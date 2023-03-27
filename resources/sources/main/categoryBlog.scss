@@ -1,0 +1,302 @@
+.blogListLeftRight {
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    &_title {
+        border-left: 5px solid $colorSLv1;
+        padding-bottom: 0;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(90deg, $colorGradient 0, rgb(255, 255, 255) 100%);
+        border-radius: 7px 0 0 7px;
+        h2, h3 {
+            font-size: 1.2rem;
+            @include colorOpacity('color', $colorText, 0.9);
+            margin-top: 0;
+            margin-bottom: 0;
+            display: inline-block;
+            padding: 0.5rem 1rem 0.75rem 1rem;
+        }
+    }
+    &_box {
+        display: flex;
+        justify-content: space-between;
+        &_left {
+            width: 50%;
+            &_image {
+                display: flex;
+                margin-bottom: 0.75rem;
+                img {
+                    margin: 0;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+            }
+            &_content {
+                &_title {
+                    display: flex;
+                    h2, h3 {
+                        font-size: 1.2rem;
+                        margin-bottom: 0.75rem;
+                        color: $colorText;
+                        &:hover {
+                            color: $colorLv1;
+                        }
+                    }
+                }
+                &_time {
+                    font-size: 0.95rem;
+                    @include colorOpacity('color', $colorText, 0.7);
+                    margin-bottom: 0.25rem;
+                    i {
+                        margin-right: 0.5rem;
+                        color: $bg-07;
+                    }
+                }
+                &_desc {
+                    @include colorOpacity('color', $colorText, 0.7);
+                    font-size: 1rem;
+                }
+            }
+        }
+        &_right {
+            margin-left: 0.75rem;
+            padding-left: 0.75rem;
+            width: 50%;
+            &_item {
+                display: flex;
+                justify-content: space-between;
+                &:not(:first-child){
+                    margin-top: 0.75rem;
+                    padding-top: 0.75rem;
+                    border-top: 1px dashed $bg-05;
+                }
+                &_image {
+                    display: flex;
+                    flex: 0 0 120px;
+                    img {
+                        margin: 0;
+                        width: 100%;
+                        object-fit: cover;
+                        border-radius: 3px;
+                    }
+                }
+                &_content {
+                    margin-left: 1rem;
+                    width: 100%;
+                    // display: flex;
+                    h2, h3 {
+                        font-size: 1.05rem;
+                        color: $colorText;
+                        margin-bottom: 0.5rem;
+                        margin-top: -0.25rem;
+                        &:hover {
+                            color: $colorLv1;
+                        }
+                    }
+                    &_time {
+                        font-size: 0.95rem;
+                        @include colorOpacity('color', $colorText, 0.7);
+                        i {
+                            margin-right: 0.5rem;
+                            color: $bg-07;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &_footer {
+        margin-top: 1rem;
+        text-align: center;
+        &_text {
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        &_button {
+            display: inline-block;
+            border: 1px solid $colorSLv1;
+            width: auto;
+            padding: 0.25rem 1.5rem;
+            border-radius: 100px;
+            font-size: 1rem;
+            color: $colorSLv1;
+            cursor: pointer;
+            &:hover {
+                color: $colorSLv1;
+                @include colorOpacity('background', $colorSLv1, 0.1);
+            }
+            i {
+                margin-right: 0.5rem;
+            }
+        }
+        .highLight {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: $colorLv1;
+        }
+    }
+    @media(max-width: 767px){
+        &_box {
+            flex-wrap: wrap;
+            &_left {
+                width: 100%;
+                display: flex;
+                &_image {
+                    flex: 0 0 260px;
+                    margin-bottom: 0;
+                }
+                &_content {
+                    margin-left: 1rem;
+                }
+            }
+            &_right {
+                width: 100%;
+                margin: 0.75rem 0 0 0;
+                padding: 0.75rem 0 0 0;
+                border-top: 1px dashed $bg-04;
+                &_item {
+                    &_image {
+                        flex: 0 0 160px;
+                        img {
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        margin-top: 0.75rem;
+        &_title {
+            margin-bottom: 1.25rem;
+        }
+        &_box {
+            &_left {
+                flex-wrap: wrap;
+                &_image {
+                    width: 100%;
+                    margin-bottom: 0.5rem;
+                    flex: unset;
+                }
+                &_content {
+                    margin-left: 0;
+                    &_title {
+                        h2, h3 {
+                            margin-bottom: 0.25rem;
+                        }
+                    }
+                }
+            }
+            &_right {
+                margin: 0.5rem 0 0 0;
+                &_item {
+                    &_image {
+                        flex: 0 0 100px;
+                    }
+                }
+            }
+        }
+    }
+}
+.articleBox {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    &_item {
+        display: flex;
+        justify-content: space-between;
+        &:not(:first-child){
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed $bg-05;
+        }
+        &_image {
+            display: flex;
+            flex: 0 0 300px;
+            aspect-ratio: 750/460;
+            img {
+                width: 100%;
+                border-radius: 5px;
+                object-fit: cover;
+                margin: 0;
+            }
+        }
+        &_content {
+            width: 100%;
+            margin-left: 1rem;
+            text-align: justify;
+            &_title {
+                // height: 50px;
+                display: flex;
+                margin: 0 0 0.5rem 0;
+                h2 {
+                    font-size: 1.25rem;
+                    margin: 0;
+                    color: $colorText;
+                    &:hover {
+                        color: $colorLv1;
+                    }
+                }
+            }
+            &_subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+                @include colorOpacity('color', $colorText, 0.7);
+                > * {
+                    &:not(:first-child){
+                        margin-left: 1.2rem;
+                    }
+                    i {
+                        margin-right: 0.1rem;
+                        color: $bg-06;
+                    }
+                }
+            }
+            &_des {
+                font-size: 1rem;
+                margin-top: 0.25rem;
+            }
+        }
+        @media (max-width: 1199px) {
+            &_content {
+                &_title {
+                    h2 {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+        @media (max-width: 577px) {
+            flex-wrap: wrap;
+            border-radius: 5px;
+            &:not(:first-child){
+                margin-top: 1.25rem;
+                border: none;
+                padding-top: 0;
+            }
+            &_image {
+                flex: 0 0 100%;
+            }
+            &_content {
+                padding-top: 0.5rem;
+                margin-left: 0;
+                background: #fff;
+                border-radius: 0 0 5px 5px;
+                &_title {
+                    margin: 0 0 0.25rem 0;
+                    h2 {
+                        font-size: 1.15rem;
+                    }
+                }
+                &_subtitle {
+                    font-size: 0.9rem;
+                    margin-bottom: 0;
+                }
+                &_des {
+                    font-size: 0.95rem;
+                }
+            }
+        }
+    }
+}

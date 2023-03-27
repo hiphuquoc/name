@@ -1,0 +1,322 @@
+.categoryGridBox {
+    .container {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        // &:after {
+        //     content: '';
+        //     position: absolute;
+        //     width: 100px;
+        //     height: 100%;
+        //     top: 0;
+        //     right: 0;
+        //     background: linear-gradient(270deg, $bg-02 20%, transparent);
+        //     z-index: 1;
+        // }
+    }
+    &_item {
+        width: 100%;
+        color: $colorText;
+        &:hover {
+            color: $colorLv1;
+            .categoryGridBox_item_icon {
+                border: 2px dashed $colorSLv2;
+            }
+        }
+        &:not(:first-child){
+            margin-left: 2rem;
+        }
+        &_icon {
+            @include colorOpacity('background', $colorSLv2, 0.1);
+            width: 100%;
+            border-radius: 50%;
+            padding: 1.5rem;
+            margin-bottom: 0.5rem;
+            border: 2px solid #fff;
+            transition: all 0.3s;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 100%;
+                display: flex;
+                margin: 0 auto;
+            }
+        }
+        &_title {
+            text-align: center;
+            font-weight: 700;
+            line-height: 1.4;
+            @include colorOpacity('color', $colorText, 0.9);
+        }
+    }
+    @include slickArrowCircle;
+    @media(max-width: 1199px){
+        &_item {
+            &:not(:first-child){
+                margin-left: 1.75rem;
+            }
+        }
+    }
+    @media(max-width: 990px){
+        &_item {
+            &:not(:first-child){
+                margin-left: 1.5rem;
+            }
+        }
+    }
+    @media(max-width: 766px){
+        &_item {
+            &:not(:first-child){
+                margin-left: 1.25rem;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_item {
+            &:not(:first-child){
+                margin-left: 1rem;
+            }
+        }
+    }
+}
+.categoryBoxFooter {
+    &_item {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        &:hover {
+            color: $colorTextLight;
+        }
+        &:not(:first-child){
+            margin-top: 0.75rem;
+        }
+        &_image {
+            flex: 0 0 40px;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 50%;
+            img {
+                width: 70%;
+            }
+        }
+        &_title {
+            margin-left: 0.75rem;
+            > span {
+                font-size: 1.1rem;
+                color: $colorTextLight;
+            }
+        }
+    }
+}
+.contentMoreSeoBox {
+    padding: 1rem 1.5rem;
+    background: $bg-02;
+    .imageBox {
+        background: #fff;
+    }
+    .tocContentMain {
+        margin-bottom: 0.75rem;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: 1px solid $bg-05;
+        &_title {
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            border-bottom: 1px solid $bg-05;
+        }
+        &_list {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    @media(max-width: 990px){
+        padding: 0.75rem 1.25rem;
+    }
+    @media(max-width: 766px){
+        padding: 0.75rem 1rem;
+    }
+}
+.tocContentMain {
+    border-radius: 5px;
+    position: relative;
+    background: $colorBackgroundLv2;
+    margin-bottom: 1.5rem;
+    &_title {
+        padding: 0.5rem 1rem 1rem;
+        font-family: $fontTitle;
+        font-size: 1.1rem;
+        cursor: pointer;
+        border-bottom: 1px solid $colorBackgroundLv1;
+        color: $colorText;
+        &_icon {
+            &::before {
+                @include fontAwesome;
+                content: "\f0ca";
+                margin-right: 1rem;
+            }
+        }
+    }
+    &_list {
+        padding: 0 1rem 1rem;
+        &_item {
+            display: flex;
+            margin-top: 0.75rem;
+            font-size: 1rem !important;
+            color: $colorText;
+            > * {
+                font-size: 1rem !important;
+            }
+            &:not(:first-child){
+                padding-top: 0.5rem;
+                // border-top: 1px dashed $bg-05;
+            }
+        }
+    }
+    &_close {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 0.3rem;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &:before {
+            @include fontAwesome;
+            content: '\f077';
+            font-size: 0.8rem;
+        }
+        &.hidden {
+            display: flex !important;
+            &::before {
+                @include fontAwesome;
+                content: '\f054';
+            }
+        }
+    }
+    &.tocFixed {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 128px;
+        height: 100%;
+        max-width: 300px;
+        z-index: 101;
+        .tocContentMain_title {
+            padding: 0.5rem 0.75rem;
+        }
+        .tocContentMain_list {
+            padding: 0 0.75rem;
+            display: block !important;
+            &_item {
+                margin-top: 0.5rem;
+            }
+        }
+        .tocContentMain_close {
+            &:before {
+                @include fontAwesome;
+                content: '\f057' !important;
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+.tocFixedIcon {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: $bg-03;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    z-index: 100;
+    opacity: 0.9;
+    margin-bottom: 0 !important;
+    &:hover {
+        border: 2px solid $bg-05;
+    }
+    > div {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+        font-size: 2rem;
+        &:before {
+            content: "\f0ca";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 1.4rem;
+        }
+    }
+    @media(max-width: 767px){
+        left: 0.25rem !important;
+    }
+}
+
+.categorySidebarBox {
+    display: flex;
+    flex-direction: column;
+    &_item {
+        display: flex;
+        flex-direction: column;
+        @include colorOpacity('color', $colorText, 0.8);
+        &:hover {
+            .categorySidebarBox_item {
+                &_image {
+                    img {
+                        scale: 1.25;
+                    }
+                }
+            }
+        }
+        &_image {
+            overflow: hidden;
+            aspect-ration: 750/460;
+            img {
+                transition: all 0.3s;
+                border-radius: 7px;
+            }
+        }
+        &_title {
+            line-height: 1.4;
+            margin-top: 0.5rem;
+            h2, h3, h4 {
+                font-size: 1rem;
+                font-family: $fontTitle;
+                margin-bottom: 0;
+                @include colorOpacity('color', $colorText, 0.8);
+            }
+        }
+        &:not(:first-child){
+            margin-top: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px dashed $bg-06;
+        }
+        &.viewMore {
+            padding-top: 0.5rem;
+            text-align: right;
+            a {
+                color: $colorLv1;
+                &:hover {
+                    color: $colorText;
+                }
+            }
+            i {
+                margin-left: 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}

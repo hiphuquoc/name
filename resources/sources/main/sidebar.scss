@@ -1,0 +1,82 @@
+.sidebarSectionBox {
+    &:not(:first-child){
+        margin-top: 1.5rem;
+    }
+    &_title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        h2, h3 {
+            font-size: 1.25rem;
+            font-family: $fontTitle;
+            margin-bottom: 0;
+            margin-top: 0;
+            color: $colorText;
+        }
+        // &:after {
+        //     content: '\f106';
+        //     @include fontAwesome;
+        //     font-size: 1rem;
+        //     @include colorOpacity('color', $colorText, 0.8);
+        // }
+    }
+    &_box {
+        font-size: 1rem;
+        border: 1px solid $bg-04;
+        border-radius: 5px;
+        &_item {
+            display: flex;
+            padding: 0.65rem 0.5rem;
+            align-items: center;
+            &:not(:first-child){
+                border-top: 1px dashed $bg-05;
+            }
+            &:hover {
+                @include colorOpacity('background', $colorLv1, 0.1);
+            }
+            &.children {
+                i {
+                    margin-left: 0.5rem;
+                    font-size: 0.4rem;
+                    color: $bg-07;
+                }
+            }
+            h2, h3, h4 {
+                font-size: 1rem;
+                font-weight: 500;
+                @include colorOpacity('color', $colorText, 0.9);
+                margin: 0;
+            }
+            i {
+                width: 25px;
+                margin-right: 0.5rem;
+                font-size: 0.8rem;
+                @include colorOpacity('color', $colorText, 0.2);
+                text-align: center;
+            }
+        }
+    }
+}
+
+.sidebarListBox {
+    &_item {
+        display: flex;
+        @include colorOpacity('color', $colorText, 0.8);
+        &:not(:first-child){
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed $bg-05;
+        }
+        &:before {
+            content: '\f105';
+            @include fontAwesome;
+            font-size: 0.8rem;
+            color: $bg-06;
+            margin-right: 0.5rem;
+        }
+        &.selected {
+            color: $colorLv1;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\Helpers",
+    "\\resources",
+    "\\resources\\sources",
+    "\\resources\\sources\\main",
+    "\\resources\\views",
+    "\\resources\\views\\wallpaper",
+    "\\resources\\views\\wallpaper\\cart",
+    "\\resources\\views\\wallpaper\\home"
+  ],
+  "SelectedNode": "\\resources\\sources\\main\\checkout.scss",
+  "PreviewInSolutionExplorer": true
+}

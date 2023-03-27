@@ -1,0 +1,12 @@
+{
+  "resources/sources/admin/style.scss": {
+    "file": "assets/style-ed39f1da.css",
+    "isEntry": true,
+    "src": "resources/sources/admin/style.scss"
+  },
+  "resources/sources/main/style.scss": {
+    "file": "assets/style-df79a078.css",
+    "isEntry": true,
+    "src": "resources/sources/main/style.scss"
+  }
+}

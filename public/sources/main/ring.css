@@ -1,0 +1,250 @@
+@media(max-width: 766px){
+    .phone-ring-hotline {
+        display: none;
+
+    }
+}
+
+.phone-ring {
+    position: fixed;
+    background-color: transparent;
+    left: 0;
+    bottom: 95px;
+    cursor: pointer;
+    z-index: 1001 !important;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transition: visibility 0.5s;
+}
+.phone-ring-hotline {
+    position: absolute;
+    width: 200px;
+    padding: 0.5rem 1rem 0.5rem 2rem;
+    top: 6px;
+    left: 30px;
+    background: linear-gradient(45deg, rgba(0,85,85,0.8), rgba(6,154,142,0.8));
+    text-align: center;
+    transform: translate(5%, 50%);
+    font-size: 20px;
+    color: #F7FF93;
+    font-weight: 700;
+    border-radius: 100px;
+    z-index: -1;
+    letter-spacing: 0.5px;
+    text-align: right;
+}
+.phone-ring-circle-fill {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 0;
+    left: 0;
+    background-color: #005555;
+    border-radius: 100%;
+    border: 2px solid #005555;
+    animation: phone-ring-circle-fill-ani 2.3s infinite ease-in-out;
+    transition: all 0.5s;
+    transform-origin: 50% 50%;
+}
+.phone-ring-image {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 20px;
+    left: 20px;
+    /* background: #005555
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABrklEQVRYR82XjTEEQRCFX0dABlwEiAARkAEyIAJEoERACETARUAIJwIyeOqptfbm5qeP3lpTdVVXVzPd3/R0v+4zTLxsYv/4XwAkrwDsV6JyZmaLyKj1ESB5AOCpYfzazAQZttYFuDWz8zDvwE8OkNwF8NIwvjCz2SgAMkqSDuOzyDxYqgKSrwB2GhBKxHsHqGtLCiDDJ42Tj2Z27LLu2JQCnAK4a5x7M7Nth23XlhRgE8B74+SemempQtaKEpKsPUPo++sGOYCSIIU7zwJ05ficSLLkV6H/CIn7wEi2GRVkOVwFixEoREE/hz9DsR2TVKkp2zeSsI9bBUNnJNV4bhIA5cFhVCk2B5JCWVYhSEopjwAob6qa4QGQOKkqcj1iJSdIpmoqWEHIhr7Ph1BNgC4haxAPAC7UITPOc1UrCOXR12TlAnBAyKhAdHvPUg4pIn6AAYQc1ebG8QC+LXfD66XHU2HP7yKQlKhGODWu1gCTY/g7wCAaendNyltrRCQOIAERjCc/ejV1V4H3dp2ES4jU1vVJpXxpogoHSEE7oOEIp9G+/3c1OkArcpMDfAIqL6EhVS6JOAAAAABJRU5ErkJggg==")
+    no-repeat center center; */
+    background: url('/storage/images/icon-zalo.png') no-repeat;
+    background-size: 100% 100%;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    opacity: 0.99;
+    animation: phone-ring-image-ani 1s infinite ease-in-out;
+    transform-origin: 50% 50%;
+}
+.phone-ring:hover .phone-ring-circle {
+    border-color: #005555;
+}
+.phone-ring:hover .phone-ring-image,
+.phone-ring:hover .phone-ring-circle-fill {
+    background-color: #069A8E;
+}
+@-moz-keyframes quick-alo-circle-anim {
+    0% {
+    -moz-transform: rotate(0) scale(0.5) skew(1deg);
+    opacity: 0.1;
+    -moz-opacity: 0.1;
+    -webkit-opacity: 0.1;
+    -o-opacity: 0.1;
+    }
+    30% {
+    -moz-transform: rotate(0) scale(0.7) skew(1deg);
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+    -webkit-opacity: 0.5;
+    -o-opacity: 0.5;
+    }
+    100% {
+    -moz-transform: rotate(0) scale(1) skew(1deg);
+    opacity: 0.6;
+    -moz-opacity: 0.6;
+    -webkit-opacity: 0.6;
+    -o-opacity: 0.1;
+    }
+}
+
+@-moz-keyframes phone-ring-circle-fill-ani {
+    0% {
+    -moz-transform: rotate(0) scale(0.7) skew(1deg);
+    opacity: 0.2;
+    }
+    50% {
+    -moz-transform: rotate(0) -moz-scale(1) skew(1deg);
+    opacity: 0.2;
+    }
+    100% {
+    -moz-transform: rotate(0) scale(0.7) skew(1deg);
+    opacity: 0.2;
+    }
+}
+@-webkit-keyframes phone-ring-circle-fill-ani {
+    0% {
+    -webkit-transform: rotate(0) scale(0.7) skew(1deg);
+    opacity: 0.2;
+    }
+    50% {
+    -webkit-transform: rotate(0) scale(1) skew(1deg);
+    opacity: 0.2;
+    }
+    100% {
+    -webkit-transform: rotate(0) scale(0.7) skew(1deg);
+    opacity: 0.2;
+    }
+}
+@-o-keyframes phone-ring-circle-fill-ani {
+    0% {
+    -o-transform: rotate(0) scale(0.7) skew(1deg);
+    opacity: 0.2;
+    }
+    50% {
+    -o-transform: rotate(0) scale(1) skew(1deg);
+    opacity: 0.2;
+    }
+    100% {
+    -o-transform: rotate(0) scale(0.7) skew(1deg);
+    opacity: 0.2;
+    }
+}
+@-moz-keyframes phone-ring-image-ani {
+    0% {
+    transform: rotate(0) scale(1) skew(1deg);
+    }
+    10% {
+    -moz-transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    20% {
+    -moz-transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    30% {
+    -moz-transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    40% {
+    -moz-transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    50% {
+    -moz-transform: rotate(0) scale(1) skew(1deg);
+    }
+    100% {
+    -moz-transform: rotate(0) scale(1) skew(1deg);
+    }
+}
+@-webkit-keyframes phone-ring-image-ani {
+    0% {
+    -webkit-transform: rotate(0) scale(1) skew(1deg);
+    }
+    10% {
+    -webkit-transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    20% {
+    -webkit-transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    30% {
+    -webkit-transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    40% {
+    -webkit-transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    50% {
+    -webkit-transform: rotate(0) scale(1) skew(1deg);
+    }
+    100% {
+    -webkit-transform: rotate(0) scale(1) skew(1deg);
+    }
+}
+@-o-keyframes phone-ring-image-ani {
+    0% {
+    -o-transform: rotate(0) scale(1) skew(1deg);
+    }
+    10% {
+    -o-transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    20% {
+    -o-transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    30% {
+    -o-transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    40% {
+    -o-transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    50% {
+    -o-transform: rotate(0) scale(1) skew(1deg);
+    }
+    100% {
+    -o-transform: rotate(0) scale(1) skew(1deg);
+    }
+}
+@-moz-keyframes fadeInRight {
+    0% {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    }
+    100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    }
+}
+@-webkit-keyframes fadeInRight {
+    0% {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    }
+    100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    }
+}
+@-o-keyframes fadeInRight {
+    0% {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    }
+    100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    }
+}
+

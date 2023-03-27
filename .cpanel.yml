@@ -1,0 +1,16 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/hitourvn/name.com.vn/
+    - /bin/cp -R * $DEPLOYPATH
+    # - rm $DEPLOYPATH/public/build/assets/style-main.css
+    
+    # - /bin/cp /app $DEPLOYPATH
+    # - /bin/cp /bootstrap $DEPLOYPATH
+    # - /bin/cp /config $DEPLOYPATH
+    # - /bin/cp /database $DEPLOYPATH
+    # - /bin/cp /lang $DEPLOYPATH
+    # - /bin/cp /public $DEPLOYPATH
+    # - /bin/cp /resources $DEPLOYPATH
+    # - /bin/cp /routes $DEPLOYPATH
+    # - /bin/cp /tests $DEPLOYPATH
