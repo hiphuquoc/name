@@ -18,7 +18,7 @@
                     @else 
                         <img class="lazyload" data-src="{{ Storage::url($file->file_path) }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" />
                     @endif
-                    <div class="galleryProductBox_item_note">{{ $price->name }}</div>
+                    {{-- <div class="galleryProductBox_item_note">{{ $price->name }}</div> --}}
                 </div>
                 @php
                     ++$i;

@@ -226,6 +226,7 @@
                     padding-left: 1rem;
                     padding-right: 1rem;
                     justify-content: center;
+                    font-family: $fontText;
                     @media(max-width: 577px){
                         height: 42px;
                     }
@@ -235,6 +236,7 @@
                     img {
                         width: 20px;
                         margin-right: 0.75rem;
+                        margin-bottom: 3px;
                     }
                 }
             }
@@ -289,11 +291,24 @@
                 }
             }
             @media(max-width: 767px){
+                &_button {
+                    button {
+                        font-size: 0.85rem !important;
+                        img {
+                            width: 18px;
+                        }
+                    }
+                }
                 .priceMobile {
                     padding-left: 1rem;
                 }
             }
             @media(max-width: 577px){
+                &_button {
+                    button {
+                        font-size: 0.8rem !important;
+                    }
+                }
                 .priceMobile {
                     padding-left: 0.75rem;
                 }
