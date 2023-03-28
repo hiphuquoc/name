@@ -45,8 +45,12 @@
                                 <div class="zIndexHide">
                                     <!-- ảnh -->
                                     @if($i==0)
-                                        <!-- load lazy ảnh đầu tiên -->
-                                        <img class="lazyload" data-src="{{ Storage::url($imageSmall) }}" alt="{{ $productName }}" title="{{ $productName }}" />
+                                        @if(!empty($type)&&$type=='lazyload')
+                                            <!-- load lazy ảnh đầu tiên -->
+                                            <img class="lazyload" data-src="{{ Storage::url($imageSmall) }}" alt="{{ $productName }}" title="{{ $productName }}" />
+                                        @else
+                                            <div class="wallpaperGridBox_item_image_backgroundImage" style="background:url('{{ Storage::url($imageSmall) }}') no-repeat center center / cover;"></div>
+                                        @endif
                                     @else 
                                         <!-- các ảnh sau khi nào click mới load -->
                                         <img data-src="{{ Storage::url($imageSmall) }}" alt="{{ $productName }}" title="{{ $productName }}" />
@@ -101,7 +105,12 @@
                                         $imageMini  = $fileInfo['dirname'].'/'.$fileInfo['filename'].'-mini'.'.'.$fileInfo['extension'];
                                     @endphp
                                     <div class="wallpaperGridBox_item_imageList_item {{ $selected }}" onClick="changeOption('{{ $keyIdFile }}');">
-                                        <img src="{{ Storage::url($imageMini) }}" alt="loading cart" title="loading cart" />
+                                        @if(!empty($type)&&$type=='lazyload')
+                                            <!-- lazy load image list -->
+                                            <img src="{{ Storage::url($imageMini) }}" alt="loading cart" title="loading cart" />
+                                        @else
+                                            <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ Storage::url($imageMini) }}') no-repeat center center / cover;"></div>
+                                        @endif
                                     </div>
                                 @endforeach
                             </div>

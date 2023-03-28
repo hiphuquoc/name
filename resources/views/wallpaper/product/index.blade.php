@@ -53,7 +53,10 @@
                         <h2>Gợi ý cho bạn</h2>
                     </div>
                     <div class="relatedProductBox_box">
-                        @include('wallpaper.template.wallpaperGrid', ['products' => $related])
+                        @include('wallpaper.template.wallpaperGrid', [
+                            'products'  => $related,
+                            'type'      => 'lazyload'
+                        ])
                     </div>
                 </div>
             </div>

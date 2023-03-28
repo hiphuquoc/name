@@ -27,6 +27,12 @@
             .zIndexHide {
                 position: relative;
                 z-index: -1;
+                width: 100%;
+                height: 100%;
+            }
+            &_backgroundImage {
+                width: 100%;
+                height: 100%;
             }
             img {
                 transition: all 0.3s;
@@ -132,6 +138,10 @@
                 cursor: pointer;
                 overflow: hidden;
                 border: 1px solid transparent;
+                &_backgroundImage {
+                    width: 100%;
+                    height: 100%;
+                }
                 &:not(:first-child){
                     margin-left: 0.5rem;
                 }
