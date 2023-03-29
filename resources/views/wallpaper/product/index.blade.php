@@ -2,20 +2,20 @@
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Title - Description - Social -->
-    @include('main.schema.social', compact('item'))
+    @include('wallpaper.schema.social', compact('item'))
     <!-- END:: Title - Description - Social -->
 
     <!-- STRAT:: Organization Schema -->
-    @include('main.schema.organization')
+    @include('wallpaper.schema.organization')
     <!-- END:: Organization Schema -->
 
 
     <!-- STRAT:: Article Schema -->
-    @include('main.schema.article', compact('item'))
+    @include('wallpaper.schema.article', compact('item'))
     <!-- END:: Article Schema -->
 
     <!-- STRAT:: Article Schema -->
-    @include('main.schema.creativeworkseries', compact('item'))
+    @include('wallpaper.schema.creativeworkseries', compact('item'))
     <!-- END:: Article Schema -->
 
     <!-- STRAT:: Product Schema -->
@@ -27,11 +27,11 @@
             if($price->price<$lowPrice||$lowPrice==0) $lowPrice = $price->price;
         }
     @endphp
-    @include('main.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Product Schema -->
 
     <!-- STRAT:: FAQ Schema -->
-    @include('main.schema.faq', ['data' => $item->faqs])
+    @include('wallpaper.schema.faq', ['data' => $item->faqs])
     <!-- END:: FAQ Schema -->
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
