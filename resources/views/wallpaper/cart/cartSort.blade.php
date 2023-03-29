@@ -29,7 +29,7 @@
             </div>
             <div class="cartBox_list_item buttonBox">
                 <div class="total">Tổng cộng: <span id="js_updateCart_total">{!! number_format($total).config('main.currency_unit') !!}</span></div>
-                <a href="{{ route('main.cart') }}" class="button">Thanh toán</a>
+                <a href="{{ route('main.cart') }}" class="button">Xem giỏ hàng</a>
             </div>
         @else 
             <div class="emptyCart">
