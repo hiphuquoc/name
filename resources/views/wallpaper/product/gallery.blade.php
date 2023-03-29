@@ -14,7 +14,7 @@
                 <div class="galleryProductBox_item">
                     @if($i<2)
                         {{-- <img src="{{ Storage::url($file->file_path) }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" /> --}}
-                        <div class="galleryProductBox_item_backgroundImage" style="background:url('{{ Storage::url($file->file_path) }}') no-repeat center center / cover;"></div>
+                        <div class="galleryProductBox_item_backgroundImage" onClick="toogleModalViewImageFull('{{ $loop->index }}');" style="background:url('{{ Storage::url($file->file_path) }}') no-repeat center center / cover;"></div>
                     @else 
                         <img class="lazyload" data-src="{{ Storage::url($file->file_path) }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" />
                     @endif
