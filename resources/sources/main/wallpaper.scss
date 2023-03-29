@@ -1022,13 +1022,12 @@
 
     &_box {
         position: relative;
-        width: 100%;
-        max-width: 330px;
+        height: 95vh;
         aspect-ratio: 1/2.18;
         background: $colorBackgroundLv1;
         border-radius: 3vh;
         &_image {
-            // height: 95vh;
+            height: 95vh;
             border-radius: 3vh;
             img {
                 border-radius: 3vh;
