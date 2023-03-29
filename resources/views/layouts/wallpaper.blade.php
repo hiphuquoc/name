@@ -21,8 +21,6 @@
                 </div>
             </div>
         </div>
-        <!-- share social -->
-        @include('wallpaper.template.shareSocial')
         <!-- === START:: Content === -->
         <div class="layoutHeaderSide" style="min-height:calc(100vh - 95px);">
             <div id="js_toggleMenuMobile" class="layoutHeaderSide_header">

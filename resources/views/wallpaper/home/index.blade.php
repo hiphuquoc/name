@@ -32,9 +32,9 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-        {{-- <!-- === START:: Banner Secondary === -->
-        @include('main.home.bannerSecondary')
-        <!-- === END:: Banner Secondary === --> --}}
+        <!-- share social -->
+        @include('wallpaper.template.shareSocial')
+        <!-- content -->
         <div class="container">
             <!-- === START:: Product Box === -->
             @if(!empty($newProducts)&&$newProducts->isNotEmpty())

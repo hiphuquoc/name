@@ -1,14 +1,14 @@
 @php
     $urlCart = route('main.cart');
 @endphp
-<div class="cartBox" onClick="noticeContrustion();">
-    <a href="#" class="cartBox_icon">
+<div class="cartBox">
+    <a href="{{ route('main.cart') }}" class="cartBox_icon">
         <img src="{{ Storage::url('images/svg/icon-cart-header.svg') }}" alt="giỏ hàng" title="giỏ hàng" />
         <div id="js_updateCart_count" class="cartBox_icon_number">
             {{ !empty($products)&&$products->isNotEmpty() ? $products->count() : 0 }}
         </div>
     </a>
-    <a href="#" class="cartBox_text">Giỏ hàng</a>
+    <a href="{{ route('main.cart') }}" class="cartBox_text">Giỏ hàng</a>
     <div class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
             @php
@@ -29,7 +29,7 @@
             </div>
             <div class="cartBox_list_item buttonBox">
                 <div class="total">Tổng cộng: <span id="js_updateCart_total">{!! number_format($total).config('main.currency_unit') !!}</span></div>
-                <a href="#" class="button">Thanh toán</a>
+                <a href="{{ route('main.cart') }}" class="button">Thanh toán</a>
             </div>
         @else 
             <div class="emptyCart">

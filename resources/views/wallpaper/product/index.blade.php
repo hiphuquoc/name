@@ -40,7 +40,9 @@
         <div class="breadcrumbMobileBox">
             @include('wallpaper.template.breadcrumb')
         </div>
-        
+        <!-- share social -->
+        @include('wallpaper.template.shareSocial')
+        <!-- content -->
         <div class="contentBox maxContent-1200">
             <!-- Gallery và Product detail -->
             @include('wallpaper.product.body')

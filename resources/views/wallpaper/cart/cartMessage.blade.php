@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="cartMessage_box_footer">
-            <a href="#" class="button" onclick="noticeContrustion();">Xem giỏ hàng</a>
+            <a href="{{ route('main.cart') }}" class="button">Xem giỏ hàng</a>
         </div>
     </div>
 </div>

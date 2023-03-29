@@ -15,11 +15,12 @@
                 <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
             </div>
         </div>
-        @include('wallpaper.template.search')
-
-        <div id="js_viewSortCart_idWrite">
-            @include('wallpaper.cart.cartSort', ['products' => null])
-        </div>
+        @if(!Route::is('main.cart'))
+            @include('wallpaper.template.search')
+            <div id="js_viewSortCart_idWrite">
+                @include('wallpaper.cart.cartSort', ['products' => null])
+            </div>
+        @endif
         <!-- button đăng nhập desktop -->
         <div class="hide-1023" style="height:100%;">
             <div class="loginBox"> 

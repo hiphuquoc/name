@@ -80,7 +80,7 @@
         </li> --}}
         
         <li>
-            <a href="/san-pham-khuyen-mai" title="Sản phẩm đang khuyến mãi trên Hoaanhtuc">
+            <a href="/san-pham-khuyen-mai" title="Sản phẩm đang khuyến mãi trên {{ config('main.company_name') }}">
                 <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ {{ config('main.company_name') }}" title="Thông tin hỗ trợ {{ config('main.company_name') }}" />
                 <div>Hỗ trợ</div>
             </a>

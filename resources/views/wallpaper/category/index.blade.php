@@ -43,7 +43,9 @@
             <div class="breadcrumbMobileBox">
                 @include('wallpaper.template.breadcrumb')
             </div>
-
+            <!-- share social -->
+            @include('wallpaper.template.shareSocial')
+            <!-- content -->
             <div class="contentBox">
                 <!-- Sản phẩm -->
                 @if(!empty($titlePage))

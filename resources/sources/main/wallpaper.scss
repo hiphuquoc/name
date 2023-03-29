@@ -17,7 +17,7 @@
             margin-left: 1.5rem;
         }
         &_image {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             position: relative;
             border-radius: inherit;
             display: flex;
@@ -130,7 +130,6 @@
         }
         &_imageList {
             display: flex;
-            margin-bottom: 0.75rem;
             &_item {
                 width: calc(20% - 0.4rem);
                 aspect-ratio: 1/1;
@@ -197,7 +196,7 @@
             margin-left: 1.5rem;
         }
         &:nth-child(n + 6){
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
         &:not(:nth-child(n + 6)){
             margin-top: 0;
@@ -213,7 +212,7 @@
                 margin-left: 1.5rem;
             }
             &:nth-child(n + 5){
-                margin-top: 1.5rem;
+                margin-top: 2rem;
             }
             &:not(:nth-child(n + 5)){
                 margin-top: 0;
@@ -230,7 +229,7 @@
                 margin-left: 1.5rem;
             }
             &:nth-child(n + 4){
-                margin-top: 1.5rem;
+                margin-top: 2rem;
             }
             &:not(:nth-child(n + 4)){
                 margin-top: 0;
@@ -247,7 +246,7 @@
                 margin-left: 1.5rem;
             }
             &:nth-child(n + 5){
-                margin-top: 1.5rem;
+                margin-top: 2rem;
             }
             &:not(:nth-child(n + 5)){
                 margin-top: 0;
@@ -264,7 +263,7 @@
                 margin-left: 1.5rem;
             }
             &:nth-child(n + 4){
-                margin-top: 1.5rem;
+                margin-top: 2rem;
             }
             &:not(:nth-child(n + 4)){
                 margin-top: 0;
@@ -281,7 +280,7 @@
                 margin-left: 1rem;
             }
             &:nth-child(n + 4){
-                margin-top: 1rem;
+                margin-top: 1.5rem;
             }
             &:not(:nth-child(n + 4)){
                 margin-top: 0;
@@ -298,7 +297,7 @@
                 margin-left: 0.5rem;
             }
             &:nth-child(n + 3){
-                margin-top: 0.5rem;
+                margin-top: 0.15rem;
             }
             &:not(:nth-child(n + 3)){
                 margin-top: 0;

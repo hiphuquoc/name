@@ -4,16 +4,16 @@
     &_left {
         width: calc(100% - 320px - 2rem);
         &_item {
-            background: #fff;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
+            // background: $colorBackgroundLv2;
+            // padding: 1rem 1.5rem;
+            // border-radius: 10px;
         }
     }
     &_right {
         margin-left: 2rem;
         flex: 0 0 320px;
-        background: #fff;
-        padding: 1rem 1.5rem;
+        background: $colorBackgroundLv2;
+        padding: 1rem;
         border-radius: 10px;
     }
     ul {
@@ -31,14 +31,14 @@
             width: 100%;
         }
     }
-    @media(max-width: 766px){
-        &_left {
-            &_item {
-                padding: 0.5rem 1rem;
-            }
-        }
+    @media(max-width: 1024px){
         &_right {
-            padding: 0.5rem 1rem;
+            margin-top: 1.25rem;
+        }
+    }
+    @media(max-width: 766px){
+        &_right {
+            margin-top: 1rem;
         }
     }
 }
@@ -46,16 +46,17 @@
     width: 100%;
     font-size: 1rem;
     &_title {
-        margin-bottom: 0.5rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid $bg-05;
+        margin-bottom: 1.5rem;
         font-weight: bold;
         font-size: 1.1rem;
     }
     &_body {
         width: inherit;
+        // background: $colorBackgroundLv2;
+        @include colorOpacity('background', $colorBackgroundLv2, 0.8);
+        border-radius: 10px;
         .total {
-            font-weight: bold;
+            font-family: $fontTitle;
             display: flex;
             justify-content: space-between;
             &_number {
@@ -69,7 +70,7 @@
     &_notice {
         @include colorOpacity('color', $colorText, 0.8);
         font-size: 1rem;
-        @include colorOpacity('background', $colorSLv1, 0.2);
+        @include colorOpacity('background', $colorBackgroundLv1, 0.5);
         padding: 0.25rem 0.5rem;
         font-size: 0.95rem;
         margin-top: 0.75rem;
@@ -98,12 +99,12 @@
         display: flex;
         width: inherit;
         > * {
-            padding: 0.25rem 1rem;
+            padding: 0.5rem 1rem;
             &:nth-child(1){
                 width: 100%
             }
             &:nth-child(2){
-                flex: 0 0 130px;
+                flex: 0 0 150px;
                 text-align: right;
             }
             &:nth-child(3){
@@ -119,16 +120,17 @@
     }
     &_head {
         font-size: 0.95rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        @include colorOpacity('color', $colorText, 0.7);
+        font-family: $fontTitle;
+        background-color: $colorBackgroundLv2;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
     }
     &_body {
         display: flex;
         flex-direction: column;
         &_item {
             display: flex;
-            border-top: 1px dashed $bg-05;
+            border-top: 1px solid $colorBackgroundLv1;
             padding-top: 0.5rem;
             margin-top: 0;
             position: relative;
@@ -138,8 +140,9 @@
             &_info {
                 display: flex;
                 align-items: stretch;
+                // padding-left: 0;
                 &_image {
-                    flex: 0 0 80px;
+                    flex: 0 0 50px;
                     img {
                         width: 100%;
                     }
@@ -158,33 +161,49 @@
                         font-family: $fontTitle;
                     }
                     &_option {
-                        font-size: 1rem;
+                        font-size: 0.9rem;
                         @include colorOpacity('color', $colorText, 0.7);
                     }
                 }
                 
             }
             &_price {
+                display: flex;
+                flex-direction: column;
+                text-align: right;
                 &_now {
                     font-family: $fontTitle;
                 }
                 &_old {
                     display: flex;
                     align-items: center;
+                    justify-content: flex-end;
                     &_percent {
                         margin-right: 0.5rem;
                         background: $colorLabel;
                         padding: 0 0.25rem;
                         font-size: 0.7rem;
-                        color: #fff;
                         border-radius: 5px;
                         height: 20px;
                         line-height: 20px;
+                        @include colorOpacity('background', $colorPrice, 0.8);
+                        color: $colorTitle;
                     }
                     &_number {
                         text-decoration: line-through;
                         font-size: 0.9rem;
                         @include colorOpacity('color', $colorText, 0.6);
+                    }
+                }
+                &_icon {
+                    margin-top: auto;
+                    img {
+                        float: right;
+                        width: 22px;
+                        cursor: pointer;
+                        &:hover {
+                            width: 25px;
+                        }
                     }
                 }
             }
@@ -212,7 +231,7 @@
             }
         }
     }
-    @media(max-width: 990px){
+    @media(max-width: 577px){
         &_head {
             display: none;
         }
@@ -220,26 +239,40 @@
             &_item {
                 flex-wrap: wrap;
                 &_info {
-                    padding-left: 0;
-                    padding-right: 0;
-                    width: calc(100% - 130px) !important;
+                    width: 100% !important;
                     &_image {
-                        flex: 0 0 150px;
+                        flex: 0 0 50px;
                     }
                 }
                 &_price {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
                     order: 4;
                     margin-top: -2.25rem;
                     display: flex;
                     padding-left: 0 !important;
-                    align-items: flex-end;
+                    align-items: flex-start;
                     padding-top: 0;
                     padding-bottom: 0.15rem;
+                    flex: 0 0 100% !important;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    &_now {
+                        order: 2;
+                        margin-right: 1rem;
+                    }
                     &_old {
                         flex-direction: row-reverse;
+                        order: 1;
+                        margin-right: 1rem;
                         > * {
                             margin-left: 0.75rem;
                         }
+                    }
+                    &_icon {
+                        order: 3;
+                        margin-top: 0.25rem;
                     }
                 }
                 &_quantity {
@@ -276,49 +309,49 @@
             }
         }
     }
-    @media(max-width: 766px){
-        &_body {
-            &_item {
-                &_price {
-                    &_old {
-                        display: none;
-                    }
-                }
-            }
-        }
-    }
-    @media(max-width: 577px){
-        &_body {
-            &_item {
-                &_info {
-                    width: 100% !important;
-                    &_content {
-                        &_title {
-                            margin-bottom: 0.25rem; 
-                        }
-                    }
-                    &_image {
-                        flex: 0 0 120px;
-                    }
-                }
-                &_quantity {
-                    order: 3;
-                    margin-left: calc(120px + 1rem);
-                    flex: unset !important;
-                    width: 100% !important;
-                    justify-content: flex-start !important;
-                }
-                &_money {
-                    text-align: right;
-                    flex-direction: row;
-                    flex: unset !important;
-                    width: calc(100% - 130px);
-                    order: 6;
-                    padding-left: 0;
-                }
-            }
-        }
-    }
+    // @media(max-width: 766px){
+    //     &_body {
+    //         &_item {
+    //             &_price {
+    //                 &_old {
+    //                     display: none;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // @media(max-width: 577px){
+    //     &_body {
+    //         &_item {
+    //             &_info {
+    //                 width: 100% !important;
+    //                 &_content {
+    //                     &_title {
+    //                         margin-bottom: 0.25rem; 
+    //                     }
+    //                 }
+    //                 &_image {
+    //                     flex: 0 0 120px;
+    //                 }
+    //             }
+    //             &_quantity {
+    //                 order: 3;
+    //                 margin-left: calc(120px + 1rem);
+    //                 flex: unset !important;
+    //                 width: 100% !important;
+    //                 justify-content: flex-start !important;
+    //             }
+    //             &_money {
+    //                 text-align: right;
+    //                 flex-direction: row;
+    //                 flex: unset !important;
+    //                 width: calc(100% - 130px);
+    //                 order: 6;
+    //                 padding-left: 0;
+    //             }
+    //         }
+    //     }
+    // }
 }
 .cartMessage {
     display: none;

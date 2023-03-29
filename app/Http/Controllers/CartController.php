@@ -21,7 +21,7 @@ class CartController extends Controller{
         $productsCart   = json_decode(Cookie::get('cart'), true);
         $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
         if(!empty($productsCart)){
-            return view('main.cart.index', compact('item', 'breadcrumb', 'products', 'productsCart'));
+            return view('wallpaper.cart.index', compact('item', 'breadcrumb', 'products', 'productsCart'));
         }else {
             return redirect()->route('main.home');
         }
