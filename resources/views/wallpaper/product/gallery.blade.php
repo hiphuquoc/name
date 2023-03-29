@@ -12,9 +12,9 @@
         @foreach($prices as $price)
             @foreach($price->files as $file)
                 <div class="galleryProductBox_item">
-                    @if($i<2)
-                        {{-- <img src="{{ Storage::url($file->file_path) }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" /> --}}
-                        <div class="galleryProductBox_item_backgroundImage" onClick="toogleModalViewImageFull('{{ $loop->index }}');" style="background:url('{{ Storage::url($file->file_path) }}') no-repeat center center / cover;"></div>
+                    @if($i<4)
+                        <!-- thêm src và data-option để mô phỏng thẻ image dùng cho tính năng addToCart -->
+                        <div class="galleryProductBox_item_backgroundImage" src="{{ Storage::url($file->file_path) }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" style="background:url('{{ Storage::url($file->file_path) }}') no-repeat center center / cover;"></div>
                     @else 
                         <img class="lazyload" data-src="{{ Storage::url($file->file_path) }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" />
                     @endif
