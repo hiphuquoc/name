@@ -6,41 +6,49 @@ use Illuminate\Http\Request;
 
 class MomoController extends Controller{
 
-    public static function create(Request $request){
-        $endpoint       = config('payment.momo.endpoint_create');
-        $partnerCode    = config('payment.momo.partner_code');
-        $accessKey      = config('payment.momo.access_key');
-        $secretKey      = config('payment.momo.secret_key');
-        $orderInfo      = config('payment.momo.action');
-        $amount         = $request->get('total') ?? '100000';
-        $orderId        = $request->get('order_id') ?? time().'';
-        $redirectUrl    = 'https://name.dev';
-        $ipnUrl         = $_SERVER['HTTP_REFERER'] ?? route('main.home');
-        $extraData      = $request->get('note') ?? '';
-        $requestId      = time().'';
-        $requestType    = $request->get('type') ?? "captureWallet";
-        // $requestType    = "payWithATM";
-        //before sign HMAC SHA256 signature
-        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-        $signature = hash_hmac("sha256", $rawHash, $secretKey);
-        $data = array(
-            'partnerCode'   => $partnerCode,
-            'partnerName'   => config('payment.momo.partner_name'),
-            "storeId"       => config('payment.momo.store_id'),
-            'requestId'     => $requestId,
-            'amount'        => $amount,
-            'orderId'       => $orderId,
-            'orderInfo'     => $orderInfo,
-            'redirectUrl'   => $redirectUrl,
-            'ipnUrl'        => $ipnUrl,
-            'lang'          => 'vi',
-            'extraData'     => $extraData,
-            'requestType'   => $requestType,
-            'signature'     => $signature
-        );
-        $result         = self::execPostRequest($endpoint, json_encode($data));
-        $jsonResult     = json_decode($result, true);  // decode json
-        header('Location: ' . $jsonResult['payUrl']);
+    public static function create($infoOrder){
+        $urlRedirect            = null;
+        if(!empty($infoOrder)){
+            $amount             = $infoOrder->total ?? 0;
+            if($amount>0){
+                $endpoint       = config('payment.momo.endpoint_create');
+                $partnerCode    = config('payment.momo.partner_code');
+                $accessKey      = config('payment.momo.access_key');
+                $secretKey      = config('payment.momo.secret_key');
+                $orderInfo      = config('payment.momo.action');
+                $orderId        = $infoOrder->code ?? time();
+                /* đường dẫn sau khi thanh toán thành công */
+                $redirectUrl    = env('APP_URL');
+                $ipnUrl         = $_SERVER['HTTP_REFERER'] ?? route('main.home');
+                $extraData      = $infoOrder->note ?? '';
+                $requestId      = time().'';
+                $requestType    = "captureWallet";
+                // $requestType    = "payWithATM";
+                //before sign HMAC SHA256 signature
+                $rawHash        = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+                $signature      = hash_hmac("sha256", $rawHash, $secretKey);
+                $data           = array(
+                    'partnerCode'   => $partnerCode,
+                    'partnerName'   => config('payment.momo.partner_name'),
+                    'storeId'       => config('payment.momo.store_id'),
+                    'requestId'     => $requestId,
+                    'amount'        => $amount,
+                    'orderId'       => $orderId,
+                    'orderInfo'     => $orderInfo,
+                    'redirectUrl'   => $redirectUrl,
+                    'ipnUrl'        => $ipnUrl,
+                    'lang'          => 'vi',
+                    'extraData'     => $extraData,
+                    'requestType'   => $requestType,
+                    'signature'     => $signature
+                );
+                $result         = self::execPostRequest($endpoint, json_encode($data));
+                $jsonResult     = json_decode($result, true);  // decode json
+                $urlRedirect    = $jsonResult['payUrl'];
+                // header('Location: ' . $jsonResult['payUrl']);
+            }
+        }
+        return $urlRedirect;
 
         // $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
@@ -75,9 +83,7 @@ class MomoController extends Controller{
         //     'signature' => $signature);
         // $result = self::execPostRequest($endpoint, json_encode($data));
         // $jsonResult = json_decode($result, true);  // decode json
-
         // //Just a example, please check more in there
-
         // header('Location: ' . $jsonResult['payUrl']);
     }
 

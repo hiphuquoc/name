@@ -1,5 +1,7 @@
 @php
-    $provinces      = \App\Models\Province::all();
+    $paymentMethods      = \App\Models\PaymentMethod::select('*')
+                            ->where('code', '!=', 'cod')
+                            ->get();
 @endphp
 
 <div id="modalPaymentMethod" class="modalBox">
@@ -7,28 +9,30 @@
     <div class="modalBox_box">
         <form id="formModalPaymentMethod" method="get" style="width:100%;">
             <!-- hidden -->
-            <div class="formModalBox_box_head">Chọn hình thức thanh toán</div>
+            <div class="formModalBox_box_head">Bước 1: Bạn vui lòng nhập email</div>
+            <div class="formModalBox_box_body">
+                <div style="margin-top:-0.5rem;">Nếu nhập email bạn sẽ được gửi thêm một bản để lưu trữ.</div>
+                <div class="inputWithLabelInside">
+                    <label for="email">Email dùng nhận ảnh</label>
+                    <input type="text" id="email" name="email" onkeyup="validateWhenType(this, 'email')" />
+                </div>
+            </div>
+            <div class="formModalBox_box_head">Bước 2: Chọn hình thức thanh toán</div>
             <div class="formModalBox_box_body">
                 
                 <div class="paymentMethodBox">
-                    <div class="paymentMethodBox_item" onClick="noticeContrustion();">
-                        <div class="paymentMethodBox_item_logo">
-                            <img src="{{ Storage::url('images/icon-payment-momo.png') }}" alt="thanh toán momo" title="thanh toán momo" />
+                    @foreach($paymentMethods as $method)
+                        <div class="paymentMethodBox_item" onClick="paymentNow({{ $method->id }});">
+                            <div class="paymentMethodBox_item_logo">
+                                <img src="{{ Storage::url($method->icon) }}" alt="{{ $method->name ?? null }}" title="{{ $method->name ?? null }}" />
+                            </div>
+                            <div class="paymentMethodBox_item_content">
+                                <div class="paymentMethodBox_item_content_title">{{ $method->name ?? null }}</div>
+                                <div class="paymentMethodBox_item_content_desc maxLine_1">{{ $method->description ?? null }}</div>
+                            </div>
                         </div>
-                        <div class="paymentMethodBox_item_content">
-                            <div class="paymentMethodBox_item_content_title">Thanh toán MOMO</div>
-                            <div class="paymentMethodBox_item_content_desc maxLine_1">Quét mã QR nhanh chóng, tiện lợi.</div>
-                        </div>
-                    </div>
-                    <div class="paymentMethodBox_item" onClick="noticeContrustion();">
-                        <div class="paymentMethodBox_item_logo">
-                            <img src="{{ Storage::url('images/icon-payment-zalopay.png') }}" alt="thanh toán zalopay" title="thanh toán zalopay" />
-                        </div>
-                        <div class="paymentMethodBox_item_content">
-                            <div class="paymentMethodBox_item_content_title">Thanh toán Zalopay</div>
-                            <div class="paymentMethodBox_item_content_desc maxLine_1">Quét mã QR nhanh chóng, tiện lợi.</div>
-                        </div>
-                    </div>
+
+                    @endforeach
                 </div>
 
             </div>
@@ -72,6 +76,35 @@
                 }
             }
         }
-        
+        function paymentNow(idMethod){
+            noticeContrustion();
+            // const email     = $('#email').val();
+            // const idProduct = $('#product_info_id').val();
+            // var idPrice     = 0;
+            // $(document).find('[data-product_price_id]').each(function(){
+            //     if($(this).hasClass('selected')){
+            //         idPrice = $(this).attr('data-product_price_id');
+            //         return false;
+            //     }
+            // })
+            // if(idPrice!=0&&idProduct!=''&&idMethod!=''){
+            //     $.ajax({
+            //         url         : '{{ route("main.paymentNow") }}',
+            //         type        : 'post',
+            //         dataType    : 'json',
+            //         data        : {
+            //             "_token"                : "{{ csrf_token() }}",
+            //             product_info_id         : idProduct,
+            //             product_price_id        : idPrice,
+            //             payment_method_info_id  : idMethod,
+            //             email
+            //         },
+            //         success     : function(response){
+            //             /* redirect qua trang thanh toán */
+            //             window.location.href = response.url;
+            //         }
+            //     });
+            // }
+        }
     </script>
 @endpush

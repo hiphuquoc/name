@@ -108,23 +108,18 @@ class BuildInsertUpdateModel {
 
     public static function buildArrayTableOrderInfo($dataForm, $idCustomer, $products){
         $result                             = [];
-        $result['code']                     = strtoupper(\App\Helpers\Charactor::randomString(8));
-        $result['customer_info_id']         = $idCustomer;
+        $result['code']                     = strtoupper(\App\Helpers\Charactor::randomString(15));
+        $result['customer_info_id']         = $idCustomer ?? null;
         $result['product_count']            = 0;
         $result['product_cash']             = 0;
         foreach($products as $product){
-            $result['product_count']        += $product->cart['quantity'];
-            $result['product_cash']         += $product->cart['quantity']*$product->price->price;
+            $result['product_count']        += 1;
+            $result['product_cash']         += $product->prices[0]->price; /* lấy phần tử đầu tiên vì trong câu query chỉ lấy price được chọn */
         }
-        $result['ship_cash']                = $dataForm['ship_cash'];
+        $result['ship_cash']                = $dataForm['ship_cash'] ?? 0;
         $result['total']                    = $result['ship_cash']+$result['product_cash'];
         $result['payment_method_info_id']   = $dataForm['payment_method_info_id'];
-        $result['name']                     = $dataForm['name'];
-        $result['phone']                    = $dataForm['phone'];
-        $result['address']                  = $dataForm['address'];
-        $result['province_info_id']         = $dataForm['province_info_id'];
-        $result['district_info_id']         = $dataForm['district_info_id'];
-        $result['ship_note']                = $dataForm['ship_note'] ?? null;
+        $result['email']                    = $dataForm['email'] ?? null;
         $result['note']                     = $dataForm['note'] ?? null;
         return $result;
     }

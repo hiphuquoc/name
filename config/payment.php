@@ -13,6 +13,7 @@ return [
     ],
     'zalopay'   => [
         'appid' => '553',
+        'appuser' => 'demo',
         "key1"  => "9phuAOYhan4urywHTh0ndEXiV3pKHr5Q",
         "key2"  => "Iyz2habzyr7AG8SgvoBCbKwKi3UzlLi3",
         "api"   => [
@@ -24,12 +25,12 @@ return [
             "getorderstatus"    => "https  =>//sandbox.zalopay.com.vn/v001/tpe/getstatusbyapptransid",
             "getbanklist"       => "https  =>//sbgateway.zalopay.vn/api/getlistmerchantbanks"
         ],
-        "db"    => [
-            "host"      => "mysql",
-            "port"      => 3306,
-            "dbname"    => "zalopay_demo",
-            "user"      => "root",
-            "password"  => "123456"
-        ]
+        // "db"    => [
+        //     "host"      => "mysql",
+        //     "port"      => 3306,
+        //     "dbname"    => "zalopay_demo",
+        //     "user"      => "root",
+        //     "password"  => "123456"
+        // ]
     ]
 ];

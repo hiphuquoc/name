@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('payment_method_info', function (Blueprint $table) {
             $table->id();
+            $table->string('code', 20);
             $table->text('name');
+            $table->text('description');
             $table->text('icon')->nullable();
         });
     }

@@ -9,20 +9,15 @@ class Order extends Model {
     use HasFactory;
     protected $table        = 'order_info';
     protected $fillable     = [
-        'code',
-        'customer_info_id', 
         'order_status_id',
+        'code', 
+        'customer_info_id',
         'product_count',
         'product_cash',
         'ship_cash',
         'total',
         'payment_method_info_id',
-        'name',
-        'phone',
-        'address',
-        'province_info_id',
-        'district_info_id',
-        'ship_note',
+        'email',
         'note'
     ];
     public $timestamps = true;

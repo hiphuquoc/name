@@ -609,14 +609,17 @@ blockquote{
 }
 
 input, textarea, select {
-  padding: 0.7rem 1rem;
+  padding: 0.75rem 1rem;
   width: 100%;
   font-size: 1rem;
-  font-family: $fontTitle;
-  border-radius: 7px;
+  font-family: $fontText;
+  border-radius: 5px;
   border: 1px solid $bg-05;
+  background: $colorBackgroundLv1;
+  border: 1px solid $colorBackgroundLv2;
+  color: $colorText;
   &:focus {
-    border: 1px solid $bg-06;
+    border: 1px solid $colorBackgroundLv3;
     outline: none;
   }
 }
@@ -781,13 +784,15 @@ label {
   }
 }
 .inputWithLabelInside, .textareaWithLabelInside {
-  height: 55px;
+  height: 58px;
   border: 1px solid $bg-05;
   width: 100%;
   position: relative;
   padding: 0;
-  background: #fff;
+  background: $colorBackgroundLv3;
+  border: 1px solid $colorBackgroundLv1;
   cursor: pointer;
+  color: $colorText;
   label {
       cursor: pointer;
       margin-bottom: 0;
@@ -798,17 +803,16 @@ label {
   > input {
       display: flex;
       margin-top: -2px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       padding: 0;
       border: none;
       outline: none;
       position: absolute;
       top: 2px;
       height: 100%;
-      padding: 35px 0.75rem 13px 0.75rem !important;
+      padding: 33px 0.75rem 13px 0.75rem !important;
       background: transparent !important;
-      color: $colorLv1;
-      font-weight: bold;
+      color: $colorText;
       cursor: pointer;
       z-index: 2;
       &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {

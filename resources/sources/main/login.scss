@@ -54,9 +54,8 @@
         position: relative;
         transform-style: preserve-3d;
         &_head {
-            padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: bold;
             font-family: $fontTitle;
             color: $colorText;
@@ -109,10 +108,25 @@
             transform: translateZ(-1px);
         }
     }
+    @media(max-width: 1199px){
+        &_box {
+            &_head {
+                font-size: 1.2rem;
+            }
+        }
+    }
+    @media(max-width: 990px){
+        &_box {
+            &_head {
+                font-size: 1.15rem;
+            }
+        }
+    }
     @media(max-width: 577px){
         &_box {
             &_head {
                 margin-bottom: 0.75rem;
+                font-size: 1.1rem;
             }
             &_body {
                 margin-bottom: 1rem;
