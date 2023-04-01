@@ -644,6 +644,8 @@ label {
   font-size: 0.925rem;
   display: flex;
   margin-bottom: 0.2rem;
+  display: flex;
+  flex-wrap: wrap;
   &.required {
     &:after {
       content: '*';
@@ -656,8 +658,8 @@ label {
     &:after {
       content: 'Vui lòng kiểm tra lại trường này';
       color: $colorRed;
-      font-size: inherit;
-      font-family: $fontText;
+      font-size: 0.9rem;
+      font-family: $fontTitle;
       margin-left: 0.25rem;
     }
   }

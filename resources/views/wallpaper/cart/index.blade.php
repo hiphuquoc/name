@@ -14,35 +14,41 @@
                 @endphp
                 <h1>Danh sách sản phẩm (<span id="js_updateCart_count" class="highLight">{{ $count }}</span>)</h1>
                 <div class="pageCartBox">
-                    <div class="pageCartBox_left">
-                        <!-- danh sách sản phẩm -->
-                        <div class="pageCartBox_left_item">
-                            <div class="cartSectionBox">
-                                {{-- <div class="cartSectionBox_title">
-                                    
-                                </div> --}}
-                                <div class="cartSectionBox_body">
-                                    <div class="cartProductBox_head">
-                                        <div>Sản phẩm</div>
-                                        <div>Đơn giá</div>
-                                        {{-- <div>Số lượng</div> --}}
-                                        {{-- <div>Thành tiền</div> --}}
-                                    </div>
-                                    <div class="cartProductBox_body">
-                                        @foreach($products as $product)
-                                            @php
-                                                $keyId  = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
-                                            @endphp
-                                            <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartProductBox_body_item">
-                                                @include('wallpaper.cart.cartRow', compact('product'))
-                                            </div>
-                                        @endforeach
+                    <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
+
+                        @if(!empty($products)&&$products->isNotEmpty())
+                            <!-- danh sách sản phẩm -->
+                            <div class="pageCartBox_left_item">
+                                <div class="cartSectionBox">
+                                    {{-- <div class="cartSectionBox_title">
+                                        
+                                    </div> --}}
+                                    <div class="cartSectionBox_body">
+                                        <div class="cartProductBox_head">
+                                            <div>Sản phẩm</div>
+                                            <div>Đơn giá</div>
+                                            {{-- <div>Số lượng</div> --}}
+                                            {{-- <div>Thành tiền</div> --}}
+                                        </div>
+                                        <div class="cartProductBox_body">
+                                            @foreach($products as $product)
+                                                @php
+                                                    $keyId  = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
+                                                @endphp
+                                                <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartProductBox_body_item">
+                                                    @include('wallpaper.cart.cartRow', compact('product'))
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- danh sách sản phẩm -->
-                        @include('wallpaper.cart.test')
+                            <!-- form email và phương thức thanh toán -->
+                            @include('wallpaper.cart.formPayment')
+                        @else 
+                            @include('wallpaper.cart.emptyCart')
+                        @endif
+
                     </div>
                     <div class="pageCartBox_right">
                         <div class="cartSectionBox">
@@ -57,7 +63,7 @@
                             </div> --}}
                             <div class="cartSectionBox_button">
                                 {{-- <a href="{{ route('main.checkout') }}" class="button">Thanh toán</a> --}}
-                                <a href="#" class="button" onClick="noticeContrustion();">Thanh toán</a>
+                                <div class="button" onClick="submitFormPayment('formPaymentMethod');">Thanh toán</div>
                             </div>
                         </div>
                     </div>

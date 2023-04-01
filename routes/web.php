@@ -57,8 +57,6 @@ Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addTo
 Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.updateCart');
 Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');
 Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main.viewSortCart');
-
-// Route::get('/testZalo', [ZalopayController::class, 'testZalo'])->name('main.testZalo');
 Route::post('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
 
 /* check out */

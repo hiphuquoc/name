@@ -4,7 +4,7 @@
                             ->get();
 @endphp
 
-<form id="formModalPaymentMethod" method="get" style="width:100%;">
+<form id="formPaymentMethod" action="#" method="get" style="width:100%;">
     <div class="pageCartBox_left_item">
         <div class="pageCartBox_left_item_head">Thông tin</div>
         <div class="pageCartBox_left_item_body">
@@ -17,16 +17,17 @@
     </div>
 
     <div class="pageCartBox_left_item">
-        <div class="pageCartBox_left_item_head">Hình thức thanh toán</div>
+        <label class="pageCartBox_left_item_head" for="payment_method">Hình thức thanh toán</label>
+        <input type="hidden" id="payment_method" name="payment_method" value="" required />
         <div class="pageCartBox_left_item_body">
 
             <div class="paymentMethodBox twoColumn">
                 @foreach($paymentMethods as $method)
-                    @php
+                    {{-- @php
                         $selected = null;
                         if($loop->index==0) $selected = 'selected';
-                    @endphp
-                    <div class="paymentMethodBox_item {{ $selected }}"  onclick="chooseOptionPayment(this);">
+                    @endphp --}}
+                    <div class="paymentMethodBox_item"  onclick="chooseOptionPayment(this, {{ $method->id }});">
                         <div class="paymentMethodBox_item_logo">
                             <img src="{{ Storage::url($method->icon) }}" alt="{{ $method->name ?? null }}" title="{{ $method->name ?? null }}" />
                         </div>
@@ -53,11 +54,10 @@
             </div> --}}
         </div>
     </div>
-    
 </form>
 @push('scriptCustom')
     <script type="text/javascript">
-        function chooseOptionPayment(element){
+        function chooseOptionPayment(element, idMethod){
             const parentElement = $(element).parent();
             /* xóa selected tất cả phần tử */
             parentElement.children().each(function(){
@@ -65,6 +65,32 @@
             })
             /* bật lại cho phần tử được click */
             $(element).addClass('selected');
+            $('#payment_method').val(idMethod);
+        }
+        function submitFormPayment(idForm){
+            event.preventDefault();
+            const error     = validateForm(idForm);
+            if(error==''){
+                // $('#'+idForm).submit(); 
+                noticeContrustion();
+            }else {
+                /* thêm class thông báo lỗi cho label của input */
+                for(let i = 0;i<error.length;++i){
+                    const idInput = $('#'+idForm).find('[name='+error[i]+']').attr('id');
+                    if(idInput!=''){
+                        const elementLabel = $('#'+idForm).find('[for='+idInput+']');
+                        elementLabel.addClass('error');
+                    }
+                }
+                /* scroll đến thông báo lỗi đầu tiên */
+                $('[class*=error]').each(function(){
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top - 90
+                    }, 300);
+                    // $(window).scrollTop(parseInt($(this).offset().top - 90));
+                    return false;
+                });
+            }
         }
     </script>
 @endpush

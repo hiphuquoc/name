@@ -20,11 +20,7 @@ class CartController extends Controller{
         $products       = \App\Http\Controllers\CartController::getCollectionProducts();
         $productsCart   = json_decode(Cookie::get('cart'), true);
         $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
-        if(!empty($productsCart)){
-            return view('wallpaper.cart.index', compact('item', 'breadcrumb', 'products', 'productsCart'));
-        }else {
-            return redirect()->route('main.home');
-        }
+        return view('wallpaper.cart.index', compact('item', 'breadcrumb', 'products', 'productsCart'));
     }
 
     public static function addToCart(Request $request){
@@ -158,6 +154,9 @@ class CartController extends Controller{
         self::setCookie('cart', json_encode($products), 3600);
         $result['total']        = number_format($total).config('main.currency_unit');
         $result['count']        = $count;
+        /* trường hợp remove đến khi cart rỗng */
+        $result['empty_cart']   = null;
+        if($total==0) $result['empty_cart'] = view('wallpaper.cart.emptyCart')->render();
         return json_encode($result);
     }
 

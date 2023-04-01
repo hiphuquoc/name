@@ -508,6 +508,8 @@
                 product_price_id    : idPrice
             },
             success     : function(response){
+                /* cart trống */
+                if(response.empty_cart!='') $('#js_checkEmptyCart_idWrite').html(response.empty_cart);
                 setTimeout(function(){
                     $('#'+idRow).hide();
                     $('#'+idTotal).html(response.total);
