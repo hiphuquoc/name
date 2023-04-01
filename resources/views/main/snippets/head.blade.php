@@ -11,6 +11,7 @@
 <!-- BEGIN: Custom CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('/sources/main/ring.css?'.time()) }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/sources/main/loading.css?'.time()) }}">
+
 @vite(['resources/sources/main/style.scss'])
 <!-- END: Custom CSS-->
 
