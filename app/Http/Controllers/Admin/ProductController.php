@@ -256,6 +256,9 @@ class ProductController extends Controller {
                     foreach($price->files as $file){
                         GalleryController::removeById($file->id);
                     }
+                    foreach($price->sources as $source){
+                        SourceController::removeById($source->id);
+                    }
                 }
                 /* xóa bảng product_price */
                 $info->prices()->delete();
