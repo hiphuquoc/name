@@ -144,7 +144,7 @@
                     @php
                         $title      = $product->name ?? $product->seo->title ?? null;
                         /* ảnh */
-                        $image      = config('image.default_square');
+                        $image      = config('image.default');
                         if(!empty($product->price->files[0]->file_path)&&file_exists(Storage::path($product->price->files[0]->file_path))) $image = Storage::url($product->price->files[0]->file_path);
                     @endphp
                     <div class="checkoutProductBox_body_item">

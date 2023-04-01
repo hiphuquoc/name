@@ -32,7 +32,7 @@
                                 @php
                                     $title      = $product->infoProduct->name ?? $product->infoProduct->seo->title ?? null;
                                     /* ảnh */
-                                    $image      = config('image.default_square');
+                                    $image      = config('image.default');
                                     if(!empty($product->infoPrice->files[0]->file_path)&&file_exists(Storage::path($product->infoPrice->files[0]->file_path))) $image = Storage::url($product->infoPrice->files[0]->file_path);
                                 @endphp
                                 <div class="checkoutProductBox_body_item">

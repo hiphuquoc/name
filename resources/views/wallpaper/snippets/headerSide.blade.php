@@ -1,9 +1,9 @@
 @php
-    $wallpaperMobile          = [];
-    $tmp                    = \App\Models\Category::getTreeCategory();
+    $wallpaperMobile            = [];
+    $tmp                        = \App\Models\Category::getTreeCategory();
     foreach($tmp as $categoryLv1){
         if($categoryLv1->seo->slug=='hinh-nen-dien-thoai'){
-            $wallpaperMobile  = $categoryLv1;
+            $wallpaperMobile    = $categoryLv1;
             break;
         }
     }

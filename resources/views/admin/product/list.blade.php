@@ -55,7 +55,7 @@
                                                         <div class="priceProductBox_item_image_count">{{ $price->files->count() }}</div>
                                                     @endif
                                                 @else 
-                                                    <img src="{{  config('image.default_square') }}" />
+                                                    <img src="{{  config('image.default') }}" />
                                                 @endif
                                             </div>
                                             <div class="priceProductBox_item_content">

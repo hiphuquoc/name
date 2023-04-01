@@ -9,16 +9,27 @@
 <meta name="description" content="{{ $description }}" />
 <link rel="canonical" href="{{ $urlFull }}" />
 <meta property="og:locale" content="vi_VN" />
-<meta property="og:title" content="{{ $title }}" />
-<meta property="og:description" content="{{ $description }}" />
-<meta property="og:url" content="{{ $urlFull }}" />
-<meta property="og:site_name" content="{{ $title }}" />
 <meta property="article:published_time" content="{{ date('c', strtotime($item->seo->created_at)) }}" />
 <meta property="article:modified_time" content="{{ date('c', strtotime($item->seo->updated_at)) }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
 <meta property="og:image" content="{{ $image }}" />
-<meta property="og:image:width" content="750" />
-<meta property="og:image:height" content="460" />
+<meta property="og:image:type" content="image/webp" /> <!-- Định dạng của ảnh -->
+<meta property="og:image:width" content="600" /> <!-- Kích thước ảnh: chiều rộng -->
+<meta property="og:image:height" content="600" /> <!-- Kích thước ảnh: chiều cao -->
 <meta property="og:image:alt" content="{{ $title }}" />
+<meta property="og:url" content="{{ $urlFull }}" />
+<meta property="og:site_name" content="{{ $title }}" />
+<meta property="og:type" content="website" />
+@if(!empty($lowPrice)&&!empty($highPrice))
+    @if($lowPrice>=$highPrice)
+        <meta property="og:price:amount" content="{{ $lowPrice }}" />
+    @else 
+        <meta property="og:price:amount:minimum" content="{{ $lowPrice }}" />
+        <meta property="og:price:amount:maximum" content="{{ $highPrice }}" />
+    @endif
+    <meta property="og:price:currency" content="VND" />
+@endif
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ $title }}" />
 <meta name="twitter:description" content="{{ $description }}" />

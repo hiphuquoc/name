@@ -53,7 +53,7 @@
                                     <div class="productListBox_item">
                                         <div class="productListBox_item_image">
                                             @php
-                                                $image = !empty($product->infoPrice->files[0]->file_path) ? Storage::url($product->infoPrice->files[0]->file_path) : config('image.default_square');
+                                                $image = !empty($product->infoPrice->files[0]->file_path) ? Storage::url($product->infoPrice->files[0]->file_path) : config('image.default');
                                                 $title = $product->infoProduct->name ?? $product->infoProduct->seo->title ?? null;
                                             @endphp
                                             <img src="{{ $image }}" />

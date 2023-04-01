@@ -1,8 +1,20 @@
 @extends('layouts.wallpaper')
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
+    <!-- STRAT:: Product Schema -->
+    @php
+    $lowPrice   = 0;
+    $highPrice  = 0;
+    foreach($item->prices as $price){
+        if($price->price>$highPrice) $highPrice = $price->price;
+        if($price->price<$lowPrice||$lowPrice==0) $lowPrice = $price->price;
+    }
+    @endphp
+    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+    <!-- END:: Product Schema -->
+
     <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.social', compact('item'))
+    @include('wallpaper.schema.social', compact('item', 'lowPrice', 'highPrice'))
     <!-- END:: Title - Description - Social -->
 
     <!-- STRAT:: Organization Schema -->
@@ -17,18 +29,6 @@
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.creativeworkseries', compact('item'))
     <!-- END:: Article Schema -->
-
-    <!-- STRAT:: Product Schema -->
-    @php
-        $lowPrice   = 0;
-        $highPrice  = 0;
-        foreach($item->prices as $price){
-            if($price->price>$highPrice) $highPrice = $price->price;
-            if($price->price<$lowPrice||$lowPrice==0) $lowPrice = $price->price;
-        }
-    @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
-    <!-- END:: Product Schema -->
 
     <!-- STRAT:: FAQ Schema -->
     @include('wallpaper.schema.faq', ['data' => $item->faqs])

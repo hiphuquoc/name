@@ -6,7 +6,7 @@
         $eventUpdateCart    = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'")';
         $title              = $product->name ?? $product->seo->title ?? null;
         /* ảnh */
-        $image              = config('image.default_square');
+        $image              = config('image.default');
         
         if($product->cart['product_price_id']=='all'){
             /* của phiên bản all => lấy ảnh của phiên bản con đầu tiên */

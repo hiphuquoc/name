@@ -6,7 +6,7 @@
     $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "'.$idPrice.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
     $title                  = $product->name ?? $product->seo->title ?? null;
     /* ảnh */
-    $image                  = config('image.default_square');
+    $image                  = config('image.default');
     if(!empty($product->price->files[0]->file_path)&&file_exists(Storage::path($product->price->files[0]->file_path))) $image = Storage::url($product->price->files[0]->file_path);
 @endphp
 

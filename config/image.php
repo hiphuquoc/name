@@ -1,13 +1,12 @@
 <?php 
 
 return [
-    'default'               => '/storage/images/image-default-750x460.png',
-    'default_square'        => '/storage/images/image-default-660x660.png',
+    'default'               => '/storage/images/image-default-660x660.png',
     'folder_upload'         => 'public/images/upload/',
     'extension'             => 'webp',
     'quality'               => '90',
-    'resize_normal_width'   => 750,
-    'resize_normal_height'  => 460,
+    'resize_normal_width'   => 600,
+    'resize_normal_height'  => 600,
     'resize_small_width'    => 200,
     'resize_small_height'   => 120,
     'resize_mini_width'     => 40,

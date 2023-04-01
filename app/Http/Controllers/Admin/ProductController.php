@@ -259,6 +259,8 @@ class ProductController extends Controller {
                 }
                 /* xóa bảng product_price */
                 $info->prices()->delete();
+                /* xóa relation_product_category */
+                $info->categories()->delete();
                 /* delete bảng seo của product_info */
                 $info->seo()->delete();
                 /* xóa product_info */
