@@ -155,7 +155,7 @@ class CartController extends Controller{
         $result['total']        = number_format($total).config('main.currency_unit');
         $result['count']        = $count;
         /* trường hợp remove đến khi cart rỗng */
-        $result['empty_cart']   = null;
+        $result['empty_cart']   = '';
         if($total==0) $result['empty_cart'] = view('wallpaper.cart.emptyCart')->render();
         return json_encode($result);
     }
