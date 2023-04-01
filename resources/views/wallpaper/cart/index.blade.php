@@ -84,46 +84,32 @@
 @push('scriptCustom')
     <script type="text/javascript">
 
-        // var elementOffset   = $("#js_scrollMenu").offset().top;
-        // var elementWidth    = $("#js_scrollMenu").outerWidth();
-        // $(window).scroll(function() {
-        //     var scroll          = $(window).scrollTop();
-        //     if (scroll >= elementOffset) {
-        //         $("#js_scrollMenu").css({
-        //             position: "fixed", 
-        //             top: "100px", 
-        //             width: elementWidth,
-        //             transition: "all 0.5s ease"
-        //         });
-        //     } else {
-        //         $("#js_scrollMenu").css({
-        //             position: "relative",
-        //             top: "0",
-        //             transition: "all 0.5s ease"
-        //         });
-        //     }
-        // });
+        $(window).ready(function(){
+            fixedElement();
+        })
 
-        var elementOffset   = $("#js_scrollMenu").offset().top;
-        var elementWidth    = $("#js_scrollMenu").outerWidth();
-        $(window).scroll(function() {
-            var scroll          = $(window).scrollTop();
-            if (scroll >= elementOffset) {
-                $("#js_scrollMenu").css({
-                    position: "fixed", 
-                    top: "calc(60px + 2rem)", 
-                    width: elementWidth,
-                    transition: 'all 0.3s ease-in-out'
-                });
-            } else {
-                $("#js_scrollMenu").css({
-                    position: "relative", 
-                    top: "0", 
-                    width: elementWidth, 
-                    transform: "translateY(0)"
-                });
-            }
-        });
+        function fixedElement(){
+            var elementOffset   = $("#js_scrollMenu").offset().top;
+            var elementWidth    = $("#js_scrollMenu").outerWidth();
+            $(window).scroll(function() {
+                var scroll          = $(window).scrollTop();
+                if (scroll>=elementOffset&&$(window).width()>1199) {
+                    $("#js_scrollMenu").css({
+                        position: "fixed", 
+                        top: "calc(60px + 2rem)", 
+                        width: 'inherit',
+                        transition: 'all 0.3s ease-in-out'
+                    });
+                } else {
+                    $("#js_scrollMenu").css({
+                        position: "relative", 
+                        top: "0", 
+                        width: 'inherit', 
+                        transform: "translateY(0)"
+                    });
+                }
+            });
+        }
 
     </script>
 @endpush

@@ -22,7 +22,7 @@
     }
     &_right {
         margin-left: 2rem;
-        flex: 0 0 320px;
+        width: 320px;
     }
     ul {
         margin-left: 1.25rem;
@@ -33,7 +33,6 @@
             width: 100%;
         }
         &_right {
-            flex: 0 0 fit-content;
             margin-left: auto;
             margin-top: 1.5rem;
             width: 100%;
