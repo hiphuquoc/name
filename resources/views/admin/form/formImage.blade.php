@@ -30,7 +30,6 @@
 
 @pushonce('scriptCustom')
     <script type="text/javascript">
-
         function readURL(input, idShow) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
