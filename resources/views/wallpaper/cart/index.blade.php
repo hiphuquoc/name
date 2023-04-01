@@ -41,12 +41,14 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- danh sách sản phẩm -->
+                        @include('wallpaper.cart.test')
                     </div>
                     <div class="pageCartBox_right">
                         <div class="cartSectionBox">
                             <div class="cartSectionBox_body">
                                 <div class="total">
-                                    <div>Tổng đơn hàng:</div>
+                                    <div>Tổng cộng:</div>
                                     <div class="total_number"><span id="js_updateCart_total">{!! number_format($total).config('main.currency_unit') !!}</span></div>
                                 </div>
                             </div>

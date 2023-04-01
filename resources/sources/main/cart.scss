@@ -4,9 +4,19 @@
     &_left {
         width: calc(100% - 320px - 2rem);
         &_item {
-            // background: $colorBackgroundLv2;
-            // padding: 1rem 1.5rem;
-            // border-radius: 10px;
+            background: $colorBackgroundLv2;
+            border-radius: 10px;
+            &:not(:last-child){
+                margin-bottom: 1.5rem;
+            }
+            &_head {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+                padding-bottom: 0;
+            }
+            &_body {
+                padding: 1rem;
+            }
         }
     }
     &_right {
@@ -32,11 +42,25 @@
         }
     }
     @media(max-width: 1024px){
+        &_left {
+            &_item {
+                &:not(:last-child){
+                    margin-bottom: 1.25rem;
+                }
+            }
+        }
         &_right {
             margin-top: 1.25rem;
         }
     }
     @media(max-width: 766px){
+        &_left {
+            &_item {
+                &:not(:last-child){
+                    margin-bottom: 1rem;
+                }
+            }
+        }
         &_right {
             margin-top: 1rem;
         }
@@ -59,6 +83,7 @@
             font-family: $fontTitle;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             &_number {
                 color: $colorPrice;
                 font-size: 1.2rem;
@@ -99,7 +124,7 @@
         display: flex;
         width: inherit;
         > * {
-            padding: 0.5rem 1rem;
+            padding: 1rem;
             &:nth-child(1){
                 width: 100%
             }
@@ -124,6 +149,9 @@
         background-color: $colorBackgroundLv2;
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
+        > * {
+            padding: 0.5rem 1rem 0.75rem 1rem;
+        }
     }
     &_body {
         display: flex;
@@ -131,12 +159,8 @@
         &_item {
             display: flex;
             border-top: 1px solid $colorBackgroundLv1;
-            padding-top: 0.5rem;
             margin-top: 0;
             position: relative;
-            &:not(:first-child){
-                margin-top: 0.5rem;
-            }
             &_info {
                 display: flex;
                 align-items: stretch;

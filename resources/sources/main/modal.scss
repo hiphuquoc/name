@@ -97,14 +97,15 @@
         display: flex;
         border: 1px solid $colorBackgroundLv3;
         cursor: pointer;
+        position: relative;
         &:not(:first-child){
             margin-top: 0.75rem;
         }
         &:hover {
-            border: 1px solid $colorTitle;
+            border: 1px solid $colorBackgroundLv1;
         }
         &_logo {
-            flex: 0 0 80px;
+            flex: 0 0 60px;
             padding: 1rem 0 1rem 1rem;
             img {
                 background: #fff;
@@ -115,27 +116,51 @@
             width: 100%;
             padding: 0.75rem 1rem 1rem;
             &_title {
-                margin-bottom: 0.5rem;
-                font-size: 1rem;
+                margin-bottom: 0;
                 color: $colorTitle;
+                font-size: 0.95rem;
             }
             &_desc {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
+            }
+        }
+        &.selected {
+            border: 1px solid $colorSuccess;
+            // border-image-slice: 1;
+            // border-image-source: linear-gradient(to right, $colorTextLight, $colorSuccess);
+            &:after {
+                position: absolute;
+                top: 5px;
+                right: 7px;
+                content: '\f00c';
+                @include fontAwesome;
+                color: $colorSuccess;
+                font-size: 0.8rem;
             }
         }
     }
-    // @media(max-width: 990px){
-    //     &_item {
-    //         &:not(:first-child){
-    //             margin-top: 1.25rem;
-    //         }
-    //     }
-    // }
-    // @media(max-width: 577px){
-    //     &_item {
-    //         &:not(:first-child){
-    //             margin-top: 1rem;
-    //         }
-    //     }
-    // }
+    &.twoColumn {
+        flex-direction: row;
+        flex-wrap: wrap;
+        .paymentMethodBox_item {
+            width: calc(50% - 0.5rem);
+            &:not(:nth-child(2n + 1)){
+                margin-left: 1rem;
+                margin-top: 0;
+            }
+            &:nth-child(2n + 1){
+                margin-left: 0;
+            }
+            &:nth-child(n + 3){
+                margin-top: 1rem;
+            }
+            @media(max-width: 766px){
+                width: 100%;
+                margin-left: 0 !important;
+                &:not(:first-child){
+                    margin-top: 1rem !important;
+                }
+            }
+        }
+    }
 }
