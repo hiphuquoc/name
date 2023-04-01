@@ -1,6 +1,6 @@
 .pageCartBox {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     &_left {
         width: calc(100% - 320px - 2rem);
         &_item {
@@ -23,9 +23,6 @@
     &_right {
         margin-left: 2rem;
         flex: 0 0 320px;
-        background: $colorBackgroundLv2;
-        padding: 1rem;
-        border-radius: 10px;
     }
     ul {
         margin-left: 1.25rem;
@@ -69,14 +66,17 @@
 }
 .cartSectionBox {
     width: 100%;
-    font-size: 1rem;
+    // font-size: 1rem;
+    background: $colorBackgroundLv2;
+    padding: 1rem;
+    border-radius: 10px;
     &_title {
         margin-bottom: 1.5rem;
         font-weight: bold;
         font-size: 1.1rem;
     }
     &_body {
-        width: inherit;
+        width: 100%;
         // background: $colorBackgroundLv2;
         @include colorOpacity('background', $colorBackgroundLv2, 0.8);
         border-radius: 10px;
@@ -142,6 +142,12 @@
                 flex: 0 0 130px;
                 text-align: right;
             }
+            &:first-child {
+                padding-left: 0;
+            }
+            &:last-child {
+                padding-right: 0;
+            }
         }
     }
     &_head {
@@ -151,7 +157,7 @@
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
         > * {
-            padding: 0.5rem 1rem 0.75rem 1rem;
+            padding: 0 1rem 0.75rem 1rem;
         }
     }
     &_body {
@@ -162,10 +168,14 @@
             border-top: 1px solid $colorBackgroundLv1;
             margin-top: 0;
             position: relative;
+            &:last-child {
+                > * {
+                    padding-bottom: 0;
+                }
+            }
             &_info {
                 display: flex;
                 align-items: stretch;
-                // padding-left: 0;
                 &_image {
                     flex: 0 0 50px;
                     img {
@@ -190,7 +200,6 @@
                         @include colorOpacity('color', $colorText, 0.7);
                     }
                 }
-                
             }
             &_price {
                 display: flex;

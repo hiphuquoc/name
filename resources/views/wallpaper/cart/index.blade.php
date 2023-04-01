@@ -51,7 +51,7 @@
 
                     </div>
                     <div class="pageCartBox_right">
-                        <div class="cartSectionBox">
+                        <div id="js_scrollMenu" class="cartSectionBox">
                             <div class="cartSectionBox_body">
                                 <div class="total">
                                     <div>Tổng cộng:</div>
@@ -83,6 +83,47 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-        
+
+        // var elementOffset   = $("#js_scrollMenu").offset().top;
+        // var elementWidth    = $("#js_scrollMenu").outerWidth();
+        // $(window).scroll(function() {
+        //     var scroll          = $(window).scrollTop();
+        //     if (scroll >= elementOffset) {
+        //         $("#js_scrollMenu").css({
+        //             position: "fixed", 
+        //             top: "100px", 
+        //             width: elementWidth,
+        //             transition: "all 0.5s ease"
+        //         });
+        //     } else {
+        //         $("#js_scrollMenu").css({
+        //             position: "relative",
+        //             top: "0",
+        //             transition: "all 0.5s ease"
+        //         });
+        //     }
+        // });
+
+        var elementOffset   = $("#js_scrollMenu").offset().top;
+        var elementWidth    = $("#js_scrollMenu").outerWidth();
+        $(window).scroll(function() {
+            var scroll          = $(window).scrollTop();
+            if (scroll >= elementOffset) {
+                $("#js_scrollMenu").css({
+                    position: "fixed", 
+                    top: "calc(60px + 2rem)", 
+                    width: elementWidth,
+                    transition: 'all 0.3s ease-in-out'
+                });
+            } else {
+                $("#js_scrollMenu").css({
+                    position: "relative", 
+                    top: "0", 
+                    width: elementWidth, 
+                    transform: "translateY(0)"
+                });
+            }
+        });
+
     </script>
 @endpush
