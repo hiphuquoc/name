@@ -1020,13 +1020,13 @@ label {
 }
 
 /* font */
-$folderFont : '/fonts/';
-@font-face{
-	font-family:'mt';
-	font-style:normal;
-	font-weight:400;
-	src:url($folderFont+"mt-regular.otf")
-}
+// $folderFont : '/fonts/';
+// @font-face{
+// 	font-family:'mt';
+// 	font-style:normal;
+// 	font-weight:400;
+// 	src:url($folderFont+"mt-regular.otf")
+// }
 // @font-face{
 // 	font-family:'SVN-Gilroy Thin';
 // 	font-style:normal;
@@ -1051,18 +1051,18 @@ $folderFont : '/fonts/';
 // 	font-weight:700;
 // 	src:url($folderFont+"svn-gilroy_semibold.ttf")
 // }
-@font-face{
-	font-family:'SVN-Gilroy Bold';
-	font-style:normal;
-	font-weight:700;
-	src:url($folderFont+"svn-gilroy_semibold.ttf")
-}
-@font-face{
-	font-family:'SVN-Gilroy';
-	font-style:normal;
-	font-weight:500;
-	src:url($folderFont+"svn-gilroy_medium.ttf")
-}
+// @font-face{
+// 	font-family:'SVN-Gilroy Bold';
+// 	font-style:normal;
+// 	font-weight:700;
+// 	src:url($folderFont+"svn-gilroy_semibold.ttf")
+// }
+// @font-face{
+// 	font-family:'SVN-Gilroy';
+// 	font-style:normal;
+// 	font-weight:500;
+// 	src:url($folderFont+"svn-gilroy_medium.ttf")
+// }
 
 // /* Loading giao diện 1 => đồng hồ xoay */
 // #loading_1 {
