@@ -119,30 +119,29 @@
             event.preventDefault();
             if (!clicked) {
                 clicked = true;
-
-                noticeContrustion();
-                // const error     = validateForm(idForm);
-                // if(error==''){
-                //     $('#'+idForm).submit(); 
-                //     // noticeContrustion();
-                // }else {
-                //     /* thêm class thông báo lỗi cho label của input */
-                //     for(let i = 0;i<error.length;++i){
-                //         const idInput = $('#'+idForm).find('[name='+error[i]+']').attr('id');
-                //         if(idInput!=''){
-                //             const elementLabel = $('#'+idForm).find('[for='+idInput+']');
-                //             elementLabel.addClass('error');
-                //         }
-                //     }
-                //     /* scroll đến thông báo lỗi đầu tiên */
-                //     $('[class*=error]').each(function(){
-                //         $('html, body').animate({
-                //             scrollTop: $(this).offset().top - 90
-                //         }, 300);
-                //         // $(window).scrollTop(parseInt($(this).offset().top - 90));
-                //         return false;
-                //     });
-                // }
+                
+                const error     = validateForm(idForm);
+                if(error==''){
+                    // $('#'+idForm).submit(); 
+                    noticeContrustion();
+                }else {
+                    /* thêm class thông báo lỗi cho label của input */
+                    for(let i = 0;i<error.length;++i){
+                        const idInput = $('#'+idForm).find('[name='+error[i]+']').attr('id');
+                        if(idInput!=''){
+                            const elementLabel = $('#'+idForm).find('[for='+idInput+']');
+                            elementLabel.addClass('error');
+                        }
+                    }
+                    /* scroll đến thông báo lỗi đầu tiên */
+                    $('[class*=error]').each(function(){
+                        $('html, body').animate({
+                            scrollTop: $(this).offset().top - 90
+                        }, 300);
+                        // $(window).scrollTop(parseInt($(this).offset().top - 90));
+                        return false;
+                    });
+                }
 
                 setTimeout(() => {
                     clicked = false;
