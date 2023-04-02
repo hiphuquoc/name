@@ -11,10 +11,15 @@
         @endphp
         @foreach($prices as $price)
             @foreach($price->files as $file)
+                @php
+                    /* lấy ảnh mini */
+                    $fileInfo   = pathinfo($file->file_path);
+                    $imageSmall = $fileInfo['dirname'].'/'.$fileInfo['filename'].'-mini'.'.'.$fileInfo['extension'];
+                @endphp
                 <div class="galleryProductBox_item">
                     @if($i<4)
                         <!-- thêm src và data-option để mô phỏng thẻ image dùng cho tính năng addToCart -->
-                        <div class="galleryProductBox_item_backgroundImage" src="{{ Storage::url($file->file_path) }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" style="background:url('{{ Storage::url($file->file_path) }}') no-repeat center center / cover;"></div>
+                        <div class="galleryProductBox_item_backgroundImage lazyload" data-src="{{ Storage::url($file->file_path) }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" style="background:url('{{ Storage::url($imageSmall) }}') no-repeat center center / cover;filter:blur(10px);"></div>
                     @else 
                         <img class="lazyload" data-src="{{ Storage::url($file->file_path) }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" />
                     @endif

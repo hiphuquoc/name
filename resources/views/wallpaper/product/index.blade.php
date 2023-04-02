@@ -56,8 +56,7 @@
                     </div>
                     <div class="relatedProductBox_box">
                         @include('wallpaper.template.wallpaperGrid', [
-                            'products'  => $related,
-                            'type'      => 'lazyload'
+                            'products'  => $related
                         ])
                     </div>
                 </div>

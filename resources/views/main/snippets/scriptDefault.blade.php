@@ -26,7 +26,6 @@
         //     }
         // });
 
-
         var Url             = document.URL;
         // var elementMenu     = null;
         $('.headerSide a').each(function(){
@@ -45,11 +44,26 @@
     });
     
     function lazyLoad(){
+        /* đối với ảnh */
         $('img.lazyload').each(function() {
             if (!$(this).hasClass('loaded')) {
                 var distance = $(window).scrollTop() - $(this).offset().top + 900;
                 if (distance > 0) {
                     $(this).attr('src', $(this).attr('data-src'));
+                    $(this).addClass('loaded');
+                }
+            }
+        });
+        /* đối với div dùng background */
+        $('div.lazyload').each(function() {
+            if (!$(this).hasClass('loaded')) {
+                var distance = $(window).scrollTop() - $(this).offset().top + 900;
+                if (distance > 0) {
+                    $(this).css({
+                        background  : 'url("'+$(this).attr('data-src')+'") no-repeat center center / cover',
+                        filter      : 'unset'
+                    });
+
                     $(this).addClass('loaded');
                 }
             }

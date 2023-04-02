@@ -36,21 +36,16 @@
                         @php
                             $tag        = $tagBox ?? null;
                             $keyIdPrice = 'js_changeOption_'.$tag.$price->id.$file->id;
-                            /* lấy ảnh small */
+                            /* lấy ảnh mini */
                             $fileInfo   = pathinfo($file->file_path);
-                            $imageSmall = $fileInfo['dirname'].'/'.$fileInfo['filename'].'-small'.'.'.$fileInfo['extension'];
+                            $imageSmall = $fileInfo['dirname'].'/'.$fileInfo['filename'].'-mini'.'.'.$fileInfo['extension'];
                         @endphp
                         <div id="{{ $keyIdPrice }}" class="{{ $i==0 ? 'show' : 'hide' }}">
                             <a href="/{{ $product->seo->slug_full }}?product_price_id={{ $price->id }}" class="wallpaperGridBox_item_image">
                                 <div class="zIndexHide">
                                     <!-- ảnh -->
                                     @if($i==0)
-                                        @if(!empty($type)&&$type=='lazyload')
-                                            <!-- load lazy ảnh đầu tiên -->
-                                            <img class="lazyload" data-src="{{ Storage::url($imageSmall) }}" alt="{{ $productName }}" title="{{ $productName }}" />
-                                        @else
-                                            <div class="wallpaperGridBox_item_image_backgroundImage" style="background:url('{{ Storage::url($imageSmall) }}') no-repeat center center / cover;"></div>
-                                        @endif
+                                        <div class="wallpaperGridBox_item_image_backgroundImage lazyload" data-src="{{ Storage::url($file->file_path) }}" style="background:url('{{ Storage::url($imageSmall) }}') no-repeat center center / cover;filter:blur(5px);"></div>
                                     @else 
                                         <!-- các ảnh sau khi nào click mới load -->
                                         <img data-src="{{ Storage::url($imageSmall) }}" alt="{{ $productName }}" title="{{ $productName }}" />
