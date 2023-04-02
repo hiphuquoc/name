@@ -24,6 +24,49 @@ class CheckoutController extends Controller{
         return view('main.checkout.index', compact('payments', 'provinces', 'products', 'productsCart'));
     }
 
+    public function paymentCart(Request $request){
+        $urlRedirect        = null;
+        /* tạo đơn hàng */
+        $productsCart       = Cookie::get('cart');
+        if(!empty($productsCart)) $productsCart = json_decode($productsCart, true);
+        $products           = new \Illuminate\Database\Eloquent\Collection;
+        foreach($productsCart as $product){
+            $idPrice        = $product['product_price_id'];
+            $tmp            = Product::select('*')
+                                ->where('id', $product['product_info_id'])
+                                ->with(['prices' => function($query) use($idPrice) {
+                                    $query->where('id', $idPrice);
+                                }])
+                                ->first();
+            $products[]     = $tmp;
+        }
+        $insertOrder        = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $products);
+        $idOrder            = Order::insertItem($insertOrder);
+        /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
+        foreach($products as $product){
+            OrderProduct::insertItem([
+                'order_info_id'     => $idOrder,
+                'product_info_id'   => $product->id,
+                'product_price_id'  => $product->prices[0]->id,
+                'quantity'          => 1,
+                'price'             => $product->prices[0]->price
+            ]);
+        }
+        /* lấy ngược lại thông tin order để xử lý cho chính xác */
+        $infoOrder      = Order::select('*')
+                            ->where('id', $idOrder)
+                            ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
+                            ->first();
+        if(!empty($infoOrder->paymentMethod->code)){
+            /* tạo yêu cầu thanh toán => nếu zalo pay */
+            if($infoOrder->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($infoOrder);
+            /* tạo yêu cầu thanh toán => nếu momo */
+            if($infoOrder->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($infoOrder);
+        }
+        /* trả về đường dẫn để chuyển hướng */
+        return redirect($urlRedirect);
+    }
+
     public function paymentNow(Request $request){
         $urlRedirect    = null;
         /* tạo đơn hàng */

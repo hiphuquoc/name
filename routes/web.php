@@ -58,6 +58,7 @@ Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.upd
 Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');
 Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main.viewSortCart');
 Route::post('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
+Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
 
 /* check out */
 Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');
