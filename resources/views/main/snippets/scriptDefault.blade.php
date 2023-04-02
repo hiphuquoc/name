@@ -10,6 +10,7 @@
         $(window).on('scroll', function() {
             lazyLoad();
         });
+        
         /* tải lại view sort cart */
         viewSortCart();
 

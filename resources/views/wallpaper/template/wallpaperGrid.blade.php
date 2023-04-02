@@ -48,7 +48,7 @@
                                         <div class="wallpaperGridBox_item_image_backgroundImage lazyload" data-src="{{ Storage::url($file->file_path) }}" style="background:url('{{ Storage::url($imageSmall) }}') no-repeat center center / cover;filter:blur(5px);"></div>
                                     @else 
                                         <!-- các ảnh sau khi nào click mới load -->
-                                        <img data-src="{{ Storage::url($imageSmall) }}" alt="{{ $productName }}" title="{{ $productName }}" />
+                                        <img data-src="{{ Storage::url($file->file_path) }}" alt="{{ $productName }}" title="{{ $productName }}" />
                                     @endif
                                     <!-- rating và số lượng đã bán -->
                                     <div class="wallpaperGridBox_item_image_rating">
