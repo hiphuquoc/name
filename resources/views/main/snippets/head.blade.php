@@ -1,10 +1,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-@php
-    $follow = 'index,follow';
-    if(URL::current()==(env('APP_URL').'/cong-tac-vien')) $follow = 'noindex,nofollow';
-@endphp
-<meta name="robots" content="{{ $follow }}">
+<meta name="robots" content="index,follow">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="fragment" content="!" />
 {{-- <link rel="shortcut icon" href="/storage/images/upload/hoaanhtuc-favicon-type-manager-upload.webp" type="image/x-icon"> --}}
@@ -33,12 +29,6 @@
         font-style:normal;
         font-weight:500;
         src:url("/fonts/svn-gilroy_medium.ttf")
-    }
-    @font-face{
-        font-family:'mt';
-        font-style:normal;
-        font-weight:400;
-        src:url("/fonts/mt-regular.otf")
     }
 </style>
 

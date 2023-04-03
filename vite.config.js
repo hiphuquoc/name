@@ -12,10 +12,7 @@ export default defineConfig({
         ],
         refresh: true
     }),
-  ],
-  server: {
-    https: true
-  }
+  ]
 });
 
 /* xóa file map => tính năng replace theme color */
