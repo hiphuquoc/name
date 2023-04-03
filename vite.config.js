@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import fs from 'fs';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
 /* export style */
 export default defineConfig({
@@ -12,12 +13,13 @@ export default defineConfig({
         ],
         refresh: true
     }),
+    basicSsl()
   ]
 });
 
-/* xóa file map => tính năng replace theme color */
-const path = './public/build/assets/style-main.css';
-if (fs.existsSync(path)) {
-  fs.unlinkSync(path);
-}
+// /* xóa file map => tính năng replace theme color */
+// const path = './public/build/assets/style-main.css';
+// if (fs.existsSync(path)) {
+//   fs.unlinkSync(path);
+// }
 
