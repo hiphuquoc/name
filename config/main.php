@@ -2,11 +2,11 @@
 
 return [
     'currency_unit'         => '<sup>đ</sup>',
-    'author_name'           => 'name',
-    'founder_name'          => 'name',
+    'author_name'           => 'Name.com.vn',
+    'founder_name'          => 'Name.com.vn',
     'founder_address'       => '443 Mạc Cửu, Rạch Giá',
     'founding'              => '2023-03-30',
-    'company_name'          => 'name',
+    'company_name'          => 'Name.com.vn',
     'hotline'               => '08.6868.4868',
     'email'                 => 'anhnendienthoai@gmail.com',
     'address'               => '443 Mạc Cửu, Rạch Giá',
