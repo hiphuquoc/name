@@ -32,14 +32,10 @@ class HomeController extends Controller{
                                         ->whereHas('prices', function($query){
                                             $query->where('sale_off', '>', 0);
                                         })
-                                        ->skip(0)
-                                        ->take(10)
-                                        ->get();
+                                        ->paginate(10);
             $newProducts            = Product::select('*')
                                         ->orderBy('id', 'DESC')
-                                        ->skip(0)
-                                        ->take(10)
-                                        ->get();
+                                        ->paginate(10);
             // $hotProducts            = Product::select('*')
             //                             ->orderBy('sold', 'DESC')
             //                             ->skip(0)

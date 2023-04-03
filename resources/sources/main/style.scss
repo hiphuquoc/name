@@ -774,34 +774,22 @@
     display: flex;
     align-items: flex-start;
     &_content {
-        width: calc(100% - 320px - 2.5rem);
+        width: calc(100% - 280px - 2.5rem);
         ul {
             margin-left: 1.25rem;
         }
     }
     &_sidebar {
-        flex: 0 0 320px;
+        flex: 0 0 280px;
         margin-left: 2.5rem;
     }
-    @media(max-width: 990px){
-        flex-direction: column;
+    @media(max-width: 1199px){
+        flex-wrap: wrap;
         &_content {
             width: 100%;
         }
         &_sidebar {
             margin-left: 0;
-            margin-top: 2rem;
-            flex: unset;
-        }
-    }
-    @media(max-width: 766px){
-        &_sidebar {
-            margin-top: 1.5rem;
-        }
-    }
-    @media(max-width: 577px){
-        &_sidebar {
-            margin-top: 1rem;
         }
     }
 }

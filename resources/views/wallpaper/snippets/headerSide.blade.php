@@ -12,6 +12,14 @@
     //                     ->orderBy('seo.ordering', 'DESC')
     //                     ->with('seo')
     //                     ->get();
+    $policies                   = \App\Models\Page::select('*')
+                                    ->join('seo', 'seo.id', '=', 'page_info.seo_id')
+                                    ->whereHas('type', function($query){
+                                        $query->where('code', 'policy');
+                                    })
+                                    ->orderBy('seo.ordering', 'DESC')
+                                    ->with('seo')
+                                    ->get();
 @endphp             
 <div class="logoInMenuMobile show-1023">
     <div class="logoMain"></div>
@@ -80,10 +88,22 @@
         </li> --}}
         
         <li>
-            <a href="/san-pham-khuyen-mai" title="Sản phẩm đang khuyến mãi trên {{ config('main.company_name') }}">
+            <div class="hasChild close" onclick="showHideListMenuMobile(this, 'ho-tro')">
                 <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ {{ config('main.company_name') }}" title="Thông tin hỗ trợ {{ config('main.company_name') }}" />
                 <div>Hỗ trợ</div>
-            </a>
+            </div>
+            <ul id="ho-tro">
+                @foreach($policies as $policy)
+                    @php
+                        $title      = $policy->name ?? $policy->seo->title ?? null;
+                    @endphp
+                    <li>
+                        <a href="{{ env('APP_URL') }}/{{ $policy->seo->slug_full ?? null }}" title="{{ $title }}">
+                            <div>{{ $title }}</div>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
         </li>
     </ul>
 </div>

@@ -55,12 +55,12 @@ class RoutingController extends Controller{
                         $arrayCategory  = [];
                         foreach($item->categories as $category) $arrayCategory[] = $category->infoCategory->id;
                         $related        = Product::select('*')
-                                    // ->where('id', '!=', $item->id)
-                                    ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                                        $query->whereIn('id', $arrayCategory);
-                                    })
-                                    ->with('seo', 'files', 'prices.files')
-                                    ->get();
+                                            ->where('id', '!=', $item->id)
+                                            ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
+                                                $query->whereIn('id', $arrayCategory);
+                                            })
+                                            ->with('seo', 'files', 'prices.files')
+                                            ->get();
                         /* breadcrumb */
                         $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
                         $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related'))->render();
@@ -158,7 +158,7 @@ class RoutingController extends Controller{
                                             ->orderBy('seo.ordering', 'DESC')
                                             ->get()
                                             ->groupBy('type.id');
-                        $xhtml          = view('main.page.index', compact('item', 'breadcrumb', 'content', 'typePages'))->render();
+                        $xhtml          = view('wallpaper.page.index', compact('item', 'breadcrumb', 'content', 'typePages'))->render();
                         break;
                     // /* ===== TOUR CATEGORY INFO */
                     // case 'category_blog_info':

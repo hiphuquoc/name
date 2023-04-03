@@ -321,22 +321,17 @@ a {
 
 ul {
     margin-bottom: 1.5rem;
-    // li {
-    //     &:not(:first-child){
-    //       margin-top: 0.75rem;
-    //     }
-    // }
-    // &.withIconCheck {
-    //     li {
-    //     margin-top: 0;
-    //     list-style-type: none;
-    //     &:before {
-    //         @include fontAwesome;
-    //         content: '\f00c';
-    //         color: $colorLv1;
-    //         margin-right: 0.5rem;
-    //     }
-    //     }
+    @media(max-width: 1199px){
+      margin-bottom: 1.25rem;
+    }
+    @media(max-width: 990px){
+      margin-bottom: 1rem;
+    }
+    @media(max-width: 766px){
+      margin-bottom: 0.75rem;
+    }
+    // @media(max-width: 577px){
+    //   margin-bottom: 0.5rem;
     // }
 }
 
@@ -347,19 +342,24 @@ h1 {
 h2 {
   font-family: $fontTitle;
   margin-bottom: 1.5rem;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: $colorText;
-//   line-height: 2.2rem;
-//   @media(max-width: 990px){
-//     font-size: 1.5rem;
-//     line-height: 2.1rem;
-//     margin-bottom: 0.75rem !important;
-//   }
-//   @media(max-width: 577px){
-//     font-size: 1.4rem;
-//     line-height: 2rem;
-//     margin-bottom: 0.5rem !important;
-//   }
+  @media(max-width: 1199px){
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+  }
+  @media(max-width: 990px){
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+  }
+  @media(max-width: 766px){
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  @media(max-width: 577px){
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 h3, h4 {
@@ -370,10 +370,25 @@ h3, h4 {
 
 h3 {
   font-size: 1.1rem;
+  @media(max-width: 990px){
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+  @media(max-width: 577px){
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 h4 {
   font-size: 1rem;
+  @media(max-width: 990px){
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  @media(max-width: 577px){
+    margin-bottom: 0.5rem;
+  }
 }
 
 .flexBox {
@@ -422,6 +437,15 @@ h4 {
 }
 p {
   margin-bottom: 1.5rem;
+  @media(max-width: 1199px){
+    margin-bottom: 1.25rem;
+  }
+  @media(max-width: 990px){
+    margin-bottom: 1rem;
+  }
+  @media(max-width: 766px){
+    margin-bottom: 0.75rem;
+  }
   // @media(max-width: 577px){
   //   margin-bottom: 0.5rem;
   // }
