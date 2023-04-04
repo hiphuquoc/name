@@ -60,4 +60,9 @@ class HomeController extends Controller{
             echo $xhtml;
         }
     }
+
+    public function test(){
+        $googleDisk = Storage::disk('google');
+        dd($googleDisk);
+    }
 }

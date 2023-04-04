@@ -6,11 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "google/apiclient": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "dev-master",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "intervention/image": "dev-master"
+        "masbug/flysystem-google-drive-ext": "^2.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -32,6 +32,7 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
+
         <!-- share social -->
         @include('wallpaper.template.shareSocial')
         <!-- content -->

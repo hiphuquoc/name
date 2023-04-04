@@ -47,6 +47,8 @@ Route::prefix('payment')->group(function(){
 });
 
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
+Route::get('/test', [HomeController::class, 'test'])->name('main.test');
+
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
 /* page */
 Route::get('/hinh-nen-dien-thoai-khuyen-mai', [PagePublic::class, 'saleOff'])->name('main.saleOff');
