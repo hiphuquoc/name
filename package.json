@@ -18,6 +18,7 @@
     "dependencies": {
         "@flaticon/flaticon-uicons": "^2.0.1",
         "debug": "^4.3.4",
+        "jszip": "^3.10.1",
         "node-fetch": "^3.3.0"
     }
 }

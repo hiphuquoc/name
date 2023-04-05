@@ -7,6 +7,7 @@ use App\Http\Controllers\MomoController;
 use App\Http\Controllers\ZalopayController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ConfirmController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController as OrderPublic;
 use App\Http\Controllers\PageController as PagePublic;
@@ -41,6 +42,9 @@ use App\Http\Controllers\Admin\CacheController;
 |
 */
 
+Route::post('/downloadSource', [ConfirmController::class, 'downloadSource'])->name('main.downloadSource');
+Route::post('/downloadSourceAll', [ConfirmController::class, 'downloadSourceAll'])->name('main.downloadSourceAll');
+
 Route::prefix('payment')->group(function(){
     Route::get('/momoCreate', [MomoController::class, 'create'])->name('main.momo.create');
     Route::get('/zaloCreate', [ZalopayController::class, 'create'])->name('main.zalo.create');
@@ -61,6 +65,7 @@ Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->
 Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main.viewSortCart');
 Route::post('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
 Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
+Route::get('/confirm', [ConfirmController::class, 'confirm'])->name('main.confirm');
 
 /* check out */
 Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');

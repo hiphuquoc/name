@@ -1,0 +1,185 @@
+@extends('layouts.wallpaper')
+@push('headCustom')
+@section('content')
+    <div style="overflow:hidden;">
+        <div class="contentBox">
+            <div class="container">
+                
+                        <h1>Tải hình ảnh</h1>
+                        <div class="pageCartBox">
+                            <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
+
+                                <div class="cartSectionBox">
+                                    <div class="cartSectionBox_body">
+                                        <div class="cartProductBox_head">
+                                            <div>Thông tin</div>
+                                            <div>Tải ảnh</div>
+                                        </div>
+                                        <div class="cartProductBox_body">
+                                            @foreach($order->products as $product)
+                                                @foreach($product->infoPrice->sources as $source)
+                                                    <div id="js_downloadSource_{{ $source->id }}" class="cartProductBox_body_item">
+                                                        <div class="cartProductBox_body_item_info">
+                                                            <div class="cartProductBox_body_item_info_content" style="margin-left:0;">
+                                                                <div class="cartProductBox_body_item_info_content_title" style="font-weight:normal;font-family:'SVN-Gilroy', tahoma, serif;">
+                                                                    {{ $product->infoProduct->name.' ('.($loop->index+1).')' }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cartProductBox_body_item_price">
+                                                            <div class="cartProductBox_body_item_price_icon" style="margin-bottom:auto;" onClick="downloadSource({{ $source->id }});">
+                                                                <img src="{{ Storage::url('images/svg/download.svg') }}" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                    
+                                                @endforeach
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="pageCartBox_right">
+                                <div id="js_scrollMenu" class="cartSectionBox">
+                                    <div class="actionPageConfirm">
+
+                                        <div class="actionPageConfirm_item" onClick="downloadSourceAll('{{ $order->code }}');">
+                                            <div class="actionPageConfirm_item_icon">
+                                                <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
+                                            </div>
+                                            <div class="actionPageConfirm_item_text">
+                                                Tải tất cả (.zip)
+                                            </div>
+                                        </div>
+                                        {{-- <div class="actionPageConfirm_item" onClick="downloadSourceAll('{{ $order->code }}');">
+                                            <div class="actionPageConfirm_item_icon">
+                                                <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
+                                            </div>
+                                            <div class="actionPageConfirm_item_text">
+                                                Tải tất cả (.zip)
+                                            </div>
+                                        </div> --}}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+    </div>
+@endsection
+@push('modal')
+
+@endpush
+@push('bottom')
+    <!-- === START:: Zalo Ring === -->
+    {{-- @include('main.snippets.zaloRing') --}}
+    <!-- === END:: Zalo Ring === -->
+@endpush
+@push('scriptCustom')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <script type="text/javascript">
+
+        $(window).ready(function(){
+            fixedElement();
+        })
+
+        function fixedElement(){
+            var elementOffset   = $("#js_scrollMenu").offset().top;
+            var elementWidth    = $("#js_scrollMenu").outerWidth();
+            $(window).scroll(function() {
+                var scroll          = $(window).scrollTop();
+                if (scroll>=elementOffset&&$(window).width()>1199) {
+                    $("#js_scrollMenu").css({
+                        position: "fixed", 
+                        top: "calc(60px + 2rem)", 
+                        width: 'inherit',
+                        transition: 'all 0.3s ease-in-out'
+                    });
+                } else {
+                    $("#js_scrollMenu").css({
+                        position: "relative", 
+                        top: "0", 
+                        width: 'inherit', 
+                        transform: "translateY(0)"
+                    });
+                }
+            });
+        }
+
+        function downloadSource(id) {
+            $.ajax({
+                url: '{{ route("main.downloadSource") }}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    '_token'            : '{{ csrf_token() }}',
+                    source_info_id      : id
+                },
+                success     : function(response){
+                    var a = document.createElement("a");
+                    a.href      = response.url;
+                    a.download  = response.filename;
+                    a.click();
+                    $('#js_downloadSource_'+id).addClass('alreadyDownload');
+                    $('#js_downloadSource_'+id+' .cartProductBox_body_item_price_icon').html('<img src="./storage/images/svg/download-success.svg" />');
+                }
+            });
+        }
+
+        function downloadSourceAll(code) {
+            $.ajax({
+                url: '{{ route("main.downloadSourceAll") }}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    '_token'    : '{{ csrf_token() }}',
+                    'code'      : code
+                },
+                success: function (response) {
+                    var zip = new JSZip();
+                    var promises = [];
+
+                    // Sử dụng biến đếm để đánh số tên file cho từng ảnh
+                    var fileIndex = 1;
+
+                    // Duyệt qua từng URL trong mảng response
+                    for (var i = 0; i < response.length; i++) {
+                        // Thực hiện một yêu cầu fetch để tải file ảnh về
+                        var promise = fetch(response[i])
+                            .then(function (response) {
+                                return response.blob();
+                            })
+                            .then(function (data) {
+                                // Thêm file ảnh vào file zip
+                                zip.file("image_" + fileIndex + ".png", data, { binary: true });
+                                fileIndex++;
+                            })
+                            .catch(function (error) {
+                                console.log("Error downloading image: " + error);
+                            });
+
+                        promises.push(promise);
+                    }
+
+                    Promise.all(promises).then(function () {
+                        // Tất cả các yêu cầu fetch đã hoàn tất, tiến hành tạo và tải file zip
+                        zip.generateAsync({ type: "blob" }).then(function (content) {
+                            const url = window.URL.createObjectURL(content);
+                            const a = document.createElement('a');
+                            a.style.display = 'none';
+                            a.href = url;
+                            // the filename you want
+                            a.download = 'images.zip';
+                            document.body.appendChild(a);
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                        });
+                    });
+                }
+            });
+        }
+    </script>
+@endpush

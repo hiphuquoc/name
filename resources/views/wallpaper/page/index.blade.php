@@ -26,16 +26,19 @@
 @section('content')
     {{-- <div style="overflow:hidden;"> --}}
         
-        <div class="breadcrumbMobileBox">
-            @include('wallpaper.template.breadcrumb')
-        </div>
+        
 
         {{-- <!-- share social -->
         @include('wallpaper.template.shareSocial') --}}
 
-        <div class="contentBox">
-            <!-- Gallery và Product detail -->
-            <div class="container">
+        
+        <!-- Gallery và Product detail -->
+        <div class="container">
+            <div class="breadcrumbMobileBox">
+                @include('wallpaper.template.breadcrumb')
+            </div>
+
+            <div class="contentBox">
                 <div class="pageContentWithSidebar">
                     <div class="pageContentWithSidebar_content">
                         <h1>{{ $item->name ?? $item->seo->title ?? null }}</h1>
@@ -74,6 +77,8 @@
 
 @endpush
 @push('bottom')
+    <!-- Header bottom -->
+    @include('wallpaper.snippets.headerBottom')
     <!-- === START:: Zalo Ring === -->
     {{-- @include('main.snippets.zaloRing') --}}
     <!-- === END:: Zalo Ring === -->

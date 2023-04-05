@@ -40,9 +40,11 @@
         </div>
 
         <!-- === START:: Footer === -->
-        @include('main.cacheHTML.create', [
-            'content'   => 'main.snippets.footer'
-        ])
+        @if(!Route::is('main.cart')&&!Route::is('main.confirm'))
+            @include('main.cacheHTML.create', [
+                'content'   => 'main.snippets.footer'
+            ])
+        @endif
         <!-- === END:: Footer === -->
 
         <div class="bottom">
@@ -53,21 +55,10 @@
         </div>
 
     </div>
-    <!-- Message -->
-    <div id="js_addToCart_idWrite">
-        @include('wallpaper.cart.cartMessage', [
-            'title'     => $item->name,
-            'option'    => null,
-            'quantity'  => 0,
-            'price'     => 0,
-            'image'     => null
-        ])
-    </div>
     
     <!-- Modal -->
     @stack('modal')
-    @include('wallpaper.modal.paymentMethod')
-    {{-- @include('wallpaper.modal.messageModal') --}}
+    
     <!-- === START:: Scripts Default === -->
     @include('main.snippets.scriptDefault')
     <!-- === END:: Scripts Default === -->

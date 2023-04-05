@@ -77,6 +77,8 @@
 
 @endpush
 @push('bottom')
+    <!-- Header bottom -->
+    @include('wallpaper.snippets.headerBottom')
     <!-- === START:: Zalo Ring === -->
     {{-- @include('wallpaper.snippets.zaloRing') --}}
     <!-- === END:: Zalo Ring === -->

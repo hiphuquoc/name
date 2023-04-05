@@ -1,6 +1,10 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="robots" content="index,follow">
+@if(Route::is('main.confirm'))
+    <meta name="robots" content="noindex,nofollow">
+@else 
+    <meta name="robots" content="index,follow">
+@endif
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="fragment" content="!" />
 {{-- <link rel="shortcut icon" href="/storage/images/upload/hoaanhtuc-favicon-type-manager-upload.webp" type="image/x-icon"> --}}

@@ -66,7 +66,20 @@
     </div>
 @endsection
 @push('modal')
+    <!-- Message Add to Cart -->
+    <div id="js_addToCart_idWrite">
+        @include('wallpaper.cart.cartMessage', [
+            'title'     => $item->name,
+            'option'    => null,
+            'quantity'  => 0,
+            'price'     => 0,
+            'image'     => null
+        ])
+    </div>
+
     @include('wallpaper.modal.viewImageFull')
+
+    @include('wallpaper.modal.paymentMethod')
 @endpush
 @push('bottom')
     <!-- === START:: Zalo Ring === -->

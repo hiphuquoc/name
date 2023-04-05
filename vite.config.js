@@ -13,7 +13,7 @@ export default defineConfig({
         ],
         refresh: true
     }),
-    basicSsl()
+    // basicSsl()
   ]
 });
 

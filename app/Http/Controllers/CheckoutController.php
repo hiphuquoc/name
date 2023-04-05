@@ -57,14 +57,17 @@ class CheckoutController extends Controller{
                             ->where('id', $idOrder)
                             ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
                             ->first();
-        if(!empty($infoOrder->paymentMethod->code)){
-            /* tạo yêu cầu thanh toán => nếu zalo pay */
-            if($infoOrder->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($infoOrder);
-            /* tạo yêu cầu thanh toán => nếu momo */
-            if($infoOrder->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($infoOrder);
-        }
-        /* trả về đường dẫn để chuyển hướng */
-        return redirect($urlRedirect);
+        // if(!empty($infoOrder->paymentMethod->code)){
+        //     /* tạo yêu cầu thanh toán => nếu zalo pay */
+        //     if($infoOrder->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($infoOrder);
+        //     /* tạo yêu cầu thanh toán => nếu momo */
+        //     if($infoOrder->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($infoOrder);
+        // }
+        // /* trả về đường dẫn để chuyển hướng */
+        // return redirect($urlRedirect);
+
+        /* chuyển hướng trang nhận sản phẩm */
+        return redirect()->route('main.confirm', ['code' => $infoOrder->code]);
     }
 
     public function paymentNow(Request $request){
