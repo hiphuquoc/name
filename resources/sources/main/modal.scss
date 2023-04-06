@@ -164,3 +164,42 @@
         }
     }
 }
+.waitingBox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    align-items: center;
+    justify-content: center;
+    &_box {
+        z-index: 99;
+        position: relative;
+        transform-style: preserve-3d;
+        text-align: center;
+        #loading_1 {
+            display: flex !important;
+            flex-direction: column !important;
+            background: none !important;
+            width: 200px !important;
+            position: unset;
+            img {
+                width: 120px !important;
+                height: 120px !important;
+            }
+        }
+        &_text {
+            margin-top: -10px;
+        }
+    }
+    &_bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(30,41,51,0.45);
+    }
+}

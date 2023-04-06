@@ -4,74 +4,89 @@
     <div style="overflow:hidden;">
         <div class="contentBox">
             <div class="container">
-                
-                        <h1>Tải hình ảnh</h1>
-                        <div class="pageCartBox">
-                            <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
+                @php
+                    $count      = 0;
+                    foreach($order->products as $product){
+                        $count  += $product->infoPrice->sources->count();
+                    }
+                @endphp
+                <h1>Tải hình ảnh ({{ $count }})</h1>
+                <div class="pageCartBox">
+                    <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
 
-                                <div class="cartSectionBox">
-                                    <div class="cartSectionBox_body">
-                                        <div class="cartProductBox_head">
-                                            <div>Thông tin</div>
-                                            <div>Tải ảnh</div>
-                                        </div>
-                                        <div class="cartProductBox_body">
-                                            @foreach($order->products as $product)
-                                                @foreach($product->infoPrice->sources as $source)
-                                                    <div id="js_downloadSource_{{ $source->id }}" class="cartProductBox_body_item">
-                                                        <div class="cartProductBox_body_item_info">
-                                                            <div class="cartProductBox_body_item_info_content" style="margin-left:0;">
-                                                                <div class="cartProductBox_body_item_info_content_title" style="font-weight:normal;font-family:'SVN-Gilroy', tahoma, serif;">
-                                                                    {{ $product->infoProduct->name.' ('.($loop->index+1).')' }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="cartProductBox_body_item_price">
-                                                            <div class="cartProductBox_body_item_price_icon" style="margin-bottom:auto;" onClick="downloadSource({{ $source->id }});">
-                                                                <img src="{{ Storage::url('images/svg/download.svg') }}" />
-                                                            </div>
+                        <div class="cartSectionBox">
+                            <div class="cartSectionBox_body">
+                                <div class="cartProductBox_head">
+                                    <div>Thông tin</div>
+                                    <div>Tải ảnh</div>
+                                </div>
+                                <div class="cartProductBox_body">
+                                    @foreach($order->products as $product)
+                                        @foreach($product->infoPrice->sources as $source)
+                                            <div id="js_downloadSource_{{ $source->id }}" class="cartProductBox_body_item">
+                                                <div class="cartProductBox_body_item_info">
+                                                    <div class="cartProductBox_body_item_info_content" style="margin-left:0;">
+                                                        <div class="cartProductBox_body_item_info_content_title" style="font-weight:normal;font-family:'SVN-Gilroy', tahoma, serif;">
+                                                            {{ $product->infoProduct->name.' ('.($loop->index+1).')' }}
                                                         </div>
                                                     </div>
-                                    
-                                                @endforeach
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="pageCartBox_right">
-                                <div id="js_scrollMenu" class="cartSectionBox">
-                                    <div class="actionPageConfirm">
-
-                                        <div class="actionPageConfirm_item" onClick="downloadSourceAll('{{ $order->code }}');">
-                                            <div class="actionPageConfirm_item_icon">
-                                                <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
+                                                </div>
+                                                <div class="cartProductBox_body_item_price">
+                                                    <div class="cartProductBox_body_item_price_icon" style="margin-bottom:auto;" onClick="downloadSource({{ $source->id }});">
+                                                        <img src="{{ Storage::url('images/svg/download.svg') }}" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="actionPageConfirm_item_text">
-                                                Tải tất cả (.zip)
-                                            </div>
-                                        </div>
-                                        {{-- <div class="actionPageConfirm_item" onClick="downloadSourceAll('{{ $order->code }}');">
-                                            <div class="actionPageConfirm_item_icon">
-                                                <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
-                                            </div>
-                                            <div class="actionPageConfirm_item_text">
-                                                Tải tất cả (.zip)
-                                            </div>
-                                        </div> --}}
-
-                                    </div>
+                            
+                                        @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="pageCartBox_right">
+                        <div id="js_scrollMenu" class="cartSectionBox">
+                            <div class="actionPageConfirm">
+
+                                <div class="actionPageConfirm_item" onClick="downloadSourceAll('{{ $order->code }}');">
+                                    <div class="actionPageConfirm_item_icon">
+                                        <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
+                                    </div>
+                                    <div class="actionPageConfirm_item_text">
+                                        Tải tất cả (.zip)
+                                    </div>
+                                </div>
+                                {{-- <div class="actionPageConfirm_item" onClick="downloadSourceAll('{{ $order->code }}');">
+                                    <div class="actionPageConfirm_item_icon">
+                                        <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
+                                    </div>
+                                    <div class="actionPageConfirm_item_text">
+                                        Tải tất cả (.zip)
+                                    </div>
+                                </div> --}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
     </div>
 @endsection
 @push('modal')
+    <div id="js_toggleWaiting_box" class="waitingBox">
+        <div class="waitingBox_box">
 
+            <div id="loading_1">
+                <img class="loading_1" src="{{ config('image.loading_main_css') }}" alt="loading cart" title="loading cart" />
+            </div>
+            <div class="waitingBox_box_text">Đang nén ảnh...</div>
+
+        </div>
+        <div class="waitingBox_bg"></div>
+    </div>
 @endpush
 @push('bottom')
     <!-- === START:: Zalo Ring === -->
@@ -109,6 +124,21 @@
             });
         }
 
+        function toggleWaiting(idElement){
+            const element   = $('#'+idElement);
+            const displayE  = element.css('display');
+            if(displayE=='none'){
+                /* hiển thị */
+                element.css('display', 'flex');
+                $('body').css('overflow', 'hidden');
+                $('#js_openCloseModal_blur').addClass('blurBackground');
+            }else {
+                element.css('display', 'none');
+                $('body').css('overflow', 'unset');
+                $('#js_openCloseModal_blur').removeClass('blurBackground');
+            }
+        }
+
         function downloadSource(id) {
             $.ajax({
                 url: '{{ route("main.downloadSource") }}',
@@ -130,6 +160,9 @@
         }
 
         function downloadSourceAll(code) {
+            /* bật loading */
+            toggleWaiting('js_toggleWaiting_box');
+            /* thực hiện */
             $.ajax({
                 url: '{{ route("main.downloadSourceAll") }}',
                 type: 'POST',
@@ -139,6 +172,7 @@
                     'code'      : code
                 },
                 success: function (response) {
+                    // console.log(response);
                     var zip = new JSZip();
                     var promises = [];
 
@@ -176,6 +210,8 @@
                             document.body.appendChild(a);
                             a.click();
                             window.URL.revokeObjectURL(url);
+                            /* tắt loading */
+                            toggleWaiting('js_toggleWaiting_box');
                         });
                     });
                 }
