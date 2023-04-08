@@ -58,10 +58,7 @@
                                                 data-context="signin"
                                                 data-ux_mode="popup"
                                                 data-login_uri="https://name.dev/auth/google/callback" 
-                                                data-auto_prompt="true" 
-                                                data-skip_prompt_cookie="SID" 
-                                                data-ux_mode="redirect" 
-                                                select_by="btn_confirm_add_session" 
+                                                data-auto_prompt="true"
                                                 data-auto_select="true"
                                                 data-itp_support="true">
                                             </div>
