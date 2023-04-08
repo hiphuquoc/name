@@ -18,6 +18,12 @@
 {{-- <meta name="google-signin-client_id" content="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}">
 <script src="https://apis.google.com/js/platform.js" async defer></script> --}}
 
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<div id="g_id_onload"
+        data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}"
+        data-callback="handleCredentialResponse">
+</div>
+
 <script type="text/javascript">
     // onSignIn();
     // function onSignIn(googleUser) {

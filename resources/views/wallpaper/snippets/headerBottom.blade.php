@@ -15,7 +15,7 @@
             Hướng dẫn
         </div>
     </a>
-    <div class="headerBottom_item">
+    <div class="headerBottom_item" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
         <div class="headerBottom_item_icon">
             <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="mua ngay" title="mua ngay" />
         </div>

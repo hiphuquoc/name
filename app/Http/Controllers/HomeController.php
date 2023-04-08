@@ -62,7 +62,8 @@ class HomeController extends Controller{
     }
 
     public function test(){
-        $googleDisk = Storage::disk('google');
-        dd($googleDisk);
+        dd(123);
+        // $googleDisk = Storage::disk('google');
+        // dd($googleDisk);
     }
 }

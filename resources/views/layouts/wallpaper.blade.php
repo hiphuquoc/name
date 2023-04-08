@@ -58,6 +58,9 @@
     
     <!-- Modal -->
     @stack('modal')
+
+    <!-- login form -->
+    @include('wallpaper.template.loginCustomer')
     
     <!-- === START:: Scripts Default === -->
     @include('main.snippets.scriptDefault')

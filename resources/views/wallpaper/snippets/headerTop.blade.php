@@ -23,7 +23,7 @@
         @endif
         <!-- button đăng nhập desktop -->
         <div class="hide-1023" style="height:100%;">
-            <div class="loginBox"> 
+            <div class="loginBox" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"> 
                 <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="đăng nhập {{ config('main.company_name') }}" title="đăng nhập {{ config('main.company_name') }}" />
                 <div>Đăng nhập</div>
             </div>

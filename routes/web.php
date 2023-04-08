@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\CacheController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/dang-nhap', [HomeController::class, 'test'])->name('main.auth.login');
 
 Route::post('/downloadSource', [ConfirmController::class, 'downloadSource'])->name('main.downloadSource');
 Route::post('/downloadSourceAll', [ConfirmController::class, 'downloadSourceAll'])->name('main.downloadSourceAll');

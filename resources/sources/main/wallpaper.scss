@@ -917,6 +917,10 @@
     font-family: $fontTitle;
     height: 100%;
     min-width: 112px;
+    cursor: pointer;
+    &:hover {
+        color: $colorTextLight;
+    }
     img {
         width: 28px;
         aspect-ratio: 1/1;

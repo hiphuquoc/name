@@ -10,6 +10,7 @@
                         $count  += $product->infoPrice->sources->count();
                     }
                 @endphp
+                
                 <h1>Tải hình ảnh ({{ $count }})</h1>
                 <div class="pageCartBox">
                     <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
@@ -99,7 +100,25 @@
 
         $(window).ready(function(){
             fixedElement();
-        })
+
+            
+        });
+
+        function googleSignIn() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init({
+                client_id: 'YOUR_CLIENT_ID'
+                }).then(function(auth2) {
+                if (auth2.isSignedIn.get()) {
+                    // User is already signed in, do something
+                } else {
+                    auth2.signIn().then(function() {
+                    // User signed in successfully, do something
+                    });
+                }
+                });
+            });
+        }
 
         function fixedElement(){
             var elementOffset   = $("#js_scrollMenu").offset().top;
@@ -153,8 +172,10 @@
                     a.href      = response.url;
                     a.download  = response.filename;
                     a.click();
-                    $('#js_downloadSource_'+id).addClass('alreadyDownload');
-                    $('#js_downloadSource_'+id+' .cartProductBox_body_item_price_icon').html('<img src="./storage/images/svg/download-success.svg" />');
+                    setTimeout(() => {
+                        $('#js_downloadSource_'+id).addClass('alreadyDownload');
+                        $('#js_downloadSource_'+id+' .cartProductBox_body_item_price_icon').html('<img src="./storage/images/svg/download-success.svg" />');
+                    }, 1000);
                 }
             });
         }

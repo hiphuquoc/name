@@ -664,7 +664,7 @@ input, textarea, select {
 }
 
 label {
-  font-weight: 600;
+  // font-weight: 600;
   font-size: 0.925rem;
   display: flex;
   margin-bottom: 0.2rem;
@@ -685,6 +685,17 @@ label {
       font-size: 0.9rem;
       font-family: $fontTitle;
       margin-left: 0.25rem;
+    }
+  }
+  &.checkBox {
+    cursor: pointer;
+    input {
+      width: 20px;
+    }
+    > * {
+      &:not(:first-child){
+        margin-left: 0.5rem;
+      }
     }
   }
 }
