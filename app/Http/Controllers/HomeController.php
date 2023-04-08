@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Blog;
 use App\Models\Page;
+use Laravel\Socialite\Facades\Socialite;
 
 class HomeController extends Controller{
     public static function home(Request $request){
@@ -59,11 +60,5 @@ class HomeController extends Controller{
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
             echo $xhtml;
         }
-    }
-
-    public function test(){
-        dd(123);
-        // $googleDisk = Storage::disk('google');
-        // dd($googleDisk);
     }
 }

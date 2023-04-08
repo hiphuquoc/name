@@ -15,33 +15,7 @@
 @vite(['resources/sources/main/style.scss'])
 <!-- END: Custom CSS-->
 
-{{-- <meta name="google-signin-client_id" content="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}">
-<script src="https://apis.google.com/js/platform.js" async defer></script> --}}
-
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<div id="g_id_onload"
-        data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}"
-        data-callback="handleCredentialResponse">
-</div>
-
-<script type="text/javascript">
-    // onSignIn();
-    // function onSignIn(googleUser) {
-    //     var profile = googleUser.getBasicProfile();
-    //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    //     console.log('Name: ' + profile.getName());
-    //     console.log('Image URL: ' + profile.getImageUrl());
-    //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    // }
-    // signOut();
-    // function signOut() {
-    //     var auth2 = gapi.auth2.getAuthInstance();
-    //     auth2.signOut().then(function () {
-    //     console.log('User signed out.');
-    //     });
-    // }
-
-</script>
 
 <!-- BEGIN: FONT AWESOME -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">

@@ -46,31 +46,37 @@
                         <!-- login social -->
                         <div class="loginFormSocial">
                             <div class="loginFormSocial_title">
-                                hoặc đăng nhập với 
+                                hoặc đăng nhập với
                             </div>
                             <div class="loginFormSocial_body">
-                                @for($i=0;$i<2;++$i)
-                                    <div class="loginFormSocial_body_item">
-                                        <div id="g_id_onload"
-                                            data-client_id="754407299411-rf9o84rnibrhte4qbpb7l4h36clabs4e.apps.googleusercontent.com"
-                                            data-context="signin"
-                                            data-ux_mode="popup"
-                                            data-login_uri="https://name.dev/dang-nhap"
-                                            data-nonce=""
-                                            data-auto_select="true"
-                                            data-itp_support="true">
-                                        </div>
+                                    @for($i=0;$i<2;++$i)
+                                        <div class="loginFormSocial_body_item">
 
-                                        <div class="g_id_signin"
-                                            data-type="standard"
-                                            data-shape="rectangular"
-                                            data-theme="filled_white"
-                                            data-text="signin_with"
-                                            data-size="large"
-                                            data-logo_alignment="left">
+                                            <div id="g_id_onload"
+                                                data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}"
+                                                data-_token="{{ csrf_token() }}" 
+                                                data-context="signin"
+                                                data-ux_mode="popup"
+                                                data-login_uri="https://name.dev/auth/google/callback" 
+                                                data-auto_prompt="true" 
+                                                data-skip_prompt_cookie="SID" 
+                                                data-ux_mode="redirect" 
+                                                select_by="btn_confirm_add_session" 
+                                                data-auto_select="true"
+                                                data-itp_support="true">
+                                            </div>
+
+                                            <div class="g_id_signin"
+                                                data-type="standard"
+                                                data-shape="rectangular"
+                                                data-theme="filled_white"
+                                                data-text="signin_with"
+                                                data-size="large"
+                                                data-logo_alignment="left">
+                                            </div>
+
                                         </div>
-                                    </div>
-                                @endfor
+                                    @endfor
                             </div>
                         </div>
 
@@ -87,6 +93,23 @@
         // $(document).ready(function(){
             
         // });
+
+        // function loginSuccess(){
+        //     $.ajax({
+        //         url: '{{ route("main.google.callback") }}',
+        //         type: 'POST',
+        //         data: {
+        //             '_token'    : '{{ csrf_token() }}',
+        //             // Thêm các thông tin cần thiết khác
+        //         },
+        //         success: function(response) {
+        //             // Xử lý phản hồi từ server
+        //         },
+        //         error: function(jqXHR, textStatus, errorThrown) {
+        //             // Xử lý lỗi
+        //         }
+        //     });
+        // }
 
         function toggleModalCustomerLoginForm(idElement){
             const element   = $('#'+idElement);

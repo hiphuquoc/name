@@ -27,6 +27,10 @@
                 <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="đăng nhập {{ config('main.company_name') }}" title="đăng nhập {{ config('main.company_name') }}" />
                 <div>Đăng nhập</div>
             </div>
+            {{-- <a href="{{ route('main.google.redirect') }}" class="loginBox"> 
+                <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="đăng nhập {{ config('main.company_name') }}" title="đăng nhập {{ config('main.company_name') }}" />
+                <div>Đăng nhập</div>
+            </a> --}}
         </div>
         {{-- <div class="settingViewBox hide-1023">
             <i class="fa-solid fa-eye"></i>

@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CacheController;
 
+use App\Http\Controllers\Auth\ProviderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +42,7 @@ use App\Http\Controllers\Admin\CacheController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/dang-nhap', [HomeController::class, 'test'])->name('main.auth.login');
+Route::post('/auth/google/callback', [ProviderController::class, 'callback'])->name('main.google.callback');
 
 Route::post('/downloadSource', [ConfirmController::class, 'downloadSource'])->name('main.downloadSource');
 Route::post('/downloadSourceAll', [ConfirmController::class, 'downloadSourceAll'])->name('main.downloadSourceAll');
