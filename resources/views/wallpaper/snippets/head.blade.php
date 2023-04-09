@@ -15,8 +15,6 @@
 @vite(['resources/sources/main/style.scss'])
 <!-- END: Custom CSS-->
 
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-
 <!-- BEGIN: FONT AWESOME -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 {{-- <link href="/your-path-to-uicons/css/uicons-rounded-bold.css" rel="stylesheet"> --}}

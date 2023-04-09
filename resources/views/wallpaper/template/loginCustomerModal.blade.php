@@ -18,18 +18,18 @@
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
                                     <label for="login_name">Tên đăng nhập</label>
-                                    <input type="text" id="login_name" name="login_name" onkeyup="validateWhenType(this)" required />
+                                    <input type="text" id="login_name" name="login_name"required />
                                 </div>
                             </div>
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
                                     <label for="password">Mật khẩu</label>
-                                    <input type="password" id="password" name="password" onkeyup="validateWhenType(this)" required />
+                                    <input type="password" id="password" name="password" required />
                                 </div>
                             </div>
                             <div class="formBox_item">
                                 <label class="checkBox" for="remember">
-                                    <input type="checkbox" id="remember" name="remember" onkeyup="validateWhenType(this, 'remember')" />
+                                    <input type="checkbox" id="remember" name="remember" />
                                     <div>Ghi nhớ tôi</div>
                                 </label>
                             </div>
@@ -50,30 +50,31 @@
                             </div>
                             <div class="loginFormSocial_body">
                                 <div class="loginFormSocial_body_item">
-                                    @if(empty($_COOKIE['XSRF-TOKEN']))
-                                        <!-- thẻ div dùng để check => có gọi setCsrfFirstTime hay không? -->
-                                        <div id="js_setCsrfFirstTime"></div>
-                                    @else 
-                                        <div id="g_id_onload" 
-                                            data-_token="{{ csrf_token() }}" 
-                                            data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}" 
-                                            data-context="signin"
-                                            data-ux_mode="popup"
-                                            data-login_uri="https://name.dev/auth/google/callback" 
-                                            data-auto_prompt="true"
-                                            data-auto_select="true"
-                                            data-itp_support="true">
-                                        </div>
+                                    <div id="g_id_onload" 
+                                        data-_token="{{ csrf_token() }}" 
+                                        data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}" 
+                                        data-context="signin"
+                                        data-ux_mode="popup"
+                                        data-login_uri="https://name.dev/auth/google/callback" 
+                                        data-auto_prompt="false"
+                                        data-auto_select="true"
+                                        data-itp_support="true">
+                                    </div>
 
-                                        <div class="g_id_signin"
-                                            data-type="standard"
-                                            data-shape="rectangular"
-                                            data-theme="filled_white"
-                                            data-text="signin_with"
-                                            data-size="large"
-                                            data-logo_alignment="left">
-                                        </div>
-                                    @endif
+                                    <div class="g_id_signin"
+                                        data-type="standard"
+                                        data-shape="rectangular"
+                                        data-theme="filled_white"
+                                        data-text="signin_with"
+                                        data-size="large"
+                                        data-logo_alignment="left">
+                                    </div>
+                                </div>
+                                <div class="loginFormSocial_body_item">
+                                    <a class="facebookButtonLogin" href="{{ route('main.facebook.redirect') }}">
+                                        <img src="{{ Storage::url('images/svg/logo-facebook-fff.png') }}" alt="đăng nhập với facebook" title="đăng nhập với facebook" />
+                                        <div>Đăng nhập với Facebook</div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -86,21 +87,9 @@
     </div>
     
 </div>
-@push('scriptCustom')
-    <script type="text/javascript">
-        $(document).ready(function(){
-            if($('#js_setCsrfFirstTime').length){
-                $.ajax({
-                    url: '{{ route("main.setCsrfFirstTime") }}',
-                    dataType: 'json',
-                    type: 'get',
-                    success: function(response) {
-                        if(response==true) location.reload();
-                    }
-                });
-            }
-        });
-        
+{{-- @push('scriptCustom') --}}
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script type="text/javascript">        
         function toggleModalCustomerLoginForm(idElement){
             const element   = $('#'+idElement);
             const displayE  = element.css('display');
@@ -116,4 +105,4 @@
             }
         }
     </script>
-@endpush
+{{-- @endpush --}}

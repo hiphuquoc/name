@@ -587,6 +587,7 @@ $width_normalMenu : 250px;
 .headerBottom {
     display: none;
     background: $colorBackgroundLv2;
+    box-shadow: 0 -0.5px 3px $colorBackgroundLv1;
     height: 55px;
     width: 100%;
     position: fixed;

@@ -3,7 +3,7 @@
 
 <!-- === START:: Head === -->
 <head>
-    @include('main.snippets.head')
+    @include('wallpaper.snippets.head')
 </head>
 <!-- === END:: Head === -->
 
@@ -41,8 +41,8 @@
 
         <!-- === START:: Footer === -->
         @if(!Route::is('main.cart')&&!Route::is('main.confirm'))
-            @include('main.cacheHTML.create', [
-                'content'   => 'main.snippets.footer'
+            @include('wallpaper.cacheHTML.create', [
+                'content'   => 'wallpaper.snippets.footer'
             ])
         @endif
         <!-- === END:: Footer === -->
@@ -59,11 +59,13 @@
     <!-- Modal -->
     @stack('modal')
 
-    <!-- login form -->
-    @include('wallpaper.template.loginCustomer')
+    <!-- login form modal -->
+    <div id="js_checkLoginAndSetShow_modal">
+        <!-- tải ajaax checkLoginAndSetShow() -->
+    </div>
     
     <!-- === START:: Scripts Default === -->
-    @include('main.snippets.scriptDefault')
+    @include('wallpaper.snippets.scriptDefault')
     <!-- === END:: Scripts Default === -->
 
     <!-- === START:: Scripts Custom === -->

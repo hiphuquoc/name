@@ -127,4 +127,25 @@ class AjaxController extends Controller {
         ])->render();
         echo $response;
     }
+
+    public static function checkLoginAndSetShow(Request $request){
+        $xhtmlModal             = '';
+        $xhtmlButton            = '';
+        $xhtmlButtonMobile      = '';
+        $user = $request->user();
+        if(!empty($user)){
+            /* đã đăng nhập => hiển thị button thông tin tài khoản */
+            $xhtmlButton        = view('wallpaper.template.buttonLogin', ['user' => $user])->render();
+            $xhtmlButtonMobile  = view('wallpaper.template.buttonLoginMobile', ['user' => $user])->render();
+        }else {
+            /* chưa đăng nhập => hiển thị button đăng nhập + modal */
+            $xhtmlButton        = view('wallpaper.template.buttonLogin')->render();
+            $xhtmlModal         = view('wallpaper.template.loginCustomerModal')->render();
+            $xhtmlButtonMobile  = view('wallpaper.template.buttonLoginMobile')->render();
+        }
+        $result['modal']            = $xhtmlModal;
+        $result['button']           = $xhtmlButton;
+        $result['button_mobile']    = $xhtmlButtonMobile;
+        return json_encode($result);
+    }
 }

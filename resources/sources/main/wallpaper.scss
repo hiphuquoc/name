@@ -916,15 +916,28 @@
     align-items: center;
     font-family: $fontTitle;
     height: 100%;
-    min-width: 112px;
+    min-width: 115px;
     cursor: pointer;
     &:hover {
         color: $colorTextLight;
     }
-    img {
-        width: 28px;
+    > img {
+        width: 25px;
         aspect-ratio: 1/1;
-        margin-right: 0.25rem;
+        margin-right: 0.5rem;
+        opacity: 0.5;
+    }
+    &_iconAvatar {
+        flex: 0 0 40px;
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+        background: $colorBackgroundLv1;
+        padding: 0.5rem;
+        margin-right: 0.5rem;
+        img {
+            width: 100%;
+            opacity: 0.5;
+        }
     }
     @media(max-width: 1199px){
         min-width: 111px;

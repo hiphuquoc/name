@@ -22,15 +22,8 @@
             </div>
         @endif
         <!-- button đăng nhập desktop -->
-        <div class="hide-1023" style="height:100%;">
-            <div class="loginBox" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"> 
-                <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="đăng nhập {{ config('main.company_name') }}" title="đăng nhập {{ config('main.company_name') }}" />
-                <div>Đăng nhập</div>
-            </div>
-            {{-- <a href="{{ route('main.google.redirect') }}" class="loginBox"> 
-                <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="đăng nhập {{ config('main.company_name') }}" title="đăng nhập {{ config('main.company_name') }}" />
-                <div>Đăng nhập</div>
-            </a> --}}
+        <div id="js_checkLoginAndSetShow_button" class="hide-1023" style="height:100%;display:none !important;">
+            <!-- tải ajax checkLoginAndSetShow() -->
         </div>
         {{-- <div class="settingViewBox hide-1023">
             <i class="fa-solid fa-eye"></i>

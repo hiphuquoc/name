@@ -195,8 +195,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /* Debugbar */
+        Barryvdh\Debugbar\ServiceProvider::class,
+
         /* image */
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+        /* Permission */
+        App\Providers\PermissionsServiceProvider::class,
+
     ],
 
     /*
@@ -213,6 +220,9 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
 
+        /* Debugbar */
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        
         /* image */
         'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),

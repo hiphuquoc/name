@@ -3,7 +3,8 @@
 <!-- END: SLICK -->
 <script type="text/javascript">
     $(window).ready(function(){
-
+        /* check để xem có cookie csrf chưa (do lần đầu truy cập trang không có lỗi google login) */
+        checkToSetCsrfFirstTime();
         /* lazyload ảnh lần đầu */
         lazyLoad();
         /* lazyload ảnh khi scroll */
@@ -42,6 +43,9 @@
                 $(this).closest('li').addClass('selected');
             }
         });
+
+        /* check login để hiện thị button */
+        checkLoginAndSetShow();
     });
     
     function lazyLoad(){
@@ -778,5 +782,40 @@
             if($(this).val()==0) error.push($(this).attr('name'));
         })
         return error;
+    }
+    /* check csrf first time */
+    function checkToSetCsrfFirstTime(){
+        /* dùng cho trường hợp người dùng vào trang lần đầu chưa có cookie CSRF */
+        const flag = '{{ $_COOKIE["XSRF-TOKEN"] ?? "" }}';
+        if(flag==''){
+            $.ajax({
+                url: '{{ route("main.setCsrfFirstTime") }}',
+                dataType: 'json',
+                type: 'get',
+                success: function(response) {
+                    if(response==true) location.reload();
+                }
+            });
+        }
+    }
+    /* check đăng nhập */
+    function checkLoginAndSetShow(){
+        $.ajax({
+            url         : '{{ route("ajax.checkLoginAndSetShow") }}',
+            type        : 'get',
+            dataType    : 'json',
+            data        : {
+                '_token'            : '{{ csrf_token() }}'
+            },
+            success     : function(response){
+                /* button desktop */
+                $('#js_checkLoginAndSetShow_button').html(response.button);
+                $('#js_checkLoginAndSetShow_button').css('display', 'flex');
+                /* button mobile */
+                $('#js_checkLoginAndSetShow_buttonMobile').html(response.button_mobile);
+                /* modal chung */
+                $('#js_checkLoginAndSetShow_modal').html(response.modal);
+            }
+        });
     }
 </script>

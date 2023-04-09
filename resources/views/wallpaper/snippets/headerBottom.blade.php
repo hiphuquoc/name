@@ -15,12 +15,7 @@
             Hướng dẫn
         </div>
     </a>
-    <div class="headerBottom_item" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
-        <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="mua ngay" title="mua ngay" />
-        </div>
-        <div class="headerBottom_item_text">
-            Đăng nhập
-        </div>
+    <div id="js_checkLoginAndSetShow_buttonMobile" class="headerBottom_item">
+        
     </div>
 </div>
