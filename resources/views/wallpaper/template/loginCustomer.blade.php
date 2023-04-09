@@ -49,31 +49,32 @@
                                 hoặc đăng nhập với
                             </div>
                             <div class="loginFormSocial_body">
-                                    @for($i=0;$i<2;++$i)
-                                        <div class="loginFormSocial_body_item">
-
-                                            <div id="g_id_onload"
-                                                data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}"
-                                                data-_token="{{ csrf_token() }}" 
-                                                data-context="signin"
-                                                data-ux_mode="popup"
-                                                data-login_uri="https://name.dev/auth/google/callback" 
-                                                data-auto_prompt="true"
-                                                data-auto_select="true"
-                                                data-itp_support="true">
-                                            </div>
-
-                                            <div class="g_id_signin"
-                                                data-type="standard"
-                                                data-shape="rectangular"
-                                                data-theme="filled_white"
-                                                data-text="signin_with"
-                                                data-size="large"
-                                                data-logo_alignment="left">
-                                            </div>
-
+                                <div class="loginFormSocial_body_item">
+                                    @if(empty($_COOKIE['XSRF-TOKEN']))
+                                        <!-- thẻ div dùng để check => có gọi setCsrfFirstTime hay không? -->
+                                        <div id="js_setCsrfFirstTime"></div>
+                                    @else 
+                                        <div id="g_id_onload" 
+                                            data-_token="{{ csrf_token() }}" 
+                                            data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}" 
+                                            data-context="signin"
+                                            data-ux_mode="popup"
+                                            data-login_uri="https://name.dev/auth/google/callback" 
+                                            data-auto_prompt="true"
+                                            data-auto_select="true"
+                                            data-itp_support="true">
                                         </div>
-                                    @endfor
+
+                                        <div class="g_id_signin"
+                                            data-type="standard"
+                                            data-shape="rectangular"
+                                            data-theme="filled_white"
+                                            data-text="signin_with"
+                                            data-size="large"
+                                            data-logo_alignment="left">
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
@@ -87,27 +88,19 @@
 </div>
 @push('scriptCustom')
     <script type="text/javascript">
-        // $(document).ready(function(){
-            
-        // });
-
-        // function loginSuccess(){
-        //     $.ajax({
-        //         url: '{{ route("main.google.callback") }}',
-        //         type: 'POST',
-        //         data: {
-        //             '_token'    : '{{ csrf_token() }}',
-        //             // Thêm các thông tin cần thiết khác
-        //         },
-        //         success: function(response) {
-        //             // Xử lý phản hồi từ server
-        //         },
-        //         error: function(jqXHR, textStatus, errorThrown) {
-        //             // Xử lý lỗi
-        //         }
-        //     });
-        // }
-
+        $(document).ready(function(){
+            if($('#js_setCsrfFirstTime').length){
+                $.ajax({
+                    url: '{{ route("main.setCsrfFirstTime") }}',
+                    dataType: 'json',
+                    type: 'get',
+                    success: function(response) {
+                        if(response==true) location.reload();
+                    }
+                });
+            }
+        });
+        
         function toggleModalCustomerLoginForm(idElement){
             const element   = $('#'+idElement);
             const displayE  = element.css('display');

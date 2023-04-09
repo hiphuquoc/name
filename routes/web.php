@@ -12,6 +12,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController as OrderPublic;
 use App\Http\Controllers\PageController as PagePublic;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\CookieController;
 use App\Http\Controllers\SitemapController;
 
 use App\Http\Controllers\Auth\LoginController;
@@ -42,6 +43,7 @@ use App\Http\Controllers\Auth\ProviderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->name('main.setCsrfFirstTime');
 Route::post('/auth/google/callback', [ProviderController::class, 'callback'])->name('main.google.callback');
 
 Route::post('/downloadSource', [ConfirmController::class, 'downloadSource'])->name('main.downloadSource');
