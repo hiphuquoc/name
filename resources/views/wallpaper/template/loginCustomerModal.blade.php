@@ -55,7 +55,7 @@
                                         data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}" 
                                         data-context="signin"
                                         data-ux_mode="popup"
-                                        data-login_uri="https://name.dev/auth/google/callback" 
+                                        data-login_uri="{{ env('APP_URL') }}/auth/google/callback" 
                                         data-auto_prompt="false"
                                         data-auto_select="true"
                                         data-itp_support="true">
