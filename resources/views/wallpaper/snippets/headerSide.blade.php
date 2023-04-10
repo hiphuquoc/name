@@ -22,7 +22,7 @@
                                     ->get();
 @endphp             
 <div class="logoInMenuMobile show-1023">
-    <div class="logoMain"></div>
+    <a href="/" class="logoMain"></a>
 </div>
 <div class="headerSide customScrollBar-y">
     <ul>

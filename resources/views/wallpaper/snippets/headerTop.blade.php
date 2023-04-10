@@ -2,13 +2,8 @@
     
     <!-- breadcrumb desktop -->
     <div class="menuTop_item hide-1023">
-        {{-- <div class=""> --}}
-            @include('wallpaper.template.breadcrumb')
-        {{-- </div> --}}
+        @include('wallpaper.template.breadcrumb')
     </div>
-    <!-- logo mobile -->
-    {{-- <div class="menuTop_item show-1023 logoMain">
-    </div> --}}
 
     <div class="menuTop_item rightBox">
 

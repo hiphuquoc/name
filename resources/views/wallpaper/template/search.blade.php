@@ -25,8 +25,11 @@
         function toggleSearchMobile(){
             const elementSearchBox = $('.searchViewBefore');
             console.log(elementSearchBox);
-            elementSearchBox.css('opacity', '1');
-            elementSearchBox.css('width', '100%');
+            elementSearchBox.css({
+                'opacity'   : '1',
+                'width'     : '100%',
+                'z-index'   : '1'
+            });
             $('.searchViewBefore input').focus();
             /* mở phần hiển thị kết quả search (nếu đang đóng) */
             $('#js_searchProductAjax_idWrite').css('height', 'auto');

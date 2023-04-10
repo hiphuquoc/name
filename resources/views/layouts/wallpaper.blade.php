@@ -13,7 +13,11 @@
         <!-- header Top -->
         <div class="menuTopBackground layoutHeaderTop">
             <div class="layoutHeaderTop_header">
-                <div class="logoMain"></div>
+                <a href="/" class="logoMain">
+                    @if(Route::is('main.home'))
+                        <h1 style="opacity:0;">Trang chủ {{ config('main.company_name') }}</h1>
+                    @endif
+                </a>
                 <!-- search box -->
                 @include('wallpaper.template.search')
             </div>
