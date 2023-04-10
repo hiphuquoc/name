@@ -1285,3 +1285,12 @@
         margin-top: 1rem;
     }
 }
+.logoInMenuMobile {
+    padding: 1rem 0 0.75rem 0;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    .logoMain {
+        width: 50px;
+    }
+}
