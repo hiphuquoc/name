@@ -24,6 +24,7 @@
     <script type="text/javascript">
         function toggleSearchMobile(){
             const elementSearchBox = $('.searchViewBefore');
+            console.log(elementSearchBox);
             elementSearchBox.css('opacity', '1');
             elementSearchBox.css('width', '100%');
             $('.searchViewBefore input').focus();

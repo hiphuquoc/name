@@ -607,6 +607,7 @@ $width_normalMenu : 250px;
         &_icon {
             width: 18px;
             aspect-ratio: 1/1;
+            opacity: 0.5;
         }
     }
     @media(max-width: 1199px){
