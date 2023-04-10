@@ -3,7 +3,7 @@
 
 <!-- === START:: Head === -->
 <head>
-    @include('main.snippets.head')
+    @include('wallpaper.snippets.head')
 </head>
 <!-- === END:: Head === -->
 
@@ -14,7 +14,7 @@
     <!-- Modal -->
     @include('admin.login.form')
     <!-- === START:: Scripts Default === -->
-    @include('main.snippets.scriptDefault')
+    @include('wallpaper.snippets.scriptDefault')
     <!-- === END:: Scripts Default === -->
 
     <!-- === START:: Scripts Custom === -->

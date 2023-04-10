@@ -149,9 +149,9 @@
     background: $colorBackgroundLv2;
     margin-bottom: 1.5rem;
     &_title {
-        padding: 0.5rem 1rem 1rem;
+        padding: 0.5rem 1rem 0.75rem 1rem;
         font-family: $fontTitle;
-        font-size: 1.1rem;
+        font-size: 1rem;
         cursor: pointer;
         border-bottom: 1px solid $colorBackgroundLv1;
         color: $colorText;
@@ -168,15 +168,7 @@
         &_item {
             display: flex;
             margin-top: 0.75rem;
-            font-size: 1rem !important;
             color: $colorText;
-            > * {
-                font-size: 1rem !important;
-            }
-            &:not(:first-child){
-                padding-top: 0.5rem;
-                // border-top: 1px dashed $bg-05;
-            }
         }
     }
     &_close {

@@ -14,6 +14,8 @@
         <div class="menuTopBackground layoutHeaderSide">
             <div class="layoutHeaderSide_header">
                 <div class="logoMain"></div>
+                <!-- search box -->
+                @include('wallpaper.template.search')
             </div>
             <div class="layoutHeaderSide_content">
                 <div class="container" style="height:100%;">

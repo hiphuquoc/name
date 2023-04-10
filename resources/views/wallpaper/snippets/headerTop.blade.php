@@ -1,22 +1,20 @@
 <div class="menuTop">
+    <!-- logo mobile -->
+    <div class="menuTop_item">
+        <div class="logoMain"></div>
+    </div>
+
     <!-- breadcrumb desktop -->
     <div class="menuTop_item">
         <div class="hide-1199">
             @include('wallpaper.template.breadcrumb')
         </div>
     </div>
-    <!-- logo mobile -->
-    <div class="menuTop_item show-1023" style="margin-left:0;">
-        <div class="logoMain"></div>
-    </div>
     <div class="menuTop_item rightBox">
-        <div class="show-1023">
-            <div class="buttonSearchMobile" onClick="toggleSearchMobile();">
-                <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
-            </div>
-        </div>
         @if(!Route::is('main.cart'))
-            @include('wallpaper.template.search')
+            
+            
+
             <div id="js_viewSortCart_idWrite">
                 @include('wallpaper.cart.cartSort', ['products' => null])
             </div>
