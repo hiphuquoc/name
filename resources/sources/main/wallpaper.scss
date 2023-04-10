@@ -772,8 +772,9 @@
         @include colorOpacity('color', $colorText, 0.8);
         position: absolute;
         top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
+        right: 0;
+        // left: 50%;
+        // transform: translateX(-50%);
         z-index: 1;
         border-radius: 0 0 10px 10px;
         border-top: 2px solid $colorBackgroundLv1;
@@ -1046,9 +1047,20 @@
     @media(max-width: 1199px){
         bottom: 120px;
         &_item {
-            &_text {
-                display: none;
+            &_icon {
+                &.twitter {
+                    display: none;
+                }
             }
+            &_text {
+                font-size: 0.65rem;
+            }
+        }
+    }
+    @media(max-width: 766px){
+        bottom: 105px;
+        &_text {
+            font-size: 0.6rem;
         }
     }
 }
@@ -1121,24 +1133,33 @@
                 cursor: pointer;
                 li {
                     list-style: none;
-                    margin-top: 5px;
+                    width: 20px;
+                    height: 20px;
                     button {
-                        @include colorOpacity('background', $colorText, 0.3);
+                        background: none;
                         color: $colorBackgroundLv1;
                         border-radius: 50%;
                         aspect-ratio: 1/1;
                         width: 25px;
                         border: none;
                         box-shadow: none;
+                        &:before {
+                            content: "•";
+                            @include colorOpacity('color', $colorText, 0.5);
+                            font-size: 25px;
+                        }
                     }
                     &.slick-active {
                         button {
-                            background: $colorTextLight;
+                            background: none;
+                            &:before {
+                                color: yellow;
+                            }
                         }
                     }
-                    &:not(:first-child){
-                        margin-left: 3px;
-                    }
+                    // &:not(:first-child){
+                    //     margin-left: 3px;
+                    // }
                 }   
             }
         }

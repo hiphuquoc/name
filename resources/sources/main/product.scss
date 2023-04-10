@@ -92,26 +92,10 @@
         margin-bottom: 1.25rem;
     }
     @media(max-width: 767px){
-        margin-bottom: 1rem;
-        &_item {
-            width: calc(50% - 0.5rem);
-            border-radius: 20px;
-            &:nth-child(2n + 1){
-                margin-left: 0;
-            }
-            &:not(:nth-child(2n + 1)){
-                margin-left: 1rem;
-            }
-            &:nth-child(n + 3){
-                margin-top: 1rem;
-            }
-        }
-    }
-    @media(max-width: 577px){
         margin-bottom: 0.75rem;
         &_item {
             width: calc(50% - 0.375rem);
-            border-radius: 15px;
+            border-radius: 20px;
             &:nth-child(2n + 1){
                 margin-left: 0;
             }
@@ -123,6 +107,22 @@
             }
         }
     }
+    @media(max-width: 577px){
+        margin-bottom: 0.5rem;
+        &_item {
+            width: calc(50% - 0.25rem);
+            border-radius: 15px;
+            &:nth-child(2n + 1){
+                margin-left: 0;
+            }
+            &:not(:nth-child(2n + 1)){
+                margin-left: 0.5rem;
+            }
+            &:nth-child(n + 3){
+                margin-top: 0.5rem;
+            }
+        }
+    }
 }
 .productDetailBox {
     position: sticky;
@@ -130,6 +130,14 @@
     &_detail {
         &_title {
             margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            @media(max-width: 766px){
+                font-size: 1.15rem;
+            }
+            @media(max-width: 766px){
+                font-size: 1.1rem;
+            }
         }
         &_rating {
             margin-bottom: 0.75rem;
@@ -144,7 +152,7 @@
             }
         }
         &_option {
-            // margin-bottom: 0.5rem;
+            margin-top: -0.5rem;
             &_title {
                 font-weight: bold;
                 font-size: 1rem;
@@ -175,10 +183,10 @@
             }
         }
         &_price {
+            margin-top: 1rem;
             &_item {
                 display: none;
                 align-items: center;
-                margin-top: 1.25rem;
                 > * {
                     &:not(:first-child){
                         margin-left: 1.5rem;
@@ -237,7 +245,6 @@
                     img {
                         width: 20px;
                         margin-right: 0.75rem;
-                        margin-bottom: 5px;
                     }
                 }
             }
@@ -370,7 +377,14 @@
                 margin-bottom: 0.5rem;
             }
             &_description {
-                margin-bottom: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_detail {
+            &_description {
+                margin-bottom: 0.25rem;
             }
         }
     }

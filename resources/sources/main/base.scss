@@ -42,21 +42,21 @@ $fontTitle  : "SVN-Gilroy Bold", tahoma, serif;
 @mixin titleDefault {
   color: $colorTitle;
   font-family: $fontTitle;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   margin-bottom: 1.5rem;
   line-height: 1.4;
   @media(max-width: 1199px){
-    font-size: 1.35rem;
+    font-size: 1.25rem;
   }
   @media(max-width: 1023px){
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
   }
   @media(max-width: 766px){
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
   @media(max-width: 577px){
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 0.75rem;
   }
 }
@@ -431,8 +431,11 @@ h4 {
   @media(max-width: 990px){
     margin-top: 1.25rem;
   }
-  @media(max-width: 577px){
+  @media(max-width: 766px){
     margin-top: 1rem;
+  }
+  @media(max-width: 577px){
+    margin-top: 0.75rem;
   }
 }
 p {
@@ -600,6 +603,7 @@ blockquote{
   text-align: center;
   border-radius: 100px;
   letter-spacing: 0.5px;
+  // box-shadow: 0 2px 0 $colorBackgroundLv3;
   box-shadow: 0 2px 0 $colorBackgroundLv3;
   transition: all 0.2s;
   &:focus, &:hover {
@@ -622,11 +626,12 @@ blockquote{
     }
   }
   &.secondary {
+    background: $colorBackgroundLv2;
     color: $colorText;
-    background: none;
-    border: 1px solid $colorBackgroundLv2;
+    // border: 1px solid $colorBackgroundLv3;
     &:hover {
       background: $colorBackgroundLv2;
+      box-shadow: none;
       // color: $colorTextLight;
     }
   }

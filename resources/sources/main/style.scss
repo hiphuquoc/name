@@ -772,6 +772,9 @@
     @media(max-width: 1199px){
         margin-bottom: calc(60px + 0.25rem);
     }
+    @media(max-width: 766px){
+        margin-bottom: calc(55px + 0.25rem);
+    }
 }
 .pageContentWithSidebar {
     display: flex;
