@@ -823,11 +823,14 @@
         /* thêm class để đánh dấu đăng load => không load nữa */ 
         const boxContent    = $('#js_loadMore_box');
         boxContent.addClass('loading');
+        setTimeout(function(){
+            boxContent.removeClass('loading');
+        }, 500);
         /* lấy dữ liệu */
-        const total         = $('#js_loadMore_total').val();
-        const loaded        = $('#js_loadMore_loaded').val();
+        const total         = parseInt($('#js_loadMore_total').val());
+        const loaded        = parseInt($('#js_loadMore_loaded').val());
         const keyCategory   = $('#js_loadMore_keyCategory').val();
-        if(total.length&&loaded.length&&total>loaded){
+        if(total>loaded){
             $.ajax({
                 url         : '{{ route("main.category.loadMore") }}',
                 type        : 'get',
@@ -839,14 +842,16 @@
                     request_load    : requestLoad
                 },
                 success     : function(response){
+                    /* xóa bỏ class để thể hiện đã load xong */
+                    // boxContent.removeClass('loading');
+
                     console.log(response);
+                    /* append dữ liệu */
                     if(response.content!=''){
                         $('#js_loadMore_loaded').val(response.loaded);
                         if($('#js_filterProduct_count').length) $('#js_filterProduct_count').html(response.loaded);
                         boxContent.append(response.content);
                     }
-                    /* xóa bỏ class để thể hiện đã load xong */
-                    boxContent.removeClass('loading');
                 }
             });
         }
