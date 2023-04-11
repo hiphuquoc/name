@@ -954,10 +954,9 @@
             }
         }
         .emptyCart {
-            padding: 1rem;
             img {
                 width: 100%;
-                height: 160px;
+                height: 120px;
             }
             &_text {
                 text-align: center;
@@ -1280,7 +1279,8 @@
     padding: 1rem;
     border-radius: 10px;
     img {
-        max-width: 200px;
+        max-width: 120px;
+        opacity: 0.8;
     }
     &_button {
         margin-top: 1rem;

@@ -53,6 +53,7 @@
 
                         </div>
                         <div class="pageCartBox_right">
+                            @if(!empty($productsCart))
                             <div id="js_scrollMenu" class="cartSectionBox">
                                 <div class="cartSectionBox_body">
                                     <div class="total">
@@ -68,6 +69,7 @@
                                     <div class="button" onClick="submitFormPayment('formPaymentMethod');">Thanh toán</div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </form>

@@ -18,7 +18,8 @@ class CartController extends Controller{
                             ->with('seo', 'type')
                             ->first();
         $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-        $productsCart   = json_decode(Cookie::get('cart'), true);
+        $productsCart   = [];
+        if(!empty(Cookie::get('cart'))) $productsCart = json_decode(Cookie::get('cart'), true);
         $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
         return view('wallpaper.cart.index', compact('item', 'breadcrumb', 'products', 'productsCart'));
     }

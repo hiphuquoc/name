@@ -49,7 +49,7 @@ class RoutingController extends Controller{
                         /* thông tin sản phẩm */
                         $item           = Product::select('*')
                             ->where('seo_id', $checkExists->id)
-                            ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand')
+                            ->with('seo', 'prices', 'contents', 'categories')
                             ->first();
                         /* danh sách category của sản phẩm */
                         $arrayCategory  = [];
@@ -59,7 +59,7 @@ class RoutingController extends Controller{
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                                 $query->whereIn('id', $arrayCategory);
                                             })
-                                            ->with('seo', 'files', 'prices.files')
+                                            ->with('seo', 'prices.files')
                                             ->get();
                         /* breadcrumb */
                         $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
@@ -78,7 +78,7 @@ class RoutingController extends Controller{
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                                 $query->whereIn('id', $arrayCategory);
                                             })
-                                            ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                                            ->with('seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->get();
                         /* lấy thông tin category dưới 1 cấp => gộp vào collection */
