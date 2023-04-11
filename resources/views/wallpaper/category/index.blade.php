@@ -64,7 +64,15 @@
                         @endif
                     </h1>
                 @else 
-                    <h1>Hình nền điện thoại {{ $item->name ?? $item->seo->title ?? null }}</h1>
+                    @if(!empty($item->name)&&$item->name!='Hình nền điện thoại')
+                        <h1>Hình nền điện thoại {{ $item->name }}</h1>
+                    @else 
+                        <h1>{{ $item->name ?? null }}</h1>
+                    @endif
+                    <!-- load more -->
+                    <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? null }}" />
+                    <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" /> 
+                    <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" /> 
                 @endif
                 <!-- Sort Box -->
                 <div class="sortBox">
@@ -95,8 +103,8 @@
                     'product'       => $product ?? null,
                     'headingTitle'  => 'h2'
                 ])
-                @include('main.template.productGridLoading')
-                <div id="js_filterProduct_hidden"></div>
+                {{-- @include('main.template.productGridLoading')
+                <div id="js_filterProduct_hidden"></div> --}}
             </div>
             <!-- Nội dung -->
             @if(!empty($content))
@@ -128,15 +136,26 @@
             
             /* build tocContent khi scroll gần tới */
             const elementBuildTocContent = $('#js_buildTocContentMain_element');
+            /* load more */
+            const boxCategory       = $('#js_loadMore_box');
             $(window).on('scroll', function() {
-                if (!elementBuildTocContent.hasClass('loaded')) {
-                    var distance = $(window).scrollTop() - elementBuildTocContent.offset().top + 900;
-                    if (distance > 0) {
-                        buildTocContentMain('js_buildTocContentMain_element');
+                /* build toc content */
+                if(elementBuildTocContent.length){
+                    if (!elementBuildTocContent.hasClass('loaded')) {
+                        var distance = $(window).scrollTop() - elementBuildTocContent.offset().top + 900;
+                        if (distance > 0) {
+                            buildTocContentMain('js_buildTocContentMain_element');
+                        }
                     }
                 }
-            });
-            
+                /* load more */
+                if(boxCategory.length&&!boxCategory.hasClass('loading')){
+                    const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
+                    if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
+                        loadWallpaperMore();
+                    }
+                }
+            });            
         })
     </script>
 @endpush

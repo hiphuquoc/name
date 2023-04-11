@@ -55,7 +55,7 @@
         transform-style: preserve-3d;
         &_head {
             margin-bottom: 1.5rem;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
             font-family: $fontTitle;
             color: $colorText;
@@ -113,14 +113,14 @@
     @media(max-width: 1199px){
         &_box {
             &_head {
-                font-size: 1.2rem;
+                font-size: 1.15rem;
             }
         }
     }
     @media(max-width: 990px){
         &_box {
             &_head {
-                font-size: 1.15rem;
+                font-size: 1.1rem;
             }
         }
     }
@@ -128,7 +128,7 @@
         &_box {
             &_head {
                 margin-bottom: 0.75rem;
-                font-size: 1.1rem;
+                font-size: 1.05rem;
             }
             &_body {
                 margin-bottom: 1rem;

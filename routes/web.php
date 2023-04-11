@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController as CategoryPublic;
 use App\Http\Controllers\MomoController;
 use App\Http\Controllers\ZalopayController;
 use App\Http\Controllers\RoutingController;
@@ -57,9 +58,13 @@ Route::prefix('payment')->group(function(){
     Route::get('/momoCreate', [MomoController::class, 'create'])->name('main.momo.create');
     Route::get('/zaloCreate', [ZalopayController::class, 'create'])->name('main.zalo.create');
 });
-
+/* trang chủ */
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 Route::get('/test', [HomeController::class, 'test'])->name('main.test');
+/* trang category */
+Route::prefix('category')->group(function(){
+    Route::get('/loadMore', [CategoryPublic::class, 'loadMore'])->name('main.category.loadMore');
+});
 /* lỗi */
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
 /* page */
@@ -74,7 +79,6 @@ Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main
 Route::post('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
 Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
 Route::get('/confirm', [ConfirmController::class, 'confirm'])->name('main.confirm');
-
 /* check out */
 Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');
 /* order */

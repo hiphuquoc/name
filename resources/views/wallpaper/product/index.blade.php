@@ -48,11 +48,15 @@
             @include('wallpaper.product.body')
 
             <!-- Related -->
-            @if(!empty($related)&&$related->isNotEmpty())
+            @if($totalProduct>0)
             <div class="contentBox">
                 <div class="relatedProductBox">
                     <div class="relatedProductBox_title">
                         <h2>Gợi ý cho bạn</h2>
+                        <!-- load more -->
+                        <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? null }}" />
+                        <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $related->count() }}" /> 
+                        <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" /> 
                     </div>
                     <div class="relatedProductBox_box">
                         @include('wallpaper.template.wallpaperGrid', [
@@ -88,9 +92,21 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-        // $(window).ready(function(){
-        //     setOptionProduct();
-        // })
+        $(window).ready(function(){
+            // setOptionProduct();
+
+            /* load more */
+            const boxCategory       = $('#js_loadMore_box');
+            $(window).on('scroll', function() {
+                /* load more */
+                if(boxCategory.length&&!boxCategory.hasClass('loading')){
+                    const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
+                    if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
+                        loadWallpaperMore();
+                    }
+                }
+            });        
+        })
         /* thay đổi option sản phẩm */
         function setOptionProduct(idPrice = ''){
             if(idPrice==''){

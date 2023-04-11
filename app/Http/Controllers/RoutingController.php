@@ -54,16 +54,17 @@ class RoutingController extends Controller{
                         /* danh sách category của sản phẩm */
                         $arrayCategory  = [];
                         foreach($item->categories as $category) $arrayCategory[] = $category->infoCategory->id;
-                        $related        = Product::select('*')
+                        $keyCategory    = json_encode($arrayCategory);
+                        $related        = new \Illuminate\Database\Eloquent\Collection;
+                        $totalProduct   = Product::select('*')
                                             ->where('id', '!=', $item->id)
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                                 $query->whereIn('id', $arrayCategory);
                                             })
-                                            ->with('seo', 'prices.files')
-                                            ->get();
+                                            ->count();
                         /* breadcrumb */
                         $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
-                        $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related'))->render();
+                        $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related', 'totalProduct', 'keyCategory'))->render();
                         break;
                     case 'category_info':
                         $flagMatch      = true;
@@ -74,13 +75,21 @@ class RoutingController extends Controller{
                                             ->first();
                         /* danh sách product => lấy riêng để dễ truyền vào template */
                         $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
+                        $keyCategory    = json_encode($arrayCategory);
                         $products       = Product::select('*')
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                                 $query->whereIn('id', $arrayCategory);
                                             })
                                             ->with('seo', 'prices')
                                             ->orderBy('id', 'DESC')
+                                            ->skip(0)
+                                            ->take(10)
                                             ->get();
+                        $totalProduct   = Product::select('*')
+                                            ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
+                                                $query->whereIn('id', $arrayCategory);
+                                            })
+                                            ->count();
                         /* lấy thông tin category dưới 1 cấp => gộp vào collection */
                         $idSeo          = $item->seo->id;
                         $categories     = Category::select('*')
@@ -99,7 +108,7 @@ class RoutingController extends Controller{
                         $content            = Blade::render(Storage::get(config('main.storage.contentCategory').$item->seo->slug.'.blade.php'));
                         /* breadcrumb */
                         $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
-                        $xhtml          = view('wallpaper.category.index', compact('item', 'products', 'breadcrumb', 'brands', 'categories', 'content'))->render();
+                        $xhtml          = view('wallpaper.category.index', compact('item', 'products', 'totalProduct', 'keyCategory', 'breadcrumb', 'brands', 'categories', 'content'))->render();
                         break;
                     // case 'brand_info':
                     //     $flagMatch      = true;

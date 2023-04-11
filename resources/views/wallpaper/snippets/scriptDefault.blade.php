@@ -818,4 +818,37 @@
             }
         });
     }
+    /* loadmore wallpaper */
+    function loadWallpaperMore(requestLoad = 10){
+        /* thêm class để đánh dấu đăng load => không load nữa */ 
+        const boxContent    = $('#js_loadMore_box');
+        boxContent.addClass('loading');
+        /* lấy dữ liệu */
+        const total         = $('#js_loadMore_total').val();
+        const loaded        = $('#js_loadMore_loaded').val();
+        const keyCategory   = $('#js_loadMore_keyCategory').val();
+        if(total.length&&loaded.length&&total>loaded){
+            $.ajax({
+                url         : '{{ route("main.category.loadMore") }}',
+                type        : 'get',
+                dataType    : 'json',
+                data        : {
+                    total           : total,
+                    loaded          : loaded,
+                    key_category    : keyCategory,
+                    request_load    : requestLoad
+                },
+                success     : function(response){
+                    console.log(response);
+                    if(response.content!=''){
+                        $('#js_loadMore_loaded').val(response.loaded);
+                        if($('#js_filterProduct_count').length) $('#js_filterProduct_count').html(response.loaded);
+                        boxContent.append(response.content);
+                    }
+                    /* xóa bỏ class để thể hiện đã load xong */
+                    boxContent.removeClass('loading');
+                }
+            });
+        }
+    }
 </script>

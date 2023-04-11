@@ -442,8 +442,15 @@
             border-radius: 100px;
             color: $colorText;
             font-size: 0.95rem;
-            &::selection, &:focus {
-                background: $colorBackgroundLv1;
+            // &::selection, &:focus {
+            //     background: $colorBackgroundLv1;
+            // }
+            &::selection, &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
+                border: none;
+                outline: none;
+                background: transparent !important;
+                -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+                -webkit-transition-delay: 9999s;
             }
         }
     }

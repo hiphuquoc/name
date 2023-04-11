@@ -18,13 +18,13 @@
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
                                     <label for="login_name">Tên đăng nhập</label>
-                                    <input type="text" id="login_name" name="login_name"required />
+                                    <input type="text" id="login_name" name="login_name" required />
                                 </div>
                             </div>
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
                                     <label for="password">Mật khẩu</label>
-                                    <input type="password" id="password" name="password" required />
+                                    <input type="password" id="password" name="password" autocomplete="off" required />
                                 </div>
                             </div>
                             <div class="formBox_item">
