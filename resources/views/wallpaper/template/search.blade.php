@@ -1,14 +1,12 @@
 
 <div class="searchViewBefore">
     <div class="searchViewBefore_input">
-        <form method="get" action="#">
-            <!-- value = null không lưu giá trị search cũ -->
-            <input id="searchProductAjax_input" type="text" name="key_search" placeholder="Tìm kiếm" value="" onkeyup="searchProductAjax(this)" autocomplete="off" />
-            
-            <button type="submit" class="button" aria-label="tìm kiếm sản phẩm">
-                <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
-            </button>
-        </form>
+        <!-- value = null không lưu giá trị search cũ -->
+        <input id="searchProductAjax_input" type="text" name="key_search" placeholder="Tìm kiếm" value="" onkeyup="searchProductAjax(this)" autocomplete="off" />
+        
+        <button type="button" class="button" aria-label="tìm kiếm sản phẩm">
+            <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
+        </button>
     </div>
     <div id="js_searchProductAjax_idWrite" class="searchViewBefore_selectbox">
         <div class="searchViewBefore_selectbox_item">
@@ -18,13 +16,12 @@
             </div>
         </div>
     </div>
-    <div class="searchViewBefore_background"></div>
+    <div class="searchViewBefore_background" onClick="closeBoxSearchMobile();"></div>
 </div>
 @push('scriptCustom')
     <script type="text/javascript">
         function toggleSearchMobile(){
             const elementSearchBox = $('.searchViewBefore');
-            console.log(elementSearchBox);
             elementSearchBox.css({
                 'opacity'   : '1',
                 'width'     : '100%',
@@ -34,6 +31,11 @@
             /* mở phần hiển thị kết quả search (nếu đang đóng) */
             $('#js_searchProductAjax_idWrite').css('height', 'auto');
             $('.searchViewBefore_background').css('display', 'block');
+        }
+        function closeBoxSearchMobile(){
+            toggleSearchMobile();
+            $('.searchViewBefore_selectbox').css('height', '0');
+            $('.searchViewBefore_background').css('display', 'none');
         }
     </script>
 @endpush

@@ -62,7 +62,9 @@
             text-align: center;
         }
         &_body {
-            margin-bottom: 1.5rem;
+            &:not(:last-child){
+                margin-bottom: 1.5rem;
+            }
             &_item {
                 display: flex;
                 align-items: center;
