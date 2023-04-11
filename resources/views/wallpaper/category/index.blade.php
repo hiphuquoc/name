@@ -133,11 +133,11 @@
 @push('scriptCustom')
     <script type="text/javascript">
         $(window).ready(function(){
-            
+            /* load more lần đầu nếu nằm trong vùng xem */
+            loadWallpaperMore();
+
             /* build tocContent khi scroll gần tới */
             const elementBuildTocContent = $('#js_buildTocContentMain_element');
-            /* load more */
-            const boxCategory       = $('#js_loadMore_box');
             $(window).on('scroll', function() {
                 /* build toc content */
                 if(elementBuildTocContent.length){
@@ -149,12 +149,7 @@
                     }
                 }
                 /* load more */
-                if(boxCategory.length&&!boxCategory.hasClass('loading')){
-                    const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
-                    if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
-                        loadWallpaperMore();
-                    }
-                }
+                loadWallpaperMore(); 
             });            
         })
     </script>

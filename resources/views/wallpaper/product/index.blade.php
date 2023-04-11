@@ -96,15 +96,9 @@
             // setOptionProduct();
 
             /* load more */
-            const boxCategory       = $('#js_loadMore_box');
+            loadWallpaperMore();
             $(window).on('scroll', function() {
-                /* load more */
-                if(boxCategory.length&&!boxCategory.hasClass('loading')){
-                    const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
-                    if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
-                        loadWallpaperMore();
-                    }
-                }
+                loadWallpaperMore();
             });        
         })
         /* thay đổi option sản phẩm */

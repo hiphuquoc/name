@@ -820,40 +820,42 @@
     }
     /* loadmore wallpaper */
     function loadWallpaperMore(requestLoad = 5){
-        /* thêm class để đánh dấu đăng load => không load nữa */ 
-        const boxContent    = $('#js_loadMore_box');
-        boxContent.addClass('loading');
-        setTimeout(function(){
-            boxContent.removeClass('loading');
-        }, 500);
-        /* lấy dữ liệu */
-        const total         = parseInt($('#js_loadMore_total').val());
-        const loaded        = parseInt($('#js_loadMore_loaded').val());
-        const keyCategory   = $('#js_loadMore_keyCategory').val();
-        if(total>loaded){
-            $.ajax({
-                url         : '{{ route("main.category.loadMore") }}',
-                type        : 'get',
-                dataType    : 'json',
-                data        : {
-                    total           : total,
-                    loaded          : loaded,
-                    key_category    : keyCategory,
-                    request_load    : requestLoad
-                },
-                success     : function(response){
-                    /* xóa bỏ class để thể hiện đã load xong */
-                    // boxContent.removeClass('loading');
-
-                    console.log(response);
-                    /* append dữ liệu */
-                    if(response.content!=''){
-                        $('#js_loadMore_loaded').val(response.loaded);
-                        if($('#js_filterProduct_count').length) $('#js_filterProduct_count').html(response.loaded);
-                        boxContent.append(response.content);
-                    }
+        var boxCategory       = $('#js_loadMore_box');
+        if(boxCategory.length&&!boxCategory.hasClass('loading')){
+            const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
+            if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
+                /* thực thi */
+                /* thêm class để đánh dấu đăng load => không load nữa */
+                boxCategory.addClass('loading');
+                /* lấy dữ liệu */
+                const total         = parseInt($('#js_loadMore_total').val());
+                const loaded        = parseInt($('#js_loadMore_loaded').val());
+                const keyCategory   = $('#js_loadMore_keyCategory').val();
+                if(total>loaded){
+                    $.ajax({
+                        url         : '{{ route("main.category.loadMore") }}',
+                        type        : 'get',
+                        dataType    : 'json',
+                        data        : {
+                            total           : total,
+                            loaded          : loaded,
+                            key_category    : keyCategory,
+                            request_load    : requestLoad
+                        },
+                        success     : function(response){
+                            /* xóa bỏ class để thể hiện đã load xong */
+                            boxCategory.removeClass('loading');
+                            /* append dữ liệu */
+                            if(response.content!=''){
+                                $('#js_loadMore_loaded').val(response.loaded);
+                                if($('#js_filterProduct_count').length) $('#js_filterProduct_count').html(response.loaded);
+                                boxCategory.append(response.content);
+                            }
+                        }
+                    });
                 }
-            });
+
+            }
         }
     }
 </script>
