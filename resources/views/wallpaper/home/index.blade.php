@@ -39,26 +39,44 @@
         <div class="container">
             <!-- === START:: Product Box === -->
             @if(!empty($newProducts)&&$newProducts->isNotEmpty())
-                <div class="contentBox">
+                {{-- <div class="contentBox">
                     @include('wallpaper.home.categoryBox', [
                         'title'     => 'Hình nền điện thoại mới',
                         'products'  => $newProducts,
                         'tagBox'    => 'new' // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box
                     ])
+                </div> --}}
+                <div class="categoryBox">
+                    <div class="categoryBox_title">
+                        <h2>Hình nền điện thoại mới</h2>
+                    </div>
+                    <div class="categoryBox_box">
+                        <div class="wallpaperGridBox">
+                            @foreach($newProducts as $product)
+                                @include('wallpaper.template.wallpaperItem', [
+                                    'product'   => $product,
+                                    'tagBox'    => 'new' // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box
+                                ])
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             @endif
             <!-- === END:: Product Box === -->
                 
             <!-- === START:: Product Box === -->
-            @if(!empty($promotionProducts)&&$promotionProducts->isNotEmpty())
+            {{-- @if(!empty($promotionProducts)&&$promotionProducts->isNotEmpty()) --}}
                 <div class="contentBox">
+                    <!-- load more -->
+                    <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalPromotionProduct ?? 0 }}" />
+                    <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $promotionProducts->count() }}" />
                     @include('wallpaper.home.categoryBox', [
                         'title'     => '<a href="/hinh-nen-dien-thoai-khuyen-mai" title="hình nền điện thoại khuyến mãi">Hình nền điện thoại khuyến mãi<i class="fa-solid fa-angle-right" style="margin-left:15px;font-size:15px;"></i></a>',
                         'products'  => $promotionProducts,
                         'tagBox'    => 'promotion'
                     ])
                 </div>
-            @endif
+            {{-- @endif --}}
             <!-- === END:: Product Box === -->
 
             {{-- <!-- === START:: Product Box === -->
@@ -85,6 +103,51 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-        
+        $(window).ready(function(){
+            /* load more lần đầu nếu nằm trong vùng xem */
+            loadWallpaperPromotionMore();
+            $(window).on('scroll', function() {
+                loadWallpaperPromotionMore(); 
+            });            
+        })
+        /* loadmore wallpaper */
+        function loadWallpaperPromotionMore(requestLoad = 5){
+            var boxCategory       = $('#js_loadMore_box');
+            if(boxCategory.length&&!boxCategory.hasClass('loading')){
+                const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
+                if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
+                    /* thực thi */
+                    /* thêm class để đánh dấu đăng load => không load nữa */
+                    boxCategory.addClass('loading');
+                    /* lấy dữ liệu */
+                    const total         = parseInt($('#js_loadMore_total').val());
+                    const loaded        = parseInt($('#js_loadMore_loaded').val());
+                    // const keyCategory   = $('#js_loadMore_keyCategory').val();
+                    if(total>loaded){
+                        $.ajax({
+                            url         : '{{ route("main.category.loadMorePromotion") }}',
+                            type        : 'get',
+                            dataType    : 'json',
+                            data        : {
+                                total           : total,
+                                loaded          : loaded,
+                                request_load    : requestLoad
+                            },
+                            success     : function(response){
+                                /* xóa bỏ class để thể hiện đã load xong */
+                                boxCategory.removeClass('loading');
+                                /* append dữ liệu */
+                                if(response.content!=''){
+                                    $('#js_loadMore_loaded').val(response.loaded);
+                                    if($('#js_filterProduct_count').length) $('#js_filterProduct_count').html(response.loaded);
+                                    boxCategory.append(response.content);
+                                }
+                            }
+                        });
+                    }
+
+                }
+            }
+        }
     </script>
 @endpush

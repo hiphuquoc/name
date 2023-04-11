@@ -70,7 +70,7 @@
                         <h1>{{ $item->name ?? null }}</h1>
                     @endif
                     <!-- load more -->
-                    <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? null }}" />
+                    <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
                     <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" /> 
                     <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" /> 
                 @endif

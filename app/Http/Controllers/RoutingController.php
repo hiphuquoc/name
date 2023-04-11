@@ -83,7 +83,7 @@ class RoutingController extends Controller{
                                             ->with('seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->skip(0)
-                                            ->take(10)
+                                            ->take(5)
                                             ->get();
                         $totalProduct   = Product::select('*')
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){

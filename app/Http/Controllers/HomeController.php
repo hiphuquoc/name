@@ -29,19 +29,18 @@ class HomeController extends Controller{
                                         })
                                         ->with('seo', 'type')
                                         ->first();
-            $promotionProducts      = Product::select('*')
+            $newProducts            = Product::select('*')
+                                        ->orderBy('id', 'DESC')
+                                        ->skip(0)
+                                        ->take(10)
+                                        ->get();
+            
+            $promotionProducts      = new \Illuminate\Database\Eloquent\Collection;
+            $totalPromotionProduct  = Product::select('*')
                                         ->whereHas('prices', function($query){
                                             $query->where('sale_off', '>', 0);
                                         })
-                                        ->paginate(10);
-            $newProducts            = Product::select('*')
-                                        ->orderBy('id', 'DESC')
-                                        ->paginate(10);
-            // $hotProducts            = Product::select('*')
-            //                             ->orderBy('sold', 'DESC')
-            //                             ->skip(0)
-            //                             ->take(8)
-            //                             ->get();
+                                        ->count();
             $categories             = Category::select('*')
                                         ->whereHas('seo', function($query){
                                             $query->where('level', 1);
@@ -55,7 +54,7 @@ class HomeController extends Controller{
                                         })
                                         ->with('seo')
                                         ->get();
-            $xhtml          = view('wallpaper.home.index', compact('item', 'categories', 'newProducts', 'promotionProducts', 'blogs'))->render();
+            $xhtml          = view('wallpaper.home.index', compact('item', 'categories', 'newProducts', 'promotionProducts', 'totalPromotionProduct', 'blogs'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
             echo $xhtml;
