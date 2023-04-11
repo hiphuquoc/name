@@ -139,7 +139,6 @@
                                 /* append dữ liệu */
                                 if(response.content!=''){
                                     $('#js_loadMore_loaded').val(response.loaded);
-                                    if($('#js_filterProduct_count').length) $('#js_filterProduct_count').html(response.loaded);
                                     boxCategory.append(response.content);
                                 }
                             }

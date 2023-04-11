@@ -77,7 +77,7 @@
                 <!-- Sort Box -->
                 <div class="sortBox">
                     <div class="sortBox_left">
-                        <div><span id="js_filterProduct_count" class="highLight">{{ $products->count() }}</span> sản phẩm</div>
+                        <div><span id="js_filterProduct_count" class="highLight">{{ $totalProduct }}</span> sản phẩm</div>
                     </div>
                     <div class="sortBox_right">
                         <div class="sortBox_right_item">
