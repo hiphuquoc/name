@@ -819,7 +819,7 @@
         });
     }
     /* loadmore wallpaper */
-    function loadWallpaperMore(requestLoad = 10){
+    function loadWallpaperMore(requestLoad = 5){
         /* thêm class để đánh dấu đăng load => không load nữa */ 
         const boxContent    = $('#js_loadMore_box');
         boxContent.addClass('loading');

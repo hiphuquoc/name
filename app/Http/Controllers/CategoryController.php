@@ -14,7 +14,7 @@ class CategoryController extends Controller {
         if(!empty($request->get('total'))&&!empty($request->get('key_category'))){
             /* content product */
             $arrayCategory  = json_decode($request->get('key_category'), true);
-            $requestLoad    = $request->get('request_load') ?? 10;
+            $requestLoad    = $request->get('request_load') ?? 5;
             $products       = Product::select('*')
                                 ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                     $query->whereIn('id', $arrayCategory);
