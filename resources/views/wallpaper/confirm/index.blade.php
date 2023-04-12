@@ -15,7 +15,7 @@
                 <div class="pageCartBox">
                     <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
 
-                        <div class="cartSectionBox">
+                        {{-- <div class="cartSectionBox">
                             <div class="cartSectionBox_body">
                                 <div class="cartProductBox_head">
                                     <div>Thông tin</div>
@@ -43,6 +43,34 @@
                                     @endforeach
                                 </div>
                             </div>
+                        </div> --}}
+
+                        <div class="wallpaperSourceGrid">
+                            @php
+                                $i = 0;
+                            @endphp
+                            @foreach($order->products as $product)
+                                @foreach($product->infoPrice->sources as $source)
+                                    @php
+                                        if($i<3){
+                                            $attribute = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.Storage::url($source->file_path).'\') no-repeat;background-size: 100% 100%;"';
+                                        }else {
+                                            $attribute = 'class="wallpaperSourceGrid_item_image lazyload" data-src="'.Storage::url($source->file_path).'" style="background:url() no-repeat;background-size: 100% 100%;"';
+                                        }
+                                        
+                                    @endphp
+                                    <div id="js_downloadSource_{{ $source->id }}" class="wallpaperSourceGrid_item" onClick="downloadSource({{ $source->id }});">
+                                        <div {!! $attribute !!}></div>
+                                        <div class="wallpaperSourceGrid_item_action">
+                                            <img src="{{ Storage::url('images/svg/download.svg') }}" />
+                                        </div>
+                                        <div class="wallpaperSourceGrid_item_background"></div>
+                                    </div>
+                                    @php
+                                        ++$i;
+                                    @endphp
+                                @endforeach
+                            @endforeach
                         </div>
 
                     </div>
@@ -100,25 +128,7 @@
 
         $(window).ready(function(){
             fixedElement();
-
-            
         });
-
-        function googleSignIn() {
-            gapi.load('auth2', function() {
-                gapi.auth2.init({
-                client_id: 'YOUR_CLIENT_ID'
-                }).then(function(auth2) {
-                if (auth2.isSignedIn.get()) {
-                    // User is already signed in, do something
-                } else {
-                    auth2.signIn().then(function() {
-                    // User signed in successfully, do something
-                    });
-                }
-                });
-            });
-        }
 
         function fixedElement(){
             var elementOffset   = $("#js_scrollMenu").offset().top;
@@ -173,9 +183,9 @@
                     a.download  = response.filename;
                     a.click();
                     setTimeout(() => {
-                        $('#js_downloadSource_'+id).addClass('alreadyDownload');
-                        $('#js_downloadSource_'+id+' .cartProductBox_body_item_price_icon').html('<img src="./storage/images/svg/download-success.svg" />');
-                    }, 1000);
+                        $('#js_downloadSource_'+id+' .wallpaperSourceGrid_item_image').addClass('alreadyDownload');
+                        $('#js_downloadSource_'+id+' .wallpaperSourceGrid_item_action').html('<img src="./storage/images/svg/download-success.svg" />');
+                    }, 0);
                 }
             });
         }
