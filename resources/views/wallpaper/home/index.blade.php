@@ -46,18 +46,20 @@
                         'tagBox'    => 'new' // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box
                     ])
                 </div> --}}
-                <div class="categoryBox">
-                    <div class="categoryBox_title">
-                        <h2>Hình nền điện thoại mới</h2>
-                    </div>
-                    <div class="categoryBox_box">
-                        <div class="wallpaperGridBox">
-                            @foreach($newProducts as $product)
-                                @include('wallpaper.template.wallpaperItem', [
-                                    'product'   => $product,
-                                    'tagBox'    => 'new' // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box
-                                ])
-                            @endforeach
+                <div class="contentBox">
+                    <div class="categoryBox">
+                        <div class="categoryBox_title">
+                            <h2>Hình nền điện thoại mới</h2>
+                        </div>
+                        <div class="categoryBox_box">
+                            <div class="wallpaperGridBox">
+                                @foreach($newProducts as $product)
+                                    @include('wallpaper.template.wallpaperItem', [
+                                        'product'   => $product,
+                                        'tagBox'    => 'new' // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box
+                                    ])
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
