@@ -27,7 +27,7 @@ class ConfirmController extends Controller {
 
     public static function handlePaymentMomo(Request $request){
         /* có mã đơn hàng => xử lý tiếp */
-        if(!empty($request->get('orderId'))&&!empty($request->get('transId'))&&!empty($request->get('resultCode'))){
+        if(!empty($request->get('orderId'))&&!empty($request->get('transId'))){
             $code       = $request->get('orderId');
             $orderInfo  = Order::select('*')
                             ->where('code', $code)
