@@ -84,7 +84,7 @@
                 /* tạo đối tượng FormData */
                 const formData = new FormData();
                 /* thêm token vào */
-                formData.append('_token', '{{ csrf_token() }}');
+                // formData.append('_token', '{{ csrf_token() }}');
                 formData.append('product_price_id', idProductPrice);
                 formData.append('slug', slug);
                 for(let i=0;i<files.length;++i){
@@ -93,7 +93,7 @@
                 }
                 $.ajax({
                     url: '{{ route("admin.product.uploadImageProductPriceAjaxToFile") }}',
-                    type: 'post',
+                    type: 'get',
                     dataType: 'json',
                     data: formData,
                     processData: false,
@@ -132,7 +132,7 @@
                 /* tạo đối tượng FormData */
                 const formData = new FormData();
                 /* thêm token vào */
-                formData.append('_token', '{{ csrf_token() }}');
+                // formData.append('_token', '{{ csrf_token() }}');
                 formData.append('product_price_id', idProductPrice);
                 formData.append('slug', slug);
                 formData.append('folder_drive', folderDrive);
@@ -142,7 +142,7 @@
                 }
                 $.ajax({
                     url: '{{ route("admin.product.uploadImageProductPriceAjaxToSource") }}',
-                    type: 'post',
+                    type: 'get',
                     dataType: 'json',
                     data: formData,
                     processData: false,

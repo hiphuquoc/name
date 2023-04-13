@@ -110,8 +110,8 @@ Route::middleware('auth', 'role:admin')->group(function () {
             Route::post('/create', [ProductController::class, 'create'])->name('admin.product.create');
             Route::post('/update', [ProductController::class, 'update'])->name('admin.product.update');
             Route::get('/delete', [ProductController::class, 'delete'])->name('admin.product.delete');
-            Route::post('/uploadImageProductPriceAjaxToFile', [ProductController::class, 'uploadImageProductPriceAjaxToFile'])->name('admin.product.uploadImageProductPriceAjaxToFile');
-            Route::post('/uploadImageProductPriceAjaxToSource', [ProductController::class, 'uploadImageProductPriceAjaxToSource'])->name('admin.product.uploadImageProductPriceAjaxToSource');
+            Route::get('/uploadImageProductPriceAjaxToFile', [ProductController::class, 'uploadImageProductPriceAjaxToFile'])->name('admin.product.uploadImageProductPriceAjaxToFile');
+            Route::get('/uploadImageProductPriceAjaxToSource', [ProductController::class, 'uploadImageProductPriceAjaxToSource'])->name('admin.product.uploadImageProductPriceAjaxToSource');
         });
         /* category */
         Route::prefix('category')->group(function(){
