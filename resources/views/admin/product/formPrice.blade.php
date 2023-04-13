@@ -98,6 +98,7 @@
                     data: formData,
                     processData: false,
                     contentType: false,
+                    timeout: 600000,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
@@ -146,6 +147,7 @@
                     data: formData,
                     processData: false,
                     contentType: false,
+                    timeout: 600000,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
