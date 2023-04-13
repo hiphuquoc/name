@@ -97,8 +97,6 @@
                     dataType: 'json',
                     data: formData,
                     timeout: 600000,
-                    processData: false, 
-                    cache: false,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
@@ -146,8 +144,6 @@
                     dataType: 'json',
                     data: formData,
                     timeout: 600000,
-                    processData: false, 
-                    cache: false,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
