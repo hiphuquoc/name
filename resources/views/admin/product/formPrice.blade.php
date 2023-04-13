@@ -74,130 +74,134 @@
 </div>
 
 @pushonce('scriptCustom')
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        function uploadFileAjax(input, idProductPrice, slug){
-            if(idProductPrice!=0){
-                addLoading('js_readURLsCustom_idWrite');
-                /* lấy thông tin file */
-                const files = $(input)[0].files;
-                /* tạo đối tượng FormData */
-                const formData = new FormData();
-                /* thêm token vào */
-                formData.append('_token', '{{ csrf_token() }}');
-                formData.append('product_price_id', idProductPrice);
-                formData.append('slug', slug);
-                for(let i=0;i<files.length;++i){
-                    /* thêm từng file vào */
-                    formData.append('files[]', files[i]);
-                }
-                $.ajax({
-                    url: '{{ route("admin.product.uploadImageProductPriceAjaxToFile") }}',
-                    type: 'post',
-                    dataType: 'json',
-                    data: formData,
-                    timeout: 600000,
-                    success: function (data) {
-                        setTimeout(() => {
-                            /* clear input file */ 
-                            $(input).val('');
-                            /* tắt loading trước để không nhảy hàng */
-                            removeLoading();
-                            /* tải bản xem trước */
-                            const parent            = $(input).parent();
-                            const elementWrite      = parent.find('.js_readURLsCustom_idWrite');
-                            for(let i=0;i<data.length;++i){
-                                const divDom        = document.createElement("div");
-                                divDom.className    = 'uploadImageBox_box_item';
-                                divDom.setAttribute('id', 'js_removeGalleryProductPrice_'+data[i].file_id);
-                                divDom.innerHTML    = '<img src="'+data[i].file_url+'" /><div class="uploadImageBox_box_item_icon" onClick="removeGalleryProductPrice('+data[i].file_id+');"></div>';
-                                elementWrite.append(divDom);
-                            };
-                        }, 500);
-                    }
-                });
-            }else {
-                $(input).val('');
-                alert('Vui lòng lưu Phiên bản sản phẩm trước khi upload ảnh!');
+    function uploadFileAjax(input, idProductPrice, slug){
+        if(idProductPrice!=0){
+            addLoading('js_readURLsCustom_idWrite');
+            /* lấy thông tin file */
+            const files = $(input)[0].files;
+            /* tạo đối tượng FormData */
+            const formData = new FormData();
+            /* thêm token vào */
+            formData.append('_token', '{{ csrf_token() }}');
+            formData.append('product_price_id', idProductPrice);
+            formData.append('slug', slug);
+            for(let i=0;i<files.length;++i){
+                /* thêm từng file vào */
+                formData.append('files[]', files[i]);
             }
-        }
-
-        function uploadSourceAjax(input, idProductPrice, slug, folderDrive){
-            if(idProductPrice!=0){
-                addLoading('js_readURLsCustom_idWrite');
-                /* lấy thông tin file */
-                const files = $(input)[0].files;
-                /* tạo đối tượng FormData */
-                const formData = new FormData();
-                /* thêm token vào */
-                formData.append('_token', '{{ csrf_token() }}');
-                formData.append('product_price_id', idProductPrice);
-                formData.append('slug', slug);
-                // formData.append('folder_drive', folderDrive);
-                for(let i=0;i<files.length;++i){
-                    /* thêm từng file vào */
-                    formData.append('files[]', files[i]);
+            $.ajax({
+                url: '{{ route("admin.product.uploadImageProductPriceAjaxToFile") }}',
+                type: 'post',
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                timeout: 600000,
+                success: function (data) {
+                    setTimeout(() => {
+                        /* clear input file */ 
+                        $(input).val('');
+                        /* tắt loading trước để không nhảy hàng */
+                        removeLoading();
+                        /* tải bản xem trước */
+                        const parent            = $(input).parent();
+                        const elementWrite      = parent.find('.js_readURLsCustom_idWrite');
+                        for(let i=0;i<data.length;++i){
+                            const divDom        = document.createElement("div");
+                            divDom.className    = 'uploadImageBox_box_item';
+                            divDom.setAttribute('id', 'js_removeGalleryProductPrice_'+data[i].file_id);
+                            divDom.innerHTML    = '<img src="'+data[i].file_url+'" /><div class="uploadImageBox_box_item_icon" onClick="removeGalleryProductPrice('+data[i].file_id+');"></div>';
+                            elementWrite.append(divDom);
+                        };
+                    }, 500);
                 }
-                $.ajax({
-                    url: '{{ route("admin.product.uploadImageProductPriceAjaxToSource") }}',
-                    type: 'post',
-                    dataType: 'json',
-                    data: formData,
-                    timeout: 600000,
-                    success: function (data) {
-                        setTimeout(() => {
-                            /* clear input file */ 
-                            $(input).val('');
-                            /* tắt loading trước để không nhảy hàng */
-                            removeLoading();
-                            /* tải bản xem trước */
-                            const parent            = $(input).parent();
-                            const elementWrite      = parent.find('.js_readURLsCustom_idWrite');
-                            for(let i=0;i<data.length;++i){
-                                const divDom        = document.createElement("div");
-                                divDom.className    = 'uploadImageBox_box_item';
-                                divDom.setAttribute('id', 'js_removeSourceFile_'+data[i].file_id);
-                                divDom.innerHTML    = '<img src="'+data[i].file_url+'" /><div class="uploadImageBox_box_item_icon" onClick="removeSourceFile('+data[i].file_id+');"></div>';
-                                elementWrite.append(divDom);
-                            };
-                        }, 0);
-                    }
-                });
-            }else {
-                $(input).val('');
-                alert('Vui lòng lưu Phiên bản sản phẩm trước khi upload ảnh!');
+            });
+        }else {
+            $(input).val('');
+            alert('Vui lòng lưu Phiên bản sản phẩm trước khi upload ảnh!');
+        }
+    }
+
+    function uploadSourceAjax(input, idProductPrice, slug, folderDrive){
+        if(idProductPrice!=0){
+            addLoading('js_readURLsCustom_idWrite');
+            /* lấy thông tin file */
+            const files = $(input)[0].files;
+            /* tạo đối tượng FormData */
+            const formData = new FormData();
+            /* thêm token vào */
+            formData.append('_token', '{{ csrf_token() }}');
+            formData.append('product_price_id', idProductPrice);
+            formData.append('slug', slug);
+            formData.append('folder_drive', folderDrive);
+            for(let i=0;i<files.length;++i){
+                /* thêm từng file vào */
+                formData.append('files[]', files[i]);
             }
-            
-        }
-
-
-        function removeGalleryProductPrice(id){
             $.ajax({
-                url         : "{{ route('admin.gallery.remove') }}",
-                type        : "post",
-                dataType    : "html",
-                data        : { 
-                    '_token'    : '{{ csrf_token() }}',
-                    id : id 
+                url: '{{ route("admin.product.uploadImageProductPriceAjaxToSource") }}',
+                type: 'post',
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                timeout: 600000,
+                success: function (data) {
+                    setTimeout(() => {
+                        /* clear input file */ 
+                        $(input).val('');
+                        /* tắt loading trước để không nhảy hàng */
+                        removeLoading();
+                        /* tải bản xem trước */
+                        const parent            = $(input).parent();
+                        const elementWrite      = parent.find('.js_readURLsCustom_idWrite');
+                        for(let i=0;i<data.length;++i){
+                            const divDom        = document.createElement("div");
+                            divDom.className    = 'uploadImageBox_box_item';
+                            divDom.setAttribute('id', 'js_removeSourceFile_'+data[i].file_id);
+                            divDom.innerHTML    = '<img src="'+data[i].file_url+'" /><div class="uploadImageBox_box_item_icon" onClick="removeSourceFile('+data[i].file_id+');"></div>';
+                            elementWrite.append(divDom);
+                        };
+                    }, 500);
                 }
-            }).done(function(data){
-                if(data==true) $('#js_removeGalleryProductPrice_'+id).remove();
             });
+        }else {
+            $(input).val('');
+            alert('Vui lòng lưu Phiên bản sản phẩm trước khi upload ảnh!');
         }
+        
+    }
 
-        function removeSourceFile(id){
-            $.ajax({
-                url         : "{{ route('admin.source.remove') }}",
-                type        : "post",
-                dataType    : "html",
-                data        : { 
-                    '_token'    : '{{ csrf_token() }}',
-                    id : id 
-                }
-            }).done(function(data){
-                if(data==true) $('#js_removeSourceFile_'+id).remove();
-            });
-        }
 
-    </script>
+    function removeGalleryProductPrice(id){
+        $.ajax({
+            url         : "{{ route('admin.gallery.remove') }}",
+            type        : "post",
+            dataType    : "html",
+            data        : { 
+                '_token'    : '{{ csrf_token() }}',
+                id : id 
+            }
+        }).done(function(data){
+            if(data==true) $('#js_removeGalleryProductPrice_'+id).remove();
+        });
+    }
+
+    function removeSourceFile(id){
+        $.ajax({
+            url         : "{{ route('admin.source.remove') }}",
+            type        : "post",
+            dataType    : "html",
+            data        : { 
+                '_token'    : '{{ csrf_token() }}',
+                id : id 
+            }
+        }).done(function(data){
+            if(data==true) $('#js_removeSourceFile_'+id).remove();
+        });
+    }
+
+</script>
 @endpushonce
