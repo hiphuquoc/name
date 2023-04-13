@@ -22,6 +22,9 @@
                 
                 <div class="paymentMethodBox">
                     @foreach($paymentMethods as $method)
+                        @php
+                            if($method->code=='zalopay') continue;
+                        @endphp
                         <div class="paymentMethodBox_item" onClick="paymentNow(this, '{{ $method->id }}');">
                             <div class="paymentMethodBox_item_logo">
                                 <img src="{{ Storage::url($method->icon) }}" alt="{{ $method->name ?? null }}" title="{{ $method->name ?? null }}" />
@@ -81,36 +84,33 @@
         function paymentNow(element, idMethod) {
             if (!clicked) {
                 clicked = true;
-                
-                noticeContrustion();
-                // const email     = $('#email').val();
-                // const idProduct = $('#product_info_id').val();
-                // var idPrice     = 0;
-                // $(document).find('[data-product_price_id]').each(function(){
-                //     if($(this).hasClass('selected')){
-                //         idPrice = $(this).attr('data-product_price_id');
-                //         return false;
-                //     }
-                // })
-                // if(idPrice!=0&&idProduct!=''&&idMethod!=''){
-                //     $.ajax({
-                //         url         : '{{ route("main.paymentNow") }}',
-                //         type        : 'post',
-                //         dataType    : 'json',
-                //         data        : {
-                //             "_token"                : "{{ csrf_token() }}",
-                //             product_info_id         : idProduct,
-                //             product_price_id        : idPrice,
-                //             payment_method_info_id  : idMethod,
-                //             email
-                //         },
-                //         success     : function(response){
-                //             /* redirect qua trang thanh toán */
-                //             window.location.href = response.url;
-                //         }
-                //     });
-                // }
-
+                const email     = $('#email').val();
+                const idProduct = $('#product_info_id').val();
+                var idPrice     = 0;
+                $(document).find('[data-product_price_id]').each(function(){
+                    if($(this).hasClass('selected')){
+                        idPrice = $(this).attr('data-product_price_id');
+                        return false;
+                    }
+                })
+                if(idPrice!=0&&idProduct!=''&&idMethod!=''){
+                    $.ajax({
+                        url         : '{{ route("main.paymentNow") }}',
+                        type        : 'post',
+                        dataType    : 'json',
+                        data        : {
+                            "_token"                : "{{ csrf_token() }}",
+                            product_info_id         : idProduct,
+                            product_price_id        : idPrice,
+                            payment_method_info_id  : idMethod,
+                            email
+                        },
+                        success     : function(response){
+                            /* redirect qua trang thanh toán */
+                            window.location.href = response.url;
+                        }
+                    });
+                }
                 // Reset the click status after a certain amount of time
                 setTimeout(() => {
                     clicked = false;

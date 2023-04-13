@@ -206,11 +206,11 @@ class CartController extends Controller{
     }
 
     public static function setCookie($name, $value, $time=null){
-        $reponse = null;
-        if(!empty($name)&&!empty($value)){
-            Cookie::queue($name, $value, $time);
+        $response        = null;
+        if(!empty($name)){
+            $response   = Cookie::queue($name, $value, $time);
         }
-        return $reponse;
+        return $response;
     }
 
     public static function removeCookie($name){

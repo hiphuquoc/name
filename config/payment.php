@@ -7,9 +7,12 @@ return [
         'partner_name'      => 'Name.com.vn',
         'endpoint_create'   => 'https://test-payment.momo.vn/v2/gateway/api/create',
         'store_id'          => 'MomoTestStore',
-        'partner_code'      => 'MOMOBKUN20180529',
-        'access_key'        => 'klm05TvNBzhg7h7j',
-        'secret_key'        => 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa'
+        'partner_code'      => 'MOMOLNCV20230412',
+        'access_key'        => 'p05z68oqDjIh0rF3',
+        'secret_key'        => 'd2KCebzFK9DPONFVDiAJMAgeY88B7if9',
+        'payment_success_code'  => [
+            0, 9000
+        ]
     ],
     'zalopay'   => [
         'appid' => '553',

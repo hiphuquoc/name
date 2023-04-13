@@ -124,8 +124,7 @@
                 
                 const error     = validateForm(idForm);
                 if(error==''){
-                    // $('#'+idForm).submit(); 
-                    noticeContrustion();
+                    $('#'+idForm).submit();
                 }else {
                     /* thêm class thông báo lỗi cho label của input */
                     for(let i = 0;i<error.length;++i){

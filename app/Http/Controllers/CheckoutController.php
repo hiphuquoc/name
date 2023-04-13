@@ -41,6 +41,7 @@ class CheckoutController extends Controller{
             $products[]     = $tmp;
         }
         $insertOrder        = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $products);
+        $insertOrder['payment_type'] = 'payment_cart';
         $idOrder            = Order::insertItem($insertOrder);
         /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
         foreach($products as $product){
@@ -57,17 +58,14 @@ class CheckoutController extends Controller{
                             ->where('id', $idOrder)
                             ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
                             ->first();
-        // if(!empty($infoOrder->paymentMethod->code)){
-        //     /* tạo yêu cầu thanh toán => nếu zalo pay */
-        //     if($infoOrder->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($infoOrder);
-        //     /* tạo yêu cầu thanh toán => nếu momo */
-        //     if($infoOrder->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($infoOrder);
-        // }
-        // /* trả về đường dẫn để chuyển hướng */
-        // return redirect($urlRedirect);
-
-        /* chuyển hướng trang nhận sản phẩm */
-        return redirect()->route('main.confirm', ['code' => $infoOrder->code]);
+        if(!empty($infoOrder->paymentMethod->code)){
+            /* tạo yêu cầu thanh toán => nếu zalo pay */
+            if($infoOrder->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($infoOrder);
+            /* tạo yêu cầu thanh toán => nếu momo */
+            if($infoOrder->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($infoOrder);
+        }
+        /* trả về đường dẫn để chuyển hướng */
+        return redirect($urlRedirect);
     }
 
     public function paymentNow(Request $request){
@@ -83,6 +81,7 @@ class CheckoutController extends Controller{
                             ->first();
         $products[]     = $tmp;
         $insertOrder    = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $products);
+        $insertOrder['payment_type'] = 'payment_now';
         $idOrder        = Order::insertItem($insertOrder);
         /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
         OrderProduct::insertItem([
@@ -100,7 +99,7 @@ class CheckoutController extends Controller{
         if(!empty($infoOrder->paymentMethod->code)){
             /* tạo yêu cầu thanh toán => nếu zalo pay */
             if($infoOrder->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($infoOrder);
-            /* tạo yêu cầu thanh toán => nếu momo */
+            /* tạo yêu cầu thanh toán => nếu momo (ghi chú: ở momo sẽ redirect thẳng) */
             if($infoOrder->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($infoOrder);
         }
         /* trả về đường dẫn để chuyển hướng */
