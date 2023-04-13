@@ -15,8 +15,7 @@ class ProductPrice extends Model {
         'price',
         'price_origin',
         'sale_off',
-        'instock',
-        'folder_drive'
+        'instock'
     ];
     public $timestamps = false;
     private static $columnFilter = [
@@ -27,8 +26,7 @@ class ProductPrice extends Model {
         'price_origin',
         'price_before_promotion',
         'sale_off',
-        'instock',
-        'folder_drive'
+        'instock'
     ];
 
     public static function insertItem($params){
