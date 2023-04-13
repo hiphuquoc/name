@@ -39,7 +39,7 @@
                                 @if(!empty($price->files)&&$price->files->isNotEmpty())
                                     @foreach($price->files as $file)
                                         <div id="js_removeGalleryProductPrice_{{ $file->id }}" class="uploadImageBox_box_item">
-                                            <img src="{{ Storage::url($file->file_path) }}" />
+                                            <img src="{{ Storage::url($file->file_path) ?? null }}" />
                                             <div class="uploadImageBox_box_item_icon" onClick="removeGalleryProductPrice({{ $file->id }});"></div>
                                         </div>
                                     @endforeach
@@ -58,7 +58,7 @@
                                 @if(!empty($price->sources)&&$price->sources->isNotEmpty())
                                     @foreach($price->sources as $source)
                                         <div id="js_removeSourceFile_{{ $source->id }}" class="uploadImageBox_box_item">
-                                            <img src="{{ Storage::disk('google')->url($source->file_path) }}" />
+                                            <img src="{{ Storage::disk('google')->url($source->file_path) ?? null }}" />
                                             <div class="uploadImageBox_box_item_icon" onClick="removeSourceFile({{ $source->id }});"></div>
                                         </div>
                                     @endforeach
@@ -96,7 +96,6 @@
                     type: 'get',
                     dataType: 'json',
                     data: formData,
-                    timeout: 600000,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
@@ -143,7 +142,6 @@
                     type: 'get',
                     dataType: 'json',
                     data: formData,
-                    timeout: 600000,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
