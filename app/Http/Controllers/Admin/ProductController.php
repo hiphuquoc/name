@@ -279,6 +279,9 @@ class ProductController extends Controller {
     }
 
     public static function uploadImageProductPriceAjaxToFile(Request $request){
+        set_time_limit(-1);
+        ini_set('max_execution_time', -1);
+        ini_set('max_input_time', -1);
         $result             = [];
         $idProductPrice     = $request->get('product_price_id') ?? 0;
         if(!empty($idProductPrice)&&$request->hasFile('files')){
@@ -296,6 +299,9 @@ class ProductController extends Controller {
     }
 
     public static function uploadImageProductPriceAjaxToSource(Request $request){
+        set_time_limit(-1);
+        ini_set('max_execution_time', -1);
+        ini_set('max_input_time', -1);
         $result             = [];
         $idProductPrice     = $request->get('product_price_id') ?? 0;
         if(!empty($idProductPrice)&&$request->hasFile('files')){
