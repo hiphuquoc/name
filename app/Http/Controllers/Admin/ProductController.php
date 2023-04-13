@@ -153,12 +153,13 @@ class ProductController extends Controller {
             // dd($request->get('prices'));
             foreach($request->get('prices') as $price){
                 if(!empty($price['name'])&&!empty($price['price'])){
-                    $dataPrice              = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct);
                     if(!empty($price['id'])){
                         /* update */
+                        $dataPrice              = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'update');
                         ProductPrice::updateItem($price['id'], $dataPrice);
                     }else {
                         /* insert */
+                        $dataPrice              = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'insert');
                         ProductPrice::insertItem($dataPrice);
                     }
                 }
@@ -300,10 +301,11 @@ class ProductController extends Controller {
         if(!empty($idProductPrice)&&$request->hasFile('files')){
             $files          = $request->file('files');
             $name           = $request->get('slug') ?? time();
+            $folderDrive    = $request->get('folder_drive').'-'.$name;
             $params         = [
                 'attachment_id'     => $idProductPrice,
                 'relation_table'    => 'product_price',
-                'name'              => $name
+                'folder_drive'      => $folderDrive
             ];
             $result         = SourceController::upload($files, 'wallpaper_mobile', $params);
         }

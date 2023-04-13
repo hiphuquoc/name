@@ -65,7 +65,7 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableProductPrice($dataForm, $idProduct){
+    public static function buildArrayTableProductPrice($dataForm, $idProduct, $type = 'insert'){
         $result                                 = [];
         if(!empty($dataForm['name'])&&!empty($dataForm['price'])&&!empty($idProduct)){
             $result['product_info_id']  = $idProduct;
@@ -75,6 +75,7 @@ class BuildInsertUpdateModel {
             $result['price_origin']     = $dataForm['price_origin'] ?? null;
             $result['price_before_promotion']   = $dataForm['price_before_promotion'] ?? null;
             $result['sale_off']         = 0;
+            if($type=='insert') $result['folder_drive'] = \App\Helpers\Charactor::randomString(15);
             if(!empty($dataForm['price_before_promotion'])){
                 $result['sale_off'] = (($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100;
             }

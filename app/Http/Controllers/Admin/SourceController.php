@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Helpers\Upload;
-
 use Intervention\Image\ImageManagerStatic;
 use App\Models\SourceFile;
 use Illuminate\Support\Facades\Storage;
@@ -17,17 +15,19 @@ class SourceController extends Controller {
         $result     = [];
         if(!empty($arrayImage)){
             // ===== folder upload
-            $folderUpload       = config('image.folder_upload');
-            $name               = $params['name'] ?? time();
+            $folderUpload       = $params['folder_drive'];
             $i                  = 0;
             foreach($arrayImage as $image){
                 // ===== set filename & checkexists (Small)
-                $filename       = $name.'-source-'.\App\Helpers\Charactor::randomString(15);
+                $filename       = \App\Helpers\Charactor::randomString(15);
                 $extension      = $image->getClientOriginalExtension();
-                $filepath       = $folderUpload.$filename.'.'.$extension;
-                ImageManagerStatic::make($image->getRealPath())
-                    ->save(Storage::path($filepath));
-                $result[$i]['file_url']         = Storage::url($filepath);
+                $filepath       = $folderUpload.'/'.$filename.'.'.$extension;
+                // ImageManagerStatic::make($image->getRealPath())
+                //     ->save(Storage::path($filepath));
+                /* lưu vào gooledrive */
+                $imageContent   = file_get_contents($image->getRealPath());
+                Storage::disk('google')->put($filepath, $imageContent);
+                $result[$i]['file_url']         = Storage::disk('google')->url($filepath);
                 /* cập nhật thông tin CSDL */
                 $arrayInsert                    = [];
                 $arrayInsert['attachment_id']   = $params['attachment_id'] ?? 0;
@@ -62,8 +62,9 @@ class SourceController extends Controller {
                 DB::beginTransaction();
                 /* xóa file */
                 $infofile   = SourceFile::find($id);
-                $filePath   = Storage::path($infofile['file_path']);
-                if(file_exists($filePath)) @unlink($filePath);
+                if(Storage::disk('google')->exists($infofile['file_path'])) {
+                    Storage::disk('google')->delete($infofile['file_path']);
+                }
                 // /* xóa bản small */
                 // $filePathSmall  = Storage::path(config('image.folder_upload').$infofile['file_name'].'-small.'.$infofile['file_extension']);
                 // if(file_exists($filePathSmall)) @unlink($filePathSmall);

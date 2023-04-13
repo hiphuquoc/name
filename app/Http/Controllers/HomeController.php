@@ -62,7 +62,11 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        $disk   = Storage::disk('google');
-        dd($disk);
+        $tmp = \App\Models\ProductPrice::select('*')
+                    ->get();
+        foreach($tmp as $p){
+            $folderDrive = \App\Helpers\Charactor::randomString(15);
+            \App\Models\ProductPrice::updateItem($p->id, ['folder_drive' => $folderDrive]);
+        }
     }
 }

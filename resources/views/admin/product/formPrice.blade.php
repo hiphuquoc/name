@@ -52,13 +52,13 @@
                 @if(!empty($price['id'])&&$type!='copy')
                     <div class="formBox_full">
                         <label class="form-label" style="margin-right:0.5rem;">Ảnh phiên bản (sản phẩm)</label>
-                        <input type="file" name="imageSource" onChange="uploadSourceAjax(this, {{ $price['id'] ?? 0 }}, '{{ $item->seo->slug ?? null }}');" multiple />
+                        <input type="file" name="imageSource" onChange="uploadSourceAjax(this, {{ $price['id'] ?? 0 }}, '{{ $item->seo->slug ?? null }}', '{{ $price['folder_drive'] }}');" multiple />
                         <div class="uploadImageBox" style="margin-top:0.5rem;">
                             <div class="uploadImageBox_box js_readURLsCustom_idWrite" style="position:relative;">
                                 @if(!empty($price->sources)&&$price->sources->isNotEmpty())
                                     @foreach($price->sources as $source)
                                         <div id="js_removeSourceFile_{{ $source->id }}" class="uploadImageBox_box_item">
-                                            <img src="{{ Storage::url($source->file_path) }}" />
+                                            <img src="{{ Storage::disk('google')->url($source->file_path) }}" />
                                             <div class="uploadImageBox_box_item_icon" onClick="removeSourceFile({{ $source->id }});"></div>
                                         </div>
                                     @endforeach
@@ -91,7 +91,6 @@
                     /* thêm từng file vào */
                     formData.append('files[]', files[i]);
                 }
-                console.log(formData);
                 $.ajax({
                     url: '{{ route("admin.product.uploadImageProductPriceAjaxToFile") }}',
                     type: 'post',
@@ -122,10 +121,9 @@
                 $(input).val('');
                 alert('Vui lòng lưu Phiên bản sản phẩm trước khi upload ảnh!');
             }
-            
         }
 
-        function uploadSourceAjax(input, idProductPrice, slug){
+        function uploadSourceAjax(input, idProductPrice, slug, folderDrive){
             if(idProductPrice!=0){
                 addLoading('js_readURLsCustom_idWrite');
                 /* lấy thông tin file */
@@ -136,6 +134,7 @@
                 formData.append('_token', '{{ csrf_token() }}');
                 formData.append('product_price_id', idProductPrice);
                 formData.append('slug', slug);
+                formData.append('folder_drive', folderDrive);
                 for(let i=0;i<files.length;++i){
                     /* thêm từng file vào */
                     formData.append('files[]', files[i]);
