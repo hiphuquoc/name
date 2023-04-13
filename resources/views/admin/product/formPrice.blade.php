@@ -99,6 +99,8 @@
                     processData: false,
                     contentType: false,
                     timeout: 600000,
+                    processData: false, 
+                    cache: false,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
@@ -148,6 +150,8 @@
                     processData: false,
                     contentType: false,
                     timeout: 600000,
+                    processData: false, 
+                    cache: false,s
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
