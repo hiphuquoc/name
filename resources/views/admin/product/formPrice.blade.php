@@ -84,7 +84,7 @@
                 /* tạo đối tượng FormData */
                 const formData = new FormData();
                 /* thêm token vào */
-                // formData.append('_token', '{{ csrf_token() }}');
+                formData.append('_token', '{{ csrf_token() }}');
                 formData.append('product_price_id', idProductPrice);
                 formData.append('slug', slug);
                 for(let i=0;i<files.length;++i){
@@ -93,9 +93,10 @@
                 }
                 $.ajax({
                     url: '{{ route("admin.product.uploadImageProductPriceAjaxToFile") }}',
-                    type: 'get',
+                    type: 'post',
                     dataType: 'json',
                     data: formData,
+                    timeout: 600000,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
@@ -129,19 +130,20 @@
                 /* tạo đối tượng FormData */
                 const formData = new FormData();
                 /* thêm token vào */
-                // formData.append('_token', '{{ csrf_token() }}');
+                formData.append('_token', '{{ csrf_token() }}');
                 formData.append('product_price_id', idProductPrice);
                 formData.append('slug', slug);
-                formData.append('folder_drive', folderDrive);
+                // formData.append('folder_drive', folderDrive);
                 for(let i=0;i<files.length;++i){
                     /* thêm từng file vào */
                     formData.append('files[]', files[i]);
                 }
                 $.ajax({
                     url: '{{ route("admin.product.uploadImageProductPriceAjaxToSource") }}',
-                    type: 'get',
+                    type: 'post',
                     dataType: 'json',
                     data: formData,
+                    timeout: 600000,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
@@ -158,7 +160,7 @@
                                 divDom.innerHTML    = '<img src="'+data[i].file_url+'" /><div class="uploadImageBox_box_item_icon" onClick="removeSourceFile('+data[i].file_id+');"></div>';
                                 elementWrite.append(divDom);
                             };
-                        }, 500);
+                        }, 0);
                     }
                 });
             }else {
