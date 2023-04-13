@@ -151,7 +151,7 @@
                     contentType: false,
                     timeout: 600000,
                     processData: false, 
-                    cache: false,s
+                    cache: false,
                     success: function (data) {
                         setTimeout(() => {
                             /* clear input file */ 
