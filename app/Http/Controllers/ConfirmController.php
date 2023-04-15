@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Http\Controllers\GoogledriveController;
 use App\Models\Order;
 use App\Models\SourceFile;
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
 
 class ConfirmController extends Controller {
 
@@ -56,35 +58,42 @@ class ConfirmController extends Controller {
         }
     }
 
-    public function downloadSource(Request $request){
-        $fullPath       = '';
-        $fileName       = '';
-        if(!empty($request->get('source_info_id'))){
-            $infoSource = SourceFile::select('*')
-                            ->where('id', $request->get('source_info_id'))
-                            ->first();
-            $fullPath   = Storage::disk('google')->url($infoSource->file_path);
-            $fileName   = $infoSource->file_name;
-        }
-        $result['url']      = $fullPath;
-        $result['filename'] = $fileName;
-        return json_encode($result);
-    }
+    // public function downloadSource(Request $request){
+    //     $fullPath       = '';
+    //     $fileName       = '';
+    //     if(!empty($request->get('source_info_id'))){
+    //         $infoSource = SourceFile::select('*')
+    //                         ->where('id', $request->get('source_info_id'))
+    //                         ->first();
+    //         $fullPath   = Storage::disk('google')->url($infoSource->file_path);
+    //         $fileName   = $infoSource->file_name;
+    //     }
+    //     $result['url']      = $fullPath;
+    //     $result['filename'] = $fileName;
+    //     return json_encode($result);
+    // }
 
-    public function downloadSourceAll(Request $request){
-        $urls           = [];
-        if(!empty($request->get('code'))){
-            $order      = Order::select('*')
-                            ->where('code', $request->get('code'))
-                            ->with('products')
-                            ->first();
-            foreach($order->products as $product){
-                foreach($product->infoPrice->sources as $source){
-                    $urls[] = env('APP_URL').Storage::url($source->file_path);
-                }
-            }
-        }
-        return json_encode($urls);
-    }
+    // public function downloadSourceZip(Request $request){
+    //     if(!empty($request->get('folder_name'))){
+            
+    //         return GoogledriveController::downloadZipInFolder($request->get('folder_name'));
+    //     }
+    // }
+
+    // public function downloadSourceAll(Request $request){
+    //     $urls           = [];
+    //     if(!empty($request->get('code'))){
+    //         $order      = Order::select('*')
+    //                         ->where('code', $request->get('code'))
+    //                         ->with('products')
+    //                         ->first();
+    //         foreach($order->products as $product){
+    //             foreach($product->infoPrice->sources as $source){
+    //                 $urls[] = env('APP_URL').Storage::url($source->file_path);
+    //             }
+    //         }
+    //     }
+    //     return json_encode($urls);
+    // }
     
 }

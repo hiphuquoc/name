@@ -34,6 +34,8 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CacheController;
 
 use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\GoogledriveController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,8 +53,8 @@ Route::post('/auth/google/callback', [ProviderController::class, 'googleCallback
 Route::get('/auth/facebook/redirect', [ProviderController::class, 'facebookRedirect'])->name('main.facebook.redirect');
 Route::get('/auth/facebook/callback', [ProviderController::class, 'facebookCallback'])->name('main.facebook.callback');
 /* tải hình ảnh khi hoàn tất thanh toán */
-Route::post('/downloadSource', [ConfirmController::class, 'downloadSource'])->name('main.downloadSource');
-Route::post('/downloadSourceAll', [ConfirmController::class, 'downloadSourceAll'])->name('main.downloadSourceAll');
+Route::get('/downloadSource', [GoogledriveController::class, 'downloadSource'])->name('main.downloadSource');
+// Route::post('/downloadSourceAll', [ConfirmController::class, 'downloadSourceAll'])->name('main.downloadSourceAll');
 /* thanh toán */
 Route::prefix('payment')->group(function(){
     Route::get('/momoCreate', [MomoController::class, 'create'])->name('main.momo.create');

@@ -82,6 +82,7 @@
         cursor: pointer;
         transition: all 0.2s;
         background: $colorBackgroundLv2;
+        border-radius: 10px;
         &:not(:nth-child(5n + 1)){
             margin-left: 1rem;
         }
@@ -100,9 +101,21 @@
         &_image {
             width: 100%;
             height: 100%;
-            overflow: hidden;
             border: 1px solid $colorBackgroundLv1;
-            border-radius: 7px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            object {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
             &.alreadyDownload {
                 box-shadow: 10px 10px 30px -25px $colorSuccess;
                 border: 1px solid #00bd7d99;
@@ -121,7 +134,7 @@
             z-index: 1;
         }
         &_background {
-            border-radius: 7px;
+            border-radius: 10px;
             display: none;
             width: calc(100% - 2px);
             height: calc(100% - 2px);
@@ -278,15 +291,16 @@
                 tbody {
                     td {
                         padding-top: 0.5rem;
-                        display: flex;
-                        align-items: flex-start;
-                        cursor: pointer;
-                        &:hover {
-                            @include colorOpacity('color', $colorTextLight, 0.8);
-                        }
-                        > * {
-                            &:not(:first-child){
-                                margin-left: 0.75rem;
+                        a {
+                            display: flex;
+                            align-items: flex-start;
+                            > * {
+                                &:not(:first-child){
+                                    margin-left: 0.75rem;
+                                }
+                            }
+                            &:hover {
+                                color: $colorSuccess;
                             }
                         }
                         img {

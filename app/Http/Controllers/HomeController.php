@@ -8,9 +8,6 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Blog;
 use App\Models\Page;
-use Laravel\Socialite\Facades\Socialite;
-
-use YasaPutu\LaravelGoogleDriveStorage\GoogleDriveStorage;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
 
 use App\Mail\OrderMailable;
@@ -68,48 +65,14 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
+        $storage = Storage::disk('google');
+        dd($storage);
+        // $folder         = 'WT2YOFEC0ADV8L9-62-hinh-nen-dien-thoai-wallpaper-mobile-hoa-bo-cong-anh-tuyet-dep';
+        // return GoogledriveController::downloadZipInFolder($folder);
 
-        // $orderInfo  = \App\Models\Order::select('*')
-        //                 ->where('id', 21)
-        //                 ->first();     
+        // echo '<a href="javascript:window.close()">CLOSE WINDOW</a>';
 
-        // /* download */
-        // $googleDrive = Storage::disk('google');
-
-        // foreach($orderInfo->products as $product){
-        //     foreach($product->infoPrice->sources as $source){
-        //         $data = Gdrive::get($source->file_path);
-        //         break;
-        //     }
-        // }
-        // return response($data->file, 200)
-        //     ->header('Content-Type', $data->ext)
-        //     ->header('Content-disposition', 'attachment; filename="'.$data->filename.'"');
-
-        $googleDriveStorage = new GoogleDriveStorage();
-
-        // Lấy danh sách thư mục
-        $folders = $googleDriveStorage->listFolders();
-
-        // Lặp qua từng thư mục để tìm thư mục có tên là "backup"
-        $backupFolderId = null;
-        foreach ($folders as $folder) {
-            dd($folder);
-            // if ($folder['name'] === 'backup') {
-            //     $backupFolderId = $folder['id'];
-            //     break;
-            // }
-        }
-
-
-        // // Lấy thông tin của folder backup từ Google Drive
-        // $backupFolder = $googleDrive->getMetadata($orderInfo->products[0]->infoPrice->folder_drive);
-
-        // // Lấy đường dẫn của folder backup
-        // $backupFolderUrl = $backupFolder->getUrl();
-        dd($data);
-
-        // Mail::to('hiphuquoc@gmail.com')->send(new OrderMailable($orderInfo));
-
+        $file         = $request->get('file') ?? 'WT2YOFEC0ADV8L9-62-hinh-nen-dien-thoai-wallpaper-mobile-hoa-bo-cong-anh-tuyet-dep/L8GM7RJB6WEVQFH.png';
+        return GoogledriveController::downloadSource($file);
     }
 }
