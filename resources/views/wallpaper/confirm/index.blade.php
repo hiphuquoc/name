@@ -10,71 +10,94 @@
                         $count  += $product->infoPrice->sources->count();
                     }
                 @endphp
-                
-                <h1>Tải hình ảnh ({{ $count }})</h1>
-                <div class="pageCartBox">
-                    <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
 
-                        {{-- <div class="cartSectionBox">
-                            <div class="cartSectionBox_body">
-                                <div class="cartProductBox_head">
-                                    <div>Thông tin</div>
-                                    <div>Tải ảnh</div>
+                {{-- <h1>Tải hình ảnh ({{ $count }})</h1> --}}
+                <div class="pageCartBox">
+                    <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left" style="width:100%;">
+
+                        <div class="confirmMessageBox">
+                            <div class="confirmMessageBox_left">
+                                <div class="confirmMessageBox_left_icon">
+                                    <img src="{{ Storage::url('images/icon-confirm-success.png') }}" />
                                 </div>
-                                <div class="cartProductBox_body">
-                                    @foreach($order->products as $product)
-                                        @foreach($product->infoPrice->sources as $source)
-                                            <div id="js_downloadSource_{{ $source->id }}" class="cartProductBox_body_item">
-                                                <div class="cartProductBox_body_item_info">
-                                                    <div class="cartProductBox_body_item_info_content" style="margin-left:0;">
-                                                        <div class="cartProductBox_body_item_info_content_title" style="font-weight:normal;font-family:'SVN-Gilroy', tahoma, serif;">
-                                                            {{ $product->infoProduct->name.' ('.($loop->index+1).')' }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="cartProductBox_body_item_price">
-                                                    <div class="cartProductBox_body_item_price_icon" style="margin-bottom:auto;" onClick="downloadSource({{ $source->id }});">
-                                                        <img src="{{ Storage::url('images/svg/download.svg') }}" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                            
-                                        @endforeach
-                                    @endforeach
+                                <div class="confirmMessageBox_left_title">
+                                    Thanh toán thành công!
+                                </div>
+                                <div class="confirmMessageBox_left_desc">
+                                    Cảm ơn bạn đã ủng hộ {{ config('main.company_name') }}. Hình ảnh của bạn ở phần bên dưới hoặc bạn có thể truy cập email của mình để tải ảnh.
                                 </div>
                             </div>
-                        </div> --}}
+                            <div class="confirmMessageBox_right">
+                                <div class="confirmMessageBox_right_item">
+                                    Mã đơn <span class="highLight">{{ $order->code }}</span>
+                                </div>
+                                <div class="confirmMessageBox_right_item">
+                                    lúc {{ date('H:i\, d/m/Y', strtotime($order->created_at))}}
+                                </div>
+                                <div class="confirmMessageBox_right_item">
+                                    {{ $order->paymentMethod->name }}
+                                </div>
+                                <div class="confirmMessageBox_right_item">
+                                    Tổng thanh toán <span class="price">{{ number_format($order->total) }}{!! config('main.currency_unit') !!}</span>
+                                </div>
+                                <div class="confirmMessageBox_right_item">
+                                    <table class="noResponsive">
+                                        <thead>
+                                            <tr>
+                                                <td>Sản phẩm:</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($order->products as $product)
+                                            <tr>
+                                                <td>
+                                                    <img src="{{ Storage::url('images/svg/download.svg') }}" />
+                                                    <div>{{ $product->infoProduct->name }} (tải file .zip)</div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="wallpaperSourceGrid">
-                            @php
+                            {{-- @php
                                 $i = 0;
                             @endphp
                             @foreach($order->products as $product)
                                 @foreach($product->infoPrice->sources as $source)
                                     @php
-                                        if($i<3){
-                                            $attribute = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.Storage::url($source->file_path).'\') no-repeat;background-size: 100% 100%;"';
+                                        if($i<5){
+                                            $attribute = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.Storage::disk('google')->url($source->file_path).'\') no-repeat;background-size: 100% 100%;"';
                                         }else {
-                                            $attribute = 'class="wallpaperSourceGrid_item_image lazyload" data-src="'.Storage::url($source->file_path).'" style="background:url() no-repeat;background-size: 100% 100%;"';
+                                            $attribute = 'class="wallpaperSourceGrid_item_image lazyload" data-src="'.Storage::disk('google')->url($source->file_path).'" style="background:url() no-repeat;background-size: 100% 100%;"';
                                         }
-                                        
                                     @endphp
-                                    <div id="js_downloadSource_{{ $source->id }}" class="wallpaperSourceGrid_item" onClick="downloadSource({{ $source->id }});">
+                                    <a class="wallpaperSourceGrid_item" href="{{ Storage::disk('google')->url($source->file_path) }}" target="_blank" id="js_downloadSource_{{ $source->id }}" class="wallpaperSourceGrid_item" onClick="downloadSource({{ $source->id }});" download>
                                         <div {!! $attribute !!}></div>
                                         <div class="wallpaperSourceGrid_item_action">
                                             <img src="{{ Storage::url('images/svg/download.svg') }}" />
                                         </div>
                                         <div class="wallpaperSourceGrid_item_background"></div>
-                                    </div>
+                                    </a>
                                     @php
                                         ++$i;
                                     @endphp
+                                @endforeach
+                            @endforeach --}}
+
+                            @foreach($order->products as $product)
+                                @foreach($product->infoPrice->sources as $source)
+                                    <div>{{ Storage::disk('google')->url($source->file_path) }}</div>
                                 @endforeach
                             @endforeach
                         </div>
 
                     </div>
-                    <div class="pageCartBox_right">
+                    {{-- <div class="pageCartBox_right">
                         <div id="js_scrollMenu" class="cartSectionBox">
                             <div class="actionPageConfirm">
 
@@ -86,18 +109,9 @@
                                         Tải tất cả (.zip)
                                     </div>
                                 </div>
-                                {{-- <div class="actionPageConfirm_item" onClick="downloadSourceAll('{{ $order->code }}');">
-                                    <div class="actionPageConfirm_item_icon">
-                                        <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
-                                    </div>
-                                    <div class="actionPageConfirm_item_text">
-                                        Tải tất cả (.zip)
-                                    </div>
-                                </div> --}}
-
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
@@ -168,7 +182,32 @@
             }
         }
 
+        // function downloadSource(id) {
+        //     console.log(id);
+        //     $.ajax({
+        //         url: '{{ route("main.downloadSource") }}',
+        //         type: 'POST',
+        //         dataType: 'json',
+        //         data: {
+        //             '_token'            : '{{ csrf_token() }}',
+        //             source_info_id      : id
+        //         },
+        //         success     : function(response){
+        //             var a = document.createElement("a");
+        //             a.href      = response.url;
+        //             a._target   = 'blank';
+        //             a.download  = response.filename;
+        //             a.click();
+        //             setTimeout(() => {
+        //                 $('#js_downloadSource_'+id+' .wallpaperSourceGrid_item_image').addClass('alreadyDownload');
+        //                 $('#js_downloadSource_'+id+' .wallpaperSourceGrid_item_action').html('<img src="./storage/images/svg/download-success.svg" />');
+        //             }, 0);
+        //         }
+        //     });
+        // }
+
         function downloadSource(id) {
+            console.log(id);
             $.ajax({
                 url: '{{ route("main.downloadSource") }}',
                 type: 'POST',
@@ -178,10 +217,8 @@
                     source_info_id      : id
                 },
                 success     : function(response){
-                    var a = document.createElement("a");
-                    a.href      = response.url;
-                    a.download  = response.filename;
-                    a.click();
+                    // tải xuống file bằng window.location.href
+                    window.location.href = response.url;
                     setTimeout(() => {
                         $('#js_downloadSource_'+id+' .wallpaperSourceGrid_item_image').addClass('alreadyDownload');
                         $('#js_downloadSource_'+id+' .wallpaperSourceGrid_item_action').html('<img src="./storage/images/svg/download-success.svg" />');

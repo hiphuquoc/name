@@ -63,7 +63,7 @@ class ConfirmController extends Controller {
             $infoSource = SourceFile::select('*')
                             ->where('id', $request->get('source_info_id'))
                             ->first();
-            $fullPath   = Storage::url($infoSource->file_path);
+            $fullPath   = Storage::disk('google')->url($infoSource->file_path);
             $fileName   = $infoSource->file_name;
         }
         $result['url']      = $fullPath;

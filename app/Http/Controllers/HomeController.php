@@ -10,6 +10,12 @@ use App\Models\Blog;
 use App\Models\Page;
 use Laravel\Socialite\Facades\Socialite;
 
+use YasaPutu\LaravelGoogleDriveStorage\GoogleDriveStorage;
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+use App\Mail\OrderMailable;
+use Illuminate\Support\Facades\Mail;
+
 class HomeController extends Controller{
     public static function home(Request $request){
         /* cache HTML */
@@ -62,11 +68,48 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        // $tmp = \App\Models\ProductPrice::select('*')
-        //             ->get();
-        // foreach($tmp as $p){
-        //     $folderDrive = \App\Helpers\Charactor::randomString(15);
-        //     \App\Models\ProductPrice::updateItem($p->id, ['folder_drive' => $folderDrive]);
+
+        // $orderInfo  = \App\Models\Order::select('*')
+        //                 ->where('id', 21)
+        //                 ->first();     
+
+        // /* download */
+        // $googleDrive = Storage::disk('google');
+
+        // foreach($orderInfo->products as $product){
+        //     foreach($product->infoPrice->sources as $source){
+        //         $data = Gdrive::get($source->file_path);
+        //         break;
+        //     }
         // }
+        // return response($data->file, 200)
+        //     ->header('Content-Type', $data->ext)
+        //     ->header('Content-disposition', 'attachment; filename="'.$data->filename.'"');
+
+        $googleDriveStorage = new GoogleDriveStorage();
+
+        // Lấy danh sách thư mục
+        $folders = $googleDriveStorage->listFolders();
+
+        // Lặp qua từng thư mục để tìm thư mục có tên là "backup"
+        $backupFolderId = null;
+        foreach ($folders as $folder) {
+            dd($folder);
+            // if ($folder['name'] === 'backup') {
+            //     $backupFolderId = $folder['id'];
+            //     break;
+            // }
+        }
+
+
+        // // Lấy thông tin của folder backup từ Google Drive
+        // $backupFolder = $googleDrive->getMetadata($orderInfo->products[0]->infoPrice->folder_drive);
+
+        // // Lấy đường dẫn của folder backup
+        // $backupFolderUrl = $backupFolder->getUrl();
+        dd($data);
+
+        // Mail::to('hiphuquoc@gmail.com')->send(new OrderMailable($orderInfo));
+
     }
 }

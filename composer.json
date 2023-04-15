@@ -13,7 +13,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
-        "masbug/flysystem-google-drive-ext": "^2.2"
+        "league/flysystem-aws-s3-v3": "^3.13",
+        "yaza/laravel-google-drive-storage": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
