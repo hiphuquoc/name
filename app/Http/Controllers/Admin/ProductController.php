@@ -57,7 +57,7 @@ class ProductController extends Controller {
             }
             /* insert product_price */
             foreach($request->get('prices') as $price){
-                $insertPrice    = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct);
+                $insertPrice    = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'insert');
                 ProductPrice::insertItem($insertPrice);
             }
             /* danh mục sản phẩm */
