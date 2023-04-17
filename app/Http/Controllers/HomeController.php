@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Blog;
 use App\Models\Page;
+use App\Models\Order;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
 
 use App\Mail\OrderMailable;
@@ -65,14 +66,14 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        $storage = Storage::disk('google');
-        dd($storage);
-        // $folder         = 'WT2YOFEC0ADV8L9-62-hinh-nen-dien-thoai-wallpaper-mobile-hoa-bo-cong-anh-tuyet-dep';
-        // return GoogledriveController::downloadZipInFolder($folder);
+        $orderInfo          = Order::select('*')
+                                ->where('email', '!=', '')
+                                ->where('payment_status', 1)
+                                ->orderBy('id', 'DESC')
+                                ->first();
+        // Mail::to('wallpaperdienthoai@gmail.com')->send(new OrderMailable($orderInfo));
 
-        // echo '<a href="javascript:window.close()">CLOSE WINDOW</a>';
-
-        $file         = $request->get('file') ?? 'WT2YOFEC0ADV8L9-62-hinh-nen-dien-thoai-wallpaper-mobile-hoa-bo-cong-anh-tuyet-dep/L8GM7RJB6WEVQFH.png';
-        return GoogledriveController::downloadSource($file);
+        return view('wallpaper.email.order', ['order' => $orderInfo]);
+        
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Controllers\GoogledriveController;
 use App\Models\Order;
 use App\Models\SourceFile;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
+use App\Mail\OrderMailable;
+use Illuminate\Support\Facades\Mail;
 
 class ConfirmController extends Controller {
 
@@ -49,6 +51,9 @@ class ConfirmController extends Controller {
                 ]);
                 /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
                 if($orderInfo->payment_type=='payment_cart') \App\Http\Controllers\CartController::removeCookie('cart');
+                /* gửi email */
+                $email = $orderInfo->email ?? null;
+                if(!empty($email)) Mail::to($email)->send(new OrderMailable($orderInfo));
                 /* chuyển hướng sang trang nhận ảnh */
                 return redirect()->route('main.confirm', ['code' => $code]);
             }else {

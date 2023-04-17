@@ -32,10 +32,10 @@
                                     Mã đơn <span class="highLight">{{ $order->code }}</span>
                                 </div>
                                 <div class="confirmMessageBox_right_item">
-                                    lúc {{ date('H:i\, d/m/Y', strtotime($order->created_at))}}
+                                    Email: {{ $order->email ?? null }}
                                 </div>
                                 <div class="confirmMessageBox_right_item">
-                                    {{ $order->paymentMethod->name }}
+                                    {{ $order->paymentMethod->name }} lúc {{ date('H:i\, d/m/Y', strtotime($order->created_at))}}
                                 </div>
                                 <div class="confirmMessageBox_right_item">
                                     Tổng thanh toán <span class="price">{{ number_format($order->total) }}{!! config('main.currency_unit') !!}</span>
@@ -44,7 +44,7 @@
                                     <table class="noResponsive">
                                         <thead>
                                             <tr>
-                                                <td>Sản phẩm:</td>
+                                                <td>Tải hình ảnh:</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,7 +53,7 @@
                                                 <tr>
                                                     <td>
                                                         @php
-                                                            $zipPath = $product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug.'/'.$product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug.'.zip'
+                                                            $zipPath = $product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug.'/'.$product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug.'.zip';
                                                         @endphp
                                                         <a href="{{ Storage::disk('google')->url($zipPath) }}" target="_blank">
                                                             <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
@@ -69,7 +69,7 @@
                             </div>
                         </div>
 
-                        <div class="wallpaperSourceGrid">
+                        {{-- <div class="wallpaperSourceGrid">
                             @php
                                 $i = 0;
                             @endphp
@@ -77,7 +77,6 @@
                                 @foreach($product->infoPrice->sources as $source)
                                     @php
                                         $imagePath      = Storage::disk('google')->url($source->file_path);
-                                        // $imagePath      = 'https://taimienphi.vn/tmp/cf/aut/Uhun-IbFB-MnGE-DiPL-OCTB-hinh-dep-1.jpg';
                                         if($i<5){
                                             $attrImage  = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.$imagePath.'\') no-repeat center center / cover;"';
                                         }else {
@@ -101,7 +100,7 @@
                                 @csrf
                                 <input id="js_downloadSource_input" type="hidden" name="folder_path" value="" />
                             </form>
-                        </div>
+                        </div> --}}
 
                     </div>
                     {{-- <div class="pageCartBox_right">

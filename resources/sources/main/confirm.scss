@@ -249,15 +249,14 @@
         text-align: center;
         > * {
             &:not(:first-child){
-                margin-top: 0.5rem;
+                margin-top: 1rem;
             }
         }
         &_icon {
             display: flex;
             justify-content: center;
-            margin-bottom: 1rem;
             img {
-                width: 70px;
+                width: 60px;
             }
         }
         &_title {
@@ -321,6 +320,9 @@
     @media(max-width: 1199px){
         &_left {
             padding: 0.75rem 1.25rem;
+            &_title {
+                font-size: 1.15rem;
+            }
         }
         &_right {
             padding: 0.75rem 1.25rem;
@@ -333,6 +335,19 @@
             // padding: 0.5rem 1rem;
             flex: unset;
             width: 100%;
+            > * {
+                &:not(:first-child){
+                    margin-top: 0.75rem;
+                }
+            }
+            &_icon {
+                img {
+                    width: 50px;
+                }
+            }
+            &_title {
+                font-size: 1.1rem;
+            }
         }
         &_right {
             width: 100%;
@@ -344,6 +359,19 @@
         margin-bottom: 0.5rem;
         &_left {
             padding: 0.5rem 1rem;
+            > * {
+                &:not(:first-child){
+                    margin-top: 0.5rem;
+                }
+            }
+            &_title {
+                font-size: 1.05rem;
+            }
+            &_icon {
+                img {
+                    width: 40px;
+                }
+            }
         }
         &_right {
             padding: 0.5rem 1rem;
