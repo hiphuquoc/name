@@ -26,10 +26,18 @@ class PageController extends Controller{
                                 $query->where('sale_off', '>', 0);
                             })
                             ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                            ->orderBy('id', 'DESC')
+                            ->skip(0)
+                            ->take(5)
                             ->get();
+        $totalProduct   = Product::select('*')
+                            ->whereHas('prices', function($query) {
+                                $query->where('sale_off', '>', 0);
+                            })
+                            ->count();
         /* breadcrumb */
         $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full);
-        return view('wallpaper.category.index', compact('item', 'products', 'breadcrumb'));
+        return view('wallpaper.category.promotion', compact('item', 'products', 'totalProduct', 'breadcrumb'));
     }
 
     public static function searchProduct(Request $request){
@@ -45,32 +53,20 @@ class PageController extends Controller{
             ->first();
         if(!empty($item)){
             /* danh sách product */
-            $products       =  Product::select('product_info.*')
+            $products       =  Product::select('*')
                 ->where('name', 'like', '%'.$keySearch.'%')
-                ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                ->orderBy('ordering', 'DESC')
                 ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                ->orderBy('id', 'DESC')
+                ->skip(0)
+                ->take(5)
                 ->get();
-            // /* lấy thông tin nghành hàng của tất cả sản phẩm trong category */
-            // $brands             = new \Illuminate\Database\Eloquent\Collection;
-            // foreach($products as $product){
-            //     if (!$brands->contains('id', $product->brand->id)){
-            //         $brands[]   = $product->brand;
-            //     }
-            // }
-            // /* danh sách tất cả category của những sản phẩm trên */
-            // $categories     = new \Illuminate\Database\Eloquent\Collection;
-            // foreach($products as $product){
-            //     foreach($product->categories as $category){
-            //         if (!$categories->contains('id', $category->infoCategory->id)){
-            //             $categories[]   = $category->infoCategory;
-            //         }
-            //     }
-            // }
+            $totalProduct   =  Product::select('product_info.*')
+                ->where('name', 'like', '%'.$keySearch.'%')
+                ->count();
             /* breadcrumb */
             $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full);
             $titlePage      = $item->name ?? $item->seo->title ?? null;
-            return view('wallpaper.category.index', compact('item', 'titlePage', 'products', 'breadcrumb'));
+            return view('wallpaper.category.search', compact('item', 'titlePage', 'products', 'totalProduct', 'breadcrumb'));
         }
         return redirect()->route('main.home');
     }

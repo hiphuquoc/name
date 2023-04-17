@@ -67,6 +67,7 @@ Route::get('/test', [HomeController::class, 'test'])->name('main.test');
 Route::prefix('category')->group(function(){
     Route::get('/loadMore', [CategoryPublic::class, 'loadMore'])->name('main.category.loadMore');
     Route::get('/loadMorePromotion', [CategoryPublic::class, 'loadMorePromotion'])->name('main.category.loadMorePromotion');
+    Route::get('/loadMoreSearch', [CategoryPublic::class, 'loadMoreSearch'])->name('main.category.loadMoreSearch');
 });
 /* lỗi */
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');

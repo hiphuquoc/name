@@ -47,33 +47,15 @@
             @include('wallpaper.template.shareSocial')
             <!-- content -->
             <div class="contentBox">
-                <!-- Sản phẩm -->
-                @if(!empty($titlePage))
-                    <h1 style="display:flex;">
-                        <div>{{ $titlePage }}</div>
-                        <!-- từ khóa vừa search -->
-                        @if(!empty(request('key_search')))
-                            <div class="keySearchBadge">
-                                <div class="keySearchBadge_item">
-                                    <a href="{{ route('main.searchProduct') }}" class="keySearchBadge_item_badge">
-                                        <div>{{ request('key_search') }}</div>
-                                        <div class="keySearchBadge_item_badge_action"><i class="fa-solid fa-xmark"></i></div>
-                                    </a>
-                                </div>
-                            </div>
-                        @endif
-                    </h1>
+                @if(!empty($item->name)&&$item->name!='Hình nền điện thoại')
+                    <h1>Hình nền điện thoại {{ $item->name }}</h1>
                 @else 
-                    @if(!empty($item->name)&&$item->name!='Hình nền điện thoại')
-                        <h1>Hình nền điện thoại {{ $item->name }}</h1>
-                    @else 
-                        <h1>{{ $item->name ?? null }}</h1>
-                    @endif
-                    <!-- load more -->
-                    <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
-                    <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" /> 
-                    <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" /> 
+                    <h1>{{ $item->name ?? null }}</h1>
                 @endif
+                <!-- load more -->
+                <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
+                <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" /> 
+                <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" /> 
                 <!-- Sort Box -->
                 <div class="sortBox">
                     <div class="sortBox_left">
