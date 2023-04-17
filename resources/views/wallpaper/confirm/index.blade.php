@@ -57,7 +57,7 @@
                                                         @endphp
                                                         <a href="{{ Storage::disk('google')->url($zipPath) }}" target="_blank">
                                                             <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
-                                                            <div>{{ $product->infoProduct->name }} (tải file .ZIP)</div>
+                                                            <div>{{ $product->infoProduct->name }} (link google drive .ZIP)</div>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -76,16 +76,17 @@
                             @foreach($order->products as $product)
                                 @foreach($product->infoPrice->sources as $source)
                                     @php
-                                        // if($i<5) {
-                                        //     $image = '<img src="'.Storage::disk('google')->url($source->file_path).'" />';
-                                        // }else {
-                                            $image = '<img class="loading_1" src="'.Storage::url('images/loading-gif-1-200.svg').'" data-src="'.Storage::disk('google')->url($source->file_path).'" style="width:120px;height:120px;" />';
-                                        // }
+                                        $imagePath      = Storage::disk('google')->url($source->file_path);
+                                        // $imagePath      = 'https://taimienphi.vn/tmp/cf/aut/Uhun-IbFB-MnGE-DiPL-OCTB-hinh-dep-1.jpg';
+                                        if($i<5){
+                                            $attrImage  = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.$imagePath.'\') no-repeat center center / cover;"';
+                                        }else {
+                                            $attrImage  = 'class="wallpaperSourceGrid_item_image lazyload" data-src="'.$imagePath.'"';
+                                            
+                                        }
                                     @endphp
                                     <a href="{{ route('main.downloadSource', ['file' => $source->file_path]) }}" class="wallpaperSourceGrid_item">
-                                        <div class="wallpaperSourceGrid_item_image">
-                                            {!! $image !!}
-                                        </div>
+                                        <div {!! $attrImage !!}></div>
                                         <div class="wallpaperSourceGrid_item_action">
                                             <img src="{{ Storage::url('images/svg/download.svg') }}" />
                                         </div>
@@ -147,24 +148,34 @@
 
         $(window).ready(function(){
             if($("#js_scrollMenu").length) fixedElement();
+            // toggleWaiting();
         });
 
         $('a.wallpaperSourceGrid_item').click(function(e) {
             e.preventDefault();
+            effectDownload($(this));
+        });
+
+        function effectDownload(elementButton){
             /* bật loading */
             toggleWaiting();
             /* lấy thông tin thẻ a được click */
-            var link = $(this).attr('href');
+            var link = elementButton.attr('href');
             window.location.href = link;
             /* thực thi */
             var downloadTimer = setInterval(function() {
                 if (downloadComplete(link)) {
                     clearInterval(downloadTimer);
+                    /* addclass đã download */
+                    elementButton.addClass('alreadyDownload');
+                    elementButton.find('.wallpaperSourceGrid_item_background').css('display', 'flex');
+                    elementButton.find('.wallpaperSourceGrid_item_action').css('display', 'flex');
+                    elementButton.find('.wallpaperSourceGrid_item_action img').attr('src', '/storage/images/svg/download-success.svg');                    
                     /* tắt loading */
                     toggleWaiting();
                 }
             }, 100);
-        });
+        }
 
         function downloadComplete(link) {
             var request = new XMLHttpRequest();

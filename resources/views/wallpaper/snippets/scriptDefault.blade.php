@@ -54,8 +54,14 @@
             if (!$(this).hasClass('loaded')) {
                 var distance = $(window).scrollTop() - $(this).offset().top + 900;
                 if (distance > 0) {
-                    $(this).attr('src', $(this).attr('data-src'));
-                    $(this).addClass('loaded');
+                    var $this = $(this);
+                    $this.attr('src', $this.attr('data-src'));
+                    $this.on('load', function() {
+                        $this.addClass('loaded');
+                        /* xóa class và animation của icon loading */
+                        if($(this).hasClass('loading_1')) $(this).removeClass('loading_1');
+                        $(this).removeAttr('style');
+                    });
                 }
             }
         });
