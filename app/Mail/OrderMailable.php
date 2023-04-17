@@ -22,7 +22,7 @@ class OrderMailable extends Mailable
     
     public function envelope(){
         return new Envelope(
-            subject: 'Order Mailable',
+            subject: 'Xác nhận đơn hàng thành công '.$this->order->code,
         );
     }
     
