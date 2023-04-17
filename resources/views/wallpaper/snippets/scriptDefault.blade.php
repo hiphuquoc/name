@@ -57,10 +57,7 @@
                     var $this = $(this);
                     $this.attr('src', $this.attr('data-src'));
                     $this.on('load', function() {
-                        $this.addClass('loaded');
-                        /* xóa class và animation của icon loading */
-                        if($(this).hasClass('loading_1')) $(this).removeClass('loading_1');
-                        $(this).removeAttr('style');
+                        $this.addClass('loaded').removeClass('loading_1').removeAttr('style').css('opacity', 1);
                     });
                 }
             }
@@ -74,7 +71,6 @@
                         background  : 'url("'+$(this).attr('data-src')+'") no-repeat center center / cover',
                         filter      : 'unset'
                     });
-
                     $(this).addClass('loaded');
                 }
             }
