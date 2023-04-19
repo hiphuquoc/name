@@ -1,7 +1,8 @@
 @php
-    $paymentMethods      = \App\Models\PaymentMethod::select('*')
+    $paymentMethods     = \App\Models\PaymentMethod::select('*')
                             ->where('code', '!=', 'cod')
                             ->get();
+    $user               = Auth::user();
 @endphp
 
 <div id="modalPaymentMethod" class="modalBox">
@@ -14,7 +15,7 @@
                 <div style="margin-top:-0.5rem;">Nếu nhập email bạn sẽ được gửi thêm một bản để lưu trữ.</div>
                 <div class="inputWithLabelInside">
                     <label for="email">Email dùng nhận ảnh</label>
-                    <input type="text" id="email" name="email" onkeyup="validateWhenType(this, 'email')" />
+                    <input type="text" id="email" name="email" onkeyup="validateWhenType(this, 'email')" value="{{ $user->email ?? null }}" />
                 </div>
             </div>
             <div class="formModalBox_box_head">Bước 2: Chọn hình thức thanh toán</div>

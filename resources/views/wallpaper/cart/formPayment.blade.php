@@ -1,7 +1,8 @@
 @php
-    $paymentMethods      = \App\Models\PaymentMethod::select('*')
+    $paymentMethods     = \App\Models\PaymentMethod::select('*')
                             ->where('code', '!=', 'cod')
                             ->get();
+    $user               = Auth::user();
 @endphp
 
 
@@ -11,7 +12,7 @@
             <div style="margin-top:-0.5rem;">Nếu nhập email bạn sẽ được gửi thêm một bản để lưu trữ.</div>
             <div class="inputWithLabelInside">
                 <label for="email">Email dùng nhận ảnh</label>
-                <input type="text" id="email" name="email" onkeyup="validateWhenType(this, 'email')">
+                <input type="text" id="email" name="email" value="{{ $user->email ?? null }}" onkeyup="validateWhenType(this, 'email')">
             </div>
         </div>
     </div>
@@ -59,6 +60,10 @@
     </div>
 @push('scriptCustom')
     <script type="text/javascript">
+        $(window).ready(function(){
+            validateWhenType($('#email'), 'email');
+        });
+
         function chooseOptionPayment(element, idMethod){
             const parentElement = $(element).parent();
             /* xóa selected tất cả phần tử */

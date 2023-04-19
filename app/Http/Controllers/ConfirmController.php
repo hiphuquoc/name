@@ -8,8 +8,7 @@ use App\Http\Controllers\GoogledriveController;
 use App\Models\Order;
 use App\Models\SourceFile;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
-use App\Mail\OrderMailable;
-use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendEmailOrder;
 
 class ConfirmController extends Controller {
 
@@ -23,9 +22,6 @@ class ConfirmController extends Controller {
         if(!empty($order)&&$order->payment_status==1){
             return view('wallpaper.confirm.index', compact('item', 'order'));
         }
-        // if(!empty($order)){
-        //     return view('wallpaper.confirm.index', compact('item', 'order'));
-        // }
         return redirect()->route('main.home');
     }
 
@@ -43,17 +39,15 @@ class ConfirmController extends Controller {
             ]);
             /* kiểm tra đã thanh toán chưa */
             $resultCode = $request->get('resultCode');
-            if(in_array($resultCode, config('payment.momo.payment_success_code'))){
-                /* đã thanh toán thành công */
+            if(in_array($resultCode, config('payment.momo.payment_success_code'))){ /* đã thanh toán thành công */
                 /* cập nhật trạng thái thành toán thành công */
                 Order::updateItem($orderInfo->id, [
                     'payment_status' => 1
                 ]);
                 /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
                 if($orderInfo->payment_type=='payment_cart') \App\Http\Controllers\CartController::removeCookie('cart');
-                /* gửi email */
-                $email = $orderInfo->email ?? null;
-                if(!empty($email)) Mail::to($email)->send(new OrderMailable($orderInfo));
+                /* tạo job gửi email */
+                if(!empty($orderInfo->email)) SendEmailOrder::dispatch($orderInfo);
                 /* chuyển hướng sang trang nhận ảnh */
                 return redirect()->route('main.confirm', ['code' => $code]);
             }else {
@@ -61,44 +55,5 @@ class ConfirmController extends Controller {
                 return redirect()->route('main.home');
             }
         }
-    }
-
-    // public function downloadSource(Request $request){
-    //     $fullPath       = '';
-    //     $fileName       = '';
-    //     if(!empty($request->get('source_info_id'))){
-    //         $infoSource = SourceFile::select('*')
-    //                         ->where('id', $request->get('source_info_id'))
-    //                         ->first();
-    //         $fullPath   = Storage::disk('google')->url($infoSource->file_path);
-    //         $fileName   = $infoSource->file_name;
-    //     }
-    //     $result['url']      = $fullPath;
-    //     $result['filename'] = $fileName;
-    //     return json_encode($result);
-    // }
-
-    // public function downloadSourceZip(Request $request){
-    //     if(!empty($request->get('folder_name'))){
-            
-    //         return GoogledriveController::downloadZipInFolder($request->get('folder_name'));
-    //     }
-    // }
-
-    // public function downloadSourceAll(Request $request){
-    //     $urls           = [];
-    //     if(!empty($request->get('code'))){
-    //         $order      = Order::select('*')
-    //                         ->where('code', $request->get('code'))
-    //                         ->with('products')
-    //                         ->first();
-    //         foreach($order->products as $product){
-    //             foreach($product->infoPrice->sources as $source){
-    //                 $urls[] = env('APP_URL').Storage::url($source->file_path);
-    //             }
-    //         }
-    //     }
-    //     return json_encode($urls);
-    // }
-    
+    }    
 }
