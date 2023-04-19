@@ -83,5 +83,5 @@ return [
         'extension'     => 'html',
         'folderSave'    => 'public/caches/',
     ],
-    'main.password_user_default' => 'wallpaperdienthoai@mk123',
+    'main.password_user_default' => 'hitourVN@mk123',
 ];

@@ -53,16 +53,16 @@
                 $.ajax({
                     url         : '{{ route("admin.loginAdmin") }}',
                     type        : 'post',
-                    dataType    : 'html',
+                    dataType    : 'json',
                     data        : {
                         '_token'    : '{{ csrf_token() }}',
                         data        : data
                     },
                     success     : function(response){
-                        if(response==true){
+                        if(response.flag==true){
                             window.location.href = "{{ route('admin.product.list') }}";
                         }else {
-                            $('#js_noticeLogin').html('Email và Password đăng nhập không hợp lệ!').css('display', 'block');
+                            $('#js_noticeLogin').html(response.message).css('display', 'block');
                         }
                     }
                 });

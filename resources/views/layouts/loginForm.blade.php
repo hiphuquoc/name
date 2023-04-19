@@ -3,7 +3,7 @@
 
 <!-- === START:: Head === -->
 <head>
-    @include('wallpaper.snippets.head')
+    @include('wallpaper.snippets.head', ['index' => 'no'])
 </head>
 <!-- === END:: Head === -->
 

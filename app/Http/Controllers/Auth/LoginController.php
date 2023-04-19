@@ -38,27 +38,30 @@ class LoginController extends Controller
     }
 
     public function loginForm(): View {
-        
         return view('layouts.loginForm');
     }
-
+    
     public function loginAdmin(Request $request){
-        // /* trực tiếp */
-        // if(Auth::attempt($request->only('email', 'password'))){
-        //     return redirect()->route('admin.booking.list');
-        // }
-        // session()->flash('error', 'Email và Password đăng nhập không hợp lệ!');
-        // return back();
-        /* ajax */
-        $dataForm   = [];
-            foreach($request->get('data') as $value){
-                $dataForm[$value['name']]   = $value['value'];
-            }
         $flag       = false;
-        if(Auth::attempt($dataForm)){
-            $flag   = true;
+        $message    = 'Email và Password đăng nhập không hợp lệ!';
+        $dataForm   = [];
+        foreach($request->get('data') as $value){
+            $dataForm[$value['name']] = $value['value'];
         }
-        echo $flag;
+        // Đăng nhập
+        if(Auth::attempt($dataForm)){
+            $user       = Auth::user();
+            if($user->hasRole('admin')){
+                $flag   = true;
+            } else {
+                $flag       = false;
+                $message    = 'Bạn không có quyền truy cập vào khu vực này!';
+                Auth::logout();
+            }
+        }
+        $result['flag']     = $flag;
+        $result['message']  = $message;
+        return json_encode($result);
     }
 
     public function logout(){

@@ -102,11 +102,12 @@ Route::get('/registrySeller', [AjaxController::class, 'registrySeller'])->name('
 Route::get('/setMessageModal', [AjaxController::class, 'setMessageModal'])->name('ajax.setMessageModal');
 Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetShow'])->name('ajax.checkLoginAndSetShow');
 /* login */
-Route::get('/admin', [LoginController::class, 'loginForm'])->name('admin.loginForm');
+Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
 Route::get('/createUser', [LoginController::class, 'create'])->name('admin.createUser');
 
-Route::middleware('auth', 'role:admin')->group(function () {
+Route::middleware('auth', 'role:admin')->group(function (){
+    Route::prefix('he-thong')->group(function(){
         /* product */
         Route::prefix('product')->group(function(){
             Route::get('/list', [ProductController::class, 'list'])->name('admin.product.list');
@@ -212,6 +213,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::prefix('cache')->group(function(){
             Route::get('/clearCacheHtml', [CacheController::class, 'clear'])->name('admin.cache.clearCache');
         });
+    });
 });
 /* ROUTING */
 Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');

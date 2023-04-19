@@ -2,8 +2,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 @if(Route::is('main.confirm'))
     <meta name="robots" content="noindex,nofollow">
-@else 
-    <meta name="robots" content="index,follow">
+@else
+    @if(!empty($index)&&$index=='no')
+        <meta name="robots" content="noindex,nofollow">
+    @else 
+        <meta name="robots" content="index,follow">
+    @endif
 @endif
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="fragment" content="!" />
