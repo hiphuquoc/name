@@ -40,22 +40,22 @@ class GalleryController extends Controller {
                 $idInsert                       = SystemFile::insertItem($arrayInsert);
                 $result[$i]['file_id']          = $idInsert;
                 /* tính tỉ lệ width và height của ảnh được upload => để resize chính xác */
-                $infoPixel      = getimagesize(Storage::path($filepath));
-                $percentPixel   = $infoPixel[0]/$infoPixel[1];
+                $infoPixel          = getimagesize(Storage::path($filepath));
+                $percentPixel       = $infoPixel[0]/$infoPixel[1];
                 /* resize bản small width 400px */
                 $widthImageSmall    = config('image.resize_small_width');
                 $heightImageSmall   = $widthImageSmall/$percentPixel;
-                $filenameSmall  = $filename.'-small';
-                $filepathSmall  = $folderUpload.$filenameSmall.'.'.$extension;
+                $filenameSmall      = $filename.'-small';
+                $filepathSmall      = $folderUpload.$filenameSmall.'.'.$extension;
                 ImageManagerStatic::make($image->getRealPath())
                     ->encode($extension, config('image.quality'))
                     ->resize($widthImageSmall, $heightImageSmall)
                     ->save(Storage::path($filepathSmall));
                 /* resize bản mini */
-                $widthImageMini    = config('image.resize_mini_width');
-                $heightImageMini   = $widthImageMini/$percentPixel;
-                $filenameMini   = $filename.'-mini';
-                $filepathMini   = $folderUpload.$filenameMini.'.'.$extension;
+                $widthImageMini     = config('image.resize_mini_width');
+                $heightImageMini    = $widthImageMini/$percentPixel;
+                $filenameMini       = $filename.'-mini';
+                $filepathMini       = $folderUpload.$filenameMini.'.'.$extension;
                 ImageManagerStatic::make($image->getRealPath())
                     ->encode($extension, config('image.quality'))
                     ->resize($widthImageMini, $heightImageMini)

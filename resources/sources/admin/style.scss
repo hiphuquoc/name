@@ -241,8 +241,6 @@ table:not(.sendEmail) {
     border-radius: 5px;
     img {
         width: 100%;
-        max-width: 320px;
-        max-height: 196px;
         object-fit: cover;
         box-shadow: 0 0 3px $bg-06;
         border-radius: inherit;

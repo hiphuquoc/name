@@ -16,7 +16,7 @@ class ZalopayController extends Controller{
                 "merchantinfo" => "embeddata123"
             ];
             /* truyển thông tin sản phẩm trong order vào */
-            $items      = [];
+            $dataItem   = [];
             $i          = 0;
             foreach($infoOrder->products as $product){
                 $dataItem[$i]['code']       = $product->infoProduct->code ?? null;
@@ -34,7 +34,7 @@ class ZalopayController extends Controller{
                     "apptime"       => round(microtime(true) * 1000), // miliseconds
                     "apptransid"    => date("ymd")."_".$infoOrder->code, // mã giao dich có định dạng yyMMdd_xxxx
                     "appuser"       => config('payment.zalopay.appuser'),
-                    "item"          => json_encode($items, JSON_UNESCAPED_UNICODE),
+                    "item"          => json_encode($dataItem, JSON_UNESCAPED_UNICODE),
                     "embeddata"     => json_encode($embeddata, JSON_UNESCAPED_UNICODE),
                     "amount"        => $total,
                     "description"   => "ZaloPay Intergration Demo",
