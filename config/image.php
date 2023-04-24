@@ -6,7 +6,8 @@ return [
     'extension'             => 'webp',
     'quality'               => '90',
     'resize_normal_width'   => 800,
-    'resize_small_width'    => 500,
+    'resize_middle_width'   => 600,
+    'resize_small_width'    => 400,
     'resize_mini_width'     => 40,
     /* danh sách action: copy_url, change_name, change_image, delete */
     'keyType'               => '-type-',

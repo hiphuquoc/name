@@ -42,7 +42,16 @@ class GalleryController extends Controller {
                 /* tính tỉ lệ width và height của ảnh được upload => để resize chính xác */
                 $infoPixel          = getimagesize(Storage::path($filepath));
                 $percentPixel       = $infoPixel[0]/$infoPixel[1];
-                /* resize bản small width 400px */
+                /* resize bản middle */
+                $widthImageMiddle   = config('image.resize_middle_width');
+                $heightImageMiddle  = $widthImageMiddle/$percentPixel;
+                $filenameMiddle     = $filename.'-middle';
+                $filepathMiddle     = $folderUpload.$filenameMiddle.'.'.$extension;
+                ImageManagerStatic::make($image->getRealPath())
+                    ->encode($extension, config('image.quality'))
+                    ->resize($widthImageMiddle, $heightImageMiddle)
+                    ->save(Storage::path($filepathMiddle));
+                /* resize bản small */
                 $widthImageSmall    = config('image.resize_small_width');
                 $heightImageSmall   = $widthImageSmall/$percentPixel;
                 $filenameSmall      = $filename.'-small';
@@ -83,9 +92,12 @@ class GalleryController extends Controller {
             try {
                 DB::beginTransaction();
                 /* xóa file */
-                $infofile   = SystemFile::find($id);
-                $filePath   = Storage::path($infofile['file_path']);
+                $infofile       = SystemFile::find($id);
+                $filePath       = Storage::path($infofile['file_path']);
                 if(file_exists($filePath)) @unlink($filePath);
+                /* xóa bản middle */
+                $filePathMiddle = Storage::path(config('image.folder_upload').$infofile['file_name'].'-middle.'.$infofile['file_extension']);
+                if(file_exists($filePathMiddle)) @unlink($filePathMiddle);
                 /* xóa bản small */
                 $filePathSmall  = Storage::path(config('image.folder_upload').$infofile['file_name'].'-small.'.$infofile['file_extension']);
                 if(file_exists($filePathSmall)) @unlink($filePathSmall);
@@ -93,7 +105,7 @@ class GalleryController extends Controller {
                 $filePathMini   = Storage::path(config('image.folder_upload').$infofile['file_name'].'-mini.'.$infofile['file_extension']);
                 if(file_exists($filePathMini)) @unlink($filePathMini);
                 /* xóa khỏi CSDL */
-                $flag       = SystemFile::removeItem($id);
+                $flag           = SystemFile::removeItem($id);
                 DB::commit();
                 return $flag;
             } catch(\Exception $exception) {

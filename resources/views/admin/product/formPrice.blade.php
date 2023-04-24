@@ -58,7 +58,7 @@
                                 @if(!empty($price->sources)&&$price->sources->isNotEmpty())
                                     @foreach($price->sources as $source)
                                         <div id="js_removeSourceFile_{{ $source->id }}" class="uploadImageBox_box_item">
-                                            <img src="{{ Storage::disk('google')->url($source->file_path) ?? null }}" />
+                                            <img src="{{ Storage::disk('google')->url($source->file_path) ?? null }}" loading="lazy" />
                                             <div class="uploadImageBox_box_item_icon" onClick="removeSourceFile({{ $source->id }});"></div>
                                         </div>
                                     @endforeach
