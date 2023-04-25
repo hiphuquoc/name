@@ -54,15 +54,15 @@ class CheckoutController extends Controller{
             ]);
         }
         /* lấy ngược lại thông tin order để xử lý cho chính xác */
-        $infoOrder      = Order::select('*')
+        $orderInfo      = Order::select('*')
                             ->where('id', $idOrder)
                             ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
                             ->first();
-        if(!empty($infoOrder->paymentMethod->code)){
+        if(!empty($orderInfo->paymentMethod->code)){
             /* tạo yêu cầu thanh toán => nếu zalo pay */
-            if($infoOrder->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($infoOrder);
+            if($orderInfo->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($orderInfo);
             /* tạo yêu cầu thanh toán => nếu momo */
-            if($infoOrder->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($infoOrder);
+            if($orderInfo->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($orderInfo);
         }
         /* trả về đường dẫn để chuyển hướng */
         return redirect($urlRedirect);
@@ -92,15 +92,15 @@ class CheckoutController extends Controller{
             'price'             => $tmp->prices[0]->price
         ]);
         /* lấy ngược lại thông tin order để xử lý cho chính xác */
-        $infoOrder      = Order::select('*')
+        $orderInfo      = Order::select('*')
                             ->where('id', $idOrder)
                             ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
                             ->first();
-        if(!empty($infoOrder->paymentMethod->code)){
+        if(!empty($orderInfo->paymentMethod->code)){
             /* tạo yêu cầu thanh toán => nếu zalo pay */
-            if($infoOrder->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($infoOrder);
+            if($orderInfo->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($orderInfo);
             /* tạo yêu cầu thanh toán => nếu momo (ghi chú: ở momo sẽ redirect thẳng) */
-            if($infoOrder->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($infoOrder);
+            if($orderInfo->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($orderInfo);
         }
         /* trả về đường dẫn để chuyển hướng */
         $reponse['url'] = $urlRedirect;

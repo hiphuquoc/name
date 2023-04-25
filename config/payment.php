@@ -15,11 +15,12 @@ return [
         ]
     ],
     'zalopay'   => [
-        'appid' => '553',
-        'appuser' => 'demo',
-        "key1"  => "9phuAOYhan4urywHTh0ndEXiV3pKHr5Q",
-        "key2"  => "Iyz2habzyr7AG8SgvoBCbKwKi3UzlLi3",
-        "api"   => [
+        'endpoint'  => 'https://sb-openapi.zalopay.vn/v2/create',
+        'app_id'    => '2669',
+        'app_user'  => 'Wallpaper',
+        "key_1"     => "gi1wPy9qc2NA5QakzbDjA1OShlXPiAfG",
+        "key_2"     => "4HZweYiFVY0RQwUTcHozGlTNZy1WyblB",
+        "api"       => [
             "createorder"       => "https  =>//sandbox.zalopay.com.vn/v001/tpe/createorder",
             "gateway"           => "https  =>//sbgateway.zalopay.vn/pay?order=",
             "quickpay"          => "https  =>//sandbox.zalopay.com.vn/v001/tpe/submitqrcodepay",

@@ -11,7 +11,6 @@ class ZalopayController extends Controller{
     public static function create($infoOrder){
         $urlRedirect    = null;
         if(!empty($infoOrder)){
-            $endpoint   = "https://sandbox.zalopay.com.vn/v001/tpe/createorder";
             $embeddata  = [
                 "merchantinfo" => "embeddata123"
             ];
@@ -30,21 +29,21 @@ class ZalopayController extends Controller{
             $total = $infoOrder->total ?? 0;
             if($total>0){
                 $order = [
-                    "appid"         => config('payment.zalopay.appid'),
-                    "apptime"       => round(microtime(true) * 1000), // miliseconds
-                    "apptransid"    => date("ymd")."_".$infoOrder->code, // mã giao dich có định dạng yyMMdd_xxxx
-                    "appuser"       => config('payment.zalopay.appuser'),
+                    "app_id"        => config('payment.zalopay.app_id'),
+                    "app_time"      => round(microtime(true) * 1000), // miliseconds
+                    "app_trans_id"  => date("ymd")."_".$infoOrder->code, // translation missing: vi.docs.shared.sample_code.comments.app_trans_id
+                    "app_user"      => config('payment.zalopay.app_user'),
                     "item"          => json_encode($dataItem, JSON_UNESCAPED_UNICODE),
-                    "embeddata"     => json_encode($embeddata, JSON_UNESCAPED_UNICODE),
+                    "embed_data"    => json_encode($embeddata, JSON_UNESCAPED_UNICODE),
                     "amount"        => $total,
-                    "description"   => "ZaloPay Intergration Demo",
-                    "bankcode"      => "zalopayapp"
+                    "description"   => "Name.com.vn - Thanh toán cho Order #$infoOrder->code",
+                    "bank_code"     => "zalopayapp"
                 ];
-                // appid|apptransid|appuser|amount|apptime|embeddata|item
-                $data = $order["appid"]."|".$order["apptransid"]."|".$order["appuser"]."|".$order["amount"]
-                ."|".$order["apptime"]."|".$order["embeddata"]."|".$order["item"];
-                $order["mac"] = hash_hmac("sha256", $data, config('payment.zalopay.key1'));
-                    
+
+                $data = $order["app_id"] . "|" . $order["app_trans_id"] . "|" . $order["app_user"] . "|" . $order["amount"]
+                . "|" . $order["app_time"] . "|" . $order["embed_data"] . "|" . $order["item"];
+                $order["mac"] = hash_hmac("sha256", $data, config('payment.zalopay.key_1'));
+
                 $context = stream_context_create([
                     "http" => [
                         "header" => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -53,10 +52,10 @@ class ZalopayController extends Controller{
                     ]
                 ]);
                 
-                $resp = file_get_contents($endpoint, false, $context);
+                $resp = file_get_contents(config('payment.zalopay.endpoint'), false, $context);
                 $result = json_decode($resp, true);
-
-                if(!empty($result['orderurl'])) $urlRedirect = $result['orderurl'];
+                
+                if(!empty($result['order_url'])) $urlRedirect = $result['order_url'];
                 //   foreach ($result as $key => $value) {
                 //     echo "$key: $value<br>";
                 //   }
