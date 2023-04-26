@@ -12,7 +12,7 @@ class ZalopayController extends Controller{
         $urlRedirect    = null;
         if(!empty($infoOrder)){
             $embeddata  = [
-                "merchantinfo" => "embeddata123"
+                "redirecturl" => route('main.handlePaymentZalopay', ['code' => $infoOrder->code])
             ];
             /* truyển thông tin sản phẩm trong order vào */
             $dataItem   = [];
@@ -36,7 +36,7 @@ class ZalopayController extends Controller{
                     "item"          => json_encode($dataItem, JSON_UNESCAPED_UNICODE),
                     "embed_data"    => json_encode($embeddata, JSON_UNESCAPED_UNICODE),
                     "amount"        => $total,
-                    "description"   => "Name.com.vn - Thanh toán cho Order #$infoOrder->code",
+                    "description"   => "Name.com.vn - Thanh toán Đơn hàng $infoOrder->code",
                     "bank_code"     => "zalopayapp"
                 ];
 
@@ -52,7 +52,7 @@ class ZalopayController extends Controller{
                     ]
                 ]);
                 
-                $resp = file_get_contents(config('payment.zalopay.endpoint'), false, $context);
+                $resp   = file_get_contents(config('payment.zalopay.endpoint'), false, $context);
                 $result = json_decode($resp, true);
                 
                 if(!empty($result['order_url'])) $urlRedirect = $result['order_url'];

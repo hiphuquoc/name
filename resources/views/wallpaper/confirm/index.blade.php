@@ -31,9 +31,11 @@
                                 <div class="confirmMessageBox_right_item">
                                     Mã đơn <span class="highLight">{{ $order->code }}</span>
                                 </div>
-                                <div class="confirmMessageBox_right_item">
-                                    Email: {{ $order->email ?? null }}
-                                </div>
+                                @if(!empty($order->email))
+                                    <div class="confirmMessageBox_right_item">
+                                        Email: {{ $order->email }}
+                                    </div>
+                                @endif
                                 <div class="confirmMessageBox_right_item">
                                     {{ $order->paymentMethod->name }} lúc {{ date('H:i\, d/m/Y', strtotime($order->created_at))}}
                                 </div>
@@ -69,7 +71,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="wallpaperSourceGrid">
+                        <div class="wallpaperSourceGrid">
                             @php
                                 $i = 0;
                             @endphp
@@ -100,7 +102,7 @@
                                 @csrf
                                 <input id="js_downloadSource_input" type="hidden" name="folder_path" value="" />
                             </form>
-                        </div> --}}
+                        </div>
 
                     </div>
                     {{-- <div class="pageCartBox_right">

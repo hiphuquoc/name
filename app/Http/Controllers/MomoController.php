@@ -18,7 +18,7 @@ class MomoController extends Controller{
                 $orderInfo      = config('payment.momo.action');
                 $orderId        = $infoOrder->code ?? time();
                 /* đường dẫn sau khi thanh toán thành công */
-                $redirectUrl    = route('main.handlePayment');
+                $redirectUrl    = route('main.handlePaymentMomo');
                 $ipnUrl         = $_SERVER['HTTP_REFERER'] ?? route('main.home');
                 $extraData      = $infoOrder->note ?? '';
                 $requestId      = time().'';

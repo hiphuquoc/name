@@ -66,14 +66,20 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        $orderInfo          = Order::select('*')
-                                ->where('email', '!=', '')
-                                ->where('payment_status', 1)
-                                ->orderBy('id', 'DESC')
-                                ->first();
-        // Mail::to('wallpaperdienthoai@gmail.com')->send(new OrderMailable($orderInfo));
-
-        return view('wallpaper.email.order', ['order' => $orderInfo]);
+        dd($request->all());
+        if(!empty($request->get('code'))){
+            $orderCode          = $request->get('code');
         
+            $orderInfo          = Order::select('*')
+                                    ->where('code', $orderCode)
+                                    ->first();
+
+            Order::updateItem($orderInfo->id, [
+                'payment_status' => 1
+            ]);
+            dd('success');
+        }else {
+            dd('fail');
+        }
     }
 }

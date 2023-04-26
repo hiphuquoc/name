@@ -83,7 +83,8 @@ Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main
 Route::post('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
 Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
 Route::get('/confirm', [ConfirmController::class, 'confirm'])->name('main.confirm');
-Route::get('/handlePayment', [ConfirmController::class, 'handlePayment'])->name('main.handlePayment');
+Route::get('/handlePaymentMomo', [ConfirmController::class, 'handlePaymentMomo'])->name('main.handlePaymentMomo');
+Route::get('/handlePaymentZalopay', [ConfirmController::class, 'handlePaymentZalopay'])->name('main.handlePaymentZalopay');
 /* check out */
 Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');
 /* order */

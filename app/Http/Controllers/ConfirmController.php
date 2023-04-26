@@ -25,7 +25,7 @@ class ConfirmController extends Controller {
         return redirect()->route('main.home');
     }
 
-    public static function handlePayment(Request $request){
+    public static function handlePaymentMomo(Request $request){
         /* lấy thông tin của Order trong CSDL */
         $code           = $request->get('orderId');
         $orderInfo      = Order::select('*')
@@ -42,30 +42,50 @@ class ConfirmController extends Controller {
             /* nếu đã thanh toán thành công */
             if(in_array($resultCode, config('payment.momo.payment_success_code'))) $flagPayment = true;
         }
-        /* Trường hợp Zalopay: */
-        if(!empty($request->get('data'))&&$orderInfo->paymentMethod->code=='zalopay'){
-            /* cập nhật trans_id (id thanh toán của momo) */
-            $transId    = $request->get('data')['zp_trans_id'];
-            Order::updateItem($orderInfo->id, ['trans_id' => $transId]);
-            /* nếu có request chắc chắn đã thanh toán thành công */
-            dd($request->all());
-            // $flagPayment = true;
-        }
-        /* xử lý sau khi đã thanh toán */
+        /* xử lý sau khi đã thanh toán thành công */
         if($flagPayment==true) {
+            self::handleAfterPayment($orderInfo);
+            /* chuyển hướng sang trang nhận ảnh */
+            return redirect()->route('main.confirm', ['code' => $code]);
+        }
+        /* thanh toán không thành công */
+        return redirect()->route('main.home');
+    }  
+
+    public static function handlePaymentZalopay(Request $request){
+        if(!empty($request->get('code'))){
+            /* lấy thông tin của Order trong CSDL */
+            $code           = $request->get('code');
+            $orderInfo      = Order::select('*')
+                                ->where('code', $code)
+                                ->first();
+            $flagPayment    = false;
+            /* cập nhật trans_id (id thanh toán của zalopay) */
+            if(!empty($request->get('apptransid'))&&!empty($request->get('amount'))){ /* tồn tại transid và đã thanh toán > 0 => xử lý tiếp */
+                $transId        = $request->get('apptransid');
+                Order::updateItem($orderInfo->id, ['trans_id' => $transId]);
+                /* nếu đã thanh toán thành công */
+                if(!empty($request->get('status'))&&$request->get('status')==1&&$request->get('amount')==$orderInfo->total) $flagPayment = true;
+                /* xử lý sau khi đã thanh toán thành công */
+                if($flagPayment==true) {
+                    self::handleAfterPayment($orderInfo);
+                    /* chuyển hướng sang trang nhận ảnh */
+                    return redirect()->route('main.confirm', ['code' => $code]);
+                }
+            }
+        }
+        /* thanh toán không thành công */
+        return redirect()->route('main.home');
+    }
+    
+    private static function handleAfterPayment($orderInfo){
+        if(!empty($orderInfo)){
             /* cập nhật trạng thái thành toán thành công */
-            Order::updateItem($orderInfo->id, [
-                'payment_status' => 1
-            ]);
+            Order::updateItem($orderInfo->id, ['payment_status' => 1]);
             /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
             if($orderInfo->payment_type=='payment_cart') \App\Http\Controllers\CartController::removeCookie('cart');
             /* tạo job gửi email */
             if(!empty($orderInfo->email)) SendEmailOrder::dispatch($orderInfo);
-            /* chuyển hướng sang trang nhận ảnh */
-            return redirect()->route('main.confirm', ['code' => $code]);
-        }else {
-            /* thanh toán không thành công */
-            return redirect()->route('main.home');
         }
-    }    
+    }
 }
