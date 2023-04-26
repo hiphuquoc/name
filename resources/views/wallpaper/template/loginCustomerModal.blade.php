@@ -3,7 +3,7 @@
     <div class="modalLoginFormCustomerBox_bg" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"></div>
     <!-- modal box -->
     <div class="modalLoginFormCustomerBox_box">
-        <div class="modalLoginFormCustomerBox_box_left" style="background:url('https://name.com.vn/storage/images/upload/54-hinh-nen-dien-thoai-wallpaper-mobile-khung-canh-tuyet-tuyet-dep-source-1MJQKAITHF2PGNL.png') no-repeat;background-size: 100% 100%;">
+        <div class="modalLoginFormCustomerBox_box_left" style="background:url('https://name.com.vn/storage/images/upload/banner-login-type-manager-upload.webp') no-repeat;background-size: 100% 100%;">
         </div>
         
         <div class="modalLoginFormCustomerBox_box_right">

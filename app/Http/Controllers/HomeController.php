@@ -38,7 +38,6 @@ class HomeController extends Controller{
                                         ->skip(0)
                                         ->take(10)
                                         ->get();
-            
             $promotionProducts      = new \Illuminate\Database\Eloquent\Collection;
             $totalPromotionProduct  = Product::select('*')
                                         ->whereHas('prices', function($query){
