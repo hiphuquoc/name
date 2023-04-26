@@ -32,6 +32,12 @@
                 <div>Trang chủ</div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi">
+                <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
+                <div>Đang khuyến mãi</div>
+            </a>
+        </li>
         @if(!empty($wallpaperMobile))
             <li>
                 <div class="hasChild open" onclick="showHideListMenuMobile(this, '{{ $wallpaperMobile->seo->slug }}')">
@@ -54,12 +60,6 @@
                 </ul>
             </li>
         @endif
-        <li>
-            <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi">
-                <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
-                <div>Đang khuyến mãi</div>
-            </a>
-        </li>
         {{-- <li>
             <div class="hasChild close" onclick="showHideListMenuMobile(this, 'phong-cach')">
                 <img src="{{ Storage::url('images/svg/bookmark.svg') }}" />
