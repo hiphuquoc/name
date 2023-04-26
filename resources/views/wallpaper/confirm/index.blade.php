@@ -83,7 +83,6 @@
                                             $attrImage  = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.$imagePath.'\') no-repeat center center / cover;"';
                                         }else {
                                             $attrImage  = 'class="wallpaperSourceGrid_item_image lazyload" data-src="'.$imagePath.'"';
-                                            
                                         }
                                     @endphp
                                     <a href="{{ route('main.downloadSource', ['file' => $source->file_path]) }}" class="wallpaperSourceGrid_item">

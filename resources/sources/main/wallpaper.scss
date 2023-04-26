@@ -24,6 +24,8 @@
             aspect-ratio: 1/2.18;
             overflow: hidden;
             border-radius: 15px;
+            background: $colorBackgroundLv2;
+            z-index: -1;
             .zIndexHide {
                 position: relative;
                 z-index: -1;
@@ -117,8 +119,8 @@
                 }
             }
             &_backgroundBlur {
-                filter: blur(8px);
-                -webkit-filter: blur(8px);
+                filter: blur(5px);
+                -webkit-filter: blur(5px);
                 position: absolute;
                 bottom: 0;
                 left: 0;
@@ -137,6 +139,7 @@
                 cursor: pointer;
                 overflow: hidden;
                 border: 1px solid transparent;
+                background: $colorBackgroundLv2;
                 &_backgroundImage {
                     width: 100%;
                     height: 100%;
