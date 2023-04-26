@@ -24,8 +24,6 @@
             aspect-ratio: 1/2.18;
             overflow: hidden;
             border-radius: 15px;
-            background: $colorBackgroundLv2;
-            z-index: -1;
             .zIndexHide {
                 position: relative;
                 z-index: -1;
@@ -117,6 +115,15 @@
                         display: flex;
                     }
                 }
+            }
+            &_background {
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                width: calc(100% - 8px);
+                height: calc(100% - 8px);
+                background: $colorBackgroundLv2;
+                z-index: -2;
             }
             &_backgroundBlur {
                 filter: blur(5px);

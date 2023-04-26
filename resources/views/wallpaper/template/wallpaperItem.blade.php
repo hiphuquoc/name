@@ -89,6 +89,7 @@
                         <!-- background blur -->
                         <div class="wallpaperGridBox_item_image_backgroundBlur"></div>
                     </div>
+                    <div class="wallpaperGridBox_item_image_background"></div>
                 </a>
                 <!-- danh sách ảnh -->
                 <div class="wallpaperGridBox_item_imageList">
