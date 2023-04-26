@@ -14,6 +14,7 @@ class ZalopayController extends Controller{
             $embeddata  = [
                 "redirecturl" => route('main.handlePaymentZalopay', ['code' => $infoOrder->code])
             ];
+            $reqtime    = round(microtime(true) * 1000); // miliseconds
             /* truyển thông tin sản phẩm trong order vào */
             $dataItem   = [];
             $i          = 0;
@@ -25,10 +26,12 @@ class ZalopayController extends Controller{
                 $dataItem[$i]['sale_off']   = $product->infoPrice->sale_off ?? null;
                 ++$i;
             }
+            /* bankcode */
+            $bankcode   = self::getBankcode();
             /* tổng tiền */
-            $total = $infoOrder->total ?? 0;
+            $total      = $infoOrder->total ?? 0;
             if($total>0){
-                $order = [
+                $order  = [
                     "app_id"        => config('payment.zalopay.app_id'),
                     "app_time"      => round(microtime(true) * 1000), // miliseconds
                     "app_trans_id"  => date("ymd")."_".$infoOrder->code, // translation missing: vi.docs.shared.sample_code.comments.app_trans_id
@@ -37,12 +40,11 @@ class ZalopayController extends Controller{
                     "embed_data"    => json_encode($embeddata, JSON_UNESCAPED_UNICODE),
                     "amount"        => $total,
                     "description"   => "Name.com.vn - Thanh toán Đơn hàng $infoOrder->code",
-                    "bank_code"     => "zalopayapp"
+                    "bank_code"     => array_merge(["zalopayapp"], $bankcode)
                 ];
-
-                $data = $order["app_id"] . "|" . $order["app_trans_id"] . "|" . $order["app_user"] . "|" . $order["amount"]
+                $data           = $order["app_id"] . "|" . $order["app_trans_id"] . "|" . $order["app_user"] . "|" . $order["amount"]
                 . "|" . $order["app_time"] . "|" . $order["embed_data"] . "|" . $order["item"];
-                $order["mac"] = hash_hmac("sha256", $data, config('payment.zalopay.key_1'));
+                $order["mac"]   = hash_hmac("sha256", $data, config('payment.zalopay.key_1'));
 
                 $context = stream_context_create([
                     "http" => [
@@ -62,6 +64,31 @@ class ZalopayController extends Controller{
             }
         }
         return $urlRedirect;
+    }
+
+    private static function getBankcode(){
+        $result     = [];
+        $config     = [
+            "appid" => config('payment.zalopay.app_id'),
+            "key1"  => config('payment.zalopay.key_1'),
+            "key2"  => config('payment.zalopay.key_2'),
+            "endpoint" => "https://sbgateway.zalopay.vn/api/getlistmerchantbanks"
+        ];
+        $reqtime = round(microtime(true) * 1000); // miliseconds
+        $params = [
+            "appid"     => config('payment.zalopay.app_id'),
+            "reqtime"   => $reqtime,
+            "mac"       => hash_hmac("sha256", config('payment.zalopay.app_id')."|".$reqtime, config('payment.zalopay.key_1')) // appid|reqtime
+        ];
+        
+        $resp       = file_get_contents($config["endpoint"]."?".http_build_query($params));
+        $response   = json_decode($resp, true);
+        if(!empty($response['banks'][39])){
+            foreach($response['banks'][39] as $bank){
+                $result[] = $bank['bankcode'];
+            }
+        }
+        return $result;
     }
 
 }
