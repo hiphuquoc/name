@@ -20,19 +20,23 @@ return [
         // 'app_user'  => 'Wallpaper',
         // "key_1"     => "gi1wPy9qc2NA5QakzbDjA1OShlXPiAfG",
         // "key_2"     => "4HZweYiFVY0RQwUTcHozGlTNZy1WyblB",
-        'endpoint'  => 'https://gateway.zalopay.vn/api/getlistmerchantbanks',
+        'endpoint'  => 'https://openapi.zalopay.vn/v2/create',
         'app_id'    => '2669',
         'app_user'  => 'Wallpaper',
         "key_1"     => "51mCWr1bU8sg6IThT31DcQCiyHaNMbgw",
         "key_2"     => "ql3W79bv0GThJ4djl8JynroiVkdvbpy6",
+        // "api"       => [
+        //     "createorder"       => "https  =>//sandbox.zalopay.com.vn/v001/tpe/createorder",
+        //     "gateway"           => "https  =>//sbgateway.zalopay.vn/pay?order=",
+        //     "quickpay"          => "https  =>//sandbox.zalopay.com.vn/v001/tpe/submitqrcodepay",
+        //     "refund"            => "https  =>//sandbox.zalopay.com.vn/v001/tpe/partialrefund",
+        //     "getrefundstatus"   => "https  =>//sandbox.zalopay.com.vn/v001/tpe/getpartialrefundstatus",
+        //     "getorderstatus"    => "https  =>//sandbox.zalopay.com.vn/v001/tpe/getstatusbyapptransid",
+        //     "getbanklist"       => "https  =>//sbgateway.zalopay.vn/api/getlistmerchantbanks"
+        // ],
+
         "api"       => [
-            "createorder"       => "https  =>//sandbox.zalopay.com.vn/v001/tpe/createorder",
-            "gateway"           => "https  =>//sbgateway.zalopay.vn/pay?order=",
-            "quickpay"          => "https  =>//sandbox.zalopay.com.vn/v001/tpe/submitqrcodepay",
-            "refund"            => "https  =>//sandbox.zalopay.com.vn/v001/tpe/partialrefund",
-            "getrefundstatus"   => "https  =>//sandbox.zalopay.com.vn/v001/tpe/getpartialrefundstatus",
-            "getorderstatus"    => "https  =>//sandbox.zalopay.com.vn/v001/tpe/getstatusbyapptransid",
-            "getbanklist"       => "https  =>//sbgateway.zalopay.vn/api/getlistmerchantbanks"
+            "getbanklist"       => "https://gateway.zalopay.vn/api/getlistmerchantbanks"
         ],
         // "db"    => [
         //     "host"      => "mysql",

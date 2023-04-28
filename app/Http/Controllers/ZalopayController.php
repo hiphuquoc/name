@@ -56,7 +56,6 @@ class ZalopayController extends Controller{
                 
                 $resp   = file_get_contents(config('payment.zalopay.endpoint'), false, $context);
                 $result = json_decode($resp, true);
-                
                 if(!empty($result['order_url'])) $urlRedirect = $result['order_url'];
                 //   foreach ($result as $key => $value) {
                 //     echo "$key: $value<br>";
@@ -69,10 +68,10 @@ class ZalopayController extends Controller{
     private static function getBankcode(){
         $result     = [];
         $config     = [
-            "appid" => config('payment.zalopay.app_id'),
-            "key1"  => config('payment.zalopay.key_1'),
-            "key2"  => config('payment.zalopay.key_2'),
-            "endpoint" => "https://sbgateway.zalopay.vn/api/getlistmerchantbanks"
+            "appid"     => config('payment.zalopay.app_id'),
+            "key1"      => config('payment.zalopay.key_1'),
+            "key2"      => config('payment.zalopay.key_2'),
+            "endpoint"  => config('payment.zalopay.api.getbanklist'),
         ];
         $reqtime = round(microtime(true) * 1000); // miliseconds
         $params = [
