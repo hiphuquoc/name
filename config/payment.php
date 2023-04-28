@@ -15,11 +15,16 @@ return [
         ]
     ],
     'zalopay'   => [
-        'endpoint'  => 'https://sb-openapi.zalopay.vn/v2/create',
+        // 'endpoint'  => 'https://sb-openapi.zalopay.vn/v2/create',
+        // 'app_id'    => '2669',
+        // 'app_user'  => 'Wallpaper',
+        // "key_1"     => "gi1wPy9qc2NA5QakzbDjA1OShlXPiAfG",
+        // "key_2"     => "4HZweYiFVY0RQwUTcHozGlTNZy1WyblB",
+        'endpoint'  => 'https://gateway.zalopay.vn/api/getlistmerchantbanks',
         'app_id'    => '2669',
         'app_user'  => 'Wallpaper',
-        "key_1"     => "gi1wPy9qc2NA5QakzbDjA1OShlXPiAfG",
-        "key_2"     => "4HZweYiFVY0RQwUTcHozGlTNZy1WyblB",
+        "key_1"     => "51mCWr1bU8sg6IThT31DcQCiyHaNMbgw",
+        "key_2"     => "ql3W79bv0GThJ4djl8JynroiVkdvbpy6",
         "api"       => [
             "createorder"       => "https  =>//sandbox.zalopay.com.vn/v001/tpe/createorder",
             "gateway"           => "https  =>//sbgateway.zalopay.vn/pay?order=",
