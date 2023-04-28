@@ -81,7 +81,7 @@ Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.upd
 Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');
 Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main.viewSortCart');
 Route::get('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
-Route::get('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
+Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
 Route::get('/confirm', [ConfirmController::class, 'confirm'])->name('main.confirm');
 Route::get('/handlePaymentMomo', [ConfirmController::class, 'handlePaymentMomo'])->name('main.handlePaymentMomo');
 Route::get('/handlePaymentZalopay', [ConfirmController::class, 'handlePaymentZalopay'])->name('main.handlePaymentZalopay');
