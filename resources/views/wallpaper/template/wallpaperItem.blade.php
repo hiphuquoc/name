@@ -35,7 +35,8 @@
                 $keyIdPrice = 'js_changeOption_'.$tag.$price->id.$file->id;
                 /* lấy ảnh mini */
                 $fileInfo   = pathinfo($file->file_path);
-                $imageSmall = $fileInfo['dirname'].'/'.$fileInfo['filename'].'-mini'.'.'.$fileInfo['extension'];
+                $imageSmall = Storage::url($fileInfo['dirname'].'/'.$fileInfo['filename'].'-small'.'.'.$fileInfo['extension']);
+                
             @endphp
             <div id="{{ $keyIdPrice }}" class="{{ $i==0 ? 'show' : 'hide' }}">
                 <a href="/{{ $product->seo->slug_full }}?product_price_id={{ $price->id }}" class="wallpaperGridBox_item_image">
@@ -45,13 +46,13 @@
 
                         <!-- xử lý loadajax -->
                         @if(!empty($type)&&$type=='ajax')
-                            <img src="{{ Storage::url($file->file_path) }}" alt="{{ $productName }}" title="{{ $productName }}" />
+                            <img src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" />
                         @else 
                             @if($i==0)
-                                <div class="wallpaperGridBox_item_image_backgroundImage lazyload" data-src="{{ Storage::url($file->file_path) }}" style="background:url('{{ Storage::url($imageSmall) }}') no-repeat center center / cover;filter:blur(5px);"></div>
+                                <div class="wallpaperGridBox_item_image_backgroundImage lazyload" data-src="{{ $imageSmall }}" style="background:url('{{ $imageSmall }}') no-repeat center center / cover;filter:blur(5px);"></div>
                             @else 
                                 <!-- các ảnh sau khi nào click mới load -->
-                                <img data-src="{{ Storage::url($file->file_path) }}" alt="{{ $productName }}" title="{{ $productName }}" />
+                                <img data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" />
                             @endif
                         @endif
                         <!-- rating và số lượng đã bán -->
@@ -102,14 +103,14 @@
                             if($loop->index==5) break;
                             /* lấy ảnh mini */
                             $fileInfo   = pathinfo($image->file_path);
-                            $imageMini  = $fileInfo['dirname'].'/'.$fileInfo['filename'].'-mini'.'.'.$fileInfo['extension'];
+                            $imageMini  = Storage::url($fileInfo['dirname'].'/'.$fileInfo['filename'].'-mini'.'.'.$fileInfo['extension']);
                         @endphp
                         <div class="wallpaperGridBox_item_imageList_item {{ $selected }}" onClick="changeOption('{{ $keyIdFile }}');">
                             @if(!empty($type)&&$type=='lazyload')
                                 <!-- lazy load image list -->
-                                <img src="{{ Storage::url($imageMini) }}" alt="loading cart" title="loading cart" />
+                                <img src="{{ $imageMini }}" alt="loading cart" title="loading cart" />
                             @else
-                                <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ Storage::url($imageMini) }}') no-repeat center center / cover;"></div>
+                                <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
                             @endif
                         </div>
                     @endforeach

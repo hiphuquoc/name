@@ -54,11 +54,8 @@
             if (!$(this).hasClass('loaded')) {
                 var distance = $(window).scrollTop() - $(this).offset().top + 900;
                 if (distance > 0) {
-                    var $this = $(this);
-                    $this.attr('src', $this.attr('data-src'));
-                    $this.on('load', function() {
-                        $this.addClass('loaded').removeClass('loading_1').removeAttr('style').css('opacity', 1);
-                    });
+                    $(this).attr('src', $(this).attr('data-src'));
+                    $(this).addClass('loaded').removeClass('loading_1').css('opacity', 1);
                 }
             }
         });
