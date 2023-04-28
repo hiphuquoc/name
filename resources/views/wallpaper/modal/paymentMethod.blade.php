@@ -95,12 +95,12 @@
                     }
                 })
                 if(idPrice!=0&&idProduct!=''&&idMethod!=''){
+                    let token   = "{{ csrf_token() }}";
                     $.ajax({
                         url         : '{{ route("main.paymentNow") }}',
-                        type        : 'post',
+                        type        : 'get',
                         dataType    : 'json',
                         data        : {
-                            "_token"                : "{{ csrf_token() }}",
                             product_info_id         : idProduct,
                             product_price_id        : idPrice,
                             payment_method_info_id  : idMethod,

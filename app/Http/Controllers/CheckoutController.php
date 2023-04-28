@@ -69,42 +69,44 @@ class CheckoutController extends Controller{
     }
 
     public function paymentNow(Request $request){
-        $urlRedirect    = null;
+        $urlRedirect        = null;
         /* tạo đơn hàng */
-        $products       = new \Illuminate\Database\Eloquent\Collection;
-        $idPrice        = $request->get('product_price_id');
-        $tmp            = Product::select('*')
+        $products           = new \Illuminate\Database\Eloquent\Collection;
+        if(!empty($request->get('product_price_id'))){
+            $idPrice        = $request->get('product_price_id');
+            $tmp            = Product::select('*')
                             ->where('id', $request->get('product_info_id'))
                             ->with(['prices' => function($query) use($idPrice) {
                                 $query->where('id', $idPrice);
                             }])
                             ->first();
-        $products[]     = $tmp;
-        $insertOrder    = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $products);
-        $insertOrder['payment_type'] = 'payment_now';
-        $idOrder        = Order::insertItem($insertOrder);
-        /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
-        OrderProduct::insertItem([
-            'order_info_id'     => $idOrder,
-            'product_info_id'   => $request->get('product_info_id'),
-            'product_price_id'  => $request->get('product_price_id'),
-            'quantity'          => 1,
-            'price'             => $tmp->prices[0]->price
-        ]);
-        /* lấy ngược lại thông tin order để xử lý cho chính xác */
-        $orderInfo      = Order::select('*')
-                            ->where('id', $idOrder)
-                            ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
-                            ->first();
-        if(!empty($orderInfo->paymentMethod->code)){
-            /* tạo yêu cầu thanh toán => nếu zalo pay */
-            if($orderInfo->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($orderInfo);
-            /* tạo yêu cầu thanh toán => nếu momo (ghi chú: ở momo sẽ redirect thẳng) */
-            if($orderInfo->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($orderInfo);
+            $products[]     = $tmp;
+            $insertOrder    = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $products);
+            $insertOrder['payment_type'] = 'payment_now';
+            $idOrder        = Order::insertItem($insertOrder);
+            /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
+            OrderProduct::insertItem([
+                'order_info_id'     => $idOrder,
+                'product_info_id'   => $request->get('product_info_id'),
+                'product_price_id'  => $request->get('product_price_id'),
+                'quantity'          => 1,
+                'price'             => $tmp->prices[0]->price
+            ]);
+            /* lấy ngược lại thông tin order để xử lý cho chính xác */
+            $orderInfo      = Order::select('*')
+                                ->where('id', $idOrder)
+                                ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
+                                ->first();
+            if(!empty($orderInfo->paymentMethod->code)){
+                /* tạo yêu cầu thanh toán => nếu zalo pay */
+                if($orderInfo->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($orderInfo);
+                /* tạo yêu cầu thanh toán => nếu momo (ghi chú: ở momo sẽ redirect thẳng) */
+                if($orderInfo->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($orderInfo);
+            }
+            /* trả về đường dẫn để chuyển hướng */
+            $reponse['url'] = $urlRedirect;
+            return json_encode($reponse);
         }
-        /* trả về đường dẫn để chuyển hướng */
-        $reponse['url'] = $urlRedirect;
-        return json_encode($reponse);
     }
 
 }

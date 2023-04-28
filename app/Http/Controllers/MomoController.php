@@ -15,7 +15,7 @@ class MomoController extends Controller{
                 $partnerCode    = config('payment.momo.partner_code');
                 $accessKey      = config('payment.momo.access_key');
                 $secretKey      = config('payment.momo.secret_key');
-                $orderInfo      = config('payment.momo.action');
+                $orderInfo      = 'Thanh toán đơn hàng '.$infoOrder->code;
                 $orderId        = $infoOrder->code ?? time();
                 /* đường dẫn sau khi thanh toán thành công */
                 $redirectUrl    = route('main.handlePaymentMomo');

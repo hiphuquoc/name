@@ -5,11 +5,11 @@ return [
     'momo'      => [
         'action'            => 'Thanh toán qua Momo',
         'partner_name'      => 'Name.com.vn',
-        'endpoint_create'   => 'https://test-payment.momo.vn/v2/gateway/api/create',
-        'store_id'          => 'MomoTestStore',
+        'endpoint_create'   => 'https://payment.momo.vn/v2/gateway/api/create',
+        'store_id'          => 'Name.com.vn',
         'partner_code'      => 'MOMOLNCV20230412',
-        'access_key'        => 'p05z68oqDjIh0rF3',
-        'secret_key'        => 'd2KCebzFK9DPONFVDiAJMAgeY88B7if9',
+        'access_key'        => 'CnX75vqGxFVp0u9o',
+        'secret_key'        => 'eZzLBvX0RZHhzmlAO1VCU0nmB5JBSAvw',
         'payment_success_code'  => [
             0, 9000
         ]
