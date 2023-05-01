@@ -12,6 +12,7 @@ use App\Http\Controllers\ConfirmController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController as OrderPublic;
 use App\Http\Controllers\PageController as PagePublic;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\SitemapController;
@@ -105,7 +106,16 @@ Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetSho
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
+Route::post('/loginCustomer', [LoginController::class, 'loginCustomer'])->name('admin.loginCustomer');
+Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 Route::get('/createUser', [LoginController::class, 'create'])->name('admin.createUser');
+/* my account */
+Route::middleware('auth')->group(function (){
+    Route::prefix('tai-khoan')->group(function(){
+        Route::get('/tai-xuong-cua-toi', [AccountController::class, 'orders'])->name('main.account.orders');
+
+    });
+});
 
 Route::middleware('auth', 'role:admin')->group(function (){
     Route::prefix('he-thong')->group(function(){

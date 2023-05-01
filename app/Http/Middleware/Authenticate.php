@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             session()->flash('error', 'Bạn cần đăng nhập trước khi truy cập vào hệ thống!');
-            return route('admin.loginForm');
+            return route('main.home');
         }
     }
 }

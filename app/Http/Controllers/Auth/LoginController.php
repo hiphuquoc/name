@@ -43,8 +43,9 @@ class LoginController extends Controller
     
     public function loginAdmin(Request $request){
         $flag       = false;
-        $message    = 'Email và Password đăng nhập không hợp lệ!';
+        $message    = 'Email và Password không hợp lệ!';
         $dataForm   = [];
+        dd($request->all());
         foreach($request->get('data') as $value){
             $dataForm[$value['name']] = $value['value'];
         }
@@ -64,8 +65,22 @@ class LoginController extends Controller
         return json_encode($result);
     }
 
-    public function logout(){
+    public function loginCustomer(Request $request){
+        $flag       = false;
+        $message    = 'Email và Password không hợp lệ!';
+        $dataForm   = [];
+        foreach($request->get('data') as $value){
+            $dataForm[$value['name']] = $value['value'];
+        }
+        /* đăng nhập */
+        if(Auth::attempt($dataForm)) $flag   = true;
+        $result['flag']     = $flag;
+        $result['message']  = $message;
+        return json_encode($result);
+    }
+
+    public static function logout(){
         Auth::logout();
-        return redirect()->route('admin.showLoginForm');
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 }

@@ -7,6 +7,7 @@
         </div>
         
         <div class="modalLoginFormCustomerBox_box_right">
+            <form id="formLogin" method="get" style="width:100%;">
             <div class="loginFormCustomer">
                 <div class="loginFormCustomer_title">
                     Đăng nhập {{ config('main.company_name') }}
@@ -17,8 +18,8 @@
                         <div class="formBox">
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
-                                    <label for="login_name">Tên đăng nhập</label>
-                                    <input type="text" id="login_name" name="login_name" required />
+                                    <label for="email">Tên đăng nhập</label>
+                                    <input type="text" id="email" name="email" required />
                                 </div>
                             </div>
                             <div class="formBox_item">
@@ -27,17 +28,21 @@
                                     <input type="password" id="password" name="password" autocomplete="off" required />
                                 </div>
                             </div>
-                            <div class="formBox_item">
+                            <div class="formBox_item" style="display:flex;justify-content:space-between;align-item:flex-end;">
                                 <label class="checkBox" for="remember">
                                     <input type="checkbox" id="remember" name="remember" />
                                     <div>Ghi nhớ tôi</div>
                                 </label>
+                                <div id="noticeLogin" class="noticeLogin"> 
+                                    <!-- thông báo đăng nhập -->
+                                    {{-- Tên đăng nhập và mật khẩu không khớp! --}}
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="loginFormCustomer_body_item">
                         <!-- button -->
-                        <button type="button" class="button">Đăng nhập</div>
+                        <button type="button" class="button" onClick="submitFormLogin('formLogin');">Đăng nhập</div>
                     </div>
                     <div class="loginFormCustomer_body_item">
                         Bạn chưa có mật khẩu? <a href="#">Đăng ký ngay</a>
@@ -83,6 +88,7 @@
                 </div>
                 
             </div>
+            </form>
         </div>
     </div>
     
@@ -103,6 +109,54 @@
                 $('body').css('overflow', 'unset');
                 $('#js_openCloseModal_blur').removeClass('blurBackground');
             }
+        }
+    </script>
+    <script type="text/javascript">
+        /* submit form */
+        function submitFormLogin(idForm){
+            const error     = validateFormLogin(idForm);
+            if(error.length==0){
+                /* tải loading */ 
+                // loadLoading(idForm);
+                /* lấy dữ liệu truyền đi */
+                var data    = $('#'+idForm).serializeArray();
+                $.ajax({
+                    url         : '{{ route("admin.loginCustomer") }}',
+                    type        : 'post',
+                    dataType    : 'json',
+                    data        : {
+                        '_token'    : '{{ csrf_token() }}',
+                        data        : data
+                    },
+                    success     : function(response){
+                        if(response.flag==true){
+                            window.location.href = '';
+                        }else {
+                            $('#noticeLogin').html(response.message);
+                        }
+                    }
+                });
+            }else {
+                $.each(error, function(index, value){
+                    const input = $('#'+idForm).find('[name='+value.name+']');
+                    input.attr('placeholder', value.notice).css('border', '1px solid red');
+                });
+            }
+        }
+        /* validate form */
+        function validateFormLogin(idForm){
+            let error       = [];
+            /* input required không được bỏ trống */
+            $('#'+idForm).find('input[required]').each(function(){
+                /* đưa vào mảng */
+                if($(this).val()==''){
+                    const errorItem = [];
+                    errorItem['name']       = $(this).attr('name');
+                    errorItem['notice']     = 'Không được để trống trường này';
+                    error.push(errorItem);
+                }
+            });
+            return error;
         }
     </script>
 {{-- @endpush --}}
