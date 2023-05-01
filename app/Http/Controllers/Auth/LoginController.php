@@ -45,7 +45,6 @@ class LoginController extends Controller
         $flag       = false;
         $message    = 'Email và Password không hợp lệ!';
         $dataForm   = [];
-        dd($request->all());
         foreach($request->get('data') as $value){
             $dataForm[$value['name']] = $value['value'];
         }
