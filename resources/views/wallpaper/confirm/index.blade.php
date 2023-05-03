@@ -71,7 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="wallpaperSourceGrid">
+                        {{-- <div class="wallpaperSourceGrid">
                             @php
                                 $i = 0;
                             @endphp
@@ -101,7 +101,7 @@
                                 @csrf
                                 <input id="js_downloadSource_input" type="hidden" name="folder_path" value="" />
                             </form>
-                        </div>
+                        </div> --}}
 
                     </div>
                     {{-- <div class="pageCartBox_right">
