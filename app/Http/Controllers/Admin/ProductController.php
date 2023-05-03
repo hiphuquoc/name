@@ -234,7 +234,12 @@ class ProductController extends Controller {
         $params['paginate'] = $viewPerPage;
         $list               = Product::getList($params);
         $brands             = Brand::all();
-        $categories         = Category::all();
+        $categories         = Category::select('*')
+                                ->whereHas('products', function(){
+                                    /* có sản phẩm mới lấy ra */
+                                })
+                                ->with('products')
+                                ->get();
         return view('admin.product.list', compact('list', 'brands', 'categories', 'viewPerPage', 'params'));
     }
 

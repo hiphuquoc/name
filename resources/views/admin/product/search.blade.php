@@ -32,7 +32,7 @@
                                 $selected = null;
                                 if(!empty($params['search_category'])&&$params['search_category']==$category->id) $selected = ' selected';
                             @endphp
-                            <option value="{{ $category->id }}" {{ $selected }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ $selected }}>{{ $category->name }} ({{ $category->products->count() }})</option>
                         @endforeach
                     </select>
                 </div>

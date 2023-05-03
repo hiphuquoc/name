@@ -24,7 +24,7 @@
                             <td class="text-center">{{ ($loop->index + 1) }}</td>
                             <td>
                                 <div class="oneLine">
-                                    <strong>Tiêu đề:</strong> {{ $item->name ?? $item->seo->title ?? null }}
+                                    <strong>Tiêu đề:</strong> {{ $item->name ?? $item->seo->title ?? null }} (<span style="font-weight:bold;color:#E74C3C;">{{ $item->code }}</span>)
                                 </div>
                                 <div class="oneLine">
                                     <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
