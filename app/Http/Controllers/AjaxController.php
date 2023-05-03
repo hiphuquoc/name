@@ -39,14 +39,16 @@ class AjaxController extends Controller {
             $keySearch          = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
             $products           = Product::select('product_info.*')
                 ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                ->where('name', 'like', '%'.$keySearch.'%')
+                ->where('code', 'like', '%'.$keySearch.'%')
+                ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->skip(0)
                 ->take(6)
                 ->with('seo')
                 ->orderBy('seo.ordering', 'DESC')
                 ->get();
             $count              = Product::select('product_info.*')
-                ->where('name', 'like', '%'.$keySearch.'%')
+                ->where('code', 'like', '%'.$keySearch.'%')
+                ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->count();
             $response           = null;
             if(!empty($products)&&$products->isNotEmpty()){

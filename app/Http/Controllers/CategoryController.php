@@ -73,7 +73,8 @@ class CategoryController extends Controller {
             $requestLoad    = $request->get('request_load') ?? 5;
             $keySearch      = $request->get('key_search') ?? null;
             $products       = Product::select('*')
-                                ->where('name', 'like', '%'.$keySearch.'%')
+                                ->where('code', 'like', '%'.$keySearch.'%')
+                                ->orWhere('name', 'like', '%'.$keySearch.'%')
                                 ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
                                 ->orderBy('id', 'DESC')
                                 ->skip($request->get('loaded'))

@@ -54,14 +54,16 @@ class PageController extends Controller{
         if(!empty($item)){
             /* danh sách product */
             $products       =  Product::select('*')
-                ->where('name', 'like', '%'.$keySearch.'%')
+                ->where('code', 'like', '%'.$keySearch.'%')
+                ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
                 ->orderBy('id', 'DESC')
                 ->skip(0)
                 ->take(5)
                 ->get();
             $totalProduct   =  Product::select('product_info.*')
-                ->where('name', 'like', '%'.$keySearch.'%')
+                ->where('code', 'like', '%'.$keySearch.'%')
+                ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->count();
             /* breadcrumb */
             $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full);

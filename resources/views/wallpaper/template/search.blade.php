@@ -1,11 +1,12 @@
 
+<form action="{{ route('main.searchProduct') }}" method="GET">
 <div class="searchViewBefore">
     <div class="searchViewBefore_input">
         <!-- value = null không lưu giá trị search cũ -->
         <input id="searchProductAjax_input" type="text" name="key_search" placeholder="Tìm kiếm" value="" onkeyup="searchProductAjax(this)" autocomplete="off" />
         
-        <button type="button" class="button" aria-label="tìm kiếm sản phẩm">
-            <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
+        <button type="submit" class="button" aria-label="tìm kiếm sản phẩm">
+            <img src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
         </button>
     </div>
     <div id="js_searchProductAjax_idWrite" class="searchViewBefore_selectbox">
@@ -18,6 +19,7 @@
     </div>
     <div class="searchViewBefore_background" onClick="closeBoxSearchMobile();"></div>
 </div>
+</form>
 @push('scriptCustom')
     <script type="text/javascript">
         function toggleSearchMobile(){
