@@ -21,7 +21,8 @@ class Product extends Model {
         $result     = self::select('*')
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->where('name', 'like', '%'.$params['search_name'].'%');
+                            $query->where('code', 'like', '%'.$params['search_name'].'%')
+                            ->orWhere('name', 'like', '%'.$params['search_name'].'%');
                         })
                         /* tìm theo nhãn hàng */
                         ->when(!empty($params['search_brand']), function($query) use($params){
