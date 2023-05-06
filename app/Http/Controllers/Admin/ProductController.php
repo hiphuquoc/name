@@ -20,7 +20,9 @@ use App\Models\RelationCategoryProduct;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\SourceController;
-use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller {
 
@@ -109,6 +111,8 @@ class ProductController extends Controller {
             /* update page */
             $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'product_info', $dataPath);
             Seo::updateItem($idSeo, $insertSeo);
+            
+
             /* insert product_info */
             $insertProduct      = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
             Product::updateItem($idProduct, $insertProduct);
