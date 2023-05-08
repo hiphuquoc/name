@@ -4,7 +4,8 @@
 <script type="text/javascript">
     $(window).ready(function(){
         /* check để xem có cookie csrf chưa (do lần đầu truy cập trang không có lỗi google login) */
-        checkToSetCsrfFirstTime();
+        // checkToSetCsrfFirstTime();
+        
         /* lazyload ảnh lần đầu */
         lazyLoad();
         /* lazyload ảnh khi scroll */
