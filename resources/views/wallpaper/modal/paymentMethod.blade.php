@@ -23,9 +23,9 @@
                 
                 <div class="paymentMethodBox">
                     @foreach($paymentMethods as $method)
-                        @php
+                        {{-- @php
                             if($method->code=='zalopay') continue;
-                        @endphp
+                        @endphp --}}
                         <div class="paymentMethodBox_item" onClick="paymentNow(this, '{{ $method->id }}');">
                             <div class="paymentMethodBox_item_logo">
                                 <img src="{{ Storage::url($method->icon) }}" alt="{{ $method->name ?? null }}" title="{{ $method->name ?? null }}" />
