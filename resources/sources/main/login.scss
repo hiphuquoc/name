@@ -127,11 +127,11 @@
     @media(max-width: 577px){
         &_box {
             &_head {
-                margin-bottom: 0.75rem;
+                margin-bottom: 1rem;
                 font-size: 1.05rem;
             }
             &_body {
-                margin-bottom: 1rem;
+                margin-bottom: 1rem !important;
                 &_item {
                     flex-wrap: wrap;
                     > * {

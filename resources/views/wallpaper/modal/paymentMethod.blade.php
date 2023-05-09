@@ -46,6 +46,9 @@
                 </div>
             </div> --}}
         </form>
+        <div class="modalBox_box_close">
+            <i class="fa-sharp fa-solid fa-xmark"></i>
+        </div>
     </div>
 </div>
 @push('scriptCustom')
