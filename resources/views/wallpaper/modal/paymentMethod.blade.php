@@ -46,7 +46,7 @@
                 </div>
             </div> --}}
         </form>
-        <div class="modalBox_box_close">
+        <div class="modalBox_box_close" onClick="openCloseModal('modalPaymentMethod');">
             <i class="fa-sharp fa-solid fa-xmark"></i>
         </div>
     </div>
