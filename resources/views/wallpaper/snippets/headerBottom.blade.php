@@ -1,5 +1,15 @@
 <div class="headerBottom">
-    <a class="headerBottom_item" href="https://zalo.me/0968617168">
+    @php
+        $contacts               = config('main.contacts');
+        $phoneCustomerService   = null;
+        foreach($contacts as $contact){
+            if($contact['type']=='customer service') {
+                $phoneCustomerService = $contact['phone'];
+                break;
+            }
+        }
+    @endphp
+    <a class="headerBottom_item" href="https://zalo.me/{{ $phoneCustomerService }}">
         <div class="headerBottom_item_icon">
             <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ Name.com.vn" title="Thông tin hỗ trợ Name.com.vn">
         </div>
@@ -7,7 +17,7 @@
             Hỗ trợ
         </div>
     </a>
-    <a class="headerBottom_item" href="/huong-dan">
+    <a class="headerBottom_item" href="#">
         <div class="headerBottom_item_icon">
             <img src="{{ Storage::url('images/svg/book-open-cover.svg') }}" alt="mua ngay" title="mua ngay" />
         </div>

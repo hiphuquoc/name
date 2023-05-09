@@ -1,10 +1,36 @@
 @if(!empty($user))
-    <div class="headerBottom_item">
+    <div class="headerBottom_item" onClick="toggleMenuListMobile();">
         <div class="headerBottom_item_icon">
             <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="mua ngay" title="mua ngay" style="width:22px;" />
         </div>
         <div class="headerBottom_item_text maxLine_1">
             {{ $user->name ?? 'Tài khoản' }}
+
+
+            <div class="headerBottom_item_text_modal">
+                <a href="https://name.dev/tai-khoan/tai-xuong-cua-toi" class="loginBox_list_item">
+                    <i class="fa-solid fa-download"></i>
+                    <div>Tải xuống của tôi</div>
+                </a> 
+                <a href="https://name.dev/logout" class="loginBox_list_item">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <div>Đăng xuất</div>
+                </a>
+            </div>
+            <div class="headerBottom_item_text_background"></div>
+            <script type="text/javascript">
+                function toggleMenuListMobile(){
+                    const flagShow = $('.headerBottom_item_text_modal').css('display');
+                    if(flagShow=='none'){
+                        $('.headerBottom_item_text_modal').css('display', 'block');
+                        $('.headerBottom_item_text_background').css('display', 'block');
+                    }else {
+                        $('.headerBottom_item_text_modal').css('display', 'none');
+                        $('.headerBottom_item_text_background').css('display', 'none');
+                    }
+                }
+
+            </script>
         </div>
     </div>
 @else 

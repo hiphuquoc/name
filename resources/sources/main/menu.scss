@@ -609,6 +609,31 @@ $width_normalMenu : 250px;
             aspect-ratio: 1/1;
             opacity: 0.5;
         }
+        &_text {
+            &_modal {
+                display: none;
+                width: 180px;
+                background: #2d3848;
+                color: #c0d0f1cc;
+                position: fixed;
+                bottom: 57px;
+                right: 0;
+                z-index: 1;
+                border-radius: 7px 7px 0 0;
+                border-top: 2px solid #1a202c;
+                box-shadow: 1px -1px 10px #1a202c;
+                overflow: hidden;
+            }
+            &_background {
+                display: none;
+                position: fixed;
+                bottom: 55px;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                @include colorOpacity('background', $colorBackgroundLv3, 0.9);
+            }
+        }
     }
     @media(max-width: 1199px){
         display: flex;

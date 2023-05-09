@@ -342,13 +342,13 @@
             }
         }
     }
-    @media(max-width: 577px){
-        > * {
-            &:not(:first-child){
-                margin-top: 0.75rem;
-            }
-        }
-    }
+    // @media(max-width: 577px){
+    //     > * {
+    //         &:not(:first-child){
+    //             margin-top: 0.75rem;
+    //         }
+    //     }
+    // }
 }
 .formBox {
     display: flex;

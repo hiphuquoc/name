@@ -7,7 +7,7 @@ return [
     'founder_address'       => '443 Mạc Cửu, Rạch Giá',
     'founding'              => '2023-03-30',
     'company_name'          => 'Name.com.vn',
-    'hotline'               => '08.6868.4868',
+    'hotline'               => '0968.6171.68',
     'email'                 => 'anhnendienthoai@gmail.com',
     'address'               => '443 Mạc Cửu, Rạch Giá',
     'company_description'   => 'Giới thiệu dịch vụ',
@@ -16,7 +16,7 @@ return [
     'contacts'          => [
         [
             'type'      => 'customer service',
-            'phone'     => '0868684868'
+            'phone'     => '0968617168'
         ],
         [
             'type'      => 'technical support',
@@ -24,7 +24,7 @@ return [
         ],
         [
             'type'      => 'sales',
-            'phone'     => '0868684868'
+            'phone'     => '0968617168'
         ]
     ],
     'products'          => [
