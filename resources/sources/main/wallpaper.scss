@@ -1224,7 +1224,7 @@
 }
 .shareSocialBox {
     position: fixed;
-    bottom: 70px;
+    bottom: 60px;
     right: 0.75rem;
     display: flex;
     flex-direction: column;
@@ -1286,7 +1286,7 @@
         }
     }
     @media(max-width: 1199px){
-        bottom: 120px;
+        bottom: 110px;
         &_item {
             &_icon {
                 &.twitter {
@@ -1298,8 +1298,24 @@
             }
         }
     }
+    @media(max-width: 1023px){
+        right: unset;
+        left: 10px;
+        bottom: 55px;
+        align-items: flex-start;
+        // &_item {
+        //     &_icon {
+        //         &.twitter {
+        //             display: none;
+        //         }
+        //     }
+        //     &_text {
+        //         font-size: 0.65rem;
+        //     }
+        // }
+    }
     @media(max-width: 766px){
-        bottom: 105px;
+        // bottom: 105px;
         &_text {
             font-size: 0.6rem;
         }
