@@ -9,7 +9,7 @@
                 <i class="fa-solid fa-key"></i>
                 <div>Đổi mật khẩu</div>
             </div>  --}}
-            <a href="{{ route('main.account.orders')}}" class="loginBox_list_item">
+            <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
                 <i class="fa-solid fa-download"></i>
                 <div>Tải xuống của tôi</div>
             </a> 
