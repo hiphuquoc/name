@@ -1010,6 +1010,12 @@
         &_text {
             display: none;
         }
+        &_list {
+            display: none !important;
+        }
+        &_background {
+            display: none !important;
+        }
     }
 }
 

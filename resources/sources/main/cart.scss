@@ -494,6 +494,11 @@
             }
         }
     }
+    @media(max-width: 766px){
+        &_box {
+            margin: 0 0.75rem;
+        }
+    }
 }
 .actionPageConfirm {
     display: flex;
