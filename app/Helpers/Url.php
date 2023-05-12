@@ -5,14 +5,22 @@ namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Seo;
+use App\Models\EnSeo;
 
 class Url {
 
     public static function checkUrlExists($slug){
+        /* check ngôn ngữ Việt */
         $infoPage       = Seo::select('*')
                             ->where('slug', $slug)
                             ->first();
         if(!empty($infoPage->slug_full)) return $infoPage;
+        /* check ngôn ngữ Anh */
+        $infoPage       = EnSeo::select('*')
+                            ->where('slug', $slug)
+                            ->first();
+        if(!empty($infoPage->slug_full)) return $infoPage;
+        /* rỗng */
         return null;
     }
 

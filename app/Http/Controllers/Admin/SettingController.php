@@ -11,8 +11,8 @@ use App\Models\Theme;
 class SettingController extends Controller {
 
     public function view(Request $request){
-        if(!empty($request->get('name')&&!empty($request->get('default')))){
-            Cookie::queue($request->get('name'), $request->get('default'), 86400);
+        if(!empty($request->get('name'))&&!empty($request->get('default'))){
+            $flag = \App\Http\Controllers\Admin\CookieController::set($request->get('name'), $request->get('default'), 86400);
         }
     }
 

@@ -43,7 +43,9 @@ return [
         'contentPage'       => 'public/contents/pages/',
         'contentBlog'       => 'public/contents/blogs/',
         'contentCategory'   => 'public/contents/categories/',
-        'contentStyle'      => 'public/contents/styles/'
+        'contentStyle'      => 'public/contents/styles/',
+
+        'enContentCategory' => 'public/contents/enCategories/',
     ],
     'filter'    => [
         'price' => [

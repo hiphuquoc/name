@@ -12,6 +12,9 @@ class Category extends Model {
         'seo_id',
         'name', 
         'description',
+        'en_seo_id',
+        'en_name',
+        'en_description',
         'icon'
     ];
     public $timestamps = true;
@@ -60,7 +63,7 @@ class Category extends Model {
                         ->whereHas('seo', function($query){
                             $query->where('level', 1);
                         })
-                        ->with('seo', 'products')
+                        ->with('seo', 'en_seo', 'products')
                         ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                         ->orderBy('seo.ordering', 'DESC')
                         ->get();
@@ -78,7 +81,7 @@ class Category extends Model {
                                     ->whereHas('seo', function($query) use($idPage){
                                         $query->where('parent', $idPage);
                                     })
-                                    ->with('seo')
+                                    ->with('seo', 'en_seo', 'products')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->orderBy('seo.ordering', 'DESC')
                                     ->get();
@@ -93,6 +96,10 @@ class Category extends Model {
 
     public function seo() {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
+    }
+
+    public function en_seo() {
+        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
     }
 
     public function files(){

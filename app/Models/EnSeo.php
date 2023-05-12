@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Seo extends Model {
+class EnSeo extends Model {
     use HasFactory;
-    protected $table        = 'seo';
+    protected $table        = 'en_seo';
     protected $fillable     = [
         'title', 
         'description', 
@@ -30,7 +30,7 @@ class Seo extends Model {
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new Seo();
+            $model      = new EnSeo();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -88,19 +88,19 @@ class Seo extends Model {
         return $url;
     }
 
-    public function keywords() {
-        return $this->hasMany(\App\Models\Keyword::class, 'seo_id', 'id');
-    }
+    // public function keywords() {
+    //     return $this->hasMany(\App\Models\Keyword::class, 'seo_id', 'id');
+    // }
 
-    public function contentspin() {
-        return $this->hasOne(\App\Models\Contentspin::class, 'seo_id', 'id');
-    }
+    // public function contentspin() {
+    //     return $this->hasOne(\App\Models\Contentspin::class, 'seo_id', 'id');
+    // }
 
-    public function checkSeos() {
-        return $this->hasMany(\App\Models\CheckSeo::class, 'seo_id', 'id');
-    }
+    // public function checkSeos() {
+    //     return $this->hasMany(\App\Models\CheckSeo::class, 'seo_id', 'id');
+    // }
 
-    public function user(){
-        return $this->hasOne(\App\Models\User::class, 'id', 'rating_author_name');
-    }
+    // public function user(){
+    //     return $this->hasOne(\App\Models\User::class, 'id', 'rating_author_name');
+    // }
 }

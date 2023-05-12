@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('brand_id');
             $table->string('code', 30);
             $table->text('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('sold')->default(0);
             $table->timestamps();
         });

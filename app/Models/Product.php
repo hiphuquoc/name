@@ -10,9 +10,12 @@ class Product extends Model {
     protected $table        = 'product_info';
     protected $fillable     = [
         'seo_id',
-        'code',
         'name', 
         'description',
+        'en_seo_id',
+        'en_name',
+        'en_description',
+        'code',
         'sold'
     ];
     public $timestamps = true;
@@ -40,7 +43,7 @@ class Product extends Model {
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'product_info');
                         }])
-                        ->with('seo', 'prices.files', 'prices.sources', 'contents', 'brand', 'categories')
+                        ->with('seo', 'en_seo', 'prices.files', 'prices.sources', 'contents', 'brand', 'categories')
                         ->paginate($params['paginate']);
         return $result;
     }
@@ -68,6 +71,10 @@ class Product extends Model {
 
     public function seo() {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
+    }
+
+    public function en_seo() {
+        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
     }
 
     public function files(){

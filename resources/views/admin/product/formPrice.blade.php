@@ -18,6 +18,14 @@
                     </div>
                     <div class="flexBox_item">
                         <div class="formBox_full_item">
+                            <label class="form-label inputRequired" for="en_name">Title (En)</label>
+                            <input class="form-control" name="en_name" type="text" value="{{ $price['en_name'] ?? null }}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="formBox_full flexBox">
+                    <div class="flexBox_item">
+                        <div class="formBox_full_item">
                             <label class="form-label inputRequired" for="price">Giá bán</label>
                             <input class="form-control" name="price" type="number" value="{{ $price['price'] ?? null }}" required />
                         </div>

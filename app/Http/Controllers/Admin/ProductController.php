@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Helpers\Upload;
 use App\Http\Requests\ProductRequest;
 use App\Models\Seo;
+use App\Models\EnSeo;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
@@ -33,6 +34,7 @@ class ProductController extends Controller {
     public function create(ProductRequest $request){
         try {
             DB::beginTransaction();
+            $keyTable           = 'product_info';
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -40,10 +42,12 @@ class ProductController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* insert page */
-            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'product_info', $dataPath);
-            $idSeo              = Seo::insertItem($insertSeo);
+            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
+            $seoId              = Seo::insertItem($insertSeo);
+            $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+            $enSeoId            = EnSeo::insertItem($insertEnSeo);
             /* insert product_info */
-            $insertProduct      = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
+            $insertProduct      = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $seoId, $enSeoId);
             $idProduct          = Product::insertItem($insertProduct);
             /* insert product_content */
             if(!empty($request->get('contents'))){
@@ -52,7 +56,9 @@ class ProductController extends Controller {
                         ProductContent::insertItem([
                             'product_info_id'   => $idProduct,
                             'name'              => $content['name'],
-                            'content'           => $content['content']
+                            'content'           => $content['content'],
+                            'en_name'           => $content['en_name'],
+                            'en_content'        => $content['en_content']
                         ]);
                     }
                 }
@@ -74,7 +80,7 @@ class ProductController extends Controller {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idProduct,
-                    'relation_table'    => 'product_info',
+                    'relation_table'    => $keyTable,
                     'name'              => $name
                 ];
                 SliderController::upload($request->file('slider'), $params);
@@ -100,8 +106,10 @@ class ProductController extends Controller {
     public function update(ProductRequest $request){
         try {
             DB::beginTransaction();
-            $idSeo              = $request->get('seo_id');
+            $seoId              = $request->get('seo_id');
+            $enSeoId            = $request->get('en_seo_id');
             $idProduct          = $request->get('product_info_id');
+            $keyTable           = 'product_info';
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -109,12 +117,17 @@ class ProductController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update page */
-            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'product_info', $dataPath);
-            Seo::updateItem($idSeo, $insertSeo);
-            
-
+            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
+            Seo::updateItem($seoId, $insertSeo);
+            if(!empty($enSeoId)){
+                $updateEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+                EnSeo::updateItem($enSeoId, $updateEnSeo);
+            }else {
+                $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+                $enSeoId            = EnSeo::insertItem($insertEnSeo);
+            }
             /* insert product_info */
-            $insertProduct      = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
+            $insertProduct      = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $seoId, $enSeoId);
             Product::updateItem($idProduct, $insertProduct);
             /* insert product_content */
             ProductContent::select('*')
@@ -126,7 +139,9 @@ class ProductController extends Controller {
                         ProductContent::insertItem([
                             'product_info_id'   => $idProduct,
                             'name'              => $content['name'],
-                            'content'           => $content['content']
+                            'content'           => $content['content'],
+                            'en_name'           => $content['en_name'],
+                            'en_content'        => $content['en_content']
                         ]);
                     }
                 }
@@ -183,7 +198,7 @@ class ProductController extends Controller {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idProduct,
-                    'relation_table'    => 'product_info',
+                    'relation_table'    => $keyTable,
                     'name'              => $name
                 ];
                 SliderController::upload($request->file('slider'), $params);
@@ -214,7 +229,7 @@ class ProductController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'product_info');
                                 }])
-                                ->with('seo', 'contents', 'prices.files', 'categories', 'brand')
+                                ->with('seo', 'en_seo', 'contents', 'prices.files', 'categories', 'brand')
                                 ->first();
         $categories         = Category::all();
         $brands             = Brand::all();

@@ -21,6 +21,22 @@
         <div class="formBox_column2_item_row">
             <div class="inputWithNumberChacractor">
                 <span data-toggle="tooltip" data-placement="top" title="
+                    Đây là Tiêu đề được hiển thị trên website (Bản tiếng Anh)
+                ">
+                    <i class="explainInput" data-feather='alert-circle'></i>
+                    <label class="form-label inputRequired" for="en_name">Title (En)</label>
+                </span>
+                <div class="inputWithNumberChacractor_count" data-charactor="en_name">
+                    {{ !empty($item->en_name) ? mb_strlen($item->en_name) : 0 }}
+                </div>
+            </div>
+            <input type="text" class="form-control" id="en_name" name="en_name" value="{{ old('en_name') ?? $item->en_name ?? null }}" required>
+            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_column2_item_row">
+            <div class="inputWithNumberChacractor">
+                <span data-toggle="tooltip" data-placement="top" title="
                     Đây là Mô tả được hiển thị trên website
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>
@@ -31,6 +47,22 @@
                 </div>
             </div>
             <textarea class="form-control" id="description"  name="description" rows="5" required>{{ old('description') ?? $item->description ?? null }}</textarea>
+            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_column2_item_row">
+            <div class="inputWithNumberChacractor">
+                <span data-toggle="tooltip" data-placement="top" title="
+                    Đây là Mô tả được hiển thị trên website
+                ">
+                    <i class="explainInput" data-feather='alert-circle'></i>
+                    <label class="form-label inputRequired" for="en_description">Desription (En)</label>
+                </span>
+                <div class="inputWithNumberChacractor_count" data-charactor="en_description">
+                    {{ !empty($item->en_description) ? mb_strlen($item->en_description) : 0 }}
+                </div>
+            </div>
+            <textarea class="form-control" id="en_description"  name="en_description" rows="5" required>{{ old('en_description') ?? $item->en_description ?? null }}</textarea>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         <!-- One Row -->

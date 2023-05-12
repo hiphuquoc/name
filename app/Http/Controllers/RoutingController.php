@@ -44,6 +44,7 @@ class RoutingController extends Controller{
                 echo $xhtml;
             }else {
                 switch($checkExists->type){
+                    /* ===== Ngôn ngữ Việt ===== */
                     case 'product_info':
                         $flagMatch      = true;
                         /* thông tin sản phẩm */
@@ -169,80 +170,6 @@ class RoutingController extends Controller{
                                             ->groupBy('type.id');
                         $xhtml          = view('wallpaper.page.index', compact('item', 'breadcrumb', 'content', 'typePages'))->render();
                         break;
-                    // /* ===== TOUR CATEGORY INFO */
-                    // case 'category_blog_info':
-                    //     $flagMatch          = true;
-                    //     $item               = CategoryBlog::select('*')
-                    //                             ->whereHas('seo', function($q) use ($checkExists){
-                    //                                 $q->where('slug', $checkExists->slug);
-                    //                             })
-                    //                             ->with('seo')
-                    //                             ->first();
-                    //     /* content */
-                    //     // $content            = Blade::render(Storage::get(config('admin.storage.contentTour').$item->seo->slug.'.blade.php'));
-                    //     /* breadcrumb */
-                    //     $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
-                    //     /* lấy id category và id category con (đệ quy) */
-                    //     $arrayCategory      = CategoryBlog::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
-                    //     $blogs              = Blog::select('*')
-                    //         ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                    //             $query->whereIn('id', $arrayCategory);
-                    //         })
-                    //         ->with('seo')
-                    //         ->get();
-                    //     /* lấy thông tin category con (để phân biệt giao diện category cấp cuối và không phải cấp cuối) */
-                    //     $infoCategoryChilds = CategoryBlog::select('*')
-                    //         ->whereHas('seo', function($q) use ($item){
-                    //             $q->where('parent', $item->seo->id);
-                    //         })
-                    //         ->with('seo')
-                    //         ->get();
-                    //     /* lấy tất cả category hiển thị theo cây */
-                    //     $categoriesBlog     = CategoryBlog::getTreeCategory();
-                    //     /* lấy danh mục sản phẩm */
-                    //     $categories         = Category::getTreeCategory();
-                    //     if(!empty($infoCategoryChilds)&&$infoCategoryChilds->isNotEmpty()){ /* trường hợp category chưa phải cấp cuối */
-                    //         /* lấy danh sách từng blog theo category child */
-                    //         foreach($infoCategoryChilds as $infoCategoryChild){
-                    //             $infoCategoryChild->childs  = Blog::select('*')
-                    //                 ->whereHas('categories.infoCategory', function($query) use($infoCategoryChild){
-                    //                     $query->where('id', $infoCategoryChild->id);
-                    //                 })
-                    //                 ->with('seo')
-                    //                 ->get();
-                    //         }
-                    //         $xhtml          = view('main.categoryBlog.indexParent', compact('item', 'breadcrumb', 'categoriesBlog', 'categories', 'infoCategoryChilds', 'blogs'))->render();
-                    //     }else { /* trường hợp category là cấp cuối */
-                    //         $xhtml          = view('main.categoryBlog.index', compact('item', 'breadcrumb', 'categoriesBlog', 'categories', 'blogs'))->render();
-                    //     }
-                    //     break;
-                    // /* ===== BLOG INFO */
-                    // case 'blog_info':
-                    //     $flagMatch          = true;
-                    //     $item               = Blog::select('*')
-                    //                             ->whereHas('seo', function($q) use ($checkExists){
-                    //                                 $q->where('slug', $checkExists->slug);
-                    //                             })
-                    //                             ->with('seo')
-                    //                             ->first();
-                    //     /* danh sách category của blog */
-                    //     $arrayCategory      = [];
-                    //     foreach($item->categories as $category) $arrayCategory[] = $category->infoCategory->id;
-                    //     $blogRelates        = Blog::select('*')
-                    //                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                    //                                 $query->whereIn('id', $arrayCategory);
-                    //                             })
-                    //                             ->where('id', '!=', $item->id)
-                    //                             ->with('seo')
-                    //                             ->get();
-                    //     /* lấy tất cả category hiển thị theo cây */
-                    //     $categoriesBlog     = CategoryBlog::getTreeCategory();
-                    //     /* lấy tất cả categories sản phẩm */
-                    //     $categories         = Category::getTreeCategory();
-                    //     $content            = Blade::render(Storage::get(config('main.storage.contentBlog').$item->seo->slug.'.blade.php'));
-                    //     $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full);
-                    //     $xhtml              = view('main.blog.index', compact('item', 'breadcrumb', 'blogRelates', 'categories', 'categoriesBlog', 'content'))->render();
-                    //     break;
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){

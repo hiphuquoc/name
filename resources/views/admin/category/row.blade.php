@@ -1,7 +1,7 @@
 @if(!empty($item))
     <tr>
         <td>{{ $no }}</td>
-        <td class="text-center"><img src="{!! Storage::url($item->seo->image_small).'?v='.time() !!}" style="width:150px;" /></td>
+        <td class="text-center"><img src="{!! Storage::url($item->seo->image).'?v='.time() !!}" style="width:150px;" /></td>
         <td>
             <div class="oneLine">
                 Tiêu đề: {{ $item->name ?? $item->seo->title ?? null }}

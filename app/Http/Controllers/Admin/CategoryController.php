@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Storage;
 use App\Helpers\Upload;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Seo;
+use App\Models\EnSeo;
 use App\Models\Category;
 use App\Models\CategoryBlog;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Models\RelationCategoryInfoCategoryBlogInfo;
+use App\Models\RelationEnCategoryInfoEnCategoryBlogInfo;
 
 class CategoryController extends Controller {
 
@@ -34,12 +36,14 @@ class CategoryController extends Controller {
     public static function view(Request $request){
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
+        $language           = Cookie::get('language') ?? 'vi';
+        $keyTable           = 'category_info';
         $item               = Category::select('*')
                                 ->where('id', $id)
-                                ->with(['files' => function($query){
-                                    $query->where('relation_table', 'category_info');
+                                ->with(['files' => function($query) use($keyTable){
+                                    $query->where('relation_table', $keyTable);
                                 }])
-                                ->with('seo')
+                                ->with('seo', 'en_seo')
                                 ->first();
         $idNot              = $item->id ?? 0;
         $parents            = Category::select('*')
@@ -52,15 +56,22 @@ class CategoryController extends Controller {
         if(!empty($item->seo->slug)){
             $content        = Storage::get(config('main.storage.contentCategory').$item->seo->slug.'.blade.php');
         }
+        /* en content */
+        $enContent          = null;
+        if(!empty($item->en_seo->slug)){
+            $enContent      = Storage::get(config('main.storage.enContentCategory').$item->en_seo->slug.'.blade.php');
+        }
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.category.view', compact('item', 'type', 'parents', 'categoryBlogs', 'message', 'content'));
+        return view('admin.category.view', compact('item', 'type', 'parents', 'categoryBlogs', 'message', 'content', 'enContent'));
     }
 
     public function create(CategoryRequest $request){
         try {
             DB::beginTransaction();
+            $language           = Cookie::get('language') ?? 'vi';
+            $keyTable           = 'category_info';
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -68,8 +79,10 @@ class CategoryController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* insert page */
-            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'category_info', $dataPath);
+            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
             $seoId              = Seo::insertItem($insertSeo);
+            $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+            $enSeoId            = EnSeo::insertItem($insertEnSeo);
             /* upload icon */
             $iconPath           = null;
             if($request->hasFile('icon')) {
@@ -81,7 +94,10 @@ class CategoryController extends Controller {
                 'seo_id'        => $seoId,
                 'name'          => $request->get('name'),
                 'description'   => $request->get('description'),
-                'icon'          => $iconPath
+                'icon'          => $iconPath,
+                'en_seo_id'     => $enSeoId,
+                'en_name'       => $request->get('en_name'),
+                'en_description'=> $request->get('en_description')
             ]);
             /* insert relation_category_info_category_blog_id */
             if(!empty($request->get('category_blog_info_id'))){
@@ -96,12 +112,15 @@ class CategoryController extends Controller {
             $content            = $request->get('content') ?? null;
             $content            = ImageController::replaceImageInContentWithLoading($content);
             if(!empty($content)) Storage::put(config('main.storage.contentCategory').$request->get('slug').'.blade.php', $content);
+            $enContent          = $request->get('en_content') ?? null;
+            $enContent          = ImageController::replaceImageInContentWithLoading($enContent);
+            if(!empty($enContent)) Storage::put(config('main.storage.enContentCategory').$request->get('en_slug').'.blade.php', $enContent);
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idCategory)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idCategory,
-                    'relation_table'    => 'category_info',
+                    'relation_table'    => $keyTable,
                     'name'              => $name
                 ];
                 SliderController::upload($request->file('slider'), $params);
@@ -111,7 +130,7 @@ class CategoryController extends Controller {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idCategory,
-                    'relation_table'    => 'category_info',
+                    'relation_table'    => $keyTable,
                     'name'              => $name
                 ];
                 GalleryController::upload($request->file('gallery'), $params);
@@ -134,11 +153,15 @@ class CategoryController extends Controller {
         return redirect()->route('admin.category.view', ['id' => $idCategory]);
     }
 
-
     public function update(CategoryRequest $request){
         try {
             DB::beginTransaction();
-            $idSeo              = $request->get('seo_id');
+            /* ngôn ngữ */
+            $language           = Cookie::get('language') ?? 'vi';
+            $keyTable           = 'category_info';
+
+            $seoId              = $request->get('seo_id');
+            $enSeoId            = $request->get('en_seo_id');
             $idCategory         = $request->get('category_info_id');
             /* upload image */
             $dataPath           = [];
@@ -147,8 +170,15 @@ class CategoryController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update page */
-            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'category_info', $dataPath);
-            Seo::updateItem($idSeo, $insertSeo);
+            $updateSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
+            Seo::updateItem($seoId, $updateSeo);
+            if(!empty($enSeoId)){
+                $updateEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+                EnSeo::updateItem($enSeoId, $updateEnSeo);
+            }else {
+                $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+                $enSeoId            = EnSeo::insertItem($insertEnSeo);
+            }
             /* upload icon */
             $iconPath           = null;
             if($request->hasFile('icon')) {
@@ -157,8 +187,12 @@ class CategoryController extends Controller {
             }
             /* insert category_info */
             $arrayUpdate        = [
+                'seo_id'        => $seoId,
                 'name'          => $request->get('name'),
-                'description'   => $request->get('description')
+                'description'   => $request->get('description'),
+                'en_seo_id'     => $enSeoId,
+                'en_name'       => $request->get('en_name'),
+                'en_description'=> $request->get('en_description')
             ];
             if(!empty($iconPath)) $arrayUpdate['icon'] = $iconPath;
             Category::updateItem($idCategory, $arrayUpdate);
@@ -182,12 +216,19 @@ class CategoryController extends Controller {
             }else {
                 Storage::delete(config('main.storage.contentCategory').$request->get('slug').'.blade.php');
             }
+            $enContent          = $request->get('en_content') ?? null;
+            $enContent          = ImageController::replaceImageInContentWithLoading($enContent);
+            if(!empty($enContent)) {
+                Storage::put(config('main.storage.enContentCategory').$request->get('en_slug').'.blade.php', $enContent);
+            }else {
+                Storage::delete(config('main.storage.enContentCategory').$request->get('en_slug').'.blade.php');
+            }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idCategory)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idCategory,
-                    'relation_table'    => 'category_info',
+                    'relation_table'    => $keyTable,
                     'name'              => $name
                 ];
                 SliderController::upload($request->file('slider'), $params);
@@ -197,7 +238,7 @@ class CategoryController extends Controller {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idCategory,
-                    'relation_table'    => 'category_info',
+                    'relation_table'    => $keyTable,
                     'name'              => $name
                 ];
                 GalleryController::upload($request->file('gallery'), $params);

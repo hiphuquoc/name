@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\Seo;
+use App\Models\EnSeo;
 use Illuminate\Support\Facades\Auth;
 
 class BuildInsertUpdateModel {
@@ -48,20 +49,59 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableProductInfo($dataForm, $idSeo){
+    public static function buildArrayTableEnSeo($dataForm, $type, $dataImage = null){
         $result                                 = [];
-        $result['seo_id']                       = $idSeo;
+        if(!empty($dataForm)){
+            $result['title']                    = $dataForm['en_name'] ?? null;
+            $result['description']              = $dataForm['en_description'] ?? null;
+            if(!empty($dataImage['filePathNormal'])) $result['image']           = $dataImage['filePathNormal'];
+            if(!empty($dataImage['filePathSmall']))  $result['image_small']     = $dataImage['filePathSmall'];
+            // page level
+            $pageLevel                          = 1;
+            $pageParent                         = 0;
+            if(!empty($dataForm['parent'])){
+                $infoPageParent                 = Seo::find($dataForm['parent']);
+                $pageLevel                      = !empty($infoPageParent->level) ? ($infoPageParent->level+1) : $pageLevel;
+                $pageParent                     = $infoPageParent->id;
+            }
+            $result['level']                    = $pageLevel;
+            $result['parent']                   = $pageParent;
+            $result['ordering']                 = $dataForm['ordering'] ?? null;
+            $result['topic']                    = null;
+            $result['seo_title']                = $dataForm['en_seo_title'] ?? $dataForm['en_title'] ?? null;
+            $result['seo_description']          = $dataForm['en_seo_description'] ?? $dataForm['en_description'] ?? null;
+            $result['slug']                     = $dataForm['en_slug'];
+            /* slug full */
+            $result['slug_full']                = EnSeo::buildFullUrl($dataForm['en_slug'], $pageLevel, $pageParent);
+            /* link canonical */
+            if(!empty($dataForm['en_link_canonical'])){
+                $tmp                            = explode('/', $dataForm['en_link_canonical']);
+                $tmp2                           = [];
+                foreach($tmp as $t) if(!empty($t)) $tmp2[] = $t;
+                $result['link_canonical']       = implode('/', $tmp2);
+            }
+            /* type */
+            $result['type']                     = $type;
+            $result['rating_author_name']       = 1;
+            $result['rating_author_star']       = 5;
+            $result['rating_aggregate_count']   = $dataForm['rating_aggregate_count'] ?? 0;
+            $result['rating_aggregate_star']    = $dataForm['rating_aggregate_star'] ?? null;
+            // $result['video']                    = $dataForm['video'] ?? null;
+            $result['created_by']               = Auth::id() ?? 0;
+        }
+        return $result;
+    }
+
+    public static function buildArrayTableProductInfo($dataForm, $seoId, $enSeoId){
+        $result                                 = [];
         $result['brand_id']                     = $dataForm['brand'];
         $result['code']                         = $dataForm['code'];
+        $result['seo_id']                       = $seoId;
         $result['name']                         = $dataForm['name'];
         $result['description']                  = $dataForm['description'];
-        // $result['title_all']                    = $dataForm['title_all'];
-        // $result['price_all']                    = $dataForm['price_all'];
-        // $result['price_all_before_promotion']   = $dataForm['price_all_before_promotion'] ?? null;
-        // $result['sale_off_all']                 = 0;
-        // if(!empty($dataForm['price_all_before_promotion'])){
-        //     $result['sale_off_all'] = (($dataForm['price_all_before_promotion'] - $dataForm['price_all'])/$dataForm['price_all_before_promotion'])*100;
-        // }
+        $result['en_seo_id']                    = $enSeoId;
+        $result['en_name']                      = $dataForm['en_name'];
+        $result['en_description']               = $dataForm['en_description'];
         return $result;
     }
 
@@ -70,7 +110,9 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm['name'])&&!empty($dataForm['price'])&&!empty($idProduct)){
             $result['product_info_id']  = $idProduct;
             $result['name']             = $dataForm['name'];
+            $result['en_name']          = $dataForm['en_name'];
             $result['description']      = $dataForm['description'] ?? null;
+            $result['en_description']   = $dataForm['en_description'] ?? null;
             $result['price']            = $dataForm['price'];
             $result['price_origin']     = $dataForm['price_origin'] ?? null;
             $result['price_before_promotion']   = $dataForm['price_before_promotion'] ?? null;

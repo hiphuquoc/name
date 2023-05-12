@@ -12,6 +12,8 @@ class ProductContent extends Model {
         'product_info_id',
         'name', 
         'content',
+        'en_name',
+        'en_content',
         'ordering'
     ];
     public $timestamps = false;

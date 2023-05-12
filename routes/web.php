@@ -34,6 +34,8 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CacheController;
 
+use App\Http\Controllers\Admin\LanguageController;
+
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
 
@@ -119,6 +121,21 @@ Route::middleware('auth')->group(function (){
 
 Route::middleware('auth', 'role:admin')->group(function (){
     Route::prefix('he-thong')->group(function(){
+        // /* ===== Ngôn ngữ En ===== */
+        // Route::prefix('he-thong')->group(function(){
+        //     /* category */
+        //     Route::prefix('category')->group(function(){
+        //         Route::get('/list', [EnCategoryController::class, 'list'])->name('admin.enCategory.list');
+        //         Route::get('/view', [EnCategoryController::class, 'view'])->name('admin.enCategory.view');
+        //         Route::post('/create', [EnCategoryController::class, 'create'])->name('admin.enCategory.create');
+        //         Route::post('/update', [EnCategoryController::class, 'update'])->name('admin.enCategory.update');
+        //     });
+
+        // });
+        /* language */
+        Route::prefix('language')->group(function(){
+            Route::get('/{type}/set', [LanguageController::class, 'set'])->name('admin.language.set');
+        });
         /* product */
         Route::prefix('product')->group(function(){
             Route::get('/list', [ProductController::class, 'list'])->name('admin.product.list');
