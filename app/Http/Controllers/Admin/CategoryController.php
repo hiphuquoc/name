@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Models\RelationCategoryInfoCategoryBlogInfo;
 use App\Models\RelationEnCategoryInfoEnCategoryBlogInfo;
+use App\Models\RelationSeoEnSeo;
 
 class CategoryController extends Controller {
 
@@ -179,6 +180,14 @@ class CategoryController extends Controller {
                 $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
                 $enSeoId            = EnSeo::insertItem($insertEnSeo);
             }
+            /* kết nối bảng vi và en */
+            RelationSeoEnSeo::select('*')
+                            ->where('seo_id', $seoId)
+                            ->delete();
+            RelationSeoEnSeo::insertItem([
+                'seo_id'    => $seoId,
+                'en_seo_id' => $enSeoId
+            ]);
             /* upload icon */
             $iconPath           = null;
             if($request->hasFile('icon')) {

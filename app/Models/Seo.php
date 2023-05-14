@@ -103,4 +103,8 @@ class Seo extends Model {
     public function user(){
         return $this->hasOne(\App\Models\User::class, 'id', 'rating_author_name');
     }
+
+    public function enSeo(){
+        return $this->hasOne(\App\Models\RelationSeoEnSeo::class, 'seo_id', 'id');
+    }
 }

@@ -60,9 +60,14 @@ class BuildInsertUpdateModel {
             $pageLevel                          = 1;
             $pageParent                         = 0;
             if(!empty($dataForm['parent'])){
-                $infoPageParent                 = Seo::find($dataForm['parent']);
-                $pageLevel                      = !empty($infoPageParent->level) ? ($infoPageParent->level+1) : $pageLevel;
-                $pageParent                     = $infoPageParent->id;
+                $idParentVi                     = $dataForm['parent'];
+                $infoParentEn                   = EnSeo::select('*')
+                                                    ->whereHas('seo.infoSeo', function($query) use($idParentVi){
+                                                        $query->where('id', $idParentVi);
+                                                    })
+                                                    ->first();
+                $pageLevel                      = !empty($infoParentEn->level) ? ($infoParentEn->level+1) : $pageLevel;
+                $pageParent                     = $infoParentEn->id;
             }
             $result['level']                    = $pageLevel;
             $result['parent']                   = $pageParent;

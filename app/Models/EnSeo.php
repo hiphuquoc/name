@@ -88,9 +88,9 @@ class EnSeo extends Model {
         return $url;
     }
 
-    // public function keywords() {
-    //     return $this->hasMany(\App\Models\Keyword::class, 'seo_id', 'id');
-    // }
+    public function seo() {
+        return $this->hasOne(\App\Models\RelationSeoEnSeo::class, 'en_seo_id', 'id');
+    }
 
     // public function contentspin() {
     //     return $this->hasOne(\App\Models\Contentspin::class, 'seo_id', 'id');
