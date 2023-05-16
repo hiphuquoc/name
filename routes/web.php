@@ -34,7 +34,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CacheController;
 
-use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\LanguageController;
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
@@ -65,6 +65,7 @@ Route::prefix('payment')->group(function(){
 });
 /* trang chủ */
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
+Route::get('/en', [HomeController::class, 'enHome'])->name('main.enHome');
 Route::get('/test', [HomeController::class, 'test'])->name('main.test');
 /* trang category */
 Route::prefix('category')->group(function(){
@@ -76,7 +77,9 @@ Route::prefix('category')->group(function(){
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
 /* page */
 Route::get('/hinh-nen-dien-thoai-khuyen-mai', [PagePublic::class, 'saleOff'])->name('main.saleOff');
+Route::get('/promotion-phone-wallpapers', [PagePublic::class, 'enSaleOff'])->name('main.enSaleOff');
 Route::get('/tim-kiem', [PagePublic::class, 'searchProduct'])->name('main.searchProduct');
+Route::get('/search', [PagePublic::class, 'enSearchProduct'])->name('main.enSearchProduct');
 /* cart */
 Route::get('/gio-hang', [CartController::class, 'index'])->name('main.cart');
 Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addToCart');
@@ -118,6 +121,10 @@ Route::middleware('auth')->group(function (){
 
     });
 });
+/* language */
+// Route::prefix('language')->group(function(){
+//     Route::get('/{type}/set', [LanguageController::class, 'set'])->name('admin.language.set');
+// });
 
 Route::middleware('auth', 'role:admin')->group(function (){
     Route::prefix('he-thong')->group(function(){
@@ -132,10 +139,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
         //     });
 
         // });
-        /* language */
-        Route::prefix('language')->group(function(){
-            Route::get('/{type}/set', [LanguageController::class, 'set'])->name('admin.language.set');
-        });
+        
         /* product */
         Route::prefix('product')->group(function(){
             Route::get('/list', [ProductController::class, 'list'])->name('admin.product.list');

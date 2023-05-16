@@ -57,6 +57,10 @@ class Page extends Model {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 
+    public function en_seo() {
+        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
+    }
+
     public function files(){
         return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id');
     }

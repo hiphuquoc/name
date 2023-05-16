@@ -21,7 +21,6 @@
     @include('wallpaper.schema.organization')
     <!-- END:: Organization Schema -->
 
-
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.article', compact('item'))
     <!-- END:: Article Schema -->
@@ -52,7 +51,11 @@
             <div class="contentBox">
                 <div class="relatedProductBox">
                     <div class="relatedProductBox_title">
-                        <h2>Gợi ý cho bạn</h2>
+                        @if(!empty($language)&&$language=='en')
+                            <h2>Recommendations for you</h2>
+                        @else 
+                            <h2>Gợi ý cho bạn</h2>
+                        @endif
                         <!-- load more -->
                         <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
                         <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $related->count() }}" /> 

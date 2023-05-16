@@ -26,18 +26,6 @@
                 }
             @endforeach
         ],
-
-        {{-- "productSupported": [{
-            "@type": "Product",
-            "name": "Thiết Kế Website Chuyên Nghiệp",
-            "description": "Dịch vụ thiết kế website chuyên nghiệp tại Kiên Giang, giúp doanh nghiệp tối ưu hóa hiệu quả kinh doanh trực tuyến và xây dựng thương hiệu 4.0 thành công.",
-            "sku": "TKW-001",
-            "brand": {
-              "@type": "Brand",
-              "name": "Thiết Kế Website Kiên Giang"
-            }
-        }], --}}
-
         "sameAs": [
             @foreach(config('main.socials') as $social)
                 @if($loop->index!=0) 

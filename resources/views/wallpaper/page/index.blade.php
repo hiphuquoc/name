@@ -9,7 +9,6 @@
     @include('wallpaper.schema.organization')
     <!-- END:: Organization Schema -->
 
-
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.article', compact('item'))
     <!-- END:: Article Schema -->
@@ -41,7 +40,11 @@
             <div class="contentBox">
                 <div class="pageContentWithSidebar">
                     <div class="pageContentWithSidebar_content">
-                        <h1>{{ $item->name ?? $item->seo->title ?? null }}</h1>
+                        @if(!empty($language)&&$language=='en')
+                            <h1>{{ $item->en_name ?? $item->en_seo->title ?? null }}</h1>
+                        @else 
+                            <h1>{{ $item->name ?? $item->seo->title ?? null }}</h1>
+                        @endif
                         {!! $content ?? null !!}
                     </div>
                     <div class="pageContentWithSidebar_sidebar">
@@ -50,17 +53,27 @@
                             @foreach($typePages as $typePage)
                                 <div class="sidebarSectionBox">
                                     <div class="sidebarSectionBox_title">
-                                        <h2>{{ $typePage[0]->type->name }}</h2>
+                                        @if(!empty($language)&&$language=='en')
+                                            <h2>Policies & Terms</h2>
+                                        @else 
+                                            <h2>{{ $typePage[0]->type->name }}</h2>
+                                        @endif
                                     </div>
                                     <div class="sidebarSectionBox_box">
                                     @foreach($typePage as $page)
                                         @php
                                             $selected       = null;
-                                            $urlPageFull    = env('APP_URL').'/'.$page->seo->slug_full;
+                                            if(!empty($language)&&$language=='en'){
+                                                $title          = $page->en_name ?? $page->en_seo->title ?? null;
+                                                $urlPageFull    = env('APP_URL').'/'.$page->en_seo->slug_full;
+                                            }else {
+                                                $title          = $page->name ?? $page->seo->title ?? null;
+                                                $urlPageFull    = env('APP_URL').'/'.$page->seo->slug_full;
+                                            }
                                             if($urlPageFull==URL::current()) $selected = 'selected';
                                         @endphp
-                                        <a href="/{{ $page->seo->slug_full ?? null }}" title="{{ $category->name ?? $category->seo->title ?? null }}" class="sidebarSectionBox_box_item {{ $selected }}">
-                                            <i class="fa-solid fa-chevron-right"></i><h3>{{ $page->name ?? $page->seo->title ?? null }}</h3>
+                                        <a href="{{ $urlPageFull }}" title="{{ $title }}" class="sidebarSectionBox_box_item {{ $selected }}">
+                                            <i class="fa-solid fa-chevron-right"></i><h3>{{ $title }}</h3>
                                         </a>
                                     @endforeach
                                     </div>

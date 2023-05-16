@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cookie;
 use App\Models\Product;
 
 class CategoryController extends Controller {
@@ -23,10 +24,12 @@ class CategoryController extends Controller {
                                 ->skip($request->get('loaded'))
                                 ->take($requestLoad)
                                 ->get();
+            $language       = !empty($request->get('language')) ? $request->get('language') : 'vi';
             foreach($products as $product){
                 $xhtmlProduct   .= view('wallpaper.template.wallpaperItem', [
                     'product'   => $product,
-                    'type'      => 'ajax'
+                    'type'      => 'ajax',
+                    'language'  => $language
                 ])->render();
             }
             /* phần tính toán */
@@ -51,10 +54,12 @@ class CategoryController extends Controller {
                                 ->skip($request->get('loaded'))
                                 ->take($requestLoad)
                                 ->get();
+            $language       = !empty($request->get('language')) ? $request->get('language') : 'vi';
             foreach($products as $product){
                 $xhtmlProduct   .= view('wallpaper.template.wallpaperItem', [
                     'product'   => $product,
-                    'type'      => 'ajax'
+                    'type'      => 'ajax',
+                    'language'  => $language
                 ])->render();
             }
             /* phần tính toán */
@@ -80,10 +85,12 @@ class CategoryController extends Controller {
                                 ->skip($request->get('loaded'))
                                 ->take($requestLoad)
                                 ->get();
+            $language       = !empty($request->get('language')) ? $request->get('language') : 'vi';
             foreach($products as $product){
                 $xhtmlProduct   .= view('wallpaper.template.wallpaperItem', [
                     'product'   => $product,
-                    'type'      => 'ajax'
+                    'type'      => 'ajax',
+                    'language'  => $language
                 ])->render();
             }
             /* phần tính toán */

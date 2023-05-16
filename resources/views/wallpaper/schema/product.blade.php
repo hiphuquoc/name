@@ -24,18 +24,25 @@
             }
         }
     }
+    if(!empty($language)&&$language=='en'){
+        $title          = $item->en_seo->seo_title ?? $item->en_seo->title ?? null;
+        $description    = $item->en_seo->seo_description ?? $item->en_seo->description ?? null;
+    }else {
+        $title          = $item->seo->seo_title ?? $item->seo->title ?? null;
+        $description    = $item->seo->seo_description ?? $item->seo->description ?? null;
+    }
 @endphp
 <script type="application/ld+json">
     {
         "@context": "https://schema.org/",
         "@type": "Product",
-        "name": "{{ $item->seo->seo_title ?? $item->seo->title ?? null }}",
+        "name": "{{ $title }}",
         "url": "{{ URL::current() }}",
         "image":
             [
                 {!! $image !!}
             ],
-        "description": "{{ $item->seo->seo_description ?? $item->seo->description ?? null }}",
+        "description": "{{ $description }}",
         "sku": "WW122023M{{ !empty($item->seo->created_at) ? strtotime($item->seo->created_at) : 00 }}YK/VN",
         "brand": {
             "@type": "Brand",

@@ -14,7 +14,8 @@
     /* trường hợp không có file cache => mở ob */
     ob_start();
     
-    echo view($content, compact('item'))->render();
+    $language       = !empty($language)&&$language=='en' ? 'en' : 'vi';
+    echo view($content, compact('item', 'language'))->render();
 
     $xhtml  = ob_get_contents();
     ob_end_flush();

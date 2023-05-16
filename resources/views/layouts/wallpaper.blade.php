@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="{{ $language ?? 'vi' }}">
 
 <!-- === START:: Head === -->
 <head>
@@ -32,7 +32,7 @@
             <div id="js_toggleMenuMobile" class="layoutHeaderSide_header">
                 <!-- === START:: Header side === -->
                 @include('wallpaper.cacheHTML.create', [
-                    'content'   => 'wallpaper.snippets.headerSide'
+                    'content'  => 'wallpaper.snippets.headerSide'
                 ])
                 <!-- === END:: Header side === -->
             </div>

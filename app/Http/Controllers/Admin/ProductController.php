@@ -12,6 +12,7 @@ use App\Helpers\Upload;
 use App\Http\Requests\ProductRequest;
 use App\Models\Seo;
 use App\Models\EnSeo;
+use App\Models\RelationSeoEnSeo;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
@@ -46,6 +47,11 @@ class ProductController extends Controller {
             $seoId              = Seo::insertItem($insertSeo);
             $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
             $enSeoId            = EnSeo::insertItem($insertEnSeo);
+            /* kết nối bảng vi và en */
+            RelationSeoEnSeo::insertItem([
+                'seo_id'    => $seoId,
+                'en_seo_id' => $enSeoId
+            ]);
             /* insert product_info */
             $insertProduct      = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $seoId, $enSeoId);
             $idProduct          = Product::insertItem($insertProduct);
@@ -126,6 +132,11 @@ class ProductController extends Controller {
                 $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
                 $enSeoId            = EnSeo::insertItem($insertEnSeo);
             }
+            /* kết nối bảng vi và en */
+            RelationSeoEnSeo::insertItem([
+                'seo_id'    => $seoId,
+                'en_seo_id' => $enSeoId
+            ]);
             /* insert product_info */
             $insertProduct      = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $seoId, $enSeoId);
             Product::updateItem($idProduct, $insertProduct);

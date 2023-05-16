@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\Upload;
 use App\Http\Requests\PageRequest;
 use App\Models\Seo;
+use App\Models\EnSeo;
+use App\Models\RelationSeoEnSeo;
 use App\Models\Page;
 use App\Models\PageType;
 use App\Http\Controllers\Admin\SliderController;
@@ -25,6 +27,7 @@ class PageController extends Controller {
     public function create(PageRequest $request){
         try {
             DB::beginTransaction();
+            $keyTable           = 'page_info';
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -32,15 +35,25 @@ class PageController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* insert page */
-            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'page_info', $dataPath);
-            $idSeo              = Seo::insertItem($insertSeo);
+            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
+            $seoId              = Seo::insertItem($insertSeo);
+            $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+            $enSeoId            = EnSeo::insertItem($insertEnSeo);
+            /* kết nối bảng vi và en */
+            RelationSeoEnSeo::insertItem([
+                'seo_id'    => $seoId,
+                'en_seo_id' => $enSeoId
+            ]);
             /* insert page_info */
             $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
             $idPage             = Page::insertItem([
-                'seo_id'        => $idSeo,
+                'seo_id'        => $seoId,
+                'en_seo_id'     => $enSeoId,
                 'type_id'       => $request->get('type_id'),
                 'name'          => $request->get('name'),
                 'description'   => $request->get('description'),
+                'en_name'       => $request->get('en_name'),
+                'en_description'=> $request->get('en_description'),
                 'show_sidebar'  => $showSidebar
             ]);
             /* insert slider và lưu CSDL */
@@ -48,13 +61,14 @@ class PageController extends Controller {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idPage,
-                    'relation_table'    => 'page_info',
+                    'relation_table'    => $keyTable,
                     'name'              => $name
                 ];
                 SliderController::upload($request->file('slider'), $params);
             }
             /* lưu content vào file */
             Storage::put(config('main.storage.contentPage').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('main.storage.enContentPage').$request->get('en_slug').'.blade.php', $request->get('en_content'));
             DB::commit();
             /* Message */
             $message        = [
@@ -77,8 +91,10 @@ class PageController extends Controller {
     public function update(PageRequest $request){
         try {
             DB::beginTransaction();
-            $idSeo              = $request->get('seo_id');
+            $seoId              = $request->get('seo_id');
+            $enSeoId            = $request->get('en_seo_id');
             $idPage             = $request->get('page_info_id');
+            $keyTable           = 'page_info';
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -86,15 +102,33 @@ class PageController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update page */
-            $updateSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'page_info', $dataPath);
-            Seo::updateItem($idSeo, $updateSeo);
+            $updateSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
+            Seo::updateItem($seoId, $updateSeo);
+            if(!empty($enSeoId)){
+                $updateEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+                EnSeo::updateItem($enSeoId, $updateEnSeo);
+            }else {
+                $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
+                $enSeoId            = EnSeo::insertItem($insertEnSeo);
+            }
+            /* kết nối bảng vi và en */
+            RelationSeoEnSeo::select('*')
+                            ->where('seo_id', $seoId)
+                            ->delete();
+            RelationSeoEnSeo::insertItem([
+                'seo_id'    => $seoId,
+                'en_seo_id' => $enSeoId
+            ]);
             /* insert page_info */
             $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
             $arrayUpdate        = [
-                'seo_id'        => $idSeo,
+                'seo_id'        => $seoId,
+                'en_seo_id'     => $enSeoId,
                 'type_id'       => $request->get('type_id'),
                 'name'          => $request->get('name'),
                 'description'   => $request->get('description'),
+                'en_name'       => $request->get('en_name'),
+                'en_description'=> $request->get('en_description'),
                 'show_sidebar'  => $showSidebar
             ];
             Page::updateItem($idPage, $arrayUpdate);
@@ -103,13 +137,14 @@ class PageController extends Controller {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $params         = [
                     'attachment_id'     => $idPage,
-                    'relation_table'    => 'page_info',
+                    'relation_table'    => $keyTable,
                     'name'              => $name
                 ];
                 SliderController::upload($request->file('slider'), $params);
             }
             /* lưu content vào file */
             Storage::put(config('main.storage.contentPage').$request->get('slug').'.blade.php', $request->get('content'));
+            Storage::put(config('main.storage.enContentPage').$request->get('en_slug').'.blade.php', $request->get('en_content'));
             DB::commit();
             /* Message */
             $message        = [
@@ -136,23 +171,28 @@ class PageController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'page_info');
                                 }])
-                                ->with('seo')
+                                ->with('seo', 'en_seo')
                                 ->first();
         $idNot              = $item->id ?? 0;
         $parents            = Page::select('*')
                                 ->where('id', '!=', $idNot)
                                 ->get();
         /* content */
-        $content        = null;
+        $content            = null;
         if(!empty($item->seo->slug)){
-            $content    = Storage::get(config('main.storage.contentPage').$item->seo->slug.'.blade.php');
+            $content        = Storage::get(config('main.storage.contentPage').$item->seo->slug.'.blade.php');
+        }
+        /* en content */
+        $enContent          = null;
+        if(!empty($item->en_seo->slug)){
+            $enContent      = Storage::get(config('main.storage.enContentPage').$item->en_seo->slug.'.blade.php');
         }
         /* type_page */
         $pageTypes          = PageType::all();
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.page.view', compact('item', 'type', 'pageTypes', 'content', 'parents', 'message'));
+        return view('admin.page.view', compact('item', 'type', 'pageTypes', 'content', 'enContent', 'parents', 'message'));
     }
 
     public static function list(Request $request){

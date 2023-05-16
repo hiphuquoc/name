@@ -7,20 +7,25 @@
             ++$i;
         }
     }
-    $productName        = $product->name ?? $product->seo->title ?? null;
+    if(!empty($language)&&$language=='en'){
+        $productName        = $product->en_name ?? $product->en_seo->title ?? null;
+    }else {
+        $productName        = $product->name ?? $product->seo->title ?? null;
+    }
     /* data filter => data-filter này phải gộp theo thứ tự menu filter từ trên xuống của giá trị (để xây dựng partern filter chính xác) 
         => filter theo danh mục
         => filter theo nhãn hàng
         => filter theo giá
     */
-    $dataFilter         = 'tat-ca-danh-muc tat-ca-nhan-hang';
-    $i                  = 0;
-    foreach($product->categories as $category){
-        if(!empty($category->infoCategory)) $dataFilter     .= ' '.$category->infoCategory->seo->slug;
-        ++$i;
-    }
-    /* gộp thêm của brand vào */
-    $dataFilter         .= ' '.$product->brand->seo->slug;
+    $dataFilter             = null;
+    // $dataFilter         = 'tat-ca-danh-muc tat-ca-nhan-hang';
+    // $i                  = 0;
+    // foreach($product->categories as $category){
+    //     if(!empty($category->infoCategory)) $dataFilter     .= ' '.$category->infoCategory->seo->slug;
+    //     ++$i;
+    // }
+    // /* gộp thêm của brand vào */
+    // $dataFilter         .= ' '.$product->brand->seo->slug;
 @endphp 
 <div class="wallpaperGridBox_item" data-key="{{ $dataFilter }}" data-price="{{ $product->prices[0]->price }}">
     @php
@@ -36,10 +41,11 @@
                 /* lấy ảnh mini */
                 $fileInfo   = pathinfo($file->file_path);
                 $imageSmall = Storage::url($fileInfo['dirname'].'/'.$fileInfo['filename'].'-small'.'.'.$fileInfo['extension']);
-                
+                /* đường dẫn */
+                $url        = !empty($language)&&$language=='en'&&!empty($product->en_seo->slug_full) ? $product->en_seo->slug_full : $product->seo->slug_full;
             @endphp
             <div id="{{ $keyIdPrice }}" class="{{ $i==0 ? 'show' : 'hide' }}">
-                <a href="/{{ $product->seo->slug_full }}?product_price_id={{ $price->id }}" class="wallpaperGridBox_item_image">
+                <a href="/{{ $url }}?product_price_id={{ $price->id }}" class="wallpaperGridBox_item_image">
                     <div class="zIndexHide">
                         
                         <!-- ảnh -->

@@ -4,7 +4,7 @@
             <h2>{!! $title ?? null !!}</h2>
         </div>
         <div class="categoryBox_box">
-        @include('wallpaper.template.wallpaperGrid', compact('products'))
+            @include('wallpaper.template.wallpaperGrid', compact('products', 'language'))
         </div>
     {{-- </div> --}}
 </div>

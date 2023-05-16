@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Blade;
 use App\Helpers\Url;
 use App\Models\Product;
@@ -46,10 +47,12 @@ class RoutingController extends Controller{
                 switch($checkExists->type){
                     /* ===== Ngôn ngữ Việt ===== */
                     case 'product_info':
+                        $language       = $checkExists->language;
+                        $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                         $flagMatch      = true;
                         /* thông tin sản phẩm */
                         $item           = Product::select('*')
-                            ->where('seo_id', $checkExists->id)
+                            ->where('seo_id', $idSeo)
                             ->with('seo', 'prices', 'contents', 'categories')
                             ->first();
                         /* danh sách category của sản phẩm */
@@ -64,52 +67,66 @@ class RoutingController extends Controller{
                                             })
                                             ->count();
                         /* breadcrumb */
-                        $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
-                        $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related', 'totalProduct', 'keyCategory'))->render();
+                        $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                        $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related', 'totalProduct', 'keyCategory', 'language'))->render();
                         break;
                     case 'category_info':
+                        $language       = $checkExists->language;
+                        $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                         $flagMatch      = true;
                         /* thông tin category */
                         $item           = Category::select('*')
-                                            ->where('seo_id', $checkExists->id)
-                                            ->with('seo', 'files', 'categoryBlogs.infoCategoryBlog.blogs.infoBlog.seo')
+                                            ->where('seo_id', $idSeo)
+                                            ->with('seo', 'en_seo')
                                             ->first();
                         /* danh sách product => lấy riêng để dễ truyền vào template */
                         $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
                         $keyCategory    = json_encode($arrayCategory);
-                        $products       = Product::select('*')
+                        $fullProducts   = Product::select('*')
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                                 $query->whereIn('id', $arrayCategory);
                                             })
-                                            ->with('seo', 'prices')
+                                            ->with('seo', 'en_seo', 'prices')
                                             ->orderBy('id', 'DESC')
-                                            ->skip(0)
-                                            ->take(5)
                                             ->get();
+                        /* lọc 5 phần tử đầu tiên */
+                        $products       = new \Illuminate\Database\Eloquent\Collection;
+                        $i              = 0;
+                        foreach($fullProducts as $p){
+                            $products[]  = $p;
+                            ++$i;
+                            if($i==5) break;
+                        }
                         $totalProduct   = Product::select('*')
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                                 $query->whereIn('id', $arrayCategory);
                                             })
                                             ->count();
-                        /* lấy thông tin category dưới 1 cấp => gộp vào collection */
-                        $idSeo          = $item->seo->id;
-                        $categories     = Category::select('*')
-                                            ->whereHas('seo', function($query) use($idSeo){
-                                                $query->where('parent', $idSeo);
-                                            })
-                                            ->get();
-                        /* lấy thông tin nghành hàng của tất cả sản phẩm trong category */
-                        $brands             = new \Illuminate\Database\Eloquent\Collection;
-                        foreach($products as $product){
-                            if (!$brands->contains('id', $product->brand->id)){
-                                $brands[]   = $product->brand;
-                            }
-                        }
+                        // /* lấy thông tin category dưới 1 cấp => gộp vào collection */
+                        // $categories     = Category::select('*')
+                        //                     ->whereHas('seo', function($query) use($idSeo){
+                        //                         $query->where('parent', $idSeo);
+                        //                     })
+                        //                     ->get();
+                        // /* lấy thông tin nghành hàng của tất cả sản phẩm trong category */
+                        // $brands             = new \Illuminate\Database\Eloquent\Collection;
+                        // foreach($products as $product){
+                        //     if (!$brands->contains('id', $product->brand->id)){
+                        //         $brands[]   = $product->brand;
+                        //     }
+                        // }
+
+                        /* xử lý ngôn ngữ của item seo */
+                        // if($language=='en'){
+                        //     /* đổi item của category */
+                        //     $item           = self::convertItemViToEn($item);
+                        // }
                         /* content */
-                        $content            = Blade::render(Storage::get(config('main.storage.contentCategory').$item->seo->slug.'.blade.php'));
+                        $folderContent      = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
+                        $content            = Blade::render(Storage::get($folderContent.$item->seo->slug.'.blade.php'));
                         /* breadcrumb */
-                        $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
-                        $xhtml          = view('wallpaper.category.index', compact('item', 'products', 'totalProduct', 'keyCategory', 'breadcrumb', 'brands', 'categories', 'content'))->render();
+                        $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'fullProducts', 'totalProduct', 'keyCategory', 'breadcrumb', 'content', 'language'))->render();
                         break;
                     // case 'brand_info':
                     //     $flagMatch      = true;
@@ -151,15 +168,21 @@ class RoutingController extends Controller{
                     //     break;
                     case 'page_info':
                         $flagMatch      = true;
+                        $language       = $checkExists->language;
+                        $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                         /* thông tin brand */
                         $item           = Page::select('*')
-                                            ->where('seo_id', $checkExists->id)
+                                            ->where('seo_id', $idSeo)
                                             ->with('seo', 'files')
                                             ->first();
                         /* breadcrumb */
                         $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
                         /* content */
-                        $content        = Blade::render(Storage::get(config('main.storage.contentPage').$item->seo->slug.'.blade.php'));
+                        if($language=='en'){
+                            $content        = Blade::render(Storage::get(config('main.storage.enContentPage').$item->en_seo->slug.'.blade.php'));
+                        }else {
+                            $content        = Blade::render(Storage::get(config('main.storage.contentPage').$item->seo->slug.'.blade.php'));
+                        }
                         /* page related */
                         $typePages      = Page::select('page_info.*')
                                             ->where('show_sidebar', 1)
@@ -168,7 +191,7 @@ class RoutingController extends Controller{
                                             ->orderBy('seo.ordering', 'DESC')
                                             ->get()
                                             ->groupBy('type.id');
-                        $xhtml          = view('wallpaper.page.index', compact('item', 'breadcrumb', 'content', 'typePages'))->render();
+                        $xhtml          = view('wallpaper.page.index', compact('item', 'language', 'breadcrumb', 'content', 'typePages'))->render();
                         break;
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
@@ -195,5 +218,11 @@ class RoutingController extends Controller{
             $result = implode('-', $result);
         }
         return $result;
+    }
+
+    private static function convertItemViToEn($item){
+        $item           = $item->en_seo;
+        $item->seo      = $item->seo->infoEnSeo;
+        return $item;
     }
 }

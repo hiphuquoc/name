@@ -84,6 +84,11 @@ class CategoryController extends Controller {
             $seoId              = Seo::insertItem($insertSeo);
             $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
             $enSeoId            = EnSeo::insertItem($insertEnSeo);
+            /* kết nối bảng vi và en */
+            RelationSeoEnSeo::insertItem([
+                'seo_id'    => $seoId,
+                'en_seo_id' => $enSeoId
+            ]);
             /* upload icon */
             $iconPath           = null;
             if($request->hasFile('icon')) {

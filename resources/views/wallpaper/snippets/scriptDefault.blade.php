@@ -831,6 +831,7 @@
                 const total         = parseInt($('#js_loadMore_total').val());
                 const loaded        = parseInt($('#js_loadMore_loaded').val());
                 const keyCategory   = $('#js_loadMore_keyCategory').val();
+                const language      = $('#language').val();
                 if(total>loaded){
                     $.ajax({
                         url         : '{{ route("main.category.loadMore") }}',
@@ -840,6 +841,7 @@
                             total           : total,
                             loaded          : loaded,
                             key_category    : keyCategory,
+                            language        : language,
                             request_load    : requestLoad
                         },
                         success     : function(response){
@@ -869,6 +871,7 @@
                 /* lấy dữ liệu */
                 const total         = parseInt($('#js_loadMore_total').val());
                 const loaded        = parseInt($('#js_loadMore_loaded').val());
+                const language      = $('#language').val();
                 if(total>loaded){
                     $.ajax({
                         url         : '{{ route("main.category.loadMorePromotion") }}',
@@ -877,6 +880,7 @@
                         data        : {
                             total           : total,
                             loaded          : loaded,
+                            language        : language,
                             request_load    : requestLoad
                         },
                         success     : function(response){
@@ -906,6 +910,7 @@
                 /* lấy dữ liệu */
                 const total         = parseInt($('#js_loadMore_total').val());
                 const loaded        = parseInt($('#js_loadMore_loaded').val());
+                const language      = $('#language').val();
                 if(total>loaded){
                     $.ajax({
                         url         : '{{ route("main.category.loadMoreSearch") }}',
@@ -915,6 +920,7 @@
                             total           : total,
                             loaded          : loaded,
                             request_load    : requestLoad,
+                            language        : language,
                             key_search      : '{{ request("key_search") }}'
                         },
                         success     : function(response){

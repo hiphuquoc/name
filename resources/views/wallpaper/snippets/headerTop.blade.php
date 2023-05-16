@@ -22,6 +22,30 @@
         <div id="js_checkLoginAndSetShow_button" class="hide-1023" style="height:100%;display:none !important;">
             <!-- tải ajax checkLoginAndSetShow() -->
         </div>
+        <!-- language -->
+        <div class="languageBox">
+            <input type="hidden" id="language" name="language" value="{{ $language ?? '' }}" />
+            @if(!empty($language)&&$language=='en')
+                <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon-en.png') }}') no-repeat;background-size:100% 100%;"></div>
+            @else 
+                <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon-vi.png') }}') no-repeat;background-size:100% 100%;"></div>
+            @endif
+            <div class="languageBox_list">
+                @php
+                    $urlVi = !empty($item->seo->slug_full)&&$item->seo->slug_full!='/' ? $item->seo->slug_full : null;
+                    $urlEn = !empty($item->en_seo->slug_full) ? $item->en_seo->slug_full : null;
+                @endphp
+                <a href="/{{ $urlVi }}" class="languageBox_list_item {{ empty($language)||$language=='vi' ? 'selected' : null }}">
+                    <div>VI</div>
+                    <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon-vi.png') }}') no-repeat;background-size:100% 100%;"></div>
+                </a>  
+                <a href="/{{ $urlEn }}" class="languageBox_list_item {{ !empty($language)&&$language=='en' ? 'selected' : null }}">
+                    <div>EN</div>  
+                    <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon-en.png') }}') no-repeat;background-size:100% 100%;"></div>
+                </a>
+            </div>
+            <div class="languageBox_background"></div>
+        </div>
         {{-- <div class="settingViewBox hide-1023">
             <i class="fa-solid fa-eye"></i>
         </div> --}}

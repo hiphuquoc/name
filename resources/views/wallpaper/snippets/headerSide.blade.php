@@ -27,31 +27,55 @@
 <div class="headerSide customScrollBar-y">
     <ul>
         <li>
-            <a href="/" title="Trang chủ {{ config('main.company_name') }}">
-                <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Trang chủ {{ config('main.company_name') }}" title="Trang chủ {{ config('main.company_name') }}" />
-                <div>Trang chủ</div>
-            </a>
+            @if(!empty($language)&&$language=='en')
+                <a href="/" title="Home {{ config('main.company_name') }}">
+                    <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Home {{ config('main.company_name') }}" title="Home {{ config('main.company_name') }}" />
+                    <div>Home</div>
+                </a>
+            @else 
+                <a href="/" title="Trang chủ {{ config('main.company_name') }}">
+                    <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Trang chủ {{ config('main.company_name') }}" title="Trang chủ {{ config('main.company_name') }}" />
+                    <div>Trang chủ</div>
+                </a>
+            @endif
         </li>
         <li>
-            <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi">
-                <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
-                <div>Đang khuyến mãi</div>
-            </a>
+            @if(!empty($language)&&$language=='en')
+                <a href="{{ route('main.saleOff') }}" title="Sale off phone wallpaper">
+                    <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Sale off phone wallpaper" title="Sale off phone wallpaper" />
+                    <div>Sale off</div>
+                </a>
+            @else 
+                <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi">
+                    <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
+                    <div>Đang khuyến mãi</div>
+                </a>
+            @endif
+            
         </li>
         @if(!empty($wallpaperMobile))
             <li>
                 <div class="hasChild open" onclick="showHideListMenuMobile(this, '{{ $wallpaperMobile->seo->slug }}')">
-                    <img src="{{ Storage::url('images/svg/picture-1.svg') }}" alt="Hình nền điện thoại" title="Hình nền điện thoại" />
-                    <div>Hình nền điện thoại</div>
+                    @php
+                        $titlePhoneWallpaper = !empty($language)&&$language=='en' ? 'Phone wallpaper' : 'Hình nền điện thoại';
+                    @endphp
+                    <img src="{{ Storage::url('images/svg/picture-1.svg') }}" alt="{{ $titlePhoneWallpaper }}" title="{{ $titlePhoneWallpaper }}" />
+                    <div>{{ $titlePhoneWallpaper }}</div>
                 </div>
                 <ul id="{{ $wallpaperMobile->seo->slug }}" style="height:auto;opacity:1;">
                     @foreach($wallpaperMobile->childs as $type)
                         @if($type->products->count()>0)
                             @php
-                                $title      = $type->name ?? $type->seo->title ?? null;
+                                if(!empty($language)&&$language=='en'){
+                                    $title  = $type->en_name ?? $type->en_seo->title ?? null;
+                                    $url    = $type->en_seo->slug_full ?? null;
+                                }else {
+                                    $title  = $type->name ?? $type->seo->title ?? null;
+                                    $url    = $type->seo->slug_full ?? null;
+                                }
                             @endphp
                             <li>
-                                <a href="{{ env('APP_URL') }}/{{ $type->seo->slug_full ?? null }}" title="{{ $title }}">
+                                <a href="{{ env('APP_URL') }}/{{ $url }}" title="{{ $title }}">
                                 <div>{{ $title }} {!! $type->products->count()>0 ? '(<span class="highLight">'.$type->products->count().'</span>)' : null !!}</div>
                                 </a>
                             </li>
@@ -89,16 +113,27 @@
         
         <li>
             <div class="hasChild close" onclick="showHideListMenuMobile(this, 'ho-tro')">
-                <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ {{ config('main.company_name') }}" title="Thông tin hỗ trợ {{ config('main.company_name') }}" />
-                <div>Hỗ trợ</div>
+                @if(!empty($language)&&$language=='en')
+                    <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Support infomation" title="Support infomation" />
+                    <div>Support</div>
+                @else 
+                    <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ {{ config('main.company_name') }}" title="Thông tin hỗ trợ {{ config('main.company_name') }}" />
+                    <div>Hỗ trợ</div>
+                @endif
             </div>
             <ul id="ho-tro">
                 @foreach($policies as $policy)
                     @php
-                        $title      = $policy->name ?? $policy->seo->title ?? null;
+                        if(!empty($language)&&$language=='en'){
+                            $title      = $policy->en_name ?? $policy->en_seo->title ?? null;
+                            $urlFull    = env('APP_URL').'/'.$policy->en_seo->slug_full;
+                        }else {
+                            $title      = $policy->name ?? $policy->seo->title ?? null;
+                            $urlFull    = env('APP_URL').'/'.$policy->seo->slug_full;
+                        }
                     @endphp
                     <li>
-                        <a href="{{ env('APP_URL') }}/{{ $policy->seo->slug_full ?? null }}" title="{{ $title }}">
+                        <a href="{{  $urlFull }}" title="{{ $title }}">
                             <div>{{ $title }}</div>
                         </a>
                     </li>

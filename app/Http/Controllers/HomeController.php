@@ -24,12 +24,63 @@ class HomeController extends Controller{
             $xhtml              = file_get_contents($pathCache);
             echo $xhtml;
         }else {
+            $language               = 'vi';
             $item                   = Page::select('*')
                                         ->whereHas('type', function($query){
                                             $query->where('code', 'home');
                                         })
                                         ->whereHas('seo', function($query){
                                             $query->where('slug', '/');
+                                        })
+                                        ->with('seo', 'en_seo', 'type')
+                                        ->first();
+            $newProducts            = Product::select('*')
+                                        ->orderBy('id', 'DESC')
+                                        ->skip(0)
+                                        ->take(10)
+                                        ->get();
+            $promotionProducts      = new \Illuminate\Database\Eloquent\Collection;
+            $totalPromotionProduct  = Product::select('*')
+                                        ->whereHas('prices', function($query){
+                                            $query->where('sale_off', '>', 0);
+                                        })
+                                        ->count();
+            // $categories             = Category::select('*')
+            //                             ->whereHas('seo', function($query){
+            //                                 $query->where('level', 1);
+            //                             })
+            //                             ->join('seo', 'seo.id', '=', 'category_info.seo_id')
+            //                             ->orderBy('seo.ordering', 'DESC')
+            //                             ->get();
+            // $blogs                  = Blog::select('*')
+            //                             ->whereHas('categories.infoCategory.seo', function($query){
+            //                                 $query->where('slug', 'blog-lam-dep');
+            //                             })
+            //                             ->with('seo')
+            //                             ->get();
+            $xhtml          = view('wallpaper.home.index', compact('item', 'language', 'newProducts', 'promotionProducts', 'totalPromotionProduct'))->render();
+            /* Ghi dữ liệu - Xuất kết quả */
+            if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+            echo $xhtml;
+        }
+    }
+
+    public static function enHome(Request $request){
+        /* cache HTML */
+        $nameCache              = 'hone.'.config('main.cache.extension');
+        $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
+        $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
+        if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+            $xhtml              = file_get_contents($pathCache);
+            echo $xhtml;
+        }else {
+            $language               = 'en';
+            $item                   = Page::select('*')
+                                        ->whereHas('type', function($query){
+                                            $query->where('code', 'home');
+                                        })
+                                        ->whereHas('en_seo', function($query){
+                                            $query->where('slug', 'en');
                                         })
                                         ->with('seo', 'type')
                                         ->first();
@@ -44,20 +95,20 @@ class HomeController extends Controller{
                                             $query->where('sale_off', '>', 0);
                                         })
                                         ->count();
-            $categories             = Category::select('*')
-                                        ->whereHas('seo', function($query){
-                                            $query->where('level', 1);
-                                        })
-                                        ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                                        ->orderBy('seo.ordering', 'DESC')
-                                        ->get();
-            $blogs                  = Blog::select('*')
-                                        ->whereHas('categories.infoCategory.seo', function($query){
-                                            $query->where('slug', 'blog-lam-dep');
-                                        })
-                                        ->with('seo')
-                                        ->get();
-            $xhtml          = view('wallpaper.home.index', compact('item', 'categories', 'newProducts', 'promotionProducts', 'totalPromotionProduct', 'blogs'))->render();
+            // $categories             = Category::select('*')
+            //                             ->whereHas('seo', function($query){
+            //                                 $query->where('level', 1);
+            //                             })
+            //                             ->join('seo', 'seo.id', '=', 'category_info.seo_id')
+            //                             ->orderBy('seo.ordering', 'DESC')
+            //                             ->get();
+            // $blogs                  = Blog::select('*')
+            //                             ->whereHas('categories.infoCategory.seo', function($query){
+            //                                 $query->where('slug', 'blog-lam-dep');
+            //                             })
+            //                             ->with('seo')
+            //                             ->get();
+            $xhtml          = view('wallpaper.home.index', compact('item', 'language', 'newProducts', 'promotionProducts', 'totalPromotionProduct'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
             echo $xhtml;

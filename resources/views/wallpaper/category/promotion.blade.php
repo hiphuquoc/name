@@ -3,14 +3,14 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-    $lowPrice   = 0;
-    $highPrice  = 0;
-    foreach($products as $product){
-        foreach($product->prices as $price){
-            if($price->price>$highPrice) $highPrice = $price->price;
-            if($price->price<$lowPrice||$lowPrice==0) $lowPrice = $price->price;
+        $lowPrice   = 0;
+        $highPrice  = 0;
+        foreach($products as $product){
+            foreach($product->prices as $price){
+                if($price->price>$highPrice) $highPrice = $price->price;
+                if($price->price<$lowPrice||$lowPrice==0) $lowPrice = $price->price;
+            }
         }
-    }
     @endphp
     @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Product Schema -->
@@ -47,7 +47,11 @@
             @include('wallpaper.template.shareSocial')
             <!-- content -->
             <div class="contentBox">
-                <h1>Hình nền điện thoại đang khuyến mãi</h1>
+                @if(!empty($language)&&$language=='en')
+                    <h1>Promotion phone wallpapers</h1>
+                @else
+                    <h1>Hình nền điện thoại đang khuyến mãi</h1>
+                @endif
                 <!-- load more -->
                 <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
                 <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" /> 
@@ -77,8 +81,9 @@
 
                 <!-- Product Box -->
                 @include('wallpaper.template.wallpaperGrid', [
-                    'product'       => $product ?? null,
-                    'headingTitle'  => 'h2'
+                    'products'      => $products ?? null,
+                    'headingTitle'  => 'h2',
+                    'language'      => $language
                 ])
                 {{-- @include('main.template.productGridLoading')
                 <div id="js_filterProduct_hidden"></div> --}}

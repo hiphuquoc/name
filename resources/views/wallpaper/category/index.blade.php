@@ -19,10 +19,13 @@
     @include('wallpaper.schema.social', compact('item', 'lowPrice', 'highPrice'))
     <!-- END:: Title - Description - Social -->
 
+    <!-- STRAT:: Title - Description - Social -->
+    @include('wallpaper.schema.breadcrumb', compact('breadcrumb'))
+    <!-- END:: Title - Description - Social -->
+
     <!-- STRAT:: Organization Schema -->
     @include('wallpaper.schema.organization')
     <!-- END:: Organization Schema -->
-
 
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.article', compact('item'))
@@ -31,6 +34,10 @@
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.creativeworkseries', compact('item'))
     <!-- END:: Article Schema -->
+
+    <!-- STRAT:: FAQ Schema -->
+    @include('wallpaper.schema.itemlist', ['data' => $fullProducts])
+    <!-- END:: FAQ Schema -->
 
     <!-- STRAT:: FAQ Schema -->
     @include('wallpaper.schema.faq', ['data' => $item->faqs])
@@ -47,10 +54,18 @@
             @include('wallpaper.template.shareSocial')
             <!-- content -->
             <div class="contentBox">
-                @if(!empty($item->name)&&$item->name!='Hình nền điện thoại')
-                    <h1>Hình nền điện thoại {{ $item->name }}</h1>
+                @if(!empty($language)&&$language=='en')
+                    @if(!empty($item->en_name)&&$item->en_name!='Phone Wallpapers')
+                        <h1>{{ $item->en_name }} Phone Wallpapers</h1>
+                    @else 
+                        <h1>{{ $item->en_name ?? null }}</h1>
+                    @endif
                 @else 
-                    <h1>{{ $item->name ?? null }}</h1>
+                    @if(!empty($item->name)&&$item->name!='Hình nền điện thoại')
+                        <h1>Hình nền điện thoại {{ $item->name }}</h1>
+                    @else 
+                        <h1>{{ $item->name ?? null }}</h1>
+                    @endif
                 @endif
                 <!-- load more -->
                 <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />

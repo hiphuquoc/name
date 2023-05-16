@@ -12,7 +12,7 @@ return [
     'address'               => '443 Mạc Cửu, Rạch Giá',
     'company_description'   => 'Giới thiệu dịch vụ',
     'logo_750x460'          => 'public/images/upload/trang-diem-750.webp',
-    'logo_main'             => 'images/upload/logo-name-type-manager-upload.webp',
+    'logo_main'             => 'images/upload/logo-type-manager-upload.webp',
     'contacts'          => [
         [
             'type'      => 'customer service',
@@ -46,6 +46,7 @@ return [
         'contentStyle'      => 'public/contents/styles/',
 
         'enContentCategory' => 'public/contents/enCategories/',
+        'enContentPage'     => 'public/contents/enPages/',
     ],
     'filter'    => [
         'price' => [

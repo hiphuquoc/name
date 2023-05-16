@@ -1,15 +1,17 @@
 @php
-    $xhtml  = '{
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Trang chủ",
-                "item": "'.env('APP_URL').'"
-            }';
-    $i      = 2;
-    foreach($data as $d){
+    $nameHome   = !empty($language)&&$language=='en' ? 'Home' : 'Trang chủ';
+    $xhtml      = '{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "'.$nameHome.'",
+                    "item": "'.env('APP_URL').'"
+                }';
+    $i          = 2;
+    foreach($breadcrumb as $b){
+        // dd($b);
         $xhtml .= ', ';
-        $title  = !empty($d->title) ? $d->title : $d->seo_title;
-        $slug   = !empty($d->slug_full) ? $d->slug_full : null;
+        $title  = $b->title ?? $b->seo_title;
+        $slug   = $b->slug_full ?? null;
         $xhtml .= '{
                         "@type": "ListItem",
                         "position": '.$i.',

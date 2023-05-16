@@ -12,6 +12,7 @@ use App\Models\Page;
 class PageController extends Controller{
 
     public static function saleOff(){
+        $language       = 'vi';
         /* thông tin Page */
         $item           = Page::select('*')
             ->whereHas('seo', function($query){
@@ -19,13 +20,13 @@ class PageController extends Controller{
             })
             ->with('seo', 'files')
             ->first();
-            $flagMatch      = true;
+            $flagMatch  = true;
         /* danh sách product => lấy riêng để dễ truyền vào template */
         $products       = Product::select('*')
                             ->whereHas('prices', function($query) {
                                 $query->where('sale_off', '>', 0);
                             })
-                            ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                            ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
                             ->orderBy('id', 'DESC')
                             ->skip(0)
                             ->take(5)
@@ -36,13 +37,44 @@ class PageController extends Controller{
                             })
                             ->count();
         /* breadcrumb */
-        $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full);
-        return view('wallpaper.category.promotion', compact('item', 'products', 'totalProduct', 'breadcrumb'));
+        $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full, $language);
+        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'totalProduct', 'breadcrumb'));
+    }
+
+    public static function enSaleOff(){
+        $language       = 'en';
+        /* thông tin Page */
+        $item           = Page::select('*')
+            ->whereHas('en_seo', function($query){
+                $query->where('slug', 'promotion-phone-wallpapers');
+            })
+            ->with('seo', 'en_seo', 'files')
+            ->first();
+            $flagMatch  = true;
+        /* danh sách product => lấy riêng để dễ truyền vào template */
+        $products       = Product::select('*')
+                            ->whereHas('prices', function($query) {
+                                $query->where('sale_off', '>', 0);
+                            })
+                            ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                            ->orderBy('id', 'DESC')
+                            ->skip(0)
+                            ->take(5)
+                            ->get();
+        $totalProduct   = Product::select('*')
+                            ->whereHas('prices', function($query) {
+                                $query->where('sale_off', '>', 0);
+                            })
+                            ->count();
+        /* breadcrumb */
+        $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full, $language);
+        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'totalProduct', 'breadcrumb'));
     }
 
     public static function searchProduct(Request $request){
         $keySearch      = $request->get('key_search') ?? null;
         $keySearch      = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
+        $language       = 'vi';
         /* thông tin Page */
         $pathUrl        = substr(parse_url(url()->current())['path'], 1);
         $item           = Page::select('*')
@@ -66,9 +98,43 @@ class PageController extends Controller{
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->count();
             /* breadcrumb */
-            $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full);
+            $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
             $titlePage      = $item->name ?? $item->seo->title ?? null;
-            return view('wallpaper.category.search', compact('item', 'titlePage', 'products', 'totalProduct', 'breadcrumb'));
+            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'totalProduct', 'breadcrumb'));
+        }
+        return redirect()->route('main.home');
+    }
+
+    public static function enSearchProduct(Request $request){
+        $keySearch      = $request->get('key_search') ?? null;
+        $keySearch      = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
+        $language       = 'en';
+        /* thông tin Page */
+        $pathUrl        = substr(parse_url(url()->current())['path'], 1);
+        $item           = Page::select('*')
+            ->whereHas('en_seo', function($query) use($pathUrl){
+                $query->where('slug_full', $pathUrl);
+            })
+            ->with('seo', 'en_seo', 'files')
+            ->first();
+        if(!empty($item)){
+            /* danh sách product */
+            $products       =  Product::select('*')
+                ->where('code', 'like', '%'.$keySearch.'%')
+                ->orWhere('name', 'like', '%'.$keySearch.'%')
+                ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                ->orderBy('id', 'DESC')
+                ->skip(0)
+                ->take(5)
+                ->get();
+            $totalProduct   =  Product::select('product_info.*')
+                ->where('code', 'like', '%'.$keySearch.'%')
+                ->orWhere('name', 'like', '%'.$keySearch.'%')
+                ->count();
+            /* breadcrumb */
+            $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
+            $titlePage      = $item->en_name ?? $item->en_seo->title ?? null;
+            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'totalProduct', 'breadcrumb'));
         }
         return redirect()->route('main.home');
     }

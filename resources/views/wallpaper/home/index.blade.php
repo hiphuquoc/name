@@ -49,14 +49,19 @@
                 <div class="contentBox">
                     <div class="categoryBox">
                         <div class="categoryBox_title">
-                            <h2>Hình nền điện thoại mới</h2>
+                            @if(!empty($language)&&$language=='en')
+                                <h2>New phone wallpapers</h2>
+                            @else 
+                                <h2>Hình nền điện thoại mới</h2>
+                            @endif
                         </div>
                         <div class="categoryBox_box">
                             <div class="wallpaperGridBox">
                                 @foreach($newProducts as $product)
                                     @include('wallpaper.template.wallpaperItem', [
                                         'product'   => $product,
-                                        'tagBox'    => 'new' // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box
+                                        'tagBox'    => 'new', // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box,
+                                        'language'  => $language
                                     ])
                                 @endforeach
                             </div>
@@ -72,10 +77,18 @@
                     <!-- load more -->
                     <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalPromotionProduct ?? 0 }}" />
                     <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $promotionProducts->count() }}" />
+                    @php
+                        if(!empty($language)&&$language=='en'){
+                            $titleCategoryBox = '<a href="/promotion-phone-wallpapers" title="Promotion phone wallpapers">Promotion phone wallpapers<i class="fa-solid fa-angle-right" style="margin-left:15px;font-size:15px;"></i></a>';
+                        }else {
+                            $titleCategoryBox = '<a href="/hinh-nen-dien-thoai-khuyen-mai" title="hình nền điện thoại khuyến mãi">Hình nền điện thoại khuyến mãi<i class="fa-solid fa-angle-right" style="margin-left:15px;font-size:15px;"></i></a>';
+                        }
+                    @endphp
                     @include('wallpaper.home.categoryBox', [
-                        'title'     => '<a href="/hinh-nen-dien-thoai-khuyen-mai" title="hình nền điện thoại khuyến mãi">Hình nền điện thoại khuyến mãi<i class="fa-solid fa-angle-right" style="margin-left:15px;font-size:15px;"></i></a>',
+                        'title'     => $titleCategoryBox,
                         'products'  => $promotionProducts,
-                        'tagBox'    => 'promotion'
+                        'tagBox'    => 'promotion',
+                        'language'  => $language
                     ])
                 </div>
             {{-- @endif --}}
@@ -124,6 +137,7 @@
                     /* lấy dữ liệu */
                     const total         = parseInt($('#js_loadMore_total').val());
                     const loaded        = parseInt($('#js_loadMore_loaded').val());
+                    const language      = $('#language').val();
                     // const keyCategory   = $('#js_loadMore_keyCategory').val();
                     if(total>loaded){
                         $.ajax({
@@ -133,6 +147,7 @@
                             data        : {
                                 total           : total,
                                 loaded          : loaded,
+                                language        : language,
                                 request_load    : requestLoad
                             },
                             success     : function(response){

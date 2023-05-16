@@ -14,7 +14,6 @@
         })
         /* set content messgae Modal ajax */
         function setMessageModal(title = null, content = null){
-            console.log(title, content);
             $.ajax({
                 url         : '{{ route("ajax.setMessageModal") }}',
                 type        : 'get',
