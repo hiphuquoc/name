@@ -22,13 +22,17 @@
                                     ->get();
 @endphp             
 <div class="logoInMenuMobile show-1023">
-    <a href="/" class="logoMain"></a>
+    @if(!empty($language)&&$language=='en')
+        <a href="/en" class="logoMain"></a>
+    @else 
+        <a href="/" class="logoMain"></a>
+    @endif
 </div>
 <div class="headerSide customScrollBar-y">
     <ul>
         <li>
             @if(!empty($language)&&$language=='en')
-                <a href="/" title="Home {{ config('main.company_name') }}">
+                <a href="/en" title="Home {{ config('main.company_name') }}">
                     <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Home {{ config('main.company_name') }}" title="Home {{ config('main.company_name') }}" />
                     <div>Home</div>
                 </a>
