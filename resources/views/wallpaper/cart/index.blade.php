@@ -14,7 +14,11 @@
                 @endphp
                 <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
                     @csrf
-                    <h1>Danh sách sản phẩm (<span id="js_updateCart_count" class="highLight">{{ $count }}</span>)</h1>
+                    @if(!empty($language)&&$language=='en')
+                        <h1>List of products (<span id="js_updateCart_count" class="highLight">{{ $count }}</span>)</h1>
+                    @else 
+                        <h1>Danh sách sản phẩm (<span id="js_updateCart_count" class="highLight">{{ $count }}</span>)</h1>
+                    @endif
                     <div class="pageCartBox">
                         <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
 
@@ -27,8 +31,13 @@
                                         </div> --}}
                                         <div class="cartSectionBox_body">
                                             <div class="cartProductBox_head">
-                                                <div>Sản phẩm</div>
-                                                <div>Đơn giá</div>
+                                                @if(!empty($language)&&$language=='en')
+                                                    <div>Products</div>
+                                                    <div>Price</div>
+                                                @else 
+                                                    <div>Sản phẩm</div>
+                                                    <div>Đơn giá</div>
+                                                @endif
                                                 {{-- <div>Số lượng</div> --}}
                                                 {{-- <div>Thành tiền</div> --}}
                                             </div>
@@ -38,7 +47,7 @@
                                                         $keyId  = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
                                                     @endphp
                                                     <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartProductBox_body_item">
-                                                        @include('wallpaper.cart.cartRow', compact('product'))
+                                                        @include('wallpaper.cart.cartRow', compact('product', 'language'))
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -46,9 +55,9 @@
                                     </div>
                                 </div>
                                 <!-- form email và phương thức thanh toán -->
-                                @include('wallpaper.cart.formPayment')
+                                @include('wallpaper.cart.formPayment', compact('language'))
                             @else 
-                                @include('wallpaper.cart.emptyCart')
+                                @include('wallpaper.cart.emptyCart', compact('language'))
                             @endif
 
                         </div>
@@ -57,7 +66,11 @@
                             <div id="js_scrollMenu" class="cartSectionBox">
                                 <div class="cartSectionBox_body">
                                     <div class="total">
-                                        <div>Tổng cộng:</div>
+                                        @if(!empty($language)&&$language=='en')
+                                            <div>Total:</div>
+                                        @else 
+                                            <div>Tổng cộng:</div>
+                                        @endif
                                         <div class="total_number"><span id="js_updateCart_total">{!! number_format($total).config('main.currency_unit') !!}</span></div>
                                     </div>
                                 </div>
@@ -66,7 +79,12 @@
                                 </div> --}}
                                 <div class="cartSectionBox_button">
                                     {{-- <a href="{{ route('main.checkout') }}" class="button">Thanh toán</a> --}}
-                                    <div class="button" onClick="submitFormPayment('formPaymentMethod');">Thanh toán</div>
+                                    @if(!empty($language)&&$language=='en')
+                                        <div class="button" onClick="submitFormPayment('formPaymentMethod');">Payment</div>
+                                    @else 
+                                        <div class="button" onClick="submitFormPayment('formPaymentMethod');">Thanh toán</div>
+                                    @endif
+                                    
                                 </div>
                             </div>
                             @endif

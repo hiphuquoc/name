@@ -1,18 +1,26 @@
+@php
+    if(!empty($language)&&$language=='en'){
+        $buttonName = 'Search';
+        $labelName  = 'Search phone wallpaper';
+    }else {
+        $buttonName = 'Tìm kiếm';
+        $labelName  = 'Tìm kiếm hình nền điện thoại';
+    }
+@endphp
 
 <form action="{{ route('main.searchProduct') }}" method="GET">
 <div class="searchViewBefore">
     <div class="searchViewBefore_input">
         <!-- value = null không lưu giá trị search cũ -->
-        <input id="searchProductAjax_input" type="text" name="key_search" placeholder="Tìm kiếm" value="" onkeyup="searchProductAjax(this)" autocomplete="off" />
-        
-        <button type="submit" class="button" aria-label="tìm kiếm sản phẩm">
-            <img src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
+        <input id="searchProductAjax_input" type="text" name="key_search" placeholder="{{ $buttonName }}" value="" onkeyup="searchProductAjax(this)" autocomplete="off" />
+        <button type="submit" class="button" aria-label="{{ $labelName }}">
+            <img src="{{ Storage::url('images/svg/search.svg') }}" alt="" title="{{ $labelName }}" />
         </button>
     </div>
     <div id="js_searchProductAjax_idWrite" class="searchViewBefore_selectbox">
         <div class="searchViewBefore_selectbox_item">
             <div>
-                <img src="/storage/images/svg/icon-search-100.png" alt="Tìm kiếm sản phẩm trên {{ config('main.company_name') }}" title="Tìm kiếm sản phẩm trên {{ config('main.company_name') }}" style="width:120px;margin:0 auto;" />
+                <img src="/storage/images/svg/icon-search-100.png" alt="{{ $labelName }}" title="{{ $labelName }}" style="width:120px;margin:0 auto;" />
                 {{-- <div>Nhập tìm kiếm của bạn!</div> --}}
             </div>
         </div>

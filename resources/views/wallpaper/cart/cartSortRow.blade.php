@@ -4,7 +4,11 @@
         $idPrice            = $product->price->id ?? 0;
         $keyId              = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
         $eventUpdateCart    = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'")';
-        $title              = $product->name ?? $product->seo->title ?? null;
+        if(!empty($language)&&$language='en'){
+            $title          = $product->en_name ?? $product->en_seo->title ?? null;
+        }else { 
+            $title          = $product->name ?? $product->seo->title ?? null;
+        }
         /* ảnh */
         $image              = config('image.default');
         
@@ -22,12 +26,18 @@
         }
         /* action */
         $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "'.$idPrice.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
+        /* đường dẫn */
+        if(!empty($language)&&$language='en'){
+            $url            = $product->en_seo->slug_full ?? null;
+        }else { 
+            $url            = $product->seo->slug_full ?? null;
+        }
     @endphp
-    <a href="/{{ $product->seo->slug_full ?? null }}" class="cartBox_list_item_image">
+    <a href="/{{ $url }}" class="cartBox_list_item_image">
         <img src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" />
     </a>
     <div class="cartBox_list_item_content">
-        <a href="/{{ $product->seo->slug_full ?? null }}" class="cartBox_list_item_content_title maxLine_2">
+        <a href="/{{ $url }}" class="cartBox_list_item_content_title maxLine_2">
             {{ $title }}
         </a>
         <div class="cartBox_list_item_content_price">
@@ -35,8 +45,14 @@
                 $price = 0;
                 if(!empty($product->price->price)) $price = number_format($product->price->price);
                 if(empty($price)) $price = number_format($product->price_all);
+                if(!empty($language)&&$language=='en'){
+                    $titlePrice = !empty($product->price->en_name) ? '<span>'.$product->price->en_name.'</span>' : null;
+                }else {
+                    $titlePrice = !empty($product->price->name) ? '<span>'.$product->price->name.'</span>' : null;
+                }
+                
             @endphp
-            {{ $price }}đ {!! !empty($product->price->name) ? '<span>'.$product->price->name.'</span>' : null !!}
+            {{ $price }}đ {!! $titlePrice !!}
         </div>
         {{-- <div class="cartBox_list_item_content_orther">
             <div class="cartBox_list_item_content_orther_quantity">

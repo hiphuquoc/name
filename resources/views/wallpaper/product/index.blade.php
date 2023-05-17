@@ -80,7 +80,8 @@
             'option'    => null,
             'quantity'  => 0,
             'price'     => 0,
-            'image'     => null
+            'image'     => null,
+            'language'  => $language
         ])
     </div>
 

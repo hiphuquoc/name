@@ -10,7 +10,11 @@
             <form id="formLogin" method="get" style="width:100%;">
             <div class="loginFormCustomer">
                 <div class="loginFormCustomer_title">
-                    Đăng nhập {{ config('main.company_name') }}
+                    @if(!empty($language)&&$language=='en')
+                        Login {{ config('main.company_name') }}
+                    @else 
+                        Đăng nhập {{ config('main.company_name') }}
+                    @endif
                 </div>
                 <div class="loginFormCustomer_body">
                     <div class="loginFormCustomer_body_item">
@@ -18,20 +22,32 @@
                         <div class="formBox">
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
-                                    <label for="email">Tên đăng nhập</label>
+                                    @if(!empty($language)&&$language=='en')
+                                        <label for="email">Email login</label>
+                                    @else 
+                                        <label for="email">Email đăng nhập</label>
+                                    @endif
                                     <input type="text" id="email" name="email" required />
                                 </div>
                             </div>
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
-                                    <label for="password">Mật khẩu</label>
+                                    @if(!empty($language)&&$language=='en')
+                                        <label for="password">Password</label>
+                                    @else 
+                                        <label for="password">Mật khẩu</label>
+                                    @endif
                                     <input type="password" id="password" name="password" autocomplete="off" required />
                                 </div>
                             </div>
                             <div class="formBox_item" style="display:flex;justify-content:space-between;align-item:flex-end;">
                                 <label class="checkBox" for="remember">
                                     <input type="checkbox" id="remember" name="remember" />
-                                    <div>Ghi nhớ tôi</div>
+                                    @if(!empty($language)&&$language=='en')
+                                        <div>Remember me</div>
+                                    @else 
+                                        <div>Ghi nhớ tôi</div>
+                                    @endif
                                 </label>
                                 <div id="noticeLogin" class="noticeLogin"> 
                                     <!-- thông báo đăng nhập -->
@@ -40,19 +56,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="loginFormCustomer_body_item">
-                        <!-- button -->
-                        <button type="button" class="button" onClick="submitFormLogin('formLogin');">Đăng nhập</div>
-                    </div>
-                    <div class="loginFormCustomer_body_item">
-                        Bạn chưa có mật khẩu? <a href="#">Đăng ký ngay</a>
-                    </div>  
+                    @if(!empty($language)&&$language=='en')
+                        <div class="loginFormCustomer_body_item">
+                            <!-- button -->
+                            <button type="button" class="button" onClick="submitFormLogin('formLogin');">Login</div>
+                        </div>
+                        <div class="loginFormCustomer_body_item">
+                            Don't have a password yet? <a href="#">Registry now</a>
+                        </div>  
+                    @else 
+                        <div class="loginFormCustomer_body_item">
+                            <!-- button -->
+                            <button type="button" class="button" onClick="submitFormLogin('formLogin');">Đăng nhập</div>
+                        </div>
+                        <div class="loginFormCustomer_body_item">
+                            Bạn chưa có mật khẩu? <a href="#">Đăng ký ngay</a>
+                        </div>  
+                    @endif
                     <div class="loginFormCustomer_body_item">
                         <!-- login social -->
                         <div class="loginFormSocial">
-                            <div class="loginFormSocial_title">
-                                hoặc đăng nhập với
-                            </div>
+                            @if(!empty($language)&&$language=='en')
+                                <div class="loginFormSocial_title">
+                                    or login with
+                                </div>
+                            @else 
+                                <div class="loginFormSocial_title">
+                                    hoặc đăng nhập với
+                                </div>
+                            @endif
                             <div class="loginFormSocial_body">
                                 <div class="loginFormSocial_body_item">
                                     <div id="g_id_onload" 
@@ -76,9 +108,16 @@
                                     </div>
                                 </div>
                                 <div class="loginFormSocial_body_item">
+                                    @php
+                                        if(!empty($language)&&$language=='en'){
+                                            $buttonTitleLoginWithFB = 'Login with Facebook';
+                                        }else {
+                                            $buttonTitleLoginWithFB = 'Đăng nhập với Facebook';
+                                        }
+                                    @endphp
                                     <a class="facebookButtonLogin" href="{{ route('main.facebook.redirect') }}">
-                                        <img src="{{ Storage::url('images/svg/logo-facebook-fff.png') }}" alt="đăng nhập với facebook" title="đăng nhập với facebook" />
-                                        <div>Đăng nhập với Facebook</div>
+                                        <img src="{{ Storage::url('images/svg/logo-facebook-fff.png') }}" alt="{{ $buttonTitleLoginWithFB }}" title="{{ $buttonTitleLoginWithFB }}" />
+                                        <div>{{ $buttonTitleLoginWithFB }}</div>
                                     </a>
                                 </div>
                             </div>

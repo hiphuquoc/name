@@ -456,6 +456,7 @@
         /* lấy title */
         dataForm.title              = $(document).find('h1').html();
         /* gửi dữ liệu để xử lý */
+        dataForm.language = $('#language').val();
         $.ajax({
             url         : '{{ route("main.addToCart") }}',
             type        : 'get',
@@ -476,10 +477,12 @@
     }
     /* tải lại thông tin icon giỏ hàng */
     function viewSortCart(){
+        const language = $('#language').val();
         $.ajax({
             url         : '{{ route("main.viewSortCart") }}',
             type        : 'get',
             dataType    : 'html',
+            data        : { language },
             success     : function(response){
                 $('#js_viewSortCart_idWrite').html(response);
             }
@@ -580,14 +583,15 @@
     }
     /* tìm kiếm sản phẩm ajax */
     function searchProductAjax(elementButton){
-        console.log(123);
-        const valueElement = $(elementButton).val();
+        const valueElement  = $(elementButton).val();
+        const language      = $('#language').val();
         $.ajax({
             url         : '{{ route("ajax.searchProductAjax") }}',
             type        : 'get',
             dataType    : 'html',
             data        : {
-                key_search  : valueElement
+                key_search  : valueElement,
+                language
             },
             success     : function(response){
                 if(response!='') {
@@ -800,12 +804,14 @@
     }
     /* check đăng nhập */
     function checkLoginAndSetShow(){
+        const language = $('#language').val();
         $.ajax({
             url         : '{{ route("ajax.checkLoginAndSetShow") }}',
             type        : 'get',
             dataType    : 'json',
             data        : {
-                '_token'            : '{{ csrf_token() }}'
+                '_token'            : '{{ csrf_token() }}',
+                language
             },
             success     : function(response){
                 /* button desktop */

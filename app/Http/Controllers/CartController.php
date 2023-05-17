@@ -11,17 +11,33 @@ use App\Models\Product;
 class CartController extends Controller{
 
     public static function index(Request $request){
+        $language       = 'vi';
         $item           = Page::select('*')
                             ->whereHas('seo', function($query){
                                 $query->where('slug', 'gio-hang');
                             })
-                            ->with('seo', 'type')
+                            ->with('seo', 'en_seo', 'type')
                             ->first();
         $products       = \App\Http\Controllers\CartController::getCollectionProducts();
         $productsCart   = [];
         if(!empty(Cookie::get('cart'))) $productsCart = json_decode(Cookie::get('cart'), true);
         $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
-        return view('wallpaper.cart.index', compact('item', 'breadcrumb', 'products', 'productsCart'));
+        return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'productsCart'));
+    }
+
+    public static function enIndex(Request $request){
+        $language       = 'en';
+        $item           = Page::select('*')
+                            ->whereHas('en_seo', function($query){
+                                $query->where('slug', 'cart');
+                            })
+                            ->with('seo', 'en_seo', 'type')
+                            ->first();
+        $products       = \App\Http\Controllers\CartController::getCollectionProducts();
+        $productsCart   = [];
+        if(!empty(Cookie::get('cart'))) $productsCart = json_decode(Cookie::get('cart'), true);
+        $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('cart', $language);
+        return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'productsCart'));
     }
 
     public static function addToCart(Request $request){
@@ -68,18 +84,21 @@ class CartController extends Controller{
         /* set cookie */
         self::setCookie('cart', json_encode($cartNew), 3600);
         /* trả thông báo */
+        $language       = $request->get('language') ?? 'vi';
         $result = view('wallpaper.cart.cartMessage', [
             'title'     => $request->get('title') ?? null,
             'option'    => $request->get('option_name') ?? null,
             'price'     => $request->get('price') ?? null,
-            'image'     => $request->get('image') ?? null
+            'image'     => $request->get('image') ?? null,
+            'language'  => $language
         ]);
         echo $result;
     }
 
-    public static function viewSortCart(){
+    public static function viewSortCart(Request $request){
+        $language = $request->get('language') ?? 'vi';
         $products = self::getCollectionProducts();
-        $response = view('wallpaper.cart.cartSort', compact('products'))->render();
+        $response = view('wallpaper.cart.cartSort', compact('products', 'language'))->render();
         echo $response;
     }
 

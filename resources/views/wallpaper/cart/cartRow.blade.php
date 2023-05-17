@@ -4,22 +4,30 @@
     $keyId                  = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
     $eventUpdateCart        = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'", "cartMain")';
     $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "'.$idPrice.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
-    $title                  = $product->name ?? $product->seo->title ?? null;
+    if(!empty($language)&&$language=='en'){
+        $title              = $product->en_name ?? $product->en_seo->title ?? null;
+        $titlePrice         = $product->price->en_name ?? null;
+        $url                = $product->en_seo->slug_full ?? null;
+    }else {
+        $title              = $product->name ?? $product->seo->title ?? null;
+        $titlePrice         = $product->price->name ?? null;
+        $url                = $product->seo->slug_full ?? null;
+    }
     /* ảnh */
     $image                  = config('image.default');
     if(!empty($product->price->files[0]->file_path)&&file_exists(Storage::path($product->price->files[0]->file_path))) $image = Storage::url($product->price->files[0]->file_path);
 @endphp
 
 <div class="cartProductBox_body_item_info">
-    <a href="/{{ $product->seo->slug_full ?? null }}" class="cartProductBox_body_item_info_image">
+    <a href="/{{ $url }}" class="cartProductBox_body_item_info_image">
         <img src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" />
     </a>
     <div class="cartProductBox_body_item_info_content">
-        <a href="/{{ $product->seo->slug_full ?? null }}" class="cartProductBox_body_item_info_content_title maxLine_2">
+        <a href="/{{ $url }}" class="cartProductBox_body_item_info_content_title maxLine_2">
             {{ $title }}
         </a>
         <div class="cartProductBox_body_item_info_content_option"> 
-            {{ $product->price->name ?? null }}
+            {{ $titlePrice }}
         </div>
     </div>
 </div>

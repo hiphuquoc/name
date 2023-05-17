@@ -12,7 +12,7 @@
                 <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
             </div>
         </div>
-        @if(!Route::is('main.cart'))
+        @if(!Route::is('main.cart')&&!Route::is('main.enCart'))
             {{-- @include('wallpaper.template.search') --}}
             <div id="js_viewSortCart_idWrite">
                 @include('wallpaper.cart.cartSort', ['products' => null])

@@ -41,6 +41,7 @@ class AjaxController extends Controller {
                 ->join('seo', 'seo.id', '=', 'product_info.seo_id')
                 ->where('code', 'like', '%'.$keySearch.'%')
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
+                ->orWhere('en_name', 'like', '%'.$keySearch.'%')
                 ->skip(0)
                 ->take(6)
                 ->with('seo')
@@ -49,14 +50,22 @@ class AjaxController extends Controller {
             $count              = Product::select('product_info.*')
                 ->where('code', 'like', '%'.$keySearch.'%')
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
+                ->orWhere('en_name', 'like', '%'.$keySearch.'%')
                 ->count();
             $response           = null;
+            $language           = $request->get('language') ?? 'vi';
             if(!empty($products)&&$products->isNotEmpty()){
                 foreach($products as $product){
-                    $title      = $product->name ?? $product->seo->title ?? null;
+                    if(!empty($language)&&$language=='en'){
+                        $title  = $product->en_name ?? $product->en_seo->title ?? null;
+                        $url    = $product->en_seo->slug_full;
+                    }else {
+                        $title  = $product->name ?? $product->seo->title ?? null;
+                        $url    = $product->seo->slug_full;
+                    }
                     $priceOld   = null;
                     if($product->prices[0]->price<$product->prices[0]->price_before_promotion) $priceOld = '<div class="searchViewBefore_selectbox_item_content_price_old">'.number_format($product->prices[0]->price_before_promotion).config('main.currency_unit').'</div>';
-                    $response       .= '<a href="/'.$product->seo->slug_full.'" class="searchViewBefore_selectbox_item">
+                    $response       .= '<a href="/'.$url.'" class="searchViewBefore_selectbox_item">
                                             <div class="searchViewBefore_selectbox_item_image">
                                                 <img src="'.Storage::url($product->prices[0]->files[0]->file_path).'" alt="'.$title.'" title="'.$title.'" />
                                             </div>
@@ -135,15 +144,16 @@ class AjaxController extends Controller {
         $xhtmlButton            = '';
         $xhtmlButtonMobile      = '';
         $user = $request->user();
+        $language               = $request->get('language') ?? 'vi';
         if(!empty($user)){
             /* đã đăng nhập => hiển thị button thông tin tài khoản */
-            $xhtmlButton        = view('wallpaper.template.buttonLogin', ['user' => $user])->render();
-            $xhtmlButtonMobile  = view('wallpaper.template.buttonLoginMobile', ['user' => $user])->render();
+            $xhtmlButton        = view('wallpaper.template.buttonLogin', ['user' => $user, 'language' => $language])->render();
+            $xhtmlButtonMobile  = view('wallpaper.template.buttonLoginMobile', ['user' => $user, 'language' => $language])->render();
         }else {
             /* chưa đăng nhập => hiển thị button đăng nhập + modal */
-            $xhtmlButton        = view('wallpaper.template.buttonLogin')->render();
-            $xhtmlModal         = view('wallpaper.template.loginCustomerModal')->render();
-            $xhtmlButtonMobile  = view('wallpaper.template.buttonLoginMobile')->render();
+            $xhtmlButton        = view('wallpaper.template.buttonLogin', ['language' => $language])->render();
+            $xhtmlModal         = view('wallpaper.template.loginCustomerModal', ['language' => $language])->render();
+            $xhtmlButtonMobile  = view('wallpaper.template.buttonLoginMobile', ['language' => $language])->render();
         }
         $result['modal']            = $xhtmlModal;
         $result['button']           = $xhtmlButton;

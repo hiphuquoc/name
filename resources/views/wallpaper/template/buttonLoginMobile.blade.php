@@ -10,11 +10,19 @@
             <div class="headerBottom_item_text_modal">
                 <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
                     <i class="fa-solid fa-download"></i>
-                    <div>Tải xuống của tôi</div>
+                    @if(!empty($language)&&$language=='en')
+                        <div>My Downloads</div>
+                    @else 
+                        <div>Tải xuống của tôi</div>
+                    @endif
                 </a> 
                 <a href="{{ route('admin.logout') }}" class="loginBox_list_item">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <div>Đăng xuất</div>
+                    @if(!empty($language)&&$language=='en')
+                        <div>Logout</div>
+                    @else 
+                        <div>Đăng xuất</div>
+                    @endif
                 </a>
             </div>
             <div class="headerBottom_item_text_background"></div>
@@ -39,7 +47,11 @@
             <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="mua ngay" title="mua ngay" />
         </div>
         <div class="headerBottom_item_text">
-            Đăng nhập
+            @if(!empty($language)&&$language=='en')
+                Login
+            @else 
+                Đăng nhập
+            @endif
         </div>
     </div>
 @endif

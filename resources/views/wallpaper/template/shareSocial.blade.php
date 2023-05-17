@@ -1,7 +1,11 @@
 <div class="shareSocialBox">
     <div class="shareSocialBox_item">
         <div class="shareSocialBox_item_text">
-            Chia sẻ<br/>bạn bè
+            @if(!empty($language)&&$language=='en')
+                Share to<br/>your friends
+            @else
+                Chia sẻ<br/>bạn bè
+            @endif
         </div>
     </div>
     <div class="shareSocialBox_item">

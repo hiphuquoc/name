@@ -82,6 +82,7 @@ Route::get('/tim-kiem', [PagePublic::class, 'searchProduct'])->name('main.search
 Route::get('/search', [PagePublic::class, 'enSearchProduct'])->name('main.enSearchProduct');
 /* cart */
 Route::get('/gio-hang', [CartController::class, 'index'])->name('main.cart');
+Route::get('/cart', [CartController::class, 'enIndex'])->name('main.enCart');
 Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addToCart');
 Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.updateCart');
 Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');

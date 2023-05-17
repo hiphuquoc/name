@@ -1,9 +1,15 @@
 <div id="cartMessage" class="cartMessage">
     <div class="cartMessage_bg" onClick="openCloseModal('cartMessage');"></div> 
     <div class="cartMessage_box">
-        <div class="cartMessage_box_head">
-            Đã thêm vào giỏ hàng!
-        </div>
+        @if(!empty($language)&&$language=='en')
+            <div class="cartMessage_box_head">
+                Added to cart!
+            </div>
+        @else 
+            <div class="cartMessage_box_head">
+                Đã thêm vào giỏ hàng!
+            </div>
+        @endif
         <div class="cartMessage_box_close" onClick="openCloseModal('cartMessage');"><i class="fa-solid fa-xmark"></i></div>
         <div class="cartMessage_box_body">
             @if(!empty($image))
@@ -17,8 +23,14 @@
                 <div class="cartMessage_box_body_content_type">{{ $option ?? 'Không xác định' }}</div>
             </div>
         </div>
-        <div class="cartMessage_box_footer">
-            <a href="{{ route('main.cart') }}" class="button">Xem giỏ hàng</a>
-        </div>
+        @if(!empty($language)&&$language=='en')
+            <div class="cartMessage_box_footer">
+                <a href="{{ route('main.enCart') }}" class="button">View cart</a>
+            </div>
+        @else 
+            <div class="cartMessage_box_footer">
+                <a href="{{ route('main.cart') }}" class="button">Xem giỏ hàng</a>
+            </div>
+        @endif
     </div>
 </div>
