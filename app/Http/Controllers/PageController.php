@@ -88,6 +88,7 @@ class PageController extends Controller{
             $products       =  Product::select('*')
                 ->where('code', 'like', '%'.$keySearch.'%')
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
+                ->orWhere('en_name', 'like', '%'.$keySearch.'%')
                 ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
                 ->orderBy('id', 'DESC')
                 ->skip(0)
@@ -96,6 +97,7 @@ class PageController extends Controller{
             $totalProduct   =  Product::select('product_info.*')
                 ->where('code', 'like', '%'.$keySearch.'%')
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
+                ->orWhere('en_name', 'like', '%'.$keySearch.'%')
                 ->count();
             /* breadcrumb */
             $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
