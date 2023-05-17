@@ -80,7 +80,8 @@ class AjaxController extends Controller {
                                             </div>
                                         </a>';
                 }
-                $response           .= '<a href="'.route('main.searchProduct').'?key_search='.request('key_search').'" class="searchViewBefore_selectbox_item">
+                $route              = $language=='en' ? route('main.enSearchProduct') : route('main.searchProduct');
+                $response           .= '<a href="'.$route.'?key_search='.request('key_search').'" class="searchViewBefore_selectbox_item">
                                             Xem tất cả (<span style="font-size:1.1rem;">'.$count.'</span>) <i class="fa-solid fa-angles-right"></i>
                                         </a>';
             }else {
