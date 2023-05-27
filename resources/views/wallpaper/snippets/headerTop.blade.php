@@ -26,9 +26,9 @@
         <div class="languageBox">
             <input type="hidden" id="language" name="language" value="{{ $language ?? '' }}" />
             @if(!empty($language)&&$language=='en')
-                <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon-en.png') }}') no-repeat;background-size:100% 100%;"></div>
+                <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon-en.png') }}') no-repeat center;background-size:100% 100%;"></div>
             @else 
-                <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon-vi.png') }}') no-repeat;background-size:100% 100%;"></div>
+                <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon-vi.png') }}') no-repeat center;background-size:100% 100%;"></div>
             @endif
             <div class="languageBox_list">
                 @php

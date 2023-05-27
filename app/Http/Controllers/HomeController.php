@@ -22,7 +22,6 @@ class HomeController extends Controller{
         $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
         if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
             $xhtml              = file_get_contents($pathCache);
-            echo $xhtml;
         }else {
             $language               = 'vi';
             $item                   = Page::select('*')
@@ -45,24 +44,11 @@ class HomeController extends Controller{
                                             $query->where('sale_off', '>', 0);
                                         })
                                         ->count();
-            // $categories             = Category::select('*')
-            //                             ->whereHas('seo', function($query){
-            //                                 $query->where('level', 1);
-            //                             })
-            //                             ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-            //                             ->orderBy('seo.ordering', 'DESC')
-            //                             ->get();
-            // $blogs                  = Blog::select('*')
-            //                             ->whereHas('categories.infoCategory.seo', function($query){
-            //                                 $query->where('slug', 'blog-lam-dep');
-            //                             })
-            //                             ->with('seo')
-            //                             ->get();
-            $xhtml          = view('wallpaper.home.index', compact('item', 'language', 'newProducts', 'promotionProducts', 'totalPromotionProduct'))->render();
+            $xhtml                  = view('wallpaper.home.index', compact('item', 'language', 'newProducts', 'promotionProducts', 'totalPromotionProduct'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
-            echo $xhtml;
         }
+        echo $xhtml;
     }
 
     public static function enHome(Request $request){
@@ -72,7 +58,6 @@ class HomeController extends Controller{
         $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
         if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
             $xhtml              = file_get_contents($pathCache);
-            echo $xhtml;
         }else {
             $language               = 'en';
             $item                   = Page::select('*')
@@ -95,24 +80,12 @@ class HomeController extends Controller{
                                             $query->where('sale_off', '>', 0);
                                         })
                                         ->count();
-            // $categories             = Category::select('*')
-            //                             ->whereHas('seo', function($query){
-            //                                 $query->where('level', 1);
-            //                             })
-            //                             ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-            //                             ->orderBy('seo.ordering', 'DESC')
-            //                             ->get();
-            // $blogs                  = Blog::select('*')
-            //                             ->whereHas('categories.infoCategory.seo', function($query){
-            //                                 $query->where('slug', 'blog-lam-dep');
-            //                             })
-            //                             ->with('seo')
-            //                             ->get();
             $xhtml          = view('wallpaper.home.index', compact('item', 'language', 'newProducts', 'promotionProducts', 'totalPromotionProduct'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
-            echo $xhtml;
         }
+        echo $xhtml;
+        return false;
     }
 
     public static function test(Request $request){

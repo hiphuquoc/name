@@ -39,9 +39,10 @@
         <div class="layoutHeaderSide" style="min-height:calc(100vh - 95px);">
             <div id="js_toggleMenuMobile" class="layoutHeaderSide_header">
                 <!-- === START:: Header side === -->
-                @include('wallpaper.cacheHTML.create', [
+                {{-- @include('wallpaper.cacheHTML.create', [
                     'content'  => 'wallpaper.snippets.headerSide'
-                ])
+                ]) --}}
+                @include('wallpaper.snippets.headerSide')
                 <!-- === END:: Header side === -->
             </div>
 
@@ -55,9 +56,10 @@
 
         <!-- === START:: Footer === -->
         @if(!Route::is('main.cart')&&!Route::is('main.confirm'))
-            @include('wallpaper.cacheHTML.create', [
+            {{-- @include('wallpaper.cacheHTML.create', [
                 'content'   => 'wallpaper.snippets.footer'
-            ])
+            ]) --}}
+            @include('wallpaper.snippets.footer')
         @endif
         <!-- === END:: Footer === -->
 

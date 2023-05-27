@@ -202,6 +202,7 @@ class RoutingController extends Controller{
                     return \App\Http\Controllers\ErrorController::error404();
                 }
             }
+            return false;
         }else {
             return \App\Http\Controllers\ErrorController::error404();
         }

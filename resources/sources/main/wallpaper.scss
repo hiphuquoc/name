@@ -754,6 +754,8 @@
     .rightBox {
         height: 100%;
         margin-top: 9px;
+        min-width: 335px;
+        justify-content: flex-end;
     }
     @media(max-width: 1199px){
         &_item {
@@ -766,6 +768,11 @@
             &:not(:first-child){
                 margin-left: 1.25rem;
             }
+        }
+    }
+    @media(max-width: 1023px){
+        .rightBox {
+            min-width: unset;
         }
     }
 }
@@ -824,7 +831,6 @@
     height: inherit;
     align-items: center;
     float: right;
-    min-width: 109px;
     &:hover {
         .cartBox_list {
             display: flex;
@@ -1024,7 +1030,6 @@
     align-items: center;
     font-family: $fontTitle;
     height: 100%;
-    min-width: 115px;
     cursor: pointer;
     position: relative;
     &:hover {
