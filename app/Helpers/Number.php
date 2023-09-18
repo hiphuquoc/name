@@ -11,4 +11,10 @@ class Number {
         }
         return $result;
     }
+
+    public static function convertUSDToVND($number){
+        $result     = null;
+        if(!empty($number)) $result = $number*config('main.exchange_rate.usd_to_vnd');
+        return $result;
+    }
 }

@@ -34,12 +34,19 @@ class HomeController extends Controller{
                                         ->with('seo', 'en_seo', 'type')
                                         ->first();
             $newProducts            = Product::select('*')
+                                        ->whereHas('prices.wallpapers', function(){
+
+                                        })
+                                        ->with('prices.wallpapers')
                                         ->orderBy('id', 'DESC')
                                         ->skip(0)
                                         ->take(10)
                                         ->get();
             $promotionProducts      = new \Illuminate\Database\Eloquent\Collection;
             $totalPromotionProduct  = Product::select('*')
+                                        ->whereHas('prices.wallpapers', function(){
+
+                                        })
                                         ->whereHas('prices', function($query){
                                             $query->where('sale_off', '>', 0);
                                         })
@@ -89,20 +96,27 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        dd($request->all());
-        if(!empty($request->get('code'))){
-            $orderCode          = $request->get('code');
-        
-            $orderInfo          = Order::select('*')
-                                    ->where('code', $orderCode)
-                                    ->first();
 
-            Order::updateItem($orderInfo->id, [
-                'payment_status' => 1
-            ]);
-            dd('success');
-        }else {
-            dd('fail');
-        }
+
+        // $flag = Storage::disk('gcs')->put('test.txt', '123');
+
+        $flag = Storage::disk('gcs')->delete('test.txt');
+        dd($flag);
+
+        // dd($request->all());
+        // if(!empty($request->get('code'))){
+        //     $orderCode          = $request->get('code');
+        
+        //     $orderInfo          = Order::select('*')
+        //                             ->where('code', $orderCode)
+        //                             ->first();
+
+        //     Order::updateItem($orderInfo->id, [
+        //         'payment_status' => 1
+        //     ]);
+        //     dd('success');
+        // }else {
+        //     dd('fail');
+        // }
     }
 }

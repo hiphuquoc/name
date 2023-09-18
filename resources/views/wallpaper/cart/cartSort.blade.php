@@ -1,9 +1,8 @@
 @php
-    $language   = !empty($language) ? $language : 'vi';
-    if($language=='en'){
-        $urlCart    = route('main.enCart');
-    }else {
+    if(empty($language)||$language=='vi'){
         $urlCart    = route('main.cart');
+    }else {
+        $urlCart    = route('main.enCart');
     }
 @endphp
 <div class="cartBox">
@@ -33,13 +32,13 @@
                 @endforeach
             </div>
             <div class="cartBox_list_item buttonBox">
-                <div class="total">{{ !empty($language)&&$language=='en' ? 'Total' : 'Tổng' }}: <span id="js_updateCart_total">{!! number_format($total).config('main.currency_unit') !!}</span></div>
-                <a href="{{ $urlCart }}" class="button">{{ !empty($language)&&$language=='en' ? 'View cart' : 'Xem giỏ hàng' }}</a>
+                <div class="total">{{ empty($language)||$language=='vi' ? 'Tổng' : 'Total' }}: <span id="js_updateCart_total">{!! number_format($total).config('main.currency_unit') !!}</span></div>
+                <a href="{{ $urlCart }}" class="button">{{ empty($language)||$language=='vi' ? 'Xem giỏ hàng' : 'View cart' }}</a>
             </div>
         @else 
             <div class="emptyCart">
                 <img src="{{ Storage::url('images/svg/icon-blank-cart.svg') }}" alt="danh sách sản phẩm trong giỏ hàng" title="danh sách sản phẩm trong giỏ hàng" />
-                <div class="emptyCart_text">{{ !empty($language)&&$language=='en' ? 'Your shopping cart is empty' : 'Giỏ hàng của bạn trống' }}!</div> 
+                <div class="emptyCart_text">{{ empty($language)||$language=='vi' ? 'Giỏ hàng của bạn trống' : 'Your shopping cart is empty' }}!</div> 
             </div>
         @endif
         

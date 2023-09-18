@@ -17,10 +17,28 @@
                     <img src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
                 </div>
             @endif
+            @php
+                $xhtmlPrice         = '-';
+                if(!empty($price)){
+                    $xhtmlPrice     = $price.config('main.currency_unit_en');
+                    if(empty($language)||$language=='vi'){
+                        $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($price)).config('main.currency_unit');
+                    }
+                }
+                if(!empty($option)){
+                    if(empty($language)||$language=='vi'){
+                        
+                    }else {
+                        $option = 'Full set';
+                    }
+                }else {
+                    $option = 'Không xác định';
+                }
+            @endphp
             <div class="cartMessage_box_body_content">
                 <div class="cartMessage_box_body_content_title maxLine_3">{{ $title ?? 'Không xác định' }}</div>
-                <div class="cartMessage_box_body_content_price">{{ !empty($price) ? number_format($price).'đ' : '-' }}</div>
-                <div class="cartMessage_box_body_content_type">{{ $option ?? 'Không xác định' }}</div>
+                <div class="cartMessage_box_body_content_price">{!! $xhtmlPrice !!}</div>
+                <div class="cartMessage_box_body_content_type">{{ $option }}</div>
             </div>
         </div>
         @if(!empty($language)&&$language=='en')

@@ -1,12 +1,4 @@
 @php
-    $allImage           = new \Illuminate\Database\Eloquent\Collection;
-    $i                  = 0;
-    foreach($product->prices as $price){
-        foreach($price->files as $file){
-            $allImage[$i]       = $file;
-            ++$i;
-        }
-    }
     if(!empty($language)&&$language=='en'){
         $productName        = $product->en_name ?? $product->en_seo->title ?? null;
     }else {
@@ -27,38 +19,35 @@
     // /* gộp thêm của brand vào */
     // $dataFilter         .= ' '.$product->brand->seo->slug;
 @endphp 
-<div class="wallpaperGridBox_item" data-key="{{ $dataFilter }}" data-price="{{ $product->prices[0]->price }}">
+<div class="wallpaperGridBox_item" data-key="{{ $dataFilter }}" data-price="{{ $product->price }}">
     @php
         $i = 0;
     @endphp
     @foreach($product->prices as $price)
-        @foreach($price->files as $file)
+        @foreach($price->wallpapers as $wallpaper)
             <!-- one price && file -->
             {{-- .\App\Helpers\Charactor::randomString(10) --}}
             @php
                 $tag        = $tagBox ?? null;
-                $keyIdPrice = 'js_changeOption_'.$tag.$price->id.$file->id;
-                /* lấy ảnh mini */
-                $fileInfo   = pathinfo($file->file_path);
-                $imageSmall = Storage::url($fileInfo['dirname'].'/'.$fileInfo['filename'].'-small'.'.'.$fileInfo['extension']);
+                $keyIdPrice = 'js_changeOption_'.$tag.$price->id.$wallpaper->infoWallpaper->id;
+                /* lấy ảnh Small */
+                $imageMini = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                $image      = $wallpaper->infoWallpaper->file_url_hosting;
                 /* đường dẫn */
                 $url        = !empty($language)&&$language=='en'&&!empty($product->en_seo->slug_full) ? $product->en_seo->slug_full : $product->seo->slug_full;
             @endphp
             <div id="{{ $keyIdPrice }}" class="{{ $i==0 ? 'show' : 'hide' }}">
                 <a href="/{{ $url }}?product_price_id={{ $price->id }}" class="wallpaperGridBox_item_image">
                     <div class="zIndexHide">
-                        
-                        <!-- ảnh -->
-
                         <!-- xử lý loadajax -->
                         @if(!empty($type)&&$type=='ajax')
-                            <img src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" />
+                            <img class="lazyLoadWithResize" src="{{ $imageMini }}" data-url-image="{{ $image }}" data-resize="300" alt="{{ $productName }}" title="{{ $productName }}" />
                         @else 
                             @if($i==0)
-                                <div class="wallpaperGridBox_item_image_backgroundImage lazyload" data-src="{{ $imageSmall }}" style="background:url('{{ $imageSmall }}') no-repeat center center / cover;filter:blur(5px);"></div>
+                                <div class="wallpaperGridBox_item_image_backgroundImage lazyLoadWithResize" data-url-image="{{ $wallpaper->infoWallpaper->file_url_hosting }}" data-resize="300" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
                             @else 
                                 <!-- các ảnh sau khi nào click mới load -->
-                                <img data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" />
+                                <img class="lazyLoadWithResize" data-url-image="{{ $wallpaper->infoWallpaper->file_url_hosting }}" data-resize="300" alt="{{ $productName }}" title="{{ $productName }}" />
                             @endif
                         @endif
                         <!-- rating và số lượng đã bán -->
@@ -85,12 +74,25 @@
                                 @endif
                             </div>
                             <div class="wallpaperGridBox_item_image_content_price">
+                                @php
+                                    $p              = $i==0 ? $product->price : $price->price;
+                                    $pOld           = $i==0 ? $product->price_before_promotion : $price->price_before_promotion;
+                                    $xhtmlPrice     = $p.config('main.currency_unit_en');
+                                    if(empty($language)||$language=='vi'){
+                                        $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($p)).config('main.currency_unit');
+                                    }
+                                    $xhtmlPriceOld  = null;
+                                    if(!empty($p!=$pOld)){
+                                        if(empty($language)||$language=='vi'){
+                                            $pOld   = number_format(\App\Helpers\Number::convertUSDToVND($pOld));
+                                        }
+                                    }
+                                    $xhtmlPriceOld  = '<span class="maxLine_1">'.$pOld.'</span>';
+                                @endphp
                                 <!-- giá -->
-                                <div>{!! number_format($price->price).config('main.currency_unit') !!}</div>
+                                <div>{!! $xhtmlPrice !!}</div>
                                 <!-- giá trước khuyến mãi -->
-                                @if(!empty($price->price!=$price->price_before_promotion))
-                                    <span class="maxLine_1">{{ number_format($price->price_before_promotion) }}{!! config('main.currency_unit') !!}</span>
-                                @endif
+                                {!! $xhtmlPriceOld !!}
                             </div>
                         </div>
                         <!-- background blur -->
@@ -100,25 +102,42 @@
                 </a>
                 <!-- danh sách ảnh -->
                 <div class="wallpaperGridBox_item_imageList">
-                    @foreach($allImage as $image)
-                        @php
-                            $tag        = $tagBox ?? null;
-                            $keyIdFile  = 'js_changeOption_'.$tag.$image->attachment_id.$image->id;
-                            $selected   = null;
-                            if($keyIdPrice==$keyIdFile) $selected = 'selected';
-                            if($loop->index==5) break;
-                            /* lấy ảnh mini */
-                            $fileInfo   = pathinfo($image->file_path);
-                            $imageMini  = Storage::url($fileInfo['dirname'].'/'.$fileInfo['filename'].'-mini'.'.'.$fileInfo['extension']);
-                        @endphp
-                        <div class="wallpaperGridBox_item_imageList_item {{ $selected }}" onClick="changeOption('{{ $keyIdFile }}');">
-                            @if(!empty($type)&&$type=='lazyload')
-                                <!-- lazy load image list -->
-                                <img src="{{ $imageMini }}" alt="loading cart" title="loading cart" />
-                            @else
-                                <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
+                    @php
+                        $k                  = 1;
+                    @endphp
+                    @foreach($product->prices as $price)
+                        @foreach($price->wallpapers as $wallpaper)
+                            @php
+                                if($k==6) break;
+                                ++$k;
+                                $tag        = $tagBox ?? null;
+                                $keyIdFile  = 'js_changeOption_'.$tag.$price->id.$wallpaper->infoWallpaper->id;
+                                $selected   = null;
+                                if($keyIdPrice==$keyIdFile) $selected = 'selected';
+                                /* lấy ảnh mini */
+                                $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                            @endphp
+                            @if($k==6)
+                                <a href="/{{ $url }}" class="wallpaperGridBox_item_imageList_item {{ $selected }}">
+                                    @if(!empty($type)&&$type=='lazyload')
+                                        <!-- lazy load image list -->
+                                        <img src="{{ $imageMini }}" alt="loading cart" title="loading cart" />
+                                    @else
+                                        <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
+                                    @endif
+                                    <span class="wallpaperGridBox_item_imageList_item_count">+{{ $product->prices->count() - 4 }}</span>
+                                </a>
+                            @else 
+                                <div class="wallpaperGridBox_item_imageList_item {{ $selected }}" onClick="changeOption('{{ $keyIdFile }}');">
+                                    @if(!empty($type)&&$type=='lazyload')
+                                        <!-- lazy load image list -->
+                                        <img src="{{ $imageMini }}" alt="loading cart" title="loading cart" />
+                                    @else
+                                        <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
+                                    @endif
+                                </div>
                             @endif
-                        </div>
+                        @endforeach
                     @endforeach
                 </div>
             </div>

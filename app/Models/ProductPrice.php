@@ -16,9 +16,9 @@ class ProductPrice extends Model {
         'en_description',
         'price',
         'price_origin',
+        'price_before_promotion',
         'sale_off',
-        'instock',
-        'folder_drive'
+        'instock'
     ];
     public $timestamps = false;
     private static $columnFilter = [
@@ -31,8 +31,7 @@ class ProductPrice extends Model {
         'price_origin',
         'price_before_promotion',
         'sale_off',
-        'instock',
-        'folder_drive'
+        'instock'
     ];
 
     public static function insertItem($params){
@@ -60,11 +59,7 @@ class ProductPrice extends Model {
         return $flag;
     }
 
-    public function files(){
-        return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id')->where('relation_table', 'product_price');
-    }
-
-    public function sources(){
-        return $this->hasMany(\App\Models\SourceFile::class, 'attachment_id', 'id');
+    public function wallpapers(){
+        return $this->hasMany(\App\Models\RelationProductPriceWallpaperInfo::class, 'product_price_id', 'id');
     }
 }

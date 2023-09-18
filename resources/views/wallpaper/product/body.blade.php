@@ -8,21 +8,8 @@
 <!-- Product Detail Box -->
 <div class="pageProductDetailBox">
     <div class="pageProductDetailBox_left">
-        @php
-            $flagHasImage = false;
-            foreach($item->prices as $price){
-                foreach($price->files as $file){
-                    if(file_exists(Storage::path($file->file_path))) {
-                        $flagHasImage = true;
-                        break;
-                    }
-                }
-            }
-        @endphp
-        @if($flagHasImage)
-            <!-- Gallery Desktop -->
-            @include('wallpaper.product.gallery', ['prices' => $item->prices])
-        @endif
+        <!-- Gallery Desktop -->
+        @include('wallpaper.product.gallery', ['prices' => $item->prices])
         <!-- giải thích thanh toán và nhận ảnh => desktop -->
         <div class="show-1199">
             <div>Sau khi thanh toán bằng <span class="highLight">Momo /Zalopay</span>, Bạn sẽ nhận được link ảnh gốc để có thể tải xuống và sử dụng.</div>

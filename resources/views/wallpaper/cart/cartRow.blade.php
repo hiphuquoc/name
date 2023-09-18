@@ -15,7 +15,7 @@
     }
     /* ảnh */
     $image                  = config('image.default');
-    if(!empty($product->price->files[0]->file_path)&&file_exists(Storage::path($product->price->files[0]->file_path))) $image = Storage::url($product->price->files[0]->file_path);
+    if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting)) $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting);
 @endphp
 
 <div class="cartProductBox_body_item_info">

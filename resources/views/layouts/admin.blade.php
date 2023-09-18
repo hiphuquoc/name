@@ -4,6 +4,7 @@
 <!-- === START:: Head === -->
 <head>
     @include('admin.snippets.head')
+    @stack('headCustom')
 </head>
 <!-- === END:: Head === -->
 

@@ -19,9 +19,11 @@ use App\Models\Brand;
 use App\Models\ProductContent;
 use App\Models\ProductPrice;
 use App\Models\RelationCategoryProduct;
+use App\Models\Wallpaper;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\SourceController;
+use App\Models\RelationProductPriceWallpaperInfo;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
 
 use Illuminate\Support\Facades\File;
@@ -168,19 +170,17 @@ class ProductController extends Controller {
             $productPriceDelete = ProductPrice::select('*')
                                     ->where('product_info_id', $idProduct)
                                     ->whereNotIn('id', $priceSave)
-                                    ->with('files')
+                                    ->with('wallpapers')
                                     ->get();
             /* duyệt mảng delete files */
             foreach($productPriceDelete as $productPrice) {
-                foreach($productPrice->files as $file) {
-                    Gallerycontroller::removeById($file->id);
-                    SourceController::removeById($file->id);
-                }
+                RelationProductPriceWallpaperInfo::select('*')
+                    ->where('product_price_id', $productPrice->id)
+                    ->delete();
                 /* xóa product price */
                 $productPrice->delete();
             }
             /* update lại các product price còn lại */
-            // dd($request->get('prices'));
             foreach($request->get('prices') as $price){
                 if(!empty($price['name'])&&!empty($price['price'])){
                     if(!empty($price['id'])){
@@ -240,15 +240,17 @@ class ProductController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'product_info');
                                 }])
-                                ->with('seo', 'en_seo', 'contents', 'prices.files', 'categories', 'brand')
+                                ->with('seo', 'en_seo', 'contents', 'prices.wallpapers.infoWallpaper', 'categories', 'brand')
                                 ->first();
         $categories         = Category::all();
         $brands             = Brand::all();
         $parents            = $categories;
+        $wallpapers         = Wallpaper::select('*')
+                                ->get();
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.product.view', compact('item', 'type', 'categories', 'brands', 'parents', 'message'));
+        return view('admin.product.view', compact('item', 'wallpapers', 'type', 'categories', 'brands', 'parents', 'message'));
     }
 
     public static function list(Request $request){
@@ -275,28 +277,22 @@ class ProductController extends Controller {
 
     public function delete(Request $request){
         if(!empty($request->get('id'))){
-            try {
-                DB::beginTransaction();
+            // try {
+            //     DB::beginTransaction();
                 $id         = $request->get('id');
                 $info       = Product::select('*')
                                 ->where('id', $id)
-                                ->with('seo', 'prices.files')
+                                ->with('seo', 'prices.wallpapers')
                                 ->first();
                 /* xóa ảnh đại diện sản phẩm trong thư mục */
                 $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
                 if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
                 $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
                 if(file_exists($imagePath)) @unlink($imagePath);
-                /* xóa ảnh của product_price */
-                foreach($info->prices as $price){
-                    foreach($price->files as $file){
-                        GalleryController::removeById($file->id);
-                    }
-                    foreach($price->sources as $source){
-                        SourceController::removeById($source->id);
-                    }
-                }
                 /* xóa bảng product_price */
+                $info->prices->each(function ($price) {
+                    $price->wallpapers()->delete();
+                });
                 $info->prices()->delete();
                 /* xóa relation_product_category */
                 $info->categories()->delete();
@@ -304,52 +300,12 @@ class ProductController extends Controller {
                 $info->seo()->delete();
                 /* xóa product_info */
                 $info->delete();
-                DB::commit();
-                return true;
-            } catch (\Exception $exception){
-                DB::rollBack();
-                return false;
-            }
+            //     DB::commit();
+            //     return true;
+            // } catch (\Exception $exception){
+            //     DB::rollBack();
+            //     return false;
+            // }
         }
-    }
-
-    public static function uploadImageProductPriceAjaxToFile(Request $request){
-        set_time_limit(-1);
-        ini_set('max_execution_time', -1);
-        ini_set('max_input_time', -1);
-        $result             = [];
-        $idProductPrice     = $request->get('product_price_id') ?? 0;
-        if(!empty($idProductPrice)&&$request->hasFile('files')){
-            $files          = $request->file('files');
-            $name           = $request->get('slug') ?? time();
-            $params         = [
-                'attachment_id'     => $idProductPrice,
-                'relation_table'    => 'product_price',
-                'name'              => $name
-            ];
-            $result         = GalleryController::upload($files, $params);
-        }
-        
-        return json_encode($result);
-    }
-
-    public static function uploadImageProductPriceAjaxToSource(Request $request){
-        set_time_limit(-1);
-        ini_set('max_execution_time', -1);
-        ini_set('max_input_time', -1);
-        $result             = [];
-        $idProductPrice     = $request->get('product_price_id') ?? 0;
-        if(!empty($idProductPrice)&&$request->hasFile('files')){
-            $files          = $request->file('files');
-            $name           = $request->get('slug') ?? time();
-            $folderDrive    = $request->get('folder_drive').'-'.$name;
-            $params         = [
-                'attachment_id'     => $idProductPrice,
-                'relation_table'    => 'product_price',
-                'folder_drive'      => $folderDrive
-            ];
-            $result         = SourceController::upload($files, 'wallpaper_mobile', $params);
-        }
-        return json_encode($result);
     }
 }

@@ -107,6 +107,11 @@ class BuildInsertUpdateModel {
         $result['en_seo_id']                    = $enSeoId;
         $result['en_name']                      = $dataForm['en_name'];
         $result['en_description']               = $dataForm['en_description'];
+        $result['price']                        = $dataForm['price'];
+        $result['price_before_promotion']       = $dataForm['price_before_promotion'] ?? null;
+        if(!empty($dataForm['price_before_promotion'])){
+            $result['sale_off'] = (($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100;
+        }
         return $result;
     }
 

@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('product_price', function (Blueprint $table) {
-            $table->text('folder_drive');
+        Schema::create('relation_product_price_wallpaper_info', function (Blueprint $table) {
+            $table->id();
+            $table->integer('product_price_id');
+            $table->integer('wallpaper_info_id');
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('product_price', function (Blueprint $table) {
-            //
-        });
+        // Schema::dropIfExists('realtion_product_price_wallpaper_info');
     }
 };

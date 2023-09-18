@@ -13,7 +13,7 @@ return [
             'child'     => [
                 [
                     'name'  => '1. Wallpaper',
-                    'route' => 'admin.product.list',
+                    'route' => 'admin.wallpaper.list',
                     'icon'  => '<i data-feather=\'circle\'></i>',
                     // 'child' => [
                     //     [
@@ -24,17 +24,22 @@ return [
                     // ]
                 ],
                 [
-                    'name'  => '2. Chủ đề',
+                    'name'  => '2. Sản phẩm',
+                    'route' => 'admin.product.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '3. Chủ đề',
                     'route' => 'admin.category.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '3. Phong cách',
+                    'name'  => '4. Phong cách',
                     'route' => 'admin.style.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Nhãn hàng',
+                    'name'  => '5. Nhãn hàng',
                     'route' => 'admin.brand.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]

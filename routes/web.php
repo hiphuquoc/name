@@ -33,6 +33,8 @@ use App\Http\Controllers\Admin\CategoryBlogController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CacheController;
+use App\Http\Controllers\Admin\WallpaperController;
+use App\Http\Controllers\Admin\ProductPriceController;
 
 use App\Http\Controllers\LanguageController;
 
@@ -109,6 +111,8 @@ Route::get('/registryEmail', [AjaxController::class, 'registryEmail'])->name('aj
 Route::get('/registrySeller', [AjaxController::class, 'registrySeller'])->name('ajax.registrySeller');
 Route::get('/setMessageModal', [AjaxController::class, 'setMessageModal'])->name('ajax.setMessageModal');
 Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetShow'])->name('ajax.checkLoginAndSetShow');
+Route::get('/loadImageFromGoogleCloud', [AjaxController::class, 'loadImageFromGoogleCloud'])->name('ajax.loadImageFromGoogleCloud');
+Route::post('/loadImageWithResize', [AjaxController::class, 'loadImageWithResize'])->name('ajax.loadImageWithResize');
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
@@ -140,7 +144,17 @@ Route::middleware('auth', 'role:admin')->group(function (){
         //     });
 
         // });
-        
+        /* wallpaper */
+        Route::prefix('wallpaper')->group(function(){
+            Route::get('/list', [WallpaperController::class, 'list'])->name('admin.wallpaper.list');
+            Route::post('/loadOneRow', [WallpaperController::class, 'loadOneRow'])->name('admin.wallpaper.loadOneRow');
+            Route::post('/loadModalUploadAndEdit', [WallpaperController::class, 'loadModalUploadAndEdit'])->name('admin.wallpaper.loadModalUploadAndEdit');
+            Route::post('/uploadWallpaperWithSource', [WallpaperController::class, 'uploadWallpaperWithSource'])->name('admin.wallpaper.uploadWallpaperWithSource');
+            Route::post('/changeWallpaperWithSource', [WallpaperController::class, 'changeWallpaperWithSource'])->name('admin.wallpaper.changeWallpaperWithSource');
+            Route::post('/deleteWallpaperAndSource', [WallpaperController::class, 'deleteWallpaperAndSource'])->name('admin.wallpaper.deleteWallpaperAndSource');
+            Route::post('/loadFormUploadSourceAndWallpaper', [WallpaperController::class, 'loadFormUploadSourceAndWallpaper'])->name('admin.wallpaper.loadFormUploadSourceAndWallpaper');
+            Route::post('/searchWallpapers', [WallpaperController::class, 'searchWallpapers'])->name('admin.wallpaper.searchWallpapers');
+        });
         /* product */
         Route::prefix('product')->group(function(){
             Route::get('/list', [ProductController::class, 'list'])->name('admin.product.list');
@@ -148,8 +162,12 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/create', [ProductController::class, 'create'])->name('admin.product.create');
             Route::post('/update', [ProductController::class, 'update'])->name('admin.product.update');
             Route::get('/delete', [ProductController::class, 'delete'])->name('admin.product.delete');
-            Route::post('/uploadImageProductPriceAjaxToFile', [ProductController::class, 'uploadImageProductPriceAjaxToFile'])->name('admin.product.uploadImageProductPriceAjaxToFile');
-            Route::post('/uploadImageProductPriceAjaxToSource', [ProductController::class, 'uploadImageProductPriceAjaxToSource'])->name('admin.product.uploadImageProductPriceAjaxToSource');
+        });
+        /* product price */
+        Route::prefix('productPrice')->group(function(){
+            Route::post('/loadWallpaperByProductPrice', [ProductPriceController::class, 'loadWallpaperByProductPrice'])->name('admin.productPrice.loadWallpaperByProductPrice');
+            Route::post('/addWallpaperToProductPrice', [ProductPriceController::class, 'addWallpaperToProductPrice'])->name('admin.productPrice.addWallpaperToProductPrice');
+            Route::post('/deleteWallpaperToProductPrice', [ProductPriceController::class, 'deleteWallpaperToProductPrice'])->name('admin.productPrice.deleteWallpaperToProductPrice');
         });
         /* category */
         Route::prefix('category')->group(function(){

@@ -147,28 +147,21 @@
                 @endif
             </select>
         </div>
-        {{-- <!-- One Row -->
+        <!-- One Row -->
         <div class="flexBox">
             <div class="flexBox_item">
                 <div class="formBox_full_item">
-                    <label class="form-label inputRequired" for="title_all">Tiêu đề trọn bộ</label>
-                    <input type="text" class="form-control" id="title_all" name="title_all" value="{{ old('title_all') ?? $item->title_all ?? null }}" required>
+                    <label class="form-label inputRequired" for="price">Giá trọn bộ $</label>
+                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price') ?? $item->price ?? null }}" required />
                 </div>
             </div>
             <div class="flexBox_item">
                 <div class="formBox_full_item">
-                    <label class="form-label inputRequired" for="price_all">Giá bán trọn bộ</label>
-                    <input type="text" class="form-control" id="price_all" name="price_all" value="{{ old('price_all') ?? $item->price_all ?? null }}" required>
+                    <label class="form-label" for="price_before_promotion">Giá trước KM $</label>
+                    <input type="text" class="form-control" id="price_before_promotion" name="price_before_promotion" value="{{ old('price_before_promotion') ?? $item->price_before_promotion ?? null }}" />
                 </div>
             </div>
-            <div class="flexBox_item">
-                <div class="formBox_full_item">
-                    <label class="form-label" for="price_all_before_promotion">Giá trước KM</label>
-                    <input type="text" class="form-control" id="price_all" name="price_all_before_promotion" value="{{ old('price_all_before_promotion') ?? $item->price_all_before_promotion ?? null }}">
-                </div>
-            </div>
-        </div> --}}
-
+        </div>
     </div>
 </div>
 

@@ -2,6 +2,10 @@
 
 return [
     'currency_unit'         => '<sup>đ</sup>',
+    'currency_unit_en'      => ' US$',
+    'exchange_rate'         => [
+        'usd_to_vnd'    => 22450
+    ],
     'author_name'           => 'Name.com.vn',
     'founder_name'          => 'Name.com.vn',
     'founder_address'       => '443 Mạc Cửu, Rạch Giá',
@@ -44,9 +48,12 @@ return [
         'contentBlog'       => 'public/contents/blogs/',
         'contentCategory'   => 'public/contents/categories/',
         'contentStyle'      => 'public/contents/styles/',
-
         'enContentCategory' => 'public/contents/enCategories/',
         'enContentPage'     => 'public/contents/enPages/',
+    ],
+    'google_cloud_storage' => [
+        'wallpapers'        => 'wallpapers/',
+        'sources'           => 'sources/',
     ],
     'filter'    => [
         'price' => [

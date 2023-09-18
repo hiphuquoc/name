@@ -8,9 +8,11 @@
         
         /* lazyload ảnh lần đầu */
         lazyLoad();
+        lazyLoadWithResize();
         /* lazyload ảnh khi scroll */
         $(window).on('scroll', function() {
             lazyLoad();
+            lazyLoadWithResize();
         });
         
         /* tải lại view sort cart */
@@ -74,6 +76,48 @@
             }
         });
     }
+
+    /* lazyload và resize từ ảnh gốc */
+    function lazyLoadWithResize() {
+        $('img.lazyLoadWithResize, div.lazyLoadWithResize').each(function() {
+            var boxThis = $(this);
+            if (!boxThis.hasClass('loaded')) {
+                var distance = $(window).scrollTop() - boxThis.offset().top + 900;
+                if (distance > 0) {
+                    loadImageWithResize(boxThis);
+                }
+            }
+        });
+    }
+    function loadImageWithResize(boxThis) {
+        const urlImage = boxThis.data('url-image');
+        const resize = boxThis.data('resize');
+        $.ajax({
+            url: "{{ route('ajax.loadImageWithResize') }}",
+            type: 'post',
+            dataType: 'html',
+            data: {
+                url_image: urlImage,
+                resize: resize
+            },
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+        }).done(function (response) {
+            if (boxThis.is('img')) {
+                boxThis.attr('src', response);
+            } else if (boxThis.is('div')) {
+                boxThis.css({
+                    background: 'url("' + response + '") no-repeat center center / cover',
+                    filter: 'unset'
+                });
+            }
+            boxThis.addClass('loaded');
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("Ajax request failed: " + textStatus, errorThrown);
+        });
+    }
+
     /* đang xây dựng */
     function noticeContrustion(){
         alert('Tính năng thanh toán online đang được xây dựng. Vui lòng quay lại sau hoặc liên hệ Zalo 0968617168');
@@ -219,106 +263,6 @@
             }
         })
     });
-    // /* tocContent */
-    // function buildTocContentMain(idElement){
-    //     var dataTocContent      = {};
-    //     var i                   = 0;
-    //     var indexToc            = 0;
-    //     $('#'+idElement).find('h2').each(function(){
-    //         if($(this).is(":visible")){
-    //             let dataId        = $(this).attr('id');
-    //             if(typeof dataId=='undefined'){
-    //                 dataId          = 'thiet-ke-website-kien-giang_'+i;
-    //                 $(this).attr('id', dataId);
-    //                 ++indexToc;
-    //             }
-    //             const name          = $(this)[0].localName;
-    //             const dataTitle     = $(this).html();
-    //             dataTocContent[i]   = {
-    //                 id      : dataId,
-    //                 name    : name,
-    //                 title   : dataTitle
-    //             };
-    //             ++i;
-    //         }
-    //     });
-    //     $.ajax({
-    //         url         : '{{ route("main.buildTocContentMain") }}',
-    //         type        : 'get', 
-    //         dataType    : 'html',
-    //         data        : {
-    //             dataSend    : dataTocContent
-    //         },
-    //         success     : function(data){
-    //             $('#tocContentMain').html(data);
-    //             fixedTocContentIcon();
-    //             setHeightTocFixed();
-
-    //             $(window).resize(function() {
-    //                 fixedTocContentIcon();
-    //                 setHeightTocFixed();
-    //             });
-
-    //             $('.tocFixedIcon, #callTocContentFromMenu, .tocFixed').click(function(){
-    //                 let elementMenu = $('.tocContentMain.tocFixed');
-    //                 let displayMenu = elementMenu.css('display');
-    //                 if(displayMenu=='none'){
-    //                     elementMenu.css('display', 'block');
-    //                 }else {
-    //                     elementMenu.css('display', 'none');
-    //                 }
-    //                 // fixedTocContentIcon();
-    //             });
-
-    //             $('.tocContentMain_title, .tocContentMain_close').click(function(){
-    //                 let elemtMenu   = $('.tocContentMain .tocContentMain_list');
-    //                 let displayMenu = elemtMenu.css('display');
-    //                 if(displayMenu=='none'){
-    //                     elemtMenu.css('display', 'block');
-    //                     $('.tocContentMain_close').removeClass('hidden');
-    //                 }else {
-    //                     elemtMenu.css('display', 'none');
-    //                     $('.tocContentMain_close').addClass('hidden');
-    //                 }
-    //             });
-
-    //             function fixedTocContentIcon(){
-    //                 let widthS      = $(window).width();
-    //                 let widthC      = $('.container').outerWidth();
-    //                 let leftE       = parseInt((widthS - widthC - 70) / 2);
-    //                 if($(window).width() < 1200){
-    //                     leftE       = parseInt((widthS - widthC + 20) / 2);
-    //                 }
-    //                 // $('.tocFixedIcon').css('left', leftE);
-    //             }
-
-    //             function setHeightTocFixed(){
-    //                 let heightToc   = parseInt($(window).height() - 210);
-    //                 $('.tocContentMain.tocFixed .tocContentMain_list').css('height', heightToc+'px');
-    //             }
-
-    //             let element         = $('#tocContentMain');
-    //             if(element.length>0){
-    //                 let positionE       = element.offset().top;
-    //                 let heightE         = element.outerHeight();
-    //                 let boxContent      = $('#'+idElement);
-    //                 let positionB       = boxContent.offset().top;
-    //                 let heightB         = boxContent.outerHeight();
-    //                 let heightFooter    = $('.footer').outerHeight();
-    //                 $(document).scroll(function(){
-    //                     let scrollNow   = $(document).scrollTop();
-    //                     // let minScroll   = parseInt(heightE + positionE);
-    //                     // let maxScroll   = parseInt(heightB + positionB - heightFooter);
-    //                     if(scrollNow > 500){ 
-    //                         $('.tocFixedIcon').css('display', 'block');
-    //                     }else {
-    //                         $('.tocFixedIcon').css('display', 'none');
-    //                     }
-    //                 });
-    //             }
-    //         }
-    //     });
-    // }
     /* Go to top */
     mybutton 					    = document.getElementById("smoothScrollToTop");
     mybutton.style.display 	        = "none";
@@ -378,6 +322,7 @@
     function changeOption(idShow){
         const elemtShow     = $('#'+idShow);
         const parent        = elemtShow.parent();
+        console.log(idShow);
         /* ẩn tất cả phần tử con */
         parent.children().each(function(){
             $(this).removeClass('show').addClass('hide');

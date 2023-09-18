@@ -18,9 +18,11 @@ return new class extends Migration
             $table->integer('product_info_id');
             $table->text('name');
             $table->text('description')->nullable();
-            $table->integer('price');
-            $table->integer('price_before_promotion')->nullable();
-            $table->integer('price_origin')->nullable();
+            $table->text('en_name');
+            $table->text('en_description')->nullable();
+            $table->text('price'); /* text vì không chỉ là số nguyên dương */
+            $table->text('price_before_promotion')->nullable();
+            $table->text('price_origin')->nullable();
             $table->integer('sale_off')->nullable();
             $table->integer('instock')->nullable(); /* rỗng mặc định bán không giới hạn */
         });

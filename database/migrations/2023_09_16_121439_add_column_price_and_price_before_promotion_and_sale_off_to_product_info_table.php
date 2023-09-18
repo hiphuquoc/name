@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('product_price', function (Blueprint $table) {
-            $table->text('en_name');
-            $table->text('en_description')->nullable();
+        Schema::table('product_info', function (Blueprint $table) {
+            $table->text('price'); /* text vì không phải số nguyên */
+            $table->text('price_before_promotion')->nullable(); /* text vì không phải số nguyên */
+            $table->integer('sale_off')->nullable();
         });
     }
 
@@ -26,8 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('product_price', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('product_info', function (Blueprint $table) {
+        //     //
+        // });
     }
 };

@@ -1,30 +1,30 @@
-@if(!empty($prices))
-
-    {{-- <!-- ảnh của all => đặt ẩn để addtocart -->
+@if(!empty($prices)&&$prices->isNotEmpty())
+    <!-- ảnh của all => đặt ẩn để addtocart -->
     <div style="display:none;">
-        <img src="{{ Storage::url($prices[0]->files[0]->file_path) }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_all" />
-    </div> --}}
+        @php
+            $imageAll = $prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting ?? config('image.default');
+        @endphp
+        <img src="{{ $imageAll }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_all" />
+    </div>
     <!-- ảnh của từng biến thể -->
     <div class="galleryProductBox">
         @php
             $i = 0;
         @endphp
         @foreach($prices as $price)
-            @foreach($price->files as $file)
+            @foreach($price->wallpapers as $wallpaper)
                 @php
                     /* lấy ảnh mini */
-                    $fileInfo       = pathinfo($file->file_path);
-                    $imageMini      = Storage::url($fileInfo['dirname'].'/'.$fileInfo['filename'].'-mini'.'.'.$fileInfo['extension']);
-                    $imageMiddle    = Storage::url($fileInfo['dirname'].'/'.$fileInfo['filename'].'-middle'.'.'.$fileInfo['extension']);
+                    $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                    $image          = $wallpaper->infoWallpaper->file_url_hosting;
                 @endphp
                 <div class="galleryProductBox_item">
                     @if($i<4)
                         <!-- thêm src và data-option để mô phỏng thẻ image dùng cho tính năng addToCart -->
-                        <div class="galleryProductBox_item_backgroundImage lazyload" src="{{ $imageMiddle }}" data-src="{{ $imageMiddle }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" style="background:url('{{ $imageMini }}') no-repeat center center / cover;filter:blur(10px);"></div>
+                        <div class="galleryProductBox_item_backgroundImage lazyload" src="{{ $image }}" data-src="{{ $image }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
                     @else 
-                        <img class="lazyload" data-src="{{ $imageMiddle }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" />
+                        <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" />
                     @endif
-                    {{-- <div class="galleryProductBox_item_note">{{ $price->name }}</div> --}}
                 </div>
                 @php
                     ++$i;

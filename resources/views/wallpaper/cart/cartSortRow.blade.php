@@ -1,37 +1,29 @@
 @if(!empty($product))
     @php
         $idProduct          = $product->id ?? 0;
-        $idPrice            = $product->price->id ?? 0;
-        $keyId              = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
+        $idPrice            = $product->cart['product_price_id'] ?? 0;
+        $keyId              = !empty($product->id) ? $product->id.$idPrice : null;
         $eventUpdateCart    = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'")';
-        if(!empty($language)&&$language='en'){
-            $title          = $product->en_name ?? $product->en_seo->title ?? null;
-        }else { 
+        if(empty($language)||$language='vi'){
             $title          = $product->name ?? $product->seo->title ?? null;
+            $url            = $product->seo->slug_full ?? null;
+        }else { 
+            $title          = $product->en_name ?? $product->en_seo->title ?? null;
+            $url            = $product->en_seo->slug_full ?? null;
         }
+        dd($product->toArray());
         /* ảnh */
         $image              = config('image.default');
-        
         if($product->cart['product_price_id']=='all'){
             /* của phiên bản all => lấy ảnh của phiên bản con đầu tiên */
-            foreach($product->prices as $price){
-                if(!empty($price->files[0]->file_path)&&file_exists(Storage::path($price->files[0]->file_path))) {
-                    $image = Storage::url($price->files[0]->file_path);
-                    break;
-                }
-            }
+            if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting)) $image = $product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting;
         }else {
-            /* có mức giá cụ thể */
-            if(!empty($product->price->files[0]->file_path)&&file_exists(Storage::path($product->price->files[0]->file_path))) $image = Storage::url($product->price->files[0]->file_path);
+            // /* có mức giá cụ thể */
+            // if(!empty($product->price->files[0]->file_path)&&file_exists(Storage::path($product->price->files[0]->file_path))) $image = Storage::url($product->price->files[0]->file_path);
         }
         /* action */
         $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "'.$idPrice.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
         /* đường dẫn */
-        if(!empty($language)&&$language='en'){
-            $url            = $product->en_seo->slug_full ?? null;
-        }else { 
-            $url            = $product->seo->slug_full ?? null;
-        }
     @endphp
     <a href="/{{ $url }}" class="cartBox_list_item_image">
         <img src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" />
@@ -43,16 +35,17 @@
         <div class="cartBox_list_item_content_price">
             @php
                 $price = 0;
-                if(!empty($product->price->price)) $price = number_format($product->price->price);
-                if(empty($price)) $price = number_format($product->price_all);
-                if(!empty($language)&&$language=='en'){
-                    $titlePrice = !empty($product->price->en_name) ? '<span>'.$product->price->en_name.'</span>' : null;
-                }else {
-                    $titlePrice = !empty($product->price->name) ? '<span>'.$product->price->name.'</span>' : null;
-                }
+                if(!empty($product->price)) $price = number_format($product->price);
+                $titlePrice = 'Trọn bộ';
+                // if(empty($price)) $price = number_format($product->price_all);
+                // if(!empty($language)&&$language=='en'){
+                //     $titlePrice = !empty($product->price->en_name) ? '<span>'.$product->price->en_name.'</span>' : null;
+                // }else {
+                //     $titlePrice = !empty($product->price->name) ? '<span>'.$product->price->name.'</span>' : null;
+                // }
                 
             @endphp
-            {{ $price }}đ {!! $titlePrice !!}
+            {{ $price }}đ /{!! $titlePrice !!}
         </div>
         {{-- <div class="cartBox_list_item_content_orther">
             <div class="cartBox_list_item_content_orther_quantity">

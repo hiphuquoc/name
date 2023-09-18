@@ -6,8 +6,8 @@
                 @php
                     $title = $price->name ?? $price->seo->title ?? null;
                 @endphp
-                @foreach($price->files as $file)
-                    <img data-src="{{ Storage::url($file->file_path) }}" alt="{{ $title }}" title="{{ $title }}" />
+                @foreach($price->wallpapers as $wallpaper)
+                    <img data-src="{{ $wallpaper->infoWallpaper->file_url_hosting }}" alt="{{ $title }}" title="{{ $title }}" />
                 @endforeach
             @endforeach
        </div>

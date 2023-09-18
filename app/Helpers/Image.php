@@ -4,6 +4,10 @@ namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Seo;
 
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as I;
+use GuzzleHttp\Client;
+
 class Image {
 
     public static function getActionImageByType($image){
@@ -21,5 +25,47 @@ class Image {
             }
         }
         return $arrayAction;
+    }
+
+    public static function streamResizedImage($imageUrl, $width = 300){
+        // // Sử dụng Intervention Image để thay đổi kích thước ảnh từ URL
+        // $resizedImage = I::make($imageUrl)
+        //     ->resize($width, null, function ($constraint) {
+        //         $constraint->aspectRatio();
+        //     })
+        //     ->encode(config('image.extension'));
+
+        // // Stream ảnh về trình duyệt
+        // return response($resizedImage)->header('Content-Type', 'image/jpeg');
+
+        // Tạo một phiên làm việc mới với Guzzle
+        $client = new Client();
+
+        // Tải ảnh từ URL
+        $response = $client->get(env('APP_URL').'/'.$imageUrl);
+
+        // Đọc dữ liệu ảnh
+        $imageData = $response->getBody()->getContents();
+
+        // Xử lý ảnh với Intervention Image
+        $image = I::make($imageData);
+
+        // Kích thước mới (ví dụ: 300px chiều rộng, tự động chiều cao)
+        $image->resize($width, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $resizedImageData = $image->encode('data-url');
+
+        return $resizedImageData;
+    }
+
+    public static function getUrlImageMiniByUrlImage($urlImage){
+        $result     = null;
+        if(!empty($urlImage)){
+            $tmp    = pathinfo($urlImage);
+            $result = $tmp['dirname'].'/'.$tmp['filename'].'-mini.'.$tmp['extension'];
+        }
+        return $result;
     }
 }

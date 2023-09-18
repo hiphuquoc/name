@@ -16,7 +16,10 @@ class Product extends Model {
         'en_name',
         'en_description',
         'code',
-        'sold'
+        'sold',
+        'price',
+        'price_before_promotion',
+        'sale_off'
     ];
     public $timestamps = true;
 
@@ -43,7 +46,7 @@ class Product extends Model {
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'product_info');
                         }])
-                        ->with('seo', 'en_seo', 'prices.files', 'prices.sources', 'contents', 'brand', 'categories')
+                        ->with('seo', 'en_seo', 'prices.wallpapers.infoWallpaper', 'contents', 'brand', 'categories')
                         ->paginate($params['paginate']);
         return $result;
     }

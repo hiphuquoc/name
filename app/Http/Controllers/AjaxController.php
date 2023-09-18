@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic;
 use App\Models\District;
 use App\Models\Product;
 use App\Models\RegistryEmail;
@@ -38,16 +39,22 @@ class AjaxController extends Controller {
         if(!empty($request->get('key_search'))){
             $keySearch          = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
             $products           = Product::select('product_info.*')
+                ->whereHas('prices.wallpapers', function(){
+
+                })
                 ->join('seo', 'seo.id', '=', 'product_info.seo_id')
                 ->where('code', 'like', '%'.$keySearch.'%')
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->orWhere('en_name', 'like', '%'.$keySearch.'%')
                 ->skip(0)
                 ->take(6)
-                ->with('seo')
+                ->with('seo', 'prices.wallpapers.infoWallpaper')
                 ->orderBy('seo.ordering', 'DESC')
                 ->get();
             $count              = Product::select('product_info.*')
+                ->whereHas('prices.wallpapers', function(){
+                        
+                })
                 ->where('code', 'like', '%'.$keySearch.'%')
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->orWhere('en_name', 'like', '%'.$keySearch.'%')
@@ -64,17 +71,19 @@ class AjaxController extends Controller {
                         $url    = $product->seo->slug_full;
                     }
                     $priceOld   = null;
-                    if($product->prices[0]->price<$product->prices[0]->price_before_promotion) $priceOld = '<div class="searchViewBefore_selectbox_item_content_price_old">'.number_format($product->prices[0]->price_before_promotion).config('main.currency_unit').'</div>';
+                    if($product->prices<$product->price_before_promotion) $priceOld = '<div class="searchViewBefore_selectbox_item_content_price_old">'.number_format($product->price_before_promotion).config('main.currency_unit').'</div>';
+                    $image      = Storage::url(config('image.loading_main_gif'));
+                    if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting)) $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting);
                     $response       .= '<a href="/'.$url.'" class="searchViewBefore_selectbox_item">
                                             <div class="searchViewBefore_selectbox_item_image">
-                                                <img src="'.Storage::url($product->prices[0]->files[0]->file_path).'" alt="'.$title.'" title="'.$title.'" />
+                                                <img src="'.$image.'" alt="'.$title.'" title="'.$title.'" />
                                             </div>
                                             <div class="searchViewBefore_selectbox_item_content">
                                                 <div class="searchViewBefore_selectbox_item_content_title maxLine_2">
                                                     '.$title.'
                                                 </div>
                                                 <div class="searchViewBefore_selectbox_item_content_price">
-                                                    <div>'.number_format($product->prices[0]->price).config('main.currency_unit').'</div>
+                                                    <div>'.number_format($product->price).config('main.currency_unit').'</div>
                                                     '.$priceOld.'
                                                 </div>
                                             </div>
@@ -160,5 +169,35 @@ class AjaxController extends Controller {
         $result['button']           = $xhtmlButton;
         $result['button_mobile']    = $xhtmlButtonMobile;
         return json_encode($result);
+    }
+
+    public static function loadImageFromGoogleCloud(Request $request){
+        $response               = '';
+        if(!empty($request->get('url_google_cloud'))){
+            $url                = $request->get('url_google_cloud');
+            $size               = $request->get('size') ?? null;
+            $response           = config('admin.images.default_750x460');
+            $contentImage       = Storage::disk('gcs')->get($url);
+            if(!empty($contentImage)){
+                if(!empty($size)){
+                    $thumbnail  = ImageManagerStatic::make($contentImage)->resize($size, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->encode();
+                }else {
+                    $thumbnail  = ImageManagerStatic::make($contentImage)->encode();
+                }
+                $response       = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+            }
+        }
+        echo $response;
+    }
+
+    public static function loadImageWithResize(Request $request){
+        $response       = '';
+        if(!empty($request->get('url_image'))){
+            $resize     = $request->get('resize') ?? 400;
+            $response   = \App\Helpers\Image::streamResizedImage($request->get('url_image'), $resize);
+        }
+        echo $response;
     }
 }
