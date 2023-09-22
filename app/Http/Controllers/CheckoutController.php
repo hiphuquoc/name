@@ -48,9 +48,9 @@ class CheckoutController extends Controller{
             OrderProduct::insertItem([
                 'order_info_id'     => $idOrder,
                 'product_info_id'   => $product->id,
-                'product_price_id'  => $product->prices[0]->id,
+                'product_price_id'  => $product->prices[0]->id ?? 'all',
                 'quantity'          => 1,
-                'price'             => $product->prices[0]->price
+                'price'             => $product->prices[0]->price ?? $product->price
             ]);
         }
         /* lấy ngược lại thông tin order để xử lý cho chính xác */
@@ -75,11 +75,11 @@ class CheckoutController extends Controller{
         if(!empty($request->get('product_price_id'))){
             $idPrice        = $request->get('product_price_id');
             $tmp            = Product::select('*')
-                            ->where('id', $request->get('product_info_id'))
-                            ->with(['prices' => function($query) use($idPrice) {
-                                $query->where('id', $idPrice);
-                            }])
-                            ->first();
+                                ->where('id', $request->get('product_info_id'))
+                                ->with(['prices' => function($query) use($idPrice) {
+                                    $query->where('id', $idPrice);
+                                }])
+                                ->first();
             $products[]     = $tmp;
             $insertOrder    = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $products);
             $insertOrder['payment_type'] = 'payment_now';
@@ -90,7 +90,7 @@ class CheckoutController extends Controller{
                 'product_info_id'   => $request->get('product_info_id'),
                 'product_price_id'  => $request->get('product_price_id'),
                 'quantity'          => 1,
-                'price'             => $tmp->prices[0]->price
+                'price'             => $tmp->prices[0]->price ?? $tmp->price
             ]);
             /* lấy ngược lại thông tin order để xử lý cho chính xác */
             $orderInfo      = Order::select('*')

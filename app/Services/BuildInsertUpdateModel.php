@@ -167,7 +167,8 @@ class BuildInsertUpdateModel {
         $result['product_cash']             = 0;
         foreach($products as $product){
             $result['product_count']        += 1;
-            $result['product_cash']         += $product->prices[0]->price; /* lấy phần tử đầu tiên vì trong câu query chỉ lấy price được chọn */
+            /* lấy phần tử đầu tiên vì trong câu query chỉ lấy price được chọn - còn không lấy được là do mua trọn bộ => sẽ lấy giá chung */
+            $result['product_cash']         += $product->prices[0]->price ?? $product->price; 
         }
         $result['ship_cash']                = $dataForm['ship_cash'] ?? 0;
         $result['total']                    = $result['ship_cash']+$result['product_cash'];

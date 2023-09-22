@@ -17,4 +17,14 @@ class Number {
         if(!empty($number)) $result = $number*config('main.exchange_rate.usd_to_vnd');
         return $result;
     }
+
+    public static function getFormatPriceByLanguage($number, $language){
+        $result         = null;
+        if(empty($language)||$language=='vi'){
+            $result     = number_format(self::convertUSDToVND($number)).config('main.currency_unit');
+        }else {
+            $result     = number_format($number).config('main.currency_unit_en');
+        }
+        return $result;
+    }
 }

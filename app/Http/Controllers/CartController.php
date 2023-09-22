@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use App\Models\Page;
 use App\Models\Product;
@@ -200,7 +201,9 @@ class CartController extends Controller{
                         ->whereHas('prices', function($query) use($idPrice){
                             $query->where('id', $idPrice);
                         })
-                        ->with('seo', 'prices.files')
+                        ->with(['prices' => function ($query) use ($idPrice) {
+                            $query->where('id', $idPrice);
+                        }, 'seo', 'prices.wallpapers'])
                         ->first();
         }else {
             $idProduct  = $productInCart['product_info_id'];

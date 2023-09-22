@@ -22,14 +22,14 @@ class ZalopayController extends Controller{
                 $dataItem[$i]['code']       = $product->infoProduct->code ?? null;
                 $dataItem[$i]['name']       = $product->infoProduct->name ?? null;
                 $dataItem[$i]['option']     = $product->infoPrice->name ?? null;
-                $dataItem[$i]['price']      = $product->infoPrice->price ?? null;
+                $dataItem[$i]['price']      = !empty($product->infoPrice->price) ? \App\Helpers\Number::convertUSDToVND($product->infoPrice->price) : 'all';
                 $dataItem[$i]['sale_off']   = $product->infoPrice->sale_off ?? null;
                 ++$i;
             }
             /* bankcode */
             $bankcode   = self::getBankcode();
             /* tổng tiền */
-            $total      = $infoOrder->total ?? 0;
+            $total      = \App\Helpers\Number::convertUSDToVND($infoOrder->total);
             if($total>0){
                 $order  = [
                     "app_id"        => config('payment.zalopay.app_id'),

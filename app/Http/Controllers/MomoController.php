@@ -9,7 +9,7 @@ class MomoController extends Controller{
     public static function create($infoOrder){
         $urlRedirect            = null;
         if(!empty($infoOrder)){
-            $amount             = $infoOrder->total ?? 0;
+            $amount             = \App\Helpers\Number::convertUSDToVND($infoOrder->total);
             if($amount>0){
                 $endpoint       = config('payment.momo.endpoint_create');
                 $partnerCode    = config('payment.momo.partner_code');

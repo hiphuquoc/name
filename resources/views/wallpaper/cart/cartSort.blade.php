@@ -12,7 +12,7 @@
             {{ !empty($products)&&$products->isNotEmpty() ? $products->count() : 0 }}
         </div>
     </a>
-    <a href="{{ $urlCart }}" class="cartBox_text">{{ !empty($language)&&$language=='en' ? 'Cart' : 'Giỏ hàng' }}</a>
+    <a href="{{ $urlCart }}" class="cartBox_text">{{ empty($language)||$language=='vi' ? 'Cart' : 'Giỏ hàng' }}</a>
     <div class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
             @php
@@ -22,17 +22,17 @@
                 @foreach($products as $product)
                     @php
                         /* cộng tổng */
-                        $total      += $product->price->price ?? $product->price_all;
+                        $total      += $product->cart['price'];
                         $idProduct  = $product->id ?? 0;
                         $keyId      = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
                     @endphp
                     <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartBox_list_item">
-                        @include('wallpaper.cart.cartSortRow', compact('product', 'language'))
+                        @include('wallpaper.cart.cartSortRow', compact('product'))
                     </div>
                 @endforeach
             </div>
             <div class="cartBox_list_item buttonBox">
-                <div class="total">{{ empty($language)||$language=='vi' ? 'Tổng' : 'Total' }}: <span id="js_updateCart_total">{!! number_format($total).config('main.currency_unit') !!}</span></div>
+                <div class="total">{{ empty($language)||$language=='vi' ? 'Tổng' : 'Total' }}: <span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($total, $language) !!}</span></div>
                 <a href="{{ $urlCart }}" class="button">{{ empty($language)||$language=='vi' ? 'Xem giỏ hàng' : 'View cart' }}</a>
             </div>
         @else 

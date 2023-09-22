@@ -11,14 +11,21 @@
                     $count          = $products->count();
                     $total          = 0;
                     foreach($productsCart as $product) $total += $product['price'];
+                    if(empty($language)||$language=='vi'){
+                        $titleH1        = 'Danh sách sản phẩm';
+                        $xhtmlHeadTable = '<div>Sản phẩm</div>
+                                            <div>Đơn giá</div>';
+                        $titleTotal     = 'Tổng cộng:';
+                    }else {
+                        $titleH1        = 'List of products';
+                        $xhtmlHeadTable = '<div>Products</div>
+                                                <div>Price</div>';
+                        $titleTotal     = 'Total:';
+                    }
                 @endphp
                 <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
                     @csrf
-                    @if(!empty($language)&&$language=='en')
-                        <h1>List of products (<span id="js_updateCart_count" class="highLight">{{ $count }}</span>)</h1>
-                    @else 
-                        <h1>Danh sách sản phẩm (<span id="js_updateCart_count" class="highLight">{{ $count }}</span>)</h1>
-                    @endif
+                    <h1>{!! $titleH1 !!} (<span id="js_updateCart_count" class="highLight">{{ $count }}</span>)</h1>
                     <div class="pageCartBox">
                         <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
 
@@ -31,15 +38,7 @@
                                         </div> --}}
                                         <div class="cartSectionBox_body">
                                             <div class="cartProductBox_head">
-                                                @if(!empty($language)&&$language=='en')
-                                                    <div>Products</div>
-                                                    <div>Price</div>
-                                                @else 
-                                                    <div>Sản phẩm</div>
-                                                    <div>Đơn giá</div>
-                                                @endif
-                                                {{-- <div>Số lượng</div> --}}
-                                                {{-- <div>Thành tiền</div> --}}
+                                                {!! $xhtmlHeadTable !!}
                                             </div>
                                             <div class="cartProductBox_body">
                                                 @foreach($products as $product)
@@ -66,12 +65,8 @@
                             <div id="js_scrollMenu" class="cartSectionBox">
                                 <div class="cartSectionBox_body">
                                     <div class="total">
-                                        @if(!empty($language)&&$language=='en')
-                                            <div>Total:</div>
-                                        @else 
-                                            <div>Tổng cộng:</div>
-                                        @endif
-                                        <div class="total_number"><span id="js_updateCart_total">{!! number_format($total).config('main.currency_unit') !!}</span></div>
+                                        {!! $titleTotal !!}
+                                        <div class="total_number"><span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($total, $language) !!}</span></div>
                                     </div>
                                 </div>
                                 {{-- <div class="cartSectionBox_notice">
@@ -79,10 +74,10 @@
                                 </div> --}}
                                 <div class="cartSectionBox_button">
                                     {{-- <a href="{{ route('main.checkout') }}" class="button">Thanh toán</a> --}}
-                                    @if(!empty($language)&&$language=='en')
-                                        <div class="button" onClick="submitFormPayment('formPaymentMethod');">Payment</div>
-                                    @else 
+                                    @if(empty($language)||$language=='vi')
                                         <div class="button" onClick="submitFormPayment('formPaymentMethod');">Thanh toán</div>
+                                    @else
+                                        <div class="button" onClick="submitFormPayment('formPaymentMethod');">Payment</div>
                                     @endif
                                     
                                 </div>

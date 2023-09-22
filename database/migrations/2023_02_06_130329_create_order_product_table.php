@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('order_info_id');
             $table->integer('product_info_id');
-            $table->integer('product_price_id');
+            $table->text('product_price_id'); /* text vì để lưu giá trị all (trọn bộ) */
             $table->integer('quantity');
             $table->integer('price');
         });
