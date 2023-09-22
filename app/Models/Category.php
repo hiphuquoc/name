@@ -59,14 +59,14 @@ class Category extends Model {
     }
 
     public static function getTreeCategory(){
-        $result     = self::select('category_info.*')
-                        ->whereHas('seo', function($query){
-                            $query->where('level', 1);
-                        })
-                        ->with('seo', 'en_seo', 'products')
-                        ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                        ->orderBy('seo.ordering', 'DESC')
-                        ->get();
+        $result = self::select('category_info.*')
+                    ->whereHas('seo', function ($query) {
+                        $query->where('level', 1);
+                    })
+                    ->with('seo', 'en_seo', 'products')
+                    ->join('seo', 'seo.id', '=', 'category_info.seo_id')
+                    ->orderBy('seo.ordering', 'DESC')
+                    ->get();
         for($i=0;$i<$result->count();++$i){
             $result[$i]->childs  = self::getTreeCategoryByInfoCategory($result[$i]);
         }

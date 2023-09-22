@@ -83,6 +83,9 @@ class RoutingController extends Controller{
                         $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
                         $keyCategory    = json_encode($arrayCategory);
                         $fullProducts   = Product::select('*')
+                                            ->whereHas('prices.wallpapers', function($query){
+
+                                            })
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                                 $query->whereIn('id', $arrayCategory);
                                             })
@@ -98,6 +101,9 @@ class RoutingController extends Controller{
                             if($i==5) break;
                         }
                         $totalProduct   = Product::select('*')
+                                            ->whereHas('prices.wallpapers', function($query){
+                                                                    
+                                            })
                                             ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
                                                 $query->whereIn('id', $arrayCategory);
                                             })
