@@ -94,7 +94,7 @@
         const resize = boxThis.data('resize');
         $.ajax({
             url: "{{ route('ajax.loadImageWithResize') }}",
-            type: 'post',
+            type: 'get',
             dataType: 'html',
             data: {
                 url_image: urlImage,

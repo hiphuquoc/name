@@ -112,7 +112,7 @@ Route::get('/registrySeller', [AjaxController::class, 'registrySeller'])->name('
 Route::get('/setMessageModal', [AjaxController::class, 'setMessageModal'])->name('ajax.setMessageModal');
 Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetShow'])->name('ajax.checkLoginAndSetShow');
 Route::get('/loadImageFromGoogleCloud', [AjaxController::class, 'loadImageFromGoogleCloud'])->name('ajax.loadImageFromGoogleCloud');
-Route::post('/loadImageWithResize', [AjaxController::class, 'loadImageWithResize'])->name('ajax.loadImageWithResize');
+Route::get('/loadImageWithResize', [AjaxController::class, 'loadImageWithResize'])->name('ajax.loadImageWithResize');
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
