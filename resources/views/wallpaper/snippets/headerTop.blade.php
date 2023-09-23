@@ -35,11 +35,11 @@
                     $urlVi = !empty($item->seo->slug_full)&&$item->seo->slug_full!='/' ? $item->seo->slug_full : null;
                     $urlEn = !empty($item->en_seo->slug_full) ? $item->en_seo->slug_full : null;
                 @endphp
-                <a href="/{{ $urlVi }}" class="languageBox_list_item {{ empty($language)||$language=='vi' ? 'selected' : null }}">
+                <a href="/{{ $urlVi }}" class="languageBox_list_item {{ empty($language)||$language=='vi' ? 'selected' : null }}" aria-label="Xem Name.com.vn bằng ngôn ngữ tiếng Việt">
                     <div>VI</div>
                     <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon-vi.png') }}') no-repeat center;background-size:100% 100%;"></div>
                 </a>  
-                <a href="/{{ $urlEn }}" class="languageBox_list_item {{ !empty($language)&&$language=='en' ? 'selected' : null }}">
+                <a href="/{{ $urlEn }}" class="languageBox_list_item {{ !empty($language)&&$language=='en' ? 'selected' : null }}" aria-label="Xem Name.com.vn bằng ngôn ngữ tiếng Anh">
                     <div>EN</div>  
                     <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon-en.png') }}') no-repeat center;background-size:100% 100%;"></div>
                 </a>
