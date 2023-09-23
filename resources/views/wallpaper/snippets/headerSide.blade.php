@@ -32,12 +32,12 @@
     <ul>
         <li>
             @if(empty($language)||$language=='vi')
-                <a href="/" title="Trang chủ {{ config('main.company_name') }}">
+                <a href="/" title="Trang chủ {{ config('main.company_name') }}" aria-label="Trang chủ Name.com.vn">
                     <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Trang chủ {{ config('main.company_name') }}" title="Trang chủ {{ config('main.company_name') }}" />
                     <div>Trang chủ</div>
                 </a>
             @else
-                <a href="/en" title="Home {{ config('main.company_name') }}">
+                <a href="/en" title="Home {{ config('main.company_name') }}" aria-label="Page home Name.com.vn">
                     <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Home {{ config('main.company_name') }}" title="Home {{ config('main.company_name') }}" />
                     <div>Home</div>
                 </a>
@@ -45,12 +45,12 @@
         </li>
         <li>
             @if(empty($language)||$language=='vi')
-                <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi">
+                <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi" aria-label="Hình nền điện thoại khuyến mãi">
                     <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
                     <div>Đang khuyến mãi</div>
                 </a>
             @else
-                <a href="{{ route('main.saleOff') }}" title="Sale off phone wallpaper">
+                <a href="{{ route('main.saleOff') }}" title="Sale off phone wallpaper" aria-label="Sale off phone wallpaper">
                     <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Sale off phone wallpaper" title="Sale off phone wallpaper" />
                     <div>Sale off</div>
                 </a>
@@ -79,7 +79,7 @@
                                 }
                             @endphp
                             <li>
-                                <a href="{{ env('APP_URL') }}/{{ $url }}" title="{{ $title }}">
+                                <a href="{{ env('APP_URL') }}/{{ $url }}" title="{{ $title }}" aria-label="{{ $title }}">
                                 <div>{{ $title }} {!! $type->products->count()>0 ? '(<span class="highLight">'.$type->products->count().'</span>)' : null !!}</div>
                                 </a>
                             </li>
@@ -100,7 +100,7 @@
                         $selected   = $loop->index==3 ? 'selected' : null;
                     @endphp
                     <li class="{{ $selected }}">
-                        <a href="/{{ $style->seo->slug_full ?? null }}" title="{{ $title }}">
+                        <a href="/{{ $style->seo->slug_full ?? null }}" title="{{ $title }}" aria-label="{{ $title }}">
                         <div>{{ $title }}</div>
                         </a>
                     </li>
@@ -109,7 +109,7 @@
         </li> --}}
 
         {{-- <li>
-            <a href="/san-pham-khuyen-mai" title="Sản phẩm đang khuyến mãi trên Hoaanhtuc">
+            <a href="/san-pham-khuyen-mai" title="Sản phẩm đang khuyến mãi trên Hoaanhtuc" aria-label="Sản phẩm đang khuyến mãi trên Hoaanhtuc">
                 <img src="{{ Storage::url('images/svg/comment.svg') }}" />
                 <div>Tản mạn</div>
             </a>
@@ -137,7 +137,7 @@
                         }
                     @endphp
                     <li>
-                        <a href="{{  $urlFull }}" title="{{ $title }}">
+                        <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
                             <div>{{ $title }}</div>
                         </a>
                     </li>
