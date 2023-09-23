@@ -322,7 +322,6 @@
     function changeOption(idShow){
         const elemtShow     = $('#'+idShow);
         const parent        = elemtShow.parent();
-        console.log(idShow);
         /* ẩn tất cả phần tử con */
         parent.children().each(function(){
             $(this).removeClass('show').addClass('hide');
@@ -330,9 +329,9 @@
         /* bật lại phần tử được chọn */
         elemtShow.removeClass('hide').addClass('show');
         /* lazy load cho ảnh trong phần tử */
-        elemtShow.find('img').each(function(){
-            $(this).addClass('lazyload');
-            lazyLoad();
+        elemtShow.find('img.lazyLoadWithResizeAfter').each(function(){
+            $(this).addClass('lazyLoadWithResize');
+            lazyLoadWithResize();
         })
     }
     /* hiện thông báo cho sản phẩm vào giỏ hàng thành công */

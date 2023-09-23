@@ -47,7 +47,7 @@
                                 <div class="wallpaperGridBox_item_image_backgroundImage lazyLoadWithResize" data-url-image="{{ $wallpaper->infoWallpaper->file_url_hosting }}" data-resize="300" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
                             @else 
                                 <!-- các ảnh sau khi nào click mới load -->
-                                <img class="lazyLoadWithResize" data-url-image="{{ $wallpaper->infoWallpaper->file_url_hosting }}" data-resize="300" alt="{{ $productName }}" title="{{ $productName }}" />
+                                <img class="lazyLoadWithResizeAfter" src="{{ $imageMini }}" data-url-image="{{ $wallpaper->infoWallpaper->file_url_hosting }}" data-resize="300" alt="{{ $productName }}" title="{{ $productName }}" />
                             @endif
                         @endif
                         <!-- rating và số lượng đã bán -->
