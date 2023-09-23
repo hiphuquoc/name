@@ -14,13 +14,13 @@
         <div class="menuTopBackground layoutHeaderTop">
             <div class="layoutHeaderTop_header">
                 @if(!empty($language)&&$language=='en')
-                    <a href="/en" class="logoMain">
+                    <a href="/en" class="logoMain" aria-label="Home Name.com.vn">
                         @if(Route::is('main.enHome'))
                             <h1 style="opacity:0;">Home {{ config('main.company_name') }}</h1>
                         @endif
                     </a>
                 @else 
-                    <a href="/" class="logoMain">
+                    <a href="/" class="logoMain" aria-label="Trang chủ Name.com.vn">
                         @if(Route::is('main.home'))
                             <h1 style="opacity:0;">Trang chủ {{ config('main.company_name') }}</h1>
                         @endif
