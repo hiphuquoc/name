@@ -22,37 +22,37 @@
                                     ->get();
 @endphp             
 <div class="logoInMenuMobile show-1023">
-    @if(!empty($language)&&$language=='en')
-        <a href="/en" class="logoMain"></a>
-    @else 
-        <a href="/" class="logoMain"></a>
+    @if(empty($language)||$language=='vi')
+        <a href="/" class="logoMain" aria-label="Trang chủ Name.com.vn"></a>
+    @else
+        <a href="/en" class="logoMain" aria-label="Page home Name.com.vn"></a>
     @endif
 </div>
 <div class="headerSide customScrollBar-y">
     <ul>
         <li>
-            @if(!empty($language)&&$language=='en')
-                <a href="/en" title="Home {{ config('main.company_name') }}">
-                    <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Home {{ config('main.company_name') }}" title="Home {{ config('main.company_name') }}" />
-                    <div>Home</div>
-                </a>
-            @else 
+            @if(empty($language)||$language=='vi')
                 <a href="/" title="Trang chủ {{ config('main.company_name') }}">
                     <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Trang chủ {{ config('main.company_name') }}" title="Trang chủ {{ config('main.company_name') }}" />
                     <div>Trang chủ</div>
                 </a>
+            @else
+                <a href="/en" title="Home {{ config('main.company_name') }}">
+                    <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Home {{ config('main.company_name') }}" title="Home {{ config('main.company_name') }}" />
+                    <div>Home</div>
+                </a>
             @endif
         </li>
         <li>
-            @if(!empty($language)&&$language=='en')
-                <a href="{{ route('main.saleOff') }}" title="Sale off phone wallpaper">
-                    <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Sale off phone wallpaper" title="Sale off phone wallpaper" />
-                    <div>Sale off</div>
-                </a>
-            @else 
+            @if(empty($language)||$language=='vi')
                 <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi">
                     <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
                     <div>Đang khuyến mãi</div>
+                </a>
+            @else
+                <a href="{{ route('main.saleOff') }}" title="Sale off phone wallpaper">
+                    <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Sale off phone wallpaper" title="Sale off phone wallpaper" />
+                    <div>Sale off</div>
                 </a>
             @endif
             
@@ -61,7 +61,7 @@
             <li>
                 <div class="hasChild open" onclick="showHideListMenuMobile(this, '{{ $wallpaperMobile->seo->slug }}')">
                     @php
-                        $titlePhoneWallpaper = !empty($language)&&$language=='en' ? 'Phone wallpaper' : 'Hình nền điện thoại';
+                        $titlePhoneWallpaper = empty($language)||$language=='vi' ?  'Hình nền điện thoại' : 'Phone wallpaper';
                     @endphp
                     <img src="{{ Storage::url('images/svg/picture-1.svg') }}" alt="{{ $titlePhoneWallpaper }}" title="{{ $titlePhoneWallpaper }}" />
                     <div>{{ $titlePhoneWallpaper }}</div>
@@ -70,12 +70,12 @@
                     @foreach($wallpaperMobile->childs as $type)
                         @if($type->products->count()>0)
                             @php
-                                if(!empty($language)&&$language=='en'){
-                                    $title  = $type->en_name ?? $type->en_seo->title ?? null;
-                                    $url    = $type->en_seo->slug_full ?? null;
-                                }else {
+                                if(empty($language)||$language=='vi'){
                                     $title  = $type->name ?? $type->seo->title ?? null;
                                     $url    = $type->seo->slug_full ?? null;
+                                }else {
+                                    $title  = $type->en_name ?? $type->en_seo->title ?? null;
+                                    $url    = $type->en_seo->slug_full ?? null;
                                 }
                             @endphp
                             <li>
@@ -117,7 +117,7 @@
         
         <li>
             <div class="hasChild close" onclick="showHideListMenuMobile(this, 'ho-tro')">
-                @if(!empty($language)&&$language=='en')
+                @if(empty($language)||$language=='vi')
                     <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Support infomation" title="Support infomation" />
                     <div>Support</div>
                 @else 
@@ -128,7 +128,7 @@
             <ul id="ho-tro">
                 @foreach($policies as $policy)
                     @php
-                        if(!empty($language)&&$language=='en'){
+                        if(empty($language)||$language=='vi'){
                             $title      = $policy->en_name ?? $policy->en_seo->title ?? null;
                             $urlFull    = env('APP_URL').'/'.$policy->en_seo->slug_full;
                         }else {
