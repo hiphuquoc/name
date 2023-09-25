@@ -219,13 +219,19 @@ class ImageController extends Controller {
                 preg_match('#alt="(.*)"#imsU', $attrImage, $match);
                 $dataImage[$i]['alt']      = $match[1] ?? null;
                 $dataImage[$i]['title']    = $match[1] ?? null;
+    
+                /* Lấy class */
+                preg_match('#class="(.*)"#imsU', $attrImage, $match);
+                $dataImage[$i]['class']    = $match[1] ?? null;
+    
                 ++$i;
             }
             /* duyệt mảng => thay thế */
             $tmp            = [];
             foreach($dataImage as $image){
                 $dataSrc    = $image['data-src'] ?? $image['src'];
-                $tmp        = '<img src="'.Storage::url(config('image.loading_main_gif')).'" data-src="'.$dataSrc.'" alt="'.$image['alt'].'" title="'.$image['title'].'" style="width:100%;" />';
+                $class      = $image['class'] ?? ''; // Lấy class từ mảng $dataImage
+                $tmp        = '<img src="'.Storage::url(config('image.loading_main_gif')).'" data-src="'.$dataSrc.'" alt="'.$image['alt'].'" title="'.$image['title'].'" style="width:100%;" class="lazyload '.$class.'" />'; // Bổ sung class vào thẻ img
                 $content    = str_replace($image['source'], $tmp, $content);
             }
         }
