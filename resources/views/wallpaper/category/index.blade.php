@@ -86,23 +86,6 @@
                     </div>
                 </div>
 
-                <div class="imageGroup">
-                    <div class="imageGroup_box">
-                    <div class="imageGroup_box_item">
-                    <img src="https://name.dev/storage/images/upload/hinh-nen-dien-thoai-soi-phat-sang-tren-bai-bien-1695309092-5.webp" alt="" title="">
-                    </div>
-                    <div class="imageGroup_box_item">
-                    <img src="https://name.dev/storage/images/upload/hinh-nen-dien-thoai-tho-con-sieu-dang-yeu-1695266668-1.webp" alt="" title="">
-                    </div>
-                    <div class="imageGroup_box_item">
-                    <img src="https://name.dev/storage/images/upload/hinh-nen-dien-thoai-minion-de-thuong-1695223368-0.webp" alt="" title="">
-                    </div>
-                    </div>
-                    <div class="imageGroup_note">
-                     một phần không thể thiếu của cuộc sống cá nhân
-                    </div>
-                    </div>
-
                 <!-- filter box -->
                 {{-- <div class="filterStyleWallpaper">
                     @for($i=0;$i<20;++$i)
