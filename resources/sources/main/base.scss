@@ -503,13 +503,13 @@ blockquote{
   max-width: 660px;
   background: $colorBackgroundLv2;
   font-size: 0.95rem;
-  border-radius: 7px;
+  border-radius: 10px;
   margin: 1.5rem auto;
   border: 1px solid $colorBackgroundLv3;
   img {
       width: 100%;
       object-fit: cover;
-      border-radius: 7px 7px 0 0;
+      border-radius: 10px 10px 0 0;
       margin: 0;
   }
   &_note {
@@ -521,6 +521,35 @@ blockquote{
   }
   @media (max-width: 577px){
       margin: 0.5rem auto 0.75rem auto;
+  }
+}
+
+.imageGroup {
+  // background: $colorBackgroundLv2;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  margin: 1.5rem auto;
+  // border: 1px solid $colorBackgroundLv3;
+  max-width: 800px;
+  &_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    overflow: hidden;
+    &_item {
+      width: calc(33.33% - 0.5rem);
+      aspect-ratio: 1/2.18;
+      img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+        margin: 0;
+      }
+    }
+  }
+  &_note {
+      padding: 0.75rem 1rem;
+      text-align: center;
   }
 }
 
