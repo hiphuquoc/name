@@ -19,11 +19,11 @@
                     $image          = $wallpaper->infoWallpaper->file_url_hosting;
                 @endphp
                 <div class="galleryProductBox_item">
-                    @if($i<4)
+                    @if($i<2)
                         <!-- thêm src và data-option để mô phỏng thẻ image dùng cho tính năng addToCart -->
-                        <div class="galleryProductBox_item_backgroundImage lazyload" src="{{ $image }}" data-src="{{ $image }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
+                        <div class="galleryProductBox_item_backgroundImage" src="{{ $image }}" data-src="{{ $image }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="background:url('{{ $image }}') no-repeat center center / cover;"></div>
                     @else 
-                        <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $loop->index }}');" />
+                        <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="filter:blur(8px);" />
                     @endif
                 </div>
                 @php

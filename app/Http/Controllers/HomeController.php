@@ -10,8 +10,10 @@ use App\Models\Blog;
 use App\Models\Page;
 use App\Models\Order;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
+use Intervention\Image\ImageManagerStatic;
 
 use App\Mail\OrderMailable;
+use Google\Service\SecurityCommandCenter\PathNodeAssociatedFinding;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller{
@@ -96,27 +98,27 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
+        // $wallpapers     = \App\Models\Wallpaper::select('*')
+        //                     ->get();
+        // foreach($wallpapers as $wallpaper){
+        //     $filenameNotExtension   = pathinfo($wallpaper->file_url_hosting)['filename'];
+        //     $extension              = pathinfo($wallpaper->file_url_hosting)['extension'];
+        //     $filenameSmall          = config('image.folder_upload').$filenameNotExtension.'-small.'.$extension;
+        //     $filePath               = public_path($wallpaper->file_url_hosting);
+        //     if(file_exists($filePath)){
+        //         $imageTmp           = ImageManagerStatic::make($filePath);
+        //         $percentPixel       = $imageTmp->width()/$imageTmp->height();
+        //         $widthImageNormal   = 500;
+        //         $heightImageNormal  = $widthImageNormal/$percentPixel;
+        //         ImageManagerStatic::make($filePath)
+        //         ->encode($extension, config('image.quality'))
+        //         ->resize($widthImageNormal, $heightImageNormal)
+        //         ->save(Storage::path($filenameSmall));
+        //     }
 
-
-        // $flag = Storage::disk('gcs')->put('test.txt', '123');
-
-        $flag = Storage::disk('gcs')->delete('test.txt');
-        dd($flag);
-
-        // dd($request->all());
-        // if(!empty($request->get('code'))){
-        //     $orderCode          = $request->get('code');
-        
-        //     $orderInfo          = Order::select('*')
-        //                             ->where('code', $orderCode)
-        //                             ->first();
-
-        //     Order::updateItem($orderInfo->id, [
-        //         'payment_status' => 1
-        //     ]);
-        //     dd('success');
-        // }else {
-        //     dd('fail');
         // }
+
+
+        // dd($wallpapers->toArray());
     }
 }

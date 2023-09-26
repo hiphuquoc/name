@@ -36,7 +36,7 @@
     <!-- END:: Article Schema -->
 
     <!-- STRAT:: FAQ Schema -->
-    @include('wallpaper.schema.itemlist', ['data' => $fullProducts])
+    @include('wallpaper.schema.itemlist', ['data' => $products])
     <!-- END:: FAQ Schema -->
 
     <!-- STRAT:: FAQ Schema -->
@@ -130,8 +130,8 @@
 @push('scriptCustom')
     <script type="text/javascript">
         $(window).ready(function(){
-            /* load more lần đầu nếu nằm trong vùng xem */
-            loadWallpaperMore();
+            // /* load more lần đầu nếu nằm trong vùng xem */
+            // loadWallpaperMore();
 
             /* build tocContent khi scroll gần tới */
             const elementBuildTocContent = $('#js_buildTocContentMain_element');
@@ -145,8 +145,8 @@
                         }
                     }
                 }
-                /* load more */
-                loadWallpaperMore(); 
+                // /* load more */
+                // loadWallpaperMore(); 
             });            
         })
     </script>

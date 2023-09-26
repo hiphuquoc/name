@@ -28,8 +28,8 @@ class CategoryController extends Controller {
             foreach($products as $product){
                 $xhtmlProduct   .= view('wallpaper.template.wallpaperItem', [
                     'product'   => $product,
-                    'type'      => 'ajax',
-                    'language'  => $language
+                    'language'  => $language,
+                    'lazyload'  => true
                 ])->render();
             }
             /* phần tính toán */
@@ -58,8 +58,8 @@ class CategoryController extends Controller {
             foreach($products as $product){
                 $xhtmlProduct   .= view('wallpaper.template.wallpaperItem', [
                     'product'   => $product,
-                    'type'      => 'ajax',
-                    'language'  => $language
+                    'language'  => $language,
+                    'lazyload'  => true
                 ])->render();
             }
             /* phần tính toán */
@@ -89,8 +89,8 @@ class CategoryController extends Controller {
             foreach($products as $product){
                 $xhtmlProduct   .= view('wallpaper.template.wallpaperItem', [
                     'product'   => $product,
-                    'type'      => 'ajax',
-                    'language'  => $language
+                    'language'  => $language,
+                    'lazyload'  => true
                 ])->render();
             }
             /* phần tính toán */

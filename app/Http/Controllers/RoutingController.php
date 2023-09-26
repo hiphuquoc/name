@@ -82,7 +82,7 @@ class RoutingController extends Controller{
                         /* danh sách product => lấy riêng để dễ truyền vào template */
                         $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
                         $keyCategory    = json_encode($arrayCategory);
-                        $fullProducts   = Product::select('*')
+                        $products       = Product::select('*')
                                             ->whereHas('prices.wallpapers', function($query){
 
                                             })
@@ -92,14 +92,14 @@ class RoutingController extends Controller{
                                             ->with('seo', 'en_seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->get();
-                        /* lọc 5 phần tử đầu tiên */
-                        $products       = new \Illuminate\Database\Eloquent\Collection;
-                        $i              = 0;
-                        foreach($fullProducts as $p){
-                            $products[]  = $p;
-                            ++$i;
-                            if($i==5) break;
-                        }
+                        // /* lọc 5 phần tử đầu tiên */
+                        // $products       = new \Illuminate\Database\Eloquent\Collection;
+                        // $i              = 0;
+                        // foreach($fullProducts as $p){
+                        //     $products[]  = $p;
+                        //     ++$i;
+                        //     if($i==5) break;
+                        // }
                         $totalProduct   = Product::select('*')
                                             ->whereHas('prices.wallpapers', function($query){
                                                                     
@@ -132,7 +132,7 @@ class RoutingController extends Controller{
                         $content            = Blade::render(Storage::get($folderContent.$item->seo->slug.'.blade.php'));
                         /* breadcrumb */
                         $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'fullProducts', 'totalProduct', 'keyCategory', 'breadcrumb', 'content', 'language'))->render();
+                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'totalProduct', 'keyCategory', 'breadcrumb', 'content', 'language'))->render();
                         break;
                     // case 'brand_info':
                     //     $flagMatch      = true;

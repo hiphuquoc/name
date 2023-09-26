@@ -25,13 +25,12 @@
     @endphp
     @foreach($product->prices as $price)
         @foreach($price->wallpapers as $wallpaper)
-            <!-- one price && file -->
-            {{-- .\App\Helpers\Charactor::randomString(10) --}}
             @php
                 $tag        = $tagBox ?? null;
                 $keyIdPrice = 'js_changeOption_'.$tag.$price->id.$wallpaper->infoWallpaper->id;
                 /* lấy ảnh Small */
-                $imageMini = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
                 $image      = $wallpaper->infoWallpaper->file_url_hosting;
                 /* đường dẫn */
                 $url        = !empty($language)&&$language=='en'&&!empty($product->en_seo->slug_full) ? $product->en_seo->slug_full : $product->seo->slug_full;
@@ -40,14 +39,19 @@
                 <a href="/{{ $url }}?product_price_id={{ $price->id }}" class="wallpaperGridBox_item_image">
                     <div class="zIndexHide">
                         <!-- xử lý loadajax -->
-                        @if(!empty($type)&&$type=='ajax')
-                            <img class="lazyLoadWithResize" src="{{ $imageMini }}" data-url-image="{{ $image }}" data-resize="300" alt="{{ $productName }}" title="{{ $productName }}" />
-                        @else 
+                        @if(!empty($lazyload)&&$lazyload==true)
                             @if($i==0)
-                                <div class="wallpaperGridBox_item_image_backgroundImage lazyLoadWithResize" data-url-image="{{ $wallpaper->infoWallpaper->file_url_hosting }}" data-resize="300" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
+                                <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" style="filter:blur(8px);" />
                             @else 
                                 <!-- các ảnh sau khi nào click mới load -->
-                                <img class="lazyLoadWithResizeAfter" src="{{ $imageMini }}" data-url-image="{{ $wallpaper->infoWallpaper->file_url_hosting }}" data-resize="300" alt="{{ $productName }}" title="{{ $productName }}" />
+                                <img class="lazyloadAfter" src="{{ $imageMini }}" data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" style="filter:blur(8px);" />
+                            @endif
+                        @else 
+                            @if($i==0)
+                                <div class="wallpaperGridBox_item_image_backgroundImage" style="background:url('{{ $imageSmall }}') no-repeat center center / cover;" ></div>
+                            @else 
+                                <!-- các ảnh sau khi nào click mới load -->
+                                <img class="lazyloadAfter" src="{{ $imageMini }}" data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" style="filter:blur(8px);" />
                             @endif
                         @endif
                         <!-- rating và số lượng đã bán -->
@@ -119,22 +123,12 @@
                             @endphp
                             @if($k==6)
                                 <a href="/{{ $url }}" class="wallpaperGridBox_item_imageList_item {{ $selected }}">
-                                    @if(!empty($type)&&$type=='lazyload')
-                                        <!-- lazy load image list -->
-                                        <img src="{{ $imageMini }}" alt="loading cart" title="loading cart" />
-                                    @else
-                                        <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
-                                    @endif
+                                    <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
                                     <span class="wallpaperGridBox_item_imageList_item_count">+{{ $product->prices->count() - 4 }}</span>
                                 </a>
                             @else 
                                 <div class="wallpaperGridBox_item_imageList_item {{ $selected }}" onClick="changeOption('{{ $keyIdFile }}');">
-                                    @if(!empty($type)&&$type=='lazyload')
-                                        <!-- lazy load image list -->
-                                        <img src="{{ $imageMini }}" alt="loading cart" title="loading cart" />
-                                    @else
-                                        <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
-                                    @endif
+                                    <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
                                 </div>
                             @endif
                         @endforeach

@@ -341,16 +341,14 @@ h1 {
 
 h2 {
   font-family: $fontTitle;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-size: 1.25rem;
   color: $colorText;
   @media(max-width: 1199px){
     font-size: 1.2rem;
-    margin-bottom: 1.25rem;
   }
   @media(max-width: 990px){
     font-size: 1.15rem;
-    margin-bottom: 1rem;
   }
   @media(max-width: 766px){
     font-size: 1.1rem;
@@ -364,7 +362,7 @@ h2 {
 
 h3, h4 {
   font-family: $fontTitle;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   color: $colorText;
 }
 
@@ -372,11 +370,10 @@ h3 {
   font-size: 1.1rem;
   @media(max-width: 990px){
     font-size: 1.05rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   @media(max-width: 577px){
     font-size: 1rem;
-    margin-bottom: 0.5rem;
   }
 }
 
@@ -384,9 +381,6 @@ h4 {
   font-size: 1rem;
   @media(max-width: 990px){
     font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-  @media(max-width: 577px){
     margin-bottom: 0.5rem;
   }
 }
@@ -439,19 +433,13 @@ h4 {
   }
 }
 p {
-  margin-bottom: 1.5rem;
-  @media(max-width: 1199px){
-    margin-bottom: 1.25rem;
-  }
-  @media(max-width: 990px){
-    margin-bottom: 1rem;
-  }
-  @media(max-width: 766px){
-    margin-bottom: 0.75rem;
-  }
-  // @media(max-width: 577px){
-  //   margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  // @media(max-width: 990px){
+  //   margin-bottom: 0.75rem;
   // }
+  @media(max-width: 577px){
+    margin-bottom: 0.5rem;
+  }
 }
 
 img {
@@ -504,7 +492,7 @@ blockquote{
   background: $colorBackgroundLv2;
   font-size: 0.95rem;
   border-radius: 10px;
-  margin: 1.5rem auto;
+  margin: 1rem auto;
   border: 1px solid $colorBackgroundLv3;
   img {
       width: 100%;
@@ -516,7 +504,7 @@ blockquote{
       padding: 0.75rem 1rem;
       text-align: center;
   }
-  @media (max-width: 1023px){
+  @media (max-width: 991px){
       margin: 0.75rem auto 1rem auto;
   }
   @media (max-width: 577px){
@@ -525,11 +513,9 @@ blockquote{
 }
 
 .imageGroup {
-  // background: $colorBackgroundLv2;
   font-size: 0.95rem;
   border-radius: 10px;
-  margin: 1.5rem auto;
-  // border: 1px solid $colorBackgroundLv3;
+  margin: 1rem auto;
   max-width: 800px;
   &_box {
     display: flex;
@@ -539,6 +525,9 @@ blockquote{
     &_item {
       width: calc(33.33% - 0.5rem);
       aspect-ratio: 1/2.18;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       img {
         width: 100%;
         object-fit: cover;
@@ -548,8 +537,14 @@ blockquote{
     }
   }
   &_note {
-      padding: 0.75rem 1rem;
+      padding: 0.75rem 1rem 0 1rem;
       text-align: center;
+  }
+  @media (max-width: 991px){
+      margin: 0.75rem auto 1rem auto;
+  }
+  @media (max-width: 577px){
+      margin: 0.5rem auto 0.75rem auto;
   }
 }
 

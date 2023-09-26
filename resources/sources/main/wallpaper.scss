@@ -1539,10 +1539,10 @@
         }
     }
 }
-.lazyLoadWithResize, .lazyload {
-    filter: blur(8px);
+.lazyloadWithResize, .lazyload {
+    // filter: blur(8px);
     transition: opacity 0.5s ease-in-out;
     &.loaded {
-        filter: unset;
+        filter: unset !important;
     }
 }

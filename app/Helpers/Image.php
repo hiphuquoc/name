@@ -68,4 +68,13 @@ class Image {
         }
         return $result;
     }
+
+    public static function getUrlImageSmallByUrlImage($urlImage){
+        $result     = null;
+        if(!empty($urlImage)){
+            $tmp    = pathinfo($urlImage);
+            $result = $tmp['dirname'].'/'.$tmp['filename'].'-small.'.$tmp['extension'];
+        }
+        return $result;
+    }
 }

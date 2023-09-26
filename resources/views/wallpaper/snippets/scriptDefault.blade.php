@@ -7,12 +7,12 @@
         // checkToSetCsrfFirstTime();
         
         /* lazyload ảnh lần đầu */
-        lazyLoad();
-        lazyLoadWithResize();
+        lazyload();
+        lazyloadWithResize();
         /* lazyload ảnh khi scroll */
         $(window).on('scroll', function() {
-            lazyLoad();
-            lazyLoadWithResize();
+            lazyload();
+            lazyloadWithResize();
         });
         
         /* tải lại view sort cart */
@@ -51,7 +51,7 @@
         checkLoginAndSetShow();
     });
     
-    function lazyLoad(){
+    function lazyload(){
         /* đối với ảnh */
         $('img.lazyload').each(function() {
             if (!$(this).hasClass('loaded')) {
@@ -78,8 +78,8 @@
     }
 
     /* lazyload và resize từ ảnh gốc */
-    function lazyLoadWithResize() {
-        $('img.lazyLoadWithResize, div.lazyLoadWithResize').each(function() {
+    function lazyloadWithResize() {
+        $('img.lazyloadWithResize, div.lazyloadWithResize').each(function() {
             var boxThis = $(this);
             if (!boxThis.hasClass('loaded')) {
                 var distance = $(window).scrollTop() - boxThis.offset().top + 900;
@@ -329,9 +329,9 @@
         /* bật lại phần tử được chọn */
         elemtShow.removeClass('hide').addClass('show');
         /* lazy load cho ảnh trong phần tử */
-        elemtShow.find('img.lazyLoadWithResizeAfter').each(function(){
-            $(this).addClass('lazyLoadWithResize');
-            lazyLoadWithResize();
+        elemtShow.find('img.lazyloadAfter').each(function(){
+            $(this).addClass('lazyload');
+            lazyload();
         })
     }
     /* hiện thông báo cho sản phẩm vào giỏ hàng thành công */
