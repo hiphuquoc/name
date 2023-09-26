@@ -67,18 +67,26 @@ class Upload {
                 ->encode(config('image.extension'), config('image.quality'))
                 ->save(Storage::path($fileUrl));
             $result         = $fileUrl;
-            // resize thêm một bản có width = 50px để làm ảnh mờ
+            // resize thêm một bản có width 50px để làm ảnh mini
             $filenameNotExtension = pathinfo($filename)['filename'];
-            $extension      = pathinfo($filename)['extension'];
-            $fileUrlMini    = $folderUpload.$filenameNotExtension.'-mini.'.$extension;
+            $extension          = pathinfo($filename)['extension'];
+            $fileUrlMini        = $folderUpload.$filenameNotExtension.'-mini.'.$extension;
             $imageTmp           = ImageManagerStatic::make($image);
             $percentPixel       = $imageTmp->width()/$imageTmp->height();
-            $widthImageNormal   = 50;
-            $heightImageNormal  = $widthImageNormal/$percentPixel;
+            $widthImageMini     = 50;
+            $heightImageMini    = $widthImageMini/$percentPixel;
             ImageManagerStatic::make($image->getRealPath())
                 ->encode($extension, config('image.quality'))
-                ->resize($widthImageNormal, $heightImageNormal)
+                ->resize($widthImageMini, $heightImageMini)
                 ->save(Storage::path($fileUrlMini));
+            // resize thêm một bản có width 500px để làm ảnh small
+            $fileUrlSmall       = $folderUpload.$filenameNotExtension.'-small.'.$extension;
+            $widthImageSmall    = 500;
+            $heightImageSmall   = $widthImageSmall/$percentPixel;
+            ImageManagerStatic::make($image->getRealPath())
+                ->encode($extension, config('image.quality'))
+                ->resize($widthImageSmall, $heightImageSmall)
+                ->save(Storage::path($fileUrlSmall));
         }
         return $result;
     }
