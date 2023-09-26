@@ -122,10 +122,10 @@
     }
 }
 .breadcrumbBox {
-    font-family: $fontTitle;
     overflow: hidden;
     @include colorOpacity('color', $colorText, 0.7);
     font-size: 0.95rem;
+    font-weight: normal;
     a {
         color: $colorText;
         &:hover {

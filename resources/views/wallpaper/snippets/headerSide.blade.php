@@ -129,11 +129,11 @@
                 @foreach($policies as $policy)
                     @php
                         if(empty($language)||$language=='vi'){
-                            $title      = $policy->en_name ?? $policy->en_seo->title ?? null;
-                            $urlFull    = env('APP_URL').'/'.$policy->en_seo->slug_full;
-                        }else {
                             $title      = $policy->name ?? $policy->seo->title ?? null;
                             $urlFull    = env('APP_URL').'/'.$policy->seo->slug_full;
+                        }else {
+                            $title      = $policy->en_name ?? $policy->en_seo->title ?? null;
+                            $urlFull    = env('APP_URL').'/'.$policy->en_seo->slug_full;
                         }
                     @endphp
                     <li>

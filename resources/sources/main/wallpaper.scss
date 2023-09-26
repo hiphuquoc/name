@@ -632,7 +632,7 @@
         li {
             list-style: none;
             &.selected {
-                font-weight: bold;
+                font-family: $fontTitle;
                 color: $colorTextLight;
                 > a, >div {
                     color: $colorTextLight !important;

@@ -140,8 +140,9 @@
             padding: 0.75rem 1rem 1rem;
             &_title {
                 margin-bottom: 0;
-                color: $colorTitle;
+                color: $colorText;
                 font-size: 0.95rem;
+                font-family: $fontTitle;
             }
             &_desc {
                 font-size: 0.9rem;
