@@ -110,7 +110,7 @@ class BuildInsertUpdateModel {
         $result['price']                        = $dataForm['price'];
         $result['price_before_promotion']       = $dataForm['price_before_promotion'] ?? null;
         if(!empty($dataForm['price_before_promotion'])){
-            $result['sale_off'] = (($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100;
+            $result['sale_off'] = round((($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100);
         }
         return $result;
     }
@@ -129,7 +129,7 @@ class BuildInsertUpdateModel {
             $result['sale_off']         = 0;
             if($type=='insert') $result['folder_drive'] = \App\Helpers\Charactor::randomString(15);
             if(!empty($dataForm['price_before_promotion'])){
-                $result['sale_off'] = (($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100;
+                $result['sale_off'] = round((($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100);
             }
             $result['instock']          = $dataForm['instock'] ?? null;
         }

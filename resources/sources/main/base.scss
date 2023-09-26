@@ -40,7 +40,7 @@ $fontText   : "SVN-Gilroy", tahoma, serif;
 $fontTitle  : "SVN-Gilroy Bold", tahoma, serif;
 /* mixin title */
 @mixin titleDefault {
-  color: $colorTitle;
+  color: $colorText;
   font-family: $fontTitle;
   font-size: 1.3rem;
   margin-bottom: 1.5rem;
@@ -262,7 +262,7 @@ $fontTitle  : "SVN-Gilroy Bold", tahoma, serif;
 @mixin highLight {
   font-size: 1.2rem;
   font-family: $fontTitle;
-  color: $colorTitle;
+  color: $colorTextLight;
   margin-right: 0.25rem;
 }
 
@@ -313,9 +313,9 @@ body {
 
 a {
     text-decoration: none;
-    color: $colorText;
+    color: $colorTextLight;
     &:hover {
-        color: $colorTextLight;
+      color: $colorText;
     }
 }
 
@@ -488,7 +488,7 @@ blockquote{
 }
 
 .imageBox {
-  max-width: 660px;
+  max-width: 750px;
   background: $colorBackgroundLv2;
   font-size: 0.95rem;
   border-radius: 10px;
@@ -516,7 +516,7 @@ blockquote{
   font-size: 0.95rem;
   border-radius: 10px;
   margin: 1rem auto;
-  max-width: 800px;
+  max-width: 750px;
   &_box {
     display: flex;
     justify-content: space-between;

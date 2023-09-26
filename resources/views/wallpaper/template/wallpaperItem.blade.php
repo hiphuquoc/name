@@ -66,7 +66,7 @@
                         </div>
                         <!-- icon giảm giá -->
                         @if(!empty($price->sale_off))
-                            <div class="wallpaperGridBox_item_image_percent">- {{ $price->sale_off }}%</div>
+                            <div class="wallpaperGridBox_item_image_percent">- {{ $product->sale_off }}%</div>
                         @endif
                         <!-- content -->
                         <div class="wallpaperGridBox_item_image_content">

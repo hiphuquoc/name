@@ -122,11 +122,15 @@
     }
 }
 .breadcrumbBox {
-    font-weight: normal;
+    font-family: $fontTitle;
     overflow: hidden;
     @include colorOpacity('color', $colorText, 0.7);
     font-size: 0.95rem;
     a {
+        color: $colorText;
+        &:hover {
+            color: $colorTextLight;
+        }
         &:after {
             @include fontAwesome;
             content: '\f101';

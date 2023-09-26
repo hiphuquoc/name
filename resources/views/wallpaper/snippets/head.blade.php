@@ -38,6 +38,42 @@
         font-weight:500;
         src:url("/fonts/svn-gilroy_medium.ttf")
     }
+    /* @font-face {
+        font-family: 'name';
+        src: url('/fonts/name-light-2.0.2.woff2')
+                format('woff2'),
+            url('/fonts/name-light-2.0.2.woff')
+                format('woff');
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'name';
+        src: url('/fonts/name-light-italic-2.0.2.woff2')
+                format('woff2'),
+            url('/fonts/name-light-italic-2.0.2.woff')
+                format('woff');
+        font-style: italic;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'name';
+        src: url('/fonts/name-regular-2.0.2.woff2')
+                format('woff2'),
+            url('/fonts/name-regular-2.0.2.woff')
+                format('woff');
+        font-weight: bold;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'name';
+        src: url('/fonts/name-regular-2.0.2.woff2')
+                format('woff2'),
+            url('/fonts/name-regular-2.0.2.woff')
+                format('woff');
+        font-weight: bold;
+        font-style: italic;
+        font-display: swap;
+    } */
 </style>
 
 @stack('headCustom')

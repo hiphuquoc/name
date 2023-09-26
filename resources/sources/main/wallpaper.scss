@@ -90,7 +90,7 @@
                 width: 100%;
                 &_title {
                     h2, h3, h4 {
-                        font-family: $fontText;
+                        font-family: $fontTitle;
                         font-weight: normal;
                         font-size: 0.9rem;
                         margin-bottom: 0 !important;
@@ -168,7 +168,8 @@
                     border: 1px solid $colorBackgroundLv3;
                     border-radius: 50%;
                     letter-spacing: 0.5px;
-                    font-size: 1.1rem;
+                    font-size: 0.95rem;
+                    color: $colorText;
                 }
                 img {
                     width: 100%;
