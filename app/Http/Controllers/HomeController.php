@@ -98,27 +98,8 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        // $wallpapers     = \App\Models\Wallpaper::select('*')
-        //                     ->get();
-        // foreach($wallpapers as $wallpaper){
-        //     $filenameNotExtension   = pathinfo($wallpaper->file_url_hosting)['filename'];
-        //     $extension              = pathinfo($wallpaper->file_url_hosting)['extension'];
-        //     $filenameSmall          = config('image.folder_upload').$filenameNotExtension.'-small.'.$extension;
-        //     $filePath               = public_path($wallpaper->file_url_hosting);
-        //     if(file_exists($filePath)){
-        //         $imageTmp           = ImageManagerStatic::make($filePath);
-        //         $percentPixel       = $imageTmp->width()/$imageTmp->height();
-        //         $widthImageNormal   = 500;
-        //         $heightImageNormal  = $widthImageNormal/$percentPixel;
-        //         ImageManagerStatic::make($filePath)
-        //         ->encode($extension, config('image.quality'))
-        //         ->resize($widthImageNormal, $heightImageNormal)
-        //         ->save(Storage::path($filenameSmall));
-        //     }
-
-        // }
-
-
-        // dd($wallpapers->toArray());
+        $result     = null;
+        if(!empty($request->get('input'))) $result = \App\Helpers\Charactor::convertStrToUrl($request->get('input'));
+        return view('wallpaper.home.test', compact('result'));
     }
 }

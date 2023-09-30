@@ -1,7 +1,11 @@
 @php
     $idProduct              = $product->id ?? 0;
     $idPrice                = $product->price->id ?? 0;
-    $keyId                  = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
+    if(!empty($product->price->id)){
+        $keyId              = $product->id.$product->price->id;
+    }else {
+        $keyId              = $idProduct.'all';
+    }
     $eventUpdateCart        = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'", "cartMain")';
     $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "'.$idPrice.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
     if(empty($language)||$language=='vi'){
@@ -29,7 +33,6 @@
     /* ảnh */
     $image                  = config('image.default');
     if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting)) {
-        // $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting);
         $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting);
     }
 @endphp

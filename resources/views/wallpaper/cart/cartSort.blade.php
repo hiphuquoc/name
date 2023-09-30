@@ -24,7 +24,8 @@
                         /* cộng tổng */
                         $total      += $product->cart['price'];
                         $idProduct  = $product->id ?? 0;
-                        $keyId      = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
+                        $idPrice    = $product->cart['product_price_id'] ?? 0;
+                        $keyId      = !empty($product->id) ? $product->id.$idPrice : null;
                     @endphp
                     <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartBox_list_item">
                         @include('wallpaper.cart.cartSortRow', compact('product'))

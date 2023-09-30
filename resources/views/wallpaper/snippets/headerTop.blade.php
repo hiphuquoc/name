@@ -32,8 +32,8 @@
             @endif
             <div class="languageBox_list">
                 @php
-                    $urlVi = !empty($item->seo->slug_full)&&$item->seo->slug_full!='/' ? $item->seo->slug_full : null;
-                    $urlEn = !empty($item->en_seo->slug_full) ? $item->en_seo->slug_full : null;
+                    $urlVi = !empty($item->seo)&&$item->seo->slug_full!='/' ? $item->seo->slug_full : null;
+                    $urlEn = !empty($item->en_seo) ? $item->en_seo->slug_full : null;
                 @endphp
                 <a href="/{{ $urlVi }}" class="languageBox_list_item {{ empty($language)||$language=='vi' ? 'selected' : null }}" aria-label="Xem Name.com.vn bằng ngôn ngữ tiếng Việt">
                     <div>VI</div>

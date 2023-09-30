@@ -43,7 +43,8 @@
                                             <div class="cartProductBox_body">
                                                 @foreach($products as $product)
                                                     @php
-                                                        $keyId  = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
+                                                        $idPrice    = $product->cart['product_price_id'] ?? 0;
+                                                        $keyId      = !empty($product->id) ? $product->id.$idPrice : null;
                                                     @endphp
                                                     <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartProductBox_body_item">
                                                         @include('wallpaper.cart.cartRow', compact('product', 'language'))

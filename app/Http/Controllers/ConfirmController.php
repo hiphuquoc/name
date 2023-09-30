@@ -15,9 +15,11 @@ class ConfirmController extends Controller {
     public static function confirm(Request $request){
         $item       = new \Illuminate\Database\Eloquent\Collection;
         $code       = $request->get('code') ?? 0;
+
+        $code       = 'NKUD0FZR29IQ5T3';
         $order      = Order::select('*')
                         ->where('code', $code)
-                        ->with('products')
+                        ->with('products.infoPrice', 'products.infoProduct')
                         ->first();
         if(!empty($order)&&$order->payment_status==1){
             return view('wallpaper.confirm.index', compact('item', 'order'));

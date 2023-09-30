@@ -63,36 +63,38 @@ class AjaxController extends Controller {
             $language           = $request->get('language') ?? 'vi';
             if(!empty($products)&&$products->isNotEmpty()){
                 foreach($products as $product){
-                    if(!empty($language)&&$language=='en'){
-                        $title  = $product->en_name ?? $product->en_seo->title ?? null;
-                        $url    = $product->en_seo->slug_full;
-                    }else {
+                    if($language=='vi'){
                         $title  = $product->name ?? $product->seo->title ?? null;
                         $url    = $product->seo->slug_full;
+                    }else {
+                        $title  = $product->en_name ?? $product->en_seo->title ?? null;
+                        $url    = $product->en_seo->slug_full;
                     }
                     $priceOld   = null;
-                    if($product->prices<$product->price_before_promotion) $priceOld = '<div class="searchViewBefore_selectbox_item_content_price_old">'.number_format($product->price_before_promotion).config('main.currency_unit').'</div>';
+                    if($product->prices<$product->price_before_promotion) {
+                        $priceOld   = '<div class="searchViewBefore_selectbox_item_content_price_old">'.\App\Helpers\Number::getFormatPriceByLanguage($product->price_before_promotion, $language).'</div>';
+                    }
                     $image      = Storage::url(config('image.loading_main_gif'));
                     if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting)) $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting);
-                    $response       .= '<a href="/'.$url.'" class="searchViewBefore_selectbox_item">
-                                            <div class="searchViewBefore_selectbox_item_image">
-                                                <img src="'.$image.'" alt="'.$title.'" title="'.$title.'" />
+                    $response   .= '<a href="/'.$url.'" class="searchViewBefore_selectbox_item">
+                                        <div class="searchViewBefore_selectbox_item_image">
+                                            <img src="'.$image.'" alt="'.$title.'" title="'.$title.'" />
+                                        </div>
+                                        <div class="searchViewBefore_selectbox_item_content">
+                                            <div class="searchViewBefore_selectbox_item_content_title maxLine_2">
+                                                '.$title.'
                                             </div>
-                                            <div class="searchViewBefore_selectbox_item_content">
-                                                <div class="searchViewBefore_selectbox_item_content_title maxLine_2">
-                                                    '.$title.'
-                                                </div>
-                                                <div class="searchViewBefore_selectbox_item_content_price">
-                                                    <div>'.number_format($product->price).config('main.currency_unit').'</div>
-                                                    '.$priceOld.'
-                                                </div>
+                                            <div class="searchViewBefore_selectbox_item_content_price">
+                                                <div>'.\App\Helpers\Number::getFormatPriceByLanguage($product->price, $language).'</div>
+                                                '.$priceOld.'
                                             </div>
-                                        </a>';
+                                        </div>
+                                    </a>';
                 }
-                $route              = $language=='en' ? route('main.enSearchProduct') : route('main.searchProduct');
-                $response           .= '<a href="'.$route.'?key_search='.request('key_search').'" class="searchViewBefore_selectbox_item">
-                                            Xem tất cả (<span style="font-size:1.1rem;">'.$count.'</span>) <i class="fa-solid fa-angles-right"></i>
-                                        </a>';
+                $route          = $language=='vi' ? route('main.searchProduct') : route('main.enSearchProduct');
+                $response       .= '<a href="'.$route.'?key_search='.request('key_search').'" class="searchViewBefore_selectbox_item">
+                                        Xem tất cả (<span style="font-size:1.1rem;">'.$count.'</span>) <i class="fa-solid fa-angles-right"></i>
+                                    </a>';
             }else {
                 $response       = '<div class="searchViewBefore_selectbox_item">Không có sản phẩm phù hợp!</div>';
             }
@@ -101,7 +103,7 @@ class AjaxController extends Controller {
     }
 
     public static function registryEmail(Request $request){
-        $idRegistryEmail    = RegistryEmail::insertItem([
+        $idRegistryEmail        = RegistryEmail::insertItem([
             'email'     => $request->get('registry_email')
         ]);
         if(!empty($idRegistryEmail)){
@@ -199,5 +201,40 @@ class AjaxController extends Controller {
             $response   = \App\Helpers\Image::streamResizedImage($request->get('url_image'), $resize);
         }
         echo $response;
+    }
+
+    public static function loadImageSource(Request $request){
+        $result = '';
+        if(!empty($request->get('order_code'))&&!empty($request->get('wallpaper_info_id'))){
+            $idWallpaper    = $request->get('wallpaper_info_id');
+            /* lấy từ order code để chống bug dò wallpaper */
+            $infoOrder      = \App\Models\Order::select('*')
+                                ->where('code', $request->get('order_code'))
+                                ->first();
+            $infoWallpaper  = new \Illuminate\Database\Eloquent\Collection;
+            foreach($infoOrder->products as $product){
+                if(empty($product->infoPrice)){
+                    /* trường hợp all => duyệt qua tìm source cần tải */
+                    foreach($product->infoProduct->prices as $price){
+                        foreach($price->wallpapers as $wallpaper){
+                            if($idWallpaper==$wallpaper->infoWallpaper->id) {
+                                $infoWallpaper = $wallpaper->infoWallpaper;
+                                break;
+                            }
+                        }
+                    }
+                }else {
+                    /* trường hợp có product_price_id */
+                    foreach($product->infoPrice->wallpapers as $wallpaper){
+                        if($idWallpaper==$wallpaper->infoWallpaper->id) {
+                            $infoWallpaper = $wallpaper->infoWallpaper;
+                            break;
+                        }
+                    }
+                }
+            }
+            dd($infoWallpaper);
+        }
+        echo $result;
     }
 }

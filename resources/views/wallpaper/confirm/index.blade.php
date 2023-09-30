@@ -5,13 +5,9 @@
         <div class="contentBox">
             <div class="container">
                 @php
-                    $count      = 0;
-                    foreach($order->products as $product){
-                        $count  += $product->infoPrice->sources->count();
-                    }
-                @endphp
+                    $xhtmlTotal = null;
 
-                {{-- <h1>Tải hình ảnh ({{ $count }})</h1> --}}
+                @endphp
                 <div class="pageCartBox">
                     <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left" style="width:100%;">
 
@@ -51,13 +47,12 @@
                                         </thead>
                                         <tbody>
                                             @foreach($order->products as $product)
-                                                {{-- <tr onClick="downloadSourceZip('{{ $product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug }}');"> --}}
                                                 <tr>
                                                     <td>
-                                                        @php
+                                                        {{-- @php
                                                             $zipPath = $product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug.'/'.$product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug.'.zip';
-                                                        @endphp
-                                                        <a href="{{ Storage::disk('google')->url($zipPath) }}" target="_blank">
+                                                        @endphp --}}
+                                                        <a href="#" target="_blank">
                                                             <img src="{{ Storage::url('images/svg/download-success.svg') }}" />
                                                             <div>{{ $product->infoProduct->name }} (link google drive .ZIP)</div>
                                                         </a>
@@ -71,37 +66,47 @@
                             </div>
                         </div>
 
-                        {{-- <div class="wallpaperSourceGrid">
-                            @php
-                                $i = 0;
-                            @endphp
+                        <div class="wallpaperSourceGrid">
                             @foreach($order->products as $product)
-                                @foreach($product->infoPrice->sources as $source)
-                                    @php
-                                        $imagePath      = Storage::disk('google')->url($source->file_path);
-                                        if($i<5){
-                                            $attrImage  = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.$imagePath.'\') no-repeat center center / cover;"';
-                                        }else {
-                                            $attrImage  = 'class="wallpaperSourceGrid_item_image lazyload" data-src="'.$imagePath.'"';
-                                        }
-                                    @endphp
-                                    <a href="{{ route('main.downloadSource', ['file' => $source->file_path]) }}" class="wallpaperSourceGrid_item">
-                                        <div {!! $attrImage !!}></div>
-                                        <div class="wallpaperSourceGrid_item_action">
-                                            <img src="{{ Storage::url('images/svg/download.svg') }}" />
-                                        </div>
-                                        <div class="wallpaperSourceGrid_item_background"></div>
-                                    </a>
-                                    @php
-                                        ++$i;
-                                    @endphp
-                                @endforeach
+                                @if(empty($product->infoPrice))
+                                    <!-- trường hợp all -->
+                                    @foreach($product->infoProduct->prices as $price)
+                                        @foreach($price->wallpapers as $wallpaper)
+                                            @php
+                                                // $imagePath      = Storage::disk('google')->url($source->file_path);
+                                                // if($i<5){
+                                                //     $attrImage  = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.$imagePath.'\') no-repeat center center / cover;"';
+                                                // }else {
+                                                //     $attrImage  = 'class="wallpaperSourceGrid_item_image lazyload" data-src="'.$imagePath.'"';
+                                                // }
+                                                $attrImage = 'class="wallpaperSourceGrid_item_image" style="background:url(\''.$wallpaper->infoWallpaper->file_url_hosting.'\') no-repeat center center / cover;"';
+                                            @endphp
+                                            <a href="{{ route('main.downloadSource', ['file' => $wallpaper->infoWallpaper->file_url_hosting]) }}" class="wallpaperSourceGrid_item">
+                                                {{-- <div class="wallpaperSourceGrid_item_image"></div> --}}
+                                                <div class="wallpaperSourceGrid_item_action">
+                                                    <img class="lazyloadSource" src="{{ Storage::url('images/svg/download.svg') }}" data-order-code="{{ $order->code }}" data-wallpaper-id="{{ $wallpaper->infoWallpaper->id }}" />
+                                                </div>
+                                                <div class="wallpaperSourceGrid_item_background"></div>
+                                            </a>
+                                        @endforeach
+                                    @endforeach
+                                @else
+                                    @foreach($product->infoPrice->wallpapers as $wallpaper)
+                                        <a href="{{ route('main.downloadSource', ['file' => $wallpaper->file_url_hosting]) }}" class="wallpaperSourceGrid_item">
+                                            <div {!! $attrImage !!}></div>
+                                            <div class="wallpaperSourceGrid_item_action">
+                                                <img src="{{ Storage::url('images/svg/download.svg') }}" />
+                                            </div>
+                                            <div class="wallpaperSourceGrid_item_background"></div>
+                                        </a>
+                                    @endforeach
+                                @endif
                             @endforeach
                             <form id="js_downloadSource_form" method="post" action="{{ route('main.downloadSource') }}">
                                 @csrf
                                 <input id="js_downloadSource_input" type="hidden" name="folder_path" value="" />
                             </form>
-                        </div> --}}
+                        </div>
 
                     </div>
                     {{-- <div class="pageCartBox_right">
@@ -149,6 +154,7 @@
         $(window).ready(function(){
             if($("#js_scrollMenu").length) fixedElement();
             // toggleWaiting();
+            lazyloadSource();
         });
 
         $('a.wallpaperSourceGrid_item').click(function(e) {
@@ -224,6 +230,45 @@
                 $('body').css('overflow', 'unset');
                 $('#js_openCloseModal_blur').removeClass('blurBackground');
             }
+        }
+
+        /* lazyload và resize từ ảnh gốc */
+        function lazyloadSource() {
+            $('img.lazyloadSource, div.lazyloadSource').each(function() {
+                var boxThis = $(this);
+                if (!boxThis.hasClass('loaded')) {
+                    var distance = $(window).scrollTop() - boxThis.offset().top + 900;
+                    if (distance > 0) {
+                        loadImageSource(boxThis);
+                    }
+                }
+            });
+        }
+        function loadImageSource(boxThis) {
+            const orderCode     = boxThis.data('order-code');
+            const idWallpaper = boxThis.data('wallpaper-id');
+            $.ajax({
+                url: "{{ route('ajax.loadImageSource') }}",
+                type: 'get',
+                dataType: 'html',
+                data: {
+                    order_code          : orderCode,
+                    wallpaper_info_id   : idWallpaper
+                }
+            }).done(function (response) {
+                console.log(response);
+                // if (boxThis.is('img')) {
+                //     boxThis.attr('src', response);
+                // } else if (boxThis.is('div')) {
+                //     boxThis.css({
+                //         background: 'url("' + response + '") no-repeat center center / cover',
+                //         filter: 'unset'
+                //     });
+                // }
+                // boxThis.addClass('loaded');
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("Ajax request failed: " + textStatus, errorThrown);
+            });
         }
     </script>
 @endpush
