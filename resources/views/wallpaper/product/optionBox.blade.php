@@ -3,7 +3,7 @@
 </div> --}}
 <div id="js_addToCart_options" class="productDetailBox_detail_option_box">
     <div class="productDetailBox_detail_option_box_item" style="background:none;font-size:0.95rem;padding:0;margin:0 10px 0 0;">
-        {{ !empty($language)&&$language=='en' ? 'Options :' : 'Tùy chọn :' }}
+        {{ empty($language)&&$language=='vi' ? 'Tùy chọn :' : 'Options :' }}
     </div>
     <!-- của all -->
     <div id="js_addToCart_option_all" class="productDetailBox_detail_option_box_item selected"

@@ -1,13 +1,13 @@
 
 <!-- của trọn bộ -->
 @php
-    $xhtmlPrice     = $item->price.config('main.currency_unit_en');
+    $xhtmlPrice         = $item->price.config('main.currency_unit_en');
     if(empty($language)||$language=='vi'){
-        $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($item->price)).config('main.currency_unit');
+        $xhtmlPrice     = number_format(\App\Helpers\Number::convertUSDToVND($item->price)).config('main.currency_unit');
     }
-    $xhtmlPriceOld  = null;
+    $xhtmlPriceOld      = null;
     if(!empty($item->price_before_promotion)&&$item->price_before_promotion!=$item->price){
-        $priceOld   = $price->price_before_promotion;
+        $priceOld       = $item->price_before_promotion;
         if(empty($language)||$language=='vi'){
             $priceOld   = number_format(\App\Helpers\Number::convertUSDToVND($item->price_before_promotion));
         }
