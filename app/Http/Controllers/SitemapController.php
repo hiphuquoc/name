@@ -34,6 +34,7 @@ class SitemapController extends Controller {
         if(!empty($name)){
             $tmp    = Seo::select('*')
                         ->where('type', $name)
+                        ->with('enSeo')
                         ->get();
             if(!empty($tmp)&&$tmp->isNotEmpty()){
                 $sitemapXhtml       = '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
@@ -48,6 +49,19 @@ class SitemapController extends Controller {
                                                 <image:title>'.self::replaceSpecialCharactorXml($item->seo_title).'</image:title>
                                             </image:image>
                                         </url>';
+                    /* phiên bản tiếng anh */
+                    if(!empty($item->enSeo->infoEnSeo)){
+                        $sitemapXhtml   .= '<url>
+                                            <loc>'.env('APP_URL').'/'.$item->enSeo->infoEnSeo->slug_full.'</loc>
+                                            <lastmod>'.date('c', strtotime($item->enSeo->infoEnSeo->updated_at)).'</lastmod>
+                                            <changefreq>hourly</changefreq>
+                                            <priority>1</priority>
+                                            <image:image>
+                                                <image:loc>'.env('APP_URL').$item->image.'</image:loc>
+                                                <image:title>'.self::replaceSpecialCharactorXml($item->enSeo->infoEnSeo->seo_title).'</image:title>
+                                            </image:image>
+                                        </url>';
+                    }
                 }
                 $sitemapXhtml       .= '</urlset>';
                 return response()->make($sitemapXhtml)->header('Content-Type', 'application/xml');
