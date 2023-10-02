@@ -319,6 +319,10 @@ a {
     }
 }
 
+strong {
+  font-family: $fontTitle;
+}
+
 h1 {
   @include titleDefault;
 }
