@@ -77,8 +77,10 @@
                     </div> --}}
                     <div class="productDetailBox_detail_checkout_button" style="margin-left:0;">
                         <div class="show-1199">
-                            <!-- dùng giá option đầu tiên -->
-                            <div class="priceMobile">{!! !empty($item->prices[0]->price)&&is_int($item->prices[0]->price) ? number_format($item->prices[0]->price).config('main.currency_unit') : '-' !!}</div>
+                            @php
+                                $priceMobile    = \App\Helpers\Number::getFormatPriceByLanguage($item->price, $language);
+                            @endphp
+                            <div class="priceMobile">{!! $priceMobile !!}</div>
                         </div>
                         @php
                             $buttonNameCart     = empty($language)||$language=='vi' ? 'Thêm giỏ hàng' : 'Add to cart';
