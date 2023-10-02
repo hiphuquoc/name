@@ -46,6 +46,9 @@
             <!-- Gallery và Product detail -->
             @include('wallpaper.product.body')
 
+            <!-- Content -->
+            @include('wallpaper.product.content', ['contents' => $item->contents])
+
             <!-- Related -->
             @if($totalProduct>0)
             <div class="contentBox">

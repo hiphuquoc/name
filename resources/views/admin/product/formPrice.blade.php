@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="searchViewBefore_selectbox">
-                            @foreach($wallpapers as $wallpaper)
+                            {{-- @foreach($wallpapers as $wallpaper)
                                 @php
                                     $selected       = false;
                                     foreach($price->wallpapers as $w){
@@ -79,7 +79,7 @@
                                     'idProductPrice'    => $price->id,
                                     'selected'          => $selected
                                 ])
-                            @endforeach
+                            @endforeach --}}
                         </div>
                     </div>
 

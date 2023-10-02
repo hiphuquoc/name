@@ -282,13 +282,15 @@ class ProductController extends Controller {
                 $id         = $request->get('id');
                 $info       = Product::select('*')
                                 ->where('id', $id)
-                                ->with('seo', 'prices.wallpapers')
+                                ->with('seo', 'prices.wallpapers', 'contents')
                                 ->first();
                 /* xóa ảnh đại diện sản phẩm trong thư mục */
                 $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
                 if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
                 $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
                 if(file_exists($imagePath)) @unlink($imagePath);
+                /* xóa content */
+                $info->contents()->delete();
                 /* xóa bảng product_price */
                 $info->prices->each(function ($price) {
                     $price->wallpapers()->delete();

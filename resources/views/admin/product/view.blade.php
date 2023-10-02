@@ -31,52 +31,80 @@
             
             <div class="pageAdminWithRightSidebar_main">
                 <!-- START:: Main content -->
-                <div id="repeaterProductPrice" class="pageAdminWithRightSidebar_main_content">
-                    <div class="pageAdminWithRightSidebar_main_content_item">
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">Thông tin trang</h4>
+                <div class="pageAdminWithRightSidebar_main_content">
+
+                    <!-- chống 2 thẻ pageAdminWithRightSidebar_main_content để repeater -->
+                    <div class="pageAdminWithRightSidebar_main_content" style="margin-right:0;">
+                        <div class="pageAdminWithRightSidebar_main_content_item">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h4 class="card-title">Thông tin trang</h4>
+                                </div>
+                                <div class="card-body">
+
+                                    @include('admin.product.formPage')
+
+                                </div>
                             </div>
-                            <div class="card-body">
+                        </div>
+                        <div class="pageAdminWithRightSidebar_main_content_item">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h4 class="card-title">Thông tin SEO</h4>
+                                </div>
+                                <div class="card-body">
 
-                                @include('admin.product.formPage')
-
+                                    @include('admin.form.formSeo')
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="pageAdminWithRightSidebar_main_content_item">
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">Thông tin SEO</h4>
-                            </div>
-                            <div class="card-body">
-
-                                @include('admin.form.formSeo')
-                                
+                    
+                    <div id="repeaterProductContent" class="pageAdminWithRightSidebar_main_content" style="margin-right:0;">
+                        <div class="pageAdminWithRightSidebar_main_content_item width100" data-repeater-list="contents">
+                            @if(!empty($item->contents)&&$item->contents->isNotEmpty())
+                                @foreach($item->contents as $content)
+                                    @include('admin.product.formContent', compact('content'))
+                                @endforeach
+                            @else 
+                                @include('admin.product.formContent')
+                            @endif
+    
+                        </div>
+                        <div class="pageAdminWithRightSidebar_main_content_item width100"> 
+                            <div class="card">
+                                <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    <span>Thêm</span>
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pageAdminWithRightSidebar_main_content_item width100" data-repeater-list="prices">
-                        @if(!empty($item->prices)&&$item->prices->isNotEmpty())
-                            @foreach($item->prices as $price)
-                                @include('admin.product.formPrice', compact('item', 'price'))
-                            @endforeach
-                        @else 
-                            @include('admin.product.formPrice')
-                        @endif
-                    </div>
-
-                    <div class="pageAdminWithRightSidebar_main_content_item width100"> 
-                        <div class="card">
-                            <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                <span>Thêm</span>
-                            </button>
+                    <div id="repeaterProductPrice" class="pageAdminWithRightSidebar_main_content" style="margin-right:0;">
+                        <div class="pageAdminWithRightSidebar_main_content_item width100" data-repeater-list="prices">
+                            @if(!empty($item->prices)&&$item->prices->isNotEmpty())
+                                @foreach($item->prices as $price)
+                                    @include('admin.product.formPrice', compact('item', 'price'))
+                                @endforeach
+                            @else 
+                                @include('admin.product.formPrice')
+                            @endif
+                        </div>
+    
+                        <div class="pageAdminWithRightSidebar_main_content_item width100"> 
+                            <div class="card">
+                                <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    <span>Thêm</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                 </div>
+                
                 <!-- END:: Main content -->
 
                 <!-- START:: Sidebar content -->
@@ -109,6 +137,7 @@
 @endsection
 @push('scriptCustom')
     <script type="text/javascript">
+        $('#repeaterProductContent').repeater();
         $('#repeaterProductPrice').repeater();
 
         $(window).ready(function(){
