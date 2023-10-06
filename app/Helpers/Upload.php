@@ -16,12 +16,12 @@ class Upload {
             $image          = $requestImage;
             $extension      = config('image.extension');
             $name           = $name ?? time();
-            /* lấy width và height của ảnh truyền vào để tính percenter resize */
-            $imageTmp           = ImageManagerStatic::make($image);
-            $percentPixel       = $imageTmp->width()/$imageTmp->height();
+            // /* lấy width và height của ảnh truyền vào để tính percenter resize */
+            // $imageTmp           = ImageManagerStatic::make($image);
+            // $percentPixel       = $imageTmp->width()/$imageTmp->height();
             /* save image resize (Normal) */
-            $widthImageNormal   = config('image.resize_normal_width');
-            $heightImageNormal  = $widthImageNormal/$percentPixel;
+            $widthImageNormal   = 800;
+            $heightImageNormal  = 533;
             $filenameNormal     = $folderUpload.$name.'.'.$extension;
             ImageManagerStatic::make($image->getRealPath())
                 ->encode($extension, config('image.quality'))

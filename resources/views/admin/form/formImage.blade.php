@@ -4,7 +4,7 @@
         Đây là Ảnh đại diện dùng làm Ảnh đại diện trên website, Ảnh đại diện ngoài Google, Ảnh đại diện khi Share link
     ">
         <i class="explainInput" data-feather='alert-circle'></i>
-        <label class="form-label inputRequired" for="image">Ảnh đại diện {{ config('image.resize_normal_width')}}*auto</label>
+        <label class="form-label inputRequired" for="image">Ảnh đại diện 800*533px</label>
     </span>
     <input class="form-control" type="file" id="image" name="image" onchange="readURL(this, 'imageUpload');" {{ $checkImage }}>
     <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
