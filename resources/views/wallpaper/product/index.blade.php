@@ -3,14 +3,27 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-    $lowPrice   = 0;
-    $highPrice  = 0;
-    foreach($item->prices as $price){
-        if($price->price>$highPrice) $highPrice = $price->price;
-        if($price->price<$lowPrice||$lowPrice==0) $lowPrice = $price->price;
+        if(empty($language)||$language=='vi'){
+            $currency           = 'VNĐ';
+            $highPrice          = \App\Helpers\Number::convertUSDToVND($item->price_before_promotion);
+            $lowPrice           = $highPrice;
+            foreach($item->prices as $price){
+                if($price->price<$lowPrice){
+                    $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
+                }
+            }
+        }else {
+            $currency           = 'USD';
+            $highPrice          = $item->price_before_promotion;
+            $lowPrice           = $highPrice;
+            foreach($item->prices as $price){
+                if($price->price<$lowPrice){
+                    $lowPrice   = $price->price;
+                }
+            }
     }
     @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice, 'currentcy' => $currency])
     <!-- END:: Product Schema -->
 
     <!-- STRAT:: Title - Description - Social -->

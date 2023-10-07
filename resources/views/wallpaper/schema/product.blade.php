@@ -57,7 +57,7 @@
                         "ratingValue": "5"
                     },
                 "author": {
-                    "@type": "Thing",
+                    "@type": "Organization",
                     "name": "{{ $item->seo->rating_author_name ?? null }}"
                 }
             },
@@ -73,8 +73,8 @@
                 "@type": "AggregateOffer",
                 "url": "{{ URL::current() }}",
                 "offerCount": "1",
-                "priceCurrency": "VND",
-                "lowPrice": "{{ $lowPrice ?? '500000' }}",
+                "priceCurrency": "{{ $currentcy ?? 'VNĐ' }}",
+                "lowPrice": "{{ $lowPrice ?? '50000' }}",
                 "highPrice": "{{ $highPrice ?? '5000000' }}",
                 "itemCondition": "https://schema.org/UsedCondition",
                 "availability": "https://schema.org/InStock",

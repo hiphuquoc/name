@@ -44,7 +44,7 @@
             "@id": "{{ URL::current() }}"
         },
         "author":{
-            "@type": "Person",
+            "@type": "Organization",
             "name": "{{ $author }}"
         },
         "image":{

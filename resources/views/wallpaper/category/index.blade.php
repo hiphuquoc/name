@@ -3,16 +3,33 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-    $lowPrice   = 0;
-    $highPrice  = 0;
-    foreach($products as $product){
-        foreach($product->prices as $price){
-            if($price->price>$highPrice) $highPrice = $price->price;
-            if($price->price<$lowPrice||$lowPrice==0) $lowPrice = $price->price;
+        if(empty($language)||$language=='vi'){
+            $currency           = 'VNĐ';
+            $highPrice          = 0;
+            foreach($products as $product){
+                if($product->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($product->price_before_promotion);
+            }
+            $lowPrice           = $highPrice;
+            foreach($products as $product){
+                foreach($product->prices as $price){
+                    if($price->price<$lowPrice) $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
+                }
+            }
+        }else {
+            $currency           = 'USD';
+            $highPrice          = 0;
+            foreach($products as $product){
+                if($product->price_before_promotion>$highPrice) $highPrice = $product->price_before_promotion;
+            }
+            $lowPrice           = $highPrice;
+            foreach($products as $product){
+                foreach($product->prices as $price){
+                    if($price->price<$lowPrice) $lowPrice = $price->price;
+                }
+            }
         }
-    }
     @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice, 'currency' => $currency])
     <!-- END:: Product Schema -->
 
     <!-- STRAT:: Title - Description - Social -->
