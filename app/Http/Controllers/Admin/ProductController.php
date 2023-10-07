@@ -79,7 +79,7 @@ class ProductController extends Controller {
             /* danh mục sản phẩm */
             foreach($request->get('categories') as $category){
                 RelationCategoryProduct::insertItem([
-                    'product_info_Id'   => $idProduct,
+                    'product_info_id'   => $idProduct,
                     'category_info_id'  => $category
                 ]);
             }
@@ -200,7 +200,7 @@ class ProductController extends Controller {
                                         ->delete();
             foreach($request->get('categories') as $category){
                 RelationCategoryProduct::insertItem([
-                    'product_info_Id'   => $idProduct,
+                    'product_info_id'   => $idProduct,
                     'category_info_id'  => $category
                 ]);
             }
