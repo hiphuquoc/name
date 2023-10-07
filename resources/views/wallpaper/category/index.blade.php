@@ -4,7 +4,7 @@
     <!-- STRAT:: Product Schema -->
     @php
         if(empty($language)||$language=='vi'){
-            $currency           = 'VNĐ';
+            $currency           = 'VND';
             $highPrice          = 0;
             foreach($products as $product){
                 if($product->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($product->price_before_promotion);

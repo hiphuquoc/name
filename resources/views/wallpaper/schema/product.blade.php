@@ -58,7 +58,8 @@
                     },
                 "author": {
                     "@type": "Organization",
-                    "name": "{{ $item->seo->rating_author_name ?? null }}"
+                    "name": "{{ $item->seo->rating_author_name ?? null }}",
+                    "url": "{{ env('APP_URL') }}"
                 }
             },
         "aggregateRating":
@@ -73,7 +74,7 @@
                 "@type": "AggregateOffer",
                 "url": "{{ URL::current() }}",
                 "offerCount": "1",
-                "priceCurrency": "{{ $currentcy ?? 'VNĐ' }}",
+                "priceCurrency": "{{ $currentcy ?? 'VND' }}",
                 "lowPrice": "{{ $lowPrice ?? '50000' }}",
                 "highPrice": "{{ $highPrice ?? '5000000' }}",
                 "itemCondition": "https://schema.org/UsedCondition",

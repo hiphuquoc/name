@@ -17,15 +17,38 @@
     @include('wallpaper.schema.creativeworkseries', compact('item'))
     <!-- END:: Article Schema -->
 
-    <!-- STRAT:: Product Schema -->
-    @php
-        $lowPrice   = 15000;
-        $highPrice  = 45000;
-    @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
-    <!-- END:: Product Schema -->
-
     @if(!empty($newProducts)&&$newProducts->isNotEmpty())
+        <!-- STRAT:: Product Schema -->
+        @php
+            if(empty($language)||$language=='vi'){
+                $currency           = 'VND';
+                $highPrice          = 0;
+                foreach($newProducts as $product){
+                    if($product->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($product->price_before_promotion);
+                }
+                $lowPrice           = $highPrice;
+                foreach($newProducts as $product){
+                    foreach($product->prices as $price){
+                        if($price->price<$lowPrice) $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
+                    }
+                }
+            }else {
+                $currency           = 'USD';
+                $highPrice          = 0;
+                foreach($newProducts as $product){
+                    if($product->price_before_promotion>$highPrice) $highPrice = $product->price_before_promotion;
+                }
+                $lowPrice           = $highPrice;
+                foreach($newProducts as $product){
+                    foreach($product->prices as $price){
+                        if($price->price<$lowPrice) $lowPrice = $price->price;
+                    }
+                }
+            }
+        @endphp
+        @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+        <!-- END:: Product Schema -->
+
         {{-- <!-- STRAT:: FAQ Schema -->
         @include('wallpaper.schema.itemlist', ['data' => $newProducts])
         <!-- END:: FAQ Schema --> --}}

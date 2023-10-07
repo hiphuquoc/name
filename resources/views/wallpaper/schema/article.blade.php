@@ -45,7 +45,8 @@
         },
         "author":{
             "@type": "Organization",
-            "name": "{{ $author }}"
+            "name": "{{ $author }}",
+            "url": "{{ env('APP_URL') }}"
         },
         "image":{
             "@type": "ImageObject",
