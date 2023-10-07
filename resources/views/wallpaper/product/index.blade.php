@@ -38,6 +38,16 @@
     @include('wallpaper.schema.article', compact('item'))
     <!-- END:: Article Schema -->
 
+    <!-- STRAT:: ImageObject Schema -->
+    @php
+        $dataImages = new \Illuminate\Database\Eloquent\Collection;
+        foreach($item->prices as $price){
+            foreach($price->wallpapers as $wallpaper) $dataImages[] = $wallpaper->infoWallpaper;
+        }
+    @endphp
+    @include('wallpaper.schema.imageObject', ['data' => $dataImages])
+    <!-- END:: ImageObject Schema -->
+
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.creativeworkseries', compact('item'))
     <!-- END:: Article Schema -->

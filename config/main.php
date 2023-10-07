@@ -8,14 +8,14 @@ return [
     ],
     'author_name'           => 'Name.com.vn',
     'founder_name'          => 'Name.com.vn',
-    'founder_address'       => '443 Mạc Cửu, Rạch Giá',
+    'founder_address'       => '55 Cô Giang, Rạch Giá',
     'founding'              => '2023-03-30',
     'company_name'          => 'Name.com.vn',
     'hotline'               => '0968.6171.68',
     'email'                 => 'anhnendienthoai@gmail.com',
-    'address'               => '443 Mạc Cửu, Rạch Giá',
+    'address'               => '55 Cô Giang, Rạch Giá',
     'company_description'   => 'Giới thiệu dịch vụ',
-    'logo_750x460'          => 'public/images/upload/trang-diem-750.webp',
+    // 'logo_750x460'          => 'public/images/upload/trang-diem-750.webp',
     'logo_main'             => 'images/upload/logo-type-manager-upload.webp',
     'contacts'          => [
         [

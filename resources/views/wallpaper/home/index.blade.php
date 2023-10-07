@@ -9,7 +9,6 @@
     @include('wallpaper.schema.organization')
     <!-- END:: Organization Schema -->
 
-
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.article', compact('item'))
     <!-- END:: Article Schema -->
@@ -25,6 +24,26 @@
     @endphp
     @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Product Schema -->
+
+    @if(!empty($newProducts)&&$newProducts->isNotEmpty())
+        {{-- <!-- STRAT:: FAQ Schema -->
+        @include('wallpaper.schema.itemlist', ['data' => $newProducts])
+        <!-- END:: FAQ Schema --> --}}
+
+        <!-- STRAT:: ImageObject Schema -->
+        @php
+            $dataImages = new \Illuminate\Database\Eloquent\Collection;
+            foreach($newProducts as $product){
+                foreach($product->prices as $price){
+                    foreach($price->wallpapers as $wallpaper) {
+                        $dataImages[] = $wallpaper->infoWallpaper;
+                    }
+                }
+            }
+        @endphp
+        @include('wallpaper.schema.imageObject', ['data' => $dataImages])
+        <!-- END:: ImageObject Schema -->
+    @endif
 
     <!-- STRAT:: FAQ Schema -->
     @include('wallpaper.schema.faq', ['data' => $item->faqs])

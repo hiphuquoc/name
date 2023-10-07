@@ -11,7 +11,7 @@
         "foundingDate": "{{ date('c', strtotime(config('main.founding'))) }}",
         "address": "{{ config('main.founder_address') }}",
         "url": "{{ env('APP_URL') }}",
-        "logo": "{{ env('APP_URL').Storage::url(config('main.logo_750x460')) }}",
+        "logo": "{{ env('APP_URL').Storage::url(config('main.logo_main')) }}",
         "contactPoint": [
             @foreach(config('main.contacts') as $contact)
                 @if($loop->index!=0) 

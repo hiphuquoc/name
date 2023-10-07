@@ -56,6 +56,20 @@
     @include('wallpaper.schema.itemlist', ['data' => $products])
     <!-- END:: FAQ Schema -->
 
+    <!-- STRAT:: ImageObject Schema -->
+    @php
+        $dataImages = new \Illuminate\Database\Eloquent\Collection;
+        foreach($products as $product){
+            foreach($product->prices as $price){
+                foreach($price->wallpapers as $wallpaper) {
+                    $dataImages[] = $wallpaper->infoWallpaper;
+                }
+            }
+        }
+    @endphp
+    @include('wallpaper.schema.imageObject', ['data' => $dataImages])
+    <!-- END:: ImageObject Schema -->
+
     <!-- STRAT:: FAQ Schema -->
     @include('wallpaper.schema.faq', ['data' => $item->faqs])
     <!-- END:: FAQ Schema -->
