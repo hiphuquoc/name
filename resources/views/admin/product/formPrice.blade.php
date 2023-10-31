@@ -39,7 +39,7 @@
                 </div>
             </div>
             
-            @if(!empty($price->id)) 
+            @if(!empty($price->id)&&$type=='edit') 
                 <div id="js_loadWallpaperByProductPrice_{{ $price->id }}" class="formBox_full">
                     <!-- load Ajax -->
                 </div>
@@ -49,7 +49,7 @@
     </div>
 </div>
 
-@if(!empty($price->id))
+@if(!empty($price->id)&&$type=='edit')
     <!-- form modal chọn wallpaper -->
     <form id="formSearchWallpapers" method="POST" action="#">
     @csrf

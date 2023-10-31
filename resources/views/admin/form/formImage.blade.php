@@ -23,7 +23,7 @@
                 <span>{{ $infoSize }} MB</span>
             </div>
         @else
-            <img id="imageUpload" src="{{ config('image.default') }}" />
+            <img id="imageUpload" src="{{ config('image.default') }}" style="aspect-ratio:800/533;" />
         @endif
     </div>
 </div>
