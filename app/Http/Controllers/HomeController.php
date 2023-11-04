@@ -35,25 +35,15 @@ class HomeController extends Controller{
                                         })
                                         ->with('seo', 'en_seo', 'type')
                                         ->first();
-            $newProducts            = Product::select('*')
+            $products               = Product::select('*')
                                         ->whereHas('prices.wallpapers', function(){
 
                                         })
                                         ->with('prices.wallpapers')
                                         ->orderBy('id', 'DESC')
-                                        ->skip(0)
-                                        ->take(10)
                                         ->get();
-            $promotionProducts      = new \Illuminate\Database\Eloquent\Collection;
-            $totalPromotionProduct  = Product::select('*')
-                                        ->whereHas('prices.wallpapers', function(){
-
-                                        })
-                                        ->whereHas('prices', function($query){
-                                            $query->where('sale_off', '>', 0);
-                                        })
-                                        ->count();
-            $xhtml                  = view('wallpaper.home.index', compact('item', 'language', 'newProducts', 'promotionProducts', 'totalPromotionProduct'))->render();
+            $viewBy                 = 'set';
+            $xhtml                  = view('wallpaper.home.index', compact('item', 'language', 'products', 'viewBy'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }

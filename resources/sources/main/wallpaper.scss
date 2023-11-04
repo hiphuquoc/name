@@ -17,7 +17,7 @@
             margin-left: 1.5rem;
         }
         &_image {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0;
             position: relative;
             border-radius: inherit;
             display: flex;
@@ -139,6 +139,7 @@
         }
         &_imageList {
             display: flex;
+            margin-top: 0.5rem;
             &_item {
                 width: calc(20% - 0.4rem);
                 aspect-ratio: 1/1;
@@ -489,7 +490,7 @@
         left: 0;
         top: 63px;
         z-index: 999;
-        border-radius: 5px;
+        border-radius: 10px;
         flex-direction: column;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         @include colorOpacity('color', $colorText, 0.8);
@@ -660,7 +661,7 @@
                 justify-content: center;
                 text-align: center;
                 line-height: 40px;
-                border-radius: 5px;
+                border-radius: 10px;
                 &:hover {
                     background: $bg-03;
                 }
@@ -805,7 +806,7 @@
     justify-content: center;
     aspect-ratio: 1/1;
     background: $colorBackgroundLv3;
-    border-radius: 5px;
+    border-radius: 10px;
     opacity: 0.8;
     &:hover {
         opacity: 1;
@@ -873,8 +874,8 @@
             opacity: 0.5;
         }
         &_number {
-            // @include colorOpacity('background', $colorSLv2, 0.8);
-            background: linear-gradient(45deg, $colorSLv1, $colorSLv2);
+            // @include colorOpacity('background', $colorLv2, 0.8);
+            background: linear-gradient(45deg, $colorButtonLv1, $colorButtonLv2);
             position: absolute;
             top: -15px;
             right: -15px;
@@ -1246,7 +1247,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 3px;
     i {
         opacity: 0.7;
@@ -1312,7 +1313,7 @@
             line-height: 1.2;
             padding: 0.25rem 0.5rem;
             background: $colorBackgroundLv3;
-            border-radius: 5px;
+            border-radius: 10px;
         }
     }
     @media(max-width: 1199px){

@@ -36,7 +36,7 @@
     }
     &:after {
         content: 'hotline';
-        background: $colorSLv1;
+        background: $colorLv1;
         color: #fff;
         padding: 0 0.5rem;
         border-radius: 10px;
@@ -93,7 +93,7 @@
         font-size: 1.2rem;
         border: none;
         cursor: pointer;
-        border-radius: 5px;
+        border-radius: 10px;
         @include colorOpacity('color', $colorText, 0.8);
         background: $colorTextLight;
         opacity: 0.6;
@@ -262,9 +262,9 @@
 }
 .categoryBox {
     &_title {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         h2, h3, a {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-family: $fontTitle;
             margin-bottom: 0 !important;
             color: $colorText;
@@ -284,33 +284,25 @@
             }
         }
     }
-    @media(max-width: 1199px){
-        &_title {
-            margin-bottom: 1.25rem;
-            h2, h3 {
-                font-size: 1.35rem;
-            }
-        }
-    }
     @media(max-width: 990px){
         &_title {
             h2, h3 {
-                font-size: 1.3rem;
+                font-size: 1.15rem;
             }
         }
     }
     @media(max-width: 766px){
         &_title {
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             h2, h3 {
-                font-size: 1.25rem;
+                font-size: 1.1rem;
             }
         }
     }
     @media(max-width: 577px){
         &_title {
             h2, h3 {
-                font-size: 1.2rem;
+                font-size: 1.05rem;
             }
         }
     }
@@ -386,7 +378,7 @@
                         margin-right: 0.5rem;
                         width: 22px;
                         height: 22px;
-                        border-radius: 5px;
+                        border-radius: 10px;
                         border: 1px solid $colorLabel;
                         display: inline-block;
                     }
@@ -809,7 +801,7 @@
     margin-left: 1rem;
     &_item {
         display: inline-block;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 0.25rem 0.5rem 0.25rem 0.75rem;
         background: $colorBackgroundLv2;
         &_badge {

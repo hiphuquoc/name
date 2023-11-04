@@ -42,22 +42,19 @@ $fontTitle  : "SVN-Gilroy Bold", tahoma, serif;
 @mixin titleDefault {
   color: $colorText;
   font-family: $fontTitle;
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
   line-height: 1.4;
-  @media(max-width: 1199px){
-    font-size: 1.25rem;
-  }
-  @media(max-width: 1023px){
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-  @media(max-width: 766px){
+  @media(max-width: 990px){
     font-size: 1.15rem;
   }
-  @media(max-width: 577px){
+  @media(max-width: 766px){
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
+  }
+  @media(max-width: 577px){
+    font-size: 1.05rem;
+   
   }
 }
 
@@ -655,7 +652,7 @@ input, textarea, select {
   width: 100%;
   font-size: 1rem;
   font-family: $fontText;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid $bg-05;
   background: $colorBackgroundLv1;
   border: 1px solid $colorBackgroundLv2;

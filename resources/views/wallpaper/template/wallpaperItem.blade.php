@@ -31,7 +31,7 @@
                 /* lấy ảnh Small */
                 $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
                 $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
-                $image      = $wallpaper->infoWallpaper->file_url_hosting;
+                // $image      = $wallpaper->infoWallpaper->file_url_hosting;
                 /* đường dẫn */
                 $url        = !empty($language)&&$language=='en'&&!empty($product->en_seo->slug_full) ? $product->en_seo->slug_full : $product->seo->slug_full;
             @endphp

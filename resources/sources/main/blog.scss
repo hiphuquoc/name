@@ -53,7 +53,7 @@
                     display: flex;
                 }
                 img {
-                    border-radius: 5px;
+                    border-radius: 10px;
                     object-fit: cover;
                     width: 100%;
                     aspect-ratio: 750/460;
@@ -87,7 +87,7 @@
             }
             &.background {
                 background: #fff;
-                border-radius: 5px;
+                border-radius: 10px;
                 box-shadow: 0 0 5px $bg-04 !important;
 
                 .relatedBox_box_item_content {

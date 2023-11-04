@@ -74,6 +74,7 @@ class RoutingController extends Controller{
                         $language       = $checkExists->language;
                         $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                         $flagMatch      = true;
+                        $viewBy         = 'set';
                         /* thông tin category */
                         $item           = Category::select('*')
                                             ->where('seo_id', $idSeo)
@@ -133,7 +134,7 @@ class RoutingController extends Controller{
                         $content            = Blade::render(Storage::get($filenameContent));
                         /* breadcrumb */
                         $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'totalProduct', 'keyCategory', 'breadcrumb', 'content', 'language'))->render();
+                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'totalProduct', 'keyCategory', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
                         break;
                     // case 'brand_info':
                     //     $flagMatch      = true;

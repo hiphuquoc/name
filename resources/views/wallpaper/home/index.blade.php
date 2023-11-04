@@ -17,17 +17,17 @@
     @include('wallpaper.schema.creativeworkseries', compact('item'))
     <!-- END:: Article Schema -->
 
-    @if(!empty($newProducts)&&$newProducts->isNotEmpty())
+    @if(!empty($products)&&$products->isNotEmpty())
         <!-- STRAT:: Product Schema -->
         @php
             if(empty($language)||$language=='vi'){
                 $currency           = 'VND';
                 $highPrice          = 0;
-                foreach($newProducts as $product){
+                foreach($products as $product){
                     if($product->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($product->price_before_promotion);
                 }
                 $lowPrice           = $highPrice;
-                foreach($newProducts as $product){
+                foreach($products as $product){
                     foreach($product->prices as $price){
                         if($price->price<$lowPrice) $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
                     }
@@ -35,11 +35,11 @@
             }else {
                 $currency           = 'USD';
                 $highPrice          = 0;
-                foreach($newProducts as $product){
+                foreach($products as $product){
                     if($product->price_before_promotion>$highPrice) $highPrice = $product->price_before_promotion;
                 }
                 $lowPrice           = $highPrice;
-                foreach($newProducts as $product){
+                foreach($products as $product){
                     foreach($product->prices as $price){
                         if($price->price<$lowPrice) $lowPrice = $price->price;
                     }
@@ -50,13 +50,13 @@
         <!-- END:: Product Schema -->
 
         {{-- <!-- STRAT:: FAQ Schema -->
-        @include('wallpaper.schema.itemlist', ['data' => $newProducts])
+        @include('wallpaper.schema.itemlist', ['data' => $products])
         <!-- END:: FAQ Schema --> --}}
 
         <!-- STRAT:: ImageObject Schema -->
         @php
             $dataImages = new \Illuminate\Database\Eloquent\Collection;
-            foreach($newProducts as $product){
+            foreach($products as $product){
                 foreach($product->prices as $price){
                     foreach($price->wallpapers as $wallpaper) {
                         $dataImages[] = $wallpaper->infoWallpaper;
@@ -80,33 +80,44 @@
         <!-- content -->
         <div class="container">
             <!-- === START:: Product Box === -->
-            @if(!empty($newProducts)&&$newProducts->isNotEmpty())
-                {{-- <div class="contentBox">
-                    @include('wallpaper.home.categoryBox', [
-                        'title'     => 'Hình nền điện thoại mới',
-                        'products'  => $newProducts,
-                        'tagBox'    => 'new' // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box
-                    ])
-                </div> --}}
+            @if(!empty($products)&&$products->isNotEmpty())
                 <div class="contentBox">
                     <div class="categoryBox">
                         <div class="categoryBox_title">
-                            @if(!empty($language)&&$language=='en')
-                                <h2>New phone wallpapers</h2>
-                            @else 
-                                <h2>Hình nền điện thoại mới</h2>
-                            @endif
+                            <h2>
+                                @if(empty($language)||$language=='vi')
+                                    Hình nền điện thoại mới
+                                @else
+                                    New Wallpapers
+                                @endif
+                            </h2>
                         </div>
                         <div class="categoryBox_box">
-                            <div class="wallpaperGridBox">
-                                @foreach($newProducts as $product)
-                                    @include('wallpaper.template.wallpaperItem', [
-                                        'product'   => $product,
-                                        'tagBox'    => 'new', // tagBox để tính năng view ảnh của cùng 1 sản phẩm vẫn hoạt động trên tất cả các box,
-                                        'language'  => $language
-                                    ])
-                                @endforeach
-                            </div>
+                            <!-- Sort Box -->
+                            @php
+                                $total = $products->count();
+                                if($viewBy=='wallpaper'){
+                                    $total = 0;
+                                    foreach($products as $product){
+                                        foreach($product->prices as $price){
+                                            foreach($price->wallpapers as $wallpaper){
+                                                ++$total;
+                                            }
+                                        }
+                                    }
+                                }
+                            @endphp
+                            @include('wallpaper.template.sort', [
+                                'language'  => $language ?? 'vi',
+                                'total'     => $total,
+                                'viewBy'    => $viewBy
+                            ])
+                            <!-- Sản phẩm -->
+                            @include('wallpaper.template.wallpaperGrid', [
+                                'products'      => $products ?? null,
+                                'headingTitle'  => 'h2',
+                                'viewBy'        => $viewBy
+                            ])
                         </div>
                     </div>
                 </div>
@@ -115,7 +126,7 @@
                 
             <!-- === START:: Product Box === -->
             {{-- @if(!empty($promotionProducts)&&$promotionProducts->isNotEmpty()) --}}
-                <div class="contentBox">
+                {{-- <div class="contentBox">
                     <!-- load more -->
                     <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalPromotionProduct ?? 0 }}" />
                     <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $promotionProducts->count() }}" />
@@ -132,20 +143,9 @@
                         'tagBox'    => 'promotion',
                         'language'  => $language
                     ])
-                </div>
+                </div> --}}
             {{-- @endif --}}
             <!-- === END:: Product Box === -->
-
-            {{-- <!-- === START:: Product Box === -->
-            <div class="contentBox">
-                @include('wallpaper.home.categoryBox', [
-                    'title'     => 'Hình nền điện thoại bán chạy',
-                    'products'  => $hotProducts,
-                    'tagBox'    => 'bestSeller'
-                ])
-            </div>
-            <!-- === END:: Product Box === -->     --}}
-
         </div>
 @endsection
 @push('modal')

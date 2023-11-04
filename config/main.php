@@ -89,6 +89,16 @@ return [
             ]
         ]
     ],
+    'view_by' => [
+        'set'   => [
+            'name'      => 'Từng bộ',
+            'en_name'   => 'Per set'
+        ],
+        'wallpaper'   => [
+            'name'      => 'Từng ảnh',
+            'en_name'   => 'Per wallpaper'
+        ]
+    ],
     'cache'     => [
         'extension'     => 'html',
         'folderSave'    => 'public/caches/',

@@ -108,7 +108,7 @@
                         color: $colorLv1;
                         text-transform: uppercase;
                         &:hover {
-                            color: $colorSLv1;
+                            color: $colorLv1;
                         }
                         &.hasChild {
                             &:after {
@@ -129,7 +129,7 @@
                     // &:not(:first-child){
                     //     > a, > div:not(.megaMenu,.normalMenu) {
                     //         > * {
-                    //             border-left: 1px solid $colorSLv2;
+                    //             border-left: 1px solid $colorLv2;
                     //             padding-left: 1.25rem;
                     //             color: #fff;
                     //         }
@@ -182,7 +182,7 @@ $heightMenu : 40px;
     font-size: 1rem;
     font-family: $fontText;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
-    border-top: 2px solid $colorSLv2;
+    border-top: 2px solid $colorLv2;
     top: $heightMenu;
     z-index: 100;
     &_title, &_content {
@@ -304,7 +304,7 @@ $width_normalMenu : 250px;
     font-family: $fontTitle;
     background: #fff;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
-    border-top: 2px solid $colorSLv2;
+    border-top: 2px solid $colorLv2;
     position: absolute;
     width: $width_normalMenu;
     z-index: 1;
@@ -376,7 +376,7 @@ $width_normalMenu : 250px;
                 background: #fff;
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
                 display: none;
-                border-top: 2px solid $colorSLv2;
+                border-top: 2px solid $colorLv2;
                 
                 li {
                     list-style: none;
@@ -535,7 +535,7 @@ $width_normalMenu : 250px;
                         justify-content: center;
                         text-align: center;
                         line-height: 40px;
-                        border-radius: 5px;
+                        border-radius: 10px;
                         &:hover {
                             background: $bg-03;
                         }
