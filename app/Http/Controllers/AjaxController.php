@@ -8,7 +8,7 @@ use Intervention\Image\ImageManagerStatic;
 use App\Models\District;
 use App\Models\Product;
 use App\Models\RegistryEmail;
-use App\Models\Seller;
+use Illuminate\Support\Facades\Cookie;
 use App\Services\BuildInsertUpdateModel;
 
 class AjaxController extends Controller {
@@ -119,22 +119,6 @@ class AjaxController extends Controller {
         return json_encode($result);
     }
 
-    // public function registrySeller(Request $request){
-    //     /* insert seller_info */
-    //     $insertSeller   = $this->BuildInsertUpdateModel->buildArrayTableSellerInfo($request->all());
-    //     $idSeller       = Seller::insertItem($insertSeller);
-    //     if(!empty($idSeller)){
-    //         $result['type']     = 'success';
-    //         $result['title']    = 'Đăng ký phân phối thành công!';
-    //         $result['content']  = 'Cảm ơn bạn đã cộng tác cùng '.config('main.company_name').'. Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất'; 
-    //     }else {
-    //         $result['type']     = 'error';
-    //         $result['title']    = 'Đăng ký phân phối thất bại!';
-    //         $result['content']  = 'Có lỗi xảy ra, vui lòng thử lại hoặc liên hệ trực tiếp chúng tôi qua hotline: '.config('main.hotline'); 
-    //     }
-    //     return json_encode($result);
-    // }
-
     public function buildTocContentMain(Request $request){
         $xhtml       = null;
         if(!empty($request->get('data'))){
@@ -236,5 +220,12 @@ class AjaxController extends Controller {
             dd($infoWallpaper);
         }
         echo $result;
+    }
+
+    public function settingViewBy(Request $request){
+        if(!empty($request->get('view_by'))){
+            Cookie::queue('view_by', $request->get('view_by'), 3600);
+        }
+        return redirect()->back()->withInput();
     }
 }

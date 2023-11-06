@@ -820,3 +820,56 @@
         }
     }
 }
+$heightSelect : 40px;
+.selectCustom {
+    display: flex;
+    position: relative;
+    height: $heightSelect;
+    align-items: center;
+    &:hover {
+        .selectCustom_box {
+            visibility: visible !important;
+        }
+    }
+    > * {
+        &:not(:first-child){
+            margin-left: 0.75rem;
+        }
+    }
+    &_text {
+
+    }
+    &_input {
+        padding: 0.25rem 0.75rem;
+        border-radius: 10px;
+        border: 1px solid $colorBackgroundLv3;
+    }
+    &_box {
+        visibility: hidden;
+        position: absolute;
+        top: calc($heightSelect - 2px);
+        right: 0;
+        background: $colorBackgroundLv2;
+        min-width: 180px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px $colorBackgroundLv1;
+        overflow: hidden;
+        z-index: 1;
+        &_item {
+            padding: 0.4rem 1rem 0.55rem 1rem;
+            cursor: pointer;
+            &.selected, &:hover {
+                color: $colorTextLight;
+                background: $colorBackgroundLv3;
+            }
+            &:not(:first-child){
+                border-top: 1px dashed $colorBackgroundLv1;
+            }
+        }
+    }
+    i {
+        font-size: 1.2rem;
+        margin-right: 0.5rem;
+        opacity: 0.6;
+    }
+}

@@ -74,7 +74,7 @@ class RoutingController extends Controller{
                         $language       = $checkExists->language;
                         $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                         $flagMatch      = true;
-                        $viewBy         = 'set';
+                        $viewBy         = request()->cookie('view_by') ?? 'set';
                         /* thông tin category */
                         $item           = Category::select('*')
                                             ->where('seo_id', $idSeo)

@@ -91,10 +91,12 @@ return [
     ],
     'view_by' => [
         'set'   => [
+            'icon'      => '<i class="fa-solid fa-gift"></i>',
             'name'      => 'Từng bộ',
             'en_name'   => 'Per set'
         ],
         'wallpaper'   => [
+            'icon'      => '<i class="fa-regular fa-image"></i>',
             'name'      => 'Từng ảnh',
             'en_name'   => 'Per wallpaper'
         ]

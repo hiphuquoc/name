@@ -114,6 +114,7 @@ Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetSho
 Route::get('/loadImageFromGoogleCloud', [AjaxController::class, 'loadImageFromGoogleCloud'])->name('ajax.loadImageFromGoogleCloud');
 Route::get('/loadImageWithResize', [AjaxController::class, 'loadImageWithResize'])->name('ajax.loadImageWithResize');
 Route::get('/loadImageSource', [AjaxController::class, 'loadImageSource'])->name('ajax.loadImageSource');
+Route::get('/settingViewBy', [AjaxController::class, 'settingViewBy'])->name('ajax.settingViewBy');
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');

@@ -14,6 +14,7 @@ use Intervention\Image\ImageManagerStatic;
 
 use App\Mail\OrderMailable;
 use Google\Service\SecurityCommandCenter\PathNodeAssociatedFinding;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller{
@@ -42,7 +43,7 @@ class HomeController extends Controller{
                                         ->with('prices.wallpapers')
                                         ->orderBy('id', 'DESC')
                                         ->get();
-            $viewBy                 = 'set';
+            $viewBy                 = $request->cookie('view_by') ?? 'set';
             $xhtml                  = view('wallpaper.home.index', compact('item', 'language', 'products', 'viewBy'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
