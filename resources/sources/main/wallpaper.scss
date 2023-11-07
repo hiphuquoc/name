@@ -467,7 +467,7 @@
         input {
             width: 100%;
             background: $colorBackgroundLv1;
-            height: 45px !important;
+            height: 42.5px !important;
             border: 1px solid $colorBackgroundLv3;
             padding: 0 2.5rem 0 1rem;
             border-radius: 100px;
@@ -547,7 +547,7 @@
     &_background {
         display: none;
         position: fixed;
-        top: 57px;
+        top: 54.5px;
         left: 0;
         width: 100%;
         height: 100%;
@@ -611,21 +611,6 @@
     .hasChild {
         position: relative;
         cursor: pointer;
-        &:after {
-            content: '\f105';
-            @include fontAwesome;
-            z-index: 1;
-            position: absolute;
-            right: 0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: $bg-07;
-        }
-        &.open {
-            &:after {
-                content: '\f107';
-            }
-        }
     }
         
     ul {
@@ -635,6 +620,9 @@
         overflow: hidden;
         li {
             list-style: none;
+            a {
+                color: $colorText !important;
+            }
             &.selected {
                 font-family: $fontTitle;
                 color: $colorTextLight;
@@ -703,6 +691,20 @@
                     padding-top: 0;
                 }
             }
+            > a, > div {
+                display: flex;
+                align-items: center;
+                i {
+                    margin-left: auto;
+                    width: 30px;
+                    aspect-ratio: 1/1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0.6;
+                    font-size: 0.9rem;
+                }
+            }
             > ul {
                 overflow: hidden;
                 > li {
@@ -728,7 +730,7 @@
     position: sticky;
     top: 0;
     left: 0;
-    height: 55px;
+    height: 52.5px;
     width: 100%;
     background: $colorBackgroundLv2;
     box-shadow: 0px 1px 5px #000;
@@ -818,6 +820,8 @@
     aspect-ratio: 1/1;
     cursor: pointer;
     opacity: 0.7;
+    background: $colorBackgroundLv2;
+    border-bottom-left-radius: 10px;
     &:hover {
         opacity: 1;
     }
@@ -1021,7 +1025,7 @@
     &_background {
         display: none;
         position: fixed;
-        top: 56px;
+        top: 54.5px;
         left: 0;
         width: 100%;
         height: 100%;
@@ -1218,7 +1222,7 @@
     &_background {
         display: none;
         position: fixed;
-        top: 56px;
+        top: 54.5px;
         left: 0;
         width: 100%;
         height: 100%;
@@ -1285,7 +1289,7 @@
         &_icon {
             display: flex;
             cursor: pointer;
-            width: 40px;
+            width: 37px;
             aspect-ratio: 1/1;
             &.facebook {
                 background: url('/storage/images/svg/facebook.png') no-repeat;
@@ -1344,7 +1348,7 @@
     @media(max-width: 1023px){
         right: unset;
         left: 10px;
-        bottom: 55px;
+        bottom: 52.5px;
         align-items: flex-start;
         // &_item {
         //     &_icon {
@@ -1359,6 +1363,11 @@
     }
     @media(max-width: 766px){
         // bottom: 105px;
+        &_item {
+            &_icon {
+                width: 35px;
+            }
+        }
         &_text {
             font-size: 0.6rem;
         }
@@ -1566,14 +1575,14 @@
     // border-top: 1px solid $colorBackgroundLv2;
     &_title {
         margin-bottom: 0.5rem;
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-family: $fontTitle;
     }
     &_box {
         display: flex;
         &_item {
             display: flex;
-            width: 40px;
+            width: 35px;
             aspect-ratio: 1/1;
             border-radius: 10px;
             background: $colorBackgroundLv2;
@@ -1589,7 +1598,7 @@
                 opacity: 1;
             }
             i {
-                font-size: 1.6rem;
+                font-size: 1.3rem;
                 color: $colorLv1;
                 text-shadow: 1px 1px 2px $colorLv2;
             }

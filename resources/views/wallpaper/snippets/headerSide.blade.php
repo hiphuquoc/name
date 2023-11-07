@@ -59,14 +59,28 @@
         </li>
         @if(!empty($wallpaperMobile))
             <li>
-                <div class="hasChild open" onclick="showHideListMenuMobile(this, '{{ $wallpaperMobile->seo->slug }}')">
+                @php
+                    $classTmp = 'close';
+                    $styleTmp = '';
+                    $flagOpen = env('APP_URL').'/'.$wallpaperMobile->seo->slug==Request::url() ? true : false;
+                    if($flagOpen==true){
+                        $classTmp = 'open';
+                        $styleTmp = 'style="height:auto;opacity:1;"';
+                    }
+                @endphp
+                <div class="hasChild {{ $classTmp }}">
                     @php
                         $titlePhoneWallpaper = empty($language)||$language=='vi' ?  'Hình nền điện thoại' : 'Phone wallpaper';
                     @endphp
                     <img src="{{ Storage::url('images/svg/picture-1.svg') }}" alt="{{ $titlePhoneWallpaper }}" title="{{ $titlePhoneWallpaper }}" />
-                    <div>{{ $titlePhoneWallpaper }}</div>
+                    @if($flagOpen==true)
+                        <div>{{ $titlePhoneWallpaper }}</div>
+                    @else 
+                        <a href="{{ env('APP_URL') }}/{{ $wallpaperMobile->seo->slug }}" arira-label="{{ $wallpaperMobile->name }}">{{ $titlePhoneWallpaper }}</a>
+                    @endif
+                    <i class="fa-solid fa-plus" onclick="showHideListMenuMobile(this, '{{ $wallpaperMobile->seo->slug }}')"></i>
                 </div>
-                <ul id="{{ $wallpaperMobile->seo->slug }}" style="height:auto;opacity:1;">
+                <ul id="{{ $wallpaperMobile->seo->slug }}" class="filterLinkSelected" {!! $styleTmp !!}>
                     @foreach($wallpaperMobile->childs as $type)
                         @if($type->products->count()>0)
                             @php
@@ -89,16 +103,18 @@
             </li>
         @endif
         <li>
-            <div class="hasChild close" onclick="showHideListMenuMobile(this, 'ho-tro')">
+            <div class="hasChild close">
                 @if(empty($language)||$language=='vi')
                     <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Support infomation" title="Support infomation" />
                     <div>Support</div>
+                    <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'ho-tro')"></i>
                 @else 
                     <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ {{ config('main.company_name') }}" title="Thông tin hỗ trợ {{ config('main.company_name') }}" />
                     <div>Hỗ trợ</div>
+                    <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'ho-tro')"></i>
                 @endif
             </div>
-            <ul id="ho-tro">
+            <ul id="ho-tro" class="filterLinkSelected">
                 @foreach($policies as $policy)
                     @php
                         if(empty($language)||$language=='vi'){
@@ -147,3 +163,56 @@
     <i class="fa-sharp fa-solid fa-xmark"></i>
 </div>
 <div class="backgroundBlurMobileMenu" onClick="toggleMenuMobile('js_toggleMenuMobile');"></div>
+
+@push('scriptCustom')
+    <script type="text/javascript">
+
+        $(window).ready(function(){
+            var Url             = document.URL;
+            // var elementMenu     = null;
+            $('.headerSide .filterLinkSelected a').each(function(){
+                const regex = new RegExp("^" + $(this).attr('href'));
+                if(regex.test(Url)) {
+                    /* mở thẻ cha chứa phần tử trang hiện tại */
+                    $(this).closest('ul').css({
+                        height : 'auto',
+                        opacity : 1
+                    });
+                    /* mở luôn thẻ chứa các phần tử con của trang hiện tại */ 
+                    $(this).next('ul').css({
+                        height : 'auto',
+                        opacity : 1
+                    })
+                    $(this).closest('ul').children().each(function(){
+                        $(this).removeClass('selected');
+                    })
+                    /* thay icon */
+                    $(this).closest('ul').closest('li').find('.fa-plus').removeClass('fa-plus').addClass('fa-minus');
+                }
+            });
+        })
+
+        function showHideListMenuMobile(element, idMenu){
+            let elementMenu     = $('#'+idMenu);
+            let flag            = elementMenu.height();
+            if(flag<=0){
+                elementMenu.css({
+                    height: 'auto',
+                    opacity: '1'
+                });
+            }else {
+                elementMenu.css({
+                    height: '0',
+                    opacity: '0'
+                });
+            }
+            /* toggle icon */
+            if ($(element).hasClass('fa-plus')) {
+                $(element).removeClass('fa-plus').addClass('fa-minus');
+            } else {
+                $(element).removeClass('fa-minus').addClass('fa-plus');
+            }
+        }
+
+    </script>
+@endpush

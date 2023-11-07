@@ -31,22 +31,6 @@
         //     }
         // });
 
-        var Url             = document.URL;
-        // var elementMenu     = null;
-        $('.headerSide a').each(function(){
-            const regex = new RegExp("^" + $(this).attr('href'));
-            if(regex.test(Url)) {
-                $(this).closest('ul').css({
-                    height : 'auto',
-                    opacity : 1
-                });
-                $(this).closest('ul').children().each(function(){
-                    $(this).removeClass('selected');
-                })
-                $(this).closest('li').addClass('selected');
-            }
-        });
-
         /* check login để hiện thị button */
         checkLoginAndSetShow();
     });
@@ -126,25 +110,6 @@
     //     const elementMobileMenu = $('.layoutHeaderSide_header');
     //     elementMobileMenu.toggle();
     // }
-    function showHideListMenuMobile(element, idMenu){
-        let elementMenu     = $('#'+idMenu);
-        let flag            = elementMenu.height();
-        if(flag<=0){
-            elementMenu.css({
-                height: 'auto',
-                opacity: '1'
-            });
-            $(element).addClass('open');
-            $(element).removeClass('close');
-        }else {
-            elementMenu.css({
-                height: '0',
-                opacity: '0'
-            });
-            $(element).removeClass('open');
-            $(element).addClass('close');
-        }
-    }
     function openCloseElemt(idElemt){
         let displayE    = $('#' + idElemt).css('display');
         if(displayE=='none'){

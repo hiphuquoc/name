@@ -36,8 +36,10 @@ $bg-04          : #dee2e6;
 $bg-03          : #e9ecef;
 $bg-02          : #EDF2F7;
 /* font chữ */
-$fontText   : "SVN-Gilroy", tahoma, serif;
-$fontTitle  : "SVN-Gilroy Bold", tahoma, serif;
+// $fontText   : "SVN-Gilroy", tahoma, serif;
+// $fontTitle  : "SVN-Gilroy Bold", tahoma, serif;
+$fontTitle: "SVN-Gilroy Bold", sans-serif;
+$fontText: "SVN-Gilroy", sans-serif;
 /* mixin title */
 @mixin titleDefault {
   color: $colorText;
@@ -284,14 +286,14 @@ body {
   font-family: $fontText;
   box-sizing: border-box;
   @include colorOpacity('color', $colorText, 0.8);
-  @media(max-width: 1199px){
-    font-size: 0.975rem;
-  }
   @media(max-width: 990px){
     font-size: 0.95rem;
   }
-  @media(max-width: 577px){
+  @media(max-width: 767px){
     font-size: 0.925rem;
+  }
+  @media(max-width: 577px){
+    font-size: 0.9rem;
   }
   &.background {
     background: $colorBackgroundLv1;

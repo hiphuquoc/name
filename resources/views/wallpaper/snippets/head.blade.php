@@ -16,64 +16,91 @@
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/sources/main/ring.css?'.time()) }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/sources/main/loading.css?'.time()) }}"> --}}
 
-@vite(['resources/sources/main/style.scss'])
-<!-- END: Custom CSS-->
-
 <!-- BEGIN: FONT AWESOME -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 {{-- <link href="/your-path-to-uicons/css/uicons-rounded-bold.css" rel="stylesheet"> --}}
 <!-- END: FONT AWESOME -->
 
 <style type="text/css">
-    /* font */
-    @font-face{
-        font-family:'SVN-Gilroy Bold';
-        font-style:normal;
-        font-weight:700;
-        src:url("/fonts/svn-gilroy_semibold.ttf")
-    }
-    @font-face{
-        font-family:'SVN-Gilroy';
-        font-style:normal;
-        font-weight:500;
-        src:url("/fonts/svn-gilroy_medium.ttf")
-    }
     /* @font-face {
-        font-family: 'name';
-        src: url('/fonts/name-light-2.0.2.woff2')
-                format('woff2'),
-            url('/fonts/name-light-2.0.2.woff')
-                format('woff');
-        font-display: swap;
-    }
-    @font-face {
-        font-family: 'name';
-        src: url('/fonts/name-light-italic-2.0.2.woff2')
-                format('woff2'),
-            url('/fonts/name-light-italic-2.0.2.woff')
-                format('woff');
-        font-style: italic;
-        font-display: swap;
-    }
-    @font-face {
-        font-family: 'name';
-        src: url('/fonts/name-regular-2.0.2.woff2')
-                format('woff2'),
-            url('/fonts/name-regular-2.0.2.woff')
-                format('woff');
-        font-weight: bold;
-        font-display: swap;
-    }
-    @font-face {
-        font-family: 'name';
-        src: url('/fonts/name-regular-2.0.2.woff2')
-                format('woff2'),
-            url('/fonts/name-regular-2.0.2.woff')
-                format('woff');
-        font-weight: bold;
-        font-style: italic;
+        font-family: 'Segoe-UI Light';
+        font-style: normal;
+        font-weight: 400;
+        src: url('/fonts/SegoeUI-Light.ttf');
         font-display: swap;
     } */
+
+    @font-face {
+        font-family: 'Segoe-UI';
+        font-style: normal;
+        font-weight: 500;
+        src: url('/fonts/SegoeUI.ttf');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Segoe-UI Semi';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/SegoeUI-SemiBold.ttf');
+    }
+
+    @font-face {
+        font-family: 'Segoe-UI Bold';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/SegoeUI-Bold.ttf');
+    }
+
+    /* @font-face {
+        font-family: 'SVN-Gilroy Thin';
+        font-style: normal;
+        font-weight: 400;
+        src: url(//bizweb.dktcdn.net/100/438/408/themes/919724/assets/svn-gilroy_regular.ttf?1698220622470);
+        font-display: 'Swap';
+    }
+
+    @font-face {
+        font-family: 'SVN-Gilroy Light';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(//bizweb.dktcdn.net/100/438/408/themes/919724/assets/svn-gilroy_regular.ttf?1698220622470);
+    } */
+
+    @font-face {
+        font-family: 'SVN-Gilroy';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 500;
+        src: url('/fonts/svn-gilroy_medium.ttf');
+    }
+
+    @font-face {
+        font-family: 'SVN-Gilroy Med';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 700;
+        src: url('/fonts/svn-gilroy_med.ttf');
+    }
+
+    @font-face {
+        font-family: 'SVN-Gilroy Semi';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/svn-gilroy_semibold.ttf');
+    }
+
+    @font-face {
+        font-family: 'SVN-Gilroy Bold';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/svn-gilroy_semibold.ttf');
+    }
 </style>
 
 @stack('headCustom')
@@ -106,3 +133,6 @@
     }(window, document, 'ttq');
 </script>
 <!-- End:: Tiktok Analutics --> --}}
+
+@vite(['resources/sources/main/style.scss'])
+<!-- END: Custom CSS-->

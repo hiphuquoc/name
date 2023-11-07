@@ -54,25 +54,28 @@ class Upload {
     }
 
     public static function uploadWallpaper($requestImage, $filename = null){
-        $result             = null;
+        $result                 = null;
         if(!empty($requestImage)){
             // ===== folder upload
-            $folderUpload   = config('image.folder_upload');
+            $folderUpload       = config('image.folder_upload');
             // ===== image upload
-            $image          = $requestImage;
+            $image              = $requestImage;
             // ===== set filename & checkexists
-            $fileUrl        = $folderUpload.$filename;
+            $fileUrl            = $folderUpload.$filename;
             // save image resize
+            $imageTmp           = ImageManagerStatic::make($image);
+            $percentPixel       = $imageTmp->width()/$imageTmp->height();
+            $widthImage         = 800;
+            $heightImage        = $widthImage/$percentPixel;
             ImageManagerStatic::make($image->getRealPath())
                 ->encode(config('image.extension'), config('image.quality'))
+                ->resize($widthImage, $heightImage)
                 ->save(Storage::path($fileUrl));
-            $result         = $fileUrl;
+            $result             = $fileUrl;
             // resize thêm một bản có width 50px để làm ảnh mini
             $filenameNotExtension = pathinfo($filename)['filename'];
             $extension          = pathinfo($filename)['extension'];
             $fileUrlMini        = $folderUpload.$filenameNotExtension.'-mini.'.$extension;
-            $imageTmp           = ImageManagerStatic::make($image);
-            $percentPixel       = $imageTmp->width()/$imageTmp->height();
             $widthImageMini     = 50;
             $heightImageMini    = $widthImageMini/$percentPixel;
             ImageManagerStatic::make($image->getRealPath())
