@@ -340,13 +340,14 @@
     width: 100%;
     &_header {
         position: sticky;
-        top: calc(60px + 2rem);
+        display: flex;
+        flex-direction: column;
+        top: calc(60px + 1.75rem);
         left: 0;
         flex: 0 0 330px;
-        height: 100%;
+        height: calc(100vh - 90px);
         padding-left: 1.5rem;
-        display: flex;
-        align-items: center;
+        padding-bottom: 1.25rem;
     }
     &_content {
         width: calc(100% - 330px);
@@ -354,6 +355,7 @@
     @media(max-width: 1199px){
         &_header {
             flex: 0 0 280px;
+            height: calc(100vh - 140px);
         }
         &_content {
             width: calc(100% - 280px);
@@ -366,8 +368,9 @@
             left: 0;
             top: 0;
             z-index: 99999;
-            background: $colorBackgroundLv3;
+            background: $colorBackgroundLv1;
             min-width: 320px;
+            height: 100vh;
         }
         &_content {
             width: 100%;
@@ -599,7 +602,7 @@
     }
 }
 .headerSide {
-    max-height: calc(100vh - 130px);
+    max-height: calc(100vh - 150px);
     &_logo {
         display: flex;
         width: 130px;
@@ -684,7 +687,6 @@
                     &:before {
                         position: absolute;
                         color: $colorBackgroundLv3;
-                        @include colorOpacity('color', $colorText, 0.4);
                         top: 0.6rem;
                         left: -1.25rem;
                         content: "--";
@@ -712,6 +714,15 @@
             }
         }
     }
+    @media(max-width: 1023px){
+        height: calc(100vh - 180px);
+    }
+    @media(max-width: 767px){
+        height: calc(100vh - 175px);
+    }
+    // @media(max-width: 577px){
+    //     height: calc(100vh - 175px);
+    // }
 }
 .menuTopBackground {
     position: sticky;
@@ -800,14 +811,13 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 38px;
+    width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     aspect-ratio: 1/1;
-    background: $colorBackgroundLv3;
-    border-radius: 10px;
-    opacity: 0.8;
+    cursor: pointer;
+    opacity: 0.7;
     &:hover {
         opacity: 1;
     }
@@ -851,6 +861,7 @@
     height: inherit;
     align-items: center;
     float: right;
+    font-size: 0.925rem;
     &:hover {
         .cartBox_list {
             display: flex;
@@ -1052,6 +1063,7 @@
     height: 100%;
     cursor: pointer;
     position: relative;
+    font-size: 0.925rem;
     &:hover {
         color: $colorTextLight;
         .loginBox_list {
@@ -1546,5 +1558,44 @@
     transition: opacity 0.5s ease-in-out;
     &.loaded {
         filter: unset !important;
+    }
+}
+.socialBox {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    // border-top: 1px solid $colorBackgroundLv2;
+    &_title {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        font-family: $fontTitle;
+    }
+    &_box {
+        display: flex;
+        &_item {
+            display: flex;
+            width: 40px;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            background: $colorBackgroundLv2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0.8;
+            &:not(:first-child){
+                margin-left: 0.5rem;
+            }
+            &:hover {
+                opacity: 1;
+            }
+            i {
+                font-size: 1.6rem;
+                color: $colorLv1;
+                text-shadow: 1px 1px 2px $colorLv2;
+            }
+        }
+    }
+    @media(max-width: 767px){
+        padding-top: 0.35rem;
     }
 }

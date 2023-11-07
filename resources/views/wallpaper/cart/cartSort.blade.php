@@ -12,7 +12,7 @@
             {{ !empty($products)&&$products->isNotEmpty() ? $products->count() : 0 }}
         </div>
     </a>
-    <a href="{{ $urlCart }}" class="cartBox_text">{{ empty($language)||$language=='vi' ? 'Cart' : 'Giỏ hàng' }}</a>
+    <a href="{{ $urlCart }}" class="cartBox_text">{{ empty($language)||$language=='vi' ? 'Giỏ hàng' : 'Cart' }}</a>
     <div class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
             @php

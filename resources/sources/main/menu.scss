@@ -610,6 +610,7 @@ $width_normalMenu : 250px;
             opacity: 0.5;
         }
         &_text {
+            color: $colorText;
             &_modal {
                 display: none;
                 width: 180px;

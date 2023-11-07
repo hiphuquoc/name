@@ -88,33 +88,6 @@
                 </ul>
             </li>
         @endif
-        {{-- <li>
-            <div class="hasChild close" onclick="showHideListMenuMobile(this, 'phong-cach')">
-                <img src="{{ Storage::url('images/svg/bookmark.svg') }}" />
-                <div>Theo phong cách</div>
-            </div>
-            <ul id="phong-cach">
-                @foreach($wallpaperStyle as $style)
-                    @php
-                        $title      = $style->name ?? $style->seo->title ?? null;
-                        $selected   = $loop->index==3 ? 'selected' : null;
-                    @endphp
-                    <li class="{{ $selected }}">
-                        <a href="/{{ $style->seo->slug_full ?? null }}" title="{{ $title }}" aria-label="{{ $title }}">
-                        <div>{{ $title }}</div>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </li> --}}
-
-        {{-- <li>
-            <a href="/san-pham-khuyen-mai" title="Sản phẩm đang khuyến mãi trên Hoaanhtuc" aria-label="Sản phẩm đang khuyến mãi trên Hoaanhtuc">
-                <img src="{{ Storage::url('images/svg/comment.svg') }}" />
-                <div>Tản mạn</div>
-            </a>
-        </li> --}}
-        
         <li>
             <div class="hasChild close" onclick="showHideListMenuMobile(this, 'ho-tro')">
                 @if(empty($language)||$language=='vi')
@@ -146,6 +119,30 @@
         </li>
     </ul>
 </div>
+
+<div class="socialBox">
+    <div class="socialBox_title">
+        Kết nối với chúng tôi
+    </div>
+    <div class="socialBox_box">
+        <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_box_item" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/@wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a href="https://www.tiktok.com/@wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="https://twitter.com/wallpapers_name" class="socialBox_box_item" target="_blank">
+            <i class="fa-brands fa-twitter"></i>
+        </a>
+    </div>
+</div>
+
 <div class="closeButtonMobileMenu show-1023" onClick="toggleMenuMobile('js_toggleMenuMobile');">
     <i class="fa-sharp fa-solid fa-xmark"></i>
 </div>

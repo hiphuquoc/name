@@ -61,24 +61,14 @@
                         </div>
                     @endif
                 </h1>
-                <!-- load more -->
+                {{-- <!-- load more -->
                 <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
-                <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" /> 
-                {{-- <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" />  --}}
+                <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" />  --}}
                 <!-- Sort Box -->
-                <div class="sortBox">
-                    <div class="sortBox_left">
-                        <div><span id="js_filterProduct_count" class="highLight">{{ $totalProduct }}</span> sản phẩm</div>
-                    </div>
-                    <div class="sortBox_right">
-                        <div class="sortBox_right_item">
-                            <div style="min-width:100px;">Sắp xếp theo:</div>
-                            <select style="max-width:100px;">
-                                <option>Mặc định</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                @include('wallpaper.template.sort', [
+                    'language'  => $language ?? 'vi',
+                    'total'     => $totalProduct
+                ])
 
                 <!-- filter box -->
                 {{-- <div class="filterStyleWallpaper">

@@ -93,6 +93,7 @@ class RoutingController extends Controller{
                                             ->with('seo', 'en_seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->get();
+                        $totalProduct   = $products->count();
                         // /* lọc 5 phần tử đầu tiên */
                         // $products       = new \Illuminate\Database\Eloquent\Collection;
                         // $i              = 0;
@@ -101,33 +102,14 @@ class RoutingController extends Controller{
                         //     ++$i;
                         //     if($i==5) break;
                         // }
-                        $totalProduct   = Product::select('*')
-                                            ->whereHas('prices.wallpapers', function($query){
+                        // $totalProduct   = Product::select('*')
+                        //                     ->whereHas('prices.wallpapers', function($query){
                                                                     
-                                            })
-                                            ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                                                $query->whereIn('id', $arrayCategory);
-                                            })
-                                            ->count();
-                        // /* lấy thông tin category dưới 1 cấp => gộp vào collection */
-                        // $categories     = Category::select('*')
-                        //                     ->whereHas('seo', function($query) use($idSeo){
-                        //                         $query->where('parent', $idSeo);
                         //                     })
-                        //                     ->get();
-                        // /* lấy thông tin nghành hàng của tất cả sản phẩm trong category */
-                        // $brands             = new \Illuminate\Database\Eloquent\Collection;
-                        // foreach($products as $product){
-                        //     if (!$brands->contains('id', $product->brand->id)){
-                        //         $brands[]   = $product->brand;
-                        //     }
-                        // }
-
-                        /* xử lý ngôn ngữ của item seo */
-                        // if($language=='en'){
-                        //     /* đổi item của category */
-                        //     $item           = self::convertItemViToEn($item);
-                        // }
+                        //                     ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
+                        //                         $query->whereIn('id', $arrayCategory);
+                        //                     })
+                        //                     ->count();
                         /* content */
                         $folderContent      = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
                         $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';

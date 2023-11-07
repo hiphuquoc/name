@@ -14,7 +14,7 @@
     @else 
         @foreach($products as $product)
             @php
-                $link           = '/'.$product->seo->slug_full;
+                $link           = empty($language)||$language=='vi' ? '/'.$product->seo->slug_full : '/'.$product->en_seo->slug_full;
                 $productName    = $product->name ?? null;
                 $lazyload       = false;
                 if($loop->index>4) $lazyload   = true;

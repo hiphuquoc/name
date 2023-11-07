@@ -13,6 +13,7 @@ class PageController extends Controller{
 
     public static function saleOff(){
         $language       = 'vi';
+        $viewBy         = request()->cookie('view_by') ?? 'set';
         /* thông tin Page */
         $item           = Page::select('*')
             ->whereHas('seo', function($query){
@@ -28,21 +29,21 @@ class PageController extends Controller{
                             })
                             ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
                             ->orderBy('id', 'DESC')
-                            ->skip(0)
-                            ->take(5)
                             ->get();
-        $totalProduct   = Product::select('*')
-                            ->whereHas('prices', function($query) {
-                                $query->where('sale_off', '>', 0);
-                            })
-                            ->count();
+        $totalProduct   = $products->count();
+        // $totalProduct   = Product::select('*')
+        //                     ->whereHas('prices', function($query) {
+        //                         $query->where('sale_off', '>', 0);
+        //                     })
+        //                     ->count();
         /* breadcrumb */
         $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full, $language);
-        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'totalProduct', 'breadcrumb'));
+        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'totalProduct', 'breadcrumb', 'viewBy'));
     }
 
     public static function enSaleOff(){
         $language       = 'en';
+        $viewBy         = request()->cookie('view_by') ?? 'set';
         /* thông tin Page */
         $item           = Page::select('*')
             ->whereHas('en_seo', function($query){
@@ -61,20 +62,22 @@ class PageController extends Controller{
                             ->skip(0)
                             ->take(5)
                             ->get();
-        $totalProduct   = Product::select('*')
-                            ->whereHas('prices', function($query) {
-                                $query->where('sale_off', '>', 0);
-                            })
-                            ->count();
+        $totalProduct   = $products->count();
+        // $totalProduct   = Product::select('*')
+        //                     ->whereHas('prices', function($query) {
+        //                         $query->where('sale_off', '>', 0);
+        //                     })
+        //                     ->count();
         /* breadcrumb */
         $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full, $language);
-        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'totalProduct', 'breadcrumb'));
+        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'totalProduct', 'breadcrumb', 'viewBy'));
     }
 
     public static function searchProduct(Request $request){
         $keySearch      = $request->get('key_search') ?? null;
         $keySearch      = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
         $language       = 'vi';
+        $viewBy         = request()->cookie('view_by') ?? 'set';
         /* thông tin Page */
         $pathUrl        = substr(parse_url(url()->current())['path'], 1);
         $item           = Page::select('*')
@@ -91,18 +94,12 @@ class PageController extends Controller{
                 ->orWhere('en_name', 'like', '%'.$keySearch.'%')
                 ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
                 ->orderBy('id', 'DESC')
-                ->skip(0)
-                ->take(5)
                 ->get();
-            $totalProduct   =  Product::select('product_info.*')
-                ->where('code', 'like', '%'.$keySearch.'%')
-                ->orWhere('name', 'like', '%'.$keySearch.'%')
-                ->orWhere('en_name', 'like', '%'.$keySearch.'%')
-                ->count();
+            $totalProduct   = $products->count();
             /* breadcrumb */
             $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
             $titlePage      = $item->name ?? $item->seo->title ?? null;
-            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'totalProduct', 'breadcrumb'));
+            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'totalProduct', 'breadcrumb', 'viewBy'));
         }
         return redirect()->route('main.home');
     }
@@ -111,6 +108,7 @@ class PageController extends Controller{
         $keySearch      = $request->get('key_search') ?? null;
         $keySearch      = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
         $language       = 'en';
+        $viewBy         = request()->cookie('view_by') ?? 'set';
         /* thông tin Page */
         $pathUrl        = substr(parse_url(url()->current())['path'], 1);
         $item           = Page::select('*')
@@ -127,18 +125,17 @@ class PageController extends Controller{
                 ->orWhere('en_name', 'like', '%'.$keySearch.'%')
                 ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
                 ->orderBy('id', 'DESC')
-                ->skip(0)
-                ->take(5)
                 ->get();
-            $totalProduct   =  Product::select('product_info.*')
-                ->where('code', 'like', '%'.$keySearch.'%')
-                ->orWhere('name', 'like', '%'.$keySearch.'%')
-                ->orWhere('en_name', 'like', '%'.$keySearch.'%')
-                ->count();
+            $totalProduct   = $products->count();
+            // $totalProduct   =  Product::select('product_info.*')
+            //     ->where('code', 'like', '%'.$keySearch.'%')
+            //     ->orWhere('name', 'like', '%'.$keySearch.'%')
+            //     ->orWhere('en_name', 'like', '%'.$keySearch.'%')
+            //     ->count();
             /* breadcrumb */
             $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
             $titlePage      = $item->en_name ?? $item->en_seo->title ?? null;
-            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'totalProduct', 'breadcrumb'));
+            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'totalProduct', 'breadcrumb', 'viewBy'));
         }
         return redirect()->route('main.home');
     }
