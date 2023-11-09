@@ -23,21 +23,21 @@
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
                                     @if(!empty($language)&&$language=='en')
-                                        <label for="email">Email login</label>
+                                        <label>Email login</label>
                                     @else 
-                                        <label for="email">Email đăng nhập</label>
+                                        <label>Email đăng nhập</label>
                                     @endif
-                                    <input type="text" id="email" name="email" required />
+                                    <input type="text" name="email" required />
                                 </div>
                             </div>
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
                                     @if(!empty($language)&&$language=='en')
-                                        <label for="password">Password</label>
+                                        <label>Password</label>
                                     @else 
-                                        <label for="password">Mật khẩu</label>
+                                        <label>Mật khẩu</label>
                                     @endif
-                                    <input type="password" id="password" name="password" autocomplete="off" required />
+                                    <input type="password" name="password" autocomplete="off" required />
                                 </div>
                             </div>
                             <div class="formBox_item" style="display:flex;justify-content:space-between;align-item:flex-end;">

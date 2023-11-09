@@ -59,8 +59,6 @@ class PageController extends Controller{
                             })
                             ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
                             ->orderBy('id', 'DESC')
-                            ->skip(0)
-                            ->take(5)
                             ->get();
         $totalProduct   = $products->count();
         // $totalProduct   = Product::select('*')
@@ -69,7 +67,7 @@ class PageController extends Controller{
         //                     })
         //                     ->count();
         /* breadcrumb */
-        $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full, $language);
+        $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
         return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'totalProduct', 'breadcrumb', 'viewBy'));
     }
 

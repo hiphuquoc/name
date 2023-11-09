@@ -50,7 +50,7 @@
                     <div>Đang khuyến mãi</div>
                 </a>
             @else
-                <a href="{{ route('main.saleOff') }}" title="Sale off phone wallpaper" aria-label="Sale off phone wallpaper">
+                <a href="{{ route('main.enSaleOff') }}" title="Sale off phone wallpaper" aria-label="Sale off phone wallpaper">
                     <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Sale off phone wallpaper" title="Sale off phone wallpaper" />
                     <div>Sale off</div>
                 </a>
@@ -60,27 +60,26 @@
         @if(!empty($wallpaperMobile))
             <li>
                 @php
+                    $titlePhoneWallpaper = empty($language)||$language=='vi' ?  'Hình nền điện thoại' : 'Phone wallpaper';
+                    $url      = empty($language)||$language=='vi' ? $wallpaperMobile->seo->slug : $wallpaperMobile->en_seo->slug;
                     $classTmp = 'close';
                     $styleTmp = '';
-                    $flagOpen = env('APP_URL').'/'.$wallpaperMobile->seo->slug==Request::url() ? true : false;
+                    $flagOpen = env('APP_URL').'/'.$url==Request::url() ? true : false;
                     if($flagOpen==true){
                         $classTmp = 'open';
                         $styleTmp = 'style="height:auto;opacity:1;"';
                     }
                 @endphp
                 <div class="hasChild {{ $classTmp }}">
-                    @php
-                        $titlePhoneWallpaper = empty($language)||$language=='vi' ?  'Hình nền điện thoại' : 'Phone wallpaper';
-                    @endphp
                     <img src="{{ Storage::url('images/svg/picture-1.svg') }}" alt="{{ $titlePhoneWallpaper }}" title="{{ $titlePhoneWallpaper }}" />
                     @if($flagOpen==true)
                         <div>{{ $titlePhoneWallpaper }}</div>
                     @else 
-                        <a href="{{ env('APP_URL') }}/{{ $wallpaperMobile->seo->slug }}" arira-label="{{ $wallpaperMobile->name }}">{{ $titlePhoneWallpaper }}</a>
+                        <a href="{{ env('APP_URL') }}/{{ $url }}" arira-label="{{ $wallpaperMobile->name }}">{{ $titlePhoneWallpaper }}</a>
                     @endif
-                    <i class="fa-solid fa-plus" onclick="showHideListMenuMobile(this, '{{ $wallpaperMobile->seo->slug }}')"></i>
+                    <i class="fa-solid fa-plus" onclick="showHideListMenuMobile(this, '{{ $url }}')"></i>
                 </div>
-                <ul id="{{ $wallpaperMobile->seo->slug }}" class="filterLinkSelected" {!! $styleTmp !!}>
+                <ul id="{{ $url }}" class="filterLinkSelected" {!! $styleTmp !!}>
                     @foreach($wallpaperMobile->childs as $type)
                         @if($type->products->count()>0)
                             @php
@@ -105,12 +104,12 @@
         <li>
             <div class="hasChild close">
                 @if(empty($language)||$language=='vi')
-                    <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Support infomation" title="Support infomation" />
-                    <div>Support</div>
-                    <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'ho-tro')"></i>
-                @else 
                     <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ {{ config('main.company_name') }}" title="Thông tin hỗ trợ {{ config('main.company_name') }}" />
                     <div>Hỗ trợ</div>
+                    <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'ho-tro')"></i>
+                @else 
+                    <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Support infomation" title="Support infomation" />
+                    <div>Support</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'ho-tro')"></i>
                 @endif
             </div>
@@ -186,6 +185,8 @@
                     $(this).closest('ul').children().each(function(){
                         $(this).removeClass('selected');
                     })
+                    
+                    $(this).closest('li').addClass('selected');
                     /* thay icon */
                     $(this).closest('ul').closest('li').find('.fa-plus').removeClass('fa-plus').addClass('fa-minus');
                 }

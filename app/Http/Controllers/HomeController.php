@@ -26,25 +26,25 @@ class HomeController extends Controller{
         if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
             $xhtml              = file_get_contents($pathCache);
         }else {
-            $language               = 'vi';
-            $item                   = Page::select('*')
-                                        ->whereHas('type', function($query){
-                                            $query->where('code', 'home');
-                                        })
-                                        ->whereHas('seo', function($query){
-                                            $query->where('slug', '/');
-                                        })
-                                        ->with('seo', 'en_seo', 'type')
-                                        ->first();
-            $products               = Product::select('*')
-                                        ->whereHas('prices.wallpapers', function(){
+            $language           = 'vi';
+            $item               = Page::select('*')
+                                    ->whereHas('type', function($query){
+                                        $query->where('code', 'home');
+                                    })
+                                    ->whereHas('seo', function($query){
+                                        $query->where('slug', '/');
+                                    })
+                                    ->with('seo', 'en_seo', 'type')
+                                    ->first();
+            $products           = Product::select('*')
+                                    ->whereHas('prices.wallpapers', function(){
 
-                                        })
-                                        ->with('prices.wallpapers')
-                                        ->orderBy('id', 'DESC')
-                                        ->get();
-            $viewBy                 = $request->cookie('view_by') ?? 'set';
-            $xhtml                  = view('wallpaper.home.index', compact('item', 'language', 'products', 'viewBy'))->render();
+                                    })
+                                    ->with('prices.wallpapers')
+                                    ->orderBy('id', 'DESC')
+                                    ->get();
+            $viewBy             = $request->cookie('view_by') ?? 'set';
+            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'products', 'viewBy'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }
@@ -67,20 +67,17 @@ class HomeController extends Controller{
                                         ->whereHas('en_seo', function($query){
                                             $query->where('slug', 'en');
                                         })
-                                        ->with('seo', 'type')
+                                        ->with('seo', 'en_seo', 'type')
                                         ->first();
-            $newProducts            = Product::select('*')
-                                        ->orderBy('id', 'DESC')
-                                        ->skip(0)
-                                        ->take(10)
-                                        ->get();
-            $promotionProducts      = new \Illuminate\Database\Eloquent\Collection;
-            $totalPromotionProduct  = Product::select('*')
-                                        ->whereHas('prices', function($query){
-                                            $query->where('sale_off', '>', 0);
-                                        })
-                                        ->count();
-            $xhtml          = view('wallpaper.home.index', compact('item', 'language', 'newProducts', 'promotionProducts', 'totalPromotionProduct'))->render();
+            $products           = Product::select('*')
+                                    ->whereHas('prices.wallpapers', function(){
+
+                                    })
+                                    ->with('prices.wallpapers')
+                                    ->orderBy('id', 'DESC')
+                                    ->get();
+            $viewBy             = $request->cookie('view_by') ?? 'set';
+            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'products', 'viewBy'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }
