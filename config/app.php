@@ -201,6 +201,9 @@ return [
         /* Permission */
         App\Providers\PermissionsServiceProvider::class,
 
+        // /* Thanh toán Paypal */
+        // Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+
     ],
 
     /*

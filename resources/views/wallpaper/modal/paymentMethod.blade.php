@@ -23,16 +23,17 @@
                 
                 <div class="paymentMethodBox">
                     @foreach($paymentMethods as $method)
-                        {{-- @php
-                            if($method->code=='zalopay') continue;
-                        @endphp --}}
+                        @php
+                            $nameMethodPayment          = empty($language)||$language=='vi' ? $method->name : $method->en_name;
+                            $descriptionMethodPayment   = empty($language)||$language=='vi' ? $method->description : $method->en_description;
+                        @endphp
                         <div class="paymentMethodBox_item" onClick="paymentNow(this, '{{ $method->id }}');">
                             <div class="paymentMethodBox_item_logo">
-                                <img src="{{ Storage::url($method->icon) }}" alt="{{ $method->name ?? null }}" title="{{ $method->name ?? null }}" />
+                                <img src="{{ Storage::url($method->icon) }}" alt="{{ $nameMethodPayment ?? null }}" title="{{ $nameMethodPayment ?? null }}" />
                             </div>
                             <div class="paymentMethodBox_item_content">
-                                <div class="paymentMethodBox_item_content_title">{{ $method->name ?? null }}</div>
-                                <div class="paymentMethodBox_item_content_desc maxLine_1">{{ $method->description ?? null }}</div>
+                                <div class="paymentMethodBox_item_content_title">{{ $nameMethodPayment ?? null }}</div>
+                                <div class="paymentMethodBox_item_content_desc maxLine_1">{{ $descriptionMethodPayment ?? null }}</div>
                             </div>
                         </div>
 

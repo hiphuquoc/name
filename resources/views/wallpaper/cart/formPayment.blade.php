@@ -40,38 +40,22 @@
 
             <div class="paymentMethodBox twoColumn">
                 @foreach($paymentMethods as $method)
-                    {{-- @php
-                        $selected = null;
-                        if($loop->index==0) $selected = 'selected';
-                    @endphp --}}
-                    {{-- @php
-                        if($method->code=='zalopay') continue;
-                    @endphp --}}
+                    @php
+                        $nameMethodPayment          = empty($language)||$language=='vi' ? $method->name : $method->en_name;
+                        $descriptionMethodPayment   = empty($language)||$language=='vi' ? $method->description : $method->en_description;
+                    @endphp
                     <div class="paymentMethodBox_item"  onclick="chooseOptionPayment(this, {{ $method->id }});">
                         <div class="paymentMethodBox_item_logo">
-                            <img src="{{ Storage::url($method->icon) }}" alt="{{ $method->name ?? null }}" title="{{ $method->name ?? null }}" />
+                            <img src="{{ Storage::url($method->icon) }}" alt="{{ $nameMethodPayment ?? null }}" title="{{ $nameMethodPayment ?? null }}" />
                         </div>
                         <div class="paymentMethodBox_item_content">
-                            <div class="paymentMethodBox_item_content_title">{{ $method->name ?? null }}</div>
-                            <div class="paymentMethodBox_item_content_desc maxLine_1">{{ $method->description ?? null }}</div>
+                            <div class="paymentMethodBox_item_content_title">{{ $nameMethodPayment ?? null }}</div>
+                            <div class="paymentMethodBox_item_content_desc maxLine_1">{{ $descriptionMethodPayment ?? null }}</div>
                         </div>
                     </div>
 
                 @endforeach
             </div>
-
-            {{-- <div class="paymentMethodBox twoColumn">
-                <div class="paymentMethodBox_item selected" onclick="chooseOptionPayment();">
-                    <div class="paymentMethodBox_item_logo">
-                        <img src="/storage/images/icon-payment-zalopay.png" alt="Thanh toán qua Zalopay" title="Thanh toán qua Zalopay">
-                    </div>
-                    <div class="paymentMethodBox_item_content">
-                        <div class="paymentMethodBox_item_content_title">Thanh toán qua Zalopay</div>
-                        <div class="paymentMethodBox_item_content_desc maxLine_1">Quét mã QR /thanh toán ATM /Visa /Mastercard...</div>
-                        <input type="hidden" name="payment_method_info_id" value="" />
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 @push('scriptCustom')

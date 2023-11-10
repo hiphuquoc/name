@@ -125,7 +125,7 @@
             margin-top: 0.75rem;
         }
         &:hover {
-            border: 1px solid $colorBackgroundLv1;
+            border: 1px solid $colorSuccess;
         }
         &_logo {
             flex: 0 0 60px;
@@ -137,7 +137,7 @@
         }
         &_content {
             width: 100%;
-            padding: 0.75rem 1rem 1rem;
+            padding: 0.5rem 1rem 0.75rem 1rem;
             &_title {
                 margin-bottom: 0;
                 color: $colorText;
@@ -150,8 +150,6 @@
         }
         &.selected {
             border: 1px solid $colorSuccess;
-            // border-image-slice: 1;
-            // border-image-source: linear-gradient(to right, $colorTextLight, $colorSuccess);
             &:after {
                 position: absolute;
                 top: 5px;
