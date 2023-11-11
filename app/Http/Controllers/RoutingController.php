@@ -94,14 +94,13 @@ class RoutingController extends Controller{
                                             ->with('seo', 'en_seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->get();
-                        $totalProduct   = $products->count();
                         /* content */
                         $folderContent      = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
                         $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
                         $content            = Blade::render(Storage::get($filenameContent));
                         /* breadcrumb */
                         $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'totalProduct', 'keyCategory', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
+                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'keyCategory', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
                         break;
                     // case 'brand_info':
                     //     $flagMatch      = true;

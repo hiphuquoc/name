@@ -104,9 +104,23 @@
                 <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" />  --}}
 
                 <!-- Sort Box -->
+                @php
+                    $total = $products->count();
+                    if($viewBy=='wallpaper'){
+                        $total = 0;
+                        foreach($products as $product){
+                            foreach($product->prices as $price){
+                                foreach($price->wallpapers as $wallpaper){
+                                    ++$total;
+                                }
+                            }
+                        }
+                    }
+                @endphp
                 @include('wallpaper.template.sort', [
                     'language'  => $language ?? 'vi',
-                    'total'     => $totalProduct
+                    'total'     => $total,
+                    'viewBy'    => $viewBy
                 ])
                 
 
