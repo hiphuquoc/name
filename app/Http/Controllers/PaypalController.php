@@ -9,42 +9,43 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 class PaypalController extends Controller{
 
     public static function create($infoOrder){
-
-        $data = [];
-        /* danh sách sản phẩm */
-        $data['item']       = [];
-        foreach($infoOrder->products as $product){
-            $data['item'][] = [
-                'name'  => $product->infoProduct->en_name,
-                'price' => $product->price,
-                'qty'   => $product->quantity
-            ];
-        }
-        $data['invoice_id']             = $infoOrder->code ?? null;
-        $data['invoice_description']    = "Order ".$data['invoice_id']." Invoice";
-        $data['return_url']             = 'https://name.dev';
-        $data['cancel_url']             = 'https://name.dev';
-        $data['total']                  = $infoOrder->total;
-
         $provider = new PayPalClient;
-        // Through facade. No need to import namespaces
-        $provider = \PayPal::setProvider();
+        $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
-        $provider->setCurrency('USD');
-        
-        // Create a payment
 
-        // Create a payment
-        $response = $provider->createOrder($data);
+        $amount         = $infoOrder->total;
 
-        dd($response);
-        // Get the approval link
-        $approvalLink = $response['links'][0]['href'];
-
-        // dd($approvalLink);
-
-        // Redirect the user to the approval link
-        return redirect($approvalLink);
+        $response = $provider->createOrder([
+            'intent'                => 'CAPTURE',
+            'invoice_id'            => $infoOrder->code,
+            'invoice_description'   => "Order ".$infoOrder->code." Invoice",
+            'total'                 => $amount,
+            'application_context'   => [
+                'return_url'        => route('main.handlePaymentPaypal', [
+                    'code'  => $infoOrder->code
+                ]),
+                'cancel_url'        => 'https://name.com.vn'
+            ],
+            'purchase_units'        => [
+                0 => [
+                    'amount'        => [
+                        'currency_code' => 'USD',
+                        'value'     => $amount
+                    ]
+                ]
+            ]
+        ]);
+        /* xủ lý response để lấy url redirect */
+        $linkRedirect               = env('APP_URL');
+        if(!empty($response['id'])){
+            foreach($response['links'] as $link){
+                if($link['rel']=='approve') {
+                    $linkRedirect   = $link['href'];
+                    break;
+                }
+            }
+        }
+       return $linkRedirect;       
     }
 
 }

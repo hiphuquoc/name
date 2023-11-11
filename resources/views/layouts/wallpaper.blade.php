@@ -38,12 +38,9 @@
         <!-- === START:: Content === -->
         <div class="layoutHeaderSide" style="min-height:calc(100vh - 95px);">
             <div id="js_toggleMenuMobile" class="layoutHeaderSide_header">
-                <!-- === START:: Header side === -->
-                {{-- @include('wallpaper.cacheHTML.create', [
-                    'content'  => 'wallpaper.snippets.headerSide'
-                ]) --}}
-                @include('wallpaper.snippets.headerSide')
-                <!-- === END:: Header side === -->
+                {{-- <div class="contentBox"> --}}
+                    @include('wallpaper.snippets.headerSide')
+                {{-- </div> --}}
             </div>
 
             <div class="layoutHeaderSide_content">

@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
-use App\Models\Category;
-use App\Models\Blog;
 use App\Models\Page;
-use App\Models\Order;
-use Yaza\LaravelGoogleDriveStorage\Gdrive;
-use Intervention\Image\ImageManagerStatic;
+use App\Http\Controllers\SettingController;
 
 use App\Mail\OrderMailable;
 use Google\Service\SecurityCommandCenter\PathNodeAssociatedFinding;
@@ -26,7 +22,9 @@ class HomeController extends Controller{
         if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
             $xhtml              = file_get_contents($pathCache);
         }else {
+            /* lưu ngôn ngữ sử dụng */
             $language           = 'vi';
+            SettingController::settingLanguage($language);
             $item               = Page::select('*')
                                     ->whereHas('type', function($query){
                                         $query->where('code', 'home');
@@ -59,7 +57,9 @@ class HomeController extends Controller{
         if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
             $xhtml              = file_get_contents($pathCache);
         }else {
+            /* lưu ngôn ngữ sử dụng */
             $language               = 'en';
+            SettingController::settingLanguage($language);
             $item                   = Page::select('*')
                                         ->whereHas('type', function($query){
                                             $query->where('code', 'home');

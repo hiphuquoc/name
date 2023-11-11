@@ -19,7 +19,11 @@
                     <!-- hidden -->
                     <input type="hidden" name="view_by" value="" />
                     <div class="selectCustom_text">
-                        Duyệt theo:
+                        @if($language=='vi')
+                            Duyệt theo:
+                        @else 
+                            Browse by:
+                        @endif
                     </div>
                     <div class="selectCustom_input">
                         <!-- load Ajax -->
@@ -31,7 +35,11 @@
                                 if(!empty($viewBy)&&$key==$viewBy) $selected = 'selected';
                             @endphp
                             <div class="selectCustom_box_item {{ $selected }}" data-value-view-by="{{ $key }}">
-                                {!! $value['icon'].$value['name'] !!}
+                                @if($language=='vi')
+                                    {!! $value['icon'].$value['name'] !!}
+                                @else 
+                                    {!! $value['icon'].$value['en_name'] !!}
+                                @endif
                             </div>
                         @endforeach
                     </div>

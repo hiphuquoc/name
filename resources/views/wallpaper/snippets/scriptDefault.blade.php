@@ -106,10 +106,7 @@
     function noticeContrustion(){
         alert('Tính năng thanh toán online đang được xây dựng. Vui lòng quay lại sau hoặc liên hệ Zalo 0968617168');
     }
-    // function toggleMenuMobile(){
-    //     const elementMobileMenu = $('.layoutHeaderSide_header');
-    //     elementMobileMenu.toggle();
-    // }
+
     function openCloseElemt(idElemt){
         let displayE    = $('#' + idElemt).css('display');
         if(displayE=='none'){
@@ -120,15 +117,7 @@
             $('body').css('overflow', 'unset');
         }
     }
-    // /* load image */
-    // function loadImage(){
-    //     $(document).find('img[data-src]').each(function(){
-    //         setTimeout(() => {
-    //             $(this).attr('src', $(this).attr('data-src'));
-    //             if($(this).hasClass('loading_1')) $(this).removeClass('loading_1');
-    //         }, 0);
-    //     });
-    // }
+    
     /* fixed menu khi scroll đối với giao diện nhỏ hơn 990px */ 
     $(window).scroll(function(){
         // const heightMenu = $('.headerMain').outerHeight();
@@ -696,21 +685,21 @@
         })
         return error;
     }
-    /* check csrf first time */
-    function checkToSetCsrfFirstTime(){
-        /* dùng cho trường hợp người dùng vào trang lần đầu chưa có cookie CSRF */
-        const flag = '{{ $_COOKIE["XSRF-TOKEN"] ?? "" }}';
-        if(flag==''){
-            $.ajax({
-                url: '{{ route("main.setCsrfFirstTime") }}',
-                dataType: 'json',
-                type: 'get',
-                success: function(response) {
-                    if(response==true) location.reload();
-                }
-            });
-        }
-    }
+    // /* check csrf first time */
+    // function checkToSetCsrfFirstTime(){
+    //     /* dùng cho trường hợp người dùng vào trang lần đầu chưa có cookie CSRF */
+    //     const flag = '{{ $_COOKIE["XSRF-TOKEN"] ?? "" }}';
+    //     if(flag==''){
+    //         $.ajax({
+    //             url: '{{ route("main.setCsrfFirstTime") }}',
+    //             dataType: 'json',
+    //             type: 'get',
+    //             success: function(response) {
+    //                 if(response==true) location.reload();
+    //             }
+    //         });
+    //     }
+    // }
     /* check đăng nhập */
     function checkLoginAndSetShow(){
         const language = $('#language').val();
@@ -733,124 +722,124 @@
             }
         });
     }
-    /* loadmore wallpaper */
-    function loadWallpaperMore(requestLoad = 5){
-        var boxCategory       = $('#js_loadMore_box');
-        if(boxCategory.length&&!boxCategory.hasClass('loading')){
-            const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
-            if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
-                /* thực thi */
-                /* thêm class để đánh dấu đăng load => không load nữa */
-                boxCategory.addClass('loading');
-                /* lấy dữ liệu */
-                const total         = parseInt($('#js_loadMore_total').val());
-                const loaded        = parseInt($('#js_loadMore_loaded').val());
-                const keyCategory   = $('#js_loadMore_keyCategory').val();
-                const language      = $('#language').val();
-                if(total>loaded){
-                    $.ajax({
-                        url         : '{{ route("main.category.loadMore") }}',
-                        type        : 'get',
-                        dataType    : 'json',
-                        data        : {
-                            total           : total,
-                            loaded          : loaded,
-                            key_category    : keyCategory,
-                            language        : language,
-                            request_load    : requestLoad
-                        },
-                        success     : function(response){
-                            /* xóa bỏ class để thể hiện đã load xong */
-                            boxCategory.removeClass('loading');
-                            /* append dữ liệu */
-                            if(response.content!=''){
-                                $('#js_loadMore_loaded').val(response.loaded);
-                                boxCategory.append(response.content);
-                            }
-                        }
-                    });
-                }
+    // /* loadmore wallpaper */
+    // function loadWallpaperMore(requestLoad = 5){
+    //     var boxCategory       = $('#js_loadMore_box');
+    //     if(boxCategory.length&&!boxCategory.hasClass('loading')){
+    //         const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
+    //         if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
+    //             /* thực thi */
+    //             /* thêm class để đánh dấu đăng load => không load nữa */
+    //             boxCategory.addClass('loading');
+    //             /* lấy dữ liệu */
+    //             const total         = parseInt($('#js_loadMore_total').val());
+    //             const loaded        = parseInt($('#js_loadMore_loaded').val());
+    //             const keyCategory   = $('#js_loadMore_keyCategory').val();
+    //             const language      = $('#language').val();
+    //             if(total>loaded){
+    //                 $.ajax({
+    //                     url         : '{{ route("main.category.loadMore") }}',
+    //                     type        : 'get',
+    //                     dataType    : 'json',
+    //                     data        : {
+    //                         total           : total,
+    //                         loaded          : loaded,
+    //                         key_category    : keyCategory,
+    //                         language        : language,
+    //                         request_load    : requestLoad
+    //                     },
+    //                     success     : function(response){
+    //                         /* xóa bỏ class để thể hiện đã load xong */
+    //                         boxCategory.removeClass('loading');
+    //                         /* append dữ liệu */
+    //                         if(response.content!=''){
+    //                             $('#js_loadMore_loaded').val(response.loaded);
+    //                             boxCategory.append(response.content);
+    //                         }
+    //                     }
+    //                 });
+    //             }
 
-            }
-        }
-    }
-    /* loadmore wallpaper promotion */
-    function loadWallpaperPromotionMore(requestLoad = 5){
-        var boxCategory       = $('#js_loadMore_box');
-        if(boxCategory.length&&!boxCategory.hasClass('loading')){
-            const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
-            if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
-                /* thực thi */
-                /* thêm class để đánh dấu đăng load => không load nữa */
-                boxCategory.addClass('loading');
-                /* lấy dữ liệu */
-                const total         = parseInt($('#js_loadMore_total').val());
-                const loaded        = parseInt($('#js_loadMore_loaded').val());
-                const language      = $('#language').val();
-                if(total>loaded){
-                    $.ajax({
-                        url         : '{{ route("main.category.loadMorePromotion") }}',
-                        type        : 'get',
-                        dataType    : 'json',
-                        data        : {
-                            total           : total,
-                            loaded          : loaded,
-                            language        : language,
-                            request_load    : requestLoad
-                        },
-                        success     : function(response){
-                            /* xóa bỏ class để thể hiện đã load xong */
-                            boxCategory.removeClass('loading');
-                            /* append dữ liệu */
-                            if(response.content!=''){
-                                $('#js_loadMore_loaded').val(response.loaded);
-                                boxCategory.append(response.content);
-                            }
-                        }
-                    });
-                }
+    //         }
+    //     }
+    // }
+    // /* loadmore wallpaper promotion */
+    // function loadWallpaperPromotionMore(requestLoad = 5){
+    //     var boxCategory       = $('#js_loadMore_box');
+    //     if(boxCategory.length&&!boxCategory.hasClass('loading')){
+    //         const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
+    //         if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
+    //             /* thực thi */
+    //             /* thêm class để đánh dấu đăng load => không load nữa */
+    //             boxCategory.addClass('loading');
+    //             /* lấy dữ liệu */
+    //             const total         = parseInt($('#js_loadMore_total').val());
+    //             const loaded        = parseInt($('#js_loadMore_loaded').val());
+    //             const language      = $('#language').val();
+    //             if(total>loaded){
+    //                 $.ajax({
+    //                     url         : '{{ route("main.category.loadMorePromotion") }}',
+    //                     type        : 'get',
+    //                     dataType    : 'json',
+    //                     data        : {
+    //                         total           : total,
+    //                         loaded          : loaded,
+    //                         language        : language,
+    //                         request_load    : requestLoad
+    //                     },
+    //                     success     : function(response){
+    //                         /* xóa bỏ class để thể hiện đã load xong */
+    //                         boxCategory.removeClass('loading');
+    //                         /* append dữ liệu */
+    //                         if(response.content!=''){
+    //                             $('#js_loadMore_loaded').val(response.loaded);
+    //                             boxCategory.append(response.content);
+    //                         }
+    //                     }
+    //                 });
+    //             }
 
-            }
-        }
-    }
-    /* loadmore wallpaper promotion */
-    function loadWallpaperSearchMore(requestLoad = 5){
-        var boxCategory       = $('#js_loadMore_box');
-        if(boxCategory.length&&!boxCategory.hasClass('loading')){
-            const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
-            if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
-                /* thực thi */
-                /* thêm class để đánh dấu đăng load => không load nữa */
-                boxCategory.addClass('loading');
-                /* lấy dữ liệu */
-                const total         = parseInt($('#js_loadMore_total').val());
-                const loaded        = parseInt($('#js_loadMore_loaded').val());
-                const language      = $('#language').val();
-                if(total>loaded){
-                    $.ajax({
-                        url         : '{{ route("main.category.loadMoreSearch") }}',
-                        type        : 'get',
-                        dataType    : 'json',
-                        data        : {
-                            total           : total,
-                            loaded          : loaded,
-                            request_load    : requestLoad,
-                            language        : language,
-                            key_search      : '{{ request("key_search") }}'
-                        },
-                        success     : function(response){
-                            /* xóa bỏ class để thể hiện đã load xong */
-                            boxCategory.removeClass('loading');
-                            /* append dữ liệu */
-                            if(response.content!=''){
-                                $('#js_loadMore_loaded').val(response.loaded);
-                                boxCategory.append(response.content);
-                            }
-                        }
-                    });
-                }
+    //         }
+    //     }
+    // }
+    // /* loadmore wallpaper promotion */
+    // function loadWallpaperSearchMore(requestLoad = 5){
+    //     var boxCategory       = $('#js_loadMore_box');
+    //     if(boxCategory.length&&!boxCategory.hasClass('loading')){
+    //         const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
+    //         if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
+    //             /* thực thi */
+    //             /* thêm class để đánh dấu đăng load => không load nữa */
+    //             boxCategory.addClass('loading');
+    //             /* lấy dữ liệu */
+    //             const total         = parseInt($('#js_loadMore_total').val());
+    //             const loaded        = parseInt($('#js_loadMore_loaded').val());
+    //             const language      = $('#language').val();
+    //             if(total>loaded){
+    //                 $.ajax({
+    //                     url         : '{{ route("main.category.loadMoreSearch") }}',
+    //                     type        : 'get',
+    //                     dataType    : 'json',
+    //                     data        : {
+    //                         total           : total,
+    //                         loaded          : loaded,
+    //                         request_load    : requestLoad,
+    //                         language        : language,
+    //                         key_search      : '{{ request("key_search") }}'
+    //                     },
+    //                     success     : function(response){
+    //                         /* xóa bỏ class để thể hiện đã load xong */
+    //                         boxCategory.removeClass('loading');
+    //                         /* append dữ liệu */
+    //                         if(response.content!=''){
+    //                             $('#js_loadMore_loaded').val(response.loaded);
+    //                             boxCategory.append(response.content);
+    //                         }
+    //                     }
+    //                 });
+    //             }
 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 </script>

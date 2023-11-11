@@ -45,9 +45,9 @@ class RoutingController extends Controller{
                 echo $xhtml;
             }else {
                 switch($checkExists->type){
-                    /* ===== Ngôn ngữ Việt ===== */
                     case 'product_info':
                         $language       = $checkExists->language;
+                        SettingController::settingLanguage($language);
                         $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                         $flagMatch      = true;
                         /* thông tin sản phẩm */
@@ -72,6 +72,7 @@ class RoutingController extends Controller{
                         break;
                     case 'category_info':
                         $language       = $checkExists->language;
+                        SettingController::settingLanguage($language);
                         $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                         $flagMatch      = true;
                         $viewBy         = request()->cookie('view_by') ?? 'set';
@@ -94,22 +95,6 @@ class RoutingController extends Controller{
                                             ->orderBy('id', 'DESC')
                                             ->get();
                         $totalProduct   = $products->count();
-                        // /* lọc 5 phần tử đầu tiên */
-                        // $products       = new \Illuminate\Database\Eloquent\Collection;
-                        // $i              = 0;
-                        // foreach($fullProducts as $p){
-                        //     $products[]  = $p;
-                        //     ++$i;
-                        //     if($i==5) break;
-                        // }
-                        // $totalProduct   = Product::select('*')
-                        //                     ->whereHas('prices.wallpapers', function($query){
-                                                                    
-                        //                     })
-                        //                     ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                        //                         $query->whereIn('id', $arrayCategory);
-                        //                     })
-                        //                     ->count();
                         /* content */
                         $folderContent      = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
                         $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
@@ -159,6 +144,7 @@ class RoutingController extends Controller{
                     case 'page_info':
                         $flagMatch      = true;
                         $language       = $checkExists->language;
+                        SettingController::settingLanguage($language);
                         $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                         /* thông tin brand */
                         $item           = Page::select('*')

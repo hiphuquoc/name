@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\CookieController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +15,7 @@ class CartController extends Controller{
 
     public static function index(Request $request){
         $language       = 'vi';
+        SettingController::settingLanguage($language);
         $item           = Page::select('*')
                             ->whereHas('seo', function($query){
                                 $query->where('slug', 'gio-hang');
@@ -28,6 +31,7 @@ class CartController extends Controller{
 
     public static function enIndex(Request $request){
         $language       = 'en';
+        SettingController::settingLanguage($language);
         $item           = Page::select('*')
                             ->whereHas('en_seo', function($query){
                                 $query->where('slug', 'cart');
@@ -83,7 +87,7 @@ class CartController extends Controller{
             ];
         }
         /* set cookie */
-        self::setCookie('cart', json_encode($cartNew), 3600);
+        CookieController::setCookie('cart', json_encode($cartNew), 3600);
         /* trả thông báo */
         $language       = $request->get('language') ?? 'vi';
         $result = view('wallpaper.cart.cartMessage', [
@@ -130,7 +134,7 @@ class CartController extends Controller{
             }
         }
         /* set lại cookie */
-        self::setCookie('cart', json_encode($products), 3600);
+        CookieController::setCookie('cart', json_encode($products), 3600);
         /* lấy dữ liệu của cột thay đổi */
         $result['total']        = number_format($total).config('main.currency_unit');
         $result['count']        = $count;
@@ -172,7 +176,7 @@ class CartController extends Controller{
             }
         }
         /* set lại cookie */
-        self::setCookie('cart', json_encode($products), 3600);
+        CookieController::setCookie('cart', json_encode($products), 3600);
         $result['total']        = number_format($total).config('main.currency_unit');
         $result['count']        = $count;
         /* trường hợp remove đến khi cart rỗng */
@@ -225,18 +229,5 @@ class CartController extends Controller{
         }
         /* đưa phần tử collection vào collection cha */
         return $tmp;
-    }
-
-    public static function setCookie($name, $value, $time=null){
-        $response        = null;
-        if(!empty($name)){
-            $response   = Cookie::queue($name, $value, $time);
-        }
-        return $response;
-    }
-
-    public static function removeCookie($name){
-        $flag = Cookie::queue($name, null, -3600);
-        return $flag;
     }
 }

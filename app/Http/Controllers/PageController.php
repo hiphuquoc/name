@@ -13,6 +13,7 @@ class PageController extends Controller{
 
     public static function saleOff(){
         $language       = 'vi';
+        SettingController::settingLanguage($language);
         $viewBy         = request()->cookie('view_by') ?? 'set';
         /* thông tin Page */
         $item           = Page::select('*')
@@ -43,6 +44,7 @@ class PageController extends Controller{
 
     public static function enSaleOff(){
         $language       = 'en';
+        SettingController::settingLanguage($language);
         $viewBy         = request()->cookie('view_by') ?? 'set';
         /* thông tin Page */
         $item           = Page::select('*')
@@ -75,6 +77,7 @@ class PageController extends Controller{
         $keySearch      = $request->get('key_search') ?? null;
         $keySearch      = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
         $language       = 'vi';
+        SettingController::settingLanguage($language);
         $viewBy         = request()->cookie('view_by') ?? 'set';
         /* thông tin Page */
         $pathUrl        = substr(parse_url(url()->current())['path'], 1);
@@ -106,6 +109,7 @@ class PageController extends Controller{
         $keySearch      = $request->get('key_search') ?? null;
         $keySearch      = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
         $language       = 'en';
+        SettingController::settingLanguage($language);
         $viewBy         = request()->cookie('view_by') ?? 'set';
         /* thông tin Page */
         $pathUrl        = substr(parse_url(url()->current())['path'], 1);

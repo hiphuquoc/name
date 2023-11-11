@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic;
 use App\Models\District;
 use App\Models\Product;
@@ -157,6 +159,13 @@ class AjaxController extends Controller {
         return json_encode($result);
     }
 
+    public function settingViewBy(Request $request){
+        if(!empty($request->get('view_by'))){
+            Cookie::queue('view_by', $request->get('view_by'), 3600);
+        }
+        return redirect()->back()->withInput();
+    }
+
     public static function loadImageFromGoogleCloud(Request $request){
         $response               = '';
         if(!empty($request->get('url_google_cloud'))){
@@ -178,54 +187,78 @@ class AjaxController extends Controller {
         echo $response;
     }
 
-    public static function loadImageWithResize(Request $request){
-        $response       = '';
-        if(!empty($request->get('url_image'))){
-            $resize     = $request->get('resize') ?? 400;
-            $response   = \App\Helpers\Image::streamResizedImage($request->get('url_image'), $resize);
+    // public static function loadImageWithResize(Request $request){
+    //     $response       = '';
+    //     if(!empty($request->get('url_image'))){
+    //         $resize     = $request->get('resize') ?? 400;
+    //         $response   = \App\Helpers\Image::streamResizedImage($request->get('url_image'), $resize);
+    //     }
+    //     echo $response;
+    // }
+
+    public static function loadImageSource(Request $request){
+        $response       = null;
+        if(!empty($request->get('order_code'))&&!empty($request->get('file_name'))){
+            $fileName   = $request->get('file_name');
+            $codeOrder  = $request->get('order_code');
+            /* kiểm tra xem có được phép tải không */
+            $flag   = self::checkShowSource($fileName, $codeOrder);
+            if($flag==true){
+                /* tiến hành tải bản xem trước ra */
+                $contentImage   = Storage::disk('gcs')->get(config('main.google_cloud_storage.sources').'/'.$fileName);
+                $thumbnail      = ImageManagerStatic::make($contentImage)->encode();
+                $response       = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
+            }
         }
         echo $response;
     }
 
-    public static function loadImageSource(Request $request){
-        $result = '';
-        if(!empty($request->get('order_code'))&&!empty($request->get('wallpaper_info_id'))){
-            $idWallpaper    = $request->get('wallpaper_info_id');
-            /* lấy từ order code để chống bug dò wallpaper */
+    public static function downloadImageSource(Request $request){
+        if (!empty($request->get('order_code')) && !empty($request->get('file_name'))) {
+            $fileName = $request->get('file_name');
+            $codeOrder = $request->get('order_code');
+    
+            // Kiểm tra xem có được phép tải không
+            $flag = self::checkShowSource($fileName, $codeOrder);
+
+            if ($flag == true) {
+                $urlImage       = config('main.google_cloud_storage.default_domain').config('main.google_cloud_storage.sources').$fileName;
+                return response()->json([
+                    'file_name' => pathinfo($urlImage)['filename'],
+                    'url'       => $urlImage
+                ]);
+            }
+        }
+    }
+
+    private static function checkShowSource($fileName, $codeOrder){
+        $flag = false;
+        if(!empty($fileName)&&!empty($codeOrder)){
+            /* kiểm tra xem source có nằm trong đơn hàng không mới cho phép tải */
             $infoOrder      = \App\Models\Order::select('*')
-                                ->where('code', $request->get('order_code'))
+                                ->where('code', $codeOrder)
+                                ->with('products.infoPrice.wallpapers.infoWallpaper')
                                 ->first();
-            $infoWallpaper  = new \Illuminate\Database\Eloquent\Collection;
-            foreach($infoOrder->products as $product){
-                if(empty($product->infoPrice)){
-                    /* trường hợp all => duyệt qua tìm source cần tải */
-                    foreach($product->infoProduct->prices as $price){
-                        foreach($price->wallpapers as $wallpaper){
-                            if($idWallpaper==$wallpaper->infoWallpaper->id) {
-                                $infoWallpaper = $wallpaper->infoWallpaper;
-                                break;
+            $arrayWallpaperFileName = [];
+            if(!empty($infoOrder)){
+                /* lấy tất cả wallpaper có trong đơn hàng (lọc all) */
+                foreach($infoOrder->products as $product){
+                    if($product->product_price_id=='all'){
+                        foreach($product->infoProduct->prices as $price){
+                            foreach($price->wallpapers as $wallpaper){
+                                $arrayWallpaperFileName[] = $wallpaper->infoWallpaper->file_name;
                             }
                         }
-                    }
-                }else {
-                    /* trường hợp có product_price_id */
-                    foreach($product->infoPrice->wallpapers as $wallpaper){
-                        if($idWallpaper==$wallpaper->infoWallpaper->id) {
-                            $infoWallpaper = $wallpaper->infoWallpaper;
-                            break;
+                    }else {
+                        foreach($product->infoPrice->wallpapers as $wallpaper){
+                            $arrayWallpaperFileName[] = $wallpaper->infoWallpaper->file_name;
                         }
                     }
                 }
             }
-            dd($infoWallpaper);
+            /* kiểm tra xem có được phép tải không */
+            $flag = in_array($fileName, $arrayWallpaperFileName);
         }
-        echo $result;
-    }
-
-    public function settingViewBy(Request $request){
-        if(!empty($request->get('view_by'))){
-            Cookie::queue('view_by', $request->get('view_by'), 3600);
-        }
-        return redirect()->back()->withInput();
+        return $flag;
     }
 }

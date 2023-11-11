@@ -83,10 +83,11 @@
         transition: all 0.2s;
         background: $colorBackgroundLv2;
         border-radius: 10px;
-        border: 1px solid $colorBackgroundLv1;
+        border: 2px solid $colorBackgroundLv1;
+        overflow: hidden;
         &.alreadyDownload {
             box-shadow: 10px 10px 30px -25px $colorSuccess;
-            border: 1px solid #00bd7d99;
+            border: 2px solid #00bd7d99;
             
         }
         &:not(:nth-child(5n + 1)){
@@ -136,11 +137,11 @@
         &_background {
             border-radius: 10px;
             display: none;
-            width: calc(100% - 2px);
-            height: calc(100% - 2px);
+            width: calc(100% - 4px);
+            height: calc(100% - 4px);
             position: absolute;
-            top: 1px;
-            left: 1px;
+            top: 2px;
+            left: 2px;
             background: rgba(0,0,0,0.8);
         }
         &:hover {
@@ -274,41 +275,31 @@
         flex-direction: column;
         border-left: 1px solid $colorBackgroundLv1;
         &_item {
-            display: flex;
-            align-items: flex-end;
             &:not(:first-child){
                 margin-top: 0.5rem;
                 padding-top: 0.5rem;
                 border-top: 1px dashed $colorBackgroundLv1;
                 
             }
-            table {
-                tbody {
-                    td {
-                        padding-top: 0.5rem;
-                        a {
-                            display: flex;
-                            align-items: flex-start;
-                            > * {
-                                &:not(:first-child){
-                                    margin-left: 0.75rem;
-                                }
-                            }
-                            &:hover {
-                                color: $colorSuccess;
-                            }
-                        }
-                        img {
-                            width: 20px;
-                        }
-                    }
-
+            > * {
+                &:not(:first-child){
+                    margin-top: 0.25rem;
+                }
+            }
+            ul {
+                margin-bottom: 0;
+                li {
+                    
                 }
             }
         }
     }
     .highLight {
         margin: 0 0.5rem;
+        font-family: $fontTitle;
+        color: $colorLv1;
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
     }
     .price {
         padding: 0 0.5rem;

@@ -20,7 +20,8 @@ class Order extends Model {
         'email',
         'note',
         'trans_id',
-        'payment_status'
+        'payment_status',
+        'payment_type'
     ];
     public $timestamps = true;
 

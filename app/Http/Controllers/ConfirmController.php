@@ -9,20 +9,21 @@ use App\Models\Order;
 use App\Models\SourceFile;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
 use App\Jobs\SendEmailOrder;
+use Illuminate\Support\Facades\Cookie;
 
 class ConfirmController extends Controller {
 
     public static function confirm(Request $request){
         $item       = new \Illuminate\Database\Eloquent\Collection;
         $code       = $request->get('code') ?? 0;
-
-        $code       = 'NKUD0FZR29IQ5T3';
+        $code       = 'XJ1ZABVIS287W4Y';
         $order      = Order::select('*')
                         ->where('code', $code)
                         ->with('products.infoPrice', 'products.infoProduct')
                         ->first();
+        $language   = session('language') ?? 'vi';
         if(!empty($order)&&$order->payment_status==1){
-            return view('wallpaper.confirm.index', compact('item', 'order'));
+            return view('wallpaper.confirm.index', compact('item', 'order', 'language'));
         }
         return redirect()->route('main.home');
     }
@@ -74,6 +75,30 @@ class ConfirmController extends Controller {
                     /* chuyển hướng sang trang nhận ảnh */
                     return redirect()->route('main.confirm', ['code' => $code]);
                 }
+            }
+        }
+        /* thanh toán không thành công */
+        return redirect()->route('main.home');
+    }
+
+    public static function handlePaymentPaypal(Request $request){
+        if(!empty($request->get('code'))&&!empty($request->get('PayerID'))){
+            /* lấy thông tin của Order trong CSDL */
+            $code           = $request->get('code');
+            $orderInfo      = Order::select('*')
+                                ->where('code', $code)
+                                ->first();
+            $flagPayment    = false;
+            /* cập nhật trans_id (id thanh toán của zalopay) */
+            $transId        = $request->get('PayerID');
+            Order::updateItem($orderInfo->id, ['trans_id' => $transId]);
+            /* nếu đã thanh toán thành công */
+            $flagPayment = true;
+            /* xử lý sau khi đã thanh toán thành công */
+            if($flagPayment==true) {
+                self::handleAfterPayment($orderInfo);
+                /* chuyển hướng sang trang nhận ảnh */
+                return redirect()->route('main.confirm', ['code' => $code]);
             }
         }
         /* thanh toán không thành công */

@@ -7,11 +7,6 @@
             break;
         }
     }
-    // $wallpaperStyle = \App\Models\Brand::select('brand_info.*')
-    //                     ->join('seo', 'seo.id', '=', 'brand_info.seo_id')
-    //                     ->orderBy('seo.ordering', 'DESC')
-    //                     ->with('seo')
-    //                     ->get();
     $policies                   = \App\Models\Page::select('*')
                                     ->join('seo', 'seo.id', '=', 'page_info.seo_id')
                                     ->whereHas('type', function($query){
@@ -137,7 +132,11 @@
 
 <div class="socialBox">
     <div class="socialBox_title">
-        Kết nối với chúng tôi
+        @if($language=='vi')
+            Kết nối với chúng tôi
+        @else 
+            Connect with us
+        @endif
     </div>
     <div class="socialBox_box">
         <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_box_item" target="_blank">
