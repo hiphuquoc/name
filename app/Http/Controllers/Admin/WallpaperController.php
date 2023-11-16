@@ -40,6 +40,8 @@ class WallpaperController extends Controller {
     }
 
     public function loadFormUploadSourceAndWallpaper(Request $request){
+        set_time_limit(0);
+        
         $xhtml = '';
         if(!empty($request->get('data_id'))){
             foreach($request->get('data_id') as $idBox){
@@ -54,7 +56,7 @@ class WallpaperController extends Controller {
             DB::beginTransaction();
             if (!empty($request->file('wallpapers')) && !empty($request->file('sources')) && count($request->file('wallpapers')) == count($request->file('sources'))){
                 set_time_limit(0);
-                
+
                 $wallpapers     = $request->file('wallpapers');
                 $sources        = $request->file('sources');
                 $arrayId        = [];
