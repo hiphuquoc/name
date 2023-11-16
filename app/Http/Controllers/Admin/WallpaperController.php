@@ -53,6 +53,8 @@ class WallpaperController extends Controller {
         try {
             DB::beginTransaction();
             if (!empty($request->file('wallpapers')) && !empty($request->file('sources')) && count($request->file('wallpapers')) == count($request->file('sources'))){
+                set_time_limit(0);
+                
                 $wallpapers     = $request->file('wallpapers');
                 $sources        = $request->file('sources');
                 $arrayId        = [];
