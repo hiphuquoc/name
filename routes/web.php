@@ -27,7 +27,7 @@ use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\StyleController;
-use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\CategoryBlogController;
 use App\Http\Controllers\Admin\BlogController;
@@ -188,11 +188,11 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/update', [StyleController::class, 'update'])->name('admin.style.update');
         });
         /* brand */
-        Route::prefix('brand')->group(function(){
-            Route::get('/list', [BrandController::class, 'list'])->name('admin.brand.list');
-            Route::get('/view', [BrandController::class, 'view'])->name('admin.brand.view');
-            Route::post('/create', [BrandController::class, 'create'])->name('admin.brand.create');
-            Route::post('/update', [BrandController::class, 'update'])->name('admin.brand.update');
+        Route::prefix('event')->group(function(){
+            Route::get('/list', [EventController::class, 'list'])->name('admin.event.list');
+            Route::get('/view', [EventController::class, 'view'])->name('admin.event.view');
+            Route::post('/create', [EventController::class, 'create'])->name('admin.event.create');
+            Route::post('/update', [EventController::class, 'update'])->name('admin.event.update');
         });
         /* page */
         Route::prefix('page')->group(function(){

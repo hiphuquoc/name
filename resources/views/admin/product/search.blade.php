@@ -6,17 +6,17 @@
                 <button class="btn btn-primary waves-effect" id="button-addon2" type="submit" aria-label="Tìm">Tìm</button>
             </div>
         </div>
-        @if(!empty($brands))
+        @if(!empty($events))
             <div class="searchBox_item">
                 <div class="position-relative">
-                    <select class="form-select select2 select2-hidden-accessible" name="search_brand" onchange="submitForm('formSearch');" aria-hidden="true">
-                        <option value="0">- Tìm theo Nhãn hàng -</option>
-                        @foreach($brands as $brand)
+                    <select class="form-select select2 select2-hidden-accessible" name="search_event" onchange="submitForm('formSearch');" aria-hidden="true">
+                        <option value="0">- Tìm theo Sự kiện -</option>
+                        @foreach($events as $event)
                             @php
                                 $selected = null;
-                                if(!empty($params['search_brand'])&&$params['search_brand']==$brand->id) $selected = ' selected';
+                                if(!empty($params['search_event'])&&$params['search_event']==$event->id) $selected = ' selected';
                             @endphp
-                            <option value="{{ $brand->id }}" {{ $selected }}>{{ $brand->name }}</option>
+                            <option value="{{ $event->id }}" {{ $selected }}>{{ $event->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -26,7 +26,7 @@
             <div class="searchBox_item">
                 <div class="position-relative">
                     <select class="form-select select2 select2-hidden-accessible" name="search_category" onchange="submitForm('formSearch');" aria-hidden="true">
-                        <option value="0">- Tìm theo Danh mục -</option>
+                        <option value="0">- Tìm theo Chủ đề -</option>
                         @foreach($categories as $category)
                             @php
                                 $selected = null;

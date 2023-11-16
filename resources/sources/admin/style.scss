@@ -1088,13 +1088,21 @@ html .content {
 //     }
 // }
 .priceProductBox {
+    display: flex;
+    flex-wrap: wrap;
     &_item {
         display: flex;
-        align-items: stretch;
+        flex-direction: column;
+        min-width: 100px;
+        width: calc(20% - 0.4rem);
         &:not(:first-child){
+            margin-left: 0.5rem;
+        }
+        &:nth-child(5n +1){
+            margin-left: 0;
+        }
+        &:nth-child(n + 6){
             margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            border-top: 1px dashed $bg-06;
         }
         &_image {
             flex: 0 0 50px;
@@ -1105,20 +1113,52 @@ html .content {
             &_count {
                 position: absolute;
                 top: 0;
-                right: 0;
-                width: 25px;
-                aspect-ratio: 1/1;
+                left: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-radius: 50%;
-                background: rgba(0,0,0,0.5);
+                background: rgba(0,0,0,0.4);
                 color: #fff;
+                padding: 0 0.25rem;
+                border-radius: 7px 0;
+                height: 30px;
+                font-size: 0.9rem !important;
+                i {
+                    color: #fff !important;
+                    margin-left: 0.1rem;
+                    font-size: 0.85rem !important;
+                }
+            }
+            &_price {
+                position: absolute;
+                top: 0;
+                right: 0;
+                aspect-ratio: 1/1;
                 font-size: 0.8rem;
+                background: red;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                height: 28px;
+                line-height: 28px;
+                min-width: 60px;
+                border-radius: 0 7px;
+                // i {
+                //     color: #fff !important;
+                //     margin-right: 0.25rem !important;
+                //     font-size: 0.8rem !important;
+                //     width: unset !important;
+                //     text-align: left !important;
+                //     aspect-ratio: 1/1;
+                //     margin-top: 0.35rem;
+                // }
             }
         }
         &_content {
-            margin-left: 0.75rem;
+            // margin-left: 0.75rem;
+            text-align: center;
         }
     }
 }

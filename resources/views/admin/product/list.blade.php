@@ -3,7 +3,7 @@
 
 <div class="titlePage">Danh sách yêu cầu</div>
 
-@include('admin.product.search', compact('list', 'brands', 'categories'))
+@include('admin.product.search', compact('list', 'events', 'categories'))
 
 <div class="card">
     <!-- ===== Table ===== -->
@@ -13,7 +13,7 @@
                 <tr>
                     <th style="width:60px;"></th>
                     <th class="text-center">Thông tin</th>
-                    <th class="text-center" style="width:320px;">Giá</th>
+                    <th class="text-center" width="800px">Wallpapers</th>
                     <th class="text-center" width="60px">-</th>
                 </tr>
             </thead>
@@ -29,6 +29,9 @@
                                 <div class="oneLine">
                                     <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
                                 </div>
+                                <div class="oneLine">
+                                    <strong>Giá trọn bộ:</strong> <span style="color:red;font-weight:bold;font-size:1.3rem;">{{ $item->price }}{!! config('main.currency_unit_en') !!}</span>
+                                </div>
                                 @if(!empty($item->categories))
                                     <div class="onLine" style="margin-top:0.25rem;">
                                         @php
@@ -37,33 +40,50 @@
                                                 $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
                                             }
                                         @endphp 
-                                        <strong>Danh mục:</strong> {!! $xhtmlCategory !!}
+                                        <strong>Chủ đề:</strong> {!! $xhtmlCategory !!}
                                     </div>
                                 @endif
-                                <div class="onLine" style="margin-top:0.25rem;">
-                                    <strong>Nhãn hàng:</strong> <div class="badge bg-success">{{ $item->brand->name }}</div>
-                                </div>
+                                @if(!empty($item->events))
+                                    <div class="onLine" style="margin-top:0.25rem;">
+                                        @php
+                                            $xhtmlCategory          = null;
+                                            foreach($item->categories as $category){
+                                                $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                            }
+                                        @endphp 
+                                        <strong>Sự kiện:</strong> {!! $xhtmlCategory !!}
+                                    </div>
+                                @endif
+                                @if(!empty($item->styles))
+                                    <div class="onLine" style="margin-top:0.25rem;">
+                                        @php
+                                            $xhtmlCategory          = null;
+                                            foreach($item->categories as $category){
+                                                $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                            }
+                                        @endphp 
+                                        <strong>Phong cách:</strong> {!! $xhtmlCategory !!}
+                                    </div>
+                                @endif
                             </td>
                             <td>
                                 <div class="priceProductBox">
                                     @foreach($item->prices as $price)
                                         <div class="priceProductBox_item">
                                             <div class="priceProductBox_item_image">
-                                                @if(!empty($price->files[0]->file_path)&&file_exists(Storage::path($price->files[0]->file_path)))
-                                                    <img src="{{  Storage::url($price->files[0]->file_path) }}" />
-                                                    @if($price->files->count()>1)
-                                                        <div class="priceProductBox_item_image_count">{{ $price->files->count() }}</div>
-                                                    @endif
-                                                @else 
-                                                    <img src="{{  config('image.default') }}" />
+                                                @php
+                                                    /* lấy ảnh Small */
+                                                    $imageSmall  = \App\Helpers\Image::getUrlImageSmallByUrlImage($price->wallpapers[0]->infoWallpaper->file_url_hosting);
+                                                @endphp     
+                                                <img src="{{ $imageSmall }}" />
+                                                @if($price->wallpapers->count()>1)
+                                                    <div class="priceProductBox_item_image_count">
+                                                        {{ $price->wallpapers->count() }}<i class="fa-regular fa-image"></i>
+                                                    </div>
                                                 @endif
-                                            </div>
-                                            <div class="priceProductBox_item_content">
-                                                <div><span class="highLight">{{ number_format($price->price) }}</span> /{{ $price->name }}</div>
-                                                <div>Lợi nhuận: <b>{{ number_format($price->price - $price->price_origin) }}</b></div>
-                                                @if(!empty($price->sale_off))
-                                                    <div>Khuyến mãi <span class="saleOff">-{{ $price->sale_off }}%</span></div>
-                                                @endif
+                                                <div class="priceProductBox_item_image_price">
+                                                    {{ number_format($price->price) }}{!! config('main.currency_unit_en') !!}
+                                                </div>
                                             </div>
                                         </div>
                                     @endforeach

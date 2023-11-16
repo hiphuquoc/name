@@ -110,7 +110,7 @@ class Category extends Model {
         return $this->hasMany(\App\Models\RelationCategoryProduct::class, 'category_info_id', 'id');
     }
 
-    public function categoryBlogs(){
+    public function blogs(){
         return $this->hasMany(\App\Models\RelationCategoryInfoCategoryBlogInfo::class, 'category_info_id', 'id');
     }
 }

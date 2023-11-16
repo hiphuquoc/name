@@ -39,8 +39,8 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '5. Nhãn hàng',
-                    'route' => 'admin.brand.list',
+                    'name'  => '5. Sự kiện',
+                    'route' => 'admin.event.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]

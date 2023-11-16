@@ -1,10 +1,10 @@
 @php
-    $titlePage      = 'Thêm Category mới';
-    $submit         = 'admin.brand.create';
+    $titlePage      = 'Thêm Event mới';
+    $submit         = 'admin.event.create';
     $checkImage     = 'required';
     if(!empty($type)&&$type=='edit'){
-        $titlePage  = 'Chỉnh sửa Category';
-        $submit     = 'admin.brand.update';
+        $titlePage  = 'Chỉnh sửa Event';
+        $submit     = 'admin.event.update';
         $checkImage = null;
     }
 @endphp
@@ -36,7 +36,7 @@
                         </div>
                         <div class="card-body">
 
-                            @include('admin.brand.formPage')
+                            @include('admin.event.formPage')
 
                         </div>
                     </div>
@@ -53,6 +53,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="pageAdminWithRightSidebar_main_content_item width100">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <h4 class="card-title">
+                                Nội dung
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            @include('admin.form.formContent')
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- END:: Main content -->
 
@@ -60,7 +72,7 @@
             <div class="pageAdminWithRightSidebar_main_rightSidebar">
                 <!-- Button Save -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
-                    <a href="{{ route('admin.brand.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
+                    <a href="{{ route('admin.event.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
                     <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;" aria-label="Lưu">Lưu</button>
                 </div>
                 <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top: 1px dashed #adb5bd;">
@@ -72,10 +84,10 @@
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                         @include('admin.form.formSlider')
                     </div>
-                    {{-- <!-- Form Gallery -->
+                    <!-- Form Gallery -->
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
-                        @include('admin.form.formGallery')
-                    </div> --}}
+                        @include('admin.form.formIcon')
+                    </div>
                 </div>
             </div>
             <!-- END:: Sidebar content -->

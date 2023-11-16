@@ -15,7 +15,7 @@ use App\Models\EnSeo;
 use App\Models\RelationSeoEnSeo;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Brand;
+use App\Models\Event;
 use App\Models\ProductContent;
 use App\Models\ProductPrice;
 use App\Models\RelationCategoryProduct;
@@ -240,17 +240,17 @@ class ProductController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'product_info');
                                 }])
-                                ->with('seo', 'en_seo', 'contents', 'prices.wallpapers.infoWallpaper', 'categories', 'brand')
+                                ->with('seo', 'en_seo', 'contents', 'prices.wallpapers.infoWallpaper', 'categories', 'events')
                                 ->first();
         $categories         = Category::all();
-        $brands             = Brand::all();
+        $events             = Event::all();
         $parents            = $categories;
         $wallpapers         = Wallpaper::select('*')
                                 ->get();
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.product.view', compact('item', 'wallpapers', 'type', 'categories', 'brands', 'parents', 'message'));
+        return view('admin.product.view', compact('item', 'wallpapers', 'type', 'categories', 'events', 'parents', 'message'));
     }
 
     public static function list(Request $request){
@@ -258,21 +258,21 @@ class ProductController extends Controller {
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         /* Search theo nhãn hàng */
-        if(!empty($request->get('search_brand'))) $params['search_brand'] = $request->get('search_brand');
+        if(!empty($request->get('search_event'))) $params['search_event'] = $request->get('search_event');
         /* Search theo danh mục */
         if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
         /* paginate */
         $viewPerPage        = Cookie::get('viewProductInfo') ?? 20;
         $params['paginate'] = $viewPerPage;
         $list               = Product::getList($params);
-        $brands             = Brand::all();
+        $events             = Event::all();
         $categories         = Category::select('*')
                                 ->whereHas('products', function(){
                                     /* có sản phẩm mới lấy ra */
                                 })
                                 ->with('products')
                                 ->get();
-        return view('admin.product.list', compact('list', 'brands', 'categories', 'viewPerPage', 'params'));
+        return view('admin.product.list', compact('list', 'events', 'categories', 'viewPerPage', 'params'));
     }
 
     public function delete(Request $request){

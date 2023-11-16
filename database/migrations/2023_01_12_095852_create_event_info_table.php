@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('category_info', function (Blueprint $table) {
-            $table->text('en_name');
-            $table->text('en_description')->nullable();
+        Schema::create('event_info', function (Blueprint $table) {
+            $table->id();
+            $table->integer('seo_id');
+            $table->text('name');
+            $table->text('description')->nullable();
+            $table->text('icon')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::table('category_info', function (Blueprint $table) {
-        //     //
-        // });
+        // Schema::dropIfExists('event_info');
     }
 };

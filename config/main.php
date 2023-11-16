@@ -47,9 +47,14 @@ return [
         'contentPage'       => 'public/contents/pages/',
         'contentBlog'       => 'public/contents/blogs/',
         'contentCategory'   => 'public/contents/categories/',
-        'contentStyle'      => 'public/contents/styles/',
         'enContentCategory' => 'public/contents/enCategories/',
+
+        'contentStyle'      => 'public/contents/styles/',
         'enContentPage'     => 'public/contents/enPages/',
+
+        'contentEvent'      => 'public/contents/events/',
+        'enContentEvent'    => 'public/contents/enEvents/',
+        
     ],
     'google_cloud_storage' => [
         'default_domain'    => 'https://'.env('GOOGLE_CLOUD_STORAGE_BUCKET').'.storage.googleapis.com/',

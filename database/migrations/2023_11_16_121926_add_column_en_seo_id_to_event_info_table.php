@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('category_info', function (Blueprint $table) {
-            $table->text('en_name');
-            $table->text('en_description')->nullable();
+        Schema::table('event_info', function (Blueprint $table) {
+            $table->integer('en_seo_id');
         });
     }
 
@@ -26,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::table('category_info', function (Blueprint $table) {
+        // Schema::table('event_info', function (Blueprint $table) {
         //     //
         // });
     }

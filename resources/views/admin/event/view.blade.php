@@ -2,10 +2,10 @@
 @section('content')
 
     {{-- <div class="titlePage">Danh sách yêu cầu</div>
-    @include('admin.brand.search')
-    @include('admin.brand.test', compact('list')) --}}
+    @include('admin.event.search')
+    @include('admin.event.test', compact('list')) --}}
 
-    @include('admin.brand.contentView')
+    @include('admin.event.contentView')
     
 @endsection
 @push('scripts-custom')

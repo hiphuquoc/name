@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 
-class BrandRequest extends FormRequest
+class EventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,22 +34,41 @@ class BrandRequest extends FormRequest
             'slug'                      => [
                 'required',
                 function($attribute, $value, $fail){
-                    $slug           = !empty(request('slug')) ? request('slug') : null;
-                    if(!empty($slug)){
-                        $flag       = false;
-                        $dataCheck  = DB::table('seo')
-                                        ->join('brand_info', 'brand_info.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'brand_info.id')
-                                        ->where('slug', $slug)
-                                        ->first();
-                        if(!empty($dataCheck)){
-                            if(empty(request('brand_info_id'))){
+                    $slug = !empty(request('slug')) ? request('slug') : null;
+                    if (!empty($slug)) {
+                        $flag = false;
+                
+                        // Kiểm tra trong bảng event_info
+                        $dataCheckEvent = DB::table('seo')
+                            ->join('event_info', 'event_info.seo_id', '=', 'seo.id')
+                            ->select('seo.slug', 'event_info.id')
+                            ->where('slug', $slug)
+                            ->first();
+                
+                        // Kiểm tra trong bảng category_info
+                        $dataCheckCategory = DB::table('seo')
+                            ->join('category_info', 'category_info.seo_id', '=', 'seo.id')
+                            ->select('seo.slug', 'category_info.id')
+                            ->where('slug', $slug)
+                            ->first();
+                
+                        // Kiểm tra trong bảng style_info
+                        $dataCheckStyle = DB::table('seo')
+                            ->join('style_info', 'style_info.seo_id', '=', 'seo.id')
+                            ->select('seo.slug', 'style_info.id')
+                            ->where('slug', $slug)
+                            ->first();
+                
+                        // Kiểm tra xem có trùng trong bảng event_info không
+                        if (!empty($dataCheckEvent)&&!empty($dataCheckCategory)&&!empty($dataCheckStyle)) {
+                            if (empty(request('event_info_id'))) {
                                 $flag = true;
-                            }else {
-                                if(request('brand_info_id')!=$dataCheck->id) $flag = true;
+                            } else {
+                                if (request('event_info_id') != $dataCheckEvent->id) $flag = true;
                             }
                         }
-                        if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một trang khác trên hệ thống!');
+                
+                        if ($flag == true) $fail('Dường dẫn tĩnh đã trùng với một trang khác trên hệ thống!');
                     }
                 }
             ]
