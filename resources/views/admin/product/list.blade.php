@@ -73,7 +73,8 @@
                                             <div class="priceProductBox_item_image">
                                                 @php
                                                     /* lấy ảnh Small */
-                                                    $imageSmall  = \App\Helpers\Image::getUrlImageSmallByUrlImage($price->wallpapers[0]->infoWallpaper->file_url_hosting);
+                                                    $imageSmall = config('image.default');
+                                                    if(!empty($price->wallpapers[0]->infoWallpaper->file_url_hosting)) $imageSmall  = \App\Helpers\Image::getUrlImageSmallByUrlImage($price->wallpapers[0]->infoWallpaper->file_url_hosting);
                                                 @endphp     
                                                 <img src="{{ $imageSmall }}" />
                                                 @if($price->wallpapers->count()>1)

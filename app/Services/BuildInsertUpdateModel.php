@@ -99,7 +99,6 @@ class BuildInsertUpdateModel {
 
     public static function buildArrayTableProductInfo($dataForm, $seoId, $enSeoId){
         $result                                 = [];
-        $result['brand_id']                     = $dataForm['brand'];
         $result['code']                         = $dataForm['code'];
         $result['seo_id']                       = $seoId;
         $result['name']                         = $dataForm['name'];
