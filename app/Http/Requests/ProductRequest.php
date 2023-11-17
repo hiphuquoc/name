@@ -34,7 +34,7 @@ class ProductRequest extends FormRequest
             'rating_aggregate_star'     => 'required',
             'prices'                    => 'required',
             'categories'                => 'required',
-            'brand'                     => 'required',
+            // 'brand'                     => 'required',
             // 'title_all'                 => 'required',
             // 'price_all'                 => 'required',
             'slug'                      => [
@@ -74,7 +74,7 @@ class ProductRequest extends FormRequest
             'rating_aggregate_star.required'    => 'Số sao không được để trống!',
             'prices.required'                   => 'Giá bán không được để trống!',
             'categories.required'               => 'Danh mục không được để trống!',
-            'brand.required'                    => 'Nhãn hàng không được để trống!',
+            // 'brand.required'                    => 'Nhãn hàng không được để trống!',
             // 'title_all.required'                => 'Tiêu đề của giá tất cả không được để trống!',
             // 'price_all.required'                => 'Giá tất cả không được để trống!',
             'slug.required'                     => 'Đường dẫn tĩnh không được để trống!'

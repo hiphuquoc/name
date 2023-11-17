@@ -131,7 +131,7 @@
                 @endif
             </select>
         </div>
-        <!-- One Row -->
+        {{-- <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired" for="brand">Nhãn hàng</label>
             <select class="select2 form-select select2-hidden-accessible" id="brand" name="brand">
@@ -146,7 +146,7 @@
                     @endforeach
                 @endif
             </select>
-        </div>
+        </div> --}}
         <!-- One Row -->
         <div class="flexBox">
             <div class="flexBox_item">
