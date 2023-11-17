@@ -18,7 +18,7 @@
     </div>
     <div class="searchBox_item" style="margin-left:auto;text-align:right;">
         @php
-            $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewWallpaperInfo', [20, 50, 100, 200, 500], $viewPerPage, $list->total());
+            $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewWallpaperInfo', [20, 50, 100, 200, 500], $viewPerPage, $total);
             echo $xhtmlSettingView;
         @endphp
     </div>
@@ -142,44 +142,77 @@
             }
         }
 
+        // /* Thêm từng file vào FormData */
+                    // for (var i = 0; i < fileWallpapers.length; i++) {
+                    //     /* Tạo đối tượng FormData */
+                    //     var formData = new FormData();
+                    //     formData.append('name', inputName);
+                    //     formData.append('description', inputDesc);
+                    //     formData.append('count', i);
+                    //     /* thêm input file wallpaper */
+                    //     formData.append('files[wallpaper]', fileWallpapers[i]);
+                    //     /* thêm input file source */ 
+                    //     const inputSource = 'sources[' + i + ']';
+                    //     const fileSource  = $('input[name="' + inputSource + '"]')[0].files;
+                    //     formData.append('files[source]', fileSource[0]);
+                    //     /* xử lý */
+                    //     $.ajax({
+                    //         url: "{{ route('admin.wallpaper.uploadWallpaperWithSource') }}",
+                    //         type: "post",
+                    //         dataType: 'json',
+                    //         data: formData,
+                    //         processData: false, // Không xử lý dữ liệu gửi đi
+                    //         contentType: false, // Không thiết lập header Content-Type
+                    //         headers: {
+                    //             'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    //         },
+                    //     }).done(function (response) {
+                    //         /* prepend thêm box mới upload vào */
+                    //         var newDiv = $("<div>", {
+                    //             id: "js_deleteWallpaperAndSource_" + response.id,
+                    //             class: "wallpaperBox_item",
+                    //             html: response.content
+                    //         });
+                    //         // Thêm div mới vào đầu của container
+                    //         newDiv.prependTo("#js_uploadAndChangeWallpaperWithSource_idWrite");
+                    //         /* tắt loading và modal */
+                    //         addLoadingModal();
+                    //         $('#modalFormWallpaper').modal('hide');
+                    //     }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //         console.error("Ajax request failed: " + textStatus, errorThrown);
+                    //     });
+                    // }
+
         function uploadAndChangeWallpaperWithSource(idWallpaper = '') {
             const tmp          = validateForm('formWallpaperWithSource');
             if(tmp==''){
                 /* bật loading */
                 addLoadingModal();
-                /* lấy dữ liệu form */
-                const formData = new FormData($('#formWallpaperWithSource')[0]); // Sử dụng [0] để lấy ra DOM element thay vì jQuery object
+                /* lấy thêm các input khác */
+                var inputName       = $('#name').val();
+                var inputDesc       = $('#description').val();
                 /* upload (create) */ 
                 if(idWallpaper==''){
-                    $.ajax({
-                        url: "{{ route('admin.wallpaper.uploadWallpaperWithSource') }}",
-                        type: "post",
-                        dataType: 'json',
-                        data: formData,
-                        processData: false, // Không xử lý dữ liệu gửi đi
-                        contentType: false, // Không thiết lập header Content-Type
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                    }).done(function (response) {
-                        /* tắt loading */
-                        addLoadingModal();
-                        /* prepend thêm box mới upload vào */
-                        $.each(response, function(index, item) {
-                            var newDiv = $("<div>", {
-                                id: "js_deleteWallpaperAndSource_" + item.id,
-                                class: "wallpaperBox_item",
-                                html: item.content
-                            });
-                            // Thêm div mới vào đầu của container
-                            newDiv.prependTo("#js_uploadAndChangeWallpaperWithSource_idWrite");
+                    /* Lấy danh sách các file từ input có id là 'inputFile' */
+                    var fileWallpapers  = $('#wallpapers')[0].files;
+                    // Sử dụng Promise đã tạo
+                    uploadWallpaperWithSource(inputName, inputDesc, fileWallpapers)
+                        .then(function () {
+                            // Tất cả các công việc đã hoàn thành, thực hiện các hành động cần thiết sau đó
+                            addLoadingModal();
+                            $('#modalFormWallpaper').modal('hide');
+                        })
+                        .catch(function () {
+                            // Xử lý khi có lỗi
                         });
-                        /* tắt modal */
-                        $('#modalFormWallpaper').modal('hide');
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error("Ajax request failed: " + textStatus, errorThrown);
-                    });
                 }else {
+                    var formData        = new FormData();
+                    formData.append('name', inputName);
+                    formData.append('description', inputDesc);
+                    const fileWallpaper = $('input[name="wallpapers[0]"]')[0].files;
+                    formData.append('files[wallpaper]', fileWallpaper[0]);
+                    const fileSource    = $('input[name="sources[0]"]')[0].files;
+                    formData.append('files[source]', fileSource[0]);
                     /* truyền thêm wallpaper_id */
                     formData.append('wallpaper_id', idWallpaper);
                     $.ajax({
@@ -192,11 +225,10 @@
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
                     }).done(function (response) {
-                        /* tắt loading */
-                        addLoadingModal();
                         /* load lại box */
                         loadOneRow(idWallpaper);
-                        /* tắt modal */
+                        /* tắt modal và loading */
+                        addLoadingModal();
                         $('#modalFormWallpaper').modal('hide');
                     }).fail(function (jqXHR, textStatus, errorThrown) {
                         console.error("Ajax request failed: " + textStatus, errorThrown);
@@ -231,6 +263,60 @@
                 })
                 $('#js_validateFormModalHotelContact_message').css('display', 'block').html(messageError);
             }
+        }
+
+        function uploadWallpaperWithSource(inputName, inputDesc, fileWallpapers) {
+            return new Promise(function (resolve, reject) {
+                // Mảng chứa tất cả các promises từ các request AJAX
+                var promises = [];
+                for (var i = 0; i < fileWallpapers.length; i++) {
+                    var formData = new FormData();
+                    formData.append('name', inputName);
+                    formData.append('description', inputDesc);
+                    formData.append('count', i);
+                    formData.append('files[wallpaper]', fileWallpapers[i]);
+                    
+                    const inputSource = 'sources[' + i + ']';
+                    const fileSource  = $('input[name="' + inputSource + '"]')[0].files;
+                    formData.append('files[source]', fileSource[0]);
+                    // Thực hiện request AJAX và đưa promise vào mảng
+                    promises.push(
+                        $.ajax({
+                            url: "{{ route('admin.wallpaper.uploadWallpaperWithSource') }}",
+                            type: "post",
+                            dataType: 'json',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                        })
+                    );
+                }
+                // Khi tất cả các promises đã hoàn thành, resolve Promise chính
+                Promise.all(promises)
+                    .then(function (responses) {
+                        // Các responses chứa kết quả từ mỗi request AJAX
+                        responses.forEach(function (response) {
+                            // Thêm box mới upload vào
+                            var newDiv = $("<div>", {
+                                id: "js_deleteWallpaperAndSource_" + response.id,
+                                class: "wallpaperBox_item",
+                                html: response.content
+                            });
+                            // Thêm div mới vào đầu của container
+                            newDiv.prependTo("#js_uploadAndChangeWallpaperWithSource_idWrite");
+                        });
+                        // Gọi resolve để kết thúc Promise
+                        resolve();
+                    })
+                    .catch(function (error) {
+                        console.error("One or more AJAX requests failed:", error);
+                        // Gọi reject để kết thúc Promise với lỗi
+                        reject();
+                    });
+            });
         }
 
         function validateForm(idForm) {
