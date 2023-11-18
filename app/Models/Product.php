@@ -97,6 +97,10 @@ class Product extends Model {
     }
 
     public function events(){
-        return $this->hasMany(\App\Models\RelationEventProduct::class, 'id', 'event_id');
+        return $this->hasMany(\App\Models\RelationEventProduct::class, 'product_info_id', 'id');
+    }
+
+    public function styles(){
+        return $this->hasMany(\App\Models\RelationStyleProduct::class, 'product_info_id', 'id');
     }
 }

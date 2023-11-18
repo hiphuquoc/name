@@ -131,22 +131,29 @@
                 @endif
             </select>
         </div>
-        {{-- <!-- One Row -->
+        <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="brand">Nhãn hàng</label>
-            <select class="select2 form-select select2-hidden-accessible" id="brand" name="brand">
+            <label class="form-label" for="events">Sự kiện</label>
+            <select class="select2 form-select select2-hidden-accessible" id="events" name="events[]" multiple="true">
                 <option value="">- Lựa chọn -</option>
-                @if(!empty($brands))
-                    @foreach($brands as $brand)
+                @if(!empty($events))
+                    @foreach($events as $event)
                         @php
                             $selected   = null;
-                            if(!empty($item->brand)&&$item->brand->id==$brand->id) $selected = ' selected';
+                            if(!empty($item->events)){
+                                foreach($item->events as $e) {
+                                    if(!empty($e->infoEvent->id)&&$e->infoEvent->id==$event->id) {
+                                        $selected = ' selected';
+                                        break;
+                                    }
+                                }
+                            }
                         @endphp
-                        <option value="{{ $brand->id }}"{{ $selected }}>{{ $brand->name }}</option>
+                        <option value="{{ $event->id }}"{{ $selected }}>{{ $event->name }}</option>
                     @endforeach
                 @endif
             </select>
-        </div> --}}
+        </div>
         <!-- One Row -->
         <div class="flexBox">
             <div class="flexBox_item">

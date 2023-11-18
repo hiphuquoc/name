@@ -49,12 +49,13 @@ return [
         'contentCategory'   => 'public/contents/categories/',
         'enContentCategory' => 'public/contents/enCategories/',
 
-        'contentStyle'      => 'public/contents/styles/',
         'enContentPage'     => 'public/contents/enPages/',
 
         'contentEvent'      => 'public/contents/events/',
         'enContentEvent'    => 'public/contents/enEvents/',
-        
+
+        'contentStyle'      => 'public/contents/styles/',
+        'enContentStyle'    => 'public/contents/enStyles/',
     ],
     'google_cloud_storage' => [
         'default_domain'    => 'https://'.env('GOOGLE_CLOUD_STORAGE_BUCKET').'.storage.googleapis.com/',

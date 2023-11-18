@@ -31,23 +31,20 @@ class EventController extends Controller {
         $params             = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
-        $list               = Event::all();
+        $list               = Event::select('*')
+                                ->orderBy('id', 'DESC')
+                                ->get();
         return view('admin.event.list', compact('list', 'params'));
     }
 
     public static function view(Request $request){
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
-        $language           = Cookie::get('language') ?? 'vi';
         $keyTable           = 'event_info';
         $item               = Event::select('*')
                                 ->where('id', $id)
-                                ->with(['files' => function($query) use($keyTable){
-                                    $query->where('relation_table', $keyTable);
-                                }])
                                 ->with('seo', 'en_seo')
                                 ->first();
-        $idNot              = $item->id ?? 0;
         $parents            = Category::select('*')
                                 ->get();
         /* category blog */
@@ -71,7 +68,6 @@ class EventController extends Controller {
     public function create(EventRequest $request){
         try {
             DB::beginTransaction();
-            $language           = Cookie::get('language') ?? 'vi';
             $keyTable           = 'event_info';
             /* upload image */
             $dataPath           = [];
@@ -89,18 +85,11 @@ class EventController extends Controller {
                 'seo_id'    => $seoId,
                 'en_seo_id' => $enSeoId
             ]);
-            /* upload icon */
-            $iconPath           = null;
-            if($request->hasFile('icon')) {
-                $name           = !empty($request->get('slug')) ? $request->get('slug').'-icon' : time();
-                $iconPath       = Upload::uploadCustom($request->file('icon'), $name);
-            }
             /* insert event_info */
             $idEvent         = Event::insertItem([
                 'seo_id'        => $seoId,
                 'name'          => $request->get('name'),
                 'description'   => $request->get('description'),
-                'icon'          => $iconPath,
                 'en_seo_id'     => $enSeoId,
                 'en_name'       => $request->get('en_name'),
                 'en_description'=> $request->get('en_description')
@@ -109,7 +98,7 @@ class EventController extends Controller {
             if(!empty($request->get('category_blog_info_id'))){
                 foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
                     RelationEventInfoCategoryBlogInfo::insertItem([
-                        'event_info_id'      => $idEvent,
+                        'event_info_id'         => $idEvent,
                         'category_blog_info_id' => $idCategoryBlogInfo
                     ]);
                 }
@@ -162,10 +151,7 @@ class EventController extends Controller {
     public function update(EventRequest $request){
         try {
             DB::beginTransaction();
-            /* ngôn ngữ */
-            $language           = Cookie::get('language') ?? 'vi';
             $keyTable           = 'event_info';
-
             $seoId              = $request->get('seo_id');
             $enSeoId            = $request->get('en_seo_id');
             $idEvent         = $request->get('event_info_id');
@@ -193,12 +179,6 @@ class EventController extends Controller {
                 'seo_id'    => $seoId,
                 'en_seo_id' => $enSeoId
             ]);
-            /* upload icon */
-            $iconPath           = null;
-            if($request->hasFile('icon')) {
-                $name           = !empty($request->get('slug')) ? $request->get('slug').'-icon' : time();
-                $iconPath       = Upload::uploadCustom($request->file('icon'), $name);
-            }
             /* insert event_info */
             $arrayUpdate        = [
                 'seo_id'        => $seoId,
@@ -208,7 +188,6 @@ class EventController extends Controller {
                 'en_name'       => $request->get('en_name'),
                 'en_description'=> $request->get('en_description')
             ];
-            if(!empty($iconPath)) $arrayUpdate['icon'] = $iconPath;
             Event::updateItem($idEvent, $arrayUpdate);
             /* insert relation_event_info_category_blog_id */
             RelationEventInfoCategoryBlogInfo::select('*')
@@ -217,7 +196,7 @@ class EventController extends Controller {
             if(!empty($request->get('category_blog_info_id'))){
                 foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
                     RelationEventInfoCategoryBlogInfo::insertItem([
-                        'event_info_id'      => $idEvent,
+                        'event_info_id'         => $idEvent,
                         'category_blog_info_id' => $idCategoryBlogInfo
                     ]);
                 }

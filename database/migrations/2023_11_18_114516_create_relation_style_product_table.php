@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('event_info', function (Blueprint $table) {
+        Schema::create('relation_style_product', function (Blueprint $table) {
             $table->id();
-            $table->integer('seo_id');
-            $table->text('name');
-            $table->text('description')->nullable();
-            $table->timestamps();
+            $table->integer('style_info_id');
+            $table->integer('product_info_id');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('event_info');
+        // Schema::dropIfExists('relation_style_product');
     }
 };

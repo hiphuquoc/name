@@ -186,6 +186,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::get('/view', [StyleController::class, 'view'])->name('admin.style.view');
             Route::post('/create', [StyleController::class, 'create'])->name('admin.style.create');
             Route::post('/update', [StyleController::class, 'update'])->name('admin.style.update');
+            Route::get('/delete', [StyleController::class, 'delete'])->name('admin.style.delete');
         });
         /* brand */
         Route::prefix('event')->group(function(){
@@ -193,6 +194,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::get('/view', [EventController::class, 'view'])->name('admin.event.view');
             Route::post('/create', [EventController::class, 'create'])->name('admin.event.create');
             Route::post('/update', [EventController::class, 'update'])->name('admin.event.update');
+            Route::get('/delete', [EventController::class, 'delete'])->name('admin.event.delete');
         });
         /* page */
         Route::prefix('page')->group(function(){

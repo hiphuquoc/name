@@ -16,17 +16,17 @@ use App\Models\RelationSeoEnSeo;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Style;
 use App\Models\ProductContent;
 use App\Models\ProductPrice;
-use App\Models\RelationCategoryProduct;
 use App\Models\Wallpaper;
+use App\Models\RelationCategoryProduct;
+use App\Models\RelationStyleProduct;
+use App\Models\RelationEventProduct;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\GalleryController;
-use App\Http\Controllers\Admin\SourceController;
+// use App\Http\Controllers\Admin\GalleryController;
+// use App\Http\Controllers\Admin\SourceController;
 use App\Models\RelationProductPriceWallpaperInfo;
-use Yaza\LaravelGoogleDriveStorage\Gdrive;
-
-use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller {
 
@@ -76,11 +76,25 @@ class ProductController extends Controller {
                 $insertPrice    = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'insert');
                 ProductPrice::insertItem($insertPrice);
             }
-            /* danh mục sản phẩm */
+            /* chủ đề */
             foreach($request->get('categories') as $category){
                 RelationCategoryProduct::insertItem([
                     'product_info_id'   => $idProduct,
                     'category_info_id'  => $category
+                ]);
+            }
+            /* phong cách */
+            foreach($request->get('styles') as $style){
+                RelationStyleProduct::insertItem([
+                    'product_info_id'   => $idProduct,
+                    'style_info_id'     => $style
+                ]);
+            }
+            /* sự kiện */
+            foreach($request->get('events') as $event){
+                RelationEventProduct::insertItem([
+                    'product_info_id'   => $idProduct,
+                    'event_info_id'     => $event
                 ]);
             }
             /* insert slider và lưu CSDL */
@@ -194,7 +208,7 @@ class ProductController extends Controller {
                     }
                 }
             }
-            /* danh mục sản phẩm */
+            /* chủ đề */
             RelationCategoryProduct::select('*')
                                         ->where('product_info_id', $idProduct)
                                         ->delete();
@@ -202,6 +216,26 @@ class ProductController extends Controller {
                 RelationCategoryProduct::insertItem([
                     'product_info_id'   => $idProduct,
                     'category_info_id'  => $category
+                ]);
+            }
+            /* phong cách */
+            RelationStyleProduct::select('*')
+                                        ->where('product_info_id', $idProduct)
+                                        ->delete();
+            foreach($request->get('styles') as $style){
+                RelationStyleProduct::insertItem([
+                    'product_info_id'   => $idProduct,
+                    'style_info_id'     => $style
+                ]);
+            }
+            /* sự kiện */
+            RelationEventProduct::select('*')
+                                    ->where('product_info_id', $idProduct)
+                                    ->delete();
+            foreach($request->get('events') as $event){
+                RelationEventProduct::insertItem([
+                    'product_info_id'   => $idProduct,
+                    'event_info_id'     => $event
                 ]);
             }
             /* insert slider và lưu CSDL */
@@ -240,17 +274,19 @@ class ProductController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'product_info');
                                 }])
-                                ->with('seo', 'en_seo', 'contents', 'prices.wallpapers.infoWallpaper', 'categories', 'events')
+                                ->with('seo', 'en_seo', 'contents', 'prices.wallpapers.infoWallpaper', 'categories', 'events', 'styles')
                                 ->first();
         $categories         = Category::all();
         $events             = Event::all();
-        $parents            = $categories;
+        $styles             = Style::all();
+        /* gộp lại thành parents và lọc bỏ page hinh-nen-dien-thoai */
+        $parents            = $categories->merge($events)->merge($styles);
         $wallpapers         = Wallpaper::select('*')
                                 ->get();
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.product.view', compact('item', 'wallpapers', 'type', 'categories', 'events', 'parents', 'message'));
+        return view('admin.product.view', compact('item', 'wallpapers', 'type', 'categories', 'events', 'styles', 'parents', 'message'));
     }
 
     public static function list(Request $request){
@@ -277,8 +313,8 @@ class ProductController extends Controller {
 
     public function delete(Request $request){
         if(!empty($request->get('id'))){
-            // try {
-            //     DB::beginTransaction();
+            try {
+                DB::beginTransaction();
                 $id         = $request->get('id');
                 $info       = Product::select('*')
                                 ->where('id', $id)
@@ -296,18 +332,22 @@ class ProductController extends Controller {
                     $price->wallpapers()->delete();
                 });
                 $info->prices()->delete();
-                /* xóa relation_product_category */
+                /* xóa relation_category_product */
                 $info->categories()->delete();
+                /* xóa relation_style_product */
+                $info->styles()->delete();
+                /* xóa relation_event_product */
+                $info->events()->delete();
                 /* delete bảng seo của product_info */
                 $info->seo()->delete();
                 /* xóa product_info */
                 $info->delete();
-            //     DB::commit();
-            //     return true;
-            // } catch (\Exception $exception){
-            //     DB::rollBack();
-            //     return false;
-            // }
+                DB::commit();
+                return true;
+            } catch (\Exception $exception){
+                DB::rollBack();
+                return false;
+            }
         }
     }
 }

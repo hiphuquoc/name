@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('seo_id');
             $table->text('name');
             $table->text('description')->nullable();
-            $table->text('icon')->nullable();
             $table->timestamps();
         });
     }
