@@ -45,18 +45,17 @@ $fontText: "SVN-Gilroy", sans-serif;
   color: $colorText;
   font-family: $fontTitle;
   font-size: 1.2rem;
-  margin-bottom: 1rem;
-  line-height: 1.4;
+  margin-bottom: 0.75rem;
   @media(max-width: 990px){
     font-size: 1.15rem;
+    margin-bottom: 0.5rem;
   }
   @media(max-width: 766px){
     font-size: 1.1rem;
-    margin-bottom: 0.75rem;
   }
   @media(max-width: 577px){
     font-size: 1.05rem;
-   
+    margin-bottom: 0.25rem;
   }
 }
 
@@ -410,14 +409,14 @@ h4 {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  @media(max-width: 990px){
-    margin-top: 1.25rem;
-  }
-  @media(max-width: 766px){
+  @media(max-width:1024px){
     margin-top: 1rem;
   }
-  @media(max-width: 577px){
+  @media(max-width: 766px){
     margin-top: 0.75rem;
+  }
+  @media(max-width: 577px){
+    margin-top: 0.5rem;
   }
 }
 p, ul, ol {
@@ -582,7 +581,7 @@ blockquote{
 .container {
   width: 100%;
   margin: 0 auto;
-  max-width: 1300px;
+  max-width: 1400px;
   padding: 0 1.5rem;
   @media(max-width: 1199px){
     padding: 0 1.25rem;

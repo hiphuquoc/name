@@ -4,10 +4,15 @@
     margin-bottom: 2rem;
     &_left {
         width: 60%;
+        margin-top: 0.25rem;
+        display: flex;
+        flex-direction: column;
     }
     &_right {
-        margin-left: 2.5rem;
-        width: calc(40% - 2.5rem);
+        margin-left: 2rem;
+        width: calc(40% - 2rem);
+        display: flex;
+        flex-direction: column;
     }
     ul {
         margin-left: 1.25rem;
@@ -33,9 +38,8 @@
 .galleryProductBox {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 0.5rem;
     &_item {
-        width: calc(50% - 0.75rem);
+        width: calc(50% - 0.5rem);
         position: relative;
         border-radius: 35px;
         cursor: pointer;
@@ -66,10 +70,10 @@
             margin-left: 0;
         }
         &:not(:nth-child(2n + 1)){
-            margin-left: 1.5rem;
+            margin-left: 1rem;
         }
         &:nth-child(n + 3){
-            margin-top: 1.5rem;
+            margin-top: 1.25rem;
         }
     }
     &.mobile {
@@ -126,21 +130,13 @@
 }
 .productDetailBox {
     position: sticky;
-    top: calc(60px + 2rem);
+    top: calc(55px + 2rem);
     &_detail {
         &_title {
-            margin-bottom: 0.75rem;
-            font-size: 1.2rem;
-            letter-spacing: 0.5px;
-            @media(max-width: 766px){
-                font-size: 1.15rem;
-            }
-            @media(max-width: 766px){
-                font-size: 1.1rem;
-            }
+            @include titleDefault;
         }
         &_rating {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
         &_description {
             margin-bottom: 1.5rem;
@@ -361,21 +357,18 @@
     }
     @media(max-width: 1199px){
         &_detail {
-            &_rating {
-                margin-bottom: 0.75rem;
-            }
+            // &_rating {
+            //     margin-bottom: 0.5rem;
+            // }
             &_description {
-                margin-bottom: 1rem;
+                margin-bottom: 0.75rem;
             }
         }
     }
     @media(max-width: 767px){
         &_detail {
-            &_title {
-                margin-bottom: 0.5rem;
-            }
             &_rating {
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.25rem;
             }
             &_description {
                 margin-bottom: 0.5rem;
@@ -392,7 +385,8 @@
 }
 .ratingBox {
     display: flex;
-    font-size: 0.925rem;
+    font-size: 0.85rem;
+    opacity: 0.75;
     > * {
         &:not(:first-child){
             margin-left: 0.5rem;
@@ -417,7 +411,6 @@
         }
         &_box {
             display: flex;
-            font-size: 0.9rem;
             > * {
                 &:not(:first-child){
                     margin-left: 0.15rem;

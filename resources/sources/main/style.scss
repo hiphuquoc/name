@@ -124,7 +124,7 @@
 .breadcrumbBox {
     overflow: hidden;
     @include colorOpacity('color', $colorText, 0.7);
-    font-size: 0.925rem;
+    font-size: 0.9rem;
     font-weight: normal;
     a {
         color: $colorText;
@@ -408,7 +408,7 @@
     @include colorOpacity('color', $colorText, 0.7);
     margin-bottom: 0.75rem;
     margin-top: -0.25rem;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     &_left {
         // width: 100%;
     }
