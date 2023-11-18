@@ -12,7 +12,11 @@
         @include('wallpaper.product.gallery', ['prices' => $item->prices])
         <!-- giải thích thanh toán và nhận ảnh => desktop -->
         <div class="show-1199">
-            <div>Sau khi thanh toán bằng <span class="highLight">Momo /Zalopay</span>, Bạn sẽ nhận được link ảnh gốc để có thể tải xuống và sử dụng.</div>
+            @if(empty($language)||$language=='vi')
+                <div>Sau khi thanh toán bằng <span style="font-size:1.1rem;font-family:'SVN-Gilroy Bold',sans-serif;color:#f7ff93;margin-right:0.25rem;">Momo /Zalopay</span>, Bạn sẽ nhận được link ảnh gốc để có thể tải xuống và sử dụng.</div>
+            @else
+                <div>After completing the payment by <span style="font-size:1.1rem;font-family:'SVN-Gilroy Bold',sans-serif;color:#f7ff93;margin-right:0.25rem;">Paypal</span>, you will receive a link to the original image for download and use.</div>
+            @endif
         </div>
     </div>
     <div class="pageProductDetailBox_right">
@@ -101,7 +105,7 @@
                     @if(empty($language)||$language=='vi')
                         <div>Sau khi thanh toán bằng <span class="highLight">Momo /Zalopay</span>, Bạn sẽ nhận được link ảnh gốc để có thể tải xuống và sử dụng.</div>
                     @else
-                        <div>After completing the payment, you will receive a link to the original image for download and use.</div>
+                        <div>After completing the payment by <span class="highLight">Paypal</span>, you will receive a link to the original image for download and use.</div>
                     @endif
                 </div>
             </div>

@@ -19,7 +19,7 @@
     }
     @media(max-width: 1199px){
         flex-direction: column-reverse;
-        margin-bottom: 1.75rem;
+        margin-bottom: 1.5rem;
         &_left {
             width: 100%;
         }
@@ -29,11 +29,11 @@
         }
     }
     @media(max-width: 766px){
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
-    @media(max-width: 577px){
-        margin-bottom: 1.25rem;
-    }
+    // @media(max-width: 577px){
+    //     margin-bottom: 0.5rem;
+    // }
 }
 .galleryProductBox {
     display: flex;
@@ -548,7 +548,7 @@
 .relatedProductBox {
     &_title {
         h2, h3 {
-            @include titleDefault;
+            @include h2Default;
         }
     }
     &_box {

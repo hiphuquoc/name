@@ -58,7 +58,23 @@ $fontText: "SVN-Gilroy", sans-serif;
     margin-bottom: 0.25rem;
   }
 }
-
+@mixin h2Default {
+  font-family: $fontTitle;
+  margin-bottom: 0.75rem;
+  font-size: 1.15rem;
+  color: $colorText;
+  @media(max-width: 990px){
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  @media(max-width: 766px){
+    font-size: 1.05rem;
+  }
+  @media(max-width: 577px){
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+}
 @mixin titleH3 {
   
 }
@@ -327,24 +343,7 @@ h1 {
 }
 
 h2 {
-  font-family: $fontTitle;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-  color: $colorText;
-  @media(max-width: 1199px){
-    font-size: 1.2rem;
-  }
-  @media(max-width: 990px){
-    font-size: 1.15rem;
-  }
-  @media(max-width: 766px){
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
-  }
-  @media(max-width: 577px){
-    font-size: 1.05rem;
-    margin-bottom: 0.5rem;
-  }
+  @include h2Default;
 }
 
 h3, h4 {

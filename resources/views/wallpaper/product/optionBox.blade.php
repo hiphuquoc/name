@@ -3,7 +3,7 @@
 </div> --}}
 <div id="js_addToCart_options" class="productDetailBox_detail_option_box">
     <div class="productDetailBox_detail_option_box_item" style="background:none;font-size:0.95rem;padding:0;margin:0 10px 0 0;">
-        {{ empty($language)&&$language=='vi' ? 'Tùy chọn :' : 'Options :' }}
+        {{ empty($language)||$language=='vi' ? 'Tùy chọn :' : 'Options :' }}
     </div>
     <!-- của all -->
     <div id="js_addToCart_option_all" class="productDetailBox_detail_option_box_item selected"
@@ -11,7 +11,7 @@
         data-option_name="all" 
         data-price="{{ $item->price }}"
         onClick="setOptionProduct('all');">
-        Trọn bộ
+            {{ empty($language)||$language=='vi' ? 'Trọn bộ' : 'Full set' }}
     </div>  
     <!-- của từng ảnh con -->
     @foreach($item->prices as $option)
