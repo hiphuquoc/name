@@ -48,7 +48,7 @@
         function deleteItem(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
-                    url         : "admin.event.delete",
+                    url         : "{{ route('admin.event.delete') }}",
                     type        : "GET",
                     dataType    : "html",
                     data        : { id : id }
