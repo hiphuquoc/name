@@ -286,7 +286,7 @@ class ProductController extends Controller {
         $events             = Event::all();
         $styles             = Style::all();
         /* gộp lại thành parents và lọc bỏ page hinh-nen-dien-thoai */
-        $parents            = $categories->merge($events)->merge($styles);
+        $parents            = $categories->concat($events)->concat($styles);
         $wallpapers         = Wallpaper::select('*')
                                 ->get();
         /* type */
