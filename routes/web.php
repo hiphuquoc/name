@@ -35,8 +35,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CacheController;
 use App\Http\Controllers\Admin\WallpaperController;
 use App\Http\Controllers\Admin\ProductPriceController;
-
-use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Admin\RedirectController;
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
@@ -51,103 +50,15 @@ use App\Http\Controllers\GoogledriveController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/* login với google */
-Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->name('main.setCsrfFirstTime');
-Route::post('/auth/google/callback', [ProviderController::class, 'googleCallback'])->name('main.google.callback');
-/* login với facebook */
-Route::get('/auth/facebook/redirect', [ProviderController::class, 'facebookRedirect'])->name('main.facebook.redirect');
-Route::get('/auth/facebook/callback', [ProviderController::class, 'facebookCallback'])->name('main.facebook.callback');
-/* tải hình ảnh khi hoàn tất thanh toán */
-Route::get('/downloadSource', [GoogledriveController::class, 'downloadSource'])->name('main.downloadSource');
-// Route::post('/downloadSourceAll', [ConfirmController::class, 'downloadSourceAll'])->name('main.downloadSourceAll');
-/* thanh toán */
-Route::prefix('payment')->group(function(){
-    Route::get('/momoCreate', [MomoController::class, 'create'])->name('main.momo.create');
-    Route::get('/zaloCreate', [ZalopayController::class, 'create'])->name('main.zalo.create');
-});
-/* trang chủ */
-Route::get('/', [HomeController::class, 'home'])->name('main.home');
-Route::get('/en', [HomeController::class, 'enHome'])->name('main.enHome');
-Route::get('/test', [HomeController::class, 'test'])->name('main.test');
-/* trang category */
-Route::prefix('category')->group(function(){
-    Route::get('/loadMore', [CategoryPublic::class, 'loadMore'])->name('main.category.loadMore');
-    Route::get('/loadMorePromotion', [CategoryPublic::class, 'loadMorePromotion'])->name('main.category.loadMorePromotion');
-    Route::get('/loadMoreSearch', [CategoryPublic::class, 'loadMoreSearch'])->name('main.category.loadMoreSearch');
-});
-/* lỗi */
-Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
-/* page */
-Route::get('/hinh-nen-dien-thoai-khuyen-mai', [PagePublic::class, 'saleOff'])->name('main.saleOff');
-Route::get('/promotion-phone-wallpapers', [PagePublic::class, 'enSaleOff'])->name('main.enSaleOff');
-Route::get('/tim-kiem', [PagePublic::class, 'searchProduct'])->name('main.searchProduct');
-Route::get('/search', [PagePublic::class, 'enSearchProduct'])->name('main.enSearchProduct');
-/* cart */
-Route::get('/gio-hang', [CartController::class, 'index'])->name('main.cart');
-Route::get('/cart', [CartController::class, 'enIndex'])->name('main.enCart');
-Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addToCart');
-Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.updateCart');
-Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');
-Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main.viewSortCart');
-Route::get('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
-Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
-Route::get('/confirm', [ConfirmController::class, 'confirm'])->name('main.confirm');
-Route::get('/handlePaymentMomo', [ConfirmController::class, 'handlePaymentMomo'])->name('main.handlePaymentMomo');
-Route::get('/handlePaymentZalopay', [ConfirmController::class, 'handlePaymentZalopay'])->name('main.handlePaymentZalopay');
-Route::get('/handlePaymentPaypal', [ConfirmController::class, 'handlePaymentPaypal'])->name('main.handlePaymentPaypal');
-/* check out */
-Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');
-/* order */
-Route::post('/order', [OrderPublic::class, 'create'])->name('main.order');
-Route::get('/viewConfirm', [OrderPublic::class, 'viewConfirm'])->name('main.viewConfirm');
-/* sitemap */
-Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');
-Route::get('sitemap/{type}.xml', [SitemapController::class, 'child'])->name('sitemap.child');
-/* AJAX */
-Route::get('/buildTocContentMain', [AjaxController::class, 'buildTocContentMain'])->name('main.buildTocContentMain');
-Route::get('/loadLoading', [AjaxController::class, 'loadLoading'])->name('ajax.loadLoading');
-Route::get('/loadDistrictByIdProvince', [AjaxController::class, 'loadDistrictByIdProvince'])->name('ajax.loadDistrictByIdProvince');
-Route::get('/searchProductAjax', [AjaxController::class, 'searchProductAjax'])->name('ajax.searchProductAjax');
-Route::get('/registryEmail', [AjaxController::class, 'registryEmail'])->name('ajax.registryEmail');
-Route::get('/registrySeller', [AjaxController::class, 'registrySeller'])->name('ajax.registrySeller');
-Route::get('/setMessageModal', [AjaxController::class, 'setMessageModal'])->name('ajax.setMessageModal');
-Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetShow'])->name('ajax.checkLoginAndSetShow');
-Route::get('/loadImageFromGoogleCloud', [AjaxController::class, 'loadImageFromGoogleCloud'])->name('ajax.loadImageFromGoogleCloud');
-Route::get('/loadImageWithResize', [AjaxController::class, 'loadImageWithResize'])->name('ajax.loadImageWithResize');
-Route::get('/loadImageSource', [AjaxController::class, 'loadImageSource'])->name('ajax.loadImageSource');
-Route::get('/downloadImageSource', [AjaxController::class, 'downloadImageSource'])->name('ajax.downloadImageSource');
-Route::get('/settingViewBy', [AjaxController::class, 'settingViewBy'])->name('ajax.settingViewBy');
-/* login */
-Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
-Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
-Route::post('/loginCustomer', [LoginController::class, 'loginCustomer'])->name('admin.loginCustomer');
-Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
-Route::get('/createUser', [LoginController::class, 'create'])->name('admin.createUser');
-/* my account */
-Route::middleware('auth')->group(function (){
-    Route::prefix('tai-khoan')->group(function(){
-        Route::get('/tai-xuong-cua-toi', [AccountController::class, 'orders'])->name('main.account.orders');
-
-    });
-});
-/* language */
-// Route::prefix('language')->group(function(){
-//     Route::get('/{type}/set', [LanguageController::class, 'set'])->name('admin.language.set');
-// });
 
 Route::middleware('auth', 'role:admin')->group(function (){
     Route::prefix('he-thong')->group(function(){
-        // /* ===== Ngôn ngữ En ===== */
-        // Route::prefix('he-thong')->group(function(){
-        //     /* category */
-        //     Route::prefix('category')->group(function(){
-        //         Route::get('/list', [EnCategoryController::class, 'list'])->name('admin.enCategory.list');
-        //         Route::get('/view', [EnCategoryController::class, 'view'])->name('admin.enCategory.view');
-        //         Route::post('/create', [EnCategoryController::class, 'create'])->name('admin.enCategory.create');
-        //         Route::post('/update', [EnCategoryController::class, 'update'])->name('admin.enCategory.update');
-        //     });
-
-        // });
+        /* ===== REDIRECT ===== */
+        Route::prefix('redirect')->group(function(){
+            Route::get('/list', [RedirectController::class, 'list'])->name('admin.redirect.list');
+            Route::get('/create', [RedirectController::class, 'create'])->name('admin.redirect.create');
+            Route::get('/delete', [RedirectController::class, 'delete'])->name('admin.redirect.delete');
+        });
         /* wallpaper */
         Route::prefix('wallpaper')->group(function(){
             Route::get('/list', [WallpaperController::class, 'list'])->name('admin.wallpaper.list');
@@ -179,6 +90,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::get('/view', [CategoryController::class, 'view'])->name('admin.category.view');
             Route::post('/create', [CategoryController::class, 'create'])->name('admin.category.create');
             Route::post('/update', [CategoryController::class, 'update'])->name('admin.category.update');
+            Route::get('/delete', [CategoryController::class, 'delete'])->name('admin.category.delete');
         });
         /* Style */
         Route::prefix('style')->group(function(){
@@ -272,5 +184,88 @@ Route::middleware('auth', 'role:admin')->group(function (){
         });
     });
 });
+
+/* login với google */
+Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->name('main.setCsrfFirstTime');
+Route::post('/auth/google/callback', [ProviderController::class, 'googleCallback'])->name('main.google.callback');
+/* login với facebook */
+Route::get('/auth/facebook/redirect', [ProviderController::class, 'facebookRedirect'])->name('main.facebook.redirect');
+Route::get('/auth/facebook/callback', [ProviderController::class, 'facebookCallback'])->name('main.facebook.callback');
+/* tải hình ảnh khi hoàn tất thanh toán */
+Route::get('/downloadSource', [GoogledriveController::class, 'downloadSource'])->name('main.downloadSource');
+// Route::post('/downloadSourceAll', [ConfirmController::class, 'downloadSourceAll'])->name('main.downloadSourceAll');
+/* thanh toán */
+Route::prefix('payment')->group(function(){
+    Route::get('/momoCreate', [MomoController::class, 'create'])->name('main.momo.create');
+    Route::get('/zaloCreate', [ZalopayController::class, 'create'])->name('main.zalo.create');
+});
+/* trang chủ */
+Route::get('/', [HomeController::class, 'home'])->name('main.home');
+Route::get('/en', [HomeController::class, 'enHome'])->name('main.enHome');
+// Route::get('/test', [HomeController::class, 'test'])->name('main.test');
+/* trang category */
+Route::prefix('category')->group(function(){
+    Route::get('/loadMore', [CategoryPublic::class, 'loadMore'])->name('main.category.loadMore');
+    Route::get('/loadMorePromotion', [CategoryPublic::class, 'loadMorePromotion'])->name('main.category.loadMorePromotion');
+    Route::get('/loadMoreSearch', [CategoryPublic::class, 'loadMoreSearch'])->name('main.category.loadMoreSearch');
+});
+/* lỗi */
+Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
+/* page */
+Route::get('/hinh-nen-dien-thoai-khuyen-mai', [PagePublic::class, 'saleOff'])->name('main.saleOff');
+Route::get('/promotion-phone-wallpapers', [PagePublic::class, 'enSaleOff'])->name('main.enSaleOff');
+Route::get('/tim-kiem', [PagePublic::class, 'searchProduct'])->name('main.searchProduct');
+Route::get('/search', [PagePublic::class, 'enSearchProduct'])->name('main.enSearchProduct');
+/* cart */
+Route::get('/gio-hang', [CartController::class, 'index'])->name('main.cart');
+Route::get('/cart', [CartController::class, 'enIndex'])->name('main.enCart');
+Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addToCart');
+Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.updateCart');
+Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');
+Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main.viewSortCart');
+Route::get('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
+Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
+Route::get('/confirm', [ConfirmController::class, 'confirm'])->name('main.confirm');
+Route::get('/handlePaymentMomo', [ConfirmController::class, 'handlePaymentMomo'])->name('main.handlePaymentMomo');
+Route::get('/handlePaymentZalopay', [ConfirmController::class, 'handlePaymentZalopay'])->name('main.handlePaymentZalopay');
+Route::get('/handlePaymentPaypal', [ConfirmController::class, 'handlePaymentPaypal'])->name('main.handlePaymentPaypal');
+/* check out */
+Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');
+/* order */
+Route::post('/order', [OrderPublic::class, 'create'])->name('main.order');
+Route::get('/viewConfirm', [OrderPublic::class, 'viewConfirm'])->name('main.viewConfirm');
+/* sitemap */
+Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');
+Route::get('sitemap/{type}.xml', [SitemapController::class, 'child'])->name('sitemap.child');
+/* AJAX */
+Route::get('/buildTocContentMain', [AjaxController::class, 'buildTocContentMain'])->name('main.buildTocContentMain');
+Route::get('/loadLoading', [AjaxController::class, 'loadLoading'])->name('ajax.loadLoading');
+Route::get('/loadDistrictByIdProvince', [AjaxController::class, 'loadDistrictByIdProvince'])->name('ajax.loadDistrictByIdProvince');
+Route::get('/searchProductAjax', [AjaxController::class, 'searchProductAjax'])->name('ajax.searchProductAjax');
+Route::get('/registryEmail', [AjaxController::class, 'registryEmail'])->name('ajax.registryEmail');
+Route::get('/registrySeller', [AjaxController::class, 'registrySeller'])->name('ajax.registrySeller');
+Route::get('/setMessageModal', [AjaxController::class, 'setMessageModal'])->name('ajax.setMessageModal');
+Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetShow'])->name('ajax.checkLoginAndSetShow');
+Route::get('/loadImageFromGoogleCloud', [AjaxController::class, 'loadImageFromGoogleCloud'])->name('ajax.loadImageFromGoogleCloud');
+Route::get('/loadImageWithResize', [AjaxController::class, 'loadImageWithResize'])->name('ajax.loadImageWithResize');
+Route::get('/loadImageSource', [AjaxController::class, 'loadImageSource'])->name('ajax.loadImageSource');
+Route::get('/downloadImageSource', [AjaxController::class, 'downloadImageSource'])->name('ajax.downloadImageSource');
+Route::get('/settingViewBy', [AjaxController::class, 'settingViewBy'])->name('ajax.settingViewBy');
+/* login */
+Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
+Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
+Route::post('/loginCustomer', [LoginController::class, 'loginCustomer'])->name('admin.loginCustomer');
+Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+Route::get('/createUser', [LoginController::class, 'create'])->name('admin.createUser');
+/* my account */
+Route::middleware('auth')->group(function (){
+    Route::prefix('tai-khoan')->group(function(){
+        Route::get('/tai-xuong-cua-toi', [AccountController::class, 'orders'])->name('main.account.orders');
+
+    });
+});
+
 /* ROUTING */
-Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');
+Route::middleware(['checkRedirect'])->group(function () {
+    Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');
+});

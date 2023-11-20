@@ -45,6 +45,19 @@
 @endsection
 @push('scriptCustom')
     <script type="text/javascript">
+        function deleteItem(id){
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+                $.ajax({
+                    url         : "{{ route('admin.category.delete') }}",
+                    type        : "get",
+                    dataType    : "html",
+                    data        : { id : id }
+                }).done(function(data){
+                    if(data==true) $('#oneItem-'+id).remove();
+                });
+            }
+        }
+
         function submitForm(idForm){
             $('#'+idForm).submit();
         }

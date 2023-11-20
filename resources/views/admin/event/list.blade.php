@@ -49,7 +49,7 @@
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
                     url         : "{{ route('admin.event.delete') }}",
-                    type        : "GET",
+                    type        : "get",
                     dataType    : "html",
                     data        : { id : id }
                 }).done(function(data){

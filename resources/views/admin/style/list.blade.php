@@ -47,14 +47,12 @@
     <script type="text/javascript">
         function deleteItem(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
-                console.log(123);
                 $.ajax({
                     url         : "{{ route('admin.style.delete') }}",
                     type        : "get",
                     dataType    : "html",
                     data        : { id : id }
                 }).done(function(data){
-                    console.log(34);
                     if(data==true) $('#oneItem-'+id).remove();
                 });
             }

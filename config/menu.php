@@ -104,6 +104,18 @@ return [
             ]
         ],
         [
+            'name'      => 'Công cụ SEO',
+            'route'     => '',
+            'icon'      => '<i class="fa-solid fa-screwdriver-wrench"></i>',
+            'child'     => [
+                [
+                    'name'  => '4. Redirect 301',
+                    'route' => 'admin.redirect.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
+            ]
+        ],
+        [
             'name'      => 'Xóa cache',
             'route'     => 'admin.cache.clearCache',
             'icon'      => '<i class="fa-sharp fa-solid fa-xmark"></i>'

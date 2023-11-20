@@ -274,4 +274,38 @@ class CategoryController extends Controller {
         $request->session()->put('message', $message);
         return redirect()->route('admin.category.view', ['id' => $idCategory]);
     }
+
+    public function delete(Request $request){
+        if(!empty($request->get('id'))){
+            try {
+                DB::beginTransaction();
+                $id         = $request->get('id');
+                $info       = Category::select('*')
+                                ->where('id', $id)
+                                ->with('seo', 'en_seo', 'products', 'blogs')
+                                ->first();
+                /* xóa ảnh đại diện trong thư mục */
+                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
+                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
+                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
+                if(file_exists($imagePath)) @unlink($imagePath);
+                /* delete content */
+                Storage::delete(config('main.storage.contentCategory').$request->get('slug').'.blade.php');
+                /* xóa bảng products */
+                $info->products()->delete();
+                /* xóa relation_style_info_category_info_blog */
+                $info->blogs()->delete();
+                /* delete bảng seo của product_info */
+                $info->seo()->delete();
+                $info->en_seo()->delete();
+                /* xóa product_info */
+                $info->delete();
+                DB::commit();
+                return true;
+            } catch (\Exception $exception){
+                DB::rollBack();
+                return false;
+            }
+        }
+    }
 }

@@ -106,7 +106,7 @@ class Event extends Model {
         return $this->hasMany(\App\Models\RelationEventProduct::class, 'event_info_id', 'id');
     }
 
-    public function categoryBlogs(){
+    public function blogs(){
         return $this->hasMany(\App\Models\RelationEventInfoCategoryBlogInfo::class, 'event_info_id', 'id');
     }
 }

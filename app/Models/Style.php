@@ -106,7 +106,7 @@ class Style extends Model {
         return $this->hasMany(\App\Models\RelationStyleProduct::class, 'style_info_id', 'id');
     }
 
-    public function categoryBlogs(){
+    public function blogs(){
         return $this->hasMany(\App\Models\RelationStyleInfoCategoryBlogInfo::class, 'style_info_id', 'id');
     }
 }
