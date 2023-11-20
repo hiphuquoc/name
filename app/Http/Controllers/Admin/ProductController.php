@@ -212,31 +212,37 @@ class ProductController extends Controller {
             RelationCategoryProduct::select('*')
                                         ->where('product_info_id', $idProduct)
                                         ->delete();
-            foreach($request->get('categories') as $category){
-                RelationCategoryProduct::insertItem([
-                    'product_info_id'   => $idProduct,
-                    'category_info_id'  => $category
-                ]);
+            if(!empty($request->get('categories'))){
+                foreach($request->get('categories') as $category){
+                    RelationCategoryProduct::insertItem([
+                        'product_info_id'   => $idProduct,
+                        'category_info_id'  => $category
+                    ]);
+                }
             }
             /* phong cách */
             RelationStyleProduct::select('*')
                                         ->where('product_info_id', $idProduct)
                                         ->delete();
-            foreach($request->get('styles') as $style){
-                RelationStyleProduct::insertItem([
-                    'product_info_id'   => $idProduct,
-                    'style_info_id'     => $style
-                ]);
+            if(!empty($request->get('styles'))){
+                foreach($request->get('styles') as $style){
+                    RelationStyleProduct::insertItem([
+                        'product_info_id'   => $idProduct,
+                        'style_info_id'     => $style
+                    ]);
+                }
             }
             /* sự kiện */
             RelationEventProduct::select('*')
                                     ->where('product_info_id', $idProduct)
                                     ->delete();
-            foreach($request->get('events') as $event){
-                RelationEventProduct::insertItem([
-                    'product_info_id'   => $idProduct,
-                    'event_info_id'     => $event
-                ]);
+            if(!empty($request->get('events'))){
+                foreach($request->get('events') as $event){
+                    RelationEventProduct::insertItem([
+                        'product_info_id'   => $idProduct,
+                        'event_info_id'     => $event
+                    ]);
+                }
             }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idProduct)){

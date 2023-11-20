@@ -28,7 +28,7 @@ class PageController extends Controller{
                             ->whereHas('prices', function($query) {
                                 $query->where('sale_off', '>', 0);
                             })
-                            ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                            ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories')
                             ->orderBy('id', 'DESC')
                             ->get();
         // $totalProduct   = Product::select('*')
@@ -58,7 +58,7 @@ class PageController extends Controller{
                             ->whereHas('prices', function($query) {
                                 $query->where('sale_off', '>', 0);
                             })
-                            ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                            ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories')
                             ->orderBy('id', 'DESC')
                             ->get();
         // $totalProduct   = Product::select('*')
@@ -91,7 +91,7 @@ class PageController extends Controller{
                 ->where('code', 'like', '%'.$keySearch.'%')
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->orWhere('en_name', 'like', '%'.$keySearch.'%')
-                ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                ->with('seo', 'files', 'prices', 'contents', 'categories')
                 ->orderBy('id', 'DESC')
                 ->get();
             /* breadcrumb */
@@ -122,7 +122,7 @@ class PageController extends Controller{
                 ->where('code', 'like', '%'.$keySearch.'%')
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->orWhere('en_name', 'like', '%'.$keySearch.'%')
-                ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories', 'brand.seo')
+                ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories')
                 ->orderBy('id', 'DESC')
                 ->get();
             // $totalProduct   =  Product::select('product_info.*')

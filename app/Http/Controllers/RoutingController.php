@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Blade;
 use App\Helpers\Url;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Brand;
+use App\Models\Style;
+use App\Models\Event;
 use App\Models\Page;
 use App\Models\CategoryBlog;
 use App\Models\Blog;
@@ -44,38 +45,45 @@ class RoutingController extends Controller{
                 $xhtml              = file_get_contents($pathCache);
                 echo $xhtml;
             }else {
-                switch($checkExists->type){
-                    case 'product_info':
-                        $language       = $checkExists->language;
-                        SettingController::settingLanguage($language);
-                        $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
-                        $flagMatch      = true;
-                        /* thông tin sản phẩm */
-                        $item           = Product::select('*')
-                            ->where('seo_id', $idSeo)
-                            ->with('seo', 'prices', 'contents', 'categories')
-                            ->first();
-                        /* danh sách category của sản phẩm */
-                        $arrayCategory  = [];
-                        foreach($item->categories as $category) $arrayCategory[] = $category->infoCategory->id;
-                        $keyCategory    = json_encode($arrayCategory);
-                        $related        = new \Illuminate\Database\Eloquent\Collection;
-                        $totalProduct   = Product::select('*')
-                                            ->where('id', '!=', $item->id)
-                                            ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                                                $query->whereIn('id', $arrayCategory);
-                                            })
-                                            ->count();
-                        /* breadcrumb */
-                        $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                        $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related', 'totalProduct', 'keyCategory', 'language'))->render();
-                        break;
-                    case 'category_info':
-                        $language       = $checkExists->language;
-                        SettingController::settingLanguage($language);
-                        $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
-                        $flagMatch      = true;
-                        $viewBy         = request()->cookie('view_by') ?? 'set';
+                /* ===== Sản phẩm ==== */
+                if($checkExists->type=='product_info'){
+                    $language       = $checkExists->language;
+                    SettingController::settingLanguage($language);
+                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                    $flagMatch      = true;
+                    /* thông tin sản phẩm */
+                    $item           = Product::select('*')
+                        ->where('seo_id', $idSeo)
+                        ->with('seo', 'prices', 'contents', 'categories')
+                        ->first();
+                    /* danh sách category của sản phẩm */
+                    $arrayCategory  = [];
+                    foreach($item->categories as $category) $arrayCategory[] = $category->infoCategory->id;
+                    $keyCategory    = json_encode($arrayCategory);
+                    $related        = new \Illuminate\Database\Eloquent\Collection;
+                    $totalProduct   = Product::select('*')
+                                        ->where('id', '!=', $item->id)
+                                        ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
+                                            $query->whereIn('id', $arrayCategory);
+                                        })
+                                        ->count();
+                    /* breadcrumb */
+                    $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                    $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related', 'totalProduct', 'keyCategory', 'language'))->render();
+                }
+                /* ===== Các trang chủ đề/phong cách/sự kiện ==== */
+                if($checkExists->type=='category_info'||$checkExists->type=='style_info'||$checkExists->type=='event_info'){
+                    $language       = $checkExists->language;
+                    SettingController::settingLanguage($language);
+                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                    $flagMatch      = true;
+                    $viewBy         = request()->cookie('view_by') ?? 'set';
+                    /* breadcrumb */
+                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                    /* ===== Chủ để ===== */
+                    if($checkExists->type=='category_info'){
+                        /* thư mục chứa content */
+                        $folderContent      = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
                         /* thông tin category */
                         $item           = Category::select('*')
                                             ->where('seo_id', $idSeo)
@@ -83,7 +91,6 @@ class RoutingController extends Controller{
                                             ->first();
                         /* danh sách product => lấy riêng để dễ truyền vào template */
                         $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
-                        $keyCategory    = json_encode($arrayCategory);
                         $products       = Product::select('*')
                                             ->whereHas('prices.wallpapers', function($query){
 
@@ -94,80 +101,83 @@ class RoutingController extends Controller{
                                             ->with('seo', 'en_seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->get();
-                        /* content */
-                        $folderContent      = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
-                        $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
-                        $content            = Blade::render(Storage::get($filenameContent));
-                        /* breadcrumb */
-                        $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'keyCategory', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
-                        break;
-                    // case 'brand_info':
-                    //     $flagMatch      = true;
-                    //     /* thông tin brand */
-                    //     $item           = Brand::select('*')
-                    //                         ->where('seo_id', $checkExists->id)
-                    //                         ->with('seo', 'files')
-                    //                         ->first();
-                    //     /* danh sách product => lấy riêng để dễ truyền vào template */
-                    //     $idBrand        = $item->id ?? 0;
-                    //     $products       = Product::select('*')
-                    //                         ->whereHas('brand', function($query) use($idBrand){
-                    //                             $query->where('brand_id', $idBrand);
-                    //                         })
-                    //                         ->with('seo', 'files', 'prices', 'contents', 'categories', 'brand')
-                    //                         ->get();
-                    //     /* danh sách tất cả category của những sản phẩm trên */
-                    //     $categories     = new \Illuminate\Database\Eloquent\Collection;
-                    //     foreach($products as $product){
-                    //         foreach($product->categories as $category){
-                    //             if (!$categories->contains('id', $category->infoCategory->id)){
-                    //                 $categories[]   = $category->infoCategory;
-                    //             }
-                    //         }
-                    //     }
-                    //     /* lấy thêm brands cho filter => duy nhất */
-                    //     $brands         = new \Illuminate\Database\Eloquent\Collection;
-                    //     $brands[]       = $item;  
-                    //     /* lấy thông tin category của các sản phẩm */
-                    //     $idSeo          = $item->seo->id;
-                    //     $item->childs   = Category::select('*')
-                    //                         ->whereHas('seo', function($query) use($idSeo){
-                    //                             $query->where('parent', $idSeo);
-                    //                         })
-                    //                         ->get();
-                    //     /* breadcrumb */
-                    //     $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
-                    //     $xhtml          = view('main.category.index', compact('item', 'products', 'breadcrumb', 'brands', 'categories'))->render();
-                    //     break;
-                    case 'page_info':
-                        $flagMatch      = true;
-                        $language       = $checkExists->language;
-                        SettingController::settingLanguage($language);
-                        $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
-                        /* thông tin brand */
-                        $item           = Page::select('*')
+                    }
+                    /* ===== Phong cách ===== */
+                    if($checkExists->type=='style_info'){
+                        /* thư mục chứa content */
+                        $folderContent  = $language=='vi' ? config('main.storage.contentStyle') : config('main.storage.enContentStyle');
+                        /* thông tin category */
+                        $item           = Style::select('*')
                                             ->where('seo_id', $idSeo)
-                                            ->with('seo', 'files')
+                                            ->with('seo', 'en_seo')
                                             ->first();
-                        /* breadcrumb */
-                        $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
-                        /* content */
-                        if($language=='en'){
-                            $content        = Blade::render(Storage::get(config('main.storage.enContentPage').$item->en_seo->slug.'.blade.php'));
-                        }else {
-                            $content        = Blade::render(Storage::get(config('main.storage.contentPage').$item->seo->slug.'.blade.php'));
-                        }
-                        /* page related */
-                        $typePages      = Page::select('page_info.*')
-                                            ->where('show_sidebar', 1)
-                                            ->join('seo', 'seo.id', '=', 'page_info.seo_id')
-                                            ->with('type')
-                                            ->orderBy('seo.ordering', 'DESC')
-                                            ->get()
-                                            ->groupBy('type.id');
-                        $xhtml          = view('wallpaper.page.index', compact('item', 'language', 'breadcrumb', 'content', 'typePages'))->render();
-                        break;
+                        /* danh sách product */
+                        $products       = Product::select('*')
+                                            ->whereHas('prices.wallpapers', function($query){
+
+                                            })
+                                            ->whereHas('styles', function($query){
+                                                
+                                            })
+                                            ->with('seo', 'en_seo', 'prices')
+                                            ->orderBy('id', 'DESC')
+                                            ->get();
+                    }
+                    /* ===== Sự kiện ===== */
+                    if($checkExists->type=='event_info'){
+                        /* thư mục chứa content */
+                        $folderContent  = $language=='vi' ? config('main.storage.contentEvent') : config('main.storage.enContentEvent');
+                        /* thông tin category */
+                        $item           = Event::select('*')
+                                            ->where('seo_id', $idSeo)
+                                            ->with('seo', 'en_seo')
+                                            ->first();
+                        /* danh sách product */
+                        $products       = Product::select('*')
+                                            ->whereHas('prices.wallpapers', function($query){
+
+                                            })
+                                            ->whereHas('events', function($query){
+                                                
+                                            })
+                                            ->with('seo', 'en_seo', 'prices')
+                                            ->orderBy('id', 'DESC')
+                                            ->get();
+                    }
+                    /* content */
+                    $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
+                    $content            = Blade::render(Storage::get($filenameContent));
+                    /* lấy giao diện */
+                    $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
+                }
+                /* ===== Trang ==== */
+                if($checkExists->type=='page_info'){
+                    $flagMatch      = true;
+                    $language       = $checkExists->language;
+                    SettingController::settingLanguage($language);
+                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                    /* thông tin brand */
+                    $item           = Page::select('*')
+                                        ->where('seo_id', $idSeo)
+                                        ->with('seo', 'files')
+                                        ->first();
+                    /* breadcrumb */
+                    $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
+                    /* content */
+                    if($language=='en'){
+                        $content        = Blade::render(Storage::get(config('main.storage.enContentPage').$item->en_seo->slug.'.blade.php'));
+                    }else {
+                        $content        = Blade::render(Storage::get(config('main.storage.contentPage').$item->seo->slug.'.blade.php'));
+                    }
+                    /* page related */
+                    $typePages      = Page::select('page_info.*')
+                                        ->where('show_sidebar', 1)
+                                        ->join('seo', 'seo.id', '=', 'page_info.seo_id')
+                                        ->with('type')
+                                        ->orderBy('seo.ordering', 'DESC')
+                                        ->get()
+                                        ->groupBy('type.id');
+                    $xhtml          = view('wallpaper.page.index', compact('item', 'language', 'breadcrumb', 'content', 'typePages'))->render();
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){

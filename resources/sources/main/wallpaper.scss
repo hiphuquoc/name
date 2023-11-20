@@ -677,11 +677,12 @@
                     position: relative;
                     &:before {
                         position: absolute;
-                        color: $colorBackgroundLv3;
+                        color: $colorText;
                         top: 0.6rem;
                         left: -1.25rem;
                         content: "--";
                         font-size: 0.8rem;
+                        opacity: 0.35;
                     }
                 }
             }
@@ -689,6 +690,9 @@
     }
     > ul {
         > li {
+            &:not(:first-child){
+                margin-top: 0.15rem;
+            }
             &:first-child {
                 a {
                     padding-top: 0;
@@ -706,10 +710,12 @@
                     justify-content: center;
                     opacity: 0.6;
                     font-size: 0.9rem;
+                    cursor: pointer;
                 }
             }
             > ul {
                 overflow: hidden;
+                opacity: 0.75 !important;
                 > li {
                     ul {
                         display: none;

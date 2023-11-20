@@ -44,7 +44,7 @@
             </div>
 
             <div class="layoutHeaderSide_content">
-                <div id="js_blurBackground">
+                <div id="js_blurBackground" style="height:100%;">
                     @yield('content')
                 </div>
             </div>

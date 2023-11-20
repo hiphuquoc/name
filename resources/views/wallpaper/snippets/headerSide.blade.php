@@ -1,4 +1,5 @@
 @php
+    /* chủ đề */
     $wallpaperMobile            = [];
     $tmp                        = \App\Models\Category::getTreeCategory();
     foreach($tmp as $categoryLv1){
@@ -7,6 +8,13 @@
             break;
         }
     }
+    /* sự kiện */
+    $events                     = \App\Models\Event::select('*')
+                                    ->join('seo', 'seo.id', '=', 'event_info.seo_id')
+                                    ->orderBy('seo.ordering', 'DESC')
+                                    ->with('seo', 'en_seo', 'products')
+                                    ->get();
+    /* trang chính sách */
     $policies                   = \App\Models\Page::select('*')
                                     ->join('seo', 'seo.id', '=', 'page_info.seo_id')
                                     ->whereHas('type', function($query){
@@ -38,20 +46,6 @@
                 </a>
             @endif
         </li>
-        <li>
-            @if(empty($language)||$language=='vi')
-                <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi" aria-label="Hình nền điện thoại khuyến mãi">
-                    <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
-                    <div>Đang khuyến mãi</div>
-                </a>
-            @else
-                <a href="{{ route('main.enSaleOff') }}" title="Sale off phone wallpaper" aria-label="Sale off phone wallpaper">
-                    <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Sale off phone wallpaper" title="Sale off phone wallpaper" />
-                    <div>Sale off</div>
-                </a>
-            @endif
-            
-        </li>
         @if(!empty($wallpaperMobile))
             <li>
                 @php
@@ -65,7 +59,7 @@
                         $styleTmp = 'style="height:auto;opacity:1;"';
                     }
                 @endphp
-                <div class="hasChild {{ $classTmp }}">
+                <div class="{{ $classTmp }}">
                     <img src="{{ Storage::url('images/svg/picture-1.svg') }}" alt="{{ $titlePhoneWallpaper }}" title="{{ $titlePhoneWallpaper }}" />
                     @if($flagOpen==true)
                         <div>{{ $titlePhoneWallpaper }}</div>
@@ -97,7 +91,54 @@
             </li>
         @endif
         <li>
-            <div class="hasChild close">
+            @if(empty($language)||$language=='vi')
+                <div class="open">
+                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Hình nền điện thoại theo sự kiện" title="Hình nền điện thoại theo sự kiện" style="opacity:1;" />
+                    <div>Sự kiện</div>
+                    <i class="fa-solid fa-minus"  onclick="showHideListMenuMobile(this, 'su-kien')"></i>
+                </div>
+            @else
+                <div class="open">
+                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Phone wallpaper by event" title="Phone wallpaper by event" style="opacity:1;" />
+                    <div>Event</div>
+                    <i class="fa-solid fa-minus"  onclick="showHideListMenuMobile(this, 'su-kien')"></i>
+                </div>
+            @endif
+            <ul id="su-kien" class="filterLinkSelected" style="height:auto;opacity:1;">
+                @foreach($events as $event)
+                    @php
+                        if(empty($language)||$language=='vi'){
+                            $title      = $event->name ?? $event->seo->title ?? null;
+                            $urlFull    = env('APP_URL').'/'.$event->seo->slug_full;
+                        }else {
+                            $title      = $event->en_name ?? $event->en_seo->title ?? null;
+                            $urlFull    = env('APP_URL').'/'.$event->en_seo->slug_full;
+                        }
+                    @endphp
+                    <li>
+                        <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
+                            <div>{{ $title }}</div>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </li>
+        <li>
+            @if(empty($language)||$language=='vi')
+                <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi" aria-label="Hình nền điện thoại khuyến mãi">
+                    <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
+                    <div>Đang khuyến mãi</div>
+                </a>
+            @else
+                <a href="{{ route('main.enSaleOff') }}" title="Sale off phone wallpaper" aria-label="Sale off phone wallpaper">
+                    <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Sale off phone wallpaper" title="Sale off phone wallpaper" />
+                    <div>Sale off</div>
+                </a>
+            @endif
+            
+        </li>
+        <li>
+            <div class="close">
                 @if(empty($language)||$language=='vi')
                     <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ {{ config('main.company_name') }}" title="Thông tin hỗ trợ {{ config('main.company_name') }}" />
                     <div>Hỗ trợ</div>
