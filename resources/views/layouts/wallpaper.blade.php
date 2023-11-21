@@ -52,12 +52,10 @@
         </div>
 
         <!-- === START:: Footer === -->
-        @if(!Route::is('main.cart')&&!Route::is('main.confirm'))
-            {{-- @include('wallpaper.cacheHTML.create', [
-                'content'   => 'wallpaper.snippets.footer'
-            ]) --}}
+        {{-- @if(!Route::is('main.cart')&&!Route::is('main.confirm'))
             @include('wallpaper.snippets.footer')
-        @endif
+        @endif --}}
+        @include('wallpaper.snippets.footer')
         <!-- === END:: Footer === -->
 
         <div class="bottom">

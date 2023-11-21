@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Page;
+use App\Models\Category;
+use App\Models\Style;
+use App\Models\Event;
 use App\Http\Controllers\SettingController;
 
 use App\Mail\OrderMailable;
@@ -42,7 +45,11 @@ class HomeController extends Controller{
                                     ->orderBy('id', 'DESC')
                                     ->get();
             $viewBy             = $request->cookie('view_by') ?? 'set';
-            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'products', 'viewBy'))->render();
+            /* select của filter */
+            $categories         = Category::all();
+            $styles             = Style::all();
+            $events             = Event::all();
+            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'products', 'categories', 'styles', 'events', 'viewBy'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }
@@ -77,7 +84,10 @@ class HomeController extends Controller{
                                     ->orderBy('id', 'DESC')
                                     ->get();
             $viewBy             = $request->cookie('view_by') ?? 'set';
-            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'products', 'viewBy'))->render();
+            $categories         = Category::all();
+            $styles             = Style::all();
+            $events             = Event::all();
+            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'products', 'categories', 'styles', 'events', 'viewBy'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }

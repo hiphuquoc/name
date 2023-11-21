@@ -31,7 +31,6 @@
                 /* lấy ảnh Small */
                 $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
                 $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
-                // $image      = $wallpaper->infoWallpaper->file_url_hosting;
                 /* đường dẫn */
                 $url        = !empty($language)&&$language=='en'&&!empty($product->en_seo->slug_full) ? $product->en_seo->slug_full : $product->seo->slug_full;
             @endphp
@@ -55,19 +54,18 @@
                             @endif
                         @endif
                         <!-- rating và số lượng đã bán -->
-                        <div class="wallpaperGridBox_item_image_rating">
+                        {{-- <div class="wallpaperGridBox_item_image_rating">
                             @if(!empty($product->seo->rating_aggregate_star))
                                 <div><img src="{{ Storage::url('images/svg/icon_star.svg') }}" alt="đánh giá sản phẩm {{ $productName }}" title="đánh giá sản phẩm {{ $productName }}" />{{ $product->seo->rating_aggregate_star }}</div>
                             @endif
-                            {{-- <div>Đã bán {{ $product->sold }}</div> --}}
-                            {{-- @if(!empty($product->sold))
+                            @if(!empty($product->sold))
                                 <div>Đã bán {{ $product->sold }}</div>
-                            @endif --}}
-                        </div>
-                        <!-- icon giảm giá -->
+                            @endif
+                        </div> --}}
+                        {{-- <!-- icon giảm giá -->
                         @if(!empty($price->sale_off))
                             <div class="wallpaperGridBox_item_image_percent">- {{ $product->sale_off }}%</div>
-                        @endif
+                        @endif --}}
                         <!-- content -->
                         <div class="wallpaperGridBox_item_image_content">
                             <div class="wallpaperGridBox_item_image_content_title maxLine_2">

@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\Url;
 use App\Models\Product;
 use App\Models\Page;
+use App\Models\Category;
+use App\Models\Style;
+use App\Models\Event;
 
 class PageController extends Controller{
 
@@ -38,7 +41,11 @@ class PageController extends Controller{
         //                     ->count();
         /* breadcrumb */
         $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full, $language);
-        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'breadcrumb', 'viewBy'));
+        /* select của filter */
+        $categories         = Category::all();
+        $styles             = Style::all();
+        $events             = Event::all();
+        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'viewBy'));
     }
 
     public static function enSaleOff(){
@@ -68,7 +75,11 @@ class PageController extends Controller{
         //                     ->count();
         /* breadcrumb */
         $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
-        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'breadcrumb', 'viewBy'));
+        /* select của filter */
+        $categories         = Category::all();
+        $styles             = Style::all();
+        $events             = Event::all();
+        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'viewBy'));
     }
 
     public static function searchProduct(Request $request){
@@ -96,8 +107,12 @@ class PageController extends Controller{
                 ->get();
             /* breadcrumb */
             $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
+            /* select của filter */
+            $categories         = Category::all();
+            $styles             = Style::all();
+            $events             = Event::all();
             $titlePage      = $item->name ?? $item->seo->title ?? null;
-            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'breadcrumb', 'viewBy'));
+            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'viewBy'));
         }
         return redirect()->route('main.home');
     }
@@ -132,8 +147,12 @@ class PageController extends Controller{
             //     ->count();
             /* breadcrumb */
             $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
+            /* select của filter */
+            $categories         = Category::all();
+            $styles             = Style::all();
+            $events             = Event::all();
             $titlePage      = $item->en_name ?? $item->en_seo->title ?? null;
-            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'breadcrumb', 'viewBy'));
+            return view('wallpaper.category.search', compact('item', 'language', 'titlePage', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'viewBy'));
         }
         return redirect()->route('main.home');
     }

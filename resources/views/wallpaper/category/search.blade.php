@@ -53,10 +53,10 @@
                     @if(!empty(request('key_search')))
                         <div class="keySearchBadge">
                             <div class="keySearchBadge_item">
-                                <a href="{{ route('main.searchProduct') }}" class="keySearchBadge_item_badge">
+                                <div class="keySearchBadge_item_badge">
                                     <div>{{ request('key_search') }}</div>
-                                    <div class="keySearchBadge_item_badge_action"><i class="fa-solid fa-xmark"></i></div>
-                                </a>
+                                    <a href="{{ empty($language)||$language=='vi' ? route('main.searchProduct') : route('main.enSearchProduct') }}" class="keySearchBadge_item_badge_action"><i class="fa-solid fa-xmark"></i></a>
+                                </div>
                             </div>
                         </div>
                     @endif

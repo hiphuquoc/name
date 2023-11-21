@@ -305,10 +305,10 @@ body {
     font-size: 0.95rem;
   }
   @media(max-width: 767px){
-    font-size: 0.925rem;
+    font-size: 0.9rem;
   }
   @media(max-width: 577px){
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   &.background {
     background: $colorBackgroundLv1;
@@ -580,7 +580,7 @@ blockquote{
 .container {
   width: 100%;
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 1300px;
   padding: 0 1.5rem;
   @media(max-width: 1199px){
     padding: 0 1.25rem;

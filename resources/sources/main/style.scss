@@ -402,43 +402,6 @@
     }
     
 }
-.sortBox {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    @include colorOpacity('color', $colorText, 0.7);
-    margin-bottom: 0.75rem;
-    margin-top: -0.25rem;
-    font-size: 0.9rem;
-    &_left {
-        // width: 100%;
-    }
-    &_right {
-        &_item {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            > * {
-                &:not(:first-child){
-                    margin-left: 0.5rem;
-                }
-            }
-            select {
-                padding: 0;
-                @include colorOpacity('color', $colorText, 0.8);
-                border: none;
-                background: transparent;
-                font-size: 0.95rem;
-            }
-        }
-    }
-    .highLight {
-        @include highLight;
-    }
-}
-.productGridSlickBox {
-    
-}
 .productGridFlexBox {
     .productGridBox {
         flex-wrap: wrap;
@@ -805,20 +768,55 @@
         border-radius: 10px;
         padding: 0.25rem 0.5rem 0.25rem 0.75rem;
         background: $colorBackgroundLv2;
+        cursor: pointer;
         &_badge {
             display: flex;
-            // color: $color;
-            cursor: pointer;
-            // &:hover {
-            //     color: #fff;
-            // }
             &_action {
                 margin-left: 0.5rem;
+                color: $colorText !important;
             }
         }
         &:hover {
             background: $bg-08;
         }
+    }
+}
+.sortBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    @include colorOpacity('color', $colorText, 0.7);
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    &_left {
+        display: flex;
+        > * {
+            &:not(:first-child){
+                margin-left: 1rem;
+            }
+        }
+    }
+    &_right {
+        &_item {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            > * {
+                &:not(:first-child){
+                    margin-left: 1rem;
+                }
+            }
+            select {
+                padding: 0;
+                @include colorOpacity('color', $colorText, 0.8);
+                border: none;
+                background: transparent;
+                font-size: 0.95rem;
+            }
+        }
+    }
+    .highLight {
+        @include highLight;
     }
 }
 $heightSelect : 33.5px;
@@ -827,22 +825,17 @@ $heightSelect : 33.5px;
     position: relative;
     height: $heightSelect;
     align-items: flex-end;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     &:hover {
         .selectCustom_box {
             visibility: visible !important;
         }
     }
-    > * {
-        &:not(:first-child){
-            margin-left: 0.75rem;
-        }
-    }
     &_text {
-
+        margin-right: 0.25rem;
     }
     &_input {
-        padding: 0.15rem 0.75rem;
+        padding: 0.1rem 0.6rem;
         border-radius: 10px;
         border: 1px solid $colorBackgroundLv3;
     }
@@ -855,11 +848,29 @@ $heightSelect : 33.5px;
         min-width: 180px;
         border-radius: 10px;
         box-shadow: 0 0 10px $colorBackgroundLv1;
-        overflow: hidden;
         z-index: 1;
+        max-height: 440px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            background-color: transparent;
+            width: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: transparent;
+            border-radius: 1000px;
+            -webkit-box-shadow: inset 0 0 6px rgba(191, 209, 242, 0.2);
+        }
+        &::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px $colorBackgroundLv2;
+            border-radius: 10px;
+            background: transparent;
+        }
         &_item {
-            padding: 0.4rem 1rem 0.55rem 1rem;
+            padding: 0.5rem 1rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: $colorText;
             &.selected, &:hover {
                 color: $colorTextLight;
                 background: $colorBackgroundLv3;
@@ -870,7 +881,7 @@ $heightSelect : 33.5px;
         }
     }
     i {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
         margin-right: 0.5rem;
         opacity: 0.6;
     }

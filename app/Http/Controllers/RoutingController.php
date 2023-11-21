@@ -71,6 +71,7 @@ class RoutingController extends Controller{
                     $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
                     $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related', 'totalProduct', 'keyCategory', 'language'))->render();
                 }
+
                 /* ===== Các trang chủ đề/phong cách/sự kiện ==== */
                 if($checkExists->type=='category_info'||$checkExists->type=='style_info'||$checkExists->type=='event_info'){
                     $language       = $checkExists->language;
@@ -101,6 +102,7 @@ class RoutingController extends Controller{
                                             ->with('seo', 'en_seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->get();
+                        $categoryChoose = $item;
                     }
                     /* ===== Phong cách ===== */
                     if($checkExists->type=='style_info'){
@@ -111,17 +113,19 @@ class RoutingController extends Controller{
                                             ->where('seo_id', $idSeo)
                                             ->with('seo', 'en_seo')
                                             ->first();
+                        $idStyle        = $item->id ?? 0;
                         /* danh sách product */
                         $products       = Product::select('*')
                                             ->whereHas('prices.wallpapers', function($query){
 
                                             })
-                                            ->whereHas('styles', function($query){
-                                                
+                                            ->whereHas('styles.infoStyle', function($query) use($idStyle){
+                                                $query->where('id', $idStyle);
                                             })
                                             ->with('seo', 'en_seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->get();
+                        $styleChoose    = $item;
                     }
                     /* ===== Sự kiện ===== */
                     if($checkExists->type=='event_info'){
@@ -132,23 +136,51 @@ class RoutingController extends Controller{
                                             ->where('seo_id', $idSeo)
                                             ->with('seo', 'en_seo')
                                             ->first();
+                        $idEvent        = $item->id ?? 0;
                         /* danh sách product */
                         $products       = Product::select('*')
                                             ->whereHas('prices.wallpapers', function($query){
 
                                             })
-                                            ->whereHas('events', function($query){
-                                                
+                                            ->whereHas('events.infoEvent', function($query) use($idEvent){
+                                                $query->where('id', $idEvent);
                                             })
                                             ->with('seo', 'en_seo', 'prices')
                                             ->orderBy('id', 'DESC')
                                             ->get();
+                        $eventChoose    = $item;
                     }
                     /* content */
                     $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
                     $content            = Blade::render(Storage::get($filenameContent));
+                    /* select của filter */
+                    $categories         = Category::all();
+                    $styles             = Style::all();
+                    $events             = Event::all();
+                    /* giá trị selectBox */
+                    if(empty($categoryChoose)) $categoryChoose = [];
+                    if(!empty(request('category_info_id'))){
+                        $categoryChoose = Category::select('*')
+                                            ->where('id', request('category_info_id'))
+                                            ->with('seo', 'en_seo')
+                                            ->first();
+                    }
+                    if(empty($styleChoose)) $styleChoose = [];
+                    if(!empty(request('style_info_id'))){
+                        $styleChoose    = Style::select('*')
+                                            ->where('id', request('style_info_id'))
+                                            ->with('seo', 'en_seo')
+                                            ->first();
+                    }
+                    if(empty($eventChoose)) $eventChoose = [];
+                    if(!empty(request('event_info_id'))){
+                        $eventChoose    = Event::select('*')
+                                            ->where('id', request('event_info_id'))
+                                            ->with('seo', 'en_seo')
+                                            ->first();
+                    }
                     /* lấy giao diện */
-                    $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
+                    $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'content', 'language', 'viewBy', 'categoryChoose', 'styleChoose', 'eventChoose'))->render();
                 }
                 /* ===== Trang ==== */
                 if($checkExists->type=='page_info'){

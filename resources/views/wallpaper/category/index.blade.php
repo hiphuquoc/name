@@ -171,19 +171,17 @@
 
             /* build tocContent khi scroll gần tới */
             const elementBuildTocContent = $('#js_buildTocContentMain_element');
-            $(window).on('scroll', function() {
-                /* build toc content */
-                if(elementBuildTocContent.length){
-                    if (!elementBuildTocContent.hasClass('loaded')) {
-                        var distance = $(window).scrollTop() - elementBuildTocContent.offset().top + 900;
-                        if (distance > 0) {
-                            buildTocContentMain('js_buildTocContentMain_element');
-                        }
-                    }
+            /* build toc content */
+            if(elementBuildTocContent.length){
+                if (!elementBuildTocContent.hasClass('loaded')) {
+                    buildTocContentMain('js_buildTocContentMain_element');
                 }
-                // /* load more */
-                // loadWallpaperMore(); 
-            });            
+            }
+           
+            // $(window).on('scroll', function() {
+            //     /* load more */
+            //     loadWallpaperMore(); 
+            // });            
         })
     </script>
 @endpush
