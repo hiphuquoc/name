@@ -13,9 +13,6 @@
             height: 0;
             opacity: 0;
         }
-        // &:not(:first-child){
-        //     margin-left: 1rem;
-        // }
         &_image {
             margin-bottom: 0;
             position: relative;
@@ -218,12 +215,12 @@
     @include wallpaperGrid;
     flex-wrap: wrap;
     &_item {
-        width: calc(20% - 0.8rem);
+        width: calc(20% - 0.6rem);
         &:nth-child(5n + 1){
             margin-left: 0;
         }
         &:not(:nth-child(5n + 1)){
-            margin-left: 1rem;
+            margin-left: 0.75rem;
         }
         &:nth-child(n + 6){
             margin-top: 1rem;
@@ -234,12 +231,12 @@
     }
     @media(max-width: 1499px){
         &_item {
-            width: calc(25% - 0.75rem);
+            width: calc(25% - 0.5625rem);
             &:nth-child(4n + 1){
                 margin-left: 0;
             }
             &:not(:nth-child(4n + 1)){
-                margin-left: 1rem;
+                margin-left: 0.75rem;
             }
             &:nth-child(n + 5){
                 margin-top: 1rem;
@@ -251,12 +248,12 @@
     }
     @media(max-width: 1199px){
         &_item {
-            width: calc(33.33% - 0.6666rem);
+            width: calc(33.33% - 0.5rem);
             &:nth-child(3n + 1){
                 margin-left: 0;
             }
             &:not(:nth-child(3n + 1)){
-                margin-left: 1rem;
+                margin-left: 0.75rem;
             }
             &:nth-child(n + 4){
                 margin-top: 1rem;
@@ -266,14 +263,14 @@
             }
         }
     }
-    @media(max-width: 1024px){
+    @media(max-width: 1023px){
         &_item {
-            width: calc(25% - 0.75rem);
+            width: calc(25% - 0.5625rem);
             &:nth-child(4n + 1){
                 margin-left: 0;
             }
             &:not(:nth-child(4n + 1)){
-                margin-left: 1rem;
+                margin-left: 0.75rem;
             }
             &:nth-child(n + 5){
                 margin-top: 1rem;
@@ -285,32 +282,15 @@
     }
     @media(max-width: 990px){
         &_item {
-            width: calc(33.33% - 0.6666rem);
+            width: calc(33.33% - 0.5rem);
             &:nth-child(3n + 1){
                 margin-left: 0;
             }
             &:not(:nth-child(3n + 1)){
-                margin-left: 1rem;
+                margin-left: 0.75rem;
             }
             &:nth-child(n + 4){
                 margin-top: 1rem;
-            }
-            &:not(:nth-child(n + 4)){
-                margin-top: 0;
-            }
-        }
-    }
-    @media(max-width: 767px){
-        &_item {
-            width: calc(33.33% - 0.6666rem);
-            &:nth-child(3n + 1){
-                margin-left: 0;
-            }
-            &:not(:nth-child(3n + 1)){
-                margin-left: 1rem;
-            }
-            &:nth-child(n + 4){
-                margin-top: 0.5rem;
             }
             &:not(:nth-child(n + 4)){
                 margin-top: 0;
@@ -344,22 +324,22 @@
         position: sticky;
         display: flex;
         flex-direction: column;
-        top: calc(55px + 1.75rem);
+        top: calc(52.5px + 1.5rem);
         left: 0;
         flex: 0 0 330px;
-        height: calc(100vh - 90px);
+        height: calc(100vh - 70px);
         padding-left: 1.5rem;
         padding-bottom: 1.25rem;
     }
     &_content {
         width: calc(100% - 330px);
-        min-height: calc(100vh - 55px);
+        min-height: calc(100vh - 45px);
     }
     @media(max-width: 1199px){
         &_header {
             flex: 0 0 280px;
-            height: calc(100vh - 130px);
-            top: calc(55px + 1.5rem);
+            height: calc(100vh - 115px);
+            top: calc(52.5px + 1rem);
         }
         &_content {
             width: calc(100% - 280px);
@@ -387,7 +367,7 @@
     width: 100%;
     &_header {
         position: sticky;
-        top: calc(55px + 2rem);
+        top: calc(52.5px + 2rem);
         left: 0;
         flex: 0 0 330px;
         height: 100%;
@@ -606,7 +586,7 @@
     }
 }
 .headerSide {
-    max-height: calc(100vh - 150px);
+    max-height: calc(100vh - 165px);
     &_logo {
         display: flex;
         width: 130px;
@@ -639,7 +619,7 @@
                 color: $colorText !important;
                 display: flex;
                 align-items: center;
-                padding: 10px 0;
+                padding: 8px 0;
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
@@ -726,15 +706,6 @@
             }
         }
     }
-    @media(max-width: 1023px){
-        height: calc(100vh - 180px);
-    }
-    @media(max-width: 767px){
-        height: calc(100vh - 175px);
-    }
-    // @media(max-width: 577px){
-    //     height: calc(100vh - 175px);
-    // }
 }
 $heightMenu : 52.5px;
 .menuTopBackground {
@@ -864,6 +835,7 @@ $heightMenu : 52.5px;
     margin-top: 0.75rem;
     display: none;
     @media(max-width: 1023px){
+        margin-top: 0.5rem;
         display: flex;
     }
 }

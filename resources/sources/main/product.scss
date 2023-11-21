@@ -1,16 +1,19 @@
 .pageProductDetailBox {
     display: flex;
     align-items: stretch;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     &_left {
         width: 60%;
-        margin-top: 0.25rem;
+        margin-top: 0.4rem;
         display: flex;
         flex-direction: column;
+        @media(max-width: 1023px){
+            margin-top: 0.5rem;
+        }
     }
     &_right {
-        margin-left: 2rem;
-        width: calc(40% - 2rem);
+        margin-left: 1.5rem;
+        width: calc(40% - 1.5rem);
         display: flex;
         flex-direction: column;
     }
@@ -19,7 +22,7 @@
     }
     @media(max-width: 1199px){
         flex-direction: column-reverse;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         &_left {
             width: 100%;
         }
@@ -28,18 +31,15 @@
             width: 100%;
         }
     }
-    @media(max-width: 766px){
-        margin-bottom: 1rem;
+    @media(max-width: 1023px){
+        margin-bottom: 0.5rem;
     }
-    // @media(max-width: 577px){
-    //     margin-bottom: 0.5rem;
-    // }
 }
 .galleryProductBox {
     display: flex;
     flex-wrap: wrap;
     &_item {
-        width: calc(50% - 0.5rem);
+        width: calc(50% - 0.375rem);
         position: relative;
         border-radius: 35px;
         cursor: pointer;
@@ -70,10 +70,23 @@
             margin-left: 0;
         }
         &:not(:nth-child(2n + 1)){
-            margin-left: 1rem;
+            margin-left: 0.75rem;
         }
         &:nth-child(n + 3){
-            margin-top: 1.25rem;
+            margin-top: 1rem;
+        }
+        @media(max-width: 1023px){
+            width: calc(50% - 0.25rem);
+            border-radius: 15px;
+            &:nth-child(2n + 1){
+                margin-left: 0;
+            }
+            &:not(:nth-child(2n + 1)){
+                margin-left: 0.5rem;
+            }
+            &:nth-child(n + 3){
+                margin-top: 0.75rem;
+            }
         }
     }
     &.mobile {
@@ -90,53 +103,27 @@
         color: $colorTextLight;
     }
     @media(max-width: 1199px){
-        margin-bottom: 1.5rem;
-    }
-    @media(max-width: 990px){
-        margin-bottom: 1.25rem;
-    }
-    @media(max-width: 767px){
         margin-bottom: 0.75rem;
-        &_item {
-            width: calc(50% - 0.375rem);
-            border-radius: 20px;
-            &:nth-child(2n + 1){
-                margin-left: 0;
-            }
-            &:not(:nth-child(2n + 1)){
-                margin-left: 0.75rem;
-            }
-            &:nth-child(n + 3){
-                margin-top: 0.75rem;
-            }
-        }
     }
-    @media(max-width: 577px){
+    @media(max-width: 1023px){
         margin-bottom: 0.5rem;
-        &_item {
-            width: calc(50% - 0.25rem);
-            border-radius: 15px;
-            &:nth-child(2n + 1){
-                margin-left: 0;
-            }
-            &:not(:nth-child(2n + 1)){
-                margin-left: 0.5rem;
-            }
-            &:nth-child(n + 3){
-                margin-top: 0.5rem;
-            }
-        }
     }
 }
 .productDetailBox {
     position: sticky;
-    top: calc(55px + 2rem);
+    top: calc($heightMenu + 1.5rem);
     &_detail {
         &_title {
             @include titleDefault;
         }
         &_rating {
             margin-bottom: 0.5rem;
+            @media(max-width: 1199px){
+                margin-bottom: 0.25rem;
+            }
+            @media(max-width: 1024px){
+                margin-bottom: 0;
+            }
         }
         &_description {
             margin-bottom: 1.5rem;
@@ -144,6 +131,12 @@
                 padding-right: 0.5rem;
             }
             ul {
+                margin-bottom: 0;
+            }
+            @media(max-width: 1199px){
+                margin-bottom: 0.5rem;
+            }
+            @media(max-width: 1023px){
                 margin-bottom: 0;
             }
         }
@@ -163,8 +156,8 @@
                     display: inline-block;
                     background: $colorBackgroundLv2;
                     color: $colorText;
-                    padding: 0.25rem 0.5rem;
-                    border-radius: 7px;
+                    padding: 0.15rem 0.75rem;
+                    border-radius: 100px;
                     margin-top: 0.5rem;
                     margin-left: 0.25rem;
                     cursor: pointer;
@@ -355,37 +348,10 @@
     .highLight {
         @include highLight;
     }
-    @media(max-width: 1199px){
-        &_detail {
-            // &_rating {
-            //     margin-bottom: 0.5rem;
-            // }
-            &_description {
-                margin-bottom: 0.75rem;
-            }
-        }
-    }
-    @media(max-width: 767px){
-        &_detail {
-            &_rating {
-                margin-bottom: 0.25rem;
-            }
-            &_description {
-                margin-bottom: 0.5rem;
-            }
-        }
-    }
-    @media(max-width: 577px){
-        &_detail {
-            &_description {
-                margin-bottom: 0.25rem;
-            }
-        }
-    }
 }
 .ratingBox {
     display: flex;
-    font-size: 0.85rem;
+    font-size: 0.825rem;
     opacity: 0.75;
     > * {
         &:not(:first-child){
@@ -397,7 +363,6 @@
     &_numberSell {
         > span {
             font-family: $fontTitle;
-            font-size: 1rem;
             color: $colorText;
             margin: 0 0.25rem;
         }
@@ -406,7 +371,7 @@
         display: flex;
         > * {
             &:not(:first-child){
-                margin-left: 0.5rem;
+                margin-left: 0.25rem;
             }
         }
         &_box {
@@ -423,28 +388,8 @@
         &_total {
             > span {
                 font-family: $fontTitle;
-                font-size: 1rem;
                 color: $colorText;
                 margin: 0 0.25rem;
-            }
-        }
-    }
-    @media(max-width: 577px){
-        &_numberSell {
-            > span {
-                font-size: 0.925rem;
-            }
-        }
-        &_star {
-            > * {
-                &:not(:first-child){
-                    margin-left: 0.25rem;
-                }
-            }
-            &_total {
-                > span {
-                    font-size: 0.925rem;
-                }
             }
         }
     }

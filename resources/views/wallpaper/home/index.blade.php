@@ -79,6 +79,7 @@
         @include('wallpaper.template.shareSocial')
         <!-- content -->
         <div class="container">
+            <div class="breadcrumbMobileBox"><!-- dùng để chống nhảy padding - margin so với các trang có breadcrumb --></div>
             <!-- === START:: Product Box === -->
             @if(!empty($products)&&$products->isNotEmpty())
                 <div class="contentBox">

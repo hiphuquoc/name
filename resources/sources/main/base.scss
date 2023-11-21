@@ -44,36 +44,37 @@ $fontText: "SVN-Gilroy", sans-serif;
 @mixin titleDefault {
   color: $colorText;
   font-family: $fontTitle;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 0.75rem;
-  @media(max-width: 990px){
-    font-size: 1.15rem;
+  @media(max-width: 1199px){
+    font-size: 1.05rem;
     margin-bottom: 0.5rem;
   }
-  @media(max-width: 766px){
-    font-size: 1.1rem;
-  }
-  @media(max-width: 577px){
-    font-size: 1.05rem;
+  @media(max-width: 1023px){
+    font-size: 1rem;
     margin-bottom: 0.25rem;
   }
 }
 @mixin h2Default {
   font-family: $fontTitle;
-  margin-bottom: 0.75rem;
-  font-size: 1.15rem;
   color: $colorText;
-  @media(max-width: 990px){
-    font-size: 1.1rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  @media(max-width: 1199px){
+    font-size: 1.05rem;
     margin-bottom: 0.5rem;
   }
-  @media(max-width: 766px){
-    font-size: 1.05rem;
-  }
-  @media(max-width: 577px){
+  @media(max-width: 1023px){
     font-size: 1rem;
     margin-bottom: 0.25rem;
   }
+  // @media(max-width: 766px){
+  //   font-size: 1.05rem;
+  // }
+  // @media(max-width: 577px){
+  //   font-size: 1rem;
+  //   margin-bottom: 0.25rem;
+  // }
 }
 @mixin titleH3 {
   
@@ -274,7 +275,7 @@ $fontText: "SVN-Gilroy", sans-serif;
   // }
 }
 @mixin highLight {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-family: $fontTitle;
   color: $colorTextLight;
   margin-right: 0.25rem;
@@ -288,24 +289,20 @@ $fontText: "SVN-Gilroy", sans-serif;
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
-  @media(max-width: 577px){
-    // font-size: 14px;
-  }
 }
 
 body {
-  font-size: 0.95rem;
+  font-size: 0.925rem;
   line-height: 1.68rem;
   font-weight: 500;
   font-family: $fontText;
   box-sizing: border-box;
   @include colorOpacity('color', $colorText, 0.8);
   @media(max-width: 990px){
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
   @media(max-width: 767px){
-    font-size: 0.9rem;
+    font-size: 0.875rem;
   }
   @media(max-width: 577px){
     font-size: 0.85rem;
@@ -402,21 +399,21 @@ h4 {
   }
 }
 .contentBox {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   @media(max-width: 1199px){
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-  @media(max-width:1024px){
     margin-top: 1rem;
+    margin-bottom: 1rem;
   }
-  @media(max-width: 766px){
-    margin-top: 0.75rem;
+  @media(max-width: 1023px){
+    margin-top: 0.25rem;
   }
-  @media(max-width: 577px){
-    margin-top: 0.5rem;
-  }
+  // @media(max-width: 766px){
+  //   margin-top: 0;
+  // }
+  // @media(max-width: 577px){
+  //   margin-top: 0.25rem;
+  // }
 }
 p, ul, ol {
   margin-bottom: 0.75rem;
@@ -583,17 +580,17 @@ blockquote{
   max-width: 1300px;
   padding: 0 1.5rem;
   @media(max-width: 1199px){
-    padding: 0 1.25rem;
-  }
-  @media(max-width: 1023px){
     padding: 0 1rem;
   }
-  @media(max-width: 767px){
-    padding: 0 0.75rem;
-  }
-  @media(max-width: 577px){
+  @media(max-width: 1023px){
     padding: 0 0.5rem;
   }
+  // @media(max-width: 767px){
+  //   padding: 0 0.75rem;
+  // }
+  // @media(max-width: 577px){
+  //   padding: 0 0.5rem;
+  // }
 }
 
 .background_2 {

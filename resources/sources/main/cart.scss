@@ -2,7 +2,7 @@
     display: flex;
     align-items: stretch;
     &_left {
-        width: calc(100% - 320px - 2rem);
+        width: calc(100% - 320px - 1.5rem);
         &_item {
             background: $colorBackgroundLv2;
             border-radius: 10px;
@@ -21,7 +21,7 @@
         }
     }
     &_right {
-        margin-left: 2rem;
+        margin-left: 1.5rem;
         width: 320px;
     }
     ul {

@@ -126,7 +126,7 @@
     @include colorOpacity('color', $colorText, 0.7);
     font-size: 0.9rem;
     font-weight: normal;
-    opacity: 0.8;
+    opacity: 0.75;
     a {
         color: $colorText;
         &:hover {
@@ -140,6 +140,9 @@
             font-size: 0.6rem;
             color: $bg-06;
         }
+    }
+    @media(max-width: 767px){
+        font-size: inherit;
     }
 }
 .bannerSecondaryBox {
@@ -704,9 +707,9 @@
     line-height: 1.5;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    @media(max-width: 1199px){
-        margin-bottom: 56px;
-    }
+    // @media(max-width: 1199px){
+    //     margin-bottom: 56px;
+    // }
 }
 .gotoTop {
     align-self: flex-end;
@@ -786,13 +789,13 @@
     justify-content: space-between;
     align-items: flex-end;
     @include colorOpacity('color', $colorText, 0.7);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     font-size: 0.9rem;
     &_left {
         display: flex;
         > * {
             &:not(:first-child){
-                margin-left: 1rem;
+                margin-left: 0.5rem;
             }
         }
     }
@@ -803,7 +806,7 @@
             align-items: center;
             > * {
                 &:not(:first-child){
-                    margin-left: 1rem;
+                    margin-left: 0.5rem;
                 }
             }
             select {
@@ -818,26 +821,43 @@
     .highLight {
         @include highLight;
     }
+    @media(max-width: 1023px){
+        margin-bottom: 0.75rem;
+    }
+    // @media(max-width: 1023px){
+    //     margin-bottom: 0.5rem;
+    // }
 }
-$heightSelect : 33.5px;
+$heightSelect : 35px;
 .selectCustom {
     display: flex;
     position: relative;
     height: $heightSelect;
     align-items: flex-end;
-    font-size: 0.85rem;
+    margin-top: 10px;
     &:hover {
         .selectCustom_box {
             visibility: visible !important;
         }
     }
     &_text {
-        margin-right: 0.25rem;
+        position: absolute;
+        top: -15px;
+        left: 0;
+        background: $colorBackgroundLv1;
+        padding: 0 0.5rem 0 0.25rem;
+        border-radius: 10px;
+        font-size: 0.75rem;
+        font-family: $fontTitle;
+        @include colorOpacity('color', $colorText, 0.5);
     }
     &_input {
-        padding: 0.1rem 0.6rem;
+        padding: 0.3rem 0.75rem 0.1rem 0.75rem;
         border-radius: 10px;
         border: 1px solid $colorBackgroundLv3;
+        font-size: 0.85rem;
+        @include colorOpacity('color', $colorText, 0.75);
+        min-width: 110px;
     }
     &_box {
         visibility: hidden;
@@ -851,6 +871,8 @@ $heightSelect : 33.5px;
         z-index: 1;
         max-height: 440px;
         overflow-y: scroll;
+        font-size: 0.8rem;
+        padding: 0.25rem 0;
         &::-webkit-scrollbar {
             background-color: transparent;
             width: 5px;
@@ -884,5 +906,8 @@ $heightSelect : 33.5px;
         font-size: 0.8rem;
         margin-right: 0.5rem;
         opacity: 0.6;
+    }
+    @media(max-width: 1023px){
+        margin-top: 7.5px;
     }
 }
