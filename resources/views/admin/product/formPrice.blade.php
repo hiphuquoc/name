@@ -61,7 +61,7 @@
                     <div class="searchViewBefore">
                         <div class="searchViewBefore_input">
                             <!-- value = null không lưu giá trị search cũ -->
-                            <input type="text" placeholder="Tìm wallpaper..." value="" data-product-price-id="{{ $price->id }}" onkeyup="searchWallpapers(this)" autocomplete="off" />
+                            <input type="text" placeholder="Tìm wallpaper..." value="" data-product-price-id="{{ $price->id }}" onkeyup="searchWallpapersWithDelay(this)" autocomplete="off" />
                             <div>
                                 <img src="/storage/images/svg/search.svg" alt="" title="Tìm kiếm hình nền điện thoại">
                             </div>
@@ -122,7 +122,15 @@
                     console.error("Ajax request failed: " + textStatus, errorThrown);
                 });
             }
-
+            /* mỗi khi người dùng nhập một ký tự mới, hàm searchWallpapersWithDelay sẽ đặt một hẹn giờ (setTimeout) để gọi hàm searchWallpapers sau 0.5 giây. Nếu có thêm ký tự nào được nhập trong khoảng 0.5 giây, hẹn giờ trước đó sẽ bị xóa và hẹn giờ mới sẽ được đặt lại. Điều này giúp tạo ra hiệu ứng chờ giữa các lần nhập. */
+            var searchTimer;
+            function searchWallpapersWithDelay(input) {
+                clearTimeout(searchTimer);
+                
+                searchTimer = setTimeout(function () {
+                    searchWallpapers(input);
+                }, 500);
+            }
             function searchWallpapers(input){
                 const valueInput        = $(input).val();
                 const idProductPrice    = $(input).data('product-price-id');

@@ -10,9 +10,9 @@
             <div class="searchViewBefore_selectbox_item_content_title maxLine_2">
                 {{ $wallpaper->name }}
             </div>
-            <div>
-                {{ $wallpaper->file_name }}
-            </div>
+            @if(!empty($wallpaper->priceUses)&&$wallpaper->priceUses->isNotEmpty())
+                <div>Đã dùng <span style="font-weight:bold;font-size:1.2rem;color:#7367f0;">{{ $wallpaper->priceUses->count() }}</span></div>
+            @endif
         </div>
         <div class="searchViewBefore_selectbox_item_message">
             <div><i class="fa-solid fa-check"></i> Đã chọn</div>

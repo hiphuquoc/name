@@ -12,7 +12,7 @@
 <div class="searchViewBefore">
     <div class="searchViewBefore_input">
         <!-- value = null không lưu giá trị search cũ -->
-        <input id="searchProductAjax_input" type="text" name="key_search" placeholder="{{ $buttonName }}" value="" onkeyup="searchProductAjax(this)" autocomplete="off" />
+        <input id="searchProductAjax_input" type="text" name="key_search" placeholder="{{ $buttonName }}" value="" onkeyup="searchProductAjaxWithDelay(this)" autocomplete="off" />
         <button type="submit" class="button" aria-label="{{ $labelName }}">
             <img src="{{ Storage::url('images/svg/search.svg') }}" alt="" title="{{ $labelName }}" />
         </button>

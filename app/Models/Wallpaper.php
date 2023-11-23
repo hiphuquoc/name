@@ -71,4 +71,7 @@ class Wallpaper extends Model {
     // public function productPrices() {
     //     return $this->hasMany(\App\Models\RelationCategoryBlogInfoBlogInfo::class, 'id', 'seo_id');
     // }
+    public function priceUses(){
+        return $this->hasMany(\App\Models\RelationProductPriceWallpaperInfo::class, 'wallpaper_info_id', 'id');
+    }
 }
