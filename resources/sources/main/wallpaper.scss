@@ -486,7 +486,7 @@
             display: flex;
             padding: 1rem;
             &:nth-child(2n + 0){
-                background: $colorBackgroundLv3;
+                @include colorOpacity('background', $colorBackgroundLv3, 0.5);
             }
             &:last-child {
                 display: flex;
@@ -926,11 +926,8 @@ $heightMenu : 52.5px;
             &:hover {
                 color: inherit;
             }
-            &:last-child {
-                background: none !important;
-            }
             &:nth-child(2n + 0) {
-                background: $colorBackgroundLv3;
+                @include colorOpacity('background', $colorBackgroundLv3, 0.5);
             }
             &_image {
                 flex: 0 0 65px;
@@ -1001,6 +998,7 @@ $heightMenu : 52.5px;
                 justify-content: space-between;
                 align-items: flex-end;
                 border-top: 1px solid $colorBackgroundLv1;
+                background: none !important;
                 .total {
                     width: 100%;
                     > span {
