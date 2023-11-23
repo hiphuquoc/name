@@ -27,7 +27,7 @@
                 }
                 if(!empty($option)){
                     if(empty($language)||$language=='vi'){
-                        
+                        $option = 'Trọn bộ';
                     }else {
                         $option = 'Full set';
                     }
@@ -37,8 +37,8 @@
             @endphp
             <div class="cartMessage_box_body_content">
                 <div class="cartMessage_box_body_content_title maxLine_3">{{ $title ?? 'Không xác định' }}</div>
-                <div class="cartMessage_box_body_content_price">{!! $xhtmlPrice !!}</div>
-                <div class="cartMessage_box_body_content_type">{{ $option }}</div>
+                <div class="cartMessage_box_body_content_price">{!! $xhtmlPrice !!} <span>/{{ $option }}</span></div>
+                {{-- <div class="cartMessage_box_body_content_type">{{ $option }}</div> --}}
             </div>
         </div>
         @if(!empty($language)&&$language=='en')

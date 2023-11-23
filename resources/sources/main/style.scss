@@ -803,7 +803,7 @@
         &_item {
             display: flex;
             justify-content: flex-end;
-            align-items: center;
+            align-items: flex-end;
             > * {
                 &:not(:first-child){
                     margin-left: 0.5rem;
@@ -863,7 +863,7 @@ $heightSelect : 35px;
         visibility: hidden;
         position: absolute;
         top: $heightSelect;
-        right: 0;
+        left: 0;
         background: $colorBackgroundLv2;
         min-width: 180px;
         border-radius: 10px;

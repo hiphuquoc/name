@@ -49,7 +49,7 @@ class AjaxController extends Controller {
                 ->orWhere('name', 'like', '%'.$keySearch.'%')
                 ->orWhere('en_name', 'like', '%'.$keySearch.'%')
                 ->skip(0)
-                ->take(6)
+                ->take(5)
                 ->with('seo', 'prices.wallpapers.infoWallpaper')
                 ->orderBy('seo.ordering', 'DESC')
                 ->get();
@@ -95,7 +95,7 @@ class AjaxController extends Controller {
                 }
                 $route          = $language=='vi' ? route('main.searchProduct') : route('main.enSearchProduct');
                 $response       .= '<a href="'.$route.'?key_search='.request('key_search').'" class="searchViewBefore_selectbox_item">
-                                        Xem tất cả (<span style="font-size:1.1rem;">'.$count.'</span>) <i class="fa-solid fa-angles-right"></i>
+                                        Xem tất cả (<span>'.$count.'</span>) kết quả <i class="fa-solid fa-angles-right"></i>
                                     </a>';
             }else {
                 $response       = '<div class="searchViewBefore_selectbox_item">Không có sản phẩm phù hợp!</div>';

@@ -266,19 +266,26 @@ $fontText: "SVN-Gilroy", sans-serif;
       }
     }
   }
-  // @media(max-width: 577px){
-  //   &_item {
-  //     &:not(:first-child){
-  //       margin-left: 1rem;
-  //     }
-  //   }
-  // }
 }
 @mixin highLight {
   font-size: 1.1rem;
   font-family: $fontTitle;
   color: $colorTextLight;
   margin-right: 0.25rem;
+}
+
+@mixin backgroundModal {
+  display: none;
+  position: fixed;
+  top: 52.5px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  @include colorOpacity('background', $colorBackgroundLv2, 0.8);
+  z-index: -1;
+  &:hover {
+    display: none !important;
+  }
 }
 
 *, ::after, ::before {

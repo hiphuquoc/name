@@ -11,12 +11,12 @@
             }
             &_head {
                 font-size: 1rem;
-                padding: 0.5rem 1rem;
-                padding-bottom: 0;
+                padding: 0.5rem 1rem 1rem;
+                padding-bottom: 0 !important;
                 font-family: $fontTitle;
             }
             &_body {
-                padding: 1rem;
+                padding: 0.75rem 1rem 1rem;
             }
         }
     }
@@ -38,11 +38,17 @@
             width: 100%;
         }
     }
-    @media(max-width: 1024px){
+    @media(max-width: 1023px){
         &_left {
             &_item {
                 &:not(:last-child){
                     margin-bottom: 1.25rem;
+                }
+                &_head {
+                    padding: 0.5rem 0.75rem 0.75rem;
+                }
+                &_body {
+                    padding: 0.5rem 0.75rem 0.75rem;
                 }
             }
         }
@@ -124,7 +130,8 @@
         font-weight: bold;
         color: $colorText;
     }
-    @media(max-width: 990px){
+    @media(max-width: 1023px){
+        padding: 0.75rem;
         &_title {
             margin-bottom: 0;
             border: none;
@@ -188,27 +195,33 @@
                 display: flex;
                 align-items: stretch;
                 &_image {
-                    flex: 0 0 50px;
+                    flex: 0 0 65px;
+                    aspect-ratio: 1/1;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    display: flex;
                     img {
                         width: 100%;
+                        object-fit: cover;
+                        aspect-ratio: 1/1;
+                        scale: 1.1;
                     }
                 }
                 &_content {
                     width: 100%;
-                    margin-left: 1rem;
+                    margin-left: 0.75rem;
                     display: flex;
                     flex-direction: column;
                     &_title {
-                        font-family: $fontText;
-                        font-weight: normal;
-                        font-size: 0.9rem;
-                        margin-bottom: 0 !important;
-                        color: $colorText;
-                        line-height: 1.58;
+                        line-height: 1.5;
+                        color: inherit;
+                        margin-top: -0.25rem;
+                        margin-bottom: 0.25rem;
+                        // opacity: 0.75;
                     }
                     &_option {
-                        font-size: 0.9rem;
-                        @include colorOpacity('color', $colorText, 0.7);
+                        // font-size: 0.9rem;
+                        @include colorOpacity('color', $colorText, 0.75);
                     }
                 }
             }
@@ -218,6 +231,9 @@
                 text-align: right;
                 &_now {
                     font-family: $fontTitle;
+                    font-size: 1rem;
+                    letter-spacing: 1px;
+                    margin-top: -0.75rem;
                 }
                 &_old {
                     display: flex;
@@ -329,6 +345,7 @@
                     &_now {
                         order: 2;
                         margin-right: 1rem;
+                        margin-top: 0;
                     }
                     &_old {
                         flex-direction: row-reverse;
@@ -401,7 +418,7 @@
         box-shadow: 1px 1px 5px $colorBackgroundLv1;
         max-width: 420px;
         width: 100%;
-        padding: 1rem 1.5rem 1.5rem;
+        padding: 1rem 1.25rem;
         position: relative;
         border-radius: 10px;
         &_head {
@@ -409,14 +426,21 @@
             position: relative;
             font-size: 1rem;
             color: $colorText;
-            // font-size: 1.2rem;
-            // font-family: $fontTitle;
+            font-family: $fontTitle;
+            letter-spacing: 0.5px;
+            &:before {
+                @include fontAwesome;
+                content: '\f00c';
+                color: $colorSuccess;
+                margin-right: 0.25rem;
+                font-size: 1.2rem;
+            }
         }
         &_close {
             position: absolute;
             top: 0;
             right: 0;
-            width: 42px;
+            width: 40px;
             background: $colorBackgroundLv2;
             aspect-ratio: 1/1;
             display: flex;
@@ -437,28 +461,37 @@
             display: flex;
             margin-bottom: 1.5rem;
             &_image {
-                flex: 0 0 80px;
+                flex: 0 0 90px;
+                aspect-ratio: 1/1;
+                border-radius: 10px;
+                overflow: hidden;
+                display: flex;
                 img {
-                    height: 100%;
+                    width: 100%;
                     object-fit: cover;
+                    aspect-ratio: 1/1;
+                    scale: 1.1;
                 }
             }
             &_content {
                 width: 100%;
-                margin-left: 1.25rem;
+                margin-left: 1rem;
                 &_title {
-                    font-family: $fontTitle;
-                    font-size: 1rem;
-                    // color: $colorText;
-                    @include colorOpacity('color', $colorText, 0.8);
-                    margin-bottom: 1rem;
+                    line-height: 1.5;
+                    color: inherit;
+                    margin-bottom: 0.25rem;
+                    margin-top: -0.25rem;
                 }
                 &_price {
                     color: $colorPrice;
-                    font-size: 1.2rem;
                     font-weight: bold;
                     letter-spacing: 2px;
-                    margin-bottom: 0.5rem;
+                    font-size: 0.9rem;
+                    > span {
+                        font-weight: normal;
+                        @include colorOpacity('color', $colorText, 0.6);
+                        letter-spacing: 0;
+                    }
                 }
                 &_type {
                     @include colorOpacity('color', $colorText, 0.7);

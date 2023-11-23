@@ -111,7 +111,7 @@
 }
 .productDetailBox {
     position: sticky;
-    top: calc($heightMenu + 1.5rem);
+    top: calc(52.5px + 1.5rem);
     &_detail {
         &_title {
             @include titleDefault;

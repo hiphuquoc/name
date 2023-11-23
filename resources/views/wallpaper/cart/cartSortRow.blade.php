@@ -42,7 +42,7 @@
             {{ $title }}
         </a>
         <div class="cartBox_list_item_content_price">
-            {!! $xhtmlPrice !!} /{!! $titlePrice !!}
+            {!! $xhtmlPrice !!} <span>/{!! $titlePrice !!}</span>
         </div>
         {{-- <div class="cartBox_list_item_content_orther">
             <div class="cartBox_list_item_content_orther_quantity">

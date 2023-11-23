@@ -177,7 +177,8 @@ class CartController extends Controller{
         }
         /* set lại cookie */
         CookieController::setCookie('cart', json_encode($products), 3600);
-        $result['total']        = number_format($total).config('main.currency_unit');
+        $language               = session('language') ?? 'vi';
+        $result['total']        = \App\Helpers\Number::getFormatPriceByLanguage($total, $language);
         $result['count']        = $count;
         /* trường hợp remove đến khi cart rỗng */
         $result['empty_cart']   = '';
@@ -186,7 +187,7 @@ class CartController extends Controller{
     }
 
     public static function getCollectionProducts(){
-        $products       = Cookie::get('cart');
+        $products           = Cookie::get('cart');
         if(!empty($products)) $products = json_decode($products, true);
         /* duyệt từ từ qua mảng để lấy lần lượt product ứng với price */
         $infoProducts       = new \Illuminate\Database\Eloquent\Collection;
