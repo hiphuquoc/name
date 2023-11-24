@@ -317,6 +317,16 @@ body {
   &.background {
     background: $colorBackgroundLv1;
   }
+  &::-webkit-scrollbar {
+    width: 7px; /* Chiều rộng của thanh cuộn */
+  }
+  &::-webkit-scrollbar-thumb {;
+    @include colorOpacity('background', $colorBackgroundLv3, 0.75); /* Màu của "nút" thanh cuộn */
+    border-radius: 100px; /* Độ cong của "nút" */
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent; /* Màu của nền thanh cuộn */
+  }
 }
 
 .contentElement {
