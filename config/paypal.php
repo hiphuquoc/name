@@ -12,9 +12,9 @@ return [
         'app_id'            => 'APP-80W284485P519543T',
     ],
     'live' => [
-        'client_id'         => env('PAYPAL_CLIENT_ID', ''),
-        'client_secret'     => env('PAYPAL_SANDBOX_LIVE_ID', ''),
-        'app_id'            => env('PAYPAL_SANDBOX_LIVE_SECRET', ''),
+        'client_id'         => env('PAYPAL_SANDBOX_LIVE_ID', ''),
+        'client_secret'     => env('PAYPAL_SANDBOX_LIVE_SECRET', ''),
+        'app_id'            => '80W284485P519543T',
     ],
 
     'payment_action' => env('PAYPAL_PAYMENT_ACTION', 'Sale'), // Can only be 'Sale', 'Authorization' or 'Order'
