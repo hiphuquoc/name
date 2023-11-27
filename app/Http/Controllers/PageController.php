@@ -14,77 +14,77 @@ use App\Models\Event;
 
 class PageController extends Controller{
 
-    public static function saleOff(){
-        $language       = 'vi';
-        SettingController::settingLanguage($language);
-        $viewBy         = request()->cookie('view_by') ?? 'set';
-        /* thông tin Page */
-        $item           = Page::select('*')
-            ->whereHas('seo', function($query){
-                $query->where('slug', 'hinh-nen-dien-thoai-khuyen-mai');
-            })
-            ->with('seo', 'files')
-            ->first();
-            $flagMatch  = true;
-        /* danh sách product => lấy riêng để dễ truyền vào template */
-        $products       = Product::select('product_info.*')
-                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                            ->whereHas('prices', function($query) {
-                                $query->where('sale_off', '>', 0);
-                            })
-                            ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories')
-                            ->orderBy('seo.ordering', 'DESC')
-                            ->orderBy('id', 'DESC')
-                            ->get();
-        // $totalProduct   = Product::select('*')
-        //                     ->whereHas('prices', function($query) {
-        //                         $query->where('sale_off', '>', 0);
-        //                     })
-        //                     ->count();
-        /* breadcrumb */
-        $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full, $language);
-        /* select của filter */
-        $categories         = Category::all();
-        $styles             = Style::all();
-        $events             = Event::all();
-        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'viewBy'));
-    }
+    // public static function saleOff(){
+    //     $language       = 'vi';
+    //     SettingController::settingLanguage($language);
+    //     $viewBy         = request()->cookie('view_by') ?? 'set';
+    //     /* thông tin Page */
+    //     $item           = Page::select('*')
+    //         ->whereHas('seo', function($query){
+    //             $query->where('slug', 'hinh-nen-dien-thoai-khuyen-mai');
+    //         })
+    //         ->with('seo', 'files')
+    //         ->first();
+    //         $flagMatch  = true;
+    //     /* danh sách product => lấy riêng để dễ truyền vào template */
+    //     $products       = Product::select('product_info.*')
+    //                         ->join('seo', 'seo.id', '=', 'product_info.seo_id')
+    //                         ->whereHas('prices', function($query) {
+    //                             $query->where('sale_off', '>', 0);
+    //                         })
+    //                         ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories')
+    //                         ->orderBy('seo.ordering', 'DESC')
+    //                         ->orderBy('id', 'DESC')
+    //                         ->get();
+    //     // $totalProduct   = Product::select('*')
+    //     //                     ->whereHas('prices', function($query) {
+    //     //                         $query->where('sale_off', '>', 0);
+    //     //                     })
+    //     //                     ->count();
+    //     /* breadcrumb */
+    //     $breadcrumb         = Url::buildBreadcrumb($item->seo->slug_full, $language);
+    //     /* select của filter */
+    //     $categories         = Category::all();
+    //     $styles             = Style::all();
+    //     $events             = Event::all();
+    //     return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'viewBy'));
+    // }
 
-    public static function enSaleOff(){
-        $language       = 'en';
-        SettingController::settingLanguage($language);
-        $viewBy         = request()->cookie('view_by') ?? 'set';
-        /* thông tin Page */
-        $item           = Page::select('*')
-            ->whereHas('en_seo', function($query){
-                $query->where('slug', 'promotion-phone-wallpapers');
-            })
-            ->with('seo', 'en_seo', 'files')
-            ->first();
-            $flagMatch  = true;
-        /* danh sách product => lấy riêng để dễ truyền vào template */
-        $products       = Product::select('product_info.*')
-                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                            ->whereHas('prices', function($query) {
-                                $query->where('sale_off', '>', 0);
-                            })
-                            ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories')
-                            ->orderBy('seo.ordering', 'DESC')
-                            ->orderBy('id', 'DESC')
-                            ->get();
-        // $totalProduct   = Product::select('*')
-        //                     ->whereHas('prices', function($query) {
-        //                         $query->where('sale_off', '>', 0);
-        //                     })
-        //                     ->count();
-        /* breadcrumb */
-        $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
-        /* select của filter */
-        $categories         = Category::all();
-        $styles             = Style::all();
-        $events             = Event::all();
-        return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'viewBy'));
-    }
+    // public static function enSaleOff(){
+    //     $language       = 'en';
+    //     SettingController::settingLanguage($language);
+    //     $viewBy         = request()->cookie('view_by') ?? 'set';
+    //     /* thông tin Page */
+    //     $item           = Page::select('*')
+    //         ->whereHas('en_seo', function($query){
+    //             $query->where('slug', 'promotion-phone-wallpapers');
+    //         })
+    //         ->with('seo', 'en_seo', 'files')
+    //         ->first();
+    //         $flagMatch  = true;
+    //     /* danh sách product => lấy riêng để dễ truyền vào template */
+    //     $products       = Product::select('product_info.*')
+    //                         ->join('seo', 'seo.id', '=', 'product_info.seo_id')
+    //                         ->whereHas('prices', function($query) {
+    //                             $query->where('sale_off', '>', 0);
+    //                         })
+    //                         ->with('seo', 'en_seo', 'files', 'prices', 'contents', 'categories')
+    //                         ->orderBy('seo.ordering', 'DESC')
+    //                         ->orderBy('id', 'DESC')
+    //                         ->get();
+    //     // $totalProduct   = Product::select('*')
+    //     //                     ->whereHas('prices', function($query) {
+    //     //                         $query->where('sale_off', '>', 0);
+    //     //                     })
+    //     //                     ->count();
+    //     /* breadcrumb */
+    //     $breadcrumb     = Url::buildBreadcrumb($item->seo->slug_full, $language);
+    //     /* select của filter */
+    //     $categories         = Category::all();
+    //     $styles             = Style::all();
+    //     $events             = Event::all();
+    //     return view('wallpaper.category.promotion', compact('item', 'language', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'viewBy'));
+    // }
 
     // public static function searchProduct(Request $request){
     //     $keySearch      = $request->get('key_search') ?? null;

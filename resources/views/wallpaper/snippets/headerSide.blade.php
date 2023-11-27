@@ -8,14 +8,23 @@
             break;
         }
     }
+    /* phong cách */
+    $styles                     = \App\Models\Style::select('style_info.*')
+                                    ->join('seo', 'seo.id', '=', 'style_info.seo_id')
+                                    ->whereHas('products', function(){
+
+                                    })
+                                    ->orderBy('seo.ordering', 'DESC')
+                                    ->with('seo', 'en_seo', 'products')
+                                    ->get();
     /* sự kiện */
-    $events                     = \App\Models\Event::select('*')
+    $events                     = \App\Models\Event::select('event_info.*')
                                     ->join('seo', 'seo.id', '=', 'event_info.seo_id')
                                     ->orderBy('seo.ordering', 'DESC')
                                     ->with('seo', 'en_seo', 'products')
                                     ->get();
     /* trang chính sách */
-    $policies                   = \App\Models\Page::select('*')
+    $policies                   = \App\Models\Page::select('page_info.*')
                                     ->join('seo', 'seo.id', '=', 'page_info.seo_id')
                                     ->whereHas('type', function($query){
                                         $query->where('code', 'policy');
@@ -82,7 +91,7 @@
                             @endphp
                             <li>
                                 <a href="{{ env('APP_URL') }}/{{ $url }}" title="{{ $title }}" aria-label="{{ $title }}">
-                                <div>{{ $title }} {!! $type->products->count()>0 ? '(<span class="highLight">'.$type->products->count().'</span>)' : null !!}</div>
+                                    <div>{{ $title }} {!! $type->products->count()>0 ? '(<span class="highLight">'.$type->products->count().'</span>)' : null !!}</div>
                                 </a>
                             </li>
                         @endif
@@ -90,6 +99,39 @@
                 </ul>
             </li>
         @endif
+        <li>
+            @if(empty($language)||$language=='vi')
+                <div class="open">
+                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Hình nền điện thoại theo phong cách" title="Hình nền điện thoại theo phong cách" style="opacity:1;" />
+                    <div>Phong cách</div>
+                    <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
+                </div>
+            @else
+                <div class="open">
+                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Phone wallpaper by styles" title="Phone wallpaper by styles" style="opacity:1;" />
+                    <div>Styles</div>
+                    <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
+                </div>
+            @endif
+            <ul id="phong-cach" class="filterLinkSelected">
+                @foreach($styles as $style)
+                    @php
+                        if(empty($language)||$language=='vi'){
+                            $title      = $style->name ?? $style->seo->title ?? null;
+                            $urlFull    = env('APP_URL').'/'.$style->seo->slug_full;
+                        }else {
+                            $title      = $style->en_name ?? $style->en_seo->title ?? null;
+                            $urlFull    = env('APP_URL').'/'.$style->en_seo->slug_full;
+                        }
+                    @endphp
+                    <li>
+                        <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
+                            <div>{{ $title }} {!! $style->products->count()>0 ? '(<span class="highLight">'.$style->products->count().'</span>)' : null !!}</div>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </li>
         <li>
             @if(empty($language)||$language=='vi')
                 <div class="open">
@@ -117,13 +159,13 @@
                     @endphp
                     <li>
                         <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
-                            <div>{{ $title }}</div>
+                            <div>{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
                         </a>
                     </li>
                 @endforeach
             </ul>
         </li>
-        <li>
+        {{-- <li>
             @if(empty($language)||$language=='vi')
                 <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi" aria-label="Hình nền điện thoại khuyến mãi">
                     <img src="{{ Storage::url('images/svg/percentage.svg') }}" alt="Hình nền điện thoại đang khuyến mãi" title="Hình nền điện thoại đang khuyến mãi" />
@@ -136,7 +178,7 @@
                 </a>
             @endif
             
-        </li>
+        </li> --}}
         <li>
             <div class="close">
                 @if(empty($language)||$language=='vi')
