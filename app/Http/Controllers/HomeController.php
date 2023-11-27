@@ -37,11 +37,13 @@ class HomeController extends Controller{
                                     })
                                     ->with('seo', 'en_seo', 'type')
                                     ->first();
-            $products           = Product::select('*')
+            $products           = Product::select('product_info.*')
+                                    ->join('seo', 'seo.id', '=', 'product_info.seo_id')
                                     ->whereHas('prices.wallpapers', function(){
 
                                     })
                                     ->with('prices.wallpapers')
+                                    ->orderBy('seo.ordering', 'DESC')
                                     ->orderBy('id', 'DESC')
                                     ->get();
             $viewBy             = $request->cookie('view_by') ?? 'set';
@@ -65,22 +67,24 @@ class HomeController extends Controller{
             $xhtml              = file_get_contents($pathCache);
         }else {
             /* lưu ngôn ngữ sử dụng */
-            $language               = 'en';
+            $language           = 'en';
             SettingController::settingLanguage($language);
-            $item                   = Page::select('*')
-                                        ->whereHas('type', function($query){
-                                            $query->where('code', 'home');
-                                        })
-                                        ->whereHas('en_seo', function($query){
-                                            $query->where('slug', 'en');
-                                        })
-                                        ->with('seo', 'en_seo', 'type')
-                                        ->first();
-            $products           = Product::select('*')
+            $item               = Page::select('*')
+                                    ->whereHas('type', function($query){
+                                        $query->where('code', 'home');
+                                    })
+                                    ->whereHas('en_seo', function($query){
+                                        $query->where('slug', 'en');
+                                    })
+                                    ->with('seo', 'en_seo', 'type')
+                                    ->first();
+            $products           = Product::select('product_info.*')
+                                    ->join('seo', 'seo.id', '=', 'product_info.seo_id')
                                     ->whereHas('prices.wallpapers', function(){
 
                                     })
                                     ->with('prices.wallpapers')
+                                    ->orderBy('seo.ordering', 'DESC')
                                     ->orderBy('id', 'DESC')
                                     ->get();
             $viewBy             = $request->cookie('view_by') ?? 'set';

@@ -241,6 +241,9 @@ class WallpaperController extends Controller {
         if(!empty($request->get('key_search'))&&!empty($request->get('product_price_id'))){
             $wallpapers     = Wallpaper::select('*')
                                 ->where('name', 'like', '%'.$request->get('key_search').'%')
+                                ->orderBy('price_uses_count', 'ASC')
+                                ->orderBy('id', 'DESC')
+                                ->withCount('priceUses') // Số lượng phần tử trong priceUses trả ra tên biến trong collection price_uses_count
                                 ->get();
             $relations      = RelationProductPriceWallpaperInfo::select('*')
                                 ->where('product_price_id', $request->get('product_price_id'))

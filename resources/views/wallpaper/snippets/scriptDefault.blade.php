@@ -479,34 +479,6 @@
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
-    /* mỗi khi người dùng nhập một ký tự mới, hàm searchWallpapersWithDelay sẽ đặt một hẹn giờ (setTimeout) để gọi hàm searchWallpapers sau 0.5 giây. Nếu có thêm ký tự nào được nhập trong khoảng 0.5 giây, hẹn giờ trước đó sẽ bị xóa và hẹn giờ mới sẽ được đặt lại. Điều này giúp tạo ra hiệu ứng chờ giữa các lần nhập. */
-    var searchTimer;
-    function searchProductAjaxWithDelay(input) {
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(function () {
-            searchProductAjax(input);
-        }, 500);
-    }
-    /* tìm kiếm sản phẩm ajax */
-    function searchProductAjax(elementButton){
-        const valueElement  = $(elementButton).val();
-        const language      = $('#language').val();
-        $.ajax({
-            url         : '{{ route("ajax.searchProductAjax") }}',
-            type        : 'get',
-            dataType    : 'html',
-            data        : {
-                key_search  : valueElement,
-                language
-            },
-            success     : function(response){
-                if(response!='') {
-                    $('#js_searchProductAjax_idWrite').html(response);
-                }
-                
-            }
-        });
-    }
     /* toc content */
     function buildTocContentMain(idElement){
         var dataTocContent      = {};

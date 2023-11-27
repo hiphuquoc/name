@@ -32,10 +32,10 @@
                                 <div class="oneLine">
                                     <strong>Giá trọn bộ:</strong> <span style="color:red;font-weight:bold;font-size:1.3rem;">{{ $item->price }}{!! config('main.currency_unit_en') !!}</span>
                                 </div>
-                                @if(!empty($item->categories))
+                                @if(!empty($item->categories)&&$item->categories->isNotEmpty())
                                     <div class="onLine" style="margin-top:0.25rem;">
                                         @php
-                                            $xhtmlCategory          = null;
+                                            $xhtmlCategory      = null;
                                             foreach($item->categories as $category){
                                                 $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
                                             }
@@ -43,26 +43,26 @@
                                         <strong>Chủ đề:</strong> {!! $xhtmlCategory !!}
                                     </div>
                                 @endif
-                                @if(!empty($item->events))
+                                @if(!empty($item->styles)&&$item->styles->isNotEmpty())
                                     <div class="onLine" style="margin-top:0.25rem;">
                                         @php
-                                            $xhtmlCategory          = null;
-                                            foreach($item->categories as $category){
-                                                $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                            $xhtmlStyle         = null;
+                                            foreach($item->styles as $style){
+                                                $xhtmlStyle  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$style->infoStyle->name.'</div>';
                                             }
                                         @endphp 
-                                        <strong>Sự kiện:</strong> {!! $xhtmlCategory !!}
+                                        <strong>Phong cách:</strong> {!! $xhtmlStyle !!}
                                     </div>
                                 @endif
-                                @if(!empty($item->styles))
+                                @if(!empty($item->events)&&$item->events->isNotEmpty())
                                     <div class="onLine" style="margin-top:0.25rem;">
                                         @php
-                                            $xhtmlCategory          = null;
-                                            foreach($item->categories as $category){
-                                                $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                            $xhtmlEvent         = null;
+                                            foreach($item->events as $event){
+                                                $xhtmlEvent     .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$event->infoEvent->name.'</div>';
                                             }
                                         @endphp 
-                                        <strong>Phong cách:</strong> {!! $xhtmlCategory !!}
+                                        <strong>Sự kiện:</strong> {!! $xhtmlEvent !!}
                                     </div>
                                 @endif
                             </td>

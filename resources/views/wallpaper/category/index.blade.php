@@ -84,19 +84,32 @@
         @include('wallpaper.template.shareSocial')
         <!-- content -->
         <div class="contentBox">
-            @if(!empty($language)&&$language=='en')
-                @if(!empty($item->en_name)&&$item->en_name!='Phone Wallpapers')
-                    <h1>{{ $item->en_name }} Phone Wallpapers</h1>
-                @else 
-                    <h1>{{ $item->en_name ?? null }}</h1>
+            <div style="display:flex;">
+                @php
+                    if(empty($language)||$language=='vi'){
+                        $titlePage = $item->seo->slug=='hinh-nen-dien-thoai' ? $item->name : 'Hình nền điện thoại '.$item->name;
+                    }else {
+                        $titlePage = $item->en_seo->slug=='phone-wallpapers' ? $item->en_name : $item->en_name.' Phone Wallpapers';
+                    }
+                @endphp
+                <h1>{{ $titlePage }}</h1>
+                <!-- từ khóa vừa search -->
+                @if(!empty(request('search')))
+                    <div class="keySearchBadge">
+                        <div class="keySearchBadge_label">
+                            - tìm kiếm với:
+                        </div>
+                        <div class="keySearchBadge_box">
+                            <div class="keySearchBadge_box_item">
+                                <div class="keySearchBadge_box_item_badge">
+                                    <div>{{ request('search') }}</div>
+                                    <a href="{{ URL::current() }}" class="keySearchBadge_box_item_badge_action"><i class="fa-solid fa-xmark"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endif
-            @else 
-                @if(!empty($item->name)&&$item->name!='Hình nền điện thoại')
-                    <h1>Hình nền điện thoại {{ $item->name }}</h1>
-                @else 
-                    <h1>{{ $item->name ?? null }}</h1>
-                @endif
-            @endif
+            </div>
             <!-- load more -->
             {{-- <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
             <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" /> 
@@ -135,7 +148,8 @@
             <!-- Product Box -->
             @include('wallpaper.template.wallpaperGrid', [
                 'products'      => $products ?? null,
-                'headingTitle'  => 'h2'
+                'headingTitle'  => 'h2',
+                'contentEmpty'  => true
             ])
             {{-- @include('main.template.productGridLoading')
             <div id="js_filterProduct_hidden"></div> --}}

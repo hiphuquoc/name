@@ -38,8 +38,8 @@ class AjaxController extends Controller {
     }
 
     public static function searchProductAjax(Request $request){
-        if(!empty($request->get('key_search'))){
-            $keySearch          = \App\Helpers\Charactor::convertStringSearch($request->get('key_search'));
+        if(!empty($request->get('search'))){
+            $keySearch          = \App\Helpers\Charactor::convertStringSearch($request->get('search'));
             $products           = Product::select('product_info.*')
                 ->whereHas('prices.wallpapers', function(){
 
@@ -93,12 +93,20 @@ class AjaxController extends Controller {
                                         </div>
                                     </a>';
                 }
-                $route          = $language=='vi' ? route('main.searchProduct') : route('main.enSearchProduct');
-                $response       .= '<a href="'.$route.'?key_search='.request('key_search').'" class="searchViewBefore_selectbox_item">
-                                        Xem tất cả (<span>'.$count.'</span>) kết quả <i class="fa-solid fa-angles-right"></i>
-                                    </a>';
+                if(empty($language)||$language=='vi'){
+                    $url            = route('routing', ['slug' => 'hinh-nen-dien-thoai']).'?search='.$keySearch;
+                    $contentButton  = 'Xem tất cả (<span>'.$count.'</span>) kết quả <i class="fa-solid fa-angles-right"></i>';
+                }else {
+                    $url            = route('routing', ['slug' => 'phone-wallpapers']).'?search='.$keySearch;
+                    $contentButton  = 'See all (<span>'.$count.'</span>) results <i class="fa-solid fa-angles-right"></i>';
+                }
+                $response           .= '<a href="'.$url.'" class="searchViewBefore_selectbox_item">'.$contentButton.'</a>';
             }else {
-                $response       = '<div class="searchViewBefore_selectbox_item">Không có sản phẩm phù hợp!</div>';
+                if(empty($language)||$language=='vi'){
+                    $response       = '<div class="searchViewBefore_selectbox_item">'.config('main.message.vi.product_empty').'</div>';
+                }else {
+                    $response       = '<div class="searchViewBefore_selectbox_item">'.config('main.message.en.product_empty').'</div>';
+                }
             }
             echo $response;
         }

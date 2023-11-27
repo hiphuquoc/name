@@ -764,23 +764,30 @@
     }
 }
 .keySearchBadge {
-    font-size: 0.9rem;
-    margin-left: 1rem;
-    &_item {
-        display: inline-block;
-        border-radius: 10px;
-        padding: 0.25rem 0.5rem 0.25rem 0.75rem;
-        background: $colorBackgroundLv2;
-        cursor: pointer;
-        &_badge {
-            display: flex;
-            &_action {
-                margin-left: 0.5rem;
-                color: $colorText !important;
+    margin-left: 0.5rem;
+    display: flex;
+    // align-items: flex-end;
+    &_label {
+        margin-right: 0.5rem;
+    }
+    &_box {
+        font-size: 0.8rem;
+        &_item {
+            display: inline-block;
+            border-radius: 10px;
+            padding: 0.1rem 0.5rem;
+            background: $colorBackgroundLv2;
+            cursor: pointer;
+            &_badge {
+                display: flex;
+                &_action {
+                    margin-left: 0.5rem;
+                    color: $colorText !important;
+                }
             }
-        }
-        &:hover {
-            background: $bg-08;
+            &:hover {
+                background: $bg-08;
+            }
         }
     }
 }

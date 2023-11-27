@@ -80,11 +80,13 @@ class RoutingController extends Controller{
                     $flagMatch      = true;
                     $viewBy         = request()->cookie('view_by') ?? 'set';
                     /* breadcrumb */
-                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                    $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                    /* key_search */
+                    $keySearch      = request('search') ?? null;
                     /* ===== Chủ để ===== */
                     if($checkExists->type=='category_info'){
                         /* thư mục chứa content */
-                        $folderContent      = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
+                        $folderContent  = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
                         /* thông tin category */
                         $item           = Category::select('*')
                                             ->where('seo_id', $idSeo)
@@ -92,7 +94,13 @@ class RoutingController extends Controller{
                                             ->first();
                         /* danh sách product => lấy riêng để dễ truyền vào template */
                         $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
-                        $products       = Product::select('*')
+                        $products       = Product::select('product_info.*')
+                                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
+                                            ->when(!empty($keySearch), function($query) use($keySearch){
+                                                $query->where('code', 'like', '%'.$keySearch.'%')
+                                                    ->orWhere('name', 'like', '%'.$keySearch.'%')
+                                                    ->orWhere('en_name', 'like', '%'.$keySearch.'%');
+                                            })
                                             ->whereHas('prices.wallpapers', function($query){
 
                                             })
@@ -100,6 +108,7 @@ class RoutingController extends Controller{
                                                 $query->whereIn('id', $arrayCategory);
                                             })
                                             ->with('seo', 'en_seo', 'prices')
+                                            ->orderBy('seo.ordering', 'DESC')
                                             ->orderBy('id', 'DESC')
                                             ->get();
                         $categoryChoose = $item;
@@ -115,7 +124,8 @@ class RoutingController extends Controller{
                                             ->first();
                         $idStyle        = $item->id ?? 0;
                         /* danh sách product */
-                        $products       = Product::select('*')
+                        $products       = Product::select('product_info.*')
+                                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
                                             ->whereHas('prices.wallpapers', function($query){
 
                                             })
@@ -123,6 +133,7 @@ class RoutingController extends Controller{
                                                 $query->where('id', $idStyle);
                                             })
                                             ->with('seo', 'en_seo', 'prices')
+                                            ->orderBy('seo.ordering', 'DESC')
                                             ->orderBy('id', 'DESC')
                                             ->get();
                         $styleChoose    = $item;
@@ -138,7 +149,8 @@ class RoutingController extends Controller{
                                             ->first();
                         $idEvent        = $item->id ?? 0;
                         /* danh sách product */
-                        $products       = Product::select('*')
+                        $products       = Product::select('product_info.*')
+                                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
                                             ->whereHas('prices.wallpapers', function($query){
 
                                             })
@@ -146,6 +158,7 @@ class RoutingController extends Controller{
                                                 $query->where('id', $idEvent);
                                             })
                                             ->with('seo', 'en_seo', 'prices')
+                                            ->orderBy('seo.ordering', 'DESC')
                                             ->orderBy('id', 'DESC')
                                             ->get();
                         $eventChoose    = $item;

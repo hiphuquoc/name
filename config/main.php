@@ -113,4 +113,12 @@ return [
         'folderSave'    => 'public/caches/',
     ],
     'main.password_user_default' => 'hitourVN@mk123',
+    'message'   => [
+        'vi'    => [
+            'product_empty' => 'Không có hình nền phù hợp!'
+        ],
+        'en'    => [
+            'product_empty' => 'No wallpapers matching your search!'
+        ]
+    ]
 ];
