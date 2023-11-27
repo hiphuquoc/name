@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\RedirectController;
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
+use App\Http\Controllers\PaypalController;
 
 /*
 |--------------------------------------------------------------------------

@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use App\Http\Controllers\GoogledriveController;
 use App\Models\Order;
-use App\Models\SourceFile;
-use Yaza\LaravelGoogleDriveStorage\Gdrive;
 use App\Jobs\SendEmailOrder;
-use Illuminate\Support\Facades\Cookie;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class ConfirmController extends Controller {
 
@@ -82,8 +79,12 @@ class ConfirmController extends Controller {
     }
 
     public static function handlePaymentPaypal(Request $request){
-        if(!empty($request->get('code'))&&!empty($request->get('PayerID'))){
-            /* lấy thông tin của Order trong CSDL */
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $provider->getAccessToken();
+        $response = $provider->capturePaymentOrder($request['token']);
+        if (!empty($response['status'])&&$response['status']=='COMPLETED') {
+             /* lấy thông tin của Order trong CSDL */
             $code           = $request->get('code');
             $orderInfo      = Order::select('*')
                                 ->where('code', $code)

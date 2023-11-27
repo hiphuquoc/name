@@ -9,13 +9,13 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 class PaypalController extends Controller{
 
     public static function create($infoOrder){
-        $provider = new PayPalClient;
+        $provider       = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
 
         $amount         = $infoOrder->total;
 
-        $response = $provider->createOrder([
+        $response       = $provider->createOrder([
             'intent'                => 'CAPTURE',
             'invoice_id'            => $infoOrder->code,
             'invoice_description'   => "Order ".$infoOrder->code." Invoice",
@@ -24,7 +24,7 @@ class PaypalController extends Controller{
                 'return_url'        => route('main.handlePaymentPaypal', [
                     'code'  => $infoOrder->code
                 ]),
-                'cancel_url'        => 'https://name.com.vn'
+                'cancel_url'        => env('APP_URL')
             ],
             'purchase_units'        => [
                 0 => [
