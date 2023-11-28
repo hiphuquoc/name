@@ -52,6 +52,7 @@ class AjaxController extends Controller {
                 ->take(5)
                 ->with('seo', 'prices.wallpapers.infoWallpaper')
                 ->orderBy('seo.ordering', 'DESC')
+                ->orderBy('id', 'DESC')
                 ->get();
             $count              = Product::select('product_info.*')
                 ->whereHas('prices.wallpapers', function(){

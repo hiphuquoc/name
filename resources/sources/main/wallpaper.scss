@@ -327,7 +327,7 @@
         top: calc(52.5px + 1.5rem);
         left: 0;
         flex: 0 0 330px;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 52.5px - 1.5rem);
         padding-left: 1.5rem;
         padding-bottom: 1.25rem;
     }
@@ -338,7 +338,7 @@
     @media(max-width: 1199px){
         &_header {
             flex: 0 0 280px;
-            height: calc(100vh - 115px);
+            height: calc(100vh - 52.5px - 1rem);
             top: calc(52.5px + 1rem);
         }
         &_content {
@@ -368,7 +368,7 @@
     width: 100%;
     &_header {
         position: sticky;
-        top: calc(52.5px + 2rem);
+        top: calc(52.5px + 1.5rem);
         left: 0;
         flex: 0 0 330px;
         height: 100%;

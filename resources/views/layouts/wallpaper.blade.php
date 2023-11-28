@@ -44,8 +44,10 @@
             </div>
 
             <div class="layoutHeaderSide_content">
-                <div id="js_blurBackground" style="height:100%;">
+                <div id="js_blurBackground">
                     @yield('content')
+
+                    @include('wallpaper.snippets.footer')
                 </div>
             </div>
             {{-- <div class="backgroundBlurMobileMenu"></div> --}}
@@ -55,7 +57,7 @@
         {{-- @if(!Route::is('main.cart')&&!Route::is('main.confirm'))
             @include('wallpaper.snippets.footer')
         @endif --}}
-        @include('wallpaper.snippets.footer')
+        {{-- @include('wallpaper.snippets.footer') --}}
         <!-- === END:: Footer === -->
 
         <div class="bottom">
