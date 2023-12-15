@@ -129,7 +129,7 @@
         }
         &_logo {
             flex: 0 0 60px;
-            padding: 1rem 0 1rem 1rem;
+            padding: 0.75rem 0 0.75rem 0.75rem;
             img {
                 background: #fff;
                 border-radius: 10px;
@@ -137,7 +137,7 @@
         }
         &_content {
             width: 100%;
-            padding: 0.5rem 1rem 0.75rem 1rem;
+            padding: 0.75rem;
             &_title {
                 margin-bottom: 0;
                 color: $colorText;
@@ -147,12 +147,19 @@
             &_desc {
                 font-size: 0.9rem;
             }
+            &_fee {
+                position: absolute;
+                top: 0;
+                right: 0.75rem;
+                font-size: 0.8rem;
+                color: $colorTextLight;
+            }
         }
         &.selected {
             border: 1px solid $colorSuccess;
             &:after {
                 position: absolute;
-                top: 5px;
+                bottom: 0;
                 right: 7px;
                 content: '\f00c';
                 @include fontAwesome;

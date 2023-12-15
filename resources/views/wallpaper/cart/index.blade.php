@@ -65,7 +65,11 @@
                             @if(!empty($productsCart))
                             <div id="js_scrollMenu" class="cartSectionBox">
                                 <div class="cartSectionBox_body">
-                                    <div class="total">
+                                    <div class="cartSectionBox_body_item">
+                                        <div>Phí:</div> 
+                                        <div>10,000đ</div>
+                                    </div>
+                                    <div class="cartSectionBox_body_item total">
                                         {!! $titleTotal !!}
                                         <div class="total_number"><span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($total, $language) !!}</span></div>
                                     </div>

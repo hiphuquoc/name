@@ -83,7 +83,6 @@
 }
 .cartSectionBox {
     width: 100%;
-    // font-size: 1rem;
     background: $colorBackgroundLv2;
     padding: 1rem;
     border-radius: 10px;
@@ -94,21 +93,29 @@
     }
     &_body {
         width: 100%;
-        // background: $colorBackgroundLv2;
         @include colorOpacity('background', $colorBackgroundLv2, 0.8);
         border-radius: 10px;
-        .total {
-            font-family: $fontTitle;
+        &_item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            &_number {
-                color: $colorPrice;
-                font-size: 1.2rem;
-                letter-spacing: 0.5px;
-                margin-left: 0.5rem;
+            &:not(:first-child){
+                margin-top: 0.5rem;
+            }
+            &.total {
+                font-family: $fontTitle;
+                margin-top: 0.75rem;
+                padding-top: 0.75rem;
+                border-top: 1px solid $colorBackgroundLv1;
+                .total_number {
+                    color: $colorPrice;
+                    font-size: 1.2rem;
+                    letter-spacing: 0.5px;
+                    margin-left: 0.5rem;
+                }
             }
         }
+        
     }
     &_notice {
         @include colorOpacity('color', $colorText, 0.8);

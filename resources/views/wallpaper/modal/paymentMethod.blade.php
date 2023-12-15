@@ -1,7 +1,4 @@
 @php
-    $paymentMethods     = \App\Models\PaymentMethod::select('*')
-                            ->where('code', '!=', 'cod')
-                            ->get();
     $user               = Auth::user();
 @endphp
 
@@ -38,22 +35,7 @@
             <div class="formModalBox_box_body">
                 
                 <div class="paymentMethodBox">
-                    @foreach($paymentMethods as $method)
-                        @php
-                            $nameMethodPayment          = empty($language)||$language=='vi' ? $method->name : $method->en_name;
-                            $descriptionMethodPayment   = empty($language)||$language=='vi' ? $method->description : $method->en_description;
-                        @endphp
-                        <div class="paymentMethodBox_item" onClick="paymentNow(this, '{{ $method->id }}');">
-                            <div class="paymentMethodBox_item_logo">
-                                <img src="{{ Storage::url($method->icon) }}" alt="{{ $nameMethodPayment ?? null }}" title="{{ $nameMethodPayment ?? null }}" />
-                            </div>
-                            <div class="paymentMethodBox_item_content">
-                                <div class="paymentMethodBox_item_content_title">{{ $nameMethodPayment ?? null }}</div>
-                                <div class="paymentMethodBox_item_content_desc maxLine_1">{{ $descriptionMethodPayment ?? null }}</div>
-                            </div>
-                        </div>
-
-                    @endforeach
+                    @include('wallpaper.template.paymentMethod')
                 </div>
 
             </div>

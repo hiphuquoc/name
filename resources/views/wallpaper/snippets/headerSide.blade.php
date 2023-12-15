@@ -58,7 +58,7 @@
         @if(!empty($wallpaperMobile))
             <li>
                 @php
-                    $titlePhoneWallpaper = empty($language)||$language=='vi' ?  'Hình nền điện thoại' : 'Phone wallpaper';
+                    $titlePhoneWallpaper = empty($language)||$language=='vi' ?  'Hình nền theo Chủ Đề' : 'Wallpapers by Theme';
                     $url      = empty($language)||$language=='vi' ? $wallpaperMobile->seo->slug : $wallpaperMobile->en_seo->slug;
                     $classTmp = 'close';
                     $styleTmp = '';
@@ -69,7 +69,7 @@
                     }
                 @endphp
                 <div class="{{ $classTmp }}">
-                    <img src="{{ Storage::url('images/svg/picture-1.svg') }}" alt="{{ $titlePhoneWallpaper }}" title="{{ $titlePhoneWallpaper }}" />
+                    <img src="{{ Storage::url('images/svg/icon-category-1.png') }}" alt="{{ $titlePhoneWallpaper }}" title="{{ $titlePhoneWallpaper }}" />
                     @if($flagOpen==true)
                         <div>{{ $titlePhoneWallpaper }}</div>
                     @else 
@@ -102,13 +102,13 @@
         <li>
             @if(empty($language)||$language=='vi')
                 <div class="open">
-                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Hình nền điện thoại theo phong cách" title="Hình nền điện thoại theo phong cách" style="opacity:1;" />
-                    <div>Phong cách</div>
+                    <img src="{{ Storage::url('images/svg/icon-style.png') }}" alt="Hình nền điện thoại theo phong cách" title="Hình nền điện thoại theo phong cách" style="opacity:1;" />
+                    <div>Phong Cách</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
                 </div>
             @else
                 <div class="open">
-                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Phone wallpaper by styles" title="Phone wallpaper by styles" style="opacity:1;" />
+                    <img src="{{ Storage::url('images/svg/icon-style.png') }}" alt="Phone wallpaper by styles" title="Phone wallpaper by styles" style="opacity:1;" />
                     <div>Styles</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
                 </div>

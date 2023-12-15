@@ -13,8 +13,11 @@ class Number {
     }
 
     public static function convertUSDToVND($number){
-        $result     = null;
-        if(!empty($number)) $result = $number*config('main.exchange_rate.usd_to_vnd');
+        $result         = null;
+        if (!empty($number)) {
+            $exchangeRate = config('main.exchange_rate.usd_to_vnd');
+            $result = ceil($number * $exchangeRate / 1000) * 1000; /* làm tròn lên 3 chữ số */
+        }
         return $result;
     }
 
@@ -23,7 +26,7 @@ class Number {
         if(empty($language)||$language=='vi'){
             $result     = number_format(self::convertUSDToVND($number)).config('main.currency_unit');
         }else {
-            $result     = number_format($number).config('main.currency_unit_en');
+            $result     = $number.config('main.currency_unit_en');
         }
         return $result;
     }
