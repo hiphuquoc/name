@@ -219,6 +219,7 @@ Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addTo
 Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.updateCart');
 Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');
 Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main.viewSortCart');
+Route::get('/loadTotalCart', [CartController::class, 'loadTotalCart'])->name('main.loadTotalCart');
 Route::get('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
 Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
 Route::get('/confirm', [ConfirmController::class, 'confirm'])->name('main.confirm');

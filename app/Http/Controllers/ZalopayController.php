@@ -28,7 +28,7 @@ class ZalopayController extends Controller{
             }
             /* bankcode */
             $bankcode   = self::getBankcode();
-            /* tổng tiền */
+            /* tổng tiền (không có phí thanh toán) */
             $total      = \App\Helpers\Number::convertUSDToVND($infoOrder->total);
             if($total>0){
                 $order  = [

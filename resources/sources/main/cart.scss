@@ -101,12 +101,11 @@
             align-items: center;
             &:not(:first-child){
                 margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                border-top: 1px solid $colorBackgroundLv1;
             }
             &.total {
                 font-family: $fontTitle;
-                margin-top: 0.75rem;
-                padding-top: 0.75rem;
-                border-top: 1px solid $colorBackgroundLv1;
                 .total_number {
                     color: $colorPrice;
                     font-size: 1.2rem;

@@ -8,7 +8,7 @@
         $nameMethodPayment          = empty($language)||$language=='vi' ? $method->name : $method->en_name;
         $descriptionMethodPayment   = empty($language)||$language=='vi' ? $method->description : $method->en_description;
     @endphp
-    <div class="paymentMethodBox_item" onclick="chooseOptionPayment(this, {{ $method->id }});">
+    <div class="paymentMethodBox_item" onclick="{{ $action }}(this, {{ $method->id }});">
         <div class="paymentMethodBox_item_logo">
             <img src="{{ Storage::url($method->icon) }}" alt="{{ $nameMethodPayment ?? null }}" title="{{ $nameMethodPayment ?? null }}" />
         </div>
@@ -28,3 +28,34 @@
         </div>
     </div>
 @endforeach
+
+@pushonce('scriptCustom')
+    <script type="text/javascript">
+        function chooseOptionPayment(element, idMethod){
+            const parentElement = $(element).parent();
+            /* xóa selected tất cả phần tử */
+            parentElement.children().each(function(){
+                if($(this).hasClass('selected')) $(this).removeClass('selected');
+            })
+            /* bật lại cho phần tử được click */
+            $(element).addClass('selected');
+            $('#payment_method_info_id').val(idMethod);
+            /* tải lại tổng tiền */
+            loadTotalCart(idMethod);
+        }
+
+        function loadTotalCart(idMethod){
+            $.ajax({
+                url         : '{{ route("main.loadTotalCart") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    payment_method_info_id : idMethod
+                },
+                success     : function(response){
+                    $('#js_loadTotalCart').html(response);
+                }
+            });
+        }
+    </script>
+@endpushonce

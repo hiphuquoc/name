@@ -63,6 +63,8 @@ class CheckoutController extends Controller{
             if($orderInfo->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($orderInfo);
             /* tạo yêu cầu thanh toán => nếu momo */
             if($orderInfo->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($orderInfo);
+            /* tạo yêu cầu thanh toán => nếu paypal */
+            if($orderInfo->paymentMethod->code=='paypal') $urlRedirect = \App\Http\Controllers\PaypalController::create($orderInfo);
         }
         /* trả về đường dẫn để chuyển hướng */
         return redirect($urlRedirect);
@@ -102,7 +104,7 @@ class CheckoutController extends Controller{
                 if($orderInfo->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($orderInfo);
                 /* tạo yêu cầu thanh toán => nếu momo (ghi chú: ở momo sẽ redirect thẳng) */
                 if($orderInfo->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($orderInfo);
-                /* tạo yêu cầu thanh toán => nếu momo (ghi chú: ở momo sẽ redirect thẳng) */
+                /* tạo yêu cầu thanh toán => nếu paypal */
                 if($orderInfo->paymentMethod->code=='paypal') $urlRedirect = \App\Http\Controllers\PaypalController::create($orderInfo);
             }
             /* trả về đường dẫn để chuyển hướng */

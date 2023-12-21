@@ -46,16 +46,5 @@
         $(window).ready(function(){
             validateWhenType($('#email'), 'email');
         });
-
-        function chooseOptionPayment(element, idMethod){
-            const parentElement = $(element).parent();
-            /* xóa selected tất cả phần tử */
-            parentElement.children().each(function(){
-                if($(this).hasClass('selected')) $(this).removeClass('selected');
-            })
-            /* bật lại cho phần tử được click */
-            $(element).addClass('selected');
-            $('#payment_method_info_id').val(idMethod);
-        }
     </script>
 @endpush

@@ -35,7 +35,10 @@
             <div class="formModalBox_box_body">
                 
                 <div class="paymentMethodBox">
-                    @include('wallpaper.template.paymentMethod')
+                    @include('wallpaper.template.paymentMethod', [
+                        'language'  => $language,
+                        'action'    => 'paymentNow'
+                    ])
                 </div>
 
             </div>

@@ -15,12 +15,12 @@
                         $titleH1        = 'Danh sách sản phẩm';
                         $xhtmlHeadTable = '<div>Sản phẩm</div>
                                             <div>Đơn giá</div>';
-                        $titleTotal     = 'Tổng cộng:';
+                        $titleTotal     = 'Tổng cộng';
                     }else {
                         $titleH1        = 'List of products';
                         $xhtmlHeadTable = '<div>Products</div>
                                                 <div>Price</div>';
-                        $titleTotal     = 'Total:';
+                        $titleTotal     = 'Total';
                     }
                 @endphp
                 <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
@@ -55,7 +55,10 @@
                                     </div>
                                 </div>
                                 <!-- form email và phương thức thanh toán -->
-                                @include('wallpaper.cart.formPayment', compact('language'))
+                                @include('wallpaper.cart.formPayment', [
+                                    'language'  => $language,
+                                    'action'    => 'chooseOptionPayment'
+                                ])
                             @else 
                                 @include('wallpaper.cart.emptyCart', compact('language'))
                             @endif
@@ -64,15 +67,13 @@
                         <div class="pageCartBox_right">
                             @if(!empty($productsCart))
                             <div id="js_scrollMenu" class="cartSectionBox">
-                                <div class="cartSectionBox_body">
-                                    <div class="cartSectionBox_body_item">
-                                        <div>Phí:</div> 
-                                        <div>10,000đ</div>
-                                    </div>
-                                    <div class="cartSectionBox_body_item total">
-                                        {!! $titleTotal !!}
-                                        <div class="total_number"><span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($total, $language) !!}</span></div>
-                                    </div>
+                                <div id="js_loadTotalCart" class="cartSectionBox_body">
+                                    @include('wallpaper.cart.total', [
+                                        'titleTotal'    => $titleTotal,
+                                        'total'         => $total,
+                                        'language'      => $language,
+                                        'taxNumber'     => 0
+                                    ])
                                 </div>
                                 {{-- <div class="cartSectionBox_notice">
                                     Dùng mã giảm giá của {{ config('main.company_name') }} ở bước sau

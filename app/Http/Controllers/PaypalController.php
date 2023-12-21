@@ -13,7 +13,9 @@ class PaypalController extends Controller{
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
 
-        $amount         = $infoOrder->total;
+        /* tổng tiền và phí thanh toán */
+        $fee            = $infoOrder->paymentMethod->fee;
+        $amount         = $infoOrder->total + $fee;
 
         $response       = $provider->createOrder([
             'intent'                => 'CAPTURE',

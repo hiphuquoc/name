@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\PaymentMethod;
 
 class CartController extends Controller{
 
@@ -230,5 +231,36 @@ class CartController extends Controller{
         }
         /* đưa phần tử collection vào collection cha */
         return $tmp;
+    }
+
+    public static function loadTotalCart(Request $request){
+        $response = null;
+        if(!empty($request->get('payment_method_info_id'))){
+            $idPaymentMethod = $request->get('payment_method_info_id');
+            /* ngôn ngữ */
+            $language = session()->get('language') ?? 'vi';
+            /* tiêu đề "tổng cộng" */
+            $titleTotal = $language=='vi' ? 'Tổng cộng' : 'Total';
+            /* sản phẩm trong giỏ hàng */
+            $products = \App\Http\Controllers\CartController::getCollectionProducts();
+            $total    = 0;
+            foreach($products as $product){
+                $total += $product->price;
+            }
+            /* phí thanh toán (nếu có) */
+            $paymentMethod  = PaymentMethod::select('*')
+                                ->where('id', $idPaymentMethod)
+                                ->first();
+            $taxNumber      = $paymentMethod->fee ?? 0;
+            $taxName        = $language=='vi' ? 'Phí thanh toán' : 'Payment fee';
+            $response = view('wallpaper.cart.total', [
+                'titleTotal'    => $titleTotal,
+                'total'         => $total,
+                'language'      => $language,
+                'taxName'       => $taxName,
+                'taxNumber'     => $taxNumber
+            ])->render();
+        }
+        echo $response;
     }
 }
