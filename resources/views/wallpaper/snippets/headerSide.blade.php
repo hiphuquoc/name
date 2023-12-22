@@ -55,6 +55,19 @@
                 </a>
             @endif
         </li>
+        <li>
+            @if(empty($language)||$language=='vi')
+                <a href="/ve-chung-toi" title="Về chúng tôi" aria-label="Về chúng tôi">
+                    <img src="{{ Storage::url('images/svg/icon-about-us.png') }}" alt="Về chúng tôi" title="Về chúng tôi" />
+                    <div>Về chúng tôi</div>
+                </a>
+            @else
+                <a href="/about-us" title="About us" aria-label="About us">
+                    <img src="{{ Storage::url('images/svg/icon-about-us.png') }}" alt="About us" title="About us" />
+                    <div>About us</div>
+                </a>
+            @endif
+        </li>
         @if(!empty($wallpaperMobile))
             <li>
                 @php

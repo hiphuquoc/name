@@ -47,7 +47,7 @@
                         @endif
                         {!! $content ?? null !!}
                     </div>
-                    <div class="pageContentWithSidebar_sidebar">
+                    {{-- <div class="pageContentWithSidebar_sidebar">
                         <!-- trang liên quan (nhiều loại) -->
                         @if(!empty($typePages)&&$typePages->isNotEmpty())
                             @foreach($typePages as $typePage)
@@ -80,7 +80,7 @@
                                 </div>
                             @endforeach
                         @endif
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
