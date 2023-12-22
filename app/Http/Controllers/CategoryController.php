@@ -17,7 +17,7 @@ class CategoryController extends Controller {
         $id                 = $request->get('id');
         $type               = $request->get('type');
         $search             = $request->get('search') ?? null;
-        $requestLoad        = $request->get('request_load') ?? 5;
+        $requestLoad        = $request->get('request_load') ?? 10;
         if($loaded<$total){
             /* content product */
             $arrayCategory      = null;

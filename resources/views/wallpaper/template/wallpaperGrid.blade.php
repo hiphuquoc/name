@@ -63,7 +63,7 @@
         })
 
         /* loadmore wallpaper */
-        function loadWallpaperMore(requestLoad = 5){
+        function loadWallpaperMore(requestLoad = 10){
             var boxCategory       = $('#js_loadMore_box');
             if(boxCategory.length&&!boxCategory.hasClass('loading')){
                 const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
