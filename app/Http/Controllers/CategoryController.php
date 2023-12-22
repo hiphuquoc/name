@@ -6,25 +6,56 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Product;
+use App\Models\Category;
 
 class CategoryController extends Controller {
 
     public static function loadMore(Request $request){
         $xhtmlProduct       = null;
-        $loaded             = $request->get('loaded') ?? 0;
-        if(!empty($request->get('total'))&&!empty($request->get('key_category'))){
+        $loaded             = $request->get('loaded');
+        $total              = $request->get('total');
+        $id                 = $request->get('id');
+        $type               = $request->get('type');
+        $search             = $request->get('search') ?? null;
+        $requestLoad        = $request->get('request_load') ?? 5;
+        if($loaded<$total){
             /* content product */
-            $arrayCategory  = json_decode($request->get('key_category'), true);
-            $requestLoad    = $request->get('request_load') ?? 5;
+            if($type=='category_info'){
+                $item           = Category::select('*')
+                                    ->where('id', $id)
+                                    ->first();
+                $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
+            }
             $products       = Product::select('product_info.*')
                                 ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                                ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                                    $query->whereIn('id', $arrayCategory);
+                                ->whereHas('prices.wallpapers', function($query){
+
                                 })
-                                ->orderBy('seo.ordering', 'DESC')
-                                ->orderBy('id', 'DESC')
+                                ->when(!empty($keySearch), function($query) use($search){
+                                    $query->where('code', 'like', '%'.$search.'%')
+                                        ->orWhere('name', 'like', '%'.$search.'%')
+                                        ->orWhere('en_name', 'like', '%'.$search.'%');
+                                })
+                                ->when($type=='category_info', function($query) use($arrayCategory){
+                                    $query->whereHas('categories.infoCategory', function($query) use($arrayCategory){
+                                        $query->whereIn('id', $arrayCategory);
+                                    });
+                                })
+                                ->when($type=='style_info', function($query) use($id){
+                                    $query->whereHas('styles.infoStyle', function($query) use($id){
+                                        $query->where('id', $id);
+                                    });
+                                })
+                                ->when($type=='event_info', function($query) use($id){
+                                    $query->whereHas('events.infoEvent', function($query) use($id){
+                                        $query->where('id', $id);
+                                    });
+                                })
+                                ->with('seo', 'en_seo', 'prices')
                                 ->skip($request->get('loaded'))
                                 ->take($requestLoad)
+                                ->orderBy('seo.ordering', 'DESC')
+                                ->orderBy('id', 'DESC')
                                 ->get();
             $language       = !empty($request->get('language')) ? $request->get('language') : 'vi';
             foreach($products as $product){

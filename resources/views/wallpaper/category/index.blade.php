@@ -111,9 +111,11 @@
                 @endif
             </div>
             <!-- load more -->
-            {{-- <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
-            <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $products->count() }}" /> 
-            <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" />  --}}
+            <input type="hidden" id="js_loadMore_total" name="load_more_total" value="{{ $products->count() }}" />
+            <input type="hidden" id="js_loadMore_loaded" name="load_more_loaded" value="5" /> 
+            <input type="hidden" id="js_loadMore_id" name="load_more_id" value="{{ $item->id ?? 0 }}" /> 
+            <input type="hidden" id="js_loadMore_key_search" name="load_more_key_search" value="{{ request('search') ?? '' }}" /> 
+            <input type="hidden" id="js_loadMore_type" name="load_more_type" value="{{ $item->seo->type ?? '' }}" /> 
 
             <!-- Sort Box -->
             @php
@@ -191,11 +193,11 @@
                     buildTocContentMain('js_buildTocContentMain_element');
                 }
             }
-           
-            // $(window).on('scroll', function() {
-            //     /* load more */
-            //     loadWallpaperMore(); 
-            // });            
+            /* load more */
+            loadWallpaperMore();
+            $(window).on('scroll', function() {
+                loadWallpaperMore();
+            });      
         })
     </script>
 @endpush

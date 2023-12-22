@@ -4,6 +4,7 @@
         @if(!empty($viewBy)&&$viewBy=='set')
             @foreach($products as $product)
                 @php
+                    if($loop->index>4) break;
                     $lazyload   = false;
                     if($loop->index>4) $lazyload   = true;
                 @endphp

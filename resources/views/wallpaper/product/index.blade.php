@@ -83,9 +83,11 @@
                             <h2>Gợi ý cho bạn</h2>
                         @endif
                         <!-- load more -->
-                        <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalProduct ?? 0 }}" />
-                        <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $related->count() }}" /> 
-                        <input type="hidden" id="js_loadMore_keyCategory" name="key_category" value="{{ $keyCategory ?? null }}" /> 
+                        <input type="hidden" id="js_loadMore_total" name="load_more_total" value="{{ $totalProduct ?? 0 }}" />
+                        <input type="hidden" id="js_loadMore_loaded" name="load_more_loaded" value="{{ $related->count() }}" /> 
+                        <input type="hidden" id="js_loadMore_id" name="load_more_id" value="34" /> 
+                        <input type="hidden" id="js_loadMore_key_search" name="load_more_key_search" value="" /> 
+                        <input type="hidden" id="js_loadMore_type" name="load_more_type" value="category_info" /> 
                     </div>
                     <div class="relatedProductBox_box">
                         @include('wallpaper.template.wallpaperGrid', [

@@ -714,7 +714,9 @@
                 /* lấy dữ liệu */
                 const total         = parseInt($('#js_loadMore_total').val());
                 const loaded        = parseInt($('#js_loadMore_loaded').val());
-                const keyCategory   = $('#js_loadMore_keyCategory').val();
+                const id            = $('#js_loadMore_id').val();
+                const type          = $('#js_loadMore_type').val();
+                const search        = $('#js_loadMore_search').val();
                 const language      = $('#language').val();
                 if(total>loaded){
                     $.ajax({
@@ -722,10 +724,12 @@
                         type        : 'get',
                         dataType    : 'json',
                         data        : {
-                            total           : total,
-                            loaded          : loaded,
-                            key_category    : keyCategory,
-                            language        : language,
+                            total,
+                            loaded,
+                            id,
+                            type,
+                            search,
+                            language,
                             request_load    : requestLoad
                         },
                         success     : function(response){
