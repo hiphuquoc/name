@@ -110,13 +110,6 @@
                     </div>
                 @endif
             </div>
-            <!-- load more -->
-            <input type="hidden" id="js_loadMore_total" name="load_more_total" value="{{ $products->count() }}" />
-            <input type="hidden" id="js_loadMore_loaded" name="load_more_loaded" value="5" /> 
-            <input type="hidden" id="js_loadMore_id" name="load_more_id" value="{{ $item->id ?? 0 }}" /> 
-            <input type="hidden" id="js_loadMore_key_search" name="load_more_key_search" value="{{ request('search') ?? '' }}" /> 
-            <input type="hidden" id="js_loadMore_type" name="load_more_type" value="{{ $item->seo->type ?? '' }}" /> 
-
             <!-- Sort Box -->
             @php
                 $total = $products->count();
@@ -151,7 +144,12 @@
             @include('wallpaper.template.wallpaperGrid', [
                 'products'      => $products ?? null,
                 'headingTitle'  => 'h2',
-                'contentEmpty'  => true
+                'contentEmpty'  => true,
+                'total'         => $products->count(),
+                'loaded'        => 5,
+                'id'            => $item->id ?? 0,
+                'type'          => $item->seo->type ?? '',
+                'search'        => request('search') ?? ''
             ])
             {{-- @include('main.template.productGridLoading')
             <div id="js_filterProduct_hidden"></div> --}}
@@ -192,12 +190,7 @@
                 if (!elementBuildTocContent.hasClass('loaded')) {
                     buildTocContentMain('js_buildTocContentMain_element');
                 }
-            }
-            /* load more */
-            loadWallpaperMore();
-            $(window).on('scroll', function() {
-                loadWallpaperMore();
-            });      
+            }    
         })
     </script>
 @endpush

@@ -117,7 +117,11 @@
                             @include('wallpaper.template.wallpaperGrid', [
                                 'products'      => $products ?? null,
                                 'headingTitle'  => 'h2',
-                                'viewBy'        => $viewBy
+                                'viewBy'        => $viewBy,
+                                'total'         => $total,
+                                'loaded'        => 5,
+                                'id'            => 1,
+                                'type'          => 'event_info'
                             ])
                         </div>
                     </div>

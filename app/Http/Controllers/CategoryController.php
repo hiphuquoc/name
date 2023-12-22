@@ -20,6 +20,7 @@ class CategoryController extends Controller {
         $requestLoad        = $request->get('request_load') ?? 5;
         if($loaded<$total){
             /* content product */
+            $arrayCategory      = null;
             if($type=='category_info'){
                 $item           = Category::select('*')
                                     ->where('id', $id)

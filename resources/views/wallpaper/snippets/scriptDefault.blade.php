@@ -702,49 +702,4 @@
             }
         });
     }
-    /* loadmore wallpaper */
-    function loadWallpaperMore(requestLoad = 5){
-        var boxCategory       = $('#js_loadMore_box');
-        if(boxCategory.length&&!boxCategory.hasClass('loading')){
-            const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
-            if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
-                /* thực thi */
-                /* thêm class để đánh dấu đăng load => không load nữa */
-                boxCategory.addClass('loading');
-                /* lấy dữ liệu */
-                const total         = parseInt($('#js_loadMore_total').val());
-                const loaded        = parseInt($('#js_loadMore_loaded').val());
-                const id            = $('#js_loadMore_id').val();
-                const type          = $('#js_loadMore_type').val();
-                const search        = $('#js_loadMore_search').val();
-                const language      = $('#language').val();
-                if(total>loaded){
-                    $.ajax({
-                        url         : '{{ route("main.category.loadMore") }}',
-                        type        : 'get',
-                        dataType    : 'json',
-                        data        : {
-                            total,
-                            loaded,
-                            id,
-                            type,
-                            search,
-                            language,
-                            request_load    : requestLoad
-                        },
-                        success     : function(response){
-                            /* xóa bỏ class để thể hiện đã load xong */
-                            boxCategory.removeClass('loading');
-                            /* append dữ liệu */
-                            if(response.content!=''){
-                                $('#js_loadMore_loaded').val(response.loaded);
-                                boxCategory.append(response.content);
-                            }
-                        }
-                    });
-                }
-
-            }
-        }
-    }
 </script>
