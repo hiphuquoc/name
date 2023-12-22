@@ -8,24 +8,35 @@
                 break;
             }
         }
+        if(empty($language)||$language=='vi'){
+            $altSupport     = 'Thông tin hỗ trợ Name.com.vn';
+            $nameSupport    = 'Hỗ trợ';
+            $altGuide       = 'Hướng dẫn đặt hình nền điện thoại';
+            $nameGuide      = 'Hướng dẫn';
+            $linkGuide      = '/huong-dan-tai-hinh-nen-dien-thoai';
+        }else {
+            $altSupport     = 'Support information Name.com.vn';
+            $nameSupport    = 'Support';
+            $altGuide       = 'Instructions for setting phone wallpapers';
+            $nameGuide      = 'Guide';
+            $linkGuide      = '/guide-to-download-phone-wallpapers';
+        }
     @endphp
     <a class="headerBottom_item" href="https://zalo.me/{{ $phoneCustomerService }}">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ Name.com.vn" title="Thông tin hỗ trợ Name.com.vn">
+            <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="{{ $altSupport }}" title="{{ $altSupport }}">
         </div>
         <div class="headerBottom_item_text">
-            Hỗ trợ
+            {{ $nameSupport }}
         </div>
     </a>
-    <a class="headerBottom_item" href="#">
+    <a class="headerBottom_item" href="{{ env('APP_URL').$linkGuide }}">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/book-open-cover.svg') }}" alt="mua ngay" title="mua ngay" />
+            <img src="{{ Storage::url('images/svg/book-open-cover.svg') }}" alt="{{ $altGuide }}" title="{{ $altGuide }}" />
         </div>
         <div class="headerBottom_item_text">
-            Hướng dẫn
+            {{ $nameGuide }}
         </div>
     </a>
-    <div id="js_checkLoginAndSetShow_buttonMobile" class="headerBottom_item">
-        
-    </div>
+    <div id="js_checkLoginAndSetShow_buttonMobile" class="headerBottom_item"></div>
 </div>
