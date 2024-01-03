@@ -1,5 +1,5 @@
 <div class="formBox_full_item">
-    <div data-bs-toggle="modal" data-bs-target="#formModal_{{ $idProductPrice }}" style="color:#7367f0;cursor:pointer;margin-bottom:0.5rem;">
+    <div data-bs-toggle="modal" data-bs-target="#formModal_{{ $idProductPrice }}" style="color:#7367f0;cursor:pointer;">
         Wallpapers đã chọn <span class="badge badge-center bg-primary">{{ !empty($wallpapers)&&$wallpapers->isNotEmpty() ? $wallpapers->count() : 0}}</span>
     </div>
     <div class="searchViewBefore">
@@ -15,12 +15,16 @@
                                 {{ $wallpaper->name }}
                             </div>
                             <div>
-                                {{ $wallpaper->file_name }}
+                                <div>{{ $wallpaper->file_name }}</div> 
+                                @php
+                                    $linkSource = config('main.google_cloud_storage.default_domain').$wallpaper->file_cloud_source;
+                                @endphp
+                                <div>Source: <a href="{{ $linkSource }}" target="_blank">{{ $linkSource }}</a></div>
                             </div>
                         </div>
-                        <div class="searchViewBefore_selectbox_item_message">
+                        {{-- <div class="searchViewBefore_selectbox_item_message">
                             <div><i class="fa-solid fa-check"></i> Đã chọn</div>
-                        </div>
+                        </div> --}}
                         <div class="searchViewBefore_selectbox_item_cancel" onClick="deleteWallpaperToProductPrice('js_deleteWallpaperToProductPrice_{{ $idProductPrice.$wallpaper->id }}', {{ $idProductPrice }}, {{ $wallpaper->id }});">
                             <i class="fa-solid fa-xmark"></i>
                         </div>

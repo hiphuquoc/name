@@ -1518,50 +1518,51 @@ html .content {
             position: relative;
             display: flex;
             cursor: pointer;
-            padding: 1rem;
             width: 50%;
-            &:hover {
-                background: $bg-04;
-            }
+            padding: 0.75rem;
             &_image {
                 flex: 0 0 150px;
             }
             &_content {
                 margin-left: 1rem;
+                width: calc(100% - 150px - 0.75rem);
                 &_title {
                     margin-bottom: 0.25rem;
                     font-family: $fontTitle;
                 }
             }
-            &_message {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: none;
-                align-items: center;
-                justify-content: center;
-                background: rgba(255,255,255,0.7);
-                border: 1px solid #00bd7d;
-                color: #f7ff93;
-                border-radius: 10px;
-                > div {
-                    background: $bg-08;
-                    padding: 0.35rem 0.75rem;
-                    border-radius: 15px;
-                    font-size: 0.925rem;
-                }
-                i {
-                    margin-right: 0.25rem;
+            &_imageFull {
+                position: relative;
+                &_message {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(255,255,255,0.7);
+                    border: 1px solid #00bd7d;
+                    color: #f7ff93;
+                    border-radius: 10px;
+                    > div {
+                        background: $bg-08;
+                        padding: 0.35rem 0.75rem;
+                        border-radius: 15px;
+                        font-size: 0.925rem;
+                    }
+                    i {
+                        margin-right: 0.25rem;
+                    }
                 }
             }
             &_cancel {
                 width: 35px;
                 aspect-ratio: 1/1;
                 position: absolute;
-                top: 15px;
-                right: 15px;
+                top: 0;
+                right: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -1573,13 +1574,46 @@ html .content {
                     background: rgba(0,0,0,0.5);
                 }
             }
+            &_action {
+                position: absolute;
+                bottom: 10px;
+                right: 0;
+                background: rgba(255,255,255,0.5);
+                width: 100%;
+                padding: 0 0.5rem;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                > * {
+                    min-width:60px;
+                }
+                span {
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                }
+                .used {
+                    i {
+                        color: #00bd7d;
+                        font-size: 1.2rem;
+                    }
+                }
+                .remove {
+                    i {
+                        color: rgba(255, 0, 0, 0.5);
+                        font-size: 1.2rem;
+                    }
+                }
+            }
             &:nth-child(n + 3){
                 border-top: 1px dashed $bg-05;
             }
         }
         .searchViewBefore_selectbox_item.selected {
-            .searchViewBefore_selectbox_item_message {
-                display: flex !important;
+            .searchViewBefore_selectbox_item_imageFull {
+                .searchViewBefore_selectbox_item_imageFull_message {
+                    display: flex !important;
+                }
             }
         }
     }
