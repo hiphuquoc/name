@@ -18,8 +18,8 @@
             }
             /* background wallpaper */
             $backgroundWallpaper    = null;
-            if(!empty($wallpaper->file_url_hosting)){
-                $backgroundWallpaper   = "background:url('".$wallpaper->file_url_hosting."') no-repeat;background-size:100% 100%;";
+            if(!empty($wallpaper->file_cloud_wallpaper)){
+                $backgroundWallpaper   = "background:url('".\App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->file_cloud_wallpaper)."') no-repeat;background-size:100% 100%;";
             }
         @endphp
         <div class="formWallpaperBox_gallery_item_source" style="{{ $backgroundSource }}">

@@ -2,7 +2,10 @@
     <!-- ảnh của all => đặt ẩn để addtocart -->
     <div style="display:none;">
         @php
-            $imageAll = $prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting ?? config('image.default');
+            $imageAll = config('image.default');
+            if(!empty($prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)){
+                $imageAll = config('main.google_cloud_storage.default_domain').$prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper;
+            }
         @endphp
         <img src="{{ $imageAll }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_all" />
     </div>
@@ -15,8 +18,8 @@
             @foreach($price->wallpapers as $wallpaper)
                 @php
                     /* lấy ảnh mini */
-                    $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
-                    $image          = $wallpaper->infoWallpaper->file_url_hosting;
+                    $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                    $image          = config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_wallpaper;
                 @endphp
                 <div class="galleryProductBox_item">
                     @if($i<2)

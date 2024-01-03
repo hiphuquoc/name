@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\RelationProductPriceWallpaperInfo;
 use Illuminate\Http\Request;
-use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Cookie;
-use App\Models\Wallpaper;
 
 use Intervention\Image\ImageManagerStatic;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +12,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
-use App\Jobs\UploadSourceAndWallpaper;
+use App\Services\BuildInsertUpdateModel;
+use App\Models\Wallpaper;
+use App\Models\RelationProductPriceWallpaperInfo;
+use App\Helpers\Charactor;
+
+// use App\Jobs\UploadSourceAndWallpaper;
 
 class WallpaperController extends Controller {
 
@@ -63,39 +65,53 @@ class WallpaperController extends Controller {
         try {
             DB::beginTransaction();
             if (!empty($request->file('files.wallpaper')) && !empty($request->file('files.source'))){
-                $wallpaper      = $request->file('files.wallpaper');
-                $source         = $request->file('files.source');
-                $i              = $request->get('count');
-                /* Lấy thông tin ảnh */
-                $imageInfo      = getimagesize($wallpaper);
-                $width          = $imageInfo[0];
-                $height         = $imageInfo[1];
-                $fileSize       = filesize($wallpaper);
-                $extensionWallpaper         = $wallpaper->getClientOriginalExtension();
-                $extensionDefault           = config('image.extension');
-                $fileNameNonHaveExtension   = \App\Helpers\Charactor::convertStrToUrl($request->get('name')).'-'.time().'-'.$i;
-                $fileNameFull               = $fileNameNonHaveExtension.'.'.$extensionWallpaper;
-                /* Lưu ảnh vào Google Cloud Storage */
-                $fileUrlW                   = config('main.google_cloud_storage.wallpapers').$fileNameFull;
-                $fileUrlS                   = config('main.google_cloud_storage.sources').$fileNameFull;
-                /* wallpaper sẽ được upload vào storage và cả google_cloud_storage */
-                \App\Helpers\Upload::uploadWallpaper($wallpaper, $fileNameNonHaveExtension.'.'.$extensionDefault);
-                Storage::disk('gcs')->put($fileUrlW, file_get_contents($wallpaper));
-                /* source sẽ được tải vào google_cloud_storage */
+                $wallpaper          = $request->file('files.wallpaper');
+                $source             = $request->file('files.source');
+                $i                  = $request->get('count');
+                /* Lấy thông tin ảnh wallpaper */
+                $imageInfoW                     = getimagesize($wallpaper);
+                $widthW                         = $imageInfoW[0];
+                $heightW                        = $imageInfoW[1];
+                $miniTypeW                      = $imageInfoW['mime'];
+                $fileSizeW                      = filesize($wallpaper);
+                $extensionW                     = config('image.extension');
+                $fileNameNonHaveExtensionW      = \App\Helpers\Charactor::convertStrToUrl($request->get('name')).'-'.time().'-'.$i;
+                $fileUrlW                       = config('main.google_cloud_storage.wallpapers').$fileNameNonHaveExtensionW.'.'.$extensionW;
+                /* upload wallpaper lên google_cloud_storage với 3 bản Full Small Mini (thông qua function Upload) */
+                \App\Helpers\Upload::uploadWallpaper($wallpaper, $fileNameNonHaveExtensionW.'.'.$extensionW);
+                /* lấy thông tin ảnh source */
+                $imageInfoS                     = getimagesize($source);
+                $widthS                         = $imageInfoS[0];
+                $heightS                        = $imageInfoS[1];
+                $miniTypeS                      = $imageInfoS['mime'];
+                $fileSizeS                      = filesize($source);
+                $extensionS                     = $source->getClientOriginalExtension();
+                $fileNameNonHaveExtensionS      = \App\Helpers\Charactor::convertStrToUrl($request->get('name')).'-'.Charactor::randomString(20);
+                $fileUrlS                       = config('main.google_cloud_storage.sources').$fileNameNonHaveExtensionS.'.'.$extensionS;
+                /* upload source trực tiếp lên google_cloud_storage */
                 Storage::disk('gcs')->put($fileUrlS, file_get_contents($source));
                 /* Lưu thông tin vào CSDL */
                 $idWallpaper = Wallpaper::insertItem([
                     'user_id'           => Auth::user()->id,
                     'name'              => $request->get('name'),
                     'description'       => $request->get('description') ?? null,
-                    'file_name'         => $fileNameFull,
-                    'file_url_cloud'    => config('main.google_cloud_storage.wallpapers').$fileNameFull,
-                    'file_url_hosting'  => Storage::url(config('image.folder_upload').$fileNameNonHaveExtension.'.'.$extensionDefault),
-                    'width'             => $width,
-                    'height'            => $height,
-                    'file_size'         => $fileSize,
-                    'extension'         => $extensionWallpaper,
-                    'mime_type'         => $imageInfo['mime']
+
+                    'file_name_wallpaper'   => $fileNameNonHaveExtensionW,
+                    'extension_wallpaper'   => $extensionW,
+                    'file_cloud_wallpaper'  => $fileUrlW,
+                    'width_wallpaper'       => $widthW,
+                    'height_wallpaper'      => $heightW,
+                    'file_size_wallpaper'   => $fileSizeW,
+                    'mime_type_wallpaper'   => $miniTypeW,
+                    
+                    'file_name_source'      => $fileNameNonHaveExtensionS,
+                    'extension_source'      => $extensionS,
+                    'file_cloud_source'     => $fileUrlS,
+                    'width_source'          => $widthS,
+                    'height_source'         => $heightS,
+                    'file_size_source'      => $fileSizeS,
+                    'mime_type_source'      => $miniTypeS
+
                 ]);
                 DB::commit();
                 if(!empty($idWallpaper)){
@@ -166,9 +182,6 @@ class WallpaperController extends Controller {
             Wallpaper::updateItem($idWallpaper, [
                 'name'              => $request->get('name'),
                 'description'       => $request->get('description') ?? null,
-                // 'file_name'         => $fileName,
-                // 'file_url_cloud'    => config('main.google_cloud_storage.wallpapers').$fileNameFull,
-                // 'file_url_hosting'  => Storage::url(config('image.folder_upload').$fileName.'.'.$extensionDefault),
                 'width'             => $width,
                 'height'            => $height,
                 'file_size'         => $fileSize,
@@ -205,22 +218,15 @@ class WallpaperController extends Controller {
     private static function delete($infoWallpaper){
         $flag   = false;
         if(!empty($infoWallpaper)){
-            /* xóa wallpaper trong storage */
-            $filenameNotExtension   = pathinfo($infoWallpaper->file_name)['filename'];
-            $extension              = config('image.extension');
-            $wallpaperPathInStorage = Storage::path(config('image.folder_upload').$filenameNotExtension.'.'.$extension);
-            if(file_exists($wallpaperPathInStorage)) unlink($wallpaperPathInStorage);
-            /* xóa ảnh wallpaper mini trong storage */
-            $filenameNotExtension   = pathinfo($infoWallpaper->file_name)['filename'];
-            $wallpaperMiniPathInStorage = Storage::path(config('image.folder_upload').$filenameNotExtension.'-mini.'.$extension);
-            if(file_exists($wallpaperMiniPathInStorage)) unlink($wallpaperMiniPathInStorage);
-            /* xóa ảnh wallpaper small trong storage */
-            $wallpaperSmallPathInStorage = Storage::path(config('image.folder_upload').$filenameNotExtension.'-small.'.$extension);
-            if(file_exists($wallpaperSmallPathInStorage)) unlink($wallpaperSmallPathInStorage);
             /* xóa wallpaper trong google_cloud_storage */
-            $flag   = Storage::disk('gcs')->delete($infoWallpaper->file_url_cloud);
+            Storage::disk('gcs')->delete($infoWallpaper->file_cloud_wallpaper);
+            /* xóa wallpaper Small trong google_cloud_storage */
+            Storage::disk('gcs')->delete(config('main.google_cloud_storage.wallpapers').$infoWallpaper->file_name_wallpaper.'-small.'.$infoWallpaper->extension_wallpaper);
+            /* xóa wallpaper Mini trong google_cloud_storage */
+            Storage::disk('gcs')->delete(config('main.google_cloud_storage.wallpapers').$infoWallpaper->file_name_wallpaper.'-mini.'.$infoWallpaper->extension_wallpaper);
             /* xóa source trong google_cloud_storage */
-            Storage::disk('gcs')->delete(config('main.google_cloud_storage.sources').$infoWallpaper->file_name);
+            Storage::disk('gcs')->delete($infoWallpaper->file_cloud_source);
+            $flag = true;
         }
         return $flag;
     }

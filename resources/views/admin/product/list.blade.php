@@ -74,7 +74,7 @@
                                                 @php
                                                     /* lấy ảnh Small */
                                                     $imageSmall = config('image.default');
-                                                    if(!empty($price->wallpapers[0]->infoWallpaper->file_url_hosting)) $imageSmall  = \App\Helpers\Image::getUrlImageSmallByUrlImage($price->wallpapers[0]->infoWallpaper->file_url_hosting);
+                                                    if(!empty($price->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)) $imageSmall  = \App\Helpers\Image::getUrlImageSmallByUrlImage($price->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
                                                 @endphp     
                                                 <img src="{{ $imageSmall }}" />
                                                 @if($price->wallpapers->count()>1)

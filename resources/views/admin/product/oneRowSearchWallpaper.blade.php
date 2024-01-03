@@ -4,7 +4,7 @@
     @endphp
     <div class="searchViewBefore_selectbox_item {{ $selected }}" data-wallpaper-id="{{ $wallpaper->id }}" data-product-price-id="{{ $idProductPrice }}" onClick="chooseWallpaperForProductPrice(this);">
         <div class="searchViewBefore_selectbox_item_image">
-            <img src="{{ $wallpaper->file_url_hosting }}" />
+            <img src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->file_cloud_wallpaper) }}" />
         </div>
         <div class="searchViewBefore_selectbox_item_content">
             <div class="searchViewBefore_selectbox_item_content_title maxLine_2">

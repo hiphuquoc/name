@@ -11,10 +11,16 @@ use App\Models\Style;
 use App\Models\Event;
 use App\Http\Controllers\SettingController;
 
+use Intervention\Image\ImageManagerStatic;
+
 use App\Mail\OrderMailable;
 use Google\Service\SecurityCommandCenter\PathNodeAssociatedFinding;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
+
+use Illuminate\Support\Facades\Http;
+use App\Helpers\Charactor;
+use App\Models\Wallpaper;
 
 class HomeController extends Controller{
     public static function home(Request $request){
@@ -100,8 +106,12 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        $result     = null;
-        if(!empty($request->get('input'))) $result = \App\Helpers\Charactor::convertStrToUrl($request->get('input'));
-        return view('wallpaper.home.test', compact('result'));
+        $wallpapers                     = \App\Models\Wallpaper::select('*')
+                                            ->where('id', '<=', '478')
+                                            ->get();
+        foreach($wallpapers as $infoWallpaper){
+            
+        }
+
     }
 }

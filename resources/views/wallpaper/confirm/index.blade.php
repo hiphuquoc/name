@@ -110,7 +110,7 @@
                                                 <div class="wallpaperSourceGrid_item_image">
                                                     @php
                                                         /* lấy ảnh mini */
-                                                        $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                                                        $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                                                     @endphp
                                                     <img class="lazyloadSource" src="{{ $imageMini }}" data-order-code="{{ $order->code }}" data-file-name="{{ $wallpaper->infoWallpaper->file_name }}" style="filter:blur(20px);" />
                                                 </div>
@@ -127,7 +127,7 @@
                                             <div class="wallpaperSourceGrid_item_image">
                                                 @php
                                                     /* lấy ảnh mini */
-                                                    $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                                                    $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                                                 @endphp
                                                 <img class="lazyloadSource" src="{{ $imageMini }}" data-order-code="{{ $order->code }}" data-file-name="{{ $wallpaper->infoWallpaper->file_name }}" style="filter:blur(20px);" />
                                             </div>

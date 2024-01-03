@@ -63,7 +63,9 @@ class Image {
     public static function getUrlImageMiniByUrlImage($urlImage){
         $result     = null;
         if(!empty($urlImage)){
-            $tmp    = pathinfo($urlImage);
+            /* sử dụng ảnh trong google_cloud_storage */
+            $url    = config('main.google_cloud_storage.default_domain').$urlImage;
+            $tmp    = pathinfo($url);
             $result = $tmp['dirname'].'/'.$tmp['filename'].'-mini.'.$tmp['extension'];
         }
         return $result;
@@ -72,7 +74,9 @@ class Image {
     public static function getUrlImageSmallByUrlImage($urlImage){
         $result     = null;
         if(!empty($urlImage)){
-            $tmp    = pathinfo($urlImage);
+            /* sử dụng ảnh trong google_cloud_storage */
+            $url    = config('main.google_cloud_storage.default_domain').$urlImage;
+            $tmp    = pathinfo($url);
             $result = $tmp['dirname'].'/'.$tmp['filename'].'-small.'.$tmp['extension'];
         }
         return $result;

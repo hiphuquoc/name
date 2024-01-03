@@ -29,8 +29,8 @@
                 $tag        = $tagBox ?? null;
                 $keyIdPrice = 'js_changeOption_'.$tag.$price->id.$wallpaper->infoWallpaper->id;
                 /* lấy ảnh Small */
-                $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
-                $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                 /* đường dẫn */
                 $url        = !empty($language)&&$language=='en'&&!empty($product->en_seo->slug_full) ? $product->en_seo->slug_full : $product->seo->slug_full;
             @endphp
@@ -117,7 +117,7 @@
                                 $selected   = null;
                                 if($keyIdPrice==$keyIdFile) $selected = 'selected';
                                 /* lấy ảnh mini */
-                                $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+                                $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                             @endphp
                             @if($k==6)
                                 <a href="/{{ $url }}" class="wallpaperGridBox_item_imageList_item {{ $selected }}">

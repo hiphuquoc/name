@@ -32,8 +32,8 @@
     $xhtmlPrice             = \App\Helpers\Number::getFormatPriceByLanguage($price, $language);
     /* ảnh */
     $image                  = config('image.default');
-    if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting)) {
-        $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting);
+    if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)) {
+        $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
     }
 @endphp
 

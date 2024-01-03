@@ -1,13 +1,13 @@
 <div class="wallpaperBox_item_source">
-    <img data-google-cloud="{{ config('main.google_cloud_storage.sources').$item->file_name }}" data-size="400" />
+    <img data-google-cloud="{{ $item->file_cloud_source }}" data-size="300" />
     <div class="wallpaperBox_item_source_info">
-        <div>{{ $item->width }}x{{ $item->height }} px - {{ round($item->file_size/(1024*1024), 2) }} Mb</div>
+        <div>{{ $item->width_source }}x{{ $item->height_source }} px - {{ round($item->file_size_source/(1024*1024), 1) }} Mb</div>
     </div>
 </div>
 <div class="wallpaperBox_item_wallpaper">
-    <img src="{{ $item->file_url_hosting }}" />
+    <img src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($item->file_cloud_wallpaper) }}" />
     <div class="wallpaperBox_item_wallpaper_info">
-        <div>{{ $item->width }}x{{ $item->height }} px - {{ round($item->file_size/(1024*1024), 2) }} Mb</div>
+        <div>{{ $item->width_wallpaper }}x{{ $item->height_wallpaper }} px - {{ round($item->file_size_wallpaper/(1024*1024), 2) }} Mb</div>
     </div>
 </div>
 <div class="wallpaperBox_item_info">

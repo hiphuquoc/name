@@ -13,7 +13,9 @@
         }
         /* ảnh => dù phiên bản all hay có product_price_id đề lấy ảnh đầu tiên vì đã lọc ở hàm bên trong */
         $image              = config('image.default');
-        if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting)) $image = $product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting;
+        if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)) {
+            $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
+        }
         $price              = 0;
         if($product->cart['product_price_id']=='all'){
             /* tiêu đề option */

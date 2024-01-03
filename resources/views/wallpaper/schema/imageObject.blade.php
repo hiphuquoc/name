@@ -4,7 +4,7 @@
         $i                  = 1;
         foreach($data as $d){
             if($i!=1) $xhtml .= ', ';
-            $urlImage        = env('APP_URL').$d->file_url_hosting;
+            $urlImage        = config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_wallpaperle_url_hosting;
             // if(empty($language)||$language=='vi'){
             //     $name           = $d->name;
             //     $description    = $d->description ?? $d->name;

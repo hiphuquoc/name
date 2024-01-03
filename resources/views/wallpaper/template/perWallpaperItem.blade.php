@@ -1,8 +1,8 @@
 @if(!empty($wallpaper))
     @php
         /* lấy ảnh Small */
-        $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
-        $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_url_hosting);
+        $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+        $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
     @endphp
     <div class="wallpaperGridBox_item" data-key="" data-price="2">
         <div id="js_changeOption_1851790" class="show">

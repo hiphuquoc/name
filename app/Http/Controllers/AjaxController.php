@@ -78,7 +78,7 @@ class AjaxController extends Controller {
                         $priceOld   = '<div class="searchViewBefore_selectbox_item_content_price_old">'.\App\Helpers\Number::getFormatPriceByLanguage($product->price_before_promotion, $language).'</div>';
                     }
                     $image      = Storage::url(config('image.loading_main_gif'));
-                    if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting)) $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_url_hosting);
+                    if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)) $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
                     $response   .= '<a href="/'.$url.'" class="searchViewBefore_selectbox_item">
                                         <div class="searchViewBefore_selectbox_item_image">
                                             <img src="'.$image.'" alt="'.$title.'" title="'.$title.'" />

@@ -7,7 +7,7 @@
                     $title = $price->name ?? $price->seo->title ?? null;
                 @endphp
                 @foreach($price->wallpapers as $wallpaper)
-                    <img data-src="{{ $wallpaper->infoWallpaper->file_url_hosting }}" alt="{{ $title }}" title="{{ $title }}" />
+                    <img data-src="{{ config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_wallpaper }}" alt="{{ $title }}" title="{{ $title }}" />
                 @endforeach
             @endforeach
        </div>

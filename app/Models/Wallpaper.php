@@ -12,14 +12,20 @@ class Wallpaper extends Model {
         'user_id',
         'name', 
         'description',
-        'file_name',
-        'file_url_hosting',
-        'file_url_cloud',
-        'width',
-        'height',
-        'file_size',
-        'extension',
-        'mime_type'
+        'file_name_wallpaper',
+        'extension_wallpaper',
+        'file_cloud_wallpaper',
+        'width_wallpaper',
+        'height_wallpaper',
+        'file_size_wallpaper',
+        'mime_type_wallpaper',
+        'file_name_source',
+        'extension_source',
+        'file_cloud_source',
+        'width_source',
+        'height_source',
+        'file_size_source',
+        'mime_type_source'
     ];
     public $timestamps = true;
 
