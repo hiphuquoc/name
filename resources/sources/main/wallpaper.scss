@@ -78,6 +78,43 @@
                 border-bottom-left-radius: 10px;
                 letter-spacing: 2px;
             }
+            &_action {
+                position: absolute;
+                top: 0;
+                right: 0;
+                @include colorOpacity('background', $colorBackgroundLv2, 0.6);
+                padding: 0.25rem 0.5rem;
+                display: flex;
+                border-bottom-left-radius: 10px;
+                > * {
+                    &:not(:first-child){
+                        margin-left: 0.5rem;
+                        // border-left: 1px solid $colorBackgroundLv2;
+                    }
+                }
+                .addToCart, .heart {
+                    height: 16px;
+                    aspect-ratio: 1/1;
+                    opacity: 0.8;
+                    transition: all 0.3s;
+                }
+                .addToCart {
+                    background: url('https://name.com.vn/storage/images/svg/icon-cart-header.svg') no-repeat center center;
+                    background-size: 100% 100%;
+                    &:hover {
+                        background: url('https://name.com.vn/storage/images/svg/icon-cart-header-success.svg') no-repeat center center;
+                        background-size: 100% 100%;
+                    }
+                }
+                .heart {
+                    background: url('https://name.com.vn/storage/images/svg/icon-heart-1.svg') no-repeat center center;
+                    background-size: 100% 100%;
+                    &:hover {
+                        background: url('https://name.com.vn/storage/images/svg/icon-heart-1-success.svg') no-repeat center center;
+                        background-size: 100% 100%;
+                    }
+                }
+            }
             &_content {
                 position: absolute;
                 bottom: 0;

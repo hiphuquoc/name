@@ -60,11 +60,30 @@ class CategoryController extends Controller {
                                 ->get();
             $language       = !empty($request->get('language')) ? $request->get('language') : 'vi';
             foreach($products as $product){
-                $xhtmlProduct   .= view('wallpaper.template.wallpaperItem', [
-                    'product'   => $product,
-                    'language'  => $language,
-                    'lazyload'  => true
-                ])->render();
+                if(!empty($request->get('view_by'))&&$request->get('view_by')=='set'){
+                    /* chế độ xem từng bộ */
+                    $xhtmlProduct   .= view('wallpaper.template.wallpaperItem', [
+                        'product'   => $product,
+                        'language'  => $language,
+                        'lazyload'  => true
+                    ])->render();
+                }else {
+                    /* chế độ xem từng ảnh */
+                    foreach($product->prices as $price){
+                        foreach($price->wallpapers as $wallpaper){
+                            $link           = empty($language)||$language=='vi' ? '/'.$product->seo->slug_full : '/'.$product->en_seo->slug_full;
+                            $productName    = $product->name ?? null;
+                            $lazyload       = true;
+                            $xhtmlProduct   .= view('wallpaper.template.perWallpaperItem', [
+                                'wallpaper' => $wallpaper, 
+                                'productName'   => $productName,
+                                'link'      => $link,
+                                'language'  => $language,
+                                'lazyload'  => $lazyload
+                            ]);
+                        }
+                    }
+                }
             }
             /* phần tính toán */
             $loaded         = $request->get('loaded') + $products->count();

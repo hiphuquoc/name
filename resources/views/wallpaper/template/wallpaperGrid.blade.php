@@ -1,19 +1,23 @@
 <!-- load more -->
-<input type="hidden" id="js_loadMore_total" name="load_more_total" value="{{ $total }}" />
-<input type="hidden" id="js_loadMore_loaded" name="load_more_loaded" value="{{ $loaded }}" /> 
-<input type="hidden" id="js_loadMore_id" name="load_more_id" value="{{ $id }}" />  
-<input type="hidden" id="js_loadMore_type" name="load_more_type" value="{{ $type }}" /> 
-<input type="hidden" id="js_loadMore_key_search" name="load_more_key_search" value="{{ $search ?? '' }}" />
+<input type="hidden" id="js_loadMore_total" value="{{ $total }}" />
+<input type="hidden" id="js_loadMore_loaded" value="{{ $loaded }}" /> 
+<input type="hidden" id="js_loadMore_id" value="{{ $id }}" />  
+<input type="hidden" id="js_loadMore_type" value="{{ $type }}" /> 
+<input type="hidden" id="js_loadMore_key_search" value="{{ $search ?? '' }}" />
+<input type="hidden" id="js_loadMore_view_by" value="{{ Cookie::get('view_by') ?? 'set' }}" />
 <!-- box -->
 <div id="js_loadMore_box" class="wallpaperGridBox">
     @if(!empty($products)&&$products->isNotEmpty())
-
+        @php
+            $productShow = $loaded; /* số sản phẩm muốn in ra ở lần đầu tiên */
+        @endphp
         @if(!empty($viewBy)&&$viewBy=='set')
             @foreach($products as $product)
                 @php
-                    if($loop->index>4) break;
                     $lazyload   = false;
-                    if($loop->index>4) $lazyload   = true;
+                    if($loop->index>=$productShow) {
+                        break;
+                    }
                 @endphp
                 @include('wallpaper.template.wallpaperItem', [
                     'product'   => $product, 
@@ -27,7 +31,9 @@
                     $link           = empty($language)||$language=='vi' ? '/'.$product->seo->slug_full : '/'.$product->en_seo->slug_full;
                     $productName    = $product->name ?? null;
                     $lazyload       = false;
-                    if($loop->index>4) $lazyload   = true;
+                    if($loop->index>=$productShow) {
+                        break;
+                    }
                 @endphp
                 @foreach($product->prices as $prices)
                     @foreach($prices->wallpapers as $wallpaper)
@@ -63,11 +69,11 @@
         })
 
         /* loadmore wallpaper */
-        function loadWallpaperMore(requestLoad = 10){
+        function loadWallpaperMore(requestLoad = 20){
             var boxCategory       = $('#js_loadMore_box');
             if(boxCategory.length&&!boxCategory.hasClass('loading')){
                 const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
-                if($(window).scrollTop() + 1200 > boxCategory.outerHeight() + boxCategory.offset().top) {
+                if($(window).scrollTop() + 1500 > boxCategory.outerHeight() + boxCategory.offset().top) {
                     /* thực thi */
                     /* thêm class để đánh dấu đăng load => không load nữa */
                     boxCategory.addClass('loading');
@@ -78,6 +84,7 @@
                     const type          = $('#js_loadMore_type').val();
                     const search        = $('#js_loadMore_search').val();
                     const language      = $('#language').val();
+                    const view_by       = $('#js_loadMore_view_by').val();
                     if(total>loaded){
                         $.ajax({
                             url         : '{{ route("main.category.loadMore") }}',
@@ -90,6 +97,7 @@
                                 type,
                                 search,
                                 language,
+                                view_by,
                                 request_load    : requestLoad
                             },
                             success     : function(response){

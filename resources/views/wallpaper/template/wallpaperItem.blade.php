@@ -100,6 +100,11 @@
                         <!-- background blur -->
                         <div class="wallpaperGridBox_item_image_backgroundBlur"></div>
                     </div>
+                    <!-- thêm vào giỏ hành nhanh -->
+                    <div class="wallpaperGridBox_item_image_action">
+                        <div class="heart"></div>
+                        <div class="addToCart"></div>
+                    </div>
                     <div class="wallpaperGridBox_item_image_background"></div>
                 </a>
                 <!-- danh sách ảnh -->

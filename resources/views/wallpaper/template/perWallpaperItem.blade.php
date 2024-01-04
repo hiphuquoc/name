@@ -18,6 +18,11 @@
                     @endif
 
                 </div>
+                <!-- thêm vào giỏ hành nhanh -->
+                <div class="wallpaperGridBox_item_image_action">
+                    <div class="heart"></div>
+                    <div class="addToCart"></div>
+                </div>
             </a>
         </div>
     </div>
