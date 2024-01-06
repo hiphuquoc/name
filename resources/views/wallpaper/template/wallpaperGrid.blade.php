@@ -35,9 +35,11 @@
                         break;
                     }
                 @endphp
-                @foreach($product->prices as $prices)
-                    @foreach($prices->wallpapers as $wallpaper)
+                @foreach($product->prices as $price)
+                    @foreach($price->wallpapers as $wallpaper)
                         @include('wallpaper.template.perWallpaperItem', [
+                            'idProduct'   => $product->id,
+                            'idPrice'   => $price->id,
                             'wallpaper' => $wallpaper, 
                             'productName'   => $productName,
                             'link'      => $link,

@@ -292,6 +292,8 @@
     function openCloseModal(idModal, action = null){
         const elementModal  = $('#'+idModal);
         const flag          = elementModal.css('display');
+
+        console.log(123);
         /* tooggle */
         if(action==null){
             if(flag=='none'){
@@ -328,33 +330,19 @@
         }
     }
     /* thêm sản phẩm vào giỏ hàng */
-    function addToCart(){
-        let dataForm            = {};
-        $('#js_addToCart_options').children().each(function(){
-            if($(this).hasClass('selected')) {
-                /* lấy ảnh của option được chọn */ 
-                const key       = $(this).attr('id');
-                $('*[data-option="'+key+'"]').each(function(){
-                    /* lấy ảnh đầu tiên trong tất cả ảnh của option */
-                    dataForm.image  = $(this).attr('src');
-                    return false;
-                });
-                /* lấy giá của option được chọn */ 
-                dataForm.price      = $(this).data('price');
-                /* lấy option đang được chọn */
-                dataForm.option_name = $(this).html();
-                /* lấy url riêng của option được chọn */ 
-                dataForm.product_price_id     = $(this).data('product_price_id');
-            }
-        });
-        /* lấy id sản phẩm */ 
-        dataForm.product_info_id    = $('#product_info_id').val();
-        /* lấy số lượng */
-        dataForm.quantity           = $('#js_addToCart_quantity').val();
-        /* lấy title */
-        dataForm.title              = $(document).find('h1').html();
-        /* gửi dữ liệu để xử lý */
-        dataForm.language = $('#language').val();
+    function addToCart(idProduct, idPrice){
+        let dataForm                = {};
+        dataForm.product_info_id    = idProduct;
+        dataForm.product_price_id   = idPrice;
+        dataForm.language           = $('#language').val();
+        // $('#js_addToCart_options').children().each(function(){
+        //     if($(this).hasClass('selected')) {
+        //         /* lấy url riêng của option được chọn */ 
+        //         dataForm.product_price_id     = $(this).data('product_price_id');
+        //     }
+        // });
+        // /* lấy id sản phẩm */ 
+        // dataForm.product_info_id    = $('#product_info_id').val();
         $.ajax({
             url         : '{{ route("main.addToCart") }}',
             type        : 'get',
@@ -375,12 +363,10 @@
     }
     /* tải lại thông tin icon giỏ hàng */
     function viewSortCart(){
-        const language = $('#language').val();
         $.ajax({
             url         : '{{ route("main.viewSortCart") }}',
             type        : 'get',
             dataType    : 'html',
-            data        : { language },
             success     : function(response){
                 $('#js_viewSortCart_idWrite').html(response);
             }
@@ -416,7 +402,7 @@
         });
     }
     /* xóa sản phẩm khỏi cart */ 
-    function removeProductCart(idProduct, idPrice, idRow, idTotal, idCount){
+    function removeProductCart(idProduct, idRow, idTotal, idCount){
         /* tải loading */ 
         loadLoading(idRow);
         $.ajax({
@@ -424,14 +410,13 @@
             type        : 'get',
             dataType    : 'json',
             data        : {
-                product_info_id     : idProduct,
-                product_price_id    : idPrice
+                product_info_id     : idProduct
             },
             success     : function(response){
                 /* cart trống */
                 if(response.empty_cart!='') $('#js_checkEmptyCart_idWrite').html(response.empty_cart);
                 setTimeout(function(){
-                    $('#'+idRow).hide();
+                    $('#'+idRow).remove();
                     $('#'+idTotal).html(response.total);
                     $('#'+idCount).html(response.count);
                 }, 1000);

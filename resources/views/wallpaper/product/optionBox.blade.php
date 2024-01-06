@@ -6,11 +6,14 @@
         {{ empty($language)||$language=='vi' ? 'Tùy chọn :' : 'Options :' }}
     </div>
     <!-- của all -->
+    @php
+        $tmp                    = [];
+        foreach($item->prices as $price) $tmp[] = $price->id;
+        $stringProductPriceAll  = implode('-', $tmp);
+    @endphp
     <div id="js_addToCart_option_all" class="productDetailBox_detail_option_box_item selected"
-        data-product_price_id="all" 
-        data-option_name="all" 
-        data-price="{{ $item->price }}"
-        onClick="setOptionProduct('all');">
+        data-product_price_id="{{ $stringProductPriceAll }}" 
+        onClick="setOptionProduct('{{ $item->id }}', this);">
             {{ empty($language)||$language=='vi' ? 'Trọn bộ' : 'Full set' }}
     </div>  
     <!-- của từng ảnh con -->
@@ -20,9 +23,7 @@
         @endphp
         <div id="js_addToCart_option_{{ $option->id }}" class="productDetailBox_detail_option_box_item"
             data-product_price_id="{{ $option->id }}" 
-            data-option_name="{{ $optionName }}" 
-            data-price="{{ $option->price }}"
-            onClick="setOptionProduct('{{ $option->id }}');">
+            onClick="setOptionProduct('{{ $item->id }}', this);">
             {{ $optionName }}
         </div>  
     @endforeach

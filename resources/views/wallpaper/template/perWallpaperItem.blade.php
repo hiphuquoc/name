@@ -18,12 +18,12 @@
                     @endif
 
                 </div>
-                <!-- thêm vào giỏ hành nhanh -->
-                <div class="wallpaperGridBox_item_image_action">
-                    <div class="heart"></div>
-                    <div class="addToCart"></div>
-                </div>
             </a>
+        </div>
+        <!-- thêm vào giỏ hành nhanh -->
+        <div class="wallpaperGridBox_item_action">
+            <div class="heart"></div>
+            <div class="addToCart" onClick="addToCart('{{ $idProduct }}', '{{ $idPrice }}');"></div>
         </div>
     </div>
 @endif

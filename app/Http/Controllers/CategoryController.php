@@ -75,6 +75,8 @@ class CategoryController extends Controller {
                             $productName    = $product->name ?? null;
                             $lazyload       = true;
                             $xhtmlProduct   .= view('wallpaper.template.perWallpaperItem', [
+                                'idProduct' => $product->id,
+                                'idPrice'   => $price->id,
                                 'wallpaper' => $wallpaper, 
                                 'productName'   => $productName,
                                 'link'      => $link,

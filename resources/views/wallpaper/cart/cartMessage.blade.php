@@ -20,19 +20,7 @@
             @php
                 $xhtmlPrice         = '-';
                 if(!empty($price)){
-                    $xhtmlPrice     = $price.config('main.currency_unit_en');
-                    if(empty($language)||$language=='vi'){
-                        $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($price)).config('main.currency_unit');
-                    }
-                }
-                if(!empty($option)){
-                    if(empty($language)||$language=='vi'){
-                        $option = 'Trọn bộ';
-                    }else {
-                        $option = 'Full set';
-                    }
-                }else {
-                    $option = 'Không xác định';
+                    $xhtmlPrice     = \App\Helpers\Number::getFormatPriceByLanguage($price, $language);
                 }
             @endphp
             <div class="cartMessage_box_body_content">

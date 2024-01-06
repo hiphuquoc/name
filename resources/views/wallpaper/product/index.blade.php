@@ -126,21 +126,21 @@
             // setOptionProduct();
         })
         /* thay đổi option sản phẩm */
-        function setOptionProduct(idPrice = ''){
-            if(idPrice==''){
-                var regex   = /product_price_id=(\d+)/;
-                var match   = regex.exec(window.location.search);
-                idPrice = match[1];
-            }
-            /* ========= xử lý của button && phần hiển thị giá */
-            $(document).find('[data-product_price_id='+idPrice+']').each(function(){
-                /* xóa hết selected của button */
-                $(this).parent().children().each(function(){
-                    $(this).removeClass('selected');
-                })
-                /* bật lại element được chọn cho button */
-                $(this).addClass('selected');
+        function setOptionProduct(idProduct, element){
+            /* xử lý cho việc thay đổi button */
+            $(element).parent().children().each(function(){
+                $(this).removeClass('selected');
             });
+            $(element).addClass('selected');
+            /* xử lý cho việc hiển thị lại giá theo option */
+            const idKey         = $(element).data('product_price_id');
+            const elementPrice  = $('#'+idKey);
+            elementPrice.parent().children().each(function(){
+                $(this).removeClass('selected');
+            });
+            elementPrice.addClass('selected');
+            /* set lại sự kiện button addToCart cho đúng option vừa chọn */
+            $('#js_addToCart_button').attr("onclick", "addToCart('"+idProduct+"', '"+idKey+"');");
         }
     </script>
 @endpush

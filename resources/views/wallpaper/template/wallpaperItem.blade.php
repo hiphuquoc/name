@@ -100,13 +100,18 @@
                         <!-- background blur -->
                         <div class="wallpaperGridBox_item_image_backgroundBlur"></div>
                     </div>
-                    <!-- thêm vào giỏ hành nhanh -->
-                    <div class="wallpaperGridBox_item_image_action">
-                        <div class="heart"></div>
-                        <div class="addToCart"></div>
-                    </div>
                     <div class="wallpaperGridBox_item_image_background"></div>
                 </a>
+                <!-- thêm vào giỏ hành nhanh -->
+                <div class="wallpaperGridBox_item_action">
+                    <div class="heart"></div>
+                    @php
+                        $keyPriceAll = [];
+                        foreach($product->prices as $p) $keyPriceAll[] = $price->id;
+                        $keyPriceAll = implode('-', $keyPriceAll);
+                    @endphp
+                    <div class="addToCart" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}');"></div>
+                </div>
                 <!-- danh sách ảnh -->
                 <div class="wallpaperGridBox_item_imageList">
                     @php

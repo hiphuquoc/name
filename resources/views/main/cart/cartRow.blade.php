@@ -3,7 +3,7 @@
     $idPrice                = $product->price->id ?? 0;
     $keyId                  = !empty($product->id)&&!empty($product->price->id) ? $product->id.$product->price->id : null;
     $eventUpdateCart        = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'", "cartMain")';
-    $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "'.$idPrice.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
+    $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
     $title                  = $product->name ?? $product->seo->title ?? null;
     /* ảnh */
     $image                  = config('image.default');

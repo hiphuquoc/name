@@ -24,10 +24,8 @@ class CartController extends Controller{
                             ->with('seo', 'en_seo', 'type')
                             ->first();
         $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-        $productsCart   = [];
-        if(!empty(Cookie::get('cart'))) $productsCart = json_decode(Cookie::get('cart'), true);
         $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
-        return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'productsCart'));
+        return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products'));
     }
 
     public static function enIndex(Request $request){
@@ -47,105 +45,119 @@ class CartController extends Controller{
     }
 
     public static function addToCart(Request $request){
-        /* cart cũ */
-        $cartOld        = Cookie::get('cart');
-        if(!empty($cartOld)){
-            /* trong giỏ hàng đã có sản phẩm */
-            $tmp        = json_decode($cartOld, true);
-            $flagMatch  = false;
-            $cartNew    = [];
-            $i          = 0;
-            for($i=0;$i<count($tmp);++$i){
-                /* sản phẩm không trùng thì thêm vào mảng mới => trùng thì xử lý bước sau */
-                if($tmp[$i]['product_info_id']==$request->get('product_info_id')){
-                    $cartNew[]      = [
-                        'product_info_id'   => $request->get('product_info_id'),
-                        'product_price_id'  => $request->get('product_price_id'),
-                        'price'             => $request->get('price')
-                    ];
-                    $flagMatch      = true;
-                }else {
-                    $cartNew[]      = $tmp[$i];
+        $result         = '';
+        $idProduct      = $request->get('product_info_id') ?? 0;
+        $arrayPrice     = explode('-', $request->get('product_price_id'));
+        /* xây dựng mảng sản phẩm vừa thêm vào giỏ hàng */
+        $infoProductInCart = [];
+        $infoProductInCart['product_info_id']   = $idProduct;
+        $infoProductInCart['product_price_id']  = $arrayPrice;
+        /* lấy thông tin */
+        $infoProduct    = Product::select('*')
+                                ->where('id', $idProduct)
+                                ->with('prices', function($query) use($arrayPrice){
+                                    $query->whereIn('id', $arrayPrice);
+                                })
+                                ->first();
+        /* tồn tại sản phẩm mới xử lý tiếp */
+        if(!empty($infoProduct)){
+            /* cart cũ */
+            $arrayCart      = Cookie::get('cart');
+            $arrayCart      = json_decode($arrayCart, true);
+            if(!empty($arrayCart)){
+                $flagExist      = false;
+                for($i=0;$i<count($arrayCart);++$i){
+                    if($idProduct==$arrayCart[$i]['product_info_id']){
+                        /* đã tồn tại */
+                        $arrayCart[$i]  = $infoProductInCart;
+                        $flagExist      = true;
+                        break;
+                    }
                 }
+                /* nếu chưa tồn tại */
+                if($flagExist==false){
+                    $next               = count($arrayCart);
+                    $arrayCart[$next]   = $infoProductInCart;
+                }
+            }else {
+                $arrayCart[0]           = $infoProductInCart;
             }
-            /* trường hợp sản phẩm chưa có trong giỏ hàng => thêm vào mảng */
-            if($flagMatch==false) {
-                $cartNew[count($cartNew)] = [
-                    'product_info_id'   => $request->get('product_info_id'),
-                    'product_price_id'  => $request->get('product_price_id'),
-                    'price'             => $request->get('price')
-                ];
-            }
-        }else {
-            /* trong giỏ hàng chưa có sản phẩm */
-            $cartNew    = [
-                [
-                    'product_info_id'   => $request->get('product_info_id'),
-                    'product_price_id'  => $request->get('product_price_id'),
-                    /* ghi cookie thêm price để dễ tính total lúc update cart */
-                    'price'             => $request->get('price')
-                ]
-            ];
+            /* set cookie */
+            CookieController::setCookie('cart', json_encode($arrayCart), 3600);
+            /* trả thông báo */
+            $language       = $request->get('language') ?? 'vi';
+            $cartToView     = self::convertInfoCartToView($infoProductInCart, $infoProduct, $language);
+            $result = view('wallpaper.cart.cartMessage', [
+                'title'     => $infoProduct->name,
+                'option'    => $cartToView['option_name'],
+                'price'     => $cartToView['price'],
+                'image'     => config('main.google_cloud_storage.default_domain').$cartToView['image'],
+                'language'  => $language
+            ])->render();
         }
-        /* set cookie */
-        CookieController::setCookie('cart', json_encode($cartNew), 3600);
-        /* trả thông báo */
-        $language       = $request->get('language') ?? 'vi';
-        $result = view('wallpaper.cart.cartMessage', [
-            'title'     => $request->get('title') ?? null,
-            'option'    => $request->get('option_name') ?? null,
-            'price'     => $request->get('price') ?? null,
-            'image'     => $request->get('image') ?? null,
-            'language'  => $language
-        ]);
         echo $result;
     }
 
+    public static function convertInfoCartToView($productInCart, $infoProduct, $language){
+        $result             = [];
+        if(!empty($productInCart)&&!empty($infoProduct)){
+            if(count($productInCart['product_price_id'])>1){
+                $result['option_name']  = $language=='vi' ? 'Trọn bộ' : 'Full set';
+                $result['price']        = $infoProduct->price;
+            }else {
+                $result['option_name']  = $language=='vi' ? $infoProduct->prices[0]->name : $infoProduct->prices[0]->en_name;
+                $result['price']        = $infoProduct->prices[0]->price;
+            }
+            $result['image']            = $infoProduct->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper;
+        }
+        return $result;
+    }
+
     public static function viewSortCart(Request $request){
-        $language = $request->get('language') ?? 'vi';
+        $language = Cookie::get('language') ?? 'vi';
         $products = self::getCollectionProducts();
         $response = view('wallpaper.cart.cartSort', compact('products', 'language'))->render();
         echo $response;
     }
 
-    public static function updateCart(Request $request){
-        /* lấy dữ liệu cookie của products */
-        $tmp            = Cookie::get('cart');
-        if(!empty($tmp)) $tmp = json_decode($tmp, true);
-        /* cập nhật lại số lượng sản phẩm */
-        $products       = [];
-        if(!empty($request->get('product_info_id'))&&!empty($request->get('quantity'))){
-            $count      = 0;
-            $total      = 0;
-            $i          = 0;
-            foreach($tmp as $product){
-                $products[$i]   = $product;
-                if($product['product_info_id']==$request->get('product_info_id')&&$product['product_price_id']==$request->get('product_price_id')){
-                    $total      += $request->get('quantity')*$products[$i]['price'];
-                    $count      += $request->get('quantity');
-                    /* cập nhật lại quantity */
-                    $products[$i]['quantity']   = $request->get('quantity');
-                    /* lấy thông tin product để cập nhật lại giao diện */
-                    $infoProduct = self::getCollectionProduct($products[$i]);
-                }else {
-                    $total += $products[$i]['quantity']*$products[$i]['price'];
-                    $count += $products[$i]['quantity'];
-                }
-                ++$i;
-            }
-        }
-        /* set lại cookie */
-        CookieController::setCookie('cart', json_encode($products), 3600);
-        /* lấy dữ liệu của cột thay đổi */
-        $result['total']        = number_format($total).config('main.currency_unit');
-        $result['count']        = $count;
-        if($request->get('theme')=='cartSort'){
-            $result['row']      = view('main.cart.cartSortRow', ['product' => $infoProduct])->render();
-        }else {
-            $result['row']      = view('main.cart.cartRow', ['product' => $infoProduct])->render();
-        }
-        return json_encode($result);
-    }
+    // public static function updateCart(Request $request){
+    //     /* lấy dữ liệu cookie của products */
+    //     $tmp            = Cookie::get('cart');
+    //     if(!empty($tmp)) $tmp = json_decode($tmp, true);
+    //     /* cập nhật lại số lượng sản phẩm */
+    //     $products       = [];
+    //     if(!empty($request->get('product_info_id'))&&!empty($request->get('quantity'))){
+    //         $count      = 0;
+    //         $total      = 0;
+    //         $i          = 0;
+    //         foreach($tmp as $product){
+    //             $products[$i]   = $product;
+    //             if($product['product_info_id']==$request->get('product_info_id')&&$product['product_price_id']==$request->get('product_price_id')){
+    //                 $total      += $request->get('quantity')*$products[$i]['price'];
+    //                 $count      += $request->get('quantity');
+    //                 /* cập nhật lại quantity */
+    //                 $products[$i]['quantity']   = $request->get('quantity');
+    //                 /* lấy thông tin product để cập nhật lại giao diện */
+    //                 $infoProduct = self::getCollectionProduct($products[$i]);
+    //             }else {
+    //                 $total += $products[$i]['quantity']*$products[$i]['price'];
+    //                 $count += $products[$i]['quantity'];
+    //             }
+    //             ++$i;
+    //         }
+    //     }
+    //     /* set lại cookie */
+    //     CookieController::setCookie('cart', json_encode($products), 3600);
+    //     /* lấy dữ liệu của cột thay đổi */
+    //     $result['total']        = number_format($total).config('main.currency_unit');
+    //     $result['count']        = $count;
+    //     if($request->get('theme')=='cartSort'){
+    //         $result['row']      = view('main.cart.cartSortRow', ['product' => $infoProduct])->render();
+    //     }else {
+    //         $result['row']      = view('main.cart.cartRow', ['product' => $infoProduct])->render();
+    //     }
+    //     return json_encode($result);
+    // }
 
     public static function calculatorTotalInCart(){
         $total          = 0;
@@ -159,78 +171,37 @@ class CartController extends Controller{
     }
 
     public static function removeProductCart(Request $request){
-        $tmp                    = Cookie::get('cart');
-        if(!empty($tmp)) $tmp = json_decode($tmp, true);
-        /* xóa product và tính lại total + count */
-        $products               = [];
-        $total                  = 0;
-        $count                  = 0;
-        $i                      = 0;
+        $tmp                    = json_decode(Cookie::get('cart'), true);
+        $cartNew                = [];
         foreach($tmp as $product){
-            if($product['product_info_id']==$request->get('product_info_id')){
-                /* không làm gì cả */
-            }else {
-                $products[$i]   = $product;
-                $total          += $product['price'];
-                $count          += 1;
-                ++$i;
-            }
+            if($product['product_info_id']!=$request->get('product_info_id')) $cartNew[]      = $product;
         }
         /* set lại cookie */
-        CookieController::setCookie('cart', json_encode($products), 3600);
-        $language               = session('language') ?? 'vi';
-        $result['total']        = \App\Helpers\Number::getFormatPriceByLanguage($total, $language);
-        $result['count']        = $count;
+        CookieController::setCookie('cart', json_encode($cartNew), 3600);
         /* trường hợp remove đến khi cart rỗng */
-        $result['empty_cart']   = '';
-        if($total==0) $result['empty_cart'] = view('wallpaper.cart.emptyCart')->render();
-        return json_encode($result);
+        return true;
     }
 
     public static function getCollectionProducts(){
-        $products           = Cookie::get('cart');
-        if(!empty($products)) $products = json_decode($products, true);
-        /* duyệt từ từ qua mảng để lấy lần lượt product ứng với price */
-        $infoProducts       = new \Illuminate\Database\Eloquent\Collection;
-        if(!empty($products)){
+        $infoProducts           = new \Illuminate\Database\Eloquent\Collection;
+        $products               = Cookie::get('cart');
+        if(!empty($products)) {
+            $products           = json_decode($products, true);
+            $i                  = 0;
             foreach($products as $product) {
-                $infoProducts[] = self::getCollectionProduct($product);
+                $arrayPrice         = $product['product_price_id'];
+                $infoProducts[$i]   = Product::select('*')
+                                        ->where('id', $product['product_info_id'])
+                                        ->with(['prices' => function ($query) use ($arrayPrice) {
+                                            $query->whereIn('id', $arrayPrice);
+                                        }, 'seo', 'prices.wallpapers'])
+                                        ->first();
+                /* ghép cart vào */
+                $infoProducts[$i]['cart'] = $product;
+                ++$i;
             }
         }
         return $infoProducts;
-    }
-
-    public static function getCollectionProduct($productInCart){
-        $idPrice    = $productInCart['product_price_id'];
-        if($idPrice!='all'){
-            $tmp    = Product::select('*')
-                        ->whereHas('prices', function($query) use($idPrice){
-                            $query->where('id', $idPrice);
-                        })
-                        ->with(['prices' => function ($query) use ($idPrice) {
-                            $query->where('id', $idPrice);
-                        }, 'seo', 'prices.wallpapers'])
-                        ->first();
-        }else {
-            $idProduct  = $productInCart['product_info_id'];
-            $tmp        = Product::select('*')
-                            ->where('id', $idProduct)
-                            ->with('seo')
-                            ->first();
-        }
-        if(!empty($tmp)){
-            /* ghép product_price được chọn vào collection */
-            foreach($tmp->prices as $price){
-                if($idPrice==$price->id) {
-                    $tmp->price = $price;
-                    break;
-                }
-            }
-            /* ghép cookie vào collection */
-            $tmp->cart      = collect($productInCart);
-        }
-        /* đưa phần tử collection vào collection cha */
-        return $tmp;
     }
 
     public static function loadTotalCart(Request $request){

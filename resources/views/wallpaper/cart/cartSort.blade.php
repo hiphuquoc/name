@@ -4,6 +4,14 @@
     }else {
         $urlCart    = route('main.enCart');
     }
+    /* tổng tiền */
+    $total          = 0;
+    if(!empty($products)&&$products->isNotEmpty()){
+        foreach($products as $product) {
+            $tmp    = \App\Http\Controllers\CartController::convertInfoCartToView($product->cart, $product, $language);
+            $total += $tmp['price'];
+        }
+    }
 @endphp
 <div class="cartBox">
     <a href="{{ $urlCart }}" class="cartBox_icon">
@@ -15,17 +23,10 @@
     <a href="{{ $urlCart }}" class="cartBox_text">{{ empty($language)||$language=='vi' ? 'Giỏ hàng' : 'Cart' }}</a>
     <div class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
-            @php
-                $total = 0;
-            @endphp
             <div class="customScrollBar-y" style="max-height:500px;">
                 @foreach($products as $product)
                     @php
-                        /* cộng tổng */
-                        $total      += $product->cart['price'];
-                        $idProduct  = $product->id ?? 0;
-                        $idPrice    = $product->cart['product_price_id'] ?? 0;
-                        $keyId      = !empty($product->id) ? $product->id.$idPrice : null;
+                        $keyId      = !empty($product->id) ? $product->id.implode('-', $product->cart['product_price_id']) : null;
                     @endphp
                     <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartBox_list_item">
                         @include('wallpaper.cart.cartSortRow', compact('product'))

@@ -13,8 +13,12 @@
         }
     }
     $xhtmlPriceOld  = '<div class="productDetailBox_detail_price_item_old">'.$priceOld.'</div>';
+    /* chuỗi json thay đổi price hiển thị chi chọn option */
+    $tmp            = [];
+    foreach($item->prices as $price) $tmp[] = $price->id;
+    $idKey          = implode('-', $tmp);
 @endphp
-<div data-product_price_id="all" class="productDetailBox_detail_price_item selected">
+<div id="{{ $idKey }}" class="productDetailBox_detail_price_item selected">
     <div class="productDetailBox_detail_price_item_real">{!! $xhtmlPrice !!}</div>
     {!! $xhtmlPriceOld !!}
     @if(!empty($item->sale_off))
@@ -38,7 +42,7 @@
         $xhtmlPriceOld  = '<div class="productDetailBox_detail_price_item_old">'.$priceOld.'</div>';
     @endphp
     <!-- của từng giá -->
-    <div data-product_price_id="{{ $price->id }}" class="productDetailBox_detail_price_item">
+    <div id="{{ $price->id }}" class="productDetailBox_detail_price_item">
         <div class="productDetailBox_detail_price_item_real">{!! $xhtmlPrice !!}</div>
         {!! $xhtmlPriceOld !!}
         @if(!empty($price->sale_off))

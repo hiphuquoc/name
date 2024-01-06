@@ -1,8 +1,6 @@
 @if(!empty($product))
     @php
-        $idProduct          = $product->id ?? 0;
-        $idPrice            = $product->cart['product_price_id'] ?? 0;
-        $keyId              = !empty($product->id) ? $product->id.$idPrice : null;
+        $keyId              = !empty($product->id) ? $product->id.implode('-', $product->cart['product_price_id']) : null;
         $eventUpdateCart    = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'")';
         if(empty($language)||$language=='vi'){
             $title          = $product->name ?? $product->seo->title ?? null;
@@ -11,30 +9,12 @@
             $title          = $product->en_name ?? $product->en_seo->title ?? null;
             $url            = $product->en_seo->slug_full ?? null;
         }
-        /* ảnh => dù phiên bản all hay có product_price_id đề lấy ảnh đầu tiên vì đã lọc ở hàm bên trong */
-        $image              = config('image.default');
-        if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)) {
-            $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
-        }
-        $price              = 0;
-        if($product->cart['product_price_id']=='all'){
-            /* tiêu đề option */
-            if(empty($language)||$language=='vi'){
-                $titlePrice     = 'Trọn bộ';
-                
-            }else {
-                $titlePrice     = 'Full set';
-            }
-            $price              = $product->price;
-        }else {
-            $titlePrice         = $product->prices[0]->name;
-            $price              = $product->prices[0]->price;
-            
-        }
-        $xhtmlPrice             = \App\Helpers\Number::getFormatPriceByLanguage($price, $language);
+        $cartToView         = \App\Http\Controllers\CartController::convertInfoCartToView($product->cart, $product, $language);
+        $xhtmlPrice             = \App\Helpers\Number::getFormatPriceByLanguage($cartToView['price'], $language);
         /* action */
-        $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "'.$idPrice.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
-        /* đường dẫn */
+        $eventRemoveProductCart = 'removeProductCart("'.$product->id.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
+        /* ảnh */
+        $image                  = \App\Helpers\Image::getUrlImageMiniByUrlImage($cartToView['image']);
     @endphp
     <a href="/{{ $url }}" class="cartBox_list_item_image">
         <img src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" />
@@ -44,7 +24,7 @@
             {{ $title }}
         </a>
         <div class="cartBox_list_item_content_price">
-            {!! $xhtmlPrice !!} <span>/{!! $titlePrice !!}</span>
+            {!! $xhtmlPrice !!} <span>/{!! $cartToView['option_name'] !!}</span>
         </div>
         {{-- <div class="cartBox_list_item_content_orther">
             <div class="cartBox_list_item_content_orther_quantity">

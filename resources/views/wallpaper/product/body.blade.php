@@ -89,8 +89,12 @@
                         @php
                             $buttonNameCart     = empty($language)||$language=='vi' ? 'Thêm giỏ hàng' : 'Add to cart';
                             $buttonNamePayment  = empty($language)||$language=='vi' ? 'Mua ngay' : 'Buy now';
+                            /* chuyển array price sang key all */
+                            $keyPriceAll        = [];
+                            foreach($item->prices as $price) $keyPriceAll[]  = $price->id;
+                            $keyPriceAll        = implode('-', $keyPriceAll);
                         @endphp
-                        <button type="button" class="button secondary maxLine_1" onClick="addToCart();" aria-label="{{ $buttonNameCart }}">
+                        <button id="js_addToCart_button" type="button" class="button secondary maxLine_1" onClick="addToCart('{{ $item->id }}', '{{ $keyPriceAll }}');" aria-label="{{ $buttonNameCart }}">
                             <img src="{{ Storage::url('images/svg/shopping-cart.png') }}" alt="{{ $buttonNameCart }}" title="{{ $buttonNameCart }}" />
                             <div>{{ $buttonNameCart }}</div>
                         </button>

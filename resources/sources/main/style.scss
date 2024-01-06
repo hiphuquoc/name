@@ -875,7 +875,7 @@ $heightSelect : 35px;
         min-width: 180px;
         border-radius: 10px;
         box-shadow: 0 0 10px $colorBackgroundLv1;
-        z-index: 1;
+        z-index: 999;
         max-height: 440px;
         overflow-y: scroll;
         font-size: 0.8rem;

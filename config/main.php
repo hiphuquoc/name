@@ -4,7 +4,7 @@ return [
     'currency_unit'         => '<sup>đ</sup>',
     'currency_unit_en'      => ' US$',
     'exchange_rate'         => [
-        'usd_to_vnd'    => 22450
+        'usd_to_vnd'    => 22000
     ],
     'author_name'           => 'Name.com.vn',
     'founder_name'          => 'Name.com.vn',
