@@ -23,7 +23,7 @@
         <!-- thêm vào giỏ hành nhanh -->
         <div class="wallpaperGridBox_item_action">
             <div class="heart"></div>
-            <div class="addToCart" onClick="addToCart('{{ $idProduct }}', '{{ $idPrice }}');"></div>
+            <div class="addToCart" onClick="addToCart('{{ $idProduct }}', '{{ $idPrice }}', 'per');"></div>
         </div>
     </div>
 @endif

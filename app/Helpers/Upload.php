@@ -67,7 +67,7 @@ class Upload {
             // Resize and save the main image
             $imageTmp           = ImageManagerStatic::make($image->getRealPath());
             $percentPixel       = $imageTmp->width() / $imageTmp->height();
-            $widthImage         = 800;
+            $widthImage         = 1000;
             $heightImage        = $widthImage / $percentPixel;
             $gcsDisk->put($fileUrl, $imageTmp->encode($extension, config('image.quality'))->resize($widthImage, $heightImage)->stream());
             $result             = $fileUrl;

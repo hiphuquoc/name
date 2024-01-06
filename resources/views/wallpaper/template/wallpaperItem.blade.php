@@ -110,7 +110,7 @@
                         foreach($product->prices as $p) $keyPriceAll[] = $price->id;
                         $keyPriceAll = implode('-', $keyPriceAll);
                     @endphp
-                    <div class="addToCart" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}');"></div>
+                    <div class="addToCart" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}', 'all');"></div>
                 </div>
                 <!-- danh sách ảnh -->
                 <div class="wallpaperGridBox_item_imageList">

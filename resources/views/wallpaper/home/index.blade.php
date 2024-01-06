@@ -154,7 +154,17 @@
         </div>
 @endsection
 @push('modal')
-
+    <!-- Message Add to Cart -->
+    <div id="js_addToCart_idWrite">
+        @include('wallpaper.cart.cartMessage', [
+            'title'     => '',
+            'option'    => null,
+            'quantity'  => 0,
+            'price'     => 0,
+            'image'     => null,
+            'language'  => $language
+        ])
+    </div>
 @endpush
 @push('bottom')
     <!-- Header bottom -->

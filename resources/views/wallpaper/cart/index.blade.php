@@ -8,13 +8,6 @@
             </div>
             <div class="contentBox">
                 @php
-                    // dd($products);
-                    $count          = $products->count();
-                    $total          = 0;
-                    foreach($products as $product) {
-                        $tmp        = \App\Http\Controllers\CartController::convertInfoCartToView($product->cart, $product, $language);
-                        $total      += $tmp['price'];
-                    }
                     if(empty($language)||$language=='vi'){
                         $titleH1        = 'Danh sách sản phẩm';
                         $xhtmlHeadTable = '<div>Sản phẩm</div>
@@ -29,7 +22,7 @@
                 @endphp
                 <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
                     @csrf
-                    <h1>{!! $titleH1 !!} (<span id="js_updateCart_count" class="highLight">{{ $count }}</span>)</h1>
+                    <h1>{!! $titleH1 !!} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] }}</span>)</h1>
                     <div class="pageCartBox">
                         <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
 
@@ -46,13 +39,26 @@
                                             </div>
                                             <div class="cartProductBox_body">
                                                 @foreach($products as $product)
-                                                    @php
-                                                        $idPrice    = $product->cart['product_price_id'] ?? 0;
-                                                        $keyId      = !empty($product->id) ? $product->id.implode('-', $product->cart['product_price_id']) : null;
-                                                    @endphp
-                                                    <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartProductBox_body_item">
-                                                        @include('wallpaper.cart.cartRow', compact('product', 'language'))
-                                                    </div>
+                                                    <!-- trường hợp trọn bộ -->
+                                                    @if(count($product->cart['product_price_id'])>=$product->prices->count())
+                                                        @php
+                                                            $arrayProductPrice  = $product->cart['product_price_id'];
+                                                            $keyId              = !empty($product->id) ? $product->id.implode('-', $product->cart['product_price_id']) : null;
+                                                        @endphp
+                                                        <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartProductBox_body_item">
+                                                            @include('wallpaper.cart.cartRow', compact('product', 'arrayProductPrice','language'))
+                                                        </div>
+                                                    @else 
+                                                        @foreach($product->cart['product_price_id'] as $p)
+                                                            @php
+                                                                $arrayProductPrice  = [$p];
+                                                                $keyId              = !empty($product->id) ? $product->id.$p : null;
+                                                            @endphp
+                                                            <div id="{{ 'js_updateCart_idWrite_'.$keyId }}" class="cartProductBox_body_item">
+                                                                @include('wallpaper.cart.cartRow', compact('product', 'arrayProductPrice', 'language'))
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
                                                 @endforeach
                                             </div>
                                         </div>
@@ -73,8 +79,9 @@
                             <div id="js_scrollMenu" class="cartSectionBox">
                                 <div id="js_loadTotalCart" class="cartSectionBox_body">
                                     @include('wallpaper.cart.total', [
+                                        'intoMoney'     => $detailCart['into_money'],
                                         'titleTotal'    => $titleTotal,
-                                        'total'         => $total,
+                                        'total'         => $detailCart['total'],
                                         'language'      => $language,
                                         'taxNumber'     => 0
                                     ])

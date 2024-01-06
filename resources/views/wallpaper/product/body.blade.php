@@ -94,7 +94,7 @@
                             foreach($item->prices as $price) $keyPriceAll[]  = $price->id;
                             $keyPriceAll        = implode('-', $keyPriceAll);
                         @endphp
-                        <button id="js_addToCart_button" type="button" class="button secondary maxLine_1" onClick="addToCart('{{ $item->id }}', '{{ $keyPriceAll }}');" aria-label="{{ $buttonNameCart }}">
+                        <button id="js_addToCart_button" type="button" class="button secondary maxLine_1" onClick="addToCart('{{ $item->id }}', '{{ $keyPriceAll }}', 'all');" aria-label="{{ $buttonNameCart }}">
                             <img src="{{ Storage::url('images/svg/shopping-cart.png') }}" alt="{{ $buttonNameCart }}" title="{{ $buttonNameCart }}" />
                             <div>{{ $buttonNameCart }}</div>
                         </button>

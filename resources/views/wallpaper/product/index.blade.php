@@ -126,7 +126,7 @@
             // setOptionProduct();
         })
         /* thay đổi option sản phẩm */
-        function setOptionProduct(idProduct, element){
+        function setOptionProduct(element, idProduct, type){
             /* xử lý cho việc thay đổi button */
             $(element).parent().children().each(function(){
                 $(this).removeClass('selected');
@@ -140,7 +140,7 @@
             });
             elementPrice.addClass('selected');
             /* set lại sự kiện button addToCart cho đúng option vừa chọn */
-            $('#js_addToCart_button').attr("onclick", "addToCart('"+idProduct+"', '"+idKey+"');");
+            $('#js_addToCart_button').attr("onclick", "addToCart('"+idProduct+"', '"+idKey+"', '"+type+"');");
         }
     </script>
 @endpush

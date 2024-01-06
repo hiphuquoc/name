@@ -9,12 +9,12 @@
             $title          = $product->en_name ?? $product->en_seo->title ?? null;
             $url            = $product->en_seo->slug_full ?? null;
         }
-        $cartToView         = \App\Http\Controllers\CartController::convertInfoCartToView($product->cart, $product, $language);
+        $cartToView         = \App\Http\Controllers\CartController::convertInfoCartToView($product, $arrayProductPrice, $language);
         $xhtmlPrice             = \App\Helpers\Number::getFormatPriceByLanguage($cartToView['price'], $language);
         /* action */
         $eventRemoveProductCart = 'removeProductCart("'.$product->id.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
         /* ảnh */
-        $image                  = \App\Helpers\Image::getUrlImageMiniByUrlImage($cartToView['image']);
+        $image                  = \App\Helpers\Image::getUrlImageSmallByUrlImage($cartToView['image']);
     @endphp
     <a href="/{{ $url }}" class="cartBox_list_item_image">
         <img src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" />

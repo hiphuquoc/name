@@ -10,10 +10,10 @@
         $title              = $product->en_name ?? $product->en_seo->title ?? null;
         $url                = $product->en_seo->slug_full ?? null;
     }
-    $cartToView             = \App\Http\Controllers\CartController::convertInfoCartToView($product->cart, $product, $language);
+    $cartToView             = \App\Http\Controllers\CartController::convertInfoCartToView($product, $arrayProductPrice, $language);
     $xhtmlPrice             = \App\Helpers\Number::getFormatPriceByLanguage($cartToView['price'], $language);
     /* ảnh */
-    $image                  = \App\Helpers\Image::getUrlImageMiniByUrlImage($cartToView['image']);
+    $image                  = \App\Helpers\Image::getUrlImageSmallByUrlImage($cartToView['image']);
 @endphp
 
 <div class="cartProductBox_body_item_info">
