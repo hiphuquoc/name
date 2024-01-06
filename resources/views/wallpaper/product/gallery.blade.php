@@ -16,22 +16,24 @@
         @endphp
         @foreach($prices as $price)
             @foreach($price->wallpapers as $wallpaper)
-                @php
-                    /* lấy ảnh mini */
-                    $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
-                    $image          = config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_wallpaper;
-                @endphp
-                <div class="galleryProductBox_item">
-                    {{-- @if($i<2)
-                        <!-- thêm src và data-option để mô phỏng thẻ image dùng cho tính năng addToCart -->
-                        <div class="galleryProductBox_item_backgroundImage" src="{{ $image }}" data-src="{{ $image }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="background:url('{{ $image }}') no-repeat center center / cover;"></div>
-                    @else  --}}
-                        <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="filter:blur(8px);" />
-                    {{-- @endif --}}
-                </div>
-                @php
-                    ++$i;
-                @endphp
+                @if(!empty($wallpaper->infoWallpaper))
+                    @php
+                        /* lấy ảnh mini */
+                        $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                        $image          = config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_wallpaper;
+                    @endphp
+                    <div class="galleryProductBox_item">
+                        {{-- @if($i<2)
+                            <!-- thêm src và data-option để mô phỏng thẻ image dùng cho tính năng addToCart -->
+                            <div class="galleryProductBox_item_backgroundImage" src="{{ $image }}" data-src="{{ $image }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="background:url('{{ $image }}') no-repeat center center / cover;"></div>
+                        @else  --}}
+                            <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $image }}" alt="{{ $title }}" title="{{ $title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="filter:blur(8px);" />
+                        {{-- @endif --}}
+                    </div>
+                    @php
+                        ++$i;
+                    @endphp
+                @endif
             @endforeach
         @endforeach
     </div>
