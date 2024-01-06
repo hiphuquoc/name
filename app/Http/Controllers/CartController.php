@@ -240,23 +240,25 @@ class CartController extends Controller{
     public static function getCollectionProducts($cartNew = null){
         /* biến cartNew dùng để lúc thay đổi cookie chưa cập nhật lại */
         $infoProducts           = new \Illuminate\Database\Eloquent\Collection;
-        $products               = empty($cartNew) ? session()->get('cart') : json_encode($cartNew);
-        if(!empty($products)) {
-            $products           = json_decode($products, true);
-            $i                  = 0;
-            foreach($products as $product) {
-                $arrayPrice         = $product['product_price_id'];
-                $infoProducts[$i]   = Product::select('*')
-                                        ->where('id', $product['product_info_id'])
-                                        // ->with(['prices' => function ($query) use ($arrayPrice) {
-                                        //     $query->whereIn('id', $arrayPrice);
-                                        // }, 'seo', 'prices.wallpapers'])
-                                        ->first();
-                /* ghép cart vào */
-                $infoProducts[$i]['cart'] = $product;
-                ++$i;
+        $products = empty($cartNew) ? session()->get('cart') : json_encode($cartNew);
+
+        if (!empty($products)) {
+            $products = json_decode($products, true);
+
+            foreach ($products as $product) {
+                // Sử dụng phương thức map để thay đổi Collection
+                $infoProducts->push(
+                    Product::select('*')
+                        ->where('id', $product['product_info_id'])
+                        ->first()
+                        ->map(function ($item, $key) use ($product) {
+                            // Gắn giá trị của cart vào mỗi phần tử
+                            return [$key => $item, 'cart' => $product];
+                        })
+                );
             }
         }
+
         return $infoProducts;
     }
 
