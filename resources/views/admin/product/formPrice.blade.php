@@ -126,14 +126,12 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
             }).done(function (response) {
-                if(response){
-                    if(action=='create'){
-                        itemBox.addClass('selected');
-                    }else if(action=='delete'){
-                        itemBox.removeClass('selected');
-                    }
-                    loadWallpaperByProductPrice(idProductPrice);
+                if(action=='create'){
+                    itemBox.addClass('selected');
+                }else if(action=='delete'){
+                    itemBox.removeClass('selected');
                 }
+                loadWallpaperByProductPrice(idProductPrice);
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 console.error("Ajax request failed: " + textStatus, errorThrown);
             });

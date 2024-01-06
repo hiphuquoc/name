@@ -5,7 +5,7 @@
         foreach($data as $d){
             if(!empty($d)){
                 if($i!=1) $xhtml .= ', ';
-                $urlImage        = config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_wallpaperle_url_hosting;
+                $urlImage        = config('main.google_cloud_storage.default_domain').$d->file_cloud_wallpaper;
                 $name           = $d->name ?? null;
                 $description    = $d->description ?? $d->name;
                 $xhtml          .= '{

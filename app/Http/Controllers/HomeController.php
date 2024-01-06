@@ -106,12 +106,7 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        $wallpapers                     = \App\Models\Wallpaper::select('*')
-                                            ->where('id', '<=', '478')
-                                            ->get();
-        foreach($wallpapers as $infoWallpaper){
-            
-        }
+        
 
     }
 }

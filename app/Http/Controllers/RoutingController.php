@@ -54,7 +54,7 @@ class RoutingController extends Controller{
                     /* thông tin sản phẩm */
                     $item           = Product::select('*')
                         ->where('seo_id', $idSeo)
-                        ->with('seo', 'prices', 'contents', 'categories')
+                        ->with('seo', 'prices.wallpapers.infoWallpaper', 'contents', 'categories')
                         ->first();
                     /* danh sách category của sản phẩm */
                     $arrayCategory  = [];

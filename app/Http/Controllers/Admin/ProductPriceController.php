@@ -32,7 +32,7 @@ class ProductPriceController extends Controller {
 
     public function addWallpaperToProductPrice(Request $request){
         $flag       = false;
-        if(!empty($request->get('wallpaper_id'))&&!empty($request->get('product_price_id'))&&!empty($request->get('action'))){
+        // if(!empty($request->get('wallpaper_id'))&&!empty($request->get('product_price_id'))&&!empty($request->get('action'))){
             if($request->get('action')=='create'){
                 $infoRelation   = RelationProductPriceWallpaperInfo::select('*')
                                     ->where('wallpaper_info_id', $request->get('wallpaper_id'))
@@ -51,7 +51,6 @@ class ProductPriceController extends Controller {
                             ->where('product_price_id', $request->get('product_price_id'))
                             ->delete();
             }
-        }
         return $flag;
     }
 
