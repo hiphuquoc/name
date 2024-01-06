@@ -1,4 +1,4 @@
-@if(!empty($wallpaper))
+@if(!empty($wallpaper->infoWallpaper))
     @php
         /* lấy ảnh Small */
         $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
