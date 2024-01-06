@@ -240,25 +240,18 @@ class CartController extends Controller{
     public static function getCollectionProducts($cartNew = null){
         /* biến cartNew dùng để lúc thay đổi cookie chưa cập nhật lại */
         $infoProducts           = new \Illuminate\Database\Eloquent\Collection;
-        $products = empty($cartNew) ? session()->get('cart') : json_encode($cartNew);
-
-        if (!empty($products)) {
-            $products = json_decode($products, true);
-
-            foreach ($products as $product) {
-                // Sử dụng map trực tiếp trên Collection của Eloquent
-                $infoProducts->push(
-                    Product::select('*')
-                        ->where('id', $product['product_info_id'])
-                        ->first()
-                        ->mapToGroups(function ($item, $key) use ($product) {
-                            // Gắn giá trị của cart vào mỗi phần tử
-                            return [$key => $item, 'cart' => $product];
-                        })
-                );
+        $products               = empty($cartNew) ? session()->get('cart') : json_encode($cartNew);
+        if(!empty($products)) {
+            $products           = json_decode($products, true);
+            foreach($products as $product) {
+                $infoProduct    = Product::select('*')
+                                        ->where('id', $product['product_info_id'])
+                                        ->first();
+                /* ghép cart vào */
+                $infoProduct->cart = $product;
+                $infoProducts->add($infoProduct);
             }
         }
-
         return $infoProducts;
     }
 
