@@ -246,12 +246,12 @@ class CartController extends Controller{
             $products = json_decode($products, true);
 
             foreach ($products as $product) {
-                // Sử dụng phương thức map để thay đổi Collection
+                // Sử dụng map trực tiếp trên Collection của Eloquent
                 $infoProducts->push(
                     Product::select('*')
                         ->where('id', $product['product_info_id'])
                         ->first()
-                        ->map(function ($item, $key) use ($product) {
+                        ->mapToGroups(function ($item, $key) use ($product) {
                             // Gắn giá trị của cart vào mỗi phần tử
                             return [$key => $item, 'cart' => $product];
                         })
