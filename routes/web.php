@@ -214,7 +214,7 @@ Route::prefix('category')->group(function(){
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
 /* cart */
 Route::get('/gio-hang', [CartController::class, 'index'])->name('main.cart');
-Route::get('/cart', [CartController::class, 'enIndex'])->name('main.enCart');
+Route::get('/cart', [CartController::class, 'index'])->name('main.enCart');
 Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addToCart');
 Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.updateCart');
 Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');

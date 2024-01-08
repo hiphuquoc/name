@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('code', 15);
             $table->integer('customer_info_id')->nullable();
             $table->integer('product_count');
-            $table->integer('product_cash');
-            $table->integer('ship_cash');
-            $table->integer('total');
+            $table->text('product_cash');
+            $table->text('ship_cash');
+            $table->text('total');
             $table->integer('payment_method_info_id')->default(0); /* 0 là không xác định => để liên hệ lại */
             $table->text('email')->nullable();
             $table->text('note')->nullable();

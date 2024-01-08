@@ -16,11 +16,11 @@ use App\Models\PaymentMethod;
 class CartController extends Controller{
 
     public static function index(Request $request){
-        $language       = 'vi';
-        SettingController::settingLanguage($language);
+        $language       = session()->get('cart');
+        $keyUrl         = $language=='vi' ? 'gio-hang' : 'cart';
         $item           = Page::select('*')
-                            ->whereHas('seo', function($query){
-                                $query->where('slug', 'gio-hang');
+                            ->whereHas('seo', function($query) use($keyUrl){
+                                $query->where('slug', $keyUrl);
                             })
                             ->with('seo', 'en_seo', 'type')
                             ->first();
@@ -31,21 +31,21 @@ class CartController extends Controller{
         return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'detailCart'));
     }
 
-    public static function enIndex(Request $request){
-        $language       = 'en';
-        SettingController::settingLanguage($language);
-        $item           = Page::select('*')
-                            ->whereHas('en_seo', function($query){
-                                $query->where('slug', 'cart');
-                            })
-                            ->with('seo', 'en_seo', 'type')
-                            ->first();
-        $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-        $productsCart   = [];
-        if(!empty(session()->get('cart'))) $productsCart = json_decode(session()->get('cart'), true);
-        $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('cart', $language);
-        return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'productsCart'));
-    }
+    // public static function enIndex(Request $request){
+    //     $language       = 'en';
+    //     SettingController::settingLanguage($language);
+    //     $item           = Page::select('*')
+    //                         ->whereHas('en_seo', function($query){
+    //                             $query->where('slug', 'cart');
+    //                         })
+    //                         ->with('seo', 'en_seo', 'type')
+    //                         ->first();
+    //     $products       = \App\Http\Controllers\CartController::getCollectionProducts();
+    //     $productsCart   = [];
+    //     if(!empty(session()->get('cart'))) $productsCart = json_decode(session()->get('cart'), true);
+    //     $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('cart', $language);
+    //     return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'productsCart'));
+    // }
 
     public static function addToCart(Request $request){
         $result         = '';
@@ -60,9 +60,7 @@ class CartController extends Controller{
         /* lấy thông tin */
         $infoProduct    = Product::select('*')
                             ->where('id', $idProduct)
-                            ->with('prices', function($query) use($arrayPrice){
-                                $query->whereIn('id', $arrayPrice);
-                            })
+                            ->with('prices')
                             ->first();
         /* tồn tại sản phẩm mới xử lý tiếp */
         if(!empty($infoProduct)){
@@ -102,6 +100,7 @@ class CartController extends Controller{
             /* trả thông báo */
             $language       = session()->get('language') ?? 'vi';
             $cartToView     = self::convertInfoCartToView($infoProduct, $infoProductInCart['product_price_id'], $language);
+            // dd($cartToView);
             $result = view('wallpaper.cart.cartMessage', [
                 'title'     => $cartToView['product_name'],
                 'option'    => $cartToView['option_name'],
@@ -191,17 +190,34 @@ class CartController extends Controller{
     public static function removeProductCart(Request $request){
         $tmp                    = json_decode(session()->get('cart'), true);
         $cartNew                = [];
-        foreach($tmp as $product){
-            if($product['product_info_id']!=$request->get('product_info_id')) $cartNew[] = $product;
+        for($i=0;$i<count($tmp);++$i){
+            if(!empty($tmp[$i])){
+                if($tmp[$i]['product_info_id']!=$request->get('product_info_id')) {
+                    $cartNew[$i]      = $tmp[$i];
+                } else {
+                    $arrayProductPriceId = json_decode($request->get('product_price_id'), true);
+                    $result = array_diff($tmp[$i]['product_price_id'], $arrayProductPriceId);
+                    if(!empty($result)) {
+                        $cartNew[$i]['product_info_id']     = $tmp[$i]['product_info_id'];
+                        $cartNew[$i]['product_price_id']    = $result;
+                        $cartNew[$i]['type']                = $tmp[$i]['type'];
+                    }
+                }
+            }
         }
         /* set lại cookie */
         Session::put('cart', json_encode($cartNew));
         /* trường hợp remove đến khi cart rỗng */
-        $language           = session()->get('language') ?? 'vi';
-        $detailCart         = self::calculatorDetailCart($cartNew, 0, $language);
-        $result             = [];
-        $result['count']    = $detailCart['count'];
-        $result['total']    = \App\Helpers\Number::getFormatPriceByLanguage($detailCart['total'], $language);
+        $language               = session()->get('language') ?? 'vi';
+        $detailCart             = self::calculatorDetailCart($cartNew, 0, $language);
+        $result                 = [];
+        $result['count']        = $detailCart['count'];
+        $result['total']        = \App\Helpers\Number::getFormatPriceByLanguage($detailCart['total'], $language);
+        /* empty cart */
+        $result['isEmpty']      = '';
+        if(empty($cartNew)){
+            $result['isEmpty']  = view('wallpaper.cart.emptyCart', compact('language'))->render();
+        }
         return json_encode($result);
     }
 

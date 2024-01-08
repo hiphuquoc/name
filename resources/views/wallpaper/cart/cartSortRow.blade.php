@@ -1,7 +1,7 @@
 @if(!empty($product))
     @php
-        $keyId              = !empty($product->id) ? $product->id.implode('-', $product->cart['product_price_id']) : null;
-        $eventUpdateCart    = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'")';
+        $keyId              = !empty($product->id) ? $product->id.implode('-', $arrayProductPrice) : null;
+        // $eventUpdateCart    = "updateCart('js_updateCart_idWrite_".$keyId."', 'js_updateCart_total', 'js_updateCart_count', 'js_addToCart_quantity_".$keyId."')";
         if(empty($language)||$language=='vi'){
             $title          = $product->name ?? $product->seo->title ?? null;
             $url            = $product->seo->slug_full ?? null;
@@ -12,7 +12,7 @@
         $cartToView         = \App\Http\Controllers\CartController::convertInfoCartToView($product, $arrayProductPrice, $language);
         $xhtmlPrice             = \App\Helpers\Number::getFormatPriceByLanguage($cartToView['price'], $language);
         /* action */
-        $eventRemoveProductCart = 'removeProductCart("'.$product->id.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
+        $eventRemoveProductCart = "removeProductCart($product->id, '".json_encode($arrayProductPrice)."', 'js_updateCart_idWrite_".$keyId."', 'js_updateCart_total', 'js_updateCart_count')";
         /* ảnh */
         $image                  = \App\Helpers\Image::getUrlImageSmallByUrlImage($cartToView['image']);
     @endphp

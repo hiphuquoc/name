@@ -27,44 +27,52 @@ class CheckoutController extends Controller{
     public function paymentCart(Request $request){
         $urlRedirect        = null;
         /* tạo đơn hàng */
-        $productsCart       = Cookie::get('cart');
-        if(!empty($productsCart)) $productsCart = json_decode($productsCart, true);
-        $products           = new \Illuminate\Database\Eloquent\Collection;
-        foreach($productsCart as $product){
-            $idPrice        = $product['product_price_id'];
-            $tmp            = Product::select('*')
-                                ->where('id', $product['product_info_id'])
-                                ->with(['prices' => function($query) use($idPrice) {
-                                    $query->where('id', $idPrice);
-                                }])
+        $productsCart       = session()->get('cart');
+        // $products           = new \Illuminate\Database\Eloquent\Collection;
+        // foreach($productsCart as $product){
+        //     $idPrice        = $product['product_price_id'];
+        //     $tmp            = Product::select('*')
+        //                         ->where('id', $product['product_info_id'])
+        //                         ->with(['prices' => function($query) use($idPrice) {
+        //                             $query->where('id', $idPrice);
+        //                         }])
+        //                         ->first();
+        //     $products[]     = $tmp;
+        // }
+        if(!empty($productsCart)&&!empty($request->get('payment_method_info_id'))){
+            $productsCart       = json_decode($productsCart, true);
+            $language           = session()->get('language') ?? 'vi';
+            $idPaymentMethod    = $request->get('payment_method_info_id');
+            $detailCart         = \App\Http\Controllers\CartController::calculatorDetailCart($productsCart, $idPaymentMethod, $language);
+            // dd($detailCart);
+            $insertOrder        = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $detailCart);
+            $insertOrder['payment_type'] = 'payment_cart';
+            $idOrder            = Order::insertItem($insertOrder);
+            /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
+            foreach($productsCart as $product){
+                foreach($product['product_price_id'] as $price){
+                    OrderProduct::insertItem([
+                        'order_info_id'     => $idOrder,
+                        'product_info_id'   => $product['product_info_id'],
+                        'product_price_id'  => $price,
+                        'quantity'          => 1,
+                        'price'             => 0
+                    ]);
+                }
+            }
+            /* lấy ngược lại thông tin order để xử lý cho chính xác */
+            $orderInfo      = Order::select('*')
+                                ->where('id', $idOrder)
+                                ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
                                 ->first();
-            $products[]     = $tmp;
-        }
-        $insertOrder        = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $products);
-        $insertOrder['payment_type'] = 'payment_cart';
-        $idOrder            = Order::insertItem($insertOrder);
-        /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
-        foreach($products as $product){
-            OrderProduct::insertItem([
-                'order_info_id'     => $idOrder,
-                'product_info_id'   => $product->id,
-                'product_price_id'  => $product->prices[0]->id ?? 'all',
-                'quantity'          => 1,
-                'price'             => $product->prices[0]->price ?? $product->price
-            ]);
-        }
-        /* lấy ngược lại thông tin order để xử lý cho chính xác */
-        $orderInfo      = Order::select('*')
-                            ->where('id', $idOrder)
-                            ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
-                            ->first();
-        if(!empty($orderInfo->paymentMethod->code)){
-            /* tạo yêu cầu thanh toán => nếu zalo pay */
-            if($orderInfo->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($orderInfo);
-            /* tạo yêu cầu thanh toán => nếu momo */
-            if($orderInfo->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($orderInfo);
-            /* tạo yêu cầu thanh toán => nếu paypal */
-            if($orderInfo->paymentMethod->code=='paypal') $urlRedirect = \App\Http\Controllers\PaypalController::create($orderInfo);
+            if(!empty($orderInfo->paymentMethod->code)){
+                /* tạo yêu cầu thanh toán => nếu zalo pay */
+                if($orderInfo->paymentMethod->code=='zalopay') $urlRedirect = \App\Http\Controllers\ZalopayController::create($orderInfo);
+                /* tạo yêu cầu thanh toán => nếu momo */
+                if($orderInfo->paymentMethod->code=='momo') $urlRedirect = \App\Http\Controllers\MomoController::create($orderInfo);
+                /* tạo yêu cầu thanh toán => nếu paypal */
+                if($orderInfo->paymentMethod->code=='paypal') $urlRedirect = \App\Http\Controllers\PaypalController::create($orderInfo);
+            }
         }
         /* trả về đường dẫn để chuyển hướng */
         return redirect($urlRedirect);

@@ -22,7 +22,7 @@
                 @endphp
                 <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
                     @csrf
-                    <h1>{!! $titleH1 !!} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] }}</span>)</h1>
+                    <h1>{!! $titleH1 !!} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] ?? 0 }}</span>)</h1>
                     <div class="pageCartBox">
                         <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
 
@@ -90,7 +90,6 @@
                                     Dùng mã giảm giá của {{ config('main.company_name') }} ở bước sau
                                 </div> --}}
                                 <div class="cartSectionBox_button">
-                                    {{-- <a href="{{ route('main.checkout') }}" class="button">Thanh toán</a> --}}
                                     @if(empty($language)||$language=='vi')
                                         <div class="button" onClick="submitFormPayment('formPaymentMethod');">Thanh toán</div>
                                     @else

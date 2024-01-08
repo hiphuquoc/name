@@ -158,19 +158,14 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableOrderInfo($dataForm, $idCustomer, $products){
+    public static function buildArrayTableOrderInfo($dataForm, $idCustomer, $detailCart){
         $result                             = [];
         $result['code']                     = strtoupper(\App\Helpers\Charactor::randomString(15));
         $result['customer_info_id']         = $idCustomer ?? null;
-        $result['product_count']            = 0;
-        $result['product_cash']             = 0;
-        foreach($products as $product){
-            $result['product_count']        += 1;
-            /* lấy phần tử đầu tiên vì trong câu query chỉ lấy price được chọn - còn không lấy được là do mua trọn bộ => sẽ lấy giá chung */
-            $result['product_cash']         += $product->prices[0]->price ?? $product->price; 
-        }
-        $result['ship_cash']                = $dataForm['ship_cash'] ?? 0;
-        $result['total']                    = $result['ship_cash']+$result['product_cash'];
+        $result['product_count']            = $detailCart['count'];
+        $result['product_cash']             = $detailCart['into_money'];
+        $result['ship_cash']                = $detailCart['fee'] ?? 0;
+        $result['total']                    = $detailCart['total'];
         $result['payment_method_info_id']   = $dataForm['payment_method_info_id'];
         $result['email']                    = $dataForm['email'] ?? null;
         $result['note']                     = $dataForm['note'] ?? null;

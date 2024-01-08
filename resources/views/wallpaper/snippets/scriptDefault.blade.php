@@ -400,7 +400,7 @@
     //     });
     // }
     /* xóa sản phẩm khỏi cart */ 
-    function removeProductCart(idProduct, idRow, idTotal, idCount){
+    function removeProductCart(idProduct, idProductPrice, idRow, idTotal, idCount){
         /* tải loading */ 
         loadLoading(idRow);
         $.ajax({
@@ -408,7 +408,8 @@
             type        : 'get',
             dataType    : 'json',
             data        : {
-                product_info_id     : idProduct
+                product_info_id     : idProduct,
+                product_price_id    : idProductPrice
             },
             success     : function(response){
                 /* cart trống */
@@ -421,6 +422,11 @@
                 /* trong page giỏ hàng => tải lại thành tiền */
                 if (typeof loadTotalCart === 'function') {
                     loadTotalCart($('#payment_method_info_id').val());
+                }
+                /* trường hợp xóa không còn sản phẩm */
+                if(response.isEmpty!='') {
+                    $('#js_checkEmptyCart_idWrite').html(response.isEmpty);
+                    $('#js_scrollMenu').remove();
                 }
             }
         });

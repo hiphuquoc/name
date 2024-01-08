@@ -1,8 +1,8 @@
 @php
     $idProduct              = $product->id;
-    $keyId                  = $product->id.implode('-', $product->cart['product_price_id']);
-    $eventUpdateCart        = 'updateCart("js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count", "js_addToCart_quantity_'.$keyId.'", "cartMain")';
-    $eventRemoveProductCart = 'removeProductCart("'.$idProduct.'", "js_updateCart_idWrite_'.$keyId.'", "js_updateCart_total", "js_updateCart_count")';
+    $keyId                  = $product->id.implode('-', $arrayProductPrice);
+    // $eventUpdateCart        = "updateCart('js_updateCart_idWrite_$keyId', 'js_updateCart_total', 'js_updateCart_count', 'js_addToCart_quantity_".$keyId."', 'cartMain')";
+    $eventRemoveProductCart = "removeProductCart($idProduct, '".json_encode($arrayProductPrice)."', 'js_updateCart_idWrite_".$keyId."', 'js_updateCart_total', 'js_updateCart_count')";
     if(empty($language)||$language=='vi'){
         $title              = $product->name ?? $product->seo->title ?? null;
         $url                = $product->seo->slug_full ?? null;

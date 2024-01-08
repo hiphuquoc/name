@@ -108,7 +108,7 @@
                         <div class="heart"></div>
                         @php
                             $keyPriceAll = [];
-                            foreach($product->prices as $p) $keyPriceAll[] = $price->id;
+                            foreach($product->prices as $p) $keyPriceAll[] = $p->id;
                             $keyPriceAll = implode('-', $keyPriceAll);
                         @endphp
                         <div class="addToCart" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}', 'all');"></div>

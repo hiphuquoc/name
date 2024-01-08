@@ -13,7 +13,7 @@
         </div>
     </a>
     <a href="{{ $urlCart }}" class="cartBox_text">{{ empty($language)||$language=='vi' ? 'Giỏ hàng' : 'Cart' }}</a>
-    <div class="cartBox_list">
+    <div id="js_checkEmptyCart_idWrite" class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
             <div class="customScrollBar-y" style="max-height:420px;">
                 @foreach($products as $product)
@@ -45,11 +45,8 @@
                 <div class="total">{{ empty($language)||$language=='vi' ? 'Tổng' : 'Total' }}: <span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($detailCart['total'], $language) !!}</span></div>
                 <a href="{{ $urlCart }}" class="button">{{ empty($language)||$language=='vi' ? 'Xem giỏ hàng' : 'View cart' }}</a>
             </div>
-        @else 
-            <div class="emptyCart">
-                <img src="{{ Storage::url('images/svg/icon-blank-cart.svg') }}" alt="danh sách sản phẩm trong giỏ hàng" title="danh sách sản phẩm trong giỏ hàng" />
-                <div class="emptyCart_text">{{ empty($language)||$language=='vi' ? 'Giỏ hàng của bạn trống' : 'Your shopping cart is empty' }}!</div> 
-            </div>
+        @else
+            @include('wallpaper.cart.emptyCart', compact('language'))
         @endif
         
     </div>
