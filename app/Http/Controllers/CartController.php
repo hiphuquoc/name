@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Route;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\PaymentMethod;
@@ -16,11 +17,19 @@ use App\Models\PaymentMethod;
 class CartController extends Controller{
 
     public static function index(Request $request){
-        $language       = session()->get('cart');
-        $keyUrl         = $language=='vi' ? 'gio-hang' : 'cart';
+        $currentRoute   = Route::currentRouteName();
+        $language       = $currentRoute=='main.cart' ? 'vi' : 'en';
+        SettingController::settingLanguage($language);
         $item           = Page::select('*')
-                            ->whereHas('seo', function($query) use($keyUrl){
-                                $query->where('slug', $keyUrl);
+                            ->when($currentRoute=='main.cart', function($query){
+                                $query->whereHas('seo', function($query) {
+                                    $query->where('slug', 'gio-hang');
+                                });
+                            })
+                            ->when($currentRoute=='main.enCart', function($query){
+                                $query->whereHas('en_seo', function($query) {
+                                    $query->where('slug', 'cart');
+                                });
                             })
                             ->with('seo', 'en_seo', 'type')
                             ->first();
@@ -30,22 +39,6 @@ class CartController extends Controller{
         $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
         return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'detailCart'));
     }
-
-    // public static function enIndex(Request $request){
-    //     $language       = 'en';
-    //     SettingController::settingLanguage($language);
-    //     $item           = Page::select('*')
-    //                         ->whereHas('en_seo', function($query){
-    //                             $query->where('slug', 'cart');
-    //                         })
-    //                         ->with('seo', 'en_seo', 'type')
-    //                         ->first();
-    //     $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-    //     $productsCart   = [];
-    //     if(!empty(session()->get('cart'))) $productsCart = json_decode(session()->get('cart'), true);
-    //     $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('cart', $language);
-    //     return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'productsCart'));
-    // }
 
     public static function addToCart(Request $request){
         $result         = '';
