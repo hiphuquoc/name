@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('name');
             $table->text('description');
             $table->text('icon')->nullable();
+            $table->boolean('active')->default(0);
         });
     }
 

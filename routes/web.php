@@ -202,7 +202,7 @@ Route::prefix('payment')->group(function(){
 });
 /* trang chủ */
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
-Route::get('/en', [HomeController::class, 'enHome'])->name('main.enHome');
+Route::get('/en', [HomeController::class, 'home'])->name('main.enHome');
 Route::get('/test123', [HomeController::class, 'test'])->name('main.test');
 /* trang category */
 Route::prefix('category')->group(function(){

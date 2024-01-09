@@ -74,84 +74,129 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
+    <!-- share social -->
+    @include('wallpaper.template.shareSocial')
+    <!-- content -->
+    <div class="container">
+        <div class="breadcrumbMobileBox"><!-- dùng để chống nhảy padding - margin so với các trang có breadcrumb --></div>
 
-        <!-- share social -->
-        @include('wallpaper.template.shareSocial')
-        <!-- content -->
-        <div class="container">
-            <div class="breadcrumbMobileBox"><!-- dùng để chống nhảy padding - margin so với các trang có breadcrumb --></div>
-            <!-- === START:: Product Box === -->
-            @if(!empty($products)&&$products->isNotEmpty())
-                <div class="contentBox">
-                    <div class="categoryBox">
-                        <div class="categoryBox_title">
-                            <h2>
-                                @if(empty($language)||$language=='vi')
-                                    Hình nền điện thoại mới
-                                @else
-                                    New Wallpapers
-                                @endif
-                            </h2>
-                        </div>
-                        <div class="categoryBox_box">
-                            <!-- Sort Box -->
-                            @php
-                                $total = $products->count();
-                                if($viewBy=='wallpaper'){
-                                    $total = 0;
-                                    foreach($products as $product){
-                                        foreach($product->prices as $price){
-                                            foreach($price->wallpapers as $wallpaper){
-                                                ++$total;
-                                            }
+        <!-- === START:: Product Box === -->
+        @if(!empty($infoCategoryTet))
+            <div class="contentBox">
+                <div class="categoryBox">
+                    <div class="categoryBox_title">
+                        <h2>
+                            @if(empty($language)||$language=='vi')
+                                <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại tết 2024">Hình nền điện thoại Tết 2024</a>
+                            @else
+                                <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">New Year 2024 Wallpapers</a>
+                            @endif
+                        </h2>
+                    </div>
+                    <div class="categoryBox_box">
+                        <!-- Hình nền điện thoại tết -->
+                        @php
+                            $productTet = new \Illuminate\Database\Eloquent\Collection;
+                            $i          = 0;
+                            foreach($infoCategoryTet->products as $product){
+                                if($i==10) break;
+                                /* lọc bỏ các phần tử chưa có wallpaper => chưa lọc được trong query */
+                                if(!empty($product->infoProduct->prices)&&$product->infoProduct->prices->isNotEmpty()) {
+                                    $flagHaveWallpaper = false;
+                                    foreach($product->infoProduct->prices as $price){
+                                        if($price->wallpapers->isNotEmpty()){
+                                            $flagHaveWallpaper = true;
+                                            break;
                                         }
                                     }
+                                    if($flagHaveWallpaper==true) {
+                                        $productTet->add($product->infoProduct);
+                                        ++$i;
+                                    }
                                 }
-                            @endphp
-                            @include('wallpaper.template.sort', [
-                                'language'  => $language ?? 'vi',
-                                'total'     => $total,
-                                'viewBy'    => $viewBy
-                            ])
-                            <!-- Sản phẩm -->
-                            @include('wallpaper.template.wallpaperGrid', [
-                                'products'      => $products ?? null,
-                                'headingTitle'  => 'h2',
-                                'viewBy'        => $viewBy,
-                                'total'         => $total,
-                                'loaded'        => 5,
-                                'id'            => 1,
-                                'type'          => 'event_info'
-                            ])
-                        </div>
+                            }
+                        @endphp
+                        @include('wallpaper.template.wallpaperGrid', [
+                            'products'      => $productTet ?? null,
+                            'headingTitle'  => 'h2',
+                            'viewBy'        => $viewBy,
+                            'total'         => $productTet->count(),
+                            'loaded'        => $productTet->count(),
+                            'id'            => 0,
+                            'type'          => 'event_info'
+                        ])
                     </div>
+                    @if(empty($language)||$language=='vi')
+                        <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" class="categoryBox_viewMore" aria-label="Hình nền điện thoại tết 2024">
+                            <i class="fa-solid fa-eye"></i>Xem thêm
+                        </a>
+                    @else
+                        <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">View more</a>
+                    @endif
                 </div>
-            @endif
-            <!-- === END:: Product Box === -->
-                
-            <!-- === START:: Product Box === -->
-            {{-- @if(!empty($promotionProducts)&&$promotionProducts->isNotEmpty()) --}}
-                {{-- <div class="contentBox">
-                    <!-- load more -->
-                    <input type="hidden" id="js_loadMore_total" name="total" value="{{ $totalPromotionProduct ?? 0 }}" />
-                    <input type="hidden" id="js_loadMore_loaded" name="loaded" value="{{ $promotionProducts->count() }}" />
-                    @php
-                        if(!empty($language)&&$language=='en'){
-                            $titleCategoryBox = '<a href="/promotion-phone-wallpapers" title="Promotion phone wallpapers">Promotion phone wallpapers<i class="fa-solid fa-angle-right" style="margin-left:15px;font-size:15px;"></i></a>';
-                        }else {
-                            $titleCategoryBox = '<a href="/hinh-nen-dien-thoai-khuyen-mai" title="hình nền điện thoại khuyến mãi">Hình nền điện thoại khuyến mãi<i class="fa-solid fa-angle-right" style="margin-left:15px;font-size:15px;"></i></a>';
-                        }
-                    @endphp
-                    @include('wallpaper.home.categoryBox', [
-                        'title'     => $titleCategoryBox,
-                        'products'  => $promotionProducts,
-                        'tagBox'    => 'promotion',
-                        'language'  => $language
-                    ])
-                </div> --}}
-            {{-- @endif --}}
-            <!-- === END:: Product Box === -->
-        </div>
+            </div>
+        @endif
+        <!-- === END:: Product Box === -->
+
+        <!-- === START:: Product Box === -->
+        @if(!empty($infoCategoryNoel))
+            <div class="contentBox">
+                <div class="categoryBox">
+                    <div class="categoryBox_title">
+                        <h2>
+                            @if(empty($language)||$language=='vi')
+                                <a href="/{{ $infoCategoryNoel->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại Noel">Hình nền điện thoại Noel</a>
+                            @else
+                            <a href="/{{ $infoCategoryNoel->en_seo->slug_full ?? null }}" aria-label="Christmas Wallpapers">Christmas Wallpapers</a>
+                            @endif
+                        </h2>
+                    </div>
+                    <div class="categoryBox_box">
+                        <!-- Hình nền điện thoại tết -->
+                        @php
+                            $productTet = new \Illuminate\Database\Eloquent\Collection;
+                            $i          = 0;
+                            foreach($infoCategoryNoel->products as $product){
+                                if($i==10) break;
+                                /* lọc bỏ các phần tử chưa có wallpaper => chưa lọc được trong query */
+                                if(!empty($product->infoProduct->prices)&&$product->infoProduct->prices->isNotEmpty()) {
+                                    $flagHaveWallpaper = false;
+                                    foreach($product->infoProduct->prices as $price){
+                                        if($price->wallpapers->isNotEmpty()){
+                                            $flagHaveWallpaper = true;
+                                            break;
+                                        }
+                                    }
+                                    if($flagHaveWallpaper==true) {
+                                        $productTet->add($product->infoProduct);
+                                        ++$i;
+                                    }
+                                }
+                            }
+                        @endphp
+                        @include('wallpaper.template.wallpaperGrid', [
+                            'products'      => $productTet ?? null,
+                            'headingTitle'  => 'h2',
+                            'viewBy'        => $viewBy,
+                            'total'         => $productTet->count(),
+                            'loaded'        => $productTet->count(),
+                            'id'            => 0,
+                            'type'          => 'event_info'
+                        ])
+                    </div>
+                    @if(empty($language)||$language=='vi')
+                        <a href="/{{ $infoCategoryNoel->seo->slug_full ?? null }}" class="categoryBox_viewMore" aria-label="Hình nền điện thoại Giáng sinh">
+                            <i class="fa-solid fa-eye"></i>Xem thêm
+                        </a>
+                    @else
+                        <a href="/{{ $infoCategoryNoel->en_seo->slug_full ?? null }}" aria-label="Christmas Wallpapers">View more</a>
+                    @endif
+                </div>
+            </div>
+        @endif
+        <!-- === END:: Product Box === -->
+
+    </div>
 @endsection
 @push('modal')
     <!-- Message Add to Cart -->
