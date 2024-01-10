@@ -141,15 +141,21 @@
             </div> --}}
 
             <!-- Product Box -->
+            @php
+                $loaded         = 5;
+                $arrayIdProduct = [];
+                $i              = 0;
+                foreach($products as $p) {
+                    if($i>=5) $arrayIdProduct[] = $p->id;
+                    ++$i;
+                }
+            @endphp
             @include('wallpaper.template.wallpaperGrid', [
-                'products'      => $products ?? null,
-                'headingTitle'  => 'h2',
-                'contentEmpty'  => true,
-                'total'         => $products->count(),
-                'loaded'        => 5,
-                'id'            => $item->id ?? 0,
-                'type'          => $item->seo->type ?? '',
-                'search'        => request('search') ?? ''
+                'products'          => $products ?? null,
+                'headingTitle'      => 'h2',
+                'contentEmpty'      => true,
+                'loaded'            => $loaded,
+                'arrayIdProduct'    => $arrayIdProduct
             ])
             {{-- @include('main.template.productGridLoading')
             <div id="js_filterProduct_hidden"></div> --}}

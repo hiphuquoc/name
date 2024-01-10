@@ -122,8 +122,7 @@
                             'viewBy'        => $viewBy,
                             'total'         => $productTet->count(),
                             'loaded'        => $productTet->count(),
-                            'id'            => 0,
-                            'type'          => 'event_info'
+                            'arrayId'       => [0]
                         ])
                     </div>
                     @if(empty($language)||$language=='vi')
@@ -180,7 +179,7 @@
                             'viewBy'        => $viewBy,
                             'total'         => $productTet->count(),
                             'loaded'        => $productTet->count(),
-                            'id'            => 0,
+                            'arrayId'       => [0],
                             'type'          => 'event_info'
                         ])
                     </div>

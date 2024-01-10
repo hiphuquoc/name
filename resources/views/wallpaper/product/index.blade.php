@@ -84,12 +84,14 @@
                         @endif
                     </div>
                     <div class="relatedProductBox_box">
+                        @php
+                            $arrayIdProduct = [];
+                            foreach($related as $p) $arrayIdProduct[] = $p->infoProduct->id;
+                        @endphp
                         @include('wallpaper.template.wallpaperGrid', [
-                            'products'  => $related,
-                            'total'     => $totalProduct ?? 0,
-                            'loaded'    => $related->count(),
-                            'id'        => 34,
-                            'type'      => 'category_info'
+                            'loaded'            => 0,
+                            'contentEmpty'      => true,
+                            'arrayIdProduct'    => $arrayIdProduct
                         ])
                     </div>
                 </div>

@@ -14,7 +14,7 @@ use App\Models\Style;
 use App\Models\Event;
 use App\Models\Page;
 use App\Models\CategoryBlog;
-use App\Models\Blog;
+use App\Models\Seo;
 
 
 class RoutingController extends Controller{
@@ -67,9 +67,36 @@ class RoutingController extends Controller{
                                             $query->whereIn('id', $arrayCategory);
                                         })
                                         ->count();
+                    /* sản phẩm liên quan */
+                    $idSeoParent            = $item->seo->parent;
+                    $infoSeoParent          = Seo::select('type')
+                                                ->where('id', $idSeoParent)
+                                                ->first();
+                    if($infoSeoParent->type=='category_info'){
+                        $tmp                = Category::select('category_info.*')
+                                                ->join('seo', 'seo.id', '=', 'category_info.seo_id')
+                                                ->where('seo.id', $idSeoParent)
+                                                ->with('products')
+                                                ->first();
+                    }
+                    if($infoSeoParent->type=='style_info'){
+                        $tmp                = Style::select('style_info.*')
+                                                ->join('seo', 'seo.id', '=', 'style_info.seo_id')
+                                                ->where('seo.id', $idSeoParent)
+                                                ->with('products')
+                                                ->first();
+                    }
+                    if($infoSeoParent->type=='event_info'){
+                        $tmp                = Event::select('event_info.*')
+                                                ->join('seo', 'seo.id', '=', 'event_info.seo_id')
+                                                ->where('seo.id', $idSeoParent)
+                                                ->with('products.infoProduct.seo')
+                                                ->first();
+                    }
+                    $related            = $tmp->products;
                     /* breadcrumb */
-                    $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                    $xhtml          = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related', 'totalProduct', 'keyCategory', 'language'))->render();
+                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                    $xhtml              = view('wallpaper.product.index', compact('item', 'breadcrumb', 'related', 'totalProduct', 'keyCategory', 'language'))->render();
                 }
 
                 /* ===== Các trang chủ đề/phong cách/sự kiện ==== */

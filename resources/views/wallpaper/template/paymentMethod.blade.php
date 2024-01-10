@@ -1,6 +1,6 @@
 @php
     $paymentMethods     = \App\Models\PaymentMethod::select('*')
-                            ->where('code', '!=', 'cod')
+                            ->where('active', 1)
                             ->get();
 @endphp
 @foreach($paymentMethods as $method)

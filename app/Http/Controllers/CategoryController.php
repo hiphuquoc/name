@@ -12,49 +12,19 @@ class CategoryController extends Controller {
 
     public static function loadMore(Request $request){
         $xhtmlProduct       = null;
-        $loaded             = $request->get('loaded');
-        $total              = $request->get('total');
-        $id                 = $request->get('id');
-        $type               = $request->get('type');
-        $search             = $request->get('search') ?? null;
         $requestLoad        = $request->get('request_load') ?? 10;
-        if($loaded<$total){
+        $tmp                = !empty($request->get('array_product_info_id')) ? json_decode($request->get('array_product_info_id'), true) : [];
+        if(!empty($tmp)){
+            $arrayIdProductLoad = array_slice($tmp, 0, $requestLoad);
+            $arrayIdProductSave = array_slice($tmp, $requestLoad);
             /* content product */
-            $arrayCategory      = null;
-            if($type=='category_info'){
-                $item           = Category::select('*')
-                                    ->where('id', $id)
-                                    ->first();
-                $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
-            }
             $products       = Product::select('product_info.*')
                                 ->join('seo', 'seo.id', '=', 'product_info.seo_id')
+                                ->whereIn('product_info.id', $arrayIdProductLoad)
                                 ->whereHas('prices.wallpapers', function($query){
 
                                 })
-                                ->when(!empty($keySearch), function($query) use($search){
-                                    $query->where('code', 'like', '%'.$search.'%')
-                                        ->orWhere('name', 'like', '%'.$search.'%')
-                                        ->orWhere('en_name', 'like', '%'.$search.'%');
-                                })
-                                ->when($type=='category_info', function($query) use($arrayCategory){
-                                    $query->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                                        $query->whereIn('id', $arrayCategory);
-                                    });
-                                })
-                                ->when($type=='style_info', function($query) use($id){
-                                    $query->whereHas('styles.infoStyle', function($query) use($id){
-                                        $query->where('id', $id);
-                                    });
-                                })
-                                ->when($type=='event_info', function($query) use($id){
-                                    $query->whereHas('events.infoEvent', function($query) use($id){
-                                        $query->where('id', $id);
-                                    });
-                                })
                                 ->with('seo', 'en_seo', 'prices')
-                                ->skip($request->get('loaded'))
-                                ->take($requestLoad)
                                 ->orderBy('seo.ordering', 'DESC')
                                 ->orderBy('id', 'DESC')
                                 ->get();
@@ -87,11 +57,9 @@ class CategoryController extends Controller {
                     }
                 }
             }
-            /* phần tính toán */
-            $loaded         = $request->get('loaded') + $products->count();
         }
         $response['content']    = $xhtmlProduct;
-        $response['loaded']     = $loaded;
+        $response['array_product_info_id']     = json_encode($arrayIdProductSave) ?? '';
         return json_encode($response);
     }
 
