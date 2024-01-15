@@ -43,27 +43,33 @@
 <div class="headerSide customScrollBar-y">
     <ul>
         <li>
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-home-1.svg');
+            @endphp
             @if(empty($language)||$language=='vi')
                 <a href="/" title="Trang chủ {{ config('main.company_name') }}" aria-label="Trang chủ Name.com.vn">
-                    <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Trang chủ {{ config('main.company_name') }}" title="Trang chủ {{ config('main.company_name') }}" />
+                    {!! $icon !!}
                     <div>Trang chủ</div>
                 </a>
             @else
                 <a href="/en" title="Home {{ config('main.company_name') }}" aria-label="Page home Name.com.vn">
-                    <img src="{{ Storage::url('images/svg/house-chimney-blank.svg') }}" alt="Home {{ config('main.company_name') }}" title="Home {{ config('main.company_name') }}" />
+                    {!! $icon !!}
                     <div>Home</div>
                 </a>
             @endif
         </li>
         <li>
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-about-me-2.svg');
+            @endphp
             @if(empty($language)||$language=='vi')
                 <a href="/ve-chung-toi" title="Về chúng tôi" aria-label="Về chúng tôi">
-                    <img src="{{ Storage::url('images/svg/icon-about-us.png') }}" alt="Về chúng tôi" title="Về chúng tôi" />
+                    {!! $icon !!}
                     <div>Về chúng tôi</div>
                 </a>
             @else
                 <a href="/about-us" title="About us" aria-label="About us">
-                    <img src="{{ Storage::url('images/svg/icon-about-us.png') }}" alt="About us" title="About us" />
+                    {!! $icon !!}
                     <div>About us</div>
                 </a>
             @endif
@@ -80,9 +86,10 @@
                         $classTmp = 'open';
                         $styleTmp = 'style="height:auto;opacity:1;"';
                     }
+                    $icon = file_get_contents('storage/images/svg/icon-category-2.svg');
                 @endphp
                 <div class="{{ $classTmp }}">
-                    <img src="{{ Storage::url('images/svg/icon-category-1.png') }}" alt="{{ $titlePhoneWallpaper }}" title="{{ $titlePhoneWallpaper }}" />
+                    {!! $icon !!}
                     @if($flagOpen==true)
                         <div>{{ $titlePhoneWallpaper }}</div>
                     @else 
@@ -194,12 +201,15 @@
         </li> --}}
         <li>
             <div class="close">
+                @php
+                    $icon = file_get_contents('storage/images/svg/icon-support-1.svg');
+                @endphp
                 @if(empty($language)||$language=='vi')
-                    <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Thông tin hỗ trợ {{ config('main.company_name') }}" title="Thông tin hỗ trợ {{ config('main.company_name') }}" />
+                    {!! $icon !!}
                     <div>Hỗ trợ</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'ho-tro')"></i>
                 @else 
-                    <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="Support infomation" title="Support infomation" />
+                    {!! $icon !!}
                     <div>Support</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'ho-tro')"></i>
                 @endif
