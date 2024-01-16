@@ -219,10 +219,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-
-        /* Debugbar */
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        
         /* image */
         'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
