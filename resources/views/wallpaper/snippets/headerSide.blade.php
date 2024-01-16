@@ -120,16 +120,19 @@
             </li>
         @endif
         <li>
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-brush-1.svg');
+            @endphp
             @if(empty($language)||$language=='vi')
                 <div class="open">
-                    <img src="{{ Storage::url('images/svg/icon-style.png') }}" alt="Hình nền điện thoại theo phong cách" title="Hình nền điện thoại theo phong cách" style="opacity:1;" />
-                    <div>Phong Cách</div>
+                    {!! $icon !!}
+                    <div style="margin-left:-3px;">Phong Cách</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
                 </div>
             @else
                 <div class="open">
-                    <img src="{{ Storage::url('images/svg/icon-style.png') }}" alt="Phone wallpaper by styles" title="Phone wallpaper by styles" style="opacity:1;" />
-                    <div>Styles</div>
+                    {!! $icon !!}
+                    <div style="margin-left:-3px;">Styles</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
                 </div>
             @endif
@@ -155,13 +158,13 @@
         <li>
             @if(empty($language)||$language=='vi')
                 <div class="open">
-                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Hình nền điện thoại theo sự kiện" title="Hình nền điện thoại theo sự kiện" style="opacity:1;" />
+                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Hình nền điện thoại theo sự kiện" title="Hình nền điện thoại theo sự kiện" />
                     <div>Sự kiện</div>
                     <i class="fa-solid fa-minus"  onclick="showHideListMenuMobile(this, 'su-kien')"></i>
                 </div>
             @else
                 <div class="open">
-                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Phone wallpaper by event" title="Phone wallpaper by event" style="opacity:1;" />
+                    <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Phone wallpaper by event" title="Phone wallpaper by event" />
                     <div>Event</div>
                     <i class="fa-solid fa-minus"  onclick="showHideListMenuMobile(this, 'su-kien')"></i>
                 </div>

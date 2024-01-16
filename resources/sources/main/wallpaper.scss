@@ -679,12 +679,13 @@
                 img {
                     width: 23px;
                     margin-right: 0.75rem;
-                    opacity: 0.5;
+                    // opacity: 0.5;
                 }
                 svg {
                     width: 24px;
                     margin-right: 0.75rem;
                     color: $colorIcon;
+                    opacity: 0.75;
                 }
             }
             > span {
@@ -710,17 +711,17 @@
             }
             ul {
                 margin-left: 10px;
-                border-left: 1px dashed $colorBackgroundLv3;
+                border-left: 1px dashed #{$colorIcon}7F;
                 > li {
                     position: relative;
                     &:before {
                         position: absolute;
-                        color: $colorText;
+                        color: $colorIcon;
                         top: 0.6rem;
                         left: -1.25rem;
                         content: "--";
                         font-size: 0.8rem;
-                        opacity: 0.35;
+                        opacity: 0.75;
                     }
                 }
             }
@@ -749,7 +750,7 @@
                     opacity: 0.8;
                     font-size: 0.9rem;
                     cursor: pointer;
-                    color: $colorIcon;
+                    @include colorOpacity('color', $colorIcon, 0.75);
                 }
             }
             > ul {
