@@ -69,7 +69,6 @@
             if(boxCategory.length&&!boxCategory.hasClass('loading')){
                 const distanceLoad  = boxCategory.outerHeight() + boxCategory.offset().top;
                 if($(window).scrollTop() + 1500 > boxCategory.outerHeight() + boxCategory.offset().top) {
-                    console.log(123);
                     /* thực thi */
                     /* thêm class để đánh dấu đăng load => không load nữa */
                     boxCategory.addClass('loading');
@@ -92,7 +91,6 @@
                                 /* xóa bỏ class để thể hiện đã load xong */
                                 boxCategory.removeClass('loading');
                                 /* append dữ liệu */
-                                console.log(response);
                                 if(response.content!=''){
                                     $('#js_loadMore_array_product_info_id').val(response.array_product_info_id);
                                     boxCategory.append(response.content);

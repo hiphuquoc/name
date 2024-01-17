@@ -193,34 +193,8 @@ class RoutingController extends Controller{
                     /* content */
                     $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
                     $content            = Blade::render(Storage::get($filenameContent));
-                    /* select của filter */
-                    $categories         = Category::all();
-                    $styles             = Style::all();
-                    $events             = Event::all();
-                    /* giá trị selectBox */
-                    if(empty($categoryChoose)) $categoryChoose = [];
-                    if(!empty(request('category_info_id'))){
-                        $categoryChoose = Category::select('*')
-                                            ->where('id', request('category_info_id'))
-                                            ->with('seo', 'en_seo')
-                                            ->first();
-                    }
-                    if(empty($styleChoose)) $styleChoose = [];
-                    if(!empty(request('style_info_id'))){
-                        $styleChoose    = Style::select('*')
-                                            ->where('id', request('style_info_id'))
-                                            ->with('seo', 'en_seo')
-                                            ->first();
-                    }
-                    if(empty($eventChoose)) $eventChoose = [];
-                    if(!empty(request('event_info_id'))){
-                        $eventChoose    = Event::select('*')
-                                            ->where('id', request('event_info_id'))
-                                            ->with('seo', 'en_seo')
-                                            ->first();
-                    }
                     /* lấy giao diện */
-                    $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'categories', 'styles', 'events', 'breadcrumb', 'content', 'language', 'viewBy', 'categoryChoose', 'styleChoose', 'eventChoose'))->render();
+                    $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
                 }
                 /* ===== Trang ==== */
                 if($checkExists->type=='page_info'){

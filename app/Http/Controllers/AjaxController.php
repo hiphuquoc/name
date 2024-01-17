@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic;
 use App\Models\District;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Style;
+use App\Models\Event;
 use App\Models\RegistryEmail;
 use Illuminate\Support\Facades\Cookie;
 use App\Services\BuildInsertUpdateModel;
@@ -173,6 +176,54 @@ class AjaxController extends Controller {
             Cookie::queue('view_by', $request->get('view_by'), 3600);
         }
         return redirect()->back()->withInput();
+    }
+
+    public function showSortBox(Request $request){
+        $xhtml              = '';
+        $type               = $request->get('type');
+        $id                 = $request->get('id');
+        $totalSet           = $request->get('totalSet');
+        $totalWallpaper     = $request->get('totalWallpaper');
+        $viewBy             = Cookie::get('view_by') ?? 'set';
+        /* select của filter */
+        $categories         = Category::all();
+        $styles             = Style::all();
+        $events             = Event::all();
+        /* giá trị selectBox */
+        $categoryChoose     = new \Illuminate\Database\Eloquent\Collection;
+        if($type=='category_info'){
+            $categoryChoose = Category::select('*')
+                                ->where('id', $id)
+                                ->with('seo', 'en_seo')
+                                ->first();
+        }
+        $styleChoose        = new \Illuminate\Database\Eloquent\Collection;
+        if($type=='style_info'){
+            $styleChoose    = Style::select('*')
+                                ->where('id', $id)
+                                ->with('seo', 'en_seo')
+                                ->first();
+        }
+        $eventChoose        = new \Illuminate\Database\Eloquent\Collection;
+        if($type=='event_info'){
+            $eventChoose    = Event::select('*')
+                                ->where('id', $id)
+                                ->with('seo', 'en_seo')
+                                ->first();
+        }
+        $xhtml              = view('wallpaper.template.sortContent', [
+            'language'          => $language ?? 'vi',
+            'totalSet'          => $totalSet,
+            'totalWallpaper'    => $totalWallpaper,
+            'viewBy'            => $viewBy,
+            'categories'        => $categories,
+            'styles'            => $styles,
+            'events'            => $events,
+            'categoryChoose'    => $categoryChoose,
+            'styleChoose'       => $styleChoose,
+            'eventChoose'       => $eventChoose
+        ])->render();
+        return $xhtml;
     }
 
     public static function loadImageFromGoogleCloud(Request $request){

@@ -829,6 +829,12 @@
         }
     }
     &_right {
+        display: flex;
+        > * {
+            &:not(:first-child){
+                margin-left: 0.5rem;
+            }
+        }
         &_item {
             display: flex;
             justify-content: flex-end;

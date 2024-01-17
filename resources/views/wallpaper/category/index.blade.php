@@ -112,24 +112,22 @@
             </div>
             <!-- Sort Box -->
             @php
-                $total = $products->count();
-                if($viewBy=='wallpaper'){
-                    $total = 0;
-                    foreach($products as $product){
-                        foreach($product->prices as $price){
-                            foreach($price->wallpapers as $wallpaper){
-                                ++$total;
-                            }
+                $totalSet   = $products->count();
+                $totalWallpaper  = 0;
+                foreach($products as $product){
+                    foreach($product->prices as $price){
+                        foreach($price->wallpapers as $wallpaper){
+                            ++$totalWallpaper;
                         }
                     }
                 }
             @endphp
             @include('wallpaper.template.sort', [
-                'language'  => $language ?? 'vi',
-                'total'     => $total,
-                'viewBy'    => $viewBy
+                'language'          => $language ?? 'vi',
+                'totalSet'          => $totalSet,
+                'totalWallpaper'    => $totalWallpaper,
+                'viewBy'            => $viewBy
             ])
-            
 
             <!-- filter box -->
             {{-- <div class="filterStyleWallpaper">

@@ -248,6 +248,7 @@ Route::get('/loadImageWithResize', [AjaxController::class, 'loadImageWithResize'
 Route::get('/loadImageSource', [AjaxController::class, 'loadImageSource'])->name('ajax.loadImageSource');
 Route::get('/downloadImageSource', [AjaxController::class, 'downloadImageSource'])->name('ajax.downloadImageSource');
 Route::get('/settingViewBy', [AjaxController::class, 'settingViewBy'])->name('ajax.settingViewBy');
+Route::get('/showSortBox', [AjaxController::class, 'showSortBox'])->name('ajax.showSortBox');
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
