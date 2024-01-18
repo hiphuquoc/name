@@ -34,11 +34,16 @@ class RoutingController extends Controller{
             /* ko rút gọn trên 1 dòng được => lỗi */
             return Redirect::to($checkExists->slug_full, 301);
         }
-        /* nếu đúng => xuất dữ liệu */
+        /* ============== nếu đúng => xuất dữ liệu */
+        /* ngôn ngữ */
+        $language                   = $checkExists->language;
+        SettingController::settingLanguage($language);
+        /* chế đệ xem */
+        $viewBy     = Cookie::get('view_by') ?? 'set';
         if(!empty($checkExists->type)){
             $flagMatch              = false;
             /* cache HTML */
-            $nameCache              = self::buildNameCache($checkExists['slug_full']).'.'.config('main.cache.extension');
+            $nameCache              = self::buildNameCache($checkExists['slug_full'], [$viewBy]).'.'.config('main.cache.extension');
             $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
             $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
             if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
@@ -47,8 +52,6 @@ class RoutingController extends Controller{
             }else {
                 /* ===== Sản phẩm ==== */
                 if($checkExists->type=='product_info'){
-                    $language       = $checkExists->language;
-                    SettingController::settingLanguage($language);
                     $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                     $flagMatch      = true;
                     /* thông tin sản phẩm */
@@ -101,8 +104,6 @@ class RoutingController extends Controller{
 
                 /* ===== Các trang chủ đề/phong cách/sự kiện ==== */
                 if($checkExists->type=='category_info'||$checkExists->type=='style_info'||$checkExists->type=='event_info'){
-                    $language       = $checkExists->language;
-                    SettingController::settingLanguage($language);
                     $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                     $flagMatch      = true;
                     $viewBy         = request()->cookie('view_by') ?? 'set';
@@ -199,8 +200,6 @@ class RoutingController extends Controller{
                 /* ===== Trang ==== */
                 if($checkExists->type=='page_info'){
                     $flagMatch      = true;
-                    $language       = $checkExists->language;
-                    SettingController::settingLanguage($language);
                     $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
                     /* thông tin brand */
                     $item           = Page::select('*')
@@ -239,11 +238,10 @@ class RoutingController extends Controller{
         }
     }
 
-    public static function buildNameCache($slugFull){
-        $result     = null;
+    public static function buildNameCache($slugFull, $prefix = []){
+        $result     = $prefix;
         if(!empty($slugFull)){
             $tmp    = explode('/', $slugFull);
-            $result = [];
             foreach($tmp as $t){
                 if(!empty($t)) $result[] = $t;
             }
