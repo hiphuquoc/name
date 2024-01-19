@@ -15,13 +15,6 @@ return [
                     'name'  => '1. Wallpaper',
                     'route' => 'admin.wallpaper.list',
                     'icon'  => '<i data-feather=\'circle\'></i>',
-                    // 'child' => [
-                    //     [
-                    //         'name'  => '1.1. Điểm đến',
-                    //         'route' => '',
-                    //         'icon'  => '<i data-feather=\'circle\'></i>'
-                    //     ]
-                    // ]
                 ],
                 [
                     'name'  => '2. Sản phẩm',
@@ -41,6 +34,11 @@ return [
                 [
                     'name'  => '5. Sự kiện',
                     'route' => 'admin.event.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '6. Miễn phí',
+                    'route' => 'admin.freeWallpaper.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]

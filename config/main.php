@@ -61,6 +61,7 @@ return [
         'default_domain'    => 'https://'.env('GOOGLE_CLOUD_STORAGE_BUCKET').'.storage.googleapis.com/',
         'wallpapers'        => 'wallpapers/',
         'sources'           => 'sources/',
+        'freeWallpapers'    => 'freewallpapers/',
     ],
     'filter'    => [
         'price' => [

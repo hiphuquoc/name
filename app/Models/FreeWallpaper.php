@@ -5,27 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Wallpaper extends Model {
+class FreeWallpaper extends Model {
     use HasFactory;
-    protected $table        = 'wallpaper_info';
+    protected $table        = 'free_wallpaper_info';
     protected $fillable     = [
         'user_id',
         'name', 
         'description',
-        'file_name_wallpaper',
-        'extension_wallpaper',
-        'file_cloud_wallpaper',
-        'width_wallpaper',
-        'height_wallpaper',
-        'file_size_wallpaper',
-        'mine_type_wallpaper',
-        'file_name_source',
-        'extension_source',
-        'file_cloud_source',
-        'width_source',
-        'height_source',
-        'file_size_source',
-        'mine_type_source'
+        'file_name',
+        'extension',
+        'file_cloud',
+        'width',
+        'height',
+        'file_size',
+        'mine_type'
     ];
     public $timestamps = true;
 
@@ -56,7 +49,7 @@ class Wallpaper extends Model {
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new Wallpaper();
+            $model      = new FreeWallpaper();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -73,11 +66,8 @@ class Wallpaper extends Model {
         }
         return $flag;
     }
-
-    // public function productPrices() {
-    //     return $this->hasMany(\App\Models\RelationCategoryBlogInfoBlogInfo::class, 'id', 'seo_id');
+    
+    // public function priceUses(){
+    //     return $this->hasMany(\App\Models\RelationProductPriceWallpaperInfo::class, 'wallpaper_info_id', 'id');
     // }
-    public function priceUses(){
-        return $this->hasMany(\App\Models\RelationProductPriceWallpaperInfo::class, 'wallpaper_info_id', 'id');
-    }
 }

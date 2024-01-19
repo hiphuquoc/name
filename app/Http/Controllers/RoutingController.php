@@ -249,10 +249,4 @@ class RoutingController extends Controller{
         }
         return $result;
     }
-
-    private static function convertItemViToEn($item){
-        $item           = $item->en_seo;
-        $item->seo      = $item->seo->infoEnSeo;
-        return $item;
-    }
 }

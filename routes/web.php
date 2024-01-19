@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CacheController;
 use App\Http\Controllers\Admin\WallpaperController;
+use App\Http\Controllers\Admin\FreeWallpaperController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\RedirectController;
 
@@ -70,6 +71,17 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/deleteWallpaperAndSource', [WallpaperController::class, 'deleteWallpaperAndSource'])->name('admin.wallpaper.deleteWallpaperAndSource');
             Route::post('/loadFormUploadSourceAndWallpaper', [WallpaperController::class, 'loadFormUploadSourceAndWallpaper'])->name('admin.wallpaper.loadFormUploadSourceAndWallpaper');
             Route::post('/searchWallpapers', [WallpaperController::class, 'searchWallpapers'])->name('admin.wallpaper.searchWallpapers');
+        });
+        /* free wallpaper */
+        Route::prefix('freeWallpaper')->group(function(){
+            Route::get('/list', [FreeWallpaperController::class, 'list'])->name('admin.freeWallpaper.list');
+            Route::post('/loadOneRow', [FreeWallpaperController::class, 'loadOneRow'])->name('admin.freeWallpaper.loadOneRow');
+            Route::post('/loadModalUploadAndEdit', [FreeWallpaperController::class, 'loadModalUploadAndEdit'])->name('admin.freeWallpaper.loadModalUploadAndEdit');
+            Route::post('/uploadWallpaper', [FreeWallpaperController::class, 'uploadWallpaper'])->name('admin.freeWallpaper.uploadWallpaper');
+            Route::post('/changeWallpaperWithSource', [FreeWallpaperController::class, 'changeWallpaperWithSource'])->name('admin.freeWallpaper.changeWallpaperWithSource');
+            Route::post('/deleteWallpaper', [FreeWallpaperController::class, 'deleteWallpaper'])->name('admin.freeWallpaper.deleteWallpaper');
+            Route::post('/addFormUpload', [FreeWallpaperController::class, 'addFormUpload'])->name('admin.freeWallpaper.addFormUpload');
+            Route::post('/searchWallpapers', [FreeWallpaperController::class, 'searchWallpapers'])->name('admin.freeWallpaper.searchWallpapers');
         });
         /* product */
         Route::prefix('product')->group(function(){

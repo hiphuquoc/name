@@ -12,7 +12,6 @@
 </div>
 <div class="wallpaperBox_item_info">
     <div>{{ $item->name }}</div>
-    <div>{{ $item->file_name }}</div>
 </div>
 <div class="wallpaperBox_item_action">
     {{-- <!-- copy đường dẫn -->

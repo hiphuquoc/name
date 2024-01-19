@@ -265,6 +265,7 @@ table:not(.sendEmail) {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    width: 100%;
     &_column2 {
         width: calc(50% - 1rem);
         &:not(:first-child){
@@ -281,6 +282,9 @@ table:not(.sendEmail) {
     &_full {
         width: 100%;
         &_item {
+            > * {
+                width: 100%;
+            }
             &:not(:first-child){
                 margin-top: 1.2rem;
             }
@@ -1368,6 +1372,26 @@ html .content {
     }
     @include slickArrowCircle;
 }
+.formFreeWallpaperBox {
+    width: 100%;
+    &_item {
+        width: 100%;
+        display: flex !important;
+        justify-content: space-between;
+        &_gallery {
+            width: 300px;
+            aspect-ratio: 9/21;
+            &_item {
+                display: flex;
+                width: 100%;
+            }
+        }
+        &_form {
+            width: calc(100% - 300px - 1.25rem);
+        }
+    }
+    @include slickArrowCircle;
+}
 .wallpaperBox {
     display: flex;
     flex-wrap: wrap;
@@ -1407,6 +1431,77 @@ html .content {
                 background: linear-gradient(360deg, rgba(0,0,0,0.4), transparent);
                 color: yellow;
                 font-size: 0.95rem;
+            }
+        }
+        &_info {
+            width: 100%;
+            padding: 0.5rem 1rem 0.75rem 1rem;
+            > * {
+                &:not(:first-child){
+                    margin-top: 0.25rem;
+                }
+            }
+        }
+        &_action {
+            display: flex;
+            border-top: 1px solid $bg-03;
+            width: 100%;
+            font-size: 0.9rem;
+            > * {
+                text-align: center;
+                padding: 0.25rem;
+                width: 100%;
+                cursor: pointer;
+                &:hover {
+                    background: $color-secondary;
+                }
+                &:not(:first-child){
+                    border-left: 1px solid $bg-03;
+                }
+                &:first-child {
+                    border-radius: 0 0 0 5px;
+                }
+                &:last-child {
+                    border-radius: 0 0 5px 0;
+                }
+                &.remove {
+                    &:hover {
+                        background: $colorRed;
+                        color: #f1f1f1;
+                    }   
+                }
+                &.disable {
+                    background: $bg-03;
+                }
+            }
+        }
+    }
+}
+.freeWallpaperBox {
+    display: flex;
+    flex-wrap: wrap;
+    &_item {
+        width: calc(16.6666% - 0.8333rem);
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 5px $bg-04;
+        overflow: hidden;
+        &:nth-child(6n + 1){
+            margin-left: 0;
+        }
+        &:nth-child(n + 7){
+            margin-top: 1rem;
+        }
+        &_wallpaper {
+            position: relative;
+            min-height: 400px;
+            img {
+                object-fit: cover;
+                height: 100%;
+                overflow: hidden;
             }
         }
         &_info {

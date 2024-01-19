@@ -188,6 +188,23 @@
                 @endforeach
             </ul>
         </li>
+        <li>
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-share-1.svg');
+            @endphp
+            @if(empty($language)||$language=='vi')
+                <a href="#" title="Hình nền điện thoại miễn phí" aria-label="Hình nền điện thoại miễn phí">
+                    {!! $icon !!}
+                    <div>Hình nền miễn phí</div>
+                </a>
+            @else
+                <a href="#" title="Free phone wallpapers" aria-label="Free phone wallpapers">
+                    {!! $icon !!}
+                    <div>Sale off</div>
+                </a>
+            @endif
+            
+        </li>
         {{-- <li>
             @if(empty($language)||$language=='vi')
                 <a href="{{ route('main.saleOff') }}" title="Hình nền điện thoại khuyến mãi" aria-label="Hình nền điện thoại khuyến mãi">
