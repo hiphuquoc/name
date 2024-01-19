@@ -34,6 +34,10 @@
                     <textarea class="form-control" name="name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->name ?? null }}</textarea>
                 </div>
                 <div class="formBox_full_item">
+                    <label class="form-label inputRequired" for="name">Alt ảnh EN</label>
+                    <textarea class="form-control" name="en_name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->en_name ?? null }}</textarea>
+                </div>
+                <div class="formBox_full_item">
                     <label class="form-label" for="description">Mô tả ngắn</label>
                     <textarea class="form-control" name="description[{{ $idBox }}]" rows="2"></textarea>
                 </div>

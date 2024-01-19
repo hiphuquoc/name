@@ -83,6 +83,7 @@ class FreeWallpaperController extends Controller {
                 $idWallpaper = FreeWallpaper::insertItem([
                     'user_id'       => Auth::user()->id,
                     'name'          => $request->get('name'),
+                    'en_name'       => $request->get('en_name') ?? null,
                     'description'   => $request->get('description') ?? null,
                     'file_name'     => $fileNameNonHaveExtensionW,
                     'extension'     => $extensionW,

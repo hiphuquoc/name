@@ -228,6 +228,9 @@
                     /* name */
                     const inputName  = $(`[name="name[${i}]"]`).val();
                     formData.append('name', inputName);
+                    /* name */
+                    const inputEnName  = $(`[name="en_name[${i}]"]`).val();
+                    formData.append('en_name', inputEnName);
                     /* description */
                     const inputDescription  = $(`[name="description[${i}]"]`).val();
                     formData.append('description', inputDescription);

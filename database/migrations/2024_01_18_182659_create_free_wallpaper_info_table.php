@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->text('name');
+            $table->text('en_name');
             $table->longText('description')->nullable();
             $table->text('file_name');
             $table->text('file_cloud');
