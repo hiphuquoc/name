@@ -78,6 +78,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/loadOneRow', [FreeWallpaperController::class, 'loadOneRow'])->name('admin.freeWallpaper.loadOneRow');
             Route::post('/loadModalUploadAndEdit', [FreeWallpaperController::class, 'loadModalUploadAndEdit'])->name('admin.freeWallpaper.loadModalUploadAndEdit');
             Route::post('/uploadWallpaper', [FreeWallpaperController::class, 'uploadWallpaper'])->name('admin.freeWallpaper.uploadWallpaper');
+
             Route::post('/changeWallpaperWithSource', [FreeWallpaperController::class, 'changeWallpaperWithSource'])->name('admin.freeWallpaper.changeWallpaperWithSource');
             Route::post('/deleteWallpaper', [FreeWallpaperController::class, 'deleteWallpaper'])->name('admin.freeWallpaper.deleteWallpaper');
             Route::post('/addFormUpload', [FreeWallpaperController::class, 'addFormUpload'])->name('admin.freeWallpaper.addFormUpload');
@@ -261,6 +262,7 @@ Route::get('/loadImageSource', [AjaxController::class, 'loadImageSource'])->name
 Route::get('/downloadImageSource', [AjaxController::class, 'downloadImageSource'])->name('ajax.downloadImageSource');
 Route::get('/settingViewBy', [AjaxController::class, 'settingViewBy'])->name('ajax.settingViewBy');
 Route::get('/showSortBox', [AjaxController::class, 'showSortBox'])->name('ajax.showSortBox');
+Route::get('/loadmoreFreeWallpapers', [AjaxController::class, 'loadmoreFreeWallpapers'])->name('admin.freeWallpaper.loadmoreFreeWallpapers');
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');

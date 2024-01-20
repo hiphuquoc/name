@@ -14,6 +14,7 @@ use App\Models\Style;
 use App\Models\Event;
 use App\Models\Page;
 use App\Models\CategoryBlog;
+use App\Models\FreeWallpaper;
 use App\Models\Seo;
 
 
@@ -104,98 +105,119 @@ class RoutingController extends Controller{
 
                 /* ===== Các trang chủ đề/phong cách/sự kiện ==== */
                 if($checkExists->type=='category_info'||$checkExists->type=='style_info'||$checkExists->type=='event_info'){
-                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
-                    $flagMatch      = true;
-                    $viewBy         = request()->cookie('view_by') ?? 'set';
                     /* breadcrumb */
                     $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                    /* key_search */
-                    $keySearch      = request('search') ?? null;
-                    /* ===== Chủ để ===== */
-                    if($checkExists->type=='category_info'){
-                        /* thư mục chứa content */
-                        $folderContent  = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
-                        /* thông tin category */
-                        $item           = Category::select('*')
-                                            ->where('seo_id', $idSeo)
-                                            ->with('seo', 'en_seo')
-                                            ->first();
-                        /* danh sách product => lấy riêng để dễ truyền vào template */
-                        $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
-                        $products       = Product::select('product_info.*')
-                                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                                            ->when(!empty($keySearch), function($query) use($keySearch){
-                                                $query->where('code', 'like', '%'.$keySearch.'%')
-                                                    ->orWhere('name', 'like', '%'.$keySearch.'%')
-                                                    ->orWhere('en_name', 'like', '%'.$keySearch.'%');
-                                            })
-                                            ->whereHas('prices.wallpapers', function($query){
-
-                                            })
-                                            ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                                                $query->whereIn('id', $arrayCategory);
-                                            })
-                                            ->with('seo', 'en_seo', 'prices')
-                                            ->orderBy('seo.ordering', 'DESC')
-                                            ->orderBy('id', 'DESC')
-                                            ->get();
-                        $categoryChoose = $item;
+                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                    $flagMatch      = true;
+                    /* ===== miễn phí */
+                    $flagFree       = false;
+                    if($checkExists->slug=='hinh-nen-dien-thoai-mien-phi'||$checkExists->slug=='free-phone-wallpapers'){
+                        $flagFree   = true;
+                        $item       = Category::select('*')
+                            ->where('seo_id', $idSeo)
+                            ->with('seo', 'en_seo')
+                            ->first();
+                        /* lấy wallpapers */
+                        $loaded     = 10;
+                        $wallpapers = FreeWallpaper::select('*')
+                                        ->orderBy('id', 'DESC')
+                                        ->skip(0)
+                                        ->take($loaded)
+                                        ->get();
+                        $total      = FreeWallpaper::count();
+                        $xhtml      = view('wallpaper.free.index', compact('item', 'breadcrumb', 'wallpapers', 'total', 'loaded', 'language'))->render();
                     }
-                    /* ===== Phong cách ===== */
-                    if($checkExists->type=='style_info'){
-                        /* thư mục chứa content */
-                        $folderContent  = $language=='vi' ? config('main.storage.contentStyle') : config('main.storage.enContentStyle');
-                        /* thông tin category */
-                        $item           = Style::select('*')
-                                            ->where('seo_id', $idSeo)
-                                            ->with('seo', 'en_seo')
-                                            ->first();
-                        $idStyle        = $item->id ?? 0;
-                        /* danh sách product */
-                        $products       = Product::select('product_info.*')
-                                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                                            ->whereHas('prices.wallpapers', function($query){
+                    /* ===== trả phí */
+                    if($flagFree==false){
+                        $viewBy         = request()->cookie('view_by') ?? 'set';
+                        /* key_search */
+                        $keySearch      = request('search') ?? null;
+                        /* ===== Chủ để ===== */
+                        if($checkExists->type=='category_info'){
+                            /* thư mục chứa content */
+                            $folderContent  = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
+                            /* thông tin category */
+                            $item           = Category::select('*')
+                                                ->where('seo_id', $idSeo)
+                                                ->with('seo', 'en_seo')
+                                                ->first();
+                            /* danh sách product => lấy riêng để dễ truyền vào template */
+                            $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
+                            $products       = Product::select('product_info.*')
+                                                ->join('seo', 'seo.id', '=', 'product_info.seo_id')
+                                                ->when(!empty($keySearch), function($query) use($keySearch){
+                                                    $query->where('code', 'like', '%'.$keySearch.'%')
+                                                        ->orWhere('name', 'like', '%'.$keySearch.'%')
+                                                        ->orWhere('en_name', 'like', '%'.$keySearch.'%');
+                                                })
+                                                ->whereHas('prices.wallpapers', function($query){
 
-                                            })
-                                            ->whereHas('styles.infoStyle', function($query) use($idStyle){
-                                                $query->where('id', $idStyle);
-                                            })
-                                            ->with('seo', 'en_seo', 'prices')
-                                            ->orderBy('seo.ordering', 'DESC')
-                                            ->orderBy('id', 'DESC')
-                                            ->get();
-                        $styleChoose    = $item;
-                    }
-                    /* ===== Sự kiện ===== */
-                    if($checkExists->type=='event_info'){
-                        /* thư mục chứa content */
-                        $folderContent  = $language=='vi' ? config('main.storage.contentEvent') : config('main.storage.enContentEvent');
-                        /* thông tin category */
-                        $item           = Event::select('*')
-                                            ->where('seo_id', $idSeo)
-                                            ->with('seo', 'en_seo')
-                                            ->first();
-                        $idEvent        = $item->id ?? 0;
-                        /* danh sách product */
-                        $products       = Product::select('product_info.*')
-                                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                                            ->whereHas('prices.wallpapers', function($query){
+                                                })
+                                                ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
+                                                    $query->whereIn('id', $arrayCategory);
+                                                })
+                                                ->with('seo', 'en_seo', 'prices')
+                                                ->orderBy('seo.ordering', 'DESC')
+                                                ->orderBy('id', 'DESC')
+                                                ->get();
+                            $categoryChoose = $item;
+                        }
+                        /* ===== Phong cách ===== */
+                        if($checkExists->type=='style_info'){
+                            /* thư mục chứa content */
+                            $folderContent  = $language=='vi' ? config('main.storage.contentStyle') : config('main.storage.enContentStyle');
+                            /* thông tin category */
+                            $item           = Style::select('*')
+                                                ->where('seo_id', $idSeo)
+                                                ->with('seo', 'en_seo')
+                                                ->first();
+                            $idStyle        = $item->id ?? 0;
+                            /* danh sách product */
+                            $products       = Product::select('product_info.*')
+                                                ->join('seo', 'seo.id', '=', 'product_info.seo_id')
+                                                ->whereHas('prices.wallpapers', function($query){
 
-                                            })
-                                            ->whereHas('events.infoEvent', function($query) use($idEvent){
-                                                $query->where('id', $idEvent);
-                                            })
-                                            ->with('seo', 'en_seo', 'prices')
-                                            ->orderBy('seo.ordering', 'DESC')
-                                            ->orderBy('id', 'DESC')
-                                            ->get();
-                        $eventChoose    = $item;
+                                                })
+                                                ->whereHas('styles.infoStyle', function($query) use($idStyle){
+                                                    $query->where('id', $idStyle);
+                                                })
+                                                ->with('seo', 'en_seo', 'prices')
+                                                ->orderBy('seo.ordering', 'DESC')
+                                                ->orderBy('id', 'DESC')
+                                                ->get();
+                            $styleChoose    = $item;
+                        }
+                        /* ===== Sự kiện ===== */
+                        if($checkExists->type=='event_info'){
+                            /* thư mục chứa content */
+                            $folderContent  = $language=='vi' ? config('main.storage.contentEvent') : config('main.storage.enContentEvent');
+                            /* thông tin category */
+                            $item           = Event::select('*')
+                                                ->where('seo_id', $idSeo)
+                                                ->with('seo', 'en_seo')
+                                                ->first();
+                            $idEvent        = $item->id ?? 0;
+                            /* danh sách product */
+                            $products       = Product::select('product_info.*')
+                                                ->join('seo', 'seo.id', '=', 'product_info.seo_id')
+                                                ->whereHas('prices.wallpapers', function($query){
+
+                                                })
+                                                ->whereHas('events.infoEvent', function($query) use($idEvent){
+                                                    $query->where('id', $idEvent);
+                                                })
+                                                ->with('seo', 'en_seo', 'prices')
+                                                ->orderBy('seo.ordering', 'DESC')
+                                                ->orderBy('id', 'DESC')
+                                                ->get();
+                            $eventChoose    = $item;
+                        }
+                        /* content */
+                        $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
+                        $content            = Blade::render(Storage::get($filenameContent));
+                        /* lấy giao diện */
+                        $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
                     }
-                    /* content */
-                    $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
-                    $content            = Blade::render(Storage::get($filenameContent));
-                    /* lấy giao diện */
-                    $xhtml              = view('wallpaper.category.index', compact('item', 'products', 'breadcrumb', 'content', 'language', 'viewBy'))->render();
                 }
                 /* ===== Trang ==== */
                 if($checkExists->type=='page_info'){

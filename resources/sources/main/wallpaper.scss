@@ -1639,3 +1639,24 @@ $heightMenu : 52.5px;
         padding-top: 0.35rem;
     }
 }
+
+.freeWallpaperBox {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: repeat(auto, 5vw);
+    gap: 15px;
+    position: relative;
+    &_item {
+        margin-bottom: auto;
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            flex: 1;
+        }
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}

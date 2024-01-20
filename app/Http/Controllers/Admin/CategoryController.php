@@ -96,11 +96,13 @@ class CategoryController extends Controller {
                 $iconPath       = Upload::uploadCustom($request->file('icon'), $name);
             }
             /* insert category_info */
+            $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
             $idCategory         = Category::insertItem([
                 'seo_id'        => $seoId,
                 'name'          => $request->get('name'),
                 'description'   => $request->get('description'),
                 'icon'          => $iconPath,
+                'flag_show'     => $flagShow,
                 'en_seo_id'     => $enSeoId,
                 'en_name'       => $request->get('en_name'),
                 'en_description'=> $request->get('en_description')
@@ -200,7 +202,9 @@ class CategoryController extends Controller {
                 $iconPath       = Upload::uploadCustom($request->file('icon'), $name);
             }
             /* insert category_info */
+            $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
             $arrayUpdate        = [
+                'flag_show'     => $flagShow,
                 'seo_id'        => $seoId,
                 'name'          => $request->get('name'),
                 'description'   => $request->get('description'),

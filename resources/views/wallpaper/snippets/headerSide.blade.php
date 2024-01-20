@@ -1,7 +1,9 @@
 @php
     /* chủ đề */
     $wallpaperMobile            = [];
-    $tmp                        = \App\Models\Category::getTreeCategory();
+    $tmp                        = \App\Models\Category::getTreeCategory([
+        'flag_show' => 1
+    ]);
     foreach($tmp as $categoryLv1){
         if($categoryLv1->seo->slug=='hinh-nen-dien-thoai'){
             $wallpaperMobile    = $categoryLv1;
@@ -77,7 +79,7 @@
         @if(!empty($wallpaperMobile))
             <li>
                 @php
-                    $titlePhoneWallpaper = empty($language)||$language=='vi' ?  'Hình nền theo Chủ Đề' : 'Wallpapers by Theme';
+                    $titlePhoneWallpaper = empty($language)||$language=='vi' ?  'Chủ Đề hình nền' : 'Wallpaper Themes';
                     $url      = empty($language)||$language=='vi' ? $wallpaperMobile->seo->slug : $wallpaperMobile->en_seo->slug;
                     $classTmp = 'close';
                     $styleTmp = '';
@@ -126,13 +128,13 @@
             @if(empty($language)||$language=='vi')
                 <div class="open">
                     {!! $icon !!}
-                    <div style="margin-left:-3px;">Phong Cách</div>
+                    <div style="margin-left:-3px;">Phong Cách hình nền</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
                 </div>
             @else
                 <div class="open">
                     {!! $icon !!}
-                    <div style="margin-left:-3px;">Styles</div>
+                    <div style="margin-left:-3px;">Wallpaper Styles</div>
                     <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
                 </div>
             @endif
@@ -159,7 +161,7 @@
             @if(empty($language)||$language=='vi')
                 <div class="open">
                     <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Hình nền điện thoại theo sự kiện" title="Hình nền điện thoại theo sự kiện" />
-                    <div>Sự kiện</div>
+                    <div>Sự Kiện</div>
                     <i class="fa-solid fa-minus"  onclick="showHideListMenuMobile(this, 'su-kien')"></i>
                 </div>
             @else
@@ -193,14 +195,14 @@
                 $icon = file_get_contents('storage/images/svg/icon-share-1.svg');
             @endphp
             @if(empty($language)||$language=='vi')
-                <a href="#" title="Hình nền điện thoại miễn phí" aria-label="Hình nền điện thoại miễn phí">
+                <a href="{{ env('APP_URL') }}/hinh-nen-dien-thoai/hinh-nen-dien-thoai-mien-phi" title="Hình nền điện thoại miễn phí" aria-label="Hình nền điện thoại miễn phí">
                     {!! $icon !!}
                     <div>Hình nền miễn phí</div>
                 </a>
             @else
-                <a href="#" title="Free phone wallpapers" aria-label="Free phone wallpapers">
+                <a href="{{ env('APP_URL') }}/phone-wallpapers/free-phone-wallpapers" title="Free phone wallpapers" aria-label="Free phone wallpapers">
                     {!! $icon !!}
-                    <div>Sale off</div>
+                    <div>Free wallpapers</div>
                 </a>
             @endif
             

@@ -102,6 +102,13 @@
                 @endif
             </select>
         </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <div class="form-check form-check-success">
+                <input type="checkbox" class="form-check-input" name="flag_show" {{ !empty($item->flag_show)&&($item->flag_show==1) ? 'checked' : null }}>
+                <label class="form-check-label" for="flag_show">Cho phép hiển thị trong danh sách</label>
+            </div>
+        </div>
         
     </div>
 </div>

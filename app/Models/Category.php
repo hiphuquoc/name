@@ -58,7 +58,7 @@ class Category extends Model {
         return $variable;
     }
 
-    public static function getTreeCategory(){
+    public static function getTreeCategory($wheres = []){
         $result = self::select('category_info.*')
                     ->whereHas('seo', function ($query) {
                         $query->where('level', 1);
@@ -68,26 +68,29 @@ class Category extends Model {
                     ->orderBy('seo.ordering', 'DESC')
                     ->get();
         for($i=0;$i<$result->count();++$i){
-            $result[$i]->childs  = self::getTreeCategoryByInfoCategory($result[$i]);
+            $result[$i]->childs  = self::getTreeCategoryByInfoCategory($result[$i], $wheres);
         }
         return $result;
     }
 
-    public static function getTreeCategoryByInfoCategory($infoCategory){
+    public static function getTreeCategoryByInfoCategory($infoCategory, $wheres){
         $result                 = new \Illuminate\Database\Eloquent\Collection;
         if(!empty($infoCategory)){
             $idPage             = $infoCategory->seo->id;
-            $result             = self::select('category_info.*')
+            $query              = self::select('category_info.*')
                                     ->whereHas('seo', function($query) use($idPage){
                                         $query->where('parent', $idPage);
                                     })
                                     ->with('seo', 'en_seo', 'products')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                                    ->orderBy('seo.ordering', 'DESC')
-                                    ->get();
+                                    ->orderBy('seo.ordering', 'DESC');
+            /* thêm query where (nếu có) */
+            foreach ($wheres as $key => $where) $query->where($key, $where);
+            $result = $query->get();  
+            /* ghép phần tử con */        
             if($result->isNotEmpty()){
                 for($i=0;$i<$result->count();++$i){
-                    $result[$i]->childs = self::getTreeCategoryByInfoCategory($result[$i]);
+                    $result[$i]->childs = self::getTreeCategoryByInfoCategory($result[$i], $wheres);
                 }
             }
         }

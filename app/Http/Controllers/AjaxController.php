@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Style;
 use App\Models\Event;
+use App\Models\FreeWallpaper;
 use App\Models\RegistryEmail;
 use Illuminate\Support\Facades\Cookie;
 use App\Services\BuildInsertUpdateModel;
@@ -320,5 +321,26 @@ class AjaxController extends Controller {
             $flag = in_array($fileName, $arrayWallpaperFileName);
         }
         return $flag;
+    }
+
+    public static function loadmoreFreeWallpapers(Request $request){
+        $response           = [];
+        $content            = '';
+        if(!empty($request->get('total'))){
+            $language       = Cookie::get('language') ?? 'vi';
+            $loaded         = $request->get('loaded');
+            $requestLoad    = $request->get('requestLoad');
+            $wallpapers     = FreeWallpaper::select('*')
+                                ->orderBy('id', 'DESC')
+                                ->skip($loaded)
+                                ->take($requestLoad)
+                                ->get();
+            foreach($wallpapers as $wallpaper){
+                $content    .= view('wallpaper.free.item', compact('wallpaper', 'language'))->render();
+            }
+        }
+        $response['content']    = $content;
+        $response['loaded']     = $loaded + $requestLoad;
+        return json_encode($response);
     }
 }

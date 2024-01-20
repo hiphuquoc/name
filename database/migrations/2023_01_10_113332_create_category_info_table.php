@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('name');
             $table->text('description')->nullable();
             $table->text('icon')->nullable();
+            $table->boolean('flag_show')->default(1);
             $table->timestamps();
         });
     }
