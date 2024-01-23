@@ -87,69 +87,75 @@
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="categories">Chủ đề</label>
-            <select class="select2 form-select select2-hidden-accessible" id="categories" name="categories[]" multiple="true">
+            <label class="form-label inputRequired">Chủ đề</label>
+            <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
                 <option value="">- Lựa chọn -</option>
                 @if(!empty($categories))
                     @foreach($categories as $category)
-                        @php
-                            $selected   = null;
-                            if(!empty($item->categories)){
-                                foreach($item->categories as $c) {
-                                    if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
-                                        $selected = ' selected';
-                                        break;
+                        @if(!empty($category->seo->type)&&$category->seo->type=='category_info')
+                            @php
+                                $selected   = null;
+                                if(!empty($item->categories)){
+                                    foreach($item->categories as $c) {
+                                        if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
+                                            $selected = ' selected';
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                        @endphp
-                        <option value="{{ $category->id }}"{{ $selected }}>{{ $category->name }}</option>
+                            @endphp
+                            <option value="{{ $category->id }}"{{ $selected }}>{{ $category->name }}</option>
+                        @endif
                     @endforeach
                 @endif
             </select>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="styles">Phong cách</label>
-            <select class="select2 form-select select2-hidden-accessible" id="styles" name="styles[]" multiple="true">
+            <label class="form-label inputRequired">Phong cách</label>
+            <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
                 <option value="">- Lựa chọn -</option>
-                @if(!empty($styles))
-                    @foreach($styles as $style)
-                        @php
-                            $selected   = null;
-                            if(!empty($item->styles)){
-                                foreach($item->styles as $c) {
-                                    if(!empty($c->infoStyle->id)&&$c->infoStyle->id==$style->id) {
-                                        $selected = ' selected';
-                                        break;
+                @if(!empty($categories))
+                    @foreach($categories as $category)
+                        @if(!empty($category->seo->type)&&$category->seo->type=='style_info')
+                            @php
+                                $selected   = null;
+                                if(!empty($item->categories)){
+                                    foreach($item->categories as $c) {
+                                        if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
+                                            $selected = ' selected';
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                        @endphp
-                        <option value="{{ $style->id }}"{{ $selected }}>{{ $style->name }}</option>
+                            @endphp
+                            <option value="{{ $category->id }}"{{ $selected }}>{{ $category->name }}</option>
+                        @endif
                     @endforeach
                 @endif
             </select>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
-            <label class="form-label" for="events">Sự kiện</label>
-            <select class="select2 form-select select2-hidden-accessible" id="events" name="events[]" multiple="true">
+            <label class="form-label inputRequired">Sự kiện</label>
+            <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
                 <option value="">- Lựa chọn -</option>
-                @if(!empty($events))
-                    @foreach($events as $event)
-                        @php
-                            $selected   = null;
-                            if(!empty($item->events)){
-                                foreach($item->events as $e) {
-                                    if(!empty($e->infoEvent->id)&&$e->infoEvent->id==$event->id) {
-                                        $selected = ' selected';
-                                        break;
+                @if(!empty($categories))
+                    @foreach($categories as $category)
+                        @if(!empty($category->seo->type)&&$category->seo->type=='event_info')
+                            @php
+                                $selected   = null;
+                                if(!empty($item->categories)){
+                                    foreach($item->categories as $c) {
+                                        if(!empty($c->infoCategory->seo->type)&&$c->infoCategory->seo->type=='event_info'&&!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
+                                            $selected = ' selected';
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                        @endphp
-                        <option value="{{ $event->id }}"{{ $selected }}>{{ $event->name }}</option>
+                            @endphp
+                            <option value="{{ $category->id }}"{{ $selected }}>{{ $category->name }}</option>
+                        @endif
                     @endforeach
                 @endif
             </select>

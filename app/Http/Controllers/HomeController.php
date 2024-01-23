@@ -5,23 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Route;
-// use App\Models\Product;
 use App\Models\Page;
 use App\Models\Category;
-// use App\Models\Style;
-use App\Models\Event;
 use App\Http\Controllers\SettingController;
-
+use App\Models\Product;
+use App\Models\RelationSeoEnSeo;
 use Intervention\Image\ImageManagerStatic;
 
-// use App\Mail\OrderMailable;
-// use Google\Service\SecurityCommandCenter\PathNodeAssociatedFinding;
-// use Illuminate\Support\Facades\Cookie;
-// use Illuminate\Support\Facades\Mail;
-
-// use Illuminate\Support\Facades\Http;
-// use App\Helpers\Charactor;
-// use App\Models\Wallpaper;
+use GuzzleHttp\Client;
 
 class HomeController extends Controller{
     public static function home(Request $request){
@@ -55,8 +46,8 @@ class HomeController extends Controller{
                                     ->first();
             /* lấy hình nền điện thoại tết */
             $slug               = 'hinh-nen-dien-thoai-tet';
-            $infoCategoryTet    = Event::select('event_info.*', 'seo.slug')
-                                    ->join('seo', 'seo.id', '=', 'event_info.seo_id')
+            $infoCategoryTet    = Category::select('category_info.*', 'seo.slug')
+                                    ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->where('seo.slug', '=', $slug)
                                     // ->whereHas('products.infoProduct.prices.wallpapers', function($query){
                                     //     // Điều kiện để kiểm tra xem có ít nhất một wallpaper
@@ -69,8 +60,8 @@ class HomeController extends Controller{
                                     ->first();
             /* lấy hình nền điện thoại noel */
             $slug               = 'hinh-nen-dien-thoai-giang-sinh-noel';
-            $infoCategoryNoel   = Event::select('event_info.*', 'seo.slug')
-                                    ->join('seo', 'seo.id', '=', 'event_info.seo_id')
+            $infoCategoryNoel   = Category::select('category_info.*', 'seo.slug')
+                                    ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->where('seo.slug', '=', $slug)
                                     // ->whereHas('products.infoProduct.prices.wallpapers', function($query){
                                     //     // Điều kiện để kiểm tra xem có ít nhất một wallpaper
@@ -94,7 +85,76 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        
+        // $client = new Client();
+
+        // $response = $client->post('https://api.cognitive.microsoft.com/bing/v7.0/search', [
+        //     'headers' => [
+        //         'Ocp-Apim-Subscription-Key' => env('BING_AI_API_KEY'),
+        //         'Content-Type' => 'application/json',
+        //     ],
+        //     'json' => [
+        //         'question' => 'Your chat question here',
+        //     ],
+        // ]);
+
+        // $result = json_decode($response->getBody(), true);
+
+        // dd($result);
+
+        // $styles = \App\Models\Event::select('*')
+        //             ->with('seo', 'en_seo')
+        //             ->get();
+        // foreach($styles as $style){
+        //     /* insert SEO */
+        //     $insertSeo      = $style->seo->toArray();
+        //     unset($insertSeo['id'], $insertSeo['created_at'], $insertSeo['updated_at']);
+        //     $idSeo          = \App\Models\Seo::insertItem($insertSeo);
+        //     /* insert EN_SEO */
+        //     $insertEnSeo    = $style->en_seo->toArray();
+        //     unset($insertEnSeo['id'], $insertEnSeo['created_at'], $insertEnSeo['updated_at']);
+        //     $idEnSeo        = \App\Models\EnSeo::insertItem($insertEnSeo);
+        //     /* delete relation */
+        //     $tmp = RelationSeoEnSeo::select('*')
+        //             ->where('en_seo_id', $style->en_seo->id)
+        //             ->delete();
+        //     RelationSeoEnSeo::insertItem([
+        //         'seo_id'    => $idSeo,
+        //         'en_seo_id' => $idEnSeo
+        //     ]);
+
+        //     /* insert category_info */
+        //     $insertCategory     = $style->toArray();
+        //     unset($insertCategory['id'], $insertCategory['created_at'], $insertCategory['updated_at'], $insertCategory['seo'], $insertCategory['en_seo']);
+        //     $insertCategory['seo_id'] = $idSeo;
+        //     $insertCategory['en_seo_id'] = $idEnSeo;
+        //     $idCategory = \App\Models\Category::insertItem($insertCategory);
+        //     echo '<pre>';
+        //     print_r('<div>'.$idCategory.'</div>');
+        //     echo '</pre>';
+        // }
+
+        // $arrayIdSeo = [];
+        // $arrayIdEnSeo = [];
+        // $tmp = Category::all();
+        // foreach($tmp as $t){
+        //     $arrayIdSeo[] = $t->seo->id;
+        //     $arrayIdEnSeo[] = $t->en_seo->id;;
+        // }
+        // $tmp = Page::all();
+        // foreach($tmp as $t){
+        //     $arrayIdSeo[] = $t->seo->id;
+        //     $arrayIdEnSeo[] = $t->en_seo->id;;
+        // }
+        // $tmp = Product::all();
+        // foreach($tmp as $t){
+        //     $arrayIdSeo[] = $t->seo->id;
+        //     $arrayIdEnSeo[] = $t->en_seo->id;;
+        // }
+
+        // $result = \App\Models\Seo::select('*')
+        //             ->whereNotIn('id', $arrayIdSeo)
+        //             ->delete();
+        // dd($result->toArray());
 
     }
 }

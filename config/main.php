@@ -49,13 +49,7 @@ return [
         'contentCategory'   => 'public/contents/categories/',
         'enContentCategory' => 'public/contents/enCategories/',
 
-        'enContentPage'     => 'public/contents/enPages/',
-
-        'contentEvent'      => 'public/contents/events/',
-        'enContentEvent'    => 'public/contents/enEvents/',
-
-        'contentStyle'      => 'public/contents/styles/',
-        'enContentStyle'    => 'public/contents/enStyles/',
+        'enContentPage'     => 'public/contents/enPages/'
     ],
     'google_cloud_storage' => [
         'default_domain'    => 'https://'.env('GOOGLE_CLOUD_STORAGE_BUCKET').'.storage.googleapis.com/',
@@ -120,6 +114,20 @@ return [
         ],
         'en'    => [
             'product_empty' => 'No wallpapers matching your search!'
+        ]
+        ],
+    'category_type' => [
+        [
+            'key' => 'category_info',
+            'name' => 'Chủ đề'
+        ],
+        [
+            'key' => 'style_info',
+            'name' => 'Phong cách'
+        ],
+        [
+            'key' => 'event_info',
+            'name' => 'Sự kiện'
         ]
     ]
 ];

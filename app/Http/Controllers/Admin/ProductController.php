@@ -15,8 +15,6 @@ use App\Models\EnSeo;
 use App\Models\RelationSeoEnSeo;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Event;
-use App\Models\Style;
 use App\Models\ProductContent;
 use App\Models\ProductPrice;
 use App\Models\Wallpaper;
@@ -81,20 +79,6 @@ class ProductController extends Controller {
                 RelationCategoryProduct::insertItem([
                     'product_info_id'   => $idProduct,
                     'category_info_id'  => $category
-                ]);
-            }
-            /* phong cách */
-            foreach($request->get('styles') as $style){
-                RelationStyleProduct::insertItem([
-                    'product_info_id'   => $idProduct,
-                    'style_info_id'     => $style
-                ]);
-            }
-            /* sự kiện */
-            foreach($request->get('events') as $event){
-                RelationEventProduct::insertItem([
-                    'product_info_id'   => $idProduct,
-                    'event_info_id'     => $event
                 ]);
             }
             /* insert slider và lưu CSDL */
@@ -220,30 +204,6 @@ class ProductController extends Controller {
                     ]);
                 }
             }
-            /* phong cách */
-            RelationStyleProduct::select('*')
-                                        ->where('product_info_id', $idProduct)
-                                        ->delete();
-            if(!empty($request->get('styles'))){
-                foreach($request->get('styles') as $style){
-                    RelationStyleProduct::insertItem([
-                        'product_info_id'   => $idProduct,
-                        'style_info_id'     => $style
-                    ]);
-                }
-            }
-            /* sự kiện */
-            RelationEventProduct::select('*')
-                                    ->where('product_info_id', $idProduct)
-                                    ->delete();
-            if(!empty($request->get('events'))){
-                foreach($request->get('events') as $event){
-                    RelationEventProduct::insertItem([
-                        'product_info_id'   => $idProduct,
-                        'event_info_id'     => $event
-                    ]);
-                }
-            }
             /* insert slider và lưu CSDL */
             if($request->hasFile('slider')&&!empty($idProduct)){
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -280,19 +240,17 @@ class ProductController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'product_info');
                                 }])
-                                ->with('seo', 'en_seo', 'contents', 'prices.wallpapers.infoWallpaper', 'categories', 'events', 'styles')
+                                ->with('seo', 'en_seo', 'contents', 'prices.wallpapers.infoWallpaper', 'categories')
                                 ->first();
         $categories         = Category::all();
-        $events             = Event::all();
-        $styles             = Style::all();
         /* gộp lại thành parents và lọc bỏ page hinh-nen-dien-thoai */
-        $parents            = $categories->concat($events)->concat($styles);
+        $parents            = Category::all();
         $wallpapers         = Wallpaper::select('*')
                                 ->get();
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.product.view', compact('item', 'wallpapers', 'type', 'categories', 'events', 'styles', 'parents', 'message'));
+        return view('admin.product.view', compact('item', 'wallpapers', 'type', 'categories', 'parents', 'message'));
     }
 
     public static function list(Request $request){
@@ -307,14 +265,13 @@ class ProductController extends Controller {
         $viewPerPage        = Cookie::get('viewProductInfo') ?? 20;
         $params['paginate'] = $viewPerPage;
         $list               = Product::getList($params);
-        $events             = Event::all();
         $categories         = Category::select('*')
                                 ->whereHas('products', function(){
                                     /* có sản phẩm mới lấy ra */
                                 })
                                 ->with('products')
                                 ->get();
-        return view('admin.product.list', compact('list', 'events', 'categories', 'viewPerPage', 'params'));
+        return view('admin.product.list', compact('list', 'categories', 'viewPerPage', 'params'));
     }
 
     public function delete(Request $request){
@@ -340,10 +297,6 @@ class ProductController extends Controller {
                 $info->prices()->delete();
                 /* xóa relation_category_product */
                 $info->categories()->delete();
-                /* xóa relation_style_product */
-                $info->styles()->delete();
-                /* xóa relation_event_product */
-                $info->events()->delete();
                 /* delete bảng seo của product_info */
                 $info->seo()->delete();
                 /* xóa product_info */

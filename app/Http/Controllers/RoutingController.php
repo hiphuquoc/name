@@ -72,31 +72,15 @@ class RoutingController extends Controller{
                                         })
                                         ->count();
                     /* sản phẩm liên quan */
-                    $idSeoParent            = $item->seo->parent;
-                    $infoSeoParent          = Seo::select('type')
-                                                ->where('id', $idSeoParent)
-                                                ->first();
-                    if($infoSeoParent->type=='category_info'){
-                        $tmp                = Category::select('category_info.*')
-                                                ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                                                ->where('seo.id', $idSeoParent)
-                                                ->with('products')
-                                                ->first();
-                    }
-                    if($infoSeoParent->type=='style_info'){
-                        $tmp                = Style::select('style_info.*')
-                                                ->join('seo', 'seo.id', '=', 'style_info.seo_id')
-                                                ->where('seo.id', $idSeoParent)
-                                                ->with('products')
-                                                ->first();
-                    }
-                    if($infoSeoParent->type=='event_info'){
-                        $tmp                = Event::select('event_info.*')
-                                                ->join('seo', 'seo.id', '=', 'event_info.seo_id')
-                                                ->where('seo.id', $idSeoParent)
-                                                ->with('products.infoProduct.seo')
-                                                ->first();
-                    }
+                    $idSeoParent        = $item->seo->parent;
+                    $infoSeoParent      = Seo::select('type')
+                                            ->where('id', $idSeoParent)
+                                            ->first();
+                    $tmp                = Category::select('category_info.*')
+                                            ->join('seo', 'seo.id', '=', 'category_info.seo_id')
+                                            ->where('seo.id', $idSeoParent)
+                                            ->with('products')
+                                            ->first();
                     $related            = $tmp->products;
                     /* breadcrumb */
                     $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
@@ -133,85 +117,33 @@ class RoutingController extends Controller{
                         /* key_search */
                         $keySearch      = request('search') ?? null;
                         /* ===== Chủ để ===== */
-                        if($checkExists->type=='category_info'){
-                            /* thư mục chứa content */
-                            $folderContent  = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
-                            /* thông tin category */
-                            $item           = Category::select('*')
-                                                ->where('seo_id', $idSeo)
-                                                ->with('seo', 'en_seo')
-                                                ->first();
-                            /* danh sách product => lấy riêng để dễ truyền vào template */
-                            $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
-                            $products       = Product::select('product_info.*')
-                                                ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                                                ->when(!empty($keySearch), function($query) use($keySearch){
-                                                    $query->where('code', 'like', '%'.$keySearch.'%')
-                                                        ->orWhere('name', 'like', '%'.$keySearch.'%')
-                                                        ->orWhere('en_name', 'like', '%'.$keySearch.'%');
-                                                })
-                                                ->whereHas('prices.wallpapers', function($query){
+                        /* thư mục chứa content */
+                        $folderContent  = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
+                        /* thông tin category */
+                        $item           = Category::select('*')
+                                            ->where('seo_id', $idSeo)
+                                            ->with('seo', 'en_seo')
+                                            ->first();
+                        /* danh sách product => lấy riêng để dễ truyền vào template */
+                        $arrayCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
+                        $products       = Product::select('product_info.*')
+                                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
+                                            ->when(!empty($keySearch), function($query) use($keySearch){
+                                                $query->where('code', 'like', '%'.$keySearch.'%')
+                                                    ->orWhere('name', 'like', '%'.$keySearch.'%')
+                                                    ->orWhere('en_name', 'like', '%'.$keySearch.'%');
+                                            })
+                                            ->whereHas('prices.wallpapers', function($query){
 
-                                                })
-                                                ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
-                                                    $query->whereIn('id', $arrayCategory);
-                                                })
-                                                ->with('seo', 'en_seo', 'prices')
-                                                ->orderBy('seo.ordering', 'DESC')
-                                                ->orderBy('id', 'DESC')
-                                                ->get();
-                            $categoryChoose = $item;
-                        }
-                        /* ===== Phong cách ===== */
-                        if($checkExists->type=='style_info'){
-                            /* thư mục chứa content */
-                            $folderContent  = $language=='vi' ? config('main.storage.contentStyle') : config('main.storage.enContentStyle');
-                            /* thông tin category */
-                            $item           = Style::select('*')
-                                                ->where('seo_id', $idSeo)
-                                                ->with('seo', 'en_seo')
-                                                ->first();
-                            $idStyle        = $item->id ?? 0;
-                            /* danh sách product */
-                            $products       = Product::select('product_info.*')
-                                                ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                                                ->whereHas('prices.wallpapers', function($query){
-
-                                                })
-                                                ->whereHas('styles.infoStyle', function($query) use($idStyle){
-                                                    $query->where('id', $idStyle);
-                                                })
-                                                ->with('seo', 'en_seo', 'prices')
-                                                ->orderBy('seo.ordering', 'DESC')
-                                                ->orderBy('id', 'DESC')
-                                                ->get();
-                            $styleChoose    = $item;
-                        }
-                        /* ===== Sự kiện ===== */
-                        if($checkExists->type=='event_info'){
-                            /* thư mục chứa content */
-                            $folderContent  = $language=='vi' ? config('main.storage.contentEvent') : config('main.storage.enContentEvent');
-                            /* thông tin category */
-                            $item           = Event::select('*')
-                                                ->where('seo_id', $idSeo)
-                                                ->with('seo', 'en_seo')
-                                                ->first();
-                            $idEvent        = $item->id ?? 0;
-                            /* danh sách product */
-                            $products       = Product::select('product_info.*')
-                                                ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                                                ->whereHas('prices.wallpapers', function($query){
-
-                                                })
-                                                ->whereHas('events.infoEvent', function($query) use($idEvent){
-                                                    $query->where('id', $idEvent);
-                                                })
-                                                ->with('seo', 'en_seo', 'prices')
-                                                ->orderBy('seo.ordering', 'DESC')
-                                                ->orderBy('id', 'DESC')
-                                                ->get();
-                            $eventChoose    = $item;
-                        }
+                                            })
+                                            ->whereHas('categories.infoCategory', function($query) use($arrayCategory){
+                                                $query->whereIn('id', $arrayCategory);
+                                            })
+                                            ->with('seo', 'en_seo', 'prices')
+                                            ->orderBy('seo.ordering', 'DESC')
+                                            ->orderBy('id', 'DESC')
+                                            ->get();
+                        $categoryChoose = $item;
                         /* content */
                         $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
                         $content            = Blade::render(Storage::get($filenameContent));

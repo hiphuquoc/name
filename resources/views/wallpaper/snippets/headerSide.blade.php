@@ -10,21 +10,6 @@
             break;
         }
     }
-    /* phong cách */
-    $styles                     = \App\Models\Style::select('style_info.*')
-                                    ->join('seo', 'seo.id', '=', 'style_info.seo_id')
-                                    ->whereHas('products', function(){
-
-                                    })
-                                    ->orderBy('seo.ordering', 'DESC')
-                                    ->with('seo', 'en_seo', 'products')
-                                    ->get();
-    /* sự kiện */
-    $events                     = \App\Models\Event::select('event_info.*')
-                                    ->join('seo', 'seo.id', '=', 'event_info.seo_id')
-                                    ->orderBy('seo.ordering', 'DESC')
-                                    ->with('seo', 'en_seo', 'products')
-                                    ->get();
     /* trang chính sách */
     $policies                   = \App\Models\Page::select('page_info.*')
                                     ->join('seo', 'seo.id', '=', 'page_info.seo_id')
@@ -101,7 +86,7 @@
                 </div>
                 <ul id="{{ $url }}" class="filterLinkSelected" {!! $styleTmp !!}>
                     @foreach($wallpaperMobile->childs as $type)
-                        @if($type->products->count()>0)
+                        @if(!empty($type->seo->type)&&$type->seo->type=='category_info'&&$type->products->count()>0)
                             @php
                                 if(empty($language)||$language=='vi'){
                                     $title  = $type->name ?? $type->seo->title ?? null;
@@ -139,21 +124,23 @@
                 </div>
             @endif
             <ul id="phong-cach" class="filterLinkSelected">
-                @foreach($styles as $style)
-                    @php
-                        if(empty($language)||$language=='vi'){
-                            $title      = $style->name ?? $style->seo->title ?? null;
-                            $urlFull    = env('APP_URL').'/'.$style->seo->slug_full;
-                        }else {
-                            $title      = $style->en_name ?? $style->en_seo->title ?? null;
-                            $urlFull    = env('APP_URL').'/'.$style->en_seo->slug_full;
-                        }
-                    @endphp
-                    <li>
-                        <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
-                            <div>{{ $title }} {!! $style->products->count()>0 ? '(<span class="highLight">'.$style->products->count().'</span>)' : null !!}</div>
-                        </a>
-                    </li>
+                @foreach($wallpaperMobile->childs as $style)
+                    @if(!empty($style->seo->type)&&$style->seo->type=='style_info')
+                        @php
+                            if(empty($language)||$language=='vi'){
+                                $title      = $style->name ?? $style->seo->title ?? null;
+                                $urlFull    = env('APP_URL').'/'.$style->seo->slug_full;
+                            }else {
+                                $title      = $style->en_name ?? $style->en_seo->title ?? null;
+                                $urlFull    = env('APP_URL').'/'.$style->en_seo->slug_full;
+                            }
+                        @endphp
+                        <li>
+                            <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
+                                <div>{{ $title }} {!! $style->products->count()>0 ? '(<span class="highLight">'.$style->products->count().'</span>)' : null !!}</div>
+                            </a>
+                        </li>
+                    @endif
                 @endforeach
             </ul>
         </li>
@@ -172,21 +159,23 @@
                 </div>
             @endif
             <ul id="su-kien" class="filterLinkSelected" style="height:auto;opacity:1;">
-                @foreach($events as $event)
-                    @php
-                        if(empty($language)||$language=='vi'){
-                            $title      = $event->name ?? $event->seo->title ?? null;
-                            $urlFull    = env('APP_URL').'/'.$event->seo->slug_full;
-                        }else {
-                            $title      = $event->en_name ?? $event->en_seo->title ?? null;
-                            $urlFull    = env('APP_URL').'/'.$event->en_seo->slug_full;
-                        }
-                    @endphp
-                    <li>
-                        <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
-                            <div>{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
-                        </a>
-                    </li>
+                @foreach($wallpaperMobile->childs as $event)
+                    @if(!empty($event->seo->type)&&$event->seo->type=='event_info')
+                        @php
+                            if(empty($language)||$language=='vi'){
+                                $title      = $event->name ?? $event->seo->title ?? null;
+                                $urlFull    = env('APP_URL').'/'.$event->seo->slug_full;
+                            }else {
+                                $title      = $event->en_name ?? $event->en_seo->title ?? null;
+                                $urlFull    = env('APP_URL').'/'.$event->en_seo->slug_full;
+                            }
+                        @endphp
+                        <li>
+                            <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
+                                <div>{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
+                            </a>
+                        </li>
+                    @endif
                 @endforeach
             </ul>
         </li>

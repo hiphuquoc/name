@@ -3,7 +3,7 @@
 
 <div class="titlePage">Danh sách yêu cầu</div>
 
-@include('admin.product.search', compact('list', 'events', 'categories'))
+@include('admin.product.search', compact('list', 'categories'))
 
 <div class="card">
     <!-- ===== Table ===== -->
@@ -37,32 +37,38 @@
                                         @php
                                             $xhtmlCategory      = null;
                                             foreach($item->categories as $category){
-                                                $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                                if($category->infoCategory->seo->type=='category_info'){
+                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                                }
                                             }
                                         @endphp 
                                         <strong>Chủ đề:</strong> {!! $xhtmlCategory !!}
                                     </div>
                                 @endif
-                                @if(!empty($item->styles)&&$item->styles->isNotEmpty())
+                                @if(!empty($item->categories)&&$item->categories->isNotEmpty())
                                     <div class="onLine" style="margin-top:0.25rem;">
                                         @php
-                                            $xhtmlStyle         = null;
-                                            foreach($item->styles as $style){
-                                                $xhtmlStyle  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$style->infoStyle->name.'</div>';
+                                            $xhtmlCategory      = null;
+                                            foreach($item->categories as $category){
+                                                if($category->infoCategory->seo->type=='style_info'){
+                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                                }
                                             }
                                         @endphp 
-                                        <strong>Phong cách:</strong> {!! $xhtmlStyle !!}
+                                        <strong>Phong cách:</strong> {!! $xhtmlCategory !!}
                                     </div>
                                 @endif
-                                @if(!empty($item->events)&&$item->events->isNotEmpty())
+                                @if(!empty($item->categories)&&$item->categories->isNotEmpty())
                                     <div class="onLine" style="margin-top:0.25rem;">
                                         @php
-                                            $xhtmlEvent         = null;
-                                            foreach($item->events as $event){
-                                                $xhtmlEvent     .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$event->infoEvent->name.'</div>';
+                                            $xhtmlCategory      = null;
+                                            foreach($item->categories as $category){
+                                                if($category->infoCategory->seo->type=='event_info'){
+                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                                }
                                             }
                                         @endphp 
-                                        <strong>Sự kiện:</strong> {!! $xhtmlEvent !!}
+                                        <strong>Sự kiện:</strong> {!! $xhtmlCategory !!}
                                     </div>
                                 @endif
                             </td>

@@ -68,6 +68,25 @@
         <!-- One Row -->
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="
+                Là loại của chuyên mục phân loại theo Chủ đề - Phong cách - Sự kiện...
+            ">
+                <i class="explainInput" data-feather='alert-circle'></i>
+                <label class="form-label" for="parent">Loại chuyên mục</label>
+            </span>
+            <select class="select2 form-select select2-hidden-accessible" name="type">
+                {{-- <option value="0">- Lựa chọn -</option> --}}
+                @foreach(config('main.category_type') as $type)
+                    @php
+                        $selected   = null;
+                        if(!empty($item->seo->type)&&$item->seo->type==$type['key']) $selected = 'selected';
+                    @endphp
+                    <option value="{{ $type['key'] }}" {{ $selected }}>{{ $type['name'] }}</option>
+                @endforeach
+            </select>
+        </div>
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <span data-toggle="tooltip" data-placement="top" title="
                 Nhập vào một số để thể hiện độ ưu tiên khi hiển thị cùng các Category khác (Số càng nhỏ càng ưu tiên cao - Để trống tức là không ưu tiên)
             ">
                 <i class="explainInput" data-feather='alert-circle'></i>

@@ -46,7 +46,7 @@ class Product extends Model {
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'product_info');
                         }])
-                        ->with('seo', 'en_seo', 'prices.wallpapers.infoWallpaper', 'contents', 'events', 'categories')
+                        ->with('seo', 'en_seo', 'prices.wallpapers.infoWallpaper', 'contents', 'categories')
                         ->paginate($params['paginate']);
         return $result;
     }
@@ -94,13 +94,5 @@ class Product extends Model {
 
     public function categories(){
         return $this->hasMany(\App\Models\RelationCategoryProduct::class, 'product_info_id', 'id');
-    }
-
-    public function events(){
-        return $this->hasMany(\App\Models\RelationEventProduct::class, 'product_info_id', 'id');
-    }
-
-    public function styles(){
-        return $this->hasMany(\App\Models\RelationStyleProduct::class, 'product_info_id', 'id');
     }
 }

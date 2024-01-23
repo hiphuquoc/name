@@ -101,12 +101,4 @@ class Event extends Model {
     public function en_seo() {
         return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
     }
-
-    public function products(){
-        return $this->hasMany(\App\Models\RelationEventProduct::class, 'event_info_id', 'id');
-    }
-
-    public function blogs(){
-        return $this->hasMany(\App\Models\RelationEventInfoCategoryBlogInfo::class, 'event_info_id', 'id');
-    }
 }

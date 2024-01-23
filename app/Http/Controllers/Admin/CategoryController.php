@@ -38,11 +38,11 @@ class CategoryController extends Controller {
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $language           = Cookie::get('language') ?? 'vi';
-        $keyTable           = 'category_info';
-        $item               = Category::select('*')
-                                ->where('id', $id)
-                                ->with(['files' => function($query) use($keyTable){
-                                    $query->where('relation_table', $keyTable);
+        $item               = Category::select('category_info.*', 'seo.type')
+                                ->join('seo', 'seo.id', '=', 'category_info.seo_id')
+                                ->where('category_info.id', $id)
+                                ->with(['files' => function($query){
+                                    $query->where('relation_table', 'seo.type');
                                 }])
                                 ->with('seo', 'en_seo')
                                 ->first();
@@ -72,7 +72,7 @@ class CategoryController extends Controller {
         try {
             DB::beginTransaction();
             $language           = Cookie::get('language') ?? 'vi';
-            $keyTable           = 'category_info';
+            $keyTable           = $request->get('type');
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -166,7 +166,7 @@ class CategoryController extends Controller {
             DB::beginTransaction();
             /* ngôn ngữ */
             $language           = Cookie::get('language') ?? 'vi';
-            $keyTable           = 'category_info';
+            $keyTable           = $request->get('type');
 
             $seoId              = $request->get('seo_id');
             $enSeoId            = $request->get('en_seo_id');

@@ -26,18 +26,18 @@ return [
                     'route' => 'admin.category.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
+                // [
+                //     'name'  => '4. Phong cách',
+                //     'route' => 'admin.style.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ],
+                // [
+                //     'name'  => '5. Sự kiện',
+                //     'route' => 'admin.event.list',
+                //     'icon'  => '<i data-feather=\'circle\'></i>'
+                // ],
                 [
-                    'name'  => '4. Phong cách',
-                    'route' => 'admin.style.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '5. Sự kiện',
-                    'route' => 'admin.event.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '6. Miễn phí',
+                    'name'  => '4. Miễn phí',
                     'route' => 'admin.freeWallpaper.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]

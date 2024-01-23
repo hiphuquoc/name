@@ -101,12 +101,4 @@ class Style extends Model {
     public function en_seo() {
         return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
     }
-
-    public function products(){
-        return $this->hasMany(\App\Models\RelationStyleProduct::class, 'style_info_id', 'id');
-    }
-
-    public function blogs(){
-        return $this->hasMany(\App\Models\RelationStyleInfoCategoryBlogInfo::class, 'style_info_id', 'id');
-    }
 }

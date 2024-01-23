@@ -26,8 +26,6 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\StyleController;
-use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\CategoryBlogController;
 use App\Http\Controllers\Admin\BlogController;
@@ -105,22 +103,6 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/create', [CategoryController::class, 'create'])->name('admin.category.create');
             Route::post('/update', [CategoryController::class, 'update'])->name('admin.category.update');
             Route::get('/delete', [CategoryController::class, 'delete'])->name('admin.category.delete');
-        });
-        /* Style */
-        Route::prefix('style')->group(function(){
-            Route::get('/list', [StyleController::class, 'list'])->name('admin.style.list');
-            Route::get('/view', [StyleController::class, 'view'])->name('admin.style.view');
-            Route::post('/create', [StyleController::class, 'create'])->name('admin.style.create');
-            Route::post('/update', [StyleController::class, 'update'])->name('admin.style.update');
-            Route::get('/delete', [StyleController::class, 'delete'])->name('admin.style.delete');
-        });
-        /* brand */
-        Route::prefix('event')->group(function(){
-            Route::get('/list', [EventController::class, 'list'])->name('admin.event.list');
-            Route::get('/view', [EventController::class, 'view'])->name('admin.event.view');
-            Route::post('/create', [EventController::class, 'create'])->name('admin.event.create');
-            Route::post('/update', [EventController::class, 'update'])->name('admin.event.update');
-            Route::get('/delete', [EventController::class, 'delete'])->name('admin.event.delete');
         });
         /* page */
         Route::prefix('page')->group(function(){

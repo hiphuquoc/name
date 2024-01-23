@@ -26,7 +26,7 @@
             <div class="searchBox_item">
                 <div class="position-relative">
                     <select class="form-select select2 select2-hidden-accessible" name="search_category" onchange="submitForm('formSearch');" aria-hidden="true">
-                        <option value="0">- Tìm theo Chủ đề -</option>
+                        <option value="0">- Tìm theo Category -</option>
                         @foreach($categories as $category)
                             @php
                                 $selected = null;
