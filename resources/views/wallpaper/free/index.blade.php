@@ -123,17 +123,14 @@
 @push('scriptCustom')
     <script type="text/javascript">
         $(window).ready(function(){
-
+            /* lazyload */ 
+            lazyload();
             /* load more */
             loadFreeWallpaperMore(50);
             $(window).scroll(function(){
                 loadFreeWallpaperMore(50);
             })
-
-            setTimeout(() => {
-                setViewAllImage();
-                lazyload();
-            }, 500);
+            /* tính lại khi resize */
             $(window).resize(function(){
                 setViewAllImage();
             })
@@ -205,6 +202,8 @@
 
         /* loadmore wallpaper */
         function loadFreeWallpaperMore(requestLoad = 20){
+
+            console.log(123);
             var boxCategory         = $('.freeWallpaperBox');
             const total             = $('#total').val();
             const loaded            = $('#loaded').val();
@@ -234,15 +233,39 @@
                             $('#loaded').val(response.loaded);
                             if(response.content!='') {
                                 boxCategory.append(response.content);
-                                /* set view lại */
-                                setTimeout(() => {
-                                    setViewAllImage();
-                                }, 10);
                             }
+                            // Kiểm tra khi tất cả các phần tử đã được load xong
+                            waitForImagesLoaded(boxCategory, function () {
+                                setViewAllImage();
+                            });
                         }
                     });
                 }
             }
+        }
+        // Hàm kiểm tra khi tất cả các hình ảnh trong boxCategory đã được load xong
+        function waitForImagesLoaded(boxCategory, callback) {
+            var images = boxCategory.find('img');
+            var imagesToLoad = images.length;
+
+            if (imagesToLoad === 0) {
+                callback();
+            }
+
+            images.on('load', function () {
+                imagesToLoad--;
+                if (imagesToLoad === 0) {
+                    callback();
+                }
+            }).each(function () {
+                // Trigger sự kiện load để xử lý trường hợp ảnh đã được cache
+                if (this.complete || this.complete === undefined) {
+                    var src = this.src;
+                    // Thiết lập src vào không gì để tránh lỗi caching
+                    this.src = '#';
+                    this.src = src;
+                }
+            });
         }
 
     </script>
