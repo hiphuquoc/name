@@ -1,4 +1,5 @@
 <div class="modal-content" style="position:relative;">
+    <input type="hidden" name="wallpaper_info_id" value="{{ $wallpaper->id ?? null }}" />
     <div class="modal-body">
         <div>
             @if(empty($wallpaper)) <!-- trương hợp edit -->
@@ -9,10 +10,10 @@
             @endif
             <div id="js_addFormUpload_box" class="formFreeWallpaperBox">
 
-                {{-- <!-- load Ajax -->
+                <!-- load Ajax -->
                 @if(!empty($wallpaper))
                     @include('admin.freeWallpaper.oneFormUpload', ['idBox' => 0, 'wallpaper' => $wallpaper])
-                @endif --}}
+                @endif
 
             </div>
         </div>

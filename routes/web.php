@@ -76,11 +76,10 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/loadOneRow', [FreeWallpaperController::class, 'loadOneRow'])->name('admin.freeWallpaper.loadOneRow');
             Route::post('/loadModalUploadAndEdit', [FreeWallpaperController::class, 'loadModalUploadAndEdit'])->name('admin.freeWallpaper.loadModalUploadAndEdit');
             Route::post('/uploadWallpaper', [FreeWallpaperController::class, 'uploadWallpaper'])->name('admin.freeWallpaper.uploadWallpaper');
-
-            Route::post('/changeWallpaperWithSource', [FreeWallpaperController::class, 'changeWallpaperWithSource'])->name('admin.freeWallpaper.changeWallpaperWithSource');
+            Route::post('/updateWallpaper', [FreeWallpaperController::class, 'updateWallpaper'])->name('admin.freeWallpaper.updateWallpaper');
             Route::post('/deleteWallpaper', [FreeWallpaperController::class, 'deleteWallpaper'])->name('admin.freeWallpaper.deleteWallpaper');
             Route::post('/addFormUpload', [FreeWallpaperController::class, 'addFormUpload'])->name('admin.freeWallpaper.addFormUpload');
-            Route::post('/searchWallpapers', [FreeWallpaperController::class, 'searchWallpapers'])->name('admin.freeWallpaper.searchWallpapers');
+            // Route::post('/searchWallpapers', [FreeWallpaperController::class, 'searchWallpapers'])->name('admin.freeWallpaper.searchWallpapers');
         });
         /* product */
         Route::prefix('product')->group(function(){

@@ -15,6 +15,8 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/forms/select/select2.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/plugins/forms/form-validation.css') }}">
+  <!-- custom tags -->
+  <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/tagify/tagify.css') }}" /> 
   <!-- END: Vendor CSS-->
   <!-- BEGIN: Theme CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/css/bootstrap.css') }}">

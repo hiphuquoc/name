@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use GoogleTranslate;
+
 class Charactor {
 
     public static function randomString($length = 10){
@@ -51,6 +53,15 @@ class Charactor {
             $output = implode('%', $output);
         }
         return $output;
+    }
+
+    public static function translateViToEn($strVi){
+        $response       = null;
+        if(!empty($strVi)){
+            $ggTrans    = GoogleTranslate::translate($strVi);
+            $response   = $ggTrans['translated_text'] ?? null;
+        }
+        return $response;
     }
 
 }

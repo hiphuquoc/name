@@ -203,7 +203,6 @@ return [
 
         // /* Thanh toán Paypal */
         // Srmklive\PayPal\Providers\PayPalServiceProvider::class,
-
     ],
 
     /*

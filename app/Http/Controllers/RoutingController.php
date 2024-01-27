@@ -91,7 +91,9 @@ class RoutingController extends Controller{
                 if($checkExists->type=='category_info'||$checkExists->type=='style_info'||$checkExists->type=='event_info'){
                     /* breadcrumb */
                     $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                    // dd($checkExists->seo);
                     $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                    
                     $flagMatch      = true;
                     /* ===== miễn phí */
                     $flagFree       = false;

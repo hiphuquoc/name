@@ -9,6 +9,7 @@
         "google/apiclient": "^2.13",
         "guzzlehttp/guzzle": "^7.8",
         "intervention/image": "^2.5",
+        "joggapp/laravel-google-translate": "^9.0",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.6",
