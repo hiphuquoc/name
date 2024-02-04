@@ -11,7 +11,7 @@ use App\Http\Controllers\SettingController;
 use App\Models\Product;
 use App\Models\RelationSeoEnSeo;
 use Intervention\Image\ImageManagerStatic;
-
+use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 
 class HomeController extends Controller{
@@ -101,60 +101,28 @@ class HomeController extends Controller{
 
         // dd($result);
 
-        // $styles = \App\Models\Event::select('*')
-        //             ->with('seo', 'en_seo')
-        //             ->get();
-        // foreach($styles as $style){
-        //     /* insert SEO */
-        //     $insertSeo      = $style->seo->toArray();
-        //     unset($insertSeo['id'], $insertSeo['created_at'], $insertSeo['updated_at']);
-        //     $idSeo          = \App\Models\Seo::insertItem($insertSeo);
-        //     /* insert EN_SEO */
-        //     $insertEnSeo    = $style->en_seo->toArray();
-        //     unset($insertEnSeo['id'], $insertEnSeo['created_at'], $insertEnSeo['updated_at']);
-        //     $idEnSeo        = \App\Models\EnSeo::insertItem($insertEnSeo);
-        //     /* delete relation */
-        //     $tmp = RelationSeoEnSeo::select('*')
-        //             ->where('en_seo_id', $style->en_seo->id)
-        //             ->delete();
-        //     RelationSeoEnSeo::insertItem([
-        //         'seo_id'    => $idSeo,
-        //         'en_seo_id' => $idEnSeo
-        //     ]);
+        // Replace 'YOUR_API_KEY' with your actual API key from OpenAI
+        $apiKey = env('CHAT_GPT_API_KEY');
 
-        //     /* insert category_info */
-        //     $insertCategory     = $style->toArray();
-        //     unset($insertCategory['id'], $insertCategory['created_at'], $insertCategory['updated_at'], $insertCategory['seo'], $insertCategory['en_seo']);
-        //     $insertCategory['seo_id'] = $idSeo;
-        //     $insertCategory['en_seo_id'] = $idEnSeo;
-        //     $idCategory = \App\Models\Category::insertItem($insertCategory);
-        //     echo '<pre>';
-        //     print_r('<div>'.$idCategory.'</div>');
-        //     echo '</pre>';
-        // }
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $apiKey,
+        ])->post('https://api.openai.com/v1/chat/completions', [
+            'model' => 'gpt-3.5-turbo-1106',
+            'prompt' => 'Phân tích giúp tôi nội dung trong ảnh này',
+            'images' => [
+                'https://namecomvn.storage.googleapis.com/freewallpapers/hinh-nen-co-gai-xinh-dep-de-thuong-goi-cam-quyen-ru-duoi-anh-nang-dep-cua-hoang-hon-1705861656-20-small.webp'
+            ], // Assuming $imagePath is the path to your image file
+            'max_tokens' => 2048, // Adjust as needed
+        ]);
 
-        // $arrayIdSeo = [];
-        // $arrayIdEnSeo = [];
-        // $tmp = Category::all();
-        // foreach($tmp as $t){
-        //     $arrayIdSeo[] = $t->seo->id;
-        //     $arrayIdEnSeo[] = $t->en_seo->id;;
-        // }
-        // $tmp = Page::all();
-        // foreach($tmp as $t){
-        //     $arrayIdSeo[] = $t->seo->id;
-        //     $arrayIdEnSeo[] = $t->en_seo->id;;
-        // }
-        // $tmp = Product::all();
-        // foreach($tmp as $t){
-        //     $arrayIdSeo[] = $t->seo->id;
-        //     $arrayIdEnSeo[] = $t->en_seo->id;;
-        // }
+        $result = $response->json();
+dd($result);
+        // Process and display the result
+        $description = $result['choices'][0]['text'];
 
-        // $result = \App\Models\Seo::select('*')
-        //             ->whereNotIn('id', $arrayIdSeo)
-        //             ->delete();
-        // dd($result->toArray());
+        dd($description);
 
+        return view('result', compact('description'));
     }
 }

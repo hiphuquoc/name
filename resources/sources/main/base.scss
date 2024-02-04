@@ -318,7 +318,7 @@ body {
     background: $colorBackgroundLv1;
   }
   &::-webkit-scrollbar {
-    width: 7px; /* Chiều rộng của thanh cuộn */
+    width: 5px; /* Chiều rộng của thanh cuộn */
   }
   &::-webkit-scrollbar-thumb {;
     @include colorOpacity('background', $colorBackgroundLv3, 0.75); /* Màu của "nút" thanh cuộn */
@@ -326,6 +326,16 @@ body {
   }
   &::-webkit-scrollbar-track {
     background: transparent; /* Màu của nền thanh cuộn */
+  }
+  @media(max-width: 767px){
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+  }
+  @media(max-width: 577px){
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
   }
 }
 
@@ -567,6 +577,16 @@ blockquote{
       border-radius: 10px;
       background: transparent;
     }
+    @media(max-width: 767px){
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+    @media(max-width: 577px){
+      &::-webkit-scrollbar {
+        width: 3px;
+      }
+    }
   }
   .customScrollBar-x {
     width: 100%;
@@ -584,6 +604,16 @@ blockquote{
       -webkit-box-shadow: inset 0 0 6px #fff;
       border-radius: 10px;
       background: transparent;
+    }
+    @media(max-width: 767px){
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+    @media(max-width: 577px){
+      &::-webkit-scrollbar {
+        width: 3px;
+      }
     }
   }
 
