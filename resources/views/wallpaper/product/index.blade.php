@@ -73,7 +73,7 @@
             @include('wallpaper.product.content', ['contents' => $item->contents])
 
             <!-- Related -->
-            @if($totalProduct>0)
+            @if($total>0)
             <div class="contentBox">
                 <div class="relatedProductBox">
                     <div class="relatedProductBox_title">
@@ -84,14 +84,14 @@
                         @endif
                     </div>
                     <div class="relatedProductBox_box">
-                        @php
+                        {{-- @php
                             $arrayIdProduct = [];
                             foreach($related as $p) $arrayIdProduct[] = $p->infoProduct->id;
-                        @endphp
+                        @endphp --}}
                         @include('wallpaper.template.wallpaperGrid', [
                             'loaded'            => 0,
                             'contentEmpty'      => true,
-                            'arrayIdProduct'    => $arrayIdProduct
+                            'arrayIdCategory'   => $arrayIdCategory
                         ])
                     </div>
                 </div>

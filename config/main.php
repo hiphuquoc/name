@@ -92,15 +92,17 @@ return [
         ]
     ],
     'view_by' => [
-        'set'   => [
+        [
             'icon'      => '<i class="fa-solid fa-gift"></i>',
             'name'      => 'Từng bộ',
-            'en_name'   => 'Per set'
+            'en_name'   => 'Per set',
+            'key'       => 'set'
         ],
-        'wallpaper'   => [
+        [
             'icon'      => '<i class="fa-regular fa-image"></i>',
             'name'      => 'Từng ảnh',
-            'en_name'   => 'Per wallpaper'
+            'en_name'   => 'Per wallpaper',
+            'key'       => 'wallpaper'
         ]
     ],
     'cache'     => [
@@ -119,15 +121,74 @@ return [
     'category_type' => [
         [
             'key' => 'category_info',
-            'name' => 'Chủ đề'
+            'name' => 'Chủ đề',
+            'en_name'   => 'Category'
         ],
         [
             'key' => 'style_info',
-            'name' => 'Phong cách'
+            'name' => 'Phong cách',
+            'en_name'   => 'Style'
         ],
         [
             'key' => 'event_info',
-            'name' => 'Sự kiện'
+            'name' => 'Sự kiện',
+            'en_name'   => 'Event'
+        ]
+    ],
+    'sort_type' => [
+        [
+            'icon'      => '<i class="fa-solid fa-star"></i>',
+            'key'       => 'propose',
+            'name'      => 'Đề xuất',
+            'en_name'   => 'Propose'
+        ],
+        [
+            'icon'      => '<i class="fa-solid fa-heart"></i>',
+            'key'       => 'favourite',
+            'name'      => 'Yêu thích',
+            'en_name'   => 'Favourite'
+        ],
+        [
+            'icon'      => '<i class="fa-solid fa-arrow-down"></i>',
+            'key'       => 'new',
+            'name'      => 'Mới nhất',
+            'en_name'   => 'Latest'
+        ],
+        [
+            'icon'      => '<i class="fa-solid fa-arrow-up"></i>',
+            'key'       => 'old',
+            'name'      => 'Cũ nhất',
+            'en_name'   => 'Oldest'
+        ]
+    ],
+    'feeling_type'  => [
+        [
+            'icon'          => 'storage/images/svg/icon-vomit-2.svg',
+            'icon_unactive' => 'storage/images/svg/icon-vomit-2-unactive.svg',
+            'key'           => 'vomit',
+            'name'          => 'Ói',
+            'en_name'       => 'Vomit'
+        ],
+        [
+            'icon'      => 'storage/images/svg/icon-notLike-2.svg',
+            'icon_unactive' => 'storage/images/svg/icon-notLike-2-unactive.svg',
+            'key'       => 'notlike',
+            'name'      => 'Không thích',
+            'en_name'   => 'Not like'
+        ],
+        [
+            'icon'      => 'storage/images/svg/icon-haha-2.svg',
+            'icon_unactive' => 'storage/images/svg/icon-haha-2-unactive.svg',
+            'key'       => 'haha',
+            'name'      => 'Haha',
+            'en_name'   => 'Haha'
+        ],
+        [
+            'icon'      => 'storage/images/svg/icon-heart-2.svg',
+            'icon_unactive' => 'storage/images/svg/icon-heart-2-unactive.svg',
+            'key'       => 'heart',
+            'name'      => 'Thả tim',
+            'en_name'   => 'Heart'
         ]
     ]
 ];

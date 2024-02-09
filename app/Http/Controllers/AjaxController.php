@@ -14,8 +14,11 @@ use App\Models\Style;
 use App\Models\Event;
 use App\Models\FreeWallpaper;
 use App\Models\RegistryEmail;
+use App\Models\RelationFreeWallpaperUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Services\BuildInsertUpdateModel;
+use SebastianBergmann\Type\FalseType;
 
 class AjaxController extends Controller {
 
@@ -99,10 +102,10 @@ class AjaxController extends Controller {
                                     </a>';
                 }
                 if(empty($language)||$language=='vi'){
-                    $url            = route('routing', ['slug' => 'hinh-nen-dien-thoai']).'?search='.$keySearch;
+                    $url            = route('routing', ['slug' => 'anh-gai-xinh']).'?search='.$keySearch;
                     $contentButton  = 'Xem tất cả (<span>'.$count.'</span>) kết quả <i class="fa-solid fa-angles-right"></i>';
                 }else {
-                    $url            = route('routing', ['slug' => 'phone-wallpapers']).'?search='.$keySearch;
+                    $url            = route('routing', ['slug' => 'photo-beautiful-girl']).'?search='.$keySearch;
                     $contentButton  = 'See all (<span>'.$count.'</span>) results <i class="fa-solid fa-angles-right"></i>';
                 }
                 $response           .= '<a href="'.$url.'" class="searchViewBefore_selectbox_item">'.$contentButton.'</a>';
@@ -137,7 +140,7 @@ class AjaxController extends Controller {
     public function buildTocContentMain(Request $request){
         $xhtml       = null;
         if(!empty($request->get('data'))){
-            $xhtml   = view('main.template.tocContentMain', ['data' => $request->get('data')])->render();
+            $xhtml   = view('wallpaper.template.tocContentMain', ['data' => $request->get('data')])->render();
         }
         echo $xhtml;
     }
@@ -172,57 +175,56 @@ class AjaxController extends Controller {
         return json_encode($result);
     }
 
-    public function settingViewBy(Request $request){
-        if(!empty($request->get('view_by'))){
-            Cookie::queue('view_by', $request->get('view_by'), 3600);
-        }
-        return redirect()->back()->withInput();
-    }
-
-    public function showSortBox(Request $request){
+    public function showSortBoxFreeWallpaper(Request $request){
         $xhtml              = '';
-        $type               = $request->get('type');
         $id                 = $request->get('id');
-        $totalSet           = $request->get('totalSet');
-        $totalWallpaper     = $request->get('totalWallpaper');
-        $viewBy             = Cookie::get('view_by') ?? 'set';
+        $total              = $request->get('total');
+        $language           = $request->session()->get('language') ?? 'vi';
         /* select của filter */
-        $categories         = Category::all();
-        $styles             = Style::all();
-        $events             = Event::all();
+        $categories         = Category::select('*')
+                                ->where('flag_show', true)
+                                ->get();
+        /* filter (nếu có) */
+        $filters            = $request->get('filters') ?? [];
         /* giá trị selectBox */
         $categoryChoose     = new \Illuminate\Database\Eloquent\Collection;
-        if($type=='category_info'){
-            $categoryChoose = Category::select('*')
+        $categoryChoose     = Category::select('*')
                                 ->where('id', $id)
                                 ->with('seo', 'en_seo')
                                 ->first();
-        }
-        $styleChoose        = new \Illuminate\Database\Eloquent\Collection;
-        if($type=='style_info'){
-            $styleChoose    = Style::select('*')
-                                ->where('id', $id)
-                                ->with('seo', 'en_seo')
-                                ->first();
-        }
-        $eventChoose        = new \Illuminate\Database\Eloquent\Collection;
-        if($type=='event_info'){
-            $eventChoose    = Event::select('*')
-                                ->where('id', $id)
-                                ->with('seo', 'en_seo')
-                                ->first();
-        }
-        $xhtml              = view('wallpaper.template.sortContent', [
+        $xhtml              = view('wallpaper.category.sortContent', [
             'language'          => $language ?? 'vi',
-            'totalSet'          => $totalSet,
-            'totalWallpaper'    => $totalWallpaper,
-            'viewBy'            => $viewBy,
+            'total'             => $total,
             'categories'        => $categories,
-            'styles'            => $styles,
-            'events'            => $events,
             'categoryChoose'    => $categoryChoose,
-            'styleChoose'       => $styleChoose,
-            'eventChoose'       => $eventChoose
+            'filters'           => $filters
+        ])->render();
+        return $xhtml;
+    }
+
+    public function showSortBoxWallpaper(Request $request){
+        $xhtml              = '';
+        $id                 = $request->get('id');
+        $total              = $request->get('total');
+        $language           = $request->session()->get('language') ?? 'vi';
+        /* select của filter */
+        $categories         = Category::select('*')
+                                ->where('flag_show', true)
+                                ->get();
+        /* filter (nếu có) */
+        $filters            = $request->get('filters') ?? [];
+        /* giá trị selectBox */
+        $categoryChoose     = new \Illuminate\Database\Eloquent\Collection;
+        $categoryChoose     = Category::select('*')
+                                ->where('id', $id)
+                                ->with('seo', 'en_seo')
+                                ->first();
+        $xhtml              = view('wallpaper.categoryMoney.sortContent', [
+            'language'          => $language ?? 'vi',
+            'total'             => $total,
+            'categories'        => $categories,
+            'categoryChoose'    => $categoryChoose,
+            'filters'           => $filters
         ])->render();
         return $xhtml;
     }
@@ -247,15 +249,6 @@ class AjaxController extends Controller {
         }
         echo $response;
     }
-
-    // public static function loadImageWithResize(Request $request){
-    //     $response       = '';
-    //     if(!empty($request->get('url_image'))){
-    //         $resize     = $request->get('resize') ?? 400;
-    //         $response   = \App\Helpers\Image::streamResizedImage($request->get('url_image'), $resize);
-    //     }
-    //     echo $response;
-    // }
 
     public static function loadImageSource(Request $request){
         $response       = null;
@@ -323,24 +316,86 @@ class AjaxController extends Controller {
         return $flag;
     }
 
-    public static function loadmoreFreeWallpapers(Request $request){
+    public function setViewBy(Request $request){
+        Cookie::queue('view_by', $request->get('key'), 3600);
+        return true;
+    }
+
+    public function setSortBy(Request $request){
+        Cookie::queue('sort_by', $request->get('key'), 3600);
+        return true;
+    }
+
+    public function downloadImgFreeWallpaper(Request $request){
+        $fileName = $request->get('file_cloud');
+        // Lấy đường dẫn đến ảnh trong Google Cloud Storage
+        $imagePath = config('main.google_cloud_storage.default_domain') . $fileName;
+
+        // Đọc nội dung của ảnh
+        $imageContents = file_get_contents($imagePath);
+
+        // Tạo một phản hồi có kiểu MIME phù hợp
+        $response = Response::make($imageContents, 200);
+
+        // Thêm header để cho phép trang web của bạn tải ảnh
+        $response->header('Content-Type', 'image/jpeg');
+        $response->header('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+
+        return $response;
+    }
+
+    public function setFeelingFreeWallpaper(Request $request){
+        $type               = $request->get('type') ?? null;
+        $idFreeWallpaper    = $request->get('free_wallpaper_info_id') ?? 0;
         $response           = [];
-        $content            = '';
-        if(!empty($request->get('total'))){
-            $language       = Cookie::get('language') ?? 'vi';
-            $loaded         = $request->get('loaded');
-            $requestLoad    = $request->get('requestLoad');
-            $wallpapers     = FreeWallpaper::select('*')
-                                ->orderBy('id', 'DESC')
-                                ->skip($loaded)
-                                ->take($requestLoad)
-                                ->get();
-            foreach($wallpapers as $wallpaper){
-                $content    .= view('wallpaper.free.item', compact('wallpaper', 'language'))->render();
+        if(!empty($type)&&!empty($idFreeWallpaper)){
+            $user   = Auth::user();
+            if(!empty($user)){
+                $infoRelation = RelationFreeWallpaperUser::select('*')
+                    ->where('free_wallpaper_info_id', $idFreeWallpaper)
+                    ->where('user_info_id', $user->id)
+                    ->first();
+                if(!empty($infoRelation)){
+                    /* update */
+                    RelationFreeWallpaperUser::updateItem($infoRelation->id, [
+                        'type'  => $type
+                    ]);
+                }else {
+                    /* insert */
+                    RelationFreeWallpaperUser::insertItem([
+                        'free_wallpaper_info_id'    => $idFreeWallpaper,
+                        'user_info_id'  => $user->id,
+                        'type'  => $type
+                    ]);
+                }
+                $response['flag']   = true;
+            }else {
+                $response['flag']   = false;
+                $response['empty_user']   = true;
             }
+        }else {
+            $response['flag'] = false;
         }
-        $response['content']    = $content;
-        $response['loaded']     = $loaded + $requestLoad;
         return json_encode($response);
+    }
+
+    public function loadOneFreeWallpaper(Request $request){
+        $response                   = null;
+        if(!empty($request->get('free_wallpaper_info_id'))){
+            $idFreeWallpaper        = $request->get('free_wallpaper_info_id');
+            $language               = Cookie::get('language') ?? 'vi';
+            $user                   = Auth::user();
+            $idUser                 = $user->id ?? 0;
+            $wallpaper              = FreeWallpaper::select('*')
+                                        ->where('id', $idFreeWallpaper)
+                                        ->when(!empty($idUser), function($query) use($idUser){
+                                            $query->with(['feeling' => function($subquery) use($idUser){
+                                                $subquery->where('user_info_id', $idUser);
+                                            }]);
+                                        })
+                                        ->first();
+            if(!empty($wallpaper)) $response = view('wallpaper.free.item', compact('wallpaper', 'language', 'user'))->render();
+        }
+        echo $response;
     }
 }

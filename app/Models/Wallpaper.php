@@ -25,7 +25,12 @@ class Wallpaper extends Model {
         'width_source',
         'height_source',
         'file_size_source',
-        'mine_type_source'
+        'mine_type_source',
+        'heart',
+        'ha_ha',
+        'not_like',
+        'vomit'
+
     ];
     public $timestamps = true;
 

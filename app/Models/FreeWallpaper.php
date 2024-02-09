@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class FreeWallpaper extends Model {
     use HasFactory;
@@ -18,7 +19,11 @@ class FreeWallpaper extends Model {
         'width',
         'height',
         'file_size',
-        'mine_type'
+        'mine_type',
+        'heart',
+        'ha_ha',
+        'not_like',
+        'vomit'
     ];
     public $timestamps = true;
 
@@ -73,5 +78,9 @@ class FreeWallpaper extends Model {
 
     public function tags(){
         return $this->hasMany(\App\Models\RelationTagInfoOrther::class, 'reference_id', 'id')->where('reference_type', 'free_wallpaper_info');
+    }
+
+    public function feeling(){
+        return $this->hasOne(\App\Models\RelationFreeWallpaperUser::class, 'free_wallpaper_info_id', 'id')->where('user_info_id', Auth::user()->id ?? null);
     }
 }

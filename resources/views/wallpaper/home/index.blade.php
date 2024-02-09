@@ -97,9 +97,7 @@
                         <!-- Hình nền điện thoại tết -->
                         @php
                             $productTet = new \Illuminate\Database\Eloquent\Collection;
-                            $i          = 0;
                             foreach($infoCategoryTet->products as $product){
-                                if($i==10) break;
                                 /* lọc bỏ các phần tử chưa có wallpaper => chưa lọc được trong query */
                                 if(!empty($product->infoProduct->prices)&&$product->infoProduct->prices->isNotEmpty()) {
                                     $flagHaveWallpaper = false;
@@ -109,15 +107,12 @@
                                             break;
                                         }
                                     }
-                                    if($flagHaveWallpaper==true) {
-                                        $productTet->add($product->infoProduct);
-                                        ++$i;
-                                    }
+                                    if($flagHaveWallpaper==true) $productTet->add($product->infoProduct);
                                 }
                             }
                         @endphp
                         @include('wallpaper.template.wallpaperGrid', [
-                            'products'      => $productTet ?? null,
+                            'wallpapers'    => $productTet ?? null,
                             'headingTitle'  => 'h2',
                             'viewBy'        => $viewBy,
                             'total'         => $productTet->count(),
@@ -154,9 +149,7 @@
                         <!-- Hình nền điện thoại tết -->
                         @php
                             $productTet = new \Illuminate\Database\Eloquent\Collection;
-                            $i          = 0;
                             foreach($infoCategoryNoel->products as $product){
-                                if($i==10) break;
                                 /* lọc bỏ các phần tử chưa có wallpaper => chưa lọc được trong query */
                                 if(!empty($product->infoProduct->prices)&&$product->infoProduct->prices->isNotEmpty()) {
                                     $flagHaveWallpaper = false;
@@ -166,15 +159,12 @@
                                             break;
                                         }
                                     }
-                                    if($flagHaveWallpaper==true) {
-                                        $productTet->add($product->infoProduct);
-                                        ++$i;
-                                    }
+                                    if($flagHaveWallpaper==true) $productTet->add($product->infoProduct);
                                 }
                             }
                         @endphp
                         @include('wallpaper.template.wallpaperGrid', [
-                            'products'      => $productTet ?? null,
+                            'wallpapers'    => $productTet ?? null,
                             'headingTitle'  => 'h2',
                             'viewBy'        => $viewBy,
                             'total'         => $productTet->count(),

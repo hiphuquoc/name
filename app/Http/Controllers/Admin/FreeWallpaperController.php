@@ -182,12 +182,12 @@ class FreeWallpaperController extends Controller {
                     }
                 }
             }
+            /* lưu tag name */
             /* delete relation có sẵn */
             RelationTagInfoOrther::select('*')
-            ->where('reference_type', 'free_wallpaper_info')
-            ->where('reference_id', $idWallpaper)
-            ->delete();
-            /* lưu tag name */
+                ->where('reference_type', 'free_wallpaper_info')
+                ->where('reference_id', $idWallpaper)
+                ->delete();
             if(!empty($request->get('tag'))){
                 $tag    = json_decode($request->get('tag'), true);
                 foreach($tag as $t){

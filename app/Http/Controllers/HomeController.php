@@ -55,7 +55,9 @@ class HomeController extends Controller{
                                     // })
                                     ->with('seo')
                                     ->with('products', function($query){
-                                        $query->orderBy('id', 'DESC');
+                                        $query->orderBy('id', 'DESC')
+                                            ->skip(0)
+                                            ->take(10);
                                     })
                                     ->first();
             /* lấy hình nền điện thoại noel */
@@ -63,21 +65,16 @@ class HomeController extends Controller{
             $infoCategoryNoel   = Category::select('category_info.*', 'seo.slug')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->where('seo.slug', '=', $slug)
-                                    // ->whereHas('products.infoProduct.prices.wallpapers', function($query){
-                                    //     // Điều kiện để kiểm tra xem có ít nhất một wallpaper
-                                    //     $query->whereNotNull('id');
-                                    // })
                                     ->with('seo')
                                     ->with('products', function($query){
-                                        $query->orderBy('id', 'DESC');
+                                        $query->orderBy('id', 'DESC')
+                                            ->skip(0)
+                                            ->take(10);
                                     })
                                     ->first();
             $viewBy             = $request->cookie('view_by') ?? 'set';
-            // /* select của filter */
-            // $categories         = Category::all();
-            // $styles             = Style::all();
-            // $events             = Event::all();
-            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'infoCategoryTet', 'infoCategoryNoel', 'viewBy'))->render();
+            $arrayIdCategory    = [];
+            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'infoCategoryTet', 'infoCategoryNoel', 'viewBy', 'arrayIdCategory'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }
@@ -100,29 +97,31 @@ class HomeController extends Controller{
         // $result = json_decode($response->getBody(), true);
 
         // dd($result);
-
-        // Replace 'YOUR_API_KEY' with your actual API key from OpenAI
-        $apiKey = env('CHAT_GPT_API_KEY');
-
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $apiKey,
-        ])->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-3.5-turbo-1106',
-            'prompt' => 'Phân tích giúp tôi nội dung trong ảnh này',
-            'images' => [
-                'https://namecomvn.storage.googleapis.com/freewallpapers/hinh-nen-co-gai-xinh-dep-de-thuong-goi-cam-quyen-ru-duoi-anh-nang-dep-cua-hoang-hon-1705861656-20-small.webp'
-            ], // Assuming $imagePath is the path to your image file
-            'max_tokens' => 2048, // Adjust as needed
-        ]);
-
-        $result = $response->json();
-dd($result);
-        // Process and display the result
-        $description = $result['choices'][0]['text'];
-
-        dd($description);
-
-        return view('result', compact('description'));
     }
+
+    // public static function chatGPT(Request $request){
+    //     // Replace 'YOUR_API_KEY' with your actual API key from OpenAI
+    //     $apiKey = env('CHAT_GPT_API_KEY');
+
+    //     $response = Http::withHeaders([
+    //         'Content-Type' => 'application/json',
+    //         'Authorization' => 'Bearer ' . $apiKey,
+    //     ])->post('https://api.openai.com/v1/chat/completions', [
+    //         'model' => 'gpt-3.5-turbo-1106',
+    //         'prompt' => 'Phân tích giúp tôi nội dung trong ảnh này',
+    //         'images' => [
+    //             'https://namecomvn.storage.googleapis.com/freewallpapers/hinh-nen-co-gai-xinh-dep-de-thuong-goi-cam-quyen-ru-duoi-anh-nang-dep-cua-hoang-hon-1705861656-20-small.webp'
+    //         ], // Assuming $imagePath is the path to your image file
+    //         'max_tokens' => 2048, // Adjust as needed
+    //     ]);
+
+    //     $result = $response->json();
+    //     dd($result);
+    //     // Process and display the result
+    //     $description = $result['choices'][0]['text'];
+
+    //     dd($description);
+
+    //     return view('result', compact('description'));
+    // }
 }
