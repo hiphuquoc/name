@@ -123,26 +123,26 @@ class CategoryController extends Controller {
             $enContent          = $request->get('en_content') ?? null;
             $enContent          = ImageController::replaceImageInContentWithLoading($enContent);
             if(!empty($enContent)) Storage::put(config('main.storage.enContentCategory').$request->get('en_slug').'.blade.php', $enContent);
-            /* insert slider và lưu CSDL */
-            if($request->hasFile('slider')&&!empty($idCategory)){
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $params         = [
-                    'attachment_id'     => $idCategory,
-                    'relation_table'    => $keyTable,
-                    'name'              => $name
-                ];
-                SliderController::upload($request->file('slider'), $params);
-            }
-            /* insert gallery và lưu CSDL */
-            if($request->hasFile('gallery')&&!empty($idCategory)){
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $params         = [
-                    'attachment_id'     => $idCategory,
-                    'relation_table'    => $keyTable,
-                    'name'              => $name
-                ];
-                GalleryController::upload($request->file('gallery'), $params);
-            }
+            // /* insert slider và lưu CSDL */
+            // if($request->hasFile('slider')&&!empty($idCategory)){
+            //     $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
+            //     $params         = [
+            //         'attachment_id'     => $idCategory,
+            //         'relation_table'    => $keyTable,
+            //         'name'              => $name
+            //     ];
+            //     SliderController::upload($request->file('slider'), $params);
+            // }
+            // /* insert gallery và lưu CSDL */
+            // if($request->hasFile('gallery')&&!empty($idCategory)){
+            //     $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
+            //     $params         = [
+            //         'attachment_id'     => $idCategory,
+            //         'relation_table'    => $keyTable,
+            //         'name'              => $name
+            //     ];
+            //     GalleryController::upload($request->file('gallery'), $params);
+            // }
             DB::commit();
             /* Message */
             $message        = [
@@ -241,26 +241,26 @@ class CategoryController extends Controller {
             }else {
                 Storage::delete(config('main.storage.enContentCategory').$request->get('en_slug').'.blade.php');
             }
-            /* insert slider và lưu CSDL */
-            if($request->hasFile('slider')&&!empty($idCategory)){
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $params         = [
-                    'attachment_id'     => $idCategory,
-                    'relation_table'    => $keyTable,
-                    'name'              => $name
-                ];
-                SliderController::upload($request->file('slider'), $params);
-            }
-            /* insert gallery và lưu CSDL */
-            if($request->hasFile('gallery')&&!empty($idCategory)){
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $params         = [
-                    'attachment_id'     => $idCategory,
-                    'relation_table'    => $keyTable,
-                    'name'              => $name
-                ];
-                GalleryController::upload($request->file('gallery'), $params);
-            }
+            // /* insert slider và lưu CSDL */
+            // if($request->hasFile('slider')&&!empty($idCategory)){
+            //     $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
+            //     $params         = [
+            //         'attachment_id'     => $idCategory,
+            //         'relation_table'    => $keyTable,
+            //         'name'              => $name
+            //     ];
+            //     SliderController::upload($request->file('slider'), $params);
+            // }
+            // /* insert gallery và lưu CSDL */
+            // if($request->hasFile('gallery')&&!empty($idCategory)){
+            //     $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
+            //     $params         = [
+            //         'attachment_id'     => $idCategory,
+            //         'relation_table'    => $keyTable,
+            //         'name'              => $name
+            //     ];
+            //     GalleryController::upload($request->file('gallery'), $params);
+            // }
             DB::commit();
             /* Message */
             $message        = [
@@ -288,17 +288,23 @@ class CategoryController extends Controller {
                                 ->where('id', $id)
                                 ->with('seo', 'en_seo', 'products', 'blogs')
                                 ->first();
-                /* xóa ảnh đại diện trong thư mục */
+                /* xóa ảnh đại diện trong thư mục */ 
                 $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
                 if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
                 $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
                 if(file_exists($imagePath)) @unlink($imagePath);
                 /* delete content */
-                Storage::delete(config('main.storage.contentCategory').$request->get('slug').'.blade.php');
+                Storage::delete(config('main.storage.contentCategory').$info->seo->slug.'.blade.php');
+                Storage::delete(config('main.storage.enContentCategory').$info->en_seo->slug.'.blade.php');
                 /* xóa bảng products */
                 $info->products()->delete();
                 /* xóa relation_style_info_category_info_blog */
                 $info->blogs()->delete();
+                /* delete relation seo_en_seo */
+                RelationSeoEnSeo::select('*')
+                    ->where('seo_id', $info->seo->id)
+                    ->where('en_seo_id', $info->en_seo->id)
+                    ->delete();
                 /* delete bảng seo của product_info */
                 $info->seo()->delete();
                 $info->en_seo()->delete();

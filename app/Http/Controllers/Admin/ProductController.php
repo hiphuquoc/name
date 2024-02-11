@@ -133,6 +133,9 @@ class ProductController extends Controller {
                 $enSeoId            = EnSeo::insertItem($insertEnSeo);
             }
             /* kết nối bảng vi và en */
+            RelationSeoEnSeo::select('*')
+                ->where('seo_id', $seoId)
+                ->delete();
             RelationSeoEnSeo::insertItem([
                 'seo_id'    => $seoId,
                 'en_seo_id' => $enSeoId
@@ -281,7 +284,7 @@ class ProductController extends Controller {
                 $id         = $request->get('id');
                 $info       = Product::select('*')
                                 ->where('id', $id)
-                                ->with('seo', 'prices.wallpapers', 'contents')
+                                ->with('seo', 'en_seo', 'prices.wallpapers', 'contents')
                                 ->first();
                 /* xóa ảnh đại diện sản phẩm trong thư mục */
                 $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
@@ -297,8 +300,15 @@ class ProductController extends Controller {
                 $info->prices()->delete();
                 /* xóa relation_category_product */
                 $info->categories()->delete();
-                /* delete bảng seo của product_info */
+                /* delete relation seo_en_seo */
+                RelationSeoEnSeo::select('*')
+                    ->where('seo_id', $info->seo->id)
+                    ->where('en_seo_id', $info->en_seo->id)
+                    ->delete();
+                /* delete bảng seo */
                 $info->seo()->delete();
+                /* delete bảng en_seo */
+                $info->en_seo()->delete();
                 /* xóa product_info */
                 $info->delete();
                 DB::commit();

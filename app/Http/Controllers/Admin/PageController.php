@@ -213,14 +213,23 @@ class PageController extends Controller {
                 $id         = $request->get('id');
                 $info       = Page::select('*')
                                 ->where('id', $id)
-                                ->with('seo')
+                                ->with('seo', 'en_seo')
                                 ->first();
+                /* delete content */
+                Storage::delete(config('main.storage.contentPage').$info->seo->slug.'.blade.php');
+                Storage::delete(config('main.storage.enContentPage').$info->en_seo->slug.'.blade.php');
+                /* delete relation seo_en_seo */
+                RelationSeoEnSeo::select('*')
+                    ->where('seo_id', $info->seo->id)
+                    ->where('en_seo_id', $info->en_seo->id)
+                    ->delete();
                 /* delete bảng seo */
-                Seo::find($info->seo->id)->delete();
-                /* xóa ảnh đại diện trong thư mục */
-                $imageSmallPath     = Storage::path($info->seo->image_small);
+                $info->seo()->delete();
+                $info->en_seo()->delete();
+                /* xóa ảnh đại diện trong thư mục */ 
+                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
                 if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
-                $imagePath          = Storage::path($info->seo->image);
+                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
                 if(file_exists($imagePath)) @unlink($imagePath);
                 /* xóa category_blog_info */
                 $info->delete();
