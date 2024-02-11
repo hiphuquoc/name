@@ -19,6 +19,9 @@ use App\Helpers\Charactor;
 use App\Models\Category;
 use App\Models\RelationTagInfoOrther;
 use App\Models\Tag;
+use App\Models\Seo;
+use App\Models\EnSeo;
+use App\Models\RelationSeoEnSeo;
 
 class FreeWallpaperController extends Controller {
 
@@ -80,7 +83,7 @@ class FreeWallpaperController extends Controller {
                 $miniTypeW                      = $imageInfoW['mime'];
                 $fileSizeW                      = filesize($wallpaper);
                 $extensionW                     = config('image.extension');
-                $fileNameNonHaveExtensionW      = \App\Helpers\Charactor::convertStrToUrl($request->get('name')).'-'.time().'-'.$i;
+                $fileNameNonHaveExtensionW      = Charactor::convertStrToUrl($request->get('name')).'-'.time().'-'.$i;
                 $folderW                        = config('main.google_cloud_storage.freeWallpapers');
                 $fileUrlW                       = $folderW.$fileNameNonHaveExtensionW.'.'.$extensionW;
                 /* upload wallpaper lên google_cloud_storage với 3 bản Full Small Mini (thông qua function Upload) */
@@ -89,7 +92,7 @@ class FreeWallpaperController extends Controller {
                 $idWallpaper = FreeWallpaper::insertItem([
                     'user_id'       => Auth::user()->id,
                     'name'          => $request->get('name'),
-                    'en_name'       => $request->get('en_name') ?? null,
+                    'en_name'       => strtolower(Charactor::translateViToEn($request->get('name'))),
                     'description'   => $request->get('description') ?? null,
                     'file_name'     => $fileNameNonHaveExtensionW,
                     'extension'     => $extensionW,
@@ -119,21 +122,14 @@ class FreeWallpaperController extends Controller {
                         /* kiểm tra xem tag name đã tồn tại chưa */
                         $infoTag    = Tag::select('*')
                                         ->where('name', $nameTag)
+                                        ->with('seo', 'en_seo')
                                         ->first();
+                        $idTag      = $infoTag->id ?? 0;
                         /* chưa tồn tại -> tạo và láy ra */
-                        if(empty($infoTag)){
-                            $enNameTag  = strtolower(Charactor::translateViToEn($nameTag));
-                            $idTag      = Tag::insertItem([
-                                'name'      => $nameTag,
-                                'en_name'   => $enNameTag
-                            ]);
-                            $infoTag    = Tag::select('*')
-                                            ->where('id', $idTag)
-                                            ->first();
-                        }
+                        if(empty($idTag)) $idTag  = self::createSeoTmp($nameTag);
                         /* insert relation */
                         RelationTagInfoOrther::insertItem([
-                            'tag_info_id'       => $infoTag->id,
+                            'tag_info_id'       => $idTag,
                             'reference_type'    => 'free_wallpaper_info',
                             'reference_id'      => $idWallpaper
                         ]);
@@ -164,7 +160,7 @@ class FreeWallpaperController extends Controller {
             /* cập nhật cở sở dữ liệu */
             FreeWallpaper::updateItem($idWallpaper, [
                 'name'              => $request->get('name'),
-                'en_name'           => $request->get('en_name'),
+                'en_name'           => strtolower(Charactor::translateViToEn($request->get('name'))),
                 'description'       => $request->get('description') ?? null,
             ]);
             /* lưu relation */
@@ -196,20 +192,12 @@ class FreeWallpaperController extends Controller {
                     $infoTag    = Tag::select('*')
                                     ->where('name', $nameTag)
                                     ->first();
+                    $idTag      = $infoTag->id ?? 0;
                     /* chưa tồn tại -> tạo và láy ra */
-                    if(empty($infoTag)){
-                        $enNameTag  = strtolower(Charactor::translateViToEn($nameTag));
-                        $idTag      = Tag::insertItem([
-                            'name'      => $nameTag,
-                            'en_name'   => $enNameTag
-                        ]);
-                        $infoTag    = Tag::select('*')
-                                        ->where('id', $idTag)
-                                        ->first();
-                    }
+                    if(empty($idTag)) $idTag  = self::createSeoTmp($nameTag);
                     /* insert relation */
                     RelationTagInfoOrther::insertItem([
-                        'tag_info_id'       => $infoTag->id,
+                        'tag_info_id'       => $idTag,
                         'reference_type'    => 'free_wallpaper_info',
                         'reference_id'      => $idWallpaper
                     ]);
@@ -221,6 +209,52 @@ class FreeWallpaperController extends Controller {
             DB::rollBack();
             return false;
         }
+    }
+
+    private static function createSeoTmp($nameTag){
+        /* tạo bảng seo tạm */
+        $slug       = config('main.auto_fill.slug.vi').'-'.Charactor::convertStrToUrl($nameTag);
+        $idSeo      = Seo::insertItem([
+            'title'                     => $nameTag,
+            'seo_title'                 => $nameTag,
+            'level'                     => 1,
+            'type'                      => 'tag_info',
+            'slug'                      => $slug,
+            'slug_full'                 => $slug,
+            'rating_author_name'        => 1,
+            'rating_author_star'        => 5,
+            'rating_aggregate_count'    => rand(100,5000),
+            'rating_aggregate_star'     => '4.'.rand(5, 9),
+            'created_by'                => Auth::user()->id
+        ]);
+        /* tảo bảng en_seo tạm */
+        $enNameTag  = strtolower(Charactor::translateViToEn($nameTag));
+        $enSlug     = config('main.auto_fill.slug.en').'-'.Charactor::convertStrToUrl($enNameTag);
+        $idEnSeo    = EnSeo::insertItem([
+            'title'                     => $enNameTag,
+            'seo_title'                 => $enNameTag,
+            'level'                     => 1,
+            'type'                      => 'tag_info',
+            'slug'                      => $enSlug,
+            'slug_full'                 => $enSlug,
+            'rating_author_name'        => 1,
+            'rating_author_star'        => 5,
+            'rating_aggregate_count'    => rand(100,5000),
+            'rating_aggregate_star'     => '4.'.rand(5, 9),
+            'created_by'                => Auth::user()->id
+        ]);
+        /* tạo relation của seo và en_seo */
+        RelationSeoEnSeo::insertItem([
+            'seo_id'    => $idSeo,
+            'en_seo_id' => $idEnSeo
+        ]);
+        /* tạo bảng tag */
+        $idTag      = Tag::insertItem([
+            'name'      => $nameTag,
+            'en_name'   => $enNameTag,
+            'seo_id'    => $idSeo
+        ]);
+        return $idTag;
     }
 
     public function deleteWallpaper(Request $request){

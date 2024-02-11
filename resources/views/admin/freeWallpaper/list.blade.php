@@ -349,38 +349,44 @@
         }
 
         function autoFillNameAndEnName(keyId) {
-            var valueName = 'Ảnh cô gái xinh đẹp ';
-            var valueEnName = 'Photo of beautiful girl ';
-            
+            var valueName = '{{ config("main.auto_fill.alt.vi") }} ';
+
             const limitBox = $('.js_uploadWallpaper_' + keyId);
 
+            // Lấy giá trị của input tag name
+            var tagNameValue = limitBox.find('[name*="tag"]').val();
+
+            // Kiểm tra nếu có giá trị trong tagNameValue
+            if (tagNameValue) {
+                // Phân tích chuỗi JSON
+                var tags = JSON.parse(tagNameValue);
+                
+                // Duyệt qua từng tag và thêm vào valueName
+                tags.forEach(function(tag) {
+                    valueName += tag.value + ' ';
+                });
+            }
+
+            // Tiếp tục lấy giá trị từ các select như cũ
             limitBox.find('select').each(function() {
                 // Chọn tất cả các option được chọn trong select
                 var selectedOptions = $(this).find('option:selected');
 
                 // Lặp qua từng option được chọn
                 selectedOptions.each(function() {
-                    // Lấy giá trị của thuộc tính data-name và data-en-name
+                    // Lấy giá trị của thuộc tính data-name
                     var dataNameValue = $(this).data('name');
-                    var dataEnNameValue = $(this).data('en-name');
 
                     // Kiểm tra xem có giá trị data-name hay không
                     if (dataNameValue) {
                         // Nếu có giá trị data-name, cập nhật giá trị valueName
                         valueName += dataNameValue + ' ';
                     }
-
-                    // Kiểm tra xem có giá trị data-en-name hay không
-                    if (dataEnNameValue) {
-                        // Nếu có giá trị data-en-name, cập nhật giá trị valueEnName
-                        valueEnName += dataEnNameValue + ' ';
-                    }
                 });
             });
 
-            /* điền vào value của name và en_name */
+            /* điền vào value của name */
             limitBox.find('[name*="name"]').val(valueName.trim());
-            limitBox.find('[name*="en_name"]').val(valueEnName.trim());
         }
 
         function addLoading(idBox, heightBox = 300){

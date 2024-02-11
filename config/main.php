@@ -190,5 +190,16 @@ return [
             'name'      => 'Thả tim',
             'en_name'   => 'Heart'
         ]
-    ]
+    ],
+    'auto_fill' => [
+        'alt'   => [
+            'vi'    => 'Hình nền điện thoại',
+            'en'    => 'Phone wallpaper'
+        ],
+        'slug'  => [
+            'vi'    => 'hinh-nen-dien-thoai',
+            'en'    => 'phone-wallpaper'
+        ]
+    ],
+
 ];

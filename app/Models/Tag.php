@@ -9,10 +9,15 @@ class Tag extends Model {
     use HasFactory;
     protected $table        = 'tag_info';
     protected $fillable     = [
-        'name',
-        'en_name'
+        'seo_id',
+        'name', 
+        'description',
+        'en_seo_id',
+        'en_name',
+        'en_description',
+        'icon'
     ];
-    public $timestamps = false;
+    public $timestamps = true;
 
     public static function insertItem($params){
         $id             = 0;
@@ -35,7 +40,19 @@ class Tag extends Model {
         return $flag;
     }
 
-    // public function type(){
-    //     return $this->hasOne(\App\Models\PageType::class, 'id', 'type_id');
-    // }
+    public function seo() {
+        return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
+    }
+
+    public function en_seo() {
+        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
+    }
+
+    public function files(){
+        return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id');
+    }
+
+    public function products(){
+        return $this->hasMany(\App\Models\RelationTagProduct::class, 'tag_info_id', 'id');
+    }
 }

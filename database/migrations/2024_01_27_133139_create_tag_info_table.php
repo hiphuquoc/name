@@ -15,8 +15,14 @@ return new class extends Migration
     {
         Schema::create('tag_info', function (Blueprint $table) {
             $table->id();
+            $table->integer('seo_id');
             $table->text('name');
             $table->text('en_name');
+            $table->text('description')->nullable();
+            $table->text('en_description')->nullable();
+            $table->text('icon')->nullable();
+            $table->boolean('flag_show')->default(1);
+            $table->timestamps();
         });
     }
 

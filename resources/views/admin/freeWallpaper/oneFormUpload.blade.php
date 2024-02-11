@@ -11,10 +11,10 @@
                     <label class="form-label inputRequired" for="name">Alt ảnh</label>
                     <textarea class="form-control" name="name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->name ?? null }}</textarea>
                 </div>
-                <div class="formBox_full_item">
+                {{-- <div class="formBox_full_item">
                     <label class="form-label inputRequired" for="name">Alt ảnh EN</label>
                     <textarea class="form-control" name="en_name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->en_name ?? null }}</textarea>
-                </div>
+                </div> --}}
                 @foreach(config('main.category_type') as $type)
                     <div class="formBox_full_item">
                         <label class="form-label" for="{{ $type['key'] }}">{{ $type['name'] }}</label>
@@ -52,7 +52,7 @@
                         $strTagName             = implode(',', $arrayTagName);
                     @endphp
                     <label for="tagName_{{ $idBox }}" class="form-label">Tag name</label>
-                    <input id="tagName_{{ $idBox }}" name="tag[{{ $idBox }}]" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}">
+                    <input id="tagName_{{ $idBox }}" name="tag[{{ $idBox }}]" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" onchange="autoFillNameAndEnName({{ $idBox }});">
                     <!-- script custom tag -->
                     <script type="text/javascript">
                         var strTag = {!! json_encode($arrayTag) !!};
