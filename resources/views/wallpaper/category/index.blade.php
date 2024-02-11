@@ -91,31 +91,7 @@
         <!-- content -->
         <div class="contentBox">
             <div style="display:flex;">
-                @php
-                    if(empty($language)||$language=='vi'){
-                        $titlePage = $item->seo->slug=='anh-gai-xinh' ? $item->name : 'Ảnh gái xinh '.$item->name;
-                    }else {
-                        $titlePage = $item->en_seo->slug=='photo-beautiful-girl' ? $item->en_name : 'Beautiful girl '.$item->en_name;
-                    }
-                    $show = !empty($home)&&$home==true ? 'style="display:none;"' : '';
-                @endphp
-                <h1 {!! $show !!}>{{ $titlePage }}</h1>
-                {{-- <!-- từ khóa vừa search -->
-                @if(!empty(request('search')))
-                    <div class="keySearchBadge">
-                        <div class="keySearchBadge_label">
-                            - tìm kiếm với:
-                        </div>
-                        <div class="keySearchBadge_box">
-                            <div class="keySearchBadge_box_item">
-                                <div class="keySearchBadge_box_item_badge">
-                                    <div>{{ request('search') }}</div>
-                                    <a href="{{ URL::current() }}" class="keySearchBadge_box_item_badge_action"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif --}}
+                <h1>Hình nền điện thoại {{ empty($language)||$language=='vi' ? $item->name : $item->en_name }}</h1>
             </div>
             <!-- Sort Box -->
             @include('wallpaper.category.sort', [
@@ -142,8 +118,6 @@
                     <div>Không có kết quả phù hợp!</div>
                 @endif
             </div>
-            {{-- @include('main.template.productGridLoading')
-            <div id="js_filterProduct_hidden"></div> --}}
         </div>
         <!-- Nội dung -->
         @if(!empty($content))

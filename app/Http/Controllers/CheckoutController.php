@@ -44,11 +44,10 @@ class CheckoutController extends Controller{
             $language           = session()->get('language') ?? 'vi';
             $idPaymentMethod    = $request->get('payment_method_info_id');
             $detailCart         = \App\Http\Controllers\CartController::calculatorDetailCart($productsCart, $idPaymentMethod, $language);
-            // dd($detailCart);
             $insertOrder        = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $detailCart);
             $insertOrder['payment_type'] = 'payment_cart';
             $idOrder            = Order::insertItem($insertOrder);
-            /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
+            /* tạo order_product cho order_info */
             foreach($productsCart as $product){
                 foreach($product['product_price_id'] as $price){
                     OrderProduct::insertItem([
@@ -81,27 +80,34 @@ class CheckoutController extends Controller{
     public function paymentNow(Request $request){
         $urlRedirect        = null;
         /* tạo đơn hàng */
-        $products           = new \Illuminate\Database\Eloquent\Collection;
         if(!empty($request->get('product_price_id'))){
-            $idPrice        = $request->get('product_price_id');
-            $tmp            = Product::select('*')
-                                ->where('id', $request->get('product_info_id'))
-                                ->with(['prices' => function($query) use($idPrice) {
-                                    $query->where('id', $idPrice);
-                                }])
-                                ->first();
-            $products[]     = $tmp;
-            $insertOrder    = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $products);
+            $arrayPrice     = explode('-', $request->get('product_price_id'));
+            $idProduct      = $request->get('product_info_id');
+            $language           = session()->get('language') ?? 'vi';
+            $idPaymentMethod    = $request->get('payment_method_info_id');
+            /* giả lập cart */
+            $cart           = [
+                [
+                    'product_info_id' => $idProduct,
+                    'product_price_id'  => $arrayPrice
+                ]
+            ];
+            $detailCart     = \App\Http\Controllers\CartController::calculatorDetailCart($cart, $idPaymentMethod, $language);
+            $insertOrder    = $this->BuildInsertUpdateModel->buildArrayTableOrderInfo($request->all(), 0, $detailCart);
             $insertOrder['payment_type'] = 'payment_now';
             $idOrder        = Order::insertItem($insertOrder);
-            /* tạo order_product cho order_info => do thanh toán ngay nên chỉ có 1 sản phẩm */
-            OrderProduct::insertItem([
-                'order_info_id'     => $idOrder,
-                'product_info_id'   => $request->get('product_info_id'),
-                'product_price_id'  => $request->get('product_price_id'),
-                'quantity'          => 1,
-                'price'             => $tmp->prices[0]->price ?? $tmp->price
-            ]);
+            /* tạo order_product cho order_info */
+            foreach($cart as $product){
+                foreach($product['product_price_id'] as $price){
+                    OrderProduct::insertItem([
+                        'order_info_id'     => $idOrder,
+                        'product_info_id'   => $product['product_info_id'],
+                        'product_price_id'  => $price,
+                        'quantity'          => 1,
+                        'price'             => 0
+                    ]);
+                }
+            }
             /* lấy ngược lại thông tin order để xử lý cho chính xác */
             $orderInfo      = Order::select('*')
                                 ->where('id', $idOrder)
