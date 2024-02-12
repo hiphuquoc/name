@@ -65,7 +65,7 @@
             <textarea class="form-control" id="en_description"  name="en_description" rows="5" required>{{ old('en_description') ?? $item->en_description ?? null }}</textarea>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
-        <!-- One Row -->
+        {{-- <!-- One Row -->
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="
                 Là loại của chuyên mục phân loại theo Chủ đề - Phong cách - Sự kiện...
@@ -74,7 +74,6 @@
                 <label class="form-label" for="parent">Loại chuyên mục</label>
             </span>
             <select class="select2 form-select select2-hidden-accessible" name="type">
-                {{-- <option value="0">- Lựa chọn -</option> --}}
                 @foreach(config('main.category_type') as $type)
                     @php
                         $selected   = null;
@@ -83,7 +82,7 @@
                     <option value="{{ $type['key'] }}" {{ $selected }}>{{ $type['name'] }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
         <!-- One Row -->
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="

@@ -42,6 +42,9 @@
     @endif
 </div>
 
+<!-- Pagination -->
+{{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
+
 <!-- ===== START: MODAL ===== -->
 <form id="formWallpaperWithSource" method="post" enctype="multipart/form-data">
 @csrf

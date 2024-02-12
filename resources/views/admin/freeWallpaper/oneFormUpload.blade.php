@@ -46,7 +46,7 @@
                         $arrayTagName           = [];
                         if(!empty($wallpaper->tags)){
                             foreach($wallpaper->tags as $tag){
-                                $arrayTagName[] = $tag->infoTag->name;
+                                if(!empty($tag->infoTag->name)) $arrayTagName[] = $tag->infoTag->name;
                             }
                         }
                         $strTagName             = implode(',', $arrayTagName);

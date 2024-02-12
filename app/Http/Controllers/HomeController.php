@@ -13,6 +13,7 @@ use App\Models\RelationSeoEnSeo;
 use Intervention\Image\ImageManagerStatic;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use AdityaDees\LaravelBard\LaravelBard;
 
 class HomeController extends Controller{
     public static function home(Request $request){

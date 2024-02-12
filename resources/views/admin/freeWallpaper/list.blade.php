@@ -3,7 +3,6 @@
 
 <div class="titlePage">Danh sách Wallpaper miễn phí</div>
 <!-- ===== START: SEARCH FORM ===== -->
-
 <div class="searchBox">
     <div class="searchBox_item">
         <form id="formSearch" method="get" action="{{ route('admin.freeWallpaper.list') }}">
@@ -34,6 +33,9 @@
         @endforeach
     @endif
 </div>
+
+<!-- Pagination -->
+{{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
 
 <!-- ===== START: MODAL ===== -->
 <form id="formWallpaper" method="post" enctype="multipart/form-data">
@@ -343,7 +345,7 @@
                 }
             }).done(function(data){
                 setTimeout(() => {
-                    if(data==true) $('#'+idBox).hide();
+                    if(data==true) $('#'+idBox).remove();
                 }, 500)
             });
         }

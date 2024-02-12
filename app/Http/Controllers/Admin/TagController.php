@@ -72,7 +72,7 @@ class TagController extends Controller {
     public function create(TagRequest $request){
         try {
             DB::beginTransaction();
-            $keyTable           = $request->get('type');
+            $keyTable           = 'tag_info';
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -165,8 +165,7 @@ class TagController extends Controller {
         try {
             DB::beginTransaction();
             /* ngôn ngữ */
-            $keyTable           = $request->get('type');
-
+            $keyTable           = 'tag_info';
             $seoId              = $request->get('seo_id');
             $enSeoId            = $request->get('en_seo_id');
             $idCategory         = $request->get('tag_info_id');

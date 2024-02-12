@@ -55,4 +55,12 @@ class Tag extends Model {
     public function products(){
         return $this->hasMany(\App\Models\RelationTagProduct::class, 'tag_info_id', 'id');
     }
+
+    public function freeWallpapers(){
+        return $this->hasMany(\App\Models\RelationTagInfoOrther::class, 'tag_info_id', 'id')->where('reference_type', 'free_wallpaper_info');
+    }
+
+    public function blogs(){
+        return $this->hasMany(\App\Models\RelationTagInfoCategoryBlogInfo::class, 'tag_info_id', 'id');
+    }
 }
