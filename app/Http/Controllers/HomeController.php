@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Page;
 use App\Models\Category;
 use App\Http\Controllers\SettingController;
-use App\Models\Product;
-use App\Models\RelationSeoEnSeo;
+use App\Models\Tag;
+use App\Models\Seo;
 use Intervention\Image\ImageManagerStatic;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
@@ -98,6 +98,16 @@ class HomeController extends Controller{
         // $result = json_decode($response->getBody(), true);
 
         // dd($result);
+        $tags   = Tag::select('*')
+                    ->with('seo')
+                    ->get();
+        foreach($tags as $tag){
+            $newSlug       = \App\Helpers\Charactor::convertStrToUrl($tag->seo->slug);
+            Seo::updateItem($tag->seo->id, [
+                'slug' => $newSlug
+            ]);
+        }
+        
     }
 
     // public static function chatGPT(Request $request){
