@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\CategoryBlogController;
 use App\Http\Controllers\Admin\BlogController;
@@ -97,11 +98,19 @@ Route::middleware('auth', 'role:admin')->group(function (){
         });
         /* category */
         Route::prefix('category')->group(function(){
-            Route::get('/list', [CategoryController::class, 'list'])->name('admin.category.list');
-            Route::get('/view', [CategoryController::class, 'view'])->name('admin.category.view');
-            Route::post('/create', [CategoryController::class, 'create'])->name('admin.category.create');
-            Route::post('/update', [CategoryController::class, 'update'])->name('admin.category.update');
-            Route::get('/delete', [CategoryController::class, 'delete'])->name('admin.category.delete');
+            Route::get('/list', [CategoryController::class, 'list'])->name('admin.categoryMoney.list');
+            Route::get('/view', [CategoryController::class, 'view'])->name('admin.categoryMoney.view');
+            Route::post('/create', [CategoryController::class, 'create'])->name('admin.categoryMoney.create');
+            Route::post('/update', [CategoryController::class, 'update'])->name('admin.categoryMoney.update');
+            Route::get('/delete', [CategoryController::class, 'delete'])->name('admin.categoryMoney.delete');
+        });
+        /* tag */
+        Route::prefix('tag')->group(function(){
+            Route::get('/list', [TagController::class, 'list'])->name('admin.tag.list');
+            Route::get('/view', [TagController::class, 'view'])->name('admin.tag.view');
+            Route::post('/create', [TagController::class, 'create'])->name('admin.tag.create');
+            Route::post('/update', [TagController::class, 'update'])->name('admin.tag.update');
+            Route::get('/delete', [TagController::class, 'delete'])->name('admin.tag.delete');
         });
         /* page */
         Route::prefix('page')->group(function(){
@@ -198,12 +207,12 @@ Route::prefix('payment')->group(function(){
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 Route::get('/en', [HomeController::class, 'home'])->name('main.enHome');
 Route::get('/test123', [HomeController::class, 'test'])->name('main.test');
-/* trang category */
-Route::prefix('category')->group(function(){
-    Route::get('/loadMore', [CategoryPublic::class, 'loadMore'])->name('main.category.loadMore');
-    // Route::get('/loadMorePromotion', [CategoryPublic::class, 'loadMorePromotion'])->name('main.category.loadMorePromotion');
-    // Route::get('/loadMoreSearch', [CategoryPublic::class, 'loadMoreSearch'])->name('main.category.loadMoreSearch');
-});
+// /* trang category */
+// Route::prefix('category')->group(function(){
+//     Route::get('/loadMore', [CategoryPublic::class, 'loadMore'])->name('main.category.loadMore');
+//     // Route::get('/loadMorePromotion', [CategoryPublic::class, 'loadMorePromotion'])->name('main.category.loadMorePromotion');
+//     // Route::get('/loadMoreSearch', [CategoryPublic::class, 'loadMoreSearch'])->name('main.category.loadMoreSearch');
+// });
 /* lỗi */
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
 /* cart */

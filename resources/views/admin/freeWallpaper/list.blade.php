@@ -56,7 +56,7 @@
     <script type="text/javascript">
     
         function loadOneRow(idWallpaper){
-            const idBox         = 'js_deleteWallpaperAndSource_'+idWallpaper;
+            const idBox         = 'js_deleteWallpaper_'+idWallpaper;
             var boxWallpaper    = $('#'+idBox);
             const heightBox     = boxWallpaper.outerHeight();
             addLoading(idBox, heightBox);

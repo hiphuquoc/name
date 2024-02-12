@@ -188,12 +188,15 @@ class FreeWallpaperController extends Controller {
                 $tag    = json_decode($request->get('tag'), true);
                 foreach($tag as $t){
                     $nameTag    = strtolower($t['value']);
+                    $slug       = config('main.auto_fill.slug.vi').'-'.Charactor::convertStrToUrl($nameTag);
                     /* kiểm tra xem tag name đã tồn tại chưa */
                     $infoTag    = Tag::select('*')
-                                    ->where('name', $nameTag)
+                                    ->whereHas('seo', function($query) use($slug){
+                                        $query->where('slug', $slug);
+                                    })
                                     ->first();
                     $idTag      = $infoTag->id ?? 0;
-                    /* chưa tồn tại -> tạo và láy ra */
+                    /* chưa tồn tại -> tạo và lấy ra */
                     if(empty($idTag)) $idTag  = self::createSeoTmp($nameTag);
                     /* insert relation */
                     RelationTagInfoOrther::insertItem([
@@ -252,7 +255,8 @@ class FreeWallpaperController extends Controller {
         $idTag      = Tag::insertItem([
             'name'      => $nameTag,
             'en_name'   => $enNameTag,
-            'seo_id'    => $idSeo
+            'seo_id'    => $idSeo,
+            'en_seo_id' => $idEnSeo
         ]);
         return $idTag;
     }

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tag_info', function (Blueprint $table) {
             $table->id();
             $table->integer('seo_id');
+            $table->integer('en_seo_id');
             $table->text('name');
             $table->text('en_name');
             $table->text('description')->nullable();

@@ -9,18 +9,19 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Upload;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\TagRequest;
 use App\Models\Seo;
 use App\Models\EnSeo;
+use App\Models\Tag;
 use App\Models\Category;
 use App\Models\CategoryBlog;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
-use App\Models\RelationCategoryInfoCategoryBlogInfo;
+use App\Models\RelationTagInfoCategoryBlogInfo;
 use App\Models\RelationEnCategoryInfoEnCategoryBlogInfo;
 use App\Models\RelationSeoEnSeo;
 
-class CategoryController extends Controller {
+class TagController extends Controller {
 
     public function __construct(BuildInsertUpdateModel $BuildInsertUpdateModel){
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
@@ -30,17 +31,17 @@ class CategoryController extends Controller {
         $params             = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
-        $list               = Category::getTreeCategory();
-        return view('admin.categoryMoney.list', compact('list', 'params'));
+        $list               = Tag::all();
+        return view('admin.tag.list', compact('list', 'params'));
     }
 
     public static function view(Request $request){
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $language           = Cookie::get('language') ?? 'vi';
-        $item               = Category::select('category_info.*', 'seo.type')
-                                ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                                ->where('category_info.id', $id)
+        $item               = Tag::select('tag_info.*', 'seo.type')
+                                ->join('seo', 'seo.id', '=', 'tag_info.seo_id')
+                                ->where('tag_info.id', $id)
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'seo.type');
                                 }])
@@ -55,23 +56,22 @@ class CategoryController extends Controller {
         /* content */
         $content            = null;
         if(!empty($item->seo->slug)){
-            $content        = Storage::get(config('main.storage.contentCategory').$item->seo->slug.'.blade.php');
+            $content        = Storage::get(config('main.storage.contentTag').$item->seo->slug.'.blade.php');
         }
         /* en content */
         $enContent          = null;
         if(!empty($item->en_seo->slug)){
-            $enContent      = Storage::get(config('main.storage.enContentCategory').$item->en_seo->slug.'.blade.php');
+            $enContent      = Storage::get(config('main.storage.enContentTag').$item->en_seo->slug.'.blade.php');
         }
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.categoryMoney.view', compact('item', 'type', 'parents', 'categoryBlogs', 'message', 'content', 'enContent'));
+        return view('admin.tag.view', compact('item', 'type', 'parents', 'categoryBlogs', 'message', 'content', 'enContent'));
     }
 
-    public function create(CategoryRequest $request){
+    public function create(TagRequest $request){
         try {
             DB::beginTransaction();
-            $language           = Cookie::get('language') ?? 'vi';
             $keyTable           = $request->get('type');
             /* upload image */
             $dataPath           = [];
@@ -95,9 +95,9 @@ class CategoryController extends Controller {
                 $name           = !empty($request->get('slug')) ? $request->get('slug').'-icon' : time();
                 $iconPath       = Upload::uploadCustom($request->file('icon'), $name);
             }
-            /* insert category_info */
+            /* insert tag_info */
             $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
-            $idCategory         = Category::insertItem([
+            $idCategory         = Tag::insertItem([
                 'seo_id'        => $seoId,
                 'name'          => $request->get('name'),
                 'description'   => $request->get('description'),
@@ -107,11 +107,11 @@ class CategoryController extends Controller {
                 'en_name'       => $request->get('en_name'),
                 'en_description'=> $request->get('en_description')
             ]);
-            /* insert relation_category_info_category_blog_id */
+            /* insert relation_tag_info_category_blog_id */
             if(!empty($request->get('category_blog_info_id'))){
                 foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
-                    RelationCategoryInfoCategoryBlogInfo::insertItem([
-                        'category_info_id'      => $idCategory,
+                    RelationTagInfoCategoryBlogInfo::insertItem([
+                        'tag_info_id'      => $idCategory,
                         'category_blog_info_id' => $idCategoryBlogInfo
                     ]);
                 }
@@ -119,10 +119,10 @@ class CategoryController extends Controller {
             /* lưu content vào file */
             $content            = $request->get('content') ?? null;
             $content            = ImageController::replaceImageInContentWithLoading($content);
-            if(!empty($content)) Storage::put(config('main.storage.contentCategory').$request->get('slug').'.blade.php', $content);
+            if(!empty($content)) Storage::put(config('main.storage.contentTag').$request->get('slug').'.blade.php', $content);
             $enContent          = $request->get('en_content') ?? null;
             $enContent          = ImageController::replaceImageInContentWithLoading($enContent);
-            if(!empty($enContent)) Storage::put(config('main.storage.enContentCategory').$request->get('en_slug').'.blade.php', $enContent);
+            if(!empty($enContent)) Storage::put(config('main.storage.enContentTag').$request->get('en_slug').'.blade.php', $enContent);
             // /* insert slider và lưu CSDL */
             // if($request->hasFile('slider')&&!empty($idCategory)){
             //     $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
@@ -147,7 +147,7 @@ class CategoryController extends Controller {
             /* Message */
             $message        = [
                 'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Dã tạo Category mới'
+                'message'   => '<strong>Thành công!</strong> Dã tạo Tag mới'
             ];
         } catch (\Exception $exception){
             DB::rollBack();
@@ -158,19 +158,18 @@ class CategoryController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.categoryMoney.view', ['id' => $idCategory]);
+        return redirect()->route('admin.tag.view', ['id' => $idCategory]);
     }
 
-    public function update(CategoryRequest $request){
+    public function update(TagRequest $request){
         try {
             DB::beginTransaction();
             /* ngôn ngữ */
-            $language           = Cookie::get('language') ?? 'vi';
             $keyTable           = $request->get('type');
 
             $seoId              = $request->get('seo_id');
             $enSeoId            = $request->get('en_seo_id');
-            $idCategory         = $request->get('category_info_id');
+            $idCategory         = $request->get('tag_info_id');
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -201,7 +200,7 @@ class CategoryController extends Controller {
                 $name           = !empty($request->get('slug')) ? $request->get('slug').'-icon' : time();
                 $iconPath       = Upload::uploadCustom($request->file('icon'), $name);
             }
-            /* insert category_info */
+            /* insert tag_info */
             $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
             $arrayUpdate        = [
                 'flag_show'     => $flagShow,
@@ -213,15 +212,15 @@ class CategoryController extends Controller {
                 'en_description'=> $request->get('en_description')
             ];
             if(!empty($iconPath)) $arrayUpdate['icon'] = $iconPath;
-            Category::updateItem($idCategory, $arrayUpdate);
-            /* insert relation_category_info_category_blog_id */
-            RelationCategoryInfoCategoryBlogInfo::select('*')
-                ->where('category_info_id', $idCategory)
+            Tag::updateItem($idCategory, $arrayUpdate);
+            /* insert relation_tag_info_category_blog_id */
+            RelationTagInfoCategoryBlogInfo::select('*')
+                ->where('tag_info_id', $idCategory)
                 ->delete();
             if(!empty($request->get('category_blog_info_id'))){
                 foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
-                    RelationCategoryInfoCategoryBlogInfo::insertItem([
-                        'category_info_id'      => $idCategory,
+                    RelationTagInfoCategoryBlogInfo::insertItem([
+                        'tag_info_id'      => $idCategory,
                         'category_blog_info_id' => $idCategoryBlogInfo
                     ]);
                 }
@@ -230,16 +229,16 @@ class CategoryController extends Controller {
             $content            = $request->get('content') ?? null;
             $content            = ImageController::replaceImageInContentWithLoading($content);
             if(!empty($content)) {
-                Storage::put(config('main.storage.contentCategory').$request->get('slug').'.blade.php', $content);
+                Storage::put(config('main.storage.contentTag').$request->get('slug').'.blade.php', $content);
             }else {
-                Storage::delete(config('main.storage.contentCategory').$request->get('slug').'.blade.php');
+                Storage::delete(config('main.storage.contentTag').$request->get('slug').'.blade.php');
             }
             $enContent          = $request->get('en_content') ?? null;
             $enContent          = ImageController::replaceImageInContentWithLoading($enContent);
             if(!empty($enContent)) {
-                Storage::put(config('main.storage.enContentCategory').$request->get('en_slug').'.blade.php', $enContent);
+                Storage::put(config('main.storage.enContentTag').$request->get('en_slug').'.blade.php', $enContent);
             }else {
-                Storage::delete(config('main.storage.enContentCategory').$request->get('en_slug').'.blade.php');
+                Storage::delete(config('main.storage.enContentTag').$request->get('en_slug').'.blade.php');
             }
             // /* insert slider và lưu CSDL */
             // if($request->hasFile('slider')&&!empty($idCategory)){
@@ -265,7 +264,7 @@ class CategoryController extends Controller {
             /* Message */
             $message        = [
                 'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã cập nhật Category!'
+                'message'   => '<strong>Thành công!</strong> Đã cập nhật Tag!'
             ];
         } catch (\Exception $exception){
             DB::rollBack();
@@ -276,7 +275,7 @@ class CategoryController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.categoryMoney.view', ['id' => $idCategory]);
+        return redirect()->route('admin.tag.view', ['id' => $idCategory]);
     }
 
     public function delete(Request $request){
@@ -284,7 +283,7 @@ class CategoryController extends Controller {
             try {
                 DB::beginTransaction();
                 $id         = $request->get('id');
-                $info       = Category::select('*')
+                $info       = Tag::select('*')
                                 ->where('id', $id)
                                 ->with('seo', 'en_seo', 'products', 'blogs')
                                 ->first();
@@ -294,11 +293,11 @@ class CategoryController extends Controller {
                 $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
                 if(file_exists($imagePath)) @unlink($imagePath);
                 /* delete content */
-                Storage::delete(config('main.storage.contentCategory').$info->seo->slug.'.blade.php');
-                Storage::delete(config('main.storage.enContentCategory').$info->en_seo->slug.'.blade.php');
+                Storage::delete(config('main.storage.contentTag').$info->seo->slug.'.blade.php');
+                Storage::delete(config('main.storage.enContentTag').$info->en_seo->slug.'.blade.php');
                 /* xóa bảng products */
                 $info->products()->delete();
-                /* xóa relation_style_info_category_info_blog */
+                /* xóa relation_style_info_tag_info_blog */
                 $info->blogs()->delete();
                 /* delete relation seo_en_seo */
                 RelationSeoEnSeo::select('*')

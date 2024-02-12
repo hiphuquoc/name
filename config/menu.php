@@ -12,33 +12,28 @@ return [
             'icon'      => '<i class="fa-solid fa-box-open"></i>',
             'child'     => [
                 [
-                    'name'  => '1. Wallpaper',
+                    'name'  => '1. Kho trả phí',
                     'route' => 'admin.wallpaper.list',
                     'icon'  => '<i data-feather=\'circle\'></i>',
                 ],
                 [
-                    'name'  => '2. Sản phẩm',
+                    'name'  => '2. Kho miễn phí',
+                    'route' => 'admin.freeWallpaper.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '3. Sản phẩm',
                     'route' => 'admin.product.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '3. Chủ đề',
-                    'route' => 'admin.category.list',
+                    'name'  => '4. Chủ đề',
+                    'route' => 'admin.categoryMoney.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
-                // [
-                //     'name'  => '4. Phong cách',
-                //     'route' => 'admin.style.list',
-                //     'icon'  => '<i data-feather=\'circle\'></i>'
-                // ],
-                // [
-                //     'name'  => '5. Sự kiện',
-                //     'route' => 'admin.event.list',
-                //     'icon'  => '<i data-feather=\'circle\'></i>'
-                // ],
                 [
-                    'name'  => '4. Miễn phí',
-                    'route' => 'admin.freeWallpaper.list',
+                    'name'  => '5. Tag',
+                    'route' => 'admin.tag.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
@@ -79,7 +74,7 @@ return [
             // 'child'     => [
             //     [
             //         'name'  => '1. Danh sách',
-            //         'route' => 'admin.category.list',
+            //         'route' => 'admin.categoryMoney.list',
             //         'icon'  => '<i data-feather=\'circle\'></i>'
             //     ]
             // ]

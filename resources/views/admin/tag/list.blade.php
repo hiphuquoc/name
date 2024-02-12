@@ -3,7 +3,7 @@
 
 <div class="titlePage">Danh sách Chủ đề</div>
 
-@include('admin.category.search', compact('list'))
+@include('admin.tag.search', compact('list'))
 
 <div class="card">
     <!-- ===== Table ===== -->
@@ -21,7 +21,7 @@
             <tbody>
                 @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
-                        @include('admin.category.row', [
+                        @include('admin.tag.row', [
                             'item'  => $item,
                             'no'    => $loop->index+1
                         ])
@@ -37,7 +37,7 @@
 </div>
 
 <!-- Nút thêm -->
-<a href="{{ route('admin.category.view') }}" class="addItemBox">
+<a href="{{ route('admin.tag.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
 </a>
@@ -48,7 +48,7 @@
         function deleteItem(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
-                    url         : "{{ route('admin.category.delete') }}",
+                    url         : "{{ route('admin.tag.delete') }}",
                     type        : "get",
                     dataType    : "html",
                     data        : { id : id }

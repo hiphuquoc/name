@@ -1,4 +1,4 @@
-<form id="formSearch" method="get" action="{{ route('admin.category.list') }}">
+<form id="formSearch" method="get" action="{{ route('admin.tag.list') }}">
     <div class="searchBox">
         <div class="searchBox_item">
             <div class="input-group">

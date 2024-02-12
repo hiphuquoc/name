@@ -197,8 +197,8 @@ return [
             'en'    => 'Phone wallpaper'
         ],
         'slug'  => [
-            'vi'    => 'hinh-nen-dien-thoai',
-            'en'    => 'phone-wallpaper'
+            'vi'    => 'tag-hinh-nen-dien-thoai',
+            'en'    => 'tag-phone-wallpaper'
         ]
     ],
 
