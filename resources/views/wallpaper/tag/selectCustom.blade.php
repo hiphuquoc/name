@@ -35,11 +35,11 @@
 </div>
 <div class="selectCustom_box">
     @if(empty($language)||$language=='vi')
-        <a href="/{{ $categoryChoose->seo->slug_full ?? null }}" class="selectCustom_box_item">
+        <a href="/hinh-nen-dien-thoai/hinh-nen-dien-thoai-mien-phi" class="selectCustom_box_item">
             Tất cả
         </a>
     @else 
-        <a href="/{{ $categoryChoose->en_seo->slug_full ?? null }}" class="selectCustom_box_item">
+        <a href="/phone-wallpapers/free-phone-wallpapers" class="selectCustom_box_item">
             All
         </a>
     @endif
