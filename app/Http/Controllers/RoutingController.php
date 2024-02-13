@@ -138,7 +138,7 @@ class RoutingController extends Controller{
                                         //     });
                                         // })
                                         ->count();
-                    $xhtml              = view('wallpaper.category.index', compact('item', 'breadcrumb', 'content', 'wallpapers', 'total', 'arrayIdCategory', 'loaded', 'language', 'user'))->render();
+                    $xhtml              = view('wallpaper.tag.index', compact('item', 'breadcrumb', 'content', 'wallpapers', 'total', 'arrayIdCategory', 'loaded', 'language', 'user'))->render();
                 }
                 /* ===== Sản phẩm ==== */
                 if($checkExists->type=='product_info'){

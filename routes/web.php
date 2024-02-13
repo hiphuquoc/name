@@ -253,6 +253,7 @@ Route::get('/downloadImageSource', [AjaxController::class, 'downloadImageSource'
 Route::get('/setViewBy', [AjaxController::class, 'setViewBy'])->name('ajax.setViewBy');
 Route::get('/showSortBoxFreeWallpaper', [AjaxController::class, 'showSortBoxFreeWallpaper'])->name('ajax.showSortBoxFreeWallpaper');
 Route::get('/showSortBoxWallpaper', [AjaxController::class, 'showSortBoxWallpaper'])->name('ajax.showSortBoxWallpaper');
+Route::get('/showSortBoxFreeWallpaperInTag', [AjaxController::class, 'showSortBoxFreeWallpaperInTag'])->name('ajax.showSortBoxFreeWallpaperInTag');
 Route::get('/setSortBy', [AjaxController::class, 'setSortBy'])->name('ajax.setSortBy');
 Route::get('/downloadImgFreeWallpaper', [AjaxController::class, 'downloadImgFreeWallpaper'])->name('ajax.downloadImgFreeWallpaper');
 Route::get('/setFeelingFreeWallpaper', [AjaxController::class, 'setFeelingFreeWallpaper'])->name('ajax.setFeelingFreeWallpaper');

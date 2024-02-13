@@ -98,16 +98,6 @@ class HomeController extends Controller{
         // $result = json_decode($response->getBody(), true);
 
         // dd($result);
-        $tags   = Tag::select('*')
-                    ->with('seo')
-                    ->get();
-        foreach($tags as $tag){
-            $newSlug       = \App\Helpers\Charactor::convertStrToUrl($tag->seo->slug);
-            Seo::updateItem($tag->seo->id, [
-                'slug' => $newSlug
-            ]);
-        }
-        
     }
 
     // public static function chatGPT(Request $request){

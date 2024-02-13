@@ -10,8 +10,7 @@ use Intervention\Image\ImageManagerStatic;
 use App\Models\District;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Style;
-use App\Models\Event;
+use App\Models\Tag;
 use App\Models\FreeWallpaper;
 use App\Models\RegistryEmail;
 use App\Models\RelationFreeWallpaperUser;
@@ -193,6 +192,33 @@ class AjaxController extends Controller {
                                 ->with('seo', 'en_seo')
                                 ->first();
         $xhtml              = view('wallpaper.category.sortContent', [
+            'language'          => $language ?? 'vi',
+            'total'             => $total,
+            'categories'        => $categories,
+            'categoryChoose'    => $categoryChoose,
+            'filters'           => $filters
+        ])->render();
+        return $xhtml;
+    }
+
+    public function showSortBoxFreeWallpaperInTag(Request $request){
+        $xhtml              = '';
+        $id                 = $request->get('id');
+        $total              = $request->get('total');
+        $language           = $request->session()->get('language') ?? 'vi';
+        /* select của filter */
+        $categories         = Category::select('*')
+                                ->where('flag_show', true)
+                                ->get();
+        /* filter (nếu có) */
+        $filters            = $request->get('filters') ?? [];
+        /* giá trị selectBox */
+        $categoryChoose     = new \Illuminate\Database\Eloquent\Collection;
+        $categoryChoose     = Tag::select('*')
+                                ->where('id', $id)
+                                ->with('seo', 'en_seo')
+                                ->first();
+        $xhtml              = view('wallpaper.tag.sortContent', [
             'language'          => $language ?? 'vi',
             'total'             => $total,
             'categories'        => $categories,
