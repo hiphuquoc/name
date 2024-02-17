@@ -3,25 +3,9 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-        if(empty($language)||$language=='vi'){
-            $currency           = 'VND';
-            $highPrice          = \App\Helpers\Number::convertUSDToVND($item->price_before_promotion);
-            $lowPrice           = $highPrice;
-            foreach($item->prices as $price){
-                if($price->price<$lowPrice){
-                    $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
-                }
-            }
-        }else {
-            $currency           = 'USD';
-            $highPrice          = $item->price_before_promotion;
-            $lowPrice           = $highPrice;
-            foreach($item->prices as $price){
-                if($price->price<$lowPrice){
-                    $lowPrice   = $price->price;
-                }
-            }
-    }
+        $highPrice          = 0;
+        $lowPrice           = 0;
+        $currency           = empty($language)||$language=='vi' ? 'VND' : 'USD';
     @endphp
     @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice, 'currentcy' => $currency])
     <!-- END:: Product Schema -->
@@ -38,7 +22,7 @@
     @include('wallpaper.schema.article', compact('item'))
     <!-- END:: Article Schema -->
 
-    <!-- STRAT:: ImageObject Schema -->
+    {{-- <!-- STRAT:: ImageObject Schema -->
     @php
         $dataImages = new \Illuminate\Database\Eloquent\Collection;
         foreach($item->prices as $price){
@@ -46,7 +30,7 @@
         }
     @endphp
     @include('wallpaper.schema.imageObject', ['data' => $dataImages])
-    <!-- END:: ImageObject Schema -->
+    <!-- END:: ImageObject Schema --> --}}
 
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.creativeworkseries', compact('item'))
@@ -67,35 +51,31 @@
         <!-- content -->
         <div class="contentBox maxContent-1200">
             <!-- Gallery và Product detail -->
-            @include('wallpaper.freeWallpaperbody')
-
-            <!-- Content -->
-            @include('wallpaper.freeWallpapercontent', ['contents' => $item->contents])
+            @include('wallpaper.freeWallpaper.body')
 
             <!-- Related -->
             @if($total>0)
-            <div class="contentBox">
-                <div class="relatedProductBox">
-                    <div class="relatedProductBox_title">
-                        @if(!empty($language)&&$language=='en')
-                            <h2>Recommendations for you</h2>
-                        @else 
-                            <h2>Gợi ý cho bạn</h2>
-                        @endif
-                    </div>
-                    <div class="relatedProductBox_box">
-                        {{-- @php
-                            $arrayIdProduct = [];
-                            foreach($related as $p) $arrayIdProduct[] = $p->infoProduct->id;
-                        @endphp --}}
-                        @include('wallpaper.template.wallpaperGrid', [
-                            'loaded'            => 0,
-                            'contentEmpty'      => true,
-                            'arrayIdCategory'   => $arrayIdCategory
-                        ])
+                <div class="contentBox">
+                    <div class="relatedProductBox">
+                        <div class="relatedProductBox_title">
+                            @if(!empty($language)&&$language=='en')
+                                <h2>Recommendations for you</h2>
+                            @else 
+                                <h2>Gợi ý cho bạn</h2>
+                            @endif
+                        </div>
+                        <div class="relatedProductBox_box">
+                            @include('wallpaper.category.box', [
+                                'total'             => $total,
+                                'loaded'            => $loaded,
+                                'arrayIdCategoyr'   => $arrayIdCategory,
+                                'wallpapers'        => $related,
+                                'language'          => $language,
+                                'idNot'             => $idNot
+                            ])
+                        </div>
                     </div>
                 </div>
-            </div>
             @endif
         </div>
     </div>
@@ -113,9 +93,9 @@
         ])
     </div>
 
-    @include('wallpaper.modal.viewImageFull')
+    {{-- @include('wallpaper.modal.viewImageFull')
 
-    @include('wallpaper.modal.paymentMethod')
+    @include('wallpaper.modal.paymentMethod') --}}
 @endpush
 @push('bottom')
     <!-- === START:: Zalo Ring === -->
@@ -125,24 +105,26 @@
 @push('scriptCustom')
     <script type="text/javascript">
         $(window).ready(function(){
-            // setOptionProduct();
+           
         })
-        /* thay đổi option sản phẩm */
-        function setOptionProduct(element, idProduct, type){
-            /* xử lý cho việc thay đổi button */
-            $(element).parent().children().each(function(){
-                $(this).removeClass('selected');
+
+        /* thả cảm xúc */
+        function toogleHeartFeelingFreeWallpaper(idFreeWallpaper){
+            $.ajax({
+                url         : '{{ route("ajax.toogleHeartFeelingFreeWallpaper") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    free_wallpaper_info_id : idFreeWallpaper
+                },
+                success     : function(response){
+                    if(response==true){
+                        $('.freeWallpaperDetailBox .heart').addClass('selected');
+                    }else {
+                        $('.freeWallpaperDetailBox .heart').removeClass('selected');
+                    }
+                }
             });
-            $(element).addClass('selected');
-            /* xử lý cho việc hiển thị lại giá theo option */
-            const idKey         = $(element).data('product_price_id');
-            const elementPrice  = $('#'+idKey);
-            elementPrice.parent().children().each(function(){
-                $(this).removeClass('selected');
-            });
-            elementPrice.addClass('selected');
-            /* set lại sự kiện button addToCart cho đúng option vừa chọn */
-            $('#js_addToCart_button').attr("onclick", "addToCart('"+idProduct+"', '"+idKey+"', '"+type+"');");
         }
     </script>
 @endpush

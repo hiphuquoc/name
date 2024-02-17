@@ -113,6 +113,10 @@ class Category extends Model {
         return $this->hasMany(\App\Models\RelationCategoryProduct::class, 'category_info_id', 'id');
     }
 
+    public function freeWallpapers(){
+        return $this->hasMany(\App\Models\RelationFreewallpaperCategory::class, 'free_wallpaper_info_id', 'id');
+    }
+
     public function blogs(){
         return $this->hasMany(\App\Models\RelationCategoryInfoCategoryBlogInfo::class, 'category_info_id', 'id');
     }

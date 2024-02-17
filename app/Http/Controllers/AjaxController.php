@@ -405,6 +405,36 @@ class AjaxController extends Controller {
         return json_encode($response);
     }
 
+    public function toogleHeartFeelingFreeWallpaper(Request $request){
+        $idFreeWallpaper    = $request->get('free_wallpaper_info_id') ?? 0;
+        if(!empty($idFreeWallpaper)){
+            $user   = Auth::user();
+            if(!empty($user)){
+                $infoRelation = RelationFreeWallpaperUser::select('*')
+                    ->where('free_wallpaper_info_id', $idFreeWallpaper)
+                    ->where('user_info_id', $user->id)
+                    ->where('type', 'heart')
+                    ->first();
+                if(!empty($infoRelation)){ 
+                    /* dã thả tim => xóa bỏ */
+                    RelationFreeWallpaperUser::select('*')
+                        ->where('free_wallpaper_info_id', $idFreeWallpaper)
+                        ->where('user_info_id', $user->id)
+                        ->delete();
+                    echo false;
+                }else {
+                    /* insert */
+                    RelationFreeWallpaperUser::insertItem([
+                        'free_wallpaper_info_id'    => $idFreeWallpaper,
+                        'user_info_id'              => $user->id,
+                        'type'                      => 'heart'
+                    ]);
+                    echo true;
+                }
+            }
+        }
+    }
+
     public function loadOneFreeWallpaper(Request $request){
         $response                   = null;
         if(!empty($request->get('free_wallpaper_info_id'))){

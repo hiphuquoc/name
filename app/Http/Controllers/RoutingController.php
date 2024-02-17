@@ -53,6 +53,40 @@ class RoutingController extends Controller{
                 $xhtml              = file_get_contents($pathCache);
                 echo $xhtml;
             }else {
+                /* ===== từng ảnh ===== */
+                if($checkExists->type=='free_wallpaper_info'){
+                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                    $flagMatch      = true;
+                    /* thông tin wallpaper */
+                    $item           = FreeWallpaper::select('*')
+                        ->where('seo_id', $idSeo)
+                        ->with('seo', 'en_seo', 'tags', 'contents', 'categories')
+                        ->first();
+                    $idNot          = $item->id;
+                    /* danh sách category của sản phẩm */
+                    $arrayIdCategory  = [];
+                    foreach($item->categories as $category) $arrayIdCategory[] = $category->infoCategory->id;
+                    $total          = FreeWallpaper::select('*')
+                                        ->where('id', '!=', $item->id)
+                                        ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
+                                            $query->whereIn('id', $arrayIdCategory);
+                                        })
+                                        ->count();
+                    $loaded         = 0;
+                    /* sản phẩm liên quan */
+                    $related            = FreeWallpaper::select('*')
+                                            ->where('id', '!=', $item->id)
+                                            ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
+                                                $query->whereIn('id', $arrayIdCategory);
+                                            })
+                                            ->orderBy('id', 'DESC')
+                                            ->skip(0)
+                                            ->take($loaded)
+                                            ->get();
+                    /* breadcrumb */
+                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                    $xhtml              = view('wallpaper.freeWallpaper.index', compact('item', 'idNot', 'breadcrumb', 'total', 'loaded', 'related', 'language', 'arrayIdCategory'))->render();
+                }
                 /* ===== Tag ==== */
                 if($checkExists->type=='tag_info'){
                     $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
@@ -174,7 +208,6 @@ class RoutingController extends Controller{
                     $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
                     $xhtml              = view('wallpaper.product.index', compact('item', 'breadcrumb', 'total', 'arrayIdCategory', 'language'))->render();
                 }
-
                 /* ===== Các trang chủ đề/phong cách/sự kiện ==== */
                 foreach(config('main.category_type') as $type){
                     if($checkExists->type==$type['key']){

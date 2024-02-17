@@ -1,129 +1,26 @@
-@extends('layouts.wallpaper')
-@push('headCustom')
-<!-- ===== START:: SCHEMA ===== -->
-    <!-- STRAT:: Product Schema -->
-    @php
-        $currency   = empty($language)||$language=='vi' ? 'VND' : 'USD';
-        $lowPrice   = 0;
-        $highPrice  = 0;
-    @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice, 'currency' => $currency])
-    <!-- END:: Product Schema -->
-
-    <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.social', compact('item', 'lowPrice', 'highPrice'))
-    <!-- END:: Title - Description - Social -->
-
-    <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.breadcrumb', compact('breadcrumb'))
-    <!-- END:: Title - Description - Social -->
-
-    <!-- STRAT:: Organization Schema -->
-    @include('wallpaper.schema.organization')
-    <!-- END:: Organization Schema -->
-
-    <!-- STRAT:: Article Schema -->
-    @include('wallpaper.schema.article', compact('item'))
-    <!-- END:: Article Schema -->
-
-    <!-- STRAT:: Article Schema -->
-    @include('wallpaper.schema.creativeworkseries', compact('item'))
-    <!-- END:: Article Schema -->
-
-    {{-- <!-- STRAT:: FAQ Schema -->
-    @include('wallpaper.schema.itemlist', ['data' => $products])
-    <!-- END:: FAQ Schema -->
-
-    <!-- STRAT:: ImageObject Schema -->
-    @php
-        $dataImages = new \Illuminate\Database\Eloquent\Collection;
-        foreach($products as $product){
-            foreach($product->prices as $price){
-                foreach($price->wallpapers as $wallpaper) {
-                    $dataImages[] = $wallpaper->infoWallpaper;
-                }
-            }
-        }
-    @endphp
-    @include('wallpaper.schema.imageObject', ['data' => $dataImages])
-    <!-- END:: ImageObject Schema --> --}}
-
-    <!-- STRAT:: FAQ Schema -->
-    @include('wallpaper.schema.faq', ['data' => $item->faqs])
-    <!-- END:: FAQ Schema -->
-<!-- ===== END:: SCHEMA ===== -->
-@endpush
-@section('content')
-    <div class="container">
-        <div class="breadcrumbMobileBox">
-            @include('wallpaper.template.breadcrumb')
-        </div>
-        <!-- share social -->
-        @include('wallpaper.template.shareSocial')
-        <!-- content -->
-        <div class="contentBox">
-            <div style="display:flex;">
-                @php
-                    if(empty($language)||$language=='vi'){
-                        $titlePage = $item->seo->slug=='hinh-nen-dien-thoai' ? $item->name : 'Hình nền điện thoại '.$item->name;
-                    }else {
-                        $titlePage = $item->en_seo->slug=='photo-beautiful-girl' ? $item->en_name : $item->en_name.' Phone Wallpapers';
-                    }
-                @endphp
-                <h1>{{ $titlePage }}</h1>
-                <!-- từ khóa vừa search -->
-                @if(!empty(request('search')))
-                    <div class="keySearchBadge">
-                        <div class="keySearchBadge_label">
-                            - tìm kiếm với:
-                        </div>
-                        <div class="keySearchBadge_box">
-                            <div class="keySearchBadge_box_item">
-                                <div class="keySearchBadge_box_item_badge">
-                                    <div>{{ request('search') }}</div>
-                                    <a href="{{ URL::current() }}" class="keySearchBadge_box_item_badge_action"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-            </div>
-
-            <!-- load more -->
-            <input type="hidden" id="total" name="total" value="{{ $total }}" />
-            <input type="hidden" id="loaded" name="loaded" value="{{ $loaded ?? 0 }}" />
-            <input type="hidden" id="topLoad" name="topLoad" value="" />
-            <div class="freeWallpaperBox">
-                @foreach($wallpapers as $wallpaper)
-                    @include('wallpaper.free.item', compact('wallpaper', 'language'))
-                @endforeach
-            </div>
-
-        </div>
-        <!-- Nội dung -->
-        @if(!empty($content))
-            <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
-                <div id="tocContentMain"></div>
-                {!! $content !!}
-            </div>
-        @endif
-        
-    </div>
-@endsection
-@push('modal')
-
-@endpush
-@push('bottom')
-    <!-- Header bottom -->
-    @include('wallpaper.snippets.headerBottom')
-    <!-- === START:: Zalo Ring === -->
-    {{-- @include('main.snippets.zaloRing') --}}
-    <!-- === END:: Zalo Ring === -->
-@endpush
+<input type="hidden" id="total" name="total" value="{{ $total }}" />
+<input type="hidden" id="loaded" name="loaded" value="{{ $loaded ?? 0 }}" />
+<input type="hidden" id="topLoad" name="topLoad" value="" />
+<input type="hidden" id="idNot" name="idNot" value="{{ $idNot ?? 0 }}" />
+<input type="hidden" id="typeWhere" name="typeWhere" value="{{ $typeWhere ?? 'or' }}" />
+<input type="hidden" id="arrayIdCategory" name="arrayIdCategory" value="{{ json_encode($arrayIdCategory) }}" />
+<div class="freeWallpaperBox">
+    @if($total>0)
+        @foreach($wallpapers as $wallpaper)
+            @include('wallpaper.category.item', [
+                'wallpaper' => $wallpaper,
+                'language'  => $language,
+                'user'      => $user ?? null
+            ])
+        @endforeach
+    @else 
+        <div>Không có kết quả phù hợp!</div>
+    @endif
+</div>
 @push('scriptCustom')
     <script type="text/javascript">
         $(window).ready(function(){
-            /* lazyload */ 
+            /* lazyload image */
             lazyload();
             /* load more */
             loadFreeWallpaperMore(50);
@@ -131,11 +28,42 @@
                 loadFreeWallpaperMore(50);
             })
             /* tính lại khi resize */
+            setTimeout(() => {
+                setViewAllImage();
+            }, 500);
             $(window).resize(function(){
                 setViewAllImage();
-            })
+            })          
         })
 
+        /* hiển thị box cảm xúc khi nhấn vào icon */ 
+        function showBoxFeeling(element) {
+            // Tìm phần tử .freeWallpaperBox_item_box
+            var boxItem = $(element).closest('.freeWallpaperBox_item_box');
+            // Toggle class active cho .feeling
+            console.log(boxItem.find('.feeling'));
+            boxItem.find('.feeling').attr('style', 'display:flex !important;');
+        }
+        /* thả cảm xúc */
+        function setFeelingFreeWallpaper(element, idFreeWallpaper, type){
+            $.ajax({
+                url         : '{{ route("ajax.setFeelingFreeWallpaper") }}',
+                type        : 'get',
+                dataType    : 'json',
+                data        : {
+                    type,
+                    free_wallpaper_info_id : idFreeWallpaper
+                },
+                success     : function(response){
+                    $(element).closest('.feeling').css('display', 'none');
+                    /* tải lại box */ 
+                    var box     = $(element).closest('.freeWallpaperBox_item');
+                    var idBox   = box.attr('id');
+                    loadOneFreeWallpaper(idFreeWallpaper, idBox);
+                }
+            });
+        }
+        /* phần wallpaper */
         function setViewAllImage(dataJson){
             const box = $('.freeWallpaperBox');
             /* tính số cột đang hiển thị */ 
@@ -160,7 +88,6 @@
             const minHeight = Math.round(Math.min(...Object.values(dataColumn)));
             $('#topLoad').val(minHeight);
         }
-
         function setViewPerImage(domItem, indexItem, row) {
             const positionItem  = domItem.position();
             const parent        = $(domItem).parent();
@@ -168,7 +95,8 @@
             const index         = domItem.index();
             const domItemTop    = parent.children().eq(index - row);
             const domItemBefore = domItem.prev();
-            if (domItemTop.length > 0) {
+            
+            if (domItemTop.length>0) {
                 // Lấy vị trí của domItemTop
                 const positionTop       = domItemTop.position();
                 const positionBefore    = domItemBefore.position();
@@ -184,7 +112,6 @@
                 });
             }
         }
-
         function calculateColumns() {
             // Lấy chiều rộng của .freeWallpaperBox (bao gồm cả margin và padding)
             const boxWidth = $('.freeWallpaperBox').outerWidth();
@@ -199,15 +126,12 @@
             });
             return totalColumns;
         }
-
         /* loadmore wallpaper */
         function loadFreeWallpaperMore(requestLoad = 20){
-
-            console.log(123);
             var boxCategory         = $('.freeWallpaperBox');
             const total             = $('#total').val();
             const loaded            = $('#loaded').val();
-            
+            const idNot             = $('#idNot').val();
             if(boxCategory.length&&!boxCategory.hasClass('loading')&&parseInt(total)>parseInt(loaded)){
                 
                 const distanceLoad  = $('#topLoad').val();;
@@ -216,15 +140,13 @@
                     /* thêm class để đánh dấu đăng load => không load nữa */
                     boxCategory.addClass('loading');
                     /* lấy dữ liệu */
-                    const arrayIdProduct    = $('#js_loadMore_array_product_info_id').val();
-                    const language          = $('#language').val();
-                    const view_by           = $('#js_loadMore_view_by').val();
+                    const arrayIdCategory   = $('#arrayIdCategory').val();
                     $.ajax({
-                        url         : '{{ route("admin.freeWallpaper.loadmoreFreeWallpapers") }}',
+                        url         : '{{ route("main.category.loadmoreFreeWallpapers") }}',
                         type        : 'get',
                         dataType    : 'json',
                         data        : {
-                            total, loaded, requestLoad
+                            total, loaded, arrayIdCategory, requestLoad, idNot
                         },
                         success     : function(response){
                             /* xóa bỏ class để thể hiện đã load xong */
@@ -238,10 +160,35 @@
                             waitForImagesLoaded(boxCategory, function () {
                                 setViewAllImage();
                             });
+                            // ngân click chuột phải các ảnh được load
+                            preventClickImgAndEffectDownload();
                         }
                     });
                 }
             }
+        }
+        function preventClickImgAndEffectDownload(){
+            $("img").on("contextmenu", function (e) {
+                e.preventDefault();
+                alert("Chức năng chuột phải đã bị vô hiệu hóa cho ảnh này.");
+            });
+            // Xử lý sự kiện click trên .action_item ẩn box khi click download
+            $('.freeWallpaperBox_item .download').on('click', function (e) {
+                e.stopPropagation(); // Ngăn chặn sự kiện click từ lan tỏa lên các phần tử cha
+
+                // Tìm phần tử .freeWallpaperBox_item_box trong phần tử cha của .action_item và thêm style display: none; với !important
+                $(this).closest('.freeWallpaperBox_item').find('.freeWallpaperBox_item_box').attr('style', 'display: none !important');
+            });
+            $('.freeWallpaperBox_item').hover(
+                function () {
+                    // Khi di chuột vào
+                    $(this).find('.freeWallpaperBox_item_box').css('display', 'flex !important');
+                },
+                function () {
+                    // Khi di chuột ra
+                    $(this).find('.freeWallpaperBox_item_box').css('display', 'none');
+                }
+            );
         }
         // Hàm kiểm tra khi tất cả các hình ảnh trong boxCategory đã được load xong
         function waitForImagesLoaded(boxCategory, callback) {
@@ -267,6 +214,19 @@
                 }
             });
         }
-
+        function loadOneFreeWallpaper(idFreeWallpaper, idWrite){
+            $.ajax({
+                url         : '{{ route("ajax.loadOneFreeWallpaper") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    free_wallpaper_info_id : idFreeWallpaper
+                },
+                success     : function(response){
+                    $('#'+idWrite).html(response);
+                    lazyload();
+                }
+            });
+        }
     </script>
 @endpush

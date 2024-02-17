@@ -17,7 +17,7 @@
             </div>
         </div>
         
-        <div class="freeWallpaperBox_item_box_item">
+        <div class="freeWallpaperBox_item_box_item" style="min-width:132px;">
             <!-- feeling -->
             <div class="feeling">
                 @foreach(config('main.feeling_type') as $feeling)
@@ -35,9 +35,11 @@
             <!-- action -->
             <div class="action">
                 {{-- <a href="{{ route('search.searchByImage', ['free_wallpaper_info_id' => $wallpaper->id]) }}" class="action_item"> --}}
-                <a href="#" class="action_item">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </a>
+                @if(!empty($wallpaper->seo))
+                    <a href="/{{ $language=='vi' ? $wallpaper->seo->slug_full : $wallpaper->en_seo->slug_full }}" class="action_item">
+                        <i class="fa-solid fa-image"></i>
+                    </a>
+                @endif
                 <div class="action_item" onclick="showBoxFeeling(this);">
                     <i class="fa-regular fa-thumbs-up"></i>
                 </div>
@@ -59,5 +61,10 @@
             {!! file_get_contents(public_path($icon)) !!}
         </div>
     @endif
-    <div class="freeWallpaperBox_item_preventClick"></div>
+    @if(!empty($wallpaper->seo))
+        <a href="/{{ empty($language)||$language=='vi' ? $wallpaper->seo->slug_full : $wallpaper->en_seo->slug_full }}" class="freeWallpaperBox_item_preventClick"></a>
+    @else 
+        <div class="freeWallpaperBox_item_preventClick"></div>
+    @endif
+    
 </div>

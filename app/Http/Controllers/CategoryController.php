@@ -94,8 +94,10 @@ class CategoryController extends Controller {
             $typeWhere      = $request->get('typeWhere') ?? 'or';
             $sortBy         = Cookie::get('sort_by') ?? null;
             $filters        = $request->get('filters') ?? [];
+            $idNot          = $request->get('idNot') ?? 0;
             $user           = Auth::user();
             $wallpapers     = FreeWallpaper::select('*')
+                                ->where('id', '!=', $idNot)
                                 ->whereHas('categories', function($query) use($arrayIdCategory, $typeWhere) {
                                     if(!empty($arrayIdCategory)){
                                         if ($typeWhere == 'or') {
@@ -138,7 +140,7 @@ class CategoryController extends Controller {
                                 ->take($requestLoad)
                                 ->get();
             foreach($wallpapers as $wallpaper){
-                $content    .= view('wallpaper.free.item', compact('wallpaper', 'language', 'user'))->render();
+                $content    .= view('wallpaper.category.item', compact('wallpaper', 'language', 'user'))->render();
             }
         }
         $response['content']    = $content;
