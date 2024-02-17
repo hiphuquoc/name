@@ -9,7 +9,7 @@
 <div class="pageProductDetailBox">
     <div class="pageProductDetailBox_left">
         <!-- Gallery Desktop -->
-        @include('wallpaper.product.gallery', ['prices' => $item->prices])
+        @include('wallpaper.freeWallpapergallery', ['prices' => $item->prices])
         <!-- giải thích thanh toán và nhận ảnh => desktop -->
         <div class="show-1199">
             @if(empty($language)||$language=='vi')
@@ -49,11 +49,11 @@
                 </div>
                 <!-- option -->
                 <div class="productDetailBox_detail_option hide-1199">
-                    @include('wallpaper.product.optionBox', compact('item'))
+                    @include('wallpaper.freeWallpaperoptionBox', compact('item'))
                 </div>
                 <!-- giá -->
                 <div class="productDetailBox_detail_price hide-1199">
-                    @include('wallpaper.product.priceBox', ['prices' => $item->prices])
+                    @include('wallpaper.freeWallpaperpriceBox', ['prices' => $item->prices])
                 </div>
                 <!-- button đặt hàng -->
                 <div class="productDetailBox_detail_checkout">

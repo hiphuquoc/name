@@ -48,9 +48,7 @@ class TagController extends Controller {
                                 ->with('seo', 'en_seo')
                                 ->first();
         $idNot              = $item->id ?? 0;
-        $parents            = Category::select('*')
-                                ->where('id', '!=', $idNot)
-                                ->get();
+        $parents            = Category::all();
         /* category blog */
         $categoryBlogs      = CategoryBlog::all();
         /* content */

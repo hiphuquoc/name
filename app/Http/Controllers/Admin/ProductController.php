@@ -145,8 +145,8 @@ class ProductController extends Controller {
             Product::updateItem($idProduct, $insertProduct);
             /* insert product_content */
             ProductContent::select('*')
-                                ->where('product_info_id', $idProduct)
-                                ->delete();
+                ->where('product_info_id', $idProduct)
+                ->delete();
             if(!empty($request->get('contents'))){
                 foreach($request->get('contents') as $content){
                     if(!empty($content['name'])&&!empty($content['content'])){

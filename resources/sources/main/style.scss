@@ -1290,3 +1290,14 @@ $heightSelect : 35px;
         }
     }
 }
+.showFeelingBox {
+    display: flex;
+    align-items: center;
+    @include colorOpacity('color', $colorTextLight, 1);
+    font-size: 0.9rem;
+    svg {
+        scale: 0.85;
+        margin-right: 0.25rem;
+        margin-top: -2px;
+    }
+}

@@ -35,6 +35,11 @@ return [
                     'name'  => '5. Tag',
                     'route' => 'admin.tag.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '6. Seo từng ảnh',
+                    'route' => 'admin.seoFreeWallpaper.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]
         ],

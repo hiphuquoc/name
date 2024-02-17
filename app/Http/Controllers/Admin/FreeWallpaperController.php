@@ -102,39 +102,10 @@ class FreeWallpaperController extends Controller {
                     'file_size'     => $fileSizeW,
                     'mine_type'     => $miniTypeW
                 ]);
-                /* lưu relation */
-                foreach(config('main.category_type') as $type){
-                    if(!empty($request->get($type['key']))){
-                        $arrayCategory = explode(',', $request->get($type['key']));
-                        foreach($arrayCategory as $idCategory){
-                            RelationFreewallpaperCategory::insertItem([
-                                'free_wallpaper_info_id'    => $idWallpaper,
-                                'category_info_id'          => $idCategory
-                            ]);
-                        }
-                    }
-                }
+                /* lưu categories */
+                self::saveCategories($idWallpaper, $request->all());
                 /* lưu tag name */
-                if(!empty($request->get('tag'))){
-                    $tag    = json_decode($request->get('tag'), true);
-                    foreach($tag as $t){
-                        $nameTag    = strtolower($t['value']);
-                        /* kiểm tra xem tag name đã tồn tại chưa */
-                        $infoTag    = Tag::select('*')
-                                        ->where('name', $nameTag)
-                                        ->with('seo', 'en_seo')
-                                        ->first();
-                        $idTag      = $infoTag->id ?? 0;
-                        /* chưa tồn tại -> tạo và láy ra */
-                        if(empty($idTag)) $idTag  = self::createSeoTmp($nameTag);
-                        /* insert relation */
-                        RelationTagInfoOrther::insertItem([
-                            'tag_info_id'       => $idTag,
-                            'reference_type'    => 'free_wallpaper_info',
-                            'reference_id'      => $idWallpaper
-                        ]);
-                    }
-                }
+                if(!empty($request->get('tag'))) self::createOrGetTagName($idWallpaper, $request->get('tag'));
                 DB::commit();
                 if(!empty($idWallpaper)){
                     $response = [];
@@ -163,13 +134,27 @@ class FreeWallpaperController extends Controller {
                 'en_name'           => strtolower(Charactor::translateViToEn($request->get('name'))),
                 'description'       => $request->get('description') ?? null,
             ]);
-            /* lưu relation */
+            /* lưu categories */
+            self::saveCategories($idWallpaper, $request->all());
+            /* lưu tag name */
+            if(!empty($request->get('tag'))) self::createOrGetTagName($idWallpaper, $request->get('tag'));
+            DB::commit();
+            return true;
+        } catch (\Exception $exception){
+            DB::rollBack();
+            return false;
+        }
+    }
+    
+    public static function saveCategories($idWallpaper, $requestAll = []){
+        if(!empty($idWallpaper)&&!empty($requestAll)){
             RelationFreewallpaperCategory::select('*')
                 ->where('free_wallpaper_info_id', $idWallpaper)
                 ->delete();
             foreach(config('main.category_type') as $type){
-                if(!empty($request->get($type['key']))){
-                    $arrayCategory = explode(',', $request->get($type['key']));
+                if(!empty($requestAll[$type['key']])){
+                    /* vừa dùng ajax vùa dùng controller nên có thể là chuỗi hoặc array -> kiểm tra trước khi đưa vào xử lý */
+                    $arrayCategory = is_string($requestAll[$type['key']]) ? explode(',', $requestAll[$type['key']]) : $requestAll[$type['key']];
                     foreach($arrayCategory as $idCategory){
                         RelationFreewallpaperCategory::insertItem([
                             'free_wallpaper_info_id'    => $idWallpaper,
@@ -178,39 +163,33 @@ class FreeWallpaperController extends Controller {
                     }
                 }
             }
-            /* lưu tag name */
-            /* delete relation có sẵn */
+        }
+    }
+
+    public static function createOrGetTagName($idWallpaper, $jsonTagName = null){
+        if(!empty($idWallpaper)&&!empty($jsonTagName)){
             RelationTagInfoOrther::select('*')
                 ->where('reference_type', 'free_wallpaper_info')
                 ->where('reference_id', $idWallpaper)
                 ->delete();
-            if(!empty($request->get('tag'))){
-                $tag    = json_decode($request->get('tag'), true);
-                foreach($tag as $t){
-                    $nameTag    = strtolower($t['value']);
-                    $slug       = config('main.auto_fill.slug.vi').'-'.Charactor::convertStrToUrl($nameTag);
-                    /* kiểm tra xem tag name đã tồn tại chưa */
-                    $infoTag    = Tag::select('*')
-                                    ->whereHas('seo', function($query) use($slug){
-                                        $query->where('slug', $slug);
-                                    })
-                                    ->first();
-                    $idTag      = $infoTag->id ?? 0;
-                    /* chưa tồn tại -> tạo và lấy ra */
-                    if(empty($idTag)) $idTag  = self::createSeoTmp($nameTag);
-                    /* insert relation */
-                    RelationTagInfoOrther::insertItem([
-                        'tag_info_id'       => $idTag,
-                        'reference_type'    => 'free_wallpaper_info',
-                        'reference_id'      => $idWallpaper
-                    ]);
-                }
+            $tag    = json_decode($jsonTagName, true);
+            foreach($tag as $t){
+                $nameTag    = strtolower($t['value']);
+                /* kiểm tra xem tag name đã tồn tại chưa */
+                $infoTag    = Tag::select('*')
+                                ->where('name', $nameTag)
+                                ->with('seo', 'en_seo')
+                                ->first();
+                $idTag      = $infoTag->id ?? 0;
+                /* chưa tồn tại -> tạo và láy ra */
+                if(empty($idTag)) $idTag  = self::createSeoTmp($nameTag);
+                /* insert relation */
+                RelationTagInfoOrther::insertItem([
+                    'tag_info_id'       => $idTag,
+                    'reference_type'    => 'free_wallpaper_info',
+                    'reference_id'      => $idWallpaper
+                ]);
             }
-            DB::commit();
-            return true;
-        } catch (\Exception $exception){
-            DB::rollBack();
-            return false;
         }
     }
 
@@ -267,20 +246,9 @@ class FreeWallpaperController extends Controller {
             $idWallpaper            = $request->get('id');
             $infoWallpaper          = FreeWallpaper::select('*')
                                         ->where('id', $idWallpaper)
+                                        ->with('seo', 'en_seo', 'contents')
                                         ->first();
             $flag                   = self::delete($infoWallpaper);
-            /* xóa relation */
-            if($flag==true){
-                RelationFreewallpaperCategory::select('*')
-                    ->where('free_wallpaper_info_id', $idWallpaper)
-                    ->delete();
-                RelationTagInfoOrther::select('*')
-                    ->where('reference_id', $idWallpaper)
-                    ->where('reference_type', 'free_wallpaper_info')
-                    ->delete();
-            }
-            /* xóa trong cơ sở dữ liệu */
-            $infoWallpaper->delete();
         }
         return $flag;
     }
@@ -294,6 +262,32 @@ class FreeWallpaperController extends Controller {
             Storage::disk('gcs')->delete(config('main.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-small.'.$infoWallpaper->extension);
             /* xóa wallpaper Mini trong google_cloud_storage */
             Storage::disk('gcs')->delete(config('main.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-mini.'.$infoWallpaper->extension);
+            /* xóa relation */
+            /* categories */
+            RelationFreewallpaperCategory::select('*')
+            ->where('free_wallpaper_info_id', $infoWallpaper->id)
+            ->delete();
+            /* tags */
+            RelationTagInfoOrther::select('*')
+                ->where('reference_id', $infoWallpaper->id)
+                ->where('reference_type', 'free_wallpaper_info')
+                ->delete();
+            /* contents */
+            $infoWallpaper->contents()->delete();
+            /* xóa seo */
+            if(!empty($infoWallpaper->seo->id)&&!empty($infoWallpaper->en_seo->id)){
+                /* relation seo và en_seo */
+                RelationSeoEnSeo::select('*')
+                    ->where('seo_id', $infoWallpaper->seo->id)
+                    ->where('en_seo_id', $infoWallpaper->en_seo->id)
+                    ->delete();
+                /* seo /*/
+                $infoWallpaper->seo()->delete();
+                /* en_seo */
+                $infoWallpaper->en_seo()->delete();
+            }
+            /* xóa trong cơ sở dữ liệu */
+            $infoWallpaper->delete();
             $flag = true;
         }
         return $flag;

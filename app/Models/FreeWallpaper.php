@@ -46,7 +46,7 @@ class FreeWallpaper extends Model {
                         //     });
                         // })
                         ->orderBy('created_at', 'DESC')
-                        // ->with('seo')
+                        ->with('categories')
                         ->paginate($params['paginate']);
         return $result;
     }
@@ -71,6 +71,14 @@ class FreeWallpaper extends Model {
         }
         return $flag;
     }
+
+    public function seo() {
+        return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
+    }
+
+    public function en_seo() {
+        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
+    }
     
     public function categories(){
         return $this->hasMany(\App\Models\RelationFreewallpaperCategory::class, 'free_wallpaper_info_id', 'id');
@@ -82,5 +90,9 @@ class FreeWallpaper extends Model {
 
     public function feeling(){
         return $this->hasOne(\App\Models\RelationFreeWallpaperUser::class, 'free_wallpaper_info_id', 'id')->where('user_info_id', Auth::user()->id ?? null);
+    }
+
+    public function contents() {
+        return $this->hasMany(\App\Models\FreeWallpaperContent::class, 'free_wallpaper_info_id', 'id');
     }
 }
