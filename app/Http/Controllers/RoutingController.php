@@ -32,6 +32,8 @@ class RoutingController extends Controller{
         $urlRequest     = implode('/', $arraySlug);
         /* check url có tồn tại? => lấy thông tin */
         $checkExists    = Url::checkUrlExists(end($arraySlug));
+
+        dd($checkExists);
         /* nếu sai => redirect về link đúng */
         if(!empty($checkExists->slug_full)&&$checkExists->slug_full!=$urlRequest){
             /* ko rút gọn trên 1 dòng được => lỗi */
