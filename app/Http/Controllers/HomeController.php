@@ -84,36 +84,36 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        $tags = Tag::select('*')
-                    ->with('seo', 'en_seo')
-                    ->get();
+        // $tags = Tag::select('*')
+        //             ->with('seo', 'en_seo')
+        //             ->get();
         
-        foreach($tags as $tag){
-            $description = 'Nâng tầm phong cách điện thoại của bạn với Hình Nền Điện Thoại '.$tag->name.' từ Name.com.vn. Độ phân giải 3072x6144px, màu sắc tươi sáng. Khám phá ngay!';
-            $seoTitle   = '+1000 Hình nền điện thoại '.$tag->name.' tuyệt đẹp @name.com.vn';
-            $insert = [
-                'description'       => $description,
-                'seo_description'   => $description,
-                'seo_title'         => $seoTitle
-            ];
-            Seo::updateItem($tag->seo->id, $insert);
+        // foreach($tags as $tag){
+        //     $description = 'Nâng tầm phong cách điện thoại của bạn với Hình Nền Điện Thoại '.$tag->name.' từ Name.com.vn. Độ phân giải 3072x6144px, màu sắc tươi sáng. Khám phá ngay!';
+        //     $seoTitle   = '+1000 Hình nền điện thoại '.$tag->name.' tuyệt đẹp @name.com.vn';
+        //     $insert = [
+        //         'description'       => $description,
+        //         'seo_description'   => $description,
+        //         'seo_title'         => $seoTitle
+        //     ];
+        //     Seo::updateItem($tag->seo->id, $insert);
 
-            $descriptionEn = "Enhance your phone's style with ".$tag->en_seo->name." Phone Wallpapers from Name.com.vn. Resolution 3072x6144px, bright colors. Explore now!";
-            $seoTitleEn   = "+1000 ".$tag->en_seo->name." Phone Wallpapers Wonderful @name.com.vn";
-            $insert = [
-                'description'       => $descriptionEn,
-                'seo_description'   => $descriptionEn,
-                'seo_title'         => $seoTitleEn
-            ];
-            EnSeo::updateItem($tag->en_seo->id, $insert);
+        //     $descriptionEn = "Enhance your phone's style with ".$tag->en_seo->name." Phone Wallpapers from Name.com.vn. Resolution 3072x6144px, bright colors. Explore now!";
+        //     $seoTitleEn   = "+1000 ".$tag->en_seo->name." Phone Wallpapers Wonderful @name.com.vn";
+        //     $insert = [
+        //         'description'       => $descriptionEn,
+        //         'seo_description'   => $descriptionEn,
+        //         'seo_title'         => $seoTitleEn
+        //     ];
+        //     EnSeo::updateItem($tag->en_seo->id, $insert);
 
-            Tag::updateItem($tag->id, [
-                'name'  => $seoTitle,
-                'description'   => $description,
-                'en_name'   => $seoTitleEn,
-                'en_description'    => $descriptionEn
-            ]);
-        }
+        //     Tag::updateItem($tag->id, [
+        //         'name'          => ucfirst($tag->name),
+        //         'en_name'          => ucfirst($tag->en_name),
+        //         'description'   => $description,
+        //         'en_description'    => $descriptionEn
+        //     ]);
+        // }
     }
 
     // public static function chatGPT(Request $request){
