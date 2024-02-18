@@ -108,7 +108,7 @@
             <div class="freeWallpaperBox">
                 @if($total>0)
                     @foreach($wallpapers as $wallpaper)
-                        @include('wallpaper.free.item', [
+                        @include('wallpaper.category.item', [
                             'wallpaper' => $wallpaper,
                             'language'  => $language,
                             'user'      => $user ?? null

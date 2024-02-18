@@ -450,7 +450,7 @@ class AjaxController extends Controller {
                                             }]);
                                         })
                                         ->first();
-            if(!empty($wallpaper)) $response = view('wallpaper.free.item', compact('wallpaper', 'language', 'user'))->render();
+            if(!empty($wallpaper)) $response = view('wallpaper.category.item', compact('wallpaper', 'language', 'user'))->render();
         }
         echo $response;
     }
