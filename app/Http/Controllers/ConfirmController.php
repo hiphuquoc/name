@@ -13,7 +13,7 @@ class ConfirmController extends Controller {
     public static function confirm(Request $request){
         $item       = new \Illuminate\Database\Eloquent\Collection;
         $code       = $request->get('code') ?? 0;
-        // $code       = 'XJ1ZABVIS287W4Y';
+        // $code       = 'X1W5CBEKRMY0L3A';
         $order      = Order::select('*')
                         ->where('code', $code)
                         ->with('products.infoPrice', 'products.infoProduct')

@@ -534,13 +534,16 @@
                 });
 
                 function fixedTocContentIcon(){
-                    let widthS      = $(window).width();
-                    let widthC      = $('.container').outerWidth();
-                    let leftE       = parseInt((widthS - widthC - 70) / 2);
-                    if($(window).width() < 1200){
-                        leftE       = parseInt((widthS - widthC + 20) / 2);
-                    }
-                    $('.tocFixedIcon').css('left', leftE);
+                    // let widthS      = $(window).width();
+                    // let widthC      = $('.container').outerWidth();
+                    // let leftE       = parseInt((widthS - widthC - 70) / 2);
+                    // if($(window).width() < 1200){
+                    //     leftE       = parseInt((widthS - widthC + 20) / 2);
+                    // }
+                    // $('.tocFixedIcon').css('left', leftE);
+                    /* thiết lập vị trí nút nhấn */
+                    const left = $('.contentElement').offset().left;
+                    $('.tocFixedIcon').css('left', parseInt(left - 50));
                 }
 
                 function setHeightTocFixed(){
@@ -555,15 +558,19 @@
                     let boxContent      = $('#'+idElement);
                     let positionB       = boxContent.offset().top;
                     let heightB         = boxContent.outerHeight();
-                    let heightFooter    = $('.footerBox').outerHeight();
+                    let heightFooter    = $('.copyright').outerHeight();
                     $(document).scroll(function(){
                         let scrollNow   = $(document).scrollTop();
                         let minScroll   = parseInt(heightE + positionE);
                         let maxScroll   = parseInt(heightB + positionB - heightFooter);
                         if(scrollNow > minScroll && scrollNow < maxScroll){ 
                             $('.tocFixedIcon').css('display', 'block');
+                            /* thiết lập chiều ngang của box fixed */ 
+                            const width = $('.layoutHeaderSide_header').outerWidth();
+                            $('.tocContentMain').css('max-width', width);
                         }else {
                             $('.tocFixedIcon').css('display', 'none');
+                            $('.tocContentMain').attr('style', '');
                         }
                     });
                 }

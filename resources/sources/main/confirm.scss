@@ -277,7 +277,7 @@
         &_item {
             &:not(:first-child){
                 margin-top: 0.5rem;
-                padding-top: 0.5rem;
+                padding-top: 0.25rem;
                 border-top: 1px dashed $colorBackgroundLv1;
                 
             }

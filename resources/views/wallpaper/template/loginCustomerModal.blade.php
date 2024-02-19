@@ -1,9 +1,12 @@
+@php
+    $randomWallpaper = \App\Models\FreeWallpaper::inRandomOrder()->first();
+@endphp
 <div id="modalLoginFormCustomerBox" class="modalLoginFormCustomerBox">
     <!-- modal background -->
     <div class="modalLoginFormCustomerBox_bg" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"></div>
     <!-- modal box -->
     <div class="modalLoginFormCustomerBox_box">
-        <div class="modalLoginFormCustomerBox_box_left" style="background:url('https://name.com.vn/storage/images/upload/banner-login-type-manager-upload.webp') no-repeat;background-size: 100% 100%;">
+        <div class="modalLoginFormCustomerBox_box_left" style="background:url('{{ config('main.google_cloud_storage.default_domain').$randomWallpaper->file_cloud }}') no-repeat center;background-size: cover;">
         </div>
         
         <div class="modalLoginFormCustomerBox_box_right">
@@ -41,8 +44,8 @@
                                 </div>
                             </div>
                             <div class="formBox_item" style="display:flex;justify-content:space-between;align-item:flex-end;">
-                                <label class="checkBox" for="remember">
-                                    <input type="checkbox" id="remember" name="remember" />
+                                <label class="checkBox" for="remember" style="font-size:0.85rem;">
+                                    <input type="checkbox" id="remember" name="remember" checked />
                                     @if(!empty($language)&&$language=='en')
                                         <div>Remember me</div>
                                     @else 
@@ -61,17 +64,17 @@
                             <!-- button -->
                             <button type="button" class="button" onClick="submitFormLogin('formLogin');">Login</div>
                         </div>
-                        <div class="loginFormCustomer_body_item">
+                        {{-- <div class="loginFormCustomer_body_item">
                             Don't have a password yet? <a href="#">Registry now</a>
-                        </div>  
+                        </div>   --}}
                     @else 
                         <div class="loginFormCustomer_body_item">
                             <!-- button -->
                             <button type="button" class="button" onClick="submitFormLogin('formLogin');">Đăng nhập</div>
                         </div>
-                        <div class="loginFormCustomer_body_item">
+                        {{-- <div class="loginFormCustomer_body_item">
                             Bạn chưa có mật khẩu? <a href="#">Đăng ký ngay</a>
-                        </div>  
+                        </div>   --}}
                     @endif
                     <div class="loginFormCustomer_body_item">
                         <!-- login social -->

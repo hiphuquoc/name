@@ -58,7 +58,7 @@
                                         Total <span class="price">{!! \App\Helpers\Number::getFormatPriceByLanguage($order->total, $language) !!}</span>
                                     @endif
                                 </div>
-                                <div class="confirmMessageBox_right_item">
+                                {{-- <div class="confirmMessageBox_right_item">
                                     @if($language=='vi')
                                         <div>Danh sách sản phẩm trong đơn hàng:</div>
                                     @else 
@@ -96,48 +96,23 @@
                                         @endforeach
 
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
                         <div class="wallpaperSourceGrid">
                             @foreach($order->products as $product)
-                                @if(empty($product->infoPrice))
-                                    <!-- trường hợp all -->
-                                    @foreach($product->infoProduct->prices as $price)
-                                        @foreach($price->wallpapers as $wallpaper)
-                                            <div class="wallpaperSourceGrid_item" onClick="downloadSource(this, '{{ $wallpaper->infoWallpaper->file_name }}', '{{ $order->code }}');">
-                                                <div class="wallpaperSourceGrid_item_image">
-                                                    @php
-                                                        /* lấy ảnh mini */
-                                                        $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
-                                                    @endphp
-                                                    <img class="lazyloadSource" src="{{ $imageMini }}" data-order-code="{{ $order->code }}" data-file-name="{{ $wallpaper->infoWallpaper->file_name }}" style="filter:blur(20px);" />
-                                                </div>
-                                                <div class="wallpaperSourceGrid_item_action">
-                                                    <img src="{{ Storage::url('images/svg/download.svg') }}" />
-                                                </div>
-                                                <div class="wallpaperSourceGrid_item_background"></div>
-                                            </div>
-                                        @endforeach
-                                    @endforeach
-                                @else
-                                    @foreach($product->infoPrice->wallpapers as $wallpaper)
-                                        <div class="wallpaperSourceGrid_item" onClick="downloadSource(this, '{{ $wallpaper->infoWallpaper->file_name }}', '{{ $order->code }}');">
-                                            <div class="wallpaperSourceGrid_item_image">
-                                                @php
-                                                    /* lấy ảnh mini */
-                                                    $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
-                                                @endphp
-                                                <img class="lazyloadSource" src="{{ $imageMini }}" data-order-code="{{ $order->code }}" data-file-name="{{ $wallpaper->infoWallpaper->file_name }}" style="filter:blur(20px);" />
-                                            </div>
-                                            <div class="wallpaperSourceGrid_item_action">
-                                                <img src="{{ Storage::url('images/svg/download.svg') }}" />
-                                            </div>
-                                            <div class="wallpaperSourceGrid_item_background"></div>
+                                @foreach($product->infoPrice->wallpapers as $wallpaper)
+                                    <a href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->infoWallpaper->file_cloud_source]) }}" class="wallpaperSourceGrid_item" download>
+                                        <div class="wallpaperSourceGrid_item_image">
+                                            <img class="lazyload" src="{{ config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_source }}" />
                                         </div>
-                                    @endforeach
-                                @endif
+                                        <div class="wallpaperSourceGrid_item_action">
+                                            <img src="{{ Storage::url('images/svg/download.svg') }}" />
+                                        </div>
+                                        <div class="wallpaperSourceGrid_item_background"></div>
+                                    </a>
+                                @endforeach
                             @endforeach
                         </div>
 
@@ -165,151 +140,4 @@
     <!-- === START:: Zalo Ring === -->
     {{-- @include('main.snippets.zaloRing') --}}
     <!-- === END:: Zalo Ring === -->
-@endpush
-@push('scriptCustom')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
-    <script type="text/javascript">
-
-        $(window).ready(function(){
-            // if($("#js_scrollMenu").length) fixedElement();
-            // toggleWaiting();
-            lazyloadSource();
-
-        });
-
-        function downloadSource(box, fileName, orderCode){
-            $.ajax({
-                url: "{{ route('ajax.downloadImageSource') }}",
-                type: 'get',
-                dataType: 'json',
-                data: {
-                    order_code  : orderCode,
-                    file_name   : fileName
-                }
-            }).done(function (response) {
-                if (response.url) {
-                    // Sử dụng XMLHttpRequest để tải ảnh dưới dạng blob
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("GET", response.url, true);
-                    xhr.responseType = "blob";
-
-                    xhr.onload = function () {
-                        if (xhr.status === 200) {
-                            var blob = xhr.response;
-                            // Tạo một đường dẫn (URL) từ blob
-                            var blobUrl = URL.createObjectURL(blob);
-                            // Tạo một thẻ a để tải xuống và kích hoạt nó
-                            var a = document.createElement("a");
-                            a.href = blobUrl;
-                            a.download = response.file_name;
-                            a.style.display = "none";
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-                            // Giải phóng đường dẫn blob khi đã sử dụng xong
-                            URL.revokeObjectURL(blobUrl);
-                        }
-                    };
-                    xhr.send();
-                    /* đánh dấu ảnh đã tải */ 
-                    $(box).addClass('alreadyDownload');
-                } else {
-                    console.error("Không thể tải ảnh.");
-                }
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                console.error("Ajax request failed: " + textStatus, errorThrown);
-            });
-        }
-
-        // function effectDownload(elementButton){
-        //     /* bật loading */
-        //     toggleWaiting();
-        //     /* lấy thông tin thẻ a được click */
-        //     var link = elementButton.attr('href');
-        //     window.location.href = link;
-        //     /* thực thi */
-        //     var downloadTimer = setInterval(function() {
-        //         if (downloadComplete(link)) {
-        //             clearInterval(downloadTimer);
-        //             /* addclass đã download */
-        //             elementButton.addClass('alreadyDownload');
-        //             elementButton.find('.wallpaperSourceGrid_item_background').css('display', 'flex');
-        //             elementButton.find('.wallpaperSourceGrid_item_action').css('display', 'flex');
-        //             elementButton.find('.wallpaperSourceGrid_item_action img').attr('src', '/storage/images/svg/download-success.svg');                    
-        //             /* tắt loading */
-        //             toggleWaiting();
-        //         }
-        //     }, 100);
-        // }
-
-        // function fixedElement(){
-        //     var elementOffset   = $("#js_scrollMenu").offset().top;
-        //     var elementWidth    = $("#js_scrollMenu").outerWidth();
-        //     $(window).scroll(function() {
-        //         var scroll          = $(window).scrollTop();
-        //         if (scroll>=elementOffset&&$(window).width()>1199) {
-        //             $("#js_scrollMenu").css({
-        //                 position: "fixed", 
-        //                 top: "calc(60px + 2rem)", 
-        //                 width: 'inherit',
-        //                 transition: 'all 0.3s ease-in-out'
-        //             });
-        //         } else {
-        //             $("#js_scrollMenu").css({
-        //                 position: "relative", 
-        //                 top: "0", 
-        //                 width: 'inherit', 
-        //                 transform: "translateY(0)"
-        //             });
-        //         }
-        //     });
-        // }
-
-        // function toggleWaiting(action = 'unset'){
-        //     const element   = $('#js_toggleWaiting_box');
-        //     const displayE  = element.css('display');
-        //     if(displayE=='none'){
-        //         /* hiển thị */
-        //         element.css('display', 'flex');
-        //         $('body').css('overflow', 'hidden');
-        //         $('#js_openCloseModal_blur').addClass('blurBackground');
-        //     }else {
-        //         element.css('display', 'none');
-        //         $('body').css('overflow', 'unset');
-        //         $('#js_openCloseModal_blur').removeClass('blurBackground');
-        //     }
-        // }
-        function lazyloadSource() {
-            $('img.lazyloadSource').each(function() {
-                var boxThis = $(this);
-                if (!boxThis.hasClass('loaded')) {
-                    var distance = $(window).scrollTop() - boxThis.offset().top + 900;
-                    if (distance > 0) {
-                        loadImageSource(boxThis);
-                    }
-                }
-            });
-        }
-        function loadImageSource(boxThis) {
-            const orderCode     = boxThis.data('order-code');
-            const fileName      = boxThis.data('file-name');
-            $.ajax({
-                url: "{{ route('ajax.loadImageSource') }}",
-                type: 'get',
-                dataType: 'html',
-                data: {
-                    order_code  : orderCode,
-                    file_name   : fileName
-                }
-            }).done(function (response) {
-                boxThis.attr({
-                    'src'   : response,
-                    'style' : ''
-                });
-                boxThis.addClass('loaded');
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                console.error("Ajax request failed: " + textStatus, errorThrown);
-            });
-        }
-    </script>
 @endpush

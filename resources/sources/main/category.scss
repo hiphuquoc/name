@@ -151,7 +151,7 @@
     &_title {
         padding: 0.5rem 1rem 0.75rem 1rem;
         font-family: $fontTitle;
-        font-size: 1rem;
+        // font-size: 1rem;
         cursor: pointer;
         border-bottom: 1px solid $colorBackgroundLv1;
         color: $colorText;
@@ -165,10 +165,16 @@
     }
     &_list {
         padding: 0 1rem 1rem;
+        font-size: 0.9rem;
+        line-height: 1.68;
         &_item {
             display: flex;
-            margin-top: 0.75rem;
+            padding-top: 0.25rem;
             color: $colorText;
+            &:not(:first-child){
+                margin-top: 0.5rem;
+                border-top: 1px dotted $colorBackgroundLv1;
+            }
         }
     }
     &_close {
@@ -185,6 +191,7 @@
             @include fontAwesome;
             content: '\f077';
             font-size: 0.8rem;
+            opacity: 0.5;
         }
         &.hidden {
             display: flex !important;
@@ -208,9 +215,6 @@
         .tocContentMain_list {
             padding: 0 0.75rem;
             display: block !important;
-            &_item {
-                margin-top: 0.5rem;
-            }
         }
         .tocContentMain_close {
             &:before {
@@ -226,17 +230,17 @@
     position: fixed;
     top: 50%;
     left: 0;
-    width: 40px;
-    height: 40px;
-    background: $bg-03;
+    width: 32px;
+    aspect-ratio: 1/1;
+    background: $colorBackgroundLv2;
     border-radius: 10px;
     cursor: pointer;
-    border: 2px solid #fff;
+    border: 1px solid $colorBackgroundLv3;
     z-index: 100;
-    opacity: 0.9;
+    opacity: 0.8;
     margin-bottom: 0 !important;
     &:hover {
-        border: 2px solid $bg-05;
+        opacity: 1;
     }
     > div {
         text-align: center;
@@ -244,12 +248,11 @@
         align-items: center;
         height: 100%;
         justify-content: center;
-        font-size: 2rem;
         &:before {
             content: "\f0ca";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
     }
     @media(max-width: 767px){
