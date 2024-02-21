@@ -46,7 +46,7 @@ class HomeController extends Controller{
                                     })
                                     ->with('seo', 'en_seo', 'type')
                                     ->first();
-            /* lấy hình nền điện thoại tết */
+            /* lấy hình nền điện thoại gái xinh */
             $slug               = 'hinh-nen-dien-thoai-gai-xinh';
             $infoCategoryTet    = Category::select('category_info.*', 'seo.slug')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
@@ -62,8 +62,8 @@ class HomeController extends Controller{
                                             ->take(10);
                                     })
                                     ->first();
-            /* lấy hình nền điện thoại noel */
-            $slug               = 'hinh-nen-dien-thoai-giang-sinh-noel';
+            /* lấy hình nền điện thoại tết */
+            $slug               = 'hinh-nen-dien-thoai-tet';
             $infoCategoryNoel   = Category::select('category_info.*', 'seo.slug')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->where('seo.slug', '=', $slug)

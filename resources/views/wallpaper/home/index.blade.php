@@ -121,11 +121,11 @@
                         ])
                     </div>
                     @if(empty($language)||$language=='vi')
-                        <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" class="categoryBox_viewMore" aria-label="Hình nền điện thoại tết 2024">
+                        <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" class="categoryBox_viewMore" aria-label="Hình nền điện thoại Gái xinh">
                             <i class="fa-solid fa-eye"></i>Xem thêm
                         </a>
                     @else
-                        <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">View more</a>
+                        <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="Pretty girl phone wallpapers">View more</a>
                     @endif
                 </div>
             </div>
@@ -139,9 +139,9 @@
                     <div class="categoryBox_title">
                         <h2>
                             @if(empty($language)||$language=='vi')
-                                <a href="/{{ $infoCategoryNoel->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại Noel">Hình nền điện thoại Noel</a>
+                                <a href="/{{ $infoCategoryNoel->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại Tết 2024">Hình nền điện thoại Tết 2024</a>
                             @else
-                            <a href="/{{ $infoCategoryNoel->en_seo->slug_full ?? null }}" aria-label="Christmas Wallpapers">Christmas Wallpapers</a>
+                            <a href="/{{ $infoCategoryNoel->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">New Year 2024 Wallpapers</a>
                             @endif
                         </h2>
                     </div>
@@ -174,11 +174,11 @@
                         ])
                     </div>
                     @if(empty($language)||$language=='vi')
-                        <a href="/{{ $infoCategoryNoel->seo->slug_full ?? null }}" class="categoryBox_viewMore" aria-label="Hình nền điện thoại Giáng sinh">
+                        <a href="/{{ $infoCategoryNoel->seo->slug_full ?? null }}" class="categoryBox_viewMore" aria-label="Hình nền điện thoại Tết 2024">
                             <i class="fa-solid fa-eye"></i>Xem thêm
                         </a>
                     @else
-                        <a href="/{{ $infoCategoryNoel->en_seo->slug_full ?? null }}" aria-label="Christmas Wallpapers">View more</a>
+                        <a href="/{{ $infoCategoryNoel->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">View more</a>
                     @endif
                 </div>
             </div>
