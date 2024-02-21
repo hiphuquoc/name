@@ -68,21 +68,19 @@ class SeoFreeWallpaperController extends Controller {
             DB::beginTransaction();
             $keyTable           = 'free_wallpaper_info';
             $idFreeWallpaper    = $request->get('free_wallpaper_info_id');
+            $seoId              = $request->get('seo_id') ?? 0;
+            $enSeoId            = $request->get('en_seo_id') ?? 0;
             /* insert page */
             $dataAdd            = $request->all();
-            $dataAdd            = self::autoInput($dataAdd);
+            $type               = !empty($seoId) ? 'update' : 'insert';
+            $dataAdd            = self::autoInput($dataAdd, $type);
             $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($dataAdd, $keyTable, []);
-            $seoId              = $request->get('seo_id');
-            if(!empty($seoId)){
-                Seo::updateItem($seoId, $insertSeo);
-            }else {
-                $seoId = Seo::insertItem($insertSeo);
-            }
             $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($dataAdd, $keyTable, []);
-            $enSeoId            = $request->get('en_seo_id');
             if(!empty($enSeoId)){
+                Seo::updateItem($seoId, $insertSeo);
                 EnSeo::updateItem($enSeoId, $insertEnSeo);
             }else {
+                $seoId = Seo::insertItem($insertSeo);
                 $enSeoId = EnSeo::insertItem($insertEnSeo);
             }
             /* kết nối bảng vi và en */
@@ -142,14 +140,16 @@ class SeoFreeWallpaperController extends Controller {
         return redirect()->route('admin.seoFreeWallpaper.view', ['id' => $idFreeWallpaper]);
     }
 
-    public static function autoInput($dataAdd){
+    public static function autoInput($dataAdd, $type = 'insert'){
         if(!empty($dataAdd)){
-            $dataAdd['rating_aggregate_count'] = rand(200, 10000);
-            $dataAdd['rating_aggregate_star'] = '4.'.rand(5,8);
             $dataAdd['en_name'] = Charactor::translateViToEn($dataAdd['name']);
             $dataAdd['en_seo_description'] = Charactor::translateViToEn($dataAdd['seo_description']);
-            $dataAdd['slug']    = Charactor::convertStrToUrl($dataAdd['name']).'-'.time();
-            $dataAdd['en_slug'] = Charactor::convertStrToUrl($dataAdd['en_name']).'-'.time();
+            if($type=='insert'){
+                $dataAdd['rating_aggregate_count'] = rand(200, 10000);
+                $dataAdd['rating_aggregate_star'] = '4.'.rand(5,8);
+                $dataAdd['slug']    = Charactor::convertStrToUrl($dataAdd['name']).'-'.time();
+                $dataAdd['en_slug'] = Charactor::convertStrToUrl($dataAdd['en_name']).'-'.time();
+            }
         }
         return $dataAdd;
     }

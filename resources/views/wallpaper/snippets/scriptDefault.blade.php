@@ -553,13 +553,13 @@
 
                 let element         = $('#tocContentMain');
                 if(element.length>0){
-                    let positionE       = element.offset().top;
-                    let heightE         = element.outerHeight();
                     let boxContent      = $('#'+idElement);
-                    let positionB       = boxContent.offset().top;
-                    let heightB         = boxContent.outerHeight();
-                    let heightFooter    = $('.copyright').outerHeight();
                     $(document).scroll(function(){
+                        let positionB       = boxContent.offset().top;
+                        let heightB         = boxContent.outerHeight();
+                        let heightFooter    = $('.copyright').outerHeight();
+                        let positionE   = element.offset().top;
+                        let heightE     = element.outerHeight();
                         let scrollNow   = $(document).scrollTop();
                         let minScroll   = parseInt(heightE + positionE);
                         let maxScroll   = parseInt(heightB + positionB - heightFooter);

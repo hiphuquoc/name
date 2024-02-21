@@ -47,7 +47,7 @@ class HomeController extends Controller{
                                     ->with('seo', 'en_seo', 'type')
                                     ->first();
             /* lấy hình nền điện thoại tết */
-            $slug               = 'hinh-nen-dien-thoai-tet';
+            $slug               = 'hinh-nen-dien-thoai-gai-xinh';
             $infoCategoryTet    = Category::select('category_info.*', 'seo.slug')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->where('seo.slug', '=', $slug)

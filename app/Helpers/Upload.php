@@ -70,6 +70,11 @@ class Upload {
             $heightImage        = $imageTmp->height();
             $gcsDisk->put($fileUrl, $imageTmp->encode($extension, config('image.quality'))->resize($widthImage, $heightImage)->stream());
             $result             = $fileUrl;
+            // Resize and save the large image
+            $fileUrlLarge       = $folderUpload . $filenameNotExtension . '-large.' . $extension;
+            $widthImageLarge    = 800;
+            $heightImageLarge   = $widthImageLarge / $percentPixel;
+            $gcsDisk->put($fileUrlLarge, $imageTmp->encode($extension, config('image.quality'))->resize($widthImageLarge, $heightImageLarge)->stream());
             // Resize and save the small image
             $fileUrlSmall       = $folderUpload . $filenameNotExtension . '-small.' . $extension;
             $widthImageSmall    = 500;

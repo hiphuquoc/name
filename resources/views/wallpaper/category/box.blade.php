@@ -170,7 +170,7 @@
         function preventClickImgAndEffectDownload(){
             $("img").on("contextmenu", function (e) {
                 e.preventDefault();
-                alert("Chức năng chuột phải đã bị vô hiệu hóa cho ảnh này.");
+                console.log("Chức năng chuột phải đã bị vô hiệu hóa cho ảnh này");
             });
             // Xử lý sự kiện click trên .action_item ẩn box khi click download
             $('.freeWallpaperBox_item .download').on('click', function (e) {

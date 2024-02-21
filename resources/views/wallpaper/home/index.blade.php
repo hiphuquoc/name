@@ -87,9 +87,9 @@
                     <div class="categoryBox_title">
                         <h2>
                             @if(empty($language)||$language=='vi')
-                                <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại tết 2024">Hình nền điện thoại Tết 2024</a>
+                                <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại Gái xinh">Hình nền điện thoại Gái xinh</a>
                             @else
-                                <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">New Year 2024 Wallpapers</a>
+                                <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="Pretty girl phone wallpapers">Pretty girl phone wallpapers</a>
                             @endif
                         </h2>
                     </div>

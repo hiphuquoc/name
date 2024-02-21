@@ -18,6 +18,7 @@ use App\Models\RelationFreewallpaperCategory;
 use App\Helpers\Charactor;
 use App\Models\Category;
 use App\Models\RelationTagInfoOrther;
+use App\Models\RelationFreeWallpaperUser;
 use App\Models\Tag;
 use App\Models\Seo;
 use App\Models\EnSeo;
@@ -82,7 +83,8 @@ class FreeWallpaperController extends Controller {
                 $heightW                        = $imageInfoW[1];
                 $miniTypeW                      = $imageInfoW['mime'];
                 $fileSizeW                      = filesize($wallpaper);
-                $extensionW                     = config('image.extension');
+                // $extensionW                     = config('image.extension');
+                $extensionW                     = $wallpaper->getClientOriginalExtension();
                 $fileNameNonHaveExtensionW      = Charactor::convertStrToUrl($request->get('name')).'-'.time().'-'.$i;
                 $folderW                        = config('main.google_cloud_storage.freeWallpapers');
                 $fileUrlW                       = $folderW.$fileNameNonHaveExtensionW.'.'.$extensionW;
@@ -258,15 +260,21 @@ class FreeWallpaperController extends Controller {
         if(!empty($infoWallpaper)){
             /* xóa wallpaper trong google_cloud_storage */
             Storage::disk('gcs')->delete($infoWallpaper->file_cloud);
+            /* xóa wallpaper large trong google_cloud_storage */
+            Storage::disk('gcs')->delete(config('main.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-large.'.$infoWallpaper->extension);
             /* xóa wallpaper Small trong google_cloud_storage */
             Storage::disk('gcs')->delete(config('main.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-small.'.$infoWallpaper->extension);
             /* xóa wallpaper Mini trong google_cloud_storage */
             Storage::disk('gcs')->delete(config('main.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-mini.'.$infoWallpaper->extension);
             /* xóa relation */
             /* categories */
+            RelationFreeWallpaperUser::select('*')
+                ->where('free_wallpaper_info_id', $infoWallpaper->id)
+                ->delete();
+            /* categories */
             RelationFreewallpaperCategory::select('*')
-            ->where('free_wallpaper_info_id', $infoWallpaper->id)
-            ->delete();
+                ->where('free_wallpaper_info_id', $infoWallpaper->id)
+                ->delete();
             /* tags */
             RelationTagInfoOrther::select('*')
                 ->where('reference_id', $infoWallpaper->id)

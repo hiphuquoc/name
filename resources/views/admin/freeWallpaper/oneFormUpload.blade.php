@@ -9,7 +9,7 @@
             <div class="formBox_full">
                 <div class="formBox_full_item">
                     <label class="form-label inputRequired" for="name">Alt ảnh</label>
-                    <textarea class="form-control" name="name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->name ?? null }}</textarea>
+                    <textarea class="form-control" name="name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->name ?? config('main.auto_fill.alt.vi') }}</textarea>
                 </div>
                 {{-- <div class="formBox_full_item">
                     <label class="form-label inputRequired" for="name">Alt ảnh EN</label>
