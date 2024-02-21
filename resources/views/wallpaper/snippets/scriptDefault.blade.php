@@ -554,9 +554,9 @@
                 let element         = $('#tocContentMain');
                 if(element.length>0){
                     let boxContent      = $('#'+idElement);
+                    let heightB         = boxContent.outerHeight();
                     $(document).scroll(function(){
                         let positionB       = boxContent.offset().top;
-                        let heightB         = boxContent.outerHeight();
                         let heightFooter    = $('.copyright').outerHeight();
                         let positionE   = element.offset().top;
                         let heightE     = element.outerHeight();
@@ -567,10 +567,9 @@
                             $('.tocFixedIcon').css('display', 'block');
                             /* thiết lập chiều ngang của box fixed */ 
                             const width = $('.layoutHeaderSide_header').outerWidth();
-                            $('.tocContentMain').css('max-width', width);
+                            $('.tocFixed').css('width', width);
                         }else {
                             $('.tocFixedIcon').css('display', 'none');
-                            $('.tocContentMain').attr('style', '');
                         }
                     });
                 }

@@ -1641,7 +1641,7 @@ $heightMenu : 52.5px;
 }
 
 .freeWallpaperBox {
-    min-height: 100vh;
+    // min-height: 100vh;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-template-rows: repeat(auto, 5vw);
