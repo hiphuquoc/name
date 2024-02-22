@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\SettingController;
 use App\Models\Seo;
 use App\Models\EnSeo;
 
@@ -16,7 +16,7 @@ class Url {
                                 ->first();
         if(!empty($infoPage->slug_full)) {
             $infoPage->language = 'vi';
-            LanguageController::set('vi');
+            SettingController::settingLanguage('vi');
             return $infoPage;
         }
         /* check ngôn ngữ Anh */
@@ -25,7 +25,7 @@ class Url {
                             ->first();
         if(!empty($infoPage->slug_full)) {
             $infoPage->language = 'en';
-            LanguageController::set('en');
+            SettingController::settingLanguage('en');
             return $infoPage;
         }
         /* rỗng */

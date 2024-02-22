@@ -129,13 +129,16 @@
                 'viewBy'            => $viewBy
             ])
 
-            <!-- Product Box -->
+            <!-- Product Box 
+                vừa vào tải 0 phần tử -> tất cả tải bằng ajax
+            -->
             @include('wallpaper.template.wallpaperGrid', [
-                'wallpapers'        => $wallpapers ?? null,
+                'wallpapers'        => new \Illuminate\Database\Eloquent\Collection,
                 'headingTitle'      => 'h2',
                 'contentEmpty'      => true,
-                'loaded'            => $loaded,
-                'total'             => $total
+                'loaded'            => 0,
+                'total'             => $total,
+                'empty'             => !empty($wallpapers)&&$wallpapers->isNotEmpty() ? false : true
             ])
         </div>
         <!-- Nội dung -->

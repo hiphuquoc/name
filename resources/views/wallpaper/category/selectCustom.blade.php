@@ -1,5 +1,5 @@
-<div class="selectCustom_text">
-    {{ empty($language)||$language=='vi' ? 'Lọc theo '.$type['name'] : 'Filter by Category'.$type['en_name'] }}
+<div class="selectCustom_text maxLine_1">
+    {{ empty($language)||$language=='vi' ? 'Lọc theo '.$type['name'] : 'Filter by '.$type['en_name'] }}
 </div>
 <div class="selectCustom_input maxLine_1">
     @php
@@ -52,9 +52,9 @@
                 @endphp
                 <div class="selectCustom_box_item {{ $selected }}" onclick="setFilter(this);">
                     @if(empty($language)||$language=='vi')
-                        {{ $category->seo->title }}
+                        {{ $category->name }}
                     @else 
-                        {{ $category->en_seo->title }}
+                        {{ $category->en_name }}
                     @endif
                     <!-- check box -->
                     <input type="radio" name="filters[{{ $type['key'] }}]" value="{{ $category->id }}" />

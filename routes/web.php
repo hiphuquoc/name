@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController as CategoryPublic;
+use App\Http\Controllers\CategoryMoneyController as CategoryMoneyPublic;
 use App\Http\Controllers\MomoController;
 use App\Http\Controllers\ZalopayController;
 use App\Http\Controllers\RoutingController;
@@ -264,7 +265,7 @@ Route::get('/setSortBy', [AjaxController::class, 'setSortBy'])->name('ajax.setSo
 Route::get('/downloadImgFreeWallpaper', [AjaxController::class, 'downloadImgFreeWallpaper'])->name('ajax.downloadImgFreeWallpaper');
 Route::get('/setFeelingFreeWallpaper', [AjaxController::class, 'setFeelingFreeWallpaper'])->name('ajax.setFeelingFreeWallpaper');
 Route::get('/loadOneFreeWallpaper', [AjaxController::class, 'loadOneFreeWallpaper'])->name('ajax.loadOneFreeWallpaper');
-Route::get('/loadMoreWallpaper', [CategoryPublic::class, 'loadMoreWallpaper'])->name('main.category.loadMoreWallpaper');
+Route::get('/loadMoreWallpaper', [CategoryMoneyPublic::class, 'loadMoreWallpaper'])->name('main.category.loadMoreWallpaper');
 Route::get('/loadmoreFreeWallpapers', [CategoryPublic::class, 'loadmoreFreeWallpapers'])->name('main.category.loadmoreFreeWallpapers');
 Route::get('/toogleHeartFeelingFreeWallpaper', [AjaxController::class, 'toogleHeartFeelingFreeWallpaper'])->name('ajax.toogleHeartFeelingFreeWallpaper');
 /* login */

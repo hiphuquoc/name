@@ -11,25 +11,53 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller {
 
-    public static function loadMoreWallpaper(Request $request){
+    public static function loadmoreFreeWallpapers(Request $request){
+        /* tìm kiếm bằng feeling */
+        $searchFeeling = $request->get('search_feeling') ?? [];
+        // foreach($searchFeeling as $feeling){
+        //     if($feeling=='all'){ /* trường hợp tìm kiếm có all thì clear */
+        //         $searchFeeling = [];
+        //         break;
+        //     }
+        // }
         $response           = [];
         $content            = '';
-        $language           = Cookie::get('language') ?? 'vi';
-        $loaded             = $request->get('loaded');
-        $requestLoad        = $request->get('request_load');
-        $arrayIdCategory    = json_decode($request->get('array_category_info_id'));
-        $sortBy             = Cookie::get('sort_by') ?? config('main.sort_type')[0]['key'];
-        // $user           = Auth::user();
-        /* filter nếu có */
-        $filters            = $request->get('filters') ?? [];
-        /* tìm kiếm bằng key_search */
-        $keySearch          = null;
-        $wallpapers         = $wallpapers     = Product::select('product_info.*')
-                            ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                            ->when(!empty($keySearch), function($query) use($keySearch){
-                                $query->where('code', 'like', '%'.$keySearch.'%')
-                                    ->orWhere('name', 'like', '%'.$keySearch.'%')
-                                    ->orWhere('en_name', 'like', '%'.$keySearch.'%');
+        $params             = [];
+        if(!empty($request->get('total'))){
+            $params['loaded']                   = $request->get('loaded');
+            $params['request_load']             = $request->get('requestLoad');
+            $params['array_category_info_id']   = json_decode($request->get('array_category_info_id'));
+            $params['sort_by']                  = Cookie::get('sort_by') ?? null;
+            $params['filters']                  = $request->get('filters') ?? [];
+            $params['id_not']                   = $request->get('idNot') ?? 0;
+            $tmp                                = self::getFreeWallpapers($params);
+            $user           = Auth::user();
+            $language       = $request->session()->get('language') ?? 'vi';
+            foreach($tmp['wallpapers'] as $wallpaper){
+                $content    .= view('wallpaper.category.item', compact('wallpaper', 'language', 'user'))->render();
+            }
+        }
+        $response['content']    = $content;
+        $response['loaded']     = $tmp['loaded'] ?? $request->get('loaded') ?? 0;
+        $response['total']      = $tmp['total'] ?? $request->get('total') ?? 0;
+        return json_encode($response);
+    }
+
+    public static function getFreeWallpapers($params){
+        $idNot          = $params['id_not'] ?? 0;
+        $keySearch      = $params['key_search'] ?? null;
+        $filters        = $params['filters'] ?? [];
+        $sortBy         = $params['sort_by'] ?? null;
+        $loaded         = $params['loaded'] ?? 0;
+        $arrayIdCategory = $params['array_category_info_id'] ?? [];
+        $requestLoad    = $params['request_load'] ?? 10;
+        $response       = [];
+        $wallpapers     = FreeWallpaper::select('*')
+                            ->when(!empty($idNot), function($query) use($idNot){
+                                $query->where('id', '!=', $idNot);
+                            })
+                            ->whereHas('categories', function($query) use($arrayIdCategory) {
+                                $query->whereIn('category_info_id', $arrayIdCategory);
                             })
                             ->when(!empty($filters), function($query) use($filters){
                                 foreach($filters as $filter){
@@ -38,12 +66,11 @@ class CategoryController extends Controller {
                                     });
                                 }
                             })
-                            ->whereHas('prices.wallpapers', function($query){
-
-                            })
-                            ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
-                                $query->whereIn('id', $arrayIdCategory);
-                            })
+                            // ->when(!empty($searchFeeling), function($query) use ($searchFeeling) {
+                            //     $query->whereHas('feeling', function($subquery) use ($searchFeeling) {
+                            //         $subquery->whereIn('type', $searchFeeling);
+                            //     });
+                            // })
                             ->when(empty($sortBy), function($query){
                                 $query->orderBy('id', 'DESC');
                             })
@@ -57,94 +84,32 @@ class CategoryController extends Controller {
                             ->when($sortBy=='old', function($query){
                                 $query->orderBy('id', 'ASC');
                             })
-                            ->with('seo', 'en_seo', 'prices')
-                            ->orderBy('seo.ordering', 'DESC')
-                            ->orderBy('id', 'DESC')
                             ->skip($loaded)
                             ->take($requestLoad)
                             ->get();
-        foreach($wallpapers as $wallpaper){
-            $content    .= view('wallpaper.template.wallpaperItem', [
-                'product'   => $wallpaper,
-                'language'  => $language,
-                'lazyload'  => true
-            ])->render();
-        }
-        $response['content']    = $content;
-        $response['loaded']     = $loaded + $requestLoad;
-        return json_encode($response);
-    }
-
-    public static function loadmoreFreeWallpapers(Request $request){
-        /* tìm kiếm bằng feeling */
-        $searchFeeling = $request->get('search_feeling') ?? [];
-        foreach($searchFeeling as $feeling){
-            if($feeling=='all'){ /* trường hợp tìm kiếm có all thì clear */
-                $searchFeeling = [];
-                break;
-            }
-        }
-        $response           = [];
-        $content            = '';
-        if(!empty($request->get('total'))){
-            $language       = Cookie::get('language') ?? 'vi';
-            $loaded         = $request->get('loaded');
-            $requestLoad    = $request->get('requestLoad');
-            $arrayIdCategory = json_decode($request->get('arrayIdCategory'));
-            $typeWhere      = $request->get('typeWhere') ?? 'or';
-            $sortBy         = Cookie::get('sort_by') ?? null;
-            $filters        = $request->get('filters') ?? [];
-            $idNot          = $request->get('idNot') ?? 0;
-            $user           = Auth::user();
-            $wallpapers     = FreeWallpaper::select('*')
-                                ->where('id', '!=', $idNot)
-                                ->whereHas('categories', function($query) use($arrayIdCategory, $typeWhere) {
-                                    if(!empty($arrayIdCategory)){
-                                        if ($typeWhere == 'or') {
-                                            $query->whereIn('category_info_id', $arrayIdCategory);
-                                        } elseif ($typeWhere == 'and') {
-                                            $query->where(function($subquery) use($arrayIdCategory) {
-                                                foreach($arrayIdCategory as $c) {
-                                                    $subquery->where('category_info_id', $c);
-                                                }
-                                            });
-                                        }
-                                    }
-                                })
-                                ->when(!empty($filters), function($query) use($filters){
-                                    foreach($filters as $filter){
-                                        $query->whereHas('categories.infoCategory', function($query) use($filter){
-                                            $query->where('id', $filter);
-                                        });
-                                    }
-                                })
-                                ->when(!empty($searchFeeling), function($query) use ($searchFeeling) {
-                                    $query->whereHas('feeling', function($subquery) use ($searchFeeling) {
-                                        $subquery->whereIn('type', $searchFeeling);
+        $total          = FreeWallpaper::select('*')
+                            ->when(!empty($idNot), function($query) use($idNot){
+                                $query->where('id', '!=', $idNot);
+                            })
+                            ->whereHas('categories', function($query) use($arrayIdCategory) {
+                                $query->whereIn('category_info_id', $arrayIdCategory);
+                            })
+                            ->when(!empty($filters), function($query) use($filters){
+                                foreach($filters as $filter){
+                                    $query->whereHas('categories.infoCategory', function($query) use($filter){
+                                        $query->where('id', $filter);
                                     });
-                                })
-                                ->when(empty($sortBy), function($query){
-                                    $query->orderBy('id', 'DESC');
-                                })
-                                ->when($sortBy=='new'||$sortBy=='propose', function($query){
-                                    $query->orderBy('id', 'DESC');
-                                })
-                                ->when($sortBy=='favourite', function($query){
-                                    $query->orderBy('heart', 'DESC')
-                                            ->orderBy('id', 'DESC');
-                                })
-                                ->when($sortBy=='old', function($query){
-                                    $query->orderBy('id', 'ASC');
-                                })
-                                ->skip($loaded)
-                                ->take($requestLoad)
-                                ->get();
-            foreach($wallpapers as $wallpaper){
-                $content    .= view('wallpaper.category.item', compact('wallpaper', 'language', 'user'))->render();
-            }
-        }
-        $response['content']    = $content;
+                                }
+                            })
+                            // ->when(!empty($searchFeeling), function($query) use ($searchFeeling) {
+                            //     $query->whereHas('feeling', function($subquery) use ($searchFeeling) {
+                            //         $subquery->whereIn('type', $searchFeeling);
+                            //     });
+                            // })
+                            ->count();
+        $response['wallpapers'] = $wallpapers;
+        $response['total']      = $total;
         $response['loaded']     = $loaded + $requestLoad;
-        return json_encode($response);
+        return $response;
     }
 }

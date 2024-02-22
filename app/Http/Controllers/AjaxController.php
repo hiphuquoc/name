@@ -439,7 +439,7 @@ class AjaxController extends Controller {
         $response                   = null;
         if(!empty($request->get('free_wallpaper_info_id'))){
             $idFreeWallpaper        = $request->get('free_wallpaper_info_id');
-            $language               = Cookie::get('language') ?? 'vi';
+            $language               = $request->session()->get('language') ?? 'vi';
             $user                   = Auth::user();
             $idUser                 = $user->id ?? 0;
             $wallpaper              = FreeWallpaper::select('*')

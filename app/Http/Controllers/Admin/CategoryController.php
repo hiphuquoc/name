@@ -37,7 +37,7 @@ class CategoryController extends Controller {
     public static function view(Request $request){
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
-        $language           = Cookie::get('language') ?? 'vi';
+        $language           = $request->session()->get('language') ?? 'vi';
         $item               = Category::select('category_info.*', 'seo.type')
                                 ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                 ->where('category_info.id', $id)
@@ -71,7 +71,7 @@ class CategoryController extends Controller {
     public function create(CategoryRequest $request){
         try {
             DB::beginTransaction();
-            $language           = Cookie::get('language') ?? 'vi';
+            $language           = $request->session()->get('language') ?? 'vi';
             $keyTable           = $request->get('type');
             /* upload image */
             $dataPath           = [];
@@ -165,7 +165,7 @@ class CategoryController extends Controller {
         try {
             DB::beginTransaction();
             /* ngôn ngữ */
-            $language           = Cookie::get('language') ?? 'vi';
+            $language           = $request->session()->get('language') ?? 'vi';
             $keyTable           = $request->get('type');
 
             $seoId              = $request->get('seo_id');

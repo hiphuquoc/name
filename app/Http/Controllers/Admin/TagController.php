@@ -38,7 +38,7 @@ class TagController extends Controller {
     public static function view(Request $request){
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
-        $language           = Cookie::get('language') ?? 'vi';
+        $language           = $request->session()->get('language') ?? 'vi';
         $item               = Tag::select('tag_info.*', 'seo.type')
                                 ->join('seo', 'seo.id', '=', 'tag_info.seo_id')
                                 ->where('tag_info.id', $id)

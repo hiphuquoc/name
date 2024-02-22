@@ -7,7 +7,7 @@
                 if($i!=1) $xhtml .= ', ';
                 $urlImage        = config('main.google_cloud_storage.default_domain').$d->file_cloud_wallpaper;
                 $name           = $d->name ?? null;
-                $description    = $d->description ?? $d->name;
+                $description    = $name;
                 $xhtml          .= '{
                                     "@type": "ImageObject",
                                     "contentUrl": "'.$urlImage.'",

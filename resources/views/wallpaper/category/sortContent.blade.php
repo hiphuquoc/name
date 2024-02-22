@@ -14,7 +14,7 @@
             }
         @endphp
         <div class="selectCustom">
-            <div class="selectCustom_text">
+            <div class="selectCustom_text maxLine_1">
                 {!! $titleViewBy !!}
             </div>
             <div class="selectCustom_input maxLine_1">
@@ -46,7 +46,7 @@
             }
         @endphp
         <div class="selectCustom">
-            <div class="selectCustom_text">
+            <div class="selectCustom_text maxLine_1">
                 {!! $titleSortBy !!}
             </div>
             <div class="selectCustom_input maxLine_1">

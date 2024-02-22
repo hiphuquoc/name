@@ -2,7 +2,6 @@
 <input type="hidden" id="loaded" name="loaded" value="{{ $loaded ?? 0 }}" />
 <input type="hidden" id="topLoad" name="topLoad" value="" />
 <input type="hidden" id="idNot" name="idNot" value="{{ $idNot ?? 0 }}" />
-<input type="hidden" id="typeWhere" name="typeWhere" value="{{ $typeWhere ?? 'or' }}" />
 <input type="hidden" id="arrayIdCategory" name="arrayIdCategory" value="{{ json_encode($arrayIdCategory) }}" />
 <div class="freeWallpaperBox">
     @if($total>0)
@@ -127,45 +126,72 @@
             return totalColumns;
         }
         /* loadmore wallpaper */
+        var isFirstLoad = true; // Khai báo một biến để theo dõi xem đã load lần đầu tiên chưa
         function loadFreeWallpaperMore(requestLoad = 20){
             var boxCategory         = $('.freeWallpaperBox');
             const total             = $('#total').val();
             const loaded            = $('#loaded').val();
-            const idNot             = $('#idNot').val();
-            if(boxCategory.length&&!boxCategory.hasClass('loading')&&parseInt(total)>parseInt(loaded)){
-                
-                const distanceLoad  = $('#topLoad').val();;
-                if($(window).scrollTop() + 1500 > distanceLoad) {
-                    /* thực thi */
-                    /* thêm class để đánh dấu đăng load => không load nữa */
-                    boxCategory.addClass('loading');
-                    /* lấy dữ liệu */
-                    const arrayIdCategory   = $('#arrayIdCategory').val();
-                    $.ajax({
-                        url         : '{{ route("main.category.loadmoreFreeWallpapers") }}',
-                        type        : 'get',
-                        dataType    : 'json',
-                        data        : {
-                            total, loaded, arrayIdCategory, requestLoad, idNot
-                        },
-                        success     : function(response){
-                            /* xóa bỏ class để thể hiện đã load xong */
-                            boxCategory.removeClass('loading');
-                            /* append dữ liệu */
-                            $('#loaded').val(response.loaded);
-                            if(response.content!='') {
-                                boxCategory.append(response.content);
-                            }
-                            // Kiểm tra khi tất cả các phần tử đã được load xong
-                            waitForImagesLoaded(boxCategory, function () {
-                                setViewAllImage();
-                            });
-                            // ngân click chuột phải các ảnh được load
-                            preventClickImgAndEffectDownload();
-                        }
-                    });
+            const distanceLoad  = $('#topLoad').val();
+            
+            if($(window).scrollTop() + 1500 > distanceLoad&&boxCategory.length&&!boxCategory.hasClass('loading')) {
+                if(isFirstLoad){
+                    loadFreeWallpaperMoreToController(requestLoad);
+                }else {
+                    if(parseInt(total)>parseInt(loaded)){
+                        loadFreeWallpaperMoreToController(requestLoad);
+                    }
                 }
             }
+        }
+        function loadFreeWallpaperMoreToController(requestLoad){
+            /* Lấy chuỗi query parameters từ URL */
+            var queryString = window.location.search;
+            var urlParams = new URLSearchParams(queryString);
+            var params = {};
+            for (const [key, value] of urlParams) {
+                params[key] = value;
+            }
+            /* lấy thông tin của input */
+            var boxCategory         = $('.freeWallpaperBox');
+            const total             = $('#total').val();
+            const loaded            = $('#loaded').val();
+            /* thêm class để đánh dấu đăng load => không load nữa */
+            boxCategory.addClass('loading');
+            /* lấy dữ liệu */
+            params.total            = total;
+            params.loaded           = loaded;
+            params.array_category_info_id = $('#arrayIdCategory').val();
+            params.request_load     = requestLoad;
+            params.idNot            = $('#idNot').val();
+            $.ajax({
+                url         : '{{ route("main.category.loadmoreFreeWallpapers") }}',
+                type        : 'get',
+                dataType    : 'json',
+                data        : params,
+                success     : function(response){
+                    setTimeout(function(){
+                        lazyload();
+                    }, 0);
+                    /* xóa bỏ class để thể hiện đã load xong */
+                    boxCategory.removeClass('loading');
+                    /* append dữ liệu */
+                    $('#loaded').val(response.loaded);
+                    $('#total').val(response.total);
+                    if(response.content!='') {
+                        boxCategory.append(response.content);
+                    }
+                    // Kiểm tra khi tất cả các phần tử đã được load xong
+                    waitForImagesLoaded(boxCategory, function () {
+                        setViewAllImage();
+                    });
+                    // ngân click chuột phải các ảnh được load
+                    preventClickImgAndEffectDownload();
+                    /* thêm thông báo nếu empty */
+                    if(boxCategory.children().length==0) boxCategory.html('<div>Không có kết quả phù hợp!');
+                }
+            });
+            // Đặt isFirstLoad thành false sau lần đầu load
+            isFirstLoad = false;
         }
         function preventClickImgAndEffectDownload(){
             $("img").on("contextmenu", function (e) {

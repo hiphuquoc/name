@@ -98,12 +98,14 @@
                 'language'          => $language ?? 'vi',
                 'total'             => $total
             ])
-            <!-- Box -->
+            <!-- Box 
+                vừa vào tải 0 phần tử -> tất cả tải bằng ajax
+            -->
             @include('wallpaper.category.box', [
+                'wallpapers'        => new \Illuminate\Database\Eloquent\Collection,
                 'total'             => $total,
-                'loaded'            => $loaded,
-                'arrayIdCategoyr'   => $arrayIdCategory,
-                'wallpapers'        => $wallpapers,
+                'loaded'            => 0,
+                'arrayIdCategory'   => $arrayIdCategory,
                 'language'          => $language
             ])
         </div>
