@@ -81,8 +81,10 @@ class CategoryMoneyController extends Controller {
                                     });
                                 }
                             })
-                            ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
-                                $query->whereIn('id', $arrayIdCategory);
+                            ->when(!empty($arrayIdCategory), function($query) use($arrayIdCategory){
+                                $query->whereHas('categories', function($query) use($arrayIdCategory) {
+                                    $query->whereIn('category_info_id', $arrayIdCategory);
+                                });
                             })
                             ->when(empty($sortBy), function($query){
                                 $query->orderBy('id', 'DESC');
@@ -120,8 +122,10 @@ class CategoryMoneyController extends Controller {
                                     });
                                 }
                             })
-                            ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
-                                $query->whereIn('id', $arrayIdCategory);
+                            ->when(!empty($arrayIdCategory), function($query) use($arrayIdCategory){
+                                $query->whereHas('categories', function($query) use($arrayIdCategory) {
+                                    $query->whereIn('category_info_id', $arrayIdCategory);
+                                });
                             })
                             ->count();
         $response['wallpapers'] = $wallpapers;

@@ -56,8 +56,10 @@ class CategoryController extends Controller {
                             ->when(!empty($idNot), function($query) use($idNot){
                                 $query->where('id', '!=', $idNot);
                             })
-                            ->whereHas('categories', function($query) use($arrayIdCategory) {
-                                $query->whereIn('category_info_id', $arrayIdCategory);
+                            ->when(!empty($arrayIdCategory), function($query) use($arrayIdCategory){
+                                $query->whereHas('categories', function($query) use($arrayIdCategory) {
+                                    $query->whereIn('category_info_id', $arrayIdCategory);
+                                });
                             })
                             ->when(!empty($filters), function($query) use($filters){
                                 foreach($filters as $filter){
@@ -91,8 +93,10 @@ class CategoryController extends Controller {
                             ->when(!empty($idNot), function($query) use($idNot){
                                 $query->where('id', '!=', $idNot);
                             })
-                            ->whereHas('categories', function($query) use($arrayIdCategory) {
-                                $query->whereIn('category_info_id', $arrayIdCategory);
+                            ->when(!empty($arrayIdCategory), function($query) use($arrayIdCategory){
+                                $query->whereHas('categories', function($query) use($arrayIdCategory) {
+                                    $query->whereIn('category_info_id', $arrayIdCategory);
+                                });
                             })
                             ->when(!empty($filters), function($query) use($filters){
                                 foreach($filters as $filter){

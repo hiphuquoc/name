@@ -81,4 +81,15 @@ class Image {
         }
         return $result;
     }
+
+    public static function getUrlImageLargeByUrlImage($urlImage){
+        $result     = null;
+        if(!empty($urlImage)){
+            /* sử dụng ảnh trong google_cloud_storage */
+            $url    = config('main.google_cloud_storage.default_domain').$urlImage;
+            $tmp    = pathinfo($url);
+            $result = $tmp['dirname'].'/'.$tmp['filename'].'-large.'.$tmp['extension'];
+        }
+        return $result;
+    }
 }

@@ -1,6 +1,10 @@
 <div class="freeWallpaperDetailBox">
     <div class="freeWallpaperDetailBox_image">
-        <img src="{{ config('main.google_cloud_storage.default_domain').$item->file_cloud }}" alt="" title="" />
+        @php
+            $image = \App\Helpers\Image::getUrlImageLargeByUrlImage($item->file_cloud);
+            $altImage = empty($language)||$language=='vi' ? $item->name : $item->en_name;
+        @endphp
+        <img src="{{ $image }}" alt="{{ $altImage }}" title="{{ $altImage }}" />
     </div>
     <div class="freeWallpaperDetailBox_content">
         <h1>{{ $item->name }}</h1>

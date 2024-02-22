@@ -3,7 +3,7 @@
 @endphp
 <div id="js_calculatorPosition_item_{{ $wallpaper->id }}" class="freeWallpaperBox_item" data-id="{{ $wallpaper->id }}">
     <div class="freeWallpaperBox_item_image">
-        <img class="lazyload" src="{{ \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->file_cloud) }}" data-src="{{ config('main.google_cloud_storage.default_domain').$wallpaper->file_cloud }}" alt="{{ $altImage }}" title="{{ $altImage }}" />
+        <img class="lazyload" src="{{ \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->file_cloud) }}" data-src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->file_cloud) }}" alt="{{ $altImage }}" title="{{ $altImage }}" />
     </div>
     <div class="freeWallpaperBox_item_box">
         <div class="freeWallpaperBox_item_box_item">
