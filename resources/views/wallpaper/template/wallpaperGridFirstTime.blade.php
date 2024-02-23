@@ -10,15 +10,15 @@
 {{-- <input type="hidden" id="js_loadMoreWallpaper_view_by" value="{{ Cookie::get('view_by') ?? 'set' }}" /> --}}
 <!-- box -->
 <div id="js_loadMoreWallpaper_box" class="wallpaperGridBox">
-    @if(!empty($wallpapers)&&$wallpapers->isNotEmpty())
-        @foreach($wallpapers as $wallpaper)
-            @php
-                $loadFirstTime = 10;
-                if($loop->index>=$loadFirstTime) break;
-            @endphp
-            <div class="wallpaperGridBox_itemBackground"></div>
-        @endforeach
-    @endif
+    @php
+        $loadFirstTime = 10;
+    @endphp
+    @foreach($wallpapers as $wallpaper)
+        @php
+            if($loop->index>=$loadFirstTime) break;
+        @endphp
+        <div class="wallpaperGridBox_itemBackground"></div>
+    @endforeach
     {{-- <!-- thông báo không có kết quả (cần thiêt) -->
     @if(!empty($empty)&&$empty==true)
         @if(empty($language)||$language=='vi')
@@ -89,12 +89,10 @@
                     /* append dữ liệu */
                     $('#js_loadMoreWallpaper_loaded').val(response.loaded);
                     $('#js_loadMoreWallpaper_total').val(response.total); /* cập nhật lại total do load ajax cache */
-                    if (response.content != '') {
-                        if(firstTime){
-                            boxCategory.html(response.content);
-                        }else {
-                            boxCategory.append(response.content);
-                        }
+                    if(firstTime){
+                        boxCategory.html(response.content);
+                    }else {
+                        boxCategory.append(response.content);
                     }
                     /* thêm thông báo nếu empty */
                     if(boxCategory.children().length==0) boxCategory.html('<div>Không có kết quả phù hợp!');
