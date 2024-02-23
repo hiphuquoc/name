@@ -48,7 +48,7 @@ class HomeController extends Controller{
                                     ->first();
             /* lấy hình nền điện thoại gái xinh */
             $slug               = 'hinh-nen-dien-thoai-gai-xinh';
-            $infoCategoryTet    = Category::select('category_info.*', 'seo.slug')
+            $infoCategoryGirl   = Category::select('category_info.*', 'seo.slug')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->where('seo.slug', '=', $slug)
                                     // ->whereHas('products.infoProduct.prices.wallpapers', function($query){
@@ -59,24 +59,24 @@ class HomeController extends Controller{
                                     ->with('products', function($query){
                                         $query->orderBy('id', 'DESC')
                                             ->skip(0)
-                                            ->take(10);
+                                            ->take(20);
                                     })
                                     ->first();
             /* lấy hình nền điện thoại tết */
             $slug               = 'hinh-nen-dien-thoai-tet';
-            $infoCategoryNoel   = Category::select('category_info.*', 'seo.slug')
+            $infoCategoryTet   = Category::select('category_info.*', 'seo.slug')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->where('seo.slug', '=', $slug)
                                     ->with('seo')
                                     ->with('products', function($query){
                                         $query->orderBy('id', 'DESC')
                                             ->skip(0)
-                                            ->take(10);
+                                            ->take(20);
                                     })
                                     ->first();
             $viewBy             = $request->cookie('view_by') ?? 'set';
             $arrayIdCategory    = [];
-            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'infoCategoryTet', 'infoCategoryNoel', 'viewBy', 'arrayIdCategory'))->render();
+            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'infoCategoryGirl', 'infoCategoryTet', 'viewBy', 'arrayIdCategory'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }

@@ -98,25 +98,29 @@ $fontText: "SVN-Gilroy", sans-serif;
       aspect-ratio: 1/1;
       border: none;
       outline: none;
-      background: $bg-08;
+      background: $colorBackgroundLv3;
       border-radius: 50%;
-      color: #fff;
-      opacity: 0.3;
+      color: $colorText;
+      opacity: 0.5;
       &:hover {
-        opacity: 0.5;
+        opacity: 0.75;
+        color: $colorTextLight;
       }
     }
     .slick-arrow {
       position: absolute;
-      top: 50%;
+      top: 45%;
       transform: translateY(-50%);
       z-index: 2;
       cursor: pointer;
       &.slick-prev {
-          left: 0;
+          left: -20px;
       }
       &.slick-next {
-          right: 0;
+          right: -20px;
+      }
+      @media(max-width: 1199px){
+        display: none !important;
       }
     }
   }

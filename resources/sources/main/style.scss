@@ -277,16 +277,6 @@
     &_box {
         width: 100%;
         @include slickArrowCircle;
-        .slick-slider {
-            .slick-arrow {
-                &.slick-prev {
-                    left: -18px;
-                }
-                // &.slick-next {
-                //     right: 0;
-                // }
-            }
-        }
     }
     &_viewMore {
         padding: 0.35rem 2.5rem;

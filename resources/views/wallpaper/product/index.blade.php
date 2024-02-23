@@ -88,7 +88,7 @@
                             $arrayIdProduct = [];
                             foreach($related as $p) $arrayIdProduct[] = $p->infoProduct->id;
                         @endphp --}}
-                        @include('wallpaper.template.wallpaperGrid', [
+                        @include('wallpaper.template.wallpaperGridWithLoadMore', [
                             'loaded'            => 0,
                             'contentEmpty'      => true,
                             'arrayIdCategory'   => $arrayIdCategory

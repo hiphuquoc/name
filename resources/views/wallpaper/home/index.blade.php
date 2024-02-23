@@ -96,8 +96,8 @@
                     <div class="categoryBox_box">
                         <!-- Hình nền điện thoại tết -->
                         @php
-                            $productTet = new \Illuminate\Database\Eloquent\Collection;
-                            foreach($infoCategoryTet->products as $product){
+                            $productGirl = new \Illuminate\Database\Eloquent\Collection;
+                            foreach($infoCategoryGirl->products as $product){
                                 /* lọc bỏ các phần tử chưa có wallpaper => chưa lọc được trong query */
                                 if(!empty($product->infoProduct->prices)&&$product->infoProduct->prices->isNotEmpty()) {
                                     $flagHaveWallpaper = false;
@@ -107,41 +107,31 @@
                                             break;
                                         }
                                     }
-                                    if($flagHaveWallpaper==true) $productTet->add($product->infoProduct);
+                                    if($flagHaveWallpaper==true) $productGirl->add($product->infoProduct);
                                 }
                             }
                         @endphp
                         @include('wallpaper.template.wallpaperGrid', [
-                            'wallpapers'    => $productTet ?? null,
+                            'wallpapers'    => $productGirl ?? null,
                             'headingTitle'  => 'h2',
-                            'viewBy'        => $viewBy,
-                            'total'         => $productTet->count(),
-                            'loaded'        => $productTet->count(),
-                            'arrayId'       => [0]
+                            'viewBy'        => $viewBy
                         ])
                     </div>
-                    @if(empty($language)||$language=='vi')
-                        <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" class="categoryBox_viewMore" aria-label="Hình nền điện thoại Gái xinh">
-                            <i class="fa-solid fa-eye"></i>Xem thêm
-                        </a>
-                    @else
-                        <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="Pretty girl phone wallpapers">View more</a>
-                    @endif
                 </div>
             </div>
         @endif
         <!-- === END:: Product Box === -->
 
         <!-- === START:: Product Box === -->
-        @if(!empty($infoCategoryNoel))
+        @if(!empty($infoCategoryTet))
             <div class="contentBox">
                 <div class="categoryBox">
                     <div class="categoryBox_title">
                         <h2>
                             @if(empty($language)||$language=='vi')
-                                <a href="/{{ $infoCategoryNoel->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại Tết 2024">Hình nền điện thoại Tết 2024</a>
+                                <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại Tết 2024">Hình nền điện thoại Tết 2024</a>
                             @else
-                            <a href="/{{ $infoCategoryNoel->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">New Year 2024 Wallpapers</a>
+                            <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">New Year 2024 Wallpapers</a>
                             @endif
                         </h2>
                     </div>
@@ -149,7 +139,7 @@
                         <!-- Hình nền điện thoại tết -->
                         @php
                             $productTet = new \Illuminate\Database\Eloquent\Collection;
-                            foreach($infoCategoryNoel->products as $product){
+                            foreach($infoCategoryTet->products as $product){
                                 /* lọc bỏ các phần tử chưa có wallpaper => chưa lọc được trong query */
                                 if(!empty($product->infoProduct->prices)&&$product->infoProduct->prices->isNotEmpty()) {
                                     $flagHaveWallpaper = false;
@@ -173,13 +163,6 @@
                             'type'          => 'event_info'
                         ])
                     </div>
-                    @if(empty($language)||$language=='vi')
-                        <a href="/{{ $infoCategoryNoel->seo->slug_full ?? null }}" class="categoryBox_viewMore" aria-label="Hình nền điện thoại Tết 2024">
-                            <i class="fa-solid fa-eye"></i>Xem thêm
-                        </a>
-                    @else
-                        <a href="/{{ $infoCategoryNoel->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">View more</a>
-                    @endif
                 </div>
             </div>
         @endif

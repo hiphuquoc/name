@@ -121,7 +121,7 @@
                         @foreach($product->prices as $price)
                             @foreach($price->wallpapers as $wallpaper)
                                 @php
-                                    if($k==6) break;
+                                    if($k==7) break;
                                     ++$k;
                                     $tag        = $tagBox ?? null;
                                     $keyIdFile  = 'js_changeOption_'.$tag.$price->id.$wallpaper->infoWallpaper->id;
@@ -130,10 +130,10 @@
                                     /* lấy ảnh mini */
                                     $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                                 @endphp
-                                @if($k==6)
+                                @if($k==7)
                                     <a href="/{{ $url }}" class="wallpaperGridBox_item_imageList_item {{ $selected }}">
                                         <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
-                                        <span class="wallpaperGridBox_item_imageList_item_count">+{{ $product->prices->count() - 4 }}</span>
+                                        <span class="wallpaperGridBox_item_imageList_item_count">+{{ $product->prices->count() - 5 }}</span>
                                     </a>
                                 @else 
                                     <div class="wallpaperGridBox_item_imageList_item {{ $selected }}" onClick="changeOption('{{ $keyIdFile }}');">
