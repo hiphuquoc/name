@@ -267,6 +267,9 @@
         flex-wrap: unset !important;
         .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
             margin-top: 0 !important;
+            &:first-child {
+                margin-left: 0 !important;
+            }
             @media(max-width: 1199px){
                 &:nth-child(3n + 1){
                     margin-left: 0.75rem;
