@@ -13,12 +13,9 @@
     @php
         $loadFirstTime = 10;
     @endphp
-    @foreach($wallpapers as $wallpaper)
-        @php
-            if($loop->index>=$loadFirstTime) break;
-        @endphp
+    @for($i=1;$i<=$loadFirstTime;++$i)
         <div class="wallpaperGridBox_itemBackground"></div>
-    @endforeach
+    @endfor
     {{-- <!-- thông báo không có kết quả (cần thiêt) -->
     @if(!empty($empty)&&$empty==true)
         @if(empty($language)||$language=='vi')
