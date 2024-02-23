@@ -1,5 +1,6 @@
 @mixin wallpaperGrid {
     display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     &_item {
         border-radius: 7px;
         position: relative;
@@ -226,6 +227,12 @@
             }
         }
     }
+    &_itemBackground {
+        // @include colorOpacity('background', $colorBackgroundLv1, 0.8);
+        background: rgba(0,0,0,0.25);
+        aspect-ratio: 1/2.18;
+        border-radius: 12px;
+    }
     @media(max-width: 766px){
         &_item {
         // &:not(:first-child){
@@ -255,7 +262,7 @@
 .wallpaperGridBox {
     @include wallpaperGrid;
     flex-wrap: wrap;
-    &_item {
+    &_item, &_itemBackground {
         width: calc(20% - 0.6rem);
         &:nth-child(5n + 1){
             margin-left: 0;
@@ -271,7 +278,7 @@
         }
     }
     @media(max-width: 1499px){
-        &_item {
+        &_item, &_itemBackground {
             width: calc(25% - 0.5625rem);
             &:nth-child(4n + 1){
                 margin-left: 0;
@@ -288,7 +295,7 @@
         }
     }
     @media(max-width: 1199px){
-        &_item {
+        &_item, &_itemBackground {
             width: calc(33.33% - 0.5rem);
             &:nth-child(3n + 1){
                 margin-left: 0;
@@ -305,7 +312,7 @@
         }
     }
     @media(max-width: 1023px){
-        &_item {
+        &_item, &_itemBackground {
             width: calc(25% - 0.5625rem);
             &:nth-child(4n + 1){
                 margin-left: 0;
@@ -322,7 +329,7 @@
         }
     }
     @media(max-width: 990px){
-        &_item {
+        &_item, &_itemBackground {
             width: calc(33.33% - 0.5rem);
             &:nth-child(3n + 1){
                 margin-left: 0;
@@ -339,7 +346,7 @@
         }
     }
     @media(max-width: 577px){
-        &_item {
+        &_item, &_itemBackground {
             width: calc(50% - 0.25rem);
             &:nth-child(2n + 1){
                 margin-left: 0;

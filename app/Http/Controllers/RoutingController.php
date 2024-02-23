@@ -245,7 +245,7 @@ class RoutingController extends Controller{
                             foreach($tmp as $t) $arrayIdCategory[] = $t->id;
                             $params['array_category_info_id']   = $arrayIdCategory;
                             $params['loaded']                   = 0;
-                            $params['request_load']             = 20;
+                            $params['request_load']             = 50; /* lấy 50 để khai báo schema */
                             $params['sort_by']                  = Cookie::get('sort_by') ?? null;
                             $params['filters']                  = $request->get('filters') ?? [];
                             $tmp                                = CategoryController::getFreeWallpapers($params);

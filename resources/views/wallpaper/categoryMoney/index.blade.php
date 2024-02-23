@@ -132,8 +132,8 @@
             <!-- Product Box 
                 vừa vào tải 0 phần tử -> tất cả tải bằng ajax
             -->
-            @include('wallpaper.template.wallpaperGrid', [
-                'wallpapers'        => new \Illuminate\Database\Eloquent\Collection,
+            @include('wallpaper.template.wallpaperGridFirstTime', [
+                'wallpapers'        => $wallpapers,
                 'headingTitle'      => 'h2',
                 'contentEmpty'      => true,
                 'loaded'            => 0,
