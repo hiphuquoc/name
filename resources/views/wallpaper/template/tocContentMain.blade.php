@@ -2,12 +2,12 @@
 <div class="tocContentMain">
     <div class="tocContentMain_title">
         <span class="tocContentMain_title_icon"></span>
-        <span class="tocContentMain_title_text">Mục lục</span>
+        <span class="tocContentMain_title_text">{{ config('language.'.$language.'.data.table_of_contents') }}</span>
     </div>
     <div class="tocContentMain_list" style="display: block;">
         @foreach($data as $item)
             <a href="#{{ $item['id'] ?? null }}" class="tocContentMain_list_item">
-                {{ $item['title'] ?? null }}
+                {!! $item['title'] ?? null !!}
             </a>
         @endforeach
     </div>
@@ -19,12 +19,12 @@
 <div class="tocContentMain tocFixed">
     <div class="tocContentMain_title">
         <span class="tocContentMain_title_icon"></span>
-        <span class="tocContentMain_title_text">Mục lục</span>
+        <span class="tocContentMain_title_text">{{ config('language.'.$language.'.data.table_of_contents') }}</span>
     </div>
     <div class="tocContentMain_list customScrollBar-y">
         @foreach($data as $item)
             <a href="#{{ $item['id'] ?? null }}" class="tocContentMain_list_item">
-                {{ $item['title'] ?? null }}
+                {!! $item['title'] ?? null !!}
             </a>
         @endforeach
     </div>

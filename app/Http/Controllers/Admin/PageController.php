@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\Upload;
 use App\Http\Requests\PageRequest;
 use App\Models\Seo;
-use App\Models\EnSeo;
 use App\Models\RelationSeoEnSeo;
+use App\Models\Prompt;
 use App\Models\Page;
 use App\Models\PageType;
+use App\Models\RelationSeoPageInfo;
+use App\Models\SeoContent;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
 use Illuminate\Support\Facades\Storage;
@@ -24,77 +26,17 @@ class PageController extends Controller {
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
     }
 
-    public function create(PageRequest $request){
+    public function createAndUpdate(PageRequest $request){
         try {
-            DB::beginTransaction();
+            DB::beginTransaction();           
+            /* ngôn ngữ */
             $keyTable           = 'page_info';
-            /* upload image */
-            $dataPath           = [];
-            if($request->hasFile('image')) {
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
-            }
-            /* insert page */
-            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
-            $seoId              = Seo::insertItem($insertSeo);
-            $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
-            $enSeoId            = EnSeo::insertItem($insertEnSeo);
-            /* kết nối bảng vi và en */
-            RelationSeoEnSeo::insertItem([
-                'seo_id'    => $seoId,
-                'en_seo_id' => $enSeoId
-            ]);
-            /* insert page_info */
-            $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
-            $idPage             = Page::insertItem([
-                'seo_id'        => $seoId,
-                'en_seo_id'     => $enSeoId,
-                'type_id'       => $request->get('type_id'),
-                'name'          => $request->get('name'),
-                'description'   => $request->get('description'),
-                'en_name'       => $request->get('en_name'),
-                'en_description'=> $request->get('en_description'),
-                'show_sidebar'  => $showSidebar
-            ]);
-            /* insert slider và lưu CSDL */
-            if($request->hasFile('slider')&&!empty($idPage)){
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $params         = [
-                    'attachment_id'     => $idPage,
-                    'relation_table'    => $keyTable,
-                    'name'              => $name
-                ];
-                SliderController::upload($request->file('slider'), $params);
-            }
-            /* lưu content vào file */
-            Storage::put(config('main.storage.contentPage').$request->get('slug').'.blade.php', $request->get('content'));
-            Storage::put(config('main.storage.enContentPage').$request->get('en_slug').'.blade.php', $request->get('en_content'));
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Dã tạo Trang mới'
-            ];
-        } catch (\Exception $exception){
-            DB::rollBack();
-            /* Message */
-            $message        = [
-                'type'      => 'danger',
-                'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
-            ];
-        }
-        $request->session()->put('message', $message);
-        return redirect()->route('admin.page.view', ['id' => $idPage]);
-    }
-
-
-    public function update(PageRequest $request){
-        try {
-            DB::beginTransaction();
-            $seoId              = $request->get('seo_id');
-            $enSeoId            = $request->get('en_seo_id');
+            $idSeo              = $request->get('seo_id');
             $idPage             = $request->get('page_info_id');
-            $keyTable           = 'page_info';
+            $language           = $request->get('language');
+            $type               = $request->get('type');
+            /* check xem là create seo hay update seo */
+            $action             = !empty($idSeo)&&$type=='edit' ? 'edit' : 'create';
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -102,49 +44,43 @@ class PageController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update page */
-            $updateSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
-            Seo::updateItem($seoId, $updateSeo);
-            if(!empty($enSeoId)){
-                $updateEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
-                EnSeo::updateItem($enSeoId, $updateEnSeo);
+            $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
+            if($action=='edit'){
+                Seo::updateItem($idSeo, $seo);
             }else {
-                $insertEnSeo        = $this->BuildInsertUpdateModel->buildArrayTableEnSeo($request->all(), $keyTable, $dataPath);
-                $enSeoId            = EnSeo::insertItem($insertEnSeo);
+                $idSeo = Seo::insertItem($seo);
             }
-            /* kết nối bảng vi và en */
-            RelationSeoEnSeo::select('*')
-                            ->where('seo_id', $seoId)
-                            ->delete();
-            RelationSeoEnSeo::insertItem([
-                'seo_id'    => $seoId,
-                'en_seo_id' => $enSeoId
-            ]);
-            /* insert page_info */
+            /* insert hoặc update page_info */
             $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
-            $arrayUpdate        = [
-                'seo_id'        => $seoId,
-                'en_seo_id'     => $enSeoId,
+            $tag                = [
                 'type_id'       => $request->get('type_id'),
-                'name'          => $request->get('name'),
-                'description'   => $request->get('description'),
-                'en_name'       => $request->get('en_name'),
-                'en_description'=> $request->get('en_description'),
                 'show_sidebar'  => $showSidebar
             ];
-            Page::updateItem($idPage, $arrayUpdate);
-            /* insert slider và lưu CSDL */
-            if($request->hasFile('slider')&&!empty($idPage)){
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $params         = [
-                    'attachment_id'     => $idPage,
-                    'relation_table'    => $keyTable,
-                    'name'              => $name
-                ];
-                SliderController::upload($request->file('slider'), $params);
+            if(empty($idPage)){ /* check xem create page hay update page */
+                $idPage          = Page::insertItem($tag);
+            }else {
+                Page::updateItem($idPage, $tag);
             }
-            /* lưu content vào file */
-            Storage::put(config('main.storage.contentPage').$request->get('slug').'.blade.php', $request->get('content'));
-            Storage::put(config('main.storage.enContentPage').$request->get('en_slug').'.blade.php', $request->get('en_content'));
+            /* relation_seo_page_info */
+            $relationSeoTagInfo = RelationSeoPageInfo::select('*')
+                                    ->where('seo_id', $idSeo)
+                                    ->where('page_info_id', $idPage)
+                                    ->first();
+            if(empty($relationSeoTagInfo)) RelationSeoPageInfo::insertItem([
+                'seo_id'        => $idSeo,
+                'page_info_id'   => $idPage
+            ]);
+            /* insert seo_content */
+            SeoContent::select('*')
+                ->where('seo_id', $idSeo)
+                ->delete();
+            foreach($request->get('content') as $content){
+                SeoContent::insertItem([
+                    'seo_id'    => $idSeo,
+                    'content'   => $content
+                ]);
+            }
+            
             DB::commit();
             /* Message */
             $message        = [
@@ -160,39 +96,42 @@ class PageController extends Controller {
             ];
         }
         $request->session()->put('message', $message);
-        return redirect()->route('admin.page.view', ['id' => $idPage]);
+        return redirect()->route('admin.page.view', ['id' => $idPage, 'language' => $language]);
     }
 
     public static function view(Request $request){
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
+        $language           = $request->get('language') ?? null;
+        /* tìm theo ngôn ngữ */
         $item               = Page::select('*')
                                 ->where('id', $id)
                                 ->with(['files' => function($query){
-                                    $query->where('relation_table', 'page_info');
+                                    $query->where('relation_table', 'seo.type');
                                 }])
-                                ->with('seo', 'en_seo')
+                                ->with('seo')
                                 ->first();
-        $idNot              = $item->id ?? 0;
-        $parents            = Page::select('*')
-                                ->where('id', '!=', $idNot)
-                                ->get();
-        /* content */
-        $content            = null;
-        if(!empty($item->seo->slug)){
-            $content        = Storage::get(config('main.storage.contentPage').$item->seo->slug.'.blade.php');
+        /* lấy item seo theo ngôn ngữ được chọn */
+        $itemSeo            = [];
+        if(!empty($item->seos)){
+            foreach($item->seos as $s){
+                if($s->infoSeo->language==$language) {
+                    $itemSeo = $s->infoSeo;
+                    break;
+                }
+            }
         }
-        /* en content */
-        $enContent          = null;
-        if(!empty($item->en_seo->slug)){
-            $enContent      = Storage::get(config('main.storage.enContentPage').$item->en_seo->slug.'.blade.php');
-        }
+        /* prompts */
+        $prompts            = Prompt::select('*')
+                ->where('reference_table', 'page_info')
+                ->get();
+        $parents            = Page::all();
+        /* type */
+        $type               = !empty($itemSeo) ? 'edit' : 'create';
+        $type               = $request->get('type') ?? $type;
         /* type_page */
         $pageTypes          = PageType::all();
-        /* type */
-        $type               = !empty($item) ? 'edit' : 'create';
-        $type               = $request->get('type') ?? $type;
-        return view('admin.page.view', compact('item', 'type', 'pageTypes', 'content', 'enContent', 'parents', 'message'));
+        return view('admin.page.view', compact('item', 'itemSeo', 'prompts', 'type', 'language', 'parents', 'message', 'pageTypes'));
     }
 
     public static function list(Request $request){
@@ -206,32 +145,35 @@ class PageController extends Controller {
         return view('admin.page.list', compact('list', 'viewPerPage', 'params'));
     }
 
-    public static function deleteItem(Request $request){
+    public function delete(Request $request){
         if(!empty($request->get('id'))){
             try {
                 DB::beginTransaction();
                 $id         = $request->get('id');
                 $info       = Page::select('*')
                                 ->where('id', $id)
-                                ->with('seo', 'en_seo')
+                                ->with(['files' => function($query){
+                                    $query->where('relation_table', 'seo.type');
+                                }])
+                                ->with('seo')
                                 ->first();
-                /* delete content */
-                Storage::delete(config('main.storage.contentPage').$info->seo->slug.'.blade.php');
-                Storage::delete(config('main.storage.enContentPage').$info->en_seo->slug.'.blade.php');
-                /* delete relation seo_en_seo */
-                RelationSeoEnSeo::select('*')
-                    ->where('seo_id', $info->seo->id)
-                    ->where('en_seo_id', $info->en_seo->id)
-                    ->delete();
-                /* delete bảng seo */
-                $info->seo()->delete();
-                $info->en_seo()->delete();
                 /* xóa ảnh đại diện trong thư mục */ 
                 $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
                 if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
                 $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
                 if(file_exists($imagePath)) @unlink($imagePath);
-                /* xóa category_blog_info */
+                /* delete relation */
+                $info->files()->delete();
+                /* delete các trang seos ngôn ngữ */
+                foreach($info->seos as $s){
+                    $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image_small));
+                    if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
+                    $imagePath          = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image));
+                    if(file_exists($imagePath)) @unlink($imagePath);
+                    foreach($s->infoSeo->contents as $c) $c->delete();
+                    $s->infoSeo()->delete();
+                    $s->delete();
+                }
                 $info->delete();
                 DB::commit();
                 return true;

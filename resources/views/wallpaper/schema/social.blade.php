@@ -1,13 +1,7 @@
 @php
-    if(empty($language)||$language=='vi'){
-        $title          = $item->seo->seo_title ?? $item->seo->title ?? config('main.description');
-        $description    = $item->seo->seo_description ?? $item->seo->description ?? null;
-        $url            = $item->seo->link_canonical ?? $item->seo->slug_full;
-    }else {
-        $title          = $item->en_seo->seo_title ?? $item->en_seo->title ?? config('main.description');
-        $description    = $item->en_seo->seo_description ?? $item->en_seo->description ?? null;
-        $url            = $item->en_seo->link_canonical ?? $item->en_seo->slug_full;
-    }
+    $title              = $itemSeo->seo_title ?? $item->seo->seo_title ?? config('main.description');
+    $description        = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
+    $url                = $itemSeo->link_canonical ?? $itemSeo->slug_full ?? $item->seo->link_canonical ?? $item->seo->slug_full;
     $urlFull            = !empty($url) ? env('APP_URL').'/'.$url : env('APP_URL');
     $image              = !empty($item->seo->image) ? env('APP_URL').Storage::url($item->seo->image) : env('APP_URL').config('admin.images.default_750x460');
 @endphp
@@ -35,11 +29,7 @@
         <meta property="og:price:amount:minimum" content="{{ $lowPrice }}" />
         <meta property="og:price:amount:maximum" content="{{ $highPrice }}" />
     @endif
-    @if(empty($language)||$language=='vi')
-        <meta property="og:price:currency" content="VNĐ" />
-    @else
-        <meta property="og:price:currency" content="USD" />
-    @endif
+    <meta property="og:price:currency" content="{{ config('language.'.$language.'.currency') }}" />
 @endif
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ $title }}" />

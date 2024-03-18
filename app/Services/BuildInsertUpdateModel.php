@@ -9,7 +9,7 @@ class BuildInsertUpdateModel {
     public static function buildArrayTableSeo($dataForm, $type, $dataImage = null){
         $result                                 = [];
         if(!empty($dataForm)){
-            $result['title']                    = $dataForm['name'] ?? null;
+            $result['title']                    = $dataForm['title'] ?? null;
             $result['description']              = $dataForm['description'] ?? null;
             if(!empty($dataImage['filePathNormal'])) $result['image']           = $dataImage['filePathNormal'];
             if(!empty($dataImage['filePathSmall']))  $result['image_small']     = $dataImage['filePathSmall'];
@@ -43,7 +43,7 @@ class BuildInsertUpdateModel {
             $result['rating_author_star']       = 5;
             $result['rating_aggregate_count']   = $dataForm['rating_aggregate_count'] ?? 0;
             $result['rating_aggregate_star']    = $dataForm['rating_aggregate_star'] ?? null;
-            // $result['video']                    = $dataForm['video'] ?? null;
+            $result['language']                 = $dataForm['language'] ?? 'vi';
             $result['created_by']               = Auth::id() ?? 0;
         }
         return $result;

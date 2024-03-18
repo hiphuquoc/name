@@ -25,9 +25,8 @@ class SeoFreeWallpaperRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                      => 'required',
+            'title'                     => 'required',
             'seo_title'                 => 'required',
-            'en_seo_title'              => 'required',
             'seo_description'           => 'required',
             // 'slug'                      => [
             //     'required',
@@ -36,31 +35,39 @@ class SeoFreeWallpaperRequest extends FormRequest
             //         if(!empty($slug)){
             //             $flag       = false;
             //             $dataCheck  = DB::table('seo')
-            //                             ->join('product_info', 'product_info.seo_id', '=', 'seo.id')
-            //                             ->select('seo.slug', 'product_info.id')
+            //                             ->join('category_info', 'category_info.seo_id', '=', 'seo.id')
+            //                             ->select('seo.slug', 'category_info.id')
             //                             ->where('slug', $slug)
             //                             ->first();
             //             if(!empty($dataCheck)){
-            //                 if(empty(request('product_info_id'))){
+            //                 if(empty(request('category_info_id'))){
             //                     $flag = true;
             //                 }else {
-            //                     if(request('product_info_id')!=$dataCheck->id) $flag = true;
+            //                     if(request('category_info_id')!=$dataCheck->id) $flag = true;
             //                 }
             //             }
-            //             if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một trang khác trên hệ thống!');
+            //             if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một Tag khác trên hệ thống!');
             //         }
             //     }
-            // ]
+            // ],
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'                     => 'Tiêu đề không được để trống!',
+            'title.required'                     => 'Tiêu đề không được để trống!',
+            'description.required'              => 'Mô tả không được để trống!',
             'seo_title.required'                => 'Tiêu đề Seo không được để trống!',
-            'en_seo_title.required'             => 'Tiêu đề Seo (EN) được để trống!',
             'seo_description.required'          => 'Mô tả Seo không được để trống!',
+            'en_name.required'                  => 'Tiêu đề (bản tiếng anh) không được để trống!',
+            'en_description.required'           => 'Mô tả (bản tiếng anh) không được để trống!',
+            'en_seo_title.required'             => 'Tiêu đề Seo (bản tiếng anh) không được để trống!',
+            'en_seo_description.required'       => 'Mô tả Seo (bản tiếng anh) không được để trống!',
+            'rating_aggregate_count.required'   => 'Số lượt đánh giá không được để trống!',
+            'rating_aggregate_star.required'    => 'Số sao không được để trống!',
+            'slug.required'                     => 'Đường dẫn tĩnh không được để trống!',
+            'en_slug.required'                  => 'Đường dẫn tĩnh (bản tiếng anh) không được để trống!'
         ];
     }
 }

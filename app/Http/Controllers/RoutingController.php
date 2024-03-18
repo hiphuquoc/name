@@ -32,40 +32,51 @@ class RoutingController extends Controller{
         $arraySlug[count($arraySlug)-1] = preg_replace('#([\?|\#]+).*$#imsU', '', end($arraySlug));
         $urlRequest     = implode('/', $arraySlug);
         /* check url có tồn tại? => lấy thông tin */
-        $checkExists    = Url::checkUrlExists(end($arraySlug));
+        $itemSeo    = Url::checkUrlExists(end($arraySlug));
         /* nếu sai => redirect về link đúng */
-        if(!empty($checkExists->slug_full)&&$checkExists->slug_full!=$urlRequest){
+        if(!empty($itemSeo->slug_full)&&$itemSeo->slug_full!=$urlRequest){
             /* ko rút gọn trên 1 dòng được => lỗi */
-            return Redirect::to($checkExists->slug_full, 301);
+            return Redirect::to($itemSeo->slug_full, 301);
         }
         /* ============== nếu đúng => xuất dữ liệu */
-        if(!empty($checkExists->type)){
+        if(!empty($itemSeo->type)){
             /* ngôn ngữ */
-            $language                   = $checkExists->language;
+            $language               = $itemSeo->language;
             SettingController::settingLanguage($language);
             /* chế đệ xem */
             $flagMatch              = false;
             /* cache HTML */
-            $nameCache              = self::buildNameCache($checkExists['slug_full']).'.'.config('main.cache.extension');
+            $nameCache              = self::buildNameCache($itemSeo['slug_full']).'.'.config('main.cache.extension');
             $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
             $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
             if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
                 $xhtml              = file_get_contents($pathCache);
                 echo $xhtml;
             }else {
+                /* breadcrumb */
+                $breadcrumb     = Url::buildBreadcrumb($itemSeo->slug_full);
+                /* thông tin */
+                $tableName      = $itemSeo->type;
+                $modelName      = config('tablemysql.'.$itemSeo->type.'.model_name');
+                $modelInstance  = resolve("\App\Models\\$modelName");
+                $idSeo          = $itemSeo->id;
+                $item           = $modelInstance::select('*')
+                                    ->whereHas('seos', function($query) use($idSeo){
+                                        $query->where('seo_id', $idSeo);
+                                    })
+                                    ->with('seo', 'seos')
+                                    ->first();
                 /* ===== từng ảnh ===== */
-                if($checkExists->type=='free_wallpaper_info'){
-                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                if($itemSeo->type=='free_wallpaper_info'){
                     $flagMatch      = true;
-                    /* thông tin wallpaper */
-                    $item           = FreeWallpaper::select('*')
-                        ->where('seo_id', $idSeo)
-                        ->with('seo', 'en_seo', 'tags', 'contents', 'categories')
-                        ->first();
                     $idNot          = $item->id;
                     /* danh sách category của sản phẩm */
                     $arrayIdCategory  = [];
-                    foreach($item->categories as $category) $arrayIdCategory[] = $category->infoCategory->id;
+                    foreach($item->categories as $category) {
+                        if(!empty($category->infoCategory)) {
+                            $arrayIdCategory[] = $category->infoCategory->id;
+                        }
+                    }
                     $total          = FreeWallpaper::select('*')
                                         ->where('id', '!=', $item->id)
                                         ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
@@ -83,27 +94,11 @@ class RoutingController extends Controller{
                                             ->skip(0)
                                             ->take($loaded)
                                             ->get();
-                    /* breadcrumb */
-                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                    $xhtml              = view('wallpaper.freeWallpaper.index', compact('item', 'idNot', 'breadcrumb', 'total', 'loaded', 'related', 'language', 'arrayIdCategory'))->render();
+                    $xhtml              = view('wallpaper.freeWallpaper.index', compact('item', 'itemSeo', 'idNot', 'breadcrumb', 'total', 'loaded', 'related', 'language', 'arrayIdCategory'))->render();
                 }
                 /* ===== Tag ==== */
-                if($checkExists->type=='tag_info'){
-                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                if($itemSeo->type=='tag_info'){
                     $flagMatch      = true;
-                    /* breadcrumb */
-                    $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
-                    $item           = Tag::select('*')
-                                        ->where('seo_id', $idSeo)
-                                        ->with('seo', 'en_seo', 'freeWallpapers')
-                                        ->first();
-                    /* content */
-                    if($language=='en'){
-                        $content        = Blade::render(Storage::get(config('main.storage.enContentTag').$item->en_seo->slug.'.blade.php'));
-                    }else {
-                        $content        = Blade::render(Storage::get(config('main.storage.contentTag').$item->seo->slug.'.blade.php'));
-                    }
                     // /* tìm kiếm bằng feeling */
                     // $searchFeeling = $request->get('search_feeling') ?? [];
                     // foreach($searchFeeling as $feeling){
@@ -172,11 +167,11 @@ class RoutingController extends Controller{
                                         //     });
                                         // })
                                         ->count();
-                    $xhtml              = view('wallpaper.tag.index', compact('item', 'breadcrumb', 'content', 'wallpapers', 'total', 'arrayIdCategory', 'loaded', 'language', 'user'))->render();
+                    $xhtml              = view('wallpaper.tag.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'total', 'arrayIdCategory', 'loaded', 'language', 'user'))->render();
                 }
                 /* ===== Sản phẩm ==== */
-                if($checkExists->type=='product_info'){
-                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                if($itemSeo->type=='product_info'){
+                    $idSeo          = $language=='vi' ? $itemSeo->id : $itemSeo->seo->infoSeo->id;
                     $flagMatch      = true;
                     /* thông tin sản phẩm */
                     $item           = Product::select('*')
@@ -195,7 +190,7 @@ class RoutingController extends Controller{
                     $loaded         = 0;
                     /* sản phẩm liên quan */
                     $idSeoParent        = $item->seo->parent;
-                    $infoSeoParent      = Seo::select('type')
+                    $itemSeoParent      = Seo::select('type')
                                             ->where('id', $idSeoParent)
                                             ->first();
                     $tmp                = Category::select('category_info.*')
@@ -205,30 +200,16 @@ class RoutingController extends Controller{
                                             ->first();
                     $related            = $tmp->products;
                     /* breadcrumb */
-                    $breadcrumb         = Url::buildBreadcrumb($checkExists->slug_full, $language);
+                    $breadcrumb         = Url::buildBreadcrumb($itemSeo->slug_full);
                     $xhtml              = view('wallpaper.product.index', compact('item', 'breadcrumb', 'total', 'arrayIdCategory', 'language'))->render();
                 }
                 /* ===== Các trang chủ đề/phong cách/sự kiện ==== */
                 foreach(config('main.category_type') as $type){
-                    if($checkExists->type==$type['key']){
-                        $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
+                    if($itemSeo->type==$type['key']){
                         $flagMatch      = true;
-                        /* breadcrumb */
-                        $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full, $language);
-                        $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
-                        $item           = Category::select('*')
-                                            ->where('seo_id', $idSeo)
-                                            ->with('seo', 'en_seo')
-                                            ->first();
-                        /* content */
-                        if($language=='en'){
-                            $content        = Blade::render(Storage::get(config('main.storage.enContentCategory').$item->en_seo->slug.'.blade.php'));
-                        }else {
-                            $content        = Blade::render(Storage::get(config('main.storage.contentCategory').$item->seo->slug.'.blade.php'));
-                        }
                         /* ===== miễn phí */
                         $flagFree       = false;
-                        if($checkExists->slug=='hinh-nen-dien-thoai-mien-phi'||$checkExists->slug=='free-phone-wallpapers'){
+                        if($itemSeo->slug=='hinh-nen-dien-thoai-mien-phi'||$itemSeo->slug=='free-phone-wallpapers'){
                             $flagFree   = true;
                             $params     = [];
                             /* tìm kiếm bằng feeling */
@@ -253,26 +234,15 @@ class RoutingController extends Controller{
                             $total                              = $tmp['total'];
                             $loaded                             = $tmp['loaded'];
                             $user                               = Auth::user();
-                            $xhtml              = view('wallpaper.category.index', compact('item', 'breadcrumb', 'content', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'user', 'searchFeeling'))->render();
+                            $xhtml              = view('wallpaper.category.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'user', 'searchFeeling'))->render();
                         }
                         /* ===== trả phí */
                         if($flagFree==false){
                             $params         = [];
                             /* key_search */
                             $params['key_search'] = request('search') ?? null;
-                            /* thư mục chứa content */
-                            $folderContent  = $language=='vi' ? config('main.storage.contentCategory') : config('main.storage.enContentCategory');
-                            /* array category */
-                            $item           = Category::select('*')
-                                                ->where('seo_id', $idSeo)
-                                                ->with('seo', 'en_seo')
-                                                ->first();
-                            // $tmp            = Category::getTreeCategoryByInfoCategory($item, []);
-                            // $arrayIdCategory = [$item->id];
-                            // foreach($tmp as $t) $arrayIdCategory[] = $t->id;
                             $arrayIdCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
                             $params['array_category_info_id'] = $arrayIdCategory;
-                            // dd($arrayIdCategory);
                             /* chế độ xem */
                             $viewBy             = request()->cookie('view_by') ?? 'set';
                             /* filter nếu có */
@@ -282,45 +252,26 @@ class RoutingController extends Controller{
                             $params['request_load'] = 10;
                             $params['sort_by']  = Cookie::get('sort_by') ?? null;
                             /* lấy thông tin dựa vào params */
-                            $response       = CategoryMoneyController::getWallpapers($params);
-                            $wallpapers     = $response['wallpapers'];
-                            $total          = $response['total'];
-                            $loaded         = $response['loaded'];
-                            // /* category Choose */
-                            // $categoryChoose     = $item;
-                            /* content */
-                            $filenameContent    = $language=='vi' ? $folderContent.$item->seo->slug.'.blade.php' : $folderContent.$item->en_seo->slug.'.blade.php';
-                            $content            = Blade::render(Storage::get($filenameContent));
-                            $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'breadcrumb', 'content', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'viewBy'))->render();
+                            $response           = CategoryMoneyController::getWallpapers($params);
+                            $wallpapers         = $response['wallpapers'];
+                            $total              = $response['total'];
+                            $loaded             = $response['loaded'];
+                            $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'viewBy'))->render();
                         }
                     }
                 }
                 /* ===== Trang ==== */
-                if($checkExists->type=='page_info'){
+                if($itemSeo->type=='page_info'){
                     $flagMatch      = true;
-                    $idSeo          = $language=='vi' ? $checkExists->id : $checkExists->seo->infoSeo->id;
-                    /* thông tin brand */
-                    $item           = Page::select('*')
-                                        ->where('seo_id', $idSeo)
-                                        ->with('seo', 'files')
-                                        ->first();
-                    /* breadcrumb */
-                    $breadcrumb     = Url::buildBreadcrumb($checkExists->slug_full);
-                    /* content */
-                    if($language=='en'){
-                        $content        = Blade::render(Storage::get(config('main.storage.enContentPage').$item->en_seo->slug.'.blade.php'));
-                    }else {
-                        $content        = Blade::render(Storage::get(config('main.storage.contentPage').$item->seo->slug.'.blade.php'));
-                    }
-                    /* page related */
-                    $typePages      = Page::select('page_info.*')
-                                        ->where('show_sidebar', 1)
-                                        ->join('seo', 'seo.id', '=', 'page_info.seo_id')
-                                        ->with('type')
-                                        ->orderBy('seo.ordering', 'DESC')
-                                        ->get()
-                                        ->groupBy('type.id');
-                    $xhtml          = view('wallpaper.page.index', compact('item', 'language', 'breadcrumb', 'content', 'typePages'))->render();
+                    // /* page related */
+                    // $typePages      = Page::select('page_info.*')
+                    //                     ->where('show_sidebar', 1)
+                    //                     ->join('seo', 'seo.id', '=', 'page_info.seo_id')
+                    //                     ->with('type')
+                    //                     ->orderBy('seo.ordering', 'DESC')
+                    //                     ->get()
+                    //                     ->groupBy('type.id');
+                    $xhtml          = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){

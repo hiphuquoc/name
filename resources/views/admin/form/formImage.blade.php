@@ -6,7 +6,7 @@
         <i class="explainInput" data-feather='alert-circle'></i>
         <label class="form-label inputRequired" for="image">Ảnh đại diện 800*533px</label>
     </span>
-    <input class="form-control" type="file" id="image" name="image" onchange="readURL(this, 'imageUpload');" {{ $checkImage }}>
+    <input class="form-control" type="file" id="image" name="image" onchange="readURL(this, 'imageUpload');" />
     <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
     <div class="imageUpload">
         @if(!empty($item->seo->image)&&file_exists(Storage::path($item->seo->image))&&$type!='copy')

@@ -3,7 +3,7 @@
     <div class="tocContentSidebar">
         <div class="tocContentSidebar_title">
             <span class="tocContentSidebar_title_icon"></span>
-            <span class="tocContentSidebar_title_text">Mục lục</span>
+            <span class="tocContentSidebar_title_text">config('language.'.$language.'.data.table_of_contents')</span>
         </div>
         <div class="tocContentSidebar_list">
             @for($i=0;$i<10;++$i)

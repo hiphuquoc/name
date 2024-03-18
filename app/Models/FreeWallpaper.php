@@ -28,23 +28,16 @@ class FreeWallpaper extends Model {
     public $timestamps = true;
 
     public static function getList($params = null){
+        $arrayLanguageAccept = [];
+        foreach(config('language') as $language) if($language['key']!='vi') $arrayLanguageAccept[] = $language['key'];
         $result     = self::select('*')
+                        ->whereDoesntHave('seo', function ($query) use($arrayLanguageAccept){
+                            $query->whereIn('language', $arrayLanguageAccept);
+                        })
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
                             $query->where('name', 'like', '%'.$params['search_name'].'%');
                         })
-                        // /* tìm theo nhãn hàng */
-                        // ->when(!empty($params['search_brand']), function($query) use($params){
-                        //     $query->whereHas('brand', function($q) use ($params){
-                        //         $q->where('id', $params['search_brand']);
-                        //     });
-                        // })
-                        // /* tìm theo danh mục */
-                        // ->when(!empty($params['search_category']), function($query) use($params){
-                        //     $query->whereHas('categories.infoCategory', function($q) use ($params){
-                        //         $q->where('id', $params['search_category']);
-                        //     });
-                        // })
                         ->orderBy('created_at', 'DESC')
                         ->with('categories')
                         ->paginate($params['paginate']);
@@ -76,8 +69,8 @@ class FreeWallpaper extends Model {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 
-    public function en_seo() {
-        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
+    public function seos() {
+        return $this->hasMany(\App\Models\RelationSeoFreeWallpaperInfo::class, 'free_wallpaper_info_id', 'id');
     }
     
     public function categories(){
@@ -90,9 +83,5 @@ class FreeWallpaper extends Model {
 
     public function feeling(){
         return $this->hasOne(\App\Models\RelationFreeWallpaperUser::class, 'free_wallpaper_info_id', 'id')->where('user_info_id', Auth::user()->id ?? null);
-    }
-
-    public function contents() {
-        return $this->hasMany(\App\Models\FreeWallpaperContent::class, 'free_wallpaper_info_id', 'id');
     }
 }

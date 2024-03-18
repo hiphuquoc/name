@@ -1,11 +1,11 @@
 {
   "resources/sources/admin/style.scss": {
-    "file": "assets/style-a6378783.css",
+    "file": "assets/style-59ff7203.css",
     "isEntry": true,
     "src": "resources/sources/admin/style.scss"
   },
   "resources/sources/main/style.scss": {
-    "file": "assets/style-887ca204.css",
+    "file": "assets/style-68955af4.css",
     "isEntry": true,
     "src": "resources/sources/main/style.scss"
   }

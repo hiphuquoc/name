@@ -1,68 +1,38 @@
-<input type="hidden" id="page_info_id" name="page_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : null }}" />
 <div class="formBox">
     <div class="formBox_full">
         <!-- One Row -->
+        @php
+            $chatgptDataAndEvent = [];
+            foreach($prompts as $prompt){
+                if($language=='vi'){
+                    if($prompt->reference_name=='title'&&$prompt->type=='auto_content'){
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
+                        break;
+                    }
+                }else {
+                    if($prompt->reference_name=='title'&&$prompt->type=='translate_content'){
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
+                        break;
+                    }
+                }
+            }
+        @endphp
         <div class="formBox_column2_item_row">
             <div class="inputWithNumberChacractor">
                 <span data-toggle="tooltip" data-placement="top" title="
                     Đây là Tiêu đề được hiển thị trên website
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>
-                    <label class="form-label inputRequired" for="name">Tiêu đề Trang</label>
+                    <label class="form-label inputRequired" for="title">Tiêu đề Trang</label>
+                    @if(!empty($chatgptDataAndEvent['eventChatgpt']))
+                        <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                    @endif
                 </span>
-                <div class="inputWithNumberChacractor_count" data-charactor="name">
-                    {{ !empty($item->name) ? mb_strlen($item->name) : 0 }}
+                <div class="inputWithNumberChacractor_count" data-charactor="title">
+                    {{ !empty($itemSeo->title) ? mb_strlen($itemSeo->title) : 0 }}
                 </div>
             </div>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') ?? $item->name ?? null }}" required>
-            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_column2_item_row">
-            <div class="inputWithNumberChacractor">
-                <span data-toggle="tooltip" data-placement="top" title="
-                    Đây là Tiêu đề được hiển thị trên website
-                ">
-                    <i class="explainInput" data-feather='alert-circle'></i>
-                    <label class="form-label inputRequired" for="en_name">Tiêu đề Trang</label>
-                </span>
-                <div class="inputWithNumberChacractor_count" data-charactor="en_name">
-                    {{ !empty($item->en_name) ? mb_strlen($item->en_name) : 0 }}
-                </div>
-            </div>
-            <input type="text" class="form-control" id="en_name" name="en_name" value="{{ old('en_name') ?? $item->en_name ?? null }}" required>
-            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_column2_item_row">
-            <div class="inputWithNumberChacractor">
-                <span data-toggle="tooltip" data-placement="top" title="
-                    Đây là Mô tả được hiển thị trên website
-                ">
-                    <i class="explainInput" data-feather='alert-circle'></i>
-                    <label class="form-label inputRequired" for="description">Mô tả Trang</label>
-                </span>
-                <div class="inputWithNumberChacractor_count" data-charactor="description">
-                    {{ !empty($item->description) ? mb_strlen($item->description) : 0 }}
-                </div>
-            </div>
-            <textarea class="form-control" id="description"  name="description" rows="5" required>{{ old('description') ?? $item->description ?? null }}</textarea>
-            <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_column2_item_row">
-            <div class="inputWithNumberChacractor">
-                <span data-toggle="tooltip" data-placement="top" title="
-                    Đây là Mô tả được hiển thị trên website
-                ">
-                    <i class="explainInput" data-feather='alert-circle'></i>
-                    <label class="form-label inputRequired" for="en_description">Mô tả Trang</label>
-                </span>
-                <div class="inputWithNumberChacractor_count" data-charactor="en_description">
-                    {{ !empty($item->en_description) ? mb_strlen($item->en_description) : 0 }}
-                </div>
-            </div>
-            <textarea class="form-control" id="en_description"  name="en_description" rows="5" required>{{ old('en_description') ?? $item->en_description ?? null }}</textarea>
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         <!-- One Row -->
@@ -73,7 +43,7 @@
                 <i class="explainInput" data-feather='alert-circle'></i>
                 <label class="form-label" for="ordering">Thứ tự</label>
             </span>
-            <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $item->seo->ordering ?? '' }}">
+            <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
@@ -97,12 +67,6 @@
                 <label class="form-check-label" for="show_sidebar">Cho phép hiển thị trong sidebar</label>
             </div>
         </div>
+        
     </div>
 </div>
-
-@push('scripts-custom')
-    <script type="text/javascript">
-        
-
-    </script>
-@endpush

@@ -36,11 +36,11 @@
     {{-- {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }} --}}
 </div>
 
-<!-- Nút thêm -->
+{{-- <!-- Nút thêm -->
 <a href="{{ route('admin.tag.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
-</a>
+</a> --}}
     
 @endsection
 @push('scriptCustom')

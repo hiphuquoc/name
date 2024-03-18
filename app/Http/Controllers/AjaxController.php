@@ -139,7 +139,8 @@ class AjaxController extends Controller {
     public function buildTocContentMain(Request $request){
         $xhtml       = null;
         if(!empty($request->get('data'))){
-            $xhtml   = view('wallpaper.template.tocContentMain', ['data' => $request->get('data')])->render();
+            $language   = $request->session()->get('language');
+            $xhtml      = view('wallpaper.template.tocContentMain', ['data' => $request->get('data'), 'language' => $language])->render();
         }
         echo $xhtml;
     }

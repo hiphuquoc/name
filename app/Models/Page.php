@@ -19,6 +19,9 @@ class Page extends Model {
 
     public static function getList($params = null){
         $result     = self::select('*')
+                        ->whereHas('seo', function($query){
+                            $query->where('language', 'vi');
+                        })
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
                             $query->where('name', 'like', '%'.$params['search_name'].'%');
@@ -57,8 +60,8 @@ class Page extends Model {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 
-    public function en_seo() {
-        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
+    public function seos() {
+        return $this->hasMany(\App\Models\RelationSeoPageInfo::class, 'page_info_id', 'id');
     }
 
     public function files(){
@@ -68,4 +71,12 @@ class Page extends Model {
     public function type(){
         return $this->hasOne(\App\Models\PageType::class, 'id', 'type_id');
     }
+
+    // public function languages(){
+    //     return $this->hasMany(\App\Models\LanguagePageInfo::class, 'id_1', 'id');
+    // }
+
+    // public function contents(){
+    //     return $this->hasMany(\App\Models\PageContent::class, 'page_info_id', 'id');
+    // }
 }

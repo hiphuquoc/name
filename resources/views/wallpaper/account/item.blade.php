@@ -14,7 +14,7 @@
                     <div class="downloadBox_item">
                         <div class="downloadBox_item_order">
                             <div class="downloadBox_item_order_title">Đơn hàng thành công #{{ $order->code }}</div>
-                            <div class="downloadBox_item_order_price">{{ number_format($order->total) }}{!! config('main.currency_unit') !!}</div>
+                            <div class="downloadBox_item_order_price">{{ number_format($order->total) }}{!! config('language.'.$language.'.currency') !!}</div>
                         </div>
                         <div class="downloadBox_item_download">
                             @foreach($order->products as $product)

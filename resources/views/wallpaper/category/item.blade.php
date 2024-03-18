@@ -1,5 +1,12 @@
 @php
-    $altImage = empty($language)||$language=='vi' ? $wallpaper->name : $wallpaper->en_name;
+    $itemSeoWallpaper = null;
+    foreach($wallpaper->seos as $seo){
+        if($seo->infoSeo->language==$language){
+            $itemSeoWallpaper   = $seo->infoSeo;
+            break;
+        }
+    }
+    $altImage    = $itemSeoWallpaper->title ?? $wallpaper->seo->title;
 @endphp
 <div id="js_calculatorPosition_item_{{ $wallpaper->id }}" class="freeWallpaperBox_item" data-id="{{ $wallpaper->id }}">
     <div class="freeWallpaperBox_item_image">
@@ -36,7 +43,7 @@
             <div class="action">
                 {{-- <a href="{{ route('search.searchByImage', ['free_wallpaper_info_id' => $wallpaper->id]) }}" class="action_item"> --}}
                 @if(!empty($wallpaper->seo))
-                    <a href="/{{ $language=='vi' ? $wallpaper->seo->slug_full : $wallpaper->en_seo->slug_full }}" class="action_item">
+                    <a href="/{{ $itemSeoWallpaper->slug_full ?? $wallpaper->seo->slug_full }}" class="action_item">
                         <i class="fa-solid fa-image"></i>
                     </a>
                 @endif
@@ -62,9 +69,8 @@
         </div>
     @endif
     @if(!empty($wallpaper->seo))
-        <a href="/{{ empty($language)||$language=='vi' ? $wallpaper->seo->slug_full : $wallpaper->en_seo->slug_full }}" class="freeWallpaperBox_item_preventClick"></a>
+        <a href="/{{ $itemSeoWallpaper->slug_full ?? $wallpaper->seo->slug_full }}" class="freeWallpaperBox_item_preventClick"></a>
     @else 
         <div class="freeWallpaperBox_item_preventClick"></div>
     @endif
-    
 </div>

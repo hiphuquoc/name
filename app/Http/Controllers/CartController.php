@@ -170,7 +170,7 @@ class CartController extends Controller{
     //     /* set lại cookie */
     //     CookieController::setCookie('cart', json_encode($products), 3600);
     //     /* lấy dữ liệu của cột thay đổi */
-    //     $result['total']        = number_format($total).config('main.currency_unit');
+    //     $result['total']        = number_format($total).config('language.'.$language.'.currency');
     //     $result['count']        = $count;
     //     if($request->get('theme')=='cartSort'){
     //         $result['row']      = view('main.cart.cartSortRow', ['product' => $infoProduct])->render();

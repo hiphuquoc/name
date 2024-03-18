@@ -23,6 +23,7 @@ use App\Models\Tag;
 use App\Models\Seo;
 use App\Models\EnSeo;
 use App\Models\RelationSeoEnSeo;
+use App\Models\RelationSeoTagInfo;
 
 class FreeWallpaperController extends Controller {
 
@@ -178,10 +179,12 @@ class FreeWallpaperController extends Controller {
             foreach($tag as $t){
                 $nameTag    = strtolower($t['value']);
                 /* kiểm tra xem tag name đã tồn tại chưa */
-                $infoTag    = Tag::select('*')
-                                ->where('name', $nameTag)
-                                ->with('seo', 'en_seo')
-                                ->first();
+                $infoTag = Tag::select('*')
+                    ->whereHas('seo', function ($query) use ($nameTag) {
+                        $query->whereRaw('LOWER(title) = ?', [$nameTag]);
+                    })
+                    ->with('seo')
+                    ->first();
                 $idTag      = $infoTag->id ?? 0;
                 /* chưa tồn tại -> tạo và láy ra */
                 if(empty($idTag)) $idTag  = self::createSeoTmp($nameTag);
@@ -209,35 +212,15 @@ class FreeWallpaperController extends Controller {
             'rating_author_star'        => 5,
             'rating_aggregate_count'    => rand(100,5000),
             'rating_aggregate_star'     => '4.'.rand(5, 9),
-            'created_by'                => Auth::user()->id
-        ]);
-        /* tảo bảng en_seo tạm */
-        $enNameTag  = strtolower(Charactor::translateViToEn($nameTag));
-        $enSlug     = config('main.auto_fill.slug.en').'-'.Charactor::convertStrToUrl($enNameTag);
-        $idEnSeo    = EnSeo::insertItem([
-            'title'                     => $enNameTag,
-            'seo_title'                 => $enNameTag,
-            'level'                     => 1,
-            'type'                      => 'tag_info',
-            'slug'                      => $enSlug,
-            'slug_full'                 => $enSlug,
-            'rating_author_name'        => 1,
-            'rating_author_star'        => 5,
-            'rating_aggregate_count'    => rand(100,5000),
-            'rating_aggregate_star'     => '4.'.rand(5, 9),
-            'created_by'                => Auth::user()->id
-        ]);
-        /* tạo relation của seo và en_seo */
-        RelationSeoEnSeo::insertItem([
-            'seo_id'    => $idSeo,
-            'en_seo_id' => $idEnSeo
+            'created_by'                => Auth::user()->id,
+            'language'                  => 'vi'
         ]);
         /* tạo bảng tag */
-        $idTag      = Tag::insertItem([
-            'name'      => $nameTag,
-            'en_name'   => $enNameTag,
-            'seo_id'    => $idSeo,
-            'en_seo_id' => $idEnSeo
+        $idTag      = Tag::insertItem(['seo_id' => $idSeo]);
+        /* tạo Relation */
+        RelationSeoTagInfo::insertItem([
+            'seo_id'        => $idSeo,
+            'tag_info_id'   => $idTag
         ]);
         return $idTag;
     }
@@ -248,7 +231,7 @@ class FreeWallpaperController extends Controller {
             $idWallpaper            = $request->get('id');
             $infoWallpaper          = FreeWallpaper::select('*')
                                         ->where('id', $idWallpaper)
-                                        ->with('seo', 'en_seo', 'contents')
+                                        ->with('seo')
                                         ->first();
             $flag                   = self::delete($infoWallpaper);
         }
@@ -280,21 +263,16 @@ class FreeWallpaperController extends Controller {
                 ->where('reference_id', $infoWallpaper->id)
                 ->where('reference_type', 'free_wallpaper_info')
                 ->delete();
-            /* contents */
-            $infoWallpaper->contents()->delete();
-            /* xóa seo */
-            if(!empty($infoWallpaper->seo->id)&&!empty($infoWallpaper->en_seo->id)){
-                /* relation seo và en_seo */
-                RelationSeoEnSeo::select('*')
-                    ->where('seo_id', $infoWallpaper->seo->id)
-                    ->where('en_seo_id', $infoWallpaper->en_seo->id)
-                    ->delete();
-                /* seo /*/
-                $infoWallpaper->seo()->delete();
-                /* en_seo */
-                $infoWallpaper->en_seo()->delete();
+            /* delete các trang seos ngôn ngữ */
+            foreach($infoWallpaper->seos as $s){
+                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image_small));
+                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
+                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image));
+                if(file_exists($imagePath)) @unlink($imagePath);
+                foreach($s->infoSeo->contents as $c) $c->delete();
+                $s->infoSeo()->delete();
+                $s->delete();
             }
-            /* xóa trong cơ sở dữ liệu */
             $infoWallpaper->delete();
             $flag = true;
         }
@@ -316,38 +294,5 @@ class FreeWallpaperController extends Controller {
         $result         = view('admin.freeWallpaper.formModalUploadAndEdit', compact('wallpaper', 'categories', 'arrayTag', 'tags'))->render();
         echo $result;
     }
-
-    // public function searchWallpapers(Request $request){
-    //     $response           = '';
-    //     if(!empty($request->get('key_search'))&&!empty($request->get('product_price_id'))){
-    //         $wallpapers     = FreeWallpaper::select('*')
-    //                             ->where('name', 'like', '%'.$request->get('key_search').'%')
-    //                             ->orderBy('price_uses_count', 'ASC')
-    //                             ->orderBy('id', 'DESC')
-    //                             ->withCount('priceUses') // Số lượng phần tử trong priceUses trả ra tên biến trong collection price_uses_count
-    //                             ->get();
-    //         $relations      = RelationProductPriceWallpaperInfo::select('*')
-    //                             ->where('product_price_id', $request->get('product_price_id'))
-    //                             ->get();
-    //         foreach($wallpapers as $wallpaper){
-    //             /* check có tồn tại chưa */
-    //             $selected   = false;
-    //             foreach($relations as $relation){
-    //                 if($wallpaper->id==$relation->wallpaper_info_id){
-    //                     $selected = true;
-    //                     break;
-    //                 }
-    //             }   
-    //             /* trả kết quả */
-    //             $response   .= view('admin.product.oneRowSearchWallpaper', [
-    //                 'wallpaper'         => $wallpaper,
-    //                 'idProductPrice'    => $request->get('product_price_id'),
-    //                 'selected'          => $selected
-    //             ])->render();
-    //         }
-    //     }
-    //     if(empty($response)) $response = '<div class="searchViewBefore_selectbox_item">Không có kết quả phù hợp!</div>';
-    //     echo $response;
-    // }
 
 }

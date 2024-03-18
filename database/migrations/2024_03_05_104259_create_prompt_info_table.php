@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('category_info', function (Blueprint $table) {
-            $table->text('en_name');
-            $table->text('en_description')->nullable();
+        Schema::create('prompt_info', function (Blueprint $table) {
+            $table->id();
+            $table->text('type'); /* auto_content */
+            $table->text('reference_table'); /* tên bảng */
+            $table->text('reference_name'); /* tên input name */
+            $table->text('reference_prompt'); /* prompt */
         });
     }
 
@@ -26,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::table('category_info', function (Blueprint $table) {
-        //     //
-        // });
+        // Schema::dropIfExists('prompt_info');
     }
 };

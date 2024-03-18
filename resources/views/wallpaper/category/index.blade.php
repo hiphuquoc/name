@@ -110,10 +110,14 @@
             ])
         </div>
         <!-- Nội dung -->
-        @if(!empty($content))
+        @if(!empty($itemSeo->contents))
             <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
                 <div id="tocContentMain"></div>
-                {!! $content !!}
+                @php
+                    $xhtmlContent = '';
+                    foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+                @endphp
+                {!! $xhtmlContent !!}
             </div>
         @endif
         {{-- <div class="categoryWithFilterBox_filter">

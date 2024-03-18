@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'currency_unit'         => '<sup>đ</sup>',
-    'currency_unit_en'      => ' US$',
     'exchange_rate'         => [
         'usd_to_vnd'    => 22000
     ],

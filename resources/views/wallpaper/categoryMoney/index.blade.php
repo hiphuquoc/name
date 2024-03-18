@@ -3,29 +3,15 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-        if(empty($language)||$language=='vi'){
-            $currency           = 'VND';
-            $highPrice          = 0;
-            foreach($wallpapers as $wallpaper){
-                if($wallpaper->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($wallpaper->price_before_promotion);
-            }
-            $lowPrice           = $highPrice;
-            foreach($wallpapers as $wallpaper){
-                foreach($wallpaper->prices as $price){
-                    if($price->price<$lowPrice) $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
-                }
-            }
-        }else {
-            $currency           = 'USD';
-            $highPrice          = 0;
-            foreach($wallpapers as $wallpaper){
-                if($wallpaper->price_before_promotion>$highPrice) $highPrice = $wallpaper->price_before_promotion;
-            }
-            $lowPrice           = $highPrice;
-            foreach($wallpapers as $wallpaper){
-                foreach($wallpaper->prices as $price){
-                    if($price->price<$lowPrice) $lowPrice = $price->price;
-                }
+        $currency           = 'VND';
+        $highPrice          = 0;
+        foreach($wallpapers as $wallpaper){
+            if($wallpaper->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($wallpaper->price_before_promotion);
+        }
+        $lowPrice           = $highPrice;
+        foreach($wallpapers as $wallpaper){
+            foreach($wallpaper->prices as $price){
+                if($price->price<$lowPrice) $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
             }
         }
     @endphp
@@ -86,11 +72,8 @@
         <div class="contentBox">
             <div style="display:flex;">
                 @php
-                    if(empty($language)||$language=='vi'){
-                        $titlePage = $item->seo->slug=='hinh-nen-dien-thoai' ? $item->name : 'Hình nền điện thoại '.$item->name;
-                    }else {
-                        $titlePage = $item->en_seo->slug=='phone-wallpapers' ? $item->en_name : $item->en_name.' Phone Wallpapers';
-                    }
+                    $titlePage = config('language.'.$language.'.data.phone_wallpaper').$item->seo->title;
+                    if($item->seo->level==1) $titlePage = $item->seo->title;
                 @endphp
                 <h1>{{ $titlePage }}</h1>
                 <!-- từ khóa vừa search -->
@@ -142,10 +125,14 @@
             ])
         </div>
         <!-- Nội dung -->
-        @if(!empty($content))
+        @if(!empty($itemSeo->contents))
             <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
                 <div id="tocContentMain"></div>
-                {!! $content !!}
+                @php
+                    $xhtmlContent = '';
+                    foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+                @endphp
+                {!! $xhtmlContent !!}
             </div>
         @endif
     </div>

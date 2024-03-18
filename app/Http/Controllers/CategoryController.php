@@ -45,6 +45,7 @@ class CategoryController extends Controller {
 
     public static function getFreeWallpapers($params){
         $idNot          = $params['id_not'] ?? 0;
+        $language       = session()->get('language');
         $keySearch      = $params['key_search'] ?? null;
         $filters        = $params['filters'] ?? [];
         $sortBy         = $params['sort_by'] ?? null;
@@ -53,6 +54,12 @@ class CategoryController extends Controller {
         $requestLoad    = $params['request_load'] ?? 10;
         $response       = [];
         $wallpapers     = FreeWallpaper::select('*')
+                            ->whereHas('seo', function($query){
+                                
+                            })
+                            ->whereHas('seos.infoSeo', function($query) use($language){
+                                $query->where('language', $language);
+                            })
                             ->when(!empty($idNot), function($query) use($idNot){
                                 $query->where('id', '!=', $idNot);
                             })

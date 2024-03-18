@@ -10,12 +10,8 @@ class Tag extends Model {
     protected $table        = 'tag_info';
     protected $fillable     = [
         'seo_id',
-        'name', 
-        'description',
-        'en_seo_id',
-        'en_name',
-        'en_description',
-        'icon'
+        'icon',
+        'flag_show',
     ];
     public $timestamps = true;
 
@@ -44,8 +40,8 @@ class Tag extends Model {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 
-    public function en_seo() {
-        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
+    public function seos() {
+        return $this->hasMany(\App\Models\RelationSeoTagInfo::class, 'tag_info_id', 'id');
     }
 
     public function files(){

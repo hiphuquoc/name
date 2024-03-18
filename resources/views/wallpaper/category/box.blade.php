@@ -13,7 +13,7 @@
             ])
         @endforeach
     @else 
-        <div>Không có kết quả phù hợp!</div>
+        <div>{{ config('language.'.$language.'.data.no_suitable_results_found') }}</div>
     @endif
 </div>
 @push('scriptCustom')
@@ -187,7 +187,7 @@
                     // ngân click chuột phải các ảnh được load
                     preventClickImgAndEffectDownload();
                     /* thêm thông báo nếu empty */
-                    if(boxCategory.children().length==0) boxCategory.html('<div>Không có kết quả phù hợp!');
+                    if(boxCategory.children().length==0) boxCategory.html('<div>'+"{{ config('language.'.$language.'.data.no_suitable_results_found') }}"+'</div>');
                 }
             });
             // Đặt isFirstLoad thành false sau lần đầu load

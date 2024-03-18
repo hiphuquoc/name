@@ -13,19 +13,11 @@
         <!-- header Top -->
         <div class="menuTopBackground layoutHeaderTop">
             <div class="layoutHeaderTop_header">
-                @if(!empty($language)&&$language=='en')
-                    <a href="/en" class="logoMain" aria-label="Home Name.com.vn">
-                        @if(Route::is('main.enHome'))
-                            <h1 style="opacity:0;">Home {{ config('main.company_name') }}</h1>
-                        @endif
-                    </a>
-                @else 
-                    <a href="/" class="logoMain" aria-label="Trang chủ Name.com.vn">
-                        @if(Route::is('main.home'))
-                            <h1 style="opacity:0;">Trang chủ {{ config('main.company_name') }}</h1>
-                        @endif
-                    </a>
-                @endif
+                <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
+                    @if(Route::is('main.home'))
+                        <h1 style="opacity:0;">{{ config('language.'.$language.'.data.home').' '.config('main.company_name') }}</h1>
+                    @endif
+                </a>
                 <!-- search box -->
                 @include('wallpaper.template.search')
             </div>

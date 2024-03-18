@@ -1,5 +1,5 @@
 @php
-    $nameHome   = !empty($language)&&$language=='en' ? 'Home' : 'Trang chủ';
+    $nameHome   = config('language.'.$language.'.data.home');
     $xhtml      = '{
                     "@type": "ListItem",
                     "position": 1,
@@ -8,7 +8,6 @@
                 }';
     $i          = 2;
     foreach($breadcrumb as $b){
-        // dd($b);
         $xhtml .= ', ';
         $title  = $b->title ?? $b->seo_title;
         $slug   = $b->slug_full ?? null;

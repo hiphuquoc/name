@@ -64,11 +64,11 @@
                                                 {{ $title }}
                                             </div>
                                             <div class="productListBox_item_content_option">
-                                                {{ $product->infoPrice->name ?? 'Không xác định' }} / {!! number_format($product->price).config('main.currency_unit') !!}
+                                                {{ $product->infoPrice->name ?? 'Không xác định' }} / {!! number_format($product->price).config('language.'.$language.'.currency') !!}
                                             </div>
                                         </div>
                                         <div class="productListBox_item_price">
-                                            {!! number_format($product->price*$product->quantity).config('main.currency_unit') !!}
+                                            {!! number_format($product->price*$product->quantity).config('language.'.$language.'.currency') !!}
                                         </div>
                                     </div>
                                 @endforeach

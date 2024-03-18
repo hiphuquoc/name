@@ -1,18 +1,14 @@
 @php
-    if(empty($language)||$language=='vi'){
-        $urlCart    = route('main.cart');
-    }else {
-        $urlCart    = route('main.enCart');
-    }
+    $urlCart    = route('main.cart');
 @endphp
 <div class="cartBox">
     <a href="{{ $urlCart }}" class="cartBox_icon">
-        <img src="{{ Storage::url('images/svg/icon-cart-header.svg') }}" alt="giỏ hàng" title="giỏ hàng" />
+        <img src="{{ Storage::url('images/svg/icon-cart-header.svg') }}" alt="{{ config('language.'.$language.'.data.cart') }}" title="{{ config('language.'.$language.'.data.cart') }}" />
         <div id="js_updateCart_count" class="cartBox_icon_number">
             {{ $detailCart['count'] ?? 0 }}
         </div>
     </a>
-    <a href="{{ $urlCart }}" class="cartBox_text">{{ empty($language)||$language=='vi' ? 'Giỏ hàng' : 'Cart' }}</a>
+    <a href="{{ $urlCart }}" class="cartBox_text">{{ config('language.'.$language.'.data.cart') }}</a>
     <div id="js_checkEmptyCart_idWrite" class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
             <div class="customScrollBar-y" style="max-height:420px;">

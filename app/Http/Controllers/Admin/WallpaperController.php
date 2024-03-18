@@ -247,6 +247,7 @@ class WallpaperController extends Controller {
     public function searchWallpapers(Request $request){
         $response           = '';
         if(!empty($request->get('key_search'))&&!empty($request->get('product_price_id'))){
+            $language       = $request->session()->get('language');
             $wallpapers     = Wallpaper::select('*')
                                 ->where('name', 'like', '%'.$request->get('key_search').'%')
                                 ->orderBy('price_uses_count', 'ASC')
@@ -273,7 +274,7 @@ class WallpaperController extends Controller {
                 ])->render();
             }
         }
-        if(empty($response)) $response = '<div class="searchViewBefore_selectbox_item">Không có kết quả phù hợp!</div>';
+        if(empty($response)) $response = '<div class="searchViewBefore_selectbox_item">'.config('language.'.$language.'.data.no_suitable_results_found').'</div>';
         echo $response;
     }
 }

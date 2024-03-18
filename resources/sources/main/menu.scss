@@ -686,6 +686,7 @@ $width_normalMenu : 250px;
             padding: 0.75rem;
             border: 1px solid $colorBackgroundLv2;
             cursor: pointer;
+            color: $colorText;
             &:not(:first-child){
                 border-top: 1px solid $colorBackgroundLv1;
             }

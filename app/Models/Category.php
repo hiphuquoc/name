@@ -10,12 +10,8 @@ class Category extends Model {
     protected $table        = 'category_info';
     protected $fillable     = [
         'seo_id',
-        'name', 
-        'description',
-        'en_seo_id',
-        'en_name',
-        'en_description',
-        'icon'
+        'icon',
+        'flag_show',
     ];
     public $timestamps = true;
 
@@ -59,14 +55,16 @@ class Category extends Model {
     }
 
     public static function getTreeCategory($wheres = []){
-        $result = self::select('category_info.*')
+        $query  = self::select('category_info.*')
                     ->whereHas('seo', function ($query) {
                         $query->where('level', 1);
                     })
-                    ->with('seo', 'en_seo', 'products')
+                    ->with('seo', 'products')
                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                    ->orderBy('seo.ordering', 'DESC')
-                    ->get();
+                    ->orderBy('seo.ordering', 'DESC');
+        /* thêm query where (nếu có) */
+        foreach ($wheres as $key => $where) $query->where($key, $where);
+        $result = $query->get();
         for($i=0;$i<$result->count();++$i){
             $result[$i]->childs  = self::getTreeCategoryByInfoCategory($result[$i], $wheres);
         }
@@ -81,7 +79,7 @@ class Category extends Model {
                                     ->whereHas('seo', function($query) use($idPage){
                                         $query->where('parent', $idPage);
                                     })
-                                    ->with('seo', 'en_seo', 'products')
+                                    ->with('seo', 'products')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->orderBy('seo.ordering', 'DESC');
             /* thêm query where (nếu có) */
@@ -101,8 +99,8 @@ class Category extends Model {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 
-    public function en_seo() {
-        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
+    public function seos() {
+        return $this->hasMany(\App\Models\RelationSeoCategoryInfo::class, 'category_info_id', 'id');
     }
 
     public function files(){

@@ -133,12 +133,8 @@
         </div> --}}
         <div class="sortBox_right_item">
             <!-- số lượng -->
-            @php
-                $nameQuantity = empty($language)||$language=='vi' ? 'Bộ ảnh' : 'Set photos';
-                // if($viewBy=='wallpaper') $nameQuantity = empty($language)||$language=='vi' ? 'Ảnh' : 'Photos';
-            @endphp
             <span class="quantity maxLine_1">
-                {{ $nameQuantity }} {{ $total }}
+                {{ config('language.'.$language.'.data.photo_set') }} {{ $total }}
             </span> 
         </div>
     </div>

@@ -40,12 +40,15 @@
             <div class="contentBox">
                 <div class="pageContentWithSidebar">
                     <div class="pageContentWithSidebar_content">
-                        @if(empty($language)||$language=='vi')
-                            <h1>{{ $item->name ?? $item->seo->title ?? null }}</h1>
-                        @else
-                            <h1>{{ $item->en_name ?? $item->en_seo->title ?? null }}</h1>
+                        <h1>{{ $itemSeo->title ?? $item->seo->title ?? null }}</h1>
+                        <!-- Nội dung -->
+                        @if(!empty($itemSeo->contents))
+                            @php
+                                $xhtmlContent = '';
+                                foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+                            @endphp
+                            {!! $xhtmlContent !!}
                         @endif
-                        {!! $content ?? null !!}
                     </div>
                     {{-- <div class="pageContentWithSidebar_sidebar">
                         <!-- trang liên quan (nhiều loại) -->

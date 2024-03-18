@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->integer('seo_id');
             $table->integer('type_id');
-            $table->text('name');
-            $table->text('description')->nullable();
             $table->boolean('show_sidebar')->default(0);
         });
     }

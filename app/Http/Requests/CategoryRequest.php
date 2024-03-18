@@ -25,14 +25,9 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                      => 'required',
-            'description'               => 'required',
+            'title'                     => 'required',
             'seo_title'                 => 'required',
             'seo_description'           => 'required',
-            'en_name'                   => 'required',
-            'en_description'            => 'required',
-            'en_seo_title'              => 'required',
-            'en_seo_description'        => 'required',
             'rating_aggregate_count'    => 'required',
             'rating_aggregate_star'     => 'required',
             'slug'                      => [
@@ -41,51 +36,25 @@ class CategoryRequest extends FormRequest
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
                         $flag       = false;
-                        $dataCheck  = DB::table('seo')
-                                        ->join('category_info', 'category_info.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'category_info.id')
-                                        ->where('slug', $slug)
-                                        ->first();
-                        if(!empty($dataCheck)){
-                            if(empty(request('category_info_id'))){
-                                $flag = true;
-                            }else {
-                                if(request('category_info_id')!=$dataCheck->id) $flag = true;
-                            }
+                        if(request('type')!='edit'){
+                            $dataCheck  = DB::table('seo')
+                                            ->join('category_info', 'category_info.seo_id', '=', 'seo.id')
+                                            ->select('seo.slug', 'category_info.id')
+                                            ->where('slug', $slug)
+                                            ->first();
+                            if(!empty($dataCheck)) $flag = true;
                         }
-                        if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một Chủ đề khác trên hệ thống!');
+                        if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một Tag khác trên hệ thống!');
                     }
                 }
             ],
-            'en_slug'                      => [
-                'required',
-                function($attribute, $value, $fail){
-                    $slug           = !empty(request('en_slug')) ? request('en_slug') : null;
-                    if(!empty($slug)){
-                        $flag       = false;
-                        $dataCheck  = DB::table('en_seo')
-                                        ->join('category_info', 'category_info.en_seo_id', '=', 'en_seo.id')
-                                        ->select('en_seo.slug', 'category_info.id')
-                                        ->where('slug', $slug)
-                                        ->first();
-                        if(!empty($dataCheck)){
-                            if(empty(request('category_info_id'))){
-                                $flag = true;
-                            }else {
-                                if(request('category_info_id')!=$dataCheck->id) $flag = true;
-                            }
-                        }
-                        if($flag==true) $fail('Dường dẫn tĩnh (bản tiếng anh) đã trùng với một Chủ đề khác trên hệ thống!');
-                    }
-                }
-            ]
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'                     => 'Tiêu đề không được để trống!',
+            'title.required'                     => 'Tiêu đề không được để trống!',
             'description.required'              => 'Mô tả không được để trống!',
             'seo_title.required'                => 'Tiêu đề Seo không được để trống!',
             'seo_description.required'          => 'Mô tả Seo không được để trống!',

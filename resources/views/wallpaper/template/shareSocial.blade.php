@@ -1,11 +1,7 @@
 <div class="shareSocialBox">
     <div class="shareSocialBox_item">
         <div class="shareSocialBox_item_text">
-            @if(!empty($language)&&$language=='en')
-                Share to<br/>your friends
-            @else
-                Chia sẻ<br/>bạn bè
-            @endif
+            {{ config('language.'.$language.'.data.share') }}
         </div>
     </div>
     <div class="shareSocialBox_item">

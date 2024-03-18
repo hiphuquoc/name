@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('category_info', function (Blueprint $table) {
             $table->id();
             $table->integer('seo_id');
-            $table->text('name');
-            $table->text('description')->nullable();
             $table->text('icon')->nullable();
             $table->boolean('flag_show')->default(1);
             $table->timestamps();

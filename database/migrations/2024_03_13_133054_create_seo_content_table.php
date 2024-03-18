@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('page_info', function (Blueprint $table) {
-            $table->integer('en_seo_id');
+        Schema::create('seo_content', function (Blueprint $table) {
+            $table->id();
+            $table->integer('seo_id');
+            $table->longText('content')->nullable();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('page_info', function (Blueprint $table) {
-            //
-        });
+        // Schema::dropIfExists('seo_content');
     }
 };

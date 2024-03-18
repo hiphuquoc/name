@@ -1,9 +1,9 @@
 
 <!-- của trọn bộ -->
 @php
-    $xhtmlPrice         = $item->price.config('main.currency_unit_en');
+    $xhtmlPrice         = $item->price.config('language.'.$language.'.currency');
     if(empty($language)||$language=='vi'){
-        $xhtmlPrice     = number_format(\App\Helpers\Number::convertUSDToVND($item->price)).config('main.currency_unit');
+        $xhtmlPrice     = number_format(\App\Helpers\Number::convertUSDToVND($item->price)).config('language.'.$language.'.currency');
     }
     $xhtmlPriceOld      = null;
     if(!empty($item->price_before_promotion)&&$item->price_before_promotion!=$item->price){
@@ -28,9 +28,9 @@
 
 @foreach($prices as $price)
     @php
-        $xhtmlPrice     = $price->price.config('main.currency_unit_en');
+        $xhtmlPrice     = $price->price.config('language.'.$language.'.currency');
         if(empty($language)||$language=='vi'){
-            $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($price->price)).config('main.currency_unit');
+            $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($price->price)).config('language.'.$language.'.currency');
         }
         $xhtmlPriceOld  = null;
         if(!empty($price->price_before_promotion)&&$price->price_before_promotion!=$price->price){

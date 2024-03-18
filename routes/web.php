@@ -38,6 +38,9 @@ use App\Http\Controllers\Admin\FreeWallpaperController;
 use App\Http\Controllers\Admin\SeoFreeWallpaperController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\RedirectController;
+use App\Http\Controllers\Admin\PromptController;
+use App\Http\Controllers\Admin\ChatGptController;
+use App\Http\Controllers\Admin\HelperController;
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
@@ -56,6 +59,8 @@ use App\Http\Controllers\PaypalController;
 
 Route::middleware('auth', 'role:admin')->group(function (){
     Route::prefix('he-thong')->group(function(){
+        /* ===== AI ===== */
+        Route::get('/chatGpt', [ChatGptController::class, 'chatGpt'])->name('main.chatGpt');
         /* ===== REDIRECT ===== */
         Route::prefix('redirect')->group(function(){
             Route::get('/list', [RedirectController::class, 'list'])->name('admin.redirect.list');
@@ -87,7 +92,15 @@ Route::middleware('auth', 'role:admin')->group(function (){
         Route::prefix('seoFreeWallpaper')->group(function(){
             Route::get('/list', [SeoFreeWallpaperController::class, 'list'])->name('admin.seoFreeWallpaper.list');
             Route::get('/view', [SeoFreeWallpaperController::class, 'view'])->name('admin.seoFreeWallpaper.view');
-            Route::post('/update', [SeoFreeWallpaperController::class, 'update'])->name('admin.seoFreeWallpaper.update');
+            Route::post('/createAndUpdate', [SeoFreeWallpaperController::class, 'createAndUpdate'])->name('admin.seoFreeWallpaper.createAndUpdate');
+        });
+        /* prompt */
+        Route::prefix('prompt')->group(function(){
+            Route::get('/list', [PromptController::class, 'list'])->name('admin.prompt.list');
+            Route::get('/view', [PromptController::class, 'view'])->name('admin.prompt.view');
+            Route::post('/createAndUpdate', [PromptController::class, 'createAndUpdate'])->name('admin.prompt.createAndUpdate');
+            Route::get('/loadColumnTable', [PromptController::class, 'loadColumnTable'])->name('admin.prompt.loadColumnTable');
+            Route::get('/delete', [PromptController::class, 'delete'])->name('admin.prompt.delete');
         });
         /* product */
         Route::prefix('product')->group(function(){
@@ -105,27 +118,24 @@ Route::middleware('auth', 'role:admin')->group(function (){
         });
         /* category */
         Route::prefix('category')->group(function(){
-            Route::get('/list', [CategoryController::class, 'list'])->name('admin.categoryMoney.list');
-            Route::get('/view', [CategoryController::class, 'view'])->name('admin.categoryMoney.view');
-            Route::post('/create', [CategoryController::class, 'create'])->name('admin.categoryMoney.create');
-            Route::post('/update', [CategoryController::class, 'update'])->name('admin.categoryMoney.update');
-            Route::get('/delete', [CategoryController::class, 'delete'])->name('admin.categoryMoney.delete');
+            Route::get('/list', [CategoryController::class, 'list'])->name('admin.category.list');
+            Route::get('/view', [CategoryController::class, 'view'])->name('admin.category.view');
+            Route::post('/createAndUpdate', [CategoryController::class, 'createAndUpdate'])->name('admin.category.createAndUpdate');
+            Route::get('/delete', [CategoryController::class, 'delete'])->name('admin.category.delete');
         });
         /* tag */
         Route::prefix('tag')->group(function(){
             Route::get('/list', [TagController::class, 'list'])->name('admin.tag.list');
             Route::get('/view', [TagController::class, 'view'])->name('admin.tag.view');
-            Route::post('/create', [TagController::class, 'create'])->name('admin.tag.create');
-            Route::post('/update', [TagController::class, 'update'])->name('admin.tag.update');
+            Route::post('/createAndUpdate', [TagController::class, 'createAndUpdate'])->name('admin.tag.createAndUpdate');
             Route::get('/delete', [TagController::class, 'delete'])->name('admin.tag.delete');
         });
         /* page */
         Route::prefix('page')->group(function(){
             Route::get('/list', [PageController::class, 'list'])->name('admin.page.list');
             Route::get('/view', [PageController::class, 'view'])->name('admin.page.view');
-            Route::post('/create', [PageController::class, 'create'])->name('admin.page.create');
-            Route::post('/update', [PageController::class, 'update'])->name('admin.page.update');
-            Route::get('/deleteItem', [PageController::class, 'deleteItem'])->name('admin.page.deleteItem');
+            Route::post('/createAndUpdate', [PageController::class, 'createAndUpdate'])->name('admin.page.createAndUpdate');
+            Route::get('/delete', [PageController::class, 'delete'])->name('admin.page.delete');
         });
         /* ===== Category Blog ===== */
         Route::prefix('categoryBlog')->group(function(){
@@ -193,6 +203,10 @@ Route::middleware('auth', 'role:admin')->group(function (){
         Route::prefix('cache')->group(function(){
             Route::get('/clearCacheHtml', [CacheController::class, 'clear'])->name('admin.cache.clearCache');
         });
+        /* ===== CACHE ===== */
+        Route::prefix('helper')->group(function(){
+            Route::get('/convertStrToUrl', [HelperController::class, 'convertStrToUrl'])->name('admin.helper.convertStrToUrl');
+        });
     });
 });
 
@@ -214,6 +228,7 @@ Route::prefix('payment')->group(function(){
 Route::get('/', [HomeController::class, 'home'])->name('main.home');
 Route::get('/en', [HomeController::class, 'home'])->name('main.enHome');
 Route::get('/test123', [HomeController::class, 'test'])->name('main.test');
+Route::get('/chatgpt', [HomeController::class, 'chatGPT'])->name('main.chatGPT');
 // /* trang category */
 // Route::prefix('category')->group(function(){
 //     Route::get('/loadMore', [CategoryPublic::class, 'loadMore'])->name('main.category.loadMore');

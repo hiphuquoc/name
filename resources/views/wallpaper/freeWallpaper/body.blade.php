@@ -2,12 +2,11 @@
     <div class="freeWallpaperDetailBox_image">
         @php
             $image = \App\Helpers\Image::getUrlImageLargeByUrlImage($item->file_cloud);
-            $altImage = empty($language)||$language=='vi' ? $item->name : $item->en_name;
         @endphp
-        <img src="{{ $image }}" alt="{{ $altImage }}" title="{{ $altImage }}" />
+        <img src="{{ $image }}" alt="{{ $itemSeo->title }}" title="{{ $itemSeo->title }}" />
     </div>
     <div class="freeWallpaperDetailBox_content">
-        <h1>{{ $item->name }}</h1>
+        <h1>{{ $itemSeo->title ?? null }}</h1>
         <!-- Action -->
         <div class="freeWallpaperDetailBox_content_action">
             @php
@@ -25,6 +24,6 @@
             </a>
         </div>
         <!-- Content -->
-        @include('wallpaper.freeWallpaper.content', ['contents' => $item->contents])
+        @include('wallpaper.freeWallpaper.content')
     </div>
 </div>

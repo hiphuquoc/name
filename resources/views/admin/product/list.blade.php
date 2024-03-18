@@ -30,7 +30,7 @@
                                     <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
                                 </div>
                                 <div class="oneLine">
-                                    <strong>Giá trọn bộ:</strong> <span style="color:red;font-weight:bold;font-size:1.3rem;">{{ $item->price }}{!! config('main.currency_unit_en') !!}</span>
+                                    <strong>Giá trọn bộ:</strong> <span style="color:red;font-weight:bold;font-size:1.3rem;">{{ $item->price }}</span>
                                 </div>
                                 @if(!empty($item->categories)&&$item->categories->isNotEmpty())
                                     <div class="onLine" style="margin-top:0.25rem;">
@@ -89,7 +89,7 @@
                                                     </div>
                                                 @endif
                                                 <div class="priceProductBox_item_image_price">
-                                                    {{ number_format($price->price) }}{!! config('main.currency_unit_en') !!}
+                                                    {{ number_format($price->price) }}
                                                 </div>
                                             </div>
                                         </div>

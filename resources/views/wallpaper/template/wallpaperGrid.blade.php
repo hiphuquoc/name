@@ -18,7 +18,7 @@
             @foreach($wallpapers as $wallpaper)
                 @php
                     $link           = empty($language)||$language=='vi' ? '/'.$wallpaper->seo->slug_full : '/'.$wallpaper->en_seo->slug_full;
-                    $wallpaperName    = $wallpaper->name ?? null;
+                    $wallpaperName  = $wallpaper->name ?? null;
                     $lazyload       = false;
                     if($loop->index>=$loaded) {
                         break;
@@ -27,13 +27,13 @@
                 @foreach($wallpaper->prices as $price)
                     @foreach($price->wallpapers as $wallpaper)
                         @include('wallpaper.template.perWallpaperItem', [
-                            'idProduct'   => $wallpaper->id,
-                            'idPrice'   => $price->id,
-                            'wallpaper' => $wallpaper, 
+                            'idProduct'     => $wallpaper->id,
+                            'idPrice'       => $price->id,
+                            'wallpaper'     => $wallpaper, 
                             'productName'   => $wallpaperName,
-                            'link'      => $link,
-                            'language'  => $language,
-                            'lazyload'  => $lazyload
+                            'link'          => $link,
+                            'language'      => $language,
+                            'lazyload'      => $lazyload
                         ])
                     @endforeach
                 @endforeach

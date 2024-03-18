@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('free_wallpaper_info', function (Blueprint $table) {
-            $table->integer('heart')->default(0);
-            $table->integer('ha_ha')->default(0);
-            $table->integer('not_like')->default(0);
-            $table->integer('vomit')->default(0);
+        Schema::table('seo', function (Blueprint $table) {
+            $table->string('language', '2');
         });
     }
 
@@ -28,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('free_wallpaper_info', function (Blueprint $table) {
+        Schema::table('seo', function (Blueprint $table) {
             //
         });
     }

@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('free_wallpaper_content', function (Blueprint $table) {
+        Schema::create('relation_seo_free_wallpaper_info', function (Blueprint $table) {
             $table->id();
+            $table->integer('seo_id');
             $table->integer('free_wallpaper_info_id');
-            $table->text('name');
-            $table->longText('content');
-            $table->text('en_name');
-            $table->longText('en_content');
-            $table->integer('ordering')->nullable();
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('free_wallpaper_content');
+        // Schema::dropIfExists('relation_seo_free_wallpaper_info');
     }
 };

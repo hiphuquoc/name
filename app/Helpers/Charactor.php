@@ -111,4 +111,50 @@ class Charactor {
         return $response;
     }
 
+    public static function splitString($html, $limitWord = 2000) {
+        // Tạo mảng để lưu trữ các phần của chuỗi
+        $parts = [];
+
+        // Tạo một biến tạm để lưu trữ một phần của chuỗi
+        $currentPart = '';
+
+        // Phân tách chuỗi thành các câu
+        $sentences = preg_split('/\n/i', $html);
+        $newSentences = [];
+        for($i=0;$i<count($sentences);++$i){
+            if(!empty(trim($sentences[$i]))){
+                $newSentences[] = trim($sentences[$i]);
+            }
+        }
+        // Lặp qua từng câu
+        foreach ($newSentences as $sentence) {
+            // Nếu độ dài của phần hiện tại cộng với độ dài của câu vượt quá 2000 ký tự
+            if (strlen($currentPart) + strlen($sentence) > $limitWord && strlen($sentence) > 10) { /* lớn hơn 10 để tránh tách những thẻ <html> */
+                // Thêm phần hiện tại vào mảng
+                $parts[] = $currentPart;
+                // Reset phần hiện tại để bắt đầu một phần mới
+                $currentPart = '';
+            }
+            // Thêm câu vào phần hiện tại
+            $currentPart .= $sentence;
+            // Nếu câu không phải là câu cuối cùng, thêm dấu xuống dòng vào phần hiện tại
+            if ($sentence !== end($newSentences)) {
+                $currentPart .= "\n";
+            }
+        }
+
+        // Thêm phần hiện tại cuối cùng vào mảng
+        $parts[] = $currentPart;
+
+        return $parts;
+    }
+
+    public static function generateChatgptDataAndEvent($itemSeo, $prompt, $language, $key) {
+        $dataChatgpt = null;
+        $eventChatgpt = null;
+        $dataChatgpt = 'data-id=' . $itemSeo->id . ' data-language=' . $language . ' data-id_prompt=' . $prompt->id.' data-type='.$prompt->type;
+        $eventChatgpt = "chatGpt($('#".$key."'), " . $itemSeo->id . ", '" . $language . "', " . $prompt->id . ")";
+        return compact('dataChatgpt', 'eventChatgpt');
+    }
+
 }

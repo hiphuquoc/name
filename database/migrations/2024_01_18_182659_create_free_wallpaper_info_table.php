@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('free_wallpaper_info', function (Blueprint $table) {
             $table->id();
+            $table->integer('seo_id')->nullable();
             $table->integer('user_id');
-            $table->text('name');
-            $table->text('en_name');
-            $table->longText('description')->nullable();
             $table->text('file_name');
             $table->text('file_cloud');
             $table->integer('width');
@@ -26,6 +24,10 @@ return new class extends Migration
             $table->integer('file_size');
             $table->text('extension');
             $table->text('mine_type');
+            $table->integer('heart')->default(0);
+            $table->integer('ha_ha')->default(0);
+            $table->integer('not_like')->default(0);
+            $table->integer('vomit')->default(0);
             $table->timestamps();
         });
     }

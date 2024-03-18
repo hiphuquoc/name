@@ -28,7 +28,7 @@ return [
                 ],
                 [
                     'name'  => '4. Chủ đề',
-                    'route' => 'admin.categoryMoney.list',
+                    'route' => 'admin.category.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
@@ -76,13 +76,6 @@ return [
             'name'      => 'Quản lí ảnh',
             'route'     => 'admin.image.list',
             'icon'      => '<i class="fa-regular fa-images"></i>',
-            // 'child'     => [
-            //     [
-            //         'name'  => '1. Danh sách',
-            //         'route' => 'admin.categoryMoney.list',
-            //         'icon'  => '<i data-feather=\'circle\'></i>'
-            //     ]
-            // ]
         ],
         [
             'name'      => 'Cài đặt',
@@ -107,8 +100,20 @@ return [
             'icon'      => '<i class="fa-solid fa-screwdriver-wrench"></i>',
             'child'     => [
                 [
-                    'name'  => '4. Redirect 301',
+                    'name'  => '1. Redirect 301',
                     'route' => 'admin.redirect.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ]
+            ]
+        ],
+        [
+            'name'      => 'Công nghệ AI',
+            'route'     => '',
+            'icon'      => '<i class="fa-solid fa-robot"></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Prompt',
+                    'route' => 'admin.prompt.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ]
             ]

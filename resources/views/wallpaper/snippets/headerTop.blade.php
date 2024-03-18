@@ -22,28 +22,30 @@
         <div id="js_checkLoginAndSetShow_button" class="hide-1023" style="height:100%;display:none !important;">
             <!-- tải ajax checkLoginAndSetShow() -->
         </div>
+        @php
+            // dd($itemSource);
+        @endphp
         <!-- language -->
         <div class="languageBox">
             <input type="hidden" id="language" name="language" value="{{ $language ?? '' }}" />
-            @if(empty($language)||$language=='vi')
-                <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon-vi.png') }}') no-repeat center;background-size:100% 100%;"></div>
-            @else
-                <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon-en.png') }}') no-repeat center;background-size:100% 100%;"></div>
+            {{-- @php
+                dd($item->languages);
+            @endphp --}}
+            <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon_flag_'.$itemSeo->language.'.png') }}') no-repeat center;background-size:100% 100%;"></div>
+            @if(!empty($item->seos)&&$item->seos->isNotEmpty())
+                <div class="languageBox_list">
+                    @foreach($item->seos as $seo)
+                        @php
+                            $selected = null;
+                            if($seo->infoSeo->language==$language) $selected = 'selected';
+                        @endphp
+                        <a href="/{{ $seo->infoSeo->slug_full }}" class="languageBox_list_item {{ $selected }}" aria-label="{{ $seo->infoSeo->title }}">
+                            <div>{{ strtoupper($seo->infoSeo->language) }}</div>
+                            <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon_flag_'.$seo->infoSeo->language.'.png') }}') no-repeat center;background-size:100% 100%;"></div>
+                        </a>
+                    @endforeach
+                </div>
             @endif
-            <div class="languageBox_list">
-                @php
-                    $urlVi = !empty($item->seo)&&$item->seo->slug_full!='/' ? $item->seo->slug_full : null;
-                    $urlEn = !empty($item->en_seo) ? $item->en_seo->slug_full : null;
-                @endphp
-                <a href="/{{ $urlVi }}" class="languageBox_list_item {{ empty($language)||$language=='vi' ? 'selected' : null }}" aria-label="Xem Name.com.vn bằng ngôn ngữ tiếng Việt">
-                    <div>VI</div>
-                    <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon-vi.png') }}') no-repeat center;background-size:100% 100%;"></div>
-                </a>  
-                <a href="/{{ $urlEn }}" class="languageBox_list_item {{ !empty($language)&&$language=='en' ? 'selected' : null }}" aria-label="Xem Name.com.vn bằng ngôn ngữ tiếng Anh">
-                    <div>EN</div>  
-                    <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon-en.png') }}') no-repeat center;background-size:100% 100%;"></div>
-                </a>
-            </div>
             <div class="languageBox_background"></div>
         </div>
         {{-- <div class="settingViewBox hide-1023">

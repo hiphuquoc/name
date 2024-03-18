@@ -80,9 +80,9 @@
                                     @php
                                         $p              = $i==0 ? $product->price : $price->price;
                                         $pOld           = $i==0 ? $product->price_before_promotion : $price->price_before_promotion;
-                                        $xhtmlPrice     = $p.config('main.currency_unit_en');
+                                        $xhtmlPrice     = $p.config('language.'.$language.'.currency');
                                         if(empty($language)||$language=='vi'){
-                                            $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($p)).config('main.currency_unit');
+                                            $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($p)).config('language.'.$language.'.currency');
                                         }
                                         $xhtmlPriceOld  = null;
                                         if(!empty($p!=$pOld)){

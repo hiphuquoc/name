@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('page_info', function (Blueprint $table) {
-            $table->text('en_name');
-            $table->text('en_description')->nullable();
+        Schema::create('relation_seo_tag_info', function (Blueprint $table) {
+            $table->id();
+            $table->integer('seo_id');
+            $table->integer('tag_info_id');
         });
     }
 
@@ -26,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('page_info', function (Blueprint $table) {
-            //
-        });
+        // Schema::dropIfExists('relation_seo_tag_info');
     }
 };

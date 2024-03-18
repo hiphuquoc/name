@@ -102,8 +102,8 @@
     function removeLoading(){
         $('.js_loading_element').remove();
     }
-     /* load image from goole cloud */
-     function loadImageFromGoogleCloud(){
+    /* load image from goole cloud */
+    function loadImageFromGoogleCloud(){
         $(document).find('img[data-google-cloud]').each(function(){
             var elementImg          = $(this);
             const urlGoogleCloud    = elementImg.attr('data-google-cloud');
@@ -121,5 +121,68 @@
                 }
             });
         });
+    }
+    /* function viết content */
+    function callAI(action){
+        console.log(action);
+        $('[data-type="'+action+'"]').each(function() {
+            
+            const id                = $(this).data('id');
+            const language          = $(this).data('language');
+            const id_prompt         = $(this).data('id_prompt');
+            chatGpt($(this), id, language, id_prompt);
+        });
+    }
+    /* ai chatgpt */
+    function chatGpt(input, id, language, id_prompt){
+        addAndRemoveClass($(input), 'inputLoading', 'inputSuccess inputError');
+        /* vô hiệu hóa box dùng tiny */ 
+        const idBox = $(input).attr('id');
+        var editor = tinymce.get(idBox);
+        if (editor) editor.getBody().setAttribute('contenteditable', false);
+        $.ajax({
+            url         : '{{ route("main.chatGpt") }}',
+            type        : 'get',
+            dataType    : 'json',
+            data        : {
+                id, language, id_prompt
+            }
+        }).done(function(data){
+            /* điền dữ liệu vào */
+            if(data.error=='') {
+                addAndRemoveClass($(input), 'inputSuccess', 'inputLoading inputError');
+                $(input).val(data.content);
+            }else {
+                addAndRemoveClass($(input), 'inputError', 'inputLoading inputSuccess');
+            }
+            /* Cập nhật nội dung Tiny */
+            if($(input).is('textarea')){
+                const idBox = $(input).attr('id');
+                if (editor) {
+                    editor.setContent(data.content);
+                    editor.getBody().setAttribute('contenteditable', true);
+                }
+            }
+            /* đếm lại kí tụ nếu có */
+            const idInput           = $(input).attr('id');
+            if(idInput){
+                const lengthInput   = $(input).val().length;
+                const elemtShow     = $(document).find("[data-charactor='" + idInput + "']");
+                elemtShow.html(lengthInput);
+            }
+        })
+    }
+    function addAndRemoveClass(input, add, remove){
+        $(input).addClass(add).removeClass(remove);
+        /* kiểm tra có phải input tiny */ 
+        var inputTiny = $(input).next();
+        if(inputTiny.hasClass('tox-tinymce')){
+            inputTiny.addClass(add).removeClass(remove);
+        }
+        /* kiểm tra có phải input tag */
+        var inputTag = $(input).prev();
+        if(inputTag.is('tags')){
+            inputTag.addClass(add).removeClass(remove);
+        }
     }
 </script>

@@ -483,6 +483,9 @@ label.error {
 .pageAdminWithRightSidebar {
     
     &_header {
+        margin-right: calc(300px - .5rem);
+        flex-wrap: wrap;
+        justify-content: space-between;
         @include titlePage;
     }
     &_main {
@@ -519,6 +522,7 @@ label.error {
                     padding-bottom: 1rem;
                     justify-content: flex-end;
                     display: flex;
+                    align-items: center;
                     > * {
                         &:not(:first-child){
                             margin-left: 1rem;
@@ -1725,6 +1729,80 @@ html .content {
     //         display: none !important;
     //     }
     // }
+}
+
+.actionBox {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    &_item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background: $bg-03;
+        padding: 0.5rem 0.5rem;
+        flex-direction: column;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+            background: $bg-04;
+        }
+        &:not(:first-child){
+            margin-left: 0.5rem;
+
+        }
+        i {
+            margin-right: 0.25rem;
+            color: rgb(0, 190, 260);
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+    }
+}
+
+.reloadContentIcon {
+    color: rgb(0, 190, 260);
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.languageBox {
+    display: flex;
+    justify-content: flex-end;
+    &_item {
+        flex: 0 0 45px;
+        cursor: pointer;
+        overflow: hidden;
+        box-shadow: 0 0 5px $bg-06;
+        height: fit-content;
+        display: flex;
+        border-radius: 5px;
+        border: 2px solid #fff;
+        img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        &:not(:first-child){
+            margin-left: 7px;
+        }
+        &.disable {
+            opacity: 0.25;
+        }
+        &.selected {
+            border: 2px solid #28c76f;
+        }
+    }
+}
+.inputLoading {
+    border: 2px dashed #000 !important;
+}
+.inputError {
+    border: 2px dashed #D80032 !important;
+}
+.inputSuccess {
+    border: 2px dashed #28c76f !important;
 }
 
 @import 'order.scss';

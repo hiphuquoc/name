@@ -53,6 +53,6 @@
     if(!empty($product->price->price)&&!empty($product->cart['quantity'])) $money = number_format($product->price->price*$product->cart['quantity']);
 @endphp
 <div class="cartProductBox_body_item_money">
-    <div>{!! $money.config('main.currency_unit') !!}</div>
+    <div>{!! $money.config('language.'.$language.'.currency') !!}</div>
     <div class="cartProductBox_body_item_money_icon" onClick="{{ $eventRemoveProductCart }}"><img src="{{ Storage::url('images/svg/icon-trash.svg') }}" alt="xóa sản phẩm khỏi giỏ hàng" title="xóa sản phẩm khỏi giỏ hàng" /></div>
 </div> --}}

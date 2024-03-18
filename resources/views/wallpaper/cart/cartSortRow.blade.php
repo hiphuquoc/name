@@ -36,7 +36,7 @@
             </div>
             @if(!empty($product->cart['quantity'])&&!empty($product->price->price))
                 <div class="cartBox_list_item_content_orther_total">
-                    Thành tiền: <span>{!! number_format($product->cart['quantity']*$product->price->price).config('main.currency_unit') !!}</span>
+                    Thành tiền: <span>{!! number_format($product->cart['quantity']*$product->price->price).config('language.'.$language.'.currency') !!}</span>
                 </div>
             @endif
         </div> --}}

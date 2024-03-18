@@ -16,6 +16,7 @@
         "vite": "^4.1.4"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-source-editing": "^41.2.0",
         "@flaticon/flaticon-uicons": "^2.0.1",
         "debug": "^4.3.4",
         "jszip": "^3.10.1",
