@@ -135,5 +135,5 @@
 <!-- End:: Tiktok Analutics --> --}}
 
 {{-- @vite(['resources/sources/main/style.scss']) --}}
-<link rel="stylesheet" href="{{ asset('css/main/style.css') }}?version={{ time() }}">
+<link rel="stylesheet" href="{{ env('APP_URL').'/css/main/style.css' }}?version={{ time() }}">
 <!-- END: Custom CSS-->
