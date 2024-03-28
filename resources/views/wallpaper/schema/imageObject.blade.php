@@ -3,12 +3,41 @@
         $xhtml              = null;
         $i                  = 1;
         foreach($data as $d){
-            if(!empty($d)){
-                if($i!=1) $xhtml .= ', ';
-                $urlImage        = config('main.google_cloud_storage.default_domain').$d->file_cloud_wallpaper;
-                $name           = $d->name ?? null;
-                $description    = $name;
-                $xhtml          .= '{
+            if($d->seo->type=='product_info'){ /* xử lý cho phần tử con là product_info */
+                foreach($d->prices as $price){
+                    foreach($price->wallpapers as $w){
+                        if($i!=1) $xhtml .= ', ';
+                        $urlImage   = config('main.google_cloud_storage.default_domain').$w->infoWallpaper->file_cloud_wallpaper;
+                        $name           = null;
+                        $description    = null;
+                        foreach($d->seos as $s){
+                            if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language) {
+                                $name           = $s->infoSeo->seo_title ?? $d->seo->seo_title;
+                                $description    = $s->infoSeo->seo_description ?? $s->seo->seo_description;
+                                break;
+                            }
+                        }
+                        $xhtml      .= '{
+                                            "@type": "ImageObject",
+                                            "contentUrl": "'.$urlImage.'",
+                                            "name": "'.$name.'",
+                                            "description": "'.$description.'"
+                                        }';
+                        ++$i;
+                    }
+                }
+            }else if($d->seo->type=='free_wallpaper_info'){ /* xử lý cho phần tử con là free_wallpaper_info */
+                $urlImage   = config('main.google_cloud_storage.default_domain').$d->file_cloud;
+                $name           = null;
+                $description    = null;
+                foreach($d->seos as $s){
+                    if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language) {
+                        $name           = $s->infoSeo->seo_title ?? $d->seo->seo_title;
+                        $description    = $s->infoSeo->seo_description ?? $s->seo->seo_description;
+                        break;
+                    }
+                }
+                $xhtml      .= '{
                                     "@type": "ImageObject",
                                     "contentUrl": "'.$urlImage.'",
                                     "name": "'.$name.'",
@@ -18,13 +47,15 @@
             }
         }
     @endphp
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": [
-            {!! $xhtml !!}
-        ]
-    }
-    </script>
+    @if(!empty($xhtml))
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "itemListElement": [
+                    {!! $xhtml !!}
+                ]
+            }
+        </script>
+    @endif
 @endif

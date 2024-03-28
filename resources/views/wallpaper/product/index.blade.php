@@ -3,31 +3,19 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-        if(empty($language)||$language=='vi'){
-            $currency           = 'VND';
-            $highPrice          = \App\Helpers\Number::convertUSDToVND($item->price_before_promotion);
-            $lowPrice           = $highPrice;
-            foreach($item->prices as $price){
-                if($price->price<$lowPrice){
-                    $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
-                }
+        $highPrice          = $item->price_before_promotion;
+        $lowPrice           = $highPrice;
+        foreach($item->prices as $price){
+            if($price->price<$lowPrice){
+                $lowPrice   = $price->price;
             }
-        }else {
-            $currency           = 'USD';
-            $highPrice          = $item->price_before_promotion;
-            $lowPrice           = $highPrice;
-            foreach($item->prices as $price){
-                if($price->price<$lowPrice){
-                    $lowPrice   = $price->price;
-                }
-            }
-    }
+        }
     @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice, 'currentcy' => $currency])
+    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Product Schema -->
 
     <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.social', compact('item', 'lowPrice', 'highPrice'))
+    @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Title - Description - Social -->
 
     <!-- STRAT:: Organization Schema -->
@@ -41,9 +29,7 @@
     <!-- STRAT:: ImageObject Schema -->
     @php
         $dataImages = new \Illuminate\Database\Eloquent\Collection;
-        foreach($item->prices as $price){
-            foreach($price->wallpapers as $wallpaper) $dataImages[] = $wallpaper->infoWallpaper;
-        }
+        $dataImages->push($item);
     @endphp
     @include('wallpaper.schema.imageObject', ['data' => $dataImages])
     <!-- END:: ImageObject Schema -->
@@ -66,22 +52,16 @@
         @include('wallpaper.template.shareSocial')
         <!-- content -->
         <div class="contentBox maxContent-1200">
+            
             <!-- Gallery và Product detail -->
             @include('wallpaper.product.body')
-
-            <!-- Content -->
-            @include('wallpaper.product.content', ['contents' => $item->contents])
-
+            
             <!-- Related -->
             @if($total>0)
             <div class="contentBox">
                 <div class="relatedProductBox">
                     <div class="relatedProductBox_title">
-                        @if(!empty($language)&&$language=='en')
-                            <h2>Recommendations for you</h2>
-                        @else 
-                            <h2>Gợi ý cho bạn</h2>
-                        @endif
+                        <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
                     </div>
                     <div class="relatedProductBox_box">
                         {{-- @php

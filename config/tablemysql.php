@@ -19,4 +19,7 @@ return [
     'page_info'        => [
         'model_name'    => 'Page',
     ],
+    'product_info'        => [
+        'model_name'    => 'Product',
+    ],
 ];

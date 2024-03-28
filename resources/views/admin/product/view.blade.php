@@ -3,20 +3,47 @@
 
     @php
         $titlePage      = 'Thêm Sản phẩm mới';
-        $submit         = 'admin.product.create';
-        $checkImage     = 'required';
+        $submit         = 'admin.product.createAndUpdate';
         if(!empty($type)&&$type=='edit'){
             $titlePage  = 'Chỉnh sửa Sản phẩm';
-            $submit     = 'admin.product.update';
-            $checkImage = null;
         }
     @endphp
 
     <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate enctype="multipart/form-data">
     @csrf
+        <input type="hidden" id="seo_id" name="seo_id" value="{{ $itemSeo->id ?? 0 }}" />
+        <input type="hidden" id="product_info_id" name="product_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" />
+        <input type="hidden" id="language" name="language" value="{{ $language ?? 'vi' }}" />
+        <input type="hidden" id="type" name="type" value="{{ $type }}" />
         <div class="pageAdminWithRightSidebar withRightSidebar">
             <div class="pageAdminWithRightSidebar_header">
-                {{ $titlePage }}
+                <div style="display:flex;align-items:flex-end;">
+                    <div style="width:100%;">{{ $titlePage }}</div>
+                    <div class="languageBox">
+                        @foreach(config('language') as $lang)
+                            @php
+                                /* trang đang sửa có ngôn ngữ ? */
+                                $selected = null;
+                                if($language==$lang['key']) $selected = 'selected';
+                                /* các trang đã tồn tại bảng ngôn ngữ này trong CSDL */
+                                $disable        = 'disable';
+                                $languageLink   = route("admin.product.view", [
+                                    "language"  => $lang['key'], 
+                                    "id"        => $item->id
+                                ]);
+                                foreach($item->seos as $s){
+                                    if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$lang['key']){
+                                        $disable = null;
+                                        break;
+                                    }
+                                }
+                            @endphp
+                            <a href="{{ $languageLink }}" class="languageBox_item {{ $selected }} {{ $disable }}">
+                                <img src="/storage/images/svg/icon_flag_{{ $lang['key'] }}.png" />
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
             </div>
             <!-- Error -->
             @if ($errors->any())
@@ -31,77 +58,94 @@
             
             <div class="pageAdminWithRightSidebar_main">
                 <!-- START:: Main content -->
-                <div class="pageAdminWithRightSidebar_main_content">
+                <div class="pageAdminWithRightSidebar_main_content" data-repeater-list="prices">
 
-                    <!-- chống 2 thẻ pageAdminWithRightSidebar_main_content để repeater -->
-                    <div class="pageAdminWithRightSidebar_main_content" style="margin-right:0;">
-                        <div class="pageAdminWithRightSidebar_main_content_item">
-                            <div class="card">
-                                <div class="card-header border-bottom">
-                                    <h4 class="card-title">Thông tin trang</h4>
-                                </div>
-                                <div class="card-body">
-
-                                    @include('admin.product.formPage')
-
-                                </div>
+                    <div class="pageAdminWithRightSidebar_main_content_item">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title">Thông tin trang</h4>
                             </div>
-                        </div>
-                        <div class="pageAdminWithRightSidebar_main_content_item">
-                            <div class="card">
-                                <div class="card-header border-bottom">
-                                    <h4 class="card-title">Thông tin SEO</h4>
-                                </div>
-                                <div class="card-body">
+                            <div class="card-body">
 
-                                    @include('admin.form.formSeo')
-                                    
-                                </div>
+                                @include('admin.product.formPage')
+
                             </div>
                         </div>
                     </div>
-                    
-                    <div id="repeaterProductContent" class="pageAdminWithRightSidebar_main_content" style="margin-right:0;">
-                        <div class="pageAdminWithRightSidebar_main_content_item width100" data-repeater-list="contents">
-                            @if(!empty($item->contents)&&$item->contents->isNotEmpty())
-                                @foreach($item->contents as $content)
-                                    @include('admin.product.formContent', compact('content'))
-                                @endforeach
-                            @else 
-                                @include('admin.product.formContent')
+
+                    <div class="pageAdminWithRightSidebar_main_content_item">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title">Thông tin SEO</h4>
+                            </div>
+                            <div class="card-body">
+
+                                @include('admin.form.formSeo')
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- nội dung -->
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach($prompts as $prompt)
+                        <!-- tiếng việt -> form viết content (đối với bản viết có nhiều box theo layout prompt viết bài) -->
+                        @if($language=='vi') 
+                            @if($prompt->type=='auto_content'&&$prompt->reference_name=='content')
+                                <div class="pageAdminWithRightSidebar_main_content_item width100">
+                                    <div class="card">
+                                        <div class="card-body">
+                                        
+                                            @include('admin.form.formContent', [
+                                                'prompt'    => $prompt,
+                                                'content' => $itemSeo->contents[$i]->content ?? null, 
+                                                'idBox' => 'content_'.$i
+                                            ])
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                                @php
+                                    ++$i;
+                                @endphp
                             @endif
-    
-                        </div>
-                        <div class="pageAdminWithRightSidebar_main_content_item width100"> 
-                            <div class="card">
-                                <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                    <span>Thêm</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                        @else 
+                            <!-- tiếng khác -> form dịch (đối với bản dịch chỉ có duy nhất 1 box content - gom dữ liệu lại) -->
+                            @if($prompt->type=='translate_content'&&$prompt->reference_name=='content')
+                                <div class="pageAdminWithRightSidebar_main_content_item width100">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            @php
+                                                $xhtmlContent = '';
+                                                if(!empty($itemSeo->contents)) foreach($itemSeo->contents as $c) $xhtmlContent .= $c->content;
+                                            @endphp
+                                            @include('admin.form.formContent', [
+                                                'prompt'    => $prompt,
+                                                'content'   => $xhtmlContent, 
+                                                'idBox'     => 'content_'.$i
+                                            ])
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+                    @endforeach
 
-                    <div id="repeaterProductPrice" class="pageAdminWithRightSidebar_main_content" style="margin-right:0;">
-                        <div class="pageAdminWithRightSidebar_main_content_item width100" data-repeater-list="prices">
-                            @if(!empty($item->prices)&&$item->prices->isNotEmpty())
-                                @foreach($item->prices as $price)
+                    <!-- tùy biến giá -->
+                    @if($language=='vi')
+                        @if(!empty($item->prices)&&$item->prices->isNotEmpty())
+                            @foreach($item->prices as $price)
+                                <div class="pageAdminWithRightSidebar_main_content_item" data-repeater-item>
                                     @include('admin.product.formPrice', compact('item', 'price'))
-                                @endforeach
-                            @else 
-                                @include('admin.product.formPrice')
-                            @endif
-                        </div>
-    
-                        <div class="pageAdminWithRightSidebar_main_content_item width100"> 
-                            <div class="card">
-                                <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" data-repeater-create>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                    <span>Thêm</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                                </div>
+                            @endforeach
+                        @else 
+                            @include('admin.product.formPrice')
+                        @endif
+                    @endif
 
                 </div>
                 
@@ -109,25 +153,51 @@
 
                 <!-- START:: Sidebar content -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
-                    <!-- Button Save -->
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
+                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
+                        @if(!empty($itemSeo->slug_full))
+                            <a href="/{{ $itemSeo->slug_full }}" target="_blank" style="font-size:1.4rem;"><i class="fa-regular fa-eye"></i></a>
+                        @endif
                         <a href="{{ route('admin.product.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;" aria-label="Lưu">Lưu</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" aria-label="Lưu">Lưu</button>
                     </div>
-                    <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top: 1px dashed #adb5bd;">
+                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
+                        <div class="actionBox">
+                            @if($language=='vi')
+                                <div class="actionBox_item maxLine_1" onClick="callAI('auto_content')">
+                                    <i class="fa-solid fa-robot"></i>Auto Content
+                                </div>
+                            @else   
+                                <div class="actionBox_item maxLine_1" onClick="callAI('translate_content')">
+                                    <i class="fa-solid fa-language"></i>Dịch Content
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="customScrollBar-y" style="height: calc(100vh - 200px);border-top: 1px dashed #adb5bd;display:flex;flex-direction:column;">
                         <!-- Form Upload -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formImage')
                         </div>
-                        <!-- Form Slider -->
+                        {{-- <!-- Form Slider -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formSlider')
-                        </div>
+                        </div> --}}
                         {{-- <!-- Form Gallery -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formGallery')
                         </div> --}}
+
+                        @if($language=='vi')
+                            <div class="pageAdminWithRightSidebar_main_rightSidebar_item" style="margin-top:auto;">
+                                <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" aria-label="Thêm" style="width:100%;" data-repeater-create>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    <span>Thêm phiên bản SP</span>
+                                </button>
+                            </div>
+                        @endif
                     </div>
+
+                    
                 </div>
                 <!-- END:: Sidebar content -->
             </div>
@@ -137,8 +207,7 @@
 @endsection
 @push('scriptCustom')
     <script type="text/javascript">
-        $('#repeaterProductContent').repeater();
-        $('#repeaterProductPrice').repeater();
+        $('.pageAdminWithRightSidebar_main').repeater();
 
         $(window).ready(function(){
             @if(!empty($item->prices)&&$item->prices->isNotEmpty())

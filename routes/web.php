@@ -106,8 +106,9 @@ Route::middleware('auth', 'role:admin')->group(function (){
         Route::prefix('product')->group(function(){
             Route::get('/list', [ProductController::class, 'list'])->name('admin.product.list');
             Route::get('/view', [ProductController::class, 'view'])->name('admin.product.view');
-            Route::post('/create', [ProductController::class, 'create'])->name('admin.product.create');
-            Route::post('/update', [ProductController::class, 'update'])->name('admin.product.update');
+            Route::post('/createAndUpdate', [ProductController::class, 'createAndUpdate'])->name('admin.product.createAndUpdate');
+            // Route::post('/create', [ProductController::class, 'create'])->name('admin.product.create');
+            // Route::post('/update', [ProductController::class, 'update'])->name('admin.product.update');
             Route::get('/delete', [ProductController::class, 'delete'])->name('admin.product.delete');
         });
         /* product price */
@@ -225,8 +226,14 @@ Route::prefix('payment')->group(function(){
     Route::get('/zaloCreate', [ZalopayController::class, 'create'])->name('main.zalo.create');
 });
 /* trang chủ */
-Route::get('/', [HomeController::class, 'home'])->name('main.home');
-Route::get('/en', [HomeController::class, 'home'])->name('main.enHome');
+$validLanguages = ['']; // Ngôn ngữ mặc định
+foreach (config('language') as $key => $value) {
+    $validLanguages[] = $key;
+}
+Route::get('/{language?}', [HomeController::class, 'home'])
+    ->where('language', implode('|', $validLanguages))
+    ->name('main.home');
+/* nháp */
 Route::get('/test123', [HomeController::class, 'test'])->name('main.test');
 Route::get('/chatgpt', [HomeController::class, 'chatGPT'])->name('main.chatGPT');
 // /* trang category */
@@ -238,8 +245,7 @@ Route::get('/chatgpt', [HomeController::class, 'chatGPT'])->name('main.chatGPT')
 /* lỗi */
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
 /* cart */
-Route::get('/gio-hang', [CartController::class, 'index'])->name('main.cart');
-Route::get('/cart', [CartController::class, 'index'])->name('main.enCart');
+// Route::get('/gio-hang', [CartController::class, 'index'])->name('main.cart');
 Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addToCart');
 Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.updateCart');
 Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');

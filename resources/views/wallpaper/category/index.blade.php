@@ -3,41 +3,14 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-        if(empty($language)||$language=='vi'){
-            $currency           = 'VND';
-            $highPrice          = 0;
-            foreach($wallpapers as $wallpaper){
-                if($wallpaper->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($wallpaper->price_before_promotion);
-            }
-            $lowPrice           = $highPrice;
-            foreach($wallpapers as $wallpaper){
-                if(!empty($wallpaper->prices)){ /* trường hợp hình nền miễn phí không có giá */
-                    foreach($wallpaper->prices as $price){
-                        if($price->price<$lowPrice) $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
-                    }
-                }
-            }
-        }else {
-            $currency           = 'USD';
-            $highPrice          = 0;
-            foreach($wallpapers as $wallpaper){
-                if($wallpaper->price_before_promotion>$highPrice) $highPrice = $wallpaper->price_before_promotion;
-            }
-            $lowPrice           = $highPrice;
-            foreach($wallpapers as $wallpaper){
-                if(!empty($wallpaper->prices)){ /* trường hợp hình nền miễn phí không có giá */
-                    foreach($wallpaper->prices as $price){
-                        if($price->price<$lowPrice) $lowPrice = $price->price;
-                    }
-                }
-            }
-        }
+        $highPrice          = 0;
+        $lowPrice           = 0;
     @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice, 'currency' => $currency])
+    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Product Schema -->
 
     <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.social', compact('item', 'lowPrice', 'highPrice'))
+    @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Title - Description - Social -->
 
     <!-- STRAT:: Title - Description - Social -->
@@ -61,19 +34,7 @@
     <!-- END:: FAQ Schema -->
 
     <!-- STRAT:: ImageObject Schema -->
-    @php
-        $dataImages = new \Illuminate\Database\Eloquent\Collection;
-        foreach($wallpapers as $wallpaper){
-            if(!empty($wallpaper->prices)){ /* trường hợp hình nền miễn phí không có giá */
-                foreach($wallpaper->prices as $price){
-                    foreach($price->wallpapers as $wallpaper) {
-                        $dataImages[] = $wallpaper->infoWallpaper;
-                    }
-                }
-            }
-        }
-    @endphp
-    @include('wallpaper.schema.imageObject', ['data' => $dataImages])
+    @include('wallpaper.schema.imageObject', ['data' => $wallpapers])
     <!-- END:: ImageObject Schema -->
 
     <!-- STRAT:: FAQ Schema -->
@@ -91,7 +52,7 @@
         <!-- content -->
         <div class="contentBox">
             <div style="display:flex;">
-                <h1>Hình nền điện thoại {{ empty($language)||$language=='vi' ? $item->name : $item->en_name }}</h1>
+                <h1>{{ config('language.'.$language.'.data.phone_wallpaper').' '.$itemSeo->title }}</h1>
             </div>
             <!-- Sort Box -->
             @include('wallpaper.category.sort', [

@@ -13,7 +13,9 @@ class PaypalController extends Controller{
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
         
+        /* thanh toán paypal đang mặc định đơn vị tiền tệ USD */
         $amount         = $infoOrder->total;
+        $currency       = 'USD';
 
         $response       = $provider->createOrder([
             'intent'                => 'CAPTURE',
@@ -29,7 +31,7 @@ class PaypalController extends Controller{
             'purchase_units'        => [
                 0 => [
                     'amount'        => [
-                        'currency_code' => 'USD',
+                        'currency_code' => $currency,
                         'value'     => $amount
                     ]
                 ]

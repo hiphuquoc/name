@@ -1,10 +1,6 @@
 @extends('layouts.wallpaper')
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
-    <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.social', compact('item'))
-    <!-- END:: Title - Description - Social -->
-
     <!-- STRAT:: Organization Schema -->
     @include('wallpaper.schema.organization')
     <!-- END:: Organization Schema -->
@@ -20,29 +16,14 @@
     @if(!empty($products)&&$products->isNotEmpty())
         <!-- STRAT:: Product Schema -->
         @php
-            if(empty($language)||$language=='vi'){
-                $currency           = 'VND';
-                $highPrice          = 0;
-                foreach($products as $product){
-                    if($product->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($product->price_before_promotion);
-                }
-                $lowPrice           = $highPrice;
-                foreach($products as $product){
-                    foreach($product->prices as $price){
-                        if($price->price<$lowPrice) $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
-                    }
-                }
-            }else {
-                $currency           = 'USD';
-                $highPrice          = 0;
-                foreach($products as $product){
-                    if($product->price_before_promotion>$highPrice) $highPrice = $product->price_before_promotion;
-                }
-                $lowPrice           = $highPrice;
-                foreach($products as $product){
-                    foreach($product->prices as $price){
-                        if($price->price<$lowPrice) $lowPrice = $price->price;
-                    }
+            $highPrice          = 0;
+            foreach($products as $product){
+                if($product->price_before_promotion>$highPrice) $highPrice = $product->price_before_promotion;
+            }
+            $lowPrice           = $highPrice;
+            foreach($products as $product){
+                foreach($product->prices as $price){
+                    if($price->price<$lowPrice) $lowPrice   = $price->price;
                 }
             }
         @endphp
@@ -54,18 +35,12 @@
         <!-- END:: FAQ Schema --> --}}
 
         <!-- STRAT:: ImageObject Schema -->
-        @php
-            $dataImages = new \Illuminate\Database\Eloquent\Collection;
-            foreach($products as $product){
-                foreach($product->prices as $price){
-                    foreach($price->wallpapers as $wallpaper) {
-                        $dataImages[] = $wallpaper->infoWallpaper;
-                    }
-                }
-            }
-        @endphp
-        @include('wallpaper.schema.imageObject', ['data' => $dataImages])
+        @include('wallpaper.schema.imageObject', ['data' => $products])
         <!-- END:: ImageObject Schema -->
+
+        <!-- STRAT:: Title - Description - Social -->
+        @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+        <!-- END:: Title - Description - Social -->
     @endif
 
     <!-- STRAT:: FAQ Schema -->

@@ -1,6 +1,6 @@
 @php
     /* lấy ảnh đại diện */
-    $image      = !empty($item->seo->image) ? '"'.env('APP_URL').Storage::url($item->seo->image).'"' : null;
+    $image      = !empty($itemSeo->image) ? '"'.env('APP_URL').Storage::url($itemSeo->image).'"' : null;
     /* trường hợp có gallery thì lấy gallery */
     /* chưa có trường hợp nên chưa xử lý */
     /* trường hợp có gallery sản phẩm thì lấy gallery sản phẩm */
@@ -24,13 +24,14 @@
             }
         }
     }
-    if(!empty($language)&&$language=='en'){
-        $title          = $item->en_seo->seo_title ?? $item->en_seo->title ?? null;
-        $description    = $item->en_seo->seo_description ?? $item->en_seo->description ?? null;
-    }else {
-        $title          = $item->seo->seo_title ?? $item->seo->title ?? null;
-        $description    = $item->seo->seo_description ?? $item->seo->description ?? null;
-    }
+    $title          = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
+    $description    = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
+    /* lấy giá theo ngôn ngữ */
+    $tmp            = \App\Helpers\Number::getPriceByLanguage($lowPrice, $language);
+    $lowPrice       = $tmp['number'];
+    $currency       = $tmp['currency_code'];
+    $tmp            = \App\Helpers\Number::getPriceByLanguage($highPrice, $language);
+    $highPrice      = $tmp['number'];
 @endphp
 <script type="application/ld+json">
     {
@@ -43,7 +44,7 @@
                 {!! $image !!}
             ],
         "description": "{{ $description }}",
-        "sku": "WW122023M{{ !empty($item->seo->created_at) ? strtotime($item->seo->created_at) : 00 }}YK/VN",
+        "sku": "WW122023M{{ !empty($itemSeo->created_at) ? strtotime($itemSeo->created_at) : 00 }}YK/VN",
         "brand": {
             "@type": "Brand",
             "name": "{{ config('main.company_name') }}"
@@ -58,15 +59,15 @@
                     },
                 "author": {
                     "@type": "Organization",
-                    "name": "{{ $item->seo->rating_author_name ?? null }}",
+                    "name": "{{ $itemSeo->rating_author_name ?? null }}",
                     "url": "{{ env('APP_URL') }}"
                 }
             },
         "aggregateRating":
             {
                 "@type": "AggregateRating",
-                "ratingValue": "{{ $item->seo->rating_aggregate_star ?? '4.8' }}",
-                "reviewCount": "{{ $item->seo->rating_aggregate_count ?? '172' }}",
+                "ratingValue": "{{ $itemSeo->rating_aggregate_star ?? '4.8' }}",
+                "reviewCount": "{{ $itemSeo->rating_aggregate_count ?? '172' }}",
                 "bestRating": "5"
             },
         "offers":
@@ -74,7 +75,7 @@
                 "@type": "AggregateOffer",
                 "url": "{{ URL::current() }}",
                 "offerCount": "1",
-                "priceCurrency": "{{ $currentcy ?? 'VND' }}",
+                "priceCurrency": "{{ $currency ?? 'VND' }}",
                 "lowPrice": "{{ $lowPrice ?? '50000' }}",
                 "highPrice": "{{ $highPrice ?? '5000000' }}",
                 "itemCondition": "https://schema.org/UsedCondition",
@@ -82,7 +83,7 @@
                 "seller":
                     {
                         "@type": "Organization",
-                        "name": "{{ $item->seo->rating_author_name ?? config('main.author_name') }}",
+                        "name": "{{ $itemSeo->rating_author_name ?? config('main.author_name') }}",
                         "url": "{{ env('APP_URL') }}"
                     }
             }

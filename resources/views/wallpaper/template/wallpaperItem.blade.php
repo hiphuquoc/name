@@ -1,9 +1,12 @@
 @php
-    if(!empty($language)&&$language=='en'){
-        $productName        = $product->en_name ?? $product->en_seo->title ?? null;
-    }else {
-        $productName        = $product->name ?? $product->seo->title ?? null;
+    $productSeo             = [];
+    foreach($product->seos as $s){
+        if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language) {
+            $productSeo     = $s->infoSeo;
+            break;
+        }
     }
+    $productName            = $productSeo->title ?? null;
     /* data filter => data-filter này phải gộp theo thứ tự menu filter từ trên xuống của giá trị (để xây dựng partern filter chính xác) 
         => filter theo danh mục
         => filter theo nhãn hàng
@@ -33,7 +36,7 @@
                     $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     /* đường dẫn */
-                    $url        = !empty($language)&&$language=='en'&&!empty($product->en_seo->slug_full) ? $product->en_seo->slug_full : $product->seo->slug_full;
+                    $url        = $productSeo->slug_full ?? null;
                 @endphp
                 <div id="{{ $keyIdPrice }}" class="{{ $i==0 ? 'show' : 'hide' }}">
                     <a href="/{{ $url }}?product_price_id={{ $price->id }}" class="wallpaperGridBox_item_image">
@@ -81,14 +84,10 @@
                                         $p              = $i==0 ? $product->price : $price->price;
                                         $pOld           = $i==0 ? $product->price_before_promotion : $price->price_before_promotion;
                                         $xhtmlPrice     = $p.config('language.'.$language.'.currency');
-                                        if(empty($language)||$language=='vi'){
-                                            $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($p)).config('language.'.$language.'.currency');
-                                        }
+                                        $xhtmlPrice     = \App\Helpers\Number::getFormatPriceByLanguage($p, $language);
                                         $xhtmlPriceOld  = null;
                                         if(!empty($p!=$pOld)){
-                                            if(empty($language)||$language=='vi'){
-                                                $pOld   = number_format(\App\Helpers\Number::convertUSDToVND($pOld));
-                                            }
+                                            $pOld   = \App\Helpers\Number::getFormatPriceByLanguage($pOld, $language, false);
                                         }
                                         $xhtmlPriceOld  = '<span class="maxLine_1">'.$pOld.'</span>';
                                     @endphp

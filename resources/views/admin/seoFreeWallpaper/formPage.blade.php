@@ -37,17 +37,18 @@
             <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <span data-toggle="tooltip" data-placement="top" title="
-                Nhập vào một số để thể hiện độ ưu tiên khi hiển thị cùng các Category khác (Số càng nhỏ càng ưu tiên cao - Để trống tức là không ưu tiên)
-            ">
-                <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label" for="ordering">Thứ tự</label>
-            </span>
-            <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
-        </div>
+        
         @if($language=='vi')
+            <!-- One Row -->
+            <div class="formBox_full_item">
+                <span data-toggle="tooltip" data-placement="top" title="
+                    Nhập vào một số để thể hiện độ ưu tiên khi hiển thị cùng các Category khác (Số càng nhỏ càng ưu tiên cao - Để trống tức là không ưu tiên)
+                ">
+                    <i class="explainInput" data-feather='alert-circle'></i>
+                    <label class="form-label" for="ordering">Thứ tự</label>
+                </span>
+                <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
+            </div>
             <!-- category/style/event -->
             @foreach(config('main.category_type') as $categoryType)
                 <div class="formBox_full_item">

@@ -7,22 +7,9 @@
                 @include('wallpaper.template.breadcrumb')
             </div>
             <div class="contentBox">
-                @php
-                    if(empty($language)||$language=='vi'){
-                        $titleH1        = 'Danh sách sản phẩm';
-                        $xhtmlHeadTable = '<div>Sản phẩm</div>
-                                            <div>Đơn giá</div>';
-                        $titleTotal     = 'Tổng cộng';
-                    }else {
-                        $titleH1        = 'List of products';
-                        $xhtmlHeadTable = '<div>Products</div>
-                                                <div>Price</div>';
-                        $titleTotal     = 'Total';
-                    }
-                @endphp
                 <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
                     @csrf
-                    <h1>{!! $titleH1 !!} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] ?? 0 }}</span>)</h1>
+                    <h1>{{ config('language.'.$language.'.data.product_list') }} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] ?? 0 }}</span>)</h1>
                     <div class="pageCartBox">
                         <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
 
@@ -35,7 +22,8 @@
                                         </div> --}}
                                         <div class="cartSectionBox_body">
                                             <div class="cartProductBox_head">
-                                                {!! $xhtmlHeadTable !!}
+                                                <div>{{ config('language.'.$language.'.data.product') }}</div>
+                                                <div>{{ config('language.'.$language.'.data.unit_price') }}</div>
                                             </div>
                                             <div class="cartProductBox_body">
                                                 @foreach($products as $product)
@@ -80,7 +68,6 @@
                                 <div id="js_loadTotalCart" class="cartSectionBox_body">
                                     @include('wallpaper.cart.total', [
                                         'intoMoney'     => $detailCart['into_money'],
-                                        'titleTotal'    => $titleTotal,
                                         'total'         => $detailCart['total'],
                                         'language'      => $language,
                                         'taxNumber'     => 0
@@ -90,12 +77,7 @@
                                     Dùng mã giảm giá của {{ config('main.company_name') }} ở bước sau
                                 </div> --}}
                                 <div class="cartSectionBox_button">
-                                    @if(empty($language)||$language=='vi')
-                                        <div class="button" onClick="submitFormPayment('formPaymentMethod');">Thanh toán</div>
-                                    @else
-                                        <div class="button" onClick="submitFormPayment('formPaymentMethod');">Payment</div>
-                                    @endif
-                                    
+                                    <div class="button" onClick="submitFormPayment('formPaymentMethod');">{{ config('language.'.$language.'.data.payment') }}</div>
                                 </div>
                             </div>
                             @endif

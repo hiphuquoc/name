@@ -1,61 +1,86 @@
-<div class="selectCustom_text maxLine_1">
-    {{ empty($language)||$language=='vi' ? 'Lọc theo '.$type['name'] : 'Filter by '.$type['en_name'] }}
-</div>
-<div class="selectCustom_input maxLine_1">
-    @php
-        /* kiểm tra selected với link truy cập hiện tại */
-        $flagSelected = false;
-        $nameSelect = empty($language)||$language=='vi' ? 'Tất cả' : 'All';
-        if(!empty($categoryChoose->seo->type)&&$categoryChoose->seo->type==$type['key']){
+
+@php
+    // /* kiểm tra selected với link truy cập hiện tại */
+    $flagSelected   = false;
+    $nameSelect     = config('language.'.$language.'.data.all');
+    if(!empty($categoryChoose->seo->type)&&$categoryChoose->seo->type==$type['key']){
+        if(!empty($categories)&&$categories->isNotEmpty()){
+            foreach($categories as $category){
+                if($category->id==$categoryChoose->id&&$category->flag_show==true) {
+                    /* chạy vòng lặp để lấy đúng ngôn ngữ */
+                    foreach($category->seos as $s){
+                        if(!empty($s->infoSeo)&&$language==$s->infoSeo->language){
+                            $nameSelect = $s->infoSeo->title;
+                            break;
+                        }
+                    }
+                    $flagSelected = true;
+                    break;
+                }
+            }
+        }
+    }
+    /* kiểm tra selected với filter */
+    if($flagSelected==false){
+        if(!empty($filters[$type['key']])){
             if(!empty($categories)&&$categories->isNotEmpty()){
                 foreach($categories as $category){
-                    if($category->name==$categoryChoose->name&&$category->flag_show==true) {
-                        $nameSelect = empty($language)||$language=='vi' ? $category->name : $category->en_name;
-                        $flagSelected = true;
+                    if($filters[$type['key']]==$category->id&&$category->flag_show==true) {
+                        /* chạy vòng lặp để lấy đúng ngôn ngữ */
+                        foreach($category->seos as $s){
+                            if(!empty($s->infoSeo)&&$language==$s->infoSeo->language){
+                                $nameSelect = $s->infoSeo->title;
+                                break;
+                            }
+                        }
                         break;
                     }
                 }
             }
         }
-        /* kiểm tra selected với filter */
-        if($flagSelected==false){
-            if(!empty($filters[$type['key']])){
-                if(!empty($categories)&&$categories->isNotEmpty()){
-                    foreach($categories as $category){
-                        if($filters[$type['key']]==$category->id&&$category->flag_show==true) {
-                            $nameSelect = empty($language)||$language=='vi' ? $category->name : $category->en_name;
-                            break;
-                        }
-                    }
+    }
+@endphp
+<div class="selectCustom_text maxLine_1">
+    {!! config('language.'.$language.'.data.filter_by') !!}
+</div>
+<div class="selectCustom_input maxLine_1">
+    {{ $nameSelect }}
+</div>
+<div class="selectCustom_box">
+    @php
+        $urlCategoryChoose = '';
+        if(!empty($categoryChoose->seos)){
+            foreach($categoryChoose->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                    $urlCategoryChoose = $seo->infoSeo->slug_full;
+                    break; 
                 }
             }
         }
     @endphp
-    {{ $nameSelect }}
-</div>
-<div class="selectCustom_box">
-    @if(empty($language)||$language=='vi')
-        <a href="/{{ $categoryChoose->seo->slug_full ?? null }}" class="selectCustom_box_item">
-            Tất cả
-        </a>
-    @else 
-        <a href="/{{ $categoryChoose->en_seo->slug_full ?? null }}" class="selectCustom_box_item">
-            All
-        </a>
-    @endif
+    <a href="/{{ $urlCategoryChoose }}" class="selectCustom_box_item">
+        {{ config('language.'.$language.'.data.all') }}
+    </a>
     @if(!empty($categories)&&$categories->isNotEmpty())
         @foreach($categories as $category)
             @if(!empty($category->seo->type)&&$category->seo->type==$type['key']&&$category->flag_show==true)
+                @php
+                    $urlCategory    = '';
+                    $nameCategory   = '';
+                    foreach($category->seos as $seo){
+                        if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                            $urlCategory = $seo->infoSeo->slug_full;
+                            $nameCategory = $seo->infoSeo->title;
+                            break;
+                        }
+                    }
+                @endphp
                 @php
                     $selected = '';
                     if(!empty($filters[$type['key']])&&$filters[$type['key']]==$category->id) $selected = 'selected';
                 @endphp
                 <div class="selectCustom_box_item {{ $selected }}" onclick="setFilter(this);">
-                    @if(empty($language)||$language=='vi')
-                        {{ $category->name }}
-                    @else 
-                        {{ $category->en_name }}
-                    @endif
+                    {{ $nameCategory }}
                     <!-- check box -->
                     <input type="radio" name="filters[{{ $type['key'] }}]" value="{{ $category->id }}" />
                 </div>

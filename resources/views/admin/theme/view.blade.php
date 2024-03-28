@@ -204,7 +204,7 @@
         <!-- START:: Sidebar content -->
         <div class="pageAdminWithRightSidebar_main_rightSidebar">
             <!-- Button Save -->
-            <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
+            <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
                 <a href="{{ route('admin.theme.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
                 <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" style="width:100px;" aria-label="Lưu">Lưu</button>
             </div>

@@ -9,6 +9,7 @@ class PageType extends Model {
     use HasFactory;
     protected $table        = 'page_type';
     protected $fillable     = [
+        'code',
         'name', 
         'description'
     ];

@@ -137,7 +137,7 @@
                 <!-- START:: Sidebar content -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
                     <!-- Button Save -->
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction" style="padding-bottom:1rem;">
+                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
                         @if(!empty($itemSeo->slug_full))
                             <a href="/{{ $itemSeo->slug_full }}" target="_blank" style="font-size:1.4rem;"><i class="fa-regular fa-eye"></i></a>
                         @endif
@@ -157,7 +157,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="customScrollBar-y" style="height: calc(100% - 70px);border-top: 1px dashed #adb5bd;">
+                    <div class="customScrollBar-y" style="height: calc(100% - 90px);">
                         <!-- Form Upload -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formImage')

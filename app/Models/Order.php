@@ -32,7 +32,7 @@ class Order extends Model {
                             $query->where('name', 'like', '%'.$params['search_name'].'%');
                         })
                         ->orderBy('created_at', 'DESC')
-                        ->with('status', 'customer', 'products.infoProduct', 'products.infoPrice.files', 'paymentMethod')
+                        ->with('status', 'customer', 'products.infoProduct', 'products.infoPrice', 'paymentMethod')
                         ->paginate($params['paginate']);
         return $result;
     }

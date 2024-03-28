@@ -9,6 +9,7 @@ class ProductPrice extends Model {
     use HasFactory;
     protected $table        = 'product_price';
     protected $fillable     = [
+        'code_name',
         'product_info_id',
         'name', 
         'description',
@@ -22,6 +23,7 @@ class ProductPrice extends Model {
     ];
     public $timestamps = false;
     private static $columnFilter = [
+        'code_name',
         'product_info_id',
         'name', 
         'description',

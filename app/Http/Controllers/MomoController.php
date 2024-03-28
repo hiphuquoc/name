@@ -9,8 +9,11 @@ class MomoController extends Controller{
     public static function create($infoOrder){
         $urlRedirect            = null;
         if(!empty($infoOrder)){
+            /* ngôn ngữ mặc định của thanh toán Zalo là tiếng việt - đơn vị tiền đồng */
+            $language   = 'vi';
             /* tổng tiền (không có phí thanh toán) */
-            $amount             = \App\Helpers\Number::convertUSDToVND($infoOrder->total);
+            $tmp                = \App\Helpers\Number::getPriceByLanguage($infoOrder->total, $language);
+            $amount             = $tmp['number'] ?? 0;
             if($amount>0){
                 $endpoint       = config('payment.momo.endpoint_create');
                 $partnerCode    = config('payment.momo.partner_code');

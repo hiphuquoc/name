@@ -28,9 +28,9 @@
                             <div class="badge" style="font-size:0.95rem;background:{{ $item->status->color ?? '#283747' }}">{{ $item->status->name ?? 'Chờ xác nhận' }}</div>
                         </td>
                         <td>
-                            <div class="oneLine">
+                            {{-- <div class="oneLine">
                                 {{ $item->customer->name ?? null }} - {{ $item->customer->phone ?? null }}
-                            </div>
+                            </div> --}}
                             @php
                                 $fullAddress = [];
                                 if(!empty($item->address)) $fullAddress[] = $item->address;
@@ -44,7 +44,7 @@
                                 </div>
                             @endif
                             <div class="oneLine">
-                                Tổng tiền: <span class="highLight">{{ number_format($item->total) }}</span> - {{ $item->paymentMethod->name ?? null }}
+                                Tổng tiền: <span class="highLight">{{ number_format($item->total) }}$</span> - {{ $item->paymentMethod->name ?? null }}
                             </div>
                         </td>
                         <td>
@@ -64,11 +64,11 @@
                                                 {{ $title }}
                                             </div>
                                             <div class="productListBox_item_content_option">
-                                                {{ $product->infoPrice->name ?? 'Không xác định' }} / {!! number_format($product->price).config('language.'.$language.'.currency') !!}
+                                                {{ $product->infoPrice->name ?? 'Không xác định' }} / {!! number_format($product->price).'USD' !!}
                                             </div>
                                         </div>
                                         <div class="productListBox_item_price">
-                                            {!! number_format($product->price*$product->quantity).config('language.'.$language.'.currency') !!}
+                                            {!! number_format($product->price*$product->quantity).'USD' !!}
                                         </div>
                                     </div>
                                 @endforeach

@@ -50,17 +50,24 @@ class PageController extends Controller {
             }else {
                 $idSeo = Seo::insertItem($seo);
             }
-            /* insert hoặc update page_info */
-            $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
-            $tag                = [
-                'type_id'       => $request->get('type_id'),
-                'show_sidebar'  => $showSidebar
-            ];
-            if(empty($idPage)){ /* check xem create page hay update page */
-                $idPage          = Page::insertItem($tag);
-            }else {
-                Page::updateItem($idPage, $tag);
+            
+            if($language=='vi'){
+                /* insert hoặc update page_info */
+                $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
+                if(empty($idPage)){ /* check xem create page hay update page */
+                    $idPage          = Page::insertItem([
+                        'type_id'       => $request->get('type_id'),
+                        'show_sidebar'  => $showSidebar,
+                        'seo_id'        => $idSeo,
+                    ]);
+                }else {
+                    Page::updateItem($idPage, [
+                        'type_id'       => $request->get('type_id'),
+                        'show_sidebar'  => $showSidebar
+                    ]);
+                }
             }
+
             /* relation_seo_page_info */
             $relationSeoTagInfo = RelationSeoPageInfo::select('*')
                                     ->where('seo_id', $idSeo)

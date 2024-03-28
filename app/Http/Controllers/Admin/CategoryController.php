@@ -36,7 +36,6 @@ class CategoryController extends Controller {
 
     public static function view(Request $request){
         $message            = $request->get('message') ?? null;
-        $idSource           = $request->get('id_source') ?? 0;
         $id                 = $request->get('id') ?? 0;
         $language           = $request->get('language') ?? null;
         /* tìm theo ngôn ngữ */
@@ -76,10 +75,10 @@ class CategoryController extends Controller {
         try {
             DB::beginTransaction();
             /* ngôn ngữ */
-            $keyTable           = 'category_info';
             $idSeo              = $request->get('seo_id');
             $idCategory         = $request->get('category_info_id');
             $language           = $request->get('language');
+            $categoryType       = $request->get('category_type') ?? null;
             $type               = $request->get('type');
             /* check xem là create seo hay update seo */
             $action             = !empty($idSeo)&&$type=='edit' ? 'edit' : 'create';
@@ -90,20 +89,40 @@ class CategoryController extends Controller {
                 $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
             }
             /* update page */
-            $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
+            $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $categoryType, $dataPath);
             if($action=='edit'){
                 Seo::updateItem($idSeo, $seo);
             }else {
                 $idSeo = Seo::insertItem($seo);
             }
-            /* insert hoặc update category_info */
-            $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
-            $category           = ['flag_show'     => $flagShow];
-            if(empty($idCategory)){ /* check xem create category hay update category */
-                $idCategory          = Category::insertItem($category);
-            }else {
-                Category::updateItem($idCategory, $category);
+            
+            if($language=='vi'){
+                /* insert hoặc update category_info */
+                $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
+                if(empty($idCategory)){ /* check xem create category hay update category */
+                    $idCategory          = Category::insertItem([
+                        'flag_show'     => $flagShow,
+                        'seo_id'        => $idSeo,
+                    ]);
+                }else {
+                    Category::updateItem($idCategory, [
+                        'flag_show'     => $flagShow,
+                    ]);
+                }
+                /* insert relation_category_info_category_blog_id */
+                RelationCategoryInfoCategoryBlogInfo::select('*')
+                    ->where('category_info_id', $idCategory)
+                    ->delete();
+                if(!empty($request->get('category_blog_info_id'))){
+                    foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
+                        RelationCategoryInfoCategoryBlogInfo::insertItem([
+                            'category_info_id'      => $idCategory,
+                            'category_blog_info_id' => $idCategoryBlogInfo
+                        ]);
+                    }
+                }
             }
+            
             /* relation_seo_category_info */
             $relationSeoCategoryInfo = RelationSeoCategoryInfo::select('*')
                                     ->where('seo_id', $idSeo)
@@ -122,18 +141,6 @@ class CategoryController extends Controller {
                     'seo_id'    => $idSeo,
                     'content'   => $content
                 ]);
-            }
-            /* insert relation_category_info_category_blog_id */
-            RelationCategoryInfoCategoryBlogInfo::select('*')
-                ->where('category_info_id', $idCategory)
-                ->delete();
-            if(!empty($request->get('category_blog_info_id'))){
-                foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
-                    RelationCategoryInfoCategoryBlogInfo::insertItem([
-                        'category_info_id'      => $idCategory,
-                        'category_blog_info_id' => $idCategoryBlogInfo
-                    ]);
-                }
             }
             
             DB::commit();

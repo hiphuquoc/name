@@ -1,9 +1,5 @@
 @php
-    if(!empty($language)&&$language=='en'){
-        $title  = $item->en_seo->seo_title ?? $item->en_seo->title ?? null;
-    }else {
-        $title  = $item->seo->seo_title ?? $item->seo->title ?? null;
-    }
+    $title  = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
 @endphp
 <script type="application/ld+json">
     {
@@ -12,9 +8,9 @@
         "name": "{{ $title }}",
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "{{ $item->seo->rating_aggregate_star ?? '5' }}",
+            "ratingValue": "{{ $itemSeo->rating_aggregate_star ?? '5' }}",
             "bestRating": "5",
-            "ratingCount": "{{ $item->seo->rating_aggregate_count ?? '120' }}"
+            "ratingCount": "{{ $itemSeo->rating_aggregate_count ?? '120' }}"
         }
     }
 </script>

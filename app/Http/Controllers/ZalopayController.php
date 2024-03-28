@@ -17,23 +17,30 @@ class ZalopayController extends Controller{
             $reqtime    = round(microtime(true) * 1000); // miliseconds
             /* truyển thông tin sản phẩm trong order vào */
             $dataItem   = [];
+            /* ngôn ngữ mặc định của thanh toán Zalo là tiếng việt - đơn vị tiền đồng */
+            $language   = 'vi';
             $i          = 0;
             foreach($infoOrder->products as $product){
                 $dataItem[$i]['code']       = $product->infoProduct->code ?? null;
                 $dataItem[$i]['name']       = $product->infoProduct->name ?? null;
                 $dataItem[$i]['option']     = $product->infoPrice->name ?? null;
-                $dataItem[$i]['price']      = !empty($product->infoPrice->price) ? \App\Helpers\Number::convertUSDToVND($product->infoPrice->price) : 'all';
+                $dataItem[$i]['price']      =  'all';
+                if(!empty($product->infoPrice->price)){
+                    $tmp                    = \App\Helpers\Number::getPriceByLanguage($product->infoPrice->price, $language); /* hàm trả ra array */
+                    $dataItem[$i]['price']  =  $tmp['number'];
+                }
                 $dataItem[$i]['sale_off']   = $product->infoPrice->sale_off ?? null;
                 ++$i;
             }
             /* bankcode */
             $bankcode   = self::getBankcode();
             /* tổng tiền (không có phí thanh toán) */
-            $total      = \App\Helpers\Number::convertUSDToVND($infoOrder->total);
+            $tmp        = \App\Helpers\Number::getPriceByLanguage($infoOrder->total, $language);
+            $total      = $tmp['number'] ?? 0;
             if($total>0){
                 $order  = [
                     "app_id"        => config('payment.zalopay.app_id'),
-                    "app_time"      => round(microtime(true) * 1000), // miliseconds
+                    "app_time"      => $reqtime,
                     "app_trans_id"  => date("ymd")."_".$infoOrder->code, // translation missing: vi.docs.shared.sample_code.comments.app_trans_id
                     "app_user"      => config('payment.zalopay.app_user'),
                     "item"          => json_encode($dataItem, JSON_UNESCAPED_UNICODE),

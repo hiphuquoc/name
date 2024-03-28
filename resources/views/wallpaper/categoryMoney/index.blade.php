@@ -3,23 +3,22 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-        $currency           = 'VND';
         $highPrice          = 0;
         foreach($wallpapers as $wallpaper){
-            if($wallpaper->price_before_promotion>$highPrice) $highPrice = \App\Helpers\Number::convertUSDToVND($wallpaper->price_before_promotion);
+            if($wallpaper->price_before_promotion>$highPrice) $highPrice = $wallpaper->price_before_promotion;
         }
         $lowPrice           = $highPrice;
         foreach($wallpapers as $wallpaper){
             foreach($wallpaper->prices as $price){
-                if($price->price<$lowPrice) $lowPrice   = \App\Helpers\Number::convertUSDToVND($price->price);
+                if($price->price<$lowPrice) $lowPrice   = $price->price;
             }
         }
     @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice, 'currency' => $currency])
+    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Product Schema -->
 
     <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.social', compact('item', 'lowPrice', 'highPrice'))
+    @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Title - Description - Social -->
 
     <!-- STRAT:: Title - Description - Social -->
@@ -43,17 +42,7 @@
     <!-- END:: FAQ Schema -->
 
     <!-- STRAT:: ImageObject Schema -->
-    @php
-        $dataImages = new \Illuminate\Database\Eloquent\Collection;
-        foreach($wallpapers as $wallpaper){
-            foreach($wallpaper->prices as $price){
-                foreach($price->wallpapers as $wallpaper) {
-                    $dataImages[] = $wallpaper->infoWallpaper;
-                }
-            }
-        }
-    @endphp
-    @include('wallpaper.schema.imageObject', ['data' => $dataImages])
+    @include('wallpaper.schema.imageObject', ['data' => $wallpapers])
     <!-- END:: ImageObject Schema -->
 
     <!-- STRAT:: FAQ Schema -->
@@ -72,8 +61,8 @@
         <div class="contentBox">
             <div style="display:flex;">
                 @php
-                    $titlePage = config('language.'.$language.'.data.phone_wallpaper').$item->seo->title;
-                    if($item->seo->level==1) $titlePage = $item->seo->title;
+                    $titlePage = config('language.'.$language.'.data.phone_wallpaper').$itemSeo->title;
+                    if($item->seo->level==1) $titlePage = $itemSeo->title;
                 @endphp
                 <h1>{{ $titlePage }}</h1>
                 <!-- từ khóa vừa search -->

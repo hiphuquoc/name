@@ -1,22 +1,19 @@
-@php
-    if(empty($language)||$language=='vi'){
-        $title =  $item->name ?? $item->seo->title ?? null;
-    }else {
-        $title =  $item->en_name ?? $item->en_seo->title ?? null;
-    }
-@endphp
 <!-- Product Detail Box -->
 <div class="pageProductDetailBox">
     <div class="pageProductDetailBox_left">
         <!-- Gallery Desktop -->
         @include('wallpaper.product.gallery', ['prices' => $item->prices])
-        <!-- giải thích thanh toán và nhận ảnh => desktop -->
+        {{-- <!-- giải thích thanh toán và nhận ảnh => desktop -->
         <div class="show-1199">
-            @if(empty($language)||$language=='vi')
-                <div>Sau khi thanh toán bằng <span style="font-size:1.1rem;font-family:'SVN-Gilroy Bold',sans-serif;color:#f7ff93;margin-right:0.25rem;">Momo /Zalopay</span>, Bạn sẽ nhận được link ảnh gốc để có thể tải xuống và sử dụng.</div>
-            @else
-                <div>After completing the payment by <span style="font-size:1.1rem;font-family:'SVN-Gilroy Bold',sans-serif;color:#f7ff93;margin-right:0.25rem;">Paypal</span>, you will receive a link to the original image for download and use.</div>
-            @endif
+            
+        </div> --}}
+        <!-- Nội dung -->
+        @php
+            $xhtmlContent = '';
+            foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+        @endphp
+        <div class="contentBox" style="margin-bottom:0 !important;">
+            {!! $xhtmlContent !!}
         </div>
     </div>
     <div class="pageProductDetailBox_right">
@@ -25,7 +22,7 @@
                 <!-- id hidden -->
                 <input type="hidden" id="product_info_id" name="product_info_id" value="{{ $item->id ?? null }}" />
                 <!-- tiêu đề -->
-                <h1 class="productDetailBox_detail_title">{{ $title }}</h1>
+                <h1 class="productDetailBox_detail_title">{{ $itemSeo->title }}</h1>
                 <!-- yêu thích -->
                 @php
                     $countHeart = 0;
@@ -40,12 +37,8 @@
                     </div>
                 @endif
                 <!-- mô tả sản phẩm -->
-                @php
-                    $description = $item->en_description;
-                    if(empty($language)||$language=='vi') $description = $item->description;
-                @endphp
                 <div id="js_viewMoreContent_content" class="productDetailBox_detail_description">
-                    {!! $description !!}
+                    {!! config('language.'.$language.'.data.product_description') !!}
                 </div>
                 <!-- option -->
                 <div class="productDetailBox_detail_option hide-1199">
@@ -72,8 +65,8 @@
                             <div class="priceMobile">{!! $priceMobile !!}</div>
                         </div>
                         @php
-                            $buttonNameCart     = empty($language)||$language=='vi' ? 'Thêm giỏ hàng' : 'Add to cart';
-                            $buttonNamePayment  = empty($language)||$language=='vi' ? 'Mua ngay' : 'Buy now';
+                            $buttonNameCart     = config('language.'.$language.'.data.add_to_cart');
+                            $buttonNamePayment  = config('language.'.$language.'.data.buy_now');
                             /* chuyển array price sang key all */
                             $keyPriceAll        = [];
                             foreach($item->prices as $price) $keyPriceAll[]  = $price->id;
@@ -91,11 +84,7 @@
                 </div>
                 <!-- giải thích thanh toán và nhận ảnh => desktop -->
                 <div class="hide-1199">
-                    @if(empty($language)||$language=='vi')
-                        <div>Sau khi thanh toán bằng <span class="highLight">Momo /Zalopay</span>, Bạn sẽ nhận được link ảnh gốc để có thể tải xuống và sử dụng.</div>
-                    @else
-                        <div>After completing the payment by <span class="highLight">Paypal</span>, you will receive a link to the original image for download and use.</div>
-                    @endif
+                    {!! config('language.'.$language.'.data.product_guide_after_payment') !!}
                 </div>
             </div>
         </div>

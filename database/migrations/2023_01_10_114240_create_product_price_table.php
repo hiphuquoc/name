@@ -15,11 +15,8 @@ return new class extends Migration
     {
         Schema::create('product_price', function (Blueprint $table) {
             $table->id();
+            $table->text('code_name');
             $table->integer('product_info_id');
-            $table->text('name');
-            $table->text('description')->nullable();
-            $table->text('en_name');
-            $table->text('en_description')->nullable();
             $table->text('price'); /* text vì không chỉ là số nguyên dương */
             $table->text('price_before_promotion')->nullable();
             $table->text('price_origin')->nullable();

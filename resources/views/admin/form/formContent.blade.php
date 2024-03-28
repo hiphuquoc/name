@@ -36,14 +36,14 @@
 @pushonce('scriptCustom')
     <!-- Place the first <script> tag in your HTML's <head> -->
     
-    <script src="https://cdn.tiny.cloud/1/z43y634qr3riedcw4hg4jglz5hcij2w07mp0l45wm5peni8y/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/9o5f4pln8szwhf4r4idntwm77ak6hczjk1zfukrbnzhi0dz0/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
-
+        // plugins: 'code anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
         tinymce.init({
             selector: '.tinySelector',
             menubar: false,
             plugins: 'code anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags typography inlinecss',
-            toolbar: 'code | undo redo | blocks | bold italic underline strikethrough | link image media table | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            toolbar: 'code | blocks | bold italic underline strikethrough | link image media table | align lineheight | checklist numlist bullist indent | emoticons charmap | removeformat',
             tinycomments_mode: 'embedded',
             tinycomments_author: 'Author name',
             mergetags_list: [

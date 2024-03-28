@@ -17,11 +17,7 @@
             <div class="paymentMethodBox_item_content_desc maxLine_1">{{ $descriptionMethodPayment ?? null }}</div>
             @if(!empty($method->fee))
                 <div class="paymentMethodBox_item_content_fee">
-                    @if(empty($language)||$language=='vi')
-                        Phí +
-                    @else 
-                        Fee +
-                    @endif
+                    {{ config('language.'.$language.'.data.fee') }} +
                     {!! \App\Helpers\Number::getFormatPriceByLanguage($method->fee, $language) !!}
                 </div>
             @endif

@@ -179,10 +179,16 @@ class AjaxController extends Controller {
         $xhtml              = '';
         $id                 = $request->get('id');
         $total              = $request->get('total');
-        $language           = $request->session()->get('language') ?? 'vi';
+        $language           = $request->session()->get('language');
         /* select của filter */
         $categories         = Category::select('*')
+                                ->whereHas('seos.infoSeo', function($query) use($language){
+                                    $query->where('language', $language);
+                                })
                                 ->where('flag_show', true)
+                                ->with('seos.infoSeo', function($query) use ($language) {
+                                    $query->where('language', $language);
+                                })
                                 ->get();
         /* filter (nếu có) */
         $filters            = $request->get('filters') ?? [];
@@ -190,7 +196,7 @@ class AjaxController extends Controller {
         $categoryChoose     = new \Illuminate\Database\Eloquent\Collection;
         $categoryChoose     = Category::select('*')
                                 ->where('id', $id)
-                                ->with('seo', 'en_seo')
+                                ->with('seo', 'seos')
                                 ->first();
         $xhtml              = view('wallpaper.category.sortContent', [
             'language'          => $language ?? 'vi',
@@ -233,10 +239,16 @@ class AjaxController extends Controller {
         $xhtml              = '';
         $id                 = $request->get('id');
         $total              = $request->get('total');
-        $language           = $request->session()->get('language') ?? 'vi';
+        $language           = $request->session()->get('language');
         /* select của filter */
         $categories         = Category::select('*')
+                                ->whereHas('seos.infoSeo', function($query) use($language){
+                                    $query->where('language', $language);
+                                })
                                 ->where('flag_show', true)
+                                ->with('seos.infoSeo', function($query) use ($language) {
+                                    $query->where('language', $language);
+                                })
                                 ->get();
         /* filter (nếu có) */
         $filters            = $request->get('filters') ?? [];
@@ -244,10 +256,10 @@ class AjaxController extends Controller {
         $categoryChoose     = new \Illuminate\Database\Eloquent\Collection;
         $categoryChoose     = Category::select('*')
                                 ->where('id', $id)
-                                ->with('seo', 'en_seo')
+                                ->with('seo', 'seos')
                                 ->first();
         $xhtml              = view('wallpaper.categoryMoney.sortContent', [
-            'language'          => $language ?? 'vi',
+            'language'          => $language,
             'total'             => $total,
             'categories'        => $categories,
             'categoryChoose'    => $categoryChoose,

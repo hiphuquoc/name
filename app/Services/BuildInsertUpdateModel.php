@@ -23,7 +23,7 @@ class BuildInsertUpdateModel {
             }
             $result['level']                    = $pageLevel;
             $result['parent']                   = $pageParent;
-            $result['ordering']                 = $dataForm['ordering'] ?? null;
+            if(!empty($dataForm['ordering'])) $result['ordering'] = $dataForm['ordering'];
             $result['topic']                    = null;
             $result['seo_title']                = $dataForm['seo_title'] ?? $dataForm['title'] ?? null;
             $result['seo_description']          = $dataForm['seo_description'] ?? $dataForm['description'] ?? null;
@@ -36,9 +36,11 @@ class BuildInsertUpdateModel {
                 $tmp2                           = [];
                 foreach($tmp as $t) if(!empty($t)) $tmp2[] = $t;
                 $result['link_canonical']       = implode('/', $tmp2);
+            }else {
+                $result['link_canonical']       = null;
             }
             /* type */
-            $result['type']                     = $type;
+            if(!empty($type)) $result['type']   = $type;
             $result['rating_author_name']       = 1;
             $result['rating_author_star']       = 5;
             $result['rating_aggregate_count']   = $dataForm['rating_aggregate_count'] ?? 0;
@@ -97,15 +99,10 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableProductInfo($dataForm, $seoId, $enSeoId){
+    public static function buildArrayTableProductInfo($dataForm, $seoId){
         $result                                 = [];
         $result['code']                         = $dataForm['code'];
-        $result['seo_id']                       = $seoId;
-        $result['name']                         = $dataForm['name'];
-        $result['description']                  = $dataForm['description'];
-        $result['en_seo_id']                    = $enSeoId;
-        $result['en_name']                      = $dataForm['en_name'];
-        $result['en_description']               = $dataForm['en_description'];
+        if(!empty($seoId)) $result['seo_id']    = $seoId;
         $result['price']                        = $dataForm['price'];
         $result['price_before_promotion']       = $dataForm['price_before_promotion'] ?? null;
         if(!empty($dataForm['price_before_promotion'])){
@@ -116,17 +113,13 @@ class BuildInsertUpdateModel {
 
     public static function buildArrayTableProductPrice($dataForm, $idProduct, $type = 'insert'){
         $result                                 = [];
-        if(!empty($dataForm['name'])&&!empty($dataForm['price'])&&!empty($idProduct)){
+        if(!empty($dataForm['code_name'])&&!empty($dataForm['price'])&&!empty($idProduct)){
+            $result['code_name']        = $dataForm['code_name'];
             $result['product_info_id']  = $idProduct;
-            $result['name']             = $dataForm['name'];
-            $result['en_name']          = $dataForm['en_name'];
-            $result['description']      = $dataForm['description'] ?? null;
-            $result['en_description']   = $dataForm['en_description'] ?? null;
             $result['price']            = $dataForm['price'];
             $result['price_origin']     = $dataForm['price_origin'] ?? null;
             $result['price_before_promotion']   = $dataForm['price_before_promotion'] ?? null;
             $result['sale_off']         = 0;
-            if($type=='insert') $result['folder_drive'] = \App\Helpers\Charactor::randomString(15);
             if(!empty($dataForm['price_before_promotion'])){
                 $result['sale_off'] = round((($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100);
             }

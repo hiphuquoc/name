@@ -2,7 +2,11 @@
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.social', compact('item'))
+    @php
+        $highPrice          = 0;
+        $lowPrice           = 0;
+    @endphp
+    @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
     <!-- END:: Title - Description - Social -->
 
     <!-- STRAT:: Organization Schema -->
@@ -24,9 +28,6 @@
 @endpush
 @section('content')
     {{-- <div style="overflow:hidden;"> --}}
-        
-        
-
         {{-- <!-- share social -->
         @include('wallpaper.template.shareSocial') --}}
 

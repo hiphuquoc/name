@@ -2,12 +2,14 @@
     @php
         $keyId              = !empty($product->id) ? $product->id.implode('-', $arrayProductPrice) : null;
         // $eventUpdateCart    = "updateCart('js_updateCart_idWrite_".$keyId."', 'js_updateCart_total', 'js_updateCart_count', 'js_addToCart_quantity_".$keyId."')";
-        if(empty($language)||$language=='vi'){
-            $title          = $product->name ?? $product->seo->title ?? null;
-            $url            = $product->seo->slug_full ?? null;
-        }else { 
-            $title          = $product->en_name ?? $product->en_seo->title ?? null;
-            $url            = $product->en_seo->slug_full ?? null;
+        $url                = null;
+        $title              = config('language.'.$language.'.data.undefined');
+        foreach($product->seos as $seo){
+            if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                $title      = $seo->infoSeo->title;
+                $url        = $seo->infoSeo->slug_full;
+                break;
+            }
         }
         $cartToView         = \App\Http\Controllers\CartController::convertInfoCartToView($product, $arrayProductPrice, $language);
         $xhtmlPrice             = \App\Helpers\Number::getFormatPriceByLanguage($cartToView['price'], $language);
@@ -41,7 +43,7 @@
             @endif
         </div> --}}
         <div class="cartBox_list_item_content_action" onclick="{{ $eventRemoveProductCart }}">
-            <img src="/storage/images/svg/icon-trash.svg" alt="xóa sản phẩm trong giỏ hàng" title="xóa sản phẩm trong giỏ hàng" />
+            <img src="/storage/images/svg/icon-trash.svg" alt="{{ config('language.'.$language.'.data.remove_item_in_cart') }}" title="{{ config('language.'.$language.'.data.remove_item_in_cart') }}" />
         </div>
     </div>
 @endif

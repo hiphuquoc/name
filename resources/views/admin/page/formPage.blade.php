@@ -35,38 +35,41 @@
             <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <span data-toggle="tooltip" data-placement="top" title="
-                Nhập vào một số để thể hiện độ ưu tiên khi hiển thị cùng các Category khác (Số càng nhỏ càng ưu tiên cao - Để trống tức là không ưu tiên)
-            ">
-                <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label" for="ordering">Thứ tự</label>
-            </span>
-            <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label inputRequired" for="type_id">Phân loại</label>
-            <select class="select2 form-select select2-hidden-accessible" id="type_id" name="type_id">
-                @if(!empty($pageTypes))
-                    @foreach($pageTypes as $pageType)
-                        @php
-                            $selected   = null;
-                            if(!empty($item->type_id)&&$item->type_id==$pageType->id) $selected = ' selected';
-                        @endphp
-                        <option value="{{ $pageType['id'] }}"{{ $selected }}>{{ $pageType['name'] }}</option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <div class="form-check form-check-success">
-                <input type="checkbox" class="form-check-input" id="show_sidebar" name="show_sidebar" {{ !empty($item->show_sidebar)&&($item->show_sidebar==1) ? 'checked' : null }}>
-                <label class="form-check-label" for="show_sidebar">Cho phép hiển thị trong sidebar</label>
+        
+        @if($language=='vi')
+            <!-- One Row -->
+            <div class="formBox_full_item">
+                <span data-toggle="tooltip" data-placement="top" title="
+                    Nhập vào một số để thể hiện độ ưu tiên khi hiển thị cùng các Category khác (Số càng nhỏ càng ưu tiên cao - Để trống tức là không ưu tiên)
+                ">
+                    <i class="explainInput" data-feather='alert-circle'></i>
+                    <label class="form-label" for="ordering">Thứ tự</label>
+                </span>
+                <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
             </div>
-        </div>
+            <!-- One Row -->
+            <div class="formBox_full_item">
+                <label class="form-label inputRequired" for="type_id">Phân loại</label>
+                <select class="select2 form-select select2-hidden-accessible" id="type_id" name="type_id">
+                    @if(!empty($pageTypes))
+                        @foreach($pageTypes as $pageType)
+                            @php
+                                $selected   = null;
+                                if(!empty($item->type_id)&&$item->type_id==$pageType->id) $selected = ' selected';
+                            @endphp
+                            <option value="{{ $pageType['id'] }}"{{ $selected }}>{{ $pageType['name'] }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <!-- One Row -->
+            <div class="formBox_full_item">
+                <div class="form-check form-check-success">
+                    <input type="checkbox" class="form-check-input" id="show_sidebar" name="show_sidebar" {{ !empty($item->show_sidebar)&&($item->show_sidebar==1) ? 'checked' : null }}>
+                    <label class="form-check-label" for="show_sidebar">Cho phép hiển thị trong sidebar</label>
+                </div>
+            </div>
+        @endif
         
     </div>
 </div>

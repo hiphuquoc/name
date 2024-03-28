@@ -1,4 +1,11 @@
 @php
+    /* trang ve-chung-toi */
+    $pageAboutUs = \App\Models\Page::select('*')
+                    ->whereHas('seo', function($query){
+                        $query->where('slug', 've-chung-toi');
+                    })
+                    ->with('seo', 'seos')
+                    ->first();
     /* chủ đề */
     $wallpaperMobile            = [];
     $tmp                        = \App\Models\Category::getTreeCategory();
@@ -27,7 +34,7 @@
             @php
                 $icon = file_get_contents('storage/images/svg/icon-home-1.svg');
             @endphp
-            <a href="/" title="{{ config('language.'.$language.'.data.home').' '.config('main.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
+            <a href="/{{ $language }}" title="{{ config('language.'.$language.'.data.home').' '.config('main.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
                 {!! $icon !!}
                 <div>{{ config('language.'.$language.'.data.home') }}</div>
             </a>
@@ -35,18 +42,31 @@
         <li>
             @php
                 $icon       = file_get_contents('storage/images/svg/icon-about-me-2.svg');
-                $aboutUs    = config('language.'.$language.'.data.about_us');
+                $urlAbotUs      = '';
+                $nameAboutUs    = '';
+                foreach($pageAboutUs->seos as $s){
+                    if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
+                        $urlAbotUs      = $s->infoSeo->slug_full;
+                        $nameAboutUs    = $s->infoSeo->title;
+                    }
+                }
             @endphp
-            <a href="/ve-chung-toi" title="{{ $aboutUs }}" aria-label="{{ $aboutUs }}">
+            <a href="/{{ $urlAbotUs }}" title="{{ $nameAboutUs }}" aria-label="{{ $nameAboutUs }}">
                 {!! $icon !!}
-                <div>{{ $aboutUs }}</div>
+                <div>{{ $nameAboutUs }}</div>
             </a>
         </li>
         @if(!empty($wallpaperMobile))
             <li>
                 @php
                     $titlePhoneWallpaper = config('language.'.$language.'.data.wallpaper_theme');
-                    $url      = $wallpaperMobile->seo->slug;
+                    $url      = '';
+                    foreach($wallpaperMobile->seos as $s){
+                        if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
+                            $url    = $s->infoSeo->slug_full;
+                            break;
+                        }
+                    }
                     $classTmp = 'close';
                     $styleTmp = '';
                     $flagOpen = env('APP_URL').'/'.$url==Request::url() ? true : false;
@@ -118,8 +138,11 @@
             </ul>
         </li>
         <li>
+            @php
+                $altPhoneWallpaperEvent = config('language.'.$language.'.data.phone_wallpaper');
+            @endphp
             <div class="open">
-                <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="Hình nền điện thoại theo sự kiện" title="Hình nền điện thoại theo sự kiện" />
+                <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
                 <div>{{ config('language.'.$language.'.data.event') }}</div>
                 <i class="fa-solid fa-minus"  onclick="showHideListMenuMobile(this, 'su-kien')"></i>
             </div>
@@ -127,7 +150,7 @@
                 @foreach($wallpaperMobile->childs as $event)
                     @if(!empty($event->seo->type)&&$event->seo->type=='event_info')
                         @foreach($event->seos as $seo)
-                            @if($seo->infoSeo->language==$language)
+                            @if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language)
                                 @php
                                     $title      = $seo->infoSeo->title ?? null;
                                     $urlFull    = env('APP_URL').'/'.$seo->infoSeo->slug_full;
@@ -146,10 +169,21 @@
         </li>
         <li>
             @php
-                $icon = file_get_contents('storage/images/svg/icon-share-1.svg');
-                $wallpaperFreeText = config('language.'.$language.'.data.free_wallpaper');
+                $icon                   = file_get_contents('storage/images/svg/icon-share-1.svg');
+                $wallpaperFreeText      = config('language.'.$language.'.data.free_wallpaper');
+                $slugFullWallpaperFree  = '';
+                foreach($wallpaperMobile->childs as $child){
+                    if(in_array($child->seo->slug, config('main.url_free_wallpaper_category'))){
+                        foreach($child->seos as $seo){
+                            if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                                $slugFullWallpaperFree = $seo->infoSeo->slug_full;
+                                break;
+                            }
+                        }
+                    }
+                }
             @endphp
-            <a href="{{ env('APP_URL') }}/hinh-nen-dien-thoai/hinh-nen-dien-thoai-mien-phi" title="{{ $wallpaperFreeText }}" aria-label="{{ $wallpaperFreeText }}">
+            <a href="{{ env('APP_URL') }}/{{ $slugFullWallpaperFree }}" title="{{ $wallpaperFreeText }}" aria-label="{{ $wallpaperFreeText }}">
                 {!! $icon !!}
                 <div>{{ $wallpaperFreeText }}</div>
             </a>
@@ -166,11 +200,18 @@
             <ul id="ho-tro" class="filterLinkSelected">
                 @foreach($policies as $policy)
                     @php
-                        $title      = $policy->name ?? $policy->seo->title ?? null;
-                        $urlFull    = env('APP_URL').'/'.$policy->seo->slug_full;
+                        $title      = '';
+                        $slugPage   = '';
+                        foreach($policy->seos as $seo){
+                            if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                                $title      = $seo->infoSeo->title;
+                                $slugPage   = $seo->infoSeo->slug_full;
+                                break;
+                            }
+                        }
                     @endphp
                     <li>
-                        <a href="{{  $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
+                        <a href="{{ env('APP_URL').'/'.$slugPage }}" title="{{ $title }}" aria-label="{{ $title }}">
                             <div>{{ $title }}</div>
                         </a>
                     </li>

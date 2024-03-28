@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->integer('seo_id');
             $table->string('code', 30);
-            $table->text('name');
-            $table->text('description')->nullable();
             $table->integer('sold')->default(0);
             $table->text('price');
             $table->text('price_before_promotion')->nullable();

@@ -102,18 +102,34 @@ class TagController extends Controller {
             }else {
                 $idSeo = Seo::insertItem($seo);
             }
-            /* insert hoặc update tag_info */
-            $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
-            if(empty($idTag)){ /* check xem create tag hay update tag */
-                $idTag          = Tag::insertItem([
-                    'flag_show' => $flagShow,
-                    'seo_id'    => $idSeo
-                ]);
-            }else {
-                Tag::updateItem($idTag, [
-                    'flag_show' => $flagShow
-                ]);
+            
+            if($language=='vi'){
+                /* insert hoặc update tag_info */
+                $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
+                if(empty($idTag)){ /* check xem create tag hay update tag */
+                    $idTag          = Tag::insertItem([
+                        'flag_show' => $flagShow,
+                        'seo_id'    => $idSeo
+                    ]);
+                }else {
+                    Tag::updateItem($idTag, [
+                        'flag_show' => $flagShow
+                    ]);
+                }
+                /* insert relation_tag_info_category_blog_id */
+                RelationTagInfoCategoryBlogInfo::select('*')
+                    ->where('tag_info_id', $idTag)
+                    ->delete();
+                if(!empty($request->get('category_blog_info_id'))){
+                    foreach($request->get('category_blog_info_id') as $idTagBlogInfo){
+                        RelationTagInfoCategoryBlogInfo::insertItem([
+                            'tag_info_id'      => $idTag,
+                            'category_blog_info_id' => $idTagBlogInfo
+                        ]);
+                    }
+                }
             }
+
             /* relation_seo_tag_info */
             $relationSeoTagInfo = RelationSeoTagInfo::select('*')
                                     ->where('seo_id', $idSeo)
@@ -132,18 +148,6 @@ class TagController extends Controller {
                     'seo_id'    => $idSeo,
                     'content'   => $content
                 ]);
-            }
-            /* insert relation_tag_info_category_blog_id */
-            RelationTagInfoCategoryBlogInfo::select('*')
-                ->where('tag_info_id', $idTag)
-                ->delete();
-            if(!empty($request->get('category_blog_info_id'))){
-                foreach($request->get('category_blog_info_id') as $idTagBlogInfo){
-                    RelationTagInfoCategoryBlogInfo::insertItem([
-                        'tag_info_id'      => $idTag,
-                        'category_blog_info_id' => $idTagBlogInfo
-                    ]);
-                }
             }
             
             DB::commit();

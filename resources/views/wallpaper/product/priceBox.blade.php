@@ -1,16 +1,10 @@
 
 <!-- của trọn bộ -->
 @php
-    $xhtmlPrice         = $item->price.config('language.'.$language.'.currency');
-    if(empty($language)||$language=='vi'){
-        $xhtmlPrice     = number_format(\App\Helpers\Number::convertUSDToVND($item->price)).config('language.'.$language.'.currency');
-    }
+    $xhtmlPrice         = \App\Helpers\Number::getFormatPriceByLanguage($item->price, $language);
     $xhtmlPriceOld      = null;
     if(!empty($item->price_before_promotion)&&$item->price_before_promotion!=$item->price){
-        $priceOld       = $item->price_before_promotion;
-        if(empty($language)||$language=='vi'){
-            $priceOld   = number_format(\App\Helpers\Number::convertUSDToVND($item->price_before_promotion));
-        }
+        $priceOld       = \App\Helpers\Number::getFormatPriceByLanguage($item->price_before_promotion, $language, false);
     }
     $xhtmlPriceOld  = '<div class="productDetailBox_detail_price_item_old">'.$priceOld.'</div>';
     /* chuỗi json thay đổi price hiển thị chi chọn option */
@@ -28,16 +22,10 @@
 
 @foreach($prices as $price)
     @php
-        $xhtmlPrice     = $price->price.config('language.'.$language.'.currency');
-        if(empty($language)||$language=='vi'){
-            $xhtmlPrice = number_format(\App\Helpers\Number::convertUSDToVND($price->price)).config('language.'.$language.'.currency');
-        }
+        $xhtmlPrice     = \App\Helpers\Number::getFormatPriceByLanguage($price->price, $language);
         $xhtmlPriceOld  = null;
         if(!empty($price->price_before_promotion)&&$price->price_before_promotion!=$price->price){
-            $priceOld   = $price->price_before_promotion;
-            if(empty($language)||$language=='vi'){
-                $priceOld   = number_format(\App\Helpers\Number::convertUSDToVND($price->price_before_promotion));
-            }
+            $priceOld   = \App\Helpers\Number::getFormatPriceByLanguage($price->price_before_promotion, $language);
         }
         $xhtmlPriceOld  = '<div class="productDetailBox_detail_price_item_old">'.$priceOld.'</div>';
     @endphp

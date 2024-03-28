@@ -15,47 +15,41 @@ use Intervention\Image\ImageManagerStatic;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use AdityaDees\LaravelBard\LaravelBard;
+use App\Models\RelationSeoProductInfo;
 use App\Models\RelationSeoTagInfo;
 
 class HomeController extends Controller{
-    public static function home(Request $request){
-        /* xác định trang tiếng anh hay tiếng việt */
-        $currentRoute           = Route::currentRouteName();
-        /* lưu ngôn ngữ sử dụng */
-        $language               = $currentRoute=='main.home' ? 'vi' : 'en';
+    public static function home(Request $request, $language = 'vi'){
+        /* ngôn ngữ */
         SettingController::settingLanguage($language);
-        /* cache HTML */
-        $nameCache              = $language.'home.'.config('main.cache.extension');
-        $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
-        $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
-        if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
-            $xhtml              = file_get_contents($pathCache);
-        }else {
+        // /* cache HTML */
+        // $nameCache              = $language.'home.'.config('main.cache.extension');
+        // $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
+        // $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
+        // if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+        //     $xhtml              = file_get_contents($pathCache);
+        // }else {
             $item               = Page::select('*')
-                                    ->whereHas('type', function($query){
-                                        $query->where('code', 'home');
+                                    ->whereHas('seos.infoSeo', function($query) use($language){
+                                        $query->where('slug', $language);
                                     })
-                                    ->when($language=='vi', function($query){
-                                        $query->whereHas('seo', function($query){
-                                            $query->where('slug', '/');
-                                        });
-                                    })
-                                    ->when($language=='en', function($query){
-                                        $query->whereHas('en_seo', function($query){
-                                            $query->where('slug', 'en');
-                                        });
-                                    })
-                                    ->with('seo', 'en_seo', 'type')
+                                    ->with('seo', 'seos', 'type')
                                     ->first();
+            /* lấy item seo theo ngôn ngữ được chọn */
+            $itemSeo            = [];
+            if(!empty($item->seos)){
+                foreach($item->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeo = $s->infoSeo;
+                        break;
+                    }
+                }
+            }
             /* lấy hình nền điện thoại gái xinh */
             $slug               = 'hinh-nen-dien-thoai-gai-xinh';
             $infoCategoryGirl   = Category::select('category_info.*', 'seo.slug')
                                     ->join('seo', 'seo.id', '=', 'category_info.seo_id')
                                     ->where('seo.slug', '=', $slug)
-                                    // ->whereHas('products.infoProduct.prices.wallpapers', function($query){
-                                    //     // Điều kiện để kiểm tra xem có ít nhất một wallpaper
-                                    //     $query->whereNotNull('id');
-                                    // })
                                     ->with('seo')
                                     ->with('products', function($query){
                                         $query->orderBy('id', 'DESC')
@@ -77,25 +71,30 @@ class HomeController extends Controller{
                                     ->first();
             $viewBy             = $request->cookie('view_by') ?? 'set';
             $arrayIdCategory    = [];
-            $xhtml              = view('wallpaper.home.index', compact('item', 'language', 'infoCategoryGirl', 'infoCategoryTet', 'viewBy', 'arrayIdCategory'))->render();
-            /* Ghi dữ liệu - Xuất kết quả */
-            if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
-        }
+            $xhtml              = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'infoCategoryGirl', 'infoCategoryTet', 'viewBy', 'arrayIdCategory'))->render();
+        //     /* Ghi dữ liệu - Xuất kết quả */
+        //     if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+        // }
         echo $xhtml;
     }
 
     public static function test(Request $request){
-        $infoTag = Tag::select('*')
-                    ->whereHas('seo', function ($query) {
-                        $query->where('slug', 'tag-hinh-nen-dien-thoai-rong');
-                    })
-                    ->with('seo')
-                    ->get();
-        $idSeo  = 539; 
-        $infoRelation = RelationSeoTagInfo::select('*')
-                            ->where('seo_id', $idSeo)
-                            ->get();
-        dd($infoRelation);
+        // $items = \App\Models\Product::select('*')
+        //             // ->whereHas('seo', function ($query) {
+        //             //     $query->where('slug', 'tag-hinh-nen-dien-thoai-rong');
+        //             // })
+        //             ->with('seo')
+        //             ->get();
+        // foreach($items as $item){
+        //     $i  = 1;
+        //     foreach($item->prices as $price){
+        //         \App\Models\ProductPrice::updateItem($price->id, [
+        //             'code_name' => '#'.$i
+        //         ]);
+        //         ++$i;
+        //     }
+        // }
+        // dd(123);
 
         // $tags   = \App\Models\FreeWallpaper::select('*')
         //                 ->whereHas('seo', function($query){

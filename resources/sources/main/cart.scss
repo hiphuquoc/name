@@ -423,7 +423,7 @@
     &_box {
         background: $colorBackgroundLv3;
         box-shadow: 1px 1px 5px $colorBackgroundLv1;
-        max-width: 420px;
+        max-width: 480px;
         width: 100%;
         padding: 1rem 1.25rem;
         position: relative;
@@ -486,7 +486,7 @@
                 &_title {
                     line-height: 1.5;
                     color: inherit;
-                    margin-bottom: 0.25rem;
+                    margin-bottom: 0.5rem;
                     margin-top: -0.25rem;
                 }
                 &_price {

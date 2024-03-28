@@ -25,40 +25,32 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                      => 'required',
-            'description'               => 'required',
-            'code'                      => 'required',
+            'title'                     => 'required',
+            // 'code'                      => 'required',
             'seo_title'                 => 'required',
             'seo_description'           => 'required',
             'rating_aggregate_count'    => 'required',
             'rating_aggregate_star'     => 'required',
-            'prices'                    => 'required',
-            'categories'                => 'required',
-            // 'brand'                     => 'required',
-            // 'title_all'                 => 'required',
-            // 'price_all'                 => 'required',
+            // 'prices'                    => 'required',
+            // 'categories'                => 'required',
             'slug'                      => [
                 'required',
                 function($attribute, $value, $fail){
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
                         $flag       = false;
-                        $dataCheck  = DB::table('seo')
-                                        ->join('product_info', 'product_info.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'product_info.id')
-                                        ->where('slug', $slug)
-                                        ->first();
-                        if(!empty($dataCheck)){
-                            if(empty(request('product_info_id'))){
-                                $flag = true;
-                            }else {
-                                if(request('product_info_id')!=$dataCheck->id) $flag = true;
-                            }
+                        if(request('type')!='edit'){
+                            $dataCheck  = DB::table('seo')
+                                            ->join('product_info', 'product_info.seo_id', '=', 'seo.id')
+                                            ->select('seo.slug', 'product_info.id')
+                                            ->where('slug', $slug)
+                                            ->first();
+                            if(!empty($dataCheck)) $flag = true;
                         }
-                        if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một trang khác trên hệ thống!');
+                        if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một Sản Phẩm khác trên hệ thống!');
                     }
                 }
-            ]
+            ],
         ];
     }
 

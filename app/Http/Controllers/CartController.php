@@ -13,32 +13,35 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\PaymentMethod;
+use App\Helpers\Number;
 
 class CartController extends Controller{
 
-    public static function index(Request $request){
-        $currentRoute   = Route::currentRouteName();
-        $language       = $currentRoute=='main.cart' ? 'vi' : 'en';
-        SettingController::settingLanguage($language);
-        $item           = Page::select('*')
-                            ->when($currentRoute=='main.cart', function($query){
-                                $query->whereHas('seo', function($query) {
-                                    $query->where('slug', 'gio-hang');
-                                });
-                            })
-                            ->when($currentRoute=='main.enCart', function($query){
-                                $query->whereHas('en_seo', function($query) {
-                                    $query->where('slug', 'cart');
-                                });
-                            })
-                            ->with('seo', 'en_seo', 'type')
-                            ->first();
-        $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-        $productsCart   = json_decode(session()->get('cart'), true);
-        $detailCart     = self::calculatorDetailCart($productsCart, 0, $language);
-        $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
-        return view('wallpaper.cart.index', compact('item', 'language', 'breadcrumb', 'products', 'detailCart'));
-    }
+    // public static function index(Request $request){
+    //     $language       = $request->session()->get('language');
+    //     SettingController::settingLanguage($language);
+    //     $item           = Page::select('*')
+    //                         ->whereHas('seo', function($query) {
+    //                             $query->where('slug', 'gio-hang');
+    //                         })
+    //                         ->with('seo', 'seos', 'type')
+    //                         ->first();
+    //     /* lấy item seo theo ngôn ngữ được chọn */
+    //     $itemSeo            = [];
+    //     if(!empty($item->seos)){
+    //         foreach($item->seos as $s){
+    //             if($s->infoSeo->language==$language) {
+    //                 $itemSeo = $s->infoSeo;
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     $products       = \App\Http\Controllers\CartController::getCollectionProducts();
+    //     $productsCart   = json_decode(session()->get('cart'), true);
+    //     $detailCart     = self::calculatorDetailCart($productsCart, 0, $language);
+    //     $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
+    //     return view('wallpaper.cart.index', compact('item', 'itemSeo', 'language', 'breadcrumb', 'products', 'detailCart'));
+    // }
 
     public static function addToCart(Request $request){
         $result         = '';
@@ -53,7 +56,7 @@ class CartController extends Controller{
         /* lấy thông tin */
         $infoProduct    = Product::select('*')
                             ->where('id', $idProduct)
-                            ->with('prices')
+                            ->with('seo', 'seos', 'prices')
                             ->first();
         /* tồn tại sản phẩm mới xử lý tiếp */
         if(!empty($infoProduct)){
@@ -93,12 +96,28 @@ class CartController extends Controller{
             /* trả thông báo */
             $language       = session()->get('language') ?? 'vi';
             $cartToView     = self::convertInfoCartToView($infoProduct, $infoProductInCart['product_price_id'], $language);
-            // dd($cartToView);
+            /* lấy url của trang cart theo ngôn ngữ */
+            $urlPageCart = null;
+            $tmp            = Page::select('*')
+                                ->whereHas('type', function($query){
+                                    $query->where('code', 'cart');
+                                })
+                                ->with('seos')
+                                ->first();
+            if(!empty($tmp->seos)){
+                foreach($tmp->seos as $seo){
+                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                        $urlPageCart = env('APP_URL').'/'.$seo->infoSeo->slug_full;
+                        break;
+                    }
+                }
+            }
             $result = view('wallpaper.cart.cartMessage', [
                 'title'     => $cartToView['product_name'],
                 'option'    => $cartToView['option_name'],
                 'price'     => $cartToView['price'],
                 'image'     => config('main.google_cloud_storage.default_domain').$cartToView['image'],
+                'urlPageCart'   => $urlPageCart,
                 'language'  => $language
             ])->render();
         }
@@ -109,7 +128,7 @@ class CartController extends Controller{
         $result             = [];
         if(!empty($priceInCart)&&!empty($infoProduct)){
             if(count($priceInCart)>=$infoProduct->prices->count()){ /* trọn bộ */
-                $result['option_name']  = $language=='vi' ? 'Trọn bộ' : 'Full set';
+                $result['option_name']  = config('language.'.$language.'.data.full_set');
                 $result['price']        = $infoProduct->price;
                 $result['image']        = $infoProduct->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper;
             }else {
@@ -122,11 +141,17 @@ class CartController extends Controller{
                         break;
                     }
                 }
-                $result['option_name']  = $language=='vi' ? $infoPriceChoose->name : $infoPriceChoose->en_name;
+                $result['option_name']  = $infoPriceChoose->code_name;
                 $result['price']        = $infoPriceChoose->price;
                 $result['image']        = $infoPriceChoose->wallpapers[0]->infoWallpaper->file_cloud_wallpaper;
             }
-            $result['product_name']     = $language=='vi' ? $infoProduct->name : $infoProduct->en_name;
+            $result['product_name']         = $infoProduct->seo->title;
+            foreach($infoProduct->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                    $result['product_name'] = $seo->infoSeo->title;
+                    break;
+                }
+            }
         }
         return $result;
     }
@@ -137,7 +162,23 @@ class CartController extends Controller{
         $cart       = json_decode($cart, true);
         $products = self::getCollectionProducts();
         $detailCart = self::calculatorDetailCart($cart, 0, $language);
-        $response = view('wallpaper.cart.cartSort', compact('products', 'detailCart', 'language'))->render();
+        /* lấy url của trang cart theo ngôn ngữ */
+        $urlPageCart = null;
+        $tmp            = Page::select('*')
+                            ->whereHas('type', function($query){
+                                $query->where('code', 'cart');
+                            })
+                            ->with('seos')
+                            ->first();
+        if(!empty($tmp->seos)){
+            foreach($tmp->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                    $urlPageCart = env('APP_URL').'/'.$seo->infoSeo->slug_full;
+                    break;
+                }
+            }
+        }
+        $response = view('wallpaper.cart.cartSort', compact('products', 'detailCart', 'urlPageCart', 'language'))->render();
         echo $response;
     }
 

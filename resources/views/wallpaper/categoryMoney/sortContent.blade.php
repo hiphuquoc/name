@@ -2,20 +2,18 @@
     <div class="sortBox_left">
         <!-- chế độ xem -->
         @php
-            $titleViewBy    = empty($language)||$language=='vi' ? 'Duyệt theo' : 'Browse by';
             $dataView       = config('main.view_by');
             $viewBy         = Cookie::get('view_by') ?? $dataView[0]['key'];
             $inputViewBy    = null;
             foreach($dataView as $viewItem){
                 if($viewBy==$viewItem['key']) {
-                    $tmp            = empty($language)||$language=='vi' ? $viewItem['name'] : $viewItem['en_name'];
-                    $inputViewBy    = $viewItem['icon'].$tmp;
+                    $inputViewBy    = $viewItem['icon'].config('language.'.$language.'.data.'.$viewItem['key']);
                 }
             }
         @endphp
         <div class="selectCustom">
             <div class="selectCustom_text maxLine_1">
-                {!! $titleViewBy !!}
+                {!! config('language.'.$language.'.data.browse_by') !!}
             </div>
             <div class="selectCustom_input maxLine_1">
                 {!! $inputViewBy !!}
@@ -27,27 +25,25 @@
                         if($viewBy==$viewItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setViewBy('{{ $viewItem['key'] }}')">
-                        {!! $viewItem['icon'] !!}{{ empty($language)||$language=='vi' ? $viewItem['name'] : $viewItem['en_name'] }}
+                        {!! $viewItem['icon'].config('language.'.$language.'.data.'.$viewItem['key']) !!}
                     </div>
                 @endforeach
             </div>
         </div>
         <!-- sort by -->
         @php
-            $titleSortBy    = empty($language)||$language=='vi' ? 'Sắp xếp theo' : 'Sort by';
             $dataSort       = config('main.sort_type');
             $sortBy         = Cookie::get('sort_by') ?? $dataSort[0]['key'];
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
                 if($sortBy==$sortItem['key']) {
-                    $tmp            = empty($language)||$language=='vi' ? $sortItem['name'] : $sortItem['en_name'];
-                    $inputSortBy    = $sortItem['icon'].$tmp;
+                    $inputSortBy    = $sortItem['icon'].config('language.'.$language.'.data.'.$sortItem['key']);
                 }
             }
         @endphp
         <div class="selectCustom">
             <div class="selectCustom_text maxLine_1">
-                {!! $titleSortBy !!}
+                {!! config('language.'.$language.'.data.sort_by') !!}
             </div>
             <div class="selectCustom_input maxLine_1">
                 {!! $inputSortBy !!}
@@ -59,7 +55,7 @@
                         if($sortBy==$sortItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setSortBy('{{ $sortItem['key'] }}')">
-                        {!! $sortItem['icon'] !!}{{ empty($language)||$language=='vi' ? $sortItem['name'] : $sortItem['en_name'] }}
+                        {!! $sortItem['icon'].config('language.'.$language.'.data.'.$sortItem['key']) !!}
                     </div>
                 @endforeach
             </div>
@@ -72,7 +68,7 @@
         @endforeach
         <!-- icon filter nâng cao -->
         @php
-            $titleAdvancedFilter = empty($language)||$language=='vi' ? 'Bộ lọc nâng cao' : 'Advanced filters';
+            $titleAdvancedFilter = config('language.'.$language.'.data.advanced_filter');
         @endphp
         <div class="filterAdvanced show-990">
             <div id="js_toggleFilterAdvanced_element" class="filterAdvanced_icon" onclick="toggleFilterAdvanced('js_toggleFilterAdvanced_element');">
@@ -83,7 +79,7 @@
             </div>
             <div class="filterAdvanced_box">
                 <div class="filterAdvanced_box_title">
-                    <span>{{ $titleAdvancedFilter}}</span>
+                    <span>{{ $titleAdvancedFilter }}</span>
                     <div class="filterAdvanced_box_title_close" onclick="toggleFilterAdvanced('js_toggleFilterAdvanced_element');">
                         <i class="fa-solid fa-xmark"></i>
                     </div>

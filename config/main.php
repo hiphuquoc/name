@@ -1,9 +1,6 @@
 <?php
 
 return [
-    'exchange_rate'         => [
-        'usd_to_vnd'    => 22000
-    ],
     'author_name'           => 'Name.com.vn',
     'founder_name'          => 'Name.com.vn',
     'founder_address'       => '55 Cô Giang, Rạch Giá',
@@ -92,15 +89,11 @@ return [
     'view_by' => [
         [
             'icon'      => '<i class="fa-solid fa-gift"></i>',
-            'name'      => 'Từng bộ',
-            'en_name'   => 'Per set',
-            'key'       => 'set'
+            'key'       => 'each_set'
         ],
         [
             'icon'      => '<i class="fa-regular fa-image"></i>',
-            'name'      => 'Từng ảnh',
-            'en_name'   => 'Per wallpaper',
-            'key'       => 'wallpaper'
+            'key'       => 'each_image'
         ]
     ],
     'cache'     => [
@@ -119,44 +112,33 @@ return [
     'category_type' => [
         [
             'key' => 'category_info',
-            'name' => 'Chủ đề',
-            'en_name'   => 'Category'
+            'name' => 'Chủ đề'
         ],
         [
             'key' => 'style_info',
-            'name' => 'Phong cách',
-            'en_name'   => 'Style'
+            'name' => 'Phong cách'
         ],
         [
             'key' => 'event_info',
-            'name' => 'Sự kiện',
-            'en_name'   => 'Event'
+            'name' => 'Sự kiện'
         ]
     ],
     'sort_type' => [
         [
             'icon'      => '<i class="fa-solid fa-star"></i>',
             'key'       => 'propose',
-            'name'      => 'Đề xuất',
-            'en_name'   => 'Propose'
         ],
         [
             'icon'      => '<i class="fa-solid fa-heart"></i>',
             'key'       => 'favourite',
-            'name'      => 'Yêu thích',
-            'en_name'   => 'Favourite'
         ],
         [
             'icon'      => '<i class="fa-solid fa-arrow-down"></i>',
-            'key'       => 'new',
-            'name'      => 'Mới nhất',
-            'en_name'   => 'Latest'
+            'key'       => 'newest',
         ],
         [
             'icon'      => '<i class="fa-solid fa-arrow-up"></i>',
-            'key'       => 'old',
-            'name'      => 'Cũ nhất',
-            'en_name'   => 'Oldest'
+            'key'       => 'oldest',
         ]
     ],
     'feeling_type'  => [
@@ -199,5 +181,17 @@ return [
             'en'    => 'tag-phone-wallpaper'
         ]
     ],
-
+    'url_free_wallpaper_category'   => [
+        'hinh-nen-dien-thoai-mien-phi',
+        'free-phone-wallpapers',
+        'fonds-d-ecran-gratuits-pour-telephone',
+        'fondos-de-pantalla-gratis-para-celular',
+        'cn-free-phone-wallpapers',
+        'besplatnye-oboi-dlya-telefona',
+        'ru-free-phone-wallpapers',
+        'ja-free-phone-wallpapers',
+        'ko-free-phone-wallpapers',
+        'hi-free-phone-wallpapers',
+        'wallpaper-ponsel-gratis',
+    ]
 ];

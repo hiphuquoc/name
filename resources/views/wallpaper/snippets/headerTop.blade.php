@@ -12,8 +12,7 @@
                 <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
             </div>
         </div>
-        @if(!Route::is('main.cart')&&!Route::is('main.enCart'))
-            {{-- @include('wallpaper.template.search') --}}
+        @if(empty($item->type->code)||$item->type->code!='cart')
             <div id="js_viewSortCart_idWrite">
                 @include('wallpaper.cart.cartSort', ['products' => null])
             </div>
@@ -22,9 +21,6 @@
         <div id="js_checkLoginAndSetShow_button" class="hide-1023" style="height:100%;display:none !important;">
             <!-- tải ajax checkLoginAndSetShow() -->
         </div>
-        @php
-            // dd($itemSource);
-        @endphp
         <!-- language -->
         <div class="languageBox">
             <input type="hidden" id="language" name="language" value="{{ $language ?? '' }}" />

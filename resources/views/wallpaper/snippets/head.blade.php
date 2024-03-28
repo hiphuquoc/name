@@ -134,5 +134,6 @@
 </script>
 <!-- End:: Tiktok Analutics --> --}}
 
-@vite(['resources/sources/main/style.scss'])
+{{-- @vite(['resources/sources/main/style.scss']) --}}
+<link rel="stylesheet" href="{{ asset('css/main/style.css') }}?version={{ time() }}">
 <!-- END: Custom CSS-->

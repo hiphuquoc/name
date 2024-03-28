@@ -10,11 +10,6 @@ class Product extends Model {
     protected $table        = 'product_info';
     protected $fillable     = [
         'seo_id',
-        'name', 
-        'description',
-        'en_seo_id',
-        'en_name',
-        'en_description',
         'code',
         'sold',
         'price',
@@ -46,7 +41,7 @@ class Product extends Model {
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'product_info');
                         }])
-                        ->with('seo', 'en_seo', 'prices.wallpapers.infoWallpaper', 'contents', 'categories')
+                        ->with('seo', 'prices.wallpapers.infoWallpaper', 'categories')
                         ->paginate($params['paginate']);
         return $result;
     }
@@ -76,8 +71,8 @@ class Product extends Model {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 
-    public function en_seo() {
-        return $this->hasOne(\App\Models\EnSeo::class, 'id', 'en_seo_id');
+    public function seos() {
+        return $this->hasMany(\App\Models\RelationSeoProductInfo::class, 'product_info_id', 'id');
     }
 
     public function files(){
@@ -88,9 +83,9 @@ class Product extends Model {
         return $this->hasMany(\App\Models\ProductPrice::class, 'product_info_id', 'id');
     }
 
-    public function contents() {
-        return $this->hasMany(\App\Models\ProductContent::class, 'product_info_id', 'id');
-    }
+    // public function contents() {
+    //     return $this->hasMany(\App\Models\ProductContent::class, 'product_info_id', 'id');
+    // }
 
     public function categories(){
         return $this->hasMany(\App\Models\RelationCategoryProduct::class, 'product_info_id', 'id');

@@ -97,16 +97,19 @@ class SeoFreeWallpaperController extends Controller {
             }else {
                 $idSeo = Seo::insertItem($seo);
             }
+
             /* xử lý riêng cho bảng việt (gốc) */
             if($language=='vi'){
                 /* lưu categories */
                 FreeWallpaperController::saveCategories($idFreeWallpaper, $request->all());
                 /* lưu tag name */
                 if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idFreeWallpaper, $request->get('tag'));
+                /* chỉ có update free_wallpaper_info => vì trong controller này bên ngoài không có tạo */
                 FreeWallpaper::updateItem($idFreeWallpaper, [
                     'seo_id' => $idSeo
                 ]);
             }
+
             /* relation_seo_free_wallpaper_info */
             $relationSeoTagInfo = RelationSeoFreeWallpaperInfo::select('*')
                                     ->where('seo_id', $idSeo)

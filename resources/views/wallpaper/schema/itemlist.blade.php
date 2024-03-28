@@ -3,19 +3,18 @@
         $xhtml              = null;
         $i                  = 1;
         foreach($data as $d){
-            if(!empty($d->seo->slug_full)){
-                if($i!=1) $xhtml .= ', ';
-                if(!empty($language)&&$language=='en'&&!empty($d->en_seo->slug_full)){
-                    $url    = env('APP_URL').'/'.$d->en_seo->slug_full;
-                }else {
-                    $url    = env('APP_URL').'/'.$d->seo->slug_full;
+            foreach($d->seos as $s){
+                if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
+                    if($i!=1) $xhtml .= ', ';
+                    $url    = env('APP_URL').'/'.$s->infoSeo->slug_full;
+                    $xhtml  .= '{
+                                "@type": "ListItem",
+                                "position": '.$i.',
+                                "url": "'.$url.'"
+                            }';
+                    ++$i;
+                    break;
                 }
-                $xhtml  .= '{
-                            "@type": "ListItem",
-                            "position": '.$i.',
-                            "url": "'.$url.'"
-                        }';
-                ++$i;
             }
         }
     @endphp

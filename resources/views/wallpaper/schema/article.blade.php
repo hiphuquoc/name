@@ -1,11 +1,6 @@
 @php
-    if(!empty($language)&&$language=='en'){
-        $title          = $item->en_seo->seo_title ?? $item->en_seo->title ?? null;
-        $description    = $item->en_seo->seo_description ?? $item->en_seo->description ?? null;
-    }else {
-        $title          = $item->seo->seo_title ?? $item->seo->title ?? null;
-        $description    = $item->seo->seo_description ?? $item->seo->description ?? null;
-    }
+    $title              = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
+    $description        = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
     /* author */
     $author             = $item->seo->rating_author_name ?? config('main.author_name');
     $imagePage          = env('APP_URL').Storage::url($item->seo->image);
@@ -32,7 +27,7 @@
         "@context": "https://schema.org",
         "@type": "Article",
         "@id": "{{ URL::current() }}#website",
-        "inLanguage": "vi",
+        "inLanguage": "{{ $language }}",
         "headline": "{{ $author }} Article",
         "datePublished": "{{ !empty($item->seo->created_at) ? date('c', strtotime($item->seo->created_at)) : null }}",
         "dateModified": "{{ !empty($item->seo->updated_at) ? date('c', strtotime($item->seo->updated_at)) : null }}",

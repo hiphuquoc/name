@@ -24,7 +24,7 @@ class CategoryMoneyController extends Controller {
         $params['array_category_info_id']   = json_decode($request->get('array_category_info_id'));
         $params['sort_by']                  = Cookie::get('sort_by') ?? config('main.sort_type')[0]['key'];
         $params['filters']                  = $request->get('filters') ?? [];
-        $tmp                                = self::getWallpapers($params);
+        $tmp                                = self::getWallpapers($params, $language);
         foreach($tmp['wallpapers'] as $wallpaper){
             if($viewBy=='set'){
                 $content    .= view('wallpaper.template.wallpaperItem', [
@@ -56,7 +56,7 @@ class CategoryMoneyController extends Controller {
         return json_encode($response);
     }
 
-    public static function getWallpapers($params){
+    public static function getWallpapers($params, $language){
         $keySearch      = $params['key_search'] ?? null;
         $filters        = $params['filters'] ?? [];
         $sortBy         = $params['sort_by'] ?? null;
@@ -64,42 +64,45 @@ class CategoryMoneyController extends Controller {
         $arrayIdCategory = $params['array_category_info_id'] ?? [];
         $requestLoad    = $params['request_load'] ?? 10;
         $response       = [];
-        $wallpapers     = Product::select('product_info.*')
+        $wallpapers = Product::select('product_info.*')
                             ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                            ->whereHas('prices.wallpapers', function(){
-
+                            ->whereHas('prices.wallpapers', function() {})
+                            ->whereHas('seos.infoSeo', function($query) use ($language) {
+                                $query->where('language', $language);
                             })
-                            ->when(!empty($keySearch), function($query) use($keySearch){
-                                $query->where('code', 'like', '%'.$keySearch.'%')
-                                    ->orWhere('name', 'like', '%'.$keySearch.'%')
-                                    ->orWhere('en_name', 'like', '%'.$keySearch.'%');
+                            ->when(!empty($keySearch), function($query) use ($keySearch) {
+                                $query->where('code', 'like', '%' . $keySearch . '%')
+                                    ->orWhere('name', 'like', '%' . $keySearch . '%')
+                                    ->orWhere('en_name', 'like', '%' . $keySearch . '%');
                             })
-                            ->when(!empty($filters), function($query) use($filters){
-                                foreach($filters as $filter){
-                                    $query->whereHas('categories.infoCategory', function($query) use($filter){
+                            ->when(!empty($filters), function($query) use ($filters) {
+                                foreach ($filters as $filter) {
+                                    $query->whereHas('categories.infoCategory', function($query) use ($filter) {
                                         $query->where('id', $filter);
                                     });
                                 }
                             })
-                            ->when(!empty($arrayIdCategory), function($query) use($arrayIdCategory){
-                                $query->whereHas('categories', function($query) use($arrayIdCategory) {
+                            ->when(!empty($arrayIdCategory), function($query) use ($arrayIdCategory) {
+                                $query->whereHas('categories', function($query) use ($arrayIdCategory) {
                                     $query->whereIn('category_info_id', $arrayIdCategory);
                                 });
                             })
-                            ->when(empty($sortBy), function($query){
+                            ->when(empty($sortBy), function($query) {
                                 $query->orderBy('id', 'DESC');
                             })
-                            ->when($sortBy=='new'||$sortBy=='propose', function($query){
+                            ->when($sortBy == 'new' || $sortBy == 'propose', function($query) {
                                 $query->orderBy('id', 'DESC');
                             })
-                            ->when($sortBy=='favourite', function($query){
+                            ->when($sortBy == 'favourite', function($query) {
                                 $query->orderBy('heart', 'DESC')
-                                        ->orderBy('id', 'DESC');
+                                    ->orderBy('id', 'DESC');
                             })
-                            ->when($sortBy=='old', function($query){
+                            ->when($sortBy == 'old', function($query) {
                                 $query->orderBy('id', 'ASC');
                             })
-                            ->with('seo', 'en_seo', 'prices')
+                            ->with(['seos.infoSeo' => function($query) use ($language) {
+                                $query->where('language', $language);
+                            }, 'seo', 'prices'])
                             ->orderBy('seo.ordering', 'DESC')
                             ->orderBy('id', 'DESC')
                             ->skip($loaded)
@@ -107,8 +110,9 @@ class CategoryMoneyController extends Controller {
                             ->get();
         $total          = Product::select('product_info.*')
                             ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                            ->whereHas('prices.wallpapers', function(){
-
+                            ->whereHas('prices.wallpapers', function(){})
+                            ->whereHas('seos.infoSeo', function($query) use ($language) {
+                                $query->where('language', $language);
                             })
                             ->when(!empty($keySearch), function($query) use($keySearch){
                                 $query->where('code', 'like', '%'.$keySearch.'%')

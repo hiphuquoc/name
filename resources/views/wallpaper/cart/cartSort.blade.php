@@ -1,14 +1,11 @@
-@php
-    $urlCart    = route('main.cart');
-@endphp
 <div class="cartBox">
-    <a href="{{ $urlCart }}" class="cartBox_icon">
+    <a href="{{ $urlPageCart ?? '/' }}" class="cartBox_icon">
         <img src="{{ Storage::url('images/svg/icon-cart-header.svg') }}" alt="{{ config('language.'.$language.'.data.cart') }}" title="{{ config('language.'.$language.'.data.cart') }}" />
         <div id="js_updateCart_count" class="cartBox_icon_number">
             {{ $detailCart['count'] ?? 0 }}
         </div>
     </a>
-    <a href="{{ $urlCart }}" class="cartBox_text">{{ config('language.'.$language.'.data.cart') }}</a>
+    <a href="{{ $urlPageCart ?? '/' }}" class="cartBox_text">{{ config('language.'.$language.'.data.cart') }}</a>
     <div id="js_checkEmptyCart_idWrite" class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
             <div class="customScrollBar-y" style="max-height:420px;">
@@ -38,8 +35,8 @@
                 @endforeach
             </div>
             <div class="cartBox_list_item buttonBox">
-                <div class="total">{{ empty($language)||$language=='vi' ? 'Tổng' : 'Total' }}: <span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($detailCart['total'], $language) !!}</span></div>
-                <a href="{{ $urlCart }}" class="button">{{ empty($language)||$language=='vi' ? 'Xem giỏ hàng' : 'View cart' }}</a>
+                <div class="total">{{ config('language.'.$language.'.data.total') }}: <span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($detailCart['total'], $language) !!}</span></div>
+                <a href="{{ $urlPageCart ?? '/' }}" class="button">{{ config('language.'.$language.'.data.view_cart') }}</a>
             </div>
         @else
             @include('wallpaper.cart.emptyCart', compact('language'))

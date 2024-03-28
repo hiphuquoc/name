@@ -4,7 +4,7 @@
                     "@type": "ListItem",
                     "position": 1,
                     "name": "'.$nameHome.'",
-                    "item": "'.env('APP_URL').'"
+                    "item": "'.env('APP_URL').'/'.$language.'"
                 }';
     $i          = 2;
     foreach($breadcrumb as $b){

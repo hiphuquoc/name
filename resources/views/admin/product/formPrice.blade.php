@@ -1,4 +1,4 @@
-<div class="card" data-repeater-item>
+<div class="card">
     <div class="card-header border-bottom">
         <h4 class="card-title">
             Phiên bản của sản phẩm
@@ -8,22 +8,10 @@
     <div class="card-body">
         <input type="hidden" name="id" value="{{ $price['id'] ?? null }}" />
         <div class="formBox">
-
-            <div class="formBox_full flexBox">
-                <div class="flexBox_item">
-                    <div class="formBox_full_item">
-                        <label class="form-label inputRequired" for="name">Tiêu đề</label>
-                        <input class="form-control" name="name" type="text" value="{{ $price['name'] ?? null }}" required />
-                    </div>
-                </div>
-                <div class="flexBox_item">
-                    <div class="formBox_full_item">
-                        <label class="form-label inputRequired" for="en_name">Title (En)</label>
-                        <input class="form-control" name="en_name" type="text" value="{{ $price['en_name'] ?? null }}" required />
-                    </div>
-                </div>
+            <div class="formBox_full">
+                <label class="form-label inputRequired" for="code_name">Mã Tên</label>
+                <input class="form-control" name="code_name" type="text" value="{{ $price['code_name'] ?? null }}" required />
             </div>
-            
             <div class="formBox_full flexBox">
                 <div class="flexBox_item">
                     <div class="formBox_full_item">
