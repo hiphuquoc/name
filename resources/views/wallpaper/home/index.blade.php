@@ -13,35 +13,33 @@
     @include('wallpaper.schema.creativeworkseries', compact('item'))
     <!-- END:: Article Schema -->
 
-    @if(!empty($products)&&$products->isNotEmpty())
-        <!-- STRAT:: Product Schema -->
-        @php
-            $highPrice          = 0;
-            foreach($products as $product){
-                if($product->price_before_promotion>$highPrice) $highPrice = $product->price_before_promotion;
+    {{-- <!-- STRAT:: Product Schema -->
+    @php
+        $highPrice          = 0;
+        if(!empty($products))foreach($products as $product){
+            if($product->price_before_promotion>$highPrice) $highPrice = $product->price_before_promotion;
+        }
+        $lowPrice           = $highPrice;
+        foreach($products as $product){
+            foreach($product->prices as $price){
+                if($price->price<$lowPrice) $lowPrice   = $price->price;
             }
-            $lowPrice           = $highPrice;
-            foreach($products as $product){
-                foreach($product->prices as $price){
-                    if($price->price<$lowPrice) $lowPrice   = $price->price;
-                }
-            }
-        @endphp
-        @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
-        <!-- END:: Product Schema -->
+        }
+    @endphp
+    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
+    <!-- END:: Product Schema -->
 
-        {{-- <!-- STRAT:: FAQ Schema -->
-        @include('wallpaper.schema.itemlist', ['data' => $products])
-        <!-- END:: FAQ Schema --> --}}
+    <!-- STRAT:: FAQ Schema -->
+    @include('wallpaper.schema.itemlist', ['data' => $products])
+    <!-- END:: FAQ Schema -->
 
-        <!-- STRAT:: ImageObject Schema -->
-        @include('wallpaper.schema.imageObject', ['data' => $products])
-        <!-- END:: ImageObject Schema -->
+    <!-- STRAT:: ImageObject Schema -->
+    @include('wallpaper.schema.imageObject', ['data' => $products])
+    <!-- END:: ImageObject Schema --> --}}
 
-        <!-- STRAT:: Title - Description - Social -->
-        @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
-        <!-- END:: Title - Description - Social -->
-    @endif
+    <!-- STRAT:: Title - Description - Social -->
+    @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => 0, 'highPrice' => 0])
+    <!-- END:: Title - Description - Social -->
 
     <!-- STRAT:: FAQ Schema -->
     @include('wallpaper.schema.faq', ['data' => $item->faqs])
