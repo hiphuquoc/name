@@ -149,11 +149,11 @@ class Charactor {
         return $parts;
     }
 
-    public static function generateChatgptDataAndEvent($itemSeo, $prompt, $language, $key) {
+    public static function generateChatgptDataAndEvent($itemSeo, $prompt, $language, $key, $idContent = 0) {
         $dataChatgpt = null;
         $eventChatgpt = null;
-        $dataChatgpt = 'data-id=' . $itemSeo->id . ' data-language=' . $language . ' data-id_prompt=' . $prompt->id.' data-type='.$prompt->type;
-        $eventChatgpt = "chatGpt($('#".$key."'), " . $itemSeo->id . ", '" . $language . "', " . $prompt->id . ")";
+        $dataChatgpt = 'data-id=' . $itemSeo->id . ' data-language=' . $language . ' data-id_prompt=' . $prompt->id.' data-type='.$prompt->type.' data-id_content='.$idContent;
+        $eventChatgpt = "chatGpt($('#".$key."'), " . $itemSeo->id . ", '" . $language . "', " . $prompt->id . ", ".$idContent.")";
         return compact('dataChatgpt', 'eventChatgpt');
     }
 

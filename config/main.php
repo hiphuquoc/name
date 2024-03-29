@@ -193,5 +193,8 @@ return [
         'ko-free-phone-wallpapers',
         'hi-free-phone-wallpapers',
         'wallpaper-ponsel-gratis',
-    ]
+    ],
+    'tool_translate'    => [
+        'ai', 'google_translate'
+    ],
 ];

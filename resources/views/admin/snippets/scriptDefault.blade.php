@@ -130,11 +130,12 @@
             const id                = $(this).data('id');
             const language          = $(this).data('language');
             const id_prompt         = $(this).data('id_prompt');
-            chatGpt($(this), id, language, id_prompt);
+            const id_content        = $(this).data('id_content');
+            chatGpt($(this), id, language, id_prompt, id_content);
         });
     }
     /* ai chatgpt */
-    function chatGpt(input, id, language, id_prompt){
+    function chatGpt(input, id, language, id_prompt, id_content){ /* id_content hiện chỉ dùng cho content do có nhiều phần tử content dùng chung 1 prompt */
         addAndRemoveClass($(input), 'inputLoading', 'inputSuccess inputError');
         /* vô hiệu hóa box dùng tiny */ 
         const idBox = $(input).attr('id');
@@ -145,7 +146,7 @@
             type        : 'get',
             dataType    : 'json',
             data        : {
-                id, language, id_prompt
+                id, language, id_prompt, id_content
             }
         }).done(function(data){
             /* điền dữ liệu vào */

@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 
 use App\Models\Prompt;
 use App\Models\Tag;
+use GoogleTranslate;
 
 class ChatGptController extends Controller {
 
@@ -23,24 +24,60 @@ class ChatGptController extends Controller {
         $infoPrompt     = Prompt::select('*')
                             ->where('id', $idPrompt)
                             ->first();
-        if($infoPrompt->reference_name=='content'&&$infoPrompt->type=='translate_content'){
-            /* ===== Dịch content ===== */
-            $items          = DB::table($infoPrompt->reference_table)
+        /* trường hợp dịch */
+        if($infoPrompt->type=='translate_content'){
+            /* dịch bàng ai */
+            if($infoPrompt->tool=='ai'){
+                /* xử lý riêng cho content */
+                if($infoPrompt->reference_name=='content'){
+                    $idContent  = $request->get('id_content');
+                    /* ===== Dịch content ===== */
+                    $item       = DB::table($infoPrompt->reference_table)
+                                    ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
+                                    ->join('seo_content', 'seo_content.seo_id', '=', 'seo.id')
+                                    ->select($infoPrompt->reference_table . '.*', 'seo.*', 'seo_content.id as seo_content_id', 'seo_content.content')
+                                    ->where($infoPrompt->reference_table.'.id', $idTable)
+                                    ->where('seo_content.id', $idContent)
+                                    ->first();
+                    /* xử lý riêng cho dịch content -> vì lấy ra idContent */
+                    $prompt     = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
+                    $response   = self::callApi($prompt);
+                    return json_encode($response);
+                }
+
+                /* dich khác content */
+                $item       = DB::table($infoPrompt->reference_table)
                                 ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
-                                ->join('seo_content', 'seo_content.seo_id', '=', 'seo.id')
-                                ->select($infoPrompt->reference_table . '.*', 'seo.*', 'seo_content.*')
+                                ->select($infoPrompt->reference_table . '.*', 'seo.*')
                                 ->where($infoPrompt->reference_table.'.id', $idTable)
-                                ->get(); /* get số nhiều vì joih lấy ra nhiều content */
-            /* xử lý riêng cho dịch content -> vì nằm trong relation và số nhiều */
-            $content        = null;
-            foreach($items as $item){
+                                ->first();
                 $prompt     = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
-                $tmp        = self::callApi($prompt);
-                $content    .= $tmp['content'];
+                $response   = self::callApi($prompt);
+                return json_encode($response);
             }
-            $response['content']    = $content;
-            $response['error']      = '';
-        }else if($infoPrompt->type!='auto_content_for_image'){
+            /* dịch bằng google translate */
+            if($infoPrompt->tool=='google_translate'){
+                $item       = DB::table($infoPrompt->reference_table)
+                                ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
+                                ->select($infoPrompt->reference_table . '.*', 'seo.*')
+                                ->where($infoPrompt->reference_table.'.id', $idTable)
+                                ->first();
+                $contentSorce           = null;
+                foreach($item as $key => $value){
+                    if($key==$infoPrompt->reference_name){
+                        $contentSorce   = $value;
+                    }
+                }
+                $tmp        = GoogleTranslate::translate($contentSorce, 'vi', $language);
+                if(!empty($tmp['translated_text'])){
+                    $response['content']    = $tmp['translated_text'];
+                    $response['error']      = '';
+                }
+                return json_encode($response);
+            }
+        }
+        /* trường hợp viết content */
+        if($infoPrompt->type=='auto_content'){
             /* ===== Viết content ===== */
             $item       = DB::table($infoPrompt->reference_table)
                             ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
@@ -49,11 +86,14 @@ class ChatGptController extends Controller {
                             ->first();
             $prompt     = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
             $response   = self::callApi($prompt);
-        }else {
+            return json_encode($response);
+        }
+        /* trường hợp viết content cho ảnh */
+        if($infoPrompt->type=='auto_content_for_image'){
             /* ===== Viết content cho ảnh ===== */
             $item       = FreeWallpaper::select('*')
-                            ->where('id', $idTable)
-                            ->first();
+            ->where('id', $idTable)
+            ->first();
             $urlImage   = \App\Helpers\Image::getUrlImageSmallByUrlImage($item->file_cloud);
             if($infoPrompt->reference_name=='tag'){
                 /* riêng cho thẻ tag */
@@ -81,7 +121,8 @@ class ChatGptController extends Controller {
                 $prompt     = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
                 $response   = self::callApi($prompt, $urlImage);
             }
-        }
+            return json_encode($response);
+        }        
         return json_encode($response);
     }
 

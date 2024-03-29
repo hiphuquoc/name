@@ -275,7 +275,6 @@ Route::get('/registrySeller', [AjaxController::class, 'registrySeller'])->name('
 Route::get('/setMessageModal', [AjaxController::class, 'setMessageModal'])->name('ajax.setMessageModal');
 Route::get('/checkLoginAndSetShow', [AjaxController::class, 'checkLoginAndSetShow'])->name('ajax.checkLoginAndSetShow');
 Route::get('/loadImageFromGoogleCloud', [AjaxController::class, 'loadImageFromGoogleCloud'])->name('ajax.loadImageFromGoogleCloud');
-Route::get('/loadImageWithResize', [AjaxController::class, 'loadImageWithResize'])->name('ajax.loadImageWithResize');
 Route::get('/loadImageSource', [AjaxController::class, 'loadImageSource'])->name('ajax.loadImageSource');
 Route::get('/downloadImageSource', [AjaxController::class, 'downloadImageSource'])->name('ajax.downloadImageSource');
 Route::get('/setViewBy', [AjaxController::class, 'setViewBy'])->name('ajax.setViewBy');

@@ -39,7 +39,19 @@
                 @endforeach --}}
             </select>
         </div>
-
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label inputRequired" for="tool">Công cụ</label>
+            <select class="select2 form-select select2-hidden-accessible" id="tool" name="tool">
+                @foreach(config('main.tool_translate') as $t)
+                    @php
+                        $selected   = null;
+                        if(!empty($item->tool)&&$item->tool==$t) $selected = ' selected';
+                    @endphp
+                    <option value="{{ $t }}"{{ $selected }}>{{ $t }}</option>
+                @endforeach
+            </select>
+        </div>
 
         <!-- One Row -->
         <div class="formBox_column2_item_row">

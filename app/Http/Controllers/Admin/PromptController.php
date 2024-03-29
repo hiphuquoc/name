@@ -29,7 +29,8 @@ class PromptController extends Controller {
                 'type'              => $request->get('type'),
                 'reference_table'   => $request->get('reference_table'),
                 'reference_name'    => $request->get('reference_name'),
-                'reference_prompt'  => $request->get('reference_prompt')
+                'reference_prompt'  => $request->get('reference_prompt'),
+                'tool'              => $request->get('tool'),
             ];
             if(!empty($id)){
                 /* update */

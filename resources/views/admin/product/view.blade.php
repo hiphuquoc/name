@@ -112,24 +112,24 @@
                                 @endphp
                             @endif
                         @else 
-                            <!-- tiếng khác -> form dịch (đối với bản dịch chỉ có duy nhất 1 box content - gom dữ liệu lại) -->
+                            <!-- tiếng khác -> form dịch -->
                             @if($prompt->type=='translate_content'&&$prompt->reference_name=='content')
-                                <div class="pageAdminWithRightSidebar_main_content_item width100">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            @php
-                                                $xhtmlContent = '';
-                                                if(!empty($itemSeo->contents)) foreach($itemSeo->contents as $c) $xhtmlContent .= $c->content;
-                                            @endphp
-                                            @include('admin.form.formContent', [
-                                                'prompt'    => $prompt,
-                                                'content'   => $xhtmlContent, 
-                                                'idBox'     => 'content_'.$i
-                                            ])
-                                                
+                                @if(!empty($item->seo->contents))
+                                    @for($i=0;$i<$item->seo->contents->count();++$i)
+                                        <div class="pageAdminWithRightSidebar_main_content_item width100">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    @include('admin.form.formContent', [
+                                                        'prompt'    => $prompt,
+                                                        'content'   => $itemSeo->contents[$i]->content ?? null, 
+                                                        'idBox'     => 'content_'.$i,
+                                                        'idContent' => $item->seo->contents[$i]->id ?? 0, /* truyền id của content tiếng viết (để dịch) */
+                                                    ]) 
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    @endfor
+                                @endif
                             @endif
                         @endif
                     @endforeach

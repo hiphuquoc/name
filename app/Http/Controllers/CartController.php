@@ -179,7 +179,7 @@ class CartController extends Controller{
             }
         }
         $response = view('wallpaper.cart.cartSort', compact('products', 'detailCart', 'urlPageCart', 'language'))->render();
-        echo $response;
+        return json_encode($response);
     }
 
     // public static function updateCart(Request $request){

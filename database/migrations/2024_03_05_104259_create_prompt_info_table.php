@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('reference_table'); /* tên bảng */
             $table->text('reference_name'); /* tên input name */
             $table->text('reference_prompt'); /* prompt */
+            $table->text('tool');
         });
     }
 

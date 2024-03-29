@@ -79,6 +79,15 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
+        // // Tạo một đối tượng GoogleTranslate
+        // $client = new GoogleTranslateClient(env('GOOGLE_TRANSLATE_API_KEY'));
+
+
+        // // Truyền đối tượng client vào hàm khởi tạo của GoogleTranslate
+        // $translator = new GoogleTranslate($client);
+
+        // Sử dụng phương thức translate để dịch văn bản
+        
         // $items = \App\Models\Product::select('*')
         //             // ->whereHas('seo', function ($query) {
         //             //     $query->where('slug', 'tag-hinh-nen-dien-thoai-rong');

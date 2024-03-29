@@ -15,6 +15,7 @@
                     <th>Loại</th>
                     <th>Bảng</th>
                     <th>Cột</th>
+                    <th width="120px">Công cụ</th>
                     <th>Prompt</th>
                     <th>-</th>
                 </tr>
@@ -27,6 +28,7 @@
                             <td>{{ $item->type }}</td>
                             <td>{{ $item->reference_table }}</td>
                             <td>{{ $item->reference_name }}</td>
+                            <td>{{ $item->tool }}</td>
                             <td><div style="white-space: pre-line;">{{ $item->reference_prompt }}</div></td>
                             <td style="vertical-align:top;display:flex;font-size:0.95rem;">
                                 <div class="icon-wrapper iconAction">

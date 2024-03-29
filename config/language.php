@@ -261,12 +261,12 @@ return [
             'payment_fee' => 'Tarifa de pago',
         ]
     ],
-    "cn"    => [
+    "zh"    => [
         "name"  => "Trung Quốc (Quan Thoại)",
         "currency"  => "USD",
         "currency_code" => "$",
         "money_value"     => "1",
-        "key"   => "cn",
+        "key"   => "zh",
         "data"      => [
             "home"          => "首页",
             "about_us"      => "关于我们",

@@ -12,7 +12,8 @@ class Prompt extends Model {
         'type',
         'reference_table', 
         'reference_name',
-        'reference_prompt'
+        'reference_prompt',
+        'ai',
     ];
     public $timestamps = false;
 

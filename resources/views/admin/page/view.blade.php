@@ -112,53 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <!-- tiếng việt -> không có prompt viết bài -->
-                    @if($language=='vi') 
-                        @if($prompt->type=='auto_content'&&$prompt->reference_name=='content')
-                            <div class="pageAdminWithRightSidebar_main_content_item width100">
-                                <div class="card">
-                                    <div class="card-body">
-                                        @php
-                                            $xhtmlContent = '';
-                                            if(!empty($itemSeo->contents)) foreach($itemSeo->contents as $c) $xhtmlContent .= $c->content;
-                                        @endphp
-                                        @include('admin.form.formContent', [
-                                            'prompt'    => null,
-                                            'content' => $xhtmlContent, 
-                                            'idBox' => 'content_'.$i
-                                        ])
-                                            
-                                    </div>
-                                </div>
-                            </div>
-                            @php
-                                ++$i;
-                            @endphp
-                        @endif
-                    @else 
-                        <!-- tiếng khác -> form dịch (đối với bản dịch chỉ có duy nhất 1 box content - gom dữ liệu lại) -->
-                        @if($prompt->type=='translate_content'&&$prompt->reference_name=='content')
-                            <div class="pageAdminWithRightSidebar_main_content_item width100">
-                                <div class="card">
-                                    <div class="card-body">
-                                        @php
-                                            $xhtmlContent = '';
-                                            if(!empty($itemSeo->contents)) foreach($itemSeo->contents as $c) $xhtmlContent .= $c->content;
-                                        @endphp
-                                        @include('admin.form.formContent', [
-                                            'prompt'    => $prompt,
-                                            'content'   => $xhtmlContent, 
-                                            'idBox'     => 'content_'.$i
-                                        ])
-                                            
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endif
-                    @foreach($prompts as $prompt)
-                        
-                    @endforeach --}}
+                    
                 </div>
                 <!-- END:: Main content -->
 
