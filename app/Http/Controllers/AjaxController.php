@@ -158,7 +158,7 @@ class AjaxController extends Controller {
         $xhtmlButton            = '';
         $xhtmlButtonMobile      = '';
         $user = $request->user();
-        $language               = $request->get('language') ?? 'vi';
+        $language               = $request->session()->get('language');
         if(!empty($user)){
             /* đã đăng nhập => hiển thị button thông tin tài khoản */
             $xhtmlButton        = view('wallpaper.template.buttonLogin', ['user' => $user, 'language' => $language])->render();

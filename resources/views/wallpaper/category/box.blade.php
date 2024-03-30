@@ -44,22 +44,34 @@
             boxItem.find('.feeling').attr('style', 'display:flex !important;');
         }
         /* thả cảm xúc */
-        function setFeelingFreeWallpaper(element, idFreeWallpaper, type){
-            $.ajax({
-                url         : '{{ route("ajax.setFeelingFreeWallpaper") }}',
-                type        : 'get',
-                dataType    : 'json',
-                data        : {
-                    type,
-                    free_wallpaper_info_id : idFreeWallpaper
-                },
-                success     : function(response){
-                    $(element).closest('.feeling').css('display', 'none');
-                    /* tải lại box */ 
-                    var box     = $(element).closest('.freeWallpaperBox_item');
-                    var idBox   = box.attr('id');
-                    loadOneFreeWallpaper(idFreeWallpaper, idBox);
+        function setFeelingFreeWallpaper(element, idFreeWallpaper, type) {
+            const queryParams = new URLSearchParams({
+                type: type,
+                free_wallpaper_info_id: idFreeWallpaper
+            }).toString();
+
+            fetch("{{ route('ajax.setFeelingFreeWallpaper') }}?" + queryParams, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                $(element).closest('.feeling').css('display', 'none');
+                /* tải lại box */
+                var box = $(element).closest('.freeWallpaperBox_item');
+                var idBox = box.attr('id');
+                loadOneFreeWallpaper(idFreeWallpaper, idBox);
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
             });
         }
         /* phần wallpaper */
@@ -163,32 +175,43 @@
             params.array_category_info_id = $('#arrayIdCategory').val();
             params.request_load     = requestLoad;
             params.idNot            = $('#idNot').val();
-            $.ajax({
-                url         : '{{ route("main.category.loadmoreFreeWallpapers") }}',
-                type        : 'get',
-                dataType    : 'json',
-                data        : params,
-                success     : function(response){
-                    setTimeout(function(){
-                        lazyload();
-                    }, 0);
-                    /* xóa bỏ class để thể hiện đã load xong */
-                    boxCategory.removeClass('loading');
-                    /* append dữ liệu */
-                    $('#loaded').val(response.loaded);
-                    $('#total').val(response.total);
-                    if(response.content!='') {
-                        boxCategory.append(response.content);
-                    }
-                    // Kiểm tra khi tất cả các phần tử đã được load xong
-                    waitForImagesLoaded(boxCategory, function () {
-                        setViewAllImage();
-                    });
-                    // ngân click chuột phải các ảnh được load
-                    preventClickImgAndEffectDownload();
-                    /* thêm thông báo nếu empty */
-                    if(boxCategory.children().length==0) boxCategory.html('<div>'+"{{ config('language.'.$language.'.data.no_suitable_results_found') }}"+'</div>');
+            const queryParams = new URLSearchParams(params).toString();
+            fetch("{{ route('main.category.loadmoreFreeWallpapers') }}?" + queryParams, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setTimeout(function () {
+                    lazyload();
+                }, 0);
+                /* xóa bỏ class để thể hiện đã load xong */
+                boxCategory.removeClass('loading');
+                /* append dữ liệu */
+                $('#loaded').val(data.loaded);
+                $('#total').val(data.total);
+                if (data.content != '') {
+                    boxCategory.append(data.content);
+                }
+                // Kiểm tra khi tất cả các phần tử đã được load xong
+                waitForImagesLoaded(boxCategory, function () {
+                    setViewAllImage();
+                });
+                // ngân click chuột phải các ảnh được load
+                preventClickImgAndEffectDownload();
+                /* thêm thông báo nếu empty */
+                if (boxCategory.children().length == 0) boxCategory.html('<div>' + "{{ config('language.' . $language . '.data.no_suitable_results_found') }}" + '</div>');
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
             });
             // Đặt isFirstLoad thành false sau lần đầu load
             isFirstLoad = false;
@@ -240,18 +263,30 @@
                 }
             });
         }
-        function loadOneFreeWallpaper(idFreeWallpaper, idWrite){
-            $.ajax({
-                url         : '{{ route("ajax.loadOneFreeWallpaper") }}',
-                type        : 'get',
-                dataType    : 'html',
-                data        : {
-                    free_wallpaper_info_id : idFreeWallpaper
-                },
-                success     : function(response){
-                    $('#'+idWrite).html(response);
-                    lazyload();
+        function loadOneFreeWallpaper(idFreeWallpaper, idWrite) {
+            const queryParams = new URLSearchParams({
+                free_wallpaper_info_id: idFreeWallpaper
+            }).toString();
+
+            fetch("{{ route('ajax.loadOneFreeWallpaper') }}?" + queryParams, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                $('#' + idWrite).html(data);
+                lazyload();
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
             });
         }
     </script>

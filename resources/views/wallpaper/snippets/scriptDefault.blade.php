@@ -623,16 +623,21 @@
     /* load quận/huyện */
     function loadDistrictByIdProvince(elementProvince, idWrite){
         const valueProvince = $(elementProvince).val();
-        $.ajax({
-            url         : '{{ route("ajax.loadDistrictByIdProvince") }}',
-            type        : 'get',
-            dataType    : 'html',
-            data        : {
-                province_info_id : valueProvince
-            },
-            success     : function(response){
-                $('#'+idWrite).html(response);
+        fetch('{{ route("ajax.loadDistrictByIdProvince") }}?province_info_id='+valueProvince, {
+            method  : 'GET',
+            mode    : 'cors',
+        })
+        .then(response => {
+            if (!response.ok){
+                throw new Error('Network response was not ok');
             }
+            return response.json();
+        })
+        .then(response => {
+            $('#'+idWrite).html(response);
+        })
+        .catch(error => {
+            console.error("Fetch request failed:", error);
         });
     }
     /* validate form */
@@ -668,24 +673,166 @@
     // }
     /* check đăng nhập */
     function checkLoginAndSetShow(){
-        const language = $('#language').val();
-        $.ajax({
-            url         : '{{ route("ajax.checkLoginAndSetShow") }}',
-            type        : 'get',
-            dataType    : 'json',
-            data        : {
-                '_token'            : '{{ csrf_token() }}',
-                language
-            },
-            success     : function(response){
-                /* button desktop */
-                $('#js_checkLoginAndSetShow_button').html(response.button);
-                $('#js_checkLoginAndSetShow_button').css('display', 'flex');
-                /* button mobile */
-                $('#js_checkLoginAndSetShow_buttonMobile').html(response.button_mobile);
-                /* modal chung */
-                $('#js_checkLoginAndSetShow_modal').html(response.modal);
+        fetch('{{ route("ajax.checkLoginAndSetShow") }}', {
+            method  : 'GET',
+            mode    : 'cors',
+        })
+        .then(response => {
+            if (!response.ok){
+                throw new Error('Network response was not ok');
             }
+            return response.json();
+        })
+        .then(response => {
+            /* button desktop */
+            $('#js_checkLoginAndSetShow_button').html(response.button);
+            $('#js_checkLoginAndSetShow_button').css('display', 'flex');
+            /* button mobile */
+            $('#js_checkLoginAndSetShow_buttonMobile').html(response.button_mobile);
+            /* modal chung */
+            $('#js_checkLoginAndSetShow_modal').html(response.modal);
+        })
+        .catch(error => {
+            console.error("Fetch request failed:", error);
+        });
+    }
+    /* bật tắt bộ lọc nâng cao */
+    function toggleFilterAdvanced(idElement){
+        $('#'+idElement).toggleClass('active');
+    }
+    /* set chế độ xem */
+    function setViewBy(key) {
+        fetch("{{ route('ajax.setViewBy') }}?key=" + key, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            location.reload();
+        })
+        .catch(error => {
+            console.error("Fetch request failed:", error);
+        });
+    }
+    /* set chế độ sắp xếp */
+    function setSortBy(key) {
+        fetch("{{ route('ajax.setSortBy') }}?key=" + key, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            location.reload();
+        })
+        .catch(error => {
+            console.error("Fetch request failed:", error);
+        });
+    }
+
+        // function setFeelingAndSubmit(element) {
+        //     // Xác định input checkbox trong phần tử cha của element
+        //     var checkbox = $(element).find('input[type="checkbox"]');
+
+        //     // Toggle trạng thái checked của checkbox
+        //     checkbox.prop('checked', !checkbox.prop('checked'));
+
+        //     // Submit form
+        //     $(element).closest('form').submit();
+        // }
+    /* set filter */
+    function setFilter(element){
+        var checkbox = $(element).find('input[type="radio"]');
+        checkbox.prop('checked', true);
+        $(element).closest('form').submit();
+    }
+    /* tải box bộ lọc trang miễn phí */
+    function showSortBoxFreeWallpaper() {
+        const id = "{{ $item->id ?? 0 }}";
+        const total = "{{ $total ?? 0 }}";
+
+        // Lấy chuỗi query parameters từ URL
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var params = {};
+        for (const [key, value] of urlParams) params[key] = value;
+
+        // Thêm các giá trị id và total vào params
+        params['id'] = id;
+        params['total'] = total;
+
+        const queryParams = new URLSearchParams(params).toString();
+
+        fetch("{{ route('ajax.showSortBoxFreeWallpaper') }}?" + queryParams, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            $('#formViewBy').html(data);
+        })
+        .catch(error => {
+            console.error("Fetch request failed:", error);
+        });
+    }
+    /* tải box bộ lọc trang trả phí */
+    function showSortBoxWallpaper() {
+        const id = "{{ $item->id ?? 0 }}";
+        const total = "{{ $total ?? 0 }}";
+
+        // Lấy chuỗi query parameters từ URL
+        var queryString = window.location.search;
+        
+        // Tạo một đối tượng URLSearchParams từ chuỗi query parameters
+        var urlParams = new URLSearchParams(queryString);
+
+        // Lấy tất cả các tham số truyền qua URL
+        var params = {};
+        for (const [key, value] of urlParams) {
+            params[key] = value;
+        }
+
+        // Thêm các giá trị id và total vào params
+        params['id'] = id;
+        params['total'] = total;
+
+        const queryParams = new URLSearchParams(params).toString();
+
+        fetch("{{ route('ajax.showSortBoxWallpaper') }}?" + queryParams, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            $('#formViewBy').html(data);
+        })
+        .catch(error => {
+            console.error("Fetch request failed:", error);
         });
     }
 </script>

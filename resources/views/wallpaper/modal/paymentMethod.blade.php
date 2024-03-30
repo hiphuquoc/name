@@ -57,70 +57,54 @@
     <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
     <script type="text/javascript">
-        function submitForm(idForm){
-            event.preventDefault();
-            const error     = validateForm(idForm);
-            if(error==''){
-                const data  = $('#'+idForm).serialize();
-                $.ajax({
-                    url         : '{{ route("ajax.registrySeller") }}',
-                    type        : 'get',
-                    dataType    : 'json',
-                    data        : data,
-                    success     : function(response){
-                        /* tắt modal form đăng ký */
-                        openCloseModal('modalRegistrySeller');
-                        /* bật thông báo */
-                        setMessageModal(response.title, response.content);
-                    }
-                });
-            }else {
-                /* thêm class thông báo lỗi cho label của input */
-                for(let i = 0;i<error.length;++i){
-                    const idInput = $('#'+idForm).find('[name='+error[i]+']').attr('id');
-                    if(idInput!=''){
-                        const elementLabel = $('#'+idForm).find('[for='+idInput+']');
-                        elementLabel.addClass('error');
-                    }
-                }
-            }
-        }
 
         let clicked = false;
         function paymentNow(element, idMethod) {
             if (!clicked) {
                 clicked = true;
-                const email     = $('#email').val();
+                const email = $('#email').val();
                 const idProduct = $('#product_info_id').val();
-                var idPrice     = 0;
-                $(document).find('[data-product_price_id]').each(function(){
-                    if($(this).hasClass('selected')){
+                let idPrice = 0;
+                $(document).find('[data-product_price_id]').each(function() {
+                    if ($(this).hasClass('selected')) {
                         idPrice = $(this).attr('data-product_price_id');
                         return false;
                     }
-                })
-                if(idPrice!=0&&idProduct!=''&&idMethod!=''){
-                    let token   = "{{ csrf_token() }}";
-                    $.ajax({
-                        url         : '{{ route("main.paymentNow") }}',
-                        type        : 'get',
-                        dataType    : 'json',
-                        data        : {
-                            product_info_id         : idProduct,
-                            product_price_id        : idPrice,
-                            payment_method_info_id  : idMethod,
-                            email
-                        },
-                        success     : function(response){
-                            /* redirect qua trang thanh toán */
-                            window.location.href = response.url;
+                });
+                if (idPrice != 0 && idProduct != '' && idMethod != '') {
+                    const queryParams = new URLSearchParams({
+                        product_info_id: idProduct,
+                        product_price_id: idPrice,
+                        payment_method_info_id: idMethod,
+                        email: email
+                    }).toString();
+
+                    fetch("{{ route('main.paymentNow') }}?" + queryParams, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        /* redirect qua trang thanh toán */
+                        window.location.href = data.url;
+                    })
+                    .catch(error => {
+                        console.error("Fetch request failed:", error);
                     });
+
+                    // Reset the click status after a certain amount of time
+                    setTimeout(() => {
+                        clicked = false;
+                    }, 1500);
                 }
-                // Reset the click status after a certain amount of time
-                setTimeout(() => {
-                    clicked = false;
-                }, 1500);
             }
         }
     </script>

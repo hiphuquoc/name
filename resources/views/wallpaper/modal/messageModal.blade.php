@@ -13,18 +13,31 @@
             openCloseModal('messageModal');
         })
         /* set content messgae Modal ajax */
-        function setMessageModal(title = null, content = null){
-            $.ajax({
-                url         : '{{ route("ajax.setMessageModal") }}',
-                type        : 'get',
-                dataType    : 'html',
-                data        : {
-                    title, content
-                },
-                success     : function(response){
-                    $('#messageModal .modalBox_box').html(response);
-                    openCloseModal('messageModal');
+        function setMessageModal(title = null, content = null) {
+            const queryParams = new URLSearchParams({
+                title: title,
+                content: content
+            }).toString();
+
+            fetch("{{ route('ajax.setMessageModal') }}?" + queryParams, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                $('#messageModal .modalBox_box').html(data);
+                openCloseModal('messageModal');
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
             });
         }
     </script>

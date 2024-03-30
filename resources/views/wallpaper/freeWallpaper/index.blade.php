@@ -106,21 +106,29 @@
         })
 
         /* thả cảm xúc */
-        function toogleHeartFeelingFreeWallpaper(idFreeWallpaper){
-            $.ajax({
-                url         : '{{ route("ajax.toogleHeartFeelingFreeWallpaper") }}',
-                type        : 'get',
-                dataType    : 'html',
-                data        : {
-                    free_wallpaper_info_id : idFreeWallpaper
-                },
-                success     : function(response){
-                    if(response==true){
-                        $('.freeWallpaperDetailBox .heart').addClass('selected');
-                    }else {
-                        $('.freeWallpaperDetailBox .heart').removeClass('selected');
-                    }
+        function toogleHeartFeelingFreeWallpaper(idFreeWallpaper) {
+            fetch("{{ route('ajax.toogleHeartFeelingFreeWallpaper') }}?free_wallpaper_info_id=" + idFreeWallpaper, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                if (data === "true") {
+                    $('.freeWallpaperDetailBox .heart').addClass('selected');
+                } else {
+                    $('.freeWallpaperDetailBox .heart').removeClass('selected');
+                }
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
             });
         }
     </script>
