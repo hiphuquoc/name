@@ -32,35 +32,27 @@ class SitemapController extends Controller {
 
     public static function child($name){
         if(!empty($name)){
-            $tmp    = Seo::select('*')
-                        ->where('type', $name)
-                        ->with('enSeo')
-                        ->get();
-            if(!empty($tmp)&&$tmp->isNotEmpty()){
+            $modelName      = config('tablemysql.'.$name.'.model_name');
+            $modelInstance  = resolve("\App\Models\\$modelName");
+            $items          = $modelInstance::select('*')
+                                ->with('seo', 'seos')
+                                ->get();
+            if(!empty($items)&&$items->isNotEmpty()){
                 $sitemapXhtml       = '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-                foreach($tmp as $item){
-                    $sitemapXhtml   .= '<url>
-                                            <loc>'.env('APP_URL').'/'.$item->slug_full.'</loc>
-                                            <lastmod>'.date('c', strtotime($item->updated_at)).'</lastmod>
-                                            <changefreq>hourly</changefreq>
-                                            <priority>1</priority>
-                                            <image:image>
-                                                <image:loc>'.env('APP_URL').$item->image.'</image:loc>
-                                                <image:title>'.self::replaceSpecialCharactorXml($item->seo_title).'</image:title>
-                                            </image:image>
-                                        </url>';
-                    /* phiên bản tiếng anh */
-                    if(!empty($item->enSeo->infoEnSeo)){
-                        $sitemapXhtml   .= '<url>
-                                            <loc>'.env('APP_URL').'/'.$item->enSeo->infoEnSeo->slug_full.'</loc>
-                                            <lastmod>'.date('c', strtotime($item->enSeo->infoEnSeo->updated_at)).'</lastmod>
-                                            <changefreq>hourly</changefreq>
-                                            <priority>1</priority>
-                                            <image:image>
-                                                <image:loc>'.env('APP_URL').$item->image.'</image:loc>
-                                                <image:title>'.self::replaceSpecialCharactorXml($item->enSeo->infoEnSeo->seo_title).'</image:title>
-                                            </image:image>
-                                        </url>';
+                foreach($items as $item){
+                    foreach($item->seos as $seo){
+                        if(!empty($seo->infoSeo)){
+                            $sitemapXhtml   .= '<url>
+                                                    <loc>'.env('APP_URL').'/'.$seo->infoSeo->slug_full.'</loc>
+                                                    <lastmod>'.date('c', strtotime($seo->infoSeo->updated_at)).'</lastmod>
+                                                    <changefreq>hourly</changefreq>
+                                                    <priority>1</priority>
+                                                    <image:image>
+                                                        <image:loc>'.env('APP_URL').'/'.$seo->infoSeo->image.'</image:loc>
+                                                        <image:title>'.self::replaceSpecialCharactorXml($seo->infoSeo->seo_title).'</image:title>
+                                                    </image:image>
+                                                </url>';
+                        }
                     }
                 }
                 $sitemapXhtml       .= '</urlset>';
