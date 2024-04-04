@@ -44,13 +44,31 @@ class SeoFreeWallpaperController extends Controller {
     }
 
     public static function view(Request $request){
+        $keyTable           = 'free_wallpaper_info';
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $language           = $request->get('language') ?? null;
+        /* chức năng copy source */
+        $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
+        $itemSourceToCopy   = FreeWallpaper::select('*')
+                                ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
+                                    $query->where('id', $idSeoSourceToCopy);
+                                })
+                                ->with('seo', 'seos')
+                                ->first();
+        $itemSeoSourceToCopy    = [];
+        if(!empty($itemSourceToCopy->seos)){
+            foreach($itemSourceToCopy->seos as $s){
+                if($s->infoSeo->language==$language) {
+                    $itemSeoSourceToCopy = $s->infoSeo;
+                    break;
+                }
+            }
+        }
         /* tìm theo ngôn ngữ */
         $item               = FreeWallpaper::select('*')
                                 ->where('id', $id)
-                                ->with('seo')
+                                ->with('seo', 'seos')
                                 ->first();
         /* lấy item seo theo ngôn ngữ được chọn */
         $itemSeo            = [];
@@ -64,7 +82,7 @@ class SeoFreeWallpaperController extends Controller {
         }
         /* prompts */
         $prompts    = Prompt::select('*')
-                ->where('reference_table', 'free_wallpaper_info')
+                ->where('reference_table', $keyTable)
                 ->get();
         $parents    = Category::all();
         $categories = $parents;
@@ -72,10 +90,18 @@ class SeoFreeWallpaperController extends Controller {
         $tags           = Tag::all();
         $arrayTag       = [];
         foreach($tags as $tag) $arrayTag[] = $tag->seo->title;
+        /* trang canonical -> cùng là sản phẩm */
+        $idProduct          = $item->id ?? 0;
+        $sources            = FreeWallpaper::select('*')
+                                ->whereHas('seos.infoSeo', function($query) use($language){
+                                    $query->where('language', $language);
+                                })
+                                ->where('id', '!=', $idProduct)
+                                ->get();
         /* type */
         $type               = !empty($itemSeo) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.seoFreeWallpaper.view', compact('item', 'itemSeo', 'prompts', 'type', 'language', 'parents', 'arrayTag', 'categories', 'message'));
+        return view('admin.seoFreeWallpaper.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'arrayTag', 'categories', 'message'));
     }
 
     public function createAndUpdate(SeoFreeWallpaperRequest $request){

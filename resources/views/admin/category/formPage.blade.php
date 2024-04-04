@@ -32,21 +32,23 @@
                     {{ !empty($itemSeo->title) ? mb_strlen($itemSeo->title) : 0 }}
                 </div>
             </div>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
+            <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired">Loại danh mục</label>
-            <select class="select2 form-select select2-hidden-accessible" name="category_type">
-                @foreach(config('main.category_type') as $categoryType)
-                    @php
-                        $selected   = null;
-                        if(!empty($item->seo->type)&&$item->seo->type==$categoryType['key']) $selected = ' selected';
-                    @endphp
-                    <option value="{{ $categoryType['key'] }}"{{ $selected }}>{{ $categoryType['name'] }}</option>
-                @endforeach
-            </select>
+            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                <select class="select2 form-select select2-hidden-accessible" name="category_type">
+                    @foreach(config('main.category_type') as $categoryType)
+                        @php
+                            $selected   = null;
+                            if(!empty($item->seo->type)&&$item->seo->type==$categoryType['key']) $selected = ' selected';
+                        @endphp
+                        <option value="{{ $categoryType['key'] }}"{{ $selected }}>{{ $categoryType['name'] }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         @if($language=='vi')
             <!-- One Row -->
@@ -57,7 +59,7 @@
                     <i class="explainInput" data-feather='alert-circle'></i>
                     <label class="form-label" for="ordering">Thứ tự</label>
                 </span>
-                <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
+                <input type="number" min="0" id="ordering" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
             </div>
             <!-- One Row -->
             <div class="formBox_column2_item_row">
@@ -67,24 +69,26 @@
                     <i class="explainInput" data-feather='alert-circle'></i>
                     <label class="form-label" for="category_blog_info_id">Kết nối Chuyên mục blog</label>
                 </span>
-                <select class="select2 form-select select2-hidden-accessible" id="category_blog_info_id" name="category_blog_info_id[]" aria-hidden="true" multiple="true">
-                    @if(!empty($categoryBlogs))
-                        @foreach($categoryBlogs as $c)
-                            @php
-                                $selected       = null;
-                                if(!empty($item->categoryBlogs)&&$item->categoryBlogs->isNotEmpty()){
-                                    foreach($item->categoryBlogs as $cBlog){
-                                        if($c->id==$cBlog->infoCategoryBlog->id) {
-                                            $selected = 'selected';
-                                            break;
+                <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                    <select class="select2 form-select select2-hidden-accessible" id="category_blog_info_id" name="category_blog_info_id[]" aria-hidden="true" multiple="true">
+                        @if(!empty($categoryBlogs))
+                            @foreach($categoryBlogs as $c)
+                                @php
+                                    $selected       = null;
+                                    if(!empty($item->categoryBlogs)&&$item->categoryBlogs->isNotEmpty()){
+                                        foreach($item->categoryBlogs as $cBlog){
+                                            if($c->id==$cBlog->infoCategoryBlog->id) {
+                                                $selected = 'selected';
+                                                break;
+                                            }
                                         }
                                     }
-                                }
-                            @endphp
-                            <option value="{{ $c->id }}" {{ $selected }}>{{ $c->name }}</option>
-                        @endforeach
-                    @endif
-                </select>
+                                @endphp
+                                <option value="{{ $c->id }}" {{ $selected }}>{{ $c->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
             </div>
             <!-- One Row -->
             <div class="formBox_full_item">

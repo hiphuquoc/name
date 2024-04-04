@@ -32,7 +32,7 @@
                     {{ !empty($itemSeo->title) ? mb_strlen($itemSeo->title) : 0 }}
                 </div>
             </div>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
+            <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         
@@ -45,22 +45,24 @@
                     <i class="explainInput" data-feather='alert-circle'></i>
                     <label class="form-label" for="ordering">Thứ tự</label>
                 </span>
-                <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
+                <input type="number" min="0" id="ordering" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
             </div>
             <!-- One Row -->
             <div class="formBox_full_item">
                 <label class="form-label inputRequired" for="type_id">Phân loại</label>
-                <select class="select2 form-select select2-hidden-accessible" id="type_id" name="type_id">
-                    @if(!empty($pageTypes))
-                        @foreach($pageTypes as $pageType)
-                            @php
-                                $selected   = null;
-                                if(!empty($item->type_id)&&$item->type_id==$pageType->id) $selected = ' selected';
-                            @endphp
-                            <option value="{{ $pageType['id'] }}"{{ $selected }}>{{ $pageType['name'] }}</option>
-                        @endforeach
-                    @endif
-                </select>
+                <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                    <select class="select2 form-select select2-hidden-accessible" id="type_id" name="type_id">
+                        @if(!empty($pageTypes))
+                            @foreach($pageTypes as $pageType)
+                                @php
+                                    $selected   = null;
+                                    if(!empty($item->type_id)&&$item->type_id==$pageType->id) $selected = ' selected';
+                                @endphp
+                                <option value="{{ $pageType['id'] }}"{{ $selected }}>{{ $pageType['name'] }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
             </div>
             <!-- One Row -->
             <div class="formBox_full_item">

@@ -38,13 +38,30 @@ class CategoryController extends Controller {
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $language           = $request->get('language') ?? null;
+        /* chức năng copy source */
+        $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
+        $itemSourceToCopy   = Category::select('*')
+                                ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
+                                    $query->where('id', $idSeoSourceToCopy);
+                                })
+                                ->with('seo', 'seos')
+                                ->first();
+        $itemSeoSourceToCopy    = [];
+        if(!empty($itemSourceToCopy->seos)){
+            foreach($itemSourceToCopy->seos as $s){
+                if($s->infoSeo->language==$language) {
+                    $itemSeoSourceToCopy = $s->infoSeo;
+                    break;
+                }
+            }
+        }
         /* tìm theo ngôn ngữ */
         $item               = Category::select('*')
                                 ->where('id', $id)
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'seo.type');
                                 }])
-                                ->with('seo')
+                                ->with('seo', 'seos')
                                 ->first();
         /* lấy item seo theo ngôn ngữ được chọn */
         $itemSeo            = [];
@@ -65,10 +82,18 @@ class CategoryController extends Controller {
         $parents            = Category::all();
         /* category blog */
         $categoryBlogs      = CategoryBlog::all();
+        /* trang canonical -> cùng là sản phẩm */
+        $idProduct          = $item->id ?? 0;
+        $sources            = Category::select('*')
+                                ->whereHas('seos.infoSeo', function($query) use($language){
+                                    $query->where('language', $language);
+                                })
+                                ->where('id', '!=', $idProduct)
+                                ->get();
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.category.view', compact('item', 'itemSeo', 'prompts', 'type', 'language', 'parents', 'categoryBlogs', 'message'));
+        return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'categoryBlogs', 'message'));
     }
 
     public function createAndUpdate(CategoryRequest $request){

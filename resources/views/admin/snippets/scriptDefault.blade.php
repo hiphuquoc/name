@@ -75,6 +75,7 @@
     }
 
     function submitForm(idForm){
+        console.log(123);
         const elemt = $('#'+idForm);
         if(elemt.valid()) elemt.submit();
     }

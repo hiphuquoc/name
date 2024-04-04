@@ -112,4 +112,8 @@ class Seo extends Model {
     public function contents(){
         return $this->hasMany(\App\Models\SeoContent::class, 'seo_id', 'id');
     }
+
+    public function source(){
+        return $this->hasOne(\App\Models\Seo::class, 'id', 'link_canonical');
+    }
 }

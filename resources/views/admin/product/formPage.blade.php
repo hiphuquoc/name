@@ -32,7 +32,7 @@
                     {{ !empty($itemSeo->title) ? mb_strlen($itemSeo->title) : 0 }}
                 </div>
             </div>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
+            <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
 
@@ -45,7 +45,7 @@
                 <i class="explainInput" data-feather='alert-circle'></i>
                 <label class="form-label" for="ordering">Thứ tự</label>
             </span>
-            <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $item->seo->ordering ?? null }}">
+            <input type="number" min="0" id="ordering" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="ordering" value="{{ old('ordering') ?? $item->seo->ordering ?? null }}">
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
@@ -55,95 +55,101 @@
                 <i class="explainInput" data-feather='alert-circle'></i>
                 <label class="form-label inputRequired" for="code">Mã sản phẩm</label>
             </span>
-            <input type="number" min="0" id="code" class="form-control" name="code" value="{{ old('code') ?? $item->code ?? null }}" required />
+            <input type="number" min="0" id="code" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="code" value="{{ old('code') ?? $item->code ?? null }}" required />
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired">Chủ đề</label>
-            <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
-                <option value="">- Lựa chọn -</option>
-                @if(!empty($categories))
-                    @foreach($categories as $category)
-                        @if(!empty($category->seo->type)&&$category->seo->type=='category_info')
-                            @php
-                                $selected   = null;
-                                if(!empty($item->categories)){
-                                    foreach($item->categories as $c) {
-                                        if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
-                                            $selected = ' selected';
-                                            break;
+            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
+                    <option value="">- Lựa chọn -</option>
+                    @if(!empty($categories))
+                        @foreach($categories as $category)
+                            @if(!empty($category->seo->type)&&$category->seo->type=='category_info')
+                                @php
+                                    $selected   = null;
+                                    if(!empty($item->categories)){
+                                        foreach($item->categories as $c) {
+                                            if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
+                                                $selected = ' selected';
+                                                break;
+                                            }
                                         }
                                     }
-                                }
-                            @endphp
-                            <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
-                        @endif
-                    @endforeach
-                @endif
-            </select>
+                                @endphp
+                                <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
+                            @endif
+                        @endforeach
+                    @endif
+                </select>
+            </div>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired">Phong cách</label>
-            <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
-                <option value="">- Lựa chọn -</option>
-                @if(!empty($categories))
-                    @foreach($categories as $category)
-                        @if(!empty($category->seo->type)&&$category->seo->type=='style_info')
-                            @php
-                                $selected   = null;
-                                if(!empty($item->categories)){
-                                    foreach($item->categories as $c) {
-                                        if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
-                                            $selected = ' selected';
-                                            break;
+            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
+                    <option value="">- Lựa chọn -</option>
+                    @if(!empty($categories))
+                        @foreach($categories as $category)
+                            @if(!empty($category->seo->type)&&$category->seo->type=='style_info')
+                                @php
+                                    $selected   = null;
+                                    if(!empty($item->categories)){
+                                        foreach($item->categories as $c) {
+                                            if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
+                                                $selected = ' selected';
+                                                break;
+                                            }
                                         }
                                     }
-                                }
-                            @endphp
-                            <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
-                        @endif
-                    @endforeach
-                @endif
-            </select>
+                                @endphp
+                                <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
+                            @endif
+                        @endforeach
+                    @endif
+                </select>
+            </div>
         </div>
         <!-- One Row -->
         <div class="formBox_full_item">
             <label class="form-label inputRequired">Sự kiện</label>
-            <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
-                <option value="">- Lựa chọn -</option>
-                @if(!empty($categories))
-                    @foreach($categories as $category)
-                        @if(!empty($category->seo->type)&&$category->seo->type=='event_info')
-                            @php
-                                $selected   = null;
-                                if(!empty($item->categories)){
-                                    foreach($item->categories as $c) {
-                                        if(!empty($c->infoCategory->seo->type)&&$c->infoCategory->seo->type=='event_info'&&!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
-                                            $selected = ' selected';
-                                            break;
+            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
+                    <option value="">- Lựa chọn -</option>
+                    @if(!empty($categories))
+                        @foreach($categories as $category)
+                            @if(!empty($category->seo->type)&&$category->seo->type=='event_info')
+                                @php
+                                    $selected   = null;
+                                    if(!empty($item->categories)){
+                                        foreach($item->categories as $c) {
+                                            if(!empty($c->infoCategory->seo->type)&&$c->infoCategory->seo->type=='event_info'&&!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
+                                                $selected = ' selected';
+                                                break;
+                                            }
                                         }
                                     }
-                                }
-                            @endphp
-                            <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
-                        @endif
-                    @endforeach
-                @endif
-            </select>
+                                @endphp
+                                <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
+                            @endif
+                        @endforeach
+                    @endif
+                </select>
+            </div>
         </div>
         <!-- One Row -->
         <div class="flexBox">
             <div class="flexBox_item">
                 <div class="formBox_full_item">
                     <label class="form-label inputRequired" for="price">Giá trọn bộ $</label>
-                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price') ?? $item->price ?? null }}" required />
+                    <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="price" name="price" value="{{ old('price') ?? $item->price ?? null }}" required />
                 </div>
             </div>
             <div class="flexBox_item">
                 <div class="formBox_full_item">
                     <label class="form-label" for="price_before_promotion">Giá trước KM $</label>
-                    <input type="text" class="form-control" id="price_before_promotion" name="price_before_promotion" value="{{ old('price_before_promotion') ?? $item->price_before_promotion ?? null }}" />
+                    <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="price_before_promotion" name="price_before_promotion" value="{{ old('price_before_promotion') ?? $item->price_before_promotion ?? null }}" />
                 </div>
             </div>
         </div>

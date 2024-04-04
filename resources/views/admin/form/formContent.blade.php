@@ -25,7 +25,9 @@
                     <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                 @endif
             </div>
-            <textarea class="form-control tinySelector" id="{{ $idBox }}"  name="content[]" rows="30" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }}>{!! is_array($content) ? implode('', $content) : $content !!}</textarea>
+            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                <textarea class="form-control tinySelector" id="{{ $idBox }}"  name="content[]" rows="30" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }}>{!! is_array($content) ? implode('', $content) : $content !!}</textarea>
+            </div>
         </div>
         {{-- <div class="formBox_full_item">
             <textarea class="form-control" id="en_content"  name="en_content" rows="20">{{ old('en_content') ?? $enContent ?? '' }}</textarea>

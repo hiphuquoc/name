@@ -1733,6 +1733,7 @@ html .content {
 
 .actionBox {
     display: flex;
+    flex-direction: column;
     align-items: center;
     font-size: 0.9rem;
     &_item {
@@ -1744,11 +1745,12 @@ html .content {
         flex-direction: column;
         border-radius: 10px;
         cursor: pointer;
+        color: inherit !important;
         &:hover {
             background: $bg-04;
         }
         &:not(:first-child){
-            margin-left: 0.5rem;
+            margin-top: 0.5rem;
 
         }
         i {
@@ -1798,11 +1800,26 @@ html .content {
 .inputLoading {
     border: 2px dashed #000 !important;
 }
+.boxInputLoading {
+    .select2, .tox-tinymce, .tagify {
+        border: 2px dashed #000 !important;
+    }
+}
 .inputError {
     border: 2px dashed #D80032 !important;
 }
+.boxInputError {
+    .select2, .tox-tinymce, .tagify {
+        border: 2px dashed #D80032 !important;
+    }
+}
 .inputSuccess {
     border: 2px dashed #28c76f !important;
+}
+.boxInputSuccess {
+    .select2, .tox-tinymce, .tagify {
+        border: 2px dashed #28c76f !important;
+    }
 }
 
 @import 'order.scss';

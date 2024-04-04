@@ -34,7 +34,7 @@
                     {{ !empty($itemSeo->title) ? mb_strlen($itemSeo->title) : 0 }}
                 </div>
             </div>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
+            <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="title" name="title" value="{{ old('title') ?? $itemSeo->title ?? null }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('admin.massage_validate.not_empty') }}</div>
         </div>
         
@@ -47,34 +47,36 @@
                     <i class="explainInput" data-feather='alert-circle'></i>
                     <label class="form-label" for="ordering">Thứ tự</label>
                 </span>
-                <input type="number" min="0" id="ordering" class="form-control" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
+                <input type="number" min="0" id="ordering" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
             </div>
             <!-- category/style/event -->
             @foreach(config('main.category_type') as $categoryType)
                 <div class="formBox_full_item">
                     <label class="form-label">{{ $categoryType['name'] }}</label>
-                    <select class="select2 form-select select2-hidden-accessible" name="{{ $categoryType['key'] }}[]" multiple="true">
-                        <option value="">- Lựa chọn -</option>
-                        @if(!empty($categories))
-                            @foreach($categories as $category)
-                                @if(!empty($category->seo->type)&&$category->seo->type==$categoryType['key'])
-                                    @php
-                                        $selected   = null;
-                                        if(!empty($item->categories)){
-                                            foreach($item->categories as $c) {
-                                                if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
-                                                    $selected = ' selected';
-                                                    break;
+                    <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                        <select class="select2 form-select select2-hidden-accessible" name="{{ $categoryType['key'] }}[]" multiple="true">
+                            <option value="">- Lựa chọn -</option>
+                            @if(!empty($categories))
+                                @foreach($categories as $category)
+                                    @if(!empty($category->seo->type)&&$category->seo->type==$categoryType['key'])
+                                        @php
+                                            $selected   = null;
+                                            if(!empty($item->categories)){
+                                                foreach($item->categories as $c) {
+                                                    if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
+                                                        $selected = ' selected';
+                                                        break;
+                                                    }
                                                 }
                                             }
-                                        }
-                                        /* tất cả tag */
-                                    @endphp
-                                    <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
-                                @endif
-                            @endforeach
-                        @endif
-                    </select>
+                                            /* tất cả tag */
+                                        @endphp
+                                        <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
                 </div>
             @endforeach
             <!-- One row -->
@@ -104,12 +106,13 @@
                         <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                     @endif
                 </label>
-                <input id="tag" name="tag" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} />  
-                {{-- onchange="autoFillNameAndEnName('ssdf');" --}}
+                <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                    <input id="tag" name="tag" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} />  
+                </div>
             </div>
             <div class="formBox_full_item">
                 <label class="form-label" for="description">Prompt Midjourney</label>
-                <textarea class="form-control" name="description" rows="2">{{ $item->description ?? null }}</textarea>
+                <textarea class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="description" rows="2">{{ $item->description ?? null }}</textarea>
             </div>
         @endif
     </div>

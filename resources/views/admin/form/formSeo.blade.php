@@ -35,7 +35,7 @@
                     {{ !empty($itemSeo->seo_title) ? mb_strlen($itemSeo->seo_title) : 0 }}
                 </div>
             </div>
-            <input type="text" id="seo_title" class="form-control" name="seo_title" value="{{ old('seo_title') ?? $itemSeo['seo_title'] ?? '' }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
+            <input type="text" id="seo_title" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="seo_title" value="{{ old('seo_title') ?? $itemSeo['seo_title'] ?? '' }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
         </div>
         <!-- One Row -->
@@ -72,7 +72,7 @@
                     {{ !empty($itemSeo->seo_description) ? mb_strlen($itemSeo->seo_description) : 0 }}
                 </div>
             </div>
-            <textarea class="form-control" id="seo_description"  name="seo_description" rows="5" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>{{ old('seo_description') ?? $itemSeo['seo_description'] ?? '' }}</textarea>
+            <textarea class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="seo_description"  name="seo_description" rows="5" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>{{ old('seo_description') ?? $itemSeo['seo_description'] ?? '' }}</textarea>
             <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
         </div>
         {{-- <!-- One Row -->
@@ -121,7 +121,13 @@
                 @endif
                 <i class="fa-solid fa-arrow-down reloadContentIcon" onclick="copyTitleToSlug($('#title'), 'slug')"></i>
             </span>
-            <input type="text" id="slug" class="form-control" name="slug" value="{{ old('slug') ?? $itemSeo['slug'] ?? '' }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
+            @php
+                $slug       = null;
+                if(empty($idSeoSource)) { /* không phải đang dùng tính năng copy trang gốc => không copy slug */
+                    $slug   = old('slug') ?? $itemSeo['slug'] ?? '';
+                } 
+            @endphp
+            <input type="text" id="slug" class="form-control" name="slug" value="{{ $slug }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} required>
             <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
         </div>
         {{-- <!-- One Row -->
@@ -138,15 +144,39 @@
         <!-- One Row -->
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="
-                Đây là thẻ khai báo Link Canonical để chuyển giá trị trang trùng lặp nội dung về trang chính. Bỏ trống tức trang chính là trang này
+                Đây là đánh dấu trang gốc của trang này, thẻ link canonical của trang này sẽ được khai báo là đường dẫn của trang gốc để Google biết đây là trang copy của trang gốc
             ">
                 <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label" for="link_canonical">Link Gộp</label>
+                <label class="form-label" for="link_canonical">Trang gốc</label>
             </span>
-            <div class="input-group input-group-merge">
-                <span class="input-group-text" style="background:#efefef;">{{ env('APP_URL') }}/</span>
-                <input type="text" name="link_canonical" class="form-control" value="{{ old('link_canonical') ?? $itemSeo->link_canonical ?? $itemSeo->seo->link_canonical ?? null }}" style="padding-left:1rem;" />
-            </div>
+            {{-- @php
+                dd($sources[0]->seos);
+            @endphp --}}
+            <select class="select2 form-select select2-hidden-accessible" id="link_canonical" name="link_canonical">
+                <option value="">- Lựa chọn -</option>
+                @foreach($sources as $source)
+                    @php
+                        $selected   = null;
+                        $seoChoose  = [];
+                        foreach($source->seos as $seo){
+                            if(!empty($seo)){
+                                if($language==$seo->infoSeo->language){
+                                    $seoChoose = $seo->infoSeo;
+                                    if(!empty($idSeoSource)&&$idSeoSource==$seoChoose->id){
+                                        $selected = 'selected';
+                                    }else if(!empty($itemSeo->link_canonical)&&$itemSeo->link_canonical==$seoChoose->id){
+                                        $selected = 'selected';
+                                    } 
+                                    break;
+                                }
+                            }
+                        }
+                    @endphp
+                    @if(!empty($seoChoose))
+                        <option value="{{ $seoChoose->id }}" {{ $selected }}>{{ $source->seo->slug_full }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         {{-- <!-- One Row -->
         <div class="formBox_full_item">
@@ -170,27 +200,29 @@
                 <i class="explainInput" data-feather='alert-circle'></i>
                 <label class="form-label" for="parent">Trang cha</label>
             </span>
-            <select class="select2 form-select select2-hidden-accessible" id="parent" name="parent">
-                <option value="0">- Lựa chọn -</option>
-                @foreach($parents as $page)
-                    @php
-                        $selected   = null;
-                        $seoChoose  = [];
-                        foreach($page->seos as $seo){
-                            if(!empty($seo)){
-                                if($language==$seo->infoSeo->language){
-                                    $seoChoose = $seo->infoSeo;
-                                    if(!empty($itemSeo->parent)&&$itemSeo->parent==$seoChoose->id) $selected = 'selected';
-                                    break;
+            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                <select class="select2 form-select select2-hidden-accessible" id="parent" name="parent">
+                    <option value="0">- Lựa chọn -</option>
+                    @foreach($parents as $page)
+                        @php
+                            $selected   = null;
+                            $seoChoose  = [];
+                            foreach($page->seos as $seo){
+                                if(!empty($seo)){
+                                    if($language==$seo->infoSeo->language){
+                                        $seoChoose = $seo->infoSeo;
+                                        if(!empty($itemSeo->parent)&&$itemSeo->parent==$seoChoose->id) $selected = 'selected';
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                    @endphp
-                    @if(!empty($seoChoose))
-                        <option value="{{ $seoChoose->id }}" {{ $selected }}>{{ $page->seo->title }}</option>
-                    @endif
-                @endforeach
-            </select>
+                        @endphp
+                        @if(!empty($seoChoose))
+                            <option value="{{ $seoChoose->id }}" {{ $selected }}>{{ $page->seo->title }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
         </div>
         @endif
         {{-- <!-- One Row -->
@@ -213,7 +245,7 @@
                         <i class="explainInput" data-feather='alert-circle'></i>
                         <label class="form-label inputRequired" for="rating_aggregate_count">Lượt đánh giá</label>
                     </span>
-                    <input type="number" id="rating_aggregate_count" class="form-control" name="rating_aggregate_count" value="{{ old('rating_aggregate_count') ?? $itemSeo['rating_aggregate_count'] ?? $item->seo['rating_aggregate_count'] ?? rand(1000,10000) }}" required>
+                    <input type="number" id="rating_aggregate_count" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="rating_aggregate_count" value="{{ old('rating_aggregate_count') ?? $itemSeo['rating_aggregate_count'] ?? $item->seo['rating_aggregate_count'] ?? rand(1000,10000) }}" required>
                     <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
                 </div>
                 <div class="flexBox_item" style="margin-left:1rem;">
@@ -223,7 +255,7 @@
                         <i class="explainInput" data-feather='alert-circle'></i>
                         <label class="form-label inputRequired" for="rating_aggregate_star">Điểm đánh giá</label>
                     </span>
-                    <input type="text" id="rating_aggregate_star" class="form-control" name="rating_aggregate_star" value="{{ old('rating_aggregate_star') ?? $itemSeo['rating_aggregate_star'] ?? $item->seo['rating_aggregate_star'] ?? '4.'.rand(6,8) }}" required>
+                    <input type="text" id="rating_aggregate_star" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="rating_aggregate_star" value="{{ old('rating_aggregate_star') ?? $itemSeo['rating_aggregate_star'] ?? $item->seo['rating_aggregate_star'] ?? '4.'.rand(6,8) }}" required>
                     <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
                 </div>
             </div>

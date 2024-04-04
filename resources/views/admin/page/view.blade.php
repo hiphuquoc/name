@@ -67,7 +67,11 @@
                             </div>
                             <div class="card-body">
 
-                                @include('admin.page.formPage')
+                                @include('admin.page.formPage', [
+                                    'item'              => !empty($itemSourceToCopy) ? $itemSourceToCopy : $item,
+                                    'itemSeo'           => !empty($itemSeoSourceToCopy) ? $itemSeoSourceToCopy : $itemSeo,
+                                    'flagCopySource'    => !empty($itemSeoSourceToCopy) ? true : false,
+                                ])
 
                             </div>
                         </div>
@@ -79,7 +83,12 @@
                             </div>
                             <div class="card-body">
 
-                                @include('admin.form.formSeo')
+                                @include('admin.form.formSeo', [
+                                    'item'              => !empty($itemSourceToCopy) ? $itemSourceToCopy : $item,
+                                    'itemSeo'           => !empty($itemSeoSourceToCopy) ? $itemSeoSourceToCopy : $itemSeo,
+                                    'flagCopySource'    => !empty($itemSeoSourceToCopy) ? true : false,
+                                    'idSeoSource'       => $itemSeoSourceToCopy->id ?? 0
+                                ])
                                 
                             </div>
                         </div>
@@ -105,9 +114,10 @@
                                     }
                                 @endphp
                                 @include('admin.form.formContent', [
-                                    'prompt'    => $prompt,
-                                    'content'   => $xhtmlContent, 
-                                    'idBox'     => 'content_'.$i
+                                    'prompt'            => $prompt,
+                                    'content'           => $itemSeoSourceToCopy->contents[$i]->content ?? $itemSeo->contents[$i]->content ?? null, 
+                                    'flagCopySource'    => !empty($itemSeoSourceToCopy->contents[$i]->content) ? true : false,
+                                    'idBox'             => 'content_'.$i,
                                 ])  
                             </div>
                         </div>
@@ -136,6 +146,11 @@
                                 <div class="actionBox_item maxLine_1" onClick="callAI('translate_content')">
                                     <i class="fa-solid fa-language"></i>Dịch Content
                                 </div>
+                            @endif
+                            @if(!empty($itemSeo->link_canonical))
+                                <a href="{{ URL::current().'?id='.$item->id.'&language='.$language.'&id_seo_source='.$itemSeo->link_canonical }}" class="actionBox_item maxLine_1">
+                                    <i class="fa-solid fa-file-import"></i>Copy từ trang gốc
+                                </a>
                             @endif
                         </div>
                     </div>

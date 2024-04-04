@@ -1,7 +1,7 @@
 @php
     $title              = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
     $description        = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
-    $url                = $itemSeo->link_canonical ?? $itemSeo->slug_full ?? $item->seo->link_canonical ?? $item->seo->slug_full;
+    $url                = !empty($itemSeo->link_canonical) ? $itemSeo->source->slug_full : $itemSeo->slug_full;
     $urlFull            = !empty($url) ? env('APP_URL').'/'.$url : env('APP_URL');
     $image              = !empty($itemSeo->image) ? env('APP_URL').Storage::url($itemSeo->image) : env('APP_URL').config('admin.images.default_750x460');
     $author             = $itemSeo->rating_author_name ?? $item->seo->rating_author_name ?? config('main.author_name');
@@ -16,8 +16,8 @@
 <meta name="description" content="{{ $description }}" />
 <link rel="canonical" href="{{ $urlFull }}" />
 <meta property="og:locale" content="vi_VN" />
-<meta property="article:published_time" content="{{ date('c', strtotime($item->seo->created_at)) }}" />
-<meta property="article:modified_time" content="{{ date('c', strtotime($item->seo->updated_at)) }}" />
+<meta property="article:published_time" content="{{ date('c', strtotime($itemSeo->created_at)) }}" />
+<meta property="article:modified_time" content="{{ date('c', strtotime($itemSeo->updated_at)) }}" />
 <meta property="og:title" content="{{ $title }}" />
 <meta property="og:description" content="{{ $description }}" />
 <meta property="og:image" content="{{ $image }}" />

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('seo_description')->nullable();
             $table->text('slug');
             $table->text('slug_full');
-            $table->text('link_canonical')->nullable();
+            $table->integer('link_canonical')->nullable();
             $table->string('type', '50');
             $table->string('rating_author_name', 1)->nullable();
             $table->string('rating_author_star', 5)->default(5);

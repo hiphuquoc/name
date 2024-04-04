@@ -10,7 +10,6 @@ use App\Models\Category;
 use App\Http\Controllers\SettingController;
 use App\Models\Tag;
 use App\Models\Seo;
-use App\Models\EnSeo;
 use Intervention\Image\ImageManagerStatic;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
@@ -79,6 +78,21 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
+        // $tmp    = Seo::select('*')
+        //             ->where('link_canonical', '!=', '')
+        //             ->get();
+        // foreach($tmp as $t){
+        //     $pageSource = Seo::select('*')
+        //                     ->where('slug_full', $t->link_canonical)
+        //                     ->first();
+        //     if(!empty($pageSource)){
+        //         Seo::updateItem($t->id, [
+        //             'link_canonical'    => $pageSource->id
+        //         ]);
+        //     }
+            
+        // }
+
         // // Tạo một đối tượng GoogleTranslate
         // $client = new GoogleTranslateClient(env('GOOGLE_TRANSLATE_API_KEY'));
 
