@@ -1,0 +1,24 @@
+<div class="languageBox">
+    @foreach(config('language') as $lang)
+        @php
+            /* trang đang sửa có ngôn ngữ ? */
+            $selected = null;
+            if(!empty($language)&&$language==$lang['key']) $selected = 'selected';
+            /* các trang đã tồn tại bảng ngôn ngữ này trong CSDL */
+            $disable        = 'disable';
+            $languageLink   = route("admin.product.view", [
+                "language"  => $lang['key'], 
+                "id"        => $item->id
+            ]);
+            foreach($item->seos as $s){
+                if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$lang['key']){
+                    $disable = null;
+                    break;
+                }
+            }
+        @endphp
+        <a href="{{ $languageLink }}" class="languageBox_item {{ $selected }} {{ $disable }}">
+            <img src="/storage/images/svg/icon_flag_{{ $lang['key'] }}.png" />
+        </a>
+    @endforeach
+</div>

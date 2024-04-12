@@ -25,6 +25,9 @@
                 <strong>Meta description:</strong> {{ $item->seo->seo_description }}
             </div>
         @endif
+        <div class="oneLine">
+            @include('admin.template.languageBox', compact('item'))
+        </div>
     </td>
     <td>
         @if(!empty($item->categories)&&$item->categories->isNotEmpty())

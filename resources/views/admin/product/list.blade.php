@@ -22,7 +22,8 @@
                     @foreach($list as $item)
                         <tr id="item_{{ $item->id }}">
                             <td class="text-center">{{ ($loop->index + 1) }}</td>
-                            <td>
+                            <td style="display:flex;flex-direction:column;">
+                                
                                 <div class="oneLine">
                                     <strong>Tiêu đề:</strong> {{ $item->name ?? $item->seo->title ?? null }} (<span style="font-weight:bold;color:#E74C3C;">{{ $item->code }}</span>)
                                 </div>
@@ -30,41 +31,41 @@
                                     <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
                                 </div>
                                 <div class="oneLine">
+                                    @include('admin.template.languageBox', compact('item'))
+                                </div>
+                                <div class="oneLine">
                                     <strong>Giá trọn bộ:</strong> <span style="color:red;font-weight:bold;font-size:1.3rem;">{{ $item->price }}</span>
                                 </div>
+                                
                                 @if(!empty($item->categories)&&$item->categories->isNotEmpty())
-                                    <div class="onLine" style="margin-top:0.25rem;">
+                                    <div class="oneLine">
                                         @php
                                             $xhtmlCategory      = null;
                                             foreach($item->categories as $category){
                                                 if($category->infoCategory->seo->type=='category_info'){
-                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->seo->title.'</div>';
                                                 }
                                             }
                                         @endphp 
                                         <strong>Chủ đề:</strong> {!! $xhtmlCategory !!}
                                     </div>
-                                @endif
-                                @if(!empty($item->categories)&&$item->categories->isNotEmpty())
-                                    <div class="onLine" style="margin-top:0.25rem;">
+                                    <div class="oneLine">
                                         @php
                                             $xhtmlCategory      = null;
                                             foreach($item->categories as $category){
                                                 if($category->infoCategory->seo->type=='style_info'){
-                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->seo->title.'</div>';
                                                 }
                                             }
                                         @endphp 
                                         <strong>Phong cách:</strong> {!! $xhtmlCategory !!}
                                     </div>
-                                @endif
-                                @if(!empty($item->categories)&&$item->categories->isNotEmpty())
-                                    <div class="onLine" style="margin-top:0.25rem;">
+                                    <div class="oneLine">
                                         @php
                                             $xhtmlCategory      = null;
                                             foreach($item->categories as $category){
                                                 if($category->infoCategory->seo->type=='event_info'){
-                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->name.'</div>';
+                                                    $xhtmlCategory  .= '<div class="badge bg-primary" style="margin-left:0.25rem;">'.$category->infoCategory->seo->title.'</div>';
                                                 }
                                             }
                                         @endphp 

@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Http\Controllers\SettingController;
 use App\Models\Tag;
 use App\Models\Seo;
+use App\Models\SeoContent;
+use App\Models\Product;
 use Intervention\Image\ImageManagerStatic;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
@@ -17,7 +19,8 @@ use AdityaDees\LaravelBard\LaravelBard;
 use App\Models\RelationSeoProductInfo;
 use App\Models\RelationSeoTagInfo;
 
-class HomeController extends Controller{
+class HomeController extends Controller
+{
     public static function home(Request $request, $language = 'vi'){
         /* ngôn ngữ */
         SettingController::settingLanguage($language);
@@ -28,49 +31,49 @@ class HomeController extends Controller{
         // if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
         //     $xhtml              = file_get_contents($pathCache);
         // }else {
-            $item               = Page::select('*')
-                                    ->whereHas('seos.infoSeo', function($query) use($language){
-                                        $query->where('slug', $language);
-                                    })
-                                    ->with('seo', 'seos', 'type')
-                                    ->first();
-            /* lấy item seo theo ngôn ngữ được chọn */
-            $itemSeo            = [];
-            if(!empty($item->seos)){
-                foreach($item->seos as $s){
-                    if($s->infoSeo->language==$language) {
-                        $itemSeo = $s->infoSeo;
-                        break;
-                    }
+        $item               = Page::select('*')
+            ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                $query->where('slug', $language);
+            })
+            ->with('seo', 'seos', 'type')
+            ->first();
+        /* lấy item seo theo ngôn ngữ được chọn */
+        $itemSeo            = [];
+        if (!empty($item->seos)) {
+            foreach ($item->seos as $s) {
+                if ($s->infoSeo->language == $language) {
+                    $itemSeo = $s->infoSeo;
+                    break;
                 }
             }
-            /* lấy hình nền điện thoại gái xinh */
-            $slug               = 'hinh-nen-dien-thoai-gai-xinh';
-            $infoCategoryGirl   = Category::select('category_info.*', 'seo.slug')
-                                    ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                                    ->where('seo.slug', '=', $slug)
-                                    ->with('seo')
-                                    ->with('products', function($query){
-                                        $query->orderBy('id', 'DESC')
-                                            ->skip(0)
-                                            ->take(20);
-                                    })
-                                    ->first();
-            /* lấy hình nền điện thoại tết */
-            $slug               = 'hinh-nen-dien-thoai-tet';
-            $infoCategoryTet   = Category::select('category_info.*', 'seo.slug')
-                                    ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                                    ->where('seo.slug', '=', $slug)
-                                    ->with('seo')
-                                    ->with('products', function($query){
-                                        $query->orderBy('id', 'DESC')
-                                            ->skip(0)
-                                            ->take(20);
-                                    })
-                                    ->first();
-            $viewBy             = $request->cookie('view_by') ?? 'set';
-            $arrayIdCategory    = [];
-            $xhtml              = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'infoCategoryGirl', 'infoCategoryTet', 'viewBy', 'arrayIdCategory'))->render();
+        }
+        /* lấy hình nền điện thoại gái xinh */
+        $slug               = 'hinh-nen-dien-thoai-gai-xinh';
+        $infoCategoryGirl   = Category::select('category_info.*', 'seo.slug')
+            ->join('seo', 'seo.id', '=', 'category_info.seo_id')
+            ->where('seo.slug', '=', $slug)
+            ->with('seo')
+            ->with('products', function ($query) {
+                $query->orderBy('id', 'DESC')
+                    ->skip(0)
+                    ->take(20);
+            })
+            ->first();
+        /* lấy hình nền điện thoại tết */
+        $slug               = 'hinh-nen-dien-thoai-tet';
+        $infoCategoryTet   = Category::select('category_info.*', 'seo.slug')
+            ->join('seo', 'seo.id', '=', 'category_info.seo_id')
+            ->where('seo.slug', '=', $slug)
+            ->with('seo')
+            ->with('products', function ($query) {
+                $query->orderBy('id', 'DESC')
+                    ->skip(0)
+                    ->take(20);
+            })
+            ->first();
+        $viewBy             = $request->cookie('view_by') ?? 'set';
+        $arrayIdCategory    = [];
+        $xhtml              = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'infoCategoryGirl', 'infoCategoryTet', 'viewBy', 'arrayIdCategory'))->render();
         //     /* Ghi dữ liệu - Xuất kết quả */
         //     if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         // }
@@ -78,146 +81,16 @@ class HomeController extends Controller{
     }
 
     public static function test(Request $request){
-        // $tmp    = Seo::select('*')
-        //             ->where('link_canonical', '!=', '')
-        //             ->get();
-        // foreach($tmp as $t){
-        //     $pageSource = Seo::select('*')
-        //                     ->where('slug_full', $t->link_canonical)
-        //                     ->first();
-        //     if(!empty($pageSource)){
-        //         Seo::updateItem($t->id, [
-        //             'link_canonical'    => $pageSource->id
-        //         ]);
-        //     }
-            
-        // }
 
-        // // Tạo một đối tượng GoogleTranslate
-        // $client = new GoogleTranslateClient(env('GOOGLE_TRANSLATE_API_KEY'));
-
-
-        // // Truyền đối tượng client vào hàm khởi tạo của GoogleTranslate
-        // $translator = new GoogleTranslate($client);
-
-        // Sử dụng phương thức translate để dịch văn bản
+        // $flag = self::copyProductBySource('bo-hinh-nen-dien-thoai-4k-meo-con-phong-cach-toi-gian-1712926734', 'hinh-nen-dien-thoai-meo-con-phong-cach');
+        // dd($flag);
         
-        // $items = \App\Models\Product::select('*')
-        //             // ->whereHas('seo', function ($query) {
-        //             //     $query->where('slug', 'tag-hinh-nen-dien-thoai-rong');
-        //             // })
-        //             ->with('seo')
-        //             ->get();
-        // foreach($items as $item){
-        //     $i  = 1;
-        //     foreach($item->prices as $price){
-        //         \App\Models\ProductPrice::updateItem($price->id, [
-        //             'code_name' => '#'.$i
-        //         ]);
-        //         ++$i;
-        //     }
-        // }
-        // dd(123);
-
-        // $tags   = \App\Models\FreeWallpaper::select('*')
-        //                 ->whereHas('seo', function($query){
-        //                     $query->where('language', 'vi');
-        //                 })
-        //                 ->get();
-        
-        // foreach($tags as $tag){
-        //     $idTag = $tag->id;
-        //     foreach($tag->languages as $language){
-        //         $idSeo  = $language->info->seo->id;
-        //         \App\Models\RelationSeoFreeWallpaperInfo::insertItem([
-        //             'seo_id'            => $idSeo,
-        //             'free_wallpaper_info_id'      => $idTag
-        //         ]);
-        //     }
-        // }
-
-        // foreach($tags as $tag){
-        //     foreach($tag->seos as $seoNew){
-        //         foreach($tag->languages as $language){
-        //             if($language->info->seo->language==$seoNew->infoSeo->language){
-        //                 foreach($language->info->contents as $content){
-        //                     \App\Models\SeoContent::insertItem([
-        //                         'content'   => $content->content,
-        //                         'seo_id'    => $language->info->seo->id
-        //                     ]);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
-        // ========================
-
-        // dd(123);
-        // foreach($pages as $page){
-        //     \App\Models\LanguageFreeWallpaperInfo::insertItem([
-        //         'id_1'   => $page->id,
-        //         'id_2'   => $page->id
-        //     ]);
-        //     \App\Models\Seo::updateItem($page->seo->id, [
-        //         'language' => 'vi'
-        //     ]);
-        // }
-
-
-        /*
-            category_info | event_info | style_info
-            page_info
-            product_info
-            tag_info
-        */
-
-        // $categories = Category::select('*')
-        //                 ->with('seo', 'en_seo')
-        //                 ->get();
-        // foreach($categories as $category){
-            
-        //     if($category->seo->slug=='hinh-nen-dien-thoai'){
-        //         /* insert en_seo qua seo */
-        //         $tmp        = $category->en_seo->toArray();
-        //         $insertSeo  = [];
-        //         foreach($tmp as $key => $value){
-        //             if($key!='id'){
-        //                 $insertSeo[$key] = $value;
-        //             }
-        //         }
-        //         $insertSeo['parent']        = 733;
-        //         $insertSeo['image']         = $category->seo->image;
-        //         $insertSeo['image_small']   = $category->seo->image_small;
-        //         $idSeo      = Seo::insertItem($insertSeo);
-        //         /* insert thêm category_info */
-        //         $tmp        = $category->toArray();
-        //         $insertCategory = [];
-        //         foreach($tmp as $key => $value){
-        //             if($key!='id'&&$key!='seo'&&$key!='en_seo'){
-        //                 $insertCategory[$key] = $value;
-        //             }
-        //         }
-        //         $insertCategory['seo_id'] = $idSeo;
-        //         $idCategoryNew  = Category::insertItem($insertCategory);
-        //         /* liên kết id category trong bảng language_category_info */
-        //         \App\Models\LanguageCategoryInfo::insertItem([
-        //             'category_info_id_1'   => $category->id,
-        //             'category_info_id_2'   => $idCategoryNew
-        //         ]);
-        //         break;
-        //     }
-            
-
-            
-        // }
-        // dd($categories);
     }
 
     public static function chatGPT(Request $request){
         // Replace 'YOUR_API_KEY' with your actual API key from OpenAI
         $apiKey = env('CHAT_GPT_API_KEY');
-    
+
         // Set a long timeout value to prevent timeout
         $timeoutSeconds = 0; // 0 means unlimited timeout
         $imageUrl   = 'https://namecomvn.storage.googleapis.com/freewallpapers/hinh-nen-dien-thoai-1708511257-20-small.png';
@@ -225,7 +98,7 @@ class HomeController extends Controller{
         /* tag */
         $tags       = Tag::all();
         $arrayTag   = [];
-        foreach($tags as $tag){
+        foreach ($tags as $tag) {
             $arrayTag[] = $tag->seo->title;
         }
         $jsonTag    = json_encode($arrayTag);
@@ -244,12 +117,12 @@ class HomeController extends Controller{
                     'content' => [
                         [
                             'type' => 'text',
-                            'text' => 'Tôi có một biến json trong đó chưa tên các thẻ tag '.$jsonTag.', dựa vào nội dung, vẻ đẹp, phong cách, màu sắc và các yếu tố của bức ảnh, bạn hãy chọn lại các tag phù hợp của ảnh và trả về biến json như vậy giúp tôi'
+                            'text' => 'Tôi có một biến json trong đó chưa tên các thẻ tag ' . $jsonTag . ', dựa vào nội dung, vẻ đẹp, phong cách, màu sắc và các yếu tố của bức ảnh, bạn hãy chọn lại các tag phù hợp của ảnh và trả về biến json như vậy giúp tôi'
                         ],
                         [
                             'type' => 'image_url',
                             'image_url' => [
-                                'url'    => 'data:image/jpeg;base64,'.$imageData
+                                'url'    => 'data:image/jpeg;base64,' . $imageData
                             ]
                         ]
                     ]
@@ -257,16 +130,88 @@ class HomeController extends Controller{
             ],
             'max_tokens' => 3000
         ]);
-    
+
         $result = $response->json();
 
         echo $result['choices'][0]['message']['content'];
         dd(123);
-    
+
         // Xử lý và hiển thị kết quả
         $description = $result['choices'][0]['message']['content'];
-    
+
         return view('result', compact('description'));
+    }
+
+    public static function copyProductBySource($urlSource, $urlSearch){
+        $response  = [];
+        $productSource  = Product::select('*')
+            ->whereHas('seo', function ($query) use($urlSource){
+                $query->where('slug', $urlSource);
+            })
+            ->with('seo', 'seos.infoSeo.contents')
+            ->first();
+
+        $tmp            = Product::select('*')
+            ->whereHas('seo', function ($query) use($urlSearch){
+                $query->where('slug', 'LIKE', $urlSearch.'%');
+            })
+            ->with('seo', 'seos.infoSeo.contents')
+            ->get();
+        $k      = 1;
+        foreach ($tmp as $t) {
+            /* xóa relation seos -> infoSeo -> contents (nếu có) */
+            foreach ($t->seos as $seo) {
+                foreach ($seo->infoSeo->contents as $content) {
+                    SeoContent::select('*')
+                        ->where('id', $content->id)
+                        ->delete();
+                }
+                \App\Models\RelationSeoProductInfo::select('*')
+                    ->where('seo_id', $seo->seo_id)
+                    ->delete();
+                Seo::select('*')
+                    ->where('id', $seo->seo_id)
+                    ->delete();
+            }
+            /* tạo dữ liệu mới */
+            $i = 0;
+            foreach ($productSource->seos as $seoS) {
+                /* tạo seo */
+                $tmp2   = $seoS->infoSeo->toArray();
+                $insert = [];
+                foreach ($tmp2 as $key => $value) {
+                    if ($key != 'contents' && $key != 'id') $insert[$key] = $value;
+                }
+                $insert['link_canonical']   = $tmp2['id'];
+                $insert['slug']             = $tmp2['slug'] . '-' . $k;
+                $insert['slug_full']        = $tmp2['slug_full'] . '-' . $k;
+                $idSeo = Seo::insertItem($insert);
+                /* cập nhật lại seo_id của product */
+                if ($insert['language'] == 'vi') {
+                    Product::updateItem($t->id, [
+                        'seo_id' => $idSeo,
+                    ]);
+                }
+                $response[] = $idSeo;
+                /* tạo relation_seo_product_info */
+                RelationSeoProductInfo::insertItem([
+                    'seo_id'    => $idSeo,
+                    'product_info_id' => $t->id,
+                ]);
+                /* tạo content */
+                foreach ($seoS->infoSeo->contents as $content) {
+                    $contentInsert = $content->content;
+                    $contentInsert = str_replace($seoS->infoSeo->slug_full, $insert['slug_full'], $contentInsert);
+                    SeoContent::insertItem([
+                        'seo_id'    => $idSeo,
+                        'content'   => $contentInsert,
+                    ]);
+                }
+                ++$i;
+            }
+            ++$k;
+        }
+        return $response;
     }
 }
 

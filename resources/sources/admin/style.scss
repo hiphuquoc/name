@@ -215,9 +215,9 @@ table:not(.sendEmail) {
             .tableHighLight {
                 font-weight: 700;
             }
-            div.oneLine {
+            .oneLine {
                 &:not(:first-child){
-                    margin-top: 0.25rem;
+                    margin-top: 0.5rem;
                 }
                 .badge {
                     margin-top: 0.3rem;
@@ -1773,7 +1773,7 @@ html .content {
     display: flex;
     justify-content: flex-end;
     &_item {
-        flex: 0 0 45px;
+        width: 50px;
         cursor: pointer;
         overflow: hidden;
         box-shadow: 0 0 5px $bg-06;
@@ -1782,7 +1782,7 @@ html .content {
         border-radius: 5px;
         border: 2px solid #fff;
         img {
-            width: 100%;
+            width: 100% !important;
             object-fit: cover;
             border-radius: 5px;
         }

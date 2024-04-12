@@ -12,6 +12,9 @@
             <div class="oneLine">
             Đường dẫn: {{ $item->seo->slug_full ?? null }}
             </div>
+            <div class="oneLine">
+                @include('admin.template.languageBox', compact('item'))
+            </div>
         </td>
         <td>
             <div class="oneLine">
