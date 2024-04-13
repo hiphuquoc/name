@@ -6,7 +6,7 @@
             if(!empty($language)&&$language==$lang['key']) $selected = 'selected';
             /* các trang đã tồn tại bảng ngôn ngữ này trong CSDL */
             $disable        = 'disable';
-            $languageLink   = route("admin.product.view", [
+            $languageLink   = route($routeName, [
                 "language"  => $lang['key'], 
                 "id"        => $item->id
             ]);

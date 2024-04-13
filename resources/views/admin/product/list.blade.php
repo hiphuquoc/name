@@ -31,7 +31,10 @@
                                     <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
                                 </div>
                                 <div class="oneLine">
-                                    @include('admin.template.languageBox', compact('item'))
+                                    @include('admin.template.languageBox', [
+                                        'item' => $item,
+                                        'routeName' => 'admin.product.view',
+                                    ])
                                 </div>
                                 <div class="oneLine">
                                     <strong>Giá trọn bộ:</strong> <span style="color:red;font-weight:bold;font-size:1.3rem;">{{ $item->price }}</span>

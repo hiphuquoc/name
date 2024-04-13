@@ -13,7 +13,10 @@
             Đường dẫn: {{ $item->seo->slug_full ?? null }}
             </div>
             <div class="oneLine">
-                @include('admin.template.languageBox', compact('item'))
+                @include('admin.template.languageBox', [
+                    'item' => $item,
+                    'routeName' => 'admin.tag.view',
+                ])
             </div>
         </td>
         <td>

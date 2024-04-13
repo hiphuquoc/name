@@ -26,7 +26,10 @@
             </div>
         @endif
         <div class="oneLine">
-            @include('admin.template.languageBox', compact('item'))
+            @include('admin.template.languageBox', [
+                    'item' => $item,
+                    'routeName' => 'admin.seoFreeWallpaper.view',
+                ])
         </div>
     </td>
     <td>

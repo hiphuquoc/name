@@ -19,7 +19,11 @@
             <div class="pageAdminWithRightSidebar_header">
                 <div style="display:flex;align-items:flex-end;">
                     <div style="width:100%;">{{ $titlePage }}</div>
-                    @include('admin.template.languageBox', compact('item', 'language'))
+                    @include('admin.template.languageBox', [
+                        'item' => $item,
+                        'language' => $language,
+                        'routeName' => 'admin.seoFreeWallpaper.view',
+                    ])
                 </div>
             </div>
             
