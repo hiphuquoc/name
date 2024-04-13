@@ -5,36 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Prompt extends Model {
+class ApiAI extends Model {
     use HasFactory;
-    protected $table        = 'prompt_info';
+    protected $table        = 'api_info';
     protected $fillable     = [
+        'email',
+        'password', 
+        'api',
         'type',
-        'reference_table', 
-        'reference_name',
-        'reference_prompt',
-        'ai',
-        'tool',
-        'version',
+        'status',
     ];
     public $timestamps = false;
-
-    public static function getList($params = null){
-        $result     = self::select('*')
-                        /* tìm theo tên */
-                        ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->where('name', 'like', '%'.$params['search_name'].'%');
-                        })
-                        ->orderBy('reference_table', 'DESC')
-                        ->orderBy('type', 'ASC')
-                        ->paginate($params['paginate']);
-        return $result;
-    }
 
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new Prompt();
+            $model      = new ApiAI();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;

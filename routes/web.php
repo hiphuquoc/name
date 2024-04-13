@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\SeoFreeWallpaperController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\RedirectController;
 use App\Http\Controllers\Admin\PromptController;
+use App\Http\Controllers\Admin\ApiAIController;
 use App\Http\Controllers\Admin\ChatGptController;
 use App\Http\Controllers\Admin\HelperController;
 
@@ -101,6 +102,12 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/createAndUpdate', [PromptController::class, 'createAndUpdate'])->name('admin.prompt.createAndUpdate');
             Route::get('/loadColumnTable', [PromptController::class, 'loadColumnTable'])->name('admin.prompt.loadColumnTable');
             Route::get('/delete', [PromptController::class, 'delete'])->name('admin.prompt.delete');
+        });
+        /* api ai */
+        Route::prefix('apiai')->group(function(){
+            Route::get('/list', [ApiAIController::class, 'list'])->name('admin.apiai.list');
+            Route::get('/view', [ApiAIController::class, 'view'])->name('admin.apiai.view');
+            Route::get('/changeApiActive', [ApiAIController::class, 'changeApiActive'])->name('admin.apiai.changeApiActive');
         });
         /* product */
         Route::prefix('product')->group(function(){

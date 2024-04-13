@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prompt_info', function (Blueprint $table) {
+        Schema::create('api_info', function (Blueprint $table) {
             $table->id();
-            $table->text('type'); /* auto_content */
-            $table->text('reference_table'); /* tên bảng */
-            $table->text('reference_name'); /* tên input name */
-            $table->text('reference_prompt'); /* prompt */
-            $table->text('tool');
-            $table->text('version');
+            $table->text('email');
+            $table->text('password');
+            $table->text('api');
+            $table->text('type');
+            $table->boolean('status')->default(0);
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('prompt_info');
+        // Schema::dropIfExists('api_info');
     }
 };

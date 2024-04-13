@@ -3,7 +3,8 @@
 
 <div class="titlePage">Danh sách yêu cầu</div>
 
-@include('admin.prompt.search', compact('list'))
+<!-- MESSAGE -->
+@include('admin.template.messageAction')
 
 <div class="card">
     <!-- ===== Table ===== -->
@@ -12,13 +13,11 @@
             <thead>
                 <tr>
                     <th></th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>API</th>
                     <th>Loại</th>
-                    <th>Bảng</th>
-                    <th>Cột</th>
-                    <th width="120px">Công cụ</th>
-                    <th width="120px">Phiên bản</th>
-                    <th>Prompt</th>
-                    <th>-</th>
+                    <th>Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,15 +25,20 @@
                     @foreach($list as $item)
                         <tr id="item_{{ $item->id }}">
                             <td class="text-center">{{ ($loop->index + 1) }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->password }}</td>
+                            <td>{{ $item->api }}</td>
                             <td>{{ $item->type }}</td>
-                            <td>{{ $item->reference_table }}</td>
-                            <td>{{ $item->reference_name }}</td>
-                            <td>{{ $item->tool }}</td>
-                            <td>{{ $item->version }}</td>
+                            <td style="display:flex;align-item:center;justify-content:center;">
+                                <div class="form-check form-check-primary form-switch">
+                                    <input type="checkbox" class="form-check-input" value="{{ $item->id }}" {{ $item->status==1 ? 'checked' : '' }} onclick="changeApiActive(this);" style="cursor:pointer;">
+                                </div>
+                            </td>
+                            {{-- <td>{{ $item->version }}</td>
                             <td><div style="white-space: pre-line;">{{ $item->reference_prompt }}</div></td>
                             <td style="vertical-align:top;display:flex;font-size:0.95rem;">
                                 <div class="icon-wrapper iconAction">
-                                    <a href="{{ route('admin.prompt.view', ['id' => $item->id]) }}">
+                                    <a href="{{ route('admin.apiai.view', ['id' => $item->id]) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -43,7 +47,7 @@
                                     </a>
                                 </div>
                                 <div class="icon-wrapper iconAction">
-                                    <a href="{{ route('admin.prompt.view', ['id' => $item->id, 'type' => 'copy']) }}">
+                                    <a href="{{ route('admin.apiai.view', ['id' => $item->id, 'type' => 'copy']) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                                         <div>Chép</div>
                                     </a>
@@ -58,7 +62,7 @@
                                         <div>Xóa</div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 @else
@@ -67,12 +71,12 @@
             </tbody>
         </table>
     </div>
-    <!-- Pagination -->
-    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
+    {{-- <!-- Pagination -->
+    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }} --}}
 </div>
 
 <!-- Nút thêm -->
-<a href="{{ route('admin.prompt.view') }}" class="addItemBox">
+<a href="{{ route('admin.apiai.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
 </a>
@@ -80,21 +84,33 @@
 @endsection
 @push('scriptCustom')
     <script type="text/javascript">
-        function deleteItem(id){
-            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
-                $.ajax({
-                    url         : "{{ route('admin.prompt.delete') }}",
-                    type        : "get",
-                    dataType    : "html",
-                    data        : { id }
-                }).done(function(data){
-                    if(data==true) $('#item_'+id).remove();
-                });
-            }
+
+        function changeApiActive(input){
+            var params              = {};
+            params['id']            = $(input).val();
+            params['is_checked']    = $(input).prop('checked');
+            const queryParams = new URLSearchParams(params).toString();
+            fetch('{{ route("admin.apiai.changeApiActive") }}?' + queryParams, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if(data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
+            });
         }
 
-        function submitForm(idForm){
-            $('#'+idForm).submit();
-        }
     </script>
 @endpush

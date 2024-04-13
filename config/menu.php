@@ -115,7 +115,12 @@ return [
                     'name'  => '1. Prompt',
                     'route' => 'admin.prompt.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
-                ]
+                ],
+                [
+                    'name'  => '2. API AI',
+                    'route' => 'admin.apiai.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
             ]
         ],
         [

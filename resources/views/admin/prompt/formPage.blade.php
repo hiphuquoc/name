@@ -52,7 +52,19 @@
                 @endforeach
             </select>
         </div>
-
+        <!-- One Row -->
+        <div class="formBox_full_item">
+            <label class="form-label inputRequired" for="version">Phiên bản</label>
+            <select class="select2 form-select select2-hidden-accessible" id="version" name="version">
+                @foreach(config('main.ai_version') as $v)
+                    @php
+                        $selected   = null;
+                        if(!empty($item->version)&&$item->version==$v) $selected = ' selected';
+                    @endphp
+                    <option value="{{ $v }}"{{ $selected }}>{{ $v }}</option>
+                @endforeach
+            </select>
+        </div>
         <!-- One Row -->
         <div class="formBox_column2_item_row">
             <div class="inputWithNumberChacractor">
