@@ -188,18 +188,20 @@ class ChatGptController extends Controller {
             $data['content']    = $result['choices'][0]['message']['content'];
             $data['error']      = '';
         }else {
+            $data['content']    = '';
+                $data['error']       = $result['error']['message'];
             /* kiểm tra nếu hết credit -> đổi trạng thái của API */
             if(strpos($result['error']['message'], 'You exceeded your current quota')!==false){
                 ApiAI::updateItem($infoApiAI->id, ['status' => 0]);
             }
-            /* nếu lỗi vì bất kì nguyên nhân gì sẽ gọi lại API 1 lần */
-            if ($retryCount < 1) {
-                $retryCount++;
-                return self::callApi($promptText, $infoPrompt, $urlImage, $retryCount);
-            }else {
-                $data['content']    = '';
-                $data['error']       = $result['error']['message'];
-            }
+            // /* nếu lỗi vì bất kì nguyên nhân gì sẽ gọi lại API 1 lần */
+            // if ($retryCount < 1) {
+            //     $retryCount++;
+            //     return self::callApi($promptText, $infoPrompt, $urlImage, $retryCount);
+            // }else {
+            //     $data['content']    = '';
+            //     $data['error']       = $result['error']['message'];
+            // }
         }
         return $data;
     }
