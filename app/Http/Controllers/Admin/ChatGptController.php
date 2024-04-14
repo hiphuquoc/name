@@ -155,13 +155,21 @@ class ChatGptController extends Controller {
         return $response;
     }
 
-    private static function callApi($promptText, $infoPrompt, $urlImage = null){
+    private static function callApi($promptText, $infoPrompt, $urlImage = null, $retryCount = 0){
         $data       = [];
-        
-        $infoApiAI  = ApiAI::select('*')
-                        ->where('type', $infoPrompt->version)
-                        ->where('status', '1')
-                        ->first();
+        /* nếu 3.5 thì lấy ngẫu nhiên các phần tử được active */
+        if($infoPrompt->version=='gpt-3.5-turbo-1106'){
+            $infoApiAI  = ApiAI::select('*')
+                            ->where('type', $infoPrompt->version)
+                            ->where('status', '1')
+                            ->inRandomOrder()
+                            ->first();
+        }else { /* nếu version 4.0 thì lấy duy nhất phần tử được active */
+            $infoApiAI  = ApiAI::select('*')
+                            ->where('type', $infoPrompt->version)
+                            ->where('status', '1')
+                            ->first();
+        }
         $apiKey     = $infoApiAI->api ?? '';
         $timeoutSeconds = 0;
         /* call api */
@@ -180,8 +188,18 @@ class ChatGptController extends Controller {
             $data['content']    = $result['choices'][0]['message']['content'];
             $data['error']      = '';
         }else {
-            $data['content']    = '';
-            $data['error']       = $result['error']['message'];
+            /* kiểm tra nếu hết credit -> đổi trạng thái của API */
+            if(strpos($result['error']['message'], 'You exceeded your current quota')!==false){
+                ApiAI::updateItem($infoApiAI->id, ['status' => 0]);
+            }
+            /* nếu lỗi vì bất kì nguyên nhân gì sẽ gọi lại API 1 lần */
+            if ($retryCount < 1) {
+                $retryCount++;
+                return self::callApi($promptText, $infoPrompt, $urlImage, $retryCount);
+            }else {
+                $data['content']    = '';
+                $data['error']       = $result['error']['message'];
+            }
         }
         return $data;
     }

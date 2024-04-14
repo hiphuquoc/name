@@ -31,7 +31,10 @@
                             <td>{{ $item->type }}</td>
                             <td style="display:flex;align-item:center;justify-content:center;">
                                 <div class="form-check form-check-primary form-switch">
-                                    <input type="checkbox" class="form-check-input" value="{{ $item->id }}" {{ $item->status==1 ? 'checked' : '' }} onclick="changeApiActive(this);" style="cursor:pointer;">
+                                    @php
+                                        $disabled = $item->type=='gpt-3.5-turbo-1106' ? 'disabled' : '';
+                                    @endphp
+                                    <input type="checkbox" class="form-check-input" value="{{ $item->id }}" {{ $item->status==1 ? 'checked' : '' }} onclick="changeApiActive(this);" style="cursor:pointer;" {{ $disabled }}>
                                 </div>
                             </td>
                             {{-- <td>{{ $item->version }}</td>
