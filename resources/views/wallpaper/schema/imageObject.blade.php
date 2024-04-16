@@ -27,6 +27,7 @@
                     }
                 }
             }else if($d->seo->type=='free_wallpaper_info'){ /* xử lý cho phần tử con là free_wallpaper_info */
+                if($i!=1) $xhtml .= ', ';
                 $urlImage   = config('main.google_cloud_storage.default_domain').$d->file_cloud;
                 $name           = null;
                 $description    = null;

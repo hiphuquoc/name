@@ -52,7 +52,11 @@
         <!-- content -->
         <div class="contentBox">
             <div style="display:flex;">
-                <h1>{{ config('language.'.$language.'.data.phone_wallpaper').' '.$itemSeo->title }}</h1>
+                @php
+                    $titlePage = config('language.'.$language.'.data.phone_wallpaper').$itemSeo->title;
+                    if($item->seo->level==1) $titlePage = $itemSeo->title;
+                @endphp
+                <h1>{{ $titlePage }}</h1>
             </div>
             <!-- Sort Box -->
             @include('wallpaper.category.sort', [
