@@ -293,7 +293,7 @@
         
         const queryString = new URLSearchParams(dataForm).toString();
 
-        fetch("{{ route('main.addToCart') }}?" + queryString, {
+        fetch("/addToCart?" + queryString, {
             method: 'GET',
             mode: 'cors',
             // headers: {
@@ -322,7 +322,7 @@
     }
     /* tải lại thông tin icon giỏ hàng */
     function viewSortCart() {
-        fetch('{{ route("main.viewSortCart") }}', {
+        fetch('/viewSortCart', {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -376,7 +376,7 @@
         /* tải loading */ 
         loadLoading(idRow);
 
-        fetch("{{ route('main.removeProductCart') }}?product_info_id=" + idProduct + "&product_price_id=" + idProductPrice, {
+        fetch("/removeProductCart?product_info_id=" + idProduct + "&product_price_id=" + idProductPrice, {
             method: 'GET',
             mode: 'cors'
         })
@@ -410,7 +410,7 @@
     }
     /* add loading icon */
     function loadLoading(idAppend, theme = 'loading_2') {
-        fetch("{{ route('ajax.loadLoading') }}?theme=" + theme, {
+        fetch("/loadLoading?theme=" + theme, {
             method: 'GET',
             mode: 'cors'
         })
@@ -433,7 +433,7 @@
         const inputEmail = $('#' + idForm).find('[name*=registry_email]');
         const valueEmail = inputEmail.val();
         if (isValidEmail(valueEmail)) {
-            fetch("{{ route('ajax.registryEmail') }}?registry_email=" + encodeURIComponent(valueEmail), {
+            fetch("/registryEmail?registry_email=" + encodeURIComponent(valueEmail), {
                 method: 'GET',
                 mode: 'cors'
             })
@@ -481,7 +481,7 @@
             ++i;
         });
         $.ajax({
-            url         : '{{ route("main.buildTocContentMain") }}',
+            url         : '/buildTocContentMain',
             type        : 'get', 
             dataType    : 'html',
             data        : {
@@ -623,7 +623,7 @@
     /* load quận/huyện */
     function loadDistrictByIdProvince(elementProvince, idWrite){
         const valueProvince = $(elementProvince).val();
-        fetch('{{ route("ajax.loadDistrictByIdProvince") }}?province_info_id='+valueProvince, {
+        fetch('/loadDistrictByIdProvince?province_info_id='+valueProvince, {
             method  : 'GET',
             mode    : 'cors',
         })
@@ -673,7 +673,7 @@
     // }
     /* check đăng nhập */
     function checkLoginAndSetShow(){
-        fetch('{{ route("ajax.checkLoginAndSetShow") }}', {
+        fetch('/checkLoginAndSetShow', {
             method  : 'GET',
             mode    : 'cors',
         })
@@ -702,7 +702,7 @@
     }
     /* set chế độ xem */
     function setViewBy(key) {
-        fetch("{{ route('ajax.setViewBy') }}?key=" + key, {
+        fetch("/setViewBy?key=" + key, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -721,7 +721,7 @@
     }
     /* set chế độ sắp xếp */
     function setSortBy(key) {
-        fetch("{{ route('ajax.setSortBy') }}?key=" + key, {
+        fetch("/setSortBy?key=" + key, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -772,7 +772,7 @@
 
         const queryParams = new URLSearchParams(params).toString();
 
-        fetch("{{ route('ajax.showSortBoxFreeWallpaper') }}?" + queryParams, {
+        fetch("/showSortBoxFreeWallpaper?" + queryParams, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -815,7 +815,7 @@
 
         const queryParams = new URLSearchParams(params).toString();
 
-        fetch("{{ route('ajax.showSortBoxWallpaper') }}?" + queryParams, {
+        fetch("/showSortBoxWallpaper?" + queryParams, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
