@@ -21,6 +21,7 @@ use App\Models\RelationSeoProductInfo;
 use App\Models\Prompt;
 use App\Models\SeoContent;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\IndexController;
 // use App\Http\Controllers\Admin\GalleryController;
 // use App\Http\Controllers\Admin\SourceController;
 use App\Models\RelationProductPriceWallpaperInfo;
@@ -143,6 +144,15 @@ class ProductController extends Controller {
                 'type'      => 'success',
                 'message'   => '<strong>Thành công!</strong> Đã cập nhật Sản phẩm!'
             ];
+            /* nếu có tùy chọn index => gửi google index */
+            if($request->get('index_google')==true) {
+                $flagIndex = IndexController::indexUrl($idSeo);
+                if($flagIndex==200){
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Sản phẩm và Báo Google Index!';
+                }else {
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Sản phẩm! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                }
+            }
         } catch (\Exception $exception){
             DB::rollBack();
             /* Message */

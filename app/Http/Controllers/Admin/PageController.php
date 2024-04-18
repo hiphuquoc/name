@@ -94,6 +94,15 @@ class PageController extends Controller {
                 'type'      => 'success',
                 'message'   => '<strong>Thành công!</strong> Đã cập nhật Trang!'
             ];
+            /* nếu có tùy chọn index => gửi google index */
+            if($request->get('index_google')==true) {
+                $flagIndex = IndexController::indexUrl($idSeo);
+                if($flagIndex==200){
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang và Báo Google Index!';
+                }else {
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                }
+            }
         } catch (\Exception $exception){
             DB::rollBack();
             /* Message */

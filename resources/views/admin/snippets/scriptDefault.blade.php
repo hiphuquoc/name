@@ -74,10 +74,20 @@
         });
     }
 
-    function submitForm(idForm){
-        console.log(123);
-        const elemt = $('#'+idForm);
-        if(elemt.valid()) elemt.submit();
+    function submitForm(idForm, addParams = {}){
+        const form = $('#' + idForm);
+        if(form.valid()){
+            // Thêm các tham số bổ sung (nếu có) vào form
+            $.each(addParams, function(key, value) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: key,
+                    value: value
+                }).appendTo(form);
+            });
+            // Submit form
+            form.submit();
+        }
     }
 
     /* copy to clipboard */

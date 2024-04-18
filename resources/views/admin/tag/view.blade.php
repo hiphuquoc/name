@@ -134,7 +134,10 @@
                             <a href="/{{ $itemSeo->slug_full }}" target="_blank" style="font-size:1.4rem;"><i class="fa-regular fa-eye"></i></a>
                         @endif
                         <a href="{{ route('admin.tag.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formAction');" aria-label="Lưu">Lưu</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu">Lưu</button>
+                    </div>
+                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
+                        <div class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu" style="width:100%;" onclick="submitForm('formAction', { 'index_google': true });">Lưu & Index</div>
                     </div>
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                         <div class="actionBox">

@@ -18,6 +18,7 @@ use GuzzleHttp\Client;
 use AdityaDees\LaravelBard\LaravelBard;
 use App\Models\RelationSeoProductInfo;
 use App\Models\RelationSeoTagInfo;
+use Google\Client as Google_Client;
 
 class HomeController extends Controller
 {
@@ -82,10 +83,43 @@ class HomeController extends Controller
 
     public static function test(Request $request){
 
-        // $flag = self::copyProductBySource('bo-hinh-nen-dien-thoai-4k-meo-con-phong-cach-toi-gian-1712926734', 'hinh-nen-dien-thoai-meo-con-phong-cach');
-        // dd($flag);
-        
+        // $client = new Google_Client();
+
+        // // service_account_file.json is the private key that you created for your service account.
+        // $client->setAuthConfig('../credentials.json');
+        // $client->addScope('https://www.googleapis.com/auth/indexing');
+
+        // // Get a Guzzle HTTP Client
+        // $httpClient = $client->authorize();
+        // $endpoint = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
+
+        // // Define contents here. The structure of the content is described in the next step.
+        // $content = '{
+        // "url": "https://name.com.vn/hinh-nen-dien-thoai",
+        // "type": "URL_UPDATED"
+        // }';
+
+        // $response = $httpClient->post($endpoint, [ 'body' => $content ]);
+        // $status_code = $response->getStatusCode();
+        // dd($status_code);
     }
+
+    // $flag = self::copyProductBySource('bo-hinh-nen-dien-thoai-4k-meo-con-phong-cach-toi-gian-1712926734', 'hinh-nen-dien-thoai-meo-con-phong-cach');
+        // dd($flag);
+
+        // $response = Http::withToken('f54b5fca3c479912fbf05e5fcbaca4c48317a5fc')
+        //         ->post('https://indexing.googleapis.com/v3/urlNotifications:publish', [
+        //             'url' => 'https://name.com.vn/hinh-nen-dien-thoai',
+        //             'type' => 'URL_UPDATED' // Hoặc 'URL_DELETED' nếu bạn muốn xóa URL khỏi index
+        //         ]);
+
+        // dd($response->getStatusCode());
+
+        // if ($response->successful()) {
+        //     // Xử lý phản hồi thành công
+        // } else {
+        //     // Xử lý lỗi khi gửi yêu cầu
+        // }
 
     public static function chatGPT(Request $request){
         // Replace 'YOUR_API_KEY' with your actual API key from OpenAI

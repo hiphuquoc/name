@@ -96,11 +96,6 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-
-        function submitForm(idForm){
-            const elemt = $('#'+idForm);
-            if(elemt.valid()) elemt.submit();
-        }
         
     </script>
 @endpush

@@ -10,8 +10,6 @@
 @endsection
 @push('scripts-custom')
     <script type="text/javascript">
-        function submitForm(idForm){
-            $('#'+idForm).submit();
-        }
+    
     </script>
 @endpush

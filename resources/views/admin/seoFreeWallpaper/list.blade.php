@@ -60,9 +60,5 @@
                 });
             }
         }
-
-        function submitForm(idForm){
-            $('#'+idForm).submit();
-        }
     </script>
 @endpush
