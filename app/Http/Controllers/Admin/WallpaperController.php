@@ -222,6 +222,8 @@ class WallpaperController extends Controller {
         if(!empty($infoWallpaper)){
             /* xóa wallpaper trong google_cloud_storage */
             Storage::disk('gcs')->delete($infoWallpaper->file_cloud_wallpaper);
+            /* xóa wallpaper Large trong google_cloud_storage */
+            Storage::disk('gcs')->delete(config('main.google_cloud_storage.wallpapers').$infoWallpaper->file_name_wallpaper.'-large.'.$infoWallpaper->extension_wallpaper);
             /* xóa wallpaper Small trong google_cloud_storage */
             Storage::disk('gcs')->delete(config('main.google_cloud_storage.wallpapers').$infoWallpaper->file_name_wallpaper.'-small.'.$infoWallpaper->extension_wallpaper);
             /* xóa wallpaper Mini trong google_cloud_storage */

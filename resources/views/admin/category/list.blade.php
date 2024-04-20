@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <th style="width:60px;"></th>
-                    <th style="width:150px;">Ảnh</th>
+                    <th style="width:240px;">Ảnh</th>
                     <th class="text-center">Thông tin</th>
                     <th class="text-center" style="width:230px;">Khác</th>
                     <th class="text-center" width="60px">-</th>

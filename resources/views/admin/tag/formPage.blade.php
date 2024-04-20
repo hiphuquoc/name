@@ -50,6 +50,35 @@
             <!-- One Row -->
             <div class="formBox_column2_item_row">
                 <span data-toggle="tooltip" data-placement="top" title="
+                    Danh sách các Category mà Tag này thuộc
+                ">
+                    <i class="explainInput" data-feather='alert-circle'></i>
+                    <label class="form-label" for="category_info_id">Categories cha</label>
+                </span>
+                <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                    <select class="select2 form-select select2-hidden-accessible" id="category_info_id" name="category_info_id[]" aria-hidden="true" multiple="true">
+                        @if(!empty($categories))
+                            @foreach($categories as $c)
+                                @php
+                                    $selected       = null;
+                                    if(!empty($item->categories)&&$item->categories->isNotEmpty()){
+                                        foreach($item->categories as $cCategory){
+                                            if($c->id==$cCategory->infoCategory->id) {
+                                                $selected = 'selected';
+                                                break;
+                                            }
+                                        }
+                                    }
+                                @endphp
+                                <option value="{{ $c->id }}" {{ $selected }}>{{ $c->seo->title }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
+            <!-- One Row -->
+            <div class="formBox_column2_item_row">
+                <span data-toggle="tooltip" data-placement="top" title="
                     Category này kết nối Blog tin tức nào?
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>

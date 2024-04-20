@@ -45,7 +45,9 @@ class ProductController extends Controller {
             $dataPath           = [];
             if($request->hasFile('image')) {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
+                $fileName       = $name.'.'.config('image.extension');
+                $folderUpload   =  config('main.google_cloud_storage.wallpapers');
+                $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
             /* update page */
             $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
@@ -264,11 +266,8 @@ class ProductController extends Controller {
                                 }])
                                 ->with('seo', 'seos', 'seo.contents', 'prices.wallpapers')
                                 ->first();
-                /* xóa ảnh đại diện sản phẩm trong thư mục */
-                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
-                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
-                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
-                if(file_exists($imagePath)) @unlink($imagePath);
+                /* xóa ảnh đại diện trên google_clouds */ 
+                Upload::deleteWallpaper($info->seo->image);
                 /* xóa bảng product_price */
                 $info->prices->each(function ($price) {
                     $price->wallpapers()->delete();
@@ -278,10 +277,8 @@ class ProductController extends Controller {
                 $info->files()->delete();
                 /* delete các trang seos ngôn ngữ */
                 foreach($info->seos as $s){
-                    $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image_small));
-                    if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
-                    $imagePath          = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image));
-                    if(file_exists($imagePath)) @unlink($imagePath);
+                    /* xóa ảnh đại diện trên google_clouds */ 
+                    Upload::deleteWallpaper($s->infoSeo->image);
                     foreach($s->infoSeo->contents as $c) $c->delete();
                     $s->infoSeo()->delete();
                     $s->delete();

@@ -17,7 +17,7 @@
                             <div>
                                 <div>{{ $wallpaper->file_name }}</div> 
                                 @php
-                                    $linkSource = config('main.google_cloud_storage.default_domain').$wallpaper->file_cloud_source;
+                                    $linkSource = \App\Helpers\Image::getUrlImageCloud($wallpaper->file_cloud_source);
                                 @endphp
                                 <div>Source: <a href="{{ $linkSource }}" target="_blank">{{ $linkSource }}</a></div>
                             </div>

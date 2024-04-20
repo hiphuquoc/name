@@ -1,15 +1,10 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run development -- --watch --watch-options-poll=1000",
-        "hot": "npm run development -- --hot",
-        "prod": "npm run production",
-        "production": "mix --production",
-        "start": "webpack-dev-server --hot",
-        "build": "npm run production"
+        "dev": "NODE_ENV=development webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development webpack --watch --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "NODE_ENV=production webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
         "@vitejs/plugin-basic-ssl": "^1.1.0",

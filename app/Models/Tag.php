@@ -56,6 +56,10 @@ class Tag extends Model {
         return $this->hasMany(\App\Models\RelationTagInfoOrther::class, 'tag_info_id', 'id')->where('reference_type', 'free_wallpaper_info');
     }
 
+    public function categories(){
+        return $this->hasMany(\App\Models\RelationCategoryInfoTagInfo::class, 'tag_info_id', 'id');
+    }
+
     public function blogs(){
         return $this->hasMany(\App\Models\RelationTagInfoCategoryBlogInfo::class, 'tag_info_id', 'id');
     }

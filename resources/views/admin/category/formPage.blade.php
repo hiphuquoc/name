@@ -64,6 +64,35 @@
             <!-- One Row -->
             <div class="formBox_column2_item_row">
                 <span data-toggle="tooltip" data-placement="top" title="
+                    Danh sách các Tags thuộc Category này
+                ">
+                    <i class="explainInput" data-feather='alert-circle'></i>
+                    <label class="form-label" for="tag_info_id">Tags con</label>
+                </span>
+                <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                    <select class="select2 form-select select2-hidden-accessible" id="tag_info_id" name="tag_info_id[]" aria-hidden="true" multiple="true">
+                        @if(!empty($tags))
+                            @foreach($tags as $t)
+                                @php
+                                    $selected       = null;
+                                    if(!empty($item->tags)&&$item->tags->isNotEmpty()){
+                                        foreach($item->tags as $tTag){
+                                            if($t->id==$tTag->infoTag->id) {
+                                                $selected = 'selected';
+                                                break;
+                                            }
+                                        }
+                                    }
+                                @endphp
+                                <option value="{{ $t->id }}" {{ $selected }}>{{ $t->seo->title }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
+            <!-- One Row -->
+            <div class="formBox_column2_item_row">
+                <span data-toggle="tooltip" data-placement="top" title="
                     Category này kết nối Blog tin tức nào?
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>

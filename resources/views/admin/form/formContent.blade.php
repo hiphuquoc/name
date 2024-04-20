@@ -38,7 +38,7 @@
 @pushonce('scriptCustom')
     <!-- Place the first <script> tag in your HTML's <head> -->
     
-    <script src="https://cdn.tiny.cloud/1/hxj07hlrrzvbo1omo61k89jy0vntp0c3oua4xnv8jj194hr7/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/nbzlb8grbp9yqpqqmr97xl66wxvappru9dgzo5diez30yifw/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         // plugins: 'code anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
         tinymce.init({

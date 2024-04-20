@@ -8,7 +8,7 @@
                 @endphp
                 @foreach($price->wallpapers as $wallpaper)
                     @if(!empty($wallpaper->infoWallpaper))
-                        <img data-src="{{ config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_wallpaper }}" alt="{{ $title }}" title="{{ $title }}" />
+                        <img data-src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper) }}" alt="{{ $title }}" title="{{ $title }}" />
                     @endif
                 @endforeach
             @endforeach

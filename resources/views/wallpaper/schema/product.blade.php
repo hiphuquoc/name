@@ -1,13 +1,13 @@
 @php
     /* lấy ảnh đại diện */
-    $image      = !empty($itemSeo->image) ? '"'.env('APP_URL').Storage::url($itemSeo->image).'"' : null;
+    $image      = !empty($item->seo->image) ? '"'.\App\Helpers\Image::getUrlImageLargeByUrlImage($item->seo->image).'"' : null;
     /* trường hợp có gallery thì lấy gallery */
     /* chưa có trường hợp nên chưa xử lý */
     /* trường hợp có gallery sản phẩm thì lấy gallery sản phẩm */
     $flagHaveImage          = false;
     if(!empty($item->prices)&&$item->prices->isNotEmpty()){
         foreach($item->prices as $price){
-            if(!empty($price->files)&&$price->files->isNotEmpty()){
+            if(!empty($price->wallpapers)&&$price->wallpapers->isNotEmpty()){
                 $flagHaveImage  = true;
                 break;
             }
@@ -17,9 +17,9 @@
         $image          = null;
         $i              = 0;
         foreach($item->prices as $price){
-            foreach($price->files as $file){
+            foreach($price->wallpapers as $w){
                 if($i!=0) $image .= ', ';
-                $image  .= '"'.env('APP_URL').Storage::url($file->file_path).'"';
+                $image  .= '"'.\App\Helpers\Image::getUrlImageCloud($w->infoWallpaper->file_cloud_wallpaper).'"';
                 ++$i;
             }
         }
@@ -29,7 +29,7 @@
     /* lấy giá theo ngôn ngữ */
     $tmp            = \App\Helpers\Number::getPriceByLanguage($lowPrice, $language);
     $lowPrice       = $tmp['number'];
-    $currency       = $tmp['currency_code'];
+    $currency       = $tmp['currency'];
     $tmp            = \App\Helpers\Number::getPriceByLanguage($highPrice, $language);
     $highPrice      = $tmp['number'];
 @endphp

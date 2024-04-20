@@ -7,7 +7,7 @@
                 foreach($d->prices as $price){
                     foreach($price->wallpapers as $w){
                         if($i!=1) $xhtml .= ', ';
-                        $urlImage   = config('main.google_cloud_storage.default_domain').$w->infoWallpaper->file_cloud_wallpaper;
+                        $urlImage   = \App\Helpers\Image::getUrlImageCloud($w->infoWallpaper->file_cloud_wallpaper);
                         $name           = null;
                         $description    = null;
                         foreach($d->seos as $s){
@@ -28,7 +28,7 @@
                 }
             }else if($d->seo->type=='free_wallpaper_info'){ /* xử lý cho phần tử con là free_wallpaper_info */
                 if($i!=1) $xhtml .= ', ';
-                $urlImage   = config('main.google_cloud_storage.default_domain').$d->file_cloud;
+                $urlImage   = \App\Helpers\Image::getUrlImageCloud($d->file_cloud);
                 $name           = null;
                 $description    = null;
                 foreach($d->seos as $s){

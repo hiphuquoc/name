@@ -6,7 +6,7 @@
     <div class="modalLoginFormCustomerBox_bg" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"></div>
     <!-- modal box -->
     <div class="modalLoginFormCustomerBox_box">
-        <div class="modalLoginFormCustomerBox_box_left" style="background:url('{{ config('main.google_cloud_storage.default_domain').$randomWallpaper->file_cloud }}') no-repeat center;background-size: cover;">
+        <div class="modalLoginFormCustomerBox_box_left" style="background:url('{{ \App\Helpers\Image::getUrlImageCloud($randomWallpaper->file_cloud) }}') no-repeat center;background-size: cover;">
         </div>
         
         <div class="modalLoginFormCustomerBox_box_right">

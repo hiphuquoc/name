@@ -2,16 +2,13 @@
     $title              = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
     $description        = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
     /* author */
-    $author             = $item->seo->rating_author_name ?? config('main.author_name');
-    $imagePage          = env('APP_URL').Storage::url($item->seo->image);
-    $widthImagePage     = 750;
-    $heigtImagePage     = 460;
-    if(file_exists($imagePage)){
-        $infoImagePage      = getimagesize($imagePage);
-        $widthImagePage     = $infoImagePage[0];
-        $heigtImagePage     = $infoImagePage[1];
-    }
-    
+    $author             = config('main.author_name');
+    /* image */
+    $imagePage          = public_path(config('image.default'));
+    if(!empty($item->seo->image)) $imagePage = \App\Helpers\Image::getUrlImageCloud($item->seo->image);
+    $size               = getimagesize($imagePage);
+    $widthImagePage     = $size[0];
+    $heigtImagePage     = $size[1];
     $imageAuthor        = env('APP_URL').Storage::url(config('main.logo_main'));
     $widthImageAuthor   = 500;
     $heightImageAuthor  = 500;

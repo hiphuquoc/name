@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Models\RelationTagInfoCategoryBlogInfo;
 use App\Models\RelationEnCategoryInfoEnCategoryBlogInfo;
-use App\Models\RelationSeoEnSeo;
+use App\Models\RelationCategoryInfoTagInfo;
 use App\Models\RelationSeoTagInfo;
 use App\Models\SeoContent;
 
@@ -108,10 +108,12 @@ class TagController extends Controller {
                                 ->where('id', '!=', $idProduct)
                                 ->get();
         $sources            = $sources->concat($sources)->concat($tmp);
+        /* categories cha */
+        $categories         = Category::all();
         /* type */
         $type               = !empty($itemSeo) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.tag.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'categoryBlogs', 'message'));
+        return view('admin.tag.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'categoryBlogs', 'categories', 'message'));
     }
 
     public function createAndUpdate(TagRequest $request){
@@ -129,7 +131,9 @@ class TagController extends Controller {
             $dataPath           = [];
             if($request->hasFile('image')) {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
+                $fileName       = $name.'.'.config('image.extension');
+                $folderUpload   =  config('main.google_cloud_storage.wallpapers');
+                $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
             /* update page */
             $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
@@ -164,8 +168,19 @@ class TagController extends Controller {
                         ]);
                     }
                 }
+                /* insert relation_category_info_tag_info */
+                RelationCategoryInfoTagInfo::select('*')
+                    ->where('tag_info_id', $idTag)
+                    ->delete();
+                if(!empty($request->get('category_info_id'))){
+                    foreach($request->get('category_info_id') as $idCategoryInfo){
+                        RelationCategoryInfoTagInfo::insertItem([
+                            'category_info_id'  => $idCategoryInfo,
+                            'tag_info_id'       => $idTag
+                        ]);
+                    }
+                }
             }
-
             /* relation_seo_tag_info */
             $relationSeoTagInfo = RelationSeoTagInfo::select('*')
                                     ->where('seo_id', $idSeo)
@@ -225,22 +240,18 @@ class TagController extends Controller {
                                 }])
                                 ->with('seo', 'products', 'blogs', 'freeWallpapers')
                                 ->first();
-                /* xóa ảnh đại diện trong thư mục */ 
-                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
-                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
-                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
-                if(file_exists($imagePath)) @unlink($imagePath);
+                /* xóa ảnh đại diện trên google_clouds */ 
+                Upload::deleteWallpaper($info->seo->image);
                 /* delete relation */
                 $info->products()->delete();
                 $info->blogs()->delete();
                 $info->freeWallpapers()->delete();
                 $info->files()->delete();
+                $info->categories()->delete();
                 /* delete các trang seos ngôn ngữ */
                 foreach($info->seos as $s){
-                    $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image_small));
-                    if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
-                    $imagePath          = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image));
-                    if(file_exists($imagePath)) @unlink($imagePath);
+                    /* xóa ảnh đại diện trên google_clouds */ 
+                    Upload::deleteWallpaper($s->infoSeo->image);
                     foreach($s->infoSeo->contents as $c) $c->delete();
                     $s->infoSeo()->delete();
                     $s->delete();

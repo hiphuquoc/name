@@ -1,7 +1,7 @@
 <div class="formFreeWallpaperBox_item js_uploadWallpaper_{{ $idBox }}">
     <div id="js_addFormUpload_wallpaper_{{ $idBox }}" class="formFreeWallpaperBox_item_gallery">
         @if(!empty($wallpaper))
-            <img src="{{ config('main.google_cloud_storage.default_domain').$wallpaper->file_cloud }}" style="width:100%;" />
+            <img src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->file_cloud) }}" style="width:100%;" />
         @endif
     </div>
     <div class="formFreeWallpaperBox_item_form">

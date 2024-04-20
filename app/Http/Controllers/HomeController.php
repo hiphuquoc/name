@@ -25,13 +25,13 @@ class HomeController extends Controller
     public static function home(Request $request, $language = 'vi'){
         /* ngôn ngữ */
         SettingController::settingLanguage($language);
-        // /* cache HTML */
-        // $nameCache              = $language.'home.'.config('main.cache.extension');
-        // $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
-        // $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
-        // if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
-        //     $xhtml              = file_get_contents($pathCache);
-        // }else {
+        /* cache HTML */
+        $nameCache              = $language.'home.'.config('main.cache.extension');
+        $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
+        $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
+        if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
+            $xhtml              = file_get_contents($pathCache);
+        }else {
         $item               = Page::select('*')
             ->whereHas('seos.infoSeo', function ($query) use ($language) {
                 $query->where('slug', $language);
@@ -48,36 +48,20 @@ class HomeController extends Controller
                 }
             }
         }
-        /* lấy hình nền điện thoại gái xinh */
-        $slug               = 'hinh-nen-dien-thoai-gai-xinh';
-        $infoCategoryGirl   = Category::select('category_info.*', 'seo.slug')
-            ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-            ->where('seo.slug', '=', $slug)
-            ->with('seo')
-            ->with('products', function ($query) {
-                $query->orderBy('id', 'DESC')
-                    ->skip(0)
-                    ->take(20);
-            })
-            ->first();
-        /* lấy hình nền điện thoại tết */
-        $slug               = 'hinh-nen-dien-thoai-tet';
-        $infoCategoryTet   = Category::select('category_info.*', 'seo.slug')
-            ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-            ->where('seo.slug', '=', $slug)
-            ->with('seo')
-            ->with('products', function ($query) {
-                $query->orderBy('id', 'DESC')
-                    ->skip(0)
-                    ->take(20);
-            })
-            ->first();
-        $viewBy             = $request->cookie('view_by') ?? 'set';
-        $arrayIdCategory    = [];
-        $xhtml              = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'infoCategoryGirl', 'infoCategoryTet', 'viewBy', 'arrayIdCategory'))->render();
-        //     /* Ghi dữ liệu - Xuất kết quả */
-        //     if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
-        // }
+        $categories = Category::select('*')
+                        ->whereHas('seo', function($query){
+                            $query->where('level', 2);
+                        })
+                        ->where('flag_show', 1)
+                        ->with('seo')
+                        ->with('seos.infoSeo', function($query) use($language){
+                            $query->where('language', $language);
+                        })
+                        ->get();
+        $xhtml      = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
+            /* Ghi dữ liệu - Xuất kết quả */
+            if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+        }
         echo $xhtml;
     }
 

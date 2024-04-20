@@ -9,18 +9,26 @@
     <input class="form-control" type="file" id="image" name="image" onchange="readURL(this, 'imageUpload');" />
     <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
     <div class="imageUpload">
-        @if(!empty($item->seo->image)&&file_exists(Storage::path($item->seo->image))&&$type!='copy')
+        @php
+            $imageUrl       = !empty($item->seo->image) ? \App\Helpers\Image::getUrlImageCloud($item->seo->image) : null;
+            $imageUrlSmall  = !empty($item->seo->image) ? \App\Helpers\Image::getUrlImageSmallByUrlImage($item->seo->image) : null;
+            $response       = !empty($imageUrl) ? Http::get($imageUrl) : null;
+        @endphp
+        @if(!empty($imageUrl)&&$response->ok()&&$type!='copy')
             @php
-                $imagePath  = Storage::path($item->seo->image);
-                $infoPixel  = getimagesize($imagePath);
-                $extension  = pathinfo($imagePath)['extension'];
-                $infoSize   = round(filesize($imagePath)/1024, 2);
+                $size = getimagesize($imageUrl);
+                $extension = pathinfo($imageUrl, PATHINFO_EXTENSION);
+                $width = $size[0];
+                $height = $size[1];
+                $mime = $size['mime'];
+                $fileSize = $response->header('content-length');
+                $fileSizeKB = round($fileSize / 1024, 0);
             @endphp
-            <img id="imageUpload" src="{{ Storage::url($item->seo->image) }}?{{ time() }}" />
+            <img id="imageUpload" src="{{ $imageUrlSmall }}?{{ time() }}" />
             <div style="margin-top:0.25rem;color:#789;display:flex;justify-content:space-between;">
                 <span>.{{ $extension }}</span>
-                <span>{{ $infoPixel[0] }}*{{ $infoPixel[1] }} px</span>
-                <span>{{ $infoSize }} MB</span>
+                <span>{{ $width }}*{{ $height }} px</span>
+                <span>{{ $fileSizeKB }} KB</span>
             </div>
         @else
             <img id="imageUpload" src="{{ config('image.default') }}" style="aspect-ratio:800/533;" />

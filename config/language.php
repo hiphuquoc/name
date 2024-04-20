@@ -3,7 +3,7 @@
 return [
     "vi"    => [
         "name"      => "Việt",
-        "currency"  => "VNĐ",
+        "currency"  => "VND",
         "currency_code" => "đ",
         "money_value"     => "25000",
         "key"       => "vi",
@@ -64,6 +64,9 @@ return [
             'payment_method' => 'Hình thức Thanh Toán',
             'fee' => 'Phí',
             'payment_fee' => 'Phí thanh toán',
+            'wallpaper_by_themes' => 'Hình Nền Điện Thoại theo Chủ Đề',
+            'wallpaper_by_styles' => 'Hình Nền Điện Thoại theo Phong Cách',
+            'wallpaper_by_events' => 'Hình Nền Điện Thoại theo Sự Kiện',
         ]
     ],
     "en"    => [
@@ -129,6 +132,9 @@ return [
             'payment_method' => 'Payment Method',
             'fee' => 'Fee',
             'payment_fee' => 'Payment Fee',
+            'wallpaper_by_themes' => 'Wallpapers by Themes',
+            'wallpaper_by_styles' => 'Wallpapers by Styles',
+            'wallpaper_by_events' => 'Wallpapers by Events',
         ]
     ],
     "fr"    => [
@@ -194,6 +200,9 @@ return [
             'payment_method' => 'Mode de paiement',
             'fee' => 'Frais',
             'payment_fee' => 'Frais de paiement',
+            'wallpaper_by_themes' => 'Papiers Peints par Thèmes',
+            'wallpaper_by_styles' => 'Papiers Peints par Styles',
+            'wallpaper_by_events' => 'Papiers Peints par Événements',
         ]
     ],
     "es"    => [
@@ -259,6 +268,9 @@ return [
             'payment_method' => 'Método de pago',
             'fee' => 'Tarifa',
             'payment_fee' => 'Tarifa de pago',
+            'wallpaper_by_themes' => 'Fondos de Pantalla por Temas',
+            'wallpaper_by_styles' => 'Fondos de Pantalla por Estilos',
+            'wallpaper_by_events' => 'Fondos de Pantalla por Eventos',
         ]
     ],
     "zh"    => [
@@ -324,6 +336,9 @@ return [
             'payment_method' => '支付方式',
             'fee' => '费用',
             'payment_fee' => '支付费用',
+            'wallpaper_by_themes' => '主题壁纸',
+            'wallpaper_by_styles' => '风格壁纸',
+            'wallpaper_by_events' => '事件壁纸',
         ]
     ],
     "ru"    => [
@@ -389,6 +404,9 @@ return [
             'payment_method' => 'Способ оплаты',
             'fee' => 'Плата',
             'payment_fee' => 'Плата за платеж',
+            'wallpaper_by_themes' => 'Обои по темам',
+            'wallpaper_by_styles' => 'Обои по стилям',
+            'wallpaper_by_events' => 'Обои по событиям',
         ]
     ],
     "ja"    => [
@@ -454,6 +472,9 @@ return [
             'payment_method' => '支払い方法',
             'fee' => '手数料',
             'payment_fee' => '支払手数料',
+            'wallpaper_by_themes' => 'テーマ別の壁紙',
+            'wallpaper_by_styles' => 'スタイル別の壁紙',
+            'wallpaper_by_events' => 'イベント別の壁紙',
         ]
     ],
     "ko"    => [
@@ -519,6 +540,9 @@ return [
             'payment_method' => '지불 방법',
             'fee' => '수수료',
             'payment_fee' => '결제 수수료',
+            'wallpaper_by_themes' => '테마별 배경화면',
+            'wallpaper_by_styles' => '스타일별 배경화면',
+            'wallpaper_by_events' => '이벤트별 배경화면',
         ]
     ],
     "hi"    => [
@@ -584,6 +608,9 @@ return [
             'payment_method' => 'भुगतान का तरीका',
             'fee' => 'शुल्क',
             'payment_fee' => 'भुगतान शुल्क',
+            'wallpaper_by_themes' => 'थीम के हिसाब से वॉलपेपर',
+            'wallpaper_by_styles' => 'शैली के हिसाब से वॉलपेपर',
+            'wallpaper_by_events' => 'घटनाओं के हिसाब से वॉलपेपर',
         ]
     ],
     "id"    => [
@@ -649,6 +676,9 @@ return [
             'payment_method' => 'Metode Pembayaran',
             'fee' => 'Biaya',
             'payment_fee' => 'Biaya Pembayaran',
+            'wallpaper_by_themes' => 'Wallpaper Menurut Tema',
+            'wallpaper_by_styles' => 'Wallpaper Menurut Gaya',
+            'wallpaper_by_events' => 'Wallpaper Menurut Acara',
         ]
     ]
 ];

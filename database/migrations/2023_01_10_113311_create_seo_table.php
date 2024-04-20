@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->text('image')->nullable();
-            $table->text('image_small')->nullable();
             $table->integer('level');
             $table->integer('parent')->nullable();
             $table->integer('ordering')->nullable();

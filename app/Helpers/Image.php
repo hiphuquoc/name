@@ -60,6 +60,15 @@ class Image {
         return $resizedImageData;
     }
 
+    public static function getUrlImageCloud($urlImage){
+        $result     = null;
+        if(!empty($urlImage)){
+            /* sử dụng ảnh trong google_cloud_storage */
+            $result = config('main.google_cloud_storage.default_domain').$urlImage;
+        }
+        return $result;
+    }
+
     public static function getUrlImageMiniByUrlImage($urlImage){
         $result     = null;
         if(!empty($urlImage)){

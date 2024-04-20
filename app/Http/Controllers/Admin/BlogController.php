@@ -59,7 +59,9 @@ class BlogController extends Controller {
             $dataPath           = [];
             if($request->hasFile('image')) {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
+                $fileName       = $name.'.'.config('image.extension');
+                $folderUpload   =  config('main.google_cloud_storage.wallpapers');
+                $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
             /* insert seo */
             $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'blog_info', $dataPath);

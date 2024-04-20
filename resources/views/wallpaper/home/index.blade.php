@@ -52,94 +52,66 @@
     <!-- content -->
     <div class="container">
         <div class="breadcrumbMobileBox"><!-- dùng để chống nhảy padding - margin so với các trang có breadcrumb --></div>
-
-        <!-- === START:: Product Box === -->
-        @if(!empty($infoCategoryTet))
+        
+        <!-- Item Category Grid Box -->
+        @foreach(config('main.category_type') as $type)
             <div class="contentBox">
-                <div class="categoryBox">
-                    <div class="categoryBox_title">
-                        <h2>
-                            @if(empty($language)||$language=='vi')
-                                <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại Gái xinh">Hình nền điện thoại Gái xinh</a>
-                            @else
-                                <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="Pretty girl phone wallpapers">Pretty girl phone wallpapers</a>
-                            @endif
-                        </h2>
-                    </div>
-                    <div class="categoryBox_box">
-                        <!-- Hình nền điện thoại tết -->
+                <div class="categoryGrid">
+                    <div class="categoryGrid_title">
                         @php
-                            $productGirl = new \Illuminate\Database\Eloquent\Collection;
-                            foreach($infoCategoryGirl->products as $product){
-                                /* lọc bỏ các phần tử chưa có wallpaper => chưa lọc được trong query */
-                                if(!empty($product->infoProduct->prices)&&$product->infoProduct->prices->isNotEmpty()) {
-                                    $flagHaveWallpaper = false;
-                                    foreach($product->infoProduct->prices as $price){
-                                        if($price->wallpapers->isNotEmpty()){
-                                            $flagHaveWallpaper = true;
-                                            break;
-                                        }
-                                    }
-                                    if($flagHaveWallpaper==true) $productGirl->add($product->infoProduct);
-                                }
-                            }
+                            $titleBox = '';
+                            if($type['key']=='category_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_themes');
+                            if($type['key']=='style_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_styles');
+                            if($type['key']=='event_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_events');
                         @endphp
-                        @include('wallpaper.template.wallpaperGrid', [
-                            'wallpapers'    => $productGirl ?? null,
-                            'headingTitle'  => 'h2',
-                            'viewBy'        => $viewBy
-                        ])
+                        <h2>{{ $titleBox }}</h2>
+                    </div>
+                    <div class="categoryGrid_box">
+                        @foreach($categories as $category)
+
+                            @foreach($category->seos as $categorySeo)
+                                @if(!empty($categorySeo->infoSeo->type)&&$categorySeo->infoSeo->type==$type['key'])
+                                    @php
+                                        $categoryName   = $categorySeo->infoSeo->title ?? null;
+                                        $categoryUrl    = env('APP_URL').'/'.$categorySeo->infoSeo->slug_full;
+                                        $categoryThumbMini  = config('image.default');
+                                        $categoryThumbSmall  = config('image.default');
+                                        if(!empty($category->seo->image)) {
+                                            $categoryThumbMini = \App\Helpers\Image::getUrlImageMiniByUrlImage($category->seo->image); 
+                                            $categoryThumbSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($category->seo->image); 
+                                        }             
+                                    @endphp
+                                    <div class="categoryGrid_box_item">
+                                        <a href="{{ $categoryUrl }}" class="categoryGrid_box_item_image">
+                                            <img class="lazyload" src="{{ $categoryThumbMini }}" data-src="{{ $categoryThumbSmall }}" alt="{{ $categoryName }}" title="{{ $categoryName }}" />
+                                        </a>
+                                        <div class="categoryGrid_box_item_content">
+                                            <a href="{{ $categoryUrl }}" class="categoryGrid_box_item_content_title">
+                                                {{ $categoryName }}
+                                            </a>
+                                            @if(!empty($category->tags)&&$category->tags->isNotEmpty())
+                                                <div class="categoryGrid_box_item_content_list">
+                                                    @foreach($category->tags as $tag)
+                                                        @foreach($tag->infoTag->seos as $tagSeo)
+                                                            @if($tagSeo->infoSeo->language==$language)
+                                                                <a href="/{{ $tagSeo->infoSeo->slug_full }}">{{ $tagSeo->infoSeo->title }}</a>
+                                                                @break
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @break
+                                @endif
+                            @endforeach
+
+                        @endforeach
                     </div>
                 </div>
             </div>
-        @endif
-        <!-- === END:: Product Box === -->
-
-        <!-- === START:: Product Box === -->
-        @if(!empty($infoCategoryTet))
-            <div class="contentBox">
-                <div class="categoryBox">
-                    <div class="categoryBox_title">
-                        <h2>
-                            @if(empty($language)||$language=='vi')
-                                <a href="/{{ $infoCategoryTet->seo->slug_full ?? null }}" aria-label="Hình nền điện thoại Tết 2024">Hình nền điện thoại Tết 2024</a>
-                            @else
-                            <a href="/{{ $infoCategoryTet->en_seo->slug_full ?? null }}" aria-label="New Year 2024 Wallpapers">New Year 2024 Wallpapers</a>
-                            @endif
-                        </h2>
-                    </div>
-                    <div class="categoryBox_box">
-                        <!-- Hình nền điện thoại tết -->
-                        @php
-                            $productTet = new \Illuminate\Database\Eloquent\Collection;
-                            foreach($infoCategoryTet->products as $product){
-                                /* lọc bỏ các phần tử chưa có wallpaper => chưa lọc được trong query */
-                                if(!empty($product->infoProduct->prices)&&$product->infoProduct->prices->isNotEmpty()) {
-                                    $flagHaveWallpaper = false;
-                                    foreach($product->infoProduct->prices as $price){
-                                        if($price->wallpapers->isNotEmpty()){
-                                            $flagHaveWallpaper = true;
-                                            break;
-                                        }
-                                    }
-                                    if($flagHaveWallpaper==true) $productTet->add($product->infoProduct);
-                                }
-                            }
-                        @endphp
-                        @include('wallpaper.template.wallpaperGrid', [
-                            'wallpapers'    => $productTet ?? null,
-                            'headingTitle'  => 'h2',
-                            'viewBy'        => $viewBy,
-                            'total'         => $productTet->count(),
-                            'loaded'        => $productTet->count(),
-                            'arrayId'       => [0],
-                            'type'          => 'event_info'
-                        ])
-                    </div>
-                </div>
-            </div>
-        @endif
-        <!-- === END:: Product Box === -->
+        @endforeach
 
     </div>
 @endsection

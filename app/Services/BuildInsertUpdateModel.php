@@ -11,8 +11,7 @@ class BuildInsertUpdateModel {
         if(!empty($dataForm)){
             $result['title']                    = $dataForm['title'] ?? null;
             $result['description']              = $dataForm['description'] ?? null;
-            if(!empty($dataImage['filePathNormal'])) $result['image']           = $dataImage['filePathNormal'];
-            if(!empty($dataImage['filePathSmall']))  $result['image_small']     = $dataImage['filePathSmall'];
+            if(!empty($dataImage)) $result['image'] = $dataImage;
             // page level
             $pageLevel                          = 1;
             $pageParent                         = 0;

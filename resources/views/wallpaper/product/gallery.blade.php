@@ -4,7 +4,7 @@
         @php
             $imageAll = config('image.default');
             if(!empty($prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)){
-                $imageAll = config('main.google_cloud_storage.default_domain').$prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper;
+                $imageAll = \App\Helpers\Image::getUrlImageCloud($prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
             }
         @endphp
         <img src="{{ $imageAll }}" alt="{{ $itemSeo->title }}" title="{{ $itemSeo->title }}" data-option="js_addToCart_option_all" />
@@ -20,7 +20,7 @@
                     @php
                         /* lấy ảnh mini */
                         $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
-                        $image          = config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_wallpaper;
+                        $image          = \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     @endphp
                     <div class="galleryProductBox_item">
                         {{-- @if($i<2)

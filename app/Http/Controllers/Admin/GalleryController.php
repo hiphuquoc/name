@@ -43,7 +43,7 @@ class GalleryController extends Controller {
                 $infoPixel          = getimagesize(Storage::path($filepath));
                 $percentPixel       = $infoPixel[0]/$infoPixel[1];
                 /* resize bản middle */
-                $widthImageMiddle   = config('image.resize_middle_width');
+                $widthImageMiddle   = config('image.resize_large_width');
                 $heightImageMiddle  = $widthImageMiddle/$percentPixel;
                 $filenameMiddle     = $filename.'-middle';
                 $filepathMiddle     = $folderUpload.$filenameMiddle.'.'.$extension;

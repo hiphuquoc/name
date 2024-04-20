@@ -105,7 +105,7 @@
                                 @foreach($product->infoPrice->wallpapers as $wallpaper)
                                     <a href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->infoWallpaper->file_cloud_source]) }}" class="wallpaperSourceGrid_item" download>
                                         <div class="wallpaperSourceGrid_item_image">
-                                            <img class="lazyload" src="{{ config('main.google_cloud_storage.default_domain').$wallpaper->infoWallpaper->file_cloud_source }}" />
+                                            <img class="lazyload" src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_source) }}" />
                                         </div>
                                         <div class="wallpaperSourceGrid_item_action">
                                             <img src="{{ Storage::url('images/svg/download.svg') }}" />
