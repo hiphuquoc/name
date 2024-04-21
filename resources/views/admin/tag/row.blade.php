@@ -1,9 +1,13 @@
 @if(!empty($item))
     <tr id="oneItem-{{ $item->id }}">
         <td>{{ $no }}</td>
-        <td class="text-center"><img src="{!! Storage::url($item->seo->image).'?v='.time() !!}" style="width:150px;" /></td>
+        @php
+            $urlImage = config('image.default');
+            if(!empty($item->seo->image)) $urlImage = \App\Helpers\Image::getUrlImageSmallByUrlImage($item->seo->image);
+        @endphp
+        <td class="text-center"><img src="{!! $urlImage.'?v='.time() !!}" style="width:100%;aspect-ratio:800/533;object-fit:cover;font-family:'SVN-Gilroy Bold',sans-serif;" /></td>
         <td>
-            <div class="oneLine">
+            <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;">
                 {{ $item->seo->title ?? null }}
             </div>
             <div class="oneLine">
@@ -12,7 +16,7 @@
             <div class="oneLine">
             Đường dẫn: {{ $item->seo->slug_full ?? null }}
             </div>
-            <div class="oneLine">
+            <div class="oneLine" style="margin-top:1rem;">
                 @include('admin.template.languageBox', [
                     'item' => $item,
                     'routeName' => 'admin.tag.view',
