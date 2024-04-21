@@ -1,9 +1,10 @@
 <div class="freeWallpaperDetailBox">
     <div class="freeWallpaperDetailBox_image">
         @php
-            $image = \App\Helpers\Image::getUrlImageLargeByUrlImage($item->file_cloud);
+            $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($item->file_cloud);
+            $imageLarge     = \App\Helpers\Image::getUrlImageLargeByUrlImage($item->file_cloud);
         @endphp
-        <img src="{{ $image }}" alt="{{ $itemSeo->title }}" title="{{ $itemSeo->title }}" />
+        <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $imageLarge }}" alt="{{ $itemSeo->title }}" title="{{ $itemSeo->title }}" style="filter: blur(8px);" />
     </div>
     <div class="freeWallpaperDetailBox_content">
         <h1>{{ $itemSeo->title ?? null }}</h1>

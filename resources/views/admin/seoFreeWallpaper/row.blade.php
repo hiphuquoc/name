@@ -3,29 +3,29 @@
     <td class="text-center">{{ ($loop->index + 1) }}</td>
     <td>
         <div class="priceProductBox">
-            <img src="{{ \App\Helpers\Image::getUrlImageMiniByUrlImage($item->file_cloud) }}" style="height:100px;" />
+            <img src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($item->file_cloud) }}" style="width:100%;height:100%;object-fit:cover;" />
         </div>
     </td>
     <td>
-        <div class="oneLine">
-            <strong>Alt:</strong> {{ $item->name ?? $item->seo->title ?? null }}</span>
+        <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;">
+            {{ $item->name ?? $item->seo->title ?? null }}</span>
         </div>
+        @if(!empty($item->seo))
+            <div class="oneLine">
+                <strong>Tiêu đề Seo:</strong> {{ $item->seo->seo_title }}
+            </div>
+        @endif
+        @if(!empty($item->seo))
+            <div class="oneLine">
+                <strong>Mô tả Seo:</strong> {{ $item->seo->seo_description }}
+            </div>
+        @endif
         @if(!empty($item->seo))
             <div class="oneLine">
                 <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
             </div>
         @endif
-        @if(!empty($item->seo))
-            <div class="oneLine">
-                <strong>Meta title:</strong> {{ $item->seo->seo_title }}
-            </div>
-        @endif
-        @if(!empty($item->seo))
-            <div class="oneLine">
-                <strong>Meta description:</strong> {{ $item->seo->seo_description }}
-            </div>
-        @endif
-        <div class="oneLine">
+        <div class="oneLine" style="margin-top:1rem;">
             @include('admin.template.languageBox', [
                     'item' => $item,
                     'routeName' => 'admin.seoFreeWallpaper.view',

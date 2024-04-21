@@ -16,6 +16,7 @@ use Intervention\Image\ImageManagerStatic;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use AdityaDees\LaravelBard\LaravelBard;
+use App\Models\FreeWallpaper;
 use App\Models\RelationSeoProductInfo;
 use App\Models\RelationSeoTagInfo;
 use Google\Client as Google_Client;
@@ -66,6 +67,17 @@ class HomeController extends Controller
     }
 
     public static function test(Request $request){
+
+        $tmp = FreeWallpaper::all();
+        foreach($tmp as $t){
+            if(!empty($t->seo)){
+                $imgUrl = $t->file_cloud;
+                Seo::updateItem($t->seo->id, [
+                    'image' => $imgUrl
+                ]);
+            }
+        }
+        dd(132);
 
         // $client = new Google_Client();
 

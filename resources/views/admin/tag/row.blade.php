@@ -11,10 +11,13 @@
                 {{ $item->seo->title ?? null }}
             </div>
             <div class="oneLine">
-                Tiêu đề SEO: {{ $item->seo->seo_title ?? null }}
+                <strong>Tiêu đề SEO</strong>: {{ $item->seo->seo_title ?? null }}
             </div>
             <div class="oneLine">
-            Đường dẫn: {{ $item->seo->slug_full ?? null }}
+                <strong>Mô tả SEO</strong>: {{ $item->seo->seo_description ?? null }}
+            </div>
+            <div class="oneLine">
+                <strong>Đường dẫn</strong>: {{ $item->seo->slug_full ?? null }}
             </div>
             <div class="oneLine" style="margin-top:1rem;">
                 @include('admin.template.languageBox', [

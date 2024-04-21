@@ -117,13 +117,13 @@ class SeoFreeWallpaperController extends Controller {
             /* check xem là create seo hay update seo */
             $action             = !empty($idSeo)&&$type=='edit' ? 'edit' : 'create';
             /* update page */
-            $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, []);
+            $tmp                = FreeWallpaper::find($idFreeWallpaper);
+            $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $tmp->file_cloud);
             if($action=='edit'){
                 Seo::updateItem($idSeo, $seo);
             }else {
                 $idSeo = Seo::insertItem($seo);
             }
-
             /* xử lý riêng cho bảng việt (gốc) */
             if($language=='vi'){
                 /* lưu categories */
@@ -173,7 +173,7 @@ class SeoFreeWallpaperController extends Controller {
         } catch (\Exception $exception){
             DB::rollBack();
             /* Message */
-            $message        = [
+            $message        = [ 
                 'type'      => 'danger',
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
