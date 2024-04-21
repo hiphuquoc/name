@@ -1815,6 +1815,22 @@ $heightMenu : 52.5px;
             margin-bottom: 0 !important;
             color: $colorText;
         }
+        @media(max-width: 990px){
+            h2, h3 {
+                font-size: 1.15rem;
+            }
+        }
+        @media(max-width: 766px){
+            margin-bottom: 0.75rem;
+            h2, h3 {
+                font-size: 1.1rem;
+            }
+        }
+        @media(max-width: 577px){
+            h2, h3 {
+                font-size: 1.05rem;
+            }
+        }
     }
     &_box {
         display: grid;
@@ -1841,21 +1857,20 @@ $heightMenu : 52.5px;
                 }
             }
             &_content {
-                padding: 0 1rem 0.5rem 1rem;
+                padding: 0.75rem 1rem;
                 &_title {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     font-size: 1.05rem;
                     font-family: $fontTitle;
-                    margin-top: 0.5rem;
-                    margin-bottom: 0.5rem;
                     color: $colorTextLight;
                 }
                 &_list {
                     display: flex;
                     flex-wrap: wrap;
                     font-size: 0.9rem;
+                    margin-top: 0.75rem;
                     > * {
                         color: $colorText;
                         margin-right: 0.75rem;
@@ -1871,6 +1886,31 @@ $heightMenu : 52.5px;
                     }
                 }
             }
+        }
+        @media(max-width: 1499px){
+            grid-template-columns: auto auto auto;
+        }
+        @media(max-width: 1199px){
+            grid-template-columns: auto auto;
+        }
+        @media(max-width: 1023px){
+            grid-template-columns: auto auto auto;
+            gap: 1rem;
+        }
+        @media(max-width: 767px){
+            grid-template-columns: auto auto;
+            gap: 0.75rem;
+            &_item {
+                &_content {
+                    padding: 0.5rem 0.75rem;
+                    &_list {
+                        margin-top: 0.5rem;
+                    }
+                }
+            }
+        }
+        @media(max-width: 577px){
+            grid-template-columns: auto;
         }
     }
 }

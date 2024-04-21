@@ -7021,6 +7021,24 @@ label.checkBox > *:not(:first-child) {
   margin-bottom: 0 !important;
   color: #c0d0f1;
 }
+@media (max-width: 990px) {
+  .categoryGrid_title h2, .categoryGrid_title h3 {
+    font-size: 1.15rem;
+  }
+}
+@media (max-width: 766px) {
+  .categoryGrid_title {
+    margin-bottom: 0.75rem;
+  }
+  .categoryGrid_title h2, .categoryGrid_title h3 {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 577px) {
+  .categoryGrid_title h2, .categoryGrid_title h3 {
+    font-size: 1.05rem;
+  }
+}
 .categoryGrid_box {
   display: grid;
   grid-template-columns: auto auto auto auto;
@@ -7049,7 +7067,7 @@ label.checkBox > *:not(:first-child) {
   transform-origin: bottom center;
 }
 .categoryGrid_box_item_content {
-  padding: 0 1rem 0.5rem 1rem;
+  padding: 0.75rem 1rem;
 }
 .categoryGrid_box_item_content_title {
   display: flex;
@@ -7057,14 +7075,13 @@ label.checkBox > *:not(:first-child) {
   align-items: center;
   font-size: 1.05rem;
   font-family: "SVN-Gilroy Bold", sans-serif;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
   color: #ffd100;
 }
 .categoryGrid_box_item_content_list {
   display: flex;
   flex-wrap: wrap;
   font-size: 0.9rem;
+  margin-top: 0.75rem;
 }
 .categoryGrid_box_item_content_list > * {
   color: #c0d0f1;
@@ -7077,6 +7094,39 @@ label.checkBox > *:not(:first-child) {
   margin-right: 0.75rem;
   font-size: 0.35rem;
   vertical-align: top;
+}
+@media (max-width: 1499px) {
+  .categoryGrid_box {
+    grid-template-columns: auto auto auto;
+  }
+}
+@media (max-width: 1199px) {
+  .categoryGrid_box {
+    grid-template-columns: auto auto;
+  }
+}
+@media (max-width: 1023px) {
+  .categoryGrid_box {
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+  }
+}
+@media (max-width: 767px) {
+  .categoryGrid_box {
+    grid-template-columns: auto auto;
+    gap: 0.75rem;
+  }
+  .categoryGrid_box_item_content {
+    padding: 0.5rem 0.75rem;
+  }
+  .categoryGrid_box_item_content_list {
+    margin-top: 0.5rem;
+  }
+}
+@media (max-width: 577px) {
+  .categoryGrid_box {
+    grid-template-columns: auto;
+  }
 }
 
 .logoMain {
