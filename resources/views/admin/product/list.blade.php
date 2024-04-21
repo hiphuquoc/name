@@ -24,13 +24,19 @@
                             <td class="text-center">{{ ($loop->index + 1) }}</td>
                             <td style="display:flex;flex-direction:column;">
                                 
+                                <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:0.5rem;">
+                                    {{ $item->name ?? $item->seo->title ?? null }} (<span style="font-weight:bold;color:#E74C3C;">{{ $item->code }}</span>)
+                                </div>
                                 <div class="oneLine">
-                                    <strong>Tiêu đề:</strong> {{ $item->name ?? $item->seo->title ?? null }} (<span style="font-weight:bold;color:#E74C3C;">{{ $item->code }}</span>)
+                                    <strong>Tiêu đề Seo:</strong> {{ $item->seo->seo_title }}
+                                </div>
+                                <div class="oneLine">
+                                    <strong>Mô tả Seo:</strong> {{ $item->seo->seo_description }}
                                 </div>
                                 <div class="oneLine">
                                     <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
                                 </div>
-                                <div class="oneLine">
+                                <div class="oneLine" style="margin-top:1rem;">
                                     @include('admin.template.languageBox', [
                                         'item' => $item,
                                         'routeName' => 'admin.product.view',

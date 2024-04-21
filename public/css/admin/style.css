@@ -903,26 +903,15 @@ html .content {
 }
 
 .priceProductBox {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  gap: 0.5rem;
 }
 .priceProductBox_item {
   display: flex;
   flex-direction: column;
-  min-width: 100px;
-  width: calc(20% - 0.4rem);
-}
-.priceProductBox_item:not(:first-child) {
-  margin-left: 0.5rem;
-}
-.priceProductBox_item:nth-child(5n+1) {
-  margin-left: 0;
-}
-.priceProductBox_item:nth-child(n+6) {
-  margin-top: 0.5rem;
 }
 .priceProductBox_item_image {
-  flex: 0 0 50px;
   position: relative;
 }
 .priceProductBox_item_image img {

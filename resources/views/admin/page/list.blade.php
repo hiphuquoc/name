@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách Chủ đề</div>
+<div class="titlePage">Danh sách Trang</div>
 
 @include('admin.page.search', compact('list'))
 
@@ -12,9 +12,9 @@
             <thead>
                 <tr>
                     <th style="width:60px;"></th>
-                    <th style="width:150px;">Ảnh</th>
+                    <th style="width:320px;">Ảnh</th>
                     <th class="text-center">Thông tin</th>
-                    <th class="text-center" style="width:230px;">Khác</th>
+                    <th class="text-center" style="width:225px;">Khác</th>
                     <th class="text-center" width="60px">-</th>
                 </tr>
             </thead>

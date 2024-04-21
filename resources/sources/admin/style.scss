@@ -1096,24 +1096,14 @@ html .content {
 //     }
 // }
 .priceProductBox {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap: 0.5rem;
     &_item {
         display: flex;
         flex-direction: column;
-        min-width: 100px;
-        width: calc(20% - 0.4rem);
-        &:not(:first-child){
-            margin-left: 0.5rem;
-        }
-        &:nth-child(5n +1){
-            margin-left: 0;
-        }
-        &:nth-child(n + 6){
-            margin-top: 0.5rem;
-        }
         &_image {
-            flex: 0 0 50px;
+            // flex: 0 0 50px;
             position: relative;
             img {
                 width: 100% !important;
