@@ -89,7 +89,7 @@ class SeoFreeWallpaperController extends Controller {
         /* tag name */
         $tags           = Tag::all();
         $arrayTag       = [];
-        foreach($tags as $tag) $arrayTag[] = $tag->seo->title;
+        foreach($tags as $tag) if(!empty($tag->seo->title)) $arrayTag[] = $tag->seo->title;
         /* trang canonical -> cùng là sản phẩm */
         $idProduct          = $item->id ?? 0;
         $sources            = FreeWallpaper::select('*')

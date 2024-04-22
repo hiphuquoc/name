@@ -68,16 +68,20 @@ class HomeController extends Controller
 
     public static function test(Request $request){
 
-        $tmp = FreeWallpaper::all();
-        foreach($tmp as $t){
-            if(!empty($t->seo)){
-                $imgUrl = $t->file_cloud;
-                Seo::updateItem($t->seo->id, [
-                    'image' => $imgUrl
-                ]);
-            }
-        }
-        dd(132);
+        // $tmp = Seo::select('seo.*')
+        //         ->leftJoin('tag_info', 'tag_info.seo_id', '=', 'seo.id')
+        //         ->where('type', 'tag_info')
+        //         ->where('language', 'vi')
+        //         ->whereNull('tag_info.seo_id')
+        //         ->get();
+        // dd($tmp);
+
+        // dd($tmp->count());
+
+        // $tmp2 = Seo::select('seo.*')
+        //         ->where('type', 'tag_info')
+        //         ->get();
+        // foreach()
 
         // $client = new Google_Client();
 

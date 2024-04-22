@@ -159,7 +159,7 @@
                         $selected   = null;
                         $seoChoose  = [];
                         foreach($source->seos as $seo){
-                            if(!empty($seo)){
+                            if(!empty($seo->infoSeo->language)){
                                 if($language==$seo->infoSeo->language){
                                     $seoChoose = $seo->infoSeo;
                                     if(!empty($idSeoSource)&&$idSeoSource==$seoChoose->id){
@@ -208,7 +208,7 @@
                             $selected   = null;
                             $seoChoose  = [];
                             foreach($page->seos as $seo){
-                                if(!empty($seo)){
+                                if(!empty($seo->infoSeo->language)){
                                     if($language==$seo->infoSeo->language){
                                         $seoChoose = $seo->infoSeo;
                                         if(!empty($itemSeo->parent)&&$itemSeo->parent==$seoChoose->id) $selected = 'selected';

@@ -6,7 +6,7 @@
             break;
         }
     }
-    $altImage    = $itemSeoWallpaper->title ?? $wallpaper->seo->title;
+    $altImage    = $itemSeoWallpaper->title ?? $wallpaper->seo->title ?? null;
 @endphp
 <div id="js_calculatorPosition_item_{{ $wallpaper->id }}" class="freeWallpaperBox_item" data-id="{{ $wallpaper->id }}">
     <div class="freeWallpaperBox_item_image">

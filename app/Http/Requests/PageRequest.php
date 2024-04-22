@@ -35,16 +35,24 @@ class PageRequest extends FormRequest
                 function($attribute, $value, $fail){
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
-                        $flag       = false;
                         if(request('type')!='edit'){
+                            /* kiểm tra đường dẫn có tồn tại chưa */
                             $dataCheck  = DB::table('seo')
                                             ->join('page_info', 'page_info.seo_id', '=', 'seo.id')
                                             ->select('seo.slug', 'page_info.id')
                                             ->where('slug', $slug)
                                             ->first();
-                            if(!empty($dataCheck)) $flag = true;
+                            
+                        }else {
+                            /* kiểm tra với category khác xem có trùng đường dẫn không */
+                            $dataCheck  = DB::table('seo')
+                                            ->join('page_info', 'page_info.seo_id', '=', 'seo.id')
+                                            ->select('seo.slug', 'page_info.id')
+                                            ->where('slug', $slug)
+                                            ->where('page_info.id', '!=', request('page_info_id'))
+                                            ->first();
                         }
-                        if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một Trang khác trên hệ thống!');
+                        if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Trang khác trên hệ thống!');
                     }
                 }
             ],

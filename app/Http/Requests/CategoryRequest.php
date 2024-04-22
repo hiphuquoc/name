@@ -35,16 +35,24 @@ class CategoryRequest extends FormRequest
                 function($attribute, $value, $fail){
                     $slug           = !empty(request('slug')) ? request('slug') : null;
                     if(!empty($slug)){
-                        $flag       = false;
                         if(request('type')!='edit'){
+                            /* kiểm tra đường dẫn có tồn tại chưa */
                             $dataCheck  = DB::table('seo')
                                             ->join('category_info', 'category_info.seo_id', '=', 'seo.id')
                                             ->select('seo.slug', 'category_info.id')
                                             ->where('slug', $slug)
                                             ->first();
-                            if(!empty($dataCheck)) $flag = true;
+                            
+                        }else {
+                            /* kiểm tra với category khác xem có trùng đường dẫn không */
+                            $dataCheck  = DB::table('seo')
+                                            ->join('category_info', 'category_info.seo_id', '=', 'seo.id')
+                                            ->select('seo.slug', 'category_info.id')
+                                            ->where('slug', $slug)
+                                            ->where('category_info.id', '!=', request('category_info_id'))
+                                            ->first();
                         }
-                        if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một Tag khác trên hệ thống!');
+                        if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Category khác trên hệ thống!');
                     }
                 }
             ],

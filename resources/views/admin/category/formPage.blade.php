@@ -84,7 +84,9 @@
                                         }
                                     }
                                 @endphp
-                                <option value="{{ $t->id }}" {{ $selected }}>{{ $t->seo->title }}</option>
+                                @if(!empty($t->seo))
+                                    <option value="{{ $t->id }}" {{ $selected }}>{{ $t->seo->title }}</option>
+                                @endif
                             @endforeach
                         @endif
                     </select>
