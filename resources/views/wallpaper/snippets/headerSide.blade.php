@@ -120,17 +120,19 @@
                 @foreach($wallpaperMobile->childs as $event)
                     @if(!empty($event->seo->type)&&$event->seo->type=='style_info')
                         @foreach($event->seos as $seo)
-                            @if($seo->infoSeo->language==$language)
-                                @php
-                                    $title      = $seo->infoSeo->title ?? null;
-                                    $urlFull    = env('APP_URL').'/'.$seo->infoSeo->slug_full;
-                                @endphp
-                                <li>
-                                    <a href="{{ $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
-                                        <div>{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
-                                    </a>
-                                </li>
-                                @break
+                            @if(!empty($seo->infoSeo))
+                                @if($seo->infoSeo->language==$language)
+                                    @php
+                                        $title      = $seo->infoSeo->title ?? null;
+                                        $urlFull    = env('APP_URL').'/'.$seo->infoSeo->slug_full;
+                                    @endphp
+                                    <li>
+                                        <a href="{{ $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
+                                            <div>{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
+                                        </a>
+                                    </li>
+                                    @break
+                                @endif
                             @endif
                         @endforeach
                     @endif
