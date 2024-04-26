@@ -240,19 +240,21 @@ foreach (config('language') as $key => $value) {
 Route::get('/{language?}', [HomeController::class, 'home'])
     ->where('language', implode('|', $validLanguages))
     ->name('main.home');
+/* trang giỏ hàng */
+$validCarts     = config('main.url_cart_page');
+Route::get('/{slugCart}', [CartController::class, 'index'])
+    ->where('slugCart', implode('|', $validCarts))
+    ->name('main.cart');
+/* trang xác nhận */
+$validSlugs = config('main.url_confirm_page');
+Route::get('/{slug}', [ConfirmController::class, 'confirm'])
+    ->where('slug', implode('|', $validSlugs))
+    ->name('main.confirm');
 /* nháp */
 Route::get('/test123', [HomeController::class, 'test'])->name('main.test');
 Route::get('/chatgpt', [HomeController::class, 'chatGPT'])->name('main.chatGPT');
-// /* trang category */
-// Route::prefix('category')->group(function(){
-//     Route::get('/loadMore', [CategoryPublic::class, 'loadMore'])->name('main.category.loadMore');
-//     // Route::get('/loadMorePromotion', [CategoryPublic::class, 'loadMorePromotion'])->name('main.category.loadMorePromotion');
-//     // Route::get('/loadMoreSearch', [CategoryPublic::class, 'loadMoreSearch'])->name('main.category.loadMoreSearch');
-// });
 /* lỗi */
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
-/* cart */
-// Route::get('/gio-hang', [CartController::class, 'index'])->name('main.cart');
 Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addToCart');
 Route::get('/updateCart', [CartController::class, 'updateCart'])->name('main.updateCart');
 Route::get('/removeProductCart', [CartController::class, 'removeProductCart'])->name('main.removeProductCart');
@@ -260,7 +262,6 @@ Route::get('/viewSortCart', [CartController::class, 'viewSortCart'])->name('main
 Route::get('/loadTotalCart', [CartController::class, 'loadTotalCart'])->name('main.loadTotalCart');
 Route::get('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main.paymentNow');
 Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
-Route::get('/confirm', [ConfirmController::class, 'confirm'])->name('main.confirm');
 Route::get('/handlePaymentMomo', [ConfirmController::class, 'handlePaymentMomo'])->name('main.handlePaymentMomo');
 Route::get('/handlePaymentZalopay', [ConfirmController::class, 'handlePaymentZalopay'])->name('main.handlePaymentZalopay');
 Route::get('/handlePaymentPaypal', [ConfirmController::class, 'handlePaymentPaypal'])->name('main.handlePaymentPaypal');

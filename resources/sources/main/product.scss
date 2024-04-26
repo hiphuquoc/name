@@ -271,7 +271,7 @@
                     flex-wrap: nowrap;
                     button {
                         border-radius: 0;
-                        height: 52.5px !important;   
+                        height: 55px !important;   
                         font-size: 0.9rem !important;
                         padding-right: 0.5rem;
                         padding-left: 0.5rem;
@@ -284,6 +284,11 @@
                         }
                         display: flex;
                         flex-direction: column;
+                        > * {
+                            &:not(:first-child){
+                                margin-top: 0.25rem;
+                            }
+                        }
                     }
                 }
                 .priceMobile {
@@ -302,8 +307,12 @@
                 &_button {
                     button {
                         font-size: 0.85rem !important;
+                        height: 52.5px !important;
                         img {
                             width: 18px;
+                        }
+                        > * {
+                            margin-top: 0 !important;
                         }
                     }
                 }
@@ -503,7 +512,7 @@
 .relatedProductBox {
     &_title {
         h2, h3 {
-            @include h2Default;
+            @include titleDefault;
         }
     }
     &_box {

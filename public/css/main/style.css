@@ -90,34 +90,56 @@ h1 {
   font-family: "SVN-Gilroy Bold", sans-serif;
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.85rem;
 }
 @media (max-width: 1199px) {
   h1 {
     font-size: 1.05rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.8rem;
   }
 }
 @media (max-width: 1023px) {
   h1 {
     font-size: 1rem;
+    line-height: 1.75rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.25px;
+  }
+}
+@media (max-width: 767px) {
+  h1 {
+    font-size: 0.95rem;
   }
 }
 
 h2 {
-  font-family: "SVN-Gilroy Bold", sans-serif;
   color: #c0d0f1;
+  font-family: "SVN-Gilroy Bold", sans-serif;
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.85rem;
 }
 @media (max-width: 1199px) {
   h2 {
     font-size: 1.05rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.8rem;
   }
 }
 @media (max-width: 1023px) {
   h2 {
     font-size: 1rem;
+    line-height: 1.75rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.25px;
+  }
+}
+@media (max-width: 767px) {
+  h2 {
+    font-size: 0.95rem;
   }
 }
 
@@ -211,7 +233,7 @@ h4 {
 p, ul, ol {
   margin-bottom: 0.75rem;
 }
-@media (max-width: 577px) {
+@media (max-width: 767px) {
   p, ul, ol {
     margin-bottom: 0.5rem;
   }
@@ -2143,16 +2165,27 @@ label.checkBox > *:not(:first-child) {
   font-family: "SVN-Gilroy Bold", sans-serif;
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.85rem;
 }
 @media (max-width: 1199px) {
   .productDetailBox_detail_title {
     font-size: 1.05rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.8rem;
   }
 }
 @media (max-width: 1023px) {
   .productDetailBox_detail_title {
     font-size: 1rem;
+    line-height: 1.75rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.25px;
+  }
+}
+@media (max-width: 767px) {
+  .productDetailBox_detail_title {
+    font-size: 0.95rem;
   }
 }
 .productDetailBox_detail_rating {
@@ -2321,7 +2354,7 @@ label.checkBox > *:not(:first-child) {
   }
   .productDetailBox_detail_checkout_button button {
     border-radius: 0;
-    height: 52.5px !important;
+    height: 55px !important;
     font-size: 0.9rem !important;
     padding-right: 0.5rem;
     padding-left: 0.5rem;
@@ -2334,6 +2367,9 @@ label.checkBox > *:not(:first-child) {
   }
   .productDetailBox_detail_checkout_button button:not(:last-child) {
     margin: 0 !important;
+  }
+  .productDetailBox_detail_checkout_button button > *:not(:first-child) {
+    margin-top: 0.25rem;
   }
   .productDetailBox_detail_checkout .priceMobile {
     min-width: 100px;
@@ -2350,9 +2386,13 @@ label.checkBox > *:not(:first-child) {
 @media (max-width: 767px) {
   .productDetailBox_detail_checkout_button button {
     font-size: 0.85rem !important;
+    height: 52.5px !important;
   }
   .productDetailBox_detail_checkout_button button img {
     width: 18px;
+  }
+  .productDetailBox_detail_checkout_button button > * {
+    margin-top: 0 !important;
   }
   .productDetailBox_detail_checkout .priceMobile {
     padding-left: 1rem;
@@ -2536,20 +2576,31 @@ label.checkBox > *:not(:first-child) {
 }
 
 .relatedProductBox_title h2, .relatedProductBox_title h3 {
-  font-family: "SVN-Gilroy Bold", sans-serif;
   color: #c0d0f1;
+  font-family: "SVN-Gilroy Bold", sans-serif;
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.85rem;
 }
 @media (max-width: 1199px) {
   .relatedProductBox_title h2, .relatedProductBox_title h3 {
     font-size: 1.05rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.8rem;
   }
 }
 @media (max-width: 1023px) {
   .relatedProductBox_title h2, .relatedProductBox_title h3 {
     font-size: 1rem;
+    line-height: 1.75rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.25px;
+  }
+}
+@media (max-width: 767px) {
+  .relatedProductBox_title h2, .relatedProductBox_title h3 {
+    font-size: 0.95rem;
   }
 }
 .relatedProductBox_box .productGridBox {
@@ -5379,7 +5430,7 @@ label.checkBox > *:not(:first-child) {
   display: flex;
   border-bottom-left-radius: 12px;
   border-top-right-radius: 15px;
-  z-index: 1;
+  z-index: -1;
 }
 .wallpaperGridBox_item_action > *:not(:first-child) {
   margin-left: 0.5rem;
@@ -5636,7 +5687,8 @@ label.checkBox > *:not(:first-child) {
   .layoutHeaderSide_header {
     display: none;
     position: fixed;
-    left: 0;
+    left: unset;
+    right: 0;
     top: 0;
     z-index: 99999;
     background: #1a202c;
@@ -6629,9 +6681,6 @@ label.checkBox > *:not(:first-child) {
   .shareSocialBox {
     bottom: 110px;
   }
-  .shareSocialBox_item_icon.twitter {
-    display: none;
-  }
   .shareSocialBox_item_text {
     font-size: 0.65rem;
   }
@@ -6642,6 +6691,16 @@ label.checkBox > *:not(:first-child) {
     left: 10px;
     bottom: 55.5px;
     align-items: flex-start;
+    flex-direction: row;
+  }
+  .shareSocialBox_item {
+    margin-bottom: 0;
+  }
+  .shareSocialBox_item:not(:first-child) {
+    margin-right: 0.25rem;
+  }
+  .shareSocialBox_item_text {
+    display: none;
   }
 }
 @media (max-width: 766px) {
@@ -7908,6 +7967,11 @@ label.checkBox > *:not(:first-child) {
   padding-top: 0.5rem;
   padding-bottom: 0.75rem;
 }
+@media (max-width: 1023px) {
+  .copyright {
+    margin-bottom: 55px;
+  }
+}
 
 .gotoTop {
   align-self: flex-end;
@@ -8566,7 +8630,7 @@ label.checkBox > *:not(:first-child) {
     width: 100%;
   }
   .freeWallpaperDetailBox_image {
-    margin: 0 auto;
+    margin: 0.5rem auto 0 auto;
   }
   .freeWallpaperDetailBox_content {
     width: 100%;
@@ -8583,7 +8647,7 @@ label.checkBox > *:not(:first-child) {
     background: #2d3848;
     border: none !important;
     padding: 0;
-    height: 50px;
+    height: 52.5px;
     z-index: 100;
   }
   .freeWallpaperDetailBox_content_action_item {
@@ -8593,6 +8657,11 @@ label.checkBox > *:not(:first-child) {
   }
   .freeWallpaperDetailBox_content_action_item:not(:first-child) {
     border-left: 1px solid #3a4556;
+  }
+}
+@media (max-width: 577px) {
+  .freeWallpaperDetailBox_image {
+    margin: 0.25rem auto 0 auto;
   }
 }
 

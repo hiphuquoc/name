@@ -46,36 +46,44 @@ $fontText: "SVN-Gilroy", sans-serif;
   font-family: $fontTitle;
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.85rem;
   @media(max-width: 1199px){
     font-size: 1.05rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.8rem;
   }
   @media(max-width: 1023px){
     font-size: 1rem;
-    // margin-bottom: 0.25rem;
-  }
-}
-@mixin h2Default {
-  font-family: $fontTitle;
-  color: $colorText;
-  font-size: 1.1rem;
-  margin-bottom: 0.75rem;
-  @media(max-width: 1199px){
-    font-size: 1.05rem;
+    line-height: 1.75rem;
     margin-bottom: 0.5rem;
+    letter-spacing: 0.25px;
   }
-  @media(max-width: 1023px){
-    font-size: 1rem;
-    // margin-bottom: 0.25rem;
+  @media(max-width: 767px){
+    font-size: 0.95rem;
   }
-  // @media(max-width: 766px){
-  //   font-size: 1.05rem;
-  // }
-  // @media(max-width: 577px){
-  //   font-size: 1rem;
-  //   margin-bottom: 0.25rem;
-  // }
 }
+// @mixin h2Default {
+//   font-family: $fontTitle;
+//   color: $colorText;
+//   font-size: 1.1rem;
+//   margin-bottom: 0.75rem;
+//   @media(max-width: 1199px){
+//     font-size: 1.05rem;
+//     margin-bottom: 0.5rem;
+//   }
+//   @media(max-width: 1023px){
+//     font-size: 1rem;
+//     // margin-bottom: 0.25rem;
+//   }
+//   // @media(max-width: 766px){
+//   //   font-size: 1.05rem;
+//   // }
+//   // @media(max-width: 577px){
+//   //   font-size: 1rem;
+//   //   margin-bottom: 0.25rem;
+//   // }
+// }
 @mixin titleH3 {
   
 }
@@ -371,7 +379,7 @@ h1 {
 }
 
 h2 {
-  @include h2Default;
+  @include titleDefault;
 }
 
 h3, h4 {
@@ -448,7 +456,7 @@ h4 {
 }
 p, ul, ol {
   margin-bottom: 0.75rem;
-  @media(max-width: 577px){
+  @media(max-width: 767px){
     margin-bottom: 0.5rem;
   }
 }

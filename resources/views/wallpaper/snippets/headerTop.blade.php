@@ -24,9 +24,6 @@
         <!-- language -->
         <div class="languageBox">
             <input type="hidden" id="language" name="language" value="{{ $language ?? '' }}" />
-            {{-- @php
-                dd($item->languages);
-            @endphp --}}
             <div class="languageBox_show" style="background:url('{{ Storage::url('images/svg/icon_flag_'.$itemSeo->language.'.png') }}') no-repeat center;background-size:100% 100%;"></div>
             @if(!empty($item->seos)&&$item->seos->isNotEmpty())
                 <div class="languageBox_list">
@@ -34,8 +31,9 @@
                         @php
                             $selected = null;
                             if($seo->infoSeo->language==$language) $selected = 'selected';
+                            $queryString = !empty(request()->getQueryString()) ? '?'.request()->getQueryString() : '';
                         @endphp
-                        <a href="/{{ $seo->infoSeo->slug_full }}" class="languageBox_list_item {{ $selected }}" aria-label="{{ $seo->infoSeo->title }}">
+                        <a href="/{{ $seo->infoSeo->slug_full.$queryString }}" class="languageBox_list_item {{ $selected }}" aria-label="{{ $seo->infoSeo->title }}">
                             <div>{{ strtoupper($seo->infoSeo->language) }}</div>
                             <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon_flag_'.$seo->infoSeo->language.'.png') }}') no-repeat center;background-size:100% 100%;"></div>
                         </a>

@@ -17,31 +17,32 @@ use App\Helpers\Number;
 
 class CartController extends Controller{
 
-    // public static function index(Request $request){
-    //     $language       = $request->session()->get('language');
-    //     SettingController::settingLanguage($language);
-    //     $item           = Page::select('*')
-    //                         ->whereHas('seo', function($query) {
-    //                             $query->where('slug', 'gio-hang');
-    //                         })
-    //                         ->with('seo', 'seos', 'type')
-    //                         ->first();
-    //     /* lấy item seo theo ngôn ngữ được chọn */
-    //     $itemSeo            = [];
-    //     if(!empty($item->seos)){
-    //         foreach($item->seos as $s){
-    //             if($s->infoSeo->language==$language) {
-    //                 $itemSeo = $s->infoSeo;
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-    //     $productsCart   = json_decode(session()->get('cart'), true);
-    //     $detailCart     = self::calculatorDetailCart($productsCart, 0, $language);
-    //     $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
-    //     return view('wallpaper.cart.index', compact('item', 'itemSeo', 'language', 'breadcrumb', 'products', 'detailCart'));
-    // }
+    public static function index(Request $request, $test){
+        // dd(213);
+        $language       = $request->session()->get('language');
+        SettingController::settingLanguage($language);
+        $item           = Page::select('*')
+                            ->whereHas('seo', function($query) {
+                                $query->where('slug', 'gio-hang');
+                            })
+                            ->with('seo', 'seos', 'type')
+                            ->first();
+        /* lấy item seo theo ngôn ngữ được chọn */
+        $itemSeo            = [];
+        if(!empty($item->seos)){
+            foreach($item->seos as $s){
+                if($s->infoSeo->language==$language) {
+                    $itemSeo = $s->infoSeo;
+                    break;
+                }
+            }
+        }
+        $products       = \App\Http\Controllers\CartController::getCollectionProducts();
+        $productsCart   = json_decode(session()->get('cart'), true);
+        $detailCart     = self::calculatorDetailCart($productsCart, 0, $language);
+        $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
+        return view('wallpaper.cart.index', compact('item', 'itemSeo', 'language', 'breadcrumb', 'products', 'detailCart'));
+    }
 
     public static function addToCart(Request $request){
         $result         = '';

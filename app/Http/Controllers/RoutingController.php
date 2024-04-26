@@ -262,18 +262,19 @@ class RoutingController extends Controller{
                                         })
                                         ->with('type')
                                         ->first();
-                    switch ($item->type->code) {
-                        case 'cart':
-                            $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-                            $productsCart   = json_decode(session()->get('cart'), true);
-                            $detailCart     = \App\Http\Controllers\CartController::calculatorDetailCart($productsCart, 0, $language);
-                            $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
-                            $xhtml          = view('wallpaper.cart.index', compact('item', 'itemSeo', 'language', 'breadcrumb', 'products', 'detailCart'));
-                            break;
-                        default:
-                            $xhtml  = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
-                            break;
-                    }
+                    $xhtml  = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
+                    // switch ($item->type->code) {
+                    //     case 'cart':
+                    //         $products       = \App\Http\Controllers\CartController::getCollectionProducts();
+                    //         $productsCart   = json_decode(session()->get('cart'), true);
+                    //         $detailCart     = \App\Http\Controllers\CartController::calculatorDetailCart($productsCart, 0, $language);
+                    //         $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
+                    //         $xhtml          = view('wallpaper.cart.index', compact('item', 'itemSeo', 'language', 'breadcrumb', 'products', 'detailCart'));
+                    //         break;
+                    //     default:
+                    //         $xhtml  = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
+                    //         break;
+                    // }
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){

@@ -4,14 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Models\Page;
 use App\Models\Order;
 use App\Jobs\SendEmailOrder;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class ConfirmController extends Controller {
 
-    public static function confirm(Request $request){
-        $item       = new \Illuminate\Database\Eloquent\Collection;
+    public static function confirm(Request $request, $slug){
+        // $item       = new \Illuminate\Database\Eloquent\Collection;
+        $language   = $request->session()->get('language');
+        $item       = Page::select("*")
+                        ->whereHas('seos.infoSeo', function($query) use($slug){
+                            $query->where('slug', $slug);
+                        })
+                        ->first();
+        /* lấy item seo theo ngôn ngữ được chọn */
+        $itemSeo            = [];
+        if (!empty($item->seos)) {
+            foreach ($item->seos as $s) {
+                if ($s->infoSeo->language == $language) {
+                    $itemSeo = $s->infoSeo;
+                    break;
+                }
+            }
+        }
         $code       = $request->get('code') ?? 0;
         // $code       = 'X1W5CBEKRMY0L3A';
         $order      = Order::select('*')
@@ -20,7 +37,7 @@ class ConfirmController extends Controller {
                         ->first();
         $language   = session('language') ?? 'vi';
         if(!empty($order)&&$order->payment_status==1){
-            return view('wallpaper.confirm.index', compact('item', 'order', 'language'));
+            return view('wallpaper.confirm.index', compact('item', 'itemSeo', 'order', 'language'));
         }
         return redirect()->route('main.home');
     }
@@ -45,8 +62,11 @@ class ConfirmController extends Controller {
         /* xử lý sau khi đã thanh toán thành công */
         if($flagPayment==true) {
             self::handleAfterPayment($orderInfo);
+            /* lấy slug theo ngôn ngữ của trang xác nhận */
+            $language   = $request->session()->get('language');
+            $slug       = self::getSlugPageConfirmByLanguage($language);
             /* chuyển hướng sang trang nhận ảnh */
-            return redirect()->route('main.confirm', ['code' => $code]);
+            if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
         }
         /* thanh toán không thành công */
         return redirect()->route('main.home');
@@ -65,12 +85,15 @@ class ConfirmController extends Controller {
                 $transId        = $request->get('apptransid');
                 Order::updateItem($orderInfo->id, ['trans_id' => $transId]);
                 /* nếu đã thanh toán thành công */
-                if(!empty($request->get('status'))&&$request->get('status')==1&&$request->get('amount')==$orderInfo->total) $flagPayment = true;
+                if(!empty($request->get('status'))&&$request->get('status')==1) $flagPayment = true;
                 /* xử lý sau khi đã thanh toán thành công */
                 if($flagPayment==true) {
                     self::handleAfterPayment($orderInfo);
+                    /* lấy slug theo ngôn ngữ của trang xác nhận */
+                    $language   = $request->session()->get('language');
+                    $slug       = self::getSlugPageConfirmByLanguage($language);
                     /* chuyển hướng sang trang nhận ảnh */
-                    return redirect()->route('main.confirm', ['code' => $code]);
+                    if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
                 }
             }
         }
@@ -98,8 +121,11 @@ class ConfirmController extends Controller {
             /* xử lý sau khi đã thanh toán thành công */
             if($flagPayment==true) {
                 self::handleAfterPayment($orderInfo);
+                /* lấy slug theo ngôn ngữ của trang xác nhận */
+                $language   = $request->session()->get('language');
+                $slug       = self::getSlugPageConfirmByLanguage($language);
                 /* chuyển hướng sang trang nhận ảnh */
-                return redirect()->route('main.confirm', ['code' => $code]);
+                if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
             }
         }
         /* thanh toán không thành công */
@@ -115,5 +141,24 @@ class ConfirmController extends Controller {
             /* tạo job gửi email */
             if(!empty($orderInfo->email)) SendEmailOrder::dispatch($orderInfo);
         }
+    }
+
+    private static function getSlugPageConfirmByLanguage($language){
+        $slug       = '';
+        if(!empty($language)){
+            $tmp        = Page::select('*')
+                            ->whereHas('seos.infoSeo', function($query){
+                                $query->whereIn('slug', config('main.url_confirm_page'));
+                            })
+                            ->first();
+            
+            foreach($tmp->seos as $seo){
+                if($seo->infoSeo->language==$language) {
+                    $slug = $seo->infoSeo->slug;
+                    break;
+                }
+            }
+        }
+        return $slug;
     }
 }

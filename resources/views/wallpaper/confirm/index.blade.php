@@ -102,17 +102,22 @@
 
                         <div class="wallpaperSourceGrid">
                             @foreach($order->products as $product)
-                                @foreach($product->infoPrice->wallpapers as $wallpaper)
-                                    <a href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->infoWallpaper->file_cloud_source]) }}" class="wallpaperSourceGrid_item" download>
-                                        <div class="wallpaperSourceGrid_item_image">
-                                            <img class="lazyload" src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_source) }}" />
-                                        </div>
-                                        <div class="wallpaperSourceGrid_item_action">
-                                            <img src="{{ Storage::url('images/svg/download.svg') }}" />
-                                        </div>
-                                        <div class="wallpaperSourceGrid_item_background"></div>
-                                    </a>
-                                @endforeach
+                                {{-- @php
+                                    dd($product->toArray());
+                                @endphp --}}
+                                @if(!empty($product->infoPrice))
+                                    @foreach($product->infoPrice->wallpapers as $wallpaper)
+                                        <a href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->infoWallpaper->file_cloud_source]) }}" class="wallpaperSourceGrid_item" download>
+                                            <div class="wallpaperSourceGrid_item_image">
+                                                <img class="lazyload" src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_source) }}" />
+                                            </div>
+                                            <div class="wallpaperSourceGrid_item_action">
+                                                <img src="{{ Storage::url('images/svg/download.svg') }}" />
+                                            </div>
+                                            <div class="wallpaperSourceGrid_item_background"></div>
+                                        </a>
+                                    @endforeach
+                                @endif
                             @endforeach
                         </div>
 
