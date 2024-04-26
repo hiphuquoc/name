@@ -234,9 +234,10 @@ class RoutingController extends Controller{
                             /* key_search */
                             $params['key_search'] = request('search') ?? null;
                             $arrayIdCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
+                            // dd($request->all());
                             $params['array_category_info_id'] = $arrayIdCategory;
                             /* chế độ xem */
-                            $viewBy             = request()->cookie('view_by') ?? 'set';
+                            $viewBy             = request()->cookie('view_by') ?? 'each_set';
                             /* filter nếu có */
                             $params['filters']  = $request->get('filters') ?? [];
                             /* danh sách product => lấy riêng để dễ truyền vào template */
@@ -263,18 +264,6 @@ class RoutingController extends Controller{
                                         ->with('type')
                                         ->first();
                     $xhtml  = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
-                    // switch ($item->type->code) {
-                    //     case 'cart':
-                    //         $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-                    //         $productsCart   = json_decode(session()->get('cart'), true);
-                    //         $detailCart     = \App\Http\Controllers\CartController::calculatorDetailCart($productsCart, 0, $language);
-                    //         $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
-                    //         $xhtml          = view('wallpaper.cart.index', compact('item', 'itemSeo', 'language', 'breadcrumb', 'products', 'detailCart'));
-                    //         break;
-                    //     default:
-                    //         $xhtml  = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
-                    //         break;
-                    // }
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){

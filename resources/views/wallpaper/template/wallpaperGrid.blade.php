@@ -6,7 +6,7 @@
 </div>
 <div class="wallpaperGridBox slickBox" style="display:none;">
     @if(!empty($wallpapers)&&$wallpapers->isNotEmpty())
-        @if(!empty($viewBy)&&$viewBy=='set')
+        @if(!empty($viewBy)&&$viewBy=='each_set')
             @foreach($wallpapers as $wallpaper)
                 @include('wallpaper.template.wallpaperItem', [
                     'product'   => $wallpaper, 

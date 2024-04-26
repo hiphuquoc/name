@@ -15,7 +15,7 @@ class CategoryMoneyController extends Controller {
         $response           = [];
         $content            = '';
         $language           = $request->session()->get('language') ?? 'vi';
-        $viewBy             = Cookie::get('view_by') ?? 'set';
+        $viewBy             = Cookie::get('view_by') ?? 'each_set';
         $params             = [];
         /* data params */
         $params['key_search']               = null;
@@ -26,7 +26,7 @@ class CategoryMoneyController extends Controller {
         $params['filters']                  = $request->get('filters') ?? [];
         $tmp                                = self::getWallpapers($params, $language);
         foreach($tmp['wallpapers'] as $wallpaper){
-            if($viewBy=='set'){
+            if($viewBy=='each_set'){
                 $content    .= view('wallpaper.template.wallpaperItem', [
                     'product'   => $wallpaper,
                     'language'  => $language,

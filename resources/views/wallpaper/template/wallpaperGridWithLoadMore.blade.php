@@ -7,7 +7,7 @@
     <input type="hidden" id="js_loadMoreWallpaper_array_category_info_id" value="[]" />
 @endif
 <input type="hidden" id="js_loadMoreWallpaper_sort_by" value="{{ $sortBy ?? null }}" />
-{{-- <input type="hidden" id="js_loadMoreWallpaper_view_by" value="{{ Cookie::get('view_by') ?? 'set' }}" /> --}}
+{{-- <input type="hidden" id="js_loadMoreWallpaper_view_by" value="{{ Cookie::get('view_by') ?? 'each_set' }}" /> --}}
 <!-- box -->
 <div id="js_loadMoreWallpaper_box" class="wallpaperGridBox">
     @php
