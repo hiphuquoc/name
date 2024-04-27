@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách đơn hàng</div>
+<div class="titlePage">Danh Sách Đơn Hàng</div>
 
 @include('admin.order.search', compact('list'))
 

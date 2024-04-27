@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách ảnh</div>
+<div class="titlePage">Danh Sách Ảnh</div>
 <!-- ===== START: SEARCH FORM ===== -->
 
 <div class="searchBox">

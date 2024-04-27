@@ -22,14 +22,9 @@ class Product extends Model {
         $result     = self::select('*')
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->where('code', 'like', '%'.$params['search_name'].'%')
-                            ->orWhere('name', 'like', '%'.$params['search_name'].'%');
-                        })
-                        /* tìm theo nhãn hàng */
-                        ->when(!empty($params['search_brand']), function($query) use($params){
-                            $query->whereHas('brand', function($q) use ($params){
-                                $q->where('id', $params['search_brand']);
-                            });
+                            $query->whereHas('seo', function($subQuery) use($params){
+                                $subQuery->where('title', 'like', '%'.$params['search_name'].'%');
+                            })->orWhere('code', 'like', '%'.$params['search_name'].'%');
                         })
                         /* tìm theo danh mục */
                         ->when(!empty($params['search_category']), function($query) use($params){

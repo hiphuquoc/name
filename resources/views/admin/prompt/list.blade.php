@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách yêu cầu</div>
+<div class="titlePage">Danh Sách Prompt</div>
 
 @include('admin.prompt.search', compact('list'))
 

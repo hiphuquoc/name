@@ -1,10 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách Chủ đề</div>
-
-@include('admin.category.search', compact('list'))
-
+<div class="titlePage">Danh Sách Chủ Đề</div>
 <div class="card">
     <!-- ===== Table ===== -->
     <div class="table-responsive">

@@ -31,16 +31,18 @@ class TagController extends Controller {
     }
 
     public static function list(Request $request){
-        $params     = [];
+        $params             = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
-        $list       = Tag::select('*')
-                        ->whereHas('seo', function($query){
-                            $query->where('language', 'vi');
-                        })
-                        ->orderBy('id', 'DESC')
-                        ->get();
-        return view('admin.tag.list', compact('list', 'params'));
+        /* Search theo danh mục */
+        if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewTagInfo') ?? 20;
+        $params['paginate'] = $viewPerPage;
+        $list               = Tag::getList($params);
+        $categories         = Category::select('*')
+                                ->get();
+        return view('admin.tag.list', compact('list', 'categories', 'params', 'viewPerPage'));
     }
 
     public static function view(Request $request){

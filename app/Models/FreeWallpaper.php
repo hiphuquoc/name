@@ -36,7 +36,9 @@ class FreeWallpaper extends Model {
                         })
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->where('name', 'like', '%'.$params['search_name'].'%');
+                            $query->whereHas('seo', function($subQuery) use($params){
+                                $subQuery->where('title', 'like', '%'.$params['search_name'].'%');
+                            });
                         })
                         ->orderBy('created_at', 'DESC')
                         ->with('categories')

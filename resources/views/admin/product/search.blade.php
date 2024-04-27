@@ -6,22 +6,6 @@
                 <button class="btn btn-primary waves-effect" id="button-addon2" type="submit" aria-label="Tìm">Tìm</button>
             </div>
         </div>
-        @if(!empty($events))
-            <div class="searchBox_item">
-                <div class="position-relative">
-                    <select class="form-select select2 select2-hidden-accessible" name="search_event" onchange="submitForm('formSearch');" aria-hidden="true">
-                        <option value="0">- Tìm theo Sự kiện -</option>
-                        @foreach($events as $event)
-                            @php
-                                $selected = null;
-                                if(!empty($params['search_event'])&&$params['search_event']==$event->id) $selected = ' selected';
-                            @endphp
-                            <option value="{{ $event->id }}" {{ $selected }}>{{ $event->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        @endif
         @if(!empty($categories))
             <div class="searchBox_item">
                 <div class="position-relative">
@@ -32,7 +16,7 @@
                                 $selected = null;
                                 if(!empty($params['search_category'])&&$params['search_category']==$category->id) $selected = ' selected';
                             @endphp
-                            <option value="{{ $category->id }}" {{ $selected }}>{{ $category->name }} ({{ $category->products->count() }})</option>
+                            <option value="{{ $category->id }}" {{ $selected }}>{{ $category->seo->title }} ({{ $category->products->count() }})</option>
                         @endforeach
                     </select>
                 </div>

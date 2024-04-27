@@ -237,8 +237,6 @@ class ProductController extends Controller {
         $params                         = [];
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
-        /* Search theo nhãn hàng */
-        if(!empty($request->get('search_event'))) $params['search_event'] = $request->get('search_event');
         /* Search theo danh mục */
         if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
         /* paginate */

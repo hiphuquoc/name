@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách Redirect</div>
+<div class="titlePage">Danh Sách Redirect</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.redirect.create') }}">
 <div class="searchBox">

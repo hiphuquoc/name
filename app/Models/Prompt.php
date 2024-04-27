@@ -23,7 +23,9 @@ class Prompt extends Model {
         $result     = self::select('*')
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->where('name', 'like', '%'.$params['search_name'].'%');
+                            $query->where('reference_table', 'like', '%'.$params['search_name'].'%')
+                            ->orWhere('reference_name', 'like', '%'.$params['search_name'].'%')
+                            ->orWhere('type', 'like', '%'.$params['search_name'].'%');
                         })
                         ->orderBy('reference_table', 'DESC')
                         ->orderBy('type', 'ASC')

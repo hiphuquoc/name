@@ -15,6 +15,30 @@ class Tag extends Model {
     ];
     public $timestamps = true;
 
+    public static function getList($params = null){
+        $result     = self::select('*')
+                        /* tìm theo tên */
+                        ->when(!empty($params['search_name']), function($query) use($params){
+                            $query->whereHas('seo', function($subQuery) use($params){
+                                $subQuery->where('title', 'like', '%'.$params['search_name'].'%');
+                            });
+                        })
+                        /* tìm theo danh mục */
+                        ->when(!empty($params['search_category']), function($query) use($params){
+                            $query->whereHas('categories.infoCategory', function($q) use ($params){
+                                $q->where('id', $params['search_category']);
+                            });
+                        })
+                        ->orderBy('created_at', 'DESC')
+                        ->with(['files' => function($query){
+                            $query->where('relation_table', 'tag_info');
+                        }])
+                        ->with('seo', 'seos', 'categories')
+                        ->paginate($params['paginate']);
+        return $result;
+    }
+
+
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){

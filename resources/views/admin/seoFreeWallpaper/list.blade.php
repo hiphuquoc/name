@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách Hình nền miễn phí</div>
+<div class="titlePage">Danh Sách Hình Nền Miễn Phí</div>
 
 @include('admin.seoFreeWallpaper.search', compact('list'))
 

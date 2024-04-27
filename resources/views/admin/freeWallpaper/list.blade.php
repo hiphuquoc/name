@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách Wallpaper miễn phí</div>
+<div class="titlePage">Danh Sách Wallpaper Miễn Phí</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <div class="searchBox">
     <div class="searchBox_item">
