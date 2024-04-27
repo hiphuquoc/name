@@ -123,10 +123,5 @@ return [
                 ],
             ]
         ],
-        [
-            'name'      => 'Xóa cache',
-            'route'     => 'admin.cache.clearCache',
-            'icon'      => '<i class="fa-sharp fa-solid fa-xmark"></i>'
-        ],
     ]
 ];

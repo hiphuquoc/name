@@ -61,6 +61,8 @@ $fontText: "SVN-Gilroy", sans-serif;
   }
   @media(max-width: 767px){
     font-size: 0.95rem;
+    line-height: 1.7rem;
+    margin-bottom: 0.25rem;
   }
 }
 // @mixin h2Default {
@@ -390,12 +392,13 @@ h3, h4 {
 
 h3 {
   font-size: 1.1rem;
-  @media(max-width: 990px){
+  @media(max-width: 1023px){
     font-size: 1.05rem;
     margin-bottom: 0.5rem;
   }
-  @media(max-width: 577px){
+  @media(max-width: 767px){
     font-size: 1rem;
+    margin-bottom: 0.25rem;
   }
 }
 
