@@ -67,7 +67,47 @@ class HomeController extends Controller
     }
 
     public static function test(Request $request){
+        $urlSource      = 'bo-hinh-nen-dien-thoai-4k-gau-con-phong-cach-toi-gian-1712897742';
+        $urlSearch      = 'bo-hinh-nen-dien-thoai-4k-gau-con-phong-cach-toi-gian';
+        $productSource  = Product::select('*')
+            ->whereHas('seo', function ($query) use($urlSource){
+                $query->where('slug', $urlSource);
+            })
+            ->with('seo', 'seos.infoSeo.contents')
+            ->first();
 
+        $tmp            = Product::select('*')
+            ->whereHas('seo', function ($query) use($urlSearch){
+                $query->where('slug', 'LIKE', $urlSearch.'%');
+            })
+            ->where('id', '!=', $productSource->id)
+            ->with('seo', 'seos.infoSeo.contents')
+            ->get();
+        foreach($tmp as $t){
+            /* copy relation product và category */
+            \App\Models\RelationCategoryProduct::select('*')
+                ->where('product_info_id', $t->id)
+                ->delete();
+            foreach($productSource->categories as $category){
+                \App\Models\RelationCategoryProduct::insertItem([
+                    'category_info_id'       => $category->category_info_id,
+                    'product_info_id'      => $t->id
+                ]);
+            }
+            /* copy relation product và tag */
+            \App\Models\RelationTagInfoOrther::select('*')
+                ->where('reference_type', 'product_info')
+                ->where('reference_id', $t->id)
+                ->delete();
+            foreach($productSource->tags as $tag){
+                \App\Models\RelationTagInfoOrther::insertItem([
+                    'tag_info_id'       => $tag->tag_info_id,
+                    'reference_type'    => 'product_info',
+                    'reference_id'      => $t->id
+                ]);
+            }
+        }
+        dd(123);
         // $tmp = Seo::select('seo.*')
         //         ->leftJoin('tag_info', 'tag_info.seo_id', '=', 'seo.id')
         //         ->where('type', 'tag_info')
@@ -189,6 +229,7 @@ class HomeController extends Controller
             ->whereHas('seo', function ($query) use($urlSearch){
                 $query->where('slug', 'LIKE', $urlSearch.'%');
             })
+            ->where('id', '!=', $productSource->id)
             ->with('seo', 'seos.infoSeo.contents')
             ->get();
         $k      = 1;
@@ -242,6 +283,28 @@ class HomeController extends Controller
                     ]);
                 }
                 ++$i;
+            }
+            /* copy relation product và category */
+            \App\Models\RelationCategoryProduct::select('*')
+                ->where('product_info_id', $t->id)
+                ->delete();
+            foreach($productSource->categories as $category){
+                \App\Models\RelationCategoryProduct::insertItem([
+                    'category_info_id'       => $category->category_info_id,
+                    'product_info_id'      => $t->id
+                ]);
+            }
+            /* copy relation product và tag */
+            \App\Models\RelationTagInfoOrther::select('*')
+                ->where('reference_type', 'product_info')
+                ->where('reference_id', $t->id)
+                ->delete();
+            foreach($productSource->tags as $tag){
+                \App\Models\RelationTagInfoOrther::insertItem([
+                    'tag_info_id'       => $tag->tag_info_id,
+                    'reference_type'    => 'product_info',
+                    'reference_id'      => $t->id
+                ]);
             }
             ++$k;
         }

@@ -78,11 +78,11 @@ class Product extends Model {
         return $this->hasMany(\App\Models\ProductPrice::class, 'product_info_id', 'id');
     }
 
-    // public function contents() {
-    //     return $this->hasMany(\App\Models\ProductContent::class, 'product_info_id', 'id');
-    // }
-
     public function categories(){
         return $this->hasMany(\App\Models\RelationCategoryProduct::class, 'product_info_id', 'id');
+    }
+
+    public function tags(){
+        return $this->hasMany(\App\Models\RelationTagInfoOrther::class, 'reference_id', 'id')->where('reference_type', 'product_info');
     }
 }

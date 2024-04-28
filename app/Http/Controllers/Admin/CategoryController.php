@@ -156,8 +156,8 @@ class CategoryController extends Controller {
                 RelationCategoryInfoTagInfo::select('*')
                     ->where('category_info_id', $idCategory)
                     ->delete();
-                if(!empty($request->get('tag_info_id'))){
-                    foreach($request->get('tag_info_id') as $idTagInfo){
+                if(!empty($request->get('tags'))){
+                    foreach($request->get('tags') as $idTagInfo){
                         RelationCategoryInfoTagInfo::insertItem([
                             'category_info_id'      => $idCategory,
                             'tag_info_id' => $idTagInfo

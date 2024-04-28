@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Helpers\Upload;
 use App\Http\Requests\ProductRequest;
 use App\Models\Seo;
-use App\Models\RelationSeoEnSeo;
+use App\Models\Tag;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductPrice;
@@ -82,6 +82,8 @@ class ProductController extends Controller {
             ]);
             /* nếu là bảng việt (gốc) mới cập nhật tiếp */
             if($language=='vi'){
+                /* lưu tag name */
+                if(!empty($request->get('tags'))) FreeWallpaperController::createOrGetTagName($idProduct, 'product_info', $request->get('tags'));
                 /* update product_price 
                     => xóa các product_price nào id không tồn tại trong mảng mới 
                     => nào có tồn tại thì update - nào không thì thêm mới 
@@ -121,12 +123,14 @@ class ProductController extends Controller {
                 RelationCategoryProduct::select('*')
                     ->where('product_info_id', $idProduct)
                     ->delete();
-                if(!empty($request->get('categories'))){
-                    foreach($request->get('categories') as $category){
-                        RelationCategoryProduct::insertItem([
-                            'product_info_id'   => $idProduct,
-                            'category_info_id'  => $category
-                        ]);
+                foreach(config('main.category_type') as $type){
+                    if(!empty($request->all()[$type['key']])){
+                        foreach($request->all()[$type['key']] as $idCategory){
+                            RelationCategoryProduct::insertItem([
+                                'product_info_id'       => $idProduct,
+                                'category_info_id'      => $idCategory
+                            ]);
+                        }
                     }
                 }
                 /* insert slider và lưu CSDL */
@@ -227,10 +231,14 @@ class ProductController extends Controller {
                                 })
                                 ->where('id', '!=', $idProduct)
                                 ->get();
+        /* tag name */
+        $tags           = Tag::all();
+        $arrayTag       = [];
+        foreach($tags as $tag) if(!empty($tag->seo->title)) $arrayTag[] = $tag->seo->title;
         /* type */
         $type               = !empty($item) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'message'));
+        return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'message', 'arrayTag'));
     }
 
     public static function list(Request $request){

@@ -17,6 +17,9 @@ class Tag extends Model {
 
     public static function getList($params = null){
         $result     = self::select('*')
+                        ->whereHas('seo', function($query){
+                            
+                        })
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
                             $query->whereHas('seo', function($subQuery) use($params){
@@ -73,7 +76,7 @@ class Tag extends Model {
     }
 
     public function products(){
-        return $this->hasMany(\App\Models\RelationTagProduct::class, 'tag_info_id', 'id');
+        return $this->hasMany(\App\Models\RelationProductInfoTagInfo::class, 'tag_info_id', 'id');
     }
 
     public function freeWallpapers(){

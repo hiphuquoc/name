@@ -108,7 +108,7 @@ class FreeWallpaperController extends Controller {
                 /* lưu categories */
                 self::saveCategories($idWallpaper, $request->all());
                 /* lưu tag name */
-                if(!empty($request->get('tag'))) self::createOrGetTagName($idWallpaper, $request->get('tag'));
+                if(!empty($request->get('tag'))) self::createOrGetTagName($idWallpaper, 'free_wallpaper_info', $request->get('tag'));
                 DB::commit();
                 if(!empty($idWallpaper)){
                     $response = [];
@@ -140,7 +140,7 @@ class FreeWallpaperController extends Controller {
             /* lưu categories */
             self::saveCategories($idWallpaper, $request->all());
             /* lưu tag name */
-            if(!empty($request->get('tag'))) self::createOrGetTagName($idWallpaper, $request->get('tag'));
+            if(!empty($request->get('tag'))) self::createOrGetTagName($idWallpaper, 'free_wallpaper_info', $request->get('tag'));
             DB::commit();
             return true;
         } catch (\Exception $exception){
@@ -169,10 +169,10 @@ class FreeWallpaperController extends Controller {
         }
     }
 
-    public static function createOrGetTagName($idWallpaper, $jsonTagName = null){
+    public static function createOrGetTagName($idWallpaper, $table, $jsonTagName = null){
         if(!empty($idWallpaper)&&!empty($jsonTagName)){
             RelationTagInfoOrther::select('*')
-                ->where('reference_type', 'free_wallpaper_info')
+                ->where('reference_type', $table)
                 ->where('reference_id', $idWallpaper)
                 ->delete();
             $tag    = json_decode($jsonTagName, true);
@@ -191,7 +191,7 @@ class FreeWallpaperController extends Controller {
                 /* insert relation */
                 RelationTagInfoOrther::insertItem([
                     'tag_info_id'       => $idTag,
-                    'reference_type'    => 'free_wallpaper_info',
+                    'reference_type'    => $table,
                     'reference_id'      => $idWallpaper
                 ]);
             }

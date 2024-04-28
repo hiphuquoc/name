@@ -57,85 +57,65 @@
             </span>
             <input type="number" min="0" id="code" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="code" value="{{ old('code') ?? $item->code ?? null }}" required />
         </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label inputRequired">Chủ đề</label>
-            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
-                <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
-                    <option value="">- Lựa chọn -</option>
-                    @if(!empty($categories))
-                        @foreach($categories as $category)
-                            @if(!empty($category->seo->type)&&$category->seo->type=='category_info')
-                                @php
-                                    $selected   = null;
-                                    if(!empty($item->categories)){
-                                        foreach($item->categories as $c) {
-                                            if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
-                                                $selected = ' selected';
-                                                break;
+        <!-- category/style/event -->
+        @foreach(config('main.category_type') as $categoryType)
+            <div class="formBox_full_item">
+                <label class="form-label">{{ $categoryType['name'] }}</label>
+                <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                    <select class="select2 form-select select2-hidden-accessible" name="{{ $categoryType['key'] }}[]" multiple="true">
+                        <option value="">- Lựa chọn -</option>
+                        @if(!empty($categories))
+                            @foreach($categories as $category)
+                                @if(!empty($category->seo->type)&&$category->seo->type==$categoryType['key'])
+                                    @php
+                                        $selected   = null;
+                                        if(!empty($item->categories)){
+                                            foreach($item->categories as $c) {
+                                                if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
+                                                    $selected = ' selected';
+                                                    break;
+                                                }
                                             }
                                         }
-                                    }
-                                @endphp
-                                <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
-                            @endif
-                        @endforeach
-                    @endif
-                </select>
+                                        /* tất cả tag */
+                                    @endphp
+                                    <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
+                                @endif
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
             </div>
-        </div>
-        <!-- One Row -->
+        @endforeach
+        <!-- One row -->
         <div class="formBox_full_item">
-            <label class="form-label inputRequired">Phong cách</label>
+            @php
+                $arrayTagName           = [];
+                if(!empty($item->tags)){
+                    foreach($item->tags as $tag){
+                        if(!empty($tag->infoTag->seo->title)) $arrayTagName[] = $tag->infoTag->seo->title;
+                    }
+                }
+                $strTagName             = implode(',', $arrayTagName);
+                /* action & prompt */
+                $chatgptDataAndEvent = [];
+                foreach($prompts as $prompt){
+                    if($prompt->reference_name=='tag'){
+                        if($prompt->type=='auto_content_for_image'){
+                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'tag');
+                            break;
+                        }
+                    }
+                }
+            @endphp
+            <label for="tags" class="form-label">
+                Tag name
+                @if(!empty($chatgptDataAndEvent['eventChatgpt']))
+                    <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                @endif
+            </label>
             <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
-                <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
-                    <option value="">- Lựa chọn -</option>
-                    @if(!empty($categories))
-                        @foreach($categories as $category)
-                            @if(!empty($category->seo->type)&&$category->seo->type=='style_info')
-                                @php
-                                    $selected   = null;
-                                    if(!empty($item->categories)){
-                                        foreach($item->categories as $c) {
-                                            if(!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
-                                                $selected = ' selected';
-                                                break;
-                                            }
-                                        }
-                                    }
-                                @endphp
-                                <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
-                            @endif
-                        @endforeach
-                    @endif
-                </select>
-            </div>
-        </div>
-        <!-- One Row -->
-        <div class="formBox_full_item">
-            <label class="form-label inputRequired">Sự kiện</label>
-            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
-                <select class="select2 form-select select2-hidden-accessible" name="categories[]" multiple="true">
-                    <option value="">- Lựa chọn -</option>
-                    @if(!empty($categories))
-                        @foreach($categories as $category)
-                            @if(!empty($category->seo->type)&&$category->seo->type=='event_info')
-                                @php
-                                    $selected   = null;
-                                    if(!empty($item->categories)){
-                                        foreach($item->categories as $c) {
-                                            if(!empty($c->infoCategory->seo->type)&&$c->infoCategory->seo->type=='event_info'&&!empty($c->infoCategory->id)&&$c->infoCategory->id==$category->id) {
-                                                $selected = ' selected';
-                                                break;
-                                            }
-                                        }
-                                    }
-                                @endphp
-                                <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
-                            @endif
-                        @endforeach
-                    @endif
-                </select>
+                <input id="tags" name="tags" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} />  
             </div>
         </div>
         <!-- One Row -->
@@ -156,10 +136,18 @@
         @endif
     </div>
 </div>
-
-@push('scripts-custom')
+@push('scriptCustom')
     <script type="text/javascript">
-        
-
+        var strTag = {!! json_encode($arrayTag) !!};
+        new Tagify(document.querySelector("#tags"), {
+            whitelist: strTag,
+            maxTags: Infinity, // allows to select max items
+            dropdown: {
+                maxItems: Infinity, // display max items
+                classname: "tags-inline", // Custom inline class
+                enabled: 0,
+                closeOnSelect: false
+            }
+        });
     </script>
 @endpush

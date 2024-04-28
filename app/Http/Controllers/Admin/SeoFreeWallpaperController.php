@@ -129,7 +129,7 @@ class SeoFreeWallpaperController extends Controller {
                 /* lưu categories */
                 FreeWallpaperController::saveCategories($idFreeWallpaper, $request->all());
                 /* lưu tag name */
-                if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idFreeWallpaper, $request->get('tag'));
+                if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idFreeWallpaper, 'free_wallpaper_info', $request->get('tag'));
                 /* chỉ có update free_wallpaper_info => vì trong controller này bên ngoài không có tạo */
                 FreeWallpaper::updateItem($idFreeWallpaper, [
                     'seo_id' => $idSeo

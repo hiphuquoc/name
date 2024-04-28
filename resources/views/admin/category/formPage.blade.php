@@ -67,10 +67,10 @@
                     Danh sách các Tags thuộc Category này
                 ">
                     <i class="explainInput" data-feather='alert-circle'></i>
-                    <label class="form-label" for="tag_info_id">Tags con</label>
+                    <label class="form-label" for="tags">Tags con</label>
                 </span>
                 <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
-                    <select class="select2 form-select select2-hidden-accessible" id="tag_info_id" name="tag_info_id[]" aria-hidden="true" multiple="true">
+                    <select class="select2 form-select select2-hidden-accessible" id="tags" name="tags[]" aria-hidden="true" multiple="true">
                         @if(!empty($tags))
                             @foreach($tags as $t)
                                 @php
