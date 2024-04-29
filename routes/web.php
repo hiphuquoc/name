@@ -42,6 +42,7 @@ use App\Http\Controllers\Admin\PromptController;
 use App\Http\Controllers\Admin\ApiAIController;
 use App\Http\Controllers\Admin\ChatGptController;
 use App\Http\Controllers\Admin\HelperController;
+use App\Http\Controllers\Admin\ToolCopyProductController;
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
@@ -214,6 +215,11 @@ Route::middleware('auth', 'role:admin')->group(function (){
         /* ===== CACHE ===== */
         Route::prefix('helper')->group(function(){
             Route::get('/convertStrToUrl', [HelperController::class, 'convertStrToUrl'])->name('admin.helper.convertStrToUrl');
+        });
+        /* ===== TOOL ===== */
+        Route::prefix('toolCopyProduct')->group(function(){
+            Route::get('/view', [ToolCopyProductController::class, 'view'])->name('admin.toolCopyProduct.view');
+            Route::get('/create', [ToolCopyProductController::class, 'create'])->name('admin.toolCopyProduct.create');
         });
     });
 });

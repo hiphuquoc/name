@@ -18,4 +18,5 @@ class HelperController extends Controller {
         }
         echo $response;
     }
+    
 }

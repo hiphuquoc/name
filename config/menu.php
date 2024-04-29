@@ -103,7 +103,12 @@ return [
                     'name'  => '1. Redirect 301',
                     'route' => 'admin.redirect.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
-                ]
+                ],
+                [
+                    'name'  => '2. Copy Đa SP',
+                    'route' => 'admin.toolCopyProduct.view',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
             ]
         ],
         [
