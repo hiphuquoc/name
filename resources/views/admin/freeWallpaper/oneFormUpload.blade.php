@@ -50,17 +50,18 @@
                             }
                         }
                         $strTagName             = implode(',', $arrayTagName);
+                        $tagName                = 'tagName_'.$idBox;
                     @endphp
-                    <label for="tagName_{{ $idBox }}" class="form-label">Tag name</label>
-                    <input id="tagName_{{ $idBox }}" name="tag[{{ $idBox }}]" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" onchange="autoFillNameAndEnName({{ $idBox }});">
+                    <label for="{{ $tagName }}" class="form-label">Tag name</label>
+                    <input id="{{ $tagName }}" name="tags[{{ $idBox }}]" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" onchange="autoFillNameAndEnName({{ $idBox }});" />
                     <!-- script custom tag -->
                     <script type="text/javascript">
                         var strTag = {!! json_encode($arrayTag) !!};
-                        new Tagify(document.querySelector("#tagName_{{ $idBox }}"), {
+                        new Tagify(document.querySelector("#{{ $tagName }}"), {
                             whitelist: strTag,
-                            maxTags: 100, // allows to select max items
+                            maxTags: Infinity, // allows to select max items
                             dropdown: {
-                                maxItems: 20, // display max items
+                                maxItems: Infinity, // display max items
                                 classname: "tags-inline", // Custom inline class
                                 enabled: 0,
                                 closeOnSelect: false
