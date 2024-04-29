@@ -89,6 +89,7 @@ class ProductController extends Controller {
                     => nào có tồn tại thì update - nào không thì thêm mới 
                 */
                 $priceSave          = [];
+                
                 foreach($request->get('prices') as $price){
                     if(!empty($price['id'])) $priceSave[]   = $price['id'];
                 }
@@ -108,7 +109,7 @@ class ProductController extends Controller {
                 /* update lại các product price còn lại */
                 foreach($request->get('prices') as $price){
                     if(!empty($price['code_name'])&&!empty($price['price'])){
-                        if(!empty($price['id'])){
+                        if(!empty($price['id'])&&$type=='edit'){
                             /* update */
                             $dataPrice              = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'update');
                             ProductPrice::updateItem($price['id'], $dataPrice);
