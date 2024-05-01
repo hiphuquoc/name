@@ -112,14 +112,17 @@ return [
     'category_type' => [
         [
             'key' => 'category_info',
+            'key_filter_language'   => 'filter_by_themes',
             'name' => 'Chủ đề'
         ],
         [
             'key' => 'style_info',
+            'key_filter_language'   => 'filter_by_styles',
             'name' => 'Phong cách'
         ],
         [
             'key' => 'event_info',
+            'key_filter_language'   => 'filter_by_events',
             'name' => 'Sự kiện'
         ]
     ],

@@ -65,7 +65,7 @@
         <!-- Chủ đề/phong cách/sự kiện -->
         @foreach(config('main.category_type') as $type)
             <div class="selectCustom hide-990">
-                @include('wallpaper.category.selectCustom')
+                @include('wallpaper.category.selectCustom', compact('type'))
             </div>
         @endforeach
         <!-- icon filter nâng cao -->

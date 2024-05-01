@@ -41,7 +41,7 @@
     }
 @endphp
 <div class="selectCustom_text maxLine_1">
-    {!! config('language.'.$language.'.data.filter_by') !!}
+    {!! config('language.'.$language.'.data.'.$type['key_filter_language']) !!}
 </div>
 <div class="selectCustom_input maxLine_1">
     {{ $nameSelect }}
