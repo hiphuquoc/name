@@ -1,7 +1,7 @@
 <!-- BEGIN: SLICK -->
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script defer type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!-- END: SLICK -->
-<script type="text/javascript">
+<script defer type="text/javascript">
     $(window).ready(function(){
         /* check để xem có cookie csrf chưa (do lần đầu truy cập trang không có lỗi google login) */
         // checkToSetCsrfFirstTime();

@@ -14,7 +14,7 @@ class AccountController extends Controller {
     public static function orders(Request $request){
         $item       = new \Illuminate\Database\Eloquent\Collection;
         $emailUser  = Auth::user()->email;
-        $language   = $request->session()->get('language') ?? 'vi';
+        $language   = SettingController::getLanguage();
         $orders     = Order::select('*')
                         ->where('email', $emailUser)
                         ->where('payment_status', 1)

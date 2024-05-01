@@ -43,6 +43,7 @@ use App\Http\Controllers\Admin\ApiAIController;
 use App\Http\Controllers\Admin\ChatGptController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\ToolCopyProductController;
+use App\Http\Controllers\CheckOnpageController;
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
@@ -223,7 +224,9 @@ Route::middleware('auth', 'role:admin')->group(function (){
         });
     });
 });
-
+/* check onpage website */
+Route::get('/buildListPostByUrl', [CheckOnpageController::class, 'buildListPostByUrl'])->name('main.checkOnpage.buildListPostByUrl');
+Route::get('/crawler', [CheckOnpageController::class, 'crawler'])->name('main.checkOnpage.crawler');
 /* login với google */
 Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->name('main.setCsrfFirstTime');
 Route::post('/auth/google/callback', [ProviderController::class, 'googleCallback'])->name('main.google.callback');

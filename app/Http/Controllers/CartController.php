@@ -17,9 +17,8 @@ use App\Helpers\Number;
 
 class CartController extends Controller{
 
-    public static function index(Request $request, $test){
-        // dd(213);
-        $language       = $request->session()->get('language');
+    public static function index(Request $request, $slugCart){
+        $language       = SettingController::getLanguageBySlug($slugCart);
         SettingController::settingLanguage($language);
         $item           = Page::select('*')
                             ->whereHas('seo', function($query) {

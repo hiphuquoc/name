@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "fabpot/goutte": "^4.0",
         "fruitcake/laravel-cors": "^3.0",
         "google/apiclient": "^2.13",
         "guzzlehttp/guzzle": "^7.8",

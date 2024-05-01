@@ -32,7 +32,7 @@ class CategoryController extends Controller {
             $params['id_not']                   = $request->get('idNot') ?? 0;
             $tmp                                = self::getFreeWallpapers($params);
             $user           = Auth::user();
-            $language       = $request->session()->get('language') ?? 'vi';
+            $language       = SettingController::getLanguage();
             foreach($tmp['wallpapers'] as $wallpaper){
                 $content    .= view('wallpaper.category.item', compact('wallpaper', 'language', 'user'))->render();
             }

@@ -14,7 +14,7 @@ class CategoryMoneyController extends Controller {
     public static function loadMoreWallpaper(Request $request){
         $response           = [];
         $content            = '';
-        $language           = $request->session()->get('language') ?? 'vi';
+        $language           = SettingController::getLanguage();
         $viewBy             = Cookie::get('view_by') ?? 'each_set';
         $params             = [];
         /* data params */

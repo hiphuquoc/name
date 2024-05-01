@@ -12,8 +12,8 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 class ConfirmController extends Controller {
 
     public static function confirm(Request $request, $slug){
-        // $item       = new \Illuminate\Database\Eloquent\Collection;
-        $language   = $request->session()->get('language');
+        $language   = SettingController::getLanguageBySlug($slug);
+        SettingController::settingLanguage($language);
         $item       = Page::select("*")
                         ->whereHas('seos.infoSeo', function($query) use($slug){
                             $query->where('slug', $slug);
@@ -30,7 +30,7 @@ class ConfirmController extends Controller {
             }
         }
         $code       = $request->get('code') ?? 0;
-        // $code       = 'X1W5CBEKRMY0L3A';
+        $code       = 'FU3J5S0NLRCVAD2';
         $order      = Order::select('*')
                         ->where('code', $code)
                         ->with('products.infoPrice', 'products.infoProduct')
@@ -63,7 +63,7 @@ class ConfirmController extends Controller {
         if($flagPayment==true) {
             self::handleAfterPayment($orderInfo);
             /* lấy slug theo ngôn ngữ của trang xác nhận */
-            $language   = $request->session()->get('language');
+            $language   = SettingController::getLanguage();
             $slug       = self::getSlugPageConfirmByLanguage($language);
             /* chuyển hướng sang trang nhận ảnh */
             if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
@@ -90,7 +90,7 @@ class ConfirmController extends Controller {
                 if($flagPayment==true) {
                     self::handleAfterPayment($orderInfo);
                     /* lấy slug theo ngôn ngữ của trang xác nhận */
-                    $language   = $request->session()->get('language');
+                    $language   = SettingController::getLanguage();
                     $slug       = self::getSlugPageConfirmByLanguage($language);
                     /* chuyển hướng sang trang nhận ảnh */
                     if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
@@ -122,7 +122,7 @@ class ConfirmController extends Controller {
             if($flagPayment==true) {
                 self::handleAfterPayment($orderInfo);
                 /* lấy slug theo ngôn ngữ của trang xác nhận */
-                $language   = $request->session()->get('language');
+                $language   = SettingController::getLanguage();
                 $slug       = self::getSlugPageConfirmByLanguage($language);
                 /* chuyển hướng sang trang nhận ảnh */
                 if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
