@@ -76,7 +76,7 @@ class Tag extends Model {
     }
 
     public function products(){
-        return $this->hasMany(\App\Models\RelationProductInfoTagInfo::class, 'tag_info_id', 'id');
+        return $this->hasMany(\App\Models\RelationTagInfoOrther::class, 'tag_info_id', 'id')->where('reference_type', 'product_info');
     }
 
     public function freeWallpapers(){
