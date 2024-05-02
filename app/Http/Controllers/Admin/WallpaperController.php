@@ -17,6 +17,8 @@ use App\Models\Wallpaper;
 use App\Models\RelationProductPriceWallpaperInfo;
 use App\Helpers\Charactor;
 
+use App\Http\Controllers\SettingController;
+
 // use App\Jobs\UploadSourceAndWallpaper;
 
 class WallpaperController extends Controller {
