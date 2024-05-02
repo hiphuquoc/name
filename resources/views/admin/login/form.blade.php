@@ -97,16 +97,5 @@
             // }
             return error;
         }
-
-        // function loadLoading(idWrite){
-        //     $.ajax({
-        //         url         : '{{ route("ajax.loadLoading") }}',
-        //         type        : 'get',
-        //         dataType    : 'html',
-        //         success     : function(response){
-        //             $('#'+idWrite).html(response);
-        //         }
-        //     });
-        // }
     </script>
 @endpush

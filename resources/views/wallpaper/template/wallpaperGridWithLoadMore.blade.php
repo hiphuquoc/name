@@ -6,6 +6,11 @@
 @else 
     <input type="hidden" id="js_loadMoreWallpaper_array_category_info_id" value="[]" />
 @endif
+@if(!empty($arrayIdTag))
+    <input type="hidden" id="js_loadMoreWallpaper_array_tag_info_id" value="{{ json_encode($arrayIdTag) }}" />
+@else 
+    <input type="hidden" id="js_loadMoreWallpaper_array_tag_info_id" value="[]" />
+@endif
 <input type="hidden" id="js_loadMoreWallpaper_sort_by" value="{{ $sortBy ?? null }}" />
 {{-- <input type="hidden" id="js_loadMoreWallpaper_view_by" value="{{ Cookie::get('view_by') ?? 'each_set' }}" /> --}}
 <!-- box -->
@@ -53,6 +58,8 @@
             }
         }
         function loadMoreWallpaperToController(requestLoad, firstTime = false){
+            /* hiện icon loading */
+            loadLoading();
             // Lấy chuỗi query parameters từ URL
             var queryString = window.location.search;
             var urlParams = new URLSearchParams(queryString);
@@ -71,6 +78,7 @@
             params.total = total;
             params.loaded = loaded;
             params.array_category_info_id = $('#js_loadMoreWallpaper_array_category_info_id').val();
+            params.array_tag_info_id = $('#js_loadMoreWallpaper_array_tag_info_id').val();
             params.request_load = requestLoad;
             $.ajax({
                 url: '{{ route("main.category.loadMoreWallpaper") }}',
@@ -93,10 +101,13 @@
                     }
                     /* thêm thông báo nếu empty */
                     if(boxCategory.children().length==0) boxCategory.html('<div>'+"{{ config('language.'.$language.'.data.no_suitable_results_found') }}"+'</div>');
+                    /* tắt icon loading */
+                    loadLoading('hide');
                 }
             });
             // Đặt isFirstLoad thành false sau lần đầu load
             isFirstLoad = false;
+            
         }
     </script>
 @endpush

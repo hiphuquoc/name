@@ -409,23 +409,14 @@
         });
     }
     /* add loading icon */
-    function loadLoading(idAppend, theme = 'loading_2') {
-        fetch("/loadLoading?theme=" + theme, {
-            method: 'GET',
-            mode: 'cors'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(response => {
-            $('#' + idAppend).append(response);
-        })
-        .catch(error => {
-            console.error("Fetch request failed:", error);
-        });
+    function loadLoading(action = 'show') {
+        if(action == 'show'){
+            $('.loadingBox').addClass('show');
+        }else if(action == 'hide'){
+            $('.loadingBox').removeClass('show');
+        }else {
+            $('.loadingBox').toggleClass('show');
+        }
     }
     /* tính năng registry email ở footer */
     function submitFormRegistryEmail(idForm) {

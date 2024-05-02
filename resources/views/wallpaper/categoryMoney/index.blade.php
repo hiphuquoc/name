@@ -112,7 +112,12 @@
                 'total'             => $total,
                 'empty'             => !empty($wallpapers)&&$wallpapers->isNotEmpty() ? false : true
             ])
+            <!-- Loading -->
+            <div class="loadingBox">
+                <span class="loadingIcon"></span>
+            </div>
         </div>
+        
         <!-- Nội dung -->
         @if(!empty($itemSeo->contents))
             <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
