@@ -87,7 +87,7 @@
                                         </a>
                                         <div class="categoryGrid_box_item_content">
                                             <a href="{{ $categoryUrl }}" class="categoryGrid_box_item_content_title">
-                                                {{ $categoryName }}
+                                                <h2>{{ $categoryName }}</h2>
                                             </a>
                                             @if(!empty($category->tags)&&$category->tags->isNotEmpty())
                                                 <div class="categoryGrid_box_item_content_list">

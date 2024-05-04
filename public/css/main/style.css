@@ -7081,7 +7081,7 @@ label.checkBox > *:not(:first-child) {
 }
 
 .categoryGrid_title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .categoryGrid_title h2, .categoryGrid_title h3, .categoryGrid_title a {
   font-size: 1.2rem;
@@ -7141,15 +7141,19 @@ label.checkBox > *:not(:first-child) {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.categoryGrid_box_item_content_title h2, .categoryGrid_box_item_content_title h3 {
   font-size: 1.05rem;
   font-family: "SVN-Gilroy Bold", sans-serif;
   color: #ffd100;
+  margin-bottom: 0;
+  text-transform: none;
 }
 .categoryGrid_box_item_content_list {
   display: flex;
   flex-wrap: wrap;
   font-size: 0.9rem;
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
 }
 .categoryGrid_box_item_content_list > * {
   color: #c0d0f1;
@@ -7188,7 +7192,7 @@ label.checkBox > *:not(:first-child) {
     padding: 0.5rem 0.75rem;
   }
   .categoryGrid_box_item_content_list {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
   }
 }
 @media (max-width: 577px) {
