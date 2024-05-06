@@ -30,7 +30,7 @@ class ConfirmController extends Controller {
             }
         }
         $code       = $request->get('code') ?? 0;
-        $code       = 'FU3J5S0NLRCVAD2';
+        // $code       = 'FU3J5S0NLRCVAD2';
         $order      = Order::select('*')
                         ->where('code', $code)
                         ->with('products.infoPrice', 'products.infoProduct')

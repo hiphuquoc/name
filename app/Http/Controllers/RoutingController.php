@@ -49,8 +49,13 @@ class RoutingController extends Controller{
             $nameCache              = self::buildNameCache($itemSeo['slug_full']).'.'.config('main.cache.extension');
             $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
             $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
+            $flagHandle             = true;
             if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
                 $xhtml              = file_get_contents($pathCache);
+                if(!empty(env('HTTP_URL'))&&strpos($xhtml, env('HTTP_URL'))==false) $flagHandle = false;
+            }
+            /* xử lý */
+            if($flagHandle==false){
                 echo $xhtml;
             }else {
                 /* breadcrumb */
@@ -296,7 +301,7 @@ class RoutingController extends Controller{
                     return \App\Http\Controllers\ErrorController::error404();
                 }
             }
-            return false;
+            // return false;
         }else {
             return \App\Http\Controllers\ErrorController::error404();
         }

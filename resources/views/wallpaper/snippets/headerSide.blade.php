@@ -76,14 +76,14 @@
                     }
                     $icon = file_get_contents('storage/images/svg/icon-category-2.svg');
                 @endphp
-                <div class="{{ $classTmp }}">
+                <div class="{{ $classTmp }}" onclick="showHideListMenuMobile(this, '{{ $url }}')">
                     {!! $icon !!}
                     @if($flagOpen==true)
                         <div>{{ $titlePhoneWallpaper }}</div>
                     @else 
                         <a href="{{ env('APP_URL') }}/{{ $url }}" arira-label="{{ $wallpaperMobile->name }}">{{ $titlePhoneWallpaper }}</a>
                     @endif
-                    <i class="fa-solid fa-plus" onclick="showHideListMenuMobile(this, '{{ $url }}')"></i>
+                    <i class="fa-solid fa-plus"></i>
                 </div>
                 <ul id="{{ $url }}" class="filterLinkSelected" {!! $styleTmp !!}>
                     @foreach($wallpaperMobile->childs as $event)
@@ -111,10 +111,10 @@
             @php
                 $icon = file_get_contents('storage/images/svg/icon-brush-1.svg');
             @endphp
-            <div class="open">
+            <div class="open" onclick="showHideListMenuMobile(this, 'phong-cach')">
                 {!! $icon !!}
                 <div style="margin-left:-3px;">{{ config('language.'.$language.'.data.wallpaper_style') }}</div>
-                <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'phong-cach')"></i>
+                <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="phong-cach" class="filterLinkSelected">
                 @foreach($wallpaperMobile->childs as $event)
@@ -143,12 +143,12 @@
             @php
                 $altPhoneWallpaperEvent = config('language.'.$language.'.data.phone_wallpaper');
             @endphp
-            <div class="open">
+            <div class="close" onclick="showHideListMenuMobile(this, 'su-kien')">
                 <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
                 <div>{{ config('language.'.$language.'.data.event') }}</div>
-                <i class="fa-solid fa-minus"  onclick="showHideListMenuMobile(this, 'su-kien')"></i>
+                <i class="fa-solid fa-plus"></i>
             </div>
-            <ul id="su-kien" class="filterLinkSelected" style="height:auto;opacity:1;">
+            <ul id="su-kien" class="filterLinkSelected">
                 @foreach($wallpaperMobile->childs as $event)
                     @if(!empty($event->seo->type)&&$event->seo->type=='event_info')
                         @foreach($event->seos as $seo)
@@ -191,13 +191,13 @@
             </a>
         </li>
         <li>
-            <div class="close">
+            <div class="close" onclick="showHideListMenuMobile(this, 'ho-tro')">
                 @php
                     $icon = file_get_contents('storage/images/svg/icon-support-1.svg');
                 @endphp
                 {!! $icon !!}
                 <div>{{ config('language.'.$language.'.data.support') }}</div>
-                <i class="fa-solid fa-plus"  onclick="showHideListMenuMobile(this, 'ho-tro')"></i>
+                <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="ho-tro" class="filterLinkSelected">
                 @foreach($policies as $policy)
@@ -296,10 +296,11 @@
                 });
             }
             /* toggle icon */
-            if ($(element).hasClass('fa-plus')) {
-                $(element).removeClass('fa-plus').addClass('fa-minus');
+            const elementIcon = $(element).find('i');
+            if ($(elementIcon).hasClass('fa-plus')) {
+                $(elementIcon).removeClass('fa-plus').addClass('fa-minus');
             } else {
-                $(element).removeClass('fa-minus').addClass('fa-plus');
+                $(elementIcon).removeClass('fa-minus').addClass('fa-plus');
             }
         }
 
