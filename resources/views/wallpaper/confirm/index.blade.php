@@ -1,5 +1,18 @@
 @extends('layouts.wallpaper')
 @push('headCustom')
+    <!-- Event snippet for Lượt xem trang conversion page -->
+    @php
+        $tmp = \App\Helpers\Number::getPriceByLanguage($order->total, 'vi');
+        $priceConfirm = $tmp['number'];
+    @endphp
+    <script>
+        gtag('event', 'conversion', {
+            'send_to': 'AW-16558810206/GKHLCKSGg64ZEN7I7dc9',
+            'value': '{{ $priceConfirm }}',
+            'currency': 'VND'
+        });
+    </script>
+@endpush
 @section('content')
     <div style="overflow:hidden;">
         <div class="contentBox">
