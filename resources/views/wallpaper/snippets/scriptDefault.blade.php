@@ -1,5 +1,14 @@
 <!-- BEGIN: SLICK -->
 <script defer type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16558810206"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-16558810206');
+</script>
 <!-- END: SLICK -->
 <script defer type="text/javascript">
     $(window).ready(function(){
