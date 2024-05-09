@@ -42,9 +42,6 @@
             @endif
             <div class="languageBox_background"></div>
         </div>
-        {{-- <div class="settingViewBox hide-1023">
-            <i class="fa-solid fa-eye"></i>
-        </div> --}}
         <div class="iconMenuMobile show-1023" onClick="toggleMenuMobile('js_toggleMenuMobile');">
             <i class="fa-regular fa-bars"></i>
         </div>

@@ -45,40 +45,39 @@ class AjaxController extends Controller {
 
     public static function searchProductAjax(Request $request){
         if(!empty($request->get('search'))){
+            $language           = $request->session()->get('language') ?? $request->get('language') ?? 'vi';
             $keySearch          = \App\Helpers\Charactor::convertStringSearch($request->get('search'));
             $products           = Product::select('product_info.*')
                 ->whereHas('prices.wallpapers', function(){
 
                 })
-                ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-                ->where('code', 'like', '%'.$keySearch.'%')
-                ->orWhere('name', 'like', '%'.$keySearch.'%')
-                ->orWhere('en_name', 'like', '%'.$keySearch.'%')
+                ->whereHas('seos.infoSeo', function($query) use($keySearch, $language){
+                    $query->where('title', 'like', '%'.$keySearch.'%')
+                            ->where('language', $language);
+                })
+                ->orWhere('code', 'like', '%'.$keySearch.'%')
                 ->skip(0)
                 ->take(5)
-                ->with('seo', 'prices.wallpapers.infoWallpaper')
-                ->orderBy('seo.ordering', 'DESC')
-                ->orderBy('id', 'DESC')
                 ->get();
             $count              = Product::select('product_info.*')
                 ->whereHas('prices.wallpapers', function(){
                         
                 })
-                ->where('code', 'like', '%'.$keySearch.'%')
-                ->orWhere('name', 'like', '%'.$keySearch.'%')
-                ->orWhere('en_name', 'like', '%'.$keySearch.'%')
+                ->whereHas('seos.infoSeo', function($query) use($keySearch, $language){
+                    $query->where('title', 'like', '%'.$keySearch.'%')
+                            ->where('language', $language);
+                })
+                ->orWhere('code', 'like', '%'.$keySearch.'%')
                 ->count();
             $response           = null;
-            $language           = $request->get('language') ?? 'vi';
             if(!empty($products)&&$products->isNotEmpty()){
                 foreach($products as $product){
-                    if($language=='vi'){
-                        $title  = $product->name ?? $product->seo->title ?? null;
-                        $url    = $product->seo->slug_full;
-                    }else {
-                        $title  = $product->en_name ?? $product->en_seo->title ?? null;
-                        $url    = $product->en_seo->slug_full;
+                    $infoSeoProduct = [];
+                    foreach($product->seos as $seo){
+                        if($seo->infoSeo->language==$language) $infoSeoProduct = $seo->infoSeo;
                     }
+                    $title      = $infoSeoProduct->title ?? '';
+                    $url        = $infoSeoProduct->slug_full ?? '';
                     $priceOld   = null;
                     if($product->prices<$product->price_before_promotion) {
                         $priceOld   = '<div class="searchViewBefore_selectbox_item_content_price_old">'.\App\Helpers\Number::getFormatPriceByLanguage($product->price_before_promotion, $language).'</div>';
@@ -100,20 +99,11 @@ class AjaxController extends Controller {
                                         </div>
                                     </a>';
                 }
-                if(empty($language)||$language=='vi'){
-                    $url            = route('routing', ['slug' => 'anh-gai-xinh']).'?search='.$keySearch;
-                    $contentButton  = 'Xem tất cả (<span>'.$count.'</span>) kết quả <i class="fa-solid fa-angles-right"></i>';
-                }else {
-                    $url            = route('routing', ['slug' => 'photo-beautiful-girl']).'?search='.$keySearch;
-                    $contentButton  = 'See all (<span>'.$count.'</span>) results <i class="fa-solid fa-angles-right"></i>';
-                }
+                $url                = route('routing', ['slug' => config('language.'.$language.'.slug_page')]).'?search='.$keySearch;
+                $contentButton      = config('language.'.$language.'.data.view_all').' (<span>'.$count.'</span>) <i class="fa-solid fa-angles-right"></i>';
                 $response           .= '<a href="'.$url.'" class="searchViewBefore_selectbox_item">'.$contentButton.'</a>';
             }else {
-                if(empty($language)||$language=='vi'){
-                    $response       = '<div class="searchViewBefore_selectbox_item">'.config('main.message.vi.product_empty').'</div>';
-                }else {
-                    $response       = '<div class="searchViewBefore_selectbox_item">'.config('main.message.en.product_empty').'</div>';
-                }
+                $response       = '<div class="searchViewBefore_selectbox_item">'.config('language.'.$language.'.data.no_suitable_results_found').'</div>';
             }
             echo $response;
         }

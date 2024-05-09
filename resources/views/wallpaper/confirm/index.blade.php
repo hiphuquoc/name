@@ -19,7 +19,6 @@
             <div class="container">
                 @php
                     $xhtmlTotal = null;
-
                 @endphp
                 <div class="pageCartBox">
                     <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left" style="width:100%;">

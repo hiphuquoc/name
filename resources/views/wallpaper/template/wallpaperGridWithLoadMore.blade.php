@@ -1,4 +1,5 @@
 <!-- load more -->
+<input type="hidden" id="js_loadMoreWallpaper_search" value="{{ $search ?? null }}" />
 <input type="hidden" id="js_loadMoreWallpaper_total" value="{{ $total ?? 0 }}" />
 <input type="hidden" id="js_loadMoreWallpaper_loaded" value="{{ $loaded ?? 0 }}" />
 @if(!empty($arrayIdCategory))
@@ -21,14 +22,6 @@
     @for($i=1;$i<=$loadFirstTime;++$i)
         <div class="wallpaperGridBox_itemBackground"></div>
     @endfor
-    {{-- <!-- thông báo không có kết quả (cần thiêt) -->
-    @if(!empty($empty)&&$empty==true)
-        @if(empty($language)||$language=='vi')
-            {{ config('main.message.vi.product_empty') }}
-        @else 
-            {{ config('main.message.en.product_empty') }}
-        @endif
-    @endif --}}
 </div>
 @push('scriptCustom')
     <script type="text/javascript">
@@ -73,8 +66,8 @@
             const loaded = $('#js_loadMoreWallpaper_loaded').val();
             /* thêm class để đánh dấu đang load => không load nữa */
             boxCategory.addClass('loading');
-
             /* lấy dữ liệu */
+            params.search = $('#js_loadMoreWallpaper_search').val();
             params.total = total;
             params.loaded = loaded;
             params.array_category_info_id = $('#js_loadMoreWallpaper_array_category_info_id').val();

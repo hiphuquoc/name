@@ -1,18 +1,12 @@
 @php
-    if(!empty($language)&&$language=='en'){
-        $buttonName = 'Search';
-        $labelName  = 'Search phone wallpaper';
-    }else {
-        $buttonName = 'Tìm kiếm';
-        $labelName  = 'Tìm kiếm hình nền điện thoại';
-    }
+    $labelName  = config('language.'.$language.'.data.search_wallpapers');
 @endphp
 
-<form action="{{ empty($language)||$language=='vi' ? route('routing', ['slug' => 'hinh-nen-dien-thoai']) : route('routing', ['slug' => 'phone-wallpapers']) }}" method="GET">
+<form action="{{ route('routing', ['slug' => config('language.'.$language.'.slug_page')]).'?search=' }}" method="GET">
     <div class="searchViewBefore">
         <div class="searchViewBefore_input">
             <!-- value = null không lưu giá trị search cũ -->
-            <input id="searchProductAjax_input" type="text" name="search" placeholder="{{ $buttonName }}" value="" onkeyup="searchProductAjaxWithDelay(this)" autocomplete="off" />
+            <input id="searchProductAjax_input" type="text" name="search" placeholder="{{ $labelName }}" value="" onkeyup="searchProductAjaxWithDelay(this)" autocomplete="off" />
             <button type="submit" class="button" aria-label="{{ $labelName }}">
                 <img src="{{ Storage::url('images/svg/search.svg') }}" alt="" title="{{ $labelName }}" />
             </button>

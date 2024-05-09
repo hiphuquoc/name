@@ -46,7 +46,7 @@ class CategoryController extends Controller {
     public static function getFreeWallpapers($params){
         $idNot          = $params['id_not'] ?? 0;
         $language       = session()->get('language');
-        $keySearch      = $params['key_search'] ?? null;
+        $keySearch      = $params['search'] ?? null;
         $filters        = $params['filters'] ?? [];
         $sortBy         = $params['sort_by'] ?? null;
         $loaded         = $params['loaded'] ?? 0;

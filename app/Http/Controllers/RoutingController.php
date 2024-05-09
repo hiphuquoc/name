@@ -249,6 +249,7 @@ class RoutingController extends Controller{
                             $params['request_load']             = 50; /* lấy 50 để khai báo schema */
                             $params['sort_by']                  = Cookie::get('sort_by') ?? null;
                             $params['filters']                  = $request->get('filters') ?? [];
+                            $params['search']                   = $request->get('search') ?? null;
                             $tmp                                = CategoryController::getFreeWallpapers($params);
                             $wallpapers                         = $tmp['wallpapers'];
                             $total                              = $tmp['total'];
@@ -260,7 +261,8 @@ class RoutingController extends Controller{
                         if($flagFree==false){
                             $params         = [];
                             /* key_search */
-                            $params['key_search'] = request('search') ?? null;
+                            $params['search'] = request('search') ?? null;
+                            $search             = $params['search'];
                             $arrayIdCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
                             // dd($request->all());
                             $params['array_category_info_id'] = $arrayIdCategory;
@@ -277,7 +279,7 @@ class RoutingController extends Controller{
                             $wallpapers         = $response['wallpapers'];
                             $total              = $response['total'];
                             $loaded             = $response['loaded'];
-                            $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'viewBy'))->render();
+                            $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'viewBy', 'search'))->render();
                         }
                     }
                 }
