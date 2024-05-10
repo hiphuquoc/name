@@ -89,6 +89,7 @@
                 padding: 0.5rem 0.75rem 0 0.75rem;
                 width: 100%;
                 &_title {
+                    position: relative;
                     h2, h3, h4 {
                         font-family: $fontText;
                         font-weight: normal;
@@ -107,6 +108,23 @@
                     display: flex;
                     align-items: flex-end;
                     height: 30px;
+                    position: relative;
+                    &_quantity {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        right: 0;
+                        color: $colorText;
+                        text-shadow: 0 0 10px #000;
+                        font-size: 0.85rem;
+                        opacity: 0.75;
+                        font-family: $fontText;
+                        font-weight: 500;
+                        i {
+                            font-size: 0.8rem;
+                            margin-right: 0.2rem;
+                        }
+                    }
                     > span {
                         font-size: 0.75rem;
                         font-weight: normal;
@@ -236,17 +254,19 @@
     }
     @media(max-width: 766px){
         &_item {
-        // &:not(:first-child){
-        //     margin-left: 1.25rem;
-        // }
-            &_content {
-                &_price {
-                    font-size: 1.05rem;
-                    letter-spacing: 0.5px;
-                > span {
-                    font-size: 0.95rem;
-                    margin-left: 0.5rem;
-                }
+            &_image {
+                &_content {
+                    &_title {
+                        font-size: 0.875rem;
+                    }
+                    &_price {
+                        font-size: 0.95rem;
+                        > span {
+                            font-size: 0.95rem;
+                            margin-left: 0.5rem;
+                            display: none;
+                        }
+                    }
                 }
             }
         }

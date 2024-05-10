@@ -5384,6 +5384,9 @@ label.checkBox > *:not(:first-child) {
   padding: 0.5rem 0.75rem 0 0.75rem;
   width: 100%;
 }
+.wallpaperGridBox_item_image_content_title {
+  position: relative;
+}
 .wallpaperGridBox_item_image_content_title h2, .wallpaperGridBox_item_image_content_title h3, .wallpaperGridBox_item_image_content_title h4 {
   font-family: "SVN-Gilroy", sans-serif;
   font-weight: normal;
@@ -5401,6 +5404,23 @@ label.checkBox > *:not(:first-child) {
   display: flex;
   align-items: flex-end;
   height: 30px;
+  position: relative;
+}
+.wallpaperGridBox_item_image_content_price_quantity {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  color: #c0d0f1;
+  text-shadow: 0 0 10px #000;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  font-family: "SVN-Gilroy", sans-serif;
+  font-weight: 500;
+}
+.wallpaperGridBox_item_image_content_price_quantity i {
+  font-size: 0.8rem;
+  margin-right: 0.2rem;
 }
 .wallpaperGridBox_item_image_content_price > span {
   font-size: 0.75rem;
@@ -5523,13 +5543,16 @@ label.checkBox > *:not(:first-child) {
   border-radius: 12px;
 }
 @media (max-width: 766px) {
-  .wallpaperGridBox_item_content_price {
-    font-size: 1.05rem;
-    letter-spacing: 0.5px;
+  .wallpaperGridBox_item_image_content_title {
+    font-size: 0.875rem;
   }
-  .wallpaperGridBox_item_content_price > span {
+  .wallpaperGridBox_item_image_content_price {
+    font-size: 0.95rem;
+  }
+  .wallpaperGridBox_item_image_content_price > span {
     font-size: 0.95rem;
     margin-left: 0.5rem;
+    display: none;
   }
 }
 @media (max-width: 577px) {

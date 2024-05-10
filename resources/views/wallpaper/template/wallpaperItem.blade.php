@@ -95,7 +95,17 @@
                                     <div>{!! $xhtmlPrice !!}</div>
                                     <!-- giá trước khuyến mãi -->
                                     {!! $xhtmlPriceOld !!}
+                                    @php
+                                        $quantityImage = 0;
+                                        foreach($product->prices as $p) if(!empty($p->wallpapers)&&$p->wallpapers->count()) $quantityImage += $p->wallpapers->count();
+                                    @endphp
+                                    @if(!empty($quantityImage))
+                                        <div class="wallpaperGridBox_item_image_content_price_quantity">
+                                            <i class="fa-regular fa-image"></i>{{ $quantityImage }}
+                                        </div>
+                                    @endif
                                 </div>
+                                
                             </div>
                             <!-- background blur -->
                             <div class="wallpaperGridBox_item_image_backgroundBlur"></div>
@@ -115,12 +125,14 @@
                     <!-- danh sách ảnh -->
                     <div class="wallpaperGridBox_item_imageList">
                         @php
-                            $k                  = 1;
+                            $k = 1;
+                            $totalWallpaper = 0;
+                            foreach($product->prices as $price) $totalWallpaper += $price->wallpapers->count();
                         @endphp
                         @foreach($product->prices as $price)
                             @foreach($price->wallpapers as $wallpaper)
                                 @php
-                                    if($k==7) break;
+                                    if($k==6) break;
                                     ++$k;
                                     $tag        = $tagBox ?? null;
                                     $keyIdFile  = 'js_changeOption_'.$tag.$price->id.$wallpaper->infoWallpaper->id;
@@ -129,7 +141,7 @@
                                     /* lấy ảnh mini */
                                     $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                                 @endphp
-                                @if($k==7)
+                                @if($totalWallpaper>6&&$k==6)
                                     <a href="/{{ $url }}" class="wallpaperGridBox_item_imageList_item {{ $selected }}">
                                         <div class="wallpaperGridBox_item_imageList_item_backgroundImage" style="background:url('{{ $imageMini }}') no-repeat center center / cover;"></div>
                                         <span class="wallpaperGridBox_item_imageList_item_count">+{{ $product->prices->count() - 5 }}</span>
