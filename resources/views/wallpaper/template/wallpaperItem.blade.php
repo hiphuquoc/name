@@ -39,7 +39,7 @@
                     $url        = $productSeo->slug_full ?? null;
                 @endphp
                 <div id="{{ $keyIdPrice }}" class="{{ $i==0 ? 'show' : 'hide' }}">
-                    <a href="/{{ $url }}?product_price_id={{ $price->id }}" class="wallpaperGridBox_item_image">
+                    <a href="/{{ $url }}" class="wallpaperGridBox_item_image">
                         <div class="zIndexHide">
                             <!-- xử lý loadajax -->
                             @if(!empty($lazyload)&&$lazyload==true)
