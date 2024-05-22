@@ -796,7 +796,7 @@
     function showSortBoxWallpaper() {
         const id = "{{ $item->id ?? 0 }}";
         const total = "{{ $total ?? 0 }}";
-
+        const type = "{{ $item->seo->type ?? '' }}";
         // Lấy chuỗi query parameters từ URL
         var queryString = window.location.search;
         
@@ -812,7 +812,7 @@
         // Thêm các giá trị id và total vào params
         params['id'] = id;
         params['total'] = total;
-
+        params['type'] = type;
         const queryParams = new URLSearchParams(params).toString();
 
         fetch("/showSortBoxWallpaper?" + queryParams, {

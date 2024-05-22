@@ -229,6 +229,7 @@ class AjaxController extends Controller {
         $xhtml              = '';
         $id                 = $request->get('id');
         $total              = $request->get('total');
+        $type               = $request->get('type');
         $language           = SettingController::getLanguage();
         /* select của filter */
         $categories         = Category::select('*')
@@ -244,16 +245,19 @@ class AjaxController extends Controller {
         $filters            = $request->get('filters') ?? [];
         /* giá trị selectBox */
         $categoryChoose     = new \Illuminate\Database\Eloquent\Collection;
-        $categoryChoose     = Category::select('*')
+        if($type=='category_info'){
+            $categoryChoose = Category::select('*')
                                 ->where('id', $id)
                                 ->with('seo', 'seos')
                                 ->first();
+        }
         $xhtml              = view('wallpaper.categoryMoney.sortContent', [
             'language'          => $language,
             'total'             => $total,
             'categories'        => $categories,
             'categoryChoose'    => $categoryChoose,
-            'filters'           => $filters
+            'filters'           => $filters,
+            'test'              => true,
         ])->render();
         return $xhtml;
     }

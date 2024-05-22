@@ -3,7 +3,7 @@
     // /* kiểm tra selected với link truy cập hiện tại */
     $flagSelected   = false;
     $nameSelect     = config('language.'.$language.'.data.all');
-    if(!empty($categoryChoose->seo->type)&&$categoryChoose->seo->type==$type['key']){
+    if(!empty($categoryChoose->seo)&&$categoryChoose->seo->type==$type['key']){
         if(!empty($categories)&&$categories->isNotEmpty()){
             foreach($categories as $category){
                 if($category->id==$categoryChoose->id&&$category->flag_show==true) {

@@ -119,6 +119,7 @@ class TagController extends Controller {
     }
 
     public function createAndUpdate(TagRequest $request){
+        // dd($request->all());
         try {
             DB::beginTransaction();
             /* ngôn ngữ */
