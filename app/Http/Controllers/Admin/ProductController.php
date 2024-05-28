@@ -83,7 +83,7 @@ class ProductController extends Controller {
             /* nếu là bảng việt (gốc) mới cập nhật tiếp */
             if($language=='vi'){
                 /* lưu tag name */
-                if(!empty($request->get('tags'))) FreeWallpaperController::createOrGetTagName($idProduct, 'product_info', $request->get('tags'));
+                if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idProduct, 'product_info', $request->get('tag'));
                 /* update product_price 
                     => xóa các product_price nào id không tồn tại trong mảng mới 
                     => nào có tồn tại thì update - nào không thì thêm mới 

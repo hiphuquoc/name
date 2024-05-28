@@ -108,14 +108,14 @@
                     }
                 }
             @endphp
-            <label for="tags" class="form-label">
+            <label for="tag" class="form-label">
                 Tag name
                 @if(!empty($chatgptDataAndEvent['eventChatgpt']))
                     <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                 @endif
             </label>
             <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
-                <input id="tags" name="tags" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} />  
+                <input id="tag" name="tag" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} />  
             </div>
         </div>
         <!-- One Row -->
@@ -139,7 +139,7 @@
 @push('scriptCustom')
     <script type="text/javascript">
         var strTag = {!! json_encode($arrayTag) !!};
-        new Tagify(document.querySelector("#tags"), {
+        new Tagify(document.querySelector("#tag"), {
             whitelist: strTag,
             maxTags: Infinity, // allows to select max items
             dropdown: {

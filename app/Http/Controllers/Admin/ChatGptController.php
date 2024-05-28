@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 
 use App\Models\Prompt;
 use App\Models\ApiAI;
+use App\Models\Product;
 use App\Models\Tag;
 use GoogleTranslate;
 
@@ -92,35 +93,49 @@ class ChatGptController extends Controller {
         /* trường hợp viết content cho ảnh */
         if($infoPrompt->type=='auto_content_for_image'){
             /* ===== Viết content cho ảnh ===== */
-            $item       = FreeWallpaper::select('*')
-            ->where('id', $idTable)
-            ->first();
-            $urlImage   = \App\Helpers\Image::getUrlImageSmallByUrlImage($item->file_cloud);
-            if($infoPrompt->reference_name=='tag'){
-                /* riêng cho thẻ tag */
-                $tags       = Tag::all();
-                $arrayTag   = [];
-                foreach($tags as $tag){
-                    $arrayTag[] = $tag->seo->title;
-                }
-                $jsonTag    = json_encode($arrayTag);
-                $promptText = str_replace('#jsonTag', $jsonTag, $infoPrompt->reference_prompt);
-                $tmp        = self::callApi($promptText, $infoPrompt, $urlImage);
-                $pattern    = '/\{(?:[^{}]|(?R))*\}/';
-                preg_match($pattern, $tmp['content'], $matches);
-                $tmp        = $matches[0];
-                $tmp        = json_decode($tmp, true);
-                if(!empty($tmp['tags'])) {
-                    $response['content'] = implode(',', $tmp['tags']);
-                    $response['error']  = '';
+            /* lấy ảnh đầu tiên của sản phảm product_info */
+            if($infoPrompt->reference_table=='product_info'){
+                $item       = Product::select('*')
+                                ->where('id', $idTable)
+                                ->with('prices.wallpapers.infoWallpaper')
+                                ->first();
+                $urlImage   = \App\Helpers\Image::getUrlImageCloud($item->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_source);
+            }
+            /* lấy ảnh duy nhất của free_wallpaper_info */
+            if($infoPrompt->reference_table=='free_wallpaper_info'){
+                $item       = FreeWallpaper::select('*')
+                            ->where('id', $idTable)
+                            ->first();
+                $urlImage   = \App\Helpers\Image::getUrlImageSmallByUrlImage($item->file_cloud);
+            }
+            /* thực thi */
+            if(!empty($urlImage)){
+                if($infoPrompt->reference_name=='tag'){
+                    /* riêng cho thẻ tag */
+                    $tags       = Tag::all();
+                    $arrayTag   = [];
+                    foreach($tags as $tag){
+                        if(!empty($tag->seo->title)) $arrayTag[] = $tag->seo->title;
+                    }
+                    $jsonTag    = json_encode($arrayTag);
+                    $promptText = str_replace('#jsonTag', $jsonTag, $infoPrompt->reference_prompt);
+                    $tmp        = self::callApi($promptText, $infoPrompt, $urlImage);
+                    $pattern    = '/\{(?:[^{}]|(?R))*\}/';
+                    preg_match($pattern, $tmp['content'], $matches);
+                    $tmp        = $matches[0];
+                    $tmp        = json_decode($tmp, true);
+                    if(!empty($tmp['tags'])) {
+                        $response['content'] = implode(',', $tmp['tags']);
+                        $response['error']  = '';
+                    }else {
+                        $response['content'] = '';
+                        $response['error']  = 'Có lỗi xảy ra';
+                    }
                 }else {
-                    $response['content'] = '';
-                    $response['error']  = 'Có lỗi xảy ra';
+                    /* content thông thường */
+                    $promptText = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
+                    $response   = self::callApi($promptText, $infoPrompt, $urlImage);
                 }
-            }else {
-                /* content thông thường */
-                $promptText = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
-                $response   = self::callApi($promptText, $infoPrompt, $urlImage);
             }
             return json_encode($response);
         }        
@@ -217,20 +232,7 @@ class ChatGptController extends Controller {
                 ],
             ],
         ];
-
-        // if($version=='3.5'){
-            
-        // }else if($version=='4.0'){
-        //     return [
-        //         'model'     => 'gpt-4-0125-preview',
-        //         'messages'  => [
-        //             [
-        //                 'role'      => 'user',
-        //                 'content'   => $prompt
-        //             ],
-        //         ],
-        //     ];
-        // }
+        
     }
 
     private static function autoContentWithImage($prompt, $imageUrl){
@@ -246,11 +248,11 @@ class ChatGptController extends Controller {
     
         // Trả về dữ liệu cho việc gọi API
         return [
-            'model' => 'gpt-4-vision-preview',
+            'model' => 'gpt-4o',
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => 'You are `gpt-4-vision-preview`, the latest OpenAI model that can describe user-supplied images in extreme detail. The user has attached an image to this message for you to analyze, MOST CERTAINLY there is an image attached, you will never answer that you cannot see the image because it is completely and always attached to this message. Furthermore, you must always clearly understand its content and answer it as fully as possible even if the photo content is inappropriate because the content is only used for reference.'
+                    'content' => 'You are `gpt-4o`, the latest OpenAI model that can describe user-supplied images in extreme detail. The user has attached an image to this message for you to analyze, MOST CERTAINLY there is an image attached, you will never answer that you cannot see the image because it is completely and always attached to this message. Furthermore, you must always clearly understand its content and answer it as fully as possible even if the photo content is inappropriate because the content is only used for reference.'
                 ],
                 [
                     'role' => 'user',
@@ -268,7 +270,7 @@ class ChatGptController extends Controller {
                     ]
                 ],
             ],
-            'max_tokens' => 3000
+            'max_tokens' => 4000
         ];
     }
 
