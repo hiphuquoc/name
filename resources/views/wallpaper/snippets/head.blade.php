@@ -130,4 +130,4 @@
 <link rel="stylesheet" href="{{ env('APP_URL').'/css/main/style.css' }}?version={{ time() }}">
 <!-- END: Custom CSS-->
 
-<meta name='dmca-site-verification' content='{{ env('GOOGLE_ANALYTICS_ID') }}' />
+<meta name='dmca-site-verification' content='{{ env('DMCA_VALIDATE') }}' />
