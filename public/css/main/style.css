@@ -263,24 +263,25 @@ table:not(.noResponsive) {
 
 blockquote {
   display: block;
-  background: #EDF2F7;
-  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  background: #2d3848BF;
+  padding: 0.75rem 0.75rem 0.75rem 2.25rem;
   margin-bottom: 0.75rem;
   margin-top: 0.75rem;
   position: relative;
   font-size: inherit;
   text-align: justify;
-  border-left: 5px solid #00bd7d;
+  border-left: 4px solid #006d57;
   border-radius: 10px;
 }
 blockquote::before {
   content: "“";
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #adb5bd;
   position: absolute;
   left: 0.5rem;
-  top: 1.5rem;
+  top: 1.25rem;
+  opacity: 0.75;
 }
 blockquote::after {
   content: "";
@@ -288,10 +289,17 @@ blockquote::after {
 blockquote em {
   font-style: italic;
 }
-@media (max-width: 577px) {
+@media (max-width: 767px) {
   blockquote {
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.75rem;
+    border-left: 3px solid #006d57;
+  }
+  blockquote::before {
+    content: "“";
+    font-size: 2rem;
+    top: 0.75rem;
   }
 }
 

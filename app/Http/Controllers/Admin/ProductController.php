@@ -60,11 +60,13 @@ class ProductController extends Controller {
             SeoContent::select('*')
                 ->where('seo_id', $idSeo)
                 ->delete();
-            foreach($request->get('content') as $content){
-                SeoContent::insertItem([
-                    'seo_id'    => $idSeo,
-                    'content'   => $content
-                ]);
+            if(!empty($request->get('content'))){
+                foreach($request->get('content') as $content){
+                    SeoContent::insertItem([
+                        'seo_id'    => $idSeo,
+                        'content'   => $content
+                    ]);
+                }
             }
             /* insert hoặc update product_info */
             if(empty($idProduct)){ /* check xem create product hay update product */
@@ -176,7 +178,7 @@ class ProductController extends Controller {
         $keyTable           = 'product_info';
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
-        $language           = $request->get('language') ?? null;
+        $language           = $request->get('language') ?? 'vi';
         /* chức năng copy source */
         $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
         $itemSourceToCopy   = Product::select('*')

@@ -8,12 +8,14 @@
             $disable        = 'disable';
             $languageLink   = route($routeName, [
                 "language"  => $lang['key'], 
-                "id"        => $item->id
+                "id"        => $item->id ?? 0
             ]);
-            foreach($item->seos as $s){
-                if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$lang['key']){
-                    $disable = null;
-                    break;
+            if(!empty($item->seos)){
+                foreach($item->seos as $s){
+                    if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$lang['key']){
+                        $disable = null;
+                        break;
+                    }
                 }
             }
         @endphp

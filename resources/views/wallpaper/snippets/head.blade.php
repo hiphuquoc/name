@@ -114,18 +114,20 @@
 <!-- END: Jquery -->
 
 <!-- BEGIN: Google Analytics -->
-@if(env('APP_ENV')=='production')
+{{-- @if(env('APP_ENV')=='production') --}}
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3XCL5MK23"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('GOOGLE_ANALYTICS_ID') }}"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-D3XCL5MK23');
+    gtag('config', '{{ env('GOOGLE_ANALYTICS_ID') }}');
     </script>
     <!-- END: Google Analytics -->
-@endif
+{{-- @endif --}}
 
 {{-- @vite(['resources/sources/main/style.scss']) --}}
 <link rel="stylesheet" href="{{ env('APP_URL').'/css/main/style.css' }}?version={{ time() }}">
 <!-- END: Custom CSS-->
+
+<meta name='dmca-site-verification' content='{{ env('GOOGLE_ANALYTICS_ID') }}' />

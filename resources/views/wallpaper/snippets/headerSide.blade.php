@@ -223,26 +223,32 @@
     </ul>
 </div>
 
-<div class="socialBox">
-    <div class="socialBox_title">
-        {{ config('language.'.$language.'.data.connect_with_us') }}
+<div style="display:flex;align-items:flex-end;">
+    <div class="socialBox">
+        <div class="socialBox_title">
+            {{ config('language.'.$language.'.data.connect_with_us') }}
+        </div>
+        <div class="socialBox_box">
+            <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_box_item" target="_blank">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://www.tiktok.com/@wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://twitter.com/wallpapers_name" class="socialBox_box_item" target="_blank">
+                <i class="fa-brands fa-twitter"></i>
+            </a>
+        </div>
     </div>
-    <div class="socialBox_box">
-        <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_box_item" target="_blank">
-            <i class="fa-brands fa-facebook-f"></i>
-        </a>
-        <a href="https://www.instagram.com/wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a href="https://www.youtube.com/@wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
-            <i class="fa-brands fa-youtube"></i>
-        </a>
-        <a href="https://www.tiktok.com/@wallpapers_namecomvn" class="socialBox_box_item" target="_blank">
-            <i class="fa-brands fa-tiktok"></i>
-        </a>
-        <a href="https://twitter.com/wallpapers_name" class="socialBox_box_item" target="_blank">
-            <i class="fa-brands fa-twitter"></i>
-        </a>
+    <div style="margin-left:1.5rem;width:70px;opacity:0.75;">
+        <a href="//www.dmca.com/Protection/Status.aspx?ID={{ env('DMCA_ID') }}" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca-badge-w100-2x1-02.png?ID={{ env('DMCA_ID') }}"  alt="DMCA.com Protection Status" /></a>  
+        <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
     </div>
 </div>
 
