@@ -8,7 +8,7 @@
         </div>
         <div class="searchBox_item" style="margin-left:auto;text-align:right;">
             @php
-                $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewBrandInfo', [20, 50, 100, 200, 500], $viewPerPage, $list->total());
+                $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewBrandInfo', config('setting.admin_array_number_view'), $viewPerPage, $list->total());
                 echo $xhtmlSettingView;
             @endphp
         </div>

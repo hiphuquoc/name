@@ -22,8 +22,9 @@ class Tag extends Model {
                         })
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->whereHas('seo', function($subQuery) use($params){
-                                $subQuery->where('title', 'like', '%'.$params['search_name'].'%');
+                            $searchName = $params['search_name'];
+                            $query->whereHas('seo', function($subQuery) use($searchName){
+                                $subQuery->where('title', 'like', '%'.$searchName.'%');
                             });
                         })
                         /* tìm theo danh mục */
@@ -40,7 +41,6 @@ class Tag extends Model {
                         ->paginate($params['paginate']);
         return $result;
     }
-
 
     public static function insertItem($params){
         $id             = 0;

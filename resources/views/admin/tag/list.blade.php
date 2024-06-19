@@ -33,7 +33,7 @@
         </table>
     </div>
     <!-- Pagination -->
-    {{-- {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }} --}}
+    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
 </div>
 
 {{-- <!-- Nút thêm -->
