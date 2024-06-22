@@ -28,15 +28,17 @@
             @if(!empty($item->seos)&&$item->seos->isNotEmpty())
                 <div class="languageBox_list">
                     @foreach($item->seos as $seo)
-                        @php
-                            $selected = null;
-                            if($seo->infoSeo->language==$language) $selected = 'selected';
-                            $queryString = !empty(request()->getQueryString()) ? '?'.request()->getQueryString() : '';
-                        @endphp
-                        <a href="/{{ $seo->infoSeo->slug_full.$queryString }}" class="languageBox_list_item {{ $selected }}" aria-label="{{ $seo->infoSeo->title }}">
-                            <div>{{ strtoupper($seo->infoSeo->language) }}</div>
-                            <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon_flag_'.$seo->infoSeo->language.'.png') }}') no-repeat center;background-size:100% 100%;"></div>
-                        </a>
+                        @if(!empty($seo->infoSeo))
+                            @php
+                                $selected = null;
+                                if($seo->infoSeo->language==$language) $selected = 'selected';
+                                $queryString = !empty(request()->getQueryString()) ? '?'.request()->getQueryString() : '';
+                            @endphp
+                            <a href="/{{ $seo->infoSeo->slug_full.$queryString }}" class="languageBox_list_item {{ $selected }}" aria-label="{{ $seo->infoSeo->title }}">
+                                <div>{{ strtoupper($seo->infoSeo->language) }}</div>
+                                <div class="languageBox_list_item_icon" style="background:url('{{ Storage::url('images/svg/icon_flag_'.$seo->infoSeo->language.'.png') }}') no-repeat center;background-size:100% 100%;"></div>
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             @endif
