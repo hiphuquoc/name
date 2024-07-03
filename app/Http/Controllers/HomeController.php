@@ -20,6 +20,9 @@ use App\Models\FreeWallpaper;
 use App\Models\RelationSeoProductInfo;
 use App\Models\RelationSeoTagInfo;
 use Google\Client as Google_Client;
+use Illuminate\Support\Facades\DB;
+
+use DOMDocument;
 
 class HomeController extends Controller
 {
@@ -67,81 +70,24 @@ class HomeController extends Controller
     }
 
     public static function test(Request $request){
-        $urlSource      = 'bo-hinh-nen-dien-thoai-4k-gau-con-phong-cach-toi-gian-1712897742';
-        $urlSearch      = 'bo-hinh-nen-dien-thoai-4k-gau-con-phong-cach-toi-gian';
-        $productSource  = Product::select('*')
-            ->whereHas('seo', function ($query) use($urlSource){
-                $query->where('slug', $urlSource);
-            })
-            ->with('seo', 'seos.infoSeo.contents')
-            ->first();
-
-        $tmp            = Product::select('*')
-            ->whereHas('seo', function ($query) use($urlSearch){
-                $query->where('slug', 'LIKE', $urlSearch.'%');
-            })
-            ->where('id', '!=', $productSource->id)
-            ->with('seo', 'seos.infoSeo.contents')
+        $seoContents = DB::table('seo_content')
+            ->select('seo_id', DB::raw('GROUP_CONCAT(id ORDER BY ordering, id) as ids'))
+            ->groupBy('seo_id')
             ->get();
-        foreach($tmp as $t){
-            /* copy relation product và category */
-            \App\Models\RelationCategoryProduct::select('*')
-                ->where('product_info_id', $t->id)
-                ->delete();
-            foreach($productSource->categories as $category){
-                \App\Models\RelationCategoryProduct::insertItem([
-                    'category_info_id'       => $category->category_info_id,
-                    'product_info_id'      => $t->id
+        foreach($seoContents as $contents){
+            $tmp        = explode(',', $contents->ids);
+            $contents   = SeoContent::select('*')
+                            ->whereIn('id', $tmp)
+                            ->get();
+            $i          = 1;
+            foreach($contents as $c){
+                SeoContent::updateItem($c->id, [
+                    'ordering' => $i
                 ]);
-            }
-            /* copy relation product và tag */
-            \App\Models\RelationTagInfoOrther::select('*')
-                ->where('reference_type', 'product_info')
-                ->where('reference_id', $t->id)
-                ->delete();
-            foreach($productSource->tags as $tag){
-                \App\Models\RelationTagInfoOrther::insertItem([
-                    'tag_info_id'       => $tag->tag_info_id,
-                    'reference_type'    => 'product_info',
-                    'reference_id'      => $t->id
-                ]);
+                ++$i;
             }
         }
-        dd(123);
-        // $tmp = Seo::select('seo.*')
-        //         ->leftJoin('tag_info', 'tag_info.seo_id', '=', 'seo.id')
-        //         ->where('type', 'tag_info')
-        //         ->where('language', 'vi')
-        //         ->whereNull('tag_info.seo_id')
-        //         ->get();
-        // dd($tmp);
-
-        // dd($tmp->count());
-
-        // $tmp2 = Seo::select('seo.*')
-        //         ->where('type', 'tag_info')
-        //         ->get();
-        // foreach()
-
-        // $client = new Google_Client();
-
-        // // service_account_file.json is the private key that you created for your service account.
-        // $client->setAuthConfig('../credentials.json');
-        // $client->addScope('https://www.googleapis.com/auth/indexing');
-
-        // // Get a Guzzle HTTP Client
-        // $httpClient = $client->authorize();
-        // $endpoint = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
-
-        // // Define contents here. The structure of the content is described in the next step.
-        // $content = '{
-        // "url": "https://name.com.vn/hinh-nen-dien-thoai",
-        // "type": "URL_UPDATED"
-        // }';
-
-        // $response = $httpClient->post($endpoint, [ 'body' => $content ]);
-        // $status_code = $response->getStatusCode();
-        // dd($status_code);
+        dd($seoContents);
     }
 
     // $flag = self::copyProductBySource('bo-hinh-nen-dien-thoai-4k-meo-con-phong-cach-toi-gian-1712926734', 'hinh-nen-dien-thoai-meo-con-phong-cach');
@@ -161,60 +107,60 @@ class HomeController extends Controller
         //     // Xử lý lỗi khi gửi yêu cầu
         // }
 
-    public static function chatGPT(Request $request){
-        // Replace 'YOUR_API_KEY' with your actual API key from OpenAI
-        $apiKey = env('CHAT_GPT_API_KEY');
+    // public static function chatGPT(Request $request){
+    //     // Replace 'YOUR_API_KEY' with your actual API key from OpenAI
+    //     $apiKey = env('CHAT_GPT_API_KEY');
 
-        // Set a long timeout value to prevent timeout
-        $timeoutSeconds = 0; // 0 means unlimited timeout
-        $imageUrl   = 'https://namecomvn.storage.googleapis.com/freewallpapers/hinh-nen-dien-thoai-1708511257-20-small.png';
-        $imageData = base64_encode(file_get_contents($imageUrl));
-        /* tag */
-        $tags       = Tag::all();
-        $arrayTag   = [];
-        foreach ($tags as $tag) {
-            $arrayTag[] = $tag->seo->title;
-        }
-        $jsonTag    = json_encode($arrayTag);
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $apiKey,
-        ])->timeout($timeoutSeconds)->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-4-vision-preview',
-            'messages' => [
-                [
-                    'role' => 'system',
-                    'content' => 'You are `gpt-4-vision-preview`, the latest OpenAI model that can describe images provided by the user in extreme detail. The user has attached an image to this message for you to analyse, there is MOST DEFINITELY an image attached, you will never reply saying that you cannot see the image because the image is absolutely and always attached to this message. The content you respond to users must be at least 10000 tokens without interruption and returns data string'
-                ],
-                [
-                    'role' => 'user',
-                    'content' => [
-                        [
-                            'type' => 'text',
-                            'text' => 'Tôi có một biến json trong đó chưa tên các thẻ tag ' . $jsonTag . ', dựa vào nội dung, vẻ đẹp, phong cách, màu sắc và các yếu tố của bức ảnh, bạn hãy chọn lại các tag phù hợp của ảnh và trả về biến json như vậy giúp tôi'
-                        ],
-                        [
-                            'type' => 'image_url',
-                            'image_url' => [
-                                'url'    => 'data:image/jpeg;base64,' . $imageData
-                            ]
-                        ]
-                    ]
-                ],
-            ],
-            'max_tokens' => 3000
-        ]);
+    //     // Set a long timeout value to prevent timeout
+    //     $timeoutSeconds = 0; // 0 means unlimited timeout
+    //     $imageUrl   = 'https://namecomvn.storage.googleapis.com/freewallpapers/hinh-nen-dien-thoai-1708511257-20-small.png';
+    //     $imageData = base64_encode(file_get_contents($imageUrl));
+    //     /* tag */
+    //     $tags       = Tag::all();
+    //     $arrayTag   = [];
+    //     foreach ($tags as $tag) {
+    //         $arrayTag[] = $tag->seo->title;
+    //     }
+    //     $jsonTag    = json_encode($arrayTag);
+    //     $response = Http::withHeaders([
+    //         'Content-Type' => 'application/json',
+    //         'Authorization' => 'Bearer ' . $apiKey,
+    //     ])->timeout($timeoutSeconds)->post('https://api.openai.com/v1/chat/completions', [
+    //         'model' => 'gpt-4-vision-preview',
+    //         'messages' => [
+    //             [
+    //                 'role' => 'system',
+    //                 'content' => 'You are `gpt-4-vision-preview`, the latest OpenAI model that can describe images provided by the user in extreme detail. The user has attached an image to this message for you to analyse, there is MOST DEFINITELY an image attached, you will never reply saying that you cannot see the image because the image is absolutely and always attached to this message. The content you respond to users must be at least 10000 tokens without interruption and returns data string'
+    //             ],
+    //             [
+    //                 'role' => 'user',
+    //                 'content' => [
+    //                     [
+    //                         'type' => 'text',
+    //                         'text' => 'Tôi có một biến json trong đó chưa tên các thẻ tag ' . $jsonTag . ', dựa vào nội dung, vẻ đẹp, phong cách, màu sắc và các yếu tố của bức ảnh, bạn hãy chọn lại các tag phù hợp của ảnh và trả về biến json như vậy giúp tôi'
+    //                     ],
+    //                     [
+    //                         'type' => 'image_url',
+    //                         'image_url' => [
+    //                             'url'    => 'data:image/jpeg;base64,' . $imageData
+    //                         ]
+    //                     ]
+    //                 ]
+    //             ],
+    //         ],
+    //         'max_tokens' => 3000
+    //     ]);
 
-        $result = $response->json();
+    //     $result = $response->json();
 
-        echo $result['choices'][0]['message']['content'];
-        dd(123);
+    //     echo $result['choices'][0]['message']['content'];
+    //     dd(123);
 
-        // Xử lý và hiển thị kết quả
-        $description = $result['choices'][0]['message']['content'];
+    //     // Xử lý và hiển thị kết quả
+    //     $description = $result['choices'][0]['message']['content'];
 
-        return view('result', compact('description'));
-    }
+    //     return view('result', compact('description'));
+    // }
 
     public static function copyProductBySource($urlSource, $urlSearch){
         $response  = [];

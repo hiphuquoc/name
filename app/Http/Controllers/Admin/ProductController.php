@@ -60,13 +60,14 @@ class ProductController extends Controller {
             SeoContent::select('*')
                 ->where('seo_id', $idSeo)
                 ->delete();
-            if(!empty($request->get('content'))){
-                foreach($request->get('content') as $content){
-                    SeoContent::insertItem([
-                        'seo_id'    => $idSeo,
-                        'content'   => $content
-                    ]);
-                }
+            $i      = 1;
+            foreach($request->get('content') as $content){
+                SeoContent::insertItem([
+                    'seo_id'    => $idSeo,
+                    'content'   => $content,
+                    'ordering'  => $i
+                ]);
+                ++$i;
             }
             /* insert hoặc update product_info */
             if(empty($idProduct)){ /* check xem create product hay update product */

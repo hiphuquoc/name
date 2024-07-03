@@ -157,8 +157,13 @@
                                             break;
                                         }
                                     }
+                                    /* nếu số lượng content không rỗng < số lương prompts mới cho dùng tính năng auto translate */
+                                    $countPromptAutoContent = 0;
+                                    foreach($prompts as $p) if($p->reference_name=='content'&&$p->type=='auto_content') $countPromptAutoContent = $countPromptAutoContent + 1;
+                                    $countContentNotEmpty = 0;
+                                    foreach($itemSeo->contents as $c) if(!empty($c->content)) $countContentNotEmpty = $countContentNotEmpty + 1;
                                 @endphp
-                                @if(!empty($itemSeo->id))
+                                @if(!empty($promptTranslateContent->id)&&!empty($itemSeo->id)&&$countContentNotEmpty<$countPromptAutoContent)
                                     <div class="actionBox_item maxLine_1" onClick="createJobTranslate({{ $promptTranslateContent->id }}, {{ $item->seo->id }}, {{ $itemSeo->id }}, '{{ $language }}')">
                                         <i class="fa-solid fa-language"></i>Dịch nội dung (chạy ngầm)
                                     </div>

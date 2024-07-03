@@ -142,7 +142,7 @@ class ChatGptController extends Controller {
         return json_encode($response);
     }
 
-    private static function convertPrompt($item, $infoPrompt, $referenceName, $language){
+    public static function convertPrompt($item, $infoPrompt, $referenceName, $language){
         $response               = null;
         $prompt                 = $infoPrompt->reference_prompt ?? null;
         $action                 = $infoPrompt->type;
@@ -170,7 +170,7 @@ class ChatGptController extends Controller {
         return $response;
     }
 
-    private static function callApi($promptText, $infoPrompt, $urlImage = null, $retryCount = 0){
+    public static function callApi($promptText, $infoPrompt, $urlImage = null, $retryCount = 0){
         $data       = [];
         /* nếu 3.5 thì lấy ngẫu nhiên các phần tử được active */
         if($infoPrompt->version=='gpt-3.5-turbo-1106'){

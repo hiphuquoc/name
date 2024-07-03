@@ -197,11 +197,14 @@ class TagController extends Controller {
             SeoContent::select('*')
                 ->where('seo_id', $idSeo)
                 ->delete();
+            $i      = 1;
             foreach($request->get('content') as $content){
                 SeoContent::insertItem([
                     'seo_id'    => $idSeo,
-                    'content'   => $content
+                    'content'   => $content,
+                    'ordering'  => $i
                 ]);
+                ++$i;
             }
             
             DB::commit();

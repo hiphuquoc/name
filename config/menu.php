@@ -128,5 +128,17 @@ return [
                 ],
             ]
         ],
+        [
+            'name'      => 'Báo cáo',
+            'route'     => '',
+            'icon'      => '<i class="fa-solid fa-flag-checkered"></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Tự động dịch',
+                    'route' => 'admin.translate.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+            ]
+        ],
     ]
 ];

@@ -43,6 +43,7 @@ use App\Http\Controllers\Admin\ApiAIController;
 use App\Http\Controllers\Admin\ChatGptController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\ToolCopyProductController;
+use App\Http\Controllers\Admin\TranslateController;
 use App\Http\Controllers\CheckOnpageController;
 
 use App\Http\Controllers\Auth\ProviderController;
@@ -221,6 +222,12 @@ Route::middleware('auth', 'role:admin')->group(function (){
         Route::prefix('toolCopyProduct')->group(function(){
             Route::get('/view', [ToolCopyProductController::class, 'view'])->name('admin.toolCopyProduct.view');
             Route::get('/create', [ToolCopyProductController::class, 'create'])->name('admin.toolCopyProduct.create');
+        });
+        /* ===== TRANSLATE ===== */
+        Route::prefix('translate')->group(function(){
+            Route::get('/list', [TranslateController::class, 'list'])->name('admin.translate.list');
+            Route::get('/delete', [TranslateController::class, 'delete'])->name('admin.translate.delete');
+            Route::post('/createJob', [TranslateController::class, 'createJob'])->name('admin.translate.createJob');
         });
     });
 });

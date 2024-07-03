@@ -30,6 +30,7 @@ class Seo extends Model {
         'rating_aggregate_star',
         'created_at',
         'updated_at',
+        'language',
     ];
 
     public static function insertItem($params){
@@ -110,10 +111,18 @@ class Seo extends Model {
     }
 
     public function contents(){
-        return $this->hasMany(\App\Models\SeoContent::class, 'seo_id', 'id');
+        return $this->hasMany(\App\Models\SeoContent::class, 'seo_id', 'id')->orderBy('ordering')->orderBy('id');
     }
 
     public function source(){
         return $this->hasOne(\App\Models\Seo::class, 'id', 'link_canonical');
+    }
+
+    public function jobAutoTranslate(){
+        return $this->hasMany(\App\Models\JobAutoTranslate::class, 'seo_id', 'id')->whereColumn('language', 'language');
+    }
+
+    public function jobAutoTranslateLinks() {
+        return $this->hasMany(\App\Models\JobAutoTranslateLinks::class, 'seo_id', 'id');
     }
 }

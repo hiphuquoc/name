@@ -5,20 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SeoContent extends Model {
+class JobAutoTranslateLinks extends Model {
     use HasFactory;
-    protected $table        = 'seo_content';
+    protected $table        = 'job_auto_translate_links';
     protected $fillable     = [
         'seo_id',
-        'content',
-        'ordering'
+        'ordering',
+        'language',
+        'link_source',
+        'link_translate'
     ];
     public $timestamps = false;
 
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new SeoContent();
+            $model      = new JobAutoTranslateLinks();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -35,8 +37,6 @@ class SeoContent extends Model {
         }
         return $flag;
     }
+
     
-    // public function seo() {
-    //     return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
-    // }
 }
