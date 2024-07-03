@@ -82,7 +82,7 @@ class AutoTranslateContent implements ShouldQueue {
                     JobAutoTranslateLinks::insertItem([
                         'seo_id'            => $this->idSeo,
                         'ordering'          => $this->content->ordering,
-                        'lanuguage'         => $this->language,
+                        'language'          => $this->language,
                         'link_source'       => $l['vi'],
                         'link_translate'    => $l['translate']
                     ]);
