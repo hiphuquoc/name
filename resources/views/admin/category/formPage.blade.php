@@ -51,6 +51,17 @@
                         <option value="{{ $categoryType['key'] }}"{{ $selected }}>{{ $categoryType['name'] }}</option>
                     @endforeach
                 </select>
+                @if($lock=='disabled')
+                    @foreach(config('main.category_type') as $categoryType)
+                        @php
+                            if(!empty($item->seo->type)&&$item->seo->type==$categoryType['key']) {
+                                $valueKey = $categoryType['key'];
+                                break;
+                            }
+                        @endphp
+                    @endforeach
+                    <input type="hidden" name="category_type" value="{{ $valueKey }}">
+                @endif
             </div>
         </div>
         @if($language=='vi')
