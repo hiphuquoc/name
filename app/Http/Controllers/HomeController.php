@@ -71,36 +71,36 @@ class HomeController extends Controller
 
     public static function test(Request $request){
 
-        $datas  = Seo::select('*')
-                    ->where('type', 'tag_info')
-                    ->whereIn('language', ['fr', 'es', 'id'])
-                    ->get();
-        foreach($datas as $data){
-            $slug       = $data->slug;
-            $newSlug    = self::reorderString($slug);
-            $slugFull   = $data->slug_full;
-            $tmp        = explode('/', $slugFull);
-            $tmp[count($tmp)-1] = $newSlug;
-            $newSlugFull = implode('/', $tmp);
+        // $datas  = Seo::select('*')
+        //             ->where('type', 'tag_info')
+        //             ->whereIn('language', ['fr', 'es', 'id'])
+        //             ->get();
+        // foreach($datas as $data){
+        //     $slug       = $data->slug;
+        //     $newSlug    = self::reorderString($slug);
+        //     $slugFull   = $data->slug_full;
+        //     $tmp        = explode('/', $slugFull);
+        //     $tmp[count($tmp)-1] = $newSlug;
+        //     $newSlugFull = implode('/', $tmp);
 
-            if($slugFull!=$newSlugFull){
-                /* tạo redirect 301 */
-                $infoRedirect = \App\Models\RedirectInfo::select('*')
-                    ->where('old_url', $slug)
-                    ->first();
-                if(empty($infoRedirect)){
-                    \App\Models\RedirectInfo::insertItem([
-                        'old_url'   => '/'.$slug,
-                        'new_url'   => '/'.$newSlug,
-                    ]);
-                }
-                /* update CSDL */
-                Seo::updateItem($data->id, [
-                    'slug'  => $newSlug,
-                    'slug_full' => $newSlugFull
-                ]);
-            }
-        }
+        //     if($slugFull!=$newSlugFull){
+        //         /* tạo redirect 301 */
+        //         $infoRedirect = \App\Models\RedirectInfo::select('*')
+        //             ->where('old_url', $slug)
+        //             ->first();
+        //         if(empty($infoRedirect)){
+        //             \App\Models\RedirectInfo::insertItem([
+        //                 'old_url'   => '/'.$slug,
+        //                 'new_url'   => '/'.$newSlug,
+        //             ]);
+        //         }
+        //         /* update CSDL */
+        //         Seo::updateItem($data->id, [
+        //             'slug'  => $newSlug,
+        //             'slug_full' => $newSlugFull
+        //         ]);
+        //     }
+        // }
 
         dd(123);
     }
