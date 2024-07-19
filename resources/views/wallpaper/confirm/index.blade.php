@@ -37,9 +37,9 @@
                                 </div>
                                 <div class="confirmMessageBox_left_desc">
                                     @if($language=='vi')
-                                        Cảm ơn bạn đã ủng hộ {{ config('main.company_name') }}. Hình ảnh của bạn ở phần bên dưới hoặc bạn có thể truy cập email của mình để tải ảnh.
+                                        Cảm ơn bạn đã ủng hộ {{ config('main.info.'.env('APP_NAME').'.company_name') }}. Hình ảnh của bạn ở phần bên dưới hoặc bạn có thể truy cập email của mình để tải ảnh.
                                     @else 
-                                        Thank you for supporting {{ config('main.company_name') }}. Your images are below or you can access your email to download photos.
+                                        Thank you for supporting {{ config('main.info.'.env('APP_NAME').'.company_name') }}. Your images are below or you can access your email to download photos.
                                     @endif
                                 </div>
                             </div>

@@ -74,7 +74,7 @@
                                     ])
                                 </div>
                                 {{-- <div class="cartSectionBox_notice">
-                                    Dùng mã giảm giá của {{ config('main.company_name') }} ở bước sau
+                                    Dùng mã giảm giá của {{ config('main.info.'.env('APP_NAME').'.company_name') }} ở bước sau
                                 </div> --}}
                                 <div class="cartSectionBox_button">
                                     <div class="button" onClick="submitFormPayment('formPaymentMethod');">{{ config('language.'.$language.'.data.payment') }}</div>

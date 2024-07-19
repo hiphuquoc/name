@@ -45,8 +45,12 @@ class RoutingController extends Controller{
             SettingController::settingLanguage($language);
             /* chế đệ xem */
             $flagMatch              = false;
+            /* đưa biến search lên để xử lý với cache */
+            $search                 = request('search') ?? null;
             /* cache HTML */
-            $nameCache              = self::buildNameCache($itemSeo['slug_full']).'.'.config('main.cache.extension');
+            $paramsSlug             = [];
+            if(!empty($search)) $paramsSlug['search'] = $search;
+            $nameCache              = self::buildNameCache($itemSeo['slug_full'], $paramsSlug).'.'.config('main.cache.extension');
             $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
             $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
             $flagHandle             = true;
@@ -249,7 +253,7 @@ class RoutingController extends Controller{
                             $params['request_load']             = 50; /* lấy 50 để khai báo schema */
                             $params['sort_by']                  = Cookie::get('sort_by') ?? null;
                             $params['filters']                  = $request->get('filters') ?? [];
-                            $params['search']                   = $request->get('search') ?? null;
+                            $params['search']                   = $search;
                             $tmp                                = CategoryController::getFreeWallpapers($params);
                             $wallpapers                         = $tmp['wallpapers'];
                             $total                              = $tmp['total'];
@@ -261,8 +265,7 @@ class RoutingController extends Controller{
                         if($flagFree==false){
                             $params         = [];
                             /* key_search */
-                            $params['search'] = request('search') ?? null;
-                            $search             = $params['search'];
+                            $params['search'] = $search;
                             $arrayIdCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
                             // dd($request->all());
                             $params['array_category_info_id'] = $arrayIdCategory;
@@ -309,15 +312,19 @@ class RoutingController extends Controller{
         }
     }
 
-    public static function buildNameCache($slugFull, $prefix = []){
-        $result     = $prefix;
+    public static function buildNameCache($slugFull, $params = []){
+        $response     = '';
         if(!empty($slugFull)){
-            $tmp    = explode('/', $slugFull);
-            foreach($tmp as $t){
-                if(!empty($t)) $result[] = $t;
+            /* duyệt params để lấy prefix hay # */
+            if(!empty($params)){
+                foreach($params as $key => $param) $response .= $key.'-'.$param;
             }
-            $result = implode('-', $result);
+            /* ghép với slug */
+            $tmp    = explode('/', $slugFull);
+            $result = [];
+            foreach($tmp as $t) if(!empty($t)) $result[] = $t;
+            $response = implode('-', $result).'-'.$response;
         }
-        return $result;
+        return $response;
     }
 }

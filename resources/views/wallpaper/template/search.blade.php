@@ -1,5 +1,5 @@
 @php
-    $labelName  = config('language.'.$language.'.data.search_wallpapers');
+    $labelName  = config('language.'.$language.'.data.search_wallpapers.'.env('APP_NAME'));
 @endphp
 
 <form action="{{ route('routing', ['slug' => config('language.'.$language.'.slug_page')]).'?search=' }}" method="GET">

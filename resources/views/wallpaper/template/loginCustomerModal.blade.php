@@ -14,9 +14,9 @@
             <div class="loginFormCustomer">
                 <div class="loginFormCustomer_title">
                     @if(!empty($language)&&$language=='en')
-                        Login {{ config('main.company_name') }}
+                        Login {{ config('main.info.'.env('APP_NAME').'.company_name') }}
                     @else 
-                        Đăng nhập {{ config('main.company_name') }}
+                        Đăng nhập {{ config('main.info.'.env('APP_NAME').'.company_name') }}
                     @endif
                 </div>
                 <div class="loginFormCustomer_body">

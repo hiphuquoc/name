@@ -47,7 +47,7 @@
         "sku": "WW122023M{{ !empty($itemSeo->created_at) ? strtotime($itemSeo->created_at) : 00 }}YK/VN",
         "brand": {
             "@type": "Brand",
-            "name": "{{ config('main.company_name') }}"
+            "name": "{{ config('main.info.'.env('APP_NAME').'.company_name') }}"
         },
         "review":
             {
@@ -83,7 +83,7 @@
                 "seller":
                     {
                         "@type": "Organization",
-                        "name": "{{ $itemSeo->rating_author_name ?? config('main.author_name') }}",
+                        "name": "{{ $itemSeo->rating_author_name ?? config('main.info.'.env('APP_NAME').'.author_name') }}",
                         "url": "{{ env('APP_URL') }}"
                     }
             }

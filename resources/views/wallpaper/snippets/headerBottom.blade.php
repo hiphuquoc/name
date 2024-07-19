@@ -1,6 +1,6 @@
 <div class="headerBottom">
     @php
-        $contacts               = config('main.contacts');
+        $contacts               = config('main.info.'.env('APP_NAME').'.contacts');
         $phoneCustomerService   = null;
         foreach($contacts as $contact){
             if($contact['type']=='customer service') {

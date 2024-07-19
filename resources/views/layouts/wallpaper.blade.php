@@ -15,7 +15,7 @@
             <div class="layoutHeaderTop_header">
                 <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
                     @if(Route::is('main.home'))
-                        <h1 style="opacity:0;">{{ config('language.'.$language.'.data.home').' '.config('main.company_name') }}</h1>
+                        <h1 style="opacity:0;">{{ config('language.'.$language.'.data.home').' '.config('main.info.'.env('APP_NAME').'.company_name') }}</h1>
                     @endif
                 </a>
                 <!-- search box -->

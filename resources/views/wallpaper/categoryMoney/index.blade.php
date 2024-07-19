@@ -61,7 +61,7 @@
         <div class="contentBox">
             <div style="display:flex;">
                 @php
-                    $titlePage = config('language.'.$language.'.data.phone_wallpaper').$itemSeo->title;
+                    $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
                     if($item->seo->level==1) $titlePage = $itemSeo->title;
                 @endphp
                 <h1>{{ $titlePage }}</h1>

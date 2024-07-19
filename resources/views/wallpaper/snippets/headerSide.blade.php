@@ -34,7 +34,7 @@
             @php
                 $icon = file_get_contents('storage/images/svg/icon-home-1.svg');
             @endphp
-            <a href="/{{ $language }}" title="{{ config('language.'.$language.'.data.home').' '.config('main.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
+            <a href="/{{ $language }}" title="{{ config('language.'.$language.'.data.home').' '.config('main.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
                 {!! $icon !!}
                 <div>{{ config('language.'.$language.'.data.home') }}</div>
             </a>
@@ -59,7 +59,7 @@
         @if(!empty($wallpaperMobile))
             <li>
                 @php
-                    $titlePhoneWallpaper = config('language.'.$language.'.data.wallpaper_theme');
+                    $titlePhoneWallpaper = config('language.'.$language.'.data.wallpaper_theme.'.env('APP_NAME'));
                     $url      = '';
                     foreach($wallpaperMobile->seos as $s){
                         if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
@@ -113,7 +113,7 @@
             @endphp
             <div class="open" onclick="showHideListMenuMobile(this, 'phong-cach')">
                 {!! $icon !!}
-                <div style="margin-left:-3px;">{{ config('language.'.$language.'.data.wallpaper_style') }}</div>
+                <div style="margin-left:-3px;">{{ config('language.'.$language.'.data.wallpaper_style.'.env('APP_NAME')) }}</div>
                 <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="phong-cach" class="filterLinkSelected">
@@ -141,7 +141,7 @@
         </li>
         <li>
             @php
-                $altPhoneWallpaperEvent = config('language.'.$language.'.data.phone_wallpaper');
+                $altPhoneWallpaperEvent = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME'));
             @endphp
             <div class="close" onclick="showHideListMenuMobile(this, 'su-kien')">
                 <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
@@ -172,7 +172,7 @@
         <li>
             @php
                 $icon                   = file_get_contents('storage/images/svg/icon-share-1.svg');
-                $wallpaperFreeText      = config('language.'.$language.'.data.free_wallpaper');
+                $wallpaperFreeText      = config('language.'.$language.'.data.free_wallpaper.'.env('APP_NAME'));
                 $slugFullWallpaperFree  = '';
                 foreach($wallpaperMobile->childs as $child){
                     if(in_array($child->seo->slug, config('main.url_free_wallpaper_category'))){

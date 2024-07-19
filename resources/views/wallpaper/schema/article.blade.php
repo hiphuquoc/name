@@ -2,7 +2,7 @@
     $title              = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
     $description        = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
     /* author */
-    $author             = config('main.author_name');
+    $author             = config('main.info.'.env('APP_NAME').'.author_name');
     /* image */
     $imagePage          = public_path(config('image.default'));
     if(!empty($item->seo->image)) $imagePage = \App\Helpers\Image::getUrlImageCloud($item->seo->image);

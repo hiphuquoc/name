@@ -38,7 +38,7 @@
                 @endif
                 <!-- mô tả sản phẩm -->
                 <div id="js_viewMoreContent_content" class="productDetailBox_detail_description">
-                    {!! config('language.'.$language.'.data.product_description') !!}
+                    {!! config('language.'.$language.'.data.product_description.'.env('APP_NAME')) !!}
                 </div>
                 <!-- option -->
                 <div class="productDetailBox_detail_option hide-1199">

@@ -1,31 +1,88 @@
 <?php
 
 return [
-    'author_name'           => 'Name.com.vn',
-    'founder_name'          => 'Name.com.vn',
-    'founder_address'       => '55 Cô Giang, Rạch Giá',
-    'founding'              => '2023-03-30',
-    'company_name'          => 'Name.com.vn',
-    'hotline'               => '0968.6171.68',
-    'email'                 => 'anhnendienthoai@gmail.com',
-    'address'               => '55 Cô Giang, Rạch Giá',
-    'company_description'   => 'Giới thiệu dịch vụ',
-    // 'logo_750x460'          => 'public/images/upload/trang-diem-750.webp',
-    'logo_main'             => 'images/upload/logo-type-manager-upload.webp',
-    'contacts'          => [
-        [
-            'type'      => 'customer service',
-            'phone'     => '0968617168'
+    'info'  => [
+        'name'  => [
+            'author_name'           => 'Name.com.vn',
+            'founder_name'          => 'Name.com.vn',
+            'founder_address'       => '55 Cô Giang, Rạch Giá',
+            'founding'              => '2023-03-30',
+            'company_name'          => 'Name.com.vn',
+            'email'                 => 'anhnendienthoai@gmail.com',
+            'company_description'   => 'Giới thiệu dịch vụ',
+            'contacts'          =>  [
+                                        [
+                                            'type'      => 'customer service',
+                                            'phone'     => '0968617168'
+                                        ],
+                                        [
+                                            'type'      => 'technical support',
+                                            'phone'     => '0968617168'
+                                        ],
+                                        [
+                                            'type'      => 'sales',
+                                            'phone'     => '0968617168'
+                                        ]
+                                    ],
         ],
-        [
-            'type'      => 'technical support',
-            'phone'     => '0968617168'
+        'topgirl'   => [
+            'author_name'           => 'topGirl.com.vn',
+            'founder_name'          => 'topGirl.com.vn',
+            'founder_address'       => 'Viet Nam',
+            'founding'              => '2024-05-30',
+            'company_name'          => 'topGirl.com.vn',
+            'email'                 => 'topgirl.com.vn@gmail.com',
+            'company_description'   => 'Giới thiệu dịch vụ',
+            'contacts'          =>  [
+                                        [
+                                            'type'      => 'customer service',
+                                            'phone'     => '0869112676'
+                                        ],
+                                        [
+                                            'type'      => 'technical support',
+                                            'phone'     => '0869112676'
+                                        ],
+                                        [
+                                            'type'      => 'sales',
+                                            'phone'     => '0869112676'
+                                        ]
+                                    ],
         ],
-        [
-            'type'      => 'sales',
-            'phone'     => '0968617168'
+        'topanime'  => [
+            'author_name'           => 'topAnime.com.vn',
+            'founder_name'          => 'topAnime.com.vn',
+            'founder_address'       => 'Viet Nam',
+            'founding'              => '2024-07-30',
+            'company_name'          => 'topAnime.com.vn',
+            'email'                 => 'topanime.com.vn@gmail.com',
+            'company_description'   => 'Giới thiệu dịch vụ',
+            'contacts'          =>  [
+                                        [
+                                            'type'      => 'customer service',
+                                            'phone'     => '0889999553'
+                                        ],
+                                        [
+                                            'type'      => 'technical support',
+                                            'phone'     => '0889999553'
+                                        ],
+                                        [
+                                            'type'      => 'sales',
+                                            'phone'     => '0889999553'
+                                        ]
+                                    ],
         ]
     ],
+    // 'author_name'           => 'Name.com.vn',
+    // 'founder_name'          => 'Name.com.vn',
+    // 'founder_address'       => '55 Cô Giang, Rạch Giá',
+    // 'founding'              => '2023-03-30',
+    // 'company_name'          => 'Name.com.vn',
+    // 'hotline'               => '0968.6171.68',
+    // 'email'                 => 'anhnendienthoai@gmail.com',
+    // 'address'               => '55 Cô Giang, Rạch Giá',
+    // 'company_description'   => 'Giới thiệu dịch vụ',
+    // 'logo_750x460'          => 'public/images/upload/trang-diem-750.webp',
+    'logo_main'             => 'images/upload/logo-type-manager-upload.webp',
     'products'          => [
         [
             'type'      => 'Product',
@@ -37,14 +94,6 @@ return [
         'https://twitter.com/name',
         'https://pinterest.com/name',
         'https://youtube.com/name'
-    ],
-    'storage'   => [
-        'contentPage'       => 'public/contents/pages/',
-        'contentBlog'       => 'public/contents/blogs/',
-        'contentCategory'   => 'public/contents/categories/',
-        'enContentCategory' => 'public/contents/enCategories/',
-
-        'enContentPage'     => 'public/contents/enPages/'
     ],
     'google_cloud_storage' => [
         'default_domain'    => 'https://'.env('GOOGLE_CLOUD_STORAGE_BUCKET').'.storage.googleapis.com/',

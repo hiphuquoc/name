@@ -60,9 +60,9 @@
                     <div class="categoryGrid_title">
                         @php
                             $titleBox = '';
-                            if($type['key']=='category_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_themes');
-                            if($type['key']=='style_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_styles');
-                            if($type['key']=='event_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_events');
+                            if($type['key']=='category_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_themes.'.env('APP_NAME'));
+                            if($type['key']=='style_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_styles.'.env('APP_NAME'));
+                            if($type['key']=='event_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_events.'.env('APP_NAME'));
                         @endphp
                         <h2>{{ $titleBox }}</h2>
                     </div>

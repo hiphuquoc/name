@@ -11,10 +11,7 @@ return [
         "data"      => [
             "home"              => "Trang chủ",
             "about_us"          => "Về chúng tôi",
-            "wallpaper_theme"   => "Chủ đề Hình Nền",
-            "wallpaper_style"   => "Phong cách Hình Nền",
             "event"             => "Sự kiện",
-            "free_wallpaper"    => "Hình nền Miễn Phí",
             "support"           => "Hỗ trợ",
             "connect_with_us"   => "Kết nối với chúng tôi",
             "table_of_contents" => "Mục lục",
@@ -24,16 +21,9 @@ return [
             "cart"              => "Giỏ hàng",
             "your_cart_is_empty"    => "Giỏ hàng của bạn trống",
             "continue_shopping" => "Tiếp tục mua sắm",
-            "phone_wallpaper"   => "Hình nền điện thoại ",
             "full_set"          => "Trọn bộ",
             "image"             => "Ảnh",
             "options"           => "Tùy chọn",
-            "product_description"   => "<div>Thêm một chút màu sắc và phong cách độc đáo vào chiếc điện thoại xinh xắn của bạn với Bộ hình nền điện thoại tuyệt đẹp này.</div>
-                                            <ul>
-                                                <li>Độ phân giải: 1440x3360</li>
-                                                <li>Tương thích tất cả màn hình điện thoại.</li>
-                                            </ul>
-                                            <div>Tải xuống áp dụng ngay trên màn hình điện thoại của bạn để cảm nhận nhé!</div>",
             "product_guide_after_payment"   => '<div>Sau khi thanh toán bằng <span class="highLight">Momo /Zalopay</span>, Bạn sẽ nhận được link ảnh gốc để có thể tải xuống và sử dụng.</div>',
             "suggestions_for_you"   => "Gợi ý cho bạn!",
             "each_image"        => "Từng ảnh",
@@ -68,10 +58,67 @@ return [
             'payment_method' => 'Hình thức Thanh Toán',
             'fee' => 'Phí',
             'payment_fee' => 'Phí thanh toán',
-            'wallpaper_by_themes' => 'Hình Nền Điện Thoại theo Chủ Đề',
-            'wallpaper_by_styles' => 'Hình Nền Điện Thoại theo Phong Cách',
-            'wallpaper_by_events' => 'Hình Nền Điện Thoại theo Sự Kiện',
-            'search_wallpapers' => 'Tìm kiếm Hình Nền',
+            /* custom */
+            "wallpaper_theme"   => [
+                'name'  => "Chủ đề Hình Nền",
+                'topgirl'  => "Chủ đề Ảnh",
+                'topanime'  => "Chủ đề Ảnh",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "Phong cách Hình Nền",
+                'topgirl'  => "Phong cách Ảnh",
+                'topanime'  => "Phong cách Ảnh",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "Hình nền Miễn Phí",
+                'topgirl'  => "Ảnh Miễn Phí",
+                'topanime'  => "Ảnh Miễn Phí",
+            ],
+            "phone_wallpaper"   => [
+                'name'  => "Hình nền điện thoại ",
+                'topgirl'  => "Ảnh Gái Xinh ",
+                'topanime'  => "Ảnh Gái Xinh ",
+            ],
+            "product_description"   => [
+                'name'  => "<div>Thêm một chút màu sắc và phong cách độc đáo vào chiếc điện thoại xinh xắn của bạn với Bộ hình nền điện thoại tuyệt đẹp này.</div>
+                                            <ul>
+                                                <li>Độ phân giải: 1440x3360</li>
+                                                <li>Tương thích tất cả màn hình điện thoại.</li>
+                                            </ul>
+                                            <div>Tải xuống áp dụng ngay trên màn hình điện thoại của bạn để cảm nhận nhé!</div>",
+                'topgirl'  => "<div>Thêm một chút màu sắc và phong cách độc đáo vào chiếc điện thoại xinh xắn của bạn với Bộ hình nền điện thoại tuyệt đẹp này.</div>
+                                            <ul>
+                                                <li>Độ phân giải: 1440x3360</li>
+                                                <li>Tương thích tất cả màn hình điện thoại.</li>
+                                            </ul>
+                                            <div>Tải xuống áp dụng ngay trên màn hình điện thoại của bạn để cảm nhận nhé!</div>",
+                'topanime'  => "<div>Thêm một chút màu sắc và phong cách độc đáo vào chiếc điện thoại xinh xắn của bạn với Bộ hình nền điện thoại tuyệt đẹp này.</div>
+                                            <ul>
+                                                <li>Độ phân giải: 1440x3360</li>
+                                                <li>Tương thích tất cả màn hình điện thoại.</li>
+                                            </ul>
+                                            <div>Tải xuống áp dụng ngay trên màn hình điện thoại của bạn để cảm nhận nhé!</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => 'Hình Nền Điện Thoại theo Chủ Đề',
+                'topgirl'  => 'Ảnh Gái Xinh theo Chủ Đề',
+                'topanime'  => 'Ảnh Gái Xinh theo Chủ Đề',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => 'Hình Nền Điện Thoại theo Phong Cách',
+                'topgirl'  => 'Ảnh Gái Xinh theo Phong Cách',
+                'topanime'  => 'Ảnh Gái Xinh theo Phong Cách',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => 'Hình Nền Điện Thoại theo Sự Kiện',
+                'topgirl'  => 'Ảnh Gái Xinh theo Sự Kiện',
+                'topanime'  => 'Ảnh Gái Xinh theo Sự Kiện',
+            ],
+            'search_wallpapers' => [
+                'name'  => 'Tìm kiếm Hình Nền',
+                'topgirl'  => 'Tìm kiếm Ảnh',
+                'topanime'  => 'Tìm kiếm Ảnh',
+            ],
         ]
     ],
     "en"    => [
@@ -84,10 +131,7 @@ return [
         "data"      => [
             "home"          => "Home",
             "about_us"      => "About us",
-            "wallpaper_theme"  => "Wallpaper Theme",
-            "wallpaper_style"   => "Wallpaper Style",
             "event"             => "Event",
-            "free_wallpaper"    => "Free Wallpaper",
             "support"           => "Support",
             "connect_with_us"   => "Connect with us",
             "table_of_contents" => "Table of Contents",
@@ -97,16 +141,9 @@ return [
             "cart"              => "Cart",
             "your_cart_is_empty"    => "Your cart is empty",
             "continue_shopping"     => "Continue shopping",
-            "phone_wallpaper"         => "Phone Wallpaper ",
             "full_set"          => "Full set",
             "image"             => "Image",
             "options"           => "Options",
-            "product_description"   => "<div>Add some color and unique style to your cute phone with this beautiful phone wallpaper set.</div>
-                                            <ul>
-                                                <li>Resolution: 1440x3360</li>
-                                                <li>Compatible with all phone screens.</li>
-                                            </ul>
-                                            <div>Download and apply it directly to your phone screen to experience it!</div>",
             "product_guide_after_payment"   => '<div>After payment with <span class="highLight">Momo /Zalopay</span>, you will receive the original image link for downloading and using.</div>',
             "suggestions_for_you"   => "Suggestions for you!",
             "each_image"        => "Each image",
@@ -141,10 +178,67 @@ return [
             'payment_method' => 'Payment Method',
             'fee' => 'Fee',
             'payment_fee' => 'Payment Fee',
-            'wallpaper_by_themes' => 'Wallpapers by Themes',
-            'wallpaper_by_styles' => 'Wallpapers by Styles',
-            'wallpaper_by_events' => 'Wallpapers by Events',
-            'search_wallpapers' => 'Search Wallpapers',
+            /* custom */
+            "wallpaper_theme"  => [
+                'name'  => "Wallpaper Theme",
+                'topgirl'  => "Photo Theme",
+                'topanime'  => "Photo Theme",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "Wallpaper Style",
+                'topgirl'  => "Photo Style",
+                'topanime'  => "Photo Style",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "Free Wallpaper",
+                'topgirl'  => "Free Photo",
+                'topanime'  => "Free Photo",
+            ],
+            "phone_wallpaper"         => [
+                'name'  => "Phone Wallpaper ",
+                'topgirl'  => "Beautiful Girl Images ",
+                'topanime'  => "Beautiful Girl Images ",
+            ],
+            "product_description"   => [
+                'name'  => "<div>Add some color and unique style to your cute phone with this beautiful phone wallpaper set.</div>
+                                            <ul>
+                                                <li>Resolution: 1440x3360</li>
+                                                <li>Compatible with all phone screens.</li>
+                                            </ul>
+                                            <div>Download and apply it directly to your phone screen to experience it!</div>",
+                'topgirl'  => "<div>Add some color and unique style to your cute phone with this beautiful phone wallpaper set.</div>
+                                            <ul>
+                                                <li>Resolution: 1440x3360</li>
+                                                <li>Compatible with all phone screens.</li>
+                                            </ul>
+                                            <div>Download and apply it directly to your phone screen to experience it!</div>",
+                'topanime'  => "<div>Add some color and unique style to your cute phone with this beautiful phone wallpaper set.</div>
+                                            <ul>
+                                                <li>Resolution: 1440x3360</li>
+                                                <li>Compatible with all phone screens.</li>
+                                            </ul>
+                                            <div>Download and apply it directly to your phone screen to experience it!</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => 'Wallpapers by Themes',
+                'topgirl'  => 'Beautiful Girl Photos by Themes',
+                'topanime'  => 'Beautiful Girl Photos by Themes',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => 'Wallpapers by Styles',
+                'topgirl'  => 'Beautiful Girl Photos by Styles',
+                'topanime'  => 'Beautiful Girl Photos by Styles',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => 'Wallpapers by Events',
+                'topgirl'  => 'Beautiful Girl Photos by Events',
+                'topanime'  => 'Beautiful Girl Photos by Events',
+            ],
+            'search_wallpapers' => [
+                'name'  => 'Search Wallpapers',
+                'topgirl'  => 'Search Photos',
+                'topanime'  => 'Search Photos',
+            ],
         ]
     ],
     "fr"    => [
@@ -157,10 +251,7 @@ return [
         "data"      => [
             "home"              => "Accueil",
             "about_us"          => "À propos de nous",
-            "wallpaper_theme"  => "Thème de fond d'écran",
-            "wallpaper_style"   => "Style de fond d'écran",
             "event"             => "Événement",
-            "free_wallpaper"    => "Fond d'écran gratuit",
             "support"           => "Support",
             "connect_with_us"       => "Connectez-vous avec nous",
             "table_of_contents"     => "Table des matières",
@@ -170,16 +261,9 @@ return [
             "cart"                  => "Panier",
             "your_cart_is_empty"    => "Votre panier est vide",
             "continue_shopping"     => "Continuer les achats",
-            "phone_wallpaper"       => "Fond d'écran de téléphone ",
             "full_set"              => "Ensemble complet",
             "image"                 => "Image",
             "options"               => "Options",
-            "product_description"   => "<div>Ajoutez de la couleur et un style unique à votre téléphone mignon avec cet ensemble de superbes fonds d'écran pour téléphone.</div>
-                                        <ul>
-                                            <li>Résolution : 1440x3360</li>
-                                            <li>Compatible avec tous les écrans de téléphone.</li>
-                                        </ul>
-                                        <div>Téléchargez-le et appliquez-le directement à l'écran de votre téléphone pour le ressentir !</div>",
             "product_guide_after_payment"   => '<div>Après le paiement avec <span class="highLight">Momo /Zalopay</span>, vous recevrez le lien de l\'image originale pour le téléchargement et l\'utilisation.</div>',
             "suggestions_for_you"   => "Suggestions pour vous!",
             "each_image"        => "Chaque image",
@@ -214,10 +298,67 @@ return [
             'payment_method' => 'Mode de paiement',
             'fee' => 'Frais',
             'payment_fee' => 'Frais de paiement',
-            'wallpaper_by_themes' => 'Papiers Peints par Thèmes',
-            'wallpaper_by_styles' => 'Papiers Peints par Styles',
-            'wallpaper_by_events' => 'Papiers Peints par Événements',
-            'search_wallpapers' => 'Rechercher des Fond d\'écran',
+            /* custom */
+            "wallpaper_theme"  => [
+                'name'  => "Thème de fond d'écran",
+                'topgirl'  => "Thème de Photo",
+                'topanime'  => "Thème de Photo",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "Style de fond d'écran",
+                'topgirl'  => "Thème de Photo",
+                'topanime'  => "Thème de Photo",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "Fond d'écran gratuit",
+                'topgirl'  => "Photo Gratuite",
+                'topanime'  => "Photo Gratuite",
+            ],
+            "phone_wallpaper"       => [
+                'name'  => "Fond d'écran de téléphone ",
+                'topgirl'  => "Images de Filles Mignonnes ",
+                'topanime'  => "Images de Filles Mignonnes ",
+            ],
+            "product_description"   => [
+                'name'  => "<div>Ajoutez de la couleur et un style unique à votre téléphone mignon avec cet ensemble de superbes fonds d'écran pour téléphone.</div>
+                                        <ul>
+                                            <li>Résolution : 1440x3360</li>
+                                            <li>Compatible avec tous les écrans de téléphone.</li>
+                                        </ul>
+                                        <div>Téléchargez-le et appliquez-le directement à l'écran de votre téléphone pour le ressentir !</div>",
+                'topgirl'  => "<div>Ajoutez de la couleur et un style unique à votre téléphone mignon avec cet ensemble de superbes fonds d'écran pour téléphone.</div>
+                                        <ul>
+                                            <li>Résolution : 1440x3360</li>
+                                            <li>Compatible avec tous les écrans de téléphone.</li>
+                                        </ul>
+                                        <div>Téléchargez-le et appliquez-le directement à l'écran de votre téléphone pour le ressentir !</div>",
+                'topanime'  => "<div>Ajoutez de la couleur et un style unique à votre téléphone mignon avec cet ensemble de superbes fonds d'écran pour téléphone.</div>
+                                        <ul>
+                                            <li>Résolution : 1440x3360</li>
+                                            <li>Compatible avec tous les écrans de téléphone.</li>
+                                        </ul>
+                                        <div>Téléchargez-le et appliquez-le directement à l'écran de votre téléphone pour le ressentir !</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => 'Papiers Peints par Thèmes',
+                'topgirl'  => 'Photos de Belles Filles par Thèmes',
+                'topanime'  => 'Photos de Belles Filles par Thèmes',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => 'Papiers Peints par Styles',
+                'topgirl'  => 'Photos de Belles Filles par Styles',
+                'topanime'  => 'Photos de Belles Filles par Styles',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => 'Papiers Peints par Événements',
+                'topgirl'  => 'Photos de Belles Filles par Événements',
+                'topanime'  => 'Photos de Belles Filles par Événements',
+            ],
+            'search_wallpapers' => [
+                'name'  => 'Rechercher des Fond d\'écran',
+                'topgirl'  => 'Recherche de Photo',
+                'topanime'  => 'Recherche de Photo',
+            ],
         ]
     ],
     "es"    => [
@@ -230,10 +371,7 @@ return [
         "data"      => [
             "home"          => "Inicio",
             "about_us"      => "Sobre nosotros",
-            "wallpaper_theme"  => "Tema de fondo de pantalla",
-            "wallpaper_style"   => "Estilo de fondo de pantalla",
             "event"             => "Evento",
-            "free_wallpaper"    => "Fondo de pantalla gratis",
             "support"           => "Soporte",
             "connect_with_us"   => "Conéctate con nosotros",
             "table_of_contents" => "Tabla de contenido",
@@ -243,16 +381,9 @@ return [
             "cart"              => "Carrito",
             "your_cart_is_empty"    => "Tu carrito está vacío",
             "continue_shopping"     => "Continuar comprando",
-            "phone_wallpaper"         => "Fondo de pantalla del teléfono ",
             "full_set"          => "Conjunto completo",
             "image"             => "Imagen",
             "options"           => "Opciones",
-            "product_description"   => "<div>Agrega algo de color y estilo único a tu lindo teléfono con este hermoso conjunto de fondos de pantalla para teléfono.</div>
-                                            <ul>
-                                                <li>Resolución: 1440x3360</li>
-                                                <li>Compatible con todas las pantallas de teléfono.</li>
-                                            </ul>
-                                            <div>¡Descárgalo y aplícalo directamente a la pantalla de tu teléfono para experimentarlo!</div>",
             "product_guide_after_payment"   => '<div>Después de realizar el pago con <span class="highLight">Momo /Zalopay</span>, recibirás el enlace de la imagen original para descargar y usar.</div>',
             "suggestions_for_you"   => "Sugerencias para ti!",
             "each_image"        => "Cada imagen",
@@ -287,10 +418,67 @@ return [
             'payment_method' => 'Método de pago',
             'fee' => 'Tarifa',
             'payment_fee' => 'Tarifa de pago',
-            'wallpaper_by_themes' => 'Fondos de Pantalla por Temas',
-            'wallpaper_by_styles' => 'Fondos de Pantalla por Estilos',
-            'wallpaper_by_events' => 'Fondos de Pantalla por Eventos',
-            'search_wallpapers' => 'Buscar Fondos de Pantalla',
+            /*  custom */
+            "wallpaper_theme"  => [
+                'name'  => "Tema de fondo de pantalla",
+                'topgirl'  => "Tema de Foto",
+                'topanime'  => "Tema de Foto",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "Estilo de fondo de pantalla",
+                'topgirl'  => "Estilo de Foto",
+                'topanime'  => "Estilo de Foto",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "Fondo de pantalla gratis",
+                'topgirl'  => "Foto Gratis",
+                'topanime'  => "Foto Gratis",
+            ],
+            "phone_wallpaper"         => [
+                'name'  => "Fondo de pantalla del teléfono ",
+                'topgirl'  => "Imágenes de Chicas Bonitas ",
+                'topanime'  => "Imágenes de Chicas Bonitas ",
+            ],
+            "product_description"   => [
+                'name'  => "<div>Agrega algo de color y estilo único a tu lindo teléfono con este hermoso conjunto de fondos de pantalla para teléfono.</div>
+                                            <ul>
+                                                <li>Resolución: 1440x3360</li>
+                                                <li>Compatible con todas las pantallas de teléfono.</li>
+                                            </ul>
+                                            <div>¡Descárgalo y aplícalo directamente a la pantalla de tu teléfono para experimentarlo!</div>",
+                'topgirl'  => "<div>Agrega algo de color y estilo único a tu lindo teléfono con este hermoso conjunto de fondos de pantalla para teléfono.</div>
+                                            <ul>
+                                                <li>Resolución: 1440x3360</li>
+                                                <li>Compatible con todas las pantallas de teléfono.</li>
+                                            </ul>
+                                            <div>¡Descárgalo y aplícalo directamente a la pantalla de tu teléfono para experimentarlo!</div>",
+                'topanime'  => "<div>Agrega algo de color y estilo único a tu lindo teléfono con este hermoso conjunto de fondos de pantalla para teléfono.</div>
+                                            <ul>
+                                                <li>Resolución: 1440x3360</li>
+                                                <li>Compatible con todas las pantallas de teléfono.</li>
+                                            </ul>
+                                            <div>¡Descárgalo y aplícalo directamente a la pantalla de tu teléfono para experimentarlo!</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => 'Fondos de Pantalla por Temas',
+                'topgirl'  => 'Fotos de Chicas Bonitas por Temas',
+                'topanime'  => 'Fotos de Chicas Bonitas por Temas',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => 'Fondos de Pantalla por Estilos',
+                'topgirl'  => 'Fotos de Chicas Bonitas por Estilos',
+                'topanime'  => 'Fotos de Chicas Bonitas por Estilos',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => 'Fondos de Pantalla por Eventos',
+                'topgirl'  => 'Fotos de Chicas Bonitas por Eventos',
+                'topanime'  => 'Fotos de Chicas Bonitas por Eventos',
+            ],
+            'search_wallpapers' => [
+                'name'  => 'Buscar Fondos de Pantalla',
+                'topgirl'  => 'Búsqueda de Foto',
+                'topanime'  => 'Búsqueda de Foto',
+            ],
         ]
     ],
     "zh"    => [
@@ -303,10 +491,7 @@ return [
         "data"      => [
             "home"          => "首页",
             "about_us"      => "关于我们",
-            "wallpaper_theme"  => "壁纸主题",
-            "wallpaper_style"   => "壁纸风格",
             "event"             => "事件",
-            "free_wallpaper"    => "免费壁纸",
             "support"           => "支持",
             "connect_with_us"   => "与我们联系",
             "table_of_contents" => "目录",
@@ -316,16 +501,9 @@ return [
             "cart"              => "购物车",
             "your_cart_is_empty"    => "您的购物车是空的",
             "continue_shopping"     => "继续购物",
-            "phone_wallpaper"         => "手机壁纸",
             "full_set"          => "全套",
             "image"             => "图片",
             "options"           => "选项",
-            "product_description"   => "<div>为您可爱的手机增添一些色彩和独特的风格，使用这组美丽的手机壁纸。</div>
-                                            <ul>
-                                                <li>分辨率：1440x3360</li>
-                                                <li>兼容所有手机屏幕。</li>
-                                            </ul>
-                                            <div>立即下载并应用于您的手机屏幕以体验它吧！</div>",
             "product_guide_after_payment"   => '<div>使用 <span class="highLight">Momo /Zalopay</span> 付款后，您将收到原始图片链接，可下载并使用。</div>',
             "suggestions_for_you"   => "给你的建议",
             "each_image"        => "每张图片",
@@ -360,10 +538,67 @@ return [
             'payment_method' => '支付方式',
             'fee' => '费用',
             'payment_fee' => '支付费用',
-            'wallpaper_by_themes' => '主题壁纸',
-            'wallpaper_by_styles' => '风格壁纸',
-            'wallpaper_by_events' => '事件壁纸',
-            'search_wallpapers' => '搜索壁纸',
+            /* custom */
+            "wallpaper_theme"  => [
+                'name'  => "壁纸主题",
+                'topgirl'  => "图片主题",
+                'topanime'  => "图片主题",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "壁纸风格",
+                'topgirl'  => "图片风格",
+                'topanime'  => "图片风格",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "免费壁纸",
+                'topgirl'  => "免费图片",
+                'topanime'  => "免费图片",
+            ],
+            "phone_wallpaper"         => [
+                'name'  => "手机壁纸",
+                'topgirl'  => "美女照片",
+                'topanime'  => "美女照片",
+            ],
+            "product_description"   => [
+                'name'  => "<div>为您可爱的手机增添一些色彩和独特的风格，使用这组美丽的手机壁纸。</div>
+                                            <ul>
+                                                <li>分辨率：1440x3360</li>
+                                                <li>兼容所有手机屏幕。</li>
+                                            </ul>
+                                            <div>立即下载并应用于您的手机屏幕以体验它吧！</div>",
+                'topgirl'  => "<div>为您可爱的手机增添一些色彩和独特的风格，使用这组美丽的手机壁纸。</div>
+                                            <ul>
+                                                <li>分辨率：1440x3360</li>
+                                                <li>兼容所有手机屏幕。</li>
+                                            </ul>
+                                            <div>立即下载并应用于您的手机屏幕以体验它吧！</div>",
+                'topanime'  => "<div>为您可爱的手机增添一些色彩和独特的风格，使用这组美丽的手机壁纸。</div>
+                                            <ul>
+                                                <li>分辨率：1440x3360</li>
+                                                <li>兼容所有手机屏幕。</li>
+                                            </ul>
+                                            <div>立即下载并应用于您的手机屏幕以体验它吧！</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => '主题壁纸',
+                'topgirl'  => '主题美女照片',
+                'topanime'  => '主题美女照片',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => '风格壁纸',
+                'topgirl'  => '风格美女照片',
+                'topanime'  => '风格美女照片',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => '事件壁纸',
+                'topgirl'  => '活动美女照片',
+                'topanime'  => '活动美女照片',
+            ],
+            'search_wallpapers' => [
+                'name'  => '搜索壁纸',
+                'topgirl'  => '图片搜索',
+                'topanime'  => '图片搜索',
+            ],
         ]
     ],
     "ru"    => [
@@ -376,10 +611,7 @@ return [
         "data"      => [
             "home"          => "Главная",
             "about_us"      => "О нас",
-            "wallpaper_theme"  => "Тема обоев",
-            "wallpaper_style"   => "Стиль обоев",
             "event"             => "Событие",
-            "free_wallpaper"    => "Бесплатный обои",
             "support"           => "Поддержка",
             "connect_with_us"   => "Свяжитесь с нами",
             "table_of_contents" => "Оглавление",
@@ -389,16 +621,9 @@ return [
             "cart"              => "Корзина",
             "your_cart_is_empty"    => "Ваша корзина пуста",
             "continue_shopping"     => "Продолжить покупки",
-            "phone_wallpaper"         => "Обои для телефона ",
             "full_set"          => "Полный комплект",
             "image"             => "Изображение",
             "options"           => "Варианты",
-            "product_description"   => "<div>Добавьте немного цвета и уникального стиля на ваш милый телефон с этим красивым набором обоев для телефона.</div>
-                                            <ul>
-                                                <li>Разрешение: 1440x3360</li>
-                                                <li>Совместимо со всеми телефонными экранами.</li>
-                                            </ul>
-                                            <div>Скачайте и примените его непосредственно на экран вашего телефона, чтобы ощутить его!</div>",
             "product_guide_after_payment"   => '<div>После оплаты через <span class="highLight">Momo /Zalopay</span>, вы получите ссылку на оригинальное изображение для загрузки и использования.</div>',
             "suggestions_for_you"   => "Предложения для вас",
             "each_image"        => "Каждый изображение",
@@ -433,10 +658,67 @@ return [
             'payment_method' => 'Способ оплаты',
             'fee' => 'Плата',
             'payment_fee' => 'Плата за платеж',
-            'wallpaper_by_themes' => 'Обои по темам',
-            'wallpaper_by_styles' => 'Обои по стилям',
-            'wallpaper_by_events' => 'Обои по событиям',
-            'search_wallpapers' => 'Поиск Обоев',
+            /* custom */
+            "wallpaper_theme"  => [
+                'name'  => "Тема обоев",
+                'topgirl'  => "Тема Фото",
+                'topanime'  => "Тема Фото",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "Стиль обоев",
+                'topgirl'  => "Стиль Фото",
+                'topanime'  => "Стиль Фото",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "Бесплатный обои",
+                'topgirl'  => "Бесплатное Фото",
+                'topanime'  => "Бесплатное Фото",
+            ],
+            "phone_wallpaper"         => [
+                'name'  => "Обои для телефона ",
+                'topgirl'  => "Красивые фотографии девушек ",
+                'topanime'  => "Красивые фотографии девушек ",
+            ],
+            "product_description"   => [
+                'name'  => "<div>Добавьте немного цвета и уникального стиля на ваш милый телефон с этим красивым набором обоев для телефона.</div>
+                                            <ul>
+                                                <li>Разрешение: 1440x3360</li>
+                                                <li>Совместимо со всеми телефонными экранами.</li>
+                                            </ul>
+                                            <div>Скачайте и примените его непосредственно на экран вашего телефона, чтобы ощутить его!</div>",
+                'topgirl'  => "<div>Добавьте немного цвета и уникального стиля на ваш милый телефон с этим красивым набором обоев для телефона.</div>
+                                            <ul>
+                                                <li>Разрешение: 1440x3360</li>
+                                                <li>Совместимо со всеми телефонными экранами.</li>
+                                            </ul>
+                                            <div>Скачайте и примените его непосредственно на экран вашего телефона, чтобы ощутить его!</div>",
+                'topanime'  => "<div>Добавьте немного цвета и уникального стиля на ваш милый телефон с этим красивым набором обоев для телефона.</div>
+                                            <ul>
+                                                <li>Разрешение: 1440x3360</li>
+                                                <li>Совместимо со всеми телефонными экранами.</li>
+                                            </ul>
+                                            <div>Скачайте и примените его непосредственно на экран вашего телефона, чтобы ощутить его!</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => 'Обои по темам',
+                'topgirl'  => 'Фотографии красивых девушек по темам',
+                'topanime'  => 'Фотографии красивых девушек по темам',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => 'Обои по стилям',
+                'topgirl'  => 'Фотографии красивых девушек по стилям',
+                'topanime'  => 'Фотографии красивых девушек по стилям',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => 'Обои по событиям',
+                'topgirl'  => 'Фотографии красивых девушек по событиям',
+                'topanime'  => 'Фотографии красивых девушек по событиям',
+            ],
+            'search_wallpapers' => [
+                'name'  => 'Поиск Обоев',
+                'topgirl'  => 'Поиск Фото',
+                'topanime'  => 'Поиск Фото',
+            ],
         ]
     ],
     "ja"    => [
@@ -449,10 +731,7 @@ return [
         "data"      => [
             "home"          => "ホーム",
             "about_us"      => "私たちについて",
-            "wallpaper_theme"  => "壁紙のテーマ",
-            "wallpaper_style"   => "壁紙のスタイル",
             "event"             => "イベント",
-            "free_wallpaper"    => "無料壁紙",
             "support"           => "サポート",
             "connect_with_us"   => "私たちとつながる",
             "table_of_contents" => "目次",
@@ -462,16 +741,9 @@ return [
             "cart"              => "カート",
             "your_cart_is_empty"    => "カートは空です",
             "continue_shopping"     => "買い物を続ける",
-            "phone_wallpaper"         => "電話の壁紙",
             "full_set"          => "完全セット",
             "image"             => "画像",
             "options"           => "オプション",
-            "product_description"   => "<div>かわいい携帯電話に色とユニークなスタイルを追加して、この美しい携帯電話用壁紙セットを使ってください。</div>
-                                        <ul>
-                                            <li>解像度：1440x3360</li>
-                                            <li>すべての携帯電話の画面と互換性があります。</li>
-                                        </ul>
-                                        <div>ダウンロードして直接携帯電話の画面に適用して、体験してください！</div>",
             "product_guide_after_payment"   => '<div>Momo/Zalopayで支払いを完了すると、元の画像リンクが送られてきて、ダウンロードして使用できます。</div>',
             "suggestions_for_you"   => "あなたへの提案",
             "each_image"        => "各画像",
@@ -506,10 +778,67 @@ return [
             'payment_method' => '支払い方法',
             'fee' => '手数料',
             'payment_fee' => '支払手数料',
-            'wallpaper_by_themes' => 'テーマ別の壁紙',
-            'wallpaper_by_styles' => 'スタイル別の壁紙',
-            'wallpaper_by_events' => 'イベント別の壁紙',
-            'search_wallpapers' => '壁紙を検索',
+            /* custom */
+            "wallpaper_theme"  => [
+                'name'  => "壁紙のテーマ",
+                'topgirl'  => "写真のテーマ",
+                'topanime'  => "写真のテーマ",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "壁紙のスタイル",
+                'topgirl'  => "写真のスタイル",
+                'topanime'  => "写真のスタイル",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "無料壁紙",
+                'topgirl'  => "無料写真",
+                'topanime'  => "無料写真",
+            ],
+            "phone_wallpaper"         => [
+                'name'  => "電話の壁紙",
+                'topgirl'  => "美しい女の子の画像",
+                'topanime'  => "美しい女の子の画像",
+            ],
+            "product_description"   => [
+                'name'  => "<div>かわいい携帯電話に色とユニークなスタイルを追加して、この美しい携帯電話用壁紙セットを使ってください。</div>
+                                        <ul>
+                                            <li>解像度：1440x3360</li>
+                                            <li>すべての携帯電話の画面と互換性があります。</li>
+                                        </ul>
+                                        <div>ダウンロードして直接携帯電話の画面に適用して、体験してください！</div>",
+                'topgirl'  => "<div>かわいい携帯電話に色とユニークなスタイルを追加して、この美しい携帯電話用壁紙セットを使ってください。</div>
+                                        <ul>
+                                            <li>解像度：1440x3360</li>
+                                            <li>すべての携帯電話の画面と互換性があります。</li>
+                                        </ul>
+                                        <div>ダウンロードして直接携帯電話の画面に適用して、体験してください！</div>",
+                'topanime'  => "<div>かわいい携帯電話に色とユニークなスタイルを追加して、この美しい携帯電話用壁紙セットを使ってください。</div>
+                                        <ul>
+                                            <li>解像度：1440x3360</li>
+                                            <li>すべての携帯電話の画面と互換性があります。</li>
+                                        </ul>
+                                        <div>ダウンロードして直接携帯電話の画面に適用して、体験してください！</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => 'テーマ別の壁紙',
+                'topgirl'  => 'テーマ別の美しい女の子の写真',
+                'topanime'  => 'テーマ別の美しい女の子の写真',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => 'スタイル別の壁紙',
+                'topgirl'  => 'スタイル別の美しい女の子の写真',
+                'topanime'  => 'スタイル別の美しい女の子の写真',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => 'イベント別の壁紙',
+                'topgirl'  => 'イベント別の美しい女の子の写真',
+                'topanime'  => 'イベント別の美しい女の子の写真',
+            ],
+            'search_wallpapers' => [
+                'name'  => '壁紙を検索',
+                'topgirl'  => '写真検索',
+                'topanime'  => '写真検索',
+            ],
         ]
     ],
     "ko"    => [
@@ -522,10 +851,7 @@ return [
         "data"      => [
             "home"          => "홈",
             "about_us"      => "우리에 관하여",
-            "wallpaper_theme"  => "벽지 테마",
-            "wallpaper_style"   => "벽지 스타일",
             "event"             => "이벤트",
-            "free_wallpaper"    => "무료 배경 화면",
             "support"           => "지원",
             "connect_with_us"   => "우리와 연락",
             "table_of_contents" => "목차",
@@ -535,16 +861,9 @@ return [
             "cart"              => "카트",
             "your_cart_is_empty"    => "장바구니가 비어 있습니다",
             "continue_shopping"     => "쇼핑 계속하기",
-            "phone_wallpaper"         => "휴대폰 배경화면 ",
             "full_set"          => "완전한 세트",
             "image"             => "이미지",
             "options"           => "옵션",
-            "product_description"   => "<div>귀여운 핸드폰에 조금의 색상과 독특한 스타일을 더해주십시오. 이 아름다운 핸드폰 배경 화면 세트를 사용해보세요.</div>
-                                            <ul>
-                                                <li>해상도: 1440x3360</li>
-                                                <li>모든 핸드폰 화면과 호환됩니다.</li>
-                                            </ul>
-                                            <div>다운로드하여 바로 핸드폰 화면에 적용하여 체험해보세요!</div>",
             "product_guide_after_payment"   => '<div><span class="highLight">Momo /Zalopay</span>로 결제한 후에, 원본 이미지 링크를 받아서 다운로드하고 사용할 수 있습니다.</div>',
             "suggestions_for_you"   => "당신을위한 제안",
             "each_image"        => "각 이미지",
@@ -579,10 +898,67 @@ return [
             'payment_method' => '지불 방법',
             'fee' => '수수료',
             'payment_fee' => '결제 수수료',
-            'wallpaper_by_themes' => '테마별 배경화면',
-            'wallpaper_by_styles' => '스타일별 배경화면',
-            'wallpaper_by_events' => '이벤트별 배경화면',
-            'search_wallpapers' => '바탕 화면 검색',
+            /* custom */
+            "wallpaper_theme"  => [
+                'name'  => "벽지 테마",
+                'topgirl'  => "사진 주제",
+                'topanime'  => "사진 주제",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "벽지 스타일",
+                'topgirl'  => "사진 스타일",
+                'topanime'  => "사진 스타일",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "무료 배경 화면",
+                'topgirl'  => "무료 사진",
+                'topanime'  => "무료 사진",
+            ],
+            "phone_wallpaper"         => [
+                'name'  => "휴대폰 배경화면 ",
+                'topgirl'  => "아름다운 여자 사진 ",
+                'topanime'  => "아름다운 여자 사진 ",
+            ],
+            "product_description"   => [
+                'name'  => "<div>귀여운 핸드폰에 조금의 색상과 독특한 스타일을 더해주십시오. 이 아름다운 핸드폰 배경 화면 세트를 사용해보세요.</div>
+                                            <ul>
+                                                <li>해상도: 1440x3360</li>
+                                                <li>모든 핸드폰 화면과 호환됩니다.</li>
+                                            </ul>
+                                            <div>다운로드하여 바로 핸드폰 화면에 적용하여 체험해보세요!</div>",
+                'topgirl'  => "<div>귀여운 핸드폰에 조금의 색상과 독특한 스타일을 더해주십시오. 이 아름다운 핸드폰 배경 화면 세트를 사용해보세요.</div>
+                                            <ul>
+                                                <li>해상도: 1440x3360</li>
+                                                <li>모든 핸드폰 화면과 호환됩니다.</li>
+                                            </ul>
+                                            <div>다운로드하여 바로 핸드폰 화면에 적용하여 체험해보세요!</div>",
+                'topanime'  => "<div>귀여운 핸드폰에 조금의 색상과 독특한 스타일을 더해주십시오. 이 아름다운 핸드폰 배경 화면 세트를 사용해보세요.</div>
+                                            <ul>
+                                                <li>해상도: 1440x3360</li>
+                                                <li>모든 핸드폰 화면과 호환됩니다.</li>
+                                            </ul>
+                                            <div>다운로드하여 바로 핸드폰 화면에 적용하여 체험해보세요!</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => '테마별 배경화면',
+                'topgirl'  => '테마별 아름다운 소녀 사진',
+                'topanime'  => '테마별 아름다운 소녀 사진',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => '스타일별 배경화면',
+                'topgirl'  => '스타일별 아름다운 소녀 사진',
+                'topanime'  => '스타일별 아름다운 소녀 사진',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => '이벤트별 배경화면',
+                'topgirl'  => '이벤트별 아름다운 소녀 사진',
+                'topanime'  => '이벤트별 아름다운 소녀 사진',
+            ],
+            'search_wallpapers' => [
+                'name'  => '바탕 화면 검색',
+                'topgirl'  => '사진 검색',
+                'topanime'  => '사진 검색',
+            ],
         ]
     ],
     "hi"    => [
@@ -595,10 +971,7 @@ return [
         "data"      => [
             "home"          => "होम",
             "about_us"      => "हमारे बारे में",
-            "wallpaper_theme"  => "वॉलपेपर थीम",
-            "wallpaper_style"   => "वॉलपेपर शैली",
             "event"             => "आयोजन",
-            "free_wallpaper"    => "मुफ्त वॉलपेपर",
             "support"           => "समर्थन",
             "connect_with_us"   => "हमसे जुड़ें",
             "table_of_contents" => "सामग्री",
@@ -608,16 +981,9 @@ return [
             "cart"              => "कार्ट",
             "your_cart_is_empty"    => "आपकी कार्ट खाली है",
             "continue_shopping"     => "खरीदारी जारी रखें",
-            "phone_wallpaper"         => "फ़ोन वॉलपेपर ",
             "full_set"          => "पूरा सेट",
             "image"             => "छवि",
             "options"           => "विकल्प",
-            "product_description"   => "<div>अपने प्यारे फोन में थोड़ा रंग और अनूठा शैली जोड़ें, इस सुंदर फोन वॉलपेपर सेट के साथ।</div>
-                                            <ul>
-                                                <li>रिज़ॉल्यूशन: 1440x3360</li>
-                                                <li>सभी फोन स्क्रीन के साथ संगत है।</li>
-                                            </ul>
-                                            <div>इसे डाउनलोड करें और अपने फोन स्क्रीन पर सीधे लागू करें, इसे अनुभवित करें!</div>",
             "product_guide_after_payment"   => '<div>भुगतान के बाद <span class="highLight">Momo /Zalopay</span> के साथ, आपको मूल छवि लिंक प्राप्त होगा जिसे डाउनलोड और उपयोग कर सकते हैं।</div>',
             "suggestions_for_you"   => "आपके लिए सुझाव",
             "each_image"        => "प्रत्येक छवि",
@@ -652,10 +1018,67 @@ return [
             'payment_method' => 'भुगतान का तरीका',
             'fee' => 'शुल्क',
             'payment_fee' => 'भुगतान शुल्क',
-            'wallpaper_by_themes' => 'थीम के हिसाब से वॉलपेपर',
-            'wallpaper_by_styles' => 'शैली के हिसाब से वॉलपेपर',
-            'wallpaper_by_events' => 'घटनाओं के हिसाब से वॉलपेपर',
-            'search_wallpapers' => 'वॉलपेपर खोजें',
+            /* custom */
+            "wallpaper_theme"  => [
+                'name'  => "वॉलपेपर थीम",
+                'topgirl'  => "फोटो थीम",
+                'topanime'  => "फोटो थीम",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "वॉलपेपर शैली",
+                'topgirl'  => "फोटो शैली",
+                'topanime'  => "फोटो शैली",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "मुफ्त वॉलपेपर",
+                'topgirl'  => "मुफ्त फोटो",
+                'topanime'  => "मुफ्त फोटो",
+            ],
+            "phone_wallpaper"         => [
+                'name'  => "फ़ोन वॉलपेपर ",
+                'topgirl'  => "सुंदर लड़कियों की तस्वीरें ",
+                'topanime'  => "सुंदर लड़कियों की तस्वीरें ",
+            ],
+            "product_description"   => [
+                'name'  => "<div>अपने प्यारे फोन में थोड़ा रंग और अनूठा शैली जोड़ें, इस सुंदर फोन वॉलपेपर सेट के साथ।</div>
+                                            <ul>
+                                                <li>रिज़ॉल्यूशन: 1440x3360</li>
+                                                <li>सभी फोन स्क्रीन के साथ संगत है।</li>
+                                            </ul>
+                                            <div>इसे डाउनलोड करें और अपने फोन स्क्रीन पर सीधे लागू करें, इसे अनुभवित करें!</div>",
+                'topgirl'  => "<div>अपने प्यारे फोन में थोड़ा रंग और अनूठा शैली जोड़ें, इस सुंदर फोन वॉलपेपर सेट के साथ।</div>
+                                            <ul>
+                                                <li>रिज़ॉल्यूशन: 1440x3360</li>
+                                                <li>सभी फोन स्क्रीन के साथ संगत है।</li>
+                                            </ul>
+                                            <div>इसे डाउनलोड करें और अपने फोन स्क्रीन पर सीधे लागू करें, इसे अनुभवित करें!</div>",
+                'topanime'  => "<div>अपने प्यारे फोन में थोड़ा रंग और अनूठा शैली जोड़ें, इस सुंदर फोन वॉलपेपर सेट के साथ।</div>
+                                            <ul>
+                                                <li>रिज़ॉल्यूशन: 1440x3360</li>
+                                                <li>सभी फोन स्क्रीन के साथ संगत है।</li>
+                                            </ul>
+                                            <div>इसे डाउनलोड करें और अपने फोन स्क्रीन पर सीधे लागू करें, इसे अनुभवित करें!</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => 'थीम के हिसाब से वॉलपेपर',
+                'topgirl'  => 'थीम के अनुसार सुंदर लड़कियों की फोटो',
+                'topanime'  => 'थीम के अनुसार सुंदर लड़कियों की फोटो',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => 'शैली के हिसाब से वॉलपेपर',
+                'topgirl'  => 'शैली के अनुसार सुंदर लड़कियों की फोटो',
+                'topanime'  => 'शैली के अनुसार सुंदर लड़कियों की फोटो',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => 'घटनाओं के हिसाब से वॉलपेपर',
+                'topgirl'  => 'इवेंट के अनुसार सुंदर लड़कियों की फोटो',
+                'topanime'  => 'इवेंट के अनुसार सुंदर लड़कियों की फोटो',
+            ],
+            'search_wallpapers' => [
+                'name'  => 'वॉलपेपर खोजें',
+                'topgirl'  => 'फोटो खोज',
+                'topanime'  => 'फोटो खोज',
+            ],
         ]
     ],
     "id"    => [
@@ -668,10 +1091,7 @@ return [
         "data"      => [
             "home"          => "Beranda",
             "about_us"      => "Tentang kami",
-            "wallpaper_theme"  => "Tema Wallpaper",
-            "wallpaper_style"   => "Gaya Wallpaper",
             "event"             => "Acara",
-            "free_wallpaper"    => "Wallpaper Gratis",
             "support"           => "Dukungan",
             "connect_with_us"   => "Terhubung dengan kami",
             "table_of_contents" => "Daftar Isi",
@@ -681,16 +1101,9 @@ return [
             "cart"              => "Keranjang",
             "your_cart_is_empty"    => "Keranjang Anda kosong",
             "continue_shopping"     => "Lanjutkan berbelanja",
-            "phone_wallpaper"         => "Wallpaper ponsel ",
             "full_set"          => "Set lengkap",
             "image"             => "Gambar",
             "options"           => "Pilihan",
-            "product_description"   => "<div>Tambahkan sedikit warna dan gaya unik ke ponsel lucu Anda dengan set wallpaper ponsel yang indah ini.</div>
-                                            <ul>
-                                                <li>Resolusi: 1440x3360</li>
-                                                <li>Kompatibel dengan semua layar ponsel.</li>
-                                            </ul>
-                                            <div>Unduh dan terapkan langsung ke layar ponsel Anda untuk merasakannya!</div>",
             "product_guide_after_payment"   => '<div>Setelah pembayaran dengan <span class="highLight">Momo /Zalopay</span>, Anda akan menerima tautan gambar asli untuk diunduh dan digunakan.</div>',
             "suggestions_for_you"   => "Saran untuk Anda",
             "each_image"        => "Setiap gambar",
@@ -725,10 +1138,67 @@ return [
             'payment_method' => 'Metode Pembayaran',
             'fee' => 'Biaya',
             'payment_fee' => 'Biaya Pembayaran',
-            'wallpaper_by_themes' => 'Wallpaper Menurut Tema',
-            'wallpaper_by_styles' => 'Wallpaper Menurut Gaya',
-            'wallpaper_by_events' => 'Wallpaper Menurut Acara',
-            'search_wallpapers' => 'Cari Wallpaper',
+            /* custom */
+            "wallpaper_theme"  => [
+                'name'  => "Tema Wallpaper",
+                'topgirl'  => "Tema Foto",
+                'topanime'  => "Tema Foto",
+            ],
+            "wallpaper_style"   => [
+                'name'  => "Gaya Wallpaper",
+                'topgirl'  => "Gaya Foto",
+                'topanime'  => "Gaya Foto",
+            ],
+            "free_wallpaper"    => [
+                'name'  => "Wallpaper Gratis",
+                'topgirl'  => "Foto Gratis",
+                'topanime'  => "Foto Gratis",
+            ],
+            "phone_wallpaper"         => [
+                'name'  => "Wallpaper ponsel ",
+                'topgirl'  => "Foto Cewek Cantik ",
+                'topanime'  => "Foto Cewek Cantik ",
+            ],
+            "product_description"   => [
+                'name'  => "<div>Tambahkan sedikit warna dan gaya unik ke ponsel lucu Anda dengan set wallpaper ponsel yang indah ini.</div>
+                                            <ul>
+                                                <li>Resolusi: 1440x3360</li>
+                                                <li>Kompatibel dengan semua layar ponsel.</li>
+                                            </ul>
+                                            <div>Unduh dan terapkan langsung ke layar ponsel Anda untuk merasakannya!</div>",
+                'topgirl'  => "<div>Tambahkan sedikit warna dan gaya unik ke ponsel lucu Anda dengan set wallpaper ponsel yang indah ini.</div>
+                                            <ul>
+                                                <li>Resolusi: 1440x3360</li>
+                                                <li>Kompatibel dengan semua layar ponsel.</li>
+                                            </ul>
+                                            <div>Unduh dan terapkan langsung ke layar ponsel Anda untuk merasakannya!</div>",
+                'topanime'  => "<div>Tambahkan sedikit warna dan gaya unik ke ponsel lucu Anda dengan set wallpaper ponsel yang indah ini.</div>
+                                            <ul>
+                                                <li>Resolusi: 1440x3360</li>
+                                                <li>Kompatibel dengan semua layar ponsel.</li>
+                                            </ul>
+                                            <div>Unduh dan terapkan langsung ke layar ponsel Anda untuk merasakannya!</div>",
+            ],
+            'wallpaper_by_themes' => [
+                'name'  => 'Wallpaper Menurut Tema',
+                'topgirl'  => 'Foto Gadis Cantik menurut Tema',
+                'topanime'  => 'Foto Gadis Cantik menurut Tema',
+            ],
+            'wallpaper_by_styles' => [
+                'name'  => 'Wallpaper Menurut Gaya',
+                'topgirl'  => 'Foto Gadis Cantik menurut Gaya',
+                'topanime'  => 'Foto Gadis Cantik menurut Gaya',
+            ],
+            'wallpaper_by_events' => [
+                'name'  => 'Wallpaper Menurut Acara',
+                'topgirl'  => 'Foto Gadis Cantik menurut Acara',
+                'topanime'  => 'Foto Gadis Cantik menurut Acara',
+            ],
+            'search_wallpapers' => [
+                'name'  => 'Cari Wallpaper',
+                'topgirl'  => 'Pencarian Foto',
+                'topanime'  => 'Pencarian Foto',
+            ],
         ]
     ]
 ];

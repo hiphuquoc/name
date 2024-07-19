@@ -117,7 +117,7 @@ class AjaxController extends Controller {
             $result['type']     = 'success';
             $result['title']    = 'Đăng ký email thành công!';
             $result['content']  = '<div>Cảm ơn bạn đã đăng ký nhận tin!</div>
-                                    <div>Trong thời gian tới nếu có bất kỳ chương trình khuyến mãi nào '.config('main.company_name').' sẽ gửi cho bạn đầu tiên.</div>'; 
+                                    <div>Trong thời gian tới nếu có bất kỳ chương trình khuyến mãi nào '.config('main.info.'.env('APP_NAME').'.company_name').' sẽ gửi cho bạn đầu tiên.</div>'; 
         }else {
             $result['type']     = 'error';
             $result['title']    = 'Đăng ký email thất bại!';

@@ -10,7 +10,7 @@
     $widthImagePage     = $size[0];
     $heigtImagePage     = $size[1];
     /* author */
-    $author             = $itemSeo->rating_author_name ?? $item->seo->rating_author_name ?? config('main.author_name');
+    $author             = $itemSeo->rating_author_name ?? $item->seo->rating_author_name ?? config('main.info.'.env('APP_NAME').'.author_name');
     /* lấy giá theo ngôn ngữ */
     $tmp            = \App\Helpers\Number::getPriceByLanguage($lowPrice, $language);
     $lowPrice       = $tmp['number'];
