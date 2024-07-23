@@ -8,7 +8,20 @@
             $titlePage  = 'Chỉnh sửa Category';
         }
     @endphp
-
+    <!-- Start: backgroun để chặn thao tác khi đang dịch content ngầm -->
+    @php
+        $flagPrevent = false;
+        foreach ($itemSeo->jobAutoTranslate as $jb) {
+            if($jb->status==0) {
+                $flagPrevent = true;
+                break;
+            }
+        }
+    @endphp
+    @if($flagPrevent)
+        @include('admin.category.lock')
+    @endif
+    <!-- End: backgroun để chặn thao tác khi đang dịch content ngầm -->
     <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate enctype="multipart/form-data">
     @csrf
     <input type="hidden" id="seo_id" name="seo_id" value="{{ $itemSeo->id ?? 0 }}" />
@@ -16,7 +29,7 @@
     <input type="hidden" id="language" name="language" value="{{ $language ?? 'vi' }}" />
     <input type="hidden" id="type" name="type" value="{{ $type }}" />
         <div class="pageAdminWithRightSidebar withRightSidebar">
-            <div class="pageAdminWithRightSidebar_header">
+            <div class="pageAdminWithRightSidebar_header" style="z-index:1000;position:relative;">
                 <div style="display:flex;align-items:flex-end;">
                     <div style="width:100%;">{{ $titlePage }}</div>
                     @include('admin.template.languageBox', [
@@ -140,36 +153,7 @@
                         <div class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu" style="width:100%;" onclick="submitForm('formAction', { 'index_google': true });">Lưu & Index</div>
                     </div>
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
-                        <div class="actionBox">
-                            @if($language=='vi')
-                                <div class="actionBox_item maxLine_1" onClick="callAI('auto_content')">
-                                    <i class="fa-solid fa-robot"></i>Viết toàn trang
-                                </div>
-                            @else   
-                                <div class="actionBox_item maxLine_1" onClick="callAI('translate_content')">
-                                    <i class="fa-solid fa-language"></i>Dịch toàn trang (trực quan)
-                                </div>
-                                @php
-                                    $promptTranslateContent = [];
-                                    foreach($prompts as $prompt){
-                                        if($prompt->reference_name=='content'&&$prompt->type=='translate_content'){
-                                            $promptTranslateContent = $prompt;
-                                            break;
-                                        }
-                                    }
-                                @endphp
-                                @if(!empty($itemSeo->id))
-                                    <div class="actionBox_item maxLine_1" onClick="createJobTranslate({{ $promptTranslateContent->id }}, {{ $item->seo->id }}, {{ $itemSeo->id }}, '{{ $language }}')">
-                                        <i class="fa-solid fa-language"></i>Dịch nội dung (chạy ngầm)
-                                    </div>
-                                @endif
-                            @endif
-                            @if(!empty($itemSeo->link_canonical))
-                                <a href="{{ URL::current().'?id='.$item->id.'&language='.$language.'&id_seo_source='.$itemSeo->link_canonical }}" class="actionBox_item maxLine_1">
-                                    <i class="fa-solid fa-file-import"></i>Copy từ trang gốc
-                                </a>
-                            @endif
-                        </div>
+                        @include('admin.category.action', compact('item', 'itemSeo', 'prompts', 'language'))
                     </div>
                     <div class="customScrollBar-y" style="height: calc(100% - 90px);">
                         <!-- Form Upload -->

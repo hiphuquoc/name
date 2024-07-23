@@ -1,0 +1,32 @@
+<div class="actionBox">
+    @if($language=='vi')
+        <div class="actionBox_item maxLine_1" onClick="callAI('auto_content')">
+            <i class="fa-solid fa-robot"></i>Viết toàn trang
+        </div>
+    @else   
+        <div class="actionBox_item maxLine_1" onClick="callAI('translate_content')">
+            <i class="fa-solid fa-language"></i>Dịch toàn trang (trực quan)
+        </div>
+        <!-- Start:: trường hợp không có bản lưu auto job nào mới hiện ra nút nhấn -->
+        @php
+            $promptTranslateContent = [];
+            foreach($prompts as $prompt){
+                if($prompt->reference_name=='content'&&$prompt->type=='translate_content'){
+                    $promptTranslateContent = $prompt;
+                    break;
+                }
+            }
+        @endphp
+        @if(!empty($itemSeo->id)&&!empty($itemSeo->jobAutoTranslate)&&$itemSeo->jobAutoTranslate->count()==0)
+            <div class="actionBox_item maxLine_1" onClick="createJobTranslate({{ $promptTranslateContent->id }}, {{ $item->seo->id }}, {{ $itemSeo->id }}, '{{ $language }}')">
+                <i class="fa-solid fa-language"></i>Dịch nội dung (chạy ngầm)
+            </div>
+        @endif
+        <!-- End:: trường hợp không có bản lưu auto job nào mới hiện ra nút nhấn -->
+    @endif
+    @if(!empty($itemSeo->link_canonical))
+        <a href="{{ URL::current().'?id='.$item->id.'&language='.$language.'&id_seo_source='.$itemSeo->link_canonical }}" class="actionBox_item maxLine_1">
+            <i class="fa-solid fa-file-import"></i>Copy từ trang gốc
+        </a>
+    @endif
+</div>

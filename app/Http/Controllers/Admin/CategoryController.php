@@ -63,7 +63,7 @@ class CategoryController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'seo.type');
                                 }])
-                                ->with('seo.contents', 'seos.infoSeo.contents')
+                                ->with('seo.contents', 'seos.infoSeo.contents', 'seos.infoSeo.jobAutoTranslate')
                                 ->first();
         /* lấy item seo theo ngôn ngữ được chọn */
         $itemSeo            = [];
@@ -71,6 +71,7 @@ class CategoryController extends Controller {
             foreach($item->seos as $s){
                 if($s->infoSeo->language==$language) {
                     $itemSeo = $s->infoSeo;
+                    // dd($itemSeo);
                     break;
                 }
             }

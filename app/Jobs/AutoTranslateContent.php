@@ -12,6 +12,12 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\Seo;
 use App\Models\Category;
 use App\Models\RelationSeoCategoryInfo;
+use App\Models\Tag;
+use App\Models\RelationSeoTagInfo;
+use App\Models\Product;
+use App\Models\RelationSeoProductInfo;
+use App\Models\Page;
+use App\Models\RelationSeoPageInfo;
 use App\Models\SeoContent;
 use App\Models\Prompt;
 use App\Models\JobAutoTranslate;
@@ -53,10 +59,8 @@ class AutoTranslateContent implements ShouldQueue {
             $resultContent  .= $response['content'];
         }
         if(!empty($resultContent)){
-            /* thay internal link */
-            preg_match_all('/href=["\'](.*?)["\']/', $resultContent, $match);
-            $allLink    = !empty($match[1]) ? $match[1] : [];
-            $response   = self::translateSlugBySlugOnData($allLink, $this->language, $resultContent);
+            /* thay internal link trong content */
+            $response   = self::translateSlugBySlugOnData($this->language, $resultContent);
             $resultContent = $response['content'];
             /* xóa box content cũ và lưu cơ sở dữ liệu */
             SeoContent::select('*')
@@ -92,8 +96,13 @@ class AutoTranslateContent implements ShouldQueue {
         }
     }
 
-    private static function translateSlugBySlugOnData($allUrl, $language, $content){
-        $responseContent = $content;
+    public static function translateSlugBySlugOnData($language, $content){
+        $responseContent    = $content;
+        /* xóa các khoảng trắng bị chuyển sang ký tự đặc biệt (do trinh soạn thảo Tyni) */
+        $responseContent    = str_replace("\u{A0}", ' ', $responseContent);
+        /* lọc tất url trong content ra */
+        preg_match_all('/href=["\'](.*?)["\']/', $content, $match);
+        $allUrl    = !empty($match[1]) ? $match[1] : [];
         /* tạo array map dịch */
         $arrayMap = [];
         foreach($allUrl as $url){
@@ -183,26 +192,62 @@ class AutoTranslateContent implements ShouldQueue {
                             ->first();
                 $id     = $tmp->category_info_id ?? 0;
                 $info   = Category::select('*')
-                            ->where('id', $tmp->category_info_id)
+                            ->where('id', $id)
                             ->with('seos.infoSeo', function($query) use($language){
                                 $query->where('language', $language);
                             })
                             ->first();
-                
-                if(!empty($info)){
-                    foreach($info->seos as $s){
-                        if(!empty($s->infoSeo)){
-                            $slugTranslate = $s->infoSeo->slug_full;
-                            break;
-                        }
-                    }
-                }
                 break;
-            
+            case 'tag_info':
+                $tmp    = RelationSeoTagInfo::select('*')
+                            ->where('seo_id', $infoSeoVi->id)
+                            ->first();
+                $id     = $tmp->tag_info_id ?? 0;
+                $info   = Tag::select('*')
+                            ->where('id', $id)
+                            ->with('seos.infoSeo', function($query) use($language){
+                                $query->where('language', $language);
+                            })
+                            ->first();
+                break;
+            case 'product_info':
+                $tmp    = RelationSeoProductInfo::select('*')
+                            ->where('seo_id', $infoSeoVi->id)
+                            ->first();
+                $id     = $tmp->product_info_id ?? 0;
+                $info   = Product::select('*')
+                            ->where('id', $id)
+                            ->with('seos.infoSeo', function($query) use($language){
+                                $query->where('language', $language);
+                            })
+                            ->first();
+                break;
+            case 'page_info':
+                $tmp    = RelationSeoPageInfo::select('*')
+                            ->where('seo_id', $infoSeoVi->id)
+                            ->first();
+                $id     = $tmp->page_info_id ?? 0;
+                $info   = Page::select('*')
+                            ->where('id', $id)
+                            ->with('seos.infoSeo', function($query) use($language){
+                                $query->where('language', $language);
+                            })
+                            ->first();
+                break;
             default:
                 # code...
                 break;
         }
+        /* duyệt info để lấy slug đúng */
+        if(!empty($info)){
+            foreach($info->seos as $s){
+                if(!empty($s->infoSeo)){
+                    $slugTranslate = $s->infoSeo->slug_full;
+                    break;
+                }
+            }
+        }
+        /* trả kết quả */
         return $slugTranslate;
     }
 

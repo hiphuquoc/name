@@ -135,9 +135,7 @@
     }
     /* function viết content */
     function callAI(action){
-        console.log(action);
         $('[data-type="'+action+'"]').each(function() {
-            
             const id                = $(this).data('id');
             const language          = $(this).data('language');
             const id_prompt         = $(this).data('id_prompt');

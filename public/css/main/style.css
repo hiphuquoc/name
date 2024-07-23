@@ -7222,6 +7222,9 @@ label.checkBox > *:not(:first-child) {
   .categoryGrid_box_item_content {
     padding: 0.5rem 0.75rem;
   }
+  .categoryGrid_box_item_content_title h2, .categoryGrid_box_item_content_title h3 {
+    font-size: 1rem;
+  }
   .categoryGrid_box_item_content_list {
     margin-top: 0.25rem;
   }

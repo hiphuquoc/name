@@ -1923,6 +1923,11 @@ $heightMenu : 52.5px;
             &_item {
                 &_content {
                     padding: 0.5rem 0.75rem;
+                    &_title {
+                        h2, h3 {
+                            font-size: 1rem;
+                        }
+                    }
                     &_list {
                         margin-top: 0.25rem;
                     }

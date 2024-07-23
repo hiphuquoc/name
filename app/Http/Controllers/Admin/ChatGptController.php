@@ -28,9 +28,9 @@ class ChatGptController extends Controller {
                             ->first();
         /* trường hợp dịch */
         if($infoPrompt->type=='translate_content'){
-            /* dịch bàng ai */
+            /* dịch bằng ai */
             if($infoPrompt->tool=='ai'){
-                /* xử lý riêng cho content */
+                /* dịch riêng cho content */
                 if($infoPrompt->reference_name=='content'){
                     $idContent  = $request->get('id_content');
                     /* ===== Dịch content ===== */
@@ -44,10 +44,12 @@ class ChatGptController extends Controller {
                     /* xử lý riêng cho dịch content -> vì lấy ra idContent */
                     $promptText = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
                     $response   = self::callApi($promptText, $infoPrompt);
+                    /* dịch url */
+                    $tmp                    = \App\Jobs\AutoTranslateContent::translateSlugBySlugOnData($language, $response['content']);
+                    $response['content'] = $tmp['content'];
                     return json_encode($response);
                 }
-
-                /* dich khác content */
+                /* dich các thành phần khác content */
                 $item       = DB::table($infoPrompt->reference_table)
                                 ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
                                 ->select($infoPrompt->reference_table . '.*', 'seo.*')
@@ -172,19 +174,10 @@ class ChatGptController extends Controller {
 
     public static function callApi($promptText, $infoPrompt, $urlImage = null, $retryCount = 0){
         $data       = [];
-        /* nếu 3.5 thì lấy ngẫu nhiên các phần tử được active */
-        if($infoPrompt->version=='gpt-3.5-turbo-1106'){
-            $infoApiAI  = ApiAI::select('*')
-                            ->where('type', $infoPrompt->version)
-                            ->where('status', '1')
-                            ->inRandomOrder()
-                            ->first();
-        }else { /* nếu version 4.0 thì lấy duy nhất phần tử được active */
-            $infoApiAI  = ApiAI::select('*')
-                            ->where('type', $infoPrompt->version)
+        $infoApiAI  = ApiAI::select('*')
+                            // ->where('type', $infoPrompt->version)
                             ->where('status', '1')
                             ->first();
-        }
         $apiKey     = $infoApiAI->api ?? '';
         $timeoutSeconds = 0;
         /* call api */

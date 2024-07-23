@@ -70,39 +70,45 @@ class HomeController extends Controller
     }
 
     public static function test(Request $request){
+        $content = '<h2>Phone Wallpapers of Spider Lily: Discover the Enigmatic and Exquisite Beauty of the Timeless Flower</h2>
 
-        // $datas  = Seo::select('*')
-        //             ->where('type', 'tag_info')
-        //             ->whereIn('language', ['fr', 'es', 'id'])
-        //             ->get();
-        // foreach($datas as $data){
-        //     $slug       = $data->slug;
-        //     $newSlug    = self::reorderString($slug);
-        //     $slugFull   = $data->slug_full;
-        //     $tmp        = explode('/', $slugFull);
-        //     $tmp[count($tmp)-1] = $newSlug;
-        //     $newSlugFull = implode('/', $tmp);
+    <h3>🌸 What is Spider Lily?</h3>
 
-        //     if($slugFull!=$newSlugFull){
-        //         /* tạo redirect 301 */
-        //         $infoRedirect = \App\Models\RedirectInfo::select('*')
-        //             ->where('old_url', $slug)
-        //             ->first();
-        //         if(empty($infoRedirect)){
-        //             \App\Models\RedirectInfo::insertItem([
-        //                 'old_url'   => '/'.$slug,
-        //                 'new_url'   => '/'.$newSlug,
-        //             ]);
-        //         }
-        //         /* update CSDL */
-        //         Seo::updateItem($data->id, [
-        //             'slug'  => $newSlug,
-        //             'slug_full' => $newSlugFull
-        //         ]);
-        //     }
-        // }
+    <p><strong>Spider Lily</strong>, also known as <strong>Red Spider Lily</strong>, is a flower native to Asia, particularly China and Japan. This flower typically blooms in the autumn and is known for its vivid red color, carrying an enigmatic and enchanting beauty. The shape of the Spider Lily resembles graceful rays of sunlight, creating a magical and captivating impression.</p>
 
-        dd(123);
+    <p>According to legend, the Spider Lily is also considered a symbol of separation and reunion in the afterlife. This makes the flower even more meaningful, making it stand out and alluring in each wallpaper.</p>
+
+    <h3>📱 Application of Spider Lily Theme in Phone Wallpapers</h3>
+
+    <p><strong>Spider Lily Phone Wallpapers</strong> are not just visually appealing images. With the dominant red color and delicate flower structure, using Spider Lily as a <strong><a href="../../hinh-nen-dien-thoai">phone wallpaper</a></strong> helps bring an enigmatic and profound beauty to your phone screen. Not only does it refresh your digital space, but Spider Lily wallpapers also evoke romantic, gentle, and slightly melancholic emotions, stimulating contemplation and imagination of the viewer.</p>
+
+    <h3>🌼 What are Spider Lily Phone Wallpapers?</h3>
+
+    <p><strong><a href="../../hinh-nen-dien-thoai/hinh-nen-dien-thoai-hoa-bi-ngan">Spider Lily phone wallpapers</a></strong> are a type of wallpaper for mobile phones, where the primary image is the Spider Lily. These wallpapers are often designed with high quality, not only providing aesthetics but also transmitting powerful emotions from the beauty of the Spider Lily.</p>
+
+    <p>They are not limited to static images but can also include dynamic wallpaper collections, offering rich visual experiences and a vibrant atmosphere for your phone.</p>
+
+    <h3>❓ Why are Spider Lily Phone Wallpapers Popular?</h3>
+
+    <p><strong>Spider Lily Phone Wallpapers</strong> are favored for many reasons, here are a few:</p>
+
+    <ul>
+
+    <li><strong>Enigmatic and Captivating Beauty:</strong> The vivid red color of the Spider Lily not only attracts the eye but also creates an enigmatic, inspirational digital space.</li>
+
+    <li><strong>Evoking Memories:</strong> For many people, the Spider Lily holds special meaning, radiating stories, memories, and personal emotions.</li>
+
+    <li><strong>Creating a Highlight:</strong> Using Spider Lily wallpapers makes your phone screen unique, standing out among ordinary images.</li>
+
+    <li><strong>Easy to Change:</strong> You can easily update and change wallpapers according to the season, mood, or personal events, bringing a fresh and exciting feeling.</li>
+
+    </ul>
+
+    <p>Try and experience it now, using Spider Lily phone wallpapers to make your screen more beautiful, distinctive, and meaningful than ever. Create an inspiring and romantic digital space right at your fingertips!
+\u{A0}
+</p>';
+        $tmp = \App\Jobs\AutoTranslateContent::translateSlugBySlugOnData('fr', $content);
+        dd($tmp);
     }
 
     private static function reorderString($input) {
