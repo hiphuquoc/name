@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="titlePage">Danh Sách Chủ Đề</div>
+@include('admin.report.search', compact('list'))
 <div class="card">
     <!-- ===== Table ===== -->
     <div class="table-responsive">
@@ -10,7 +11,8 @@
                 <tr>
                     <th style="width:60px;"></th>
                     <th class="text-center">Thông tin</th>
-                    <th style="width:900px;">Đường dãn</th>
+                    <th class="text-center" style="width:130px;">Trạng thái</th>
+                    <th style="width:800px;">Đường dãn</th>
                     <th class="text-center" width="60px">-</th>
                 </tr>
             </thead>
@@ -29,7 +31,7 @@
         </table>
     </div>
     <!-- Pagination -->
-    {{-- {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }} --}}
+    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
 </div>
 
 {{-- <!-- Nút thêm -->

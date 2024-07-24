@@ -31,6 +31,9 @@ class TranslateController extends Controller {
 
     public static function list(Request $request){
         $params     = [];
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewTranslateReport') ?? 20;
+        $params['paginate'] = $viewPerPage;
         // /* Search theo tên */
         // if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         $list = Seo::select('*')
@@ -41,8 +44,8 @@ class TranslateController extends Controller {
             ->with(['jobAutoTranslate' => function($query) {
                 $query->whereColumn('job_auto_translate.language', 'language');
             }])
-            ->get();
-        return view('admin.report.listAutoTranslateContent', compact('list', 'params'));
+            ->paginate($params['paginate']);
+        return view('admin.report.listAutoTranslateContent', compact('list', 'params', 'viewPerPage'));
     }
 
     public static function createJob(Request $request){

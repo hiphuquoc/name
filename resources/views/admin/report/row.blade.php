@@ -23,6 +23,13 @@
                 <strong>Đường dẫn</strong>: {{ $item->slug_full ?? null }}
             </div>
         </td>
+        <td class="text-center">
+            @foreach($item->jobAutoTranslate as $l)
+                <div class="oneLine" {{ $loop->index>0 ? 'style="border-top:1px dashed #333;padding-top:5px;"' : '' }}>
+                    {!! $l->status==1 ? '<span style="color:#28c76f;">Thành công</span>' : '<span>Đang chờ...</span>' !!}
+                </div>
+            @endforeach
+        </td>
         <td>
             @foreach($item->jobAutoTranslateLinks as $l)
                 <div class="oneLine" {{ $loop->index>0 ? 'style="border-top:1px dashed #333;padding-top:5px;"' : '' }}>{{ ($loop->index+1) }}. <a target="_blank" href="{{ $l->link_translate }}">{{ $l->link_translate }}</a></div>
