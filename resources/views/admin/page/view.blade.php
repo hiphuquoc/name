@@ -8,7 +8,9 @@
             $titlePage  = 'Chỉnh sửa Category';
         }
     @endphp
-
+    <!-- Start: backgroun để chặn thao tác khi đang dịch content ngầm -->
+    @include('admin.category.lock')
+    <!-- End: backgroun để chặn thao tác khi đang dịch content ngầm -->
     <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate enctype="multipart/form-data">
     @csrf
     <input type="hidden" id="seo_id" name="seo_id" value="{{ $itemSeo->id ?? 0 }}" />

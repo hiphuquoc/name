@@ -9,18 +9,7 @@
         }
     @endphp
     <!-- Start: backgroun để chặn thao tác khi đang dịch content ngầm -->
-    @php
-        $flagPrevent = false;
-        foreach ($itemSeo->jobAutoTranslate as $jb) {
-            if($jb->status==0) {
-                $flagPrevent = true;
-                break;
-            }
-        }
-    @endphp
-    @if($flagPrevent)
-        @include('admin.category.lock')
-    @endif
+    @include('admin.category.lock')
     <!-- End: backgroun để chặn thao tác khi đang dịch content ngầm -->
     <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate enctype="multipart/form-data">
     @csrf
