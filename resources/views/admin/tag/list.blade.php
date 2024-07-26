@@ -21,7 +21,7 @@
             <tbody>
                 @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
-                        @include('admin.tag.row', [
+                        @include('admin.category.row', [
                             'item'  => $item,
                             'no'    => $loop->index+1
                         ])

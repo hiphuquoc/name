@@ -36,12 +36,6 @@
                                 <div class="oneLine">
                                     <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
                                 </div>
-                                <div class="oneLine" style="margin-top:1rem;">
-                                    @include('admin.template.languageBox', [
-                                        'item' => $item,
-                                        'routeName' => 'admin.product.view',
-                                    ])
-                                </div>
                                 <div class="oneLine">
                                     <strong>Giá trọn bộ:</strong> <span style="color:red;font-weight:bold;font-size:1.3rem;">{{ $item->price }}</span>
                                 </div>
@@ -141,6 +135,14 @@
                                         <div>Xóa</div>
                                     </div>
                                 </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                @include('admin.template.languageBox', [
+                                    'item' => $item,
+                                    'routeName' => 'admin.product.view',
+                                ])
                             </td>
                         </tr>
                     @endforeach

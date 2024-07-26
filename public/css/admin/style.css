@@ -53,6 +53,33 @@ textarea::-webkit-scrollbar-track {
   background: transparent;
 }
 
+.maxLine_1, .maxLine_2, .maxLine_3, .maxLine_4, .maxLine_5 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+
+.maxLine_1 {
+  -webkit-line-clamp: 1;
+}
+
+.maxLine_2 {
+  -webkit-line-clamp: 2;
+}
+
+.maxLine_3 {
+  -webkit-line-clamp: 3;
+}
+
+.maxLine_4 {
+  -webkit-line-clamp: 4;
+}
+
+.maxLine_5 {
+  -webkit-line-clamp: 5;
+}
+
 .highLight_700 {
   font-weight: 700;
   color: rgb(105, 103, 240);
@@ -97,6 +124,9 @@ table:not(.sendEmail) tr th {
   color: #fff !important;
   text-transform: none !important;
   font-size: 1rem !important;
+}
+table:not(.sendEmail) tbody tr:nth-child(even) {
+  background: #EDF2F7;
 }
 
 .iconAction {
@@ -330,6 +360,7 @@ label.error {
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
+  color: #456;
 }
 .pageAdminWithRightSidebar_main {
   display: flex;
@@ -492,6 +523,7 @@ html .content {
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
+  color: #456;
 }
 
 .btn {
@@ -1636,18 +1668,14 @@ html .content {
 
 .languageBox {
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 .languageBox_item {
-  width: 50px;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 0 5px #adb5bd;
-  height: -moz-fit-content;
-  height: fit-content;
-  display: flex;
-  border-radius: 5px;
-  border: 2px solid #fff;
+  color: #456;
+  font-size: 15px;
+  width: 10%;
+  border-left: 1px solid #333;
+  padding: 4px 10px;
 }
 .languageBox_item img {
   width: 100% !important;
@@ -1655,14 +1683,11 @@ html .content {
      object-fit: cover;
   border-radius: 5px;
 }
-.languageBox_item:not(:first-child) {
-  margin-left: 7px;
-}
 .languageBox_item.disable {
-  opacity: 0.25;
+  opacity: 0.35;
 }
-.languageBox_item.selected {
-  border: 2px solid #28c76f;
+.languageBox_item.selected, .languageBox_item:hover {
+  color: rgb(38, 207, 142);
 }
 
 .inputLoading {

@@ -19,12 +19,6 @@
             <div class="oneLine">
                 <strong>Đường dẫn</strong>: {{ $item->seo->slug_full ?? null }}
             </div>
-            <div class="oneLine" style="margin-top:1rem;">
-                @include('admin.template.languageBox', [
-                    'item' => $item,
-                    'routeName' => 'admin.category.view',
-                ])
-            </div>
         </td>
         <td>
             <div class="oneLine">
@@ -72,6 +66,14 @@
                     <div>Xóa</div>
                 </div>
             </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5"> 
+            @include('admin.template.languageBox', [
+                'item' => $item,
+                'routeName' => 'admin.category.view',
+            ])
         </td>
     </tr>
     <!-- nếu có phần tử con => viết tiếp -->

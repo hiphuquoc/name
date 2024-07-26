@@ -648,16 +648,16 @@ blockquote{
   width: 100%;
   margin: 0 auto;
   max-width: 1600px;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
   @media(max-width: 1199px){
     padding: 0 1rem;
   }
   @media(max-width: 1023px){
+    padding: 0 0.75rem;
+  }
+  @media(max-width: 767px){
     padding: 0 0.5rem;
   }
-  // @media(max-width: 767px){
-  //   padding: 0 0.75rem;
-  // }
   // @media(max-width: 577px){
   //   padding: 0 0.5rem;
   // }

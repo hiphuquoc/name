@@ -20,7 +20,10 @@
             }
         @endphp
         <a href="{{ $languageLink }}" class="languageBox_item {{ $selected }} {{ $disable }}">
-            <img src="/storage/images/svg/icon_flag_{{ $lang['key'] }}.png" />
+            {{-- <img src="/storage/images/svg/icon_flag_{{ $lang['key'] }}.png" /> --}}
+            <div class="maxLine_1">
+                {{ $lang['key']}} - {{ $lang['name_by_language'] }}
+            </div>
         </a>
     @endforeach
 </div>

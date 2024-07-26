@@ -439,7 +439,7 @@ blockquote em {
   width: 100%;
   margin: 0 auto;
   max-width: 1600px;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
 }
 @media (max-width: 1199px) {
   .container {
@@ -447,6 +447,11 @@ blockquote em {
   }
 }
 @media (max-width: 1023px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+}
+@media (max-width: 767px) {
   .container {
     padding: 0 0.5rem;
   }
@@ -1551,16 +1556,18 @@ label.checkBox > *:not(:first-child) {
   margin-top: 11px;
   position: relative;
 }
-.languageBox:hover .languageBox_list {
-  display: block;
-}
-.languageBox:hover .languageBox_background {
-  display: block;
-}
 .languageBox_show {
-  border-radius: 3px;
-  width: 40px;
+  cursor: pointer;
   height: 25px;
+  font-size: 1.05rem;
+}
+.languageBox_show i {
+  margin-right: 0.5rem;
+  scale: 1.2 1;
+  opacity: 0.6;
+}
+.languageBox_show:hover {
+  color: #ffd100;
 }
 .languageBox_list {
   display: none;
@@ -1574,29 +1581,46 @@ label.checkBox > *:not(:first-child) {
   border-radius: 0 0 7px 7px;
   border-top: 2px solid #1a202c;
   box-shadow: 1px 1px 10px #1a202c;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  width: 660px;
+  padding: 0.5rem 0;
+}
+.languageBox_list_close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  border-radius: 10px;
+  background: #3a455699;
+  width: 35px;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+.languageBox_list_close:hover {
+  background: #3a4556CC;
 }
 .languageBox_list_item {
-  display: flex;
-  justify-content: space-between;
+  width: 25%;
   padding: 0.75rem;
-  border: 1px solid #2d3848;
-  cursor: pointer;
   color: #c0d0f1;
+  padding: 0 1rem;
+  line-height: 2.75;
 }
-.languageBox_list_item:not(:first-child) {
-  border-top: 1px solid #1a202c;
-}
-.languageBox_list_item_icon {
-  width: 40px;
-  height: 25px;
-  margin-left: 0.5rem;
-}
-.languageBox_list_item.selected, .languageBox_list_item:hover {
+.languageBox_list_item.selected, .languageBox_list_item:not(div):hover {
   color: #ffd100;
-  background: #3a4556;
 }
-.languageBox_list_item:last-child {
-  border-radius: inherit;
+.languageBox_list_item:is(div) {
+  opacity: 0.25;
+}
+.languageBox_list.visible {
+  display: flex;
+}
+.languageBox_list .hidden {
+  display: none;
 }
 .languageBox_background {
   display: none;
@@ -1611,24 +1635,49 @@ label.checkBox > *:not(:first-child) {
 .languageBox_background:hover {
   display: none !important;
 }
+.languageBox_background:hover {
+  display: block !important;
+}
+@media (max-width: 1023px) {
+  .languageBox_show {
+    margin-top: 0.2rem;
+  }
+}
 @media (max-width: 767px) {
   .languageBox {
     margin-top: 5px;
   }
-  .languageBox_show {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-size: auto 100% !important;
-  }
-  .languageBox_list_item_icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-size: auto 100% !important;
-  }
   .languageBox_background {
+    display: none !important;
     top: 52px;
+  }
+  .languageBox_show {
+    margin-top: 0.5rem;
+  }
+  .languageBox_list {
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 50px);
+    top: 50px;
+    box-shadow: 1px 1px 5px #1a202c;
+    overflow: scroll;
+  }
+  .languageBox_list_item {
+    width: 33.33%;
+  }
+  .languageBox_list_close {
+    position: fixed;
+    top: calc(50px + 0.75rem);
+  }
+}
+@media (max-width: 420px) {
+  .languageBox_list_item {
+    width: 50%;
+    overflow-x: scroll;
+  }
+  .languageBox_list_close {
+    right: 0.5rem;
+    top: calc(50px + 0.5rem);
   }
 }
 
@@ -5702,11 +5751,11 @@ label.checkBox > *:not(:first-child) {
   position: sticky;
   display: flex;
   flex-direction: column;
-  top: calc(52.5px + 1.5rem);
+  top: calc(52.5px + 1.25rem);
   left: 0;
   flex: 0 0 330px;
-  height: calc(100vh - 52.5px - 1.5rem);
-  padding-left: 1.5rem;
+  height: calc(100vh - 52.5px - 1.25rem);
+  padding-left: 1.25rem;
   padding-bottom: 1.25rem;
 }
 .layoutHeaderSide_content {
@@ -5718,6 +5767,7 @@ label.checkBox > *:not(:first-child) {
     flex: 0 0 280px;
     height: calc(100vh - 52.5px - 1rem);
     top: calc(52.5px + 1rem);
+    padding-left: 1rem;
   }
   .layoutHeaderSide_content {
     width: calc(100% - 280px);
@@ -5734,10 +5784,16 @@ label.checkBox > *:not(:first-child) {
     background: #1a202c;
     min-width: 320px;
     height: 100vh;
+    padding-left: 0.75rem;
   }
   .layoutHeaderSide_content {
     width: 100%;
     min-height: unset;
+  }
+}
+@media (max-width: 767px) {
+  .layoutHeaderSide_header {
+    padding-left: 0.5rem;
   }
 }
 
@@ -5748,11 +5804,11 @@ label.checkBox > *:not(:first-child) {
 }
 .layoutHeaderTop_header {
   position: sticky;
-  top: calc(52.5px + 1.5rem);
+  top: calc(52.5px + 1.25rem);
   left: 0;
   flex: 0 0 330px;
   height: 100%;
-  padding-left: 1.5rem;
+  padding-left: 1.25rem;
   display: flex;
   align-items: center;
 }
@@ -5762,7 +5818,7 @@ label.checkBox > *:not(:first-child) {
 }
 @media (max-width: 1199px) {
   .layoutHeaderTop_header {
-    padding-left: 1.25rem;
+    padding-left: 1rem;
     flex: 0 0 280px;
   }
   .layoutHeaderTop_content {
@@ -5772,19 +5828,13 @@ label.checkBox > *:not(:first-child) {
 @media (max-width: 1023px) {
   .layoutHeaderTop_header {
     flex: unset;
-    padding-left: 1rem;
+    padding-left: 0.75rem;
   }
   .layoutHeaderTop_content {
     width: auto !important;
   }
 }
 @media (max-width: 767px) {
-  .layoutHeaderTop_header {
-    flex: unset;
-    padding-left: 0.75rem;
-  }
-}
-@media (max-width: 577px) {
   .layoutHeaderTop_header {
     flex: unset;
     padding-left: 0.5rem;
@@ -6157,10 +6207,10 @@ label.checkBox > *:not(:first-child) {
   height: 100%;
 }
 .menuTop_item > *:not(:first-child) {
-  margin-left: 1.5rem;
+  padding-left: 1.5rem;
 }
 .menuTop_item:not(:first-child) {
-  margin-left: 1.5rem;
+  padding-left: 1.5rem;
 }
 .menuTop .rightBox {
   height: 100%;
@@ -6173,10 +6223,10 @@ label.checkBox > *:not(:first-child) {
     height: 100%;
   }
   .menuTop_item > *:not(:first-child) {
-    margin-left: 1.25rem;
+    padding-left: 1.25rem;
   }
   .menuTop_item:not(:first-child) {
-    margin-left: 1.25rem;
+    padding-left: 1.25rem;
   }
 }
 @media (max-width: 1023px) {
@@ -6650,6 +6700,8 @@ label.checkBox > *:not(:first-child) {
   justify-content: center;
   border-radius: 10px;
   margin-top: 3px;
+  padding: 0 !important;
+  margin-left: 1.25rem;
 }
 .iconMenuMobile i {
   opacity: 0.7;
@@ -7990,7 +8042,7 @@ label.checkBox > *:not(:first-child) {
   bottom: 0;
   right: 0;
   padding: 0.25rem;
-  z-index: 1000;
+  z-index: 998;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
