@@ -19,16 +19,13 @@
     <input type="hidden" id="type" name="type" value="{{ $type }}" />
         <div class="pageAdminWithRightSidebar withRightSidebar">
             <div class="pageAdminWithRightSidebar_header" style="z-index:1000;position:relative;">
-                <div style="display:flex;align-items:flex-end;">
-                    <div style="width:100%;">{{ $titlePage }}</div>
-                    @include('admin.template.languageBox', [
-                        'item' => $item,
-                        'language' => $language,
-                        'routeName' => 'admin.tag.view',
-                    ])
-                </div>
+                <div style="width:100%;margin-bottom:10px;">{{ $titlePage }}</div>
+                @include('admin.template.languageBox', [
+                    'item' => $item,
+                    'language' => $language,
+                    'routeName' => 'admin.tag.view',
+                ])
             </div>
-            
             <!-- Error -->
             @if ($errors->any())
                 <ul class="errorList">

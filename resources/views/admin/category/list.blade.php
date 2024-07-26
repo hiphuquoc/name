@@ -20,7 +20,8 @@
                     @foreach($list as $item)
                         @include('admin.category.row', [
                             'item'  => $item,
-                            'no'    => $loop->index+1
+                            'no'    => $loop->index+1,
+                            'typeRoute' => 'category',
                         ])
                     @endforeach
                 @else
