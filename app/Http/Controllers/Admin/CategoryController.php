@@ -40,21 +40,12 @@ class CategoryController extends Controller {
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $language           = $request->get('language') ?? null;
-        /* chức năng copy source */
-        $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
-        $itemSourceToCopy   = Category::select('*')
-                                ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
-                                    $query->where('id', $idSeoSourceToCopy);
-                                })
-                                ->with('seo', 'seos')
-                                ->first();
-        $itemSeoSourceToCopy    = [];
-        if(!empty($itemSourceToCopy->seos)){
-            foreach($itemSourceToCopy->seos as $s){
-                if($s->infoSeo->language==$language) {
-                    $itemSeoSourceToCopy = $s->infoSeo;
-                    break;
-                }
+        /* kiểm tra xem ngôn ngữ có nằm trong danh sách không */
+        $flagView       = false;
+        foreach(config('language') as $ld){
+            if($ld['key']==$language) {
+                $flagView = true;
+                break;
             }
         }
         /* tìm theo ngôn ngữ */
@@ -65,40 +56,62 @@ class CategoryController extends Controller {
                                 }])
                                 ->with('seo.contents', 'seos.infoSeo.contents', 'seos.infoSeo.jobAutoTranslate')
                                 ->first();
-        /* lấy item seo theo ngôn ngữ được chọn */
-        $itemSeo            = [];
-        if(!empty($item->seos)){
-            foreach($item->seos as $s){
-                if($s->infoSeo->language==$language) {
-                    $itemSeo = $s->infoSeo;
-                    // dd($itemSeo);
-                    break;
+        if(empty($item)) $flagView = false;
+        if($flagView==true){
+            /* chức năng copy source */
+            $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
+            $itemSourceToCopy   = Category::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
+                                        $query->where('id', $idSeoSourceToCopy);
+                                    })
+                                    ->with('seo', 'seos')
+                                    ->first();
+            $itemSeoSourceToCopy    = [];
+            if(!empty($itemSourceToCopy->seos)){
+                foreach($itemSourceToCopy->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeoSourceToCopy = $s->infoSeo;
+                        break;
+                    }
                 }
             }
+            /* lấy item seo theo ngôn ngữ được chọn */
+            $itemSeo            = [];
+            if(!empty($item->seos)){
+                foreach($item->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeo = $s->infoSeo;
+                        // dd($itemSeo);
+                        break;
+                    }
+                }
+            }
+            /* prompts */
+            $arrayTypeCategory = [];
+            foreach(config('main.category_type') as $c) $arrayTypeCategory[] = $c['key'];
+            $prompts            = Prompt::select('*')
+                                    ->whereIn('reference_table', $arrayTypeCategory)
+                                    ->get();
+            $parents            = Category::all();
+            /* category blog */
+            $categoryBlogs      = CategoryBlog::all();
+            /* trang canonical -> cùng là sản phẩm */
+            $idProduct          = $item->id ?? 0;
+            $sources            = Category::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($language){
+                                        $query->where('language', $language);
+                                    })
+                                    ->where('id', '!=', $idProduct)
+                                    ->get();
+            /* tags con */
+            $tags               = Tag::all();
+            /* type */
+            $type               = !empty($item) ? 'edit' : 'create';
+            $type               = $request->get('type') ?? $type;
+            return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'categoryBlogs', 'tags', 'message'));
+        } else {
+            return redirect()->route('admin.category.list');
         }
-        /* prompts */
-        $arrayTypeCategory = [];
-        foreach(config('main.category_type') as $c) $arrayTypeCategory[] = $c['key'];
-        $prompts            = Prompt::select('*')
-                                ->whereIn('reference_table', $arrayTypeCategory)
-                                ->get();
-        $parents            = Category::all();
-        /* category blog */
-        $categoryBlogs      = CategoryBlog::all();
-        /* trang canonical -> cùng là sản phẩm */
-        $idProduct          = $item->id ?? 0;
-        $sources            = Category::select('*')
-                                ->whereHas('seos.infoSeo', function($query) use($language){
-                                    $query->where('language', $language);
-                                })
-                                ->where('id', '!=', $idProduct)
-                                ->get();
-        /* tags con */
-        $tags               = Tag::all();
-        /* type */
-        $type               = !empty($item) ? 'edit' : 'create';
-        $type               = $request->get('type') ?? $type;
-        return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'categoryBlogs', 'tags', 'message'));
     }
 
     public function createAndUpdate(CategoryRequest $request){

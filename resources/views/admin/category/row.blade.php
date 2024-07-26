@@ -72,7 +72,7 @@
         <td colspan="5"> 
             @include('admin.template.languageBox', [
                 'item' => $item,
-                'routeName' => 'admin.category.view',
+                'routeName' => 'admin.'.$typeRoute.'.view',
             ])
         </td>
     </tr>

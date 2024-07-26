@@ -180,24 +180,12 @@ class ProductController extends Controller {
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $language           = $request->get('language') ?? 'vi';
-        /* chức năng copy source */
-        $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
-        $itemSourceToCopy   = Product::select('*')
-                                ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
-                                    $query->where('id', $idSeoSourceToCopy);
-                                })
-                                ->with(['files' => function($query) use($keyTable){
-                                    $query->where('relation_table', $keyTable);
-                                }])
-                                ->with('seo', 'seos', 'prices.wallpapers.infoWallpaper', 'categories')
-                                ->first();
-        $itemSeoSourceToCopy    = [];
-        if(!empty($itemSourceToCopy->seos)){
-            foreach($itemSourceToCopy->seos as $s){
-                if($s->infoSeo->language==$language) {
-                    $itemSeoSourceToCopy = $s->infoSeo;
-                    break;
-                }
+        /* kiểm tra xem ngôn ngữ có nằm trong danh sách không */
+        $flagView       = false;
+        foreach(config('language') as $ld){
+            if($ld['key']==$language) {
+                $flagView = true;
+                break;
             }
         }
         /* lấy thông tin item */
@@ -208,41 +196,66 @@ class ProductController extends Controller {
                                 }])
                                 ->with('seo', 'seos', 'prices.wallpapers.infoWallpaper', 'categories')
                                 ->first();
-        /* lấy item seo theo ngôn ngữ được chọn */
-        $itemSeo            = [];
-        if(!empty($item->seos)){
-            foreach($item->seos as $s){
-                if($s->infoSeo->language==$language) {
-                    $itemSeo = $s->infoSeo;
-                    break;
+        if(empty($item)) $flagView = false;
+        if($flagView==true){
+            /* chức năng copy source */
+            $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
+            $itemSourceToCopy   = Product::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
+                                        $query->where('id', $idSeoSourceToCopy);
+                                    })
+                                    ->with(['files' => function($query) use($keyTable){
+                                        $query->where('relation_table', $keyTable);
+                                    }])
+                                    ->with('seo', 'seos', 'prices.wallpapers.infoWallpaper', 'categories')
+                                    ->first();
+            $itemSeoSourceToCopy    = [];
+            if(!empty($itemSourceToCopy->seos)){
+                foreach($itemSourceToCopy->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeoSourceToCopy = $s->infoSeo;
+                        break;
+                    }
                 }
             }
+            /* lấy item seo theo ngôn ngữ được chọn */
+            $itemSeo            = [];
+            if(!empty($item->seos)){
+                foreach($item->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeo = $s->infoSeo;
+                        break;
+                    }
+                }
+            }
+            /* prompts */
+            $prompts            = Prompt::select('*')
+                                    ->where('reference_table', $keyTable)
+                                    ->get();
+            /* gộp lại thành parents và lọc bỏ page hinh-nen-dien-thoai */
+            $parents            = Category::all();
+            $wallpapers         = Wallpaper::select('*')
+                                    ->get();
+            $categories         = $parents;
+            /* trang canonical -> cùng là sản phẩm */
+            $idProduct          = $item->id ?? 0;
+            $sources            = Product::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($language){
+                                        $query->where('language', $language);
+                                    })
+                                    ->where('id', '!=', $idProduct)
+                                    ->get();
+            /* tag name */
+            $tags           = Tag::all();
+            $arrayTag       = [];
+            foreach($tags as $tag) if(!empty($tag->seo->title)) $arrayTag[] = $tag->seo->title;
+            /* type */
+            $type               = !empty($item) ? 'edit' : 'create';
+            $type               = $request->get('type') ?? $type;
+            return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'message', 'arrayTag'));
+        }else {
+            return redirect()->route('admin.product.list');
         }
-        /* prompts */
-        $prompts            = Prompt::select('*')
-                                ->where('reference_table', $keyTable)
-                                ->get();
-        /* gộp lại thành parents và lọc bỏ page hinh-nen-dien-thoai */
-        $parents            = Category::all();
-        $wallpapers         = Wallpaper::select('*')
-                                ->get();
-        $categories         = $parents;
-        /* trang canonical -> cùng là sản phẩm */
-        $idProduct          = $item->id ?? 0;
-        $sources            = Product::select('*')
-                                ->whereHas('seos.infoSeo', function($query) use($language){
-                                    $query->where('language', $language);
-                                })
-                                ->where('id', '!=', $idProduct)
-                                ->get();
-        /* tag name */
-        $tags           = Tag::all();
-        $arrayTag       = [];
-        foreach($tags as $tag) if(!empty($tag->seo->title)) $arrayTag[] = $tag->seo->title;
-        /* type */
-        $type               = !empty($item) ? 'edit' : 'create';
-        $type               = $request->get('type') ?? $type;
-        return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'message', 'arrayTag'));
     }
 
     public static function list(Request $request){

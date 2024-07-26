@@ -125,24 +125,12 @@ class PageController extends Controller {
         $message            = $request->get('message') ?? null;
         $id                 = $request->get('id') ?? 0;
         $language           = $request->get('language') ?? null;
-        /* chức năng copy source */
-        $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
-        $itemSourceToCopy   = Page::select('*')
-                                ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
-                                    $query->where('id', $idSeoSourceToCopy);
-                                })
-                                ->with(['files' => function($query) use($keyTable){
-                                    $query->where('relation_table', $keyTable);
-                                }])
-                                ->with('seo', 'seos')
-                                ->first();
-        $itemSeoSourceToCopy    = [];
-        if(!empty($itemSourceToCopy->seos)){
-            foreach($itemSourceToCopy->seos as $s){
-                if($s->infoSeo->language==$language) {
-                    $itemSeoSourceToCopy = $s->infoSeo;
-                    break;
-                }
+        /* kiểm tra xem ngôn ngữ có nằm trong danh sách không */
+        $flagView       = false;
+        foreach(config('language') as $ld){
+            if($ld['key']==$language) {
+                $flagView = true;
+                break;
             }
         }
         /* tìm theo ngôn ngữ */
@@ -153,35 +141,60 @@ class PageController extends Controller {
                                 }])
                                 ->with('seo', 'seos')
                                 ->first();
-        /* lấy item seo theo ngôn ngữ được chọn */
-        $itemSeo            = [];
-        if(!empty($item->seos)){
-            foreach($item->seos as $s){
-                if($s->infoSeo->language==$language) {
-                    $itemSeo = $s->infoSeo;
-                    break;
+        if(empty($item)) $flagView = false;
+        if($flagView==true){
+            /* chức năng copy source */
+            $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
+            $itemSourceToCopy   = Page::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
+                                        $query->where('id', $idSeoSourceToCopy);
+                                    })
+                                    ->with(['files' => function($query) use($keyTable){
+                                        $query->where('relation_table', $keyTable);
+                                    }])
+                                    ->with('seo', 'seos')
+                                    ->first();
+            $itemSeoSourceToCopy    = [];
+            if(!empty($itemSourceToCopy->seos)){
+                foreach($itemSourceToCopy->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeoSourceToCopy = $s->infoSeo;
+                        break;
+                    }
                 }
             }
+            /* lấy item seo theo ngôn ngữ được chọn */
+            $itemSeo            = [];
+            if(!empty($item->seos)){
+                foreach($item->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeo = $s->infoSeo;
+                        break;
+                    }
+                }
+            }
+            /* prompts */
+            $prompts            = Prompt::select('*')
+                    ->where('reference_table', $keyTable)
+                    ->get();
+            $parents            = Page::all();
+            /* trang canonical -> cùng là sản phẩm */
+            $idProduct          = $item->id ?? 0;
+            $sources            = Page::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($language){
+                                        $query->where('language', $language);
+                                    })
+                                    ->where('id', '!=', $idProduct)
+                                    ->get();
+            /* type */
+            $type               = !empty($itemSeo) ? 'edit' : 'create';
+            $type               = $request->get('type') ?? $type;
+            /* type_page */
+            $pageTypes          = PageType::all();
+            return view('admin.page.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'message', 'pageTypes'));
+        }else {
+            return redirect()->route('admin.page.list');
         }
-        /* prompts */
-        $prompts            = Prompt::select('*')
-                ->where('reference_table', $keyTable)
-                ->get();
-        $parents            = Page::all();
-        /* trang canonical -> cùng là sản phẩm */
-        $idProduct          = $item->id ?? 0;
-        $sources            = Page::select('*')
-                                ->whereHas('seos.infoSeo', function($query) use($language){
-                                    $query->where('language', $language);
-                                })
-                                ->where('id', '!=', $idProduct)
-                                ->get();
-        /* type */
-        $type               = !empty($itemSeo) ? 'edit' : 'create';
-        $type               = $request->get('type') ?? $type;
-        /* type_page */
-        $pageTypes          = PageType::all();
-        return view('admin.page.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'message', 'pageTypes'));
     }
 
     public static function list(Request $request){
