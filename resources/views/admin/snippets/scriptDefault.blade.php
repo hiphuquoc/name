@@ -218,16 +218,14 @@
         })
     }
     /* tạo job dịch tự động */
-    function createJobTranslate(idPrompt, idSeoSource, idSeo, language){
+    function createJobTranslateContent(idSeoVI, language){
         $.ajax({
-            url         : '{{ route("admin.translate.createJob") }}',
+            url         : '{{ route("admin.translate.createJobTranslateContentAjax") }}',
             type        : 'post',
             dataType    : 'html',
             data        : {
                 "_token": "{{ csrf_token() }}",
-                id_prompt : idPrompt, 
-                id_seo_source : idSeoSource,
-                id_seo : idSeo,
+                id_seo_vi : idSeoVI,
                 language
             }
         }).done(function(data){

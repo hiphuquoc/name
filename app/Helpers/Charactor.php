@@ -84,7 +84,7 @@ class Charactor {
     
             // Loại bỏ các ký tự không mong muốn và thay thế dấu cách bằng dấu gạch ngang
             $str = strtolower($str);
-            $str = preg_replace('/[^a-z0-9\s-]/', '', $str);
+            // $str = preg_replace('/[^a-z0-9\s-]/', '', $str);
             $str = preg_replace('/[\s-]+/', ' ', $str);
             $str = preg_replace('/[\s_]/', $word, $str);
     

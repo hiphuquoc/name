@@ -216,7 +216,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
         });
         /* ===== CACHE ===== */
         Route::prefix('helper')->group(function(){
-            Route::get('/convertStrToUrl', [HelperController::class, 'convertStrToUrl'])->name('admin.helper.convertStrToUrl');
+            Route::get('/convertStrToSlug', [HelperController::class, 'convertStrToSlug'])->name('admin.helper.convertStrToSlug');
         });
         /* ===== TOOL ===== */
         Route::prefix('toolCopyProduct')->group(function(){
@@ -225,9 +225,13 @@ Route::middleware('auth', 'role:admin')->group(function (){
         });
         /* ===== TRANSLATE ===== */
         Route::prefix('translate')->group(function(){
+            Route::get('/viewcreateJobTranslateContent', [TranslateController::class, 'viewcreateJobTranslateContent'])->name('admin.translate.viewcreateJobTranslateContent');
+            Route::get('/viewCreateJobTranslateAndCreatePage', [TranslateController::class, 'viewCreateJobTranslateAndCreatePage'])->name('admin.translate.viewCreateJobTranslateAndCreatePage');
             Route::get('/list', [TranslateController::class, 'list'])->name('admin.translate.list');
             Route::get('/delete', [TranslateController::class, 'delete'])->name('admin.translate.delete');
-            Route::post('/createJob', [TranslateController::class, 'createJob'])->name('admin.translate.createJob');
+            Route::post('/createJobTranslateContentAjax', [TranslateController::class, 'createJobTranslateContentAjax'])->name('admin.translate.createJobTranslateContentAjax');
+            Route::post('/createMultiJobTranslateContent', [TranslateController::class, 'createMultiJobTranslateContent'])->name('admin.translate.createMultiJobTranslateContent');
+            Route::post('/createJobTranslateAndCreatePage', [TranslateController::class, 'createJobTranslateAndCreatePage'])->name('admin.translate.createJobTranslateAndCreatePage');
         });
     });
 });
@@ -325,7 +329,6 @@ Route::middleware('auth')->group(function (){
 
     });
 });
-
 /* ROUTING */
 Route::middleware(['checkRedirect'])->group(function () {
     Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');

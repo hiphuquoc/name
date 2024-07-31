@@ -19,7 +19,6 @@ use App\Models\RelationSeoProductInfo;
 use App\Models\Page;
 use App\Models\RelationSeoPageInfo;
 use App\Models\SeoContent;
-use App\Models\Prompt;
 use App\Models\JobAutoTranslate;
 use App\Http\Controllers\Admin\ChatGptController;
 use App\Models\JobAutoTranslateLinks;
@@ -30,69 +29,70 @@ class AutoTranslateContent implements ShouldQueue {
     private $content;
     private $language;
     private $idSeo;
-    private $idPrompt;
+    private $infoPrompt;
+    public  $tries = 5; // Số lần thử lại
 
-    public function __construct($contentViDB, $language, $idSeo, $idPrompt){
-        $this->content  = $contentViDB;
-        $this->language = $language;
-        $this->idSeo    = $idSeo;
-        $this->idPrompt = $idPrompt;
+    public function __construct($contentViDB, $language, $idSeo, $infoPrompt){
+        $this->content      = $contentViDB;
+        $this->language     = $language;
+        $this->idSeo        = $idSeo;
+        $this->infoPrompt   = $infoPrompt;
     }
 
     public function handle(){
-        /* xóa các khoảng trắng bị chuyển sang ký tự đặc biệt (do trinh soạn thảo Tyni) */
-        $stringContent      = str_replace("\u{A0}", ' ', $this->content->content);
-        /* lấy info prompt và prompt text */
-        $infoPrompt         = Prompt::select('*')
-                                ->where('id', $this->idPrompt)
-                                ->first();
-        $languageName       = config('language.'.$this->language.'.name');
-        $languageCode       = config('language.'.$this->language.'.code');
-        $promptText         = str_replace(['#language', '#code'], [$languageName, $languageCode], $infoPrompt->reference_prompt);
-        /* dịch content */
-        // $resultContent      = $this->content->content;
-        $arrayPartContent   = \App\Helpers\Charactor::splitString($stringContent, 4000);
-        $resultContent      = '';
-        foreach($arrayPartContent as $contentPart){
-            $promptUse      = $promptText . "\n\n" . $contentPart;
-            $response       = ChatGptController::callApi($promptUse, $infoPrompt);
-            $resultContent  .= $response['content'];
-        }
-        if(!empty($resultContent)){
-            /* thay internal link trong content */
-            $response   = self::translateSlugBySlugOnData($this->language, $resultContent);
-            $resultContent = $response['content'];
-            /* xóa box content cũ và lưu cơ sở dữ liệu */
-            SeoContent::select('*')
-                ->where('seo_id', $this->idSeo)
-                ->where('ordering', $this->content->ordering)
-                ->delete();
-            SeoContent::insertItem([
-                'seo_id'    => $this->idSeo,
-                'content'   => $resultContent,
-                'ordering'  => $this->content->ordering
-            ]);
-            /* cập nhật lại trạng thái */
-            JobAutoTranslate::where('seo_id', $this->idSeo)
-                                ->where('ordering', $this->content->ordering)
-                                ->where('language', $this->language)
-                                ->update(['status' => 1]);
-            /* tạo danh sách links => báo cáo */
-            JobAutoTranslateLinks::where('seo_id', $this->idSeo)
-                                ->where('ordering', $this->content->ordering)
-                                ->where('language', $this->language)
-                                ->delete();
-            if(!empty($response['array_link'])){
-                foreach($response['array_link'] as $l){
-                    JobAutoTranslateLinks::insertItem([
-                        'seo_id'            => $this->idSeo,
-                        'ordering'          => $this->content->ordering,
-                        'language'          => $this->language,
-                        'link_source'       => $l['vi'],
-                        'link_translate'    => $l['translate']
-                    ]);
+        try {
+            /* xóa các khoảng trắng bị chuyển sang ký tự đặc biệt (do trinh soạn thảo Tyni) */
+            $stringContent      = str_replace("\u{A0}", ' ', $this->content->content);
+            $languageName       = config('language.'.$this->language.'.name');
+            $languageCode       = config('language.'.$this->language.'.code');
+            $promptText         = str_replace(['#language', '#code'], [$languageName, $languageCode], $this->infoPrompt->reference_prompt);
+            /* dịch content */
+            // $resultContent      = $this->content->content;
+            $arrayPartContent   = \App\Helpers\Charactor::splitString($stringContent, 4000);
+            $resultContent      = '';
+            foreach($arrayPartContent as $contentPart){
+                $promptUse      = $promptText . "\n\n" . $contentPart;
+                $response       = ChatGptController::callApi($promptUse, $this->infoPrompt);
+                $resultContent  .= $response['content'];
+            }
+            if(!empty($resultContent)){
+                /* thay internal link trong content */
+                $response   = self::translateSlugBySlugOnData($this->language, $resultContent);
+                $resultContent = $response['content'];
+                /* xóa box content cũ và lưu cơ sở dữ liệu */
+                SeoContent::select('*')
+                    ->where('seo_id', $this->idSeo)
+                    ->where('ordering', $this->content->ordering)
+                    ->delete();
+                SeoContent::insertItem([
+                    'seo_id'    => $this->idSeo,
+                    'content'   => $resultContent,
+                    'ordering'  => $this->content->ordering
+                ]);
+                /* cập nhật lại trạng thái */
+                JobAutoTranslate::where('seo_id', $this->idSeo)
+                                    ->where('ordering', $this->content->ordering)
+                                    ->where('language', $this->language)
+                                    ->update(['status' => 1]);
+                /* tạo danh sách links => báo cáo */
+                JobAutoTranslateLinks::where('seo_id', $this->idSeo)
+                                    ->where('ordering', $this->content->ordering)
+                                    ->where('language', $this->language)
+                                    ->delete();
+                if(!empty($response['array_link'])){
+                    foreach($response['array_link'] as $l){
+                        JobAutoTranslateLinks::insertItem([
+                            'seo_id'            => $this->idSeo,
+                            'ordering'          => $this->content->ordering,
+                            'language'          => $this->language,
+                            'link_source'       => $l['vi'],
+                            'link_translate'    => $l['translate']
+                        ]);
+                    }
                 }
             }
+        } catch (\Exception $e) {
+            throw $e; // Đẩy lại lỗi để Laravel tự động thử lại
         }
     }
 

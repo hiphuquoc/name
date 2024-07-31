@@ -109,6 +109,16 @@ return [
                     'route' => 'admin.toolCopyProduct.view',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
+                [
+                    'name'  => '3. Auto tạo trang',
+                    'route' => 'admin.translate.viewCreateJobTranslateAndCreatePage',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '4. Auto dịch',
+                    'route' => 'admin.translate.viewcreateJobTranslateContent',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
             ]
         ],
         [
@@ -134,7 +144,7 @@ return [
             'icon'      => '<i class="fa-solid fa-flag-checkered"></i>',
             'child'     => [
                 [
-                    'name'  => '1. Tự động dịch',
+                    'name'  => '1. Auto dịch',
                     'route' => 'admin.translate.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],

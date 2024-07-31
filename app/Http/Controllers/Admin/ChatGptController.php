@@ -181,8 +181,9 @@ class ChatGptController extends Controller {
         $apiKey     = $infoApiAI->api ?? '';
         $timeoutSeconds = 0;
         /* call api */
+        $version    = $infoPrompt->version ?? $infoPrompt['version'];
         if(empty($urlImage)){
-            $body   = self::autoContent($promptText, $infoPrompt->version);
+            $body   = self::autoContent($promptText, $version);
         }else {
             $body   = self::autoContentWithImage($promptText, $urlImage);
         }

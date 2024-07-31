@@ -140,7 +140,6 @@ class CategoryController extends Controller {
             }else {
                 $idSeo = Seo::insertItem($seo);
             }
-            
             if($language=='vi'){
                 /* insert hoặc update category_info */
                 $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;

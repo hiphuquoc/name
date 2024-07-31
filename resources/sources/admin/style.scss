@@ -779,6 +779,7 @@ html .content {
 
 .searchBox {
     display: flex;
+    align-items: flex-end;
     margin-bottom: 1rem;
     &_item {
         width: 100%;

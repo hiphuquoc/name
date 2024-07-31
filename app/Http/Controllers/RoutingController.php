@@ -24,7 +24,10 @@ use Illuminate\Support\Facades\Auth;
 class RoutingController extends Controller{
     public function routing(Request $request, $slug, $slug2 = null, $slug3 = null, $slug4 = null, $slug5 = null, $slug6 = null, $slug7 = null, $slug8 = null, $slug9 = null, $slug10 = null){
         /* dùng request uri */
-        $tmpSlug        = explode('/', $_SERVER['REQUEST_URI']);
+        $slug           = $request->path();
+        // Giải mã các ký tự URL-encoded
+        $decodedSlug    = urldecode($slug);
+        $tmpSlug        = explode('/', $decodedSlug);
         /* loại bỏ phần tử rỗng */
         $arraySlug      = [];
         foreach($tmpSlug as $slug) if(!empty($slug)&&$slug!='public') $arraySlug[] = $slug;

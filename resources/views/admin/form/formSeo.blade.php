@@ -119,7 +119,8 @@
                 @if(!empty($chatgptDataAndEvent['eventChatgpt']))
                     <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                 @endif
-                <i class="fa-solid fa-arrow-down reloadContentIcon" onclick="copyTitleToSlug($('#title'), 'slug')"></i>
+                <!-- Hàm này dùng idSeo->parent bảng tiếng việt gửi vào trong để tìm parent những ngôn ngữ khác (vì những trang create chưa có trang) -->
+                <i class="fa-solid fa-arrow-down reloadContentIcon" onclick="copyTitleToSlug($('#title'), 'slug', {{ $item->seo->parent }}, '{{ $language }}');"></i>
             </span>
             @php
                 $slug       = null;
@@ -275,16 +276,19 @@
 @push('scriptCustom')
     <script type="text/javascript">
 
-        function copyTitleToSlug(inpputData, idWrite) {
+        function copyTitleToSlug(inpputData, idWrite, idParentVI, language) {
             const string = $(inpputData).val();
-            console.log(string);
             $.ajax({
-                url         : '{{ route("admin.helper.convertStrToUrl") }}',
+                url         : '{{ route("admin.helper.convertStrToSlug") }}',
                 type        : 'get',
                 dataType    : 'html',
-                data        : { string }
+                data        : { 
+                    string,
+                    language,
+                    id_parent_vi : idParentVI,
+                 }
             }).done(function(data){
-                $('#'+idWrite).val(data+"-{{ time() }}");
+                $('#'+idWrite).val(data);
             })
         }
 

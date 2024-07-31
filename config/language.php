@@ -10,6 +10,9 @@ return [
         "currency_code" => "$",
         "money_value" => "1",
         "key" => "en",
+        "latin"     => true,
+        "flag_join_left_to_right" => false,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
@@ -135,6 +138,9 @@ return [
         "currency_code" => "¥",
         "money_value" => "7",
         "key" => "zh",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => false,
         "slug_page" => "zh-phone-wallpapers",
         "data" => [
             "home" => "首页",
@@ -260,6 +266,9 @@ return [
         "currency_code" => "€",
         "money_value" => "0.85",
         "key" => "es",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "fondos-de-pantalla-del-telefono",
         "data" => [
             "home" => "Inicio",
@@ -385,6 +394,9 @@ return [
         "currency_code" => "€",
         "money_value" => "0.85",
         "key" => "fr",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "fonds-d-ecran-de-telephone",
         "data" => [
             "home" => "Accueil",
@@ -510,6 +522,9 @@ return [
         "currency_code" => "₫",
         "money_value" => "25000",
         "key" => "vi",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "hinh-nen-dien-thoai",
         "data"      => [
             "home"              => "Trang chủ",
@@ -636,6 +651,9 @@ return [
         "currency_code" => "₹",
         "money_value" => "82",
         "key" => "hi",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "hi-phone-wallpapers",
         "data" => [
             "home" => "होम",
@@ -761,6 +779,9 @@ return [
         "currency_code" => "৳",
         "money_value" => "110",
         "key" => "bn",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "হোম",
@@ -886,6 +907,9 @@ return [
         "currency_code" => "₹",
         "money_value" => "82",
         "key" => "mr",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "मुखपृष्ठ",
@@ -1011,6 +1035,9 @@ return [
         "currency_code" => "₹",
         "money_value" => "82",
         "key" => "ta",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "முகப்பு",
@@ -1136,6 +1163,9 @@ return [
         "currency_code" => "₹",
         "money_value" => "82",
         "key" => "te",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "హోమ్",
@@ -1261,6 +1291,9 @@ return [
         "currency_code" => "₨",
         "money_value" => "305",
         "key" => "ur",
+        "latin"     => false,
+        "flag_join_left_to_right" => false,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "ہوم",
@@ -1386,6 +1419,9 @@ return [
         "currency_code" => "₹",
         "money_value" => "82",
         "key" => "gu",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "હોમ",
@@ -1511,6 +1547,9 @@ return [
         "currency_code" => "₹",
         "money_value" => "82",
         "key" => "kn",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "ಮನೆ",
@@ -1636,6 +1675,9 @@ return [
         "currency_code" => "¥",
         "money_value" => "110",
         "key" => "ja",
+        "latin"     => false,
+        "flag_join_left_to_right" => false,
+        "flag_has_space_in_content" => false,
         "slug_page" => "ja-phone-wallpapers",
         "data"      => [
             "home"          => "ホーム",
@@ -1761,6 +1803,9 @@ return [
         "currency_code" => "₩",
         "money_value" => "1300",
         "key" => "ko",
+        "latin"     => false,
+        "flag_join_left_to_right" => false,
+        "flag_has_space_in_content" => true,
         "slug_page" => "ko-phone-wallpapers",
         "data"      => [
             "home"          => "홈",
@@ -1886,6 +1931,9 @@ return [
         "currency_code" => "Rp",
         "money_value" => "14500",
         "key" => "jv",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Beranda",
@@ -2011,6 +2059,9 @@ return [
         "currency_code" => "Rp",
         "money_value" => "14500",
         "key" => "id",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "wallpaper-ponsel",
         "data"      => [
             "home"          => "Beranda",
@@ -2136,6 +2187,9 @@ return [
         "currency_code" => "RM",
         "money_value" => "4.15",
         "key" => "ms",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Rumah",
@@ -2261,6 +2315,9 @@ return [
         "currency_code" => "฿",
         "money_value" => "34",
         "key" => "th",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => false,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "หน้าหลัก",
@@ -2386,6 +2443,9 @@ return [
         "currency_code" => "៛",
         "money_value" => "4100",
         "key" => "km",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => false,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "ទំព័រដើម",
@@ -2511,6 +2571,9 @@ return [
         "currency_code" => "₭",
         "money_value" => "9500",
         "key" => "lo",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => false,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "ໜ້າຫຼັກ",
@@ -2636,6 +2699,9 @@ return [
         "currency_code" => "ر.س",
         "money_value" => "3.75",
         "key" => "ar",
+        "latin"     => false,
+        "flag_join_left_to_right" => false,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "الرئيسية",
@@ -2761,6 +2827,9 @@ return [
         "currency_code" => "﷼",
         "money_value" => "42000",
         "key" => "fa",
+        "latin"     => false,
+        "flag_join_left_to_right" => false,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "خانه",
@@ -2886,6 +2955,9 @@ return [
         "currency_code" => "₽",
         "money_value" => "90",
         "key" => "ru",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "ru-phone-wallpapers",
         "data"      => [
             "home"          => "Главная",
@@ -3011,6 +3083,9 @@ return [
         "currency_code" => "€",
         "money_value" => "0.85",
         "key" => "de",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Startseite",
@@ -3136,6 +3211,9 @@ return [
         "currency_code" => "₺",
         "money_value" => "8.5",
         "key" => "tr",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Ana Sayfa",
@@ -3261,6 +3339,9 @@ return [
         "currency_code" => "€",
         "money_value" => "0.85",
         "key" => "it",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
@@ -3386,6 +3467,9 @@ return [
         "currency_code" => "zł",
         "money_value" => "3.8",
         "key" => "pl",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Strona główna",
@@ -3511,6 +3595,9 @@ return [
         "currency_code" => "₴",
         "money_value" => "27",
         "key" => "uk",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Головна",
@@ -3636,6 +3723,9 @@ return [
         "currency_code" => "€",
         "money_value" => "0.85",
         "key" => "nl",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
@@ -3761,6 +3851,9 @@ return [
         "currency_code" => "€",
         "money_value" => "0.85",
         "key" => "el",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Αρχική",
@@ -3886,6 +3979,9 @@ return [
         "currency_code" => "Ft",
         "money_value" => "300",
         "key" => "hu",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Kezdőlap",
@@ -4011,6 +4107,9 @@ return [
         "currency_code" => "Kč",
         "money_value" => "21.5",
         "key" => "cs",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Domů",
@@ -4136,6 +4235,9 @@ return [
         "currency_code" => "lei",
         "money_value" => "4.1",
         "key" => "ro",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Acasă",
@@ -4261,6 +4363,9 @@ return [
         "currency_code" => "€",
         "money_value" => "0.85",
         "key" => "sk",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Domov",
@@ -4386,6 +4491,9 @@ return [
         "currency_code" => "₾",
         "money_value" => "3.3",
         "key" => "ka",
+        "latin"     => false,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "მთავარი",
@@ -4511,6 +4619,9 @@ return [
         "currency_code" => "₪",
         "money_value" => "3.3",
         "key" => "he",
+        "latin"     => false,
+        "flag_join_left_to_right" => false,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "בית",
@@ -4636,6 +4747,9 @@ return [
         "currency_code" => "soʻm",
         "money_value" => "11400",
         "key" => "uz",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Uy",
@@ -4761,6 +4875,9 @@ return [
         "currency_code" => "R$",
         "money_value" => "5.3",
         "key" => "pt",
+        "latin"     => true,
+        "flag_join_left_to_right" => true,
+        "flag_has_space_in_content" => true,
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Início",

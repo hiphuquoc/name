@@ -18,7 +18,7 @@
             }
         @endphp
         @if(!empty($itemSeo->id)&&!empty($itemSeo->jobAutoTranslate)&&$itemSeo->jobAutoTranslate->count()==0)
-            <div class="actionBox_item maxLine_1" onClick="createJobTranslate({{ $promptTranslateContent->id }}, {{ $item->seo->id }}, {{ $itemSeo->id }}, '{{ $language }}')">
+            <div class="actionBox_item maxLine_1" onClick="createJobTranslateContent({{ $item->seo->id }}, '{{ $language }}')">
                 <i class="fa-solid fa-language"></i>Dịch nội dung (chạy ngầm)
             </div>
         @endif

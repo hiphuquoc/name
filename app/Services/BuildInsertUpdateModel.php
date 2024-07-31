@@ -9,8 +9,8 @@ class BuildInsertUpdateModel {
     public static function buildArrayTableSeo($dataForm, $type, $dataImage = null){
         $result                                 = [];
         if(!empty($dataForm)){
-            $result['title']                    = $dataForm['title'] ?? null;
-            $result['description']              = $dataForm['description'] ?? null;
+            $result['title']                    = !empty($dataForm['title']) ? trim($dataForm['title']) : '';
+            $result['description']              = !empty($dataForm['description']) ? trim($dataForm['description']) : '';
             if(!empty($dataImage)) $result['image'] = $dataImage;
             // page level
             $pageLevel                          = 1;
@@ -24,11 +24,11 @@ class BuildInsertUpdateModel {
             $result['parent']                   = $pageParent;
             if(!empty($dataForm['ordering'])) $result['ordering'] = $dataForm['ordering'];
             $result['topic']                    = null;
-            $result['seo_title']                = $dataForm['seo_title'] ?? $dataForm['title'] ?? null;
-            $result['seo_description']          = $dataForm['seo_description'] ?? $dataForm['description'] ?? null;
-            $result['slug']                     = $dataForm['slug'];
+            $result['seo_title']                = !empty($dataForm['seo_title']) ? trim($dataForm['seo_title']) : $result['title'];
+            $result['seo_description']          = !empty($dataForm['seo_description']) ? trim($dataForm['seo_description']) : $result['description'];
+            $result['slug']                     = mb_strtolower(trim($dataForm['slug']));
             /* slug full */
-            $result['slug_full']                = Seo::buildFullUrl($dataForm['slug'], $pageLevel, $pageParent);
+            $result['slug_full']                = Seo::buildFullUrl(mb_strtolower(trim($dataForm['slug'])), $pageLevel, $pageParent);
             /* link canonical */
             if(!empty($dataForm['link_canonical'])){
                 $tmp                            = explode('/', $dataForm['link_canonical']);
