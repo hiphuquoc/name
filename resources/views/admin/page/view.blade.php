@@ -14,6 +14,7 @@
     <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate enctype="multipart/form-data">
     @csrf
     <input type="hidden" id="seo_id" name="seo_id" value="{{ $itemSeo->id ?? 0 }}" />
+    <input type="hidden" id="seo_id_vi" name="seo_id_vi" value="{{ !empty($item->seo->id)&&$type!='copy' ? $item->seo->id : 0 }}" />
     <input type="hidden" id="page_info_id" name="page_info_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" />
     <input type="hidden" id="language" name="language" value="{{ $language ?? 'vi' }}" />
     <input type="hidden" id="type" name="type" value="{{ $type }}" />
@@ -137,7 +138,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="customScrollBar-y" style="height: calc(100% - 90px);">
+                    <div class="customScrollBar-y">
                         <!-- Form Upload -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formImage')

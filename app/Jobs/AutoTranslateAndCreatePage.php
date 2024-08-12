@@ -22,21 +22,19 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
     private $arrayLanguageHas;
     private $arrayLanguageTranslate;
     private $infoPage;
-    private $flagTranslateContent;
     public  $tries = 5; // Số lần thử lại
 
-    public function __construct($arrayLanguageHas, $arrayLanguageTranslate, $infoPage, $flagTranslateContent = false){
+    public function __construct($arrayLanguageHas, $arrayLanguageTranslate, $infoPage){
         $this->arrayLanguageHas         = $arrayLanguageHas;
         $this->arrayLanguageTranslate   = $arrayLanguageTranslate;
         $this->infoPage                 = $infoPage;
-        $this->flagTranslateContent     = $flagTranslateContent;
     }
 
     public function handle(){
         try {
             $type                   = $this->infoPage->seo->type;
-            /* array chứa những ngôn ngữ để lấy content làm bản dịch */
-            $arrayLanguageAccept    = ['vi', 'en', 'fr', 'es', 'id']; /* dùng 5 ngôn ngữ này làm ngôn ngữ nguồn cho bản dịch -> tăng độ chính xác */
+            /* array chứa những ngôn ngữ để lấy content làm bản dịch , 'vi', 'fr', 'es', 'id', 'ja', 'ko', 'ru', 'id' */ 
+            $arrayLanguageAccept    = ['en', 'vi', 'fr', 'es', 'id', 'ja', 'ko', 'ru', 'id']; /* dùng 5 ngôn ngữ này làm ngôn ngữ nguồn cho bản dịch -> tăng độ chính xác */
             /* tạo prompt */
             /*
                 Tôi có nội dung của title, seo_title và seo_description của các phiên bản ngôn ngữ như sau, tôi gửi hết vào để bạn có thể tham khảo và cho ra bản dịch chuẩn nhất:
@@ -118,8 +116,8 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
             //     ],
             // ];
             /* tạo seo */
-            if(is_array($responseAPI)){
-                foreach($responseAPI as $language => $value){
+            foreach($responseAPI as $language => $value){
+                if(!empty($language)){
                     $arrayInsert            = [];
                     /* kiểm tra tiếp parent trang cha của ngôn ngữ đó có dịch chưa (nếu là trang con) */
                     $idSeoParentVI          = $this->infoPage->seo->parent;
@@ -140,75 +138,66 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
                     }
                     /* hợp lệ mới tiến hành tiếp */
                     if($flagNext==true){
-                        $title                      = HelperController::removeUnicodeControlCharacters($value['title']);
-                        $arrayInsert['title']       = $title;
+                        $title                                  = HelperController::removeUnicodeControlCharacters($value['title']);
+                        $arrayInsert['title']                   = $title;
                         /* slug và slug_full */
-                        $slug                       = HelperController::buildSlugFromTitle($title, $language, $idSeoParentVI);
-                        $arrayInsert['slug']        = $slug;
-                        $slugFull                   = \App\Models\Seo::buildFullUrl($slug, $this->infoPage->seo->level, $idParentForLanguage);
-                        $arrayInsert['slug_full']   = $slugFull;
-                        /* kiểm tra lần nữa khi nào slug_full không trùng mới thưc hiện tiếp */
-                        $flagInsert                 = Seo::select('*')
-                                                        ->where('slug_full', $slugFull)
-                                                        ->first();
-                        if(empty($flagInsert)){
-                            $arrayInsert['parent']                  = $idParentForLanguage;
-                            /* xây dựng mảng các phần tử còn lại */
-                            $arrayInsert['seo_title']               = HelperController::removeUnicodeControlCharacters($value['seo_title']);
-                            $arrayInsert['seo_description']         = HelperController::removeUnicodeControlCharacters($value['seo_description']);
-                            $arrayInsert['level']                   = $this->infoPage->seo->level;
-                            $arrayInsert['type']                    = $type;
-                            $arrayInsert['rating_author_name']      = $this->infoPage->seo->rating_author_name;
-                            $arrayInsert['rating_author_star']      = $this->infoPage->seo->rating_author_star;
-                            $arrayInsert['rating_aggregate_count']  = $this->infoPage->seo->rating_aggregate_count;
-                            $arrayInsert['rating_aggregate_star']   = $this->infoPage->seo->rating_aggregate_star;
-                            $arrayInsert['created_by']              = $this->infoPage->seo->created_by;
-                            $arrayInsert['language']                = $language;
-                            /* linkcanonical */
-                            $idSeoPageSource            = $this->infoPage->seo->link_canonical ?? 0;
-                            $idSeoPageSourceForLanguage = 0;
-                            if(!empty($idSeoPageSource)){
-                                $infoPageSource             = HelperController::getFullInfoPageByIdSeo($idSeoPageSource);
-                                foreach($infoPageSource->seos as $seo){
-                                    if($seo->infoSeo->language==$language) {
-                                        $idSeoPageSourceForLanguage = $seo->infoSeo->id;
-                                        break;
-                                    }
+                        $slug                                   = HelperController::buildSlugFromTitle($title, $language, $idSeoParentVI);
+                        $arrayInsert['slug']                    = $slug;
+                        $slugFull                               = \App\Models\Seo::buildFullUrl($slug, $idParentForLanguage);
+                        $arrayInsert['slug_full']               = $slugFull;
+                        $arrayInsert['parent']                  = $idParentForLanguage;
+                        /* xây dựng mảng các phần tử còn lại */
+                        $arrayInsert['seo_title']               = HelperController::removeUnicodeControlCharacters($value['seo_title']);
+                        $arrayInsert['seo_description']         = HelperController::removeUnicodeControlCharacters($value['seo_description']);
+                        $arrayInsert['level']                   = $this->infoPage->seo->level;
+                        $arrayInsert['type']                    = $type;
+                        $arrayInsert['rating_author_name']      = $this->infoPage->seo->rating_author_name;
+                        $arrayInsert['rating_author_star']      = $this->infoPage->seo->rating_author_star;
+                        $arrayInsert['rating_aggregate_count']  = $this->infoPage->seo->rating_aggregate_count;
+                        $arrayInsert['rating_aggregate_star']   = $this->infoPage->seo->rating_aggregate_star;
+                        $arrayInsert['created_by']              = $this->infoPage->seo->created_by;
+                        $arrayInsert['language']                = $language;
+                        /* linkcanonical */
+                        $idSeoPageSource            = $this->infoPage->seo->link_canonical ?? 0;
+                        $idSeoPageSourceForLanguage = 0;
+                        if(!empty($idSeoPageSource)){
+                            $infoPageSource             = HelperController::getFullInfoPageByIdSeo($idSeoPageSource);
+                            foreach($infoPageSource->seos as $seo){
+                                if($seo->infoSeo->language==$language) {
+                                    $idSeoPageSourceForLanguage = $seo->infoSeo->id;
+                                    break;
                                 }
                             }
-                            $arrayInsert['link_canonical']  = $idSeoPageSourceForLanguage;
-                            $idSeoInsert                    = Seo::insertItem($arrayInsert);
-                            if(!empty($idSeoInsert)){
-                                /* tạo relation kết nối với loại của nó */
-                                switch ($type) {
-                                    case 'category_info':
-                                        RelationSeoCategoryInfo::insertItem([
-                                            'seo_id'            => $idSeoInsert,
-                                            'category_info_id'  => $this->infoPage->id,
-                                        ]);
-                                        break;
-                                    case 'tag_info':
-                                        RelationSeoTagInfo::insertItem([
-                                            'seo_id'        => $idSeoInsert,
-                                            'tag_info_id'   => $this->infoPage->id,
-                                        ]);
-                                        break;
-                                    case 'product_info':
-                                        RelationSeoProductInfo::insertItem([
-                                            'seo_id'            => $idSeoInsert,
-                                            'product_info_id'   => $this->infoPage->id,
-                                        ]);
-                                        break;
-                                    case 'page_info':
-                                        RelationSeoPageInfo::insertItem([
-                                            'seo_id'        => $idSeoInsert,
-                                            'page_info_id'  => $this->infoPage->id,
-                                        ]);
-                                        break;
-                                    default:
-                                        # code...
-                                        break;
-                                }
+                        }
+                        $arrayInsert['link_canonical']  = $idSeoPageSourceForLanguage;
+                        $idSeoInsert                    = Seo::insertItem($arrayInsert, $this->infoPage->seo->id);
+                        if(!empty($idSeoInsert)){
+                            /* tạo relation kết nối với loại của nó */
+                            switch ($type) {
+                                case 'tag_info':
+                                    RelationSeoTagInfo::insertItem([
+                                        'seo_id'        => $idSeoInsert,
+                                        'tag_info_id'   => $this->infoPage->id,
+                                    ]);
+                                    break;
+                                case 'product_info':
+                                    RelationSeoProductInfo::insertItem([
+                                        'seo_id'            => $idSeoInsert,
+                                        'product_info_id'   => $this->infoPage->id,
+                                    ]);
+                                    break;
+                                case 'page_info':
+                                    RelationSeoPageInfo::insertItem([
+                                        'seo_id'        => $idSeoInsert,
+                                        'page_info_id'  => $this->infoPage->id,
+                                    ]);
+                                    break;
+                                default:
+                                    RelationSeoCategoryInfo::insertItem([
+                                        'seo_id'            => $idSeoInsert,
+                                        'category_info_id'  => $this->infoPage->id,
+                                    ]);
+                                    break;
                             }
                         }
                     }                

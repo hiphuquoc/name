@@ -111,6 +111,7 @@ class SeoFreeWallpaperController extends Controller {
             /* ngôn ngữ */
             $keyTable           = 'free_wallpaper_info';
             $idSeo              = $request->get('seo_id');
+            $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idFreeWallpaper    = $request->get('free_wallpaper_info_id');
             $language           = $request->get('language');
             $type               = $request->get('type');
@@ -122,61 +123,66 @@ class SeoFreeWallpaperController extends Controller {
             if($action=='edit'){
                 Seo::updateItem($idSeo, $seo);
             }else {
-                $idSeo = Seo::insertItem($seo);
+                $idSeo = Seo::insertItem($seo, $idSeoVI);
             }
-            /* xử lý riêng cho bảng việt (gốc) */
-            if($language=='vi'){
-                /* lưu categories */
-                FreeWallpaperController::saveCategories($idFreeWallpaper, $request->all());
-                /* lưu tag name */
-                if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idFreeWallpaper, 'free_wallpaper_info', $request->get('tag'));
-                /* chỉ có update free_wallpaper_info => vì trong controller này bên ngoài không có tạo */
-                FreeWallpaper::updateItem($idFreeWallpaper, [
-                    'seo_id' => $idSeo
-                ]);
-            }
+            /* kiểm tra insert thành công không */
+            if(!empty($idSeo)){
+                /* xử lý riêng cho bảng việt (gốc) */
+                if($language=='vi'){
+                    /* lưu categories */
+                    FreeWallpaperController::saveCategories($idFreeWallpaper, $request->all());
+                    /* lưu tag name */
+                    if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idFreeWallpaper, 'free_wallpaper_info', $request->get('tag'));
+                    /* chỉ có update free_wallpaper_info => vì trong controller này bên ngoài không có tạo */
+                    FreeWallpaper::updateItem($idFreeWallpaper, [
+                        'seo_id' => $idSeo
+                    ]);
+                }
 
-            /* relation_seo_free_wallpaper_info */
-            $relationSeoTagInfo = RelationSeoFreeWallpaperInfo::select('*')
-                                    ->where('seo_id', $idSeo)
-                                    ->where('free_wallpaper_info_id', $idFreeWallpaper)
-                                    ->first();
-            if(empty($relationSeoTagInfo)) RelationSeoFreeWallpaperInfo::insertItem([
-                'seo_id'        => $idSeo,
-                'free_wallpaper_info_id'   => $idFreeWallpaper
-            ]);
-            /* insert seo_content */
-            SeoContent::select('*')
-                ->where('seo_id', $idSeo)
-                ->delete();
-            $i      = 1;
-            foreach($request->get('content') as $content){
-                SeoContent::insertItem([
-                    'seo_id'    => $idSeo,
-                    'content'   => $content,
-                    'ordering'  => $i
+                /* relation_seo_free_wallpaper_info */
+                $relationSeoTagInfo = RelationSeoFreeWallpaperInfo::select('*')
+                                        ->where('seo_id', $idSeo)
+                                        ->where('free_wallpaper_info_id', $idFreeWallpaper)
+                                        ->first();
+                if(empty($relationSeoTagInfo)) RelationSeoFreeWallpaperInfo::insertItem([
+                    'seo_id'        => $idSeo,
+                    'free_wallpaper_info_id'   => $idFreeWallpaper
                 ]);
-                ++$i;
-            }
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã cập nhật Hình ảnh!'
-            ];
-            /* nếu có tùy chọn index => gửi google index */
-            if($request->get('index_google')==true) {
-                $flagIndex = IndexController::indexUrl($idSeo);
-                if($flagIndex==200){
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Hình ảnh và Báo Google Index!';
-                }else {
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Hình ảnh! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                /* insert seo_content */
+                SeoContent::select('*')
+                    ->where('seo_id', $idSeo)
+                    ->delete();
+                $i      = 1;
+                foreach($request->get('content') as $content){
+                    SeoContent::insertItem([
+                        'seo_id'    => $idSeo,
+                        'content'   => $content,
+                        'ordering'  => $i
+                    ]);
+                    ++$i;
+                }
+                DB::commit();
+                /* Message */
+                $message        = [
+                    'type'      => 'success',
+                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Hình ảnh!'
+                ];
+                /* nếu có tùy chọn index => gửi google index */
+                if($request->get('index_google')==true) {
+                    $flagIndex = IndexController::indexUrl($idSeo);
+                    if($flagIndex==200){
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Hình ảnh và Báo Google Index!';
+                    }else {
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Hình ảnh! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                    }
                 }
             }
         } catch (\Exception $exception){
             DB::rollBack();
-            /* Message */
-            $message        = [ 
+        }
+        /* có lỗi mặc định Message */
+        if(empty($message)){
+            $message        = [
                 'type'      => 'danger',
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];

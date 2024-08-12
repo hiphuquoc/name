@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use AdityaDees\LaravelBard\LaravelBard;
 use App\Http\Controllers\Admin\TranslateController;
+use App\Jobs\AutoTranslateContent;
 use App\Models\FreeWallpaper;
 use App\Models\RelationSeoCategoryInfo;
 use App\Models\RelationSeoProductInfo;
@@ -27,10 +28,10 @@ use Google\Client as Google_Client;
 use Illuminate\Support\Facades\DB;
 
 use DOMDocument;
+use PDO;
 use PhpParser\Node\Stmt\Switch_;
 
-class HomeController extends Controller
-{
+class HomeController extends Controller {
     public static function home(Request $request, $language = 'vi'){
         /* ngôn ngữ */
         SettingController::settingLanguage($language);
@@ -45,7 +46,7 @@ class HomeController extends Controller
             ->whereHas('seos.infoSeo', function ($query) use ($language) {
                 $query->where('slug', $language);
             })
-            ->with('seo', 'seos', 'type')
+            ->with('seo', 'seos.infoSeo', 'type')
             ->first();
         /* lấy item seo theo ngôn ngữ được chọn */
         $itemSeo            = [];
@@ -59,13 +60,15 @@ class HomeController extends Controller
         }
         $categories = Category::select('*')
                         ->whereHas('seo', function($query){
-                            $query->where('level', 2);
+                            $query->where('level', 2)
+                                    ->where('type', 'category_info');
                         })
                         ->where('flag_show', 1)
-                        ->with('seo')
-                        ->with('seos.infoSeo', function($query) use($language){
+                        ->with(['seo', 'seos.infoSeo' => function($query) use($language) {
                             $query->where('language', $language);
-                        })
+                        }])
+                        ->skip(0)
+                        ->take(8)
                         ->get();
         $xhtml      = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
@@ -75,10 +78,145 @@ class HomeController extends Controller
     }
 
     public static function test(Request $request){
-        $fullUrl    = 'https://name.dev/hinh-nen-dien-thoai/hinh-nen-dien-thoai-hai-huoc';
-        TranslateController::createJobTranslateAndCreatePage($fullUrl);
-        
-        dd(123);
+
+        /* test */
+        $arrayNot   = ['vi', 'lo', 'ro'];
+        $item   = Category::select('*')
+                    ->where('id', 52)
+                    ->with('seo', 'seos.infoSeo')
+                    ->first();
+        foreach($item->seos as $seo){
+            $language   = $seo->infoSeo->language;
+            // foreach($seo->infoSeo->contents as $c){
+            //     /* thay thế content */
+            //     $content = AutoTranslateContent::translateSlugBySlugOnData($language, $c->content);
+            //     /* update content */
+            //     SeoContent::updateItem($c->id, [
+            //         'content' => $content
+            //     ]);
+            // }
+            if(!in_array($language, $arrayNot)) TranslateController::createJobTranslateContent($item->seo->id, $language);
+        }
+        dd(123);    
+
+        // /* kiểm tra xem tag nào còn thiếu ngôn ngữ nào */
+        // $items = Tag::select('*')
+        //             ->with('seos', 'seo')
+        //             ->get();
+        // $arrayLanguageDefault = [];
+        // foreach(config('language') as $l){
+        //     $arrayLanguageDefault[] = $l['key'];
+        // }
+        // $response       = [];
+        // $count          = 0;
+        // foreach($items as $item){
+        //     $arrayHas   = [];
+        //     foreach($item->seos as $seo){
+        //         if(in_array($seo->infoSeo->language, $arrayLanguageDefault)) {
+        //             $arrayHas[] = $seo->infoSeo->language;
+        //         }
+        //     }
+        //     /* so sánh 2 mảng để lấy ngôn ngữ còn thiếu */
+        //     $missing = array_diff($arrayLanguageDefault, $arrayHas);
+        //     if (!empty($missing)) {
+        //         /* đưa vào mảng in */
+        //         $response[$item->seo->title] = $missing;
+        //         $count                      += count($missing);
+        //     }
+        // }
+        // dd($response);
+        // dd($count);
+
+
+        // /* xóa trang ngôn ngữ */
+        // $arrayNonDelete = [
+        //     'vi', 'en', 'fr', 'es'
+        // ];
+        // $items       = Tag::select('*')
+        //                 ->where('id', 602)
+        //                 ->with('seo', 'seos')
+        //                 ->get();
+        // $arrayDelete = [];
+        // foreach($items as $item){
+        //     foreach($item->seos as $seo){
+        //         if(!in_array($seo->infoSeo->language, $arrayNonDelete)){
+        //         // if($seo->infoSeo->language=='kn'){
+        //             Seo::select('*')
+        //                     ->where('id', $seo->infoSeo->id)
+        //                     ->delete();
+        //             RelationSeoTagInfo::select('*')
+        //                 ->where('seo_id', $seo->infoSeo->id)
+        //                 ->delete();
+        //             $arrayDelete[] = $seo->infoSeo->language;
+        //         }
+        //     }
+        // }
+        // dd($arrayDelete);
+
+        // /* tạo trang đa ngôn ngữ hàng loạt */
+        // $items = Tag::select('*')
+        //             ->with('seo', 'seos')
+        //             ->orderBy('id', 'DESC')
+        //             ->get();
+        // $jobs  = [];
+        // foreach($items as $item){
+        //     $flag = TranslateController::createJobTranslateAndCreatePage($item);
+        //     if($flag) {
+        //         $jobs[] = $item->seo->title;
+        //     }
+        // }
+        // dd($jobs);
+
+        // /* xóa hàng loạt 1 vài ngôn ngữ của tag */
+        // $arrayDelete    = ['pl', 'cs', 'mr', 'sk'];
+        // $items  = Tag::select('*')
+        //             ->whereHas('seos.infoSeo', function($query) use($arrayDelete){
+        //                 $query->whereIn('language', $arrayDelete);
+        //             })
+        //             ->with('seo', 'seos')
+        //             ->get();
+        // $response = 0;
+        // foreach($items as $item){
+        //     foreach($item->seos as $seo){
+        //         if(in_array($seo->infoSeo->language, $arrayDelete)){
+        //             /* xóa relation */
+        //             RelationSeoTagInfo::select('*')
+        //                 ->where('seo_id', $seo->infoSeo->id)
+        //                 ->delete();
+        //             /* xóa trang seo */
+        //             $flag = Seo::select('*')
+        //                 ->where('id', $seo->infoSeo->id)
+        //                 ->delete();
+        //             if($flag) $response += 1;
+        //         }
+        //     }
+            
+        // }
+    }
+
+    public static function changeSlug(Request $request){
+        $arrayFix = ['es', 'fr', 'zh', 'ru', 'ja', 'ko', 'hi'];
+        $items = Tag::select('*')
+                    ->whereHas('seos.infoSeo', function($query) use($arrayFix){
+                        $query->whereIn('language', $arrayFix)
+                        ->where('level', 2);
+                    })
+                    ->with('seo', 'seos')
+                    ->get();
+        foreach($items as $item){
+            foreach($item->seos as $seo){
+                if(in_array($seo->infoSeo->language, $arrayFix)){
+                    /* xây dựng slug */
+                    $slugNew = HelperController::buildSlugFromTitle($seo->infoSeo->title, $seo->infoSeo->language, $item->seo->parent);
+                    $slugFullNew = Seo::buildFullUrl($slugNew, $seo->infoSeo->parent);
+                    Seo::updateItem($seo->infoSeo->id, [
+                        'slug'  => $slugNew,
+                        'slug_full' => $slugFullNew,
+                    ]);
+                }
+            }
+        }
+        dd('success');
     }
 
     private static function reorderString($input) {

@@ -27,6 +27,7 @@ class HelperController extends Controller {
     public static function buildSlugFromTitle($title, $language, $idPageParentVI = 0){
         $response = '';
         if(!empty($title)&&$language){
+            $title      = mb_strtolower($title);
             /* trường hợp có gửi vào id của trang cha (bảng vi) */
             if(!empty($idPageParentVI)){
                 $infoPageParentVI   = self::getFullInfoPageByIdSeo($idPageParentVI);
@@ -68,17 +69,9 @@ class HelperController extends Controller {
         if(!empty($infoSeo)){
             $type               = $infoSeo->type;
             switch ($type) {
-                case 'category_info':
-                    $response   = Category::select('*')
-                                    ->whereHas('seo', function($query) use($idSeo){
-                                        $query->where('id', $idSeo);
-                                    })
-                                    ->with('seo', 'seos')
-                                    ->first();
-                    break;
                 case 'tag_info':
                     $response   = Tag::select('*')
-                                    ->whereHas('seo', function($query) use($idSeo){
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeo){
                                         $query->where('id', $idSeo);
                                     })
                                     ->with('seo', 'seos')
@@ -86,7 +79,7 @@ class HelperController extends Controller {
                     break;
                 case 'product_info':
                     $response   = Product::select('*')
-                                    ->whereHas('seo', function($query) use($idSeo){
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeo){
                                         $query->where('id', $idSeo);
                                     })
                                     ->with('seo', 'seos')
@@ -94,13 +87,19 @@ class HelperController extends Controller {
                     break;
                 case 'page_info':
                     $response   = Page::select('*')
-                                    ->whereHas('seo', function($query) use($idSeo){
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeo){
                                         $query->where('id', $idSeo);
                                     })
                                     ->with('seo', 'seos')
                                     ->first();
                     break;
                 default:
+                    $response   = Category::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeo){
+                                        $query->where('id', $idSeo);
+                                    })
+                                    ->with('seo', 'seos')
+                                    ->first();
                     break;
             }
         }

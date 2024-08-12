@@ -159,13 +159,11 @@ class ChatGptController extends Controller {
         /* trường hợp translate_content => thay thế #key language và truyền thêm content để dịch */
         if($action=='translate_content'){
             $languageName       = config('language.'.$language.'.name');
-            $languageCode       = config('language.'.$language.'.code');
-            $prompt             = str_replace(['#language', '#code'], [$languageName, $languageCode], $prompt);
+            $languageCode       = config('language.'.$language.'.key');
+            $prompt             = str_replace(['#language', '#key'], [$languageName, $languageCode], $prompt);
             foreach($item as $key => $value){
-                if($key==$referenceName){
-                    $prompt     = $prompt . "\n\n" . $value;
-                    break;
-                }
+                $str            = '#'.strval($key);
+                $prompt         = str_replace($str, $value, $prompt);
             }
             $response           = $prompt;
         }

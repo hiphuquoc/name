@@ -6,9 +6,6 @@
     /* image */
     $imagePage          = public_path(config('image.default'));
     if(!empty($item->seo->image)) $imagePage = \App\Helpers\Image::getUrlImageCloud($item->seo->image);
-    $size               = getimagesize($imagePage);
-    $widthImagePage     = $size[0];
-    $heigtImagePage     = $size[1];
     $imageAuthor        = env('APP_URL').Storage::url(config('main.logo_main'));
     $widthImageAuthor   = 500;
     $heightImageAuthor  = 500;
@@ -43,8 +40,8 @@
         "image":{
             "@type": "ImageObject",
             "url": "{{ $imagePage }}",
-            "width": "{{ $widthImagePage }}",
-            "height": "{{ $heigtImagePage }}"
+            "width": "800",
+            "height": "500"
         },
         "publisher": {
             "@type": "Organization",

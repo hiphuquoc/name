@@ -92,7 +92,7 @@ class TagController extends Controller {
             $itemSeo            = [];
             if(!empty($item->seos)){
                 foreach($item->seos as $s){
-                    if($s->infoSeo->language==$language) {
+                    if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language) {
                         $itemSeo = $s->infoSeo;
                         break;
                     }
@@ -132,12 +132,12 @@ class TagController extends Controller {
     }
 
     public function createAndUpdate(TagRequest $request){
-        // dd($request->all());
         try {
             DB::beginTransaction();
             /* ngôn ngữ */
             $keyTable           = 'tag_info';
             $idSeo              = $request->get('seo_id');
+            $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idTag              = $request->get('tag_info_id');
             $language           = $request->get('language');
             $type               = $request->get('type');
@@ -156,88 +156,92 @@ class TagController extends Controller {
             if($action=='edit'){
                 Seo::updateItem($idSeo, $seo);
             }else {
-                $idSeo = Seo::insertItem($seo);
+                $idSeo = Seo::insertItem($seo, $idSeoVI);
             }
-            
-            if($language=='vi'){
-                /* insert hoặc update tag_info */
-                $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
-                if(empty($idTag)){ /* check xem create tag hay update tag */
-                    $idTag          = Tag::insertItem([
-                        'flag_show' => $flagShow,
-                        'seo_id'    => $idSeo
-                    ]);
-                }else {
-                    Tag::updateItem($idTag, [
-                        'flag_show' => $flagShow
-                    ]);
-                }
-                /* insert relation_tag_info_category_blog_id */
-                RelationTagInfoCategoryBlogInfo::select('*')
-                    ->where('tag_info_id', $idTag)
-                    ->delete();
-                if(!empty($request->get('category_blog_info_id'))){
-                    foreach($request->get('category_blog_info_id') as $idTagBlogInfo){
-                        RelationTagInfoCategoryBlogInfo::insertItem([
-                            'tag_info_id'      => $idTag,
-                            'category_blog_info_id' => $idTagBlogInfo
+            /* kiểm tra insert thành công không */
+            if(!empty($idSeo)){
+                if($language=='vi'){
+                    /* insert hoặc update tag_info */
+                    $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
+                    if(empty($idTag)){ /* check xem create tag hay update tag */
+                        $idTag          = Tag::insertItem([
+                            'flag_show' => $flagShow,
+                            'seo_id'    => $idSeo
+                        ]);
+                    }else {
+                        Tag::updateItem($idTag, [
+                            'flag_show' => $flagShow
                         ]);
                     }
-                }
-                /* insert relation_category_info_tag_info */
-                RelationCategoryInfoTagInfo::select('*')
-                    ->where('tag_info_id', $idTag)
-                    ->delete();
-                if(!empty($request->get('categories'))){
-                    foreach($request->get('categories') as $idCategoryInfo){
-                        RelationCategoryInfoTagInfo::insertItem([
-                            'category_info_id'  => $idCategoryInfo,
-                            'tag_info_id'       => $idTag
-                        ]);
+                    /* insert relation_tag_info_category_blog_id */
+                    RelationTagInfoCategoryBlogInfo::select('*')
+                        ->where('tag_info_id', $idTag)
+                        ->delete();
+                    if(!empty($request->get('category_blog_info_id'))){
+                        foreach($request->get('category_blog_info_id') as $idTagBlogInfo){
+                            RelationTagInfoCategoryBlogInfo::insertItem([
+                                'tag_info_id'      => $idTag,
+                                'category_blog_info_id' => $idTagBlogInfo
+                            ]);
+                        }
+                    }
+                    /* insert relation_category_info_tag_info */
+                    RelationCategoryInfoTagInfo::select('*')
+                        ->where('tag_info_id', $idTag)
+                        ->delete();
+                    if(!empty($request->get('categories'))){
+                        foreach($request->get('categories') as $idCategoryInfo){
+                            RelationCategoryInfoTagInfo::insertItem([
+                                'category_info_id'  => $idCategoryInfo,
+                                'tag_info_id'       => $idTag
+                            ]);
+                        }
                     }
                 }
-            }
-            /* relation_seo_tag_info */
-            $relationSeoTagInfo = RelationSeoTagInfo::select('*')
-                                    ->where('seo_id', $idSeo)
-                                    ->where('tag_info_id', $idTag)
-                                    ->first();
-            if(empty($relationSeoTagInfo)) RelationSeoTagInfo::insertItem([
-                'seo_id'        => $idSeo,
-                'tag_info_id'   => $idTag
-            ]);
-            /* insert seo_content */
-            SeoContent::select('*')
-                ->where('seo_id', $idSeo)
-                ->delete();
-            $i      = 1;
-            foreach($request->get('content') as $content){
-                SeoContent::insertItem([
-                    'seo_id'    => $idSeo,
-                    'content'   => $content,
-                    'ordering'  => $i
+                /* relation_seo_tag_info */
+                $relationSeoTagInfo = RelationSeoTagInfo::select('*')
+                                        ->where('seo_id', $idSeo)
+                                        ->where('tag_info_id', $idTag)
+                                        ->first();
+                if(empty($relationSeoTagInfo)) RelationSeoTagInfo::insertItem([
+                    'seo_id'        => $idSeo,
+                    'tag_info_id'   => $idTag
                 ]);
-                ++$i;
-            }
-            
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã cập nhật Tag!'
-            ];
-            /* nếu có tùy chọn index => gửi google index */
-            if($request->get('index_google')==true) {
-                $flagIndex = IndexController::indexUrl($idSeo);
-                if($flagIndex==200){
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Tag và Báo Google Index!';
-                }else {
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Tag! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                /* insert seo_content */
+                SeoContent::select('*')
+                    ->where('seo_id', $idSeo)
+                    ->delete();
+                $i      = 1;
+                foreach($request->get('content') as $content){
+                    SeoContent::insertItem([
+                        'seo_id'    => $idSeo,
+                        'content'   => $content,
+                        'ordering'  => $i
+                    ]);
+                    ++$i;
+                }
+                
+                DB::commit();
+                /* Message */
+                $message        = [
+                    'type'      => 'success',
+                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Tag!'
+                ];
+                /* nếu có tùy chọn index => gửi google index */
+                if($request->get('index_google')==true) {
+                    $flagIndex = IndexController::indexUrl($idSeo);
+                    if($flagIndex==200){
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Tag và Báo Google Index!';
+                    }else {
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Tag! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                    }
                 }
             }
         } catch (\Exception $exception){
             DB::rollBack();
-            /* Message */
+        }
+        /* có lỗi mặc định Message */
+        if(empty($message)){
             $message        = [
                 'type'      => 'danger',
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'

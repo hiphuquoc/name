@@ -14,6 +14,13 @@ class RedirectInfo extends Model {
     ];
     public $timestamps      = false;
 
+    public static function getList($params = null){
+        $result     = self::select('*')
+                        ->orderBy('id', 'DESC')
+                        ->paginate($params['paginate']);
+        return $result;
+    }
+
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){

@@ -6,9 +6,6 @@
     /* image */
     $imagePage          = public_path(config('image.default'));
     if(!empty($item->seo->image)) $imagePage = \App\Helpers\Image::getUrlImageCloud($item->seo->image);
-    $size               = getimagesize($imagePage);
-    $widthImagePage     = $size[0];
-    $heigtImagePage     = $size[1];
     /* author */
     $author             = $itemSeo->rating_author_name ?? $item->seo->rating_author_name ?? config('main.info.'.env('APP_NAME').'.author_name');
     /* lấy giá theo ngôn ngữ */
@@ -29,8 +26,8 @@
 <meta property="og:image" content="{{ $imagePage }}" />
 <meta property="og:image:secure_url" content="{{ $imagePage }}" />
 <meta property="og:image:type" content="image/webp" />
-<meta property="og:image:width" content="{{ $widthImagePage }}" />
-<meta property="og:image:height" content="{{ $heigtImagePage }}" />
+<meta property="og:image:width" content="800" />
+<meta property="og:image:height" content="533" />
 <meta property="og:image:alt" content="{{ $title }}" />
 <meta property="og:url" content="{{ $urlFull }}" />
 <meta property="og:site_name" content="{{ $title }}" />

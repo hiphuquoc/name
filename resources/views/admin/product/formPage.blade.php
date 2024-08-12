@@ -57,7 +57,7 @@
                 <input type="number" min="0" id="code" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="code" value="{{ old('code') ?? $item->code ?? null }}" required />
             </div>
             <!-- category/style/event -->
-            @foreach(config('main.category_type') as $categoryType)
+            {{-- @foreach(config('main.category_type') as $categoryType)
                 <div class="formBox_full_item">
                     <label class="form-label">{{ $categoryType['name'] }}</label>
                     <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
@@ -85,9 +85,40 @@
                         </select>
                     </div>
                 </div>
+            @endforeach --}}
+            @foreach(config('main.category_type') as $categoryType)
+                <div class="formBox_full_item">
+                    <label class="form-label">{{ $categoryType['name'] }}</label>
+                    <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                        <select class="select2 form-select select2-hidden-accessible" name="{{ $categoryType['key'] }}[]" multiple="true">
+                            <option value="">- Lựa chọn -</option>
+                            @if(!empty($categories))
+                                @foreach($categories as $category)
+                                    @if(!empty($category->seo->type) && $category->seo->type == $categoryType['key'])
+                                        @php
+                                            $selected = null;
+                                            $oldCategories = old($categoryType['key'], []);
+                                            if(in_array($category->id, $oldCategories)) {
+                                                $selected = 'selected';
+                                            } else if(!empty($item->categories)){
+                                                foreach($item->categories as $c) {
+                                                    if(!empty($c->infoCategory->id) && $c->infoCategory->id == $category->id) {
+                                                        $selected = 'selected';
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                        <option value="{{ $category->id }}" {{ $selected }}>{{ $category->seo->title }}</option>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
             @endforeach
             <!-- One row -->
-            <div class="formBox_full_item">
+            {{-- <div class="formBox_full_item">
                 @php
                     $arrayTagName           = [];
                     if(!empty($item->tags)){
@@ -116,7 +147,45 @@
                 <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
                     <input id="tag" name="tag" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} />  
                 </div>
-            </div>
+            </div> --}}
+            <div class="formBox_full_item">
+                @php
+                    $arrayTagName = [];
+            
+                    // Sử dụng old() để giữ lại các tag đã nhập trước đó khi có lỗi validate
+                    $oldTags = old('tag');
+                    if($oldTags) {
+                        $arrayTagName = explode(',', $oldTags);
+                    } else {
+                        if(!empty($item->tags)) {
+                            foreach($item->tags as $tag) {
+                                if(!empty($tag->infoTag->seo->title)) $arrayTagName[] = $tag->infoTag->seo->title;
+                            }
+                        }
+                    }
+                    $strTagName = implode(',', $arrayTagName);
+            
+                    // action & prompt
+                    $chatgptDataAndEvent = [];
+                    foreach($prompts as $prompt){
+                        if($prompt->reference_name == 'tag') {
+                            if($prompt->type == 'auto_content_for_image') {
+                                $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'tag');
+                                break;
+                            }
+                        }
+                    }
+                @endphp
+                <label for="tag" class="form-label">
+                    Tag name
+                    @if(!empty($chatgptDataAndEvent['eventChatgpt']))
+                        <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                    @endif
+                </label>
+                <div class="{{ !empty($flagCopySource) && $flagCopySource == true ? 'boxInputSuccess' : '' }}">
+                    <input id="tag" name="tag" class="form-control" placeholder="Nhập tag name" value="{{ $strTagName }}" {{ $chatgptDataAndEvent['dataChatgpt'] ?? null }} />
+                </div>
+            </div>            
             <!-- One Row -->
             <div class="flexBox">
                 <div class="flexBox_item">

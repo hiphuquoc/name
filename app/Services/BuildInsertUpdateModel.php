@@ -2,7 +2,6 @@
 
 namespace App\Services;
 use App\Models\Seo;
-use App\Models\EnSeo;
 use Illuminate\Support\Facades\Auth;
 
 class BuildInsertUpdateModel {
@@ -28,7 +27,7 @@ class BuildInsertUpdateModel {
             $result['seo_description']          = !empty($dataForm['seo_description']) ? trim($dataForm['seo_description']) : $result['description'];
             $result['slug']                     = mb_strtolower(trim($dataForm['slug']));
             /* slug full */
-            $result['slug_full']                = Seo::buildFullUrl(mb_strtolower(trim($dataForm['slug'])), $pageLevel, $pageParent);
+            $result['slug_full']                = Seo::buildFullUrl(mb_strtolower(trim($dataForm['slug'])), $pageParent);
             /* link canonical */
             if(!empty($dataForm['link_canonical'])){
                 $tmp                            = explode('/', $dataForm['link_canonical']);
@@ -45,54 +44,6 @@ class BuildInsertUpdateModel {
             $result['rating_aggregate_count']   = $dataForm['rating_aggregate_count'] ?? 0;
             $result['rating_aggregate_star']    = $dataForm['rating_aggregate_star'] ?? null;
             $result['language']                 = $dataForm['language'] ?? 'vi';
-            $result['created_by']               = Auth::id() ?? 0;
-        }
-        return $result;
-    }
-
-    public static function buildArrayTableEnSeo($dataForm, $type, $dataImage = null){
-        $result                                 = [];
-        if(!empty($dataForm)){
-            $result['title']                    = $dataForm['en_name'] ?? null;
-            $result['description']              = $dataForm['en_description'] ?? null;
-            if(!empty($dataImage['filePathNormal'])) $result['image']           = $dataImage['filePathNormal'];
-            if(!empty($dataImage['filePathSmall']))  $result['image_small']     = $dataImage['filePathSmall'];
-            // page level
-            $pageLevel                          = 1;
-            $pageParent                         = 0;
-            if(!empty($dataForm['parent'])){
-                $idParentVi                     = $dataForm['parent'];
-                $infoParentEn                   = EnSeo::select('*')
-                                                    ->whereHas('seo.infoSeo', function($query) use($idParentVi){
-                                                        $query->where('id', $idParentVi);
-                                                    })
-                                                    ->first();
-                $pageLevel                      = !empty($infoParentEn->level) ? ($infoParentEn->level+1) : $pageLevel;
-                $pageParent                     = $infoParentEn->id;
-            }
-            $result['level']                    = $pageLevel;
-            $result['parent']                   = $pageParent;
-            $result['ordering']                 = $dataForm['ordering'] ?? null;
-            $result['topic']                    = null;
-            $result['seo_title']                = $dataForm['en_seo_title'] ?? $dataForm['en_title'] ?? null;
-            $result['seo_description']          = $dataForm['en_seo_description'] ?? $dataForm['en_description'] ?? null;
-            $result['slug']                     = $dataForm['en_slug'];
-            /* slug full */
-            $result['slug_full']                = EnSeo::buildFullUrl($dataForm['en_slug'], $pageLevel, $pageParent);
-            /* link canonical */
-            if(!empty($dataForm['en_link_canonical'])){
-                $tmp                            = explode('/', $dataForm['en_link_canonical']);
-                $tmp2                           = [];
-                foreach($tmp as $t) if(!empty($t)) $tmp2[] = $t;
-                $result['link_canonical']       = implode('/', $tmp2);
-            }
-            /* type */
-            $result['type']                     = $type;
-            $result['rating_author_name']       = 1;
-            $result['rating_author_star']       = 5;
-            $result['rating_aggregate_count']   = $dataForm['rating_aggregate_count'] ?? 0;
-            $result['rating_aggregate_star']    = $dataForm['rating_aggregate_star'] ?? null;
-            // $result['video']                    = $dataForm['video'] ?? null;
             $result['created_by']               = Auth::id() ?? 0;
         }
         return $result;

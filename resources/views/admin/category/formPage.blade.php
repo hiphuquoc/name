@@ -46,11 +46,13 @@
                     @foreach(config('main.category_type') as $categoryType)
                         @php
                             $selected   = null;
-                            if(!empty($item->seo->type)&&$item->seo->type==$categoryType['key']) $selected = ' selected';
+                            if(old('category_type') == $categoryType['key'] || (!empty($item->seo->type) && $item->seo->type == $categoryType['key'])) {
+                                $selected = 'selected';
+                            }
                         @endphp
-                        <option value="{{ $categoryType['key'] }}"{{ $selected }}>{{ $categoryType['name'] }}</option>
+                        <option value="{{ $categoryType['key'] }}" {{ $selected }}>{{ $categoryType['name'] }}</option>
                     @endforeach
-                </select>
+                </select>                
                 @if($lock=='disabled')
                     @foreach(config('main.category_type') as $categoryType)
                         @php
@@ -88,10 +90,15 @@
                         @if(!empty($tags))
                             @foreach($tags as $t)
                                 @php
-                                    $selected       = null;
-                                    if(!empty($item->tags)&&$item->tags->isNotEmpty()){
-                                        foreach($item->tags as $tTag){
-                                            if($t->id==$tTag->infoTag->id) {
+                                    $selected = null;
+                                    // Kiểm tra nếu có old input
+                                    $oldTags = old('tags', []);
+                                    if(in_array($t->id, $oldTags)) {
+                                        $selected = 'selected';
+                                    } else if (!empty($item->tags) && $item->tags->isNotEmpty()) {
+                                        // Kiểm tra trong $item->tags
+                                        foreach($item->tags as $tTag) {
+                                            if($t->id == $tTag->infoTag->id) {
                                                 $selected = 'selected';
                                                 break;
                                             }
@@ -103,7 +110,7 @@
                                 @endif
                             @endforeach
                         @endif
-                    </select>
+                    </select>                    
                 </div>
             </div>
             <!-- One Row -->

@@ -51,10 +51,7 @@ class CategoryController extends Controller {
         /* tìm theo ngôn ngữ */
         $item               = Category::select('*')
                                 ->where('id', $id)
-                                ->with(['files' => function($query){
-                                    $query->where('relation_table', 'seo.type');
-                                }])
-                                ->with('seo.contents', 'seos.infoSeo.contents', 'seos.infoSeo.jobAutoTranslate')
+                                ->with('seo.contents', 'seos.infoSeo.contents', 'seos.infoSeo.jobAutoTranslate', 'files')
                                 ->first();
         if(empty($item)) $flagView = false;
         if($flagView==true){
@@ -81,7 +78,6 @@ class CategoryController extends Controller {
                 foreach($item->seos as $s){
                     if($s->infoSeo->language==$language) {
                         $itemSeo = $s->infoSeo;
-                        // dd($itemSeo);
                         break;
                     }
                 }
@@ -106,7 +102,7 @@ class CategoryController extends Controller {
             /* tags con */
             $tags               = Tag::all();
             /* type */
-            $type               = !empty($item) ? 'edit' : 'create';
+            $type               = !empty($itemSeo) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
             return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'categoryBlogs', 'tags', 'message'));
         } else {
@@ -119,6 +115,7 @@ class CategoryController extends Controller {
             DB::beginTransaction();
             /* ngôn ngữ */
             $idSeo              = $request->get('seo_id');
+            $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idCategory         = $request->get('category_info_id');
             $language           = $request->get('language');
             $categoryType       = $request->get('category_type') ?? null;
@@ -138,86 +135,102 @@ class CategoryController extends Controller {
             if($action=='edit'){
                 Seo::updateItem($idSeo, $seo);
             }else {
-                $idSeo = Seo::insertItem($seo);
+                $idSeo = Seo::insertItem($seo, $idSeoVI);
             }
-            if($language=='vi'){
-                /* insert hoặc update category_info */
-                $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
-                if(empty($idCategory)){ /* check xem create category hay update category */
-                    $idCategory          = Category::insertItem([
-                        'flag_show'     => $flagShow,
-                        'seo_id'        => $idSeo,
-                    ]);
-                }else {
-                    Category::updateItem($idCategory, [
-                        'flag_show'     => $flagShow,
-                    ]);
-                }
-                /* insert relation_category_info_category_blog_id */
-                RelationCategoryInfoCategoryBlogInfo::select('*')
-                    ->where('category_info_id', $idCategory)
-                    ->delete();
-                if(!empty($request->get('category_blog_info_id'))){
-                    foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
-                        RelationCategoryInfoCategoryBlogInfo::insertItem([
-                            'category_info_id'      => $idCategory,
-                            'category_blog_info_id' => $idCategoryBlogInfo
+            /* kiểm tra insert thành công không */
+            if(!empty($idSeo)){
+                if($language=='vi'){
+                    /* insert hoặc update category_info */
+                    $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
+                    if(empty($idCategory)){ /* check xem create category hay update category */
+                        $idCategory          = Category::insertItem([
+                            'flag_show'     => $flagShow,
+                            'seo_id'        => $idSeo,
+                        ]);
+                    }else {
+                        Category::updateItem($idCategory, [
+                            'flag_show'     => $flagShow,
                         ]);
                     }
-                }
-                /* insert relation_category_info_tag_info */
-                RelationCategoryInfoTagInfo::select('*')
-                    ->where('category_info_id', $idCategory)
-                    ->delete();
-                if(!empty($request->get('tags'))){
-                    foreach($request->get('tags') as $idTagInfo){
-                        RelationCategoryInfoTagInfo::insertItem([
-                            'category_info_id'      => $idCategory,
-                            'tag_info_id' => $idTagInfo
-                        ]);
+                    /* insert relation_category_info_category_blog_id */
+                    RelationCategoryInfoCategoryBlogInfo::select('*')
+                        ->where('category_info_id', $idCategory)
+                        ->delete();
+                    if(!empty($request->get('category_blog_info_id'))){
+                        foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
+                            RelationCategoryInfoCategoryBlogInfo::insertItem([
+                                'category_info_id'      => $idCategory,
+                                'category_blog_info_id' => $idCategoryBlogInfo
+                            ]);
+                        }
+                    }
+                    /* insert relation_category_info_tag_info */
+                    RelationCategoryInfoTagInfo::select('*')
+                        ->where('category_info_id', $idCategory)
+                        ->delete();
+                    if(!empty($request->get('tags'))){
+                        foreach($request->get('tags') as $idTagInfo){
+                            RelationCategoryInfoTagInfo::insertItem([
+                                'category_info_id'      => $idCategory,
+                                'tag_info_id' => $idTagInfo
+                            ]);
+                        }
+                    }
+                    /* insert gallery và lưu CSDL */
+                    if($request->hasFile('galleries')){
+                        $name           = $request->get('slug');
+                        $params         = [
+                            'attachment_id'     => $idCategory,
+                            'relation_table'    => 'category_info',
+                            'name'              => $name,
+                            'file_type'         => 'gallery',
+                        ];
+                        GalleryController::upload($request->file('galleries'), $params);
                     }
                 }
-            }
-            /* relation_seo_category_info */
-            $relationSeoCategoryInfo = RelationSeoCategoryInfo::select('*')
-                                    ->where('seo_id', $idSeo)
-                                    ->where('category_info_id', $idCategory)
-                                    ->first();
-            if(empty($relationSeoCategoryInfo)) RelationSeoCategoryInfo::insertItem([
-                'seo_id'        => $idSeo,
-                'category_info_id'   => $idCategory
-            ]);
-            /* insert seo_content */
-            SeoContent::select('*')
-                ->where('seo_id', $idSeo)
-                ->delete();
-            $i      = 1;
-            foreach($request->get('content') as $content){
-                SeoContent::insertItem([
-                    'seo_id'    => $idSeo,
-                    'content'   => $content,
-                    'ordering'  => $i
+                /* relation_seo_category_info */
+                $relationSeoCategoryInfo = RelationSeoCategoryInfo::select('*')
+                                        ->where('seo_id', $idSeo)
+                                        ->where('category_info_id', $idCategory)
+                                        ->first();
+                if(empty($relationSeoCategoryInfo)) RelationSeoCategoryInfo::insertItem([
+                    'seo_id'        => $idSeo,
+                    'category_info_id'   => $idCategory
                 ]);
-                ++$i;
-            }
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã cập nhật Category!'
-            ];
-            /* nếu có tùy chọn index => gửi google index */
-            if($request->get('index_google')==true) {
-                $flagIndex = IndexController::indexUrl($idSeo);
-                if($flagIndex==200){
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category và Báo Google Index!';
-                }else {
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                /* insert seo_content */
+                SeoContent::select('*')
+                    ->where('seo_id', $idSeo)
+                    ->delete();
+                $i      = 1;
+                foreach($request->get('content') as $content){
+                    SeoContent::insertItem([
+                        'seo_id'    => $idSeo,
+                        'content'   => $content,
+                        'ordering'  => $i
+                    ]);
+                    ++$i;
+                }
+                DB::commit();
+                /* Message */
+                $message        = [
+                    'type'      => 'success',
+                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Category!'
+                ];
+                /* nếu có tùy chọn index => gửi google index */
+                if($request->get('index_google')==true) {
+                    $flagIndex = IndexController::indexUrl($idSeo);
+                    if($flagIndex==200){
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category và Báo Google Index!';
+                    }else {
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                    }
                 }
             }
         } catch (\Exception $exception){
             DB::rollBack();
-            /* Message */
+        }
+        /* có lỗi mặc định Message */
+        if(empty($message)){
             $message        = [
                 'type'      => 'danger',
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'

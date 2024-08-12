@@ -146,6 +146,13 @@ class TranslateController extends Controller {
                     ]);
                     /* lấy prompt đang được áp dụng cho content */
                     $type       = $infoPage->seo->type;
+                    /* check xem phải category_type */
+                    foreach(config('main.category_type') as $t) {
+                        if($type==$t['key']){
+                            $type = 'category_info';
+                            break;
+                        }
+                    }
                     $infoPrompt = Prompt::select('*')
                                     ->where('reference_name', 'content')
                                     ->where('type', 'translate_content')
@@ -160,7 +167,7 @@ class TranslateController extends Controller {
         return $flag;
     }
 
-    public static function createJobTranslateAndCreatePage(Request $request) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */
+    public static function createJobTranslateAndCreatePageAjax(Request $request) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */
         $urlVi      = $request->get('url_vi');
         $slug       = self::getSlugByUrl($urlVi);
         /* lấy thông tin trang gốc - vi */
@@ -171,48 +178,7 @@ class TranslateController extends Controller {
         if (!empty($tmp->id)) {
             /* kiểm tra xem loại nào */
             $infoPage =     HelperController::getFullInfoPageByIdSeo($tmp->id);
-            if (!empty($infoPage)) {
-                /* xây dựng aray của những ngôn ngữ đã có trang */
-                $arrayLanguageHas       = [];
-                $i                      = 0;
-                foreach ($infoPage->seos as $p) {
-                    if (!empty($p->infoSeo->language)) {
-                        $arrayLanguageHas[$i]['key']    = $p->infoSeo->language;
-                        $arrayLanguageHas[$i]['title']  = $p->infoSeo->title;
-                        $arrayLanguageHas[$i]['seo_title']    = $p->infoSeo->seo_title;
-                        $arrayLanguageHas[$i]['seo_description']    = $p->infoSeo->seo_description;
-                        $arrayLanguageHas[$i]['slug']    = $p->infoSeo->slug;
-                        $arrayLanguageHas[$i]['parent']    = $p->infoSeo->parent;
-                        ++$i;
-                    }
-                }
-                /* xây dựng array của những ngôn ngữ chưa có trang */
-                $arrayLanguageNonHas    = [];
-                $i                      = 0;
-                foreach (config('language') as $ld) {
-                    foreach ($arrayLanguageHas as $lh) {
-                        $flag           = false;
-                        if ($lh['key'] == $ld['key']) {
-                            $flag       = true;
-                            break;
-                        }
-                    }
-                    if ($flag == false) {
-                        $arrayLanguageNonHas[$i]['key'] = $ld['key'];
-                        $arrayLanguageNonHas[$i]['name'] = $ld['name'];
-                        $arrayLanguageNonHas[$i]['name_by_language'] = $ld['name_by_language'];
-                        ++$i;
-                    }
-                }
-                /* phân chia -> mỗi lần thực hiện 8 ngôn ngữ */
-                $numberPertime          = 8;
-                $chunkedArrays          = array_chunk($arrayLanguageNonHas, $numberPertime);
-                $flagTranslateContent   = !empty($request->get('flag'))&&$request->get('flag')=='on' ? true : false;
-                foreach ($chunkedArrays as $arrayLanguageTranslate) {
-                    $flag = AutoTranslateAndCreatePage::dispatch($arrayLanguageHas, $arrayLanguageTranslate, $infoPage, $flagTranslateContent);
-                    if($flag) $arrayLanguageRequested = array_merge($arrayLanguageRequested, $arrayLanguageTranslate);
-                }
-            }
+            if (!empty($infoPage)) $arrayLanguageRequested = self::createJobTranslateAndCreatePage($infoPage);
         }
         /* Message */
         $message        = [
@@ -221,6 +187,52 @@ class TranslateController extends Controller {
         ];
         $request->session()->put('message', $message);
         return redirect()->route('admin.translate.viewCreateJobTranslateAndCreatePage');
+    }
+
+    public static function createJobTranslateAndCreatePage($infoPage) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */
+        $arrayLanguageRequested = [];
+        if (!empty($infoPage)) {
+            /* xây dựng aray của những ngôn ngữ đã có trang */
+            $arrayLanguageHas       = [];
+            $i                      = 0;
+            foreach ($infoPage->seos as $p) {
+                if (!empty($p->infoSeo->language)) {
+                    $arrayLanguageHas[$i]['key']    = $p->infoSeo->language;
+                    $arrayLanguageHas[$i]['title']  = $p->infoSeo->title;
+                    $arrayLanguageHas[$i]['seo_title']    = $p->infoSeo->seo_title;
+                    $arrayLanguageHas[$i]['seo_description']    = $p->infoSeo->seo_description;
+                    $arrayLanguageHas[$i]['slug']    = $p->infoSeo->slug;
+                    $arrayLanguageHas[$i]['parent']    = $p->infoSeo->parent;
+                    ++$i;
+                }
+            }
+            /* xây dựng array của những ngôn ngữ chưa có trang */
+            $arrayLanguageNonHas    = [];
+            $i                      = 0;
+            foreach (config('language') as $ld) {
+                foreach ($arrayLanguageHas as $lh) {
+                    $flag           = false;
+                    if ($lh['key'] == $ld['key']) {
+                        $flag       = true;
+                        break;
+                    }
+                }
+                if ($flag == false) {
+                    $arrayLanguageNonHas[$i]['key'] = $ld['key'];
+                    $arrayLanguageNonHas[$i]['name'] = $ld['name'];
+                    $arrayLanguageNonHas[$i]['name_by_language'] = $ld['name_by_language'];
+                    ++$i;
+                }
+            }
+            /* phân chia -> mỗi lần thực hiện 8 ngôn ngữ */
+            $numberPertime          = 8;
+            $chunkedArrays          = array_chunk($arrayLanguageNonHas, $numberPertime);
+            foreach ($chunkedArrays as $arrayLanguageTranslate) {
+                $flag = AutoTranslateAndCreatePage::dispatch($arrayLanguageHas, $arrayLanguageTranslate, $infoPage);
+                if($flag) $arrayLanguageRequested = array_merge($arrayLanguageRequested, $arrayLanguageTranslate);
+            }
+        }
+        return $arrayLanguageRequested;
     }
 
     public static function getSlugByUrl($url){

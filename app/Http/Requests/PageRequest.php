@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use App\Rules\UniqueSlug;
 
 class PageRequest extends FormRequest
 {
@@ -32,29 +33,7 @@ class PageRequest extends FormRequest
             'rating_aggregate_star'     => 'required',
             'slug'                      => [
                 'required',
-                function($attribute, $value, $fail){
-                    $slug           = !empty(request('slug')) ? request('slug') : null;
-                    if(!empty($slug)){
-                        if(request('type')!='edit'){
-                            /* kiểm tra đường dẫn có tồn tại chưa */
-                            $dataCheck  = DB::table('seo')
-                                            ->join('page_info', 'page_info.seo_id', '=', 'seo.id')
-                                            ->select('seo.slug', 'page_info.id')
-                                            ->where('slug', $slug)
-                                            ->first();
-                            
-                        }else {
-                            /* kiểm tra với category khác xem có trùng đường dẫn không */
-                            $dataCheck  = DB::table('seo')
-                                            ->join('page_info', 'page_info.seo_id', '=', 'seo.id')
-                                            ->select('seo.slug', 'page_info.id')
-                                            ->where('slug', $slug)
-                                            ->where('page_info.id', '!=', request('page_info_id'))
-                                            ->first();
-                        }
-                        if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Trang khác trên hệ thống!');
-                    }
-                }
+                new UniqueSlug(request()),
             ],
         ];
     }

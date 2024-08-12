@@ -32,6 +32,7 @@ class PageController extends Controller {
             /* ngôn ngữ */
             $keyTable           = 'page_info';
             $idSeo              = $request->get('seo_id');
+            $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idPage             = $request->get('page_info_id');
             $language           = $request->get('language');
             $type               = $request->get('type');
@@ -50,67 +51,71 @@ class PageController extends Controller {
             if($action=='edit'){
                 Seo::updateItem($idSeo, $seo);
             }else {
-                $idSeo = Seo::insertItem($seo);
+                $idSeo = Seo::insertItem($seo, $idSeoVI);
             }
-            
-            if($language=='vi'){
-                /* insert hoặc update page_info */
-                $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
-                if(empty($idPage)){ /* check xem create page hay update page */
-                    $idPage          = Page::insertItem([
-                        'type_id'       => $request->get('type_id'),
-                        'show_sidebar'  => $showSidebar,
-                        'seo_id'        => $idSeo,
-                    ]);
-                }else {
-                    Page::updateItem($idPage, [
-                        'type_id'       => $request->get('type_id'),
-                        'show_sidebar'  => $showSidebar
-                    ]);
+            /* kiểm tra insert thành công không */
+            if(!empty($idSeo)){
+                if($language=='vi'){
+                    /* insert hoặc update page_info */
+                    $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
+                    if(empty($idPage)){ /* check xem create page hay update page */
+                        $idPage          = Page::insertItem([
+                            'type_id'       => $request->get('type_id'),
+                            'show_sidebar'  => $showSidebar,
+                            'seo_id'        => $idSeo,
+                        ]);
+                    }else {
+                        Page::updateItem($idPage, [
+                            'type_id'       => $request->get('type_id'),
+                            'show_sidebar'  => $showSidebar
+                        ]);
+                    }
                 }
-            }
 
-            /* relation_seo_page_info */
-            $relationSeoTagInfo = RelationSeoPageInfo::select('*')
-                                    ->where('seo_id', $idSeo)
-                                    ->where('page_info_id', $idPage)
-                                    ->first();
-            if(empty($relationSeoTagInfo)) RelationSeoPageInfo::insertItem([
-                'seo_id'        => $idSeo,
-                'page_info_id'   => $idPage
-            ]);
-            /* insert seo_content */
-            SeoContent::select('*')
-                ->where('seo_id', $idSeo)
-                ->delete();
-            $i      = 1;
-            foreach($request->get('content') as $content){
-                SeoContent::insertItem([
-                    'seo_id'    => $idSeo,
-                    'content'   => $content,
-                    'ordering'  => $i
+                /* relation_seo_page_info */
+                $relationSeoTagInfo = RelationSeoPageInfo::select('*')
+                                        ->where('seo_id', $idSeo)
+                                        ->where('page_info_id', $idPage)
+                                        ->first();
+                if(empty($relationSeoTagInfo)) RelationSeoPageInfo::insertItem([
+                    'seo_id'        => $idSeo,
+                    'page_info_id'   => $idPage
                 ]);
-                ++$i;
-            }
-            
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã cập nhật Trang!'
-            ];
-            /* nếu có tùy chọn index => gửi google index */
-            if($request->get('index_google')==true) {
-                $flagIndex = IndexController::indexUrl($idSeo);
-                if($flagIndex==200){
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang và Báo Google Index!';
-                }else {
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                /* insert seo_content */
+                SeoContent::select('*')
+                    ->where('seo_id', $idSeo)
+                    ->delete();
+                $i      = 1;
+                foreach($request->get('content') as $content){
+                    SeoContent::insertItem([
+                        'seo_id'    => $idSeo,
+                        'content'   => $content,
+                        'ordering'  => $i
+                    ]);
+                    ++$i;
+                }
+                
+                DB::commit();
+                /* Message */
+                $message        = [
+                    'type'      => 'success',
+                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Trang!'
+                ];
+                /* nếu có tùy chọn index => gửi google index */
+                if($request->get('index_google')==true) {
+                    $flagIndex = IndexController::indexUrl($idSeo);
+                    if($flagIndex==200){
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang và Báo Google Index!';
+                    }else {
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                    }
                 }
             }
         } catch (\Exception $exception){
             DB::rollBack();
-            /* Message */
+        }
+        /* có lỗi mặc định Message */
+        if(empty($message)){
             $message        = [
                 'type'      => 'danger',
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'

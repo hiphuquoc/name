@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use App\Rules\UniqueSlug;
 
 class ProductRequest extends FormRequest
 {
@@ -35,29 +36,7 @@ class ProductRequest extends FormRequest
             // 'categories'                => 'required',
             'slug'                      => [
                 'required',
-                function($attribute, $value, $fail){
-                    $slug           = !empty(request('slug')) ? request('slug') : null;
-                    if(!empty($slug)){
-                        if(request('type')!='edit'){
-                            /* kiểm tra đường dẫn có tồn tại chưa */
-                            $dataCheck  = DB::table('seo')
-                                            ->join('product_info', 'product_info.seo_id', '=', 'seo.id')
-                                            ->select('seo.slug', 'product_info.id')
-                                            ->where('slug', $slug)
-                                            ->first();
-                            
-                        }else {
-                            /* kiểm tra với category khác xem có trùng đường dẫn không */
-                            $dataCheck  = DB::table('seo')
-                                            ->join('product_info', 'product_info.seo_id', '=', 'seo.id')
-                                            ->select('seo.slug', 'product_info.id')
-                                            ->where('slug', $slug)
-                                            ->where('product_info.id', '!=', request('product_info_id'))
-                                            ->first();
-                        }
-                        if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Sản Phẩm khác trên hệ thống!');
-                    }
-                }
+                new UniqueSlug(request()),
             ],
         ];
     }

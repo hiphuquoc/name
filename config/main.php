@@ -97,6 +97,7 @@ return [
     ],
     'google_cloud_storage' => [
         'default_domain'    => 'https://'.env('GOOGLE_CLOUD_STORAGE_BUCKET').'.storage.googleapis.com/',
+        // 'wallpapers'        => 'test/',
         'wallpapers'        => 'wallpapers/',
         'sources'           => 'sources/',
         'freeWallpapers'    => 'freewallpapers/',

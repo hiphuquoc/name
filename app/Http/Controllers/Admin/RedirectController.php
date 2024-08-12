@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\RedirectInfo;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 
 class RedirectController extends Controller {
     
     public function list(Request $request){
-        $list           = RedirectInfo::select('*')
-                            ->orderBy('id', 'DESC')
-                            ->get();
-        return view('admin.redirect.list', compact('list'));
+        $params             = [];
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewRedirectInfo') ?? 20;
+        $params['paginate'] = $viewPerPage;
+        $list               = RedirectInfo::getList($params);
+        return view('admin.redirect.list', compact('list', 'viewPerPage'));
     }
 
     public function create(Request $request){

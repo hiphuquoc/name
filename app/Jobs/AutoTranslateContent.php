@@ -21,6 +21,7 @@ use App\Models\RelationSeoPageInfo;
 use App\Models\SeoContent;
 use App\Models\JobAutoTranslate;
 use App\Http\Controllers\Admin\ChatGptController;
+use App\Http\Controllers\Admin\HelperController;
 use App\Models\JobAutoTranslateLinks;
 
 class AutoTranslateContent implements ShouldQueue {
@@ -125,7 +126,7 @@ class AutoTranslateContent implements ShouldQueue {
                     foreach($allSeo as $seo){
                         if($slugVi==$seo->slug_full){
                             /* tìm link theo ngôn ngữ */
-                            $slugTranslate = self::findSlugByLanguage($seo, $language);
+                            $slugTranslate = self::findSlugByIdSeoViAndLanguage($seo->id, $language);
                             break;
                         }
                     }
@@ -183,65 +184,13 @@ class AutoTranslateContent implements ShouldQueue {
         return $processedString;
     }
 
-    private static function findSlugByLanguage($infoSeoVi, $language){
+    public static function findSlugByIdSeoViAndLanguage($idSeoVi, $language){
         $slugTranslate = null;
-        switch ($infoSeoVi->type) {
-            case 'category_info':
-                $tmp    = RelationSeoCategoryInfo::select('*')
-                            ->where('seo_id', $infoSeoVi->id)
-                            ->first();
-                $id     = $tmp->category_info_id ?? 0;
-                $info   = Category::select('*')
-                            ->where('id', $id)
-                            ->with('seos.infoSeo', function($query) use($language){
-                                $query->where('language', $language);
-                            })
-                            ->first();
-                break;
-            case 'tag_info':
-                $tmp    = RelationSeoTagInfo::select('*')
-                            ->where('seo_id', $infoSeoVi->id)
-                            ->first();
-                $id     = $tmp->tag_info_id ?? 0;
-                $info   = Tag::select('*')
-                            ->where('id', $id)
-                            ->with('seos.infoSeo', function($query) use($language){
-                                $query->where('language', $language);
-                            })
-                            ->first();
-                break;
-            case 'product_info':
-                $tmp    = RelationSeoProductInfo::select('*')
-                            ->where('seo_id', $infoSeoVi->id)
-                            ->first();
-                $id     = $tmp->product_info_id ?? 0;
-                $info   = Product::select('*')
-                            ->where('id', $id)
-                            ->with('seos.infoSeo', function($query) use($language){
-                                $query->where('language', $language);
-                            })
-                            ->first();
-                break;
-            case 'page_info':
-                $tmp    = RelationSeoPageInfo::select('*')
-                            ->where('seo_id', $infoSeoVi->id)
-                            ->first();
-                $id     = $tmp->page_info_id ?? 0;
-                $info   = Page::select('*')
-                            ->where('id', $id)
-                            ->with('seos.infoSeo', function($query) use($language){
-                                $query->where('language', $language);
-                            })
-                            ->first();
-                break;
-            default:
-                # code...
-                break;
-        }
+        $info   = HelperController::getFullInfoPageByIdSeo($idSeoVi);
         /* duyệt info để lấy slug đúng */
         if(!empty($info)){
             foreach($info->seos as $s){
-                if(!empty($s->infoSeo)){
+                if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
                     $slugTranslate = $s->infoSeo->slug_full;
                     break;
                 }

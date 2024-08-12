@@ -60,10 +60,15 @@
                         @if(!empty($categories))
                             @foreach($categories as $c)
                                 @php
-                                    $selected       = null;
-                                    if(!empty($item->categories)&&$item->categories->isNotEmpty()){
-                                        foreach($item->categories as $cCategory){
-                                            if($c->id==$cCategory->infoCategory->id) {
+                                    $selected = null;
+                                    // Kiểm tra nếu có old input
+                                    $oldCategories = old('categories', []);
+                                    if(in_array($c->id, $oldCategories)) {
+                                        $selected = 'selected';
+                                    } else if (!empty($item->categories) && $item->categories->isNotEmpty()) {
+                                        // Kiểm tra trong $item->categories
+                                        foreach($item->categories as $cCategory) {
+                                            if($c->id == $cCategory->infoCategory->id) {
                                                 $selected = 'selected';
                                                 break;
                                             }
@@ -75,7 +80,7 @@
                                 @endif
                             @endforeach
                         @endif
-                    </select>
+                    </select>                    
                 </div>
             </div>
             <!-- One Row -->

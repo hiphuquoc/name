@@ -14,6 +14,12 @@
     <div class="searchBox_item">
         <button class="btn btn-primary waves-effect" id="button-addon2" type="submit">Thêm mới</button>
     </div>
+    <div class="searchBox_item" style="margin-left:auto;text-align:right;">
+        @php
+            $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewRedirectInfo', config('setting.admin_array_number_view'), $viewPerPage, $list->total());
+            echo $xhtmlSettingView;
+        @endphp
+    </div>
 </div>
 </form>
 <!-- ===== END: SEARCH FORM ===== -->
@@ -46,6 +52,8 @@
             </tbody>
         </table>
     </div>
+    <!-- Pagination -->
+    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
 </div>
     
 @endsection

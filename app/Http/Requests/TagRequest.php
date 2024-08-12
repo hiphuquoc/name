@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use App\Rules\UniqueSlug;
 
 class TagRequest extends FormRequest
 {
@@ -22,8 +23,7 @@ class TagRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'title'                     => 'required',
             'seo_title'                 => 'required',
@@ -32,29 +32,7 @@ class TagRequest extends FormRequest
             'rating_aggregate_star'     => 'required',
             'slug'                      => [
                 'required',
-                function($attribute, $value, $fail){
-                    $slug           = !empty(request('slug')) ? request('slug') : null;
-                    if(!empty($slug)){
-                        if(request('type')!='edit'){
-                            /* kiểm tra đường dẫn có tồn tại chưa */
-                            $dataCheck  = DB::table('seo')
-                                            ->join('tag_info', 'tag_info.seo_id', '=', 'seo.id')
-                                            ->select('seo.slug', 'tag_info.id')
-                                            ->where('slug', $slug)
-                                            ->first();
-                            
-                        }else {
-                            /* kiểm tra với category khác xem có trùng đường dẫn không */
-                            $dataCheck  = DB::table('seo')
-                                            ->join('tag_info', 'tag_info.seo_id', '=', 'seo.id')
-                                            ->select('seo.slug', 'tag_info.id')
-                                            ->where('slug', $slug)
-                                            ->where('tag_info.id', '!=', request('tag_info_id'))
-                                            ->first();
-                        }
-                        if(!empty($dataCheck)) $fail('Dường dẫn tĩnh đã trùng với một Tag khác trên hệ thống!');
-                    }
-                }
+                new UniqueSlug(request()),
             ],
         ];
     }

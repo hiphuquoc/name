@@ -1861,27 +1861,44 @@ $heightMenu : 52.5px;
         grid-template-columns: auto auto auto auto;
         gap: 1.25rem;
         &_item {
-            @include colorOpacity('background', $colorBackgroundLv2, 0.75);
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
             border-radius: 12px;
             overflow: hidden;
+            aspect-ratio: 1/2;
+            background: $colorBackgroundLv2;
             &_image {
-                padding: 0;
-                position: relative;
-                overflow: hidden;
+                display: flex;
+                flex-direction: row;
+                // transition: transform 0.5s ease-in-out;
                 img {
-                    width: 100%;
-                    max-height: 100%;
-                    transition: all 0.2s;
+                    display: none;
+                    height: 100%;
                     object-fit: cover;
-                    aspect-ratio: 800/533;
-                    &:hover {
-                        transform: scale(1.1);
-                        transform-origin: bottom center;
+                    transition: transform 0.5s ease-in-out;
+                    &.active {
+                        display: block;
                     }
+                    
+                }
+                
+                &.fade {
+                    animation-name: fade;
+                    animation-duration: 1.5s;
                 }
             }
             &_content {
-                padding: 0.75rem 1rem;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: fit-content;
+                transform: translateZ(1px);
+                z-index: 4;
+                padding: 0.5rem 1rem 0.75rem 1rem;
+                font-size: 0.85rem;
+                background-image: linear-gradient(360deg, rgba(45, 56, 72, 0.9) 33.33%, rgba(45, 56, 72, 0.95) 66.66%, rgba(45, 56, 72, 0.5) 100%);
+                transition: all 2s;
                 &_title {
                     display: flex;
                     justify-content: center;
@@ -1898,10 +1915,22 @@ $heightMenu : 52.5px;
                     display: flex;
                     flex-wrap: wrap;
                     font-size: 0.9rem;
-                    margin-top: 0.5rem;
+                    margin-top: 0.25rem;
+                    letter-spacing: 0.75px;
+                    max-height: 204.859px;
+                    overflow: hidden;
+                    transition: max-height 1.5s ease; // Slow transition by default
+                    &:hover {
+                        max-height: 500px; // Set a large enough max-height for the content
+                        transition: max-height 1.5s ease; // Slow transition on hover
+                    }
+                    &:not(:hover) {
+                        transition: max-height 0.25s ease; // Fast transition when hover is removed
+                    }
                     > * {
                         color: $colorText;
                         margin-right: 0.75rem;
+                        margin-bottom: 0.15rem;
                         &:not(:first-child){
                             &:before {
                                 content: '\f192';
@@ -1947,3 +1976,7 @@ $heightMenu : 52.5px;
         }
     }
 }
+// .blogBox {
+//     width: 100%;
+    
+// }

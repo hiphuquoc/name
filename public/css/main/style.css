@@ -7196,29 +7196,44 @@ label.checkBox > *:not(:first-child) {
   gap: 1.25rem;
 }
 .categoryGrid_box_item {
-  background: #2d3848BF;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
   overflow: hidden;
+  aspect-ratio: 1/2;
+  background: #2d3848;
 }
 .categoryGrid_box_item_image {
-  padding: 0;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: row;
 }
 .categoryGrid_box_item_image img {
-  width: 100%;
-  max-height: 100%;
-  transition: all 0.2s;
+  display: none;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  aspect-ratio: 800/533;
+  transition: transform 0.5s ease-in-out;
 }
-.categoryGrid_box_item_image img:hover {
-  transform: scale(1.1);
-  transform-origin: bottom center;
+.categoryGrid_box_item_image img.active {
+  display: block;
+}
+.categoryGrid_box_item_image.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
 }
 .categoryGrid_box_item_content {
-  padding: 0.75rem 1rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  transform: translateZ(1px);
+  z-index: 4;
+  padding: 0.5rem 1rem 0.75rem 1rem;
+  font-size: 0.85rem;
+  background-image: linear-gradient(360deg, rgba(45, 56, 72, 0.9) 33.33%, rgba(45, 56, 72, 0.95) 66.66%, rgba(45, 56, 72, 0.5) 100%);
+  transition: all 2s;
 }
 .categoryGrid_box_item_content_title {
   display: flex;
@@ -7236,11 +7251,23 @@ label.checkBox > *:not(:first-child) {
   display: flex;
   flex-wrap: wrap;
   font-size: 0.9rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
+  letter-spacing: 0.75px;
+  max-height: 204.859px;
+  overflow: hidden;
+  transition: max-height 1.5s ease;
+}
+.categoryGrid_box_item_content_list:hover {
+  max-height: 500px;
+  transition: max-height 1.5s ease;
+}
+.categoryGrid_box_item_content_list:not(:hover) {
+  transition: max-height 0.25s ease;
 }
 .categoryGrid_box_item_content_list > * {
   color: #c0d0f1;
   margin-right: 0.75rem;
+  margin-bottom: 0.15rem;
 }
 .categoryGrid_box_item_content_list > *:not(:first-child):before {
   content: "\f192";

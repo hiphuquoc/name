@@ -143,16 +143,13 @@
             <div class="invalid-feedback">{{ config('message.admin.validate.not_empty') }}</div>
         </div> --}}
         <!-- One Row -->
-        <div class="formBox_full_item">
+        {{-- <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="
                 Đây là đánh dấu trang gốc của trang này, thẻ link canonical của trang này sẽ được khai báo là đường dẫn của trang gốc để Google biết đây là trang copy của trang gốc
             ">
                 <i class="explainInput" data-feather='alert-circle'></i>
                 <label class="form-label" for="link_canonical">Trang gốc</label>
             </span>
-            {{-- @php
-                dd($sources[0]->seos);
-            @endphp --}}
             <select class="select2 form-select select2-hidden-accessible" id="link_canonical" name="link_canonical">
                 <option value="">- Lựa chọn -</option>
                 @foreach($sources as $source)
@@ -178,7 +175,39 @@
                     @endif
                 @endforeach
             </select>
+        </div> --}}
+        <div class="formBox_full_item">
+            <span data-toggle="tooltip" data-placement="top" title="
+                Đây là đánh dấu trang gốc của trang này, thẻ link canonical của trang này sẽ được khai báo là đường dẫn của trang gốc để Google biết đây là trang copy của trang gốc
+            ">
+                <i class="explainInput" data-feather='alert-circle'></i>
+                <label class="form-label" for="link_canonical">Trang gốc</label>
+            </span>
+            <select class="select2 form-select select2-hidden-accessible" id="link_canonical" name="link_canonical">
+                <option value="">- Lựa chọn -</option>
+                @foreach($sources as $source)
+                    @php
+                        $selected   = null;
+                        $seoChoose  = [];
+                        foreach($source->seos as $seo){
+                            if(!empty($seo->infoSeo->language)){
+                                if($language==$seo->infoSeo->language){
+                                    $seoChoose = $seo->infoSeo;
+                                    if(old('link_canonical') == $seoChoose->id || (!empty($idSeoSource) && $idSeoSource == $seoChoose->id) || (!empty($itemSeo->link_canonical) && $itemSeo->link_canonical == $seoChoose->id)){
+                                        $selected = 'selected';
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    @endphp
+                    @if(!empty($seoChoose))
+                        <option value="{{ $seoChoose->id }}" {{ $selected }}>{{ $source->seo->slug_full }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
+        
         {{-- <!-- One Row -->
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="
@@ -194,38 +223,41 @@
         </div> --}}
         <!-- One Row -->
         @if(!empty($parents))
-        <div class="formBox_full_item">
-            <span data-toggle="tooltip" data-placement="top" title="
-                Là trang cha chứa trang hiện tại... URL cũng sẽ được hiển thị theo cấp cha - con
-            ">
-                <i class="explainInput" data-feather='alert-circle'></i>
-                <label class="form-label" for="parent">Trang cha</label>
-            </span>
-            <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
-                <select class="select2 form-select select2-hidden-accessible" id="parent" name="parent">
-                    <option value="0">- Lựa chọn -</option>
-                    @foreach($parents as $page)
-                        @php
-                            $selected   = null;
-                            $seoChoose  = [];
-                            foreach($page->seos as $seo){
-                                if(!empty($seo->infoSeo->language)){
-                                    if($language==$seo->infoSeo->language){
-                                        $seoChoose = $seo->infoSeo;
-                                        if(!empty($itemSeo->parent)&&$itemSeo->parent==$seoChoose->id) $selected = 'selected';
-                                        break;
+            <div class="formBox_full_item">
+                <span data-toggle="tooltip" data-placement="top" title="
+                    Là trang cha chứa trang hiện tại... URL cũng sẽ được hiển thị theo cấp cha - con
+                ">
+                    <i class="explainInput" data-feather='alert-circle'></i>
+                    <label class="form-label" for="parent">Trang cha</label>
+                </span>
+                <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
+                    <select class="select2 form-select select2-hidden-accessible" id="parent" name="parent">
+                        <option value="0">- Lựa chọn -</option>
+                        @foreach($parents as $page)
+                            @php
+                                $selected   = null;
+                                $seoChoose  = [];
+                                foreach($page->seos as $seo){
+                                    if(!empty($seo->infoSeo->language)){
+                                        if($language==$seo->infoSeo->language){
+                                            $seoChoose = $seo->infoSeo;
+                                            if(old('parent') == $seoChoose->id || (!empty($itemSeo->parent) && $itemSeo->parent == $seoChoose->id)) {
+                                                $selected = 'selected';
+                                            }
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                        @endphp
-                        @if(!empty($seoChoose))
-                            <option value="{{ $seoChoose->id }}" {{ $selected }}>{{ $page->seo->title }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                            @endphp
+                            @if(!empty($seoChoose))
+                                <option value="{{ $seoChoose->id }}" {{ $selected }}>{{ $page->seo->title }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
             </div>
-        </div>
         @endif
+
         {{-- <!-- One Row -->
         <div class="formBox_full_item">
             <span data-toggle="tooltip" data-placement="top" title="

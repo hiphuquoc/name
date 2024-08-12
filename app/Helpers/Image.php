@@ -101,4 +101,28 @@ class Image {
         }
         return $result;
     }
+
+    public static function isValidImageUrl($url) {
+        // Kiểm tra URL có hợp lệ không
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return false;
+        }
+    
+        // Sử dụng cURL để kiểm tra xem tệp có tồn tại không
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true); // Chỉ kiểm tra xem URL có tồn tại
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+    
+        // Kiểm tra mã trạng thái HTTP
+        if ($httpCode == 200) {
+            // Kiểm tra nếu có thể lấy kích thước hình ảnh
+            $size = @getimagesize($url);
+            return $size !== false;
+        }
+    
+        return false;
+    }
 }

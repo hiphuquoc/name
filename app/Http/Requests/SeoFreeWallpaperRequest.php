@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use App\Rules\UniqueSlug;
 
 class SeoFreeWallpaperRequest extends FormRequest
 {
@@ -28,28 +29,10 @@ class SeoFreeWallpaperRequest extends FormRequest
             'title'                     => 'required',
             'seo_title'                 => 'required',
             'seo_description'           => 'required',
-            // 'slug'                      => [
-            //     'required',
-            //     function($attribute, $value, $fail){
-            //         $slug           = !empty(request('slug')) ? request('slug') : null;
-            //         if(!empty($slug)){
-            //             $flag       = false;
-            //             $dataCheck  = DB::table('seo')
-            //                             ->join('category_info', 'category_info.seo_id', '=', 'seo.id')
-            //                             ->select('seo.slug', 'category_info.id')
-            //                             ->where('slug', $slug)
-            //                             ->first();
-            //             if(!empty($dataCheck)){
-            //                 if(empty(request('category_info_id'))){
-            //                     $flag = true;
-            //                 }else {
-            //                     if(request('category_info_id')!=$dataCheck->id) $flag = true;
-            //                 }
-            //             }
-            //             if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một Tag khác trên hệ thống!');
-            //         }
-            //     }
-            // ],
+            'slug'                      => [
+                'required',
+                new UniqueSlug(request()),
+            ],
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\RedirectController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,13 +36,26 @@ class Seo extends Model {
         'language',
     ];
 
-    public static function insertItem($params){
-        $id             = 0;
+    public static function insertItem($params, $idSeoVI = 0){ /* truyền thêm idSeoVi nếu muốn kiểm tra */
+        $id                 = 0;
         if(!empty($params)){
-            $model      = new Seo();
-            foreach($params as $key => $value) $model->{$key}  = $value;
-            $model->save();
-            $id         = $model->id;
+            /* kiểm tra slug_full và language có trùng không trước khi insert */
+            $flagNext           = false;
+            if(!empty($idSeoVI)){
+                $flagCheckLanguage  = self::checkLanguageUnique($idSeoVI, $params['language']);
+                $flagCheckSLugFull  = self::checkSlugFullUnique($params['slug_full'], 'insert', 0);
+                if($flagCheckLanguage==false&&$flagCheckSLugFull==false) $flagNext = true;
+            }else {
+                $flagCheckSLugFull  = self::checkSlugFullUnique($params['slug_full'], 'insert', 0);
+                if($flagCheckSLugFull==false) $flagNext = true;
+            }
+            /* tiến hành */
+            if($flagNext==true){
+                $model      = new Seo();
+                foreach($params as $key => $value) $model->{$key}  = $value;
+                $model->save();
+                $id         = $model->id;
+            }
         }
         return $id;
     }
@@ -52,21 +66,25 @@ class Seo extends Model {
         $flag               = false;
         if(!empty($id)&&!empty($params)){
             $model          = self::find($id);
-            /* lấy slug cũ - mới để so sánh */
-            $slugFullOld    = $model->slug_full;
-            $slugFullNew    = self::buildFullUrl($params['slug'], $model->level, $model->parent);
-            foreach($params as $key => $value) $model->{$key}  = $value;
-            $flag           = $model->update();
-            /* mỗi lần cập nhật lại slug thì phải build lại slug_full của toàn bộ children và thay thế internal link trong tất cả content của cả slug hiện tại và slug con */
-            if($slugFullOld!=$slugFullNew) {
-                /* tạo bản redirect 301 */
-                $urlOldWithPrefix   = RedirectController::filterUrl($slugFullOld);
-                $urlNewWithPrefix   = RedirectController::filterUrl($slugFullNew);
-                RedirectController::createRedirectAndFix($urlOldWithPrefix, $urlNewWithPrefix);
-                /* thay thế internal link trong tất cả content của slug hiện tại */
-                self::replaceInternalLinksInSeoContents($slugFullOld, $slugFullNew);
-                /* cập nhật lại slug_full của phần tử con */
-                self::updateSlugChilds($model->id);
+            /* kiểm tra slug_full có phải duy nhất không */
+            $slugFullNew    = self::buildFullUrl($params['slug'], $model->parent);
+            $flagCheckSLugFull = self::checkSlugFullUnique($slugFullNew, 'update', $id);
+            if($flagCheckSLugFull==false){
+                /* lấy slug_full cũ - mới để so sánh */
+                $slugFullOld    = $model->slug_full;
+                foreach($params as $key => $value) $model->{$key}  = $value;
+                $flag           = $model->update();
+                /* mỗi lần cập nhật lại slug thì phải build lại slug_full của toàn bộ children và thay thế internal link trong tất cả content của cả slug hiện tại và slug con */
+                if($slugFullOld!=$slugFullNew) {
+                    /* tạo bản redirect 301 */
+                    $urlOldWithPrefix   = RedirectController::filterUrl($slugFullOld);
+                    $urlNewWithPrefix   = RedirectController::filterUrl($slugFullNew);
+                    RedirectController::createRedirectAndFix($urlOldWithPrefix, $urlNewWithPrefix);
+                    /* thay thế internal link trong tất cả content của slug hiện tại */
+                    self::replaceInternalLinksInSeoContents($slugFullOld, $slugFullNew);
+                    /* cập nhật lại slug_full của phần tử con */
+                    self::updateSlugChilds($model->id);
+                }
             }
         }
         return $flag;
@@ -108,12 +126,12 @@ class Seo extends Model {
                     ->where('parent', $idParent)
                     ->get();
         foreach($childs as $child){
-            $slugFullNew     = self::buildFullUrl($child->slug, $child->level, $child->parent);
+            $slugFullNew     = self::buildFullUrl($child->slug, $child->parent);
             $slugFullOld     = $child->slug_full;
             if($slugFullNew!=$slugFullOld){
                  /* cập nhật lại slug_full */
                 $paramsUpdate   = [
-                    'slug'      => $child->slug, /* trong updatItem slug bắt buộc để kiểm tra có thay đổi không => tuy không đổi vẫn phải truyền vào */
+                    'slug'      => $child->slug,
                     'slug_full' => $slugFullNew
                 ];
                 self::updateItem($child->id, $paramsUpdate);
@@ -140,23 +158,52 @@ class Seo extends Model {
         return $result;
     }
 
-    public static function buildFullUrl($slug, $level, $parent){
-        $url    = null;
-        if(!empty($slug)){
-            $infoSeo    = self::select('id', 'slug', 'parent')
-                            ->get();
-            $url        = $slug;
-            for($i=1;$i<=$level;++$i){
-                foreach($infoSeo as $item){
-                    if($item->id==$parent) {
-                        $url    = $item->slug.'/'.$url;
-                        $parent = $item->parent;
-                        break;
-                    }
-                }
+    public static function buildFullUrl($slug, $parent = 0){
+        $url    = $slug;
+        if(!empty($parent)){
+            $infoSeo    = self::select('slug_full')
+                            ->where('id', $parent)
+                            ->first();
+            if(!empty($infoSeo->slug_full)){
+                $url    =  $infoSeo->slug_full.'/'.$slug;
             }
         }
         return $url;
+    }
+
+    public static function checkSlugFullUnique($slugFull, $type = 'insert', $idSeo = 0){
+        $flag           = true; /* cờ đánh dấu trùng */
+        $slugFull       = trim($slugFull, '/');
+        /* trường hợp insert */
+        if($type=='insert'){
+            $infoSeo    = self::select('*')
+                            ->where('slug_full', $slugFull)
+                            ->first();
+            if(empty($infoSeo)) $flag = false;
+        }
+        /* trường hợp update */
+        if($type=='update'&&!empty($idSeo)){
+            $infoSeo    = self::select('*')
+                            ->where('slug_full', $slugFull)
+                            ->where('id', '!=', $idSeo)
+                            ->first();
+            if(empty($infoSeo)) $flag = false;
+        }
+        return $flag;
+    }
+
+    public static function checkLanguageUnique($idSeoVi, $language){
+        $flag   = false;
+        $tmp    = HelperController::getFullInfoPageByIdSeo($idSeoVi);
+        if(!empty($tmp)&&!empty($language)){
+            foreach($tmp->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language) {
+                    $flag = true;
+                    break;
+                }
+            }
+        }
+        return $flag;
     }
 
     // public function keywords() {

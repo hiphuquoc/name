@@ -7,7 +7,7 @@
 @include('admin.template.messageAction')
 
 <!-- ===== START: SEARCH FORM ===== -->
-<form id="formSearch" method="post" action="{{ route('admin.translate.createJobTranslateAndCreatePage') }}">
+<form id="formSearch" method="post" action="{{ route('admin.translate.createJobTranslateAndCreatePageAjax') }}">
 @csrf
     <div class="searchBox">
         <div class="searchBox_item" style="max-width:unset;">

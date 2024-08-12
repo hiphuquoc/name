@@ -38,6 +38,7 @@ class ProductController extends Controller {
             /* ngôn ngữ */
             $keyTable           = 'product_info';
             $idSeo              = $request->get('seo_id');
+            $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idProduct          = $request->get('product_info_id');
             $language           = $request->get('language');
             $type               = $request->get('type');
@@ -54,118 +55,123 @@ class ProductController extends Controller {
             if(!empty($idSeo)&&$type=='edit'){
                 Seo::updateItem($idSeo, $seo);
             }else {
-                $idSeo = Seo::insertItem($seo);
+                $idSeo = Seo::insertItem($seo, $idSeoVI);
             }
-            /* insert seo_content */
-            SeoContent::select('*')
-                ->where('seo_id', $idSeo)
-                ->delete();
-            $i      = 1;
-            foreach($request->get('content') as $content){
-                SeoContent::insertItem([
-                    'seo_id'    => $idSeo,
-                    'content'   => $content,
-                    'ordering'  => $i
-                ]);
-                ++$i;
-            }
-            /* insert hoặc update product_info */
-            if(empty($idProduct)){ /* check xem create product hay update product */
-                $infoProduct    = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
-                $idProduct      = Product::insertItem($infoProduct);
-            }
-            /* relation_seo_product_info */
-            $relationSeoCategoryInfo = RelationSeoProductInfo::select('*')
-                                    ->where('seo_id', $idSeo)
-                                    ->where('product_info_id', $idProduct)
-                                    ->first();
-            if(empty($relationSeoCategoryInfo)) RelationSeoProductInfo::insertItem([
-                'seo_id'            => $idSeo,
-                'product_info_id'   => $idProduct
-            ]);
-            /* nếu là bảng việt (gốc) mới cập nhật tiếp */
-            if($language=='vi'){
-                /* lưu tag name */
-                if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idProduct, 'product_info', $request->get('tag'));
-                /* update product_price 
-                    => xóa các product_price nào id không tồn tại trong mảng mới 
-                    => nào có tồn tại thì update - nào không thì thêm mới 
-                */
-                $priceSave          = [];
-                
-                foreach($request->get('prices') as $price){
-                    if(!empty($price['id'])) $priceSave[]   = $price['id'];
-                }
-                $productPriceDelete = ProductPrice::select('*')
-                                        ->where('product_info_id', $idProduct)
-                                        ->whereNotIn('id', $priceSave)
-                                        ->with('wallpapers')
-                                        ->get();
-                /* duyệt mảng delete files */
-                foreach($productPriceDelete as $productPrice) {
-                    RelationProductPriceWallpaperInfo::select('*')
-                        ->where('product_price_id', $productPrice->id)
-                        ->delete();
-                    /* xóa product price */
-                    $productPrice->delete();
-                }
-                /* update lại các product price còn lại */
-                foreach($request->get('prices') as $price){
-                    if(!empty($price['code_name'])&&!empty($price['price'])){
-                        if(!empty($price['id'])&&$type=='edit'){
-                            /* update */
-                            $dataPrice              = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'update');
-                            ProductPrice::updateItem($price['id'], $dataPrice);
-                        }else {
-                            /* insert */
-                            $dataPrice              = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'insert');
-                            ProductPrice::insertItem($dataPrice);
-                        }
-                    }
-                }
-                /* chủ đề */
-                RelationCategoryProduct::select('*')
-                    ->where('product_info_id', $idProduct)
+            /* kiểm tra insert thành công không */
+            if(!empty($idSeo)){
+                /* insert seo_content */
+                SeoContent::select('*')
+                    ->where('seo_id', $idSeo)
                     ->delete();
-                foreach(config('main.category_type') as $type){
-                    if(!empty($request->all()[$type['key']])){
-                        foreach($request->all()[$type['key']] as $idCategory){
-                            RelationCategoryProduct::insertItem([
-                                'product_info_id'       => $idProduct,
-                                'category_info_id'      => $idCategory
-                            ]);
+                $i      = 1;
+                foreach($request->get('content') as $content){
+                    SeoContent::insertItem([
+                        'seo_id'    => $idSeo,
+                        'content'   => $content,
+                        'ordering'  => $i
+                    ]);
+                    ++$i;
+                }
+                /* insert hoặc update product_info */
+                if(empty($idProduct)){ /* check xem create product hay update product */
+                    $infoProduct    = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
+                    $idProduct      = Product::insertItem($infoProduct);
+                }
+                /* relation_seo_product_info */
+                $relationSeoCategoryInfo = RelationSeoProductInfo::select('*')
+                                        ->where('seo_id', $idSeo)
+                                        ->where('product_info_id', $idProduct)
+                                        ->first();
+                if(empty($relationSeoCategoryInfo)) RelationSeoProductInfo::insertItem([
+                    'seo_id'            => $idSeo,
+                    'product_info_id'   => $idProduct
+                ]);
+                /* nếu là bảng việt (gốc) mới cập nhật tiếp */
+                if($language=='vi'){
+                    /* lưu tag name */
+                    if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idProduct, 'product_info', $request->get('tag'));
+                    /* update product_price 
+                        => xóa các product_price nào id không tồn tại trong mảng mới 
+                        => nào có tồn tại thì update - nào không thì thêm mới 
+                    */
+                    $priceSave          = [];
+                    
+                    foreach($request->get('prices') as $price){
+                        if(!empty($price['id'])) $priceSave[]   = $price['id'];
+                    }
+                    $productPriceDelete = ProductPrice::select('*')
+                                            ->where('product_info_id', $idProduct)
+                                            ->whereNotIn('id', $priceSave)
+                                            ->with('wallpapers')
+                                            ->get();
+                    /* duyệt mảng delete files */
+                    foreach($productPriceDelete as $productPrice) {
+                        RelationProductPriceWallpaperInfo::select('*')
+                            ->where('product_price_id', $productPrice->id)
+                            ->delete();
+                        /* xóa product price */
+                        $productPrice->delete();
+                    }
+                    /* update lại các product price còn lại */
+                    foreach($request->get('prices') as $price){
+                        if(!empty($price['code_name'])&&!empty($price['price'])){
+                            if(!empty($price['id'])&&$type=='edit'){
+                                /* update */
+                                $dataPrice              = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'update');
+                                ProductPrice::updateItem($price['id'], $dataPrice);
+                            }else {
+                                /* insert */
+                                $dataPrice              = $this->BuildInsertUpdateModel->buildArrayTableProductPrice($price, $idProduct, 'insert');
+                                ProductPrice::insertItem($dataPrice);
+                            }
                         }
                     }
+                    /* chủ đề */
+                    RelationCategoryProduct::select('*')
+                        ->where('product_info_id', $idProduct)
+                        ->delete();
+                    foreach(config('main.category_type') as $type){
+                        if(!empty($request->all()[$type['key']])){
+                            foreach($request->all()[$type['key']] as $idCategory){
+                                RelationCategoryProduct::insertItem([
+                                    'product_info_id'       => $idProduct,
+                                    'category_info_id'      => $idCategory
+                                ]);
+                            }
+                        }
+                    }
+                    /* insert slider và lưu CSDL */
+                    if($request->hasFile('slider')&&!empty($idProduct)){
+                        $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
+                        $params         = [
+                            'attachment_id'     => $idProduct,
+                            'relation_table'    => $keyTable,
+                            'name'              => $name
+                        ];
+                        SliderController::upload($request->file('slider'), $params);
+                    }
                 }
-                /* insert slider và lưu CSDL */
-                if($request->hasFile('slider')&&!empty($idProduct)){
-                    $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                    $params         = [
-                        'attachment_id'     => $idProduct,
-                        'relation_table'    => $keyTable,
-                        'name'              => $name
-                    ];
-                    SliderController::upload($request->file('slider'), $params);
-                }
-            }
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã cập nhật Sản phẩm!'
-            ];
-            /* nếu có tùy chọn index => gửi google index */
-            if($request->get('index_google')==true) {
-                $flagIndex = IndexController::indexUrl($idSeo);
-                if($flagIndex==200){
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Sản phẩm và Báo Google Index!';
-                }else {
-                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Sản phẩm! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                DB::commit();
+                /* Message */
+                $message        = [
+                    'type'      => 'success',
+                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Sản phẩm!'
+                ];
+                /* nếu có tùy chọn index => gửi google index */
+                if($request->get('index_google')==true) {
+                    $flagIndex = IndexController::indexUrl($idSeo);
+                    if($flagIndex==200){
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Sản phẩm và Báo Google Index!';
+                    }else {
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Sản phẩm! <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                    }
                 }
             }
         } catch (\Exception $exception){
             DB::rollBack();
-            /* Message */
+        }
+        /* có lỗi mặc định Message */
+        if(empty($message)){
             $message        = [
                 'type'      => 'danger',
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
@@ -250,7 +256,7 @@ class ProductController extends Controller {
             $arrayTag       = [];
             foreach($tags as $tag) if(!empty($tag->seo->title)) $arrayTag[] = $tag->seo->title;
             /* type */
-            $type               = !empty($item) ? 'edit' : 'create';
+            $type               = !empty($itemSeo) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
             return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'message', 'arrayTag'));
         }else {
