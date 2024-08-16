@@ -42,7 +42,7 @@
                         // Gọi hàm loadInfoCategory và đánh dấu phần tử là đã load
                         let idCategory  = $(this).data('category_info_id');
                         let idWrite     = $(this).attr('id');
-                        loadInfoCategory(idCategory, idWrite);
+                        loadInfoCategory(idCategory, '{{ $language }}', idWrite);
                         $(this).addClass('loaded'); // Để tránh load lại cùng một phần tử
                     }
                 });
@@ -57,9 +57,10 @@
             });
         });
 
-        function loadInfoCategory(idCategory, idWrite) {
+        function loadInfoCategory(idCategory, language, idWrite) {
             let dataForm = {};
             dataForm.category_info_id = idCategory;
+            dataForm.language = language;
         
             const queryString = new URLSearchParams(dataForm).toString();
             fetch("/loadInfoCategory?" + queryString, {
