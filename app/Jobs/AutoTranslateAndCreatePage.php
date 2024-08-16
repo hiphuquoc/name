@@ -97,7 +97,7 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
             $promptText .= "- tôi đang dùng API nên chỉ cần câu trả lời và không cần giải thích thêm gì cả";
             /* call API để lấy dữ liệu trả về */
             $infoPrompt = new \stdClass; /* giả lập infoPrompt để truyền vào function */
-            $infoPrompt->version = config('main.ai_version')[0];
+            $infoPrompt->version = config('main_'.env('APP_NAME').'.ai_version')[0];
             $response   = \App\Http\Controllers\Admin\ChatGptController::callApi($promptText, $infoPrompt);
             $pattern    = '/\{(?:[^{}]|(?R))*\}/';
             preg_match($pattern, $response['content'], $matches);

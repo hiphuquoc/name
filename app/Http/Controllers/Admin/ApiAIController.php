@@ -70,7 +70,7 @@ class ApiAIController extends Controller {
         $tables             = [];
         $categoryType       = [];
         /* lọc với bảng trùng của category_info */
-        foreach(config('main.category_type') as $cType) $categoryType[] = $cType['key'];
+        foreach(config('main_'.env('APP_NAME').'.category_type') as $cType) $categoryType[] = $cType['key'];
         foreach($tmp as $t){
             if($t->type=='category_info'||!in_array($t->type, $categoryType)){
                 if(!in_array($t->type, $tables)) {

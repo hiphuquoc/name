@@ -2,8 +2,8 @@
     /* cache HTML */
     $name           = explode('.', $content);
     $name           = implode('-', $name);
-    $nameCache      = $name.'.'.config('main.cache.extension');
-    $pathCache      = Storage::path(config('main.cache.folderSave')).$nameCache;
+    $nameCache      = $name.'.'.config('main_'.env('APP_NAME').'.cache.extension');
+    $pathCache      = Storage::path(config('main_'.env('APP_NAME').'.cache.folderSave')).$nameCache;
     $cacheTime    	= env('APP_CACHE_TIME') ?? 1800;
     /* trường hợp tồn tại file cache => return */
     if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){

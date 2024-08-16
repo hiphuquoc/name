@@ -27,7 +27,7 @@
         <div class="freeWallpaperBox_item_box_item" style="min-width:132px;">
             <!-- feeling -->
             <div class="feeling">
-                @foreach(config('main.feeling_type') as $feeling)
+                @foreach(config('main_'.env('APP_NAME').'.feeling_type') as $feeling)
                     @if(!empty($user->id))
                         <div class="feeling_item" onclick="setFeelingFreeWallpaper(this, {{ $wallpaper->id }}, '{{ $feeling['key'] }}');">
                             {!! file_get_contents(public_path($feeling['icon'])) !!}
@@ -60,7 +60,7 @@
     @if(!empty($wallpaper->feeling))
         @php
             $icon = null;
-            foreach(config('main.feeling_type') as $feeling){
+            foreach(config('main_'.env('APP_NAME').'.feeling_type') as $feeling){
                 if($wallpaper->feeling->type==$feeling['key']) $icon = $feeling['icon'];
             }
         @endphp

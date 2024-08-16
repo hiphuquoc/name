@@ -47,7 +47,7 @@ class ProductController extends Controller {
             if($request->hasFile('image')) {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $fileName       = $name.'.'.config('image.extension');
-                $folderUpload   =  config('main.google_cloud_storage.wallpapers');
+                $folderUpload   =  config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers');
                 $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
             /* update page */
@@ -130,7 +130,7 @@ class ProductController extends Controller {
                     RelationCategoryProduct::select('*')
                         ->where('product_info_id', $idProduct)
                         ->delete();
-                    foreach(config('main.category_type') as $type){
+                    foreach(config('main_'.env('APP_NAME').'.category_type') as $type){
                         if(!empty($request->all()[$type['key']])){
                             foreach($request->all()[$type['key']] as $idCategory){
                                 RelationCategoryProduct::insertItem([

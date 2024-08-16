@@ -148,7 +148,7 @@ class ConfirmController extends Controller {
         if(!empty($language)){
             $tmp        = Page::select('*')
                             ->whereHas('seos.infoSeo', function($query){
-                                $query->whereIn('slug', config('main.url_confirm_page'));
+                                $query->whereIn('slug', config('main_'.env('APP_NAME').'.url_confirm_page'));
                             })
                             ->first();
             

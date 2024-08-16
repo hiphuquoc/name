@@ -54,7 +54,7 @@
         <div class="breadcrumbMobileBox"><!-- dùng để chống nhảy padding - margin so với các trang có breadcrumb --></div>
         
         <!-- Item Category Grid Box -->
-        @foreach(config('main.category_type') as $type)
+        @foreach(config('main_'.env('APP_NAME').'.category_type') as $type)
             @include('wallpaper.home.categoryBox', [
                 'type'  => $type['key'],
                 'data'  => $categories,

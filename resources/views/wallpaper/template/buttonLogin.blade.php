@@ -32,7 +32,7 @@
     </div>
 @else 
     <div class="loginBox" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
-        <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="đăng nhập {{ config('main.info.'.env('APP_NAME').'.company_name') }}" title="đăng nhập {{ config('main.info.'.env('APP_NAME').'.company_name') }}" />
+        <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="đăng nhập {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" title="đăng nhập {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" />
         @if(!empty($language)&&$language=='en')
             <div class="maxLine_1">Login</div>
         @else 

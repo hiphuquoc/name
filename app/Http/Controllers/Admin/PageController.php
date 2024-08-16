@@ -43,7 +43,7 @@ class PageController extends Controller {
             if($request->hasFile('image')) {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $fileName       = $name.'.'.config('image.extension');
-                $folderUpload   =  config('main.google_cloud_storage.wallpapers');
+                $folderUpload   =  config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers');
                 $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
             /* update page */

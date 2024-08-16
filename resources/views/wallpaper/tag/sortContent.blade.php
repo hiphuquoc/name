@@ -3,7 +3,7 @@
         {{-- <!-- chế độ xem -->
         @php
             $titleViewBy    = empty($language)||$language=='vi' ? 'Duyệt theo' : 'Browse by';
-            $dataView       = config('main.view_by');
+            $dataView       = config('main_'.env('APP_NAME').'.view_by');
             $viewBy         = Cookie::get('view_by') ?? $dataView[0]['key'];
             $inputViewBy    = null;
             foreach($dataView as $viewItem){
@@ -34,7 +34,7 @@
         </div> --}}
         <!-- sort by -->
         @php
-            $dataSort       = config('main.sort_type');
+            $dataSort       = config('main_'.env('APP_NAME').'.sort_type');
             $sortBy         = Cookie::get('sort_by') ?? $dataSort[0]['key'];
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
@@ -63,7 +63,7 @@
             </div>
         </div>
         <!-- Chủ đề/phong cách/sự kiện -->
-        @foreach(config('main.category_type') as $type)
+        @foreach(config('main_'.env('APP_NAME').'.category_type') as $type)
             <div class="selectCustom hide-990">
                 @include('wallpaper.category.selectCustom')
             </div>
@@ -88,7 +88,7 @@
                 </div>
                 
                 <div class="filterAdvanced_box_content">
-                    @foreach(config('main.category_type') as $type)
+                    @foreach(config('main_'.env('APP_NAME').'.category_type') as $type)
                         <div class="filterAdvanced_box_content_item">
                             <div class="selectCustom">
                                 @include('wallpaper.category.selectCustom')
@@ -108,7 +108,7 @@
                     Tất cả
                     <input type="checkbox" name="search_feeling[]" value="all" /> 
                 </div>
-                @foreach(config('main.feeling_type') as $feeling)
+                @foreach(config('main_'.env('APP_NAME').'.feeling_type') as $feeling)
                     @php
                         $icon       = $feeling['icon_unactive'];
                         $checked    = null;

@@ -261,12 +261,12 @@ Route::get('/{language?}', [HomeController::class, 'home'])
     ->where('language', implode('|', $validLanguages))
     ->name('main.home');
 /* trang giỏ hàng */
-$validCarts     = config('main.url_cart_page');
+$validCarts     = config('main_'.env('APP_NAME').'.url_cart_page');
 Route::get('/{slugCart}', [CartController::class, 'index'])
     ->where('slugCart', implode('|', $validCarts))
     ->name('main.cart');
 /* trang xác nhận */
-$validSlugs = config('main.url_confirm_page');
+$validSlugs = config('main_'.env('APP_NAME').'.url_confirm_page');
 Route::get('/{slug}', [ConfirmController::class, 'confirm'])
     ->where('slug', implode('|', $validSlugs))
     ->name('main.confirm');

@@ -34,7 +34,7 @@
             @php
                 $icon = file_get_contents('storage/images/svg/icon-home-1.svg');
             @endphp
-            <a href="/{{ $language }}" title="{{ config('language.'.$language.'.data.home').' '.config('main.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
+            <a href="/{{ $language }}" title="{{ config('language.'.$language.'.data.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
                 {!! $icon !!}
                 <div>{{ config('language.'.$language.'.data.home') }}</div>
             </a>
@@ -173,7 +173,7 @@
                 $wallpaperFreeText      = config('language.'.$language.'.data.free_wallpaper.'.env('APP_NAME'));
                 $slugFullWallpaperFree  = '';
                 foreach($wallpaperMobile->childs as $child){
-                    if(in_array($child->seo->slug, config('main.url_free_wallpaper_category'))){
+                    if(in_array($child->seo->slug, config('main_'.env('APP_NAME').'.url_free_wallpaper_category'))){
                         foreach($child->seos as $seo){
                             if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
                                 $slugFullWallpaperFree = $seo->infoSeo->slug_full;

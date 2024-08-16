@@ -53,8 +53,8 @@ class RoutingController extends Controller{
             /* cache HTML */
             $paramsSlug             = [];
             if(!empty($search)) $paramsSlug['search'] = $search;
-            $nameCache              = self::buildNameCache($itemSeo['slug_full'], $paramsSlug).'.'.config('main.cache.extension');
-            $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
+            $nameCache              = self::buildNameCache($itemSeo['slug_full'], $paramsSlug).'.'.config('main_'.env('APP_NAME').'.cache.extension');
+            $pathCache              = Storage::path(config('main_'.env('APP_NAME').'.cache.folderSave')).$nameCache;
             $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
             $flagHandle             = true;
             if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
@@ -231,12 +231,12 @@ class RoutingController extends Controller{
                     $xhtml              = view('wallpaper.product.index', compact('item', 'itemSeo', 'breadcrumb', 'total', 'arrayIdCategory', 'language'))->render();
                 }
                 /* ===== Các trang chủ đề/phong cách/sự kiện ==== */
-                foreach(config('main.category_type') as $type){
+                foreach(config('main_'.env('APP_NAME').'.category_type') as $type){
                     if($itemSeo->type==$type['key']){
                         $flagMatch      = true;
                         /* ===== miễn phí */
                         $flagFree       = false;
-                        if(in_array($itemSeo->slug, config('main.url_free_wallpaper_category'))){
+                        if(in_array($itemSeo->slug, config('main_'.env('APP_NAME').'.url_free_wallpaper_category'))){
                             $flagFree   = true;
                             $params     = [];
                             /* tìm kiếm bằng feeling */
@@ -303,7 +303,7 @@ class RoutingController extends Controller{
                 }
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){
-                    if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+                    if(env('APP_CACHE_HTML')==true) Storage::put(config('main_'.env('APP_NAME').'.cache.folderSave').$nameCache, $xhtml);
                     echo $xhtml;
                 }else {
                     return \App\Http\Controllers\ErrorController::error404();

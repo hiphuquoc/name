@@ -4,7 +4,7 @@
             /* background source */
             $backgroundSource       = null;
             if(!empty($wallpaper->file_name)){
-                $url                = config('main.google_cloud_storage.sources').$wallpaper->file_name;
+                $url                = config('main_'.env('APP_NAME').'.google_cloud_storage.sources').$wallpaper->file_name;
                 $size               = 400;
                 $response           = config('admin.images.default_750x460');
                 $contentImage       = Storage::disk('gcs')->get($url);

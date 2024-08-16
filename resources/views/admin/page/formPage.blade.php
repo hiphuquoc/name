@@ -6,12 +6,12 @@
             foreach($prompts as $prompt){
                 if($language=='vi'){
                     if($prompt->reference_name=='title'&&$prompt->type=='auto_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'title');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
                         break;
                     }
                 }else {
                     if($prompt->reference_name=='title'&&$prompt->type=='translate_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'title');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
                         break;
                     }
                 }

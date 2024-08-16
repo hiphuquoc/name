@@ -36,8 +36,8 @@ class HomeController extends Controller {
         /* ngôn ngữ */
         SettingController::settingLanguage($language);
         /* cache HTML */
-        $nameCache              = $language.'home.'.config('main.cache.extension');
-        $pathCache              = Storage::path(config('main.cache.folderSave')).$nameCache;
+        $nameCache              = $language.'home.'.config('main_'.env('APP_NAME').'.cache.extension');
+        $pathCache              = Storage::path(config('main_'.env('APP_NAME').'.cache.folderSave')).$nameCache;
         $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
         if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
             $xhtml              = file_get_contents($pathCache);
@@ -69,12 +69,25 @@ class HomeController extends Controller {
                                 ->get();
             $xhtml      = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
-            if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
+            if(env('APP_CACHE_HTML')==true) Storage::put(config('main_'.env('APP_NAME').'.cache.folderSave').$nameCache, $xhtml);
         }
         echo $xhtml;
     }
 
     public static function test(Request $request){
+
+        $item       = Page::select('*')
+                        ->where('id', 2)
+                        ->with('seo', 'seos')
+                        ->first();
+        foreach($item->seos as $seo){
+            echo '<div>\''.$seo->infoSeo->slug.'\',</div>';
+        }
+
+        dd(123);
+
+
+
         /* lấy danh sách category */
         // $items   = Category::select('*')
         //             ->whereHas('seo', function($query){
@@ -139,30 +152,30 @@ class HomeController extends Controller {
         // dd($count);
 
 
-        /* xóa trang ngôn ngữ */
-        $arrayNonDelete = [
-            'vi', 'en', 'fr', 'es'
-        ];
-        $items       = Page::select('*')
-                        ->where('id', 10)
-                        ->with('seo', 'seos')
-                        ->get();
-        $arrayDelete = [];
-        foreach($items as $item){
-            foreach($item->seos as $seo){
-                if(!in_array($seo->infoSeo->language, $arrayNonDelete)){
-                // if($seo->infoSeo->language=='kn'){
-                    Seo::select('*')
-                            ->where('id', $seo->infoSeo->id)
-                            ->delete();
-                    RelationSeoPageInfo::select('*')
-                        ->where('seo_id', $seo->infoSeo->id)
-                        ->delete();
-                    $arrayDelete[] = $seo->infoSeo->language;
-                }
-            }
-        }
-        dd($arrayDelete);
+        // /* xóa trang ngôn ngữ */
+        // $arrayNonDelete = [
+        //     'vi', 'en', 'fr', 'es'
+        // ];
+        // $items       = Page::select('*')
+        //                 ->where('id', 1)
+        //                 ->with('seo', 'seos')
+        //                 ->get();
+        // $arrayDelete = [];
+        // foreach($items as $item){
+        //     foreach($item->seos as $seo){
+        //         if(!in_array($seo->infoSeo->language, $arrayNonDelete)){
+        //         // if($seo->infoSeo->language=='kn'){
+        //             Seo::select('*')
+        //                     ->where('id', $seo->infoSeo->id)
+        //                     ->delete();
+        //             RelationSeoPageInfo::select('*')
+        //                 ->where('seo_id', $seo->infoSeo->id)
+        //                 ->delete();
+        //             $arrayDelete[] = $seo->infoSeo->language;
+        //         }
+        //     }
+        // }
+        // dd($arrayDelete);
 
         // /* tạo trang đa ngôn ngữ hàng loạt */
         // $items = Tag::select('*')

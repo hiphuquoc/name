@@ -27,8 +27,8 @@ class UploadSourceAndWallpaper implements ShouldQueue
     }
 
     public function handle(){
-        // $urlS                           = config('main.google_cloud_storage.sources').$this->infoWallpaper->file_name;
-        // $fullUrlS                       = config('main.google_cloud_storage.default_domain').$urlS;
+        // $urlS                           = config('main_'.env('APP_NAME').'.google_cloud_storage.sources').$this->infoWallpaper->file_name;
+        // $fullUrlS                       = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$urlS;
 
         // /* Lấy thông tin ảnh wallpaper */
         // $widthW                         = 800;
@@ -36,7 +36,7 @@ class UploadSourceAndWallpaper implements ShouldQueue
         // $miniTypeW                      = 'image/webp';
         // $extensionW                     = config('image.extension');
         // $fileNameNonHaveExtensionW      = \App\Helpers\Charactor::convertStrToUrl($this->infoWallpaper->name).'-'.Charactor::randomString(10);
-        // $newUrlW                        = config('main.google_cloud_storage.wallpapers').$fileNameNonHaveExtensionW.'.'.$extensionW;
+        // $newUrlW                        = config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers').$fileNameNonHaveExtensionW.'.'.$extensionW;
         // // /* lấy thông tin ảnh source */
         // // $widthS                         = 3072;
         // // $heightS                        = 6144;
@@ -49,7 +49,7 @@ class UploadSourceAndWallpaper implements ShouldQueue
         // // $fileSizeS                      = $filesize ?? '0';
         // // $extensionS                     = pathinfo($urlS)['extension'];
         // // $fileNameNonHaveExtensionS      = \App\Helpers\Charactor::convertStrToUrl($this->infoWallpaper->name).'-'.Charactor::randomString(20);
-        // // $newUrlS                        = config('main.google_cloud_storage.sources').$fileNameNonHaveExtensionS.'.'.$extensionS;
+        // // $newUrlS                        = config('main_'.env('APP_NAME').'.google_cloud_storage.sources').$fileNameNonHaveExtensionS.'.'.$extensionS;
         // // /* đổi tên source */
         // // Storage::disk('gcs')->move($urlS, $newUrlS);
         // $infoUpdate     = [
@@ -71,8 +71,8 @@ class UploadSourceAndWallpaper implements ShouldQueue
         // ];
         // Wallpaper::updateItem($this->infoWallpaper->id, $infoUpdate);
 
-        // $urlW                   = config('main.google_cloud_storage.wallpapers').$this->infoWallpaper->file_name;
-        // $fullUrlW               = config('main.google_cloud_storage.default_domain').$urlW;
+        // $urlW                   = config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers').$this->infoWallpaper->file_name;
+        // $fullUrlW               = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$urlW;
         
         // $folderTmp              = 'testwallpapers/';
         // $imageTmp               = ImageManagerStatic::make($fullUrlW);

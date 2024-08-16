@@ -44,7 +44,7 @@ class BlogController extends Controller {
         $parents        = CategoryBlog::all();
         $content        = null;
         if(!empty($item->seo->slug)){
-            $content    = Storage::get(config('main.storage.contentBlog').$item->seo->slug.'.blade.php');
+            $content    = Storage::get(config('main_'.env('APP_NAME').'.storage.contentBlog').$item->seo->slug.'.blade.php');
         }
         /* type */
         $type           = !empty($item) ? 'edit' : 'create';
@@ -60,7 +60,7 @@ class BlogController extends Controller {
             if($request->hasFile('image')) {
                 $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
                 $fileName       = $name.'.'.config('image.extension');
-                $folderUpload   =  config('main.google_cloud_storage.wallpapers');
+                $folderUpload   =  config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers');
                 $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
             /* insert seo */
@@ -72,7 +72,7 @@ class BlogController extends Controller {
             /* lưu content vào file */
             $content            = $request->get('content') ?? null;
             $content            = ImageController::replaceImageInContentWithLoading($content);
-            Storage::put(config('main.storage.contentBlog').$request->get('slug').'.blade.php', $content);
+            Storage::put(config('main_'.env('APP_NAME').'.storage.contentBlog').$request->get('slug').'.blade.php', $content);
             /* relation category_blog_info và blog_info */
             if(!empty($request->get('category_blog_info_id'))){
                 foreach($request->get('category_blog_info_id') as $idCategoryBlog){
@@ -121,7 +121,7 @@ class BlogController extends Controller {
             /* lưu content vào file */
             $content            = $request->get('content') ?? null;
             $content            = ImageController::replaceImageInContentWithLoading($content);
-            Storage::put(config('main.storage.contentBlog').$request->get('slug').'.blade.php', $content);
+            Storage::put(config('main_'.env('APP_NAME').'.storage.contentBlog').$request->get('slug').'.blade.php', $content);
             /* relation category_blog_info và blog_info */
             RelationCategoryBlogInfoBlogInfo::select('*')
                 ->where('blog_info_id', $idBlog)

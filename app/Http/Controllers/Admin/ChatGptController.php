@@ -20,12 +20,19 @@ class ChatGptController extends Controller {
 
     public static function chatGpt(Request $request){
         $response       = [];
-        $idSeo          = $request->get('id') ?? null;
+        $idTable        = $request->get('id') ?? null;
         $idPrompt       = $request->get('id_prompt') ?? null;
         $language       = $request->get('language') ?? null;
         $infoPrompt     = Prompt::select('*')
                             ->where('id', $idPrompt)
                             ->first();
+        /* lấy thông tin page dựa vào id */
+        $tmp            = DB::table($infoPrompt->reference_table)
+                                ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
+                                ->select($infoPrompt->reference_table . '.seo_id')
+                                ->where($infoPrompt->reference_table.'.id', $idTable)
+                                ->first();
+        $idSeo          = $tmp->seo_id ?? 0;
         $infoPage       = HelperController::getFullInfoPageByIdSeo($idSeo);
         /* trường hợp dịch */
         if($infoPrompt->type=='translate_content'){

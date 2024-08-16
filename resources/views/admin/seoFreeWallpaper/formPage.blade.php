@@ -7,13 +7,13 @@
                 if($language=='vi'){
                     if($prompt->reference_name=='title'){
                         if($prompt->type=='auto_content'||$prompt->type=='auto_content_for_image'){
-                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'title');
+                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
                             break;
                         }
                     }
                 }else {
                     if($prompt->reference_name=='title'&&$prompt->type=='translate_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'title');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
                         break;
                     }
                 }
@@ -50,7 +50,7 @@
                 <input type="number" min="0" id="ordering" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="ordering" value="{{ old('ordering') ?? $itemSeo->ordering ?? $itemSource->seo->ordering ?? '' }}">
             </div>
             <!-- category/style/event -->
-            @foreach(config('main.category_type') as $categoryType)
+            @foreach(config('main_'.env('APP_NAME').'.category_type') as $categoryType)
                 <div class="formBox_full_item">
                     <label class="form-label">{{ $categoryType['name'] }}</label>
                     <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
@@ -94,7 +94,7 @@
                     foreach($prompts as $prompt){
                         if($prompt->reference_name=='tag'){
                             if($prompt->type=='auto_content_for_image'){
-                                $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'tag');
+                                $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'tag');
                                 break;
                             }
                         }

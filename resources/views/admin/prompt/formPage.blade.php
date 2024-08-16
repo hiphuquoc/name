@@ -43,7 +43,7 @@
         <div class="formBox_full_item">
             <label class="form-label inputRequired" for="tool">Công cụ</label>
             <select class="select2 form-select select2-hidden-accessible" id="tool" name="tool">
-                @foreach(config('main.tool_translate') as $t)
+                @foreach(config('main_'.env('APP_NAME').'.tool_translate') as $t)
                     @php
                         $selected   = null;
                         if(!empty($item->tool)&&$item->tool==$t) $selected = ' selected';
@@ -56,7 +56,7 @@
         <div class="formBox_full_item">
             <label class="form-label inputRequired" for="version">Phiên bản</label>
             <select class="select2 form-select select2-hidden-accessible" id="version" name="version">
-                @foreach(config('main.ai_version') as $v)
+                @foreach(config('main_'.env('APP_NAME').'.ai_version') as $v)
                     @php
                         $selected   = null;
                         if(!empty($item->version)&&$item->version==$v) $selected = ' selected';

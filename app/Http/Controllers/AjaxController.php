@@ -117,7 +117,7 @@ class AjaxController extends Controller {
             $result['type']     = 'success';
             $result['title']    = 'Đăng ký email thành công!';
             $result['content']  = '<div>Cảm ơn bạn đã đăng ký nhận tin!</div>
-                                    <div>Trong thời gian tới nếu có bất kỳ chương trình khuyến mãi nào '.config('main.info.'.env('APP_NAME').'.company_name').' sẽ gửi cho bạn đầu tiên.</div>'; 
+                                    <div>Trong thời gian tới nếu có bất kỳ chương trình khuyến mãi nào '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name').' sẽ gửi cho bạn đầu tiên.</div>'; 
         }else {
             $result['type']     = 'error';
             $result['title']    = 'Đăng ký email thất bại!';
@@ -292,7 +292,7 @@ class AjaxController extends Controller {
             $flag   = self::checkShowSource($fileName, $codeOrder);
             if($flag==true){
                 /* tiến hành tải bản xem trước ra */
-                $contentImage   = Storage::disk('gcs')->get(config('main.google_cloud_storage.sources').'/'.$fileName);
+                $contentImage   = Storage::disk('gcs')->get(config('main_'.env('APP_NAME').'.google_cloud_storage.sources').'/'.$fileName);
                 $thumbnail      = ImageManagerStatic::make($contentImage)->encode();
                 $response       = 'data:image/jpeg;base64,'.base64_encode($thumbnail);
             }
@@ -309,7 +309,7 @@ class AjaxController extends Controller {
             $flag = self::checkShowSource($fileName, $codeOrder);
 
             if ($flag == true) {
-                $urlImage       = config('main.google_cloud_storage.default_domain').config('main.google_cloud_storage.sources').$fileName;
+                $urlImage       = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').config('main_'.env('APP_NAME').'.google_cloud_storage.sources').$fileName;
                 return response()->json([
                     'file_name' => pathinfo($urlImage)['filename'],
                     'url'       => $urlImage
@@ -362,7 +362,7 @@ class AjaxController extends Controller {
     public function downloadImgFreeWallpaper(Request $request){
         $fileName = $request->get('file_cloud');
         // Lấy đường dẫn đến ảnh trong Google Cloud Storage
-        $imagePath = config('main.google_cloud_storage.default_domain') . $fileName;
+        $imagePath = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain') . $fileName;
 
         // Đọc nội dung của ảnh
         $imageContents = file_get_contents($imagePath);

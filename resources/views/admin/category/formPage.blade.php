@@ -6,12 +6,12 @@
             foreach($prompts as $prompt){
                 if($language=='vi'){
                     if($prompt->reference_name=='title'&&$prompt->type=='auto_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'title');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
                         break;
                     }
                 }else {
                     if($prompt->reference_name=='title'&&$prompt->type=='translate_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'title');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
                         break;
                     }
                 }
@@ -43,7 +43,7 @@
             <label class="form-label inputRequired">Loại danh mục</label>
             <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">
                 <select class="select2 form-select select2-hidden-accessible" name="category_type" {{ $lock }}>
-                    @foreach(config('main.category_type') as $categoryType)
+                    @foreach(config('main_'.env('APP_NAME').'.category_type') as $categoryType)
                         @php
                             $selected   = null;
                             if(old('category_type') == $categoryType['key'] || (!empty($item->seo->type) && $item->seo->type == $categoryType['key'])) {
@@ -54,7 +54,7 @@
                     @endforeach
                 </select>                
                 @if($lock=='disabled')
-                    @foreach(config('main.category_type') as $categoryType)
+                    @foreach(config('main_'.env('APP_NAME').'.category_type') as $categoryType)
                         @php
                             if(!empty($item->seo->type)&&$item->seo->type==$categoryType['key']) {
                                 $valueKey = $categoryType['key'];

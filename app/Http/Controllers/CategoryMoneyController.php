@@ -23,7 +23,7 @@ class CategoryMoneyController extends Controller {
         $params['request_load']             = $request->get('request_load');
         $params['array_category_info_id']   = json_decode($request->get('array_category_info_id'));
         $params['array_tag_info_id']        = json_decode($request->get('array_tag_info_id'));
-        $params['sort_by']                  = Cookie::get('sort_by') ?? config('main.sort_type')[0]['key'];
+        $params['sort_by']                  = Cookie::get('sort_by') ?? config('main_'.env('APP_NAME').'.sort_type')[0]['key'];
         $params['filters']                  = $request->get('filters') ?? [];
         $tmp                                = self::getWallpapers($params, $language);
         foreach($tmp['wallpapers'] as $wallpaper){

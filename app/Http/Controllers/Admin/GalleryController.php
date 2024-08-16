@@ -17,7 +17,7 @@ class GalleryController extends Controller {
         $result     = [];
         if(!empty($arrayImage)){
             // ===== folder upload
-            $folderUpload       = config('main.google_cloud_storage.wallpapers');
+            $folderUpload       = config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers');
             $fileExtension      = config('image.extension');
             $i                  = 0;
             foreach($arrayImage as $image){

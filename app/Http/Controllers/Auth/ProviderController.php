@@ -36,7 +36,7 @@ class ProviderController extends Controller {
                     'provider_id'   => $payload['sub']
                 ];
                 if(empty($finduser->password)){
-                    $dataUpdate['password'] = Hash::make(config('main.password_user_default'));
+                    $dataUpdate['password'] = Hash::make(config('main_'.env('APP_NAME').'.password_user_default'));
                 }
                 User::updateItem($finduser->id, $dataUpdate);
                 Auth::login($finduser);
@@ -46,7 +46,7 @@ class ProviderController extends Controller {
                     'name'          => $payload['name'],
                     'provider'      => 'google',
                     'provider_id'   => $payload['sub'],
-                    'password'      => Hash::make(config('main.password_user_default'))
+                    'password'      => Hash::make(config('main_'.env('APP_NAME').'.password_user_default'))
                 ];
                 $newUser = User::create($arrayCreate);
                 Auth::login($newUser);    

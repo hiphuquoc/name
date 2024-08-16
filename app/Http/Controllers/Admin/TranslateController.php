@@ -147,7 +147,7 @@ class TranslateController extends Controller {
                     /* lấy prompt đang được áp dụng cho content */
                     $type       = $infoPage->seo->type;
                     /* check xem phải category_type */
-                    foreach(config('main.category_type') as $t) {
+                    foreach(config('main_'.env('APP_NAME').'.category_type') as $t) {
                         if($type==$t['key']){
                             $type = 'category_info';
                             break;

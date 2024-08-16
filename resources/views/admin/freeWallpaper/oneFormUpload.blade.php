@@ -9,13 +9,13 @@
             <div class="formBox_full">
                 <div class="formBox_full_item">
                     <label class="form-label inputRequired" for="name">Alt ảnh</label>
-                    <textarea class="form-control" name="name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->name ?? config('main.auto_fill.alt.vi') }}</textarea>
+                    <textarea class="form-control" name="name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->name ?? config('main_'.env('APP_NAME').'.auto_fill.alt.vi') }}</textarea>
                 </div>
                 {{-- <div class="formBox_full_item">
                     <label class="form-label inputRequired" for="name">Alt ảnh EN</label>
                     <textarea class="form-control" name="en_name[{{ $idBox }}]" rows="1" required>{{ $wallpaper->en_name ?? null }}</textarea>
                 </div> --}}
-                @foreach(config('main.category_type') as $type)
+                @foreach(config('main_'.env('APP_NAME').'.category_type') as $type)
                     <div class="formBox_full_item">
                         <label class="form-label" for="{{ $type['key'] }}">{{ $type['name'] }}</label>
                         <select class="select2 form-select select2-hidden-accessible" name="{{ $type['key'] }}[{{ $idBox }}]" multiple="true" onchange="autoFillNameAndEnName({{ $idBox }});">

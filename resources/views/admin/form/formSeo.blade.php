@@ -8,13 +8,13 @@
                 if($language=='vi'){
                     if($prompt->reference_name=='seo_title'){
                         if($prompt->type=='auto_content'||$prompt->type=='auto_content_for_image'){
-                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'seo_title');
+                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'seo_title');
                             break;
                         }
                     }
                 }else {
                     if($prompt->reference_name=='seo_title'&&$prompt->type=='translate_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'seo_title');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'seo_title');
                         break;
                     }
                 }
@@ -45,13 +45,13 @@
                 if($language=='vi'){
                     if($prompt->reference_name=='seo_description'){
                         if($prompt->type=='auto_content'||$prompt->type=='auto_content_for_image'){
-                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'seo_description');
+                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'seo_description');
                             break;
                         }
                     }
                 }else {
                     if($prompt->reference_name=='seo_description'&&$prompt->type=='translate_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'seo_description');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'seo_description');
                         break;
                     }
                 }
@@ -98,13 +98,13 @@
                 if($language=='vi'){
                     if($prompt->reference_name=='slug'){
                         if($prompt->type=='auto_content'||$prompt->type=='auto_content_for_image'){
-                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'slug');
+                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'slug');
                             break;
                         }
                     }
                 }else {
                     if($prompt->reference_name=='slug'&&$prompt->type=='translate_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'slug');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'slug');
                         break;
                     }
                 }

@@ -87,7 +87,7 @@ class FreeWallpaperController extends Controller {
                 // $extensionW                     = config('image.extension');
                 $extensionW                     = $wallpaper->getClientOriginalExtension();
                 $fileNameNonHaveExtensionW      = Charactor::convertStrToUrl($request->get('name')).'-'.time().'-'.$i;
-                $folderW                        = config('main.google_cloud_storage.freeWallpapers');
+                $folderW                        = config('main_'.env('APP_NAME').'.google_cloud_storage.freeWallpapers');
                 $fileUrlW                       = $folderW.$fileNameNonHaveExtensionW.'.'.$extensionW;
                 /* upload wallpaper lên google_cloud_storage với 3 bản Full Small Mini (thông qua function Upload) */
                 $fileUpload = \App\Helpers\Upload::uploadWallpaper($wallpaper, $fileNameNonHaveExtensionW.'.'.$extensionW, $folderW);
@@ -151,7 +151,7 @@ class FreeWallpaperController extends Controller {
             RelationFreewallpaperCategory::select('*')
                 ->where('free_wallpaper_info_id', $idWallpaper)
                 ->delete();
-            foreach(config('main.category_type') as $type){
+            foreach(config('main_'.env('APP_NAME').'.category_type') as $type){
                 if(!empty($requestAll[$type['key']])){
                     /* vừa dùng ajax vùa dùng controller nên có thể là chuỗi hoặc array -> kiểm tra trước khi đưa vào xử lý */
                     $arrayCategory = is_string($requestAll[$type['key']]) ? explode(',', $requestAll[$type['key']]) : $requestAll[$type['key']];
@@ -197,7 +197,7 @@ class FreeWallpaperController extends Controller {
 
     private static function createSeoTmp($nameTag){
         /* tạo bảng seo tạm */
-        $slug       = config('main.auto_fill.slug.vi').'-'.Charactor::convertStrToUrl($nameTag);
+        $slug       = config('main_'.env('APP_NAME').'.auto_fill.slug.vi').'-'.Charactor::convertStrToUrl($nameTag);
         $idSeo      = Seo::insertItem([
             'title'                     => $nameTag,
             'seo_title'                 => $nameTag,
@@ -241,11 +241,11 @@ class FreeWallpaperController extends Controller {
             /* xóa wallpaper trong google_cloud_storage */
             Storage::disk('gcs')->delete($infoWallpaper->file_cloud);
             /* xóa wallpaper large trong google_cloud_storage */
-            Storage::disk('gcs')->delete(config('main.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-large.'.$infoWallpaper->extension);
+            Storage::disk('gcs')->delete(config('main_'.env('APP_NAME').'.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-large.'.$infoWallpaper->extension);
             /* xóa wallpaper Small trong google_cloud_storage */
-            Storage::disk('gcs')->delete(config('main.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-small.'.$infoWallpaper->extension);
+            Storage::disk('gcs')->delete(config('main_'.env('APP_NAME').'.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-small.'.$infoWallpaper->extension);
             /* xóa wallpaper Mini trong google_cloud_storage */
-            Storage::disk('gcs')->delete(config('main.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-mini.'.$infoWallpaper->extension);
+            Storage::disk('gcs')->delete(config('main_'.env('APP_NAME').'.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-mini.'.$infoWallpaper->extension);
             /* xóa relation */
             /* categories */
             RelationFreeWallpaperUser::select('*')
