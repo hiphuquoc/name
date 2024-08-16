@@ -104,7 +104,7 @@ class Category extends Model {
     }
 
     public function files(){
-        return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id')->where('relation_table', 'category_info');
+        return $this->hasMany(\App\Models\SystemFile::class, 'attachment_id', 'id')->where('relation_table', 'category_info')->inRandomOrder();
     }
 
     public function products(){

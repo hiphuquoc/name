@@ -315,7 +315,7 @@ Route::get('/setFeelingFreeWallpaper', [AjaxController::class, 'setFeelingFreeWa
 Route::get('/loadOneFreeWallpaper', [AjaxController::class, 'loadOneFreeWallpaper'])->name('ajax.loadOneFreeWallpaper');
 Route::get('/loadMoreWallpaper', [CategoryMoneyPublic::class, 'loadMoreWallpaper'])->name('main.category.loadMoreWallpaper');
 Route::get('/loadmoreFreeWallpapers', [CategoryPublic::class, 'loadmoreFreeWallpapers'])->name('main.category.loadmoreFreeWallpapers');
-Route::post('/loadInfoCategory', [CategoryPublic::class, 'loadInfoCategory'])->name('main.category.loadInfoCategory');
+Route::get('/loadInfoCategory', [CategoryPublic::class, 'loadInfoCategory'])->name('main.category.loadInfoCategory');
 Route::get('/toogleHeartFeelingFreeWallpaper', [AjaxController::class, 'toogleHeartFeelingFreeWallpaper'])->name('ajax.toogleHeartFeelingFreeWallpaper');
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');

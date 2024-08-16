@@ -63,7 +63,7 @@
         
             const queryString = new URLSearchParams(dataForm).toString();
             fetch("/loadInfoCategory?" + queryString, {
-                method: 'POST',
+                method: 'GET',
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
