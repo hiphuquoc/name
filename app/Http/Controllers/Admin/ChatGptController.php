@@ -20,54 +20,58 @@ class ChatGptController extends Controller {
 
     public static function chatGpt(Request $request){
         $response       = [];
-        $idTable        = $request->get('id') ?? null;
+        $idSeo          = $request->get('id') ?? null;
         $idPrompt       = $request->get('id_prompt') ?? null;
         $language       = $request->get('language') ?? null;
         $infoPrompt     = Prompt::select('*')
                             ->where('id', $idPrompt)
                             ->first();
+        $infoPage       = HelperController::getFullInfoPageByIdSeo($idSeo);
         /* trường hợp dịch */
         if($infoPrompt->type=='translate_content'){
             /* dịch bằng ai */
             if($infoPrompt->tool=='ai'){
                 /* dịch riêng cho content */
                 if($infoPrompt->reference_name=='content'){
-                    $idContent  = $request->get('id_content');
                     /* ===== Dịch content ===== */
-                    $item       = DB::table($infoPrompt->reference_table)
-                                    ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
-                                    ->join('seo_content', 'seo_content.seo_id', '=', 'seo.id')
-                                    ->select($infoPrompt->reference_table . '.*', 'seo.*', 'seo_content.id as seo_content_id', 'seo_content.content')
-                                    ->where($infoPrompt->reference_table.'.id', $idTable)
-                                    ->where('seo_content.id', $idContent)
-                                    ->first();
-                    /* xử lý riêng cho dịch content -> vì lấy ra idContent */
-                    $promptText = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
-                    $response   = self::callApi($promptText, $infoPrompt);
-                    /* dịch url */
-                    $tmp                    = \App\Jobs\AutoTranslateContent::translateSlugBySlugOnData($language, $response['content']);
+                    $idContent  = $request->get('id_content');
+                    /* gộp thêm content vào mảng để thay thế */
+                    $contentVi  = '';
+                    if(!empty($idContent)){
+                        foreach($infoPage->seo->contents as $c){
+                            if(!empty($c->id)&&$c->id==$idContent){
+                                $contentVi = $c->content;
+                                break;
+                            }
+                        }
+                    }
+                    /* convert prompt */
+                    $promptText         = self::convertPrompt($infoPage, $infoPrompt, $language);
+                    /* tách content thành những phần nhỏ */
+                    $arrayPartContent   = \App\Helpers\Charactor::splitString($contentVi, 4000);
+                    $resultContent      = '';
+                    foreach($arrayPartContent as $contentPart){
+                        if(!empty(trim($contentPart))){
+                            $promptUse      = str_replace('#content', $contentPart, $promptText);
+                            $response       = self::callApi($promptUse, $infoPrompt);
+                            $resultContent  .= $response['content'];
+                        }
+                    }
+                    /* thay internal link theo đúng ngôn ngữ */
+                    $tmp                 = \App\Jobs\AutoTranslateContent::translateSlugBySlugOnData($language, $resultContent);
                     $response['content'] = $tmp['content'];
                     return json_encode($response);
+                }else {
+                    /* dich các thành phần khác content */
+                    $promptText = self::convertPrompt($infoPage, $infoPrompt, $language);
+                    $response   = self::callApi($promptText, $infoPrompt);
+                    return json_encode($response);
                 }
-                /* dich các thành phần khác content */
-                $item       = DB::table($infoPrompt->reference_table)
-                                ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
-                                ->select($infoPrompt->reference_table . '.*', 'seo.*')
-                                ->where($infoPrompt->reference_table.'.id', $idTable)
-                                ->first();
-                $promptText = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
-                $response   = self::callApi($promptText, $infoPrompt);
-                return json_encode($response);
             }
             /* dịch bằng google translate */
             if($infoPrompt->tool=='google_translate'){
-                $item       = DB::table($infoPrompt->reference_table)
-                                ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
-                                ->select($infoPrompt->reference_table . '.*', 'seo.*')
-                                ->where($infoPrompt->reference_table.'.id', $idTable)
-                                ->first();
-                $contentSorce           = null;
-                foreach($item as $key => $value){
+                $contentSorce           = '';
+                foreach($infoPage->seo->getAttributes() as $key => $value) {
                     if($key==$infoPrompt->reference_name){
                         $contentSorce   = $value;
                     }
@@ -83,12 +87,7 @@ class ChatGptController extends Controller {
         /* trường hợp viết content */
         if($infoPrompt->type=='auto_content'){
             /* ===== Viết content ===== */
-            $item       = DB::table($infoPrompt->reference_table)
-                            ->join('seo', 'seo.id', '=', $infoPrompt->reference_table.'.seo_id')
-                            ->select($infoPrompt->reference_table . '.*', 'seo.*')
-                            ->where($infoPrompt->reference_table.'.id', $idTable)
-                            ->first();
-            $promptText = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
+            $promptText = self::convertPrompt($infoPage, $infoPrompt, $language);
             $response   = self::callApi($promptText, $infoPrompt);
             return json_encode($response);
         }
@@ -135,7 +134,7 @@ class ChatGptController extends Controller {
                     }
                 }else {
                     /* content thông thường */
-                    $promptText = self::convertPrompt($item, $infoPrompt, $infoPrompt->reference_name, $language);
+                    $promptText = self::convertPrompt($item, $infoPrompt, $language);
                     $response   = self::callApi($promptText, $infoPrompt, $urlImage);
                 }
             }
@@ -144,27 +143,43 @@ class ChatGptController extends Controller {
         return json_encode($response);
     }
 
-    public static function convertPrompt($item, $infoPrompt, $referenceName, $language){
+    public static function convertPrompt($infoPage, $infoPrompt, $language){
         $response               = null;
         $prompt                 = $infoPrompt->reference_prompt ?? null;
         $action                 = $infoPrompt->type;
         /* trường hợp auto_content => thay thế các #key trong prompt */
         if($action=='auto_content'||$action=='auto_content_for_image'){
-            foreach($item as $key => $value){
-                $str            = '#'.strval($key);
-                $prompt         = str_replace($str, $value, $prompt);
+            foreach($infoPage->seo->getAttributes() as $key => $value) {
+                $arrayReplace['search'][]  = '#'.strval($key);
+                $arrayReplace['replace'][] = $value;
             }
+            $prompt             = str_replace($arrayReplace['search'], $arrayReplace['replace'], $prompt);
             $response           = $prompt;
         }
         /* trường hợp translate_content => thay thế #key language và truyền thêm content để dịch */
         if($action=='translate_content'){
-            $languageName       = config('language.'.$language.'.name');
-            $languageCode       = config('language.'.$language.'.key');
-            $prompt             = str_replace(['#language', '#key'], [$languageName, $languageCode], $prompt);
-            foreach($item as $key => $value){
-                $str            = '#'.strval($key);
-                $prompt         = str_replace($str, $value, $prompt);
+            $arrayReplace       = [];
+            /* tạo mảng thay biến ngôn ngữ */
+            $arrayReplace['search'][0]  = '#language';
+            $arrayReplace['replace'][0] = config('language.'.$language.'.name');
+            $arrayReplace['search'][1]  = '#key';
+            $arrayReplace['replace'][1] = config('language.'.$language.'.key');
+            /* tạo mảng thay thế ngôn ngữ dịch => #title_by_language = giá trị title dịch (phải để này lên trước để tránh #title thay thế cho #title_by_language) */
+            foreach($infoPage->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                    foreach($seo->infoSeo->getAttributes() as $key => $value){
+                        $arrayReplace['search'][]  = '#'.strval($key).'_of_language';
+                        $arrayReplace['replace'][] = $value;
+                    }
+                }
             }
+            /* tạo mảng thay thế ngôn ngữ tiếng việt => #title = giá trị title tiếng việt */
+            foreach($infoPage->seo->getAttributes() as $key => $value) {
+                $arrayReplace['search'][]  = '#'.strval($key);
+                $arrayReplace['replace'][] = $value;
+            }
+            
+            $prompt             = str_replace($arrayReplace['search'], $arrayReplace['replace'], $prompt);
             $response           = $prompt;
         }
         return $response;

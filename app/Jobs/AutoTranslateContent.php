@@ -42,19 +42,18 @@ class AutoTranslateContent implements ShouldQueue {
 
     public function handle(){
         try {
-            /* xóa các khoảng trắng bị chuyển sang ký tự đặc biệt (do trinh soạn thảo Tyni) */
-            $stringContent      = str_replace("\u{A0}", ' ', $this->content->content);
-            $languageName       = config('language.'.$this->language.'.name');
-            $languageCode       = config('language.'.$this->language.'.code');
-            $promptText         = str_replace(['#language', '#code'], [$languageName, $languageCode], $this->infoPrompt->reference_prompt);
-            /* dịch content */
-            // $resultContent      = $this->content->content;
-            $arrayPartContent   = \App\Helpers\Charactor::splitString($stringContent, 4000);
+            $infoPage           = HelperController::getFullInfoPageByIdSeo($this->idSeo);
+            /* convert prompt */
+            $promptText         = ChatGptController::convertPrompt($infoPage, $this->infoPrompt, $this->language);
+            /* tách content thành những phần nhỏ */
+            $arrayPartContent   = \App\Helpers\Charactor::splitString($this->content->content, 4000);
             $resultContent      = '';
             foreach($arrayPartContent as $contentPart){
-                $promptUse      = $promptText . "\n\n" . $contentPart;
-                $response       = ChatGptController::callApi($promptUse, $this->infoPrompt);
-                $resultContent  .= $response['content'];
+                if(!empty(trim($contentPart))){
+                    $promptUse      = str_replace('#content', $contentPart, $promptText);
+                    $response       = ChatGptController::callApi($promptUse, $this->infoPrompt);
+                    $resultContent  .= $response['content'];
+                }
             }
             if(!empty($resultContent)){
                 /* thay internal link trong content */

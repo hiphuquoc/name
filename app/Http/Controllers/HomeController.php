@@ -42,35 +42,32 @@ class HomeController extends Controller {
         if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
             $xhtml              = file_get_contents($pathCache);
         }else {
-        $item               = Page::select('*')
-            ->whereHas('seos.infoSeo', function ($query) use ($language) {
-                $query->where('slug', $language);
-            })
-            ->with('seo', 'seos.infoSeo', 'type')
-            ->first();
-        /* lấy item seo theo ngôn ngữ được chọn */
-        $itemSeo            = [];
-        if (!empty($item->seos)) {
-            foreach ($item->seos as $s) {
-                if ($s->infoSeo->language == $language) {
-                    $itemSeo = $s->infoSeo;
-                    break;
+            $item               = Page::select('*')
+                ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                    $query->where('slug', $language);
+                })
+                ->with('seo', 'seos.infoSeo', 'type')
+                ->first();
+            /* lấy item seo theo ngôn ngữ được chọn */
+            $itemSeo            = [];
+            if (!empty($item->seos)) {
+                foreach ($item->seos as $s) {
+                    if ($s->infoSeo->language == $language) {
+                        $itemSeo = $s->infoSeo;
+                        break;
+                    }
                 }
             }
-        }
-        $categories = Category::select('*')
-                        ->whereHas('seo', function($query){
-                            $query->where('level', 2)
-                                    ->where('type', 'category_info');
-                        })
-                        ->where('flag_show', 1)
-                        ->with(['seo', 'seos.infoSeo' => function($query) use($language) {
-                            $query->where('language', $language);
-                        }])
-                        ->skip(0)
-                        ->take(8)
-                        ->get();
-        $xhtml      = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
+            /* load một ít category */
+            // $tmp        = [
+            //     'request_load'  => 100,
+            //     'type'          => 'category_info',
+            // ];
+            // $categories = self::getCategories($tmp);
+            $categories     = Category::select('*')
+                                ->where('flag_show', 1)
+                                ->get();
+            $xhtml      = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
             /* Ghi dữ liệu - Xuất kết quả */
             if(env('APP_CACHE_HTML')==true) Storage::put(config('main.cache.folderSave').$nameCache, $xhtml);
         }
@@ -78,26 +75,40 @@ class HomeController extends Controller {
     }
 
     public static function test(Request $request){
+        /* lấy danh sách category */
+        // $items   = Category::select('*')
+        //             ->whereHas('seo', function($query){
+        //                 $query->where('level', 2);
+        //             })
+        //             ->with('seo', 'seos.infoSeo')
+        //             ->get();
+        // $i      = 1;
+        // foreach($items as $item){
+        //     echo '<div>Hình Nền Điện Thoại '.$item->seo->title.' Miễn Phí</div>';
+        //     if($i%3==0) echo '<div>Tiếp tục giúp tôi với:</div>';
+        //     ++$i;
+        // }
+        // dd(123);
 
-        /* test */
-        $arrayNot   = ['vi', 'lo', 'ro'];
-        $item   = Category::select('*')
-                    ->where('id', 52)
-                    ->with('seo', 'seos.infoSeo')
-                    ->first();
-        foreach($item->seos as $seo){
-            $language   = $seo->infoSeo->language;
-            // foreach($seo->infoSeo->contents as $c){
-            //     /* thay thế content */
-            //     $content = AutoTranslateContent::translateSlugBySlugOnData($language, $c->content);
-            //     /* update content */
-            //     SeoContent::updateItem($c->id, [
-            //         'content' => $content
-            //     ]);
-            // }
-            if(!in_array($language, $arrayNot)) TranslateController::createJobTranslateContent($item->seo->id, $language);
-        }
-        dd(123);    
+        // /* test */
+        // $arrayNot   = ['vi', 'lo', 'ro'];
+        // $item   = Category::select('*')
+        //             ->where('id', 100)
+        //             ->with('seo', 'seos.infoSeo')
+        //             ->first();
+        // foreach($item->seos as $seo){
+        //     $language   = $seo->infoSeo->language;
+        //     // foreach($seo->infoSeo->contents as $c){
+        //     //     /* thay thế content */
+        //     //     $content = AutoTranslateContent::translateSlugBySlugOnData($language, $c->content);
+        //     //     /* update content */
+        //     //     SeoContent::updateItem($c->id, [
+        //     //         'content' => $content
+        //     //     ]);
+        //     // }
+        //     if(!in_array($language, $arrayNot)) TranslateController::createJobTranslateContent($item->seo->id, $language);
+        // }
+        // dd(123);    
 
         // /* kiểm tra xem tag nào còn thiếu ngôn ngữ nào */
         // $items = Tag::select('*')
@@ -128,30 +139,30 @@ class HomeController extends Controller {
         // dd($count);
 
 
-        // /* xóa trang ngôn ngữ */
-        // $arrayNonDelete = [
-        //     'vi', 'en', 'fr', 'es'
-        // ];
-        // $items       = Tag::select('*')
-        //                 ->where('id', 602)
-        //                 ->with('seo', 'seos')
-        //                 ->get();
-        // $arrayDelete = [];
-        // foreach($items as $item){
-        //     foreach($item->seos as $seo){
-        //         if(!in_array($seo->infoSeo->language, $arrayNonDelete)){
-        //         // if($seo->infoSeo->language=='kn'){
-        //             Seo::select('*')
-        //                     ->where('id', $seo->infoSeo->id)
-        //                     ->delete();
-        //             RelationSeoTagInfo::select('*')
-        //                 ->where('seo_id', $seo->infoSeo->id)
-        //                 ->delete();
-        //             $arrayDelete[] = $seo->infoSeo->language;
-        //         }
-        //     }
-        // }
-        // dd($arrayDelete);
+        /* xóa trang ngôn ngữ */
+        $arrayNonDelete = [
+            'vi', 'en', 'fr', 'es'
+        ];
+        $items       = Page::select('*')
+                        ->where('id', 10)
+                        ->with('seo', 'seos')
+                        ->get();
+        $arrayDelete = [];
+        foreach($items as $item){
+            foreach($item->seos as $seo){
+                if(!in_array($seo->infoSeo->language, $arrayNonDelete)){
+                // if($seo->infoSeo->language=='kn'){
+                    Seo::select('*')
+                            ->where('id', $seo->infoSeo->id)
+                            ->delete();
+                    RelationSeoPageInfo::select('*')
+                        ->where('seo_id', $seo->infoSeo->id)
+                        ->delete();
+                    $arrayDelete[] = $seo->infoSeo->language;
+                }
+            }
+        }
+        dd($arrayDelete);
 
         // /* tạo trang đa ngôn ngữ hàng loạt */
         // $items = Tag::select('*')
@@ -335,6 +346,57 @@ class HomeController extends Controller {
             }
             ++$k;
         }
+        return $response;
+    }
+
+    public static function getCategories($params){
+        $language       = session()->get('language');
+        $sortBy         = $params['sort_by'] ?? null;
+        $loaded         = $params['loaded'] ?? 0;
+        $requestLoad    = $params['request_load'] ?? 10;
+        $type           = $params['type'] ?? 'category_info'; /* category_info, style_info, event_info */
+        $response       = [];
+        $items          = Category::select('*')
+                            ->whereHas('seo', function($query) use($type){
+                                $query->where('level', 2)
+                                    ->where('type', $type);
+                            })
+                            ->whereHas('seos.infoSeo', function($query) use($language){
+                                $query->where('language', $language);
+                            })
+                            ->where('flag_show', 1)
+                            ->when(empty($sortBy), function($query){
+                                $query->orderBy('id', 'ASC');
+                            })
+                            ->when($sortBy=='newest'||$sortBy=='propose', function($query){
+                                $query->orderBy('id', 'DESC');
+                            })
+                            ->when($sortBy=='favourite', function($query){
+                                $query->orderBy('heart', 'DESC')
+                                        ->orderBy('id', 'DESC');
+                            })
+                            ->when($sortBy=='oldest', function($query){
+                                $query->orderBy('id', 'ASC');
+                            })
+                            // ->with(['seo', 'seos.infoSeo' => function($query) use($language) {
+                            //     $query->where('language', $language);
+                            // }])
+                            ->skip($loaded)
+                            ->take($requestLoad)
+                            ->get();
+        $total          = Category::select('*')
+                            ->whereHas('seo', function($query) use($type){
+                                $query->where('level', 2)
+                                    ->where('type', $type);
+                            })
+                            ->whereHas('seos.infoSeo', function($query) use($language){
+                                $query->where('language', $language);
+                            })
+                            ->where('flag_show', 1)
+                            ->count();
+        $response['items']      = $items;
+        $response['total']      = $total;
+        $response['loaded']     = $loaded + $requestLoad;
         return $response;
     }
 }

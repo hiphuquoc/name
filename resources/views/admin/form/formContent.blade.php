@@ -8,12 +8,12 @@
                     if($language=='vi'){
                         if($prompt->reference_name=='content'){
                             if($prompt->type=='auto_content'||$prompt->type=='auto_content_for_image'){
-                                $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, $idBox, $idContent ?? 0);
+                                $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, $idBox, $idContent ?? 0);
                             }
                         }
                     }else {
                         if($prompt->reference_name=='content'&&$prompt->type=='translate_content'){
-                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, $idBox, $idContent ?? 0);
+                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, $idBox, $idContent ?? 0);
                         }
                     }
                 }

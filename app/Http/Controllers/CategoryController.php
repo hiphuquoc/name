@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cookie;
-use App\Models\Product;
+use App\Models\Category;
 use App\Models\FreeWallpaper;
 use Illuminate\Support\Facades\Auth;
 
@@ -122,5 +122,24 @@ class CategoryController extends Controller {
         $response['total']      = $total;
         $response['loaded']     = $loaded + $requestLoad;
         return $response;
+    }
+
+    public static function loadInfoCategory(Request $request){ /* hàm này dùng load thông tin của category bao gồm các tag con (dùng cho trang chủ) */
+
+        // dd($request->all());
+        $idCategory     = $request->get('category_info_id') ?? 0;
+        $language       = session()->get('language');
+        $infoCategory   = Category::select('*')
+                            ->whereHas('seos.infoSeo', function($query) use($language){
+                                $query->where('language', $language);
+                            })
+                            ->where('id', $idCategory)
+                            ->with('seo', 'seos')
+                            ->first();
+        $xhtml          = view('wallpaper.home.categoryItem', [
+            'category'  => $infoCategory,
+            'language'  => $language,
+        ])->render();
+        echo $xhtml;
     }
 }

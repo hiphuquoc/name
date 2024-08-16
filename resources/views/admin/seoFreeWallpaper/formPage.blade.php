@@ -7,13 +7,13 @@
                 if($language=='vi'){
                     if($prompt->reference_name=='title'){
                         if($prompt->type=='auto_content'||$prompt->type=='auto_content_for_image'){
-                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
+                            $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'title');
                             break;
                         }
                     }
                 }else {
                     if($prompt->reference_name=='title'&&$prompt->type=='translate_content'){
-                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'title');
+                        $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'title');
                         break;
                     }
                 }
@@ -94,7 +94,7 @@
                     foreach($prompts as $prompt){
                         if($prompt->reference_name=='tag'){
                             if($prompt->type=='auto_content_for_image'){
-                                $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($item, $prompt, $language, 'tag');
+                                $chatgptDataAndEvent = \App\Helpers\Charactor::generateChatgptDataAndEvent($itemSeo, $prompt, $language, 'tag');
                                 break;
                             }
                         }

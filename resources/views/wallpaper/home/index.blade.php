@@ -55,67 +55,10 @@
         
         <!-- Item Category Grid Box -->
         @foreach(config('main.category_type') as $type)
-            <div class="contentBox">
-                <div class="categoryGrid">
-                    <div class="categoryGrid_title">
-                        @php
-                            $titleBox = '';
-                            if($type['key']=='category_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_themes.'.env('APP_NAME'));
-                            if($type['key']=='style_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_styles.'.env('APP_NAME'));
-                            if($type['key']=='event_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_events.'.env('APP_NAME'));
-                        @endphp
-                        <h2>{{ $titleBox }}</h2>
-                    </div>
-                    <div class="categoryGrid_box">
-                        @foreach($categories as $category)
-                            @foreach($category->seos as $categorySeo)
-                                @if(!empty($categorySeo->infoSeo->type)&&$categorySeo->infoSeo->type==$type['key'])
-                                    @php
-                                        $categoryName           = $categorySeo->infoSeo->title ?? null;
-                                        $categoryUrl            = env('APP_URL').'/'.$categorySeo->infoSeo->slug_full;
-                                        $categoryThumbMini      = config('image.default');
-                                        $categoryThumbSmall     = 'https://namecomvn.storage.googleapis.com/sources/hinh-nen-dien-thoai-canh-tuyet-tuyet-dep-doc-dao-D74HIEKYX1PO895G3ZAB.png';         
-                                    @endphp
-                                    <div class="categoryGrid_box_item">
-                                        <a href="{{ $categoryUrl }}" class="categoryGrid_box_item_image fade">
-                                            @if(!empty($category->files)&&$category->files->count()>0)
-                                                @foreach($category->files as $file)
-                                                    @php
-                                                        $categoryThumbMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($file->file_path); 
-                                                        $categoryThumbSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($file->file_path); 
-                                                        $active             = $loop->index == 0 ? ' active' : '';
-                                                    @endphp
-                                                    <img class="lazyload {{ $active }}" src="{{ $categoryThumbMini }}" data-src="{{ $categoryThumbSmall }}" alt="{{ $categoryName }}" title="{{ $categoryName }}" />
-                                                @endforeach
-                                            @else 
-                                                <img class="lazyload" src="{{ $categoryThumbMini }}" data-src="{{ $categoryThumbSmall }}" alt="{{ $categoryName }}" title="{{ $categoryName }}" />
-                                            @endif
-                                        </a>
-                                        <div class="categoryGrid_box_item_content">
-                                            @if(!empty($category->tags)&&$category->tags->isNotEmpty())
-                                                <a href="{{ $categoryUrl }}" class="categoryGrid_box_item_content_title">
-                                                    <h2>{{ $categoryName }}</h2>
-                                                </a>
-                                                <div class="categoryGrid_box_item_content_list">
-                                                    @foreach($category->tags as $tag)
-                                                        @foreach($tag->infoTag->seos as $tagSeo)
-                                                            @if($tagSeo->infoSeo->language==$language)
-                                                                <a href="/{{ $tagSeo->infoSeo->slug_full }}">{{ $tagSeo->infoSeo->title }}</a>
-                                                                @break
-                                                            @endif
-                                                        @endforeach
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    @break
-                                @endif
-                            @endforeach
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+            @include('wallpaper.home.categoryBox', [
+                'type'  => $type['key'],
+                'data'  => $categories,
+            ])
         @endforeach
 
     </div>
@@ -143,34 +86,43 @@
 @push('scriptCustom')
     <script type="text/javascript">
         $(document).ready(function() {
-            let $items = $('.categoryGrid_box_item_image');
-            let currentIndex = 1;
-            let interval;
+            let interval; // Biến lưu trữ interval cho carousel
 
-            function startCarousel() {
+            // Sử dụng $(document).on để xử lý sự kiện trên các phần tử động
+            $(document).on('mouseenter', '.categoryGrid_box_item_image', function() {
+                var $children = $(this).children('img');
+                let currentIndex = 0;
+
+                // Đổi ảnh ngay lập tức khi hover lần đầu
+                $children.eq(currentIndex).removeClass('active');
+                currentIndex = (currentIndex + 1) % $children.length;
+                $children.eq(currentIndex).addClass('active');
+
+                // Khởi động carousel để tiếp tục đổi ảnh mỗi 2s
                 interval = setInterval(function() {
-                    $items.eq(currentIndex).removeClass('active');
-                    currentIndex = (currentIndex + 1) % $items.length;
-                    $items.eq(currentIndex).addClass('active');
-                }, 500); // Thay đổi thời gian giữa các vòng lặp nếu cần
+                    $children.eq(currentIndex).removeClass('active');
+                    currentIndex = (currentIndex + 1) % $children.length; // Quay lại từ đầu khi hết phần tử
+                    $children.eq(currentIndex).addClass('active');
+                }, 2000); // Thay đổi thời gian giữa các vòng lặp nếu cần
+
+            }).on('mouseleave', '.categoryGrid_box_item_image', function() {
+                clearInterval(interval); // Dừng carousel khi chuột ra ngoài
+                var $children = $(this).children('img');
+                $children.removeClass('active'); // Ẩn tất cả hình ảnh khi không hover
+                $children.eq(0).addClass('active'); // Hiển thị hình ảnh đầu tiên khi không hover
+            });
+
+            // Khởi động carousel với hình ảnh đầu tiên khi trang tải hoặc khi có phần tử mới được thêm vào
+            function initializeImages() {
+                $('.categoryGrid_box_item_image').each(function() {
+                    var $children = $(this).children('img');
+                    $children.eq(0).addClass('active'); // Hiển thị hình ảnh đầu tiên
+                });
             }
 
-            function stopCarousel() {
-                clearInterval(interval);
-            }
+            // Khởi động cho các phần tử ban đầu
+            initializeImages();
 
-            $('.categoryGrid_box_item_image').hover(
-                function() {
-                    startCarousel();
-                },
-                function() {
-                    stopCarousel();
-                    $items.removeClass('active'); // Ẩn tất cả các hình ảnh khi không hover
-                }
-            );
-
-            // Khởi động carousel với hình ảnh đầu tiên
-            $items.eq(currentIndex).addClass('active');
         });
     </script>
 @endpush
