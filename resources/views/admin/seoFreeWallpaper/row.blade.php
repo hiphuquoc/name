@@ -2,9 +2,7 @@
 <tr id="item_{{ $item->id }}">
     <td class="text-center">{{ ($loop->index + 1) }}</td>
     <td>
-        <div class="priceProductBox">
-            <img src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($item->file_cloud) }}" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
+        <img src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($item->file_cloud) }}" style="width:100%;height:100%;object-fit:cover;" />
     </td>
     <td>
         <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;">
@@ -25,12 +23,6 @@
                 <strong>Dường dẫn tĩnh:</strong> {{ $item->seo->slug_full }}
             </div>
         @endif
-        <div class="oneLine" style="margin-top:1rem;">
-            @include('admin.template.languageBox', [
-                    'item' => $item,
-                    'routeName' => 'admin.seoFreeWallpaper.view',
-                ])
-        </div>
     </td>
     <td>
         @if(!empty($item->categories)&&$item->categories->isNotEmpty())
@@ -43,7 +35,7 @@
                         }
                     }
                 @endphp 
-                <strong>Chủ đề:</strong> {!! $xhtmlCategory !!}
+                <strong>Chủ đề:</strong> {!! $xhtmlCategory ?? '...' !!}
             </div>
         @endif
         @if(!empty($item->categories)&&$item->categories->isNotEmpty())
@@ -56,7 +48,7 @@
                         }
                     }
                 @endphp 
-                <strong>Phong cách:</strong> {!! $xhtmlCategory !!}
+                <strong>Phong cách:</strong> {!! $xhtmlCategory ?? '...' !!}
             </div>
         @endif
         @if(!empty($item->categories)&&$item->categories->isNotEmpty())
@@ -69,7 +61,20 @@
                         }
                     }
                 @endphp 
-                <strong>Sự kiện:</strong> {!! $xhtmlCategory !!}
+                <strong>Sự kiện:</strong> {!! $xhtmlCategory ?? '...' !!}
+            </div>
+        @endif
+        @if(!empty($item->tags)&&$item->tags->isNotEmpty())
+            <div class="onLine" style="margin-top:0.25rem;">
+                @php
+                    $xhtmlTag      = null;
+                    foreach($item->tags as $tag){
+                        if(!empty($tag->infoTag)){
+                            $xhtmlTag  .= '<div class="badge bg-secondary" style="margin-left:0.25rem;margin-top:0.25rem;">'.$tag->infoTag->seo->title.'</div>';
+                        }
+                    }
+                @endphp 
+                <strong>Tags:</strong> {!! $xhtmlTag ?? '...' !!}
             </div>
         @endif
     </td>
@@ -104,6 +109,13 @@
                 <div>Xóa</div>
             </div>
         </div>
+    </td>
+</tr><tr>
+    <td colspan="5"> 
+        @include('admin.template.languageBox', [
+            'item'      => $item,
+            'routeName' => 'admin.seoFreeWallpaper.view',
+        ])
     </td>
 </tr>
 @endif

@@ -23,6 +23,7 @@ use App\Models\SeoContent;
 use App\Models\Prompt;
 use App\Http\Requests\SeoFreeWallpaperRequest;
 use App\Http\Controllers\Admin\FreeWallpaperController;
+use App\Models\RelationCategoryThumnail;
 
 class SeoFreeWallpaperController extends Controller {
 
@@ -107,7 +108,6 @@ class SeoFreeWallpaperController extends Controller {
     public function createAndUpdate(SeoFreeWallpaperRequest $request){
         try {
             DB::beginTransaction();
-
             /* ngôn ngữ */
             $keyTable           = 'free_wallpaper_info';
             $idSeo              = $request->get('seo_id');
@@ -135,7 +135,7 @@ class SeoFreeWallpaperController extends Controller {
                     if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idFreeWallpaper, 'free_wallpaper_info', $request->get('tag'));
                     /* chỉ có update free_wallpaper_info => vì trong controller này bên ngoài không có tạo */
                     FreeWallpaper::updateItem($idFreeWallpaper, [
-                        'seo_id' => $idSeo
+                        'seo_id'                    => $idSeo
                     ]);
                 }
 
@@ -148,6 +148,18 @@ class SeoFreeWallpaperController extends Controller {
                     'seo_id'        => $idSeo,
                     'free_wallpaper_info_id'   => $idFreeWallpaper
                 ]);
+                /* relation_category_thumnail (lấy free_wallpaper làm ảnh đại diện category) */
+                RelationCategoryThumnail::select('*')
+                    ->where('free_wallpaper_info_id', $idFreeWallpaper)
+                    ->delete();
+                if(!empty($request->get('thumnails'))){
+                    foreach($request->get('thumnails') as $thumnail){
+                        RelationCategoryThumnail::insertItem([
+                            'free_wallpaper_info_id'    => $idFreeWallpaper,
+                            'category_info_id'          => $thumnail,
+                        ]);
+                    }
+                }
                 /* insert seo_content */
                 SeoContent::select('*')
                     ->where('seo_id', $idSeo)

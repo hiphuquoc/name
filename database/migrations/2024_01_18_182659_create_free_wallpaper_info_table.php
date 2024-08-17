@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('ha_ha')->default(0);
             $table->integer('not_like')->default(0);
             $table->integer('vomit')->default(0);
+            $table->boolean('flag_thumnail_category')->default(0);
             $table->timestamps();
         });
     }

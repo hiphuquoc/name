@@ -34,7 +34,7 @@
                                                 }
                                             }
                                         @endphp
-                                        <option value="{{ $category->id }}" data-name="{{ $category->name }}" data-en-name="{{ $category->en_name }}" {{ $selected }}>{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" {{ $selected }}>{{ $category->seo->title }}</option>
                                     @endif
                                 @endforeach
                             @endif
@@ -73,6 +73,16 @@
                     <label class="form-label" for="description">Prompt Midjourney</label>
                     <textarea class="form-control" name="description[{{ $idBox }}]" rows="2"></textarea>
                 </div>
+                {{-- <!-- One Row -->
+                <div class="formBox_full_item">
+                    <div class="form-check form-check-success">
+                        @php
+                            $flagCheck = !empty($wallpaper->flag_thumnail_category)&&($wallpaper->flag_thumnail_category==1) ? 'checked' : null;
+                        @endphp
+                        <input type="checkbox" class="form-check-input" name="flag_thumnail_category" {{ $flagCheck }}>
+                        <label class="form-check-label" for="flag_thumnail_category">Cho phép hiển thị làm ảnh đại diện Category</label>
+                    </div>
+                </div> --}}
             </div>
         </div>
     </div>

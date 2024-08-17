@@ -76,15 +76,13 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        $item       = Page::select('*')
+        $item       = Category::select('*')
                         ->where('id', 2)
-                        ->with('seo', 'seos')
+                        ->with('seo', 'seos', 'freeWallpapers')
                         ->first();
-        foreach($item->seos as $seo){
-            echo '<div>\''.$seo->infoSeo->slug.'\',</div>';
-        }
+        
 
-        dd(123);
+        dd($item);
 
 
 

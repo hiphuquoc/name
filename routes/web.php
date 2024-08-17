@@ -133,6 +133,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::get('/view', [CategoryController::class, 'view'])->name('admin.category.view');
             Route::post('/createAndUpdate', [CategoryController::class, 'createAndUpdate'])->name('admin.category.createAndUpdate');
             Route::get('/delete', [CategoryController::class, 'delete'])->name('admin.category.delete');
+            Route::get('/removeThumnailsOfCategory', [CategoryController::class, 'removeThumnailsOfCategory'])->name('admin.category.removeThumnailsOfCategory');
         });
         /* tag */
         Route::prefix('tag')->group(function(){

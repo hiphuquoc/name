@@ -22,6 +22,7 @@ use App\Models\RelationFreeWallpaperUser;
 use App\Models\Tag;
 use App\Models\Seo;
 use App\Models\EnSeo;
+use App\Models\RelationCategoryThumnail;
 use App\Models\RelationSeoEnSeo;
 use App\Models\RelationSeoTagInfo;
 
@@ -129,10 +130,9 @@ class FreeWallpaperController extends Controller {
             DB::beginTransaction();
             $idWallpaper        = $request->get('wallpaper_info_id');
             /* cập nhật cở sở dữ liệu */
+            $flagShow           = !empty($request->get('flag_thumnail_category'))&&$request->get('flag_thumnail_category')=='on' ? 1 : 0;
             FreeWallpaper::updateItem($idWallpaper, [
-                'name'              => $request->get('name'),
-                'en_name'           => strtolower(Charactor::translateViToEn($request->get('name'))),
-                'description'       => $request->get('description') ?? null,
+                'flag_thumnail_category'    => $flagShow,
             ]);
             /* lưu categories */
             self::saveCategories($idWallpaper, $request->all());
@@ -253,6 +253,10 @@ class FreeWallpaperController extends Controller {
                 ->delete();
             /* categories */
             RelationFreewallpaperCategory::select('*')
+                ->where('free_wallpaper_info_id', $infoWallpaper->id)
+                ->delete();
+            /* thumnails của category */
+            RelationCategoryThumnail::select('*')
                 ->where('free_wallpaper_info_id', $infoWallpaper->id)
                 ->delete();
             /* tags */

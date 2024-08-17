@@ -114,6 +114,30 @@
                 <label class="form-label" for="description">Prompt Midjourney</label>
                 <textarea class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" name="description" rows="2">{{ $item->description ?? null }}</textarea>
             </div>
+            <!-- One Row -->
+            <div class="formBox_full_item">
+                <label class="form-label">Cho phép làm Thumnail của các Category:</label>
+                <select class="select2 form-select select2-hidden-accessible" name="thumnails[]" multiple="true">
+                    <option value="">- Lựa chọn -</option>
+                    @if(!empty($categories))
+                        @foreach($categories as $category)
+                            @php
+                                $selected   = null;
+                                if(!empty($item->thumnailsOf)){
+                                    foreach($item->thumnailsOf as $t) {
+                                        if(!empty($t->infoCategory->id)&&$t->infoCategory->id==$category->id) {
+                                            $selected = ' selected';
+                                            break;
+                                        }
+                                    }
+                                }
+                                /* tất cả tag */
+                            @endphp
+                            <option value="{{ $category->id }}"{{ $selected }}>{{ $category->seo->title }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
         @endif
     </div>
 </div>

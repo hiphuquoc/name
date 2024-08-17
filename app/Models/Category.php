@@ -112,7 +112,7 @@ class Category extends Model {
     }
 
     public function freeWallpapers(){
-        return $this->hasMany(\App\Models\RelationFreewallpaperCategory::class, 'free_wallpaper_info_id', 'id');
+        return $this->hasMany(\App\Models\RelationFreewallpaperCategory::class, 'category_info_id', 'id');
     }
 
     public function tags(){
@@ -121,5 +121,9 @@ class Category extends Model {
 
     public function blogs(){
         return $this->hasMany(\App\Models\RelationCategoryInfoCategoryBlogInfo::class, 'category_info_id', 'id');
+    }
+
+    public function thumnails(){
+        return $this->hasMany(\App\Models\RelationCategoryThumnail::class, 'category_info_id', 'id');
     }
 }

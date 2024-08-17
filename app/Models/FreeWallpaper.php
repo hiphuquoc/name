@@ -86,4 +86,8 @@ class FreeWallpaper extends Model {
     public function feeling(){
         return $this->hasOne(\App\Models\RelationFreeWallpaperUser::class, 'free_wallpaper_info_id', 'id')->where('user_info_id', Auth::user()->id ?? null);
     }
+
+    public function thumnailsOf(){
+        return $this->hasMany(\App\Models\RelationCategoryThumnail::class, 'free_wallpaper_info_id', 'id');
+    }
 }

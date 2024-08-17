@@ -18,8 +18,10 @@ use App\Models\CategoryBlog;
 use App\Models\Tag;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Models\FreeWallpaper;
 use App\Models\RelationCategoryInfoCategoryBlogInfo;
 use App\Models\RelationCategoryInfoTagInfo;
+use App\Models\RelationCategoryThumnail;
 use App\Models\RelationSeoCategoryInfo;
 
 class CategoryController extends Controller {
@@ -41,17 +43,17 @@ class CategoryController extends Controller {
         $id                 = $request->get('id') ?? 0;
         $language           = $request->get('language') ?? null;
         /* kiểm tra xem ngôn ngữ có nằm trong danh sách không */
-        $flagView       = false;
+        $flagView           = false;
         foreach(config('language') as $ld){
             if($ld['key']==$language) {
-                $flagView = true;
+                $flagView   = true;
                 break;
             }
         }
         /* tìm theo ngôn ngữ */
         $item               = Category::select('*')
                                 ->where('id', $id)
-                                ->with('seo.contents', 'seos.infoSeo.contents', 'seos.infoSeo.jobAutoTranslate', 'files')
+                                ->with('thumnails', 'seo.contents', 'seos.infoSeo.contents', 'seos.infoSeo.jobAutoTranslate')
                                 ->first();
         if(empty($item)) $flagView = false;
         if($flagView==true){
@@ -258,6 +260,7 @@ class CategoryController extends Controller {
                 $info->products()->delete();
                 $info->blogs()->delete();
                 $info->freeWallpapers()->delete();
+                $info->thumnails()->delete();
                 $info->files()->delete();
                 $info->tags()->delete();
                 /* delete các trang seos ngôn ngữ */
@@ -276,5 +279,13 @@ class CategoryController extends Controller {
                 return false;
             }
         }
+    }
+
+    public static function removeThumnailsOfCategory(Request $request){
+        $flag = RelationCategoryThumnail::select('*')
+                    ->where('free_wallpaper_info_id', $request->get('free_wallpaper_info_id'))
+                    ->where('category_Info_id', $request->get('category_info_id'))
+                    ->delete();
+        echo $flag;
     }
 }

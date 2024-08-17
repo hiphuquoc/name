@@ -8,33 +8,36 @@
             Ảnh Gallery 
         </label>
     </span>
-    <input class="form-control" type="file" id="galleries" name="galleries[]" onchange="readURL(this, 'galleryUpload');" multiple />
-    <div class="imageUpload">
-        @foreach($item->files as $file)
-            @if($file->file_type=='gallery'&&$file->file_path)
-                <div id="js_removeGallery_{{ $file->id }}">
-                    <img id="galleryUpload" src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($file->file_path) }}" />
-                    <i class="fa-solid fa-circle-xmark" onclick="removeGallery({{ $file->id }});"></i>
-                </div>
-            @endif
-        @endforeach
+    {{-- <input class="form-control" type="file" id="galleries" name="galleries[]" onchange="readURL(this, 'galleryUpload');" multiple /> --}}
+    <div class="imageUpload" style="margin-top:0;">
+        @if(!empty($item->thumnails)&&$item->thumnails->count()>0)
+            @foreach($item->thumnails as $thumnail)
+                @if(!empty($thumnail->infoFreewallpaper))
+                    <div id="js_removeThumnailsOfCategory_{{ $thumnail->infoFreewallpaper->id }}">
+                        <img id="galleryUpload" src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($thumnail->infoFreewallpaper->file_cloud) }}" />
+                        <i class="fa-solid fa-circle-xmark" onclick="removeThumnailsOfCategory({{ $thumnail->infoFreewallpaper->id }}, {{ $item->id }});"></i>
+                    </div>
+                    @endif
+            @endforeach
+        @endif
     </div>
 </div>
 
 @push('scriptCustom')
     <script type="text/javascript">
 
-        function removeGallery(idFile){
+        function removeThumnailsOfCategory(idWallpaper, idCategory){
             $.ajax({
-                url         : '{{ route("admin.gallery.remove") }}',
-                type        : 'post',
+                url         : '{{ route("admin.category.removeThumnailsOfCategory") }}',
+                type        : 'get',
                 dataType    : 'html',
                 data        : {
                     "_token": "{{ csrf_token() }}",
-                    id_file : idFile
+                    free_wallpaper_info_id  : idWallpaper,
+                    category_info_id        : idCategory,
                 }
             }).done(function(data){
-                if(data) $('#js_removeGallery_'+idFile).remove();
+                if(data) $('#js_removeThumnailsOfCategory_'+idWallpaper).remove();
             })
         }
 

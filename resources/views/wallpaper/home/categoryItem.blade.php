@@ -11,11 +11,11 @@
     $categoryUrl            = env('APP_URL').'/'.$categorySeo->infoSeo->slug_full;       
 @endphp
 <a href="{{ $categoryUrl }}" class="categoryGrid_box_item_image">
-    @if(!empty($category->files)&&$category->files->count()>0)
-        @foreach($category->files as $file)
+    @if(!empty($category->thumnails)&&$category->thumnails->count()>0)
+        @foreach($category->thumnails as $thumnail)
             @php
-                $categoryThumbMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($file->file_path); 
-                $categoryThumbSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($file->file_path); 
+                $categoryThumbMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($thumnail->infoFreewallpaper->file_cloud); 
+                $categoryThumbSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($thumnail->infoFreewallpaper->file_cloud); 
                 $active             = $loop->index == 0 ? ' active' : '';
             @endphp
             <img class="lazyload {{ $active }}" src="{{ $categoryThumbMini }}" data-src="{{ $categoryThumbSmall }}" alt="{{ $categoryName }}" title="{{ $categoryName }}" />
