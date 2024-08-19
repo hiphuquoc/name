@@ -154,7 +154,7 @@
                         </div> --}}
                         <!-- Form Gallery -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
-                            @include('admin.form.formGallery')
+                            @include('admin.category.formGallery')
                         </div>
                     </div>
                 </div>
@@ -163,10 +163,48 @@
         </div>
     </form>    
 @endsection
+@push('modal')
+    <!-- modal chọn thumnail -->
+    @include('admin.category.formSearchThumnail')
+@endpush
 @push('scriptCustom')
     <script type="text/javascript">
 
-        $('.repeater').repeater();
+        $(window).ready(function(){
+
+            loadFreeWallpaperOfCategory('{{ $item->id ?? 0 }}');
+
+            $('.repeater').repeater();
+
+        })
+
+        function loadFreeWallpaperOfCategory(idCategory){
+            $.ajax({
+                url         : "{{ route('admin.category.loadFreeWallpaperOfCategory') }}",
+                type        : "post",
+                dataType    : "html",
+                data        : { 
+                    '_token'    : '{{ csrf_token() }}',
+                    category_info_id : idCategory 
+                }
+            }).done(function(response){
+                $('#js_loadFreeWallpaperOfCategory_idWrite').html(response);
+            });
+        }
+
+        function seachFreeWallpaperOfCategory(idCategory){
+            $.ajax({
+                url         : "{{ route('admin.category.seachFreeWallpaperOfCategory') }}",
+                type        : "post",
+                dataType    : "html",
+                data        : { 
+                    '_token'    : '{{ csrf_token() }}',
+                    category_info_id : idCategory 
+                }
+            }).done(function(response){
+                $('#js_seachFreeWallpaperOfCategory_idWrite').html(response);
+            });
+        }
 
     </script>
 @endpush

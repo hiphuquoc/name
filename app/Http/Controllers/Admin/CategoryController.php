@@ -288,4 +288,62 @@ class CategoryController extends Controller {
                     ->delete();
         echo $flag;
     }
+
+    public static function loadFreeWallpaperOfCategory(Request $request){
+        $idCategory         = $request->get('category_info_id');
+        $item               = Category::select('*')
+                                ->where('id', $idCategory)
+                                ->with('thumnails')
+                                ->first();
+        $xhtml              = '';
+        foreach($item->thumnails as $thumnail) $xhtml .= view('admin.category.oneRowGallery', compact('thumnail'))->render();
+
+        echo $xhtml;
+    }
+
+    public static function seachFreeWallpaperOfCategory(Request $request){
+        $idCategory         = $request->get('category_info_id');
+        $item               = Category::select('*')
+                                ->where('id', $idCategory)
+                                ->with('thumnails', 'freeWallpapers')
+                                ->first();
+        $xhtml              = '';
+        foreach($item->freeWallpapers as $freeWallpaper) {
+            $selected   = '';
+            foreach($item->thumnails as $thumnail){
+                if(!empty($freeWallpaper->infoFreewallpaper->id)&&$thumnail->free_wallpaper_info_id==$freeWallpaper->infoFreewallpaper->id) $selected = 'selected';
+            }
+            $xhtml .= view('admin.category.oneRowSearchGallery', compact('freeWallpaper', 'selected'))->render();
+
+        }
+
+        echo $xhtml;
+    }
+
+    public static function chooseFreeWallpaperForCategory(Request $request){
+        $action             = $request->get('action');
+        $idCategory         = $request->get('category_info_id');
+        $idFreewallpaper    = $request->get('free_wallpaper_info_id');
+        /* đầu tiên sẽ delete tất cả */
+        RelationCategoryThumnail::select('*')
+            ->where('category_info_id', $idCategory)
+            ->where('free_wallpaper_info_id', $idFreewallpaper)
+            ->delete();
+        /* nếu là create thì tạo lại */
+        if($action=='create'){
+            RelationCategoryThumnail::insertItem([
+                'category_info_id'          => $idCategory,
+                'free_wallpaper_info_id'    => $idFreewallpaper,
+            ]);
+        }
+        /* không quan tâm hành động, trả về flag có hay không tồn tại relation để hiện thị selected */
+        $tmp        = RelationCategoryThumnail::select('*')
+            ->where('category_info_id', $idCategory)
+            ->where('free_wallpaper_info_id', $idFreewallpaper)
+            ->first();
+        
+        $flagHas    = !empty($tmp) ? true : false;
+
+        return response()->json($flagHas);
+    }
 }

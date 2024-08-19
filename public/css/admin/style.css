@@ -1558,6 +1558,14 @@ html .content {
 }
 .searchViewBefore_selectbox_item_imageFull {
   position: relative;
+  overflow: hidden;
+}
+.searchViewBefore_selectbox_item_imageFull img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 7px;
 }
 .searchViewBefore_selectbox_item_imageFull_message {
   width: 100%;
@@ -1571,7 +1579,7 @@ html .content {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid #00bd7d;
   color: #f7ff93;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 .searchViewBefore_selectbox_item_imageFull_message > div {
   background: #495057;

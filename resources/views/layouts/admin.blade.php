@@ -34,6 +34,8 @@
     <!-- === START:: Footer === -->
     {{-- @include('snippets.footer') --}}
     <!-- === END:: Footer === -->
+
+    @stack('modal')
     
     <!-- === START:: Scripts Default === -->
     @include('admin.snippets.scriptDefault')
