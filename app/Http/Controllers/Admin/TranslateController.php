@@ -59,6 +59,20 @@ class TranslateController extends Controller {
         return view('admin.report.listAutoTranslateContent', compact('list', 'params', 'viewPerPage'));
     }
 
+    public static function reRequestTranslate(Request $request){
+        $idSeoByLanguage        = $request->get('id_seo');
+        $language               = $request->get('language');
+        /* xóa báo cáo cũ */
+        $request    = new Request(['id' => $idSeoByLanguage]);
+        $result     = self::delete($request);
+        /* lấy trang theo ngôn ngữ */
+        $infoPage               = \App\Http\Controllers\Admin\HelperController::getFullInfoPageByIdSeo($idSeoByLanguage);
+        $idSeoVI                = $infoPage->seo->id;
+        /* tạo lại */
+        $flag       = self::createJobTranslateContent($idSeoVI, $language);
+        return response()->json($flag);
+    }
+
     public static function createMultiJobTranslateContent(Request $request){
         $urlVi      = $request->get('url_vi');
         $slug       = self::getSlugByUrl($urlVi);

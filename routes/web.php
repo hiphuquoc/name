@@ -233,6 +233,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::get('/viewCreateJobTranslateAndCreatePage', [TranslateController::class, 'viewCreateJobTranslateAndCreatePage'])->name('admin.translate.viewCreateJobTranslateAndCreatePage');
             Route::get('/list', [TranslateController::class, 'list'])->name('admin.translate.list');
             Route::get('/delete', [TranslateController::class, 'delete'])->name('admin.translate.delete');
+            Route::post('/reRequestTranslate', [TranslateController::class, 'reRequestTranslate'])->name('admin.translate.reRequestTranslate');
             Route::post('/createJobTranslateContentAjax', [TranslateController::class, 'createJobTranslateContentAjax'])->name('admin.translate.createJobTranslateContentAjax');
             Route::post('/createMultiJobTranslateContent', [TranslateController::class, 'createMultiJobTranslateContent'])->name('admin.translate.createMultiJobTranslateContent');
             Route::post('/createJobTranslateAndCreatePageAjax', [TranslateController::class, 'createJobTranslateAndCreatePageAjax'])->name('admin.translate.createJobTranslateAndCreatePageAjax');

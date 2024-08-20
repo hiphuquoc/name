@@ -51,15 +51,15 @@
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                     </svg>
-                    <div>Sửa</div>
-                </a>
-            </div>
-            <div class="icon-wrapper iconAction">
-                <a href="{{ route('admin.category.view', ['id' => $item->id, 'language' => 'vi', 'type' => 'copy']) }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <div>Chép</div>
+                    <div>Yêu cầu</div>
                 </a>
             </div> --}}
+            <div class="icon-wrapper iconAction">
+                <a href="#" onClick="reRequestTranslate({{ $item->id }}, '{{ $item->language }}');">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <div>Lại</div>
+                </a>
+            </div>
             <div class="icon-wrapper iconAction">
                 <div class="actionDelete" onclick="deleteItem({{ $item->id }});">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square">
@@ -82,3 +82,22 @@
         @endforeach
     @endif
 @endif
+
+@pushonce('scriptCustom')
+    <script type="text/javascript">
+        function reRequestTranslate(idSeo, language){
+            $.ajax({
+                url         : "{{ route('admin.translate.reRequestTranslate') }}",
+                type        : "post",
+                dataType    : "html",
+                data        : { 
+                    '_token'        : '{{ csrf_token() }}', 
+                    id_seo : idSeo,
+                    language
+                }
+            }).done(function(data){
+                $('#oneItem-'+idSeo).remove();
+            });
+        }
+    </script>
+@endpushonce
