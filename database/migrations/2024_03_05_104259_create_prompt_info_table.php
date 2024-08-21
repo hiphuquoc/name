@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('reference_prompt'); /* prompt */
             $table->text('tool');
             $table->text('version');
+            $table->integer('ordering')->default(0);
         });
     }
 

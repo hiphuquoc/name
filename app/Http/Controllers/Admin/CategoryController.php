@@ -200,18 +200,7 @@ class CategoryController extends Controller {
                     'category_info_id'   => $idCategory
                 ]);
                 /* insert seo_content */
-                SeoContent::select('*')
-                    ->where('seo_id', $idSeo)
-                    ->delete();
-                $i      = 1;
-                foreach($request->get('content') as $content){
-                    SeoContent::insertItem([
-                        'seo_id'    => $idSeo,
-                        'content'   => $content,
-                        'ordering'  => $i
-                    ]);
-                    ++$i;
-                }
+                self::insertAndUpdateContents($idSeo, $request->get('content'));
                 DB::commit();
                 /* Message */
                 $message        = [
@@ -240,6 +229,19 @@ class CategoryController extends Controller {
         }
         $request->session()->put('message', $message);
         return redirect()->route('admin.category.view', ['id' => $idCategory, 'language' => $language]);
+    }
+
+    public static function insertAndUpdateContents($idSeo, $arrayContent){
+        SeoContent::select('*')
+            ->where('seo_id', $idSeo)
+            ->delete();
+        foreach($arrayContent as $ordering => $content){
+            SeoContent::insertItem([
+                'seo_id'    => $idSeo,
+                'content'   => $content,
+                'ordering'  => $ordering
+            ]);
+        }
     }
 
     public function delete(Request $request){

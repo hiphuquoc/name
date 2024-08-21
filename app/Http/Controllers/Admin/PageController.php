@@ -82,18 +82,7 @@ class PageController extends Controller {
                     'page_info_id'   => $idPage
                 ]);
                 /* insert seo_content */
-                SeoContent::select('*')
-                    ->where('seo_id', $idSeo)
-                    ->delete();
-                $i      = 1;
-                foreach($request->get('content') as $content){
-                    SeoContent::insertItem([
-                        'seo_id'    => $idSeo,
-                        'content'   => $content,
-                        'ordering'  => $i
-                    ]);
-                    ++$i;
-                }
+                CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
                 
                 DB::commit();
                 /* Message */

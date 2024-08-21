@@ -76,54 +76,7 @@
                         </div>
                     </div>
                     <!-- nội dung -->
-                    @php
-                        $i = 0;
-                    @endphp
-                    @foreach($prompts as $prompt)
-                        <!-- tiếng việt -> form viết content (đối với bản viết có nhiều box theo layout prompt viết bài) -->
-                        @if($language=='vi') 
-                            @if($prompt->type=='auto_content'&&$prompt->reference_name=='content')
-                                <div class="pageAdminWithRightSidebar_main_content_item width100">
-                                    <div class="card">
-                                        <div class="card-body">
-                                        
-                                            @include('admin.form.formContent', [
-                                                'prompt'            => $prompt,
-                                                'content'           => $itemSeoSourceToCopy->contents[$i]->content ?? $itemSeo->contents[$i]->content ?? null, 
-                                                'flagCopySource'    => !empty($itemSeoSourceToCopy->contents[$i]->content) ? true : false,
-                                                'idBox'             => 'content_'.$i,
-                                            ])
-                                                
-                                        </div>
-                                    </div>
-                                </div>
-                                @php
-                                    ++$i;
-                                @endphp
-                            @endif
-                        @else 
-                            <!-- tiếng khác -> form dịch -->
-                            @if($prompt->type=='translate_content'&&$prompt->reference_name=='content')
-                                @if(!empty($item->seo->contents))
-                                    @for($i=0;$i<$item->seo->contents->count();++$i)
-                                        <div class="pageAdminWithRightSidebar_main_content_item width100">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    @include('admin.form.formContent', [
-                                                        'prompt'            => $prompt,
-                                                        'content'           => $itemSeoSourceToCopy->contents[$i]->content ?? $itemSeo->contents[$i]->content ?? null, 
-                                                        'flagCopySource'    => !empty($itemSeoSourceToCopy->contents[$i]->content) ? true : false,
-                                                        'idBox'             => 'content_'.$i,
-                                                        'idContent'         => $itemSourceToCopy->seo->contents[$i]->id ?? $item->seo->contents[$i]->id ?? 0, /* truyền id của content tiếng viết (để dịch) */
-                                                    ]) 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                @endif
-                            @endif
-                        @endif
-                    @endforeach
+                    @include('admin.form.formFilterContent')
                 </div>
                 <!-- END:: Main content -->
 

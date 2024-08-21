@@ -60,18 +60,7 @@ class ProductController extends Controller {
             /* kiểm tra insert thành công không */
             if(!empty($idSeo)){
                 /* insert seo_content */
-                SeoContent::select('*')
-                    ->where('seo_id', $idSeo)
-                    ->delete();
-                $i      = 1;
-                foreach($request->get('content') as $content){
-                    SeoContent::insertItem([
-                        'seo_id'    => $idSeo,
-                        'content'   => $content,
-                        'ordering'  => $i
-                    ]);
-                    ++$i;
-                }
+                CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
                 /* insert hoặc update product_info */
                 if(empty($idProduct)){ /* check xem create product hay update product */
                     $infoProduct    = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);

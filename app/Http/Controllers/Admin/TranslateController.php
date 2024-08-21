@@ -258,6 +258,31 @@ class TranslateController extends Controller {
         return $slug;
     }
 
+    public static function redirectEdit(Request $request){
+        $language   = $request->get('language');
+        $infoPage   = HelperController::getFullInfoPageByIdSeo($request->get('id_seo_by_language'));
+        $idPage     = $infoPage->id;
+        $type       = $infoPage->seo->type;
+        foreach(config('main_'.env('APP_NAME').'.category_type') as $t){
+            if($t['key']==$type){
+                $type = 'category_info';
+                break;
+            }
+        }
+        $tmp        = explode('_', $type);
+        $typeRoute  = $tmp[0];
+    
+        // dd($typeRoute);
+        // Tạo URL thay vì redirect
+        $url = route('admin.'.$typeRoute.'.view', [
+            'id'        => $idPage,
+            'language'  => $language,
+        ]);
+    
+        // Trả về URL
+        return response()->json(['url' => $url]);
+    }
+
     public static function delete(Request $request) {
         if (!empty($request->get('id'))) {
             try {

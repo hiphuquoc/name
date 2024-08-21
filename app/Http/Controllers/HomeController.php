@@ -13,6 +13,7 @@ use App\Models\Tag;
 use App\Models\Seo;
 use App\Models\SeoContent;
 use App\Models\Product;
+use App\Models\Prompt;
 use Intervention\Image\ImageManagerStatic;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
@@ -76,13 +77,23 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        $item       = Category::select('*')
-                        ->where('id', 2)
-                        ->with('seo', 'seos', 'freeWallpapers')
-                        ->first();
+        $items      = Prompt::select('*')
+                        ->where('reference_name', 'content')
+                        ->where('reference_table', 'tag_info')
+                        ->where('type', 'auto_content')
+                        ->orderBy('id', 'ASC')
+                        ->get();
+        $i          = 1;
+        foreach($items as $item){
+            Prompt::updateItem($item->id, [
+                'ordering' => $i,
+            ]);
+
+            ++$i;
+        }
         
 
-        dd($item);
+        dd(123);
 
 
 
@@ -329,6 +340,7 @@ class HomeController extends Controller {
                     SeoContent::insertItem([
                         'seo_id'    => $idSeo,
                         'content'   => $contentInsert,
+                        'ordering'  => $content->ordering,
                     ]);
                 }
                 ++$i;

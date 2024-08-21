@@ -75,7 +75,8 @@
                         </div>
                     </div>
                     <!-- nội dung -->
-                    @php
+                    @include('admin.form.formFilterContent')
+                    {{-- @php
                         $i = 0;
                     @endphp
                     <div class="pageAdminWithRightSidebar_main_content_item width100">
@@ -102,7 +103,7 @@
                                 ])  
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     
                 </div>
                 <!-- END:: Main content -->

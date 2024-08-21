@@ -98,6 +98,7 @@ class ToolCopyProductController extends Controller {
                             SeoContent::insertItem([
                                 'seo_id'    => $idSeo,
                                 'content'   => $contentInsert,
+                                'ordering'  => $content->ordering,   
                             ]);
                         }
                         ++$i;
