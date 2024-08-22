@@ -147,15 +147,17 @@ class TranslateController extends Controller {
                     ->get();
                 /* duyệt qua từng box content để xử lý */
                 foreach ($contents as $content) {
+                    /* lấy ordering làm key */
+                    $ordering   = $content->ordering;
                     /* tạo đánh dấu đang và đã thực hiện tính năng */
                     JobAutoTranslate::select('*')
                         ->where('seo_id', $idSeo)
-                        ->where('ordering', $content->ordering)
+                        ->where('ordering', $ordering)
                         ->where('language', $language)
                         ->delete();
                     JobAutoTranslate::insertItem([
                         'seo_id'    => $idSeo,
-                        'ordering'  => $content->ordering,
+                        'ordering'  => $ordering,
                         'language'  => $language
                     ]);
                     /* lấy prompt đang được áp dụng cho content */
@@ -173,7 +175,7 @@ class TranslateController extends Controller {
                                     ->where('reference_table', $type)
                                     ->first();
                     /* tạo job */
-                    AutoTranslateContent::dispatch($content, $language, $idSeo, $infoPrompt);
+                    AutoTranslateContent::dispatch($ordering, $language, $idSeo, $infoPrompt);
                 }
                 $flag = true;
             }

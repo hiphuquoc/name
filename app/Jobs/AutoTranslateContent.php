@@ -27,14 +27,14 @@ use App\Models\JobAutoTranslateLinks;
 class AutoTranslateContent implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $content;
+    private $ordering;
     private $language;
     private $idSeo;
     private $infoPrompt;
     public  $tries = 5; // Số lần thử lại
 
-    public function __construct($contentViDB, $language, $idSeo, $infoPrompt){
-        $this->content      = $contentViDB;
+    public function __construct($ordering, $language, $idSeo, $infoPrompt){
+        $this->ordering     = $ordering;
         $this->language     = $language;
         $this->idSeo        = $idSeo;
         $this->infoPrompt   = $infoPrompt;
@@ -43,10 +43,18 @@ class AutoTranslateContent implements ShouldQueue {
     public function handle(){
         try {
             $infoPage           = HelperController::getFullInfoPageByIdSeo($this->idSeo);
+            /* lấy content bảng vi - lấy lại để có bản mói nhất */
+            $contentVi          = '';
+            foreach($infoPage->seo->contents as $c){
+                if($c->ordering==$this->ordering) {
+                    $contentVi  = $c->content;
+                    break;
+                }
+            }
             /* convert prompt */
             $promptText         = ChatGptController::convertPrompt($infoPage, $this->infoPrompt, $this->language);
             /* tách content thành những phần nhỏ */
-            $arrayPartContent   = \App\Helpers\Charactor::splitString($this->content->content, 4000);
+            $arrayPartContent   = \App\Helpers\Charactor::splitString($contentVi, 4000);
             $resultContent      = '';
             foreach($arrayPartContent as $contentPart){
                 if(!empty(trim($contentPart))){
@@ -62,28 +70,28 @@ class AutoTranslateContent implements ShouldQueue {
                 /* xóa box content cũ và lưu cơ sở dữ liệu */
                 SeoContent::select('*')
                     ->where('seo_id', $this->idSeo)
-                    ->where('ordering', $this->content->ordering)
+                    ->where('ordering', $this->ordering)
                     ->delete();
                 SeoContent::insertItem([
                     'seo_id'    => $this->idSeo,
                     'content'   => $resultContent,
-                    'ordering'  => $this->content->ordering
+                    'ordering'  => $this->ordering
                 ]);
                 /* cập nhật lại trạng thái */
                 JobAutoTranslate::where('seo_id', $this->idSeo)
-                                    ->where('ordering', $this->content->ordering)
+                                    ->where('ordering', $this->ordering)
                                     ->where('language', $this->language)
                                     ->update(['status' => 1]);
                 /* tạo danh sách links => báo cáo */
                 JobAutoTranslateLinks::where('seo_id', $this->idSeo)
-                                    ->where('ordering', $this->content->ordering)
+                                    ->where('ordering', $this->ordering)
                                     ->where('language', $this->language)
                                     ->delete();
                 if(!empty($response['array_link'])){
                     foreach($response['array_link'] as $l){
                         JobAutoTranslateLinks::insertItem([
                             'seo_id'            => $this->idSeo,
-                            'ordering'          => $this->content->ordering,
+                            'ordering'          => $this->ordering,
                             'language'          => $this->language,
                             'link_source'       => $l['vi'],
                             'link_translate'    => $l['translate']

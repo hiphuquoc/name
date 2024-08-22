@@ -76,24 +76,12 @@ class HomeController extends Controller {
     }
 
     public static function test(Request $request){
-
-        $items      = Prompt::select('*')
-                        ->where('reference_name', 'content')
-                        ->where('reference_table', 'tag_info')
-                        ->where('type', 'auto_content')
-                        ->orderBy('id', 'ASC')
-                        ->get();
-        $i          = 1;
-        foreach($items as $item){
-            Prompt::updateItem($item->id, [
-                'ordering' => $i,
-            ]);
-
-            ++$i;
-        }
-        
-
-        dd(123);
+        $idSeo      = 779;
+        $content    = SeoContent::select('*')
+                        ->where('seo_id', $idSeo)
+                        ->where('ordering', 2)
+                        ->first();
+        dd($content);
 
 
 
