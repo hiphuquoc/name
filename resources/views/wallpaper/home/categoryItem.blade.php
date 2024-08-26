@@ -17,7 +17,7 @@
         @foreach($category->thumnails as $thumnail)
             @php
                 $categoryThumbMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($thumnail->infoFreewallpaper->file_cloud); 
-                $categoryThumbSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($thumnail->infoFreewallpaper->file_cloud); 
+                $categoryThumbSmall = \App\Helpers\Image::getUrlImageLargeByUrlImage($thumnail->infoFreewallpaper->file_cloud); 
                 $active             = $loop->index == 0 ? ' active' : '';
             @endphp
             <img class="lazyload {{ $active }}" src="{{ $categoryThumbMini }}" data-src="{{ $categoryThumbSmall }}" alt="{{ $categoryName }}" title="{{ $categoryName }}" />

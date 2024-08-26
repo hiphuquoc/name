@@ -34,7 +34,7 @@
                     $keyIdPrice = 'js_changeOption_'.$tag.$price->id.$wallpaper->infoWallpaper->id;
                     /* lấy ảnh Small */
                     $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
-                    $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                    $imageSmall = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     /* đường dẫn */
                     $url        = $productSeo->slug_full ?? null;
                 @endphp
