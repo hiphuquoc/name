@@ -7,13 +7,15 @@
                     <div class="card-body">
                         @php
                             $key = $prompt->ordering;
-                            $contentsByLanguageUse   = $itemSeoSourceToCopy->contents ?? $itemSeo->contents;
+                            $contentsByLanguageUse   = $itemSeoSourceToCopy->contents ?? $itemSeo->contents ?? null;
                             /* lấy content theo ordering */
                             $xhtmlContent       = '';
-                            foreach($contentsByLanguageUse as $c){
-                                if($c->ordering==$key) {
-                                    $xhtmlContent = $c->content;
-                                    break;
+                            if(!empty($contentsByLanguageUse)&&$contentsByLanguageUse->count()>0){
+                                foreach($contentsByLanguageUse as $c){
+                                    if($c->ordering==$key) {
+                                        $xhtmlContent = $c->content;
+                                        break;
+                                    }
                                 }
                             }
                         @endphp

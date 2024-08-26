@@ -25,6 +25,7 @@ use App\Models\RelationSeoCategoryInfo;
 use App\Models\RelationSeoProductInfo;
 use App\Models\RelationSeoTagInfo;
 use App\Models\RelationSeoPageInfo;
+use App\Models\Wallpaper;
 use Google\Client as Google_Client;
 use Illuminate\Support\Facades\DB;
 
@@ -76,12 +77,15 @@ class HomeController extends Controller {
     }
 
     public static function test(Request $request){
-        $idSeo      = 779;
-        $content    = SeoContent::select('*')
-                        ->where('seo_id', $idSeo)
-                        ->where('ordering', 2)
-                        ->first();
-        dd($content);
+        // $wallpapers     = Wallpaper::select('*')
+        //                     ->get();
+        // $folderUpload   = config('main_name.google_cloud_storage.wallpapers');
+        // foreach($wallpapers as $wallpaper){
+        //     $filename   = $wallpaper->file_name_wallpaper.'.webp';
+        //     $urlImage   = \App\Helpers\Image::getUrlImageCloud($wallpaper->file_cloud_wallpaper);
+        //     \App\Jobs\reUploadWallpaper::dispatch($urlImage, $filename, $folderUpload);
+        // }
+        // dd(123);
 
 
 
