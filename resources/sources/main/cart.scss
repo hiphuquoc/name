@@ -421,7 +421,7 @@
         background: rgba(30,41,51,0.45);
     }
     &_box {
-        background: $colorBackgroundLv3;
+        background: $colorBackgroundLv2;
         box-shadow: 1px 1px 5px $colorBackgroundLv1;
         max-width: 480px;
         width: 100%;
@@ -444,25 +444,7 @@
             }
         }
         &_close {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 40px;
-            background: $colorBackgroundLv2;
-            aspect-ratio: 1/1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-top-right-radius: inherit;
-            border-bottom-left-radius: 7px;
-            cursor: pointer;
-            i {
-                font-size: 1rem;
-                @include colorOpacity('color', $colorText, 0.5);
-            }
-            &:hover {
-                background: $colorBackgroundLv1;
-            }
+            @include iconCloseSquare;
         }
         &_body {
             display: flex;

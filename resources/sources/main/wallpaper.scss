@@ -1,6 +1,6 @@
 @mixin wallpaperGrid {
     display: flex;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     width: 100%;
     &_item {
         border-radius: 12px;
@@ -390,17 +390,34 @@
             }
         }
     }
+    @media(max-width: 767px){
+        &_item, &_itemBackground {
+            width: calc(33.33% - 0.3333rem);
+            &:nth-child(3n + 1){
+                margin-left: 0;
+            }
+            &:not(:nth-child(3n + 1)){
+                margin-left: 0.5rem;
+            }
+            &:nth-child(n + 4){
+                margin-top: 0.75rem;
+            }
+            &:not(:nth-child(n + 4)){
+                margin-top: 0;
+            }
+        }
+    }
     @media(max-width: 577px){
         &_item, &_itemBackground {
-            width: calc(50% - 0.25rem);
+            width: calc(50% - 0.125rem);
             &:nth-child(2n + 1){
                 margin-left: 0;
             }
             &:not(:nth-child(2n + 1)){
-                margin-left: 0.5rem;
+                margin-left: 0.25rem;
             }
-            &:nth-child(n + 3){
-                margin-top: 0.5rem;
+            &:nth-child(n + 3){ 
+                margin-top: 0.55rem;
             }
             &:not(:nth-child(n + 3)){
                 margin-top: 0;
@@ -447,7 +464,7 @@
             right: 0;
             top: 0;
             z-index: 99999;
-            background: $colorBackgroundLv1;
+            background: $colorBackgroundLv2;
             min-width: 320px;
             height: 100vh;
             padding-left: 0.75rem;
@@ -911,21 +928,7 @@ $heightMenu : 52.5px;
     }
 }
 .closeButtonMobileMenu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1/1;
-    cursor: pointer;
-    opacity: 0.7;
-    background: $colorBackgroundLv2;
-    border-bottom-left-radius: 10px;
-    &:hover {
-        opacity: 1;
-    }
+    @include iconCloseSquare;
 }
 .backgroundBlurMobileMenu {
     background: rgba(0,0,0,0.2);
@@ -1678,7 +1681,7 @@ $heightMenu : 52.5px;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            opacity: 0.8;
+            opacity: 0.75;
             &:not(:first-child){
                 margin-left: 0.5rem;
             }
@@ -1865,7 +1868,7 @@ $heightMenu : 52.5px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
             border-radius: 12px;
             overflow: hidden;
-            aspect-ratio: 1/2;
+            aspect-ratio: 9/16;
             background: $colorBackgroundLv2;
             &_image {
                 display: flex;
@@ -1901,31 +1904,81 @@ $heightMenu : 52.5px;
                 padding: 0.5rem 1rem 0.75rem 1rem;
                 font-size: 0.85rem;
                 background-image: linear-gradient(360deg, rgba(45, 56, 72, 0.9) 33.33%, rgba(45, 56, 72, 0.95) 66.66%, rgba(45, 56, 72, 0.5) 100%);
-                transition: all 2s;
+                transition: all 0.1s;
+                &.zoom {
+                    position: fixed;
+                    top: 0;
+                    bottom: unset;
+                    height: 100vh;
+                    z-index: 9999;
+                    background: $colorBackgroundLv2;
+                    line-height: 2;
+                    padding: 0.75rem;
+                    transition: all 0.2s;
+                    .categoryGrid_box_item_content_title_action {
+                        &::after {
+                            content: '\f00d';
+                            @include iconCloseSquare;
+                        }
+                    }
+                    .categoryGrid_box_item_content_list {
+                        display: flex;
+                        margin-top: 0.5rem;
+                        max-height: unset;
+                        font-size: 0.85rem;
+                        
+                    }
+                }
                 &_title {
                     display: flex;
-                    justify-content: center;
+                    justify-content: space-between;
                     align-items: center;
+                    a {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+                    }
                     h2, h3 {
-                        font-size: 1.05rem;
+                        font-size: 0.95rem;
                         font-family: $fontTitle;
-                        color: $colorTextLight;
+                        color: $colorLv1;
                         margin-bottom: 0;
                         text-transform: none;
+                        width: inherit;
+                        letter-spacing: 1px;
+                        text-shadow: 0 0 $colorTextLight;
+                        &:hover {
+                            color: $colorLv2;
+                        }
+                    }
+                    &_action {
+                        display: none;
+                        &:after {
+                            content: '\f192\f192\f192';
+                            @include fontAwesome;
+                            @include colorOpacity('color', $colorText, 0.5);
+                            text-shadow: 0 0 rgba(192, 208, 241, 0.5);
+                            opacity: 0.75;    
+                            font-size: 0.25rem;
+                            letter-spacing: 4px;
+                            width: 35px;
+                            text-align: right;
+                            margin-left: 0.5rem;
+                        }
                     }
                 }
                 &_list {
                     display: flex;
                     flex-wrap: wrap;
-                    font-size: 0.9rem;
-                    margin-top: 0.25rem;
+                    font-size: 0.85rem;
+                    margin-top: 0.35rem;
                     letter-spacing: 0.75px;
-                    max-height: 204.859px;
+                    max-height: 157.109px;
                     overflow: hidden;
-                    transition: max-height 1.5s ease; // Slow transition by default
+                    transition: max-height 0.5s ease; // Slow transition by default
                     &:hover {
                         max-height: 500px; // Set a large enough max-height for the content
-                        transition: max-height 1.5s ease; // Slow transition on hover
+                        transition: max-height 0.5s ease; // Slow transition on hover
                     }
                     &:not(:hover) {
                         transition: max-height 0.25s ease; // Fast transition when hover is removed
@@ -1940,7 +1993,7 @@ $heightMenu : 52.5px;
                                 @include fontAwesome;
                                 margin-right: 0.75rem;
                                 font-size: 0.35rem;
-                                vertical-align: top;
+                                vertical-align: middle;
                             }
                         }
                     }
@@ -1956,6 +2009,18 @@ $heightMenu : 52.5px;
         @media(max-width: 1023px){
             grid-template-columns: auto auto auto;
             gap: 1rem;
+            &_item {
+                &_content {
+                    &_title {
+                        &_action {
+                            display: flex;
+                        }
+                    }
+                    &_list {
+                        display: none;
+                    }
+                }
+            }
         }
         @media(max-width: 767px){
             grid-template-columns: auto auto;
@@ -1965,7 +2030,7 @@ $heightMenu : 52.5px;
                     padding: 0.5rem 0.75rem;
                     &_title {
                         h2, h3 {
-                            font-size: 1rem;
+                            font-size: 0.9rem;
                         }
                     }
                     &_list {
@@ -1975,11 +2040,16 @@ $heightMenu : 52.5px;
             }
         }
         @media(max-width: 577px){
-            grid-template-columns: auto;
+            gap: 0.55rem;
+            &_item {
+                &_content {
+                    &_title {
+                        h2, h3 {
+                            font-size: 0.85rem;
+                        }
+                    }
+                }
+            }
         }
     }
 }
-// .blogBox {
-//     width: 100%;
-    
-// }

@@ -27,21 +27,22 @@
         position: relative;
         transform-style: preserve-3d;
         &_close {
-            position: absolute;
-            top: 0;
-            right: 0;
-            border-radius: 0 10px 0 7px;
-            @include colorOpacity('background', $colorBackgroundLv3, 0.6);
-            width: 40px;
-            aspect-ratio: 1/1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.7rem;
-            &:hover {
-                @include colorOpacity('background', $colorBackgroundLv3, 0.8);
-            }
+            // position: absolute;
+            // top: 0;
+            // right: 0;
+            // border-radius: 0 10px 0 7px;
+            // @include colorOpacity('background', $colorBackgroundLv3, 0.6);
+            // width: 40px;
+            // aspect-ratio: 1/1;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+            // cursor: pointer;
+            // font-size: 0.7rem;
+            // &:hover {
+            //     @include colorOpacity('background', $colorBackgroundLv3, 0.8);
+            // }
+            @include iconCloseSquare;
         }
         &_head {
             margin-bottom: 0.5rem;

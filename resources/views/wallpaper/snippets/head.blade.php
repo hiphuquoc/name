@@ -11,13 +11,13 @@
 @endif
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="fragment" content="!" />
-<link rel="shortcut icon" href="/storage/images/upload/logo-type-manager-upload.webp" type="image/x-icon">
+<link rel="shortcut icon" href="/storage/images/upload/logo-type-manager-upload.webp" type="image/x-icon" />
 <!-- BEGIN: Custom CSS-->
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/sources/main/ring.css?'.time()) }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/sources/main/loading.css?'.time()) }}"> --}}
 
 <!-- BEGIN: FONT AWESOME -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 {{-- <link href="/your-path-to-uicons/css/uicons-rounded-bold.css" rel="stylesheet"> --}}
 <!-- END: FONT AWESOME -->
 
@@ -106,7 +106,7 @@
 @stack('headCustom')
 
 <!-- BEGIN: SLICK -->
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <!-- END: SLICK -->
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/forms/select/select2.min.css') }}"> --}}
 <!-- BEGIN: Jquery -->

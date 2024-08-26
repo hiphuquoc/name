@@ -86,5 +86,14 @@
                 console.error("Fetch request failed:", error);
             });
         }
+
+        function openCloseCategoryListForMobile(idList){
+            const element = $('#'+idList);
+            if(element.hasClass('zoom')){
+                element.removeClass('zoom');
+            }else {
+                element.addClass('zoom');
+            }
+        }
     </script>
 @endPushonce

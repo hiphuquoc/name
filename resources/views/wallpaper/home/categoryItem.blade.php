@@ -8,7 +8,9 @@
         }
     }
     $categoryName           = $categorySeo->infoSeo->title ?? null;
-    $categoryUrl            = env('APP_URL').'/'.$categorySeo->infoSeo->slug_full;       
+    $categoryUrl            = env('APP_URL').'/'.$categorySeo->infoSeo->slug_full;
+    /* key id list */
+    $idList                 = 'js_openCloseCategoryListForMobile_'.$category->id;
 @endphp
 <a href="{{ $categoryUrl }}" class="categoryGrid_box_item_image">
     @if(!empty($category->thumnails)&&$category->thumnails->count()>0)
@@ -22,10 +24,15 @@
         @endforeach
     @endif
 </a>
-<div class="categoryGrid_box_item_content">
-    <a href="{{ $categoryUrl }}" class="categoryGrid_box_item_content_title">
-        <h2>{{ $categoryName }}</h2>
-    </a>
+<div id="{{ $idList }}" class="categoryGrid_box_item_content">
+    <div class="categoryGrid_box_item_content_title">
+        <a href="{{ $categoryUrl }}">
+            <h2 class="maxLine_1">{{ $categoryName }}</h2>
+        </a>
+        <div class="categoryGrid_box_item_content_title_action" onclick="openCloseCategoryListForMobile('{{ $idList }}');">
+            <!-- dùng after => content -->
+        </div>
+    </div>
     @if(!empty($category->tags)&&$category->tags->isNotEmpty())
         <div class="categoryGrid_box_item_content_list">
             @foreach($category->tags as $tag)

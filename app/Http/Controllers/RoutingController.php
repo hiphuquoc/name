@@ -111,75 +111,6 @@ class RoutingController extends Controller{
                 /* ===== Tag ==== */
                 if($itemSeo->type=='tag_info'){
                     $flagMatch      = true;
-                    // /* tìm kiếm bằng feeling */
-                    // $searchFeeling = $request->get('search_feeling') ?? [];
-                    // foreach($searchFeeling as $feeling){
-                    //     if($feeling=='all'){ /* trường hợp tìm kiếm có all thì clear */
-                    //         $searchFeeling = [];
-                    //         break;
-                    //     }
-                    // }
-                    // /* lấy wallpapers */
-                    // $loaded         = 10;
-                    // $sortBy         = Cookie::get('sort_by') ?? null;
-                    // $filters        = $request->get('filters') ?? [];
-                    // $user           = Auth::user();
-                    // $arrayIdTag     = [$item->id];
-                    // $arrayIdCategory    = [];
-                    // $wallpapers     = FreeWallpaper::select('*')
-                    //                     ->when(!empty($arrayIdTag), function($query) use($arrayIdTag){
-                    //                         $query->whereHas('tags', function($subquery) use($arrayIdTag){
-                    //                             $subquery->whereIn('tag_info_id', $arrayIdTag);
-                    //                         });
-                    //                     })
-                    //                     ->when(!empty($filters), function($query) use($filters){
-                    //                         foreach($filters as $filter){
-                    //                             $query->whereHas('categories.infoCategory', function($query) use($filter){
-                    //                                 $query->where('id', $filter);
-                    //                             });
-                    //                         }
-                    //                     })
-                    //                     // ->when(!empty($searchFeeling), function($query) use ($searchFeeling) {
-                    //                     //     $query->whereHas('feeling', function($subquery) use ($searchFeeling) {
-                    //                     //         $subquery->whereIn('type', $searchFeeling);
-                    //                     //     });
-                    //                     // })
-                    //                     ->when(empty($sortBy), function($query){
-                    //                         $query->orderBy('id', 'DESC');
-                    //                     })
-                    //                     ->when($sortBy=='new'||$sortBy=='propose', function($query){
-                    //                         $query->orderBy('id', 'DESC');
-                    //                     })
-                    //                     ->when($sortBy=='favourite', function($query){
-                    //                         $query->orderBy('heart', 'DESC')
-                    //                                 ->orderBy('id', 'DESC');
-                    //                     })
-                    //                     ->when($sortBy=='old', function($query){
-                    //                         $query->orderBy('id', 'ASC');
-                    //                     })
-                    //                     ->skip(0)
-                    //                     ->take($loaded)
-                    //                     ->get();
-                    // $total          = FreeWallpaper::select('*')
-                    //                     ->when(!empty($arrayIdTag), function($query) use($arrayIdTag){
-                    //                         $query->whereHas('tags', function($subquery) use($arrayIdTag){
-                    //                             $subquery->whereIn('tag_info_id', $arrayIdTag);
-                    //                         });
-                    //                     })
-                    //                     ->when(!empty($filters), function($query) use($filters){
-                    //                         foreach($filters as $filter){
-                    //                             $query->whereHas('categories.infoCategory', function($query) use($filter){
-                    //                                 $query->where('id', $filter);
-                    //                             });
-                    //                         }
-                    //                     })
-                    //                     // ->when(!empty($searchFeeling), function($query) use ($searchFeeling) {
-                    //                     //     $query->whereHas('feeling', function($subquery) use ($searchFeeling) {
-                    //                     //         $subquery->whereIn('type', $searchFeeling);
-                    //                     //     });
-                    //                     // })
-                    //                     ->count();
-                    // $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'total', 'arrayIdCategory', 'loaded', 'language', 'user'))->render();
                     $params         = [];
                     /* key_search */
                     $params['key_search'] = request('search') ?? null;
@@ -318,15 +249,17 @@ class RoutingController extends Controller{
     public static function buildNameCache($slugFull, $params = []){
         $response     = '';
         if(!empty($slugFull)){
+             /* xây dựng  slug */
+             $tmp    = explode('/', $slugFull);
+             $result = [];
+             foreach($tmp as $t) if(!empty($t)) $result[] = $t;
+             $response = implode('-', $result);
             /* duyệt params để lấy prefix hay # */
             if(!empty($params)){
-                foreach($params as $key => $param) $response .= $key.'-'.$param;
+                $part   = '';
+                foreach($params as $key => $param) $part .= $key.'-'.$param;
+                if(!empty($part)) $response = $response.'-'.$part;
             }
-            /* ghép với slug */
-            $tmp    = explode('/', $slugFull);
-            $result = [];
-            foreach($tmp as $t) if(!empty($t)) $result[] = $t;
-            $response = implode('-', $result).'-'.$response;
         }
         return $response;
     }
