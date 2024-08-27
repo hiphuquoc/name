@@ -132,7 +132,7 @@ class CategoryController extends Controller {
                                 $query->where('language', $language);
                             })
                             ->where('id', $idCategory)
-                            ->with('seo', 'seos')
+                            ->with('seo', 'seos', 'thumnails')
                             ->first();
         $xhtml          = view('wallpaper.home.categoryItem', [
             'category'  => $infoCategory,

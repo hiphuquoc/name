@@ -124,6 +124,6 @@ class Category extends Model {
     }
 
     public function thumnails(){
-        return $this->hasMany(\App\Models\RelationCategoryThumnail::class, 'category_info_id', 'id');
+        return $this->hasMany(\App\Models\RelationCategoryThumnail::class, 'category_info_id', 'id')->orderBy('id', 'DESC');
     }
 }
