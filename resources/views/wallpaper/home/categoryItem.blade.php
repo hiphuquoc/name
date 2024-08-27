@@ -21,6 +21,7 @@
                 $active             = $loop->index == 0 ? ' active' : '';
             @endphp
             <img class="lazyload {{ $active }}" src="{{ $categoryThumbMini }}" data-src="{{ $categoryThumbSmall }}" alt="{{ $categoryName }}" title="{{ $categoryName }}" />
+            @break
         @endforeach
     @endif
 </a>

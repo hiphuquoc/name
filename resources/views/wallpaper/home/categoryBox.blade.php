@@ -28,26 +28,6 @@
 @pushonce('scriptCustom')
     <script type="text/javascript">
         $(document).ready(function() {
-            function loadVisibleCategories() {
-                // Lấy vị trí hiện tại của scrollTop
-                var scrollTop = $(window).scrollTop();
-                var windowHeight = $(window).height();
-
-                // Kiểm tra từng phần tử với class 'js_loadInfoCategory'
-                $('.js_loadInfoCategory').each(function() {
-                    var elementTop = $(this).offset().top;
-
-                    // Kiểm tra nếu phần tử cách scrollTop 500px
-                    if (elementTop < scrollTop + windowHeight + 500 && !$(this).hasClass('loaded')) {
-                        // Gọi hàm loadInfoCategory và đánh dấu phần tử là đã load
-                        let idCategory  = $(this).data('category_info_id');
-                        let idWrite     = $(this).attr('id');
-                        loadInfoCategory(idCategory, '{{ $language }}', idWrite);
-                        $(this).addClass('loaded'); // Để tránh load lại cùng một phần tử
-                    }
-                });
-            }
-
             // Gọi hàm loadVisibleCategories khi trang vừa load
             loadVisibleCategories();
 
@@ -57,6 +37,26 @@
             });
         });
 
+        function loadVisibleCategories() {
+            // Lấy vị trí hiện tại của scrollTop
+            var scrollTop = $(window).scrollTop();
+            var windowHeight = $(window).height();
+
+            // Kiểm tra từng phần tử với class 'js_loadInfoCategory'
+            $('.js_loadInfoCategory').each(function() {
+                var elementTop = $(this).offset().top;
+
+                // Kiểm tra nếu phần tử cách scrollTop 500px
+                if (elementTop < scrollTop + windowHeight + 500 && !$(this).hasClass('loaded')) {
+                    // Gọi hàm loadInfoCategory và đánh dấu phần tử là đã load
+                    let idCategory  = $(this).data('category_info_id');
+                    let idWrite     = $(this).attr('id');
+                    loadInfoCategory(idCategory, '{{ $language }}', idWrite);
+                    $(this).addClass('loaded'); // Để tránh load lại cùng một phần tử
+                }
+            });
+        }
+
         function loadInfoCategory(idCategory, language, idWrite) {
             let dataForm = {};
             dataForm.category_info_id = idCategory;
@@ -65,10 +65,10 @@
             const queryString = new URLSearchParams(dataForm).toString();
             fetch("/loadInfoCategory?" + queryString, {
                 method: 'GET',
-                mode: 'cors',
+                // mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    // 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
             })
             .then(response => {
