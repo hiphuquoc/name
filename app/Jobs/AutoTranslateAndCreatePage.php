@@ -141,7 +141,7 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
                         $title                                  = HelperController::removeUnicodeControlCharacters($value['title']);
                         $arrayInsert['title']                   = $title;
                         /* slug và slug_full */
-                        $slug                                   = HelperController::buildSlugFromTitle($title, $language, $idSeoParentVI);
+                        $slug                                   = HelperController::buildSlugFromTitle($title, $type, $language, $idSeoParentVI);
                         $arrayInsert['slug']                    = $slug;
                         $slugFull                               = \App\Models\Seo::buildFullUrl($slug, $idParentForLanguage);
                         $arrayInsert['slug_full']               = $slugFull;

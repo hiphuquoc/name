@@ -120,7 +120,7 @@
                     <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                 @endif
                 <!-- Hàm này dùng idSeo->parent bảng tiếng việt gửi vào trong để tìm parent những ngôn ngữ khác (vì những trang create chưa có trang) -->
-                <i class="fa-solid fa-arrow-down reloadContentIcon" onclick="copyTitleToSlug($('#title'), 'slug', {{ $item->seo->parent ?? 0 }}, '{{ $language }}');"></i>
+                <i class="fa-solid fa-arrow-down reloadContentIcon" onclick="convertStrToSlug('slug', $('#title'), '{{ $itemSeo->type ?? null }}', '{{ $language }}', {{ $item->seo->parent ?? 0 }});"></i>
             </span>
             @php
                 $slug       = null;
@@ -308,7 +308,7 @@
 @push('scriptCustom')
     <script type="text/javascript">
 
-        function copyTitleToSlug(inpputData, idWrite, idParentVI, language) {
+        function convertStrToSlug(idWrite, inpputData, type, language, idParentVI) {
             const string = $(inpputData).val();
             $.ajax({
                 url         : '{{ route("admin.helper.convertStrToSlug") }}',
@@ -316,6 +316,7 @@
                 dataType    : 'html',
                 data        : { 
                     string,
+                    type,
                     language,
                     id_parent_vi : idParentVI,
                  }

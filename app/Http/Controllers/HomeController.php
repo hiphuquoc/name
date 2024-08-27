@@ -232,7 +232,7 @@ class HomeController extends Controller {
             foreach($item->seos as $seo){
                 if(in_array($seo->infoSeo->language, $arrayFix)){
                     /* xây dựng slug */
-                    $slugNew = HelperController::buildSlugFromTitle($seo->infoSeo->title, $seo->infoSeo->language, $item->seo->parent);
+                    $slugNew = HelperController::buildSlugFromTitle($seo->infoSeo->title, $seo->infoSeo->type, $seo->infoSeo->language, $item->seo->parent);
                     $slugFullNew = Seo::buildFullUrl($slugNew, $seo->infoSeo->parent);
                     Seo::updateItem($seo->infoSeo->id, [
                         'slug'  => $slugNew,

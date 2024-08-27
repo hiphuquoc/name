@@ -153,7 +153,7 @@ return [
     'main.password_user_default' => 'hitourVN@mk123',
     'category_type' => [
         [
-            'key' => 'category_info',
+            'key' => 'category_info', /* mặc định nằm ở trên */
             'key_filter_language'   => 'filter_by_themes',
             'name' => 'Chủ đề'
         ],

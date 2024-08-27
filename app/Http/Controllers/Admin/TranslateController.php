@@ -163,12 +163,7 @@ class TranslateController extends Controller {
                     /* lấy prompt đang được áp dụng cho content */
                     $type       = $infoPage->seo->type;
                     /* check xem phải category_type */
-                    foreach(config('main_'.env('APP_NAME').'.category_type') as $t) {
-                        if($type==$t['key']){
-                            $type = 'category_info';
-                            break;
-                        }
-                    }
+                    $type       = HelperController::determinePageType($type);
                     $infoPrompt = Prompt::select('*')
                                     ->where('reference_name', 'content')
                                     ->where('type', 'translate_content')
@@ -265,12 +260,7 @@ class TranslateController extends Controller {
         $infoPage   = HelperController::getFullInfoPageByIdSeo($request->get('id_seo_by_language'));
         $idPage     = $infoPage->id;
         $type       = $infoPage->seo->type;
-        foreach(config('main_'.env('APP_NAME').'.category_type') as $t){
-            if($t['key']==$type){
-                $type = 'category_info';
-                break;
-            }
-        }
+        $type       = HelperController::determinePageType($type);
         $tmp        = explode('_', $type);
         $typeRoute  = $tmp[0];
     

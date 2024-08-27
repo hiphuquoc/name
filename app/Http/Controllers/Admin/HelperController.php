@@ -17,41 +17,41 @@ use App\Models\Product;
 class HelperController extends Controller {
 
     public static function convertStrToSlug(Request $request){
-        $string     = $request->get('string') ?? null;
-        $language   = $request->get('language');
+        $string             = $request->get('string') ?? null;
+        $language           = $request->get('language');
         $idPageParentVI     = $request->get('id_parent_vi') ?? 0;
-        $response   = self::buildSlugFromTitle($string, $language, $idPageParentVI);
+        $type               = $request->get('type') ?? null;
+        $response           = self::buildSlugFromTitle($string, $type, $language, $idPageParentVI);
         echo $response;
     }
 
-    public static function buildSlugFromTitle($title, $language, $idPageParentVI = 0){
+    public static function buildSlugFromTitle($title, $type, $language, $idPageParentVI = 0){
         $response = '';
         if(!empty($title)&&$language){
-            $title      = mb_strtolower($title);
+            $title                  = mb_strtolower($title);
+            $type                   = self::determinePageType($type);
             /* trường hợp có gửi vào id của trang cha (bảng vi) */
             if(!empty($idPageParentVI)){
                 $infoPageParentVI   = self::getFullInfoPageByIdSeo($idPageParentVI);
-                if(!empty($infoPageParentVI)) {
-                    if($infoPageParentVI->seo->type=='category_info'||$infoPageParentVI->seo->type=='tag_info'){ /* trường hợp là category_info hay tag_info */
-                        /* lấy slug của parent */
-                        $slugParent         = null;
-                        foreach($infoPageParentVI->seos as $seo){
-                            if($seo->infoSeo->language==$language){
-                                $slugParent = $seo->infoSeo->slug;
-                                break;
-                            }
+                if($type=='category_info'||$type=='tag_info'||$type=='page_info'){ /* trường hợp là category_info hay tag_info hay page_info */
+                    /* lấy slug của parent */
+                    $slugParent         = null;
+                    foreach($infoPageParentVI->seos as $seo){
+                        if($seo->infoSeo->language==$language){
+                            $slugParent = $seo->infoSeo->slug;
+                            break;
                         }
-                        /* lấy chiều ghép và tiến hành ghép */
-                        $part       = Charactor::convertStrToUrl($title);
-                        $charactor  = config('language.'.$language.'.flag_has_space_in_content')==true ? '-' : '';
-                        if(config('language.'.$language.'.flag_join_left_to_right')==true){
-                            $response = $slugParent.$charactor.$part;
-                        }else {
-                            $response = $part.$charactor.$slugParent;
-                        }
-                    } else { /* trường hợp là sản phẩm */
-                        $response   = Charactor::convertStrToUrl($title).'-'.time();
                     }
+                    /* lấy chiều ghép và tiến hành ghép */
+                    $part       = Charactor::convertStrToUrl($title);
+                    $charactor  = config('language.'.$language.'.flag_has_space_in_content')==true ? '-' : '';
+                    if(config('language.'.$language.'.flag_join_left_to_right')==true){
+                        $response = $slugParent.$charactor.$part;
+                    }else {
+                        $response = $part.$charactor.$slugParent;
+                    }
+                } else if($type=='product_info'||$type=='free_wallpaper_info'){ /* trường hợp là product_info hay free_wallpaper_info */
+                    $response   = Charactor::convertStrToUrl($title).'-'.time();
                 }
             } else { /* trường hợp không có trang cha */
                 $response   = Charactor::convertStrToUrl($title);
@@ -111,4 +111,22 @@ class HelperController extends Controller {
         $zeroWidthPattern = '/[\x{200B}-\x{200F}\x{2060}\x{FEFF}]/u';
         return preg_replace($zeroWidthPattern, '', $string);
     }
+
+    public static function determinePageType($type){
+        $response = null;
+        if(!empty($type)){
+            /* các trường hợp còn lại trả về đúng loại */
+            $response           = $type;
+            /* xử lý trường hợp category */
+            $categoryType       = config('main_'.env('APP_NAME').'.category_type');
+            foreach($categoryType as $cType){
+                if($type==$cType['key']){
+                    $response   = $categoryType[0]['key']; /* giá trị mặc định category_info */
+                }
+                break;
+            }
+        }
+        return $response;
+    }
+
 }
