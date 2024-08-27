@@ -353,6 +353,6 @@ return [
         'ai', 'google_translate'
     ],
     'ai_version'    => [ /* vesion đầu tiên được mặc định dùng ở các trường hợp không quy định */
-        'gpt-4o', 'gpt-4o-mini'
+        'gpt-4o-mini', 'gpt-4o',
     ],
 ];
