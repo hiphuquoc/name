@@ -6,10 +6,10 @@
                 <div class="card">
                     <div class="card-body">
                         @php
-                            $key = $prompt->ordering;
-                            $contentsByLanguageUse   = $itemSeoSourceToCopy->contents ?? $itemSeo->contents ?? null;
+                            $key                    = $prompt->ordering;
+                            $contentsByLanguageUse  = $itemSeoSourceToCopy->contents ?? $itemSeo->contents ?? [];
                             /* lấy content theo ordering */
-                            $xhtmlContent       = '';
+                            $xhtmlContent           = '';
                             if(!empty($contentsByLanguageUse)&&$contentsByLanguageUse->count()>0){
                                 foreach($contentsByLanguageUse as $c){
                                     if($c->ordering==$key) {
@@ -35,8 +35,8 @@
         <!-- tiếng khác -> form dịch -->
         @if($prompt->type=='translate_content'&&$prompt->reference_name=='content')
             @php
-                $contentsByLanguageUse   = $itemSeoSourceToCopy->contents ?? $itemSeo->contents;
-                $contentsViUse           = $itemSourceToCopy->seo->contents ?? $item->seo->contents;
+                $contentsByLanguageUse   = $itemSeoSourceToCopy->contents ?? $itemSeo->contents ?? [];
+                $contentsViUse           = $itemSourceToCopy->seo->contents ?? $item->seo->contents ?? [];
             @endphp
             @if(!empty($contentsViUse))
                 @foreach($contentsViUse as $content)

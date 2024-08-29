@@ -402,6 +402,7 @@ label.error {
   justify-content: flex-end;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .pageAdminWithRightSidebar_main_rightSidebar_item.buttonAction > *:not(:first-child) {
   margin-left: 1rem;
@@ -1688,6 +1689,7 @@ html .content {
   width: 10%;
   border-left: 1px solid #333;
   padding: 4px 10px;
+  display: flex;
 }
 .languageBox_item img {
   width: 100% !important;

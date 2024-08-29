@@ -208,7 +208,7 @@ class CategoryController extends Controller {
                     'message'   => '<strong>Thành công!</strong> Đã cập nhật Category!'
                 ];
                 /* nếu có tùy chọn index => gửi google index */
-                if($request->get('index_google')==true) {
+                if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
                     $flagIndex = IndexController::indexUrl($idSeo);
                     if($flagIndex==200){
                         $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category và Báo Google Index!';

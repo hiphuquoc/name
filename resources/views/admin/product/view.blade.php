@@ -99,19 +99,11 @@
 
                 <!-- START:: Sidebar content -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
-                        @if(!empty($itemSeo->slug_full))
-                            <a href="/{{ $itemSeo->slug_full }}" target="_blank" style="font-size:1.4rem;"><i class="fa-regular fa-eye"></i></a>
-                        @endif
-                        <a href="{{ route('admin.product.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu">Lưu</button>
-                    </div>
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
-                        <div class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu" style="width:100%;" onclick="submitForm('formAction', { 'index_google': true });">Lưu & Index</div>
-                    </div>
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
-                        @include('admin.category.action', compact('item', 'itemSeo', 'prompts', 'language'))
-                    </div>
+                    <!-- action -->
+                    @include('admin.form.buttonAction', [
+                        'routeBack' => 'admin.product.list',
+                    ])
+                    <!-- action support -->
                     <div class="customScrollBar-y">
                         {{-- @if($language=='vi') --}}
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
@@ -144,6 +136,10 @@
 
     </form>
 @endsection
+@push('modal')
+    <!-- modal chọn thumnail -->
+    @include('admin.form.formModalChooseLanguageBeforeDeletePage')
+@endpush
 @push('scriptCustom')
     <script type="text/javascript">
         $('.pageAdminWithRightSidebar_main').repeater();

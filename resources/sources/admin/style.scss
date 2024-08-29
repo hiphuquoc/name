@@ -556,6 +556,7 @@ label.error {
                     justify-content: flex-end;
                     display: flex;
                     align-items: center;
+                    flex-wrap: wrap;
                     > * {
                         &:not(:first-child){
                             margin-left: 1rem;
@@ -1819,6 +1820,7 @@ html .content {
         width: 10%;
         border-left: 1px solid #333;
         padding: 4px 10px;
+        display: flex;
         img {
             width: 100% !important;
             object-fit: cover;

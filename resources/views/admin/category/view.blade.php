@@ -82,20 +82,11 @@
 
                 <!-- START:: Sidebar content -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
-                    <!-- Button Save -->
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
-                        @if(!empty($itemSeo->slug_full))
-                            <a href="/{{ $itemSeo->slug_full }}" target="_blank" style="font-size:1.4rem;"><i class="fa-regular fa-eye"></i></a>
-                        @endif
-                        <a href="{{ route('admin.category.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu">Lưu</button>
-                    </div>
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
-                        <div class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu" style="width:100%;" onclick="submitForm('formAction', { 'index_google': true });">Lưu & Index</div>
-                    </div>
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
-                        @include('admin.category.action', compact('item', 'itemSeo', 'prompts', 'language'))
-                    </div>
+                    <!-- action -->
+                    @include('admin.form.buttonAction', [
+                        'routeBack' => 'admin.category.list',
+                    ])
+                    <!-- action support -->
                     <div class="customScrollBar-y">
                         <!-- Form Upload -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
@@ -119,6 +110,8 @@
 @push('modal')
     <!-- modal chọn thumnail -->
     @include('admin.category.formSearchThumnail')
+    <!-- modal chọn thumnail -->
+    @include('admin.form.formModalChooseLanguageBeforeDeletePage')
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">

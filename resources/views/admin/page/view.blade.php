@@ -110,35 +110,11 @@
 
                 <!-- START:: Sidebar content -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
-                    <!-- Button Save -->
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
-                        @if(!empty($itemSeo->slug_full))
-                            <a href="/{{ $itemSeo->slug_full }}" target="_blank" style="font-size:1.4rem;"><i class="fa-regular fa-eye"></i></a>
-                        @endif
-                        <a href="{{ route('admin.page.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu">Lưu</button>
-                    </div>
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
-                        <div class="btn btn-success waves-effect waves-float waves-light" aria-label="Lưu" style="width:100%;" onclick="submitForm('formAction', { 'index_google': true });">Lưu & Index</div>
-                    </div>
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
-                        <div class="actionBox">
-                            @if($language=='vi')
-                                <div class="actionBox_item maxLine_1" onClick="callAI('auto_content')">
-                                    <i class="fa-solid fa-robot"></i>Auto Content
-                                </div>
-                            @else   
-                                <div class="actionBox_item maxLine_1" onClick="callAI('translate_content')">
-                                    <i class="fa-solid fa-language"></i>Dịch Content
-                                </div>
-                            @endif
-                            @if(!empty($itemSeo->link_canonical))
-                                <a href="{{ URL::current().'?id='.$item->id.'&language='.$language.'&id_seo_source='.$itemSeo->link_canonical }}" class="actionBox_item maxLine_1">
-                                    <i class="fa-solid fa-file-import"></i>Copy từ trang gốc
-                                </a>
-                            @endif
-                        </div>
-                    </div>
+                    <!-- action -->
+                    @include('admin.form.buttonAction', [
+                        'routeBack' => 'admin.page.list',
+                    ])
+                    <!-- action support -->
                     <div class="customScrollBar-y">
                         <!-- Form Upload -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
@@ -159,6 +135,10 @@
         </div>
     </form>    
 @endsection
+@push('modal')
+    <!-- modal chọn thumnail -->
+    @include('admin.form.formModalChooseLanguageBeforeDeletePage')
+@endpush
 @push('scriptCustom')
     <script type="text/javascript">
 

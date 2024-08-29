@@ -81,7 +81,7 @@
 
                 <!-- START:: Sidebar content -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
-                    <!-- Button Save -->
+                    {{-- <!-- Button Save -->
                     <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
                         @if(!empty($itemSeo->slug_full))
                             <a href="/{{ $itemSeo->slug_full }}" target="_blank" style="font-size:1.4rem;"><i class="fa-regular fa-eye"></i></a>
@@ -109,7 +109,10 @@
                                 </a>
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
+                    @include('admin.form.buttonAction', [
+                        'routeBack' => 'admin.seoFreeWallpaper.list',
+                    ])
                     <div class="customScrollBar-y">
                         <img src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($item->file_cloud) }}" />
                     </div>
@@ -119,6 +122,10 @@
         </div>
     </form>    
 @endsection
+@push('modal')
+    <!-- modal chọn thumnail -->
+    @include('admin.form.formModalChooseLanguageBeforeDeletePage')
+@endpush
 @push('scriptCustom')
     <script type="text/javascript">
 

@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Page;
 use App\Models\Product;
+use App\Helpers\Upload;
 
 class HelperController extends Controller {
 
@@ -129,4 +130,28 @@ class HelperController extends Controller {
         return $response;
     }
 
+    public static function deleteLanguage(Request $request){
+        $idSeoVi    = $request->get('id_seo_vi');
+        $languages  = $request->get('languages');
+        $infoPage   = self::getFullInfoPageByIdSeo($idSeoVi);
+        $count      = 0;
+        if(!empty($infoPage)&&!empty($languages)){
+            foreach($infoPage->seos as $s){
+                if(in_array($s->infoSeo->language, $languages)){
+                    /* xóa ảnh đại diện trên google_clouds */ 
+                    Upload::deleteWallpaper($s->infoSeo->image);
+                    foreach($s->infoSeo->contents as $c) $c->delete();
+                    $s->infoSeo()->delete();
+                    $s->delete();
+                    ++$count;
+                }
+            }
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Đã xóa '.$count.' trang ngôn ngữ!',
+            ];
+            $request->session()->put('message', $message);
+        }
+    }
 }

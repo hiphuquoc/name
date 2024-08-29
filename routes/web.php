@@ -221,6 +221,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
         /* ===== CACHE ===== */
         Route::prefix('helper')->group(function(){
             Route::get('/convertStrToSlug', [HelperController::class, 'convertStrToSlug'])->name('admin.helper.convertStrToSlug');
+            Route::post('/deleteLanguage', [HelperController::class, 'deleteLanguage'])->name('admin.helper.deleteLanguage');
         });
         /* ===== TOOL ===== */
         Route::prefix('toolCopyProduct')->group(function(){
