@@ -232,4 +232,20 @@
             if(data) location.reload();
         })
     }
+    function openCloseFullLoading(){
+        const htmlLoading = $('#js_fullLoading_bg');
+        if(htmlLoading.is(":visible")){
+            htmlLoading.css('display', 'none');
+            $('#js_fullLoading_blur').css({
+                'filter' : 'unset',
+                'overflow'  : 'unset',
+            });
+        } else {
+            htmlLoading.css('display', 'flex');
+            $('#js_fullLoading_blur').css({
+                'filter'    : 'blur(8px)',
+                'overflow'  : 'hidden',
+            });
+        }
+    }
 </script>

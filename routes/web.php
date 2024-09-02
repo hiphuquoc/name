@@ -42,7 +42,6 @@ use App\Http\Controllers\Admin\PromptController;
 use App\Http\Controllers\Admin\ApiAIController;
 use App\Http\Controllers\Admin\ChatGptController;
 use App\Http\Controllers\Admin\HelperController;
-use App\Http\Controllers\Admin\ToolCopyProductController;
 use App\Http\Controllers\Admin\TranslateController;
 use App\Http\Controllers\CheckOnpageController;
 
@@ -119,6 +118,8 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/createAndUpdate', [ProductController::class, 'createAndUpdate'])->name('admin.product.createAndUpdate');
             // Route::post('/create', [ProductController::class, 'create'])->name('admin.product.create');
             // Route::post('/update', [ProductController::class, 'update'])->name('admin.product.update');
+            Route::post('/searchProductCopied', [ProductController::class, 'searchProductCopied'])->name('admin.product.searchProductCopied');
+            Route::post('/updateProductCopied', [ProductController::class, 'updateProductCopied'])->name('admin.product.updateProductCopied');
             Route::get('/delete', [ProductController::class, 'delete'])->name('admin.product.delete');
         });
         /* product price */
@@ -224,10 +225,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::post('/deleteLanguage', [HelperController::class, 'deleteLanguage'])->name('admin.helper.deleteLanguage');
         });
         /* ===== TOOL ===== */
-        Route::prefix('toolCopyProduct')->group(function(){
-            Route::get('/view', [ToolCopyProductController::class, 'view'])->name('admin.toolCopyProduct.view');
-            Route::get('/create', [ToolCopyProductController::class, 'create'])->name('admin.toolCopyProduct.create');
-        });
+        
         /* ===== TRANSLATE ===== */
         Route::prefix('translate')->group(function(){
             Route::get('/viewcreateJobTranslateContent', [TranslateController::class, 'viewcreateJobTranslateContent'])->name('admin.translate.viewcreateJobTranslateContent');

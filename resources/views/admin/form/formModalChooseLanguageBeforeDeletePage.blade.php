@@ -53,6 +53,10 @@
         });
 
         function deleteLanguage(){
+            /* đóng modal + bật loading */
+            $('#modalChooseLanguageBeforeDeletePage').modal('hide');
+            openCloseFullLoading();
+            /* lấy dữ liệu */
             const idSeoVi = $('#seo_id_vi').val();
             // Tạo một mảng để chứa các giá trị đã được chọn
             let selectedLanguages = [];
@@ -70,7 +74,9 @@
                     languages   : selectedLanguages, 
                 }
             }).done(function(response){
-                location.reload();
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
             });
         }
 

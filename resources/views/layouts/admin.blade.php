@@ -10,25 +10,16 @@
 
 <!-- === START:: Body === -->
 <body class="pace-done vertical-layout vertical-menu-modern navbar-floating footer-static menu-expanded" data-open="click" data-menu="vertical-menu-modern" data-col>
-    <!-- === START:: Header === -->
-    {{-- <div class="headerTop">
-        <div class="headerTop_phone"><i class="fa-solid fa-phone"></i>0388.189.089</div>
-        <div class="headerTop_text">Chuyến tàu Văn Học - Học văn không khó vì có Cô Ngọc Anh!</div>
-    </div> --}}
-    @include('admin.snippets.menu')
-    <!-- === END:: Header === -->
+    <div id="js_fullLoading_blur">
+        <!-- === START:: Header === -->
+        @include('admin.snippets.menu')
+        <!-- === END:: Header === -->
 
-    <!-- === START:: Breadcrumb === -->
-    {{-- @if(Route::current()->uri!=='/')
-        @include('snippets.breadcrumb')
-    @endif --}}
-    
-    <!-- === END:: Breadcrumb === -->
-
-    <!-- === START:: Content === -->
-    <div class="app-content content">
-        <div class="content-overlay"></div>
-        @yield('content')
+        <!-- === START:: Content === -->
+        <div class="app-content content">
+            <div class="content-overlay"></div>
+            @yield('content')
+        </div>
     </div>
 
     <!-- === START:: Footer === -->

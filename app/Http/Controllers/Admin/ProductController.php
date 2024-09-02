@@ -263,13 +263,55 @@ class ProductController extends Controller {
         $viewPerPage        = Cookie::get('viewProductInfo') ?? 20;
         $params['paginate'] = $viewPerPage;
         $list               = Product::getList($params);
-        $categories         = Category::select('*')
-                                ->whereHas('products', function(){
-                                    /* có sản phẩm mới lấy ra */
-                                })
-                                ->with('products')
-                                ->get();
+        $categories = Category::select('*')
+                        ->with('products', 'seo')
+                        ->get();
         return view('admin.product.list', compact('list', 'categories', 'viewPerPage', 'params'));
+    }
+
+    public static function searchProductCopied(Request $request){
+        $xhtml  = '';
+        if(!empty($request->get('id_seo'))){
+            $idSeo      = $request->get('id_seo');
+            $copiedSeos = Product::select('*')
+                            ->whereHas('seo', function($query) use($idSeo){
+                                $query->where('link_canonical', $idSeo);
+                            })
+                            ->get();
+            $i          = 1;
+            foreach($copiedSeos as $item){
+                $no     = $i;
+                $xhtml .= view('admin.product.row', compact('item', 'no'))->render();
+                ++$i;
+            }
+        }
+        echo $xhtml;
+    }
+
+    public static function updateProductCopied(Request $request){
+        $idSeo      = $request->get('id_seo') ?? 0;
+        if(!empty($idSeo)){ /* điều kiện này quan trọng -> vì nếu rỗng sẽ lấy hết sản phẩm */
+            /* lấy sản phẩm gốc */
+            $productSource = Product::select('*')
+                                ->whereHas('seo', function($query) use($idSeo){
+                                    $query->where('id', $idSeo);
+                                })
+                                ->with('seo', 'seos')
+                                ->first();
+            /* lấy danh sách sản phẩm copy */
+            $products   = Product::select('*')
+                        ->whereHas('seo', function($query) use($idSeo){
+                            $query->where('link_canonical', $idSeo);
+                        })
+                        ->with('seo', 'seos')
+                        ->get();
+            $response   = self::copyMultiProduct($productSource, $products);
+            $message        = [
+                'type'      => 'success',
+                'message'   => 'Đã Copy thành công '.count($response).' Url Sản Phẩm (bao gồm đa ngôn ngữ)',
+            ];
+            $request->session()->put('message', $message);
+        }
     }
 
     public function delete(Request $request){
@@ -310,5 +352,89 @@ class ProductController extends Controller {
                 return false;
             }
         }
+    }
+
+    public static function copyMultiProduct($infoProductSource, $arrayInfoProduct){
+        $response   = []; /* trả ra array id đã xử lý */
+        try {
+            DB::beginTransaction();
+            foreach ($arrayInfoProduct as $t) {
+                /* xóa relation seos -> infoSeo -> contents (nếu có) */
+                foreach ($t->seos as $seo) {
+                    foreach ($seo->infoSeo->contents as $content) {
+                        SeoContent::select('*')
+                            ->where('id', $content->id)
+                            ->delete();
+                    }
+                    \App\Models\RelationSeoProductInfo::select('*')
+                        ->where('seo_id', $seo->seo_id)
+                        ->delete();
+                    Seo::select('*')
+                        ->where('id', $seo->seo_id)
+                        ->delete();
+                }
+                /* tạo dữ liệu mới */
+                foreach ($infoProductSource->seos as $seoS) {
+                    /* tạo seo */
+                    $tmp2   = $seoS->infoSeo->toArray();
+                    $insert = [];
+                    foreach ($tmp2 as $key => $value) {
+                        if ($key != 'contents' && $key != 'id') $insert[$key] = $value;
+                    }
+                    $insert['link_canonical']   = $tmp2['id'];
+                    $insert['slug']             = $tmp2['slug'] . '-' . $t->id;
+                    $insert['slug_full']        = $tmp2['slug_full'] . '-' . $t->id;
+                    $idSeo = Seo::insertItem($insert);
+                    /* cập nhật lại seo_id của product */
+                    if ($insert['language'] == 'vi') {
+                        Product::updateItem($t->id, [
+                            'seo_id' => $idSeo,
+                        ]);
+                    }
+                    $response[] = $idSeo;
+                    /* tạo relation_seo_product_info */
+                    RelationSeoProductInfo::insertItem([
+                        'seo_id'    => $idSeo,
+                        'product_info_id' => $t->id,
+                    ]);
+                    /* tạo content */
+                    foreach ($seoS->infoSeo->contents as $content) {
+                        $contentInsert = $content->content;
+                        $contentInsert = str_replace($seoS->infoSeo->slug_full, $insert['slug_full'], $contentInsert);
+                        SeoContent::insertItem([
+                            'seo_id'    => $idSeo,
+                            'content'   => $contentInsert,
+                            'ordering'  => $content->ordering,   
+                        ]);
+                    }
+                }
+                /* copy relation product và category */
+                \App\Models\RelationCategoryProduct::select('*')
+                    ->where('product_info_id', $t->id)
+                    ->delete();
+                foreach($infoProductSource->categories as $category){
+                    \App\Models\RelationCategoryProduct::insertItem([
+                        'category_info_id'       => $category->category_info_id,
+                        'product_info_id'      => $t->id
+                    ]);
+                }
+                /* copy relation product và tag */
+                \App\Models\RelationTagInfoOrther::select('*')
+                    ->where('reference_type', 'product_info')
+                    ->where('reference_id', $t->id)
+                    ->delete();
+                foreach($infoProductSource->tags as $tag){
+                    \App\Models\RelationTagInfoOrther::insertItem([
+                        'tag_info_id'       => $tag->tag_info_id,
+                        'reference_type'    => 'product_info',
+                        'reference_id'      => $t->id
+                    ]);
+                }
+            }
+            DB::commit();
+        } catch (\Exception $exception){
+            DB::rollBack();
+        }
+        return $response;
     }
 }

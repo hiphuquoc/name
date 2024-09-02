@@ -105,17 +105,12 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '2. Copy Đa SP',
-                    'route' => 'admin.toolCopyProduct.view',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '3. Auto tạo trang',
+                    'name'  => '2. Auto tạo trang',
                     'route' => 'admin.translate.viewCreateJobTranslateAndCreatePage',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Auto dịch',
+                    'name'  => '3. Auto dịch',
                     'route' => 'admin.translate.viewcreateJobTranslateContent',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
