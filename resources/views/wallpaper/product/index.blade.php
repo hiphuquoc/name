@@ -64,14 +64,10 @@
                         <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
                     </div>
                     <div class="relatedProductBox_box">
-                        {{-- @php
-                            $arrayIdProduct = [];
-                            foreach($related as $p) $arrayIdProduct[] = $p->infoProduct->id;
-                        @endphp --}}
                         @include('wallpaper.template.wallpaperGridWithLoadMore', [
                             'loaded'            => 0,
-                            'contentEmpty'      => true,
-                            'arrayIdCategory'   => $arrayIdCategory
+                            'total'             => $total,
+                            'idProduct'         => $item->id,
                         ])
                     </div>
                 </div>

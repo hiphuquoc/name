@@ -138,28 +138,15 @@ class RoutingController extends Controller{
                 /* ===== Sản phẩm ==== */
                 if($itemSeo->type=='product_info'){
                     $flagMatch      = true;
-                    /* danh sách category của sản phẩm */
-                    $arrayIdCategory  = [];
-                    foreach($item->categories as $category) $arrayIdCategory[] = $category->infoCategory->id;
-                    $total          = Product::select('*')
-                                        ->where('id', '!=', $item->id)
-                                        ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
-                                            $query->whereIn('id', $arrayIdCategory);
-                                        })
-                                        ->count();
-                    $loaded         = 0;
                     /* sản phẩm liên quan */
-                    $idSeoParent        = $item->seo->parent;
-                    $itemSeoParent      = Seo::select('type')
-                                            ->where('id', $idSeoParent)
-                                            ->first();
-                    $tmp                = Category::select('category_info.*')
-                                            ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                                            ->where('seo.id', $idSeoParent)
-                                            ->with('products')
-                                            ->first();
-                    $related            = $tmp->products;
-                    $xhtml              = view('wallpaper.product.index', compact('item', 'itemSeo', 'breadcrumb', 'total', 'arrayIdCategory', 'language'))->render();
+                    $loaded             = 0;
+                    $arrayIdTag         = $item->tags->pluck('tag_info_id')->toArray();
+                    $total              = CategoryMoneyController::getWallpapersByProductRelated($item->id, $arrayIdTag, $language, [
+                        /* param tạm truyền vào nhưng không dùng ví chủ yếu để lấy total */
+                        'loaded'        => $loaded,
+                        'request_load'  => 0,
+                    ])['total'];
+                    $xhtml              = view('wallpaper.product.index', compact('item', 'itemSeo', 'breadcrumb', 'language', 'total'))->render();
                 }
                 /* ===== Các trang chủ đề/phong cách/sự kiện ==== */
                 foreach(config('main_'.env('APP_NAME').'.category_type') as $type){

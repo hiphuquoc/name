@@ -12,48 +12,63 @@ use Illuminate\Support\Facades\Auth;
 class CategoryMoneyController extends Controller {
 
     public static function loadMoreWallpaper(Request $request){
-        $response           = [];
-        $content            = '';
-        $language           = SettingController::getLanguage();
-        $viewBy             = Cookie::get('view_by') ?? 'each_set';
-        $params             = [];
-        /* data params */
-        $params['search']                   = $request->get('search') ?? null;
-        $params['loaded']                   = $request->get('loaded');
-        $params['request_load']             = $request->get('request_load');
-        $params['array_category_info_id']   = json_decode($request->get('array_category_info_id'));
-        $params['array_tag_info_id']        = json_decode($request->get('array_tag_info_id'));
-        $params['sort_by']                  = Cookie::get('sort_by') ?? config('main_'.env('APP_NAME').'.sort_type')[0]['key'];
-        $params['filters']                  = $request->get('filters') ?? [];
-        $tmp                                = self::getWallpapers($params, $language);
-        foreach($tmp['wallpapers'] as $wallpaper){
-            if($viewBy=='each_set'){
-                $content    .= view('wallpaper.template.wallpaperItem', [
-                    'product'   => $wallpaper,
-                    'language'  => $language,
-                    'lazyload'  => true
-                ])->render();
+        $response                                   = [];
+        if($request->get('loaded')<$request->get('total')){
+            $language                               = SettingController::getLanguage();
+            $viewBy                                 = Cookie::get('view_by') ?? 'each_set';
+            $content                                = '';
+            $params                                 = [];
+            if(!empty($request->get('id_product'))){
+                /* trường hợp tải theo product liên quan */
+                $idProduct                          = $request->get('id_product');
+                $currentProduct                     = Product::find($idProduct);
+                $arrayIdTag                         = $currentProduct->tags->pluck('tag_info_id')->toArray();
+                $params['loaded']                   = $request->get('loaded') ?? 0;
+                $params['request_load']             = $request->get('request_load');
+                $tmp                                = self::getWallpapersByProductRelated($idProduct, $arrayIdTag, $language, $params);
             }else {
-                $link           = empty($language)||$language=='vi' ? '/'.$wallpaper->seo->slug_full : '/'.$wallpaper->en_seo->slug_full;
-                $wallpaperName    = $wallpaper->name ?? null;
-                foreach($wallpaper->prices as $price){
-                    foreach($price->wallpapers as $w){
-                        $content .= view('wallpaper.template.perWallpaperItem', [
-                            'idProduct'     => $w->id,
-                            'idPrice'       => $price->id,
-                            'wallpaper'     => $w, 
-                            'productName'   => $wallpaperName,
-                            'link'          => $link,
-                            'language'      => $language,
-                            'lazyload'      => true
-                        ]);
+                /* trường hợp tải từ category & tag */
+                $params['filters']                  = $request->get('filters') ?? [];
+                $params['search']                   = $request->get('search') ?? null;
+                $params['loaded']                   = $request->get('loaded');
+                $params['request_load']             = $request->get('request_load');
+                $params['array_category_info_id']   = json_decode($request->get('array_category_info_id'));
+                $params['array_tag_info_id']        = json_decode($request->get('array_tag_info_id'));
+                $params['sort_by']                  = Cookie::get('sort_by') ?? config('main_'.env('APP_NAME').'.sort_type')[0]['key'];
+                $tmp                                = self::getWallpapers($params, $language);
+            }
+            /* đổ theme lấy html */
+            foreach($tmp['wallpapers'] as $wallpaper){
+                if($viewBy=='each_set'){
+                    $content    .= view('wallpaper.template.wallpaperItem', [
+                        'product'   => $wallpaper,
+                        'language'  => $language,
+                        'lazyload'  => true
+                    ])->render();
+                }else {
+                    $link           = empty($language)||$language=='vi' ? '/'.$wallpaper->seo->slug_full : '/'.$wallpaper->en_seo->slug_full;
+                    $wallpaperName    = $wallpaper->name ?? null;
+                    foreach($wallpaper->prices as $price){
+                        foreach($price->wallpapers as $w){
+                            $content .= view('wallpaper.template.perWallpaperItem', [
+                                'idProduct'     => $w->id,
+                                'idPrice'       => $price->id,
+                                'wallpaper'     => $w, 
+                                'productName'   => $wallpaperName,
+                                'link'          => $link,
+                                'language'      => $language,
+                                'lazyload'      => true
+                            ]);
+                        }
                     }
                 }
             }
+            /* trả kết quả */
+            $response['content']    = $content;
+            $response['loaded']     = $tmp['loaded'];
+            $response['total']      = $tmp['total'];
         }
-        $response['content']    = $content;
-        $response['loaded']     = $tmp['loaded'];
-        $response['total']      = $tmp['total'];
+        
         return json_encode($response);
     }
 
@@ -66,7 +81,7 @@ class CategoryMoneyController extends Controller {
         $arrayIdTag     = $params['array_tag_info_id'] ?? [];
         $requestLoad    = $params['request_load'] ?? 10;
         $response       = [];
-        $wallpapers = Product::select('product_info.*')
+        $wallpapers     = Product::select('product_info.*')
                             ->join('seo', 'seo.id', '=', 'product_info.seo_id')
                             ->whereHas('prices.wallpapers', function() {})
                             ->whereHas('seos.infoSeo', function ($query) use ($language, $keySearch) {
@@ -141,6 +156,31 @@ class CategoryMoneyController extends Controller {
         $response['wallpapers'] = $wallpapers;
         $response['total']      = $total;
         $response['loaded']     = $loaded + $requestLoad;
+        return $response;
+    }
+
+    public static function getWallpapersByProductRelated($idProduct, $arrayIdTag, $language, $params){
+        /* hàm này nhận vào idProduct + arrayTag (đã xử lý) để dùng cho nhiều chỗ nhưng cần tối thiểu câu query 
+            ==== thuật toán : Lấy những sản phẩm liên quan sắp xếp giảm dần theo số lượng tag trùng
+        */
+        $response                       = [];
+        $tmp                            = Product::select('product_info.*')
+                                                ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                                                    $query->where('language', $language);
+                                                })
+                                                ->join('relation_tag_info_orther as rt', 'product_info.id', '=', 'rt.reference_id')
+                                                ->where('rt.reference_type', 'product_info')
+                                                ->whereIn('rt.tag_info_id', $arrayIdTag)
+                                                ->where('product_info.id', '!=', $idProduct)
+                                                ->selectRaw('COUNT(rt.tag_info_id) as common_tags_count')
+                                                ->groupBy('product_info.id', 'product_info.seo_id', 'product_info.code', 'product_info.sold', 'product_info.created_at', 'product_info.updated_at', 'product_info.price', 'product_info.price_before_promotion', 'product_info.sale_off')
+                                                ->orderByDesc('common_tags_count')
+                                                ->with('tags')
+                                                ->get();
+        $response['wallpapers']         = $tmp->slice($params['loaded'], $params['request_load'])->values();
+        $response['loaded']             = $params['loaded'] + $response['wallpapers']->count();
+        $response['total']              = $tmp->count();
+
         return $response;
     }
 }

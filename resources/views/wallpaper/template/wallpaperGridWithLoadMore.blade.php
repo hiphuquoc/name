@@ -13,6 +13,7 @@
     <input type="hidden" id="js_loadMoreWallpaper_array_tag_info_id" value="[]" />
 @endif
 <input type="hidden" id="js_loadMoreWallpaper_sort_by" value="{{ $sortBy ?? null }}" />
+<input type="hidden" id="js_loadMoreWallpaper_id_product" value="{{ $idProduct ?? 0 }}" />
 {{-- <input type="hidden" id="js_loadMoreWallpaper_view_by" value="{{ Cookie::get('view_by') ?? 'each_set' }}" /> --}}
 <!-- box -->
 <div id="js_loadMoreWallpaper_box" class="wallpaperGridBox">
@@ -73,6 +74,7 @@
             params.array_category_info_id = $('#js_loadMoreWallpaper_array_category_info_id').val();
             params.array_tag_info_id = $('#js_loadMoreWallpaper_array_tag_info_id').val();
             params.request_load = requestLoad;
+            params.id_product = $('#js_loadMoreWallpaper_id_product').val();
             $.ajax({
                 url: '{{ route("main.category.loadMoreWallpaper") }}',
                 type: 'get',
