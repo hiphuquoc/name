@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class CategoryMoneyController extends Controller {
 
     public static function loadMoreWallpaper(Request $request){
-        $response                                   = [];
+        $language                                   = SettingController::getLanguage();
+        $viewBy                                     = Cookie::get('view_by') ?? 'each_set';
+        $response                                   = [
+            'content'   => '<div>'.config('language.'.$language.'.data.no_suitable_results_found').'</div>',
+        ];
         if($request->get('loaded')<$request->get('total')){
-            $language                               = SettingController::getLanguage();
-            $viewBy                                 = Cookie::get('view_by') ?? 'each_set';
-            $content                                = '';
             $params                                 = [];
             if(!empty($request->get('id_product'))){
                 /* trường hợp tải theo product liên quan */
@@ -38,6 +39,7 @@ class CategoryMoneyController extends Controller {
                 $tmp                                = self::getWallpapers($params, $language);
             }
             /* đổ theme lấy html */
+            $content                                = '';
             foreach($tmp['wallpapers'] as $wallpaper){
                 if($viewBy=='each_set'){
                     $content    .= view('wallpaper.template.wallpaperItem', [
@@ -68,7 +70,6 @@ class CategoryMoneyController extends Controller {
             $response['loaded']     = $tmp['loaded'];
             $response['total']      = $tmp['total'];
         }
-        
         return json_encode($response);
     }
 
