@@ -162,8 +162,6 @@ class TranslateController extends Controller {
                     ]);
                     /* lấy prompt đang được áp dụng cho content */
                     $type       = $infoPage->seo->type;
-                    /* check xem phải category_type */
-                    $type       = HelperController::determinePageType($type);
                     $infoPrompt = Prompt::select('*')
                                     ->where('reference_name', 'content')
                                     ->where('type', 'translate_content')

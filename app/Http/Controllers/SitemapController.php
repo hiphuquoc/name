@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\DB;
+
+use App\Http\Controllers\Admin\HelperController;
 use App\Models\Seo;
 
 class SitemapController extends Controller {
 
     public static function main(){
-        $tmp        = Seo::all();
-        $arrayTable = [];
+        $tmp            = Seo::all();
+        $arrayTable     = [];
         foreach($tmp as $item){
-            if(!empty($item->type)&&!in_array($item->type, $arrayTable)) $arrayTable[] = $item->type;
+            if(!empty($item->type)){
+                $type   = HelperController::determinePageType($item->type);
+                if(!in_array($type, $arrayTable)) $arrayTable[] = $type;
+            }
         }
         /* viết dữ liệu */
         $sitemapXhtml       = '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
@@ -32,6 +37,33 @@ class SitemapController extends Controller {
 
     public static function child($name){
         if(!empty($name)){
+            /* kiểm tra xem có trong loại không */
+            $name               = HelperController::determinePageType($name);
+            /* viết dữ liệu */
+            $sitemapXhtml       = '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            foreach(config('language') as $language){
+                if(!empty($language['key'])){
+                    $language       = $language['key'];
+                    $url            = env('APP_URL').'/sitemap/'.$language.'/'.$name.'.xml';
+                    $mk             = time() - rand(3600, 84600);
+                    $sitemapXhtml   .= '<url>
+                                            <loc>'.$url.'</loc>
+                                            <lastmod>'.date('c', $mk).'</lastmod>
+                                            <changefreq>weekly</changefreq>
+                                            <priority>0.8</priority>
+                                        </url>';
+                }
+            }
+            $sitemapXhtml       .= '</urlset>';
+            /* response */
+            return response()->make($sitemapXhtml)->header('Content-Type', 'application/xml');
+        }
+        /* return 404 */
+        return \App\Http\Controllers\ErrorController::error404();
+    }
+
+    public static function childForLanguage($language, $name){
+        if(!empty($name)){
             $modelName      = config('tablemysql.'.$name.'.model_name');
             $modelInstance  = resolve("\App\Models\\$modelName");
             $items          = $modelInstance::select('*')
@@ -41,9 +73,10 @@ class SitemapController extends Controller {
                 $sitemapXhtml       = '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
                 foreach($items as $item){
                     foreach($item->seos as $seo){
-                        if(!empty($seo->infoSeo)){
+                        if(!empty($seo->infoSeo)&&$seo->infoSeo->language==$language){
+                            $url            = env('APP_URL').'/'.self::replaceSpecialCharactorXml($seo->infoSeo->slug_full);
                             $sitemapXhtml   .= '<url>
-                                                    <loc>'.env('APP_URL').'/'.$seo->infoSeo->slug_full.'</loc>
+                                                    <loc>'.$url.'</loc>
                                                     <lastmod>'.date('c', strtotime($seo->infoSeo->updated_at)).'</lastmod>
                                                     <changefreq>hourly</changefreq>
                                                     <priority>1</priority>
@@ -63,21 +96,18 @@ class SitemapController extends Controller {
         return \App\Http\Controllers\ErrorController::error404();
     }
 
-    public static function replaceSpecialCharactorXml($str){
-        $output         = null;
-        if(!empty($str)){
+    public static function replaceSpecialCharactorXml($str) {
+        if (!empty($str)) {
             $dataEscape = [
-                '&' => '&amp;',
+                '&' => '&amp;', // Phải thay thế & đầu tiên để tránh các lỗi khác
                 '<' => '&lt;',
                 '>' => '&gt;',
                 '"' => '&quot;',
                 "'" => '&apos;'
             ];
-            $output     = $str;
-            foreach($dataEscape as $key => $value){
-                $output = preg_replace('#'.$key.'#imsU', $value, $output);
-            }
+            // Sử dụng str_replace để thay thế nhanh và tránh lỗi từ regex
+            return str_replace(array_keys($dataEscape), array_values($dataEscape), $str);
         }
-        return $output;
+        return $str; // Trả về chuỗi nếu nó rỗng
     }
 }

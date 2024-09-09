@@ -123,8 +123,9 @@ class HelperController extends Controller {
             foreach($categoryType as $cType){
                 if($type==$cType['key']){
                     $response   = $categoryType[0]['key']; /* giá trị mặc định category_info */
+                    break;
                 }
-                break;
+                
             }
         }
         return $response;

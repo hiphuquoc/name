@@ -298,6 +298,7 @@ Route::get('/viewConfirm', [OrderPublic::class, 'viewConfirm'])->name('main.view
 /* sitemap */
 Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');
 Route::get('sitemap/{type}.xml', [SitemapController::class, 'child'])->name('sitemap.child');
+Route::get('sitemap/{language}/{type}.xml', [SitemapController::class, 'childForLanguage'])->name('sitemap.childForLanguage');
 /* AJAX */
 Route::get('/buildTocContentMain', [AjaxController::class, 'buildTocContentMain'])->name('main.buildTocContentMain');
 Route::get('/loadLoading', [AjaxController::class, 'loadLoading'])->name('ajax.loadLoading');
