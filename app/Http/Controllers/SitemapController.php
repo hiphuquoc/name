@@ -77,7 +77,7 @@ class SitemapController extends Controller {
                     foreach($item->seos as $seo){
                         if(!empty($seo->infoSeo)&&$seo->infoSeo->language==$language){
                             $url            = env('APP_URL').'/'.self::replaceSpecialCharactorXml($seo->infoSeo->slug_full);
-                            $urlImage       = env('APP_URL').Storage::url(config('main_name.logo_main'));
+                            $urlImage       = env('APP_URL').Storage::url(config('main_'.env('APP_NAME').'.logo_main'));
                             if(!empty($item->seo->image)) $urlImage   = Image::getUrlImageLargeByUrlImage($item->seo->image);
                             $sitemapXhtml   .= '<url>
                                                     <loc>'.$url.'</loc>
