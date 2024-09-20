@@ -6307,8 +6307,7 @@ label.checkBox input {
 }
 
 .wallpaperGridBox {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  display: flex;
   width: 100%;
   gap: 1rem 0.75rem;
   flex-wrap: wrap;
@@ -6318,7 +6317,7 @@ label.checkBox input {
   flex-wrap: unset !important;
 }
 .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
-  width: 100%;
+  width: calc(20% - 0.6rem);
 }
 .wallpaperGridBox_item {
   border-radius: 12px;
@@ -6613,14 +6612,16 @@ label.checkBox input {
   border-radius: 12px;
 }
 @media (max-width: 1799px) {
-  .wallpaperGridBox {
-    grid-template-columns: auto auto auto auto;
+  .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
+    width: calc(25% - 0.5625rem);
   }
 }
 @media (max-width: 1199px) {
   .wallpaperGridBox {
     gap: 0.875rem 0.625rem;
-    grid-template-columns: auto auto auto;
+  }
+  .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
+    width: calc(33.33% - 0.41438rem);
   }
   .wallpaperGridBox_item_image_content_price i, .wallpaperGridBox_itemBackground_image_content_price i {
     /* sửa chênh lệch khi thay đổi rem của i và text */
@@ -6630,20 +6631,26 @@ label.checkBox input {
 @media (max-width: 1023px) {
   .wallpaperGridBox {
     gap: 0.75rem 0.5rem;
-    grid-template-columns: auto auto auto auto;
+  }
+  .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
+    width: calc(25% - 0.375rem);
   }
   .wallpaperGridBox_item_image_content_title, .wallpaperGridBox_itemBackground_image_content_title {
     margin-bottom: 0.25rem;
   }
 }
 @media (max-width: 990px) {
-  .wallpaperGridBox {
-    grid-template-columns: auto auto auto;
+  .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
+    width: calc(33.33% - 0.331rem);
   }
 }
 @media (max-width: 767px) {
   .wallpaperGridBox {
     gap: 0.625rem 0.375rem;
+    grid-template-columns: auto auto auto;
+  }
+  .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
+    width: calc(33.33% - 0.25rem);
   }
   .wallpaperGridBox_item_image_content_title, .wallpaperGridBox_itemBackground_image_content_title {
     font-size: 0.875rem;
@@ -6663,7 +6670,9 @@ label.checkBox input {
 @media (max-width: 577px) {
   .wallpaperGridBox {
     gap: 0.5rem 0.25rem;
-    grid-template-columns: auto auto;
+  }
+  .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
+    width: calc(50% - 0.125rem);
   }
   .wallpaperGridBox_item_image_content_price i, .wallpaperGridBox_itemBackground_image_content_price i {
     /* sửa chênh lệch khi thay đổi rem của i và text */

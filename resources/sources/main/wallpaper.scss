@@ -1,6 +1,6 @@
 .wallpaperGridBox {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    display: flex;
+    // grid-template-columns: auto auto auto auto auto;
     width: 100%;
     gap: 1rem 0.75rem;
     flex-wrap: wrap;
@@ -30,7 +30,7 @@
         // }
     }
     &_item, &_itemBackground {
-        width: 100%;
+        width: calc(20% - 0.6rem);
     }
     &_item {
         border-radius: 12px;
@@ -278,16 +278,16 @@
         border-radius: 12px;
     }
     @media(max-width: 1799px){
-        grid-template-columns: auto auto auto auto;
-        // &_item, &_itemBackground {
-        //     width: calc(25% - 0.5625rem);
-        // }
+        // grid-template-columns: auto auto auto auto;
+        &_item, &_itemBackground {
+            width: calc(25% - 0.5625rem);
+        }
     }
     @media(max-width: 1199px){
         gap: 0.875rem 0.625rem;
-        grid-template-columns: auto auto auto;
+        // grid-template-columns: auto auto auto;
         &_item, &_itemBackground {
-            // width: calc(33.33% - 0.41438rem);
+            width: calc(33.33% - 0.41438rem);
             &_image {
                 &_content {
                     &_price {
@@ -303,9 +303,9 @@
     }
     @media(max-width: 1023px){
         gap: 0.75rem 0.5rem;
-        grid-template-columns: auto auto auto auto;
+        // grid-template-columns: auto auto auto auto;
         &_item, &_itemBackground {
-            // width: calc(25% - 0.375rem);
+            width: calc(25% - 0.375rem);
             &_image {
                 &_content {
                     &_title {
@@ -316,16 +316,16 @@
         }
     }
     @media(max-width: 990px){
-        grid-template-columns: auto auto auto;
+        // grid-template-columns: auto auto auto;
         &_item, &_itemBackground {
-            // width: calc(33.33% - 0.331rem);
+            width: calc(33.33% - 0.331rem);
         }
     }
     @media(max-width: 767px){
         gap: 0.625rem 0.375rem;
-        // grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto auto;
         &_item, &_itemBackground {
-            // width: calc(33.33% - 0.25rem);
+            width: calc(33.33% - 0.25rem);
             &_image {
                 &_content {
                     &_title {
@@ -350,9 +350,9 @@
     }
     @media(max-width: 577px){
         gap: 0.5rem 0.25rem;
-        grid-template-columns: auto auto;
+        // grid-template-columns: auto auto;
         &_item, &_itemBackground {
-            // width: calc(50% - 0.125rem);
+            width: calc(50% - 0.125rem);
             &_image {
                 &_content {
                     &_price {
