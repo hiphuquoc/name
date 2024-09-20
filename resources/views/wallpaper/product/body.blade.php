@@ -12,7 +12,8 @@
             $xhtmlContent = '';
             foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
         @endphp
-        <div class="contentBox" style="margin-bottom:0 !important;">
+        <!-- một thẻ div bao bọc để tránh bị display: flex; gap... -->
+        <div>
             {!! $xhtmlContent !!}
         </div>
     </div>
@@ -57,7 +58,7 @@
                             <div class="inputQty_button plus" onClick="plusMinusQuantity('js_addToCart_quantity', 'plus');"><i class="fa-solid fa-plus"></i></div>       
                         </div>                 
                     </div> --}}
-                    <div class="productDetailBox_detail_checkout_button" style="margin-left:0;">
+                    <div class="productDetailBox_detail_checkout_button">
                         <div class="show-1199">
                             @php
                                 $priceMobile    = \App\Helpers\Number::getFormatPriceByLanguage($item->price, $language);

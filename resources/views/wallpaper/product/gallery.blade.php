@@ -22,13 +22,18 @@
                         $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                         $image          = \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     @endphp
-                    <div class="galleryProductBox_item">
+                    <div class="galleryProductBox_item" onClick="toogleModalViewImageFull('{{ $i }}');">
                         {{-- @if($i<2)
                             <!-- thêm src và data-option để mô phỏng thẻ image dùng cho tính năng addToCart -->
                             <div class="galleryProductBox_item_backgroundImage" src="{{ $image }}" data-src="{{ $image }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="background:url('{{ $image }}') no-repeat center center / cover;"></div>
                         @else  --}}
-                            <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $image }}" alt="{{ $itemSeo->title }}" title="{{ $itemSeo->title }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="filter:blur(8px);" />
+                            <div class="zIndexHide">
+                                <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $image }}" alt="{{ $itemSeo->title }}" title="{{ $itemSeo->title }}" data-option="js_addToCart_option_{{ $price->id }}" style="filter:blur(8px);" />
+                            </div>
                         {{-- @endif --}}
+                        <div class="galleryProductBox_item_background"></div>
+                        <div class="galleryProductBox_item_backgroundTopMore"></div>
+                        <div class="galleryProductBox_item_backgroundSideMore"></div>
                     </div>
                     @php
                         ++$i;

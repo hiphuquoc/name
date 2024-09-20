@@ -1,14 +1,16 @@
 <div class="cartBox">
-    <a href="{{ $urlPageCart ?? '/' }}" class="cartBox_icon">
-        <img src="{{ Storage::url('images/svg/icon-cart-header.svg') }}" alt="{{ config('language.'.$language.'.data.cart') }}" title="{{ config('language.'.$language.'.data.cart') }}" />
-        <div id="js_updateCart_count" class="cartBox_icon_number">
-            {{ $detailCart['count'] ?? 0 }}
+    <a href="{{ $urlPageCart ?? '/' }}" class="cartBox_show">
+        <div class="cartBox_show_icon">
+            <img src="{{ Storage::url('images/svg/icon-cart-header.svg') }}" alt="{{ config('language.'.$language.'.data.cart') }}" title="{{ config('language.'.$language.'.data.cart') }}" />
+            <div id="js_updateCart_count" class="cartBox_show_icon_number">
+                {{ $detailCart['count'] ?? 0 }}
+            </div>
         </div>
+        <div class="cartBox_show_text">{{ config('language.'.$language.'.data.cart') }}</div>
     </a>
-    <a href="{{ $urlPageCart ?? '/' }}" class="cartBox_text">{{ config('language.'.$language.'.data.cart') }}</a>
     <div id="js_checkEmptyCart_idWrite" class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
-            <div class="customScrollBar-y" style="max-height:420px;">
+            <div class="customScrollBar-y">
                 @foreach($products as $product)
                     <!-- trường hợp trọn bộ -->
                     @if(count($product->cart['product_price_id'])>=$product->prices->count())

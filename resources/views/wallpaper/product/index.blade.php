@@ -44,36 +44,34 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="container">        
-        <div class="breadcrumbMobileBox">
-            @include('wallpaper.template.breadcrumb')
-        </div>
-        <!-- share social -->
-        @include('wallpaper.template.shareSocial')
-        <!-- content -->
-        <div class="contentBox maxContent-1200">
-            
-            <!-- Gallery và Product detail -->
-            @include('wallpaper.product.body')
-            
-            <!-- Related -->
-            @if($total>0)
-            <div class="contentBox">
-                <div class="relatedProductBox">
-                    <div class="relatedProductBox_title">
-                        <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
-                    </div>
-                    <div class="relatedProductBox_box">
-                        @include('wallpaper.template.wallpaperGridWithLoadMore', [
-                            'loaded'            => 0,
-                            'total'             => $total,
-                            'idProduct'         => $item->id,
-                        ])
-                    </div>
+    <div class="breadcrumbMobileBox">
+        @include('wallpaper.template.breadcrumb')
+    </div>
+    <!-- share social -->
+    @include('wallpaper.template.shareSocial')
+    <!-- content -->
+    <div class="contentBox maxContent-1200">
+        
+        <!-- Gallery và Product detail -->
+        @include('wallpaper.product.body')
+        
+        <!-- Related -->
+        @if($total>0)
+        <div class="contentBox">
+            <div class="relatedProductBox">
+                <div class="relatedProductBox_title">
+                    <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
+                </div>
+                <div class="relatedProductBox_box">
+                    @include('wallpaper.template.wallpaperGridWithLoadMore', [
+                        'loaded'            => 0,
+                        'total'             => $total,
+                        'idProduct'         => $item->id,
+                    ])
                 </div>
             </div>
-            @endif
         </div>
+        @endif
     </div>
 @endsection
 @push('modal')

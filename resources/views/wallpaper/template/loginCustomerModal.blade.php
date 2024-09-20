@@ -1,6 +1,7 @@
 @php
     $randomWallpaper = \App\Models\FreeWallpaper::inRandomOrder()->first();
 @endphp
+<form id="formLogin" method="get" style="width:100%;">
 <div id="modalLoginFormCustomerBox" class="modalLoginFormCustomerBox">
     <!-- modal background -->
     <div class="modalLoginFormCustomerBox_bg" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"></div>
@@ -8,9 +9,10 @@
     <div class="modalLoginFormCustomerBox_box">
         <div class="modalLoginFormCustomerBox_box_left" style="background:url('{{ \App\Helpers\Image::getUrlImageCloud($randomWallpaper->file_cloud) }}') no-repeat center;background-size: cover;">
         </div>
-        
         <div class="modalLoginFormCustomerBox_box_right">
-            <form id="formLogin" method="get" style="width:100%;">
+            <!-- close -->
+            <div class="modalLoginFormCustomerBox_box_right_close" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"><i class="fa-solid fa-xmark"></i></div>
+            <!-- form -->
             <div class="loginFormCustomer">
                 <div class="loginFormCustomer_title">
                     @if(!empty($language)&&$language=='en')
@@ -58,70 +60,56 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @if(!empty($language)&&$language=='en')
-                        <div class="loginFormCustomer_body_item">
-                            <!-- button -->
-                            <button type="button" class="button" onClick="submitFormLogin('formLogin');">Login</div>
-                        </div>
-                        {{-- <div class="loginFormCustomer_body_item">
-                            Don't have a password yet? <a href="#">Registry now</a>
-                        </div>   --}}
-                    @else 
                         <div class="loginFormCustomer_body_item">
                             <!-- button -->
                             <button type="button" class="button" onClick="submitFormLogin('formLogin');">Đăng nhập</div>
-                        </div>
-                        {{-- <div class="loginFormCustomer_body_item">
-                            Bạn chưa có mật khẩu? <a href="#">Đăng ký ngay</a>
-                        </div>   --}}
-                    @endif
-                    <div class="loginFormCustomer_body_item">
-                        <!-- login social -->
-                        <div class="loginFormSocial">
-                            @if(!empty($language)&&$language=='en')
-                                <div class="loginFormSocial_title">
-                                    or login with
-                                </div>
-                            @else 
-                                <div class="loginFormSocial_title">
-                                    hoặc đăng nhập với
-                                </div>
-                            @endif
-                            <div class="loginFormSocial_body">
-                                <div class="loginFormSocial_body_item">
-                                    <div id="g_id_onload" 
-                                        data-_token="{{ csrf_token() }}" 
-                                        data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}" 
-                                        data-context="signin"
-                                        data-ux_mode="popup"
-                                        data-login_uri="{{ env('APP_URL') }}/auth/google/callback" 
-                                        data-auto_prompt="false"
-                                        data-auto_select="true"
-                                        data-itp_support="true">
+                            <!-- đăng nhập google -->
+                            <!-- login social -->
+                            <div class="loginFormSocial">
+                                @if(!empty($language)&&$language=='en')
+                                    <div class="loginFormSocial_title">
+                                        or login with
                                     </div>
+                                @else 
+                                    <div class="loginFormSocial_title">
+                                        hoặc đăng nhập với
+                                    </div>
+                                @endif
+                                <div class="loginFormSocial_body">
+                                    <div class="loginFormSocial_body_item">
+                                        <div id="g_id_onload" 
+                                            data-_token="{{ csrf_token() }}" 
+                                            data-client_id="{{ env('GOOGLE_DRIVE_CLIENT_ID') }}" 
+                                            data-context="signin"
+                                            data-ux_mode="popup"
+                                            data-login_uri="{{ env('APP_URL') }}/auth/google/callback" 
+                                            data-auto_prompt="false"
+                                            data-auto_select="true"
+                                            data-itp_support="true">
+                                        </div>
 
-                                    <div class="g_id_signin"
-                                        data-type="standard"
-                                        data-shape="rectangular"
-                                        data-theme="filled_white"
-                                        data-text="signin_with"
-                                        data-size="large"
-                                        data-logo_alignment="left">
+                                        <div class="g_id_signin"
+                                            data-type="standard"
+                                            data-shape="rectangular"
+                                            data-theme="filled_white"
+                                            data-text="signin_with"
+                                            data-size="large"
+                                            data-logo_alignment="left">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="loginFormSocial_body_item">
-                                    @php
-                                        if(!empty($language)&&$language=='en'){
-                                            $buttonTitleLoginWithFB = 'Login with Facebook';
-                                        }else {
-                                            $buttonTitleLoginWithFB = 'Đăng nhập với Facebook';
-                                        }
-                                    @endphp
-                                    <a class="facebookButtonLogin" href="{{ route('main.facebook.redirect') }}">
-                                        <img src="{{ Storage::url('images/svg/logo-facebook-fff.png') }}" alt="{{ $buttonTitleLoginWithFB }}" title="{{ $buttonTitleLoginWithFB }}" />
-                                        <div>{{ $buttonTitleLoginWithFB }}</div>
-                                    </a>
+                                    <div class="loginFormSocial_body_item">
+                                        @php
+                                            if(!empty($language)&&$language=='en'){
+                                                $buttonTitleLoginWithFB = 'Login with Facebook';
+                                            }else {
+                                                $buttonTitleLoginWithFB = 'Đăng nhập với Facebook';
+                                            }
+                                        @endphp
+                                        <a class="facebookButtonLogin" href="{{ route('main.facebook.redirect') }}">
+                                            <img src="{{ Storage::url('images/svg/logo-facebook-fff.png') }}" alt="{{ $buttonTitleLoginWithFB }}" title="{{ $buttonTitleLoginWithFB }}" />
+                                            <div>{{ $buttonTitleLoginWithFB }}</div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -130,11 +118,11 @@
                 </div>
                 
             </div>
-            </form>
         </div>
     </div>
     
 </div>
+</form>
 {{-- @push('scriptCustom') --}}
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script type="text/javascript">        

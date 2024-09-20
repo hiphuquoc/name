@@ -12,12 +12,7 @@
             </button>
         </div>
         <div id="js_searchProductAjax_idWrite" class="searchViewBefore_selectbox">
-            <div class="searchViewBefore_selectbox_item">
-                <div>
-                    <img src="/storage/images/svg/icon-search-100.png" alt="{{ $labelName }}" title="{{ $labelName }}" style="width:120px;margin:0.75rem auto;" />
-                    {{-- <div>Nhập tìm kiếm của bạn!</div> --}}
-                </div>
-            </div>
+            @include('wallpaper.template.emptySearch')
         </div>
         <div class="searchViewBefore_background" onClick="closeBoxSearchMobile();"></div>
     </div>

@@ -43,63 +43,57 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="container">
-        <div class="breadcrumbMobileBox">
-            @include('wallpaper.template.breadcrumb')
-        </div>
-        <!-- share social -->
-        @include('wallpaper.template.shareSocial')
-        <!-- content -->
-        <div class="contentBox">
-            <div style="display:flex;">
-                @php
-                    $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
-                    if($item->seo->level==1) $titlePage = $itemSeo->title;
-                @endphp
-                <h1>{{ $titlePage }}</h1>
-            </div>
-            <!-- Sort Box -->
-            @include('wallpaper.tag.sort', [
-                'language'          => $language ?? 'vi',
-                'total'             => $total
-            ])
-            <!-- Product Box -->
-            <!-- load more -->
-            <input type="hidden" id="total" name="total" value="{{ $total }}" />
-            <input type="hidden" id="loaded" name="loaded" value="{{ $loaded ?? 0 }}" />
-            <input type="hidden" id="topLoad" name="topLoad" value="" />
-            <input type="hidden" id="typeWhere" name="typeWhere" value="{{ $typeWhere ?? 'or' }}" />
-            <input type="hidden" id="arrayIdCategory" name="arrayIdCategory" value="{{ json_encode($arrayIdCategory) }}" />
-            <div class="freeWallpaperBox">
-                @if($total>0)
-                    @foreach($wallpapers as $wallpaper)
-                        @include('wallpaper.category.item', [
-                            'wallpaper' => $wallpaper,
-                            'language'  => $language,
-                            'user'      => $user ?? null
-                        ])
-                    @endforeach
-                @else 
-                    <div>{{ config('language.'.$language.'.data.no_suitable_results_found') }}</div>
-                @endif
-            </div>
-        </div>
-        <!-- Nội dung -->
-        @if(!empty($itemSeo->contents))
-            <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
-                <div id="tocContentMain"></div>
-                @php
-                    $xhtmlContent = '';
-                    foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
-                @endphp
-                {!! $xhtmlContent !!}
-            </div>
-        @endif
-        {{-- <div class="categoryWithFilterBox_filter">
-            @include('main.tag.sidebarContent')
-        </div> --}}
-        
+    <div class="breadcrumbMobileBox">
+        @include('wallpaper.template.breadcrumb')
     </div>
+    <!-- share social -->
+    @include('wallpaper.template.shareSocial')
+    <!-- content -->
+    <div class="contentBox">
+        <div style="display:flex;">
+            @php
+                $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
+                if($item->seo->level==1) $titlePage = $itemSeo->title;
+            @endphp
+            <h1>{{ $titlePage }}</h1>
+        </div>
+        <!-- Sort Box -->
+        @include('wallpaper.tag.sort', [
+            'language'          => $language ?? 'vi',
+            'total'             => $total
+        ])
+        <!-- Product Box -->
+        <!-- load more -->
+        <input type="hidden" id="total" name="total" value="{{ $total }}" />
+        <input type="hidden" id="loaded" name="loaded" value="{{ $loaded ?? 0 }}" />
+        <input type="hidden" id="topLoad" name="topLoad" value="" />
+        <input type="hidden" id="typeWhere" name="typeWhere" value="{{ $typeWhere ?? 'or' }}" />
+        <input type="hidden" id="arrayIdCategory" name="arrayIdCategory" value="{{ json_encode($arrayIdCategory) }}" />
+        <div class="freeWallpaperBox">
+            @if($total>0)
+                @foreach($wallpapers as $wallpaper)
+                    @include('wallpaper.category.item', [
+                        'wallpaper' => $wallpaper,
+                        'language'  => $language,
+                        'user'      => $user ?? null
+                    ])
+                @endforeach
+            @else 
+                <div>{{ config('language.'.$language.'.data.no_suitable_results_found') }}</div>
+            @endif
+        </div>
+    </div>
+    <!-- Nội dung -->
+    @if(!empty($itemSeo->contents))
+        <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
+            <div id="tocContentMain"></div>
+            @php
+                $xhtmlContent = '';
+                foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+            @endphp
+            {!! $xhtmlContent !!}
+        </div>
+    @endif
 @endsection
 @push('modal')
     <!-- Message Add to Cart -->

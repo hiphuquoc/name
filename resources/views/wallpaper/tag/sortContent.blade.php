@@ -132,7 +132,7 @@
         <div class="sortBox_right_item">
             <!-- số lượng -->
             <span class="quantity maxLine_1">
-                {{ config('language.'.$language.'.data.photo_set') }} {{ $total }}
+                <div class="maxLine_1">{{ config('language.'.$language.'.data.photo_set') }} {{ $total }}</div>
             </span> 
         </div>
     </div>

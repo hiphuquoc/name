@@ -43,53 +43,50 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="container">
-        <div class="breadcrumbMobileBox">
-            @include('wallpaper.template.breadcrumb')
-        </div>
-        <!-- share social -->
-        @include('wallpaper.template.shareSocial')
-        <!-- content -->
-        <div class="contentBox">
-            <div style="display:flex;">
-                @php
-                    $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
-                    if($item->seo->level==1) $titlePage = $itemSeo->title;
-                @endphp
-                <h1>{{ $titlePage }}</h1>
-            </div>
-            <!-- Sort Box -->
-            @include('wallpaper.category.sort', [
-                'language'          => $language ?? 'vi',
-                'total'             => $total
-            ])
-            <!-- Box 
-                vừa vào tải 0 phần tử -> tất cả tải bằng ajax
-            -->
-            @include('wallpaper.category.box', [
-                'wallpapers'        => new \Illuminate\Database\Eloquent\Collection,
-                'total'             => $total,
-                'loaded'            => 0,
-                'arrayIdCategory'   => $arrayIdCategory,
-                'language'          => $language
-            ])
-        </div>
-        <!-- Nội dung -->
-        @if(!empty($itemSeo->contents))
-            <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
-                <div id="tocContentMain"></div>
-                @php
-                    $xhtmlContent = '';
-                    foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
-                @endphp
-                {!! $xhtmlContent !!}
-            </div>
-        @endif
-        {{-- <div class="categoryWithFilterBox_filter">
-            @include('main.category.sidebarContent')
-        </div> --}}
-        
+    <div class="breadcrumbMobileBox">
+        @include('wallpaper.template.breadcrumb')
     </div>
+    <!-- share social -->
+    @include('wallpaper.template.shareSocial')
+    <!-- content -->
+    <div class="contentBox">
+        <div style="display:flex;">
+            @php
+                $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
+                if($item->seo->level==1) $titlePage = $itemSeo->title;
+            @endphp
+            <h1>{{ $titlePage }}</h1>
+        </div>
+        <!-- Sort Box -->
+        @include('wallpaper.category.sort', [
+            'language'          => $language ?? 'vi',
+            'total'             => $total
+        ])
+        <!-- Box 
+            vừa vào tải 0 phần tử -> tất cả tải bằng ajax
+        -->
+        @include('wallpaper.category.box', [
+            'wallpapers'        => new \Illuminate\Database\Eloquent\Collection,
+            'total'             => $total,
+            'loaded'            => 0,
+            'arrayIdCategory'   => $arrayIdCategory,
+            'language'          => $language
+        ])
+    </div>
+    <!-- Nội dung -->
+    @if(!empty($itemSeo->contents))
+        <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
+            <div id="tocContentMain"></div>
+            @php
+                $xhtmlContent = '';
+                foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+            @endphp
+            {!! $xhtmlContent !!}
+        </div>
+    @endif
+    {{-- <div class="categoryWithFilterBox_filter">
+        @include('main.category.sidebarContent')
+    </div> --}}
 @endsection
 @push('modal')
     <!-- Message Add to Cart -->

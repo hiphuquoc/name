@@ -52,8 +52,7 @@ class AjaxController extends Controller {
 
                 })
                 ->whereHas('seos.infoSeo', function($query) use($keySearch, $language){
-                    $query->where('title', 'like', '%'.$keySearch.'%')
-                            ->where('language', $language);
+                    $query->where('title', 'like', '%'.$keySearch.'%');
                 })
                 ->orWhere('code', 'like', '%'.$keySearch.'%')
                 ->skip(0)
@@ -64,8 +63,7 @@ class AjaxController extends Controller {
                         
                 })
                 ->whereHas('seos.infoSeo', function($query) use($keySearch, $language){
-                    $query->where('title', 'like', '%'.$keySearch.'%')
-                            ->where('language', $language);
+                    $query->where('title', 'like', '%'.$keySearch.'%');
                 })
                 ->orWhere('code', 'like', '%'.$keySearch.'%')
                 ->count();
@@ -76,34 +74,38 @@ class AjaxController extends Controller {
                     foreach($product->seos as $seo){
                         if($seo->infoSeo->language==$language) $infoSeoProduct = $seo->infoSeo;
                     }
-                    $title      = $infoSeoProduct->title ?? '';
-                    $url        = $infoSeoProduct->slug_full ?? '';
-                    $priceOld   = null;
-                    if($product->prices<$product->price_before_promotion) {
-                        $priceOld   = '<div class="searchViewBefore_selectbox_item_content_price_old">'.\App\Helpers\Number::getFormatPriceByLanguage($product->price_before_promotion, $language).'</div>';
+                    if(!empty($infoSeoProduct)){
+                        $title      = $infoSeoProduct->title;
+                        $url        = $infoSeoProduct->slug_full;
+                        $priceOld   = null;
+                        if($product->prices<$product->price_before_promotion) {
+                            $priceOld   = '<div class="searchViewBefore_selectbox_item_content_price_old">'.\App\Helpers\Number::getFormatPriceByLanguage($product->price_before_promotion, $language).'</div>';
+                        }
+                        $image      = Storage::url(config('image.loading_main_gif'));
+                        if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)) $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
+                        $response   .= '<a href="/'.$url.'" class="searchViewBefore_selectbox_item">
+                                            <div class="searchViewBefore_selectbox_item_image">
+                                                <img src="'.$image.'" alt="'.$title.'" title="'.$title.'" />
+                                            </div>
+                                            <div class="searchViewBefore_selectbox_item_content">
+                                                <div class="searchViewBefore_selectbox_item_content_title maxLine_2">
+                                                    '.$title.'
+                                                </div>
+                                                <div class="searchViewBefore_selectbox_item_content_price">
+                                                    <div>'.\App\Helpers\Number::getFormatPriceByLanguage($product->price, $language).'</div>
+                                                    '.$priceOld.'
+                                                </div>
+                                            </div>
+                                        </a>';
                     }
-                    $image      = Storage::url(config('image.loading_main_gif'));
-                    if(!empty($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)) $image = \App\Helpers\Image::getUrlImageMiniByUrlImage($product->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
-                    $response   .= '<a href="/'.$url.'" class="searchViewBefore_selectbox_item">
-                                        <div class="searchViewBefore_selectbox_item_image">
-                                            <img src="'.$image.'" alt="'.$title.'" title="'.$title.'" />
-                                        </div>
-                                        <div class="searchViewBefore_selectbox_item_content">
-                                            <div class="searchViewBefore_selectbox_item_content_title maxLine_2">
-                                                '.$title.'
-                                            </div>
-                                            <div class="searchViewBefore_selectbox_item_content_price">
-                                                <div>'.\App\Helpers\Number::getFormatPriceByLanguage($product->price, $language).'</div>
-                                                '.$priceOld.'
-                                            </div>
-                                        </div>
-                                    </a>';
                 }
                 $url                = route('routing', ['slug' => config('language.'.$language.'.slug_page')]).'?search='.$keySearch;
-                $contentButton      = config('language.'.$language.'.data.view_all').' (<span>'.$count.'</span>) <i class="fa-solid fa-angles-right"></i>';
-                $response           .= '<a href="'.$url.'" class="searchViewBefore_selectbox_item">'.$contentButton.'</a>';
+                $response           .= '<a href="'.$url.'" class="searchViewBefore_selectbox_item viewAll">
+                                            <div>'.config('language.'.$language.'.data.view_all').' (<span>'.$count.'</span>)</div>
+                                            <i class="fa-solid fa-angles-right"></i>
+                                        </a>';
             }else {
-                $response       = '<div class="searchViewBefore_selectbox_item">'.config('language.'.$language.'.data.no_suitable_results_found').'</div>';
+                $response           = view('wallpaper.template.emptySearch')->render();
             }
             echo $response;
         }

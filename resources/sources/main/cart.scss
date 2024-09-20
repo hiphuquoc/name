@@ -1,14 +1,18 @@
 .pageCartBox {
     display: flex;
     align-items: stretch;
+    gap: 1.5rem;
     &_left {
         width: calc(100% - 320px - 1.5rem);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
         &_item {
             background: $colorBackgroundLv2;
             border-radius: 10px;
-            &:not(:last-child){
-                margin-bottom: 1.5rem;
-            }
+            // &:not(:last-child){
+            //     margin-bottom: 1.5rem;
+            // }
             &_head {
                 font-size: 1rem;
                 padding: 0.5rem 1rem 1rem;
@@ -21,7 +25,6 @@
         }
     }
     &_right {
-        margin-left: 1.5rem;
         width: 320px;
     }
     ul {
@@ -29,21 +32,11 @@
     }
     @media(max-width: 1199px){
         flex-direction: column;
+        gap: 1.25rem;
         &_left {
             width: 100%;
-        }
-        &_right {
-            margin-left: auto;
-            margin-top: 1.5rem;
-            width: 100%;
-        }
-    }
-    @media(max-width: 1023px){
-        &_left {
+            gap: 1rem;
             &_item {
-                &:not(:last-child){
-                    margin-bottom: 1.25rem;
-                }
                 &_head {
                     padding: 0.5rem 0.75rem 0.75rem;
                 }
@@ -53,31 +46,26 @@
             }
         }
         &_right {
-            margin-top: 1.25rem;
+            width: 100%;
         }
     }
-    @media(max-width: 766px){
+    @media(max-width: 1023px){
+        gap: 1rem;
         &_left {
-            &_item {
-                &:not(:last-child){
-                    margin-bottom: 0.75rem;
-                }
-            }
-        }
-        &_right {
-            margin-top: 0.75rem;
+            gap: 1rem;
         }
     }
+    @media(max-width: 767px){
+        gap: 0.75rem;
+        &_left {
+            gap: 0.75rem;
+        }
+    }
+    /* nếu khoảng cách chiều đứng +0.25rem => nên không cần định dạng 577px */
     @media(max-width: 577px){
+        // gap: 0.5rem;
         &_left {
-            &_item {
-                &:not(:last-child){
-                    margin-bottom: 0.5rem;
-                }
-            }
-        }
-        &_right {
-            margin-top: 0.5rem;
+            gap: 0.5rem;
         }
     }
 }
@@ -99,6 +87,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 0.75rem;
             &:not(:first-child){
                 margin-top: 0.5rem;
                 padding-top: 0.5rem;
@@ -110,7 +99,6 @@
                     color: $colorPrice;
                     font-size: 1.2rem;
                     letter-spacing: 0.5px;
-                    margin-left: 0.5rem;
                 }
             }
         }
@@ -155,7 +143,12 @@
             }
             &:nth-child(2){
                 flex: 0 0 150px;
-                text-align: right;
+                [dir="ltr"] & {
+                    text-align: right;
+                }
+                [dir="rtl"] & {
+                    text-align: left;
+                }
             }
             &:nth-child(3){
                 flex: 0 0 170px;
@@ -164,7 +157,12 @@
             }
             &:nth-child(4){
                 flex: 0 0 130px;
-                text-align: right;
+                [dir="ltr"] & {
+                    text-align: right;
+                }
+                [dir="rtl"] & {
+                    text-align: left;
+                }
             }
             &:first-child {
                 padding-left: 0;
@@ -200,6 +198,7 @@
             &_info {
                 display: flex;
                 align-items: stretch;
+                gap: 0.75rem;
                 &_image {
                     flex: 0 0 65px;
                     aspect-ratio: 1/1;
@@ -215,7 +214,7 @@
                 }
                 &_content {
                     width: 100%;
-                    margin-left: 0.75rem;
+                    // margin-left: 0.75rem;
                     display: flex;
                     flex-direction: column;
                     &_title {
@@ -265,9 +264,14 @@
                 &_icon {
                     margin-top: auto;
                     img {
-                        float: right;
                         width: 22px;
                         cursor: pointer;
+                        [dir="ltr"] & {
+                            float: right;
+                        }
+                        [dir="rtl"] & {
+                            float: left;
+                        }
                         &:hover {
                             width: 25px;
                         }
@@ -337,8 +341,7 @@
                 }
                 &_price {
                     position: absolute;
-                    bottom: 0;
-                    right: 0;
+                    
                     order: 4;
                     margin-top: -2.25rem;
                     display: flex;
@@ -349,6 +352,13 @@
                     flex: 0 0 100% !important;
                     flex-direction: row;
                     justify-content: flex-end;
+                    right: 0;
+                    [dir="ltr"] & {
+                        bottom: 0;
+                    }
+                    [dir="rtl"] & {
+                        left: 0;
+                    }
                     &_now {
                         order: 2;
                         margin-right: 1rem;
@@ -423,24 +433,27 @@
     &_box {
         background: $colorBackgroundLv2;
         box-shadow: 1px 1px 5px $colorBackgroundLv1;
-        max-width: 480px;
+        max-width: 520px;
         width: 100%;
-        padding: 1rem 1.25rem;
+        padding: 0.875rem 1.25rem 1.25rem;
         position: relative;
         border-radius: 10px;
+        margin: 0 0.5rem;
         &_head {
             margin-bottom: 1rem;
             position: relative;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: $colorText;
             font-family: $fontTitle;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            display: flex;
+            gap: 0.5rem;
             &:before {
                 @include fontAwesome;
                 content: '\f00c';
-                color: $colorSuccess;
-                margin-right: 0.25rem;
                 font-size: 1.2rem;
+                color: $colorLv2;
+                text-shadow: 0 0 $colorTextLight;
             }
         }
         &_close {
@@ -448,13 +461,22 @@
         }
         &_body {
             display: flex;
-            margin-bottom: 1.5rem;
+            gap: 1rem;
+            background: $colorBackgroundLv1;
+            border-radius: 10px;
+            padding: 1.125rem 1rem;
+            margin-bottom: 1.25rem;
             &_image {
                 flex: 0 0 90px;
                 aspect-ratio: 1/1;
-                border-radius: 10px;
                 overflow: hidden;
                 display: flex;
+                [dir="ltr"] & {
+                    border-radius: 10px 0 0 10px;
+                }
+                [dir="rtl"] & {
+                    border-radius: 0 10px 10px 0;
+                }
                 img {
                     width: 100%;
                     object-fit: cover;
@@ -464,22 +486,24 @@
             }
             &_content {
                 width: 100%;
-                margin-left: 1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
                 &_title {
-                    line-height: 1.5;
                     color: inherit;
-                    margin-bottom: 0.5rem;
+                    // margin-bottom: 0.5rem;
                     margin-top: -0.25rem;
                 }
                 &_price {
                     color: $colorPrice;
                     font-weight: bold;
                     letter-spacing: 2px;
-                    font-size: 0.9rem;
+                    font-size: 1rem;
                     > span {
                         font-weight: normal;
                         @include colorOpacity('color', $colorText, 0.6);
                         letter-spacing: 0;
+                        font-size: 0.9rem;
                     }
                 }
                 &_type {
@@ -507,30 +531,39 @@
     }
     @media(max-width: 1023px){
         &_box {
-            top: 0;
-            padding: 1rem 1.25rem 1.25rem;
+            padding: 0.875rem 1rem 1.25rem 1rem;
             &_head {
+                font-size: 1.05rem;
                 margin-bottom: 0.75rem;
             }
             &_body {
-                margin-bottom: 1.25rem;
+                padding: 0.875rem 0.75rem;
+                margin-bottom: 1rem;
+                gap: 0.75rem;
+                &_content {
+                    &_price {
+                        font-size: 0.95rem;
+                    }
+                }
             }
         }
     }
-    @media(max-width: 766px){
+    @media(max-width: 577px){
         &_box {
-            padding: 0.75rem 1rem 1rem;
+            padding: 0.625rem 0.75rem 1rem 0.75rem;
             &_head {
-                margin-bottom: 0.75rem;
+                font-size: 1rem;
+                letter-spacing: 0.5px;
             }
             &_body {
-                margin-bottom: 1.25rem;
+                padding: 0.625rem 0.5rem;
+                gap: 0.5rem;
+                &_content {
+                    &_price {
+                        font-size: 0.9rem;
+                    }
+                }
             }
-        }
-    }
-    @media(max-width: 766px){
-        &_box {
-            margin: 0 0.75rem;
         }
     }
 }

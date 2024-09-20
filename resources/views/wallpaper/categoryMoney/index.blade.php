@@ -51,85 +51,83 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="container">
-        <div class="breadcrumbMobileBox">
-            @include('wallpaper.template.breadcrumb')
-        </div>
-        <!-- share social -->
-        @include('wallpaper.template.shareSocial')
-        <!-- content -->
-        <div class="contentBox">
-            <div style="display:flex;">
-                @php
-                    $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
-                    if($item->seo->level==1) $titlePage = $itemSeo->title;
-                @endphp
-                <h1>{{ $titlePage }}</h1>
-                <!-- từ khóa vừa search -->
-                @if(!empty(request('search')))
-                    <div class="keySearchBadge">
-                        <div class="keySearchBadge_label">
-                            - tìm kiếm với:
-                        </div>
-                        <div class="keySearchBadge_box">
-                            <div class="keySearchBadge_box_item">
-                                <div class="keySearchBadge_box_item_badge">
-                                    <div>{{ request('search') }}</div>
-                                    <a href="{{ URL::current() }}" class="keySearchBadge_box_item_badge_action"><i class="fa-solid fa-xmark"></i></a>
-                                </div>
+    <div class="breadcrumbMobileBox">
+        @include('wallpaper.template.breadcrumb')
+    </div>
+    <!-- share social -->
+    @include('wallpaper.template.shareSocial')
+    <!-- content -->
+    <div class="contentBox">
+        <div style="display:flex;">
+            @php
+                $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
+                if($item->seo->level==1) $titlePage = $itemSeo->title;
+            @endphp
+            <h1>{{ $titlePage }}</h1>
+            <!-- từ khóa vừa search -->
+            @if(!empty(request('search')))
+                <div class="keySearchBadge">
+                    <div class="keySearchBadge_label">
+                        - tìm kiếm với:
+                    </div>
+                    <div class="keySearchBadge_box">
+                        <div class="keySearchBadge_box_item">
+                            <div class="keySearchBadge_box_item_badge">
+                                <div>{{ request('search') }}</div>
+                                <a href="{{ URL::current() }}" class="keySearchBadge_box_item_badge_action"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                         </div>
                     </div>
-                @endif
-            </div>
-            <!-- Sort Box -->
-            @php
-                $totalSet   = $wallpapers->count();
-                $totalWallpaper  = 0;
-                foreach($wallpapers as $wallpaper){
-                    foreach($wallpaper->prices as $price){
-                        foreach($price->wallpapers as $wallpaper){
-                            ++$totalWallpaper;
-                        }
+                </div>
+            @endif
+        </div>
+        <!-- Sort Box -->
+        @php
+            $totalSet   = $wallpapers->count();
+            $totalWallpaper  = 0;
+            foreach($wallpapers as $wallpaper){
+                foreach($wallpaper->prices as $price){
+                    foreach($price->wallpapers as $wallpaper){
+                        ++$totalWallpaper;
                     }
                 }
-            @endphp
-            @include('wallpaper.categoryMoney.sort', [
-                'language'          => $language ?? 'vi',
-                'totalSet'          => $totalSet,
-                'totalWallpaper'    => $totalWallpaper,
-                'viewBy'            => $viewBy
-            ])
+            }
+        @endphp
+        @include('wallpaper.categoryMoney.sort', [
+            'language'          => $language ?? 'vi',
+            'totalSet'          => $totalSet,
+            'totalWallpaper'    => $totalWallpaper,
+            'viewBy'            => $viewBy
+        ])
 
-            <!-- Product Box 
-                vừa vào tải 0 phần tử -> tất cả tải bằng ajax
-            -->
-            @include('wallpaper.template.wallpaperGridWithLoadMore', [
-                'wallpapers'        => $wallpapers,
-                'headingTitle'      => 'h2',
-                'contentEmpty'      => true,
-                'loaded'            => 0,
-                'total'             => $total,
-                'empty'             => !empty($wallpapers)&&$wallpapers->isNotEmpty() ? false : true
-            ])
-            <!-- Loading -->
-            <div class="loadingBox">
-                <span class="loadingIcon"></span>
-            </div>
+        <!-- Product Box 
+            vừa vào tải 0 phần tử -> tất cả tải bằng ajax
+        -->
+        @include('wallpaper.template.wallpaperGridWithLoadMore', [
+            'wallpapers'        => $wallpapers,
+            'headingTitle'      => 'h2',
+            'contentEmpty'      => true,
+            'loaded'            => 0,
+            'total'             => $total,
+            'empty'             => !empty($wallpapers)&&$wallpapers->isNotEmpty() ? false : true
+        ])
+        <!-- Loading -->
+        <div class="loadingBox">
+            <span class="loadingIcon"></span>
         </div>
-        
-        <!-- Nội dung -->
-        @if(!empty($itemSeo->contents))
-            <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
-                <div id="tocContentMain"></div>
-                @php
-                    $xhtmlContent = '';
-                    foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
-                @endphp
-                {!! $xhtmlContent !!}
-            </div>
-        @endif
     </div>
+
+    <!-- Nội dung -->
+    @if(!empty($itemSeo->contents))
+        <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
+            <div id="tocContentMain"></div>
+            @php
+                $xhtmlContent = '';
+                foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+            @endphp
+            {!! $xhtmlContent !!}
+        </div>
+    @endif
 @endsection
 @push('modal')
     <!-- Message Add to Cart -->

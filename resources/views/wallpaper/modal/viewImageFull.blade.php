@@ -8,7 +8,12 @@
                 @endphp
                 @foreach($price->wallpapers as $wallpaper)
                     @if(!empty($wallpaper->infoWallpaper))
-                        <img data-src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper) }}" alt="{{ $title }}" title="{{ $title }}" />
+                        <div>
+                            <img data-src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper) }}" alt="{{ $title }}" title="{{ $title }}" />
+                            {{-- <div class="viewImageFullBox_box_image_background"></div> --}}
+                            <div class="viewImageFullBox_box_image_backgroundTopMore"></div>
+                            <div class="viewImageFullBox_box_image_backgroundSideMore"></div>
+                        </div>
                     @endif
                 @endforeach
             @endforeach

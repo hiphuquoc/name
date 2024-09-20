@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $language ?? 'vi' }}">
+<html lang="{{ $language ?? 'vi' }}" dir="{{ config('language.'.$language.'.dir') }}">
 
 <!-- === START:: Head === -->
 <head>
@@ -12,7 +12,7 @@
     <div id="js_openCloseModal_blur">
         <!-- header Top -->
         <div class="menuTopBackground layoutHeaderTop">
-            <div class="layoutHeaderTop_header">
+            <div class="layoutHeaderTop_header container">
                 <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
                     @if(Route::is('main.home'))
                         <h1 style="opacity:0;">{{ config('language.'.$language.'.data.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}</h1>
@@ -21,21 +21,17 @@
                 <!-- search box -->
                 @include('wallpaper.template.search')
             </div>
-            <div class="layoutHeaderTop_content">
-                <div class="container" style="height:100%;">
-                    @include('wallpaper.snippets.headerTop')
-                </div>
+            <div class="layoutHeaderTop_content container">
+                @include('wallpaper.snippets.headerTop')
             </div>
         </div>
         <!-- === START:: Content === -->
         <div class="layoutHeaderSide" style="min-height:calc(100vh - 95px);">
-            <div id="js_toggleMenuMobile" class="layoutHeaderSide_header">
-                {{-- <div class="contentBox"> --}}
-                    @include('wallpaper.snippets.headerSide')
-                {{-- </div> --}}
+            <div id="js_toggleMenuMobile" class="layoutHeaderSide_header container">
+                @include('wallpaper.snippets.headerSide')
             </div>
 
-            <div class="layoutHeaderSide_content">
+            <div class="layoutHeaderSide_content container">
                 <div id="js_blurBackground">
                     @yield('content')
 

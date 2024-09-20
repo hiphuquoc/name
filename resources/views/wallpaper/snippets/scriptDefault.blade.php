@@ -529,8 +529,17 @@
                     // }
                     // $('.tocFixedIcon').css('left', leftE);
                     /* thiết lập vị trí nút nhấn */
-                    const left = $('.contentElement').offset().left;
-                    $('.tocFixedIcon').css('left', parseInt(left - 50));
+                    const elemtBox = $('.contentElement');
+                    const isRTL = $('html').attr('dir') == 'rtl';
+                    const positionBox = isRTL 
+                        ? $(window).width() - elemtBox.offset().left - elemtBox.outerWidth() 
+                        : elemtBox.offset().left;
+
+                    if (isRTL) {
+                        $('.tocFixedIcon').css('right', parseInt(positionBox - 50));
+                    } else {
+                        $('.tocFixedIcon').css('left', parseInt(positionBox - 50));
+                    }
                 }
 
                 function setHeightTocFixed(){

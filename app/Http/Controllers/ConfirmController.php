@@ -36,8 +36,9 @@ class ConfirmController extends Controller {
                         ->with('products.infoPrice', 'products.infoProduct')
                         ->first();
         $language   = session('language') ?? 'vi';
+        $breadcrumb = \App\Helpers\Url::buildBreadcrumb($itemSeo->slug_full);
         if(!empty($order)&&$order->payment_status==1){
-            return view('wallpaper.confirm.index', compact('item', 'itemSeo', 'order', 'language'));
+            return view('wallpaper.confirm.index', compact('item', 'itemSeo', 'order', 'breadcrumb', 'language'));
         }
         return redirect()->route('main.home');
     }

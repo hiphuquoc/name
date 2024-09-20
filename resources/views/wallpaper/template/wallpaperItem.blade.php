@@ -101,7 +101,7 @@
                                     @endphp
                                     @if(!empty($quantityImage))
                                         <div class="wallpaperGridBox_item_image_content_price_quantity">
-                                            <i class="fa-regular fa-image"></i>{{ $quantityImage }}
+                                            <i class="fa-regular fa-image"></i><div>{{ $quantityImage }}</div>
                                         </div>
                                     @endif
                                 </div>
@@ -111,6 +111,8 @@
                             <div class="wallpaperGridBox_item_image_backgroundBlur"></div>
                         </div>
                         <div class="wallpaperGridBox_item_image_background"></div>
+                        <div class="wallpaperGridBox_item_image_backgroundTopMore"></div>
+                        <div class="wallpaperGridBox_item_image_backgroundSideMore"></div>
                     </a>
                     <!-- thêm vào giỏ hành nhanh -->
                     <div class="wallpaperGridBox_item_action">

@@ -13,6 +13,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
@@ -64,6 +65,7 @@ return [
             "payment_method" => "Payment Method",
             "fee" => "Fee",
             "payment_fee" => "Payment Fee",
+            'view_all'  => 'View all',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Wallpaper Theme",
@@ -141,6 +143,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
+        "dir"       => "ltr",
         "slug_page" => "zh-phone-wallpapers",
         "data" => [
             "home" => "首页",
@@ -192,6 +195,7 @@ return [
             "payment_method" => "支付方式",
             "fee" => "费用",
             "payment_fee" => "支付费用",
+            'view_all' => '查看全部',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "壁纸主题",
@@ -269,6 +273,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "fondos-de-pantalla-del-telefono",
         "data" => [
             "home" => "Inicio",
@@ -320,6 +325,7 @@ return [
             "payment_method" => "Método de pago",
             "fee" => "Tarifa",
             "payment_fee" => "Tarifa de pago",
+            'view_all' => 'Ver todo',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "Tema de fondo de pantalla",
@@ -397,6 +403,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "fonds-d-ecran-de-telephone",
         "data" => [
             "home" => "Accueil",
@@ -448,6 +455,7 @@ return [
             "payment_method" => "Méthode de paiement",
             "fee" => "Frais",
             "payment_fee" => "Frais de paiement",
+            'view_all' => 'Voir tout',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "Thème du fond d'écran",
@@ -519,12 +527,13 @@ return [
         "area" => "Việt Nam",
         "scope" => "Ngôn ngữ khu vực châu Á",
         "currency" => "VND",
-        "currency_code" => "₫",
+        "currency_code" => "đ",
         "money_value" => "25000",
         "key" => "vi",
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "hinh-nen-dien-thoai",
         "data"      => [
             "home"              => "Trang chủ",
@@ -576,6 +585,7 @@ return [
             "payment_method" => "Hình thức Thanh Toán",
             "fee" => "Phí",
             "payment_fee" => "Phí thanh toán",
+            'view_all' => 'Xem tất cả',
             /* custom */
             "wallpaper_theme"   => [
                 "name"  => "Chủ đề Hình Nền",
@@ -654,6 +664,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "hi-phone-wallpapers",
         "data" => [
             "home" => "होम",
@@ -705,6 +716,7 @@ return [
             "payment_method" => "भुगतान का तरीका",
             "fee" => "शुल्क",
             "payment_fee" => "भुगतान शुल्क",
+            'view_all' => 'सभी देखें',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "वॉलपेपर थीम",
@@ -782,6 +794,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "হোম",
@@ -833,6 +846,7 @@ return [
             "payment_method" => "পেমেন্ট পদ্ধতি",
             "fee" => "ফি",
             "payment_fee" => "পেমেন্ট ফি",
+            'view_all' => 'সব দেখুন',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "ওয়ালপেপার থিম",
@@ -910,6 +924,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "मुखपृष्ठ",
@@ -961,6 +976,7 @@ return [
             "payment_method" => "भरणा पद्धत",
             "fee" => "शुल्क",
             "payment_fee" => "भरणा शुल्क",
+            'view_all' => 'सर्व पहा',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "वॉलपेपर थीम",
@@ -1038,6 +1054,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "முகப்பு",
@@ -1089,6 +1106,7 @@ return [
             "payment_method" => "கட்டண முறைகள்",
             "fee" => "கட்டணம்",
             "payment_fee" => "கட்டண கட்டணம்",
+            'view_all' => 'அனைத்தையும் காண்க',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "வால்பேப்பர் தீம்",
@@ -1166,6 +1184,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "హోమ్",
@@ -1217,6 +1236,7 @@ return [
             "payment_method" => "చెల్లింపు పద్ధతి",
             "fee" => "ఫీజు",
             "payment_fee" => "చెల్లింపు ఫీజు",
+            'view_all' => 'అన్ని చూడండి',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "వాల్‌పేపర్ థీమ్",
@@ -1294,6 +1314,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
+        "dir"       => "rtl",
         "slug_page" => "phone-wallpapers",
         "data" => [
             "home" => "ہوم",
@@ -1345,6 +1366,7 @@ return [
             "payment_method" => "ادائیگی کا طریقہ",
             "fee" => "فیس",
             "payment_fee" => "ادائیگی کی فیس",
+            'view_all' => 'سب دیکھیں',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "وال پیپر تھیم",
@@ -1422,6 +1444,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "હોમ",
@@ -1473,6 +1496,7 @@ return [
             "payment_method" => "ચુકવણી પદ્ધતિ",
             "fee" => "ફી",
             "payment_fee" => "ચુકવણી ફી",
+            'view_all' => 'બધુ જુઓ',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "વોલપેપર થીમ",
@@ -1550,6 +1574,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "ಮನೆ",
@@ -1601,6 +1626,7 @@ return [
             "payment_method" => "ಪಾವತಿ ವಿಧಾನ",
             "fee" => "ಶುಲ್ಕ",
             "payment_fee" => "ಪಾವತಿ ಶುಲ್ಕ",
+            'view_all' => 'ಎಲ್ಲವನ್ನೂ ನೋಡಿ',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ವಾಲ್‌ಪೇಪರ್ ಥೀಮ್",
@@ -1678,6 +1704,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => false,
+        "dir"       => "ltr",
         "slug_page" => "ja-phone-wallpapers",
         "data"      => [
             "home"          => "ホーム",
@@ -1729,6 +1756,7 @@ return [
             "payment_method" => "支払い方法",
             "fee" => "手数料",
             "payment_fee" => "支払い手数料",
+            'view_all' => 'すべてを見る',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "壁紙テーマ",
@@ -1806,6 +1834,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "ko-phone-wallpapers",
         "data"      => [
             "home"          => "홈",
@@ -1857,6 +1886,7 @@ return [
             "payment_method" => "결제 방법",
             "fee" => "수수료",
             "payment_fee" => "결제 수수료",
+            'view_all' => '모두 보기',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "배경화면 테마",
@@ -1934,6 +1964,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Beranda",
@@ -1985,6 +2016,7 @@ return [
             "payment_method" => "Metode Pembayaran",
             "fee" => "Biaya",
             "payment_fee" => "Biaya Pembayaran",
+            'view_all' => 'Deleng Kabeh',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2062,6 +2094,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "wallpaper-ponsel",
         "data"      => [
             "home"          => "Beranda",
@@ -2113,6 +2146,7 @@ return [
             "payment_method" => "Metode Pembayaran",
             "fee" => "Biaya",
             "payment_fee" => "Biaya Pembayaran",
+            'view_all' => 'Lihat semua',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2190,6 +2224,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Rumah",
@@ -2241,6 +2276,7 @@ return [
             "payment_method" => "Kaedah Pembayaran",
             "fee" => "Bayaran",
             "payment_fee" => "Bayaran Pembayaran",
+            'view_all' => 'Lihat semua',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2318,6 +2354,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "หน้าหลัก",
@@ -2369,6 +2406,7 @@ return [
             "payment_method" => "วิธีการชำระเงิน",
             "fee" => "ค่าธรรมเนียม",
             "payment_fee" => "ค่าธรรมเนียมการชำระเงิน",
+            'view_all' => 'ดูทั้งหมด',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ธีมวอลเปเปอร์",
@@ -2446,6 +2484,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "ទំព័រដើម",
@@ -2497,6 +2536,7 @@ return [
             "payment_method" => "វិធីសាស្ត្រទូទាត់",
             "fee" => "ថ្លៃសេវា",
             "payment_fee" => "ថ្លៃសេវាទូទាត់",
+            'view_all' => 'មើលទាំងអស់',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ប្រធានបទផ្ទាំងរូបភាព",
@@ -2574,6 +2614,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "ໜ້າຫຼັກ",
@@ -2625,6 +2666,7 @@ return [
             "payment_method" => "ວິທີການຈ່າຍເງິນ",
             "fee"           => "ຄ່າທຳນຽມ",
             "payment_fee"   => "ຄ່າທຳນຽມການຈ່າຍເງິນ",
+            'view_all' => 'ເບິ່ງທັງໝົດ',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ຫົວຂໍ້ພາບເວລ",
@@ -2702,6 +2744,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
+        "dir"       => "rtl",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "الرئيسية",
@@ -2753,6 +2796,7 @@ return [
             "payment_method" => "طريقة الدفع",
             "fee"           => "رسوم",
             "payment_fee"   => "رسوم الدفع",
+            'view_all' => 'عرض الكل',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "موضوع خلفية الشاشة",
@@ -2830,6 +2874,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
+        "dir"       => "rtl",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "خانه",
@@ -2881,6 +2926,7 @@ return [
             "payment_method" => "روش پرداخت",
             "fee"           => "هزینه",
             "payment_fee"   => "هزینه پرداخت",
+            'view_all' => 'مشاهده همه',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "موضوع پس‌زمینه",
@@ -2958,6 +3004,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "ru-phone-wallpapers",
         "data"      => [
             "home"          => "Главная",
@@ -3009,6 +3056,7 @@ return [
             "payment_method" => "Способ оплаты",
             "fee"           => "Сбор",
             "payment_fee"   => "Комиссия за оплату",
+            'view_all' => 'Посмотреть все',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Тема обоев",
@@ -3086,6 +3134,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Startseite",
@@ -3137,6 +3186,7 @@ return [
             "payment_method" => "Zahlungsmethode",
             "fee"           => "Gebühr",
             "payment_fee"   => "Zahlungsgebühr",
+            'view_all' => 'Alle ansehen',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tapetenthema",
@@ -3214,6 +3264,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Ana Sayfa",
@@ -3265,6 +3316,7 @@ return [
             "payment_method" => "Ödeme Yöntemi",
             "fee"           => "Ücret",
             "payment_fee"   => "Ödeme Ücreti",
+            'view_all' => 'Hepsini gör',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Duvar Kağıdı Teması",
@@ -3342,6 +3394,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
@@ -3393,6 +3446,7 @@ return [
             "payment_method" => "Metodo di pagamento",
             "fee"           => "Tassa",
             "payment_fee"   => "Tassa di pagamento",
+            'view_all' => 'Vedi tutto',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema dello sfondo",
@@ -3470,6 +3524,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Strona główna",
@@ -3521,6 +3576,7 @@ return [
             "payment_method" => "Metoda płatności",
             "fee"           => "Opłata",
             "payment_fee"   => "Opłata za płatność",
+            'view_all' => 'Zobacz wszystko',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Temat tapety",
@@ -3598,6 +3654,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Головна",
@@ -3649,6 +3706,7 @@ return [
             "payment_method" => "Метод оплати",
             "fee"           => "Плата",
             "payment_fee"   => "Плата за оплату",
+            'view_all' => 'Переглянути все',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Тема шпалер",
@@ -3726,6 +3784,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
@@ -3777,6 +3836,7 @@ return [
             "payment_method" => "Betaalmethode",
             "fee" => "Kosten",
             "payment_fee" => "Betalingskosten",
+            'view_all' => 'Bekijk alles',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Achtergrondthema",
@@ -3854,6 +3914,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Αρχική",
@@ -3905,6 +3966,7 @@ return [
             "payment_method" => "Μέθοδος Πληρωμής",
             "fee" => "Χρέωση",
             "payment_fee" => "Χρέωση Πληρωμής",
+            'view_all' => 'Δείτε όλα',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Θέμα Ταπετσαρίας",
@@ -3982,6 +4044,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Kezdőlap",
@@ -4033,6 +4096,7 @@ return [
             "payment_method" => "Fizetési mód",
             "fee" => "Díj",
             "payment_fee" => "Fizetési díj",
+            'view_all' => 'Összes megtekintése',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Háttérkép téma",
@@ -4110,6 +4174,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Domů",
@@ -4161,6 +4226,7 @@ return [
             "payment_method" => "Platební metoda",
             "fee" => "Poplatek",
             "payment_fee" => "Poplatek za platbu",
+            'view_all' => 'Zobrazit vše',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Téma tapety",
@@ -4238,6 +4304,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Acasă",
@@ -4289,6 +4356,7 @@ return [
             "payment_method" => "Metodă de plată",
             "fee" => "Taxă",
             "payment_fee" => "Taxă de plată",
+            'view_all' => 'Vezi tot',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Temă tapet",
@@ -4366,6 +4434,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Domov",
@@ -4417,6 +4486,7 @@ return [
             "payment_method" => "Spôsob platby",
             "fee" => "Poplatok",
             "payment_fee" => "Poplatok za platbu",
+            'view_all' => 'Zobraziť všetko',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Téma tapety",
@@ -4494,6 +4564,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "მთავარი",
@@ -4545,6 +4616,7 @@ return [
             "payment_method" => "გადახდის მეთოდი",
             "fee" => "საფასური",
             "payment_fee" => "გადახდის საფასური",
+            'view_all' => 'ნახე ყველა',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ფონის თემა",
@@ -4622,6 +4694,7 @@ return [
         "latin"     => false,
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
+        "dir"       => "rtl",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "בית",
@@ -4673,6 +4746,7 @@ return [
             "payment_method" => "שיטת תשלום",
             "fee" => "עמלה",
             "payment_fee" => "עמלת תשלום",
+            'view_all' => 'הצג הכל',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "נושא טפט",
@@ -4750,6 +4824,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Uy",
@@ -4801,6 +4876,7 @@ return [
             "payment_method" => "To'lov usuli",
             "fee" => "To'lov",
             "payment_fee" => "To'lov komissiyasi",
+            'view_all' => 'Hammasini ko‘rish',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Fon rasmi mavzusi",
@@ -4878,6 +4954,7 @@ return [
         "latin"     => true,
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
+        "dir"       => "ltr",
         "slug_page" => "phone-wallpapers",
         "data"      => [
             "home"          => "Início",
@@ -4929,6 +5006,7 @@ return [
             "payment_method" => "Método de pagamento",
             "fee" => "Taxa",
             "payment_fee" => "Taxa de pagamento",
+            'view_all' => 'Ver tudo',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema do Papel de Parede",

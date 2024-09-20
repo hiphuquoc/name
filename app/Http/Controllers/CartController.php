@@ -39,7 +39,7 @@ class CartController extends Controller{
         $products       = \App\Http\Controllers\CartController::getCollectionProducts();
         $productsCart   = json_decode(session()->get('cart'), true);
         $detailCart     = self::calculatorDetailCart($productsCart, 0, $language);
-        $breadcrumb     = \App\Helpers\Url::buildBreadcrumb('gio-hang');
+        $breadcrumb     = \App\Helpers\Url::buildBreadcrumb($itemSeo->slug_full);
         return view('wallpaper.cart.index', compact('item', 'itemSeo', 'language', 'breadcrumb', 'products', 'detailCart'));
     }
 

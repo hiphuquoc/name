@@ -39,42 +39,36 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="container">        
-        <div class="breadcrumbMobileBox">
-            @include('wallpaper.template.breadcrumb')
-        </div>
-        <!-- share social -->
-        @include('wallpaper.template.shareSocial')
-        <!-- content -->
-        <div class="contentBox maxContent-1200">
-            <!-- Gallery và Product detail -->
-            @include('wallpaper.freeWallpaper.body')
+    <div class="breadcrumbMobileBox">
+        @include('wallpaper.template.breadcrumb')
+    </div>
+    <!-- share social -->
+    @include('wallpaper.template.shareSocial')
+    <!-- content -->
+    <div class="contentBox maxContent-1200">
+        <!-- Gallery và Product detail -->
+        @include('wallpaper.freeWallpaper.body')
 
-            <!-- Related -->
-            @if($total>0)
-                <div class="contentBox">
-                    <div class="relatedProductBox">
-                        <div class="relatedProductBox_title">
-                            @if(!empty($language)&&$language=='en')
-                                <h2>Recommendations for you</h2>
-                            @else 
-                                <h2>Gợi ý cho bạn</h2>
-                            @endif
-                        </div>
-                        <div class="relatedProductBox_box">
-                            @include('wallpaper.category.box', [
-                                'total'             => $total,
-                                'loaded'            => $loaded,
-                                'arrayIdCategoyr'   => $arrayIdCategory,
-                                'wallpapers'        => $related,
-                                'language'          => $language,
-                                'idNot'             => $idNot
-                            ])
-                        </div>
+        <!-- Related -->
+        @if($total>0)
+            <div class="contentBox">
+                <div class="relatedProductBox">
+                    <div class="relatedProductBox_title">
+                        <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
+                    </div>
+                    <div class="relatedProductBox_box">
+                        @include('wallpaper.category.box', [
+                            'total'             => $total,
+                            'loaded'            => $loaded,
+                            'arrayIdCategoyr'   => $arrayIdCategory,
+                            'wallpapers'        => $related,
+                            'language'          => $language,
+                            'idNot'             => $idNot
+                        ])
                     </div>
                 </div>
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
 @endsection
 @push('modal')
