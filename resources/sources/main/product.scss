@@ -39,12 +39,12 @@
             gap: 0.75rem;
         }
     }
-    @media(max-width: 577px){
-        gap: 0.5rem;
-        &_left {
-            gap: 0.5rem;
-        }
-    }
+    // @media(max-width: 577px){
+    //     gap: 0.5rem;
+    //     &_left {
+    //         gap: 0.5rem;
+    //     }
+    // }
 }
 .galleryProductBox {
     display: flex;
