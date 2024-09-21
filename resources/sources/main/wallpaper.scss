@@ -164,7 +164,7 @@
                         }
                         i {
                             margin-top: 0;
-                            font-size: 0.85rem;
+                            font-size: 0.825rem;
                         }
                     }
                     > span {
@@ -365,12 +365,11 @@
                     //         font-size: 0.85rem;
                     //     }
                     // }
-                    // &_price {
-                    //     i {
-                    //         /* sửa chênh lệch khi thay đổi rem của i và text */
-                    //         margin-top: 0.3rem;
-                    //     }
-                    // }
+                    &_price {
+                        &_quantity {
+                            gap: 0.125rem;
+                        }
+                    }
                 }
             }
             &_imageList {

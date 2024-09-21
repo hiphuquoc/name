@@ -6487,7 +6487,7 @@ label.checkBox input {
 }
 .wallpaperGridBox_item_image_content_price_quantity i {
   margin-top: 0;
-  font-size: 0.85rem;
+  font-size: 0.825rem;
 }
 .wallpaperGridBox_item_image_content_price > span {
   font-size: 0.85rem;
@@ -6704,6 +6704,9 @@ label.checkBox input {
   }
   .wallpaperGridBox_item_image_content, .wallpaperGridBox_itemBackground_image_content {
     padding: 0.5rem;
+  }
+  .wallpaperGridBox_item_image_content_price_quantity, .wallpaperGridBox_itemBackground_image_content_price_quantity {
+    gap: 0.125rem;
   }
   .wallpaperGridBox_item_imageList, .wallpaperGridBox_itemBackground_imageList {
     display: none;
