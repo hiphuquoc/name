@@ -164,6 +164,7 @@
                         }
                         i {
                             margin-top: 0;
+                            font-size: 0.85rem;
                         }
                     }
                     > span {
@@ -329,8 +330,10 @@
             &_image {
                 &_content {
                     &_title {
-                        font-size: 0.875rem;
-                        margin-bottom: 0.125rem;
+                        margin-bottom: 0;
+                        h2, h3, h4 {
+                            font-size: 0.875rem;
+                        }
                     }
                     &_price {
                         font-size: 0.95rem;
@@ -353,16 +356,23 @@
         // grid-template-columns: auto auto;
         &_item, &_itemBackground {
             width: calc(50% - 0.125rem);
-            // &_image {
-            //     &_content {
-            //         &_price {
-            //             i {
-            //                 /* sửa chênh lệch khi thay đổi rem của i và text */
-            //                 margin-top: 0.3rem;
-            //             }
-            //         }
-            //     }
-            // }
+            &_image {
+                &_content {
+                    padding: 0.5rem;
+                    // &_title {
+                        
+                    //     h2, h3, h4 {
+                    //         font-size: 0.85rem;
+                    //     }
+                    // }
+                    // &_price {
+                    //     i {
+                    //         /* sửa chênh lệch khi thay đổi rem của i và text */
+                    //         margin-top: 0.3rem;
+                    //     }
+                    // }
+                }
+            }
             &_imageList {
                 display: none;
             }

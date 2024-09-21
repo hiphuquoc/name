@@ -1063,7 +1063,7 @@ label.checkBox input {
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  gap: 0.25rem;
+  gap: 0.125rem;
 }
 .headerBottom_item:not(:first-child) {
   border-left: 1px solid #3a4556;
@@ -3455,7 +3455,6 @@ label.checkBox input {
 @media (max-width: 767px) {
   .productDetailBox_detail_checkout_button button {
     font-size: 0.85rem !important;
-    height: 50px !important;
   }
   .productDetailBox_detail_checkout .priceMobile {
     padding-left: 1rem;
@@ -3467,7 +3466,7 @@ label.checkBox input {
     font-size: 0.8rem !important;
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 0.25rem;
+    gap: 0.5rem;
   }
   .productDetailBox_detail_checkout_button button img {
     width: 1.25rem;
@@ -6488,6 +6487,7 @@ label.checkBox input {
 }
 .wallpaperGridBox_item_image_content_price_quantity i {
   margin-top: 0;
+  font-size: 0.85rem;
 }
 .wallpaperGridBox_item_image_content_price > span {
   font-size: 0.85rem;
@@ -6679,8 +6679,10 @@ label.checkBox input {
     width: calc(33.33% - 0.25rem);
   }
   .wallpaperGridBox_item_image_content_title, .wallpaperGridBox_itemBackground_image_content_title {
+    margin-bottom: 0;
+  }
+  .wallpaperGridBox_item_image_content_title h2, .wallpaperGridBox_item_image_content_title h3, .wallpaperGridBox_item_image_content_title h4, .wallpaperGridBox_itemBackground_image_content_title h2, .wallpaperGridBox_itemBackground_image_content_title h3, .wallpaperGridBox_itemBackground_image_content_title h4 {
     font-size: 0.875rem;
-    margin-bottom: 0.125rem;
   }
   .wallpaperGridBox_item_image_content_price, .wallpaperGridBox_itemBackground_image_content_price {
     font-size: 0.95rem;
@@ -6699,6 +6701,9 @@ label.checkBox input {
   }
   .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
     width: calc(50% - 0.125rem);
+  }
+  .wallpaperGridBox_item_image_content, .wallpaperGridBox_itemBackground_image_content {
+    padding: 0.5rem;
   }
   .wallpaperGridBox_item_imageList, .wallpaperGridBox_itemBackground_imageList {
     display: none;
