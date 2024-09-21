@@ -146,11 +146,6 @@ h2 {
     margin-bottom: 0.5rem;
   }
 }
-@media (max-width: 577px) {
-  h2 {
-    margin-bottom: 0.325rem;
-  }
-}
 
 h3, h4 {
   font-family: "SVN-Gilroy Bold", sans-serif;
@@ -215,11 +210,6 @@ p, ul, ol {
 @media (max-width: 767px) {
   p, ul, ol {
     margin-bottom: 0.5rem;
-  }
-}
-@media (max-width: 577px) {
-  p, ul, ol {
-    margin-bottom: 0.325rem;
   }
 }
 
