@@ -366,10 +366,14 @@
                     //     }
                     // }
                     &_price {
+                        margin-top: -0.125rem;
                         &_quantity {
                             gap: 0.125rem;
                         }
                     }
+                }
+                &_backgroundBlur {
+                    height: 5.75rem;
                 }
             }
             &_imageList {
