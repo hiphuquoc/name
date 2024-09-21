@@ -276,15 +276,9 @@
             }
         }
     }
-    // @media(max-width: 1199px){
-    //     ul {
-    //         li {
-    //             > a, > div {
-    //                 padding: 0.375rem 0;
-    //             }
-    //         }
-    //     }
-    // }
+    @media(max-width: 1023px){
+        max-height: calc(100vh - $heightMenu - 1.5rem - 4.75rem);
+    }
 }
 
 .logoInMenuMobile {

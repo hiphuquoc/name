@@ -53,7 +53,7 @@
             display: flex;
             aspect-ratio: 1/2.18;
             overflow: hidden;
-            border-radius: 12px;
+            border-radius: 7%;
             .zIndexHide {
                 position: relative;
                 z-index: -1;
@@ -288,16 +288,16 @@
         // grid-template-columns: auto auto auto;
         &_item, &_itemBackground {
             width: calc(33.33% - 0.41438rem);
-            &_image {
-                &_content {
-                    &_price {
-                        i {
-                            /* sửa chênh lệch khi thay đổi rem của i và text */
-                            margin-top: 0.2rem;
-                        }
-                    }
-                }
-            }
+            // &_image {
+            //     &_content {
+            //         &_price {
+            //             i {
+            //                 /* sửa chênh lệch khi thay đổi rem của i và text */
+            //                 margin-top: 0.2rem;
+            //             }
+            //         }
+            //     }
+            // }
         }
         
     }
@@ -353,16 +353,16 @@
         // grid-template-columns: auto auto;
         &_item, &_itemBackground {
             width: calc(50% - 0.125rem);
-            &_image {
-                &_content {
-                    &_price {
-                        i {
-                            /* sửa chênh lệch khi thay đổi rem của i và text */
-                            margin-top: 0.3rem;
-                        }
-                    }
-                }
-            }
+            // &_image {
+            //     &_content {
+            //         &_price {
+            //             i {
+            //                 /* sửa chênh lệch khi thay đổi rem của i và text */
+            //                 margin-top: 0.3rem;
+            //             }
+            //         }
+            //     }
+            // }
             &_imageList {
                 display: none;
             }
