@@ -4911,7 +4911,6 @@ label.checkBox input {
   display: flex;
   align-items: stretch;
   gap: 1.5rem;
-  /* nếu khoảng cách chiều đứng +0.25rem => nên không cần định dạng 577px */
 }
 .pageCartBox_left {
   width: calc(100% - 320px);
@@ -4934,13 +4933,15 @@ label.checkBox input {
 }
 .pageCartBox_left_item_body_note {
   font-size: 0.85rem;
-  margin-top: 0.375rem;
+  line-height: 1.55;
+  margin-top: 0.5rem;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 0.375rem;
 }
 .pageCartBox_left_item_body_note i {
   font-size: 0.5rem;
+  margin-top: 0.5rem;
 }
 .pageCartBox_right {
   width: 320px;
@@ -4953,12 +4954,6 @@ label.checkBox input {
   .pageCartBox_left {
     width: 100%;
     gap: 1.25rem;
-  }
-  .pageCartBox_left_item_head {
-    padding: 0.5rem 0.75rem 0.75rem;
-  }
-  .pageCartBox_left_item_body {
-    padding: 0.5rem 0.75rem 0.75rem;
   }
   .pageCartBox_right {
     width: 100%;
@@ -4979,13 +4974,11 @@ label.checkBox input {
   .pageCartBox_left {
     gap: 0.75rem;
   }
-}
-@media (max-width: 577px) {
-  .pageCartBox {
-    gap: 0.5rem;
+  .pageCartBox_left_item_head {
+    padding: 0.375rem 0.75rem 0.75rem;
   }
-  .pageCartBox_left {
-    gap: 0.5rem;
+  .pageCartBox_left_item_body {
+    padding: 0.5rem 0.75rem 0.75rem;
   }
 }
 
@@ -5044,9 +5037,9 @@ label.checkBox input {
   font-weight: bold;
   color: #c0d0f1;
 }
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .cartSectionBox {
-    padding: 0.75rem;
+    padding: 0.375rem 0.75rem 0.75rem;
   }
   .cartSectionBox_title {
     margin-bottom: 0;
@@ -5227,6 +5220,14 @@ label.checkBox input {
   content: "\f00c";
   font-size: 0.8rem;
 }
+@media (max-width: 767px) {
+  .cartProductBox_head > * {
+    padding: 0 1rem 0.5rem 1rem;
+  }
+  .cartProductBox_body_item > * {
+    padding: 0.75rem;
+  }
+}
 @media (max-width: 577px) {
   .cartProductBox_head {
     display: none;
@@ -5256,21 +5257,21 @@ label.checkBox input {
     padding-left: 0 !important;
     align-items: flex-start;
     padding-top: 0;
-    padding-bottom: 0.15rem;
+    padding-bottom: 0.5rem;
     flex: 0 0 100% !important;
     flex-direction: row;
     justify-content: flex-end;
-    right: 0;
+    bottom: 0;
+    gap: 0.75rem;
   }
   [dir=ltr] .cartProductBox_body_item_price {
-    bottom: 0;
+    right: 0;
   }
   [dir=rtl] .cartProductBox_body_item_price {
     left: 0;
   }
   .cartProductBox_body_item_price_now {
     order: 2;
-    margin-right: 1rem;
     margin-top: 0;
   }
   .cartProductBox_body_item_price_old {
@@ -5283,7 +5284,6 @@ label.checkBox input {
   }
   .cartProductBox_body_item_price_icon {
     order: 3;
-    margin-top: 0.25rem;
   }
   .cartProductBox_body_item_quantity {
     align-items: flex-end;
