@@ -16,9 +16,6 @@
                             <!-- danh sách sản phẩm -->
                             <div class="pageCartBox_left_item">
                                 <div class="cartSectionBox">
-                                    {{-- <div class="cartSectionBox_title">
-                                        
-                                    </div> --}}
                                     <div class="cartSectionBox_body">
                                         <div class="cartProductBox_head">
                                             <div>{{ config('language.'.$language.'.data.product') }}</div>

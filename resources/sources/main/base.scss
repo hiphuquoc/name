@@ -116,7 +116,7 @@ $heightMenu : 3.3rem;
 @mixin productGrid {
   display: flex;
   &_item {
-    border-radius: 7px;
+    border-radius: 0.5rem;
     .show {
       width: 100%;
       height: auto;
@@ -327,7 +327,7 @@ $heightMenu : 3.3rem;
   &_image {
       flex: 0 0 70px;
       aspect-ratio: 1/1.05;
-      border-radius: 10px;
+      border-radius: 0.5rem;
       overflow: hidden;
       display: flex;
       img {
@@ -679,7 +679,7 @@ blockquote{
     font-size: inherit;
     text-align: justify;
     border-left: 4px solid $colorLv2;
-    border-radius: 10px;
+    border-radius: 0.5rem;
 	&::before{
 		content: "\201C";
         font-size: 2.5rem;
@@ -713,13 +713,13 @@ blockquote{
   max-width: 750px;
   background: $colorBackgroundLv2;
   font-size: 0.95rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   margin: 1rem auto;
   border: 1px solid $colorBackgroundLv3;
   img {
       width: 100%;
       object-fit: cover;
-      border-radius: 10px 10px 0 0;
+      border-radius: 0.5rem 0.5rem 0 0;
       margin: 0;
   }
   &_note {
@@ -736,7 +736,7 @@ blockquote{
 
 .imageGroup {
   font-size: 0.95rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   margin: 1rem auto;
   max-width: 750px;
   &_box {
@@ -753,7 +753,7 @@ blockquote{
       img {
         width: 100%;
         object-fit: cover;
-        border-radius: 10px 10px 0 0;
+        border-radius: 0.5rem 0.5rem 0 0;
         margin: 0;
       }
     }
@@ -785,7 +785,7 @@ blockquote{
     }
     &::-webkit-scrollbar-track {
       // -webkit-box-shadow: inset 0 0 6px $bg-03;
-      border-radius: 10px;
+      border-radius: 0.5rem;
       background: transparent;
     }
     @media(max-width: 767px){
@@ -813,7 +813,7 @@ blockquote{
   }
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px #fff;
-    border-radius: 10px;
+    border-radius: 0.5rem;
     background: transparent;
   }
   @media(max-width: 767px){
@@ -907,7 +907,7 @@ input, textarea, select {
   width: 100%;
   font-size: 1rem;
   font-family: $fontText;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   border: 1px solid $bg-05;
   background: $colorBackgroundLv1;
   border: 1px solid $colorBackgroundLv2;
@@ -971,7 +971,7 @@ label {
 .badge {
   display: inline-flex;
   padding: 0.15rem 0.5rem;
-  border-radius: 7px;
+  border-radius: 0.5rem;
   cursor: pointer;
   font-size: 0.9rem;
   background: $bg-02;
@@ -1098,7 +1098,7 @@ label {
   border: none;
   cursor: pointer;
   color: $colorText;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   label {
       cursor: pointer;
       margin-bottom: 0;
@@ -1301,7 +1301,7 @@ label {
   
 }
 .select2-container--default .select2-selection--single {
-  border-radius: 7px !important;
+  border-radius: 0.5rem !important;
   border: 1px solid $bg-05 !important;
 }
 .select2-selection__arrow {

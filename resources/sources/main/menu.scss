@@ -123,7 +123,7 @@
                 bottom: $heightMenu;
                 right: 0;
                 z-index: 1;
-                border-radius: 7px 7px 0 0;
+                border-radius: 0.5rem 0.5rem 0 0;
                 border-top: 2px solid #1a202c;
                 box-shadow: 0px -1px 10px #1a202c;
                 overflow: hidden;
@@ -164,7 +164,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 0.5rem;
     margin-top: 3px;
     padding: 0 !important;
     i {
@@ -235,7 +235,7 @@
         background: $colorBackgroundLv2;
         @include colorOpacity('color', $colorText, 0.8);
         z-index: 1;
-        border-radius: 0 0 7px 7px;
+        border-radius: 0 0 0.5rem 0.5rem;
         border-top: 2px solid $colorBackgroundLv1;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         align-content: flex-start;
@@ -348,7 +348,7 @@
         @include colorOpacity('color', $colorText, 0.8);
         position: absolute;
         z-index: 1;
-        border-radius: 0 0 10px 10px;
+        border-radius: 0 0 0.5rem 0.5rem;
         border-top: 2px solid $colorBackgroundLv1;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         overflow: hidden;
@@ -542,7 +542,7 @@
         @include colorOpacity('color', $colorText, 0.8);
         position: absolute;
         z-index: 1;
-        border-radius: 0 0 10px 10px;
+        border-radius: 0 0 0.5rem 0.5rem;
         border-top: 2px solid $colorBackgroundLv1;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         padding: 0;
@@ -623,7 +623,7 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 0.5rem;
     img {
         max-width: 120px;
         opacity: 0.8;
@@ -708,7 +708,7 @@
         visibility: hidden;
         background: $colorBackgroundLv2;
         z-index: 999;
-        border-radius: 10px;
+        border-radius: 0.5rem;
         flex-direction: column;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         @include colorOpacity('color', $colorText, 0.8);
@@ -1229,7 +1229,7 @@
 //         padding: 0.35rem 0.75rem;
 //         background: $bg-02;
 //         margin-left: 1rem;
-//         border-radius: 7px;
+//         border-radius: 0.5rem;
 //         border: 1px solid $bg-04;
 //         color: $bg-07;
 //     }
@@ -1329,7 +1329,7 @@
 //                         justify-content: center;
 //                         text-align: center;
 //                         line-height: 40px;
-//                         border-radius: 10px;
+//                         border-radius: 0.5rem;
 //                         &:hover {
 //                             background: $bg-03;
 //                         }

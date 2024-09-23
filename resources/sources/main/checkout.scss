@@ -292,7 +292,7 @@
                 width: 100%;
                 display: flex;
                 justify-content: center;
-                border-radius: 7px;
+                border-radius: 0.5rem;
                 padding-left: 0rem;
                 padding-right: 0rem;
             }
@@ -323,7 +323,7 @@
                 font-size: 1.2rem;
             }
             &.button {
-                border-radius: 7px;
+                border-radius: 0.5rem;
                 padding: 0.5rem 1.5rem;
             }
         }

@@ -266,7 +266,7 @@
                 margin: 0;
                 padding: 0;
                 background: $colorBackgroundLv2;
-                border-radius: 15px 15px 0 0;
+                border-radius: 0.5rem 0.5rem 0 0;
                 overflow: hidden;
                 box-shadow: 0 -1px 5px $colorBackgroundLv1;
                 &_button {
@@ -484,14 +484,14 @@
     &.mini {
         height: 30px;
         max-width: 110px;
-        border-radius: 15px;
+        border-radius: 0.5rem;
         .inputQty_button {
             flex: 0 0 30px;
             &.minus {
-                border-radius: 15px 0 0 15px;
+                border-radius: 0.5rem 0 0 0.5rem;
             }
             &.plus {
-                border-radius: 0 15px 15px 0;
+                border-radius: 0 0.5rem 0.5rem 0;
             }
         }
         input {
@@ -747,7 +747,7 @@
 //         width: calc(25% - 1rem);
 //         display: flex;
 //         flex-direction: column;
-//         border-radius: 7px;
+//         border-radius: 0.5rem;
 //         background: white;
 //         width: calc(25% - 1.5rem);
 //         &:not(:first-child){
@@ -766,7 +766,7 @@
 //             margin-bottom: 1.25rem;
 //             position: relative;
 //             overflow: hidden;
-//             border-radius: 7px 7px 0 0;
+//             border-radius: 0.5rem 0.5rem 0 0;
 //             &::after {
 //                 position: absolute;
 //                 top: 0;
@@ -815,12 +815,12 @@
 //             display: flex;
 //             justify-content: flex-end;
 //             align-items: flex-end;
-//             border-radius: 0 0 7px 0;
+//             border-radius: 0 0 0.5rem 0;
 //             &_item {
 //                 width: 100%;
 //                 height: 40px;
 //                 background: linear-gradient(90deg, #EDF2F7 0%, #F7FAFC 100%);
-//                 border-radius: 0 0 7px 0;
+//                 border-radius: 0 0 0.5rem 0;
 //                 position: relative;
 //                 overflow: hidden;
 //                 &::after {

@@ -245,7 +245,7 @@ blockquote {
   font-size: inherit;
   text-align: justify;
   border-left: 4px solid #00E38C;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 blockquote::before {
   content: "“";
@@ -281,7 +281,7 @@ blockquote em {
   max-width: 750px;
   background: #2d3848;
   font-size: 0.95rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   margin: 1rem auto;
   border: 1px solid #3a4556;
 }
@@ -289,7 +289,7 @@ blockquote em {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 10px 10px 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
   margin: 0;
 }
 .imageBox_note {
@@ -309,7 +309,7 @@ blockquote em {
 
 .imageGroup {
   font-size: 0.95rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   margin: 1rem auto;
   max-width: 750px;
 }
@@ -330,7 +330,7 @@ blockquote em {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 10px 10px 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
   margin: 0;
 }
 .imageGroup_note {
@@ -362,7 +362,7 @@ blockquote em {
   border-radius: 1000px;
 }
 .customScrollBar-y::-webkit-scrollbar-track {
-  border-radius: 10px;
+  border-radius: 0.5rem;
   background: transparent;
 }
 @media (max-width: 767px) {
@@ -391,7 +391,7 @@ blockquote em {
 }
 .customScrollBar-x::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px #fff;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   background: transparent;
 }
 @media (max-width: 767px) {
@@ -483,7 +483,7 @@ input, textarea, select {
   width: 100%;
   font-size: 1rem;
   font-family: "SVN-Gilroy", sans-serif;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   border: 1px solid #ced4da;
   background: #1a202c;
   border: 1px solid #2d3848;
@@ -543,7 +543,7 @@ label.checkBox input {
 .badge {
   display: inline-flex;
   padding: 0.15rem 0.5rem;
-  border-radius: 7px;
+  border-radius: 0.5rem;
   cursor: pointer;
   font-size: 0.9rem;
   background: #EDF2F7;
@@ -696,7 +696,7 @@ label.checkBox input {
   border: none;
   cursor: pointer;
   color: #c0d0f1;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .inputWithLabelInside label, .textareaWithLabelInside label {
   cursor: pointer;
@@ -879,7 +879,7 @@ label.checkBox input {
 }
 
 .select2-container--default .select2-selection--single {
-  border-radius: 7px !important;
+  border-radius: 0.5rem !important;
   border: 1px solid #ced4da !important;
 }
 
@@ -1063,7 +1063,7 @@ label.checkBox input {
   bottom: 3.3rem;
   right: 0;
   z-index: 1;
-  border-radius: 7px 7px 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
   border-top: 2px solid #1a202c;
   box-shadow: 0px -1px 10px #1a202c;
   overflow: hidden;
@@ -1098,7 +1098,7 @@ label.checkBox input {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   margin-top: 3px;
   padding: 0 !important;
 }
@@ -1201,7 +1201,7 @@ label.checkBox input {
   background: #2d3848;
   color: #c0d0f1CC;
   z-index: 1;
-  border-radius: 0 0 7px 7px;
+  border-radius: 0 0 0.5rem 0.5rem;
   border-top: 2px solid #1a202c;
   box-shadow: 1px 1px 10px #1a202c;
   align-content: flex-start;
@@ -1351,7 +1351,7 @@ label.checkBox input {
   color: #c0d0f1CC;
   position: absolute;
   z-index: 1;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 0.5rem 0.5rem;
   border-top: 2px solid #1a202c;
   box-shadow: 1px 1px 10px #1a202c;
   overflow: hidden;
@@ -1546,7 +1546,7 @@ label.checkBox input {
   color: #c0d0f1CC;
   position: absolute;
   z-index: 1;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 0.5rem 0.5rem;
   border-top: 2px solid #1a202c;
   box-shadow: 1px 1px 10px #1a202c;
   padding: 0;
@@ -1579,7 +1579,7 @@ label.checkBox input {
 .cartBox_list_item_image {
   flex: 0 0 70px;
   aspect-ratio: 1/1.05;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   overflow: hidden;
   display: flex;
 }
@@ -1729,7 +1729,7 @@ label.checkBox input {
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .emptyCartBox img {
   max-width: 120px;
@@ -1813,7 +1813,7 @@ label.checkBox input {
   visibility: hidden;
   background: #2d3848;
   z-index: 999;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   flex-direction: column;
   box-shadow: 1px 1px 10px #1a202c;
   color: #c0d0f1CC;
@@ -1843,7 +1843,7 @@ label.checkBox input {
 .searchViewBefore_selectbox_item_image {
   flex: 0 0 70px;
   aspect-ratio: 1/1.05;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   overflow: hidden;
   display: flex;
 }
@@ -2174,7 +2174,7 @@ label.checkBox input {
   justify-content: center;
   text-align: center;
   line-height: 40px;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .headerSide ul li > span:hover {
   background: #e9ecef;
@@ -2290,7 +2290,7 @@ label.checkBox input {
   display: flex;
   width: 28px;
   aspect-ratio: 1/1;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   background: #2d3848;
   display: flex;
   justify-content: center;
@@ -2310,7 +2310,7 @@ label.checkBox input {
   height: 28px;
   aspect-ratio: 100/50;
   opacity: 0.75;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   overflow: hidden;
 }
 [dir=ltr] .socialBox_dmca {
@@ -2342,7 +2342,7 @@ label.checkBox input {
   color: #c0d0f1;
 }
 .sidebarSectionBox_box {
-  border-radius: 10px;
+  border-radius: 0.5rem;
   background: #2d3848;
   font-weight: normal;
 }
@@ -2567,7 +2567,7 @@ label.checkBox input {
 }
 
 .tocContentMain {
-  border-radius: 10px;
+  border-radius: 0.5rem;
   position: relative;
   background: #2d3848;
   margin-bottom: 1.5rem;
@@ -2665,7 +2665,7 @@ label.checkBox input {
   width: 32px;
   aspect-ratio: 1/1;
   background: #2d3848;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   cursor: pointer;
   border: 1px solid #3a4556;
   z-index: 100;
@@ -2719,7 +2719,7 @@ label.checkBox input {
 }
 .categorySidebarBox_item_image img {
   transition: all 0.3s;
-  border-radius: 7px;
+  border-radius: 0.375rem;
 }
 .categorySidebarBox_item_title {
   line-height: 1.4;
@@ -2768,14 +2768,14 @@ label.checkBox input {
   left: 0;
   background: #1a202c;
   padding: 0 0.5rem 0 0.25rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   font-size: 0.75rem;
   font-family: "SVN-Gilroy Bold", sans-serif;
   color: #c0d0f18C;
 }
 .selectCustom_input {
   padding: 0.3rem 0.75rem 0.1rem 0.75rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   border: 1px solid #3a4556;
   font-size: 0.85rem;
   color: #c0d0f1BF;
@@ -2801,7 +2801,7 @@ label.checkBox input {
   left: 0;
   background: #2d3848;
   min-width: 200px;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   box-shadow: 0 0 10px #1a202c;
   z-index: 999;
   max-height: 420px;
@@ -2820,7 +2820,7 @@ label.checkBox input {
 }
 .selectCustom_box::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px #2d3848;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   background: transparent;
 }
 .selectCustom_box_item {
@@ -2937,7 +2937,7 @@ label.checkBox input {
   width: calc(2.25rem + 5px);
   aspect-ratio: 1/1;
   background: #2d3848CC;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   z-index: 1;
   cursor: pointer;
 }
@@ -2966,7 +2966,7 @@ label.checkBox input {
   top: calc(-2.25rem - 2px);
   left: 0;
   padding: 0.15rem 0.5rem;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   line-height: 18px;
   height: 28px;
 }
@@ -2996,7 +2996,7 @@ label.checkBox input {
   z-index: 99;
   background: #1a202cFF;
   padding: 0.75rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   width: 400px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.45);
 }
@@ -3017,7 +3017,7 @@ label.checkBox input {
   justify-content: center;
   align-items: center;
   background: #2d3848BF;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   font-size: 0.85rem;
 }
 .filterAdvanced_box_content {
@@ -3395,7 +3395,7 @@ label.checkBox input {
     margin: 0;
     padding: 0;
     background: #2d3848;
-    border-radius: 15px 15px 0 0;
+    border-radius: 0.5rem 0.5rem 0 0;
     overflow: hidden;
     box-shadow: 0 -1px 5px #1a202c;
   }
@@ -3596,16 +3596,16 @@ label.checkBox input {
 .inputQty.mini {
   height: 30px;
   max-width: 110px;
-  border-radius: 15px;
+  border-radius: 0.5rem;
 }
 .inputQty.mini .inputQty_button {
   flex: 0 0 30px;
 }
 .inputQty.mini .inputQty_button.minus {
-  border-radius: 15px 0 0 15px;
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 .inputQty.mini .inputQty_button.plus {
-  border-radius: 0 15px 15px 0;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 .inputQty.mini input {
   flex: 0 0 45px;
@@ -3640,7 +3640,7 @@ label.checkBox input {
   display: flex;
 }
 .productGridBox_item {
-  border-radius: 7px;
+  border-radius: 0.5rem;
 }
 .productGridBox_item .show {
   width: 100%;
@@ -4013,7 +4013,7 @@ label.checkBox input {
   padding-bottom: 0;
   margin-bottom: 1.5rem;
   background: linear-gradient(90deg, rgba(240, 160, 0, 0.2) 0, rgb(255, 255, 255) 100%);
-  border-radius: 7px 0 0 7px;
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 .blogListLeftRight_title h2, .blogListLeftRight_title h3 {
   font-size: 1.2rem;
@@ -4039,7 +4039,7 @@ label.checkBox input {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .blogListLeftRight_box_left_content_title {
   display: flex;
@@ -4088,7 +4088,7 @@ label.checkBox input {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 3px;
+  border-radius: 0.5rem;
 }
 .blogListLeftRight_box_right_item_content {
   margin-left: 1rem;
@@ -4217,7 +4217,7 @@ label.checkBox input {
 }
 .articleBox_item_image img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   -o-object-fit: cover;
      object-fit: cover;
   margin: 0;
@@ -4263,7 +4263,7 @@ label.checkBox input {
 @media (max-width: 577px) {
   .articleBox_item {
     flex-wrap: wrap;
-    border-radius: 10px;
+    border-radius: 0.5rem;
   }
   .articleBox_item:not(:first-child) {
     margin-top: 1.25rem;
@@ -4277,7 +4277,7 @@ label.checkBox input {
     padding-top: 0.5rem;
     margin-left: 0;
     background: #fff;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 0.5rem 0.5rem;
   }
   .articleBox_item_content_title {
     margin: 0 0 0.25rem 0;
@@ -4351,7 +4351,7 @@ label.checkBox input {
   display: flex;
 }
 .relatedBox_box_item_image img {
-  border-radius: 10px;
+  border-radius: 0.5rem;
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
@@ -4383,12 +4383,12 @@ label.checkBox input {
 }
 .relatedBox_box_item.background {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   box-shadow: 0 0 5px #dee2e6 !important;
 }
 .relatedBox_box_item.background .relatedBox_box_item_content {
   padding: 0.5rem 0.75rem;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 .relatedBox .slick-track {
   display: flex;
@@ -4455,7 +4455,7 @@ label.checkBox input {
   width: calc(100% - 2rem);
   margin: 0 auto;
   background: #2d3848;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   padding: 1rem 1.5rem 1.5rem;
   z-index: 99;
   position: relative;
@@ -4567,6 +4567,7 @@ label.checkBox input {
   position: relative;
   padding: 0.75rem;
   gap: 0.75rem;
+  border-radius: 0.5rem;
 }
 .paymentMethodBox_item:hover {
   border: 1px solid #00bd7d;
@@ -4576,7 +4577,7 @@ label.checkBox input {
 }
 .paymentMethodBox_item_logo img {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .paymentMethodBox_item_content {
   width: 100%;
@@ -4703,7 +4704,7 @@ label.checkBox input {
   min-width: 500px;
   width: 100%;
   background: #2d3848;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   padding: 0;
   z-index: 99;
   position: relative;
@@ -4726,7 +4727,7 @@ label.checkBox input {
 .modalLoginFormCustomerBox_box_right {
   width: 100%;
   padding: 0.75rem 1.25rem 0.5rem 1.25rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .modalLoginFormCustomerBox_box_right_close {
   position: absolute;
@@ -4913,14 +4914,14 @@ label.checkBox input {
   /* nếu khoảng cách chiều đứng +0.25rem => nên không cần định dạng 577px */
 }
 .pageCartBox_left {
-  width: calc(100% - 320px - 1.5rem);
+  width: calc(100% - 320px);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 .pageCartBox_left_item {
   background: #2d3848;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .pageCartBox_left_item_head {
   font-size: 1rem;
@@ -4931,11 +4932,18 @@ label.checkBox input {
 .pageCartBox_left_item_body {
   padding: 0.75rem 1rem 1rem;
 }
+.pageCartBox_left_item_body_note {
+  font-size: 0.85rem;
+  margin-top: 0.375rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.pageCartBox_left_item_body_note i {
+  font-size: 0.5rem;
+}
 .pageCartBox_right {
   width: 320px;
-}
-.pageCartBox ul {
-  margin-left: 1.25rem;
 }
 @media (max-width: 1199px) {
   .pageCartBox {
@@ -4944,7 +4952,7 @@ label.checkBox input {
   }
   .pageCartBox_left {
     width: 100%;
-    gap: 1rem;
+    gap: 1.25rem;
   }
   .pageCartBox_left_item_head {
     padding: 0.5rem 0.75rem 0.75rem;
@@ -4973,6 +4981,9 @@ label.checkBox input {
   }
 }
 @media (max-width: 577px) {
+  .pageCartBox {
+    gap: 0.5rem;
+  }
   .pageCartBox_left {
     gap: 0.5rem;
   }
@@ -4981,8 +4992,8 @@ label.checkBox input {
 .cartSectionBox {
   width: 100%;
   background: #2d3848;
-  padding: 1rem;
-  border-radius: 10px;
+  padding: 0.5rem 1rem 1rem;
+  border-radius: 0.5rem;
 }
 .cartSectionBox_title {
   margin-bottom: 1.5rem;
@@ -4992,7 +5003,7 @@ label.checkBox input {
 .cartSectionBox_body {
   width: 100%;
   background: #2d3848CC;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .cartSectionBox_body_item {
   display: flex;
@@ -5113,7 +5124,7 @@ label.checkBox input {
 .cartProductBox_body_item_info_image {
   flex: 0 0 65px;
   aspect-ratio: 1/1;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   overflow: hidden;
   display: flex;
 }
@@ -5159,7 +5170,7 @@ label.checkBox input {
   background: #ad8e70;
   padding: 0 0.25rem;
   font-size: 0.7rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   height: 20px;
   line-height: 20px;
   background: #ffd100CC;
@@ -5291,16 +5302,16 @@ label.checkBox input {
   .cartProductBox_body .inputQty {
     height: 30px !important;
     max-width: 110px;
-    border-radius: 15px;
+    border-radius: 0.5rem;
   }
   .cartProductBox_body .inputQty .inputQty_button {
     flex: 0 0 30px;
   }
   .cartProductBox_body .inputQty .inputQty_button.minus {
-    border-radius: 15px 0 0 15px;
+    border-radius: 0.5rem 0 0 0.5rem;
   }
   .cartProductBox_body .inputQty .inputQty_button.plus {
-    border-radius: 0 15px 15px 0;
+    border-radius: 0 0.5rem 0.5rem 0;
   }
   .cartProductBox_body .inputQty input {
     flex: 0 0 45px;
@@ -5333,7 +5344,7 @@ label.checkBox input {
   width: 100%;
   padding: 0.875rem 1.25rem 1.25rem;
   position: relative;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   margin: 0 0.5rem;
 }
 .cartMessage_box_head {
@@ -5387,7 +5398,7 @@ label.checkBox input {
   display: flex;
   gap: 1rem;
   background: #1a202c;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   padding: 1.125rem 1rem;
   margin-bottom: 1.25rem;
 }
@@ -5398,10 +5409,10 @@ label.checkBox input {
   display: flex;
 }
 [dir=ltr] .cartMessage_box_body_image {
-  border-radius: 10px 0 0 10px;
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 [dir=rtl] .cartMessage_box_body_image {
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 .cartMessage_box_body_image img {
   width: 100%;
@@ -5772,7 +5783,7 @@ label.checkBox input {
   width: 100%;
   display: flex;
   justify-content: center;
-  border-radius: 7px;
+  border-radius: 0.5rem;
   padding-left: 0rem;
   padding-right: 0rem;
 }
@@ -5802,7 +5813,7 @@ label.checkBox input {
   font-size: 1.2rem;
 }
 .detailPayment_item > *.button {
-  border-radius: 7px;
+  border-radius: 0.5rem;
   padding: 0.5rem 1.5rem;
 }
 .detailPayment_item.buttonBox {
@@ -5992,7 +6003,7 @@ label.checkBox input {
   cursor: pointer;
   transition: all 0.2s;
   background: #2d3848;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   border: 2px solid #1a202c;
   overflow: hidden;
 }
@@ -6035,7 +6046,7 @@ label.checkBox input {
   z-index: 1;
 }
 .wallpaperSourceGrid_item_background {
-  border-radius: 10px;
+  border-radius: 0.5rem;
   display: none;
   width: calc(100% - 4px);
   height: calc(100% - 4px);
@@ -6072,7 +6083,7 @@ label.checkBox input {
 .confirmMessageBox {
   display: flex;
   background: #2d3848;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .confirmMessageBox_left {
   padding: 1rem 1.25rem;
@@ -6211,7 +6222,7 @@ label.checkBox input {
   width: calc(100% - 2rem);
   margin: 0 auto;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   padding: 1.5rem;
   z-index: 99;
   position: relative;
@@ -6319,7 +6330,7 @@ label.checkBox input {
   width: calc(20% - 0.6rem);
 }
 .wallpaperGridBox_item {
-  border-radius: 12px;
+  border-radius: 0.5rem;
   position: relative;
 }
 .wallpaperGridBox_item .show {
@@ -6609,7 +6620,7 @@ label.checkBox input {
 .wallpaperGridBox_itemBackground {
   background: rgba(0, 0, 0, 0.25);
   aspect-ratio: 1/2.18;
-  border-radius: 12px;
+  border-radius: 0.5rem;
 }
 @media (max-width: 1799px) {
   .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
@@ -6749,7 +6760,7 @@ label.checkBox input {
 }
 .filterStyleWallpaper_item {
   background: #2d3848;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   padding: 0.2rem 0.75rem;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -6820,7 +6831,7 @@ label.checkBox input {
   line-height: 1.2;
   padding: 0.25rem 0.5rem;
   background: #3a4556;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 @media (max-width: 1199px) {
   .shareSocialBox {
@@ -6923,7 +6934,7 @@ label.checkBox input {
   width: 100%;
   height: 100%;
   flex: 1;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 .freeWallpaperBox_item_box {
   display: none;
@@ -6936,7 +6947,7 @@ label.checkBox input {
   align-items: center;
   font-size: 0.8rem;
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   z-index: 2;
 }
 .freeWallpaperBox_item_box_item {
@@ -6977,7 +6988,7 @@ label.checkBox input {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
 .freeWallpaperBox_item_box_item .feeling_item:hover {
@@ -6994,7 +7005,7 @@ label.checkBox input {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   cursor: pointer;
   color: #c0d0f1;
 }
@@ -7069,7 +7080,7 @@ label.checkBox input {
 .categoryGrid_box_item {
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
-  border-radius: 12px;
+  border-radius: 0.5rem;
   overflow: hidden;
   aspect-ratio: 9/16;
   background: #2d3848;
@@ -7375,7 +7386,7 @@ label.checkBox input {
   background: #00FA9A;
   color: #fff;
   padding: 0 0.5rem;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   font-size: 0.95rem;
   margin-left: 0.5rem;
   font-family: "SVN-Gilroy Bold", sans-serif;
@@ -7428,7 +7439,7 @@ label.checkBox input {
   font-size: 1.2rem;
   border: none;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   color: #c0d0f1CC;
   background: #ffd100;
   opacity: 0.6;
@@ -7658,7 +7669,7 @@ label.checkBox input {
   background: #2d384899;
   width: -moz-fit-content;
   width: fit-content;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   margin-top: 1rem;
   cursor: pointer;
   color: #c0d0f1;
@@ -7746,7 +7757,7 @@ label.checkBox input {
   margin-right: 0.5rem;
   width: 22px;
   height: 22px;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   border: 1px solid #ad8e70;
   display: inline-block;
 }
@@ -7965,7 +7976,7 @@ label.checkBox input {
 }
 .registryEmailBox_input button {
   background: #00bd7d;
-  border-radius: 0 7px 7px 0;
+  border-radius: 0 0.5rem 0.5rem 0;
   color: #c0d0f1CC;
   display: flex;
   align-items: center;
@@ -7982,7 +7993,7 @@ label.checkBox input {
   font-size: 1.2rem;
 }
 .registryEmailBox_input input {
-  border-radius: 7px 0 0 7px;
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 @media (max-width: 990px) {
   .registryEmailBox {
@@ -8116,7 +8127,7 @@ label.checkBox input {
   background-color: #00FA9A66;
   color: #fff;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   width: 37px;
   aspect-ratio: 1/1;
   margin: 0 0.5rem 0.5rem 0.5rem;
@@ -8180,7 +8191,7 @@ label.checkBox input {
 }
 .keySearchBadge_box_item {
   display: inline-block;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   padding: 0.1rem 0.5rem;
   background: #2d3848;
   cursor: pointer;
@@ -8201,7 +8212,7 @@ label.checkBox input {
   align-items: stretch;
   border: 2px dashed #2d3848;
   background: #2d38484C;
-  border-radius: 12px;
+  border-radius: 0.5rem;
   padding: 0.75rem;
   font-size: 0.9rem;
   margin: 0.25rem auto 1rem auto;
@@ -8217,7 +8228,7 @@ label.checkBox input {
      object-fit: cover;
   width: 100%;
   height: 100%;
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 .searchMessage_content {
   flex: 1;
@@ -8319,7 +8330,7 @@ label.checkBox input {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   cursor: pointer;
   color: #808080;
 }
@@ -8394,7 +8405,7 @@ label.checkBox input {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   color: #c0d0f1;

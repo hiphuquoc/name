@@ -83,7 +83,7 @@
         cursor: pointer;
         transition: all 0.2s;
         background: $colorBackgroundLv2;
-        border-radius: 10px;
+        border-radius: 0.5rem;
         border: 2px solid $colorBackgroundLv1;
         overflow: hidden;
         &.alreadyDownload {
@@ -124,7 +124,7 @@
             z-index: 1;
         }
         &_background {
-            border-radius: 10px;
+            border-radius: 0.5rem;
             display: none;
             width: calc(100% - 4px);
             height: calc(100% - 4px);
@@ -162,7 +162,7 @@
 .confirmMessageBox {
     display: flex;
     background: $colorBackgroundLv2;
-    border-radius: 10px;
+    border-radius: 0.5rem;
     &_left {
         padding: 1rem 1.25rem;
         flex: 0 0 320px;

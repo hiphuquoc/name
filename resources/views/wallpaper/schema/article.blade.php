@@ -1,6 +1,7 @@
 @php
     $title              = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
     $description        = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
+    $url                = env('APP_URL').'/'.$itemSeo->slug_full ?? $item->slug_full;
     /* author */
     $author             = config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.author_name');
     /* image */
@@ -20,17 +21,17 @@
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "@id": "{{ URL::current() }}#website",
+        "@id": "{{ $url }}#website",
         "inLanguage": "{{ $language }}",
         "headline": "{{ $author }} Article",
         "datePublished": "{{ !empty($item->seo->created_at) ? date('c', strtotime($item->seo->created_at)) : null }}",
         "dateModified": "{{ !empty($item->seo->updated_at) ? date('c', strtotime($item->seo->updated_at)) : null }}",
         "name": "{{ $title }}",
         "description": "{{ $description }}",
-        "url": "{{ URL::current() }}",
+        "url": "{{ $url }}",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "{{ URL::current() }}"
+            "@id": "{{ $url }}"
         },
         "author":{
             "@type": "Organization",
@@ -58,7 +59,7 @@
             "target": [
                 {
                     "@type": "EntryPoint",
-                    "urlTemplate": "{{ URL::current() }}"
+                    "urlTemplate": "{{ $url }}"
                 }
             ]
         }

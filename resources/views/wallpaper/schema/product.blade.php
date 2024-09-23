@@ -26,6 +26,7 @@
     }
     $title          = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
     $description    = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
+    $url            = env('APP_URL').'/'.$itemSeo->slug_full ?? $item->slug_full;
     /* lấy giá theo ngôn ngữ */
     $tmp            = \App\Helpers\Number::getPriceByLanguage($lowPrice, $language);
     $lowPrice       = $tmp['number'];
@@ -38,7 +39,7 @@
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": "{{ $title }}",
-        "url": "{{ URL::current() }}",
+        "url": "{{ $url }}",
         "image":
             [
                 {!! $image !!}
@@ -73,7 +74,7 @@
         "offers":
             {
                 "@type": "AggregateOffer",
-                "url": "{{ URL::current() }}",
+                "url": "{{ $url }}",
                 "offerCount": "1",
                 "priceCurrency": "{{ $currency ?? 'VND' }}",
                 "lowPrice": "{{ $lowPrice ?? '50000' }}",

@@ -11,6 +11,7 @@
 @endif
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="fragment" content="!" />
+<meta name="language" content="{{ $language }}" />
 <link rel="shortcut icon" href="/storage/images/upload/logo-type-manager-upload.webp" type="image/x-icon" />
 <!-- BEGIN: Custom CSS-->
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/sources/main/ring.css?'.time()) }}">
