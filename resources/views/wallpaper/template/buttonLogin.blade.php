@@ -1,9 +1,12 @@
 @if(!empty($user))
+    @php
+        $accountInformationByLanguage = config('language.'.$language.'.data.account_information');
+    @endphp
     <div class="loginBox" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
         <div class="loginBox_iconAvatar">
-            <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="thông tin tài khoản" title="thông tin tài khoản" />
+            <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="{{ $accountInformationByLanguage }}" title="{{ $accountInformationByLanguage }}" />
         </div>
-        <div class="maxLine_1">{{ $user->name ?? 'Tài khoản' }}</div>
+        <div class="maxLine_1">{{ $user->name ?? '' }}</div>
         <div class="loginBox_list">
             {{-- <div class="loginBox_list_item">
                 <i class="fa-solid fa-key"></i>
@@ -11,19 +14,11 @@
             </div>  --}}
             <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
                 <i class="fa-solid fa-download"></i>
-                @if(!empty($language)&&$language=='en')
-                    <div>My Downloads</div>
-                @else 
-                    <div>Tải xuống của tôi</div>
-                @endif
+                <div class="maxLine_1">{{ config('language.'.$language.'.data.my_downloads') }}</div>
             </a> 
             <a href="{{ route('admin.logout') }}" class="loginBox_list_item">
                 <i class="fa-solid fa-right-from-bracket"></i>
-                @if(!empty($language)&&$language=='en')
-                    <div class="maxLine_1">Logout</div>
-                @else 
-                    <div class="maxLine_1">Đăng xuất</div>
-                @endif
+                <div class="maxLine_1">{{ config('language.'.$language.'.data.logout') }}</div>
             </a>
         </div>
         <div class="loginBox_background">
@@ -32,11 +27,10 @@
     </div>
 @else 
     <div class="loginBox" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
-        <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="đăng nhập {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" title="đăng nhập {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" />
-        @if(!empty($language)&&$language=='en')
-            <div class="maxLine_1">Login</div>
-        @else 
-            <div class="maxLine_1">Đăng nhập</div>
-        @endif
+        @php
+            $loginByLanguage = config('language.'.$language.'.data.login');
+        @endphp
+        <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="{{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" title="{{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" />
+        <div class="maxLine_1">{{ $loginByLanguage }}</div>
     </div>
 @endif

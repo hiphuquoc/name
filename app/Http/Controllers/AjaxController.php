@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\HelperController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
@@ -11,13 +12,14 @@ use App\Models\District;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\Seo;
 use App\Models\FreeWallpaper;
 use App\Models\RegistryEmail;
 use App\Models\RelationFreeWallpaperUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Services\BuildInsertUpdateModel;
-use SebastianBergmann\Type\FalseType;
+// use SebastianBergmann\Type\FalseType;
 
 class AjaxController extends Controller {
 
@@ -462,5 +464,23 @@ class AjaxController extends Controller {
             if(!empty($wallpaper)) $response = view('wallpaper.category.item', compact('wallpaper', 'language', 'user'))->render();
         }
         echo $response;
+    }
+
+    public function loadLinkDownloadGuide(Request $request){
+        $language               = $request->get('language');
+        $linkGuideDownloadVI    = 'huong-dan-tai-hinh-nen-dien-thoai';
+        $infoSeo                = Seo::select('id')
+                                    ->where('slug', $linkGuideDownloadVI)
+                                    ->first();
+        $linkGuideDownloadByLanguage = '/';
+        if(!empty($infoSeo)){
+            $infoPage           = HelperController::getFullInfoPageByIdSeo($infoSeo->id);
+            foreach($infoPage->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                    $linkGuideDownloadByLanguage = env('APP_URL').'/'.$seo->infoSeo->slug_full;
+                }
+            }
+        }
+        echo $linkGuideDownloadByLanguage;
     }
 }

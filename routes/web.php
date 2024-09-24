@@ -323,6 +323,7 @@ Route::get('/loadMoreWallpaper', [CategoryMoneyPublic::class, 'loadMoreWallpaper
 Route::get('/loadmoreFreeWallpapers', [CategoryPublic::class, 'loadmoreFreeWallpapers'])->name('main.category.loadmoreFreeWallpapers');
 Route::get('/loadInfoCategory', [CategoryPublic::class, 'loadInfoCategory'])->name('main.category.loadInfoCategory');
 Route::get('/toogleHeartFeelingFreeWallpaper', [AjaxController::class, 'toogleHeartFeelingFreeWallpaper'])->name('ajax.toogleHeartFeelingFreeWallpaper');
+Route::get('/loadLinkDownloadGuide', [AjaxController::class, 'loadLinkDownloadGuide'])->name('ajax.loadLinkDownloadGuide');
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
