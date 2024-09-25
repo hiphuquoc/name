@@ -1,28 +1,21 @@
 @if(!empty($user))
+    @php
+        $myDownloadsByLanguage = config('language.'.$language.'.data.login');
+    @endphp
     <div class="headerBottom_item" onClick="toggleMenuListMobile();">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="mua ngay" title="mua ngay" style="width:22px;" />
+            <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="{{ $myDownloadsByLanguage }}" title="$myDownloadsByLanguage" />
         </div>
-        <div class="headerBottom_item_text maxLine_1">
-            {{ $user->name ?? 'Tài khoản' }}
-
-
+        <div class="headerBottom_item_text">
+            <div class="maxLine_1">{{ $user->name ?? ''}}</div>
             <div class="headerBottom_item_text_modal">
                 <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
                     <i class="fa-solid fa-download"></i>
-                    @if(!empty($language)&&$language=='en')
-                        <div>My Downloads</div>
-                    @else 
-                        <div>Tải xuống của tôi</div>
-                    @endif
+                    <div>{{ $myDownloadsByLanguage }}</div>
                 </a> 
                 <a href="{{ route('admin.logout') }}" class="loginBox_list_item">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    @if(!empty($language)&&$language=='en')
-                        <div>Logout</div>
-                    @else 
-                        <div>Đăng xuất</div>
-                    @endif
+                    <div>{{ config('language.'.$language.'.data.logout') }}</div>
                 </a>
             </div>
             <div class="headerBottom_item_text_background"></div>
@@ -42,16 +35,15 @@
         </div>
     </div>
 @else 
+    @php
+        $loginByLanguage = config('language.'.$language.'.data.login');
+    @endphp
     <div class="headerBottom_item" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="mua ngay" title="mua ngay" />
+            <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="{{ $loginByLanguage }}" title="{{ $loginByLanguage }}" />
         </div>
         <div class="headerBottom_item_text">
-            @if(!empty($language)&&$language=='en')
-                Login
-            @else 
-                Đăng nhập
-            @endif
+            {{ $loginByLanguage }}
         </div>
     </div>
 @endif

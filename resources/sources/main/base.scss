@@ -915,6 +915,11 @@ input, textarea, select {
   &:focus {
     border: 1px solid $colorBackgroundLv3;
     outline: none;
+    -webkit-transition-delay: unset !important;
+  }
+  &::-webkit-autofill, &::-moz-autofill, &:valid, &:active {
+    background: red !important;
+    -webkit-transition-delay: unset !important;
   }
 }
 
@@ -1105,6 +1110,9 @@ label {
       font-weight: normal;
       font-size: 0.85rem;
       padding: 0 0.75rem;
+      opacity: 0.8;
+      z-index: 10;
+      position: relative;
   }
   > input {
       display: flex;
@@ -1122,11 +1130,11 @@ label {
       cursor: pointer;
       z-index: 2;
       &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
-          border: none;
-          outline: none;
-          background: transparent !important;
-          -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
-          -webkit-transition-delay: 9999s;
+          // border: 1px solid $colorBackgroundLv3;
+          outline: 1px solid $colorBackgroundLv3;
+          -webkit-text-fill-color: $colorText !important;
+          box-shadow: 0 0 0px 1000px $colorBackgroundLv3 inset !important; /* Màu nền mong muốn */
+          // transition: background-color 5000s ease-in-out 0s;
       }
   }
   &:not(:first-child){
