@@ -416,9 +416,9 @@ $heightMenu : 3.3rem;
     pointer-events: none;
     overflow: hidden;
 
-    // /* Hiệu ứng mờ dần */
-    // opacity: 0; /* Bắt đầu từ trạng thái ẩn */
-    // animation: fadeInBackground 1s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
+    /* Hiệu ứng mờ dần */
+    opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+    animation: fadeInBackground 0.5s ease-in-out 0.5s forwards; /* Trì hoãn 0.2 giây trước khi bắt đầu */
   }
   &_backgroundTopMore {
     /* làm tối viền phần trên thêm */
@@ -432,9 +432,9 @@ $heightMenu : 3.3rem;
     pointer-events: none;
     overflow: hidden;
 
-    // /* Hiệu ứng mờ dần */
-    // opacity: 0; /* Bắt đầu từ trạng thái ẩn */
-    // animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
+    /* Hiệu ứng mờ dần */
+    opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+    animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
   }
   $colorFill : #000;
   &_backgroundSideMore {
@@ -449,19 +449,19 @@ $heightMenu : 3.3rem;
     pointer-events: none;
     overflow: hidden;
 
-    // /* Hiệu ứng mờ dần */
-    // opacity: 0; /* Bắt đầu từ trạng thái ẩn */
-    // animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
+    /* Hiệu ứng mờ dần */
+    opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+    animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
   }
-  // /* Định nghĩa animation */
-  // @keyframes fadeInBackground {
-  //   0% {
-  //     opacity: 0;
-  //   }
-  //   100% {
-  //     opacity: 1;
-  //   }
-  // }
+  /* Định nghĩa animation */
+  @keyframes fadeInBackground {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
   /* làm mờ nền */
   &_backgroundBlur {
       filter: blur(5px);

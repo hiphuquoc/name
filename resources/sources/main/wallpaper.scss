@@ -179,6 +179,9 @@
             }
             /* background */
             @include backgroundFillWallpaperOfProduct;
+            &_background, &_backgroundSideMore, &_backgroundTopMore {
+                // opacity: 1 !important;
+            }
         }
         &_action {
             position: absolute;

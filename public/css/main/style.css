@@ -3119,6 +3119,7 @@ label.checkBox input {
   aspect-ratio: 1/2.18;
   overflow: hidden;
   border-radius: 7%;
+  /* Định nghĩa animation */
   /* làm mờ nền */
 }
 .galleryProductBox_item .zIndexHide {
@@ -3160,6 +3161,9 @@ label.checkBox input {
   z-index: -2;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0.5s forwards; /* Trì hoãn 0.2 giây trước khi bắt đầu */
 }
 .galleryProductBox_item_backgroundTopMore {
   /* làm tối viền phần trên thêm */
@@ -3172,6 +3176,9 @@ label.checkBox input {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
 }
 .galleryProductBox_item_backgroundSideMore {
   /* làm tối viền phần trên thêm */
@@ -3184,6 +3191,17 @@ label.checkBox input {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
+}
+@keyframes fadeInBackground {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .galleryProductBox_item_backgroundBlur {
   filter: blur(5px);
@@ -3833,6 +3851,7 @@ label.checkBox input {
   height: 95vh;
   border-radius: 3vh;
   /* background */
+  /* Định nghĩa animation */
   /* làm mờ nền */
 }
 .viewImageFullBox_box_image img {
@@ -3930,6 +3949,9 @@ label.checkBox input {
   z-index: -2;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0.5s forwards; /* Trì hoãn 0.2 giây trước khi bắt đầu */
 }
 .viewImageFullBox_box_image_backgroundTopMore {
   /* làm tối viền phần trên thêm */
@@ -3942,6 +3964,9 @@ label.checkBox input {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
 }
 .viewImageFullBox_box_image_backgroundSideMore {
   /* làm tối viền phần trên thêm */
@@ -3954,6 +3979,17 @@ label.checkBox input {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
+}
+@keyframes fadeInBackground {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .viewImageFullBox_box_image_backgroundBlur {
   filter: blur(5px);
@@ -6360,6 +6396,7 @@ label.checkBox input {
   overflow: hidden;
   border-radius: 7%;
   /* background */
+  /* Định nghĩa animation */
   /* làm mờ nền */
 }
 .wallpaperGridBox_item_image .zIndexHide {
@@ -6496,6 +6533,9 @@ label.checkBox input {
   z-index: -2;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0.5s forwards; /* Trì hoãn 0.2 giây trước khi bắt đầu */
 }
 .wallpaperGridBox_item_image_backgroundTopMore {
   /* làm tối viền phần trên thêm */
@@ -6508,6 +6548,9 @@ label.checkBox input {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
 }
 .wallpaperGridBox_item_image_backgroundSideMore {
   /* làm tối viền phần trên thêm */
@@ -6520,6 +6563,17 @@ label.checkBox input {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
+  /* Hiệu ứng mờ dần */
+  opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+  animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
+}
+@keyframes fadeInBackground {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .wallpaperGridBox_item_image_backgroundBlur {
   filter: blur(5px);
