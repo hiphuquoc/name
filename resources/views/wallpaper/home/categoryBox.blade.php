@@ -56,19 +56,17 @@
                 }
             });
         }
-
+        
         function loadInfoCategory(idCategory, language, idWrite) {
             let dataForm = {};
             dataForm.category_info_id = idCategory;
             dataForm.language = language;
-        
+
             const queryString = new URLSearchParams(dataForm).toString();
             fetch("/loadInfoCategory?" + queryString, {
                 method: 'GET',
-                // mode: 'cors',
                 headers: {
-                    'Content-Type': 'application/json',
-                    // 'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    'Content-Type': 'application/json'
                 }
             })
             .then(response => {
@@ -78,9 +76,40 @@
                 return response.text();
             })
             .then(data => {
-                $('#'+idWrite).html(data);
-                /* lazyload ảnh trong khung nhìn */
-                lazyload();
+                // Tạo một container ẩn để chứa dữ liệu tạm thời
+                const tempDiv = $('<div></div>').html(data);
+
+                // Tìm tất cả thẻ img trong dữ liệu
+                const images = tempDiv.find('img');
+                let imagesLoaded = 0;
+
+                if (images.length === 0) {
+                    // Nếu không có hình ảnh nào, thì thêm trực tiếp vào phần tử
+                    $('#'+idWrite).html(data);
+                    lazyload(); // Tải lazy load cho các hình ảnh khác nếu có
+                } else {
+                    // Nếu có hình ảnh, kiểm tra xem tất cả có tải xong không
+                    images.each(function() {
+                        const img = new Image();
+                        img.src = $(this).attr('src');
+                        img.onload = function() {
+                            imagesLoaded++;
+                            if (imagesLoaded === images.length) {
+                                // Khi tất cả ảnh đã được tải, chèn nội dung vào HTML
+                                $('#'+idWrite).html(data);
+                                lazyload(); // Tải lazy load sau khi nội dung đã được chèn
+                            }
+                        };
+                        img.onerror = function() {
+                            imagesLoaded++;
+                            if (imagesLoaded === images.length) {
+                                // Nếu có lỗi với bất kỳ ảnh nào, vẫn chèn nội dung khi tất cả đã thử tải
+                                $('#'+idWrite).html(data);
+                                lazyload();
+                            }
+                        };
+                    });
+                }
             })
             .catch(error => {
                 console.error("Fetch request failed:", error);

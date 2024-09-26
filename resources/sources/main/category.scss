@@ -1,86 +1,76 @@
-.categoryGridBox {
-    .container {
-        position: relative;
-        display: flex;
-        align-items: flex-start;
-        // &:after {
-        //     content: '';
-        //     position: absolute;
-        //     width: 100px;
-        //     height: 100%;
-        //     top: 0;
-        //     right: 0;
-        //     background: linear-gradient(270deg, $bg-02 20%, transparent);
-        //     z-index: 1;
-        // }
-    }
-    &_item {
-        width: 100%;
-        color: $colorText;
-        &:hover {
-            color: $colorLv1;
-            .categoryGridBox_item_icon {
-                border: 2px dashed $colorSLv2;
-            }
-        }
-        &:not(:first-child){
-            margin-left: 2rem;
-        }
-        &_icon {
-            @include colorOpacity('background', $colorSLv2, 0.1);
-            width: 100%;
-            border-radius: 50%;
-            padding: 1.5rem;
-            margin-bottom: 0.5rem;
-            border: 2px solid #fff;
-            transition: all 0.3s;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            img {
-                width: 100%;
-                display: flex;
-                margin: 0 auto;
-            }
-        }
-        &_title {
-            text-align: center;
-            font-weight: 700;
-            line-height: 1.4;
-            @include colorOpacity('color', $colorText, 0.9);
-        }
-    }
-    @include slickArrowCircle;
-    @media(max-width: 1199px){
-        &_item {
-            &:not(:first-child){
-                margin-left: 1.75rem;
-            }
-        }
-    }
-    @media(max-width: 990px){
-        &_item {
-            &:not(:first-child){
-                margin-left: 1.5rem;
-            }
-        }
-    }
-    @media(max-width: 767px){
-        &_item {
-            &:not(:first-child){
-                margin-left: 1.25rem;
-            }
-        }
-    }
-    @media(max-width: 577px){
-        &_item {
-            &:not(:first-child){
-                margin-left: 1rem;
-            }
-        }
-    }
-}
+// .categoryGridBox {
+//     // .container {
+//     //     position: relative;
+//     //     display: flex;
+//     //     align-items: flex-start;
+//     // }
+//     &_item {
+//         width: 100%;
+//         color: $colorText;
+//         &:hover {
+//             color: $colorLv1;
+//             .categoryGridBox_item_icon {
+//                 border: 2px dashed $colorSLv2;
+//             }
+//         }
+//         &:not(:first-child){
+//             margin-left: 2rem;
+//         }
+//         &_icon {
+//             @include colorOpacity('background', $colorSLv2, 0.1);
+//             width: 100%;
+//             border-radius: 50%;
+//             padding: 1.5rem;
+//             margin-bottom: 0.5rem;
+//             border: 2px solid #fff;
+//             transition: all 0.3s;
+//             aspect-ratio: 1 / 1;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             img {
+//                 width: 100%;
+//                 display: flex;
+//                 margin: 0 auto;
+//             }
+//         }
+//         &_title {
+//             text-align: center;
+//             font-weight: 700;
+//             line-height: 1.4;
+//             @include colorOpacity('color', $colorText, 0.9);
+//         }
+//     }
+//     @include slickArrowCircle;
+//     @media(max-width: 1199px){
+//         &_item {
+//             &:not(:first-child){
+//                 margin-left: 1.75rem;
+//             }
+//         }
+//     }
+//     @media(max-width: 990px){
+//         &_item {
+//             &:not(:first-child){
+//                 margin-left: 1.5rem;
+//             }
+//         }
+//     }
+//     @media(max-width: 767px){
+//         &_item {
+//             &:not(:first-child){
+//                 margin-left: 1.25rem;
+//             }
+//         }
+//     }
+//     @media(max-width: 577px){
+//         &_item {
+//             &:not(:first-child){
+//                 margin-left: 1rem;
+//             }
+//         }
+//     }
+// }
 .categoryBoxFooter {
     &_item {
         display: flex;
@@ -622,6 +612,238 @@ $heightSelect : 2.25rem;
                 align-items: stretch;
                 justify-content: flex-start;
                 align-content: flex-start;
+            }
+        }
+    }
+}
+.categoryGrid {
+    &_title {
+        margin-bottom: 1rem;
+        h2, h3, a {
+            font-size: 1.2rem;
+            font-family: $fontTitle;
+            margin-bottom: 0 !important;
+            color: $colorText;
+        }
+        @media(max-width: 990px){
+            h2, h3 {
+                font-size: 1.15rem;
+            }
+        }
+        @media(max-width: 767px){
+            margin-bottom: 0.75rem;
+            h2, h3 {
+                font-size: 1.1rem;
+            }
+        }
+        @media(max-width: 577px){
+            h2, h3 {
+                font-size: 1.05rem;
+            }
+        }
+    }
+    &_box {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 1.25rem;
+        &_item {
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            background: $colorBackgroundLv2;
+            &_image {
+                display: flex;
+                flex-direction: row;
+                position: relative;
+                width: 100%;
+                height: 100%;
+                img {
+                    // opacity: 0;
+                    object-fit: cover;
+                    transition: all 1s ease-in-out;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    &.active {
+                        // opacity: 0;
+                        z-index: 2;
+                    }
+                    
+                }
+            }
+            &_content {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: fit-content;
+                transform: translateZ(1px);
+                z-index: 4;
+                padding: 0.5rem 1rem 0.75rem 1rem;
+                font-size: 0.85rem;
+                background-image: linear-gradient(360deg, rgba(45, 56, 72, 0.9) 33.33%, rgba(45, 56, 72, 0.95) 66.66%, rgba(45, 56, 72, 0.5) 100%);
+                transition: all 0.1s;
+                &.zoom {
+                    position: fixed;
+                    top: 0;
+                    bottom: unset;
+                    height: 100vh;
+                    z-index: 9999;
+                    background: $colorBackgroundLv2;
+                    line-height: 2;
+                    padding: 0.75rem;
+                    transition: all 0.2s;
+                    .categoryGrid_box_item_content_title_action {
+                        &::after {
+                            content: '\f00d';
+                            @include iconCloseSquare;
+                        }
+                    }
+                    .categoryGrid_box_item_content_list {
+                        display: flex;
+                        margin-top: 0.5rem;
+                        max-height: unset;
+                        font-size: 0.85rem;
+                        
+                    }
+                }
+                &_title {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    a {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+                    }
+                    h2, h3 {
+                        font-size: 0.95rem;
+                        font-family: $fontTitle;
+                        color: $colorLv1;
+                        margin-bottom: 0;
+                        text-transform: none;
+                        width: inherit;
+                        letter-spacing: 1px;
+                        text-shadow: 0 0 $colorTextLight;
+                        &:hover {
+                            color: $colorLv2;
+                        }
+                    }
+                    &_action {
+                        display: none;
+                        &:after {
+                            content: '\f192\f192\f192';
+                            @include fontAwesome;
+                            @include colorOpacity('color', $colorText, 0.5);
+                            text-shadow: 0 0 rgba(192, 208, 241, 0.5);
+                            opacity: 0.75;    
+                            font-size: 0.25rem;
+                            letter-spacing: 4px;
+                            width: 35px;
+                            text-align: right;
+                            [dir="ltr"] & {
+                                margin-left: 0.5rem;
+                            }
+                            [dir="rtl"] & {
+                                margin-left: unset;
+                                margin-right: 0.5rem;
+                            }
+                        }
+                    }
+                }
+                &_list {
+                    display: flex;
+                    flex-wrap: wrap;
+                    font-size: 0.85rem;
+                    margin-top: 0.35rem;
+                    letter-spacing: 0.75px;
+                    max-height: 157.109px;
+                    overflow: hidden;
+                    gap: 0.15rem 0.75rem;
+                    transition: max-height 0.5s ease; // Slow transition by default
+                    &:hover {
+                        max-height: 500px; // Set a large enough max-height for the content
+                        transition: max-height 0.5s ease; // Slow transition on hover
+                    }
+                    &:not(:hover) {
+                        transition: max-height 0.25s ease; // Fast transition when hover is removed
+                    }
+                    > * {
+                        color: $colorText;
+                        &:not(:first-child){
+                            &:before {
+                                content: '\f192';
+                                @include fontAwesome;
+                                font-size: 0.35rem;
+                                vertical-align: middle;
+                                [dir="ltr"] & {
+                                    margin-right: 0.75rem;
+                                }
+                                [dir="rtl"] & {
+                                    margin-left: 0.75rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        @media(max-width: 1499px){
+            grid-template-columns: auto auto auto;
+        }
+        @media(max-width: 1199px){
+            grid-template-columns: auto auto;
+        }
+        @media(max-width: 1023px){
+            grid-template-columns: auto auto auto;
+            gap: 1rem;
+            &_item {
+                &_content {
+                    &_title {
+                        &_action {
+                            display: flex;
+                        }
+                    }
+                    &_list {
+                        display: none;
+                    }
+                }
+            }
+        }
+        @media(max-width: 767px){
+            grid-template-columns: auto auto;
+            gap: 0.75rem;
+            &_item {
+                border-radius: 0.5rem;
+                &_content {
+                    padding: 0.5rem 0.75rem;
+                    &_title {
+                        h2, h3 {
+                            font-size: 0.9rem;
+                        }
+                    }
+                    &_list {
+                        margin-top: 0.25rem;
+                    }
+                }
+            }
+        }
+        @media(max-width: 577px){
+            gap: 0.55rem;
+            &_item {
+                
+                &_content {
+                    &_title {
+                        h2, h3 {
+                            font-size: 0.85rem;
+                        }
+                    }
+                }
             }
         }
     }
