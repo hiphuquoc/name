@@ -3119,6 +3119,7 @@ label.checkBox input {
   aspect-ratio: 1/2.18;
   overflow: hidden;
   border-radius: 7%;
+  /* làm mờ nền */
 }
 .galleryProductBox_item .zIndexHide {
   position: relative;
@@ -3832,6 +3833,7 @@ label.checkBox input {
   height: 95vh;
   border-radius: 3vh;
   /* background */
+  /* làm mờ nền */
 }
 .viewImageFullBox_box_image img {
   border-radius: 3vh;
@@ -6358,6 +6360,7 @@ label.checkBox input {
   overflow: hidden;
   border-radius: 7%;
   /* background */
+  /* làm mờ nền */
 }
 .wallpaperGridBox_item_image .zIndexHide {
   position: relative;

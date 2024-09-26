@@ -184,10 +184,10 @@ class RoutingController extends Controller{
                         }
                         /* ===== trả phí */
                         if($flagFree==false){
-                            $params         = [];
+                            $params             = [];
                             /* key_search */
-                            $params['search'] = $search;
-                            $arrayIdCategory  = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
+                            $params['search']   = $search;
+                            $arrayIdCategory    = Category::getArrayIdCategoryRelatedByIdCategory($item, [$item->id]);
                             // dd($request->all());
                             $params['array_category_info_id'] = $arrayIdCategory;
                             /* chế độ xem */

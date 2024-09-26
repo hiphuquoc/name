@@ -39,20 +39,37 @@ class CategoryMoneyController extends Controller {
                 $tmp                                = self::getWallpapers($params, $language);
             }
             /* đổ theme lấy html */
-            $content                                = '';
-            foreach($tmp['wallpapers'] as $wallpaper){
+            $content                                = self::getXhtmlWallpapers($tmp['wallpapers'], $language, $viewBy);
+            /* trả kết quả */
+            $response['content']                    = $content;
+            $response['loaded']                     = $tmp['loaded'];
+            $response['total']                      = $tmp['total'];
+        }
+        return json_encode($response);
+    }
+
+    public static function getXhtmlWallpapers($wallpapers, $language, $viewBy = 'each_set'){
+        $response   = '';
+        if(!empty($wallpapers)){
+            foreach($wallpapers as $wallpaper){
                 if($viewBy=='each_set'){
-                    $content    .= view('wallpaper.template.wallpaperItem', [
+                    $response    .= view('wallpaper.template.wallpaperItem', [
                         'product'   => $wallpaper,
                         'language'  => $language,
                         'lazyload'  => true
                     ])->render();
                 }else {
-                    $link           = empty($language)||$language=='vi' ? '/'.$wallpaper->seo->slug_full : '/'.$wallpaper->en_seo->slug_full;
-                    $wallpaperName    = $wallpaper->name ?? null;
+                    $wallpaperName      = $wallpaper->name ?? null;
+                    $link               = env('APP_URL').'/'.$wallpaper->seo->slug_full;
+                    foreach($wallpaper->seos as $seo){
+                        if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language) {
+                            $link = env('APP_URL').'/'.$seo->infoSeo->slug_full;
+                            break;
+                        }
+                    }
                     foreach($wallpaper->prices as $price){
                         foreach($price->wallpapers as $w){
-                            $content .= view('wallpaper.template.perWallpaperItem', [
+                            $response .= view('wallpaper.template.perWallpaperItem', [
                                 'idProduct'     => $w->id,
                                 'idPrice'       => $price->id,
                                 'wallpaper'     => $w, 
@@ -65,12 +82,8 @@ class CategoryMoneyController extends Controller {
                     }
                 }
             }
-            /* trả kết quả */
-            $response['content']    = $content;
-            $response['loaded']     = $tmp['loaded'];
-            $response['total']      = $tmp['total'];
         }
-        return json_encode($response);
+        return $response;
     }
 
     public static function getWallpapers($params, $language){

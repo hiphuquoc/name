@@ -415,32 +415,54 @@ $heightMenu : 3.3rem;
     z-index: -2;
     pointer-events: none;
     overflow: hidden;
+
+    // /* Hiệu ứng mờ dần */
+    // opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+    // animation: fadeInBackground 1s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
   }
   &_backgroundTopMore {
-      /* làm tối viền phần trên thêm */
-      position: absolute;
-      top: 0px;
-      left: 0;
-      width: 100%;
-      height: 5%;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.375) 15%, transparent);
-      z-index: -1;
-      pointer-events: none;
-      overflow: hidden;
+    /* làm tối viền phần trên thêm */
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 5%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.375) 15%, transparent);
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+
+    // /* Hiệu ứng mờ dần */
+    // opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+    // animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
   }
   $colorFill : #000;
   &_backgroundSideMore {
-      /* làm tối viền phần trên thêm */
-      position: absolute;
-      top: 0px;
-      left: 0;
-      width: 99%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba($colorFill, 0.5) 0%, rgba($colorFill, 0) 4%, rgba($colorFill, 0) 96%, rgba($colorFill, 0.5) 100%);
-      z-index: -1;
-      pointer-events: none;
-      overflow: hidden;
+    /* làm tối viền phần trên thêm */
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 99%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba($colorFill, 0.5) 0%, rgba($colorFill, 0) 4%, rgba($colorFill, 0) 96%, rgba($colorFill, 0.5) 100%);
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+
+    // /* Hiệu ứng mờ dần */
+    // opacity: 0; /* Bắt đầu từ trạng thái ẩn */
+    // animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
   }
+  // /* Định nghĩa animation */
+  // @keyframes fadeInBackground {
+  //   0% {
+  //     opacity: 0;
+  //   }
+  //   100% {
+  //     opacity: 1;
+  //   }
+  // }
+  /* làm mờ nền */
   &_backgroundBlur {
       filter: blur(5px);
       -webkit-filter: blur(5px);
