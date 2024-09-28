@@ -18,6 +18,10 @@
 <!-- Tối ưu hóa việc tải ảnh từ Google Cloud Storage -->
 <link rel="preconnect" href="https://namecomvn.storage.googleapis.com" crossorigin>
 <link rel="dns-prefetch" href="https://namecomvn.storage.googleapis.com">
+<link rel="preconnect" href="https://images.dmca.com">
+<link rel="dns-prefetch" href="https://images.dmca.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <!-- Favicon -->
 <link rel="shortcut icon" href="/storage/images/upload/logo-type-manager-upload.webp" type="image/x-icon" />
 <!-- Font Awesome -->
