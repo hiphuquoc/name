@@ -1,12 +1,11 @@
 {
     "private": true,
     "scripts": {
-        "dev": "NODE_ENV=development webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "NODE_ENV=development webpack --watch --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "production": "NODE_ENV=production webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "dev": "vite",
+        "build": "vite build"
     },
     "devDependencies": {
+        "@fullhuman/postcss-purgecss": "^6.0.0",
         "@vitejs/plugin-basic-ssl": "^1.1.0",
         "axios": "^1.1.2",
         "css-loader": "^6.10.0",
@@ -14,13 +13,14 @@
         "file-loader": "^6.2.0",
         "http-proxy-middleware": "^2.0.6",
         "laravel-mix": "^6.0.49",
-        "laravel-vite-plugin": "^0.7.2",
+        "laravel-vite-plugin": "^0.7.8",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "sass": "^1.57.1",
+        "postcss": "^8.4.47",
+        "purgecss": "^6.0.0",
+        "sass": "^1.79.3",
         "sass-loader": "^14.1.1",
         "style-loader": "^3.3.4",
-        "vite": "^4.1.4",
+        "vite": "^4.5.5",
         "webpack": "^5.91.0",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.0.4"

@@ -84,9 +84,9 @@
 @push('scriptCustom')
     <script type="text/javascript">
 
-        $(window).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             loadColumnTable($('#reference_table') , 'reference_name');
-        })
+        });
 
         function loadColumnTable(input, idWrite){
             const table_name        = $(input).val();

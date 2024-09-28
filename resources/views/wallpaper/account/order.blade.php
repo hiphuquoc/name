@@ -49,13 +49,3 @@
     {{-- @include('main.snippets.zaloRing') --}}
     <!-- === END:: Zalo Ring === -->
 @endpush
-@push('scriptCustom')
-    <script type="text/javascript">
-
-        $(window).ready(function(){
-            
-        });
-
-        
-    </script>
-@endpush

@@ -18,14 +18,15 @@
 </div>
 @push('scriptCustom')
     <script type="text/javascript">
-        $(window).ready(function(){
+
+        document.addEventListener('DOMContentLoaded', function() {
             /* lazyload image */
             lazyload();
             /* load more */
             loadFreeWallpaperMore(50);
-            $(window).scroll(function(){
+            window.addEventListener('scroll', function() {
                 loadFreeWallpaperMore(50);
-            })
+            });
             /* tính lại khi resize */
             setTimeout(() => {
                 setViewAllImage();
@@ -33,7 +34,7 @@
             $(window).resize(function(){
                 setViewAllImage();
             })          
-        })
+        });
 
         /* hiển thị box cảm xúc khi nhấn vào icon */ 
         function showBoxFeeling(element) {

@@ -1,0 +1,60 @@
+/* định dạng ảnh => hiện dùng cho blog */
+.imageBox {
+    max-width: 750px;
+    background: $colorBackgroundLv2;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+    border: 1px solid $colorBackgroundLv3;
+    img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0.5rem 0.5rem 0 0;
+        margin: 0;
+    }
+    &_note {
+        padding: 0.75rem 1rem;
+        text-align: center;
+    }
+    @media (max-width: 991px){
+        margin: 0.75rem auto 1rem auto;
+    }
+    @media (max-width: 577px){
+        margin: 0.5rem auto 0.75rem auto;
+    }
+}
+.imageGroup {
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+    max-width: 750px;
+    &_box {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        overflow: hidden;
+        &_item {
+        width: calc(33.33% - 0.5rem);
+        aspect-ratio: 1/2.18;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem 0.5rem 0 0;
+            margin: 0;
+        }
+        }
+    }
+    &_note {
+        padding: 0.75rem 1rem 0 1rem;
+        text-align: center;
+    }
+    @media (max-width: 991px){
+        margin: 0.75rem auto 1rem auto;
+    }
+    @media (max-width: 577px){
+        margin: 0.5rem auto 0.75rem auto;
+    }
+}

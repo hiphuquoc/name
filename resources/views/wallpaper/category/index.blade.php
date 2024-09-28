@@ -1,4 +1,13 @@
 @extends('layouts.wallpaper')
+@push('cssFirstView')
+    @php
+        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $cssFirstView       = $manifest['resources/sources/main/category-free-first-view.scss']['file'];
+    @endphp
+    <style type="text/css">
+        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+    </style>
+@endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
@@ -84,9 +93,6 @@
             {!! $xhtmlContent !!}
         </div>
     @endif
-    {{-- <div class="categoryWithFilterBox_filter">
-        @include('main.category.sidebarContent')
-    </div> --}}
 @endsection
 @push('modal')
     <!-- Message Add to Cart -->
@@ -110,7 +116,7 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-        $(window).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             /* build tocContent khi scroll gần tới */
             const elementBuildTocContent = $('#js_buildTocContentMain_element');
             /* build toc content */
@@ -118,7 +124,7 @@
                 if (!elementBuildTocContent.hasClass('loaded')) {
                     buildTocContentMain('js_buildTocContentMain_element');
                 }
-            }         
-        })
+            }     
+        });
     </script>
 @endpush

@@ -1,0 +1,36 @@
+/* Home ===== màn hình đầu tiên */
+@import 'childs/default.scss';
+@import 'childs/base.scss';
+@import 'childs/header-top.scss';
+@import 'childs/header-side.scss';
+@import 'childs/breadcrumb.scss';
+/* Home ===== kém quan trọng (nhưng ít nên đưa vào đây luôn) */
+@import 'childs/image-box.scss';
+@import 'childs/footer.scss';
+@import 'childs/right.scss';
+@import 'childs/login.scss';
+@import 'childs/modal.scss';
+
+.pageContentWithSidebar {
+    display: flex;
+    align-items: flex-start;
+    &_content {
+        width: calc(100% - 280px - 2.5rem);
+        ul {
+            margin-left: 1.25rem;
+        }
+    }
+    &_sidebar {
+        flex: 0 0 280px;
+        margin-left: 2.5rem;
+    }
+    @media(max-width: 1199px){
+        flex-wrap: wrap;
+        &_content {
+            width: 100%;
+        }
+        &_sidebar {
+            margin-left: 0;
+        }
+    }
+}

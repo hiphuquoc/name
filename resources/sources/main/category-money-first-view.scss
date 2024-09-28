@@ -1,0 +1,43 @@
+/* Home ===== màn hình đầu tiên */
+@import 'childs/default.scss';
+@import 'childs/base.scss';
+@import 'childs/header-top.scss';
+@import 'childs/header-side.scss';
+@import 'childs/breadcrumb.scss';
+@import 'childs/filter.scss';
+@import 'childs/wallpaper.scss';
+/* Home ===== kém quan trọng (nhưng ít nên đưa vào đây luôn) */
+@import 'childs/toccontent.scss';
+@import 'childs/footer.scss';
+@import 'childs/right.scss';
+@import 'childs/login.scss';
+@import 'childs/modal.scss';
+
+.keySearchBadge {
+    margin-left: 0.5rem;
+    display: flex;
+    // align-items: flex-end;
+    &_label {
+        margin-right: 0.5rem;
+    }
+    &_box {
+        font-size: 0.8rem;
+        &_item {
+            display: inline-block;
+            border-radius: 0.5rem;
+            padding: 0.1rem 0.5rem;
+            background: $colorBackgroundLv2;
+            cursor: pointer;
+            &_badge {
+                display: flex;
+                &_action {
+                    margin-left: 0.5rem;
+                    color: $colorText !important;
+                }
+            }
+            &:hover {
+                background: $bg-08;
+            }
+        }
+    }
+}

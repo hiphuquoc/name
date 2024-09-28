@@ -64,7 +64,7 @@
     <div id="js_checkLoginAndSetShow_modal">
         <!-- tải ajaax checkLoginAndSetShow() -->
     </div>
-    
+
     <!-- === START:: Scripts Default === -->
     @include('wallpaper.snippets.scriptDefault')
     <!-- === END:: Scripts Default === -->
@@ -72,6 +72,7 @@
     <!-- === START:: Scripts Custom === -->
     @stack('scriptCustom')
     <!-- === END:: Scripts Custom === -->
+    
 </body>
 <!-- === END:: Body === -->
 

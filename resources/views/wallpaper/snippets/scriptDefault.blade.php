@@ -1,17 +1,29 @@
-<!-- BEGIN: SLICK -->
-<script defer type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16558810206"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<!-- BEGIN: Google Analytics -->
+@if(env('APP_ENV')=='production')
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+    
+        function loadGoogleAnalytics() {
+            var script = document.createElement('script');
+            script.src = 'https://www.googletagmanager.com/gtag/js?id={{ env('GOOGLE_ANALYTICS_ID') }}';
+            document.head.appendChild(script);
+    
+            gtag('js', new Date());
+            gtag('config', '{{ env('GOOGLE_ANALYTICS_ID') }}');
+        }
+    
+        window.addEventListener('scroll', loadGoogleAnalytics, { once: true });
+    </script>
+@endif
+<!-- END: Google Analytics -->
 
-    gtag('config', 'AW-16558810206');
-</script>
-<!-- END: SLICK -->
+<!-- BEGIN: Jquery -->
+<script defer src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- END: Jquery -->
 <script defer type="text/javascript">
-    $(window).ready(function(){
+
+    document.addEventListener('DOMContentLoaded', function() {
         /* check để xem có cookie csrf chưa (do lần đầu truy cập trang không có lỗi google login) */
         // checkToSetCsrfFirstTime();
         
@@ -84,8 +96,8 @@
         }
     }
     
-    /* fixed menu khi scroll đối với giao diện nhỏ hơn 990px */ 
-    $(window).scroll(function(){
+    /* fixed menu khi scroll đối với giao diện nhỏ hơn 990px */
+    window.addEventListener('scroll', function() {
         // const heightMenu = $('.headerMain').outerHeight();
         if($(window).scrollTop()>300){
             $('.headerMain').addClass('fixed');
@@ -99,10 +111,10 @@
             $('.headerMain').removeClass('fixed');
             $('.headerMain').css('opacity', '1');
         }
-    })
+    });
     const percentHeightScreenEffect = 1.3;
     /* hiệu ứng fade in */
-    $(window).scroll(function(){
+    window.addEventListener('scroll', function() {
         $('.effectFadeIn').each(function(){
             const positionElement   = $(this).offset().top;
             const heightWindow      = $(window).height();
@@ -115,7 +127,7 @@
         })
     });
     /* hiệu ứng rơi xuống => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
-    $(window).scroll(function(){
+    window.addEventListener('scroll', function() {
         $('.effectDropdown').each(function(){
             /* ẩn trước */
             if(!$(this).hasClass('alreadyEffectDropdown')) $(this).css('opacity', 0);
@@ -138,7 +150,7 @@
         })
     });
     /* hiệu ứng xuất hiện từ trái qua phải => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
-    $(window).scroll(function(){
+    window.addEventListener('scroll', function() {
         $('.effectLeftToRight').each(function(){
             /* ẩn trước */
             if(!$(this).hasClass('alreadyEffectLeftToRight')) $(this).css('opacity', 0);
@@ -161,7 +173,7 @@
         })
     });
     /* hiệu ứng xuất hiện từ dưới lên => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
-    $(window).scroll(function(){
+    window.addEventListener('scroll', function() {
         $('.effectBottomToTop').each(function(){
             /* ẩn trước */
             if(!$(this).hasClass('alreadyEffectBottomToTop')) $(this).css('opacity', 0);
@@ -551,7 +563,7 @@
                 if(element.length>0){
                     let boxContent      = $('#'+idElement);
                     let heightB         = boxContent.outerHeight();
-                    $(document).scroll(function(){
+                    window.addEventListener('scroll', function() {
                         let positionB       = boxContent.offset().top;
                         let heightFooter    = $('.copyright').outerHeight();
                         let positionE   = element.offset().top;

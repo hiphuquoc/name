@@ -33,7 +33,7 @@
 
 @push('scriptCustom')
     <script type="text/javascript">
-        $(window).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             validateWhenType($('#email'), 'email');
         });
     </script>

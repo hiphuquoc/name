@@ -146,13 +146,13 @@
     <script type="text/javascript">
         $('.pageAdminWithRightSidebar_main').repeater();
 
-        $(window).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             @if(!empty($item->prices)&&$item->prices->isNotEmpty())
                 @foreach($item->prices as $price)
                     loadWallpaperByProductPrice('{{ $price->id }}');
                 @endforeach
             @endif
-        })
+        });
 
         function loadWallpaperByProductPrice(idProductPrice){
             $.ajax({

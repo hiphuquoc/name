@@ -1,0 +1,776 @@
+*, ::after, ::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 1rem;
+  line-height: 1.68rem;
+  @media(max-width: 1499px){
+    font-size: 0.975rem;
+  }
+  @media(max-width: 1199px){
+    font-size: 0.95rem;
+  }
+  @media(max-width: 1023px){
+    font-size: 0.925rem;
+  }
+  @media(max-width: 767px){
+    font-size: 0.9rem;
+  }
+}
+
+body {
+  font-size: 0.925rem;
+  font-weight: 500;
+  font-family: $fontText;
+  box-sizing: border-box;
+  @include colorOpacity('color', $colorText, 0.8);
+  
+  &.background {
+    background: $colorBackgroundLv1;
+  }
+  &::-webkit-scrollbar {
+    width: 5px; /* Chiều rộng của thanh cuộn */
+  }
+  &::-webkit-scrollbar-thumb {
+    @include colorOpacity('background', $colorBackgroundLv3, 0.75); /* Màu của "nút" thanh cuộn */
+    border-radius: 100px; /* Độ cong của "nút" */
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent; /* Màu của nền thanh cuộn */
+  }
+  @media(max-width: 1199px){
+    // font-size: 0.9rem;
+    // line-height: 1.66;
+  }
+  @media(max-width: 1023px){
+    // font-size: 0.875rem;
+    // line-height: 1.64;
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+  }
+  @media(max-width: 767px){
+    // font-size: 0.85rem;
+    // line-height: 1.62;
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+  }
+}
+
+.blurBackground {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+a {
+  text-decoration: none;
+  color: $colorTextLight;
+  &:hover {
+    color: $colorText;
+  }
+}
+
+strong {
+  font-family: $fontTitle;
+}
+
+h1 {
+  @include titleDefault;
+}
+
+h2 {
+  @include titleDefault;
+  @media(max-width: 767px){
+    margin-bottom: 0.5rem;
+  }
+}
+
+h3, h4 {
+  font-family: $fontTitle;
+  margin-bottom: 0.5rem;
+  color: $colorText;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+form {
+  width: 100%;
+}
+
+.flexBox {
+  display: flex;
+  align-items: flex-start;
+  &_item {
+    width: 100%;
+  }
+}
+
+.contentBox {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  @media(max-width: 1199px){
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  @media(max-width: 1023px){
+    margin-top: 0.5rem;
+  }
+  @media(max-width: 767px){
+    margin-top: 0.25rem;
+  }
+}
+p, ul, ol {
+  margin-bottom: 0.875rem;
+  @media(max-width: 1199px){
+    margin-bottom: 0.75rem;
+  }
+  @media(max-width: 1023px){
+    margin-bottom: 0.625rem;
+  }
+  @media(max-width: 767px){
+    margin-bottom: 0.5rem;
+  }
+}
+
+ul, ol {
+  [dir="ltr"] & {
+    margin-right: unset;
+    margin-left: 1rem;
+  }
+  [dir="rtl"] & {
+    margin-left: unset;
+    margin-right: 1rem;
+  }
+}
+
+img {
+  width: 100%;
+  display: flex;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    &:not(.noResponsive){
+        min-width: 600px;
+    }
+}
+
+blockquote{
+	display:block;
+    @include colorOpacity('background', $colorBackgroundLv2, 0.75);
+    padding: 0.75rem 0.75rem 0.75rem 2.25rem;
+    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
+    position: relative;
+    font-size: inherit;
+    text-align: justify;
+    border-left: 4px solid $colorLv2;
+    border-radius: 0.5rem;
+	&::before{
+		content: "\201C";
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: $bg-06;
+        position: absolute;
+        left: 0.5rem;
+        top: 1.25rem;
+        opacity: 0.75;
+	}
+	&::after{
+		content: "";
+	}
+	em {
+		font-style: italic;
+	}
+  @media(max-width: 767px){
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.75rem;
+    border-left: 3px solid $colorLv2;
+    &::before{
+      content: "\201C";
+          font-size: 2rem;
+          top: 0.75rem;
+    }
+  }
+}
+
+.customScrollBar-y {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll !important;
+    &::-webkit-scrollbar {
+      background-color: transparent;
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      border-radius: 1000px;
+      // -webkit-box-shadow: inset 0 0 6px $bg-03;
+    }
+    &::-webkit-scrollbar-track {
+      // -webkit-box-shadow: inset 0 0 6px $bg-03;
+      border-radius: 0.5rem;
+      background: transparent;
+    }
+    @media(max-width: 767px){
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+    }
+    @media(max-width: 577px){
+      &::-webkit-scrollbar {
+        width: 3px;
+      }
+    }
+}
+.customScrollBar-x {
+  width: 100%;
+  overflow-x: scroll !important;
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    height: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $bg-03;
+    border-radius: 1000px;
+    -webkit-box-shadow: inset 0 0 6px #fff;
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #fff;
+    border-radius: 0.5rem;
+    background: transparent;
+  }
+  @media(max-width: 767px){
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+  }
+  @media(max-width: 577px){
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+  }
+}
+
+.fa-regular, .far {
+    font-weight: 900 !important;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  // max-width: 100rem;
+  padding: 0 1.25rem;
+  @media(max-width: 1199px){
+    padding: 0 1rem;
+  }
+  @media(max-width: 1023px){
+    padding: 0 0.75rem;
+  }
+  @media(max-width: 767px){
+    padding: 0 0.5rem;
+  }
+  // @media(max-width: 577px){
+  //   padding: 0 0.5rem;
+  // }
+}
+
+.background_2 {
+  background: $bg-02;
+}
+
+.button {
+  padding: 0.5rem 2rem;
+  background: linear-gradient(45deg, $colorButtonLv1, $colorButtonLv2);
+  display: inline-block;
+  font-family: $fontTitle;
+  color: #fff;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: inherit;
+  border: none;
+  text-align: center;
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+  // box-shadow: 0 2px 0 $colorBackgroundLv3;
+  box-shadow: 0 2px 0 $colorBackgroundLv3;
+  transition: all 0.2s;
+  &:focus, &:hover {
+    color: #fff;
+    outline: none;
+    background: linear-gradient(120deg, $colorButtonLv1, $colorButtonLv2);
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+  i {
+    margin-left: -0.25rem;
+    margin-right: 0.75rem;
+  }
+  &.cancel {
+    background: $bg-04;
+    @include colorOpacity('color', $colorText, 0.8);
+    &:hover {
+      outline: none;
+      background: $bg-05;
+    }
+  }
+  &.secondary {
+    background: $colorBackgroundLv2;
+    color: $colorText;
+    // border: 1px solid $colorBackgroundLv3;
+    &:hover {
+      background: $colorBackgroundLv2;
+      box-shadow: none;
+      // color: $colorTextLight;
+    }
+  }
+}
+
+input, textarea, select {
+  padding: 0.75rem 1rem;
+  width: 100%;
+  font-size: 1rem;
+  font-family: $fontText;
+  border-radius: 0.5rem;
+  border: 1px solid $bg-05;
+  background: $colorBackgroundLv1;
+  border: 1px solid $colorBackgroundLv2;
+  color: $colorText;
+  &:focus {
+    border: 1px solid $colorBackgroundLv3;
+    outline: none;
+    -webkit-transition-delay: unset !important;
+  }
+  &::-webkit-autofill, &::-moz-autofill, &:valid, &:active {
+    background: red !important;
+    -webkit-transition-delay: unset !important;
+  }
+}
+
+.inputWithIcon {
+  position: relative;
+  &:after {
+    @include fontAwesome;
+    content: "\f06e";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.75rem;
+    color: $bg-05;
+    margin-left: 0.25rem;
+    cursor: pointer;
+  }
+}
+
+label {
+  // font-weight: 600;
+  font-size: 0.925rem;
+  display: flex;
+  margin-bottom: 0.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  &.required {
+    &:after {
+      content: '*';
+      color: $colorRed;
+      font-size: 1.1rem;
+      margin-left: 0.25rem;
+    }
+  }
+  &.error {
+    &:after {
+      content: 'Vui lòng kiểm tra lại trường này';
+      color: $colorRed;
+      font-size: 0.9rem;
+      font-family: $fontTitle;
+      margin-left: 0.25rem;
+    }
+  }
+  &.checkBox {
+    cursor: pointer;
+    margin-bottom: 0;
+    display: flex;
+    gap: 0.5rem;
+    input {
+      width: 20px;
+    }
+  }
+}
+
+.badge {
+  display: inline-flex;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background: $bg-02;
+  &:not(:last-child){
+    margin-right: 0.25rem;
+  }
+  margin-bottom: 0.6rem;
+  &Primary {
+    &.selected {
+      background: $colorBackgroundLv2;
+      color: $colorText;
+      &:hover {
+          background: $colorBackgroundLv2;
+          color: $colorText;
+      }
+    }
+    &:hover {
+      background: $colorBackgroundLv3;
+      color: $colorText;
+    }
+  }
+}
+
+.maxLine_1, .maxLine_2, .maxLine_3, .maxLine_4, .maxLine_5 {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+}
+.maxLine_1 {
+	-webkit-line-clamp: 1;
+}
+.maxLine_2 {
+	-webkit-line-clamp: 2;
+}
+.maxLine_3 {
+	-webkit-line-clamp: 3;
+}
+.maxLine_4 {
+	-webkit-line-clamp: 4;
+}
+.maxLine_5 {
+	-webkit-line-clamp: 5;
+}
+
+.show-766 {
+  display: none !important;
+  @media(max-width: 767px){
+    display: flex !important;
+  }
+}
+.hide-766 {
+  display: flex !important;
+  @media(max-width: 767px){
+    display: none !important;
+  }
+}
+.show-990 {
+  display: none !important;
+  @media(max-width: 990px){
+    display: flex !important;
+  }
+}
+.hide-990 {
+  display: flex !important;
+  @media(max-width: 990px){
+    display: none !important;
+  }
+}
+.show-1023 {
+  display: none !important;
+  @media(max-width: 1023px){
+    display: flex !important;
+  }
+}
+.hide-1023 {
+  display: flex !important;
+  @media(max-width: 1023px){
+    display: none !important;
+  }
+}
+.show-1199 {
+  display: none !important;
+  @media(max-width: 1199px){
+    display: flex !important;
+  }
+}
+.hide-1199 {
+  display: flex !important;
+  @media(max-width: 1199px){
+    display: none !important;
+  }
+}
+.column {
+  display: flex;
+  &.two {
+    .column_item {
+      width: 50%;
+      &:not(:first-child){
+        margin-left: 1.25rem;
+      }
+    }
+  }
+}
+
+/* form */
+.inputRequired {
+  &:after {
+      content: '\f621';
+      font-weight: 900;
+      @include fontAwesome;
+      font-size: 0.55rem;
+      color: $colorRed;
+      margin-left: 0.3rem;
+      opacity: 0.6;
+  }
+}
+.inputWithLabelInside, .textareaWithLabelInside {
+  height: 58px;
+  border: 1px solid $bg-05;
+  width: 100%;
+  position: relative;
+  padding: 0;
+  background: $colorBackgroundLv3;
+  border: none;
+  cursor: pointer;
+  color: $colorText;
+  border-radius: 0.5rem;
+  label {
+      cursor: pointer;
+      margin-bottom: 0;
+      font-weight: normal;
+      font-size: 0.85rem;
+      padding: 0 0.75rem;
+      opacity: 0.8;
+      z-index: 10;
+      position: relative;
+  }
+  > input {
+      display: flex;
+      margin-top: -2px;
+      font-size: 1rem;
+      padding: 0;
+      border: none;
+      outline: none;
+      position: absolute;
+      top: 2px;
+      height: 100%;
+      padding: 33px 0.75rem 13px 0.75rem !important;
+      background: transparent !important;
+      color: $colorText;
+      cursor: pointer;
+      z-index: 2;
+      &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
+          // border: 1px solid $colorBackgroundLv3;
+          outline: 1px solid $colorBackgroundLv3;
+          -webkit-text-fill-color: $colorText !important;
+          box-shadow: 0 0 0px 1000px $colorBackgroundLv3 inset !important; /* Màu nền mong muốn */
+          // transition: background-color 5000s ease-in-out 0s;
+      }
+  }
+  &:not(:first-child){
+      margin-top: 1rem;
+  }
+  &:after {
+      @include fontAwesome;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $bg-06;
+      font-size: 0.95rem;
+      z-index: 1;
+  }
+  &.email {
+      &:after {
+          content: "\f0e0";
+      }
+  }
+  &.phone {
+      &:after {
+          content: "\f095";
+      }
+  }
+  &.location {
+      &:after {
+          content: "\f3c5";
+      }
+  }
+  &.date {
+      &:after {
+          content: "\f073";
+      }
+  }  
+  &.adult {
+      &:after {
+          content: "\f183";
+          font-size: 1.1rem;
+      }
+  }  
+  &.child {
+      &:after {
+          content: "\f1ae";
+          font-size: 1.1rem;
+      }
+  } 
+  &.old {
+      &:after {
+          content: "\e53c";
+          font-size: 1.1rem;
+      }
+  } 
+  &.message {
+      &:after {
+          content: "\f4ad";
+          font-size: 1.1rem;
+      }
+  }
+  select {
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+  }
+  .select2-container .select2-selection--single {
+      // height: 45px !important;
+      padding: 0 !important;    
+  }
+  .select2-container--default .select2-selection--single {
+      border: none !important;
+      background: none;
+      margin-top: -12px;
+      font-weight: bold;
+      height: 28px !important;
+      
+      .select2-selection__arrow {
+      display: none;
+      }
+  }
+  .select2-selection__arrow {
+      top: 50% !important;
+      transform: translateY(-50%);
+  }
+  .select2-search--dropdown {
+      border-top: 1px solid $bg-05;
+      input {
+      margin: 0 !important;
+      }
+  }
+  .select2-results__option {
+      padding: 7px !important;
+  }
+  .select2-search--dropdown .select2-search__field {
+      display: none !important;
+  }
+  .select2-container {
+      left: 0 !important;
+      .select2-selection--single .select2-selection__rendered {
+          margin-top: -45px;
+          padding: 22px 0.75rem 10px 0.75rem !important;
+          z-index: 2;
+          position: relative;
+      }
+  }
+}
+.textareaWithLabelInside {
+  height: auto !important;
+  textarea {
+      border: none;
+      padding: 0 0.75rem 0.75rem;
+  }
+}
+.validateErrorEmpty {
+  border: 1px solid $colorRed;
+  label {
+      &:after {
+          content: 'Trường này không được bỏ trống';
+          font-family: $fontText;
+          font-size: inherit;
+          color: $colorRed;
+          margin-left: 0.3rem;
+      }
+  }
+  &.errorCustomLocation {
+      border: none !important;
+      label {
+          &:after {
+              content: 'Vui lòng chọn chuyến đi và loại vé!' !important;
+          }
+      }
+  }
+}
+.validateErrorPhone {
+  border: 1px solid $colorRed;
+  label {
+  &:after {
+      content: 'Số điện thoại không hợp lệ';
+      font-family: $fontText;
+      font-size: inherit;
+      color: $colorRed;
+      margin-left: 0.3rem;
+  }
+  }
+}
+.validateErrorEmail {
+  border: 1px solid $colorRed;
+  label {
+      &:after {
+      content: 'Email không hợp lệ';
+      font-family: $fontText;
+      font-size: inherit;
+      color: $colorRed;
+      margin-left: 0.3rem;
+      }
+  }
+  }
+.validateSuccess {
+  border: 1px solid $colorSuccess;
+  label {
+  &:after {
+      content: '\f00c';
+      @include fontAwesome;
+      color: $colorSuccess;
+      font-size: 0.9rem;
+      margin-left: 0.3rem;
+  }
+  }
+}
+.select2-container .select2-selection--single {
+  height: 45px !important;
+  padding: 0.5rem 0.75rem;
+  
+}
+.select2-container--default .select2-selection--single {
+  border-radius: 0.5rem !important;
+  border: 1px solid $bg-05 !important;
+}
+.select2-selection__arrow {
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+.select2-search--dropdown {
+  padding: 1px !important;
+  background: $bg-05;
+  input {
+    // border-radius: 0;
+  }
+}
+.select2-search--dropdown .select2-search__field, .select2-results__option {
+  padding: 7px !important;
+}
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-left: 0 !important;
+  font-family: $fontTitle;
+}
+.lazyloadWithResize, .lazyload {
+  transition: opacity 0.5s ease-in-out;
+  &.loaded {
+      filter: unset !important;
+  }
+}

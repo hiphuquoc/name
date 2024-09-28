@@ -227,19 +227,19 @@
             {{ config('language.'.$language.'.data.connect_with_us') }}
         </div>
         <div class="socialBox_social_box">
-            <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_social_box_item" target="_blank">
+            <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_social_box_item" aria-label="facebook">
                 <i class="fa-brands fa-facebook-f"></i>
             </a>
-            <a href="https://www.instagram.com/wallpapers_namecomvn" class="socialBox_social_box_item" target="_blank">
+            <a href="https://www.instagram.com/wallpapers_namecomvn" class="socialBox_social_box_item" aria-label="instagram">
                 <i class="fa-brands fa-instagram"></i>
             </a>
-            <a href="https://www.youtube.com/@wallpapers_namecomvn" class="socialBox_social_box_item" target="_blank">
+            <a href="https://www.youtube.com/@wallpapers_namecomvn" class="socialBox_social_box_item" aria-label="youtube">
                 <i class="fa-brands fa-youtube"></i>
             </a>
-            <a href="https://www.tiktok.com/@wallpapers_namecomvn" class="socialBox_social_box_item" target="_blank">
+            <a href="https://www.tiktok.com/@wallpapers_namecomvn" class="socialBox_social_box_item" aria-label="tiktok">
                 <i class="fa-brands fa-tiktok"></i>
             </a>
-            <a href="https://twitter.com/wallpapers_name" class="socialBox_social_box_item" target="_blank">
+            <a href="https://twitter.com/wallpapers_name" class="socialBox_social_box_item" aria-label="twitter">
                 <i class="fa-brands fa-twitter"></i>
             </a>
         </div>
@@ -258,7 +258,7 @@
 @push('scriptCustom')
     <script type="text/javascript">
 
-        $(window).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             var Url             = document.URL;
             // var elementMenu     = null;
             $('.headerSide .filterLinkSelected a').each(function(){
@@ -283,7 +283,7 @@
                     $(this).closest('ul').closest('li').find('.fa-plus').removeClass('fa-plus').addClass('fa-minus');
                 }
             });
-        })
+        });
 
         function showHideListMenuMobile(element, idMenu){
             let elementMenu     = $('#'+idMenu);

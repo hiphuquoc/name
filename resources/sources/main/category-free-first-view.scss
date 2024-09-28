@@ -1,0 +1,47 @@
+/* Home ===== màn hình đầu tiên */
+@import 'childs/default.scss';
+@import 'childs/base.scss';
+@import 'childs/header-top.scss';
+@import 'childs/header-side.scss';
+@import 'childs/breadcrumb.scss';
+/* Home ===== kém quan trọng (nhưng ít nên đưa vào đây luôn) */
+@import 'childs/filter.scss';
+@import 'childs/freewallpaper.scss';
+@import 'childs/toccontent.scss';
+@import 'childs/footer.scss';
+@import 'childs/right.scss';
+@import 'childs/login.scss';
+@import 'childs/modal.scss';
+
+.feelingBox {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: -4px;
+    &_item {
+        padding: 0 0.15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        color: #808080;
+        &.selected {
+            @include colorOpacity('color', $colorText, 0.75);
+        }
+        input {
+            display: none;
+        }
+    }
+}
+.showFeelingBox {
+    display: flex;
+    align-items: center;
+    @include colorOpacity('color', $colorTextLight, 1);
+    font-size: 0.9rem;
+    svg {
+        scale: 0.85;
+        margin-right: 0.25rem;
+        margin-top: -2px;
+    }
+}

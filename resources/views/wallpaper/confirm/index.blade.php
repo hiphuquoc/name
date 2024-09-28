@@ -1,4 +1,13 @@
 @extends('layouts.wallpaper')
+@push('cssFirstView')
+    @php
+        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $cssFirstView       = $manifest['resources/sources/main/confirm-first-view.scss']['file'];
+    @endphp
+    <style type="text/css">
+        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+    </style>
+@endpush
 @push('headCustom')
     <!-- Event snippet for Lượt xem trang conversion page -->
     @php

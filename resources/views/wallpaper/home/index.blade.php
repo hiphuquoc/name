@@ -1,4 +1,13 @@
 @extends('layouts.wallpaper')
+@push('cssFirstView')
+    @php
+        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $cssFirstView       = $manifest['resources/sources/main/home-first-view.scss']['file'];
+    @endphp
+    <style type="text/css">
+        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+    </style>
+@endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Organization Schema -->
@@ -81,7 +90,7 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
             let interval; // Biến lưu trữ interval cho carousel
 
             // Sử dụng $(document).on để xử lý sự kiện trên các phần tử động
@@ -118,7 +127,6 @@
 
             // Khởi động cho các phần tử ban đầu
             initializeImages();
-
         });
     </script>
 @endpush

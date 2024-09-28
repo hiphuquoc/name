@@ -31,7 +31,8 @@
 </div>
 @push('scriptCustom')
     <script defer type="text/javascript">
-        $(window).ready(function(){
+
+        document.addEventListener('DOMContentLoaded', function() {
             loadLinkDownloadGuide('{{ $language }}');
         });
 

@@ -16,7 +16,7 @@
 
 @pushonce('scriptCustom')
     <script type="text/javascript">
-        $(document).ready(function () {
+        document.addEventListener('DOMContentLoaded', function() {
             showSortBoxWallpaper();
         });
     </script>

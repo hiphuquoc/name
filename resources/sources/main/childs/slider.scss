@@ -1,0 +1,76 @@
+.sliderBox {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1920/600;
+    overflow: hidden;
+    .slick-dots {
+        position: absolute;
+        margin: 0;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        li {
+            list-style-type: none;
+            margin-top: 0;
+            &:not(:first-child){
+                margin-left: 0.5rem;
+            }
+            button {
+                border-radius: 100px;
+                color: transparent;
+                width: 40px;
+                height: 3px;
+                @include colorOpacity('background', $colorTextLight, 0.5);
+                outline: none;
+                border: none;
+                cursor: pointer;
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+            }
+            &.slick-active {
+                button {
+                    background: $colorTextLight;
+                }
+            }
+        }
+    }
+    .slick-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        padding: 0.5rem 0.65rem;
+        font-size: 1.2rem;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        @include colorOpacity('color', $colorText, 0.8);
+        background: $colorTextLight;
+        opacity: 0.6;
+        &:hover {
+            opacity: 0.8;
+        }
+        &.slick-prev {
+            left: 10px;
+        }
+        &.slick-next {
+            right: 10px;
+        }
+    }
+    @media(max-width: 767px){
+        aspect-ratio: 750/550;
+        .slick-dots {
+            bottom: 0;
+            li {
+                button {
+                    width: 35px;
+                    height: 2.5px;
+                }
+            }
+        }
+
+    }
+}

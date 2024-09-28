@@ -1,0 +1,23 @@
+.actionPageConfirm {
+    display: flex;
+    flex-direction: column;
+    &_item {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        cursor: pointer;
+        &:not(:first-child){
+            margin-top: 0.75rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid $colorBackgroundLv1;
+        }
+        &_icon {
+            flex: 0 0 25px;
+            margin-right: 10px;
+        }
+        &_text {
+            width: 100%;
+            margin-bottom: -7px;
+        }
+    }
+}

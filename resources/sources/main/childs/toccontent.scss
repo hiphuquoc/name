@@ -1,0 +1,135 @@
+.tocContentMain {
+    border-radius: 0.5rem;
+    position: relative;
+    background: $colorBackgroundLv2;
+    margin-bottom: 1.5rem;
+    &_title {
+        padding: 0.5rem 1rem;
+        font-family: $fontTitle;
+        cursor: pointer;
+        border-bottom: 1px solid $colorBackgroundLv1;
+        color: $colorText;
+        display: flex;
+        gap: 1rem;
+        &_icon {
+            &::before {
+                @include fontAwesome;
+                content: "\f0ca";
+            }
+        }
+    }
+    &_list {
+        padding: 0.25rem 1rem 1rem;
+        font-size: 0.9rem;
+        line-height: 1.68;
+        &_item {
+            display: flex;
+            padding-top: 0.25rem;
+            color: $colorText;
+            &:not(:first-child){
+                margin-top: 0.5rem;
+                border-top: 1px dotted $colorBackgroundLv1;
+            }
+        }
+    }
+    &_close {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        top: 0.3rem;
+        [dir="ltr"] & {
+            right: 0;
+        }
+        [dir="rtl"] & {
+            left: 0;
+        }
+        &:before {
+            @include fontAwesome;
+            content: '\f077';
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+        &.hidden {
+            display: flex !important;
+            &::before {
+                @include fontAwesome;
+                content: '\f054';
+            }
+        }
+    }
+    &.tocFixed {
+        display: none;
+        position: fixed;
+        height: 100%;
+        max-width: 330px;
+        z-index: 101;
+        top: 128px;
+        [dir="ltr"] & {
+            left: 0;
+        }
+        [dir="rtl"] & {
+            right: 0;
+        }
+        .tocContentMain_title {
+            padding: 0.5rem 0.75rem;
+        }
+        .tocContentMain_list {
+            padding: 0 0.75rem;
+            display: block !important;
+        }
+        .tocContentMain_close {
+            &:before {
+                @include fontAwesome;
+                content: '\f057' !important;
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+.tocFixedIcon {
+    display: none;
+    position: fixed;
+    width: 32px;
+    aspect-ratio: 1/1;
+    background: $colorBackgroundLv2;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: 1px solid $colorBackgroundLv3;
+    z-index: 100;
+    opacity: 0.8;
+    margin-bottom: 0 !important;
+    top: 50%;
+    [dir="ltr"] & {
+        left: 0;
+    }
+    [dir="rtl"] & {
+        right: 0;
+    }
+    &:hover {
+        opacity: 1;
+    }
+    > div {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+        &:before {
+            content: "\f0ca";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+    }
+    @media(max-width: 767px){
+        left: 0.25rem !important;
+    }
+}
+.contentElement {
+    max-width: 660px;
+    margin: 0 auto;
+}

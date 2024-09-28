@@ -1,0 +1,383 @@
+.wallpaperGridBox {
+    display: flex;
+    width: 100%;
+    gap: 1rem 0.75rem;
+    flex-wrap: wrap;
+    position: relative;
+    &.slickBox {
+        flex-wrap: unset !important;
+        // .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
+        //     margin-top: 0 !important;
+        //     &:first-child {
+        //         margin-left: 0 !important;
+        //     }
+        //     @media(max-width: 1199px){
+        //         &:nth-child(3n + 1){
+        //             margin-left: 0.75rem;
+        //         }
+        //     }
+        //     @media(max-width: 1023px){
+        //         &:nth-child(4n + 1){
+        //             margin-left: 0.75rem;
+        //         }
+        //     }
+        //     @media(max-width: 577px){
+        //         &:nth-child(2n + 1){
+        //             margin-left: 0.5rem;
+        //         }
+        //     }
+        // }
+    }
+    &_item, &_itemBackground {
+        width: calc(20% - 0.6rem);
+    }
+    &_item {
+        border-radius: 0.5rem;
+        position: relative;
+        .show {
+            width: 100%;
+            height: auto;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+        .hide {
+            width: 0;
+            height: 0;
+            opacity: 0;
+        }
+        &_image {
+            margin-bottom: 0;
+            position: relative;
+            border-radius: inherit;
+            display: flex;
+            aspect-ratio: 1/2.18;
+            overflow: hidden;
+            border-radius: 7%;
+            .zIndexHide {
+                position: relative;
+                z-index: -1;
+                width: 100%;
+                height: 100%;
+            }
+            &_backgroundImage {
+                width: 100%;
+                height: 100%;
+            }
+            img {
+                transition: all 0.3s;
+                border-radius: inherit;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                object-fit: contain;
+                position: relative;
+                z-index: -1;
+            }
+            &_rating {
+                position: absolute;
+                top: 0;
+                left: 0;
+                @include colorOpacity('background', $colorBackgroundLv1, 0.8);
+                padding: 0.1rem 0.5rem;
+                display: flex;
+                color: $colorText;
+                font-size: 0.8rem;
+                border-top-left-radius: inherit;
+                border-bottom-right-radius: 10px;
+                img {
+                    width: 10px;
+                    margin-right: 0.3rem;
+                }
+                > * {
+                    display: flex;
+                    &:not(:first-child){
+                        margin-left: 0.25rem;
+                        padding-left: 0.25rem;
+                        border-left: 1px solid $bg-07;
+                    }
+                }
+            }
+            &_percent {
+                position: absolute;
+                top: 0;
+                right: 0;
+                @include colorOpacity('background', $colorPrice, 0.8);
+                padding: 0.1rem 0.5rem;
+                display: flex;
+                color: $colorTitle;
+                text-shadow: 0 0 5px $colorBackgroundLv1;
+                font-size: 0.8rem;
+                font-family: $fontTitle;
+                border-top-right-radius: inherit;
+                border-bottom-left-radius: 10px;
+                letter-spacing: 2px;
+            }
+            &_content {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                z-index: 2;
+                padding: 0.5rem 0.75rem;
+                width: 100%;
+                &_title {
+                    position: relative;
+                    height: 2.75rem;
+                    margin-bottom: 0.375rem;
+                    h2, h3, h4 {
+                        font-family: $fontText;
+                        font-weight: normal;
+                        font-size: 0.9rem;
+                        margin-bottom: 0 !important;
+                        color: $colorText;
+                        line-height: 1.58;
+                    }
+                }
+                &_price {
+                    color: $colorPrice;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    letter-spacing: 2px;
+                    display: flex;
+                    align-items: center;
+                    height: 30px;
+                    position: relative;
+                    gap: 0.5rem;
+                    &_quantity {
+                        position: absolute;
+                        transform: translateY(-50%);
+                        color: $colorText;
+                        text-shadow: 0 0 10px #000;
+                        font-size: 0.875rem;
+                        opacity: 0.65;
+                        font-family: $fontTitle;
+                        font-weight: 500;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.25rem;
+                        top: 50%;
+                        [dir="ltr"] & {
+                            right: 0;
+                        }
+                        [dir="rtl"] & {
+                            left: 0;
+                        }
+                        i {
+                            margin-top: 0;
+                            font-size: 0.825rem;
+                        }
+                    }
+                    > span {
+                        font-size: 0.85rem;
+                        font-weight: normal;
+                        @include colorOpacity('color', $colorText, 0.6);
+                        text-decoration: line-through;
+                        // margin-left: 0.5rem;
+                        display: flex;
+                    }
+                }
+            }
+            /* background */
+            @include backgroundFillWallpaperOfProduct;
+        }
+        &_action {
+            position: absolute;
+            font-size: 0.9rem;
+            @include colorOpacity('background', $colorBackgroundLv2, 0.6);
+            padding: 0.5rem 0;
+            display: flex;
+            gap: 0;
+            border-bottom-left-radius: 10px;
+            border-top-right-radius: 12px;
+            z-index: -1;
+            top: 0.25rem;
+            [dir="ltr"] & {
+                right: 0.375rem;
+            }
+            [dir="rtl"] & {
+                left: 0.375rem;
+            }
+            .addToCart, .heart {
+                height: 0.9rem;
+                aspect-ratio: 1/1;
+                opacity: 0.75;  
+                transition: all 0.3s;
+                cursor: pointer;
+                padding-inline-start: 2.25rem;
+                background-size: 100% 100% !important;
+                &:not(:first-child){
+                    border-inline-start: 1px solid rgba($colorText, 0.25);
+                }
+            }
+            .addToCart {
+                background: url('/storage/images/svg/icon-cart-header.svg') no-repeat center center;
+                &:hover {
+                    background: url('/storage/images/svg/icon-cart-header-success.svg') no-repeat center center !important;
+                    background-size: 100% 100% !important;
+                }
+            }
+            .heart {
+                background: url('/storage/images/svg/icon-heart-1.svg') no-repeat center center;
+                &:hover {
+                    background: url('/storage/images/svg/icon-heart-1-success.svg') no-repeat center center !important;
+                    background-size: 100% 100% !important;
+                }
+            }
+        }
+        &_imageList {
+            display: flex;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            gap: 0.5rem;
+            &_item {
+                width: 20%;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                cursor: pointer;
+                overflow: hidden;
+                border: 1px solid transparent;
+                background: $colorBackgroundLv2;
+                position: relative;
+                &_backgroundImage {
+                    width: 100%;
+                    height: 100%;
+                }
+                &_count {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.8);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid $colorBackgroundLv3;
+                    border-radius: 50%;
+                    letter-spacing: 0.5px;
+                    font-size: 0.95rem;
+                    color: $colorText;
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    transition: all 0.3;
+                    border-radius: inherit;
+                    object-fit: cover;
+                }
+                &.selected, &:hover {
+                    border: 1px solid $colorLabel;
+                }
+            }
+        }
+    }
+    &_itemBackground {
+        // @include colorOpacity('background', $colorBackgroundLv1, 0.8);
+        background: rgba(0,0,0,0.25);
+        aspect-ratio: 1/2.18;
+        border-radius: 0.5rem;
+    }
+    @media(max-width: 1799px){
+        // grid-template-columns: auto auto auto auto;
+        &_item, &_itemBackground {
+            width: calc(25% - 0.5625rem);
+        }
+    }
+    @media(max-width: 1199px){
+        gap: 0.875rem 0.625rem;
+        // grid-template-columns: auto auto auto;
+        &_item, &_itemBackground {
+            width: calc(33.33% - 0.41438rem);
+            // &_image {
+            //     &_content {
+            //         &_price {
+            //             i {
+            //                 /* sửa chênh lệch khi thay đổi rem của i và text */
+            //                 margin-top: 0.2rem;
+            //             }
+            //         }
+            //     }
+            // }
+        }
+        
+    }
+    @media(max-width: 1023px){
+        gap: 0.75rem 0.5rem;
+        // grid-template-columns: auto auto auto auto;
+        &_item, &_itemBackground {
+            width: calc(25% - 0.375rem);
+            &_image {
+                &_content {
+                    &_title {
+                        margin-bottom: 0.25rem;
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width: 990px){
+        // grid-template-columns: auto auto auto;
+        &_item, &_itemBackground {
+            width: calc(33.33% - 0.331rem);
+        }
+    }
+    @media(max-width: 767px){
+        gap: 0.625rem 0.375rem;
+        grid-template-columns: auto auto auto;
+        &_item, &_itemBackground {
+            width: calc(33.33% - 0.25rem);
+            &_image {
+                &_content {
+                    &_title {
+                        margin-bottom: 0;
+                        h2, h3, h4 {
+                            font-size: 0.875rem;
+                        }
+                    }
+                    &_price {
+                        font-size: 0.95rem;
+                        > span {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            &_action {
+                .addToCart, .heart {
+                    height: 0.875rem;
+                    padding-inline-start: 2.125rem;
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        gap: 0.5rem 0.25rem;
+        // grid-template-columns: auto auto;
+        &_item, &_itemBackground {
+            width: calc(50% - 0.125rem);
+            &_image {
+                &_content {
+                    padding: 0.5rem;
+                    // &_title {
+                        
+                    //     h2, h3, h4 {
+                    //         font-size: 0.85rem;
+                    //     }
+                    // }
+                    &_price {
+                        margin-top: -0.125rem;
+                        &_quantity {
+                            gap: 0.125rem;
+                        }
+                    }
+                }
+                &_backgroundBlur {
+                    height: 5.75rem;
+                }
+            }
+            &_imageList {
+                display: none;
+            }
+        }
+    }
+}

@@ -40,7 +40,7 @@
 @pushonce('scriptCustom')
     <script type="text/javascript">
 
-        $(document).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             $('#language_check_all').on('change', function() {
                 // Lấy trạng thái checked của checkbox "all"
                 var isChecked = $(this).is(':checked');

@@ -104,9 +104,8 @@
     
 </div>
 </form>
-{{-- @push('scriptCustom') --}}
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script type="text/javascript">        
+{{-- @push('scriptCustom')
+    <script type="text/javascript">
         function toggleModalCustomerLoginForm(idElement){
             const element   = $('#'+idElement);
             const displayE  = element.css('display');
@@ -122,52 +121,4 @@
             }
         }
     </script>
-    <script type="text/javascript">
-        /* submit form */
-        function submitFormLogin(idForm){
-            const error     = validateFormLogin(idForm);
-            if(error.length==0){
-                /* tải loading */ 
-                // loadLoading(idForm);
-                /* lấy dữ liệu truyền đi */
-                var data    = $('#'+idForm).serializeArray();
-                $.ajax({
-                    url         : '{{ route("admin.loginCustomer") }}',
-                    type        : 'post',
-                    dataType    : 'json',
-                    data        : {
-                        '_token'    : '{{ csrf_token() }}',
-                        data        : data
-                    },
-                    success     : function(response){
-                        if(response.flag==true){
-                            window.location.href = '';
-                        }else {
-                            $('#noticeLogin').html(response.message);
-                        }
-                    }
-                });
-            }else {
-                $.each(error, function(index, value){
-                    const input = $('#'+idForm).find('[name='+value.name+']');
-                    input.attr('placeholder', value.notice).css('border', '1px solid red');
-                });
-            }
-        }
-        /* validate form */
-        function validateFormLogin(idForm){
-            let error       = [];
-            /* input required không được bỏ trống */
-            $('#'+idForm).find('input[required]').each(function(){
-                /* đưa vào mảng */
-                if($(this).val()==''){
-                    const errorItem = [];
-                    errorItem['name']       = $(this).attr('name');
-                    errorItem['notice']     = 'Không được để trống trường này';
-                    error.push(errorItem);
-                }
-            });
-            return error;
-        }
-    </script>
-{{-- @endpush --}}
+@endpush --}}

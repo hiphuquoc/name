@@ -1,3 +1,8 @@
+@push('headCustom')
+    <!-- BEGIN: SLICK -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <!-- END: SLICK -->
+@endpush
 
 <div id="js_toogleModalViewImageFull" class="viewImageFullBox">
     <div class="viewImageFullBox_box">
@@ -26,6 +31,9 @@
 </div>
 
 @pushonce('scriptCustom')
+    <!-- BEGIN: SLICK -->
+    <script defer type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <!-- END: SLICK -->
     <script type="text/javascript">
         /* ẩn hiện riêng cho modal view image all */
         function toogleModalViewImageFull(numberActive = 0, action = null){

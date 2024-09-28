@@ -1,0 +1,133 @@
+.freeWallpaperBox {
+    // min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: repeat(auto, 5vw);
+    gap: 15px;
+    position: relative;
+    &_item {
+        margin-bottom: auto;
+        position: relative;
+        cursor: pointer;
+        &:hover {
+            .freeWallpaperBox_item_box {
+                display: flex !important;
+            }
+        }
+        &_image {
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                flex: 1;
+                border-radius: 0.5rem;
+            }
+        }
+        &_box {
+            display: none;
+            @include colorOpacity('background', $colorBackgroundLv1, 1);
+            position: absolute;
+            bottom: 0.4rem;
+            width: calc(100% - 1rem);
+            left: 0.5rem;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            z-index: 2;
+            &_item {
+                display: flex;
+                width: fit-content;
+                overflow: hidden;
+                position: relative;
+                width: 50%;
+                .author {
+                    display: flex;
+                    width: 100%;
+                    &_image {
+                        img {
+                            width: 28px;
+                            aspect-ratio: 1/1;
+                            object-fit: cover;
+                        }
+                    }
+                    &_name {
+                        margin-left: 0.5rem;
+                    }
+                }
+                .feeling {
+                    display: none;
+                    width: 100%;
+                    justify-content: flex-end;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    z-index: 3;
+                    background: $colorBackgroundLv1;
+                    transform: translateY(-50%);
+                    &_item {
+                        aspect-ratio: 1/1;
+                        padding: 0.4rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 0.5rem;
+                        cursor: pointer;
+                        &:hover {
+                            background: $colorBackgroundLv2;
+                        }
+                    }
+                }
+                .action {
+                    display: flex;
+                    width: 100%;
+                    justify-content: flex-end;
+                    font-size: 0.95rem;
+                    &_item {
+                        padding: 0.6rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 0.5rem;
+                        cursor: pointer;
+                        color: $colorText;
+                        &:hover {
+                            background: $colorBackgroundLv2;
+                        }
+                        i {
+                            opacity: 0.5;
+                        }
+                    }
+                }
+            }
+        }
+        &_icon {
+            position: absolute;
+            z-index: 1;
+            bottom: -15px;
+            right: 0.75rem;
+            padding: 0.4rem 0.65rem;
+            background: $colorBackgroundLv1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100%;
+            svg {
+                scale: 0.8;
+            }
+        }
+        &_preventClick {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            top: 0;
+            left: 0;
+        }
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}

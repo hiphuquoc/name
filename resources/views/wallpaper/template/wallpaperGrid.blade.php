@@ -43,14 +43,15 @@
 </div>
 @push('scriptCustom')
     <script type="text/javascript">
-        $(window).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             $('.viewFirstTime').css('display', 'none');
             $('.slickBox').css('display', 'flex');
             setSlick();
-        })
-        $(window).resize(function(){
+        });
+
+        window.addEventListener('resize', function() {
             setSlick();
-        })
+        });
         function setSlick(){
             $('.slickBox').slick({
                 infinite: false,

@@ -1,0 +1,134 @@
+/* Home ===== màn hình đầu tiên */
+@import 'childs/default.scss';
+@import 'childs/base.scss';
+@import 'childs/header-top.scss';
+@import 'childs/header-side.scss';
+@import 'childs/breadcrumb.scss';
+/* Home ===== kém quan trọng (nhưng ít nên đưa vào đây luôn) */
+@import 'childs/freewallpaper.scss';
+@import 'childs/footer.scss';
+@import 'childs/right.scss';
+@import 'childs/login.scss';
+@import 'childs/modal.scss';
+
+.freeWallpaperDetailBox {
+    display: flex;
+    align-items: stretch;
+    width: fit-content;
+    margin: 0 auto;
+    &_image {
+        position: relative;
+        img {
+            height: calc(100vh - 100px);
+            width: auto;
+            aspect-ratio: auto;
+            position: sticky;
+            top: calc(52.5px + 1.5rem);
+            display: flex;
+            @media(max-width: 767px){
+                width: 100%;
+                max-width: 660px;
+                height: auto;
+            }
+        }
+    }
+    &_content {
+        max-width: 500px;
+        margin-left: 1.5rem;
+        text-align: justify;
+        &_action {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            font-family: $fontTitle;
+            border: 2px dashed rgba(255,209,0,0.8);
+            padding: 0.75rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            text-align: left;
+            margin-top: 1rem;
+            &:hover {
+                border: 2px dashed rgba(255,209,0,1);
+            }
+            &_item {
+                padding: 0.5rem;
+                width: 100%;
+                @include colorOpacity('background', $colorBackgroundLv2, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 0.5rem;
+                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                cursor: pointer;
+                color: $colorText;
+                &:hover {
+                    background: $colorBackgroundLv2;
+                }
+                &:not(:first-child){
+                    margin-left: 0.75rem;
+                }
+                &.heart {
+                    &.selected {
+                        background: $colorBackgroundLv1;
+                        > span {
+                            &:before {
+                                content: 'Đã ';
+                            }
+                        }
+                    }
+                }
+                
+                i {
+                    margin-right: 0.5rem;
+                }
+                .fa-heart {
+                    color: red;
+                }
+                .fa-download {
+                    color: $colorLv1;
+                }
+                .fa-share-nodes {
+                    color: #007bff;
+                }
+            }
+        }
+    }
+    @media(max-width: 1200px){
+        flex-wrap: wrap;
+        width: 100%;
+        &_image {
+            margin: 0.5rem auto 0 auto;
+        }
+        &_content {
+            width: 100%;
+            max-width: 100%;
+            margin-left: 0;
+            margin-top: 0.75rem;
+            &_action {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                margin: 0;
+                background: $colorBackgroundLv2;
+                border: none !important;
+                padding: 0;
+                height: 52.5px;
+                z-index: 100;
+                &_item {
+                    box-shadow: none;
+                    border-radius: 0 !important;
+                    margin: 0 !important;
+                    &:not(:first-child){
+                        border-left: 1px solid $colorBackgroundLv3;
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_image {
+            margin: 0.25rem auto 0 auto;
+        }
+    }
+}

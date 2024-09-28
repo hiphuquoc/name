@@ -27,7 +27,8 @@
 </div>
 @pushonce('scriptCustom')
     <script type="text/javascript">
-        $(document).ready(function() {
+
+        document.addEventListener('DOMContentLoaded', function() {
             // Gọi hàm loadVisibleCategories khi trang vừa load
             loadVisibleCategories();
 

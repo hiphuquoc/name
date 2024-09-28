@@ -117,7 +117,7 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-        $(window).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             /* build tocContent khi scroll gần tới */
             const elementBuildTocContent = $('#js_buildTocContentMain_element');
             /* build toc content */
@@ -128,6 +128,6 @@
             }  
             // /* lazyload image */
             // lazyload();     
-        })
+        });
     </script>
 @endpush

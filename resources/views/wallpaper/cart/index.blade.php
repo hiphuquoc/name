@@ -1,5 +1,14 @@
 @extends('layouts.wallpaper')
 @push('headCustom')
+@push('cssFirstView')
+    @php
+        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $cssFirstView       = $manifest['resources/sources/main/cart-first-view.scss']['file'];
+    @endphp
+    <style type="text/css">
+        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+    </style>
+@endpush
 @section('content')
     <div style="overflow:hidden;">
         <div class="breadcrumbMobileBox">
@@ -94,14 +103,14 @@
 @push('scriptCustom')
     <script type="text/javascript">
 
-        $(window).ready(function(){
+        document.addEventListener('DOMContentLoaded', function() {
             fixedElement();
-        })
+        });
 
         function fixedElement(){
             var elementOffset   = $("#js_scrollMenu").offset().top;
             var elementWidth    = $("#js_scrollMenu").outerWidth();
-            $(window).scroll(function() {
+            window.addEventListener('scroll', function() {
                 var scroll          = $(window).scrollTop();
                 if (scroll>=elementOffset&&$(window).width()>1199) {
                     $("#js_scrollMenu").css({

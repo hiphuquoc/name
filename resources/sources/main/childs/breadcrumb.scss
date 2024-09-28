@@ -1,0 +1,35 @@
+.breadcrumbBox {
+    overflow: hidden;
+    @include colorOpacity('color', $colorText, 0.7);
+    font-size: 0.9rem;
+    font-weight: normal;
+    opacity: 0.75;
+    margin-top: 0.75rem;
+    a {
+        color: $colorText;
+        &:hover {
+            color: $colorTextLight;
+        }
+        &:after {
+            @include fontAwesome;
+            content: '\f101';
+            margin-right: 0.5rem;
+            margin-left: 0.75rem;
+            font-size: 0.6rem;
+            color: $bg-06;
+        }
+    }
+    @media(max-width: 1023px){
+        margin-top: 0.5rem;
+    }
+    @media(max-width: 767px){
+        font-size: 0.85rem;
+    }
+}
+
+.breadcrumbMobileBox {
+    display: none;
+    @media(max-width: 1023px){
+        display: flex;
+    }
+}

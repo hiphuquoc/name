@@ -26,13 +26,14 @@
 </div>
 @push('scriptCustom')
     <script type="text/javascript">
-        $(window).ready(function(){
+
+        document.addEventListener('DOMContentLoaded', function() {
             /* load more */
             loadMoreWallpaper();
             $(window).on('scroll', function() {
                 loadMoreWallpaper();
-            });      
-        })
+            });    
+        });
 
         /* loadMoreWallpaper wallpaper */
         var isFirstLoad = true; // Khai báo một biến để theo dõi xem đã load lần đầu tiên chưa
@@ -51,60 +52,6 @@
                 }
             }
         }
-        // function loadMoreWallpaperToController(requestLoad, firstTime = false){
-        //     /* hiện icon loading */
-        //     loadLoading();
-        //     // Lấy chuỗi query parameters từ URL
-        //     var queryString = window.location.search;
-        //     var urlParams = new URLSearchParams(queryString);
-        //     var params = {};
-        //     for (const [key, value] of urlParams) {
-        //         params[key] = value;
-        //     }
-        //     /* lấy dữ liệu */
-        //     var boxCategory = $('#js_loadMoreWallpaper_box');
-        //     const total = $('#js_loadMoreWallpaper_total').val();
-        //     const loaded = $('#js_loadMoreWallpaper_loaded').val();
-        //     /* thêm class để đánh dấu đang load => không load nữa */
-        //     boxCategory.addClass('loading');
-        //     /* lấy dữ liệu */
-        //     params.search = $('#js_loadMoreWallpaper_search').val();
-        //     params.total = total;
-        //     params.loaded = loaded;
-        //     params.array_category_info_id = $('#js_loadMoreWallpaper_array_category_info_id').val();
-        //     params.array_tag_info_id = $('#js_loadMoreWallpaper_array_tag_info_id').val();
-        //     params.request_load = requestLoad;
-        //     params.id_product = $('#js_loadMoreWallpaper_id_product').val();
-        //     $.ajax({
-        //         url: '{{ route("main.category.loadMoreWallpaper") }}',
-        //         type: 'get',
-        //         dataType: 'json',
-        //         data: params,
-        //         success: function (response) {
-        //             /* append dữ liệu */
-        //             if(firstTime){
-        //                 boxCategory.html(response.content);
-        //             }else {
-        //                 boxCategory.append(response.content);
-        //             }
-        //             $('#js_loadMoreWallpaper_loaded').val(response.loaded);
-        //             $('#js_loadMoreWallpaper_total').val(response.total); /* cập nhật lại total do load ajax cache */
-        //             /* tải lazy load */
-        //             setTimeout(() => {
-        //                 lazyload();
-        //             }, 0);
-        //             /* xóa bỏ class để thể hiện đã load xong */
-        //             boxCategory.removeClass('loading');
-        //             /* thêm thông báo nếu empty */
-        //             if(boxCategory.children().length==0) boxCategory.html('<div>'+"{{ config('language.'.$language.'.data.no_suitable_results_found') }}"+'</div>');
-        //             /* tắt icon loading */
-        //             loadLoading('hide');
-        //         }
-        //     });
-        //     // Đặt isFirstLoad thành false sau lần đầu load
-        //     isFirstLoad = false;
-            
-        // }
         function loadMoreWallpaperToController(requestLoad, firstTime = false) {
             /* hiện icon loading */
             loadLoading();

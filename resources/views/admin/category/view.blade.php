@@ -115,14 +115,10 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-
-        $(window).ready(function(){
-
+        document.addEventListener('DOMContentLoaded', function() {
             loadFreeWallpaperOfCategory('{{ $item->id ?? 0 }}');
-
             $('.repeater').repeater();
-
-        })
+        });
 
         function loadFreeWallpaperOfCategory(idCategory){
             $.ajax({

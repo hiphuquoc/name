@@ -1,4 +1,13 @@
 @extends('layouts.wallpaper')
+@push('cssFirstView')
+    @php
+        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $cssFirstView       = $manifest['resources/sources/main/freewallpaper-first-view.scss']['file'];
+    @endphp
+    <style type="text/css">
+        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+    </style>
+@endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
@@ -95,9 +104,6 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-        $(window).ready(function(){
-           
-        })
 
         /* thả cảm xúc */
         function toogleHeartFeelingFreeWallpaper(idFreeWallpaper) {

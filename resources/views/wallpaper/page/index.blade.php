@@ -1,4 +1,13 @@
 @extends('layouts.wallpaper')
+@push('cssFirstView')
+    @php
+        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $cssFirstView       = $manifest['resources/sources/main/page-first-view.scss']['file'];
+    @endphp
+    <style type="text/css">
+        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+    </style>
+@endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Title - Description - Social -->
@@ -44,40 +53,6 @@
                     {!! $xhtmlContent !!}
                 @endif
             </div>
-            {{-- <div class="pageContentWithSidebar_sidebar">
-                <!-- trang liên quan (nhiều loại) -->
-                @if(!empty($typePages)&&$typePages->isNotEmpty())
-                    @foreach($typePages as $typePage)
-                        <div class="sidebarSectionBox">
-                            <div class="sidebarSectionBox_title">
-                                @if(empty($language)||$language=='vi')
-                                    <h2>{{ $typePage[0]->type->name }}</h2>
-                                @else
-                                    <h2>Policies & Terms</h2>
-                                @endif
-                            </div>
-                            <div class="sidebarSectionBox_box">
-                            @foreach($typePage as $page)
-                                @php
-                                    $selected       = null;
-                                    if(empty($language)||$language=='vi'){
-                                        $title          = $page->name ?? $page->seo->title ?? null;
-                                        $urlPageFull    = env('APP_URL').'/'.$page->seo->slug_full;
-                                    }else {
-                                        $title          = $page->en_name ?? $page->en_seo->title ?? null;
-                                        $urlPageFull    = env('APP_URL').'/'.$page->en_seo->slug_full;
-                                    }
-                                    if($urlPageFull==URL::current()) $selected = 'selected';
-                                @endphp
-                                <a href="{{ $urlPageFull }}" title="{{ $title }}" class="sidebarSectionBox_box_item {{ $selected }}">
-                                    <i class="fa-solid fa-chevron-right"></i><h3>{{ $title }}</h3>
-                                </a>
-                            @endforeach
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div> --}}
         </div>
     </div>
 @endsection

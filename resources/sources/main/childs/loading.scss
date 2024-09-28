@@ -1,0 +1,69 @@
+.loadingBox {
+    display: none;
+    margin: 0.5rem auto;
+    scale: 0.6;
+    width: fit-content;
+    &.show {
+        display: flex;
+    }
+}
+
+.loadingIcon {
+    width: 80px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    margin: 0;
+  }
+  
+  .loadingIcon::before,
+  .loadingIcon::after {
+    position: absolute;
+    content: '';
+    top: 6px;
+    background-color: $colorLv1;
+    opacity: 0.75;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    animation: loadingIcon-anim 1s linear infinite;
+  }
+  
+  .loadingIcon::after {
+    background-color: $colorTextLight;
+    animation-delay: 0.5s;
+    opacity: 0.55;
+  }
+  
+  @keyframes loadingIcon-anim {
+    0%,
+    100% {
+      top: 6px;
+      left: 0px;
+      width: 28px;
+      height: 28px;
+      z-index: 0;
+    }
+  
+    25% {
+      top: 0px;
+      height: 40px;
+      width: 40px;
+      z-index: 1;
+      left: 20px;
+    }
+  
+    50% {
+      top: 6px;
+      width: 28px;
+      height: 28px;
+      left: 48px;
+    }
+  
+    75% {
+      top: 8px;
+      width: 28px;
+      height: 28px;
+      left: 26px;
+    }
+  }
