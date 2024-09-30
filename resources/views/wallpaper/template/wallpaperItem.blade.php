@@ -34,7 +34,8 @@
                     $keyIdPrice = 'js_changeOption_'.$tag.$price->id.$wallpaper->infoWallpaper->id;
                     /* lấy ảnh Small */
                     $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
-                    $imageSmall = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                    $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                    $imageLarge = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     /* đường dẫn */
                     $url        = $productSeo->slug_full ?? null;
                 @endphp
@@ -43,18 +44,36 @@
                         <div class="zIndexHide">
                             <!-- xử lý loadajax -->
                             @if(!empty($lazyload)&&$lazyload==true)
-                                @if($i==0)
-                                    <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" style="filter:blur(8px);" />
-                                @else 
-                                    <!-- các ảnh sau khi nào click mới load -->
-                                    <img class="lazyloadAfter" src="{{ $imageMini }}" data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" style="filter:blur(8px);" />
-                                @endif
+                                @php
+                                    $classMethodLoad = $i==0 ? 'lazyload' : 'lazyloadAfter';
+                                @endphp
+                                <picture>
+                                    <source media="(max-width: 767px)" srcset="{{ $imageSmall }}">
+                                    <img class="{{ $classMethodLoad }}" 
+                                        src="{{ $imageMini }}" 
+                                        data-src="{{ $imageLarge }}" 
+                                        alt="{{ $productName }}" 
+                                        title="{{ $productName }}" 
+                                        loading="lazy" 
+                                        style="filter:blur(8px);" 
+                                    />
+                                </picture>
                             @else 
                                 @if($i==0)
-                                    <div class="wallpaperGridBox_item_image_backgroundImage" style="background:url('{{ $imageSmall }}') no-repeat center center / cover;" ></div>
+                                    <div class="wallpaperGridBox_item_image_backgroundImage" style="background:url('{{ $imageLarge }}') no-repeat center center / cover;" ></div>
                                 @else 
                                     <!-- các ảnh sau khi nào click mới load -->
-                                    <img class="lazyloadAfter" src="{{ $imageMini }}" data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" style="filter:blur(8px);" />
+                                    <picture>
+                                        <source media="(max-width: 767px)" srcset="{{ $imageSmall }}">
+                                        <img class="lazyloadAfter" 
+                                            src="{{ $imageMini }}" 
+                                            data-src="{{ $imageLarge }}" 
+                                            alt="{{ $productName }}" 
+                                            title="{{ $productName }}" 
+                                            loading="lazy" 
+                                            style="filter:blur(8px);" 
+                                        />
+                                    </picture>
                                 @endif
                             @endif
                             <!-- rating và số lượng đã bán -->

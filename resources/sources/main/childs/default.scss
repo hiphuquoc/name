@@ -40,8 +40,8 @@ $colorLv2       : #00E38C;
 // $colorLv2       : #00bd7d;
 
 /* ===== */
-$colorSLv1      : #ffd100;
-$colorSLv2      : #ebc000;
+$colorSLv1      : #FF6500;
+$colorSLv2      : #CD5C08;
 /* ===== */
 // $colorButtonLv1 : #00bd7d;
 // $colorButtonLv2 : #004f3f;
@@ -59,7 +59,7 @@ $colorLabel     : #ad8e70;
 $colorPrice     : #ffd100;
 $colorStar      : #ffd100;
 $colorSuccess   : #00bd7d;
-$colorRed       : #ffadaf;
+$colorRed       : #FF6500;
 
 $colorBackgroundLv1: #1a202c;
 $colorBackgroundLv2: #2d3848;
@@ -187,7 +187,7 @@ $heightMenu : 3.3rem;
     position: relative;
     button {
       width: 35px;
-      aspect-ratio: 1/1;
+      height: 35px;
       border: none;
       outline: none;
       background: $colorBackgroundLv3;
@@ -296,7 +296,7 @@ $heightMenu : 3.3rem;
       margin-bottom: 0.75rem;
       &_item {
           width: calc(20% - 0.4rem);
-          aspect-ratio: 1/1;
+          height: calc(20% - 0.4rem);
           border-radius: 50%;
           cursor: pointer;
           overflow: hidden;
@@ -389,9 +389,9 @@ $heightMenu : 3.3rem;
   position: absolute;
   top: 0;
   width: 2.5rem;
+  height: 2.5rem;
   font-size: 1rem;
   background: $colorBackgroundLv2;
-  aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;

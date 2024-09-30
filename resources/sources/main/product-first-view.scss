@@ -620,13 +620,17 @@
         position: relative;
         height: 95vh;
         aspect-ratio: 1/2.18;
+        width: calc(95vh / 2.18);
         background: $colorBackgroundLv1;
         border-radius: 3vh;
         &_image {
             height: 95vh;
+            // width: 400px;
             border-radius: 3vh;
             img {
                 border-radius: 3vh;
+                // height: 100%;
+                // width: 100%;
             }
             .zIndexHide {   
                 position: relative;

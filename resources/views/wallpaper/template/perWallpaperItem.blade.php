@@ -6,7 +6,7 @@
     @endphp
     <div class="wallpaperGridBox_item" data-key="" data-price="2">
         <div id="js_changeOption_1851790" class="show">
-            <a href="{{ $link }}" class="wallpaperGridBox_item_image">
+            <a href="{{ $link }}" class="wallpaperGridBox_item_image" aria-label="{{ $productName }}">
                 <div class="zIndexHide">
                     @if(!empty($lazyload)&&$lazyload==true)
                         <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $imageSmall }}" alt="{{ $productName }}" title="{{ $productName }}" style="filter:blur(8px);" />

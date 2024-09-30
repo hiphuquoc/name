@@ -67,18 +67,20 @@
                         </div>
                         @php
                             $buttonNameCart     = config('language.'.$language.'.data.add_to_cart');
+                            $altCart            = \App\Helpers\Charactor::concatenateWords([$buttonNameCart, $itemSeo->title], $language);
                             $buttonNamePayment  = config('language.'.$language.'.data.buy_now');
+                            $altPayment         = \App\Helpers\Charactor::concatenateWords([$buttonNamePayment, $itemSeo->title], $language);
                             /* chuyển array price sang key all */
                             $keyPriceAll        = [];
                             foreach($item->prices as $price) $keyPriceAll[]  = $price->id;
                             $keyPriceAll        = implode('-', $keyPriceAll);
                         @endphp
-                        <button id="js_addToCart_button" type="button" class="button secondary maxLine_1" onClick="addToCart('{{ $item->id }}', '{{ $keyPriceAll }}', 'all');" aria-label="{{ $buttonNameCart }}">
-                            <img src="{{ Storage::url('images/svg/shopping-cart.png') }}" alt="{{ $buttonNameCart }}" title="{{ $buttonNameCart }}" />
+                        <button id="js_addToCart_button" type="button" class="button secondary maxLine_1" onClick="addToCart('{{ $item->id }}', '{{ $keyPriceAll }}', 'all');" aria-label="{{ $altCart }}">
+                            <img src="{{ Storage::url('images/svg/shopping-cart.png') }}" alt="{{ $altCart }}" title="{{ $altCart }}" />
                             <div>{{ $buttonNameCart }}</div>
                         </button>
-                        <button type="button" class="button maxLine_1" onClick="openCloseModal('modalPaymentMethod');" aria-label="{{ $buttonNamePayment }}">
-                            <img src="{{ Storage::url('images/svg/money-bill-wave.png') }}" alt="{{ $buttonNamePayment }}" title="{{ $buttonNamePayment }}" />
+                        <button type="button" class="button maxLine_1" onClick="openCloseModal('modalPaymentMethod');" aria-label="{{ $altPayment }}">
+                            <img src="{{ Storage::url('images/svg/money-bill-wave.png') }}" alt="{{ $altPayment }}" title="{{ $altPayment }}" />
                             <div>{{ $buttonNamePayment }}</div>
                         </button>
                     </div>

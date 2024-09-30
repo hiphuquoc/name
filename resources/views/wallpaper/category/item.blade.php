@@ -7,19 +7,33 @@
         }
     }
     $altImage    = $itemSeoWallpaper->title ?? $wallpaper->seo->title ?? null;
+    /* lấy ảnh Small */
+    $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->file_cloud);
+    $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->file_cloud);
+    $imageLarge = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->file_cloud);
 @endphp
 <div id="js_calculatorPosition_item_{{ $wallpaper->id }}" class="freeWallpaperBox_item" data-id="{{ $wallpaper->id }}">
     <div class="freeWallpaperBox_item_image">
-        <img class="lazyload" src="{{ \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->file_cloud) }}" data-src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->file_cloud) }}" alt="{{ $altImage }}" title="{{ $altImage }}" />
+        <picture>
+            <source media="(max-width: 767px)" srcset="{{ $imageSmall }}">
+            <img class="lazyload" 
+                src="{{ $imageMini }}" 
+                data-src="{{ $imageLarge }}" 
+                alt="{{ $altImage }}" 
+                title="{{ $altImage }}" 
+                loading="lazy" 
+            />
+        </picture>
+        
     </div>
     <div class="freeWallpaperBox_item_box">
         <div class="freeWallpaperBox_item_box_item">
             <div class="author">
                 <div class="author_image">
-                    <img src="https://name.com.vn/storage/images/upload/logo-type-manager-upload.webp" alt="websitekiengiang@gmail.com" />
+                    <img src="https://name.com.vn/storage/images/upload/logo-type-manager-upload.webp" alt="websitekiengiang@gmail.com" title="websitekiengiang@gmail.com" />
                 </div>
                 <div class="author_name maxLine_1">
-                    gaixinh AI
+                    Name
                 </div>
             </div>
         </div>
@@ -43,14 +57,14 @@
             <div class="action">
                 {{-- <a href="{{ route('search.searchByImage', ['free_wallpaper_info_id' => $wallpaper->id]) }}" class="action_item"> --}}
                 @if(!empty($wallpaper->seo))
-                    <a href="/{{ $itemSeoWallpaper->slug_full ?? $wallpaper->seo->slug_full }}" class="action_item">
+                    <a href="/{{ $itemSeoWallpaper->slug_full ?? $wallpaper->seo->slug_full }}" class="action_item" aria-label="viewmore">
                         <i class="fa-solid fa-image"></i>
                     </a>
                 @endif
                 <div class="action_item" onclick="showBoxFeeling(this);">
                     <i class="fa-regular fa-thumbs-up"></i>
                 </div>
-                <a class="action_item download" href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->file_cloud]) }}" download>
+                <a class="action_item download" href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->file_cloud]) }}" download aria-label="download">
                     <i class="fa-solid fa-download"></i>
                 </a>
                 
@@ -69,7 +83,7 @@
         </div>
     @endif
     @if(!empty($wallpaper->seo))
-        <a href="/{{ $itemSeoWallpaper->slug_full ?? $wallpaper->seo->slug_full }}" class="freeWallpaperBox_item_preventClick"></a>
+        <a href="/{{ $itemSeoWallpaper->slug_full ?? $wallpaper->seo->slug_full }}" class="freeWallpaperBox_item_preventClick" aria-label="{{ $altImage }}"></a>
     @else 
         <div class="freeWallpaperBox_item_preventClick"></div>
     @endif

@@ -20,7 +20,7 @@ $heightSelect : 2.25rem;
         border-radius: 0.5rem;
         font-size: 0.75rem;
         font-family: $fontTitle;
-        @include colorOpacity('color', $colorText, 0.55);
+        @include colorOpacity('color', $colorText, 0.75);
     }
     &_input {
         padding: 0.3rem 0.75rem 0.1rem 0.75rem;

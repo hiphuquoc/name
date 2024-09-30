@@ -14,7 +14,7 @@
                 @foreach($price->wallpapers as $wallpaper)
                     @if(!empty($wallpaper->infoWallpaper))
                         <div>
-                            <img data-src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper) }}" alt="{{ $title }}" title="{{ $title }}" />
+                            <img src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper) }}" data-src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper) }}" alt="{{ $title }}" title="{{ $title }}" loading="lazy" />
                             {{-- <div class="viewImageFullBox_box_image_background"></div> --}}
                             <div class="viewImageFullBox_box_image_backgroundTopMore"></div>
                             <div class="viewImageFullBox_box_image_backgroundSideMore"></div>

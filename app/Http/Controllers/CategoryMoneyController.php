@@ -56,13 +56,15 @@ class CategoryMoneyController extends Controller {
                     $response    .= view('wallpaper.template.wallpaperItem', [
                         'product'   => $wallpaper,
                         'language'  => $language,
-                        'lazyload'  => true
+                        'lazyload'  => true,
+                        'headingTitle'  => 'h2',
                     ])->render();
                 }else {
-                    $wallpaperName      = $wallpaper->name ?? null;
+                    $wallpaperName      = null;
                     $link               = env('APP_URL').'/'.$wallpaper->seo->slug_full;
                     foreach($wallpaper->seos as $seo){
                         if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language) {
+                            $wallpaperName = $seo->infoSeo->title;
                             $link = env('APP_URL').'/'.$seo->infoSeo->slug_full;
                             break;
                         }

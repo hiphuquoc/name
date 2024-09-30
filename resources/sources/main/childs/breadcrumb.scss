@@ -3,7 +3,7 @@
     @include colorOpacity('color', $colorText, 0.7);
     font-size: 0.9rem;
     font-weight: normal;
-    opacity: 0.75;
+    // opacity: 0.75;
     margin-top: 0.75rem;
     a {
         color: $colorText;

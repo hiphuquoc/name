@@ -20,7 +20,8 @@
                     @php
                         /* lấy ảnh mini */
                         $imageMini      = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
-                        $image          = \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                        $imageSmall     = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                        $imageLarge     = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     @endphp
                     <div class="galleryProductBox_item" onClick="toogleModalViewImageFull('{{ $i }}');">
                         {{-- @if($i<2)
@@ -28,7 +29,18 @@
                             <div class="galleryProductBox_item_backgroundImage" src="{{ $image }}" data-src="{{ $image }}" data-option="js_addToCart_option_{{ $price->id }}" onClick="toogleModalViewImageFull('{{ $i }}');" style="background:url('{{ $image }}') no-repeat center center / cover;"></div>
                         @else  --}}
                             <div class="zIndexHide">
-                                <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $image }}" alt="{{ $itemSeo->title }}" title="{{ $itemSeo->title }}" data-option="js_addToCart_option_{{ $price->id }}" style="filter:blur(8px);" />
+                                <picture>
+                                    <source media="(max-width: 767px)" srcset="{{ $imageSmall }}">
+                                    <img class="lazyload" 
+                                        src="{{ $imageMini }}" 
+                                        data-src="{{ $imageLarge }}" 
+                                        alt="{{ $itemSeo->title }}" 
+                                        title="{{ $itemSeo->title }}" 
+                                        data-option="js_addToCart_option_{{ $price->id }}" 
+                                        loading="lazy" 
+                                        style="filter:blur(8px);" 
+                                    />
+                                </picture>
                             </div>
                         {{-- @endif --}}
                         <div class="galleryProductBox_item_background"></div>

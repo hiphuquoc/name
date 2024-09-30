@@ -130,6 +130,8 @@
                         margin-bottom: 0 !important;
                         color: $colorText;
                         line-height: 1.58;
+                        letter-spacing: 0.25px;
+                        text-transform: unset;
                     }
                 }
                 &_price {

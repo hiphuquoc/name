@@ -160,4 +160,16 @@ class Charactor {
         return compact('dataChatgpt', 'eventChatgpt');
     }
 
+    public static function concatenateWords(array $words, $language){
+        // Lấy giá trị config flag từ ngôn ngữ
+        $flagJoinLeftToRight    = config('language.'.$language.'.flag_join_left_to_right');
+        $spaceBetween           = config('language.'.$language.'.flag_has_space_in_content')==true ? ' ' : '';
+        // Nếu flag là true, ghép từ trái sang phải, nếu false, ghép từ phải sang trái
+        if ($flagJoinLeftToRight) {
+            return implode($spaceBetween, $words); // Ghép từ trái sang phải
+        } else {
+            return implode($spaceBetween, array_reverse($words)); // Ghép từ phải sang trái
+        }
+    }
+
 }
