@@ -11,6 +11,9 @@
 @import 'childs/modal.scss';
 
 .categoryGrid {
+    &:not(:first-child){
+        margin-top: 1.5rem;
+    }
     &_title {
         margin-bottom: 1rem;
         h2, h3, a {
@@ -239,6 +242,16 @@
                     }
                 }
             }
+        }
+    }
+    @media(max-width: 1023px){
+        &:first-child , &:not(:first-child){
+            margin-top: 1.25rem;
+        }
+    }
+    @media(max-width: 767px){
+        &:first-child, &:not(:first-child){
+            margin-top: 1rem;
         }
     }
 }

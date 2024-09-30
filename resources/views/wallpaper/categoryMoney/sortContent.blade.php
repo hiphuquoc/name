@@ -7,7 +7,7 @@
             $inputViewBy    = null;
             foreach($dataView as $viewItem){
                 if($viewBy==$viewItem['key']) {
-                    $inputViewBy    = $viewItem['icon'].config('language.'.$language.'.data.'.$viewItem['key']);
+                    $inputViewBy    = $viewItem['icon'].'<div class="maxLine_1">'.config('language.'.$language.'.data.'.$viewItem['key']).'</div>';
                 }
             }
         @endphp
@@ -15,7 +15,7 @@
             <div class="selectCustom_text maxLine_1">
                 {!! config('language.'.$language.'.data.browse_by') !!}
             </div>
-            <div class="selectCustom_input maxLine_1">
+            <div class="selectCustom_input">
                 {!! $inputViewBy !!}
             </div>
             <div class="selectCustom_box">
@@ -37,7 +37,7 @@
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
                 if($sortBy==$sortItem['key']) {
-                    $inputSortBy    = $sortItem['icon'].config('language.'.$language.'.data.'.$sortItem['key']);
+                    $inputSortBy    = $sortItem['icon'].'<div class="maxLine_1">'.config('language.'.$language.'.data.'.$sortItem['key']).'</div>';
                 }
             }
         @endphp

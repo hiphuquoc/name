@@ -28,7 +28,7 @@
             color: $colorText;
             &:not(:first-child){
                 margin-top: 0.5rem;
-                border-top: 1px dotted $colorBackgroundLv1;
+                border-top: 1px dashed $colorBackgroundLv1;
             }
         }
     }
@@ -87,6 +87,15 @@
                 content: '\f057' !important;
                 font-size: 1.3rem;
             }
+        }
+    }
+    @media(max-width: 1023px){
+        margin-bottom: 1.25rem;
+    }
+    @media(max-width: 767px){
+        margin-bottom: 1rem;
+        &_list {
+            padding: 0.25rem 0.75rem 0.75rem;
         }
     }
 }

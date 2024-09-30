@@ -1,4 +1,5 @@
 <div class="headerBottom">
+    <!-- hỗ trợ -->
     @php
         $contacts               = config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.contacts');
         $phoneCustomerService   = null;
@@ -9,24 +10,28 @@
             }
         }
         $nameSupport            = config('language.'.$language.'.data.support');
+        $altSupport             = \App\Helpers\Charactor::concatenateWords([$nameSupport, env('APP_NAME')], $language);
         $nameGuide              = config('language.'.$language.'.data.download_guide');
+        $altGuide               = \App\Helpers\Charactor::concatenateWords([$nameGuide, config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME'))], $language);
     @endphp
     <a class="headerBottom_item" href="https://zalo.me/{{ $phoneCustomerService }}">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="{{ $nameSupport }}" title="{{ $nameSupport }}">
+            <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="{{ $altSupport }}" title="{{ $altSupport }}" loading="lazy" />
         </div>
-        <div class="headerBottom_item_text">
+        <div class="headerBottom_item_text maxLine_1">
             {{ $nameSupport }}
         </div>
     </a>
+    <!-- hướng dẫn tải -->
     <a id="js_loadLinkDownloadGuide" class="headerBottom_item" href="/">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/book-open-cover.svg') }}" alt="{{ $nameGuide }}" title="{{ $nameGuide }}" />
+            <img src="{{ Storage::url('images/svg/book-open-cover.svg') }}" alt="{{ $altGuide }}" title="{{ $altGuide }}" loading="lazy" />
         </div>
-        <div class="headerBottom_item_text">
+        <div class="headerBottom_item_text maxLine_1">
             {{ $nameGuide }}
         </div>
     </a>
+    <!-- đăng nhập => Ajax -->
     <div id="js_checkLoginAndSetShow_buttonMobile" class="headerBottom_item"></div>
 </div>
 @push('scriptCustom')

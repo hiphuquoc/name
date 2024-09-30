@@ -165,7 +165,7 @@
                 align-items: center;
                 padding: 0.5rem 0;
                 width: 100%;
-                flex-wrap: wrap;
+                // flex-wrap: wrap;
                 align-items: flex-start;
                 gap: 0.75rem;
                 img {
@@ -206,11 +206,11 @@
             }
             ul {
                 [dir="ltr"] & {
-                    margin-left: 10px;
+                    // margin-left: 10px;
                     border-left: 1px dashed #{$colorIcon}7F;
                 }
                 [dir="rtl"] & {
-                    margin-right: 10px;
+                    // margin-right: 10px;
                     border-right: 1px dashed #{$colorIcon}7F;
                 }
                 > li {

@@ -61,12 +61,14 @@
     <!-- content -->
     <div class="breadcrumbMobileBox"><!-- dùng để chống nhảy padding - margin so với các trang có breadcrumb --></div>
     <!-- Item Category Grid Box -->
-    @foreach(config('main_'.env('APP_NAME').'.category_type') as $type)
-        @include('wallpaper.home.categoryBox', [
-            'type'  => $type['key'],
-            'data'  => $categories,
-        ])
-    @endforeach
+    <div class="contentBox">
+        @foreach(config('main_'.env('APP_NAME').'.category_type') as $type)
+            @include('wallpaper.home.categoryBox', [
+                'type'  => $type['key'],
+                'data'  => $categories,
+            ])
+        @endforeach
+    </div>
 @endsection
 @push('modal')
     <!-- Message Add to Cart -->

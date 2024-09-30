@@ -96,22 +96,22 @@
         }
     }
     
-    /* fixed menu khi scroll đối với giao diện nhỏ hơn 990px */
-    window.addEventListener('scroll', function() {
-        // const heightMenu = $('.headerMain').outerHeight();
-        if($(window).scrollTop()>300){
-            $('.headerMain').addClass('fixed');
-            $('.headerMain').css('opacity', '1');
-        }
-        if($(window).scrollTop()<=300){
-            $('.headerMain').removeClass('fixed');
-            $('.headerMain').css('opacity', '0');
-        }
-        if($(window).scrollTop()<55){
-            $('.headerMain').removeClass('fixed');
-            $('.headerMain').css('opacity', '1');
-        }
-    });
+    // /* fixed menu khi scroll đối với giao diện nhỏ hơn 990px */
+    // window.addEventListener('scroll', function() {
+    //     // const heightMenu = $('.headerMain').outerHeight();
+    //     if($(window).scrollTop()>300){
+    //         $('.headerMain').addClass('fixed');
+    //         $('.headerMain').css('opacity', '1');
+    //     }
+    //     if($(window).scrollTop()<=300){
+    //         $('.headerMain').removeClass('fixed');
+    //         $('.headerMain').css('opacity', '0');
+    //     }
+    //     if($(window).scrollTop()<55){
+    //         $('.headerMain').removeClass('fixed');
+    //         $('.headerMain').css('opacity', '1');
+    //     }
+    // });
     const percentHeightScreenEffect = 1.3;
     /* hiệu ứng fade in */
     window.addEventListener('scroll', function() {

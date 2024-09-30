@@ -1,6 +1,6 @@
 @if(!empty($user))
     @php
-        $myDownloadsByLanguage = config('language.'.$language.'.data.login');
+        $myDownloadsByLanguage = config('language.'.$language.'.data.my_downloads');
     @endphp
     <div class="headerBottom_item" onClick="toggleMenuListMobile();">
         <div class="headerBottom_item_icon">

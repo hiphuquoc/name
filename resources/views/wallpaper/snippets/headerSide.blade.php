@@ -30,15 +30,17 @@
 </div>
 <div class="headerSide customScrollBar-y">
     <ul>
+        <!-- trang chủ -->
         <li>
             @php
                 $icon = file_get_contents('storage/images/svg/icon-home-1.svg');
             @endphp
             <a href="/{{ $language }}" title="{{ config('language.'.$language.'.data.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
                 {!! $icon !!}
-                <div>{{ config('language.'.$language.'.data.home') }}</div>
+                <div class="maxLine_1">{{ config('language.'.$language.'.data.home') }}</div>
             </a>
         </li>
+        <!-- về chúng tôi -->
         <li>
             @php
                 $icon       = file_get_contents('storage/images/svg/icon-about-me-2.svg');
@@ -53,9 +55,10 @@
             @endphp
             <a href="/{{ $urlAbotUs }}" title="{{ $nameAboutUs }}" aria-label="{{ $nameAboutUs }}">
                 {!! $icon !!}
-                <div>{{ $nameAboutUs }}</div>
+                <div class="maxLine_1">{{ $nameAboutUs }}</div>
             </a>
         </li>
+        <!-- chủ đề -->
         @if(!empty($wallpaperMobile))
             <li>
                 @php
@@ -67,23 +70,25 @@
                             break;
                         }
                     }
-                    $classTmp = 'close';
-                    $styleTmp = '';
-                    $flagOpen = env('APP_URL').'/'.$url==Request::url() ? true : false;
+                    $classTmp   = 'close';
+                    $styleTmp   = '';
+                    $iconRight  = '<i class="fa-solid fa-plus"></i>';
+                    $flagOpen   = env('APP_URL').'/'.$url==urldecode(Request::url()) ? true : false;
                     if($flagOpen==true){
-                        $classTmp = 'open';
-                        $styleTmp = 'style="height:auto;opacity:1;"';
+                        $classTmp   = 'open';
+                        $styleTmp   = 'style="height:auto;opacity:1;"';
+                        $iconRight  = '<i class="fa-solid fa-minus"></i>';
                     }
                     $icon = file_get_contents('storage/images/svg/icon-category-2.svg');
                 @endphp
                 <div class="{{ $classTmp }}" onclick="showHideListMenuMobile(this, '{{ $url }}')">
                     {!! $icon !!}
                     @if($flagOpen==true)
-                        <div>{{ $titlePhoneWallpaper }}</div>
+                        <div class="maxLine_1">{{ $titlePhoneWallpaper }}</div>
                     @else 
-                        <a href="{{ env('APP_URL') }}/{{ $url }}" arira-label="{{ $wallpaperMobile->name }}">{{ $titlePhoneWallpaper }}</a>
+                        <a href="{{ env('APP_URL') }}/{{ $url }}" class="maxLine_1" arira-label="{{ $wallpaperMobile->name }}">{{ $titlePhoneWallpaper }}</a>
                     @endif
-                    <i class="fa-solid fa-plus"></i>
+                    {!! $iconRight !!}
                 </div>
                 <ul id="{{ $url }}" class="filterLinkSelected" {!! $styleTmp !!}>
                     @foreach($wallpaperMobile->childs as $event)
@@ -96,7 +101,7 @@
                                     @endphp
                                     <li>
                                         <a href="{{ $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
-                                            <div>{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
+                                            <div class="maxLine_1">{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
                                         </a>
                                     </li>
                                     @break
@@ -107,13 +112,14 @@
                 </ul>
             </li>
         @endif
+        <!-- phong cách -->
         <li>
             @php
                 $icon = file_get_contents('storage/images/svg/icon-brush-1.svg');
             @endphp
             <div class="open" onclick="showHideListMenuMobile(this, 'phong-cach')">
                 {!! $icon !!}
-                <div style="margin-left:-3px;">{{ config('language.'.$language.'.data.wallpaper_style.'.env('APP_NAME')) }}</div>
+                <div class="maxLine_1" style="margin-left:-3px;">{{ config('language.'.$language.'.data.wallpaper_style.'.env('APP_NAME')) }}</div>
                 <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="phong-cach" class="filterLinkSelected">
@@ -127,7 +133,7 @@
                                 @endphp
                                 <li>
                                     <a href="{{ $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
-                                        <div>{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
+                                        <div class="maxLine_1">{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
                                     </a>
                                 </li>
                                 @break
@@ -137,13 +143,14 @@
                 @endforeach
             </ul>
         </li>
+        <!-- sự kiện -->
         <li>
             @php
                 $altPhoneWallpaperEvent = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME'));
             @endphp
             <div class="close" onclick="showHideListMenuMobile(this, 'su-kien')">
                 <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
-                <div>{{ config('language.'.$language.'.data.event') }}</div>
+                <div class="maxLine_1">{{ config('language.'.$language.'.data.event') }}</div>
                 <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="su-kien" class="filterLinkSelected">
@@ -157,7 +164,7 @@
                                 @endphp
                                 <li>
                                     <a href="{{ $urlFull }}" title="{{ $title }}" aria-label="{{ $title }}">
-                                        <div>{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
+                                        <div class="maxLine_1">{{ $title }} {!! $event->products->count()>0 ? '(<span class="highLight">'.$event->products->count().'</span>)' : null !!}</div>
                                     </a>
                                 </li>
                                 @break
@@ -167,6 +174,7 @@
                 @endforeach
             </ul>
         </li>
+        <!-- miễn phí -->
         <li>
             @php
                 $icon                   = file_get_contents('storage/images/svg/icon-share-1.svg');
@@ -185,16 +193,17 @@
             @endphp
             <a href="{{ env('APP_URL') }}/{{ $slugFullWallpaperFree }}" title="{{ $wallpaperFreeText }}" aria-label="{{ $wallpaperFreeText }}">
                 {!! $icon !!}
-                <div>{{ $wallpaperFreeText }}</div>
+                <div class="maxLine_1">{{ $wallpaperFreeText }}</div>
             </a>
         </li>
+        <!-- hỗ trợ -->
         <li>
             <div class="close" onclick="showHideListMenuMobile(this, 'ho-tro')">
                 @php
                     $icon = file_get_contents('storage/images/svg/icon-support-1.svg');
                 @endphp
                 {!! $icon !!}
-                <div>{{ config('language.'.$language.'.data.support') }}</div>
+                <div class="maxLine_1">{{ config('language.'.$language.'.data.support') }}</div>
                 <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="ho-tro" class="filterLinkSelected">
@@ -212,7 +221,7 @@
                     @endphp
                     <li>
                         <a href="{{ env('APP_URL').'/'.$slugPage }}" title="{{ $title }}" aria-label="{{ $title }}">
-                            <div>{{ $title }}</div>
+                            <div class="maxLine_1">{{ $title }}</div>
                         </a>
                     </li>
                 @endforeach
@@ -262,8 +271,7 @@
     <script type="text/javascript">
 
         document.addEventListener('DOMContentLoaded', function() {
-            var Url             = document.URL;
-            // var elementMenu     = null;
+            var Url = decodeURIComponent(document.URL);
             $('.headerSide .filterLinkSelected a').each(function(){
                 const regex = new RegExp("^" + $(this).attr('href'));
                 if(regex.test(Url)) {

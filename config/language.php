@@ -376,9 +376,9 @@ return [
                 "topanime" => "Foto gratis",
             ],
             "phone_wallpaper" => [
-                "name" => "Fondo de pantalla para teléfono ",
-                "topgirl" => "Imágenes de chicas bonitas ",
-                "topanime" => "Imágenes de chicas bonitas ",
+                "name"      => "Fondo de pantalla para teléfono ",
+                "topgirl"   => "Imágenes de chicas bonitas ",
+                "topanime"  => "Imágenes de chicas bonitas ",
             ],
             "product_description" => [
                 "name" => "<div>¡Transforma el fondo de pantalla de tu teléfono en una obra de arte con esta impresionante colección de fotos! Aporta un estilo fresco y único a tu teléfono.</div>

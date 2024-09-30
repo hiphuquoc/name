@@ -210,6 +210,30 @@
                 preventClickImgAndEffectDownload();
                 /* thêm thông báo nếu empty */
                 if (boxCategory.children().length == 0) boxCategory.html('<div>' + "{{ config('language.' . $language . '.data.no_suitable_results_found') }}" + '</div>');
+                
+                // setTimeout(function () {
+                //     lazyload();
+                // }, 0);
+
+                // /* Xóa class loading để biểu thị nội dung đã được tải */
+                // boxCategory.removeClass('loading');
+
+                // /* Append dữ liệu content nếu không rỗng */
+                // if (data.content) {
+                //     // Append các phần tử con khi các ảnh trong data.content đã tải xong
+                //     boxCategory[0].insertAdjacentHTML('beforeend', data.content);
+                // }
+
+                // /* Kiểm tra khi tất cả ảnh đã được tải xong trước khi thực hiện các hành động khác */
+                // waitForImagesLoaded(boxCategory, function () {
+                //     setViewAllImage();
+                //     preventClickImgAndEffectDownload();
+                // });
+
+                // /* Thêm thông báo nếu không có phần tử con nào trong container */
+                // if (!boxCategory.children().length) {
+                //     boxCategory.html('<div>' + "{{ config('language.' . $language . '.data.no_suitable_results_found') }}" + '</div>');
+                // }
             })
             .catch(error => {
                 console.error("Fetch request failed:", error);

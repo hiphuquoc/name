@@ -1,28 +1,26 @@
-<div class="contentBox">
-    <div class="categoryGrid">
-        <div class="categoryGrid_title">
-            {{-- <input type="hidden" id="total" name="total" value="{{ $total ?? 0 }}" />
-            <input type="hidden" id="loaded" name="loaded" value="{{ $data['items']->count() ?? 0 }}" /> --}}
-            @php
-                $titleBox = '';
-                if($type=='category_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_themes.'.env('APP_NAME'));
-                if($type=='style_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_styles.'.env('APP_NAME'));
-                if($type=='event_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_events.'.env('APP_NAME'));
-            @endphp
-            <h2>{{ $titleBox }}</h2>
-        </div>
-        <div class="categoryGrid_box">
-            @foreach($categories as $category)
-                @foreach($category->seos as $categorySeo)
-                    @if(!empty($categorySeo->infoSeo->type)&&$categorySeo->infoSeo->type==$type) <!-- kiểm tra có ngôn ngữ -->
-                        <div id="js_loadInfoCategory_{{ $category->id }}" class="categoryGrid_box_item js_loadInfoCategory" data-category_info_id="{{ $category->id }}">
-                            <!-- load Ajax -->
-                        </div>
-                        @break
-                    @endif
-                @endforeach
+<div class="categoryGrid">
+    <div class="categoryGrid_title">
+        {{-- <input type="hidden" id="total" name="total" value="{{ $total ?? 0 }}" />
+        <input type="hidden" id="loaded" name="loaded" value="{{ $data['items']->count() ?? 0 }}" /> --}}
+        @php
+            $titleBox = '';
+            if($type=='category_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_themes.'.env('APP_NAME'));
+            if($type=='style_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_styles.'.env('APP_NAME'));
+            if($type=='event_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_events.'.env('APP_NAME'));
+        @endphp
+        <h2>{{ $titleBox }}</h2>
+    </div>
+    <div class="categoryGrid_box">
+        @foreach($categories as $category)
+            @foreach($category->seos as $categorySeo)
+                @if(!empty($categorySeo->infoSeo->type)&&$categorySeo->infoSeo->type==$type) <!-- kiểm tra có ngôn ngữ -->
+                    <div id="js_loadInfoCategory_{{ $category->id }}" class="categoryGrid_box_item js_loadInfoCategory" data-category_info_id="{{ $category->id }}">
+                        <!-- load Ajax -->
+                    </div>
+                    @break
+                @endif
             @endforeach
-        </div>
+        @endforeach
     </div>
 </div>
 @pushonce('scriptCustom')
