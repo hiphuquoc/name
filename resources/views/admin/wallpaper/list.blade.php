@@ -250,6 +250,7 @@
                             data: formData,
                             processData: false,
                             contentType: false,
+                            timeout: 0,
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
