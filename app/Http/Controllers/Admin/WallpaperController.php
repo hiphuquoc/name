@@ -64,6 +64,8 @@ class WallpaperController extends Controller {
     }
 
     public function uploadWallpaperWithSource(Request $request){
+        // Thiết lập thời gian thực thi không giới hạn
+        set_time_limit(0);
         try {
             DB::beginTransaction();
             if (!empty($request->file('files.wallpaper')) && !empty($request->file('files.source'))){
