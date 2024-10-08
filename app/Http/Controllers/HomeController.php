@@ -77,6 +77,9 @@ class HomeController extends Controller {
     }
 
     public static function test(Request $request){
+
+
+        phpinfo();
         // $wallpapers     = Wallpaper::select('*')
         //                     ->get();
         // $folderUpload   = config('main_name.google_cloud_storage.wallpapers');

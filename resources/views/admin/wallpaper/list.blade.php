@@ -145,64 +145,196 @@
             }
         }
 
+        // function uploadAndChangeWallpaperWithSource(idWallpaper = '') {
+        //     const tmp          = validateForm('formWallpaperWithSource');
+        //     if(tmp==''){
+        //         /* bật loading */
+        //         addLoadingModal();
+        //         /* lấy thêm các input khác */
+        //         var inputName       = $('#name').val();
+        //         var inputDesc       = $('#description').val();
+        //         /* upload (create) */ 
+        //         if(idWallpaper==''){
+        //             /* Lấy danh sách các file từ input có id là 'inputFile' */
+        //             var fileWallpapers  = $('#wallpapers')[0].files;
+        //             // Sử dụng Promise đã tạo
+        //             uploadWallpaperWithSource(inputName, inputDesc, fileWallpapers)
+        //                 .then(function () {
+        //                     // Tất cả các công việc đã hoàn thành, thực hiện các hành động cần thiết sau đó
+        //                     addLoadingModal();
+        //                     $('#modalFormWallpaper').modal('hide');
+        //                 })
+        //                 .catch(function () {
+        //                     // Xử lý khi có lỗi
+        //                 });
+        //         }else {
+        //             var formData        = new FormData();
+        //             formData.append('name', inputName);
+        //             formData.append('description', inputDesc);
+        //             const fileWallpaper = $('input[name="wallpapers[0]"]')[0].files;
+        //             formData.append('files[wallpaper]', fileWallpaper[0]);
+        //             const fileSource    = $('input[name="sources[0]"]')[0].files;
+        //             formData.append('files[source]', fileSource[0]);
+        //             /* truyền thêm wallpaper_id */
+        //             formData.append('wallpaper_id', idWallpaper);
+        //             $.ajax({
+        //                 url: "{{ route('admin.wallpaper.changeWallpaperWithSource') }}",
+        //                 type: "post",
+        //                 data: formData,
+        //                 processData: false, // Không xử lý dữ liệu gửi đi
+        //                 contentType: false, // Không thiết lập header Content-Type
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        //                 },
+        //             }).done(function (response) {
+        //                 /* load lại box */
+        //                 loadOneRow(idWallpaper);
+        //                 /* tắt modal và loading */
+        //                 addLoadingModal();
+        //                 $('#modalFormWallpaper').modal('hide');
+        //             }).fail(function (jqXHR, textStatus, errorThrown) {
+        //                 console.error("Ajax request failed: " + textStatus, errorThrown);
+        //             });
+        //         }   
+        //         /* tải lại source => dùng cho loadOneRow */
+        //         setTimeout(function(){
+        //             loadImageFromGoogleCloud();
+        //         }, 300);             
+        //     }else {
+        //         /* có 1 vài trường required bị bỏ trống */
+        //         let messageError        = 'Không được bỏ trống trường ';
+        //         tmp.forEach(function(value, index, array){
+        //             switch (true) {
+        //                 case /^sources\[\d+\]$/.test(value):
+        //                     var index = parseInt(value.match(/\d+/)[0]) + 1;
+        //                     messageError += '<strong>Ảnh gốc ' + index + '</strong>';
+        //                     break;
+        //                 case value === 'wallpapers[]':
+        //                     messageError += '<strong>Wallpaper</strong>';
+        //                     break;
+        //                 case value === 'file_name':
+        //                     messageError += '<strong>Đường dẫn ảnh</strong>';
+        //                     break;
+        //                 case value === 'name':
+        //                     messageError += '<strong>Alt wallpaper</strong>';
+        //                     break;
+        //                 default:
+        //                     break;
+        //             }
+        //             if(index!=parseInt(tmp.length-1)) messageError += ', ';
+        //         })
+        //         $('#js_validateFormModalHotelContact_message').css('display', 'block').html(messageError);
+        //     }
+        // }
+
+        // function uploadWallpaperWithSource(inputName, inputDesc, fileWallpapers) {
+        //     return new Promise(function (resolve, reject) {
+        //         // Mảng chứa tất cả các promises từ các request AJAX
+        //         var promises = [];
+        //         for (var i = 0; i < fileWallpapers.length; i++) {
+        //             var formData = new FormData();
+        //             formData.append('name', inputName);
+        //             formData.append('description', inputDesc);
+        //             formData.append('count', i);
+        //             formData.append('files[wallpaper]', fileWallpapers[i]);
+                    
+        //             const inputSource = 'sources[' + i + ']';
+        //             const fileSource  = $('input[name="' + inputSource + '"]')[0].files;
+        //             formData.append('files[source]', fileSource[0]);
+        //             // Thực hiện request AJAX và đưa promise vào mảng
+        //             promises.push(
+        //                 $.ajax({
+        //                     url: "{{ route('admin.wallpaper.uploadWallpaperWithSource') }}",
+        //                     type: "post",
+        //                     dataType: 'json',
+        //                     data: formData,
+        //                     processData: false,
+        //                     contentType: false,
+        //                     timeout: 0,
+        //                     headers: {
+        //                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        //                     },
+        //                 })
+        //             );
+        //         }
+        //         // Khi tất cả các promises đã hoàn thành, resolve Promise chính
+        //         Promise.all(promises)
+        //             .then(function (responses) {
+        //                 // Các responses chứa kết quả từ mỗi request AJAX
+        //                 responses.forEach(function (response) {
+        //                     // Thêm box mới upload vào
+        //                     var newDiv = $("<div>", {
+        //                         id: "js_deleteWallpaperAndSource_" + response.id,
+        //                         class: "wallpaperBox_item",
+        //                         html: response.content
+        //                     });
+        //                     // Thêm div mới vào đầu của container
+        //                     newDiv.prependTo("#js_uploadAndChangeWallpaperWithSource_idWrite");
+        //                 });
+        //                 // Gọi resolve để kết thúc Promise
+        //                 resolve();
+        //             })
+        //             .catch(function (error) {
+        //                 console.error("One or more AJAX requests failed:", error);
+        //                 // Gọi reject để kết thúc Promise với lỗi
+        //                 reject();
+        //             });
+        //     });
+        // }
+
         function uploadAndChangeWallpaperWithSource(idWallpaper = '') {
-            const tmp          = validateForm('formWallpaperWithSource');
-            if(tmp==''){
-                /* bật loading */
+            const tmp = validateForm('formWallpaperWithSource');
+            if(tmp == ''){
+                // Bật loading
                 addLoadingModal();
-                /* lấy thêm các input khác */
-                var inputName       = $('#name').val();
-                var inputDesc       = $('#description').val();
-                /* upload (create) */ 
-                if(idWallpaper==''){
-                    /* Lấy danh sách các file từ input có id là 'inputFile' */
-                    var fileWallpapers  = $('#wallpapers')[0].files;
-                    // Sử dụng Promise đã tạo
+                // Lấy thêm các input khác
+                var inputName = $('#name').val();
+                var inputDesc = $('#description').val();
+                
+                if(idWallpaper == ''){
+                    var fileWallpapers = $('#wallpapers')[0].files;
+                    // Gọi upload và xử lý sau khi hoàn thành
                     uploadWallpaperWithSource(inputName, inputDesc, fileWallpapers)
                         .then(function () {
-                            // Tất cả các công việc đã hoàn thành, thực hiện các hành động cần thiết sau đó
+                            // Tất cả các công việc đã hoàn thành
                             addLoadingModal();
                             $('#modalFormWallpaper').modal('hide');
+                            setTimeout(function() {
+                                loadImageFromGoogleCloud();
+                            }, 300);
                         })
                         .catch(function () {
-                            // Xử lý khi có lỗi
+                            // Xử lý lỗi nếu có (có thể thêm thông báo lỗi ở đây)
                         });
-                }else {
-                    var formData        = new FormData();
-                    formData.append('name', inputName);
-                    formData.append('description', inputDesc);
-                    const fileWallpaper = $('input[name="wallpapers[0]"]')[0].files;
-                    formData.append('files[wallpaper]', fileWallpaper[0]);
-                    const fileSource    = $('input[name="sources[0]"]')[0].files;
-                    formData.append('files[source]', fileSource[0]);
-                    /* truyền thêm wallpaper_id */
-                    formData.append('wallpaper_id', idWallpaper);
-                    $.ajax({
-                        url: "{{ route('admin.wallpaper.changeWallpaperWithSource') }}",
-                        type: "post",
-                        data: formData,
-                        processData: false, // Không xử lý dữ liệu gửi đi
-                        contentType: false, // Không thiết lập header Content-Type
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                    }).done(function (response) {
-                        /* load lại box */
-                        loadOneRow(idWallpaper);
-                        /* tắt modal và loading */
-                        addLoadingModal();
-                        $('#modalFormWallpaper').modal('hide');
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error("Ajax request failed: " + textStatus, errorThrown);
-                    });
-                }   
-                /* tải lại source => dùng cho loadOneRow */
-                setTimeout(function(){
-                    loadImageFromGoogleCloud();
-                }, 300);             
-            }else {
-                /* có 1 vài trường required bị bỏ trống */
-                let messageError        = 'Không được bỏ trống trường ';
+                } else {
+                    // var formData = new FormData();
+                    // formData.append('name', inputName);
+                    // formData.append('description', inputDesc);
+                    // const fileWallpaper = $('input[name="wallpapers[0]"]')[0].files;
+                    // formData.append('files[wallpaper]', fileWallpaper[0]);
+                    // const fileSource = $('input[name="sources[0]"]')[0].files;
+                    // formData.append('files[source]', fileSource[0]);
+                    // formData.append('wallpaper_id', idWallpaper);
+                    
+                    // $.ajax({
+                    //     url: "{{ route('admin.wallpaper.changeWallpaperWithSource') }}",
+                    //     type: "post",
+                    //     data: formData,
+                    //     processData: false,
+                    //     contentType: false,
+                    //     headers: {
+                    //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    //     }
+                    // }).done(function (response) {
+                    //     loadOneRow(idWallpaper);
+                    //     addLoadingModal();
+                    //     $('#modalFormWallpaper').modal('hide');
+                    // }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //     console.error("Ajax request failed: " + textStatus, errorThrown);
+                    // });
+                }
+            } else {
+                let messageError = 'Không được bỏ trống trường ';
                 tmp.forEach(function(value, index, array){
                     switch (true) {
                         case /^sources\[\d+\]$/.test(value):
@@ -221,62 +353,69 @@
                         default:
                             break;
                     }
-                    if(index!=parseInt(tmp.length-1)) messageError += ', ';
-                })
+                    if(index != parseInt(tmp.length - 1)) messageError += ', ';
+                });
                 $('#js_validateFormModalHotelContact_message').css('display', 'block').html(messageError);
             }
         }
-
+        function retryAjax(requestFunc) {
+            return new Promise((resolve, reject) => {
+                const attempt = () => {
+                    requestFunc().done(resolve).fail(() => {
+                        console.error("Retrying failed request...");
+                        attempt();
+                    });
+                };
+                attempt();
+            });
+        }
         function uploadWallpaperWithSource(inputName, inputDesc, fileWallpapers) {
             return new Promise(function (resolve, reject) {
-                // Mảng chứa tất cả các promises từ các request AJAX
                 var promises = [];
+                
                 for (var i = 0; i < fileWallpapers.length; i++) {
-                    var formData = new FormData();
+                    const formData = new FormData();
                     formData.append('name', inputName);
                     formData.append('description', inputDesc);
                     formData.append('count', i);
                     formData.append('files[wallpaper]', fileWallpapers[i]);
                     
                     const inputSource = 'sources[' + i + ']';
-                    const fileSource  = $('input[name="' + inputSource + '"]')[0].files;
+                    const fileSource = $('input[name="' + inputSource + '"]')[0].files;
                     formData.append('files[source]', fileSource[0]);
-                    // Thực hiện request AJAX và đưa promise vào mảng
-                    promises.push(
-                        $.ajax({
-                            url: "{{ route('admin.wallpaper.uploadWallpaperWithSource') }}",
-                            type: "post",
-                            dataType: 'json',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            timeout: 0,
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                        })
-                    );
+
+                    // Tạo hàm request AJAX
+                    const requestFunc = () => $.ajax({
+                        url: "{{ route('admin.wallpaper.uploadWallpaperWithSource') }}",
+                        type: "post",
+                        dataType: 'json',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        timeout: 0,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    });
+
+                    // Đẩy request vào mảng với cơ chế retry
+                    promises.push(retryAjax(requestFunc));
                 }
-                // Khi tất cả các promises đã hoàn thành, resolve Promise chính
+
                 Promise.all(promises)
                     .then(function (responses) {
-                        // Các responses chứa kết quả từ mỗi request AJAX
                         responses.forEach(function (response) {
-                            // Thêm box mới upload vào
                             var newDiv = $("<div>", {
                                 id: "js_deleteWallpaperAndSource_" + response.id,
                                 class: "wallpaperBox_item",
                                 html: response.content
                             });
-                            // Thêm div mới vào đầu của container
                             newDiv.prependTo("#js_uploadAndChangeWallpaperWithSource_idWrite");
                         });
-                        // Gọi resolve để kết thúc Promise
                         resolve();
                     })
                     .catch(function (error) {
                         console.error("One or more AJAX requests failed:", error);
-                        // Gọi reject để kết thúc Promise với lỗi
                         reject();
                     });
             });
