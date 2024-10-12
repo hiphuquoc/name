@@ -112,89 +112,90 @@
     //         $('.headerMain').css('opacity', '1');
     //     }
     // });
-    const percentHeightScreenEffect = 1.3;
-    /* hiệu ứng fade in */
-    window.addEventListener('scroll', function() {
-        $('.effectFadeIn').each(function(){
-            const positionElement   = $(this).offset().top;
-            const heightWindow      = $(window).height();
-            const positionScroll    = $(window).scrollTop();
-            if(parseInt(heightWindow/percentHeightScreenEffect + positionScroll)>=positionElement){
-                $(this).animate({
-                    opacity : 1,
-                }, 800);
-            }
-        })
-    });
-    /* hiệu ứng rơi xuống => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
-    window.addEventListener('scroll', function() {
-        $('.effectDropdown').each(function(){
-            /* ẩn trước */
-            if(!$(this).hasClass('alreadyEffectDropdown')) $(this).css('opacity', 0);
-            /* thao tác */
-            const positionElement   = $(this).offset().top;
-            const heightWindow      = $(window).height();
-            const positionScroll    = $(window).scrollTop();
-            if(!$(this).hasClass('alreadyEffectDropdown')&&parseInt(heightWindow/percentHeightScreenEffect + positionScroll)>=positionElement){
-                    const marginTopReal = parseInt($(this).css('margin-top'));
-                    $(this).css({
-                        'margin-top'    : (marginTopReal - 200)+'px'
-                    });
-                    $(this).animate({
-                        'margin-top'    : marginTopReal+'px',
-                        'opacity'       : 1
-                    }, 800);
-                    /* thực hiện rồi thì không thực hiện nữa */
-                    $(this).addClass('alreadyEffectDropdown');
-            }
-        })
-    });
-    /* hiệu ứng xuất hiện từ trái qua phải => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
-    window.addEventListener('scroll', function() {
-        $('.effectLeftToRight').each(function(){
-            /* ẩn trước */
-            if(!$(this).hasClass('alreadyEffectLeftToRight')) $(this).css('opacity', 0);
-            /* thao tác */
-            const positionElement           = $(this).offset().top;
-            const heightWindow              = $(window).height();
-            const positionScroll            = $(window).scrollTop();
-            if(!$(this).hasClass('alreadyEffectLeftToRight')&&parseInt(heightWindow/percentHeightScreenEffect + positionScroll)>=positionElement){
-                    const marginLeftReal    = parseInt($(this).css('margin-left'));
-                    $(this).css({
-                        'margin-left'   : (marginLeftReal - 200)+'px'
-                    });
-                    $(this).animate({
-                        'margin-left'    : marginLeftReal+'px',
-                        'opacity'       : 1
-                    }, 800);
-                    /* thực hiện rồi thì không thực hiện nữa */
-                    $(this).addClass('alreadyEffectLeftToRight');
-            }
-        })
-    });
-    /* hiệu ứng xuất hiện từ dưới lên => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
-    window.addEventListener('scroll', function() {
-        $('.effectBottomToTop').each(function(){
-            /* ẩn trước */
-            if(!$(this).hasClass('alreadyEffectBottomToTop')) $(this).css('opacity', 0);
-            /* thao tác */
-            const positionElement           = $(this).offset().top;
-            const heightWindow              = $(window).height();
-            const positionScroll            = $(window).scrollTop();
-            if(!$(this).hasClass('alreadyEffectBottomToTop')&&parseInt(heightWindow/percentHeightScreenEffect + positionScroll)>=positionElement){
-                    const marginTopReal     = parseInt($(this).css('margin-top'));
-                    $(this).css({
-                        'margin-top'    : (marginTopReal + 200)+'px'
-                    });
-                    $(this).animate({
-                        'margin-top'    : marginTopReal+'px',
-                        'opacity'       : 1
-                    }, 800);
-                    /* thực hiện rồi thì không thực hiện nữa */
-                    $(this).addClass('alreadyEffectBottomToTop');
-            }
-        })
-    });
+    // /* ===== Hiệu ứng ===== */
+    // const percentHeightScreenEffect = 1.3;
+    // /* hiệu ứng fade in */
+    // window.addEventListener('scroll', function() {
+    //     $('.effectFadeIn').each(function(){
+    //         const positionElement   = $(this).offset().top;
+    //         const heightWindow      = $(window).height();
+    //         const positionScroll    = $(window).scrollTop();
+    //         if(parseInt(heightWindow/percentHeightScreenEffect + positionScroll)>=positionElement){
+    //             $(this).animate({
+    //                 opacity : 1,
+    //             }, 800);
+    //         }
+    //     })
+    // });
+    // /* hiệu ứng rơi xuống => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
+    // window.addEventListener('scroll', function() {
+    //     $('.effectDropdown').each(function(){
+    //         /* ẩn trước */
+    //         if(!$(this).hasClass('alreadyEffectDropdown')) $(this).css('opacity', 0);
+    //         /* thao tác */
+    //         const positionElement   = $(this).offset().top;
+    //         const heightWindow      = $(window).height();
+    //         const positionScroll    = $(window).scrollTop();
+    //         if(!$(this).hasClass('alreadyEffectDropdown')&&parseInt(heightWindow/percentHeightScreenEffect + positionScroll)>=positionElement){
+    //                 const marginTopReal = parseInt($(this).css('margin-top'));
+    //                 $(this).css({
+    //                     'margin-top'    : (marginTopReal - 200)+'px'
+    //                 });
+    //                 $(this).animate({
+    //                     'margin-top'    : marginTopReal+'px',
+    //                     'opacity'       : 1
+    //                 }, 800);
+    //                 /* thực hiện rồi thì không thực hiện nữa */
+    //                 $(this).addClass('alreadyEffectDropdown');
+    //         }
+    //     })
+    // });
+    // /* hiệu ứng xuất hiện từ trái qua phải => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
+    // window.addEventListener('scroll', function() {
+    //     $('.effectLeftToRight').each(function(){
+    //         /* ẩn trước */
+    //         if(!$(this).hasClass('alreadyEffectLeftToRight')) $(this).css('opacity', 0);
+    //         /* thao tác */
+    //         const positionElement           = $(this).offset().top;
+    //         const heightWindow              = $(window).height();
+    //         const positionScroll            = $(window).scrollTop();
+    //         if(!$(this).hasClass('alreadyEffectLeftToRight')&&parseInt(heightWindow/percentHeightScreenEffect + positionScroll)>=positionElement){
+    //                 const marginLeftReal    = parseInt($(this).css('margin-left'));
+    //                 $(this).css({
+    //                     'margin-left'   : (marginLeftReal - 200)+'px'
+    //                 });
+    //                 $(this).animate({
+    //                     'margin-left'    : marginLeftReal+'px',
+    //                     'opacity'       : 1
+    //                 }, 800);
+    //                 /* thực hiện rồi thì không thực hiện nữa */
+    //                 $(this).addClass('alreadyEffectLeftToRight');
+    //         }
+    //     })
+    // });
+    // /* hiệu ứng xuất hiện từ dưới lên => dùng cho phần tử có scrollTop thấp hơn ít nhất 1 màn hình */
+    // window.addEventListener('scroll', function() {
+    //     $('.effectBottomToTop').each(function(){
+    //         /* ẩn trước */
+    //         if(!$(this).hasClass('alreadyEffectBottomToTop')) $(this).css('opacity', 0);
+    //         /* thao tác */
+    //         const positionElement           = $(this).offset().top;
+    //         const heightWindow              = $(window).height();
+    //         const positionScroll            = $(window).scrollTop();
+    //         if(!$(this).hasClass('alreadyEffectBottomToTop')&&parseInt(heightWindow/percentHeightScreenEffect + positionScroll)>=positionElement){
+    //                 const marginTopReal     = parseInt($(this).css('margin-top'));
+    //                 $(this).css({
+    //                     'margin-top'    : (marginTopReal + 200)+'px'
+    //                 });
+    //                 $(this).animate({
+    //                     'margin-top'    : marginTopReal+'px',
+    //                     'opacity'       : 1
+    //                 }, 800);
+    //                 /* thực hiện rồi thì không thực hiện nữa */
+    //                 $(this).addClass('alreadyEffectBottomToTop');
+    //         }
+    //     })
+    // });
     /* Go to top */
     mybutton 					    = document.getElementById("smoothScrollToTop");
     mybutton.style.display 	        = "none";
