@@ -54,7 +54,7 @@
                 dataType    : 'html',
                 data        : {
                     search      : valueElement,
-                    language
+                    language,
                 },
                 success     : function(response){
                     if(response!='') {

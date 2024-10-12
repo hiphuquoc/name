@@ -343,7 +343,10 @@
     }
     /* tải lại thông tin icon giỏ hàng */
     function viewSortCart() {
-        fetch('/viewSortCart', {
+        let dataForm = {};
+        dataForm.language = $('#language').val();            
+        const queryString = new URLSearchParams(dataForm).toString();
+        fetch('/viewSortCart?' + queryString, {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -473,6 +476,7 @@
     }
     /* toc content */
     function buildTocContentMain(idElement){
+        var language            = $('#language').val();
         var dataTocContent      = {};
         var i                   = 0;
         var indexToc            = 0;
@@ -497,7 +501,8 @@
             type        : 'get', 
             dataType    : 'html',
             data        : {
-                data    : dataTocContent
+                data    : dataTocContent,
+                language
             },
             success     : function(data){
                 $('#tocContentMain').html(data);
@@ -694,7 +699,10 @@
     // }
     /* check đăng nhập */
     function checkLoginAndSetShow(){
-        fetch('/checkLoginAndSetShow', {
+        let dataForm = {};
+        dataForm.language = $('#language').val();            
+        const queryString = new URLSearchParams(dataForm).toString();
+        fetch('/checkLoginAndSetShow?' + queryString, {
             method  : 'GET',
             mode    : 'cors',
         })
@@ -780,7 +788,7 @@
     function showSortBoxFreeWallpaper() {
         const id = "{{ $item->id ?? 0 }}";
         const total = "{{ $total ?? 0 }}";
-
+        const language = $('#language').val();
         // Lấy chuỗi query parameters từ URL
         var queryString = window.location.search;
         var urlParams = new URLSearchParams(queryString);
@@ -790,6 +798,7 @@
         // Thêm các giá trị id và total vào params
         params['id'] = id;
         params['total'] = total;
+        params['language'] = language;
 
         const queryParams = new URLSearchParams(params).toString();
 
@@ -818,6 +827,7 @@
         const id = "{{ $item->id ?? 0 }}";
         const total = "{{ $total ?? 0 }}";
         const type = "{{ $item->seo->type ?? '' }}";
+        const language = "{{ $language ?? '' }}";
         // Lấy chuỗi query parameters từ URL
         var queryString = window.location.search;
         
@@ -834,6 +844,7 @@
         params['id'] = id;
         params['total'] = total;
         params['type'] = type;
+        params['language'] = language;
         const queryParams = new URLSearchParams(params).toString();
 
         fetch("/showSortBoxWallpaper?" + queryParams, {

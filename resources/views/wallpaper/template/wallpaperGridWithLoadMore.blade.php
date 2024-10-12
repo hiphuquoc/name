@@ -80,6 +80,7 @@
             params.array_tag_info_id = $('#js_loadMoreWallpaper_array_tag_info_id').val();
             params.request_load = requestLoad;
             params.id_product = $('#js_loadMoreWallpaper_id_product').val();
+            params.language = $('#language').val();
 
             // Tạo URL với các query parameters
             const url = new URL('{{ route("main.category.loadMoreWallpaper") }}');

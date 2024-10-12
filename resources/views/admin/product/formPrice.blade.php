@@ -136,13 +136,15 @@
         function searchWallpapers(input){
             const valueInput        = $(input).val();
             const idProductPrice    = $(input).data('product-price-id');
+            const language          = $('#language').val();
             $.ajax({
                 url: "{{ route('admin.wallpaper.searchWallpapers') }}",
                 type: "post",
                 dataType: 'html',
                 data: {
                     key_search : valueInput,
-                    product_price_id : idProductPrice
+                    product_price_id : idProductPrice,
+                    language,
                 },
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'

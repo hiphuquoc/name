@@ -16,23 +16,40 @@
     align-items: stretch;
     gap: 1.5rem;
     &_left {
-        width: 60%;
+        flex: 0 0 780px;
         margin-top: 0.25rem;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
     }
     &_right {
-        width: calc(40% - 1.5rem);
+        // width: calc(50% - 1.5rem);
+        width: 100%;
         display: flex;
         flex-direction: column;
         z-index: 1;
+    }
+    @media(max-width: 1799px){
+        &_left {
+            flex: 0 0 720px;
+        }
+    }
+    @media(max-width: 1499px){
+        &_left {
+            flex: 0 0 620px;
+        }
+    }
+    @media(max-width: 1199px){
+        &_left {
+            flex: 0 0 520px;
+        }
     }
     @media(max-width: 1199px){
         flex-direction: column-reverse;
         gap: 1.25rem;
         &_left {
             width: 100%;
+            flex: unset;
             gap: 1.25rem;
             margin-top: 0;
         }

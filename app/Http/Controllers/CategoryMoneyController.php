@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class CategoryMoneyController extends Controller {
 
     public static function loadMoreWallpaper(Request $request){
-        $language                                   = SettingController::getLanguage();
+        $language                                   = $request->get('language');
         $viewBy                                     = Cookie::get('view_by') ?? 'each_set';
         $response                                   = [
             'content'   => '<div>'.config('language.'.$language.'.data.no_suitable_results_found').'</div>',

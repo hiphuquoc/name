@@ -47,7 +47,7 @@ class AjaxController extends Controller {
 
     public static function searchProductAjax(Request $request){
         if(!empty($request->get('search'))){
-            $language           = $request->session()->get('language') ?? $request->get('language') ?? 'vi';
+            $language           = $request->get('language');
             $keySearch          = \App\Helpers\Charactor::convertStringSearch($request->get('search'));
             $products           = Product::select('product_info.*')
                 ->whereHas('prices.wallpapers', function(){
@@ -133,7 +133,7 @@ class AjaxController extends Controller {
     public function buildTocContentMain(Request $request) {
         $xhtml = null;
         if(!empty($request->get('data'))) {
-            $language   = SettingController::getLanguage();
+            $language   = $request->get('language');
             $xhtml      = view('wallpaper.template.tocContentMain', ['data' => $request->get('data'), 'language' => $language])->render();
         }
         return $xhtml;
@@ -151,8 +151,8 @@ class AjaxController extends Controller {
         $xhtmlModal             = '';
         $xhtmlButton            = '';
         $xhtmlButtonMobile      = '';
-        $user = $request->user();
-        $language               = SettingController::getLanguage();
+        $user                   = $request->user();
+        $language               = $request->get('language');
         if(!empty($user)){
             /* đã đăng nhập => hiển thị button thông tin tài khoản */
             $xhtmlButton        = view('wallpaper.template.buttonLogin', ['user' => $user, 'language' => $language])->render();
@@ -173,7 +173,7 @@ class AjaxController extends Controller {
         $xhtml              = '';
         $id                 = $request->get('id');
         $total              = $request->get('total');
-        $language           = SettingController::getLanguage();
+        $language           = $request->get('language');
         /* select của filter */
         $categories         = Category::select('*')
                                 ->whereHas('seos.infoSeo', function($query) use($language){
@@ -206,7 +206,7 @@ class AjaxController extends Controller {
         $xhtml              = '';
         $id                 = $request->get('id');
         $total              = $request->get('total');
-        $language           = SettingController::getLanguage();
+        $language           = $request->get('language');
         /* select của filter */
         $categories         = Category::select('*')
                                 ->where('flag_show', true)
@@ -234,7 +234,7 @@ class AjaxController extends Controller {
         $id                 = $request->get('id');
         $total              = $request->get('total');
         $type               = $request->get('type');
-        $language           = SettingController::getLanguage();
+        $language           = $request->get('language');
         /* select của filter */
         $categories         = Category::select('*')
                                 ->whereHas('seos.infoSeo', function($query) use($language){
@@ -450,7 +450,7 @@ class AjaxController extends Controller {
         $response                   = null;
         if(!empty($request->get('free_wallpaper_info_id'))){
             $idFreeWallpaper        = $request->get('free_wallpaper_info_id');
-            $language               = SettingController::getLanguage();
+            $language               = $request->get('language');
             $user                   = Auth::user();
             $idUser                 = $user->id ?? 0;
             $wallpaper              = FreeWallpaper::select('*')

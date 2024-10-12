@@ -120,7 +120,7 @@
                     <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                 @endif
                 <!-- Hàm này dùng idSeo->parent bảng tiếng việt gửi vào trong để tìm parent những ngôn ngữ khác (vì những trang create chưa có trang) -->
-                <i class="fa-solid fa-arrow-down reloadContentIcon" onclick="convertStrToSlug('slug', $('#title'), '{{ $itemSeo->type ?? null }}', '{{ $language }}', {{ $item->seo->parent ?? 0 }});"></i>
+                <i class="fa-solid fa-arrow-down reloadContentIcon" onclick="convertStrToSlug('slug', $('#title'), '{{ $itemSeo->type ?? $item->seo->type ?? null }}', '{{ $language }}', {{ $item->seo->parent ?? 0 }});"></i>
             </span>
             @php
                 $slug       = null;

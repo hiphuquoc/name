@@ -253,7 +253,7 @@ class WallpaperController extends Controller {
     public function searchWallpapers(Request $request){
         $response           = '';
         if(!empty($request->get('key_search'))&&!empty($request->get('product_price_id'))){
-            $language       = SettingController::getLanguage();
+            $language       = $request->get('language');
             $wallpapers     = Wallpaper::select('*')
                                 ->where('name', 'like', '%'.$request->get('key_search').'%')
                                 ->orderBy('price_uses_count', 'ASC')

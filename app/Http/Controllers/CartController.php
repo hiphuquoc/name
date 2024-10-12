@@ -157,7 +157,7 @@ class CartController extends Controller{
     }
 
     public static function viewSortCart(Request $request){
-        $language = session()->get('language') ?? 'vi';
+        $language   = $request->get('language');
         $cart       = session()->get('cart');
         $cart       = json_decode($cart, true);
         $products = self::getCollectionProducts();

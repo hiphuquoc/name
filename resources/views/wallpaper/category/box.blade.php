@@ -69,7 +69,8 @@
                 /* tải lại box */
                 var box = $(element).closest('.freeWallpaperBox_item');
                 var idBox = box.attr('id');
-                loadOneFreeWallpaper(idFreeWallpaper, idBox);
+                var language = $('#language').val();
+                loadOneFreeWallpaper(idFreeWallpaper, idBox, language);
             })
             .catch(error => {
                 console.error("Fetch request failed:", error);
@@ -176,6 +177,7 @@
             params.array_category_info_id = $('#arrayIdCategory').val();
             params.request_load     = requestLoad;
             params.idNot            = $('#idNot').val();
+            params.language         = $('#language').val();
             const queryParams = new URLSearchParams(params).toString();
             fetch("{{ route('main.category.loadmoreFreeWallpapers') }}?" + queryParams, {
                 method: 'GET',
@@ -288,9 +290,10 @@
                 }
             });
         }
-        function loadOneFreeWallpaper(idFreeWallpaper, idWrite) {
+        function loadOneFreeWallpaper(idFreeWallpaper, idWrite, language) {
             const queryParams = new URLSearchParams({
-                free_wallpaper_info_id: idFreeWallpaper
+                free_wallpaper_info_id: idFreeWallpaper,
+                language: language,
             }).toString();
 
             fetch("{{ route('ajax.loadOneFreeWallpaper') }}?" + queryParams, {
