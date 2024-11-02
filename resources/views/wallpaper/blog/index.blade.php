@@ -6,7 +6,7 @@
     @else
         @php
             $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-            $cssFirstView       = $manifest['resources/sources/main/category-money-first-view.scss']['file'];
+            $cssFirstView       = $manifest['resources/sources/main/category-blog-first-view.scss']['file'];
         @endphp
         <style type="text/css">
             {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
