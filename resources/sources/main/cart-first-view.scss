@@ -11,6 +11,13 @@
 @import 'childs/modal.scss';
 
 .pageCartBox {
+    max-width: 70rem;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.layoutPageCart {
     display: flex;
     align-items: stretch;
     gap: 1.5rem;
@@ -18,7 +25,6 @@
         width: calc(100% - 320px);
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
         &_item {
             background: $colorBackgroundLv2;
             border-radius: 0.5rem;
@@ -53,22 +59,17 @@
         gap: 1.25rem;
         &_left {
             width: 100%;
-            gap: 1.25rem;
         }
         &_right {
             width: 100%;
         }
     }
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         gap: 1rem;
-        &_left {
-            gap: 1rem;
-        }
     }
     @media(max-width: 767px){
         gap: 0.75rem;
         &_left {
-            gap: 0.75rem;
             &_item {
                 &_head {
                     padding: 0.375rem 0.75rem 0.75rem;
@@ -79,19 +80,17 @@
             }
         }
     }
-    // /* nếu khoảng cách chiều đứng +0.25rem => nên không cần định dạng 577px */
-    // @media(max-width: 577px){
-    //     gap: 0.5rem;
-    //     &_left {
-    //         gap: 0.5rem;
-    //     }
-    // }
+    @media(max-width: 577px){
+        gap: 0.5rem;
+    }
 }
 .cartSectionBox {
     width: 100%;
     background: $colorBackgroundLv2;
-    padding: 0.5rem 1rem 1rem;
+    padding: 0.75rem 1rem 1rem;
     border-radius: 0.5rem;
+    position: sticky;
+    top: calc($heightMenu + 1.25rem);
     &_title {
         margin-bottom: 1.5rem;
         font-weight: bold;
@@ -143,7 +142,7 @@
         color: $colorText;
     }
     @media(max-width: 767px){
-        padding: 0.375rem 0.75rem 0.75rem;
+        padding: 0.75rem;
         &_title {
             margin-bottom: 0;
             border: none;
@@ -161,10 +160,8 @@
             }
             &:nth-child(2){
                 flex: 0 0 150px;
-                [dir="ltr"] & {
-                    text-align: right;
-                }
-                [dir="rtl"] & {
+                text-align: right;
+                &:dir(rtl), [dir="rtl"] & {
                     text-align: left;
                 }
             }
@@ -175,10 +172,8 @@
             }
             &:nth-child(4){
                 flex: 0 0 130px;
-                [dir="ltr"] & {
-                    text-align: right;
-                }
-                [dir="rtl"] & {
+                text-align: right;
+                &:dir(rtl), [dir="rtl"] & {
                     text-align: left;
                 }
             }
@@ -235,13 +230,10 @@
                     display: flex;
                     flex-direction: column;
                     &_title {
-                        line-height: 1.5;
+                        line-height: 1.58;
                         color: inherit;
                         margin-top: -0.25rem;
                         margin-bottom: 0.25rem;
-                        // font-family: $fontTitle;
-                        // font-size: 0.95rem;
-                        // opacity: 0.75;
                     }
                     &_option {
                         // font-size: 0.9rem;
@@ -253,11 +245,14 @@
                 display: flex;
                 flex-direction: column;
                 text-align: right;
+                &:dir(rtl), [dir="rtl"] & {
+                    text-align: left;
+                }
                 &_now {
                     font-family: $fontTitle;
                     font-size: 1rem;
                     letter-spacing: 1px;
-                    margin-top: -0.75rem;
+                    margin-top: -0.25rem;
                 }
                 &_old {
                     display: flex;
@@ -285,10 +280,8 @@
                     img {
                         width: 22px;
                         cursor: pointer;
-                        [dir="ltr"] & {
-                            float: right;
-                        }
-                        [dir="rtl"] & {
+                        float: right;
+                        &:dir(rtl), [dir="rtl"] & {
                             float: left;
                         }
                         &:hover {
@@ -304,6 +297,9 @@
                 display: flex;
                 flex-direction: column;
                 text-align: right;
+                &:dir(rtl), [dir="rtl"] & {
+                    text-align: left;
+                }
                 > * {
                     width: 100%;
                 }
@@ -311,6 +307,9 @@
                     margin-top: auto;
                     img {
                         float: right;
+                        &:dir(rtl), [dir="rtl"] & {
+                            float: left;
+                        }
                         width: 22px;
                         cursor: pointer;
                         &:hover {
@@ -339,22 +338,14 @@
     }
     @media(max-width: 767px){
         &_head {
-            > * {
-                padding: 0 1rem 0.5rem 1rem;
-            }
-        }
-        &_body_item {
-            > * {
-                padding: 0.75rem;
-            }
-        }
-    }
-    @media(max-width: 577px){
-        &_head {
             display: none;
         }
         &_body {
             &_item {
+                flex-wrap: wrap;
+                > * {
+                    padding: 0.75rem;
+                }
                 &:first-child {
                     border-top: 0;
                     .cartProductBox_body_item_info {
@@ -362,7 +353,6 @@
                         padding-bottom: 0.75rem;
                     }
                 }
-                flex-wrap: wrap;
                 &_info {
                     width: 100% !important;
                     padding-right: 0;
@@ -383,11 +373,10 @@
                     flex-direction: row;
                     justify-content: flex-end;
                     bottom: 0;
-                    gap: 0.75rem;
-                    [dir="ltr"] & {
-                        right: 0;
-                    }
-                    [dir="rtl"] & {
+                    gap: 1rem;
+                    right: 0;
+                    &:dir(rtl), [dir="rtl"] & {
+                        right: unset;
                         left: 0;
                     }
                     &_now {
@@ -404,7 +393,7 @@
                     }
                     &_icon {
                         order: 3;
-                        // margin-top: 0.25rem;
+                        margin-top: 0;
                     }
                 }
                 &_quantity {

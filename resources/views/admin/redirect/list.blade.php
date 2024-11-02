@@ -67,7 +67,7 @@
                 dataType    : "html",
                 data        : { id : id }
             }).done(function(data){
-                if(data==true) $('#redirect_'+id).remove();
+                if(data==true) $('#oneItem-'+id).remove();
             });
         }
     </script>

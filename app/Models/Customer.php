@@ -9,25 +9,24 @@ class Customer extends Model {
     use HasFactory;
     protected $table        = 'customer_info';
     protected $fillable     = [
-        'prefix_name',
         'name', 
         'phone',
         'zalo',
-        'email'
+        'email',
     ];
     public $timestamps = true;
 
-    public static function getList($params = null){
-        $result     = self::select('*')
-                        /* tìm theo tên */
-                        ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->where('name', 'like', '%'.$params['search_name'].'%');
-                        })
-                        ->orderBy('created_at', 'DESC')
-                        ->with('seo')
-                        ->paginate($params['paginate']);
-        return $result;
-    }
+    // public static function getList($params = null){
+    //     $result     = self::select('*')
+    //                     /* tìm theo tên */
+    //                     ->when(!empty($params['search_name']), function($query) use($params){
+    //                         $query->where('name', 'like', '%'.$params['search_name'].'%');
+    //                     })
+    //                     ->orderBy('created_at', 'DESC')
+    //                     ->with('seo')
+    //                     ->paginate($params['paginate']);
+    //     return $result;
+    // }
 
     public static function insertItem($params){
         $id             = 0;

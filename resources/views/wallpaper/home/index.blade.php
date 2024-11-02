@@ -1,12 +1,17 @@
 @extends('layouts.wallpaper')
 @push('cssFirstView')
-    @php
-        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-        $cssFirstView       = $manifest['resources/sources/main/home-first-view.scss']['file'];
-    @endphp
-    <style type="text/css">
-        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
-    </style>
+    <!-- trường hợp là local thì dùng vite để chạy npm run dev lúc code -->
+    @if(env('APP_ENV')=='local')
+        @vite('resources/sources/main/home-first-view.scss')
+    @else
+        @php
+            $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $cssFirstView       = $manifest['resources/sources/main/home-first-view.scss']['file'];
+        @endphp
+        <style type="text/css">
+            {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+        </style>
+    @endif
 @endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
@@ -61,7 +66,7 @@
     <!-- content -->
     <div class="breadcrumbMobileBox"><!-- dùng để chống nhảy padding - margin so với các trang có breadcrumb --></div>
     <!-- Item Category Grid Box -->
-    <div class="contentBox">
+    <div class="articleBox">
         @foreach(config('main_'.env('APP_NAME').'.category_type') as $type)
             @include('wallpaper.home.categoryBox', [
                 'type'  => $type['key'],

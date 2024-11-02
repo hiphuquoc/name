@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('customer_info', function (Blueprint $table) {
             $table->id();
-            $table->string('prefix_name')->nullable();
             $table->string('name')->nullable();
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('zalo')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email');
             $table->timestamps();
         });
     }

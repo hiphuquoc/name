@@ -1,13 +1,11 @@
 <div class="menuTop">
-    
-    <!-- breadcrumb desktop -->
-    <div class="menuTop_item hide-1023">
-        @include('wallpaper.template.breadcrumb')
-    </div>
+
+    {{-- <!-- search box -->
+    @include('wallpaper.template.search') --}}
 
     <div class="menuTop_item rightBox">
 
-        {{-- <div class="show-1023">
+        {{-- <div class="show-991">
             <div class="buttonSearchMobile" onClick="toggleSearchMobile();">
                 <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />
             </div>
@@ -18,7 +16,7 @@
             </div>
         @endif
         <!-- button đăng nhập desktop -->
-        <div id="js_checkLoginAndSetShow_button" class="hide-1023" style="height:100%;display:none !important;">
+        <div id="js_checkLoginAndSetShow_button" class="hide-991" style="height:100%;display:none !important;">
             <!-- tải ajax checkLoginAndSetShow() -->
         </div>
         <!-- language -->
@@ -57,7 +55,7 @@
             @endif
             <div id="ja_closeLanguageBoxList_background" class="languageBox_background"></div>
         </div>
-        <div class="iconMenuMobile show-1023" onClick="toggleMenuMobile('js_toggleMenuMobile');">
+        <div class="iconMenuMobile show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
             <i class="fa-regular fa-bars"></i>
         </div>
     </div>

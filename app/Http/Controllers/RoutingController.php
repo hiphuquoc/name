@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Blade;
 use App\Helpers\Url;
 use App\Http\Controllers\CategoryMoneyController;
-use App\Models\Product;
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Style;
@@ -171,7 +171,7 @@ class RoutingController extends Controller{
                             foreach($tmp as $t) $arrayIdCategory[] = $t->id;
                             $params['array_category_info_id']   = $arrayIdCategory;
                             $params['loaded']                   = 0;
-                            $params['request_load']             = 50; /* lấy 50 để khai báo schema */
+                            $params['request_load']             = 20; /* lấy 20 để khai báo schema */
                             $params['sort_by']                  = Cookie::get('sort_by') ?? null;
                             $params['filters']                  = $request->get('filters') ?? [];
                             $params['search']                   = $search;
@@ -180,7 +180,7 @@ class RoutingController extends Controller{
                             $total                              = $tmp['total'];
                             $loaded                             = $tmp['loaded'];
                             $user                               = Auth::user();
-                            $xhtml              = view('wallpaper.category.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'user', 'searchFeeling'))->render();
+                            $xhtml                              = view('wallpaper.category.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'user', 'searchFeeling'))->render();
                         }
                         /* ===== trả phí */
                         if($flagFree==false){
@@ -219,6 +219,57 @@ class RoutingController extends Controller{
                                         ->first();
                     $xhtml  = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
                 }
+                /* ===== Category Blog ==== */
+                if($itemSeo->type=='category_blog'){
+                    $flagMatch          = true;
+                    /* thông tin trang category blog */
+                    $item               = CategoryBlog::select('*')
+                                            ->whereHas('seos.infoSeo', function($query) use($idSeo){
+                                                $query->where('id', $idSeo);
+                                            })
+                                            ->with('seo', 'seos')
+                                            ->first();
+                    /* tạo mảng để lấy blogs */
+                    $params             = [];
+                    $params['sort_by']  = Cookie::get('sort_by') ?? null;
+                    $categoryTree       = CategoryBlog::getTreeCategoryByInfoCategory($item, []);
+                    $arrayIdCategory    = [$item->id];
+                    foreach($categoryTree as $t) $arrayIdCategory[] = $t->id;
+                    $params['array_category_blog_id'] = $arrayIdCategory;
+                    $tmp                = \App\Http\Controllers\CategoryBlogController::getBlogs($params, $language);
+                    $blogs              = $tmp['blogs'];
+                    // /* lấy danh sách chuyên mục level 2 */
+                    // $categoriesLv2      = CategoryBlog::select('*')
+                    //                         ->join('seo', 'seo.id', '=', 'category_blog.seo_id')
+                    //                         ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                    //                             $query->where('language', $language)
+                    //                                 ->where('level', 2);
+                    //                         })
+                    //                         ->with(['seos.infoSeo' => function($query) use ($language) {
+                    //                             $query->where('language', $language);
+                    //                         }, 'seo', 'seos'])
+                    //                         ->orderBy('seo.ordering', 'DESC')
+                    //                         ->orderBy('seo.id', 'DESC')
+                    //                         ->get();
+                    /* blog nổi bật - sidebar */
+                    $blogFeatured       = BlogController::getBlogFeatured($language);
+                    $xhtml              = view('wallpaper.categoryBlog.index', compact('item', 'itemSeo', 'blogs', 'blogFeatured', 'language', 'breadcrumb'))->render();
+                }
+                /* ===== Blog ==== */
+                if($itemSeo->type=='blog_info'){
+                    $flagMatch          = true;
+                    /* thông tin trang category blog */
+                    $item               = Blog::select('*')
+                                            ->whereHas('seos.infoSeo', function($query) use($idSeo){
+                                                $query->where('id', $idSeo);
+                                            })
+                                            ->with('seo', 'seos.infoSeo.contents')
+                                            ->first();
+                    /* blog nổi bật - sidebar */
+                    $blogFeatured       = BlogController::getBlogFeatured($language);
+                    $xhtml              = view('wallpaper.blog.index', compact('item', 'itemSeo', 'blogFeatured', 'language', 'breadcrumb'))->render();
+                }
+
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){
                     if(env('APP_CACHE_HTML')==true) Storage::put(config('main_'.env('APP_NAME').'.cache.folderSave').$nameCache, $xhtml);

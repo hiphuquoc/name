@@ -24,22 +24,22 @@ export default defineConfig({
             'resources/sources/main/freewallpaper-non-first-view.scss',
             'resources/sources/main/confirm-first-view.scss',
             'resources/sources/main/confirm-non-first-view.scss',
+            'resources/sources/main/category-blog-first-view.scss',
+            'resources/sources/main/category-blog-non-first-view.scss',
         ],
         refresh: true,
     }),
   ],
-  // // Cấu hình này sẽ loại bỏ những CSS không sử dụng dựa trên nội dung trong các tệp Blade và Vue.
-  // css: {
-  //   postcss: {
-  //     plugins: [
-  //       purgecss({
-  //         content: [
-  //           './resources/views/**/*.blade.php',
-  //           './resources/js/**/*.vue'
-  //         ],
-  //         defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
-  //       })
-  //     ]
-  //   }
-  // }
+  server: {
+    watch: {
+      usePolling: true, // Giúp Vite theo dõi thay đổi file
+      interval: 100, // Điều chỉnh thời gian polling
+    },
+    hmr: {
+      overlay: false, // Vô hiệu hóa overlay để tránh lỗi khó chịu
+    },
+  },
+  css: {
+    devSourcemap: true, // Hỗ trợ sourcemap trong quá trình dev
+  },
 });

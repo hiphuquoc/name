@@ -1,29 +1,36 @@
 @extends('layouts.wallpaper')
 @push('headCustom')
 @push('cssFirstView')
-    @php
-        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-        $cssFirstView       = $manifest['resources/sources/main/cart-first-view.scss']['file'];
-    @endphp
-    <style type="text/css">
-        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
-    </style>
+    <!-- trường hợp là local thì dùng vite để chạy npm run dev lúc code -->
+    @if(env('APP_ENV')=='local')
+        @vite('resources/sources/main/cart-first-view.scss')
+    @else
+        @php
+            $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $cssFirstView       = $manifest['resources/sources/main/cart-first-view.scss']['file'];
+        @endphp
+        <style type="text/css">
+            {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+        </style>
+    @endif
 @endpush
 @section('content')
-    <div style="overflow:hidden;">
-        <div class="breadcrumbMobileBox">
+
+    <div class="articleBox distanceBetweenBox">
+
+        <div class="pageCartBox distanceBetweenSubbox">
+            <!-- breadcrumb -->
             @include('wallpaper.template.breadcrumb')
-        </div>
-        <div class="contentBox">
+            <!-- tiêu đề -->
+            <h1 class="titlePage">{{ config('language.'.$language.'.data.product_list') }} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] ?? 0 }}</span>)</h1>
             <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
                 @csrf
-                <h1>{{ config('language.'.$language.'.data.product_list') }} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] ?? 0 }}</span>)</h1>
-                <div class="pageCartBox">
-                    <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left">
+                <div class="layoutPageCart">
+                    <div id="js_checkEmptyCart_idWrite" class="layoutPageCart_left distanceBetweenBox">
 
                         @if(!empty($products)&&$products->isNotEmpty())
                             <!-- danh sách sản phẩm -->
-                            <div class="pageCartBox_left_item">
+                            <div class="layoutPageCart_left_item">
                                 <div class="cartSectionBox">
                                     <div class="cartSectionBox_body">
                                         <div class="cartProductBox_head">
@@ -67,7 +74,7 @@
                         @endif
 
                     </div>
-                    <div class="pageCartBox_right">
+                    <div class="layoutPageCart_right">
                         @if(!empty($products)&&$products->isNotEmpty())
                         <div id="js_scrollMenu" class="cartSectionBox">
                             <div id="js_loadTotalCart" class="cartSectionBox_body">
@@ -102,34 +109,6 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
-
-        document.addEventListener('DOMContentLoaded', function() {
-            fixedElement();
-        });
-
-        function fixedElement(){
-            var elementOffset   = $("#js_scrollMenu").offset().top;
-            var elementWidth    = $("#js_scrollMenu").outerWidth();
-            window.addEventListener('scroll', function() {
-                var scroll          = $(window).scrollTop();
-                if (scroll>=elementOffset&&$(window).width()>1199) {
-                    $("#js_scrollMenu").css({
-                        position: "fixed", 
-                        top: "calc(60px + 2rem)", 
-                        width: 'inherit',
-                        transition: 'all 0.3s ease-in-out'
-                    });
-                } else {
-                    $("#js_scrollMenu").css({
-                        position: "relative", 
-                        top: "0", 
-                        width: 'inherit', 
-                        transform: "translateY(0)"
-                    });
-                }
-            });
-        }
-
         let clicked = false;
         function submitFormPayment(idForm){
             event.preventDefault();

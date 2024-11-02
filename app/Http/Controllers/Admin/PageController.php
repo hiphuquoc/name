@@ -82,7 +82,7 @@ class PageController extends Controller {
                     'page_info_id'   => $idPage
                 ]);
                 /* insert seo_content */
-                CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
+                if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
                 
                 DB::commit();
                 /* Message */

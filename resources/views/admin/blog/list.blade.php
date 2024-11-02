@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh sách Bài viết</div>
+<div class="titlePage">Danh Sách Bài Viết</div>
 <!-- ===== START: SEARCH FORM ===== -->
 <form id="formSearch" method="get" action="{{ route('admin.blog.list') }}">
     <div class="searchBox">
@@ -20,7 +20,7 @@
                             $selected   = null;
                             if(!empty($params['search_category'])&&$params['search_category']==$category->id) $selected = 'selected';
                         @endphp
-                        <option value="{{ $category->id }}" {{ $selected }}>{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" {{ $selected }}>{{ $category->seo->title }}</option>
                     @endforeach
                 </select>
             </div>
@@ -33,55 +33,59 @@
         </div>
     </div>
 </form>
-<!-- ===== END: SEARCH FORM ===== -->
 <div class="card">
     <!-- ===== Table ===== -->
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="min-width:900px;">
             <thead>
                 <tr>
                     <th style="width:60px;"></th>
-                    <th style="width:150px;">Ảnh</th>
+                    <th style="width:320px;">Ảnh</th>
                     <th class="text-center">Thông tin</th>
-                    <th class="text-center" style="width:230px;">Khác</th>
+                    <th class="text-center" style="width:225px;">Khác</th>
                     <th class="text-center" width="60px">-</th>
                 </tr>
             </thead>
             <tbody>
                 @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
-                        @include('admin.blog.row', [
-                            'item'  => $item, 
-                            'idRow' => \App\Helpers\Charactor::randomString(10),
-                            'no'    => $loop->index + 1
+                        @include('admin.category.row', [
+                            'item'          => $item,
+                            'no'            => $loop->index+1,
+                            'typeRoute'     => 'blog',
                         ])
                     @endforeach
-                @else 
+                @else
                     <tr><td colspan="5">Không có dữ liệu phù hợp!</td></tr>
                 @endif
             </tbody>
         </table>
     </div>
-    {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }}
+    <!-- Pagination -->
+    {{-- {{ !empty($list&&$list->isNotEmpty()) ? $list->appends(request()->query())->links('admin.template.paginate') : '' }} --}}
 </div>
-<!-- Nút thêm -->
-<a href="{{ route('admin.blog.view') }}" class="addItemBox">
+
+{{-- <!-- Nút thêm -->
+<a href="{{ route('admin.category.view') }}" class="addItemBox">
     <i class="fa-regular fa-plus"></i>
     <span>Thêm</span>
-</a>
+</a> --}}
     
 @endsection
 @push('scriptCustom')
     <script type="text/javascript">
-        function deleteItem(id, idRow){
+        function deleteItem(id){
             if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
                 $.ajax({
-                    url         : '{{ route("admin.blog.delete") }}',
-                    type        : 'GET',
-                    dataType    : 'html',
+                    url         : "{{ route('admin.blog.delete') }}",
+                    type        : "get",
+                    dataType    : "html",
                     data        : { id : id }
                 }).done(function(data){
-                    if(data==true) $('#'+idRow).remove();
+                    if(data==true) {
+                        $('#oneItem-'+id).remove();
+                        $('#oneItemSub-'+id).remove();
+                    }
                 });
             }
         }

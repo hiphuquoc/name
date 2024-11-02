@@ -83,7 +83,7 @@
                     </select>                    
                 </div>
             </div>
-            <!-- One Row -->
+            {{-- <!-- One Row -->
             <div class="formBox_column2_item_row">
                 <span data-toggle="tooltip" data-placement="top" title="
                     Category này kết nối Blog tin tức nào?
@@ -111,7 +111,7 @@
                         @endif
                     </select>
                 </div>
-            </div>
+            </div> --}}
             <!-- One Row -->
             <div class="formBox_full_item">
                 <div class="form-check form-check-success">

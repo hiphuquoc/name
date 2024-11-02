@@ -1,12 +1,17 @@
 @extends('layouts.wallpaper')
 @push('cssFirstView')
-    @php
-        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-        $cssFirstView       = $manifest['resources/sources/main/page-first-view.scss']['file'];
-    @endphp
-    <style type="text/css">
-        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
-    </style>
+    <!-- trường hợp là local thì dùng vite để chạy npm run dev lúc code -->
+    @if(env('APP_ENV')=='local')
+        @vite('resources/sources/main/page-first-view.scss')
+    @else
+        @php
+            $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $cssFirstView       = $manifest['resources/sources/main/page-first-view.scss']['file'];
+        @endphp
+        <style type="text/css">
+            {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+        </style>
+    @endif
 @endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
@@ -36,23 +41,21 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="breadcrumbMobileBox">
-        @include('wallpaper.template.breadcrumb')
-    </div>
 
-    <div class="contentBox">
-        <div class="pageContentWithSidebar">
-            <div class="pageContentWithSidebar_content">
-                <h1>{{ $itemSeo->title ?? $item->seo->title ?? null }}</h1>
-                <!-- Nội dung -->
-                @if(!empty($itemSeo->contents))
-                    @php
-                        $xhtmlContent = '';
-                        foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
-                    @endphp
-                    {!! $xhtmlContent !!}
-                @endif
-            </div>
+    <div class="articleBox distanceBetweenBox">
+        <div class="pagePageBox distanceBetweenSubbox">
+            <!-- breadcrumb -->
+            @include('wallpaper.template.breadcrumb')
+            <!-- tiêu đề -->
+            <h1 class="titlePage">{{ $itemSeo->title ?? $item->seo->title ?? null }}</h1>
+            <!-- Nội dung -->
+            @if(!empty($itemSeo->contents))
+                @php
+                    $xhtmlContent = '';
+                    foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+                @endphp
+                <div class="contentBox">{!! $xhtmlContent !!}</div>
+            @endif
         </div>
     </div>
 @endsection

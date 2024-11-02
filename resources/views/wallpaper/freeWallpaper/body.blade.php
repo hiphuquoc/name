@@ -6,8 +6,8 @@
         @endphp
         <img class="lazyload" src="{{ $imageMini }}" data-src="{{ $imageLarge }}" alt="{{ $itemSeo->title }}" title="{{ $itemSeo->title }}" style="filter: blur(8px);" />
     </div>
-    <div class="freeWallpaperDetailBox_content">
-        <h1>{{ $itemSeo->title ?? null }}</h1>
+    <div class="freeWallpaperDetailBox_content distanceBetweenSubbox">
+        <h1 class="titlePage">{{ $itemSeo->title ?? null }}</h1>
         <!-- Action -->
         <div class="freeWallpaperDetailBox_content_action">
             @php

@@ -78,18 +78,6 @@ class BuildInsertUpdateModel {
         return $result;
     }
 
-    public static function buildArrayTableCustomerInfo($dataForm){
-        $result                                 = [];
-        if(!empty($dataForm['name'])&&!empty($dataForm['phone'])){
-            if(!empty($dataForm['prefix_name'])) $result['prefix_name']  = $dataForm['prefix_name'];
-            $result['name']             = $dataForm['name'];
-            $result['phone']            = $dataForm['phone'];
-            if(!empty($dataForm['zalo'])) $result['zalo']  = $dataForm['zalo'];
-            if(!empty($dataForm['email'])) $result['email']  = $dataForm['email'];
-        }
-        return $result;
-    }
-
     public static function buildArrayTableCustomerAddress($dataForm, $idCustomer){
         $result                         = [];
         if(!empty($dataForm['address'])&&!empty($dataForm['province_info_id'])&&!empty($dataForm['district_info_id'])){

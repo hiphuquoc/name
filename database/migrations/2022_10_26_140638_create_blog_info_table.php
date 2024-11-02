@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('blog_info', function (Blueprint $table) {
             $table->id();
             $table->integer('seo_id');
-            $table->text('name');
-            $table->text('description')->nullable();
             $table->boolean('outstanding')->default(0);
-            $table->text('note')->nullable();
+            $table->boolean('status')->default(1);
+            $table->integer('viewed')->default(0);
+            $table->integer('shared')->default(0);
+            $table->timestamps();
         });
     }
 

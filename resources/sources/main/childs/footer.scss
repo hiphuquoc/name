@@ -11,7 +11,7 @@
             color: $colorLv1;
         }
     }
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         margin-bottom: 55px;
     }
 }
@@ -24,10 +24,9 @@
     flex-direction: column;
     justify-content: flex-end;
     bottom: 0;
-    [dir="ltr"] & {
-        right: 0;
-    }
-    [dir="rtl"] & {
+    right: 0;
+    &:dir(rtl), [dir="rtl"] & {
+        right: unset;
         left: 0;
     }
 }

@@ -1,12 +1,17 @@
 @extends('layouts.wallpaper')
 @push('cssFirstView')
-    @php
-        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-        $cssFirstView       = $manifest['resources/sources/main/confirm-first-view.scss']['file'];
-    @endphp
-    <style type="text/css">
-        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
-    </style>
+    <!-- trường hợp là local thì dùng vite để chạy npm run dev lúc code -->
+    @if(env('APP_ENV')=='local')
+        @vite('resources/sources/main/confirm-first-view.scss')
+    @else
+        @php
+            $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $cssFirstView       = $manifest['resources/sources/main/confirm-first-view.scss']['file'];
+        @endphp
+        <style type="text/css">
+            {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+        </style>
+    @endif
 @endpush
 @push('headCustom')
     <!-- Event snippet for Lượt xem trang conversion page -->
@@ -24,135 +29,72 @@
 @endpush
 @section('content')
     <div style="overflow:hidden;">
-        <div class="breadcrumbMobileBox">
-            @include('wallpaper.template.breadcrumb')
-        </div>
-        <div class="contentBox">
-            <h1>{{ $itemSeo->title }}</h1>
-            @php
-                $xhtmlTotal = null;
-            @endphp
-            <div class="pageCartBox">
-                <div id="js_checkEmptyCart_idWrite" class="pageCartBox_left" style="width:100%;">
-
-                    <div class="confirmMessageBox">
-                        <div class="confirmMessageBox_left">
-                            <div class="confirmMessageBox_left_icon">
-                                <img src="{{ Storage::url('images/icon-confirm-success.png') }}" />
-                            </div>
-                            <div class="confirmMessageBox_left_title">
-                                @if($language=='vi')
-                                    Thanh toán thành công!
-                                @else 
-                                    Payment success!
-                                @endif
-                            </div>
-                            <div class="confirmMessageBox_left_desc">
-                                @if($language=='vi')
-                                    Cảm ơn bạn đã ủng hộ {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}. Hình ảnh của bạn ở phần bên dưới hoặc bạn có thể truy cập email của mình để tải ảnh.
-                                @else 
-                                    Thank you for supporting {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}. Your images are below or you can access your email to download photos.
-                                @endif
-                            </div>
+        <div class="articleBox distanceBetweenBox">
+            <div class="distanceBetweenSubbox">
+                <!-- breadcrumb -->
+                @include('wallpaper.template.breadcrumb')
+                <!-- tiêu đề -->
+                <h1 class="titlePage">{{ $itemSeo->title }}</h1>
+                @php
+                    $xhtmlTotal = null;
+                @endphp
+                <div class="confirmMessageBox">
+                    <div class="confirmMessageBox_left">
+                        <div class="confirmMessageBox_left_icon">
+                            <img class="lazyload" src="{{ Storage::url('images/icon-confirm-success.png') }}" loading="lazy" />
                         </div>
-                        <div class="confirmMessageBox_right">
-                            <div class="confirmMessageBox_right_item">
-                                @if($language=='vi')
-                                    Mã đơn <span class="highLight">{{ $order->code }}</span>
-                                @else 
-                                    Code <span class="highLight">{{ $order->code }}</span>
-                                @endif
-                            </div>
-                            @if(!empty($order->email))
-                                <div class="confirmMessageBox_right_item">
-                                    Email: {{ $order->email }}
-                                </div>
-                            @endif
-                            <div class="confirmMessageBox_right_item">
-                                @if($language=='vi')
-                                    {{ $order->paymentMethod->name }} lúc {{ date('H:i\, d/m/Y', strtotime($order->created_at)) }}
-                                @else 
-                                    {{ $order->paymentMethod->en_name }} at {{ date('H:i\, d/m/Y', strtotime($order->created_at)) }}
-                                @endif
-                            </div>
-                            <div class="confirmMessageBox_right_item">
-                                @if($language=='vi')
-                                    Tổng thanh toán <span class="price">{!! \App\Helpers\Number::getFormatPriceByLanguage($order->total, $language) !!}</span>
-                                @else 
-                                    Total <span class="price">{!! \App\Helpers\Number::getFormatPriceByLanguage($order->total, $language) !!}</span>
-                                @endif
-                            </div>
-                            {{-- <div class="confirmMessageBox_right_item">
-                                @if($language=='vi')
-                                    <div>Danh sách sản phẩm trong đơn hàng:</div>
-                                @else 
-                                    <div>List of products in the order:</div>
-                                @endif
-                                <ul>
-                                    @foreach($order->products as $product)
-                                        @php
-                                            /* tên product */
-                                            $xhtmlProduct           = $language=='vi' ? $product->infoProduct->name : $product->infoProduct->en_name;
-                                            /* option product */
-                                            if($product->product_price_id=='all'){
-                                                if($language=='vi'){
-                                                    $xhtmlOption    = 'Trọn bộ';
-                                                }else {
-                                                    $xhtmlOption    = 'Full set';
-                                                }
-                                            }else {
-                                                $tmp                = [];
-                                                foreach($product->infoPrice->wallpapers as $wallpaper){
-                                                    if($language=='vi'){
-                                                        $tmp[]      = $wallpaper->name;
-                                                    }else {
-                                                        $tmp[]      = $wallpaper->en_name;
-                                                    }
-                                                }
-                                                $xhtmlOption        = implode(', ', $tmp);
-                                            }
-                                        @endphp     
-                                        <li>
-                                            <div>
-                                                {{ $xhtmlProduct }} ({{ $xhtmlOption }})
-                                            </div>
-                                        </li>
-                                    @endforeach
-
-                                </ul>
-                            </div> --}}
+                        <div class="confirmMessageBox_left_title">
+                            {{ config('language.'.$language.'.data.payment_successful') }}
+                        </div>
+                        <div class="confirmMessageBox_left_desc">
+                            {{ config('language.'.$language.'.data.thank_you_message') }}
                         </div>
                     </div>
-
-                    <div class="wallpaperSourceGrid">
-                        @foreach($order->products as $product)
-                            {{-- @php
-                                dd($product->toArray());
-                            @endphp --}}
-                            @if(!empty($product->infoPrice))
-                                @foreach($product->infoPrice->wallpapers as $wallpaper)
-                                    <a href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->infoWallpaper->file_cloud_source]) }}" class="wallpaperSourceGrid_item" download>
-                                        <div class="wallpaperSourceGrid_item_image">
-                                            <img class="lazyload" src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_source) }}" />
-                                        </div>
-                                        <div class="wallpaperSourceGrid_item_action">
-                                            <img src="{{ Storage::url('images/svg/download.svg') }}" />
-                                        </div>
-                                        <div class="wallpaperSourceGrid_item_background"></div>
-                                    </a>
-                                @endforeach
+                    <div class="confirmMessageBox_right">
+                        <div class="confirmMessageBox_right_item">
+                            {{ config('language.'.$language.'.data.order_id') }} <span class="highLight">{{ $order->code }}</span>
+                        </div>
+                        @if(!empty($order->email))
+                            <div class="confirmMessageBox_right_item">
+                                {{ config('language.'.$language.'.data.order_id') }} {{ $order->email }}
+                            </div>
+                        @endif
+                        <div class="confirmMessageBox_right_item">
+                            @if($language=='vi')
+                                {{ $order->paymentMethod->name }} lúc {{ date('H:i\, d/m/Y', strtotime($order->created_at)) }}
+                            @else 
+                                {{ $order->paymentMethod->en_name }} at {{ date('H:i\, d/m/Y', strtotime($order->created_at)) }}
                             @endif
-                        @endforeach
+                        </div>
+                        <div class="confirmMessageBox_right_item">
+                            {{ config('language.'.$language.'.data.total') }} <span class="price">{!! \App\Helpers\Number::getFormatPriceByLanguage($order->total, $language) !!}</span>
+                        </div>
                     </div>
-
                 </div>
             </div>
+
+            @if(!empty($order->wallpapers))
+                <div class="wallpaperSourceGrid">
+                    @foreach($order->wallpapers as $wallpaper)
+                        <div class="wallpaperSourceGrid_item">
+                            <div class="wallpaperSourceGrid_item_image">
+                                <img class="lazyload" src="{{ \App\Helpers\Image::getUrlImageCloud($wallpaper->infoWallpaper->file_cloud_source) }}" loading="lazy" />
+                            </div>
+                            <a href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->infoWallpaper->file_cloud_source]) }}" class="wallpaperSourceGrid_item_action" download>
+                                <img src="{{ Storage::url('images/svg/download.svg') }}" loading="lazy" />
+                                <div>{{ config('language.'.$language.'.data.click_to_download') }}</div>
+                            </a>
+                            {{-- <div class="wallpaperSourceGrid_item_background"></div> --}}
+                        </div>
+                    @endforeach
+                </div>
+            @endif
 
         </div>
     </div>
 @endsection
 @push('modal')
-    <div id="js_toggleWaiting_box" class="waitingBox">
+    {{-- <div id="js_toggleWaiting_box" class="waitingBox">
         <div class="waitingBox_box">
 
             <div id="loading_1">
@@ -162,10 +104,9 @@
 
         </div>
         <div class="waitingBox_bg"></div>
-    </div>
+    </div> --}}
 @endpush
 @push('bottom')
-    <!-- === START:: Zalo Ring === -->
-    {{-- @include('main.snippets.zaloRing') --}}
-    <!-- === END:: Zalo Ring === -->
+    <!-- Header bottom -->
+    {{-- @include('wallpaper.snippets.headerBottom') --}}
 @endpush

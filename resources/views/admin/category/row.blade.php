@@ -68,7 +68,7 @@
             </div>
         </td>
     </tr>
-    <tr>
+    <tr id="oneItemSub-{{ $item->id }}">
         <td colspan="5"> 
             @include('admin.template.languageBox', [
                 'item' => $item,

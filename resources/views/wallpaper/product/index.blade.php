@@ -1,12 +1,17 @@
 @extends('layouts.wallpaper')
 @push('cssFirstView')
-    @php
-        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-        $cssFirstView       = $manifest['resources/sources/main/product-first-view.scss']['file'];
-    @endphp
-    <style type="text/css">
-        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
-    </style>
+    <!-- trường hợp là local thì dùng vite để chạy npm run dev lúc code -->
+    @if(env('APP_ENV')=='local')
+        @vite('resources/sources/main/product-first-view.scss')
+    @else
+        @php
+            $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $cssFirstView       = $manifest['resources/sources/main/product-first-view.scss']['file'];
+        @endphp
+        <style type="text/css">
+            {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+        </style>
+    @endif
 @endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
@@ -53,20 +58,16 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="breadcrumbMobileBox">
-        @include('wallpaper.template.breadcrumb')
-    </div>
     <!-- share social -->
     @include('wallpaper.template.shareSocial')
     <!-- content -->
-    <div class="contentBox maxContent-1200">
-        
+    <div class="distanceBetweenBox articleBox maxContent-1200">
+
         <!-- Gallery và Product detail -->
         @include('wallpaper.product.body')
         
         <!-- Related -->
         @if($total>0)
-        <div class="contentBox">
             <div class="relatedProductBox">
                 <div class="relatedProductBox_title">
                     <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
@@ -79,7 +80,6 @@
                     ])
                 </div>
             </div>
-        </div>
         @endif
     </div>
 @endsection

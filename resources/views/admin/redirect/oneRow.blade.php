@@ -2,7 +2,7 @@
 @php
     $no = $no ?? 0;
 @endphp
-<tr id="redirect_{{ $item->id }}">
+<tr id="oneItem-{{ $item->id }}">
     <td style="font-weight:700;text-align:center;">
         {{ $no }}
     </td>

@@ -60,7 +60,7 @@ class ProductController extends Controller {
             /* kiểm tra insert thành công không */
             if(!empty($idSeo)){
                 /* insert seo_content */
-                CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
+                if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
                 /* insert hoặc update product_info */
                 if(empty($idProduct)){ /* check xem create product hay update product */
                     $infoProduct    = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);

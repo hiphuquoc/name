@@ -18,23 +18,27 @@
                         <h1 style="opacity:0;">{{ config('language.'.$language.'.data.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}</h1>
                     @endif
                 </a>
-                <!-- search box -->
-                @include('wallpaper.template.search')
             </div>
             <div class="layoutHeaderTop_content container">
                 @include('wallpaper.snippets.headerTop')
             </div>
         </div>
         <!-- === START:: Content === -->
-        <div class="layoutHeaderSide" style="min-height:calc(100vh - 95px);">
+        @php
+            $menuCollapsed = '';
+            if(!empty(Session::get('view_menu'))&&Session::get('view_menu')=='on') $menuCollapsed = 'collapsed';
+        @endphp
+        <div id="js_settingCollapsedMenu" class="layoutHeaderSide {{ $menuCollapsed }}">
+            <!-- giữ chỗ thanh bên để chống nhảy trang -->
+            <div class="layoutHeaderSide_placeholder"></div>
+            <!-- thanh bên -->
             <div id="js_toggleMenuMobile" class="layoutHeaderSide_header container">
                 @include('wallpaper.snippets.headerSide')
             </div>
-
+            <!-- nội dung chính -->
             <div class="layoutHeaderSide_content container">
                 <div id="js_blurBackground">
                     @yield('content')
-
                     @include('wallpaper.snippets.footer')
                 </div>
             </div>

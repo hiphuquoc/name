@@ -1,0 +1,23 @@
+.relatedProductBox {
+    &_title {
+        margin-bottom: 0.825rem;
+        h2, h3 {
+            @include titleDefault;
+        }
+    }
+    @media(max-width: 1199px){
+        &_title {
+            margin-bottom: 0.75rem;
+        }
+    }
+    @media(max-width: 991px){
+        &_title {
+            margin-bottom: 0.625rem;
+        }
+    }
+    @media(max-width: 767px){
+        &_title {
+            margin-bottom: 0.5rem;
+        }
+    }
+}

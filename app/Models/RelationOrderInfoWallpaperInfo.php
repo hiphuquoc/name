@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RelationTagInfoCategoryBlogInfo extends Model {
+class RelationOrderInfoWallpaperInfo extends Model {
     use HasFactory;
-    protected $table        = 'relation_tag_info_category_blog_info';
+    protected $table        = 'relation_order_info_wallpaper_info';
     protected $fillable     = [
-        'tag_info_id', 
-        'category_blog_info_id'
+        'order_info_id', 
+        'wallpaper_info_id'
     ];
     public $timestamps      = false;
 
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){
-            $model      = new RelationTagInfoCategoryBlogInfo();
+            $model      = new RelationOrderInfoWallpaperInfo();
             foreach($params as $key => $value) $model->{$key}  = $value;
             $model->save();
             $id         = $model->id;
@@ -25,13 +25,11 @@ class RelationTagInfoCategoryBlogInfo extends Model {
         return $id;
     }
 
-    public function infoTag(){
-        return $this->hasOne(\App\Models\Tag::class, 'id', 'tag_info_id');
+    public function infoOrder(){
+        return $this->hasOne(\App\Models\Order::class, 'id', 'order_info_id');
     }
 
-    public function infoCategoryBlog(){
-        return $this->hasOne(\App\Models\CategoryBlog::class, 'id', 'category_blog_info_id');
+    public function infoWallpaper(){
+        return $this->hasOne(\App\Models\Wallpaper::class, 'id', 'wallpaper_info_id');
     }
-
-    
 }

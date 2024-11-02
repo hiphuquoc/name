@@ -1,23 +1,32 @@
 @extends('layouts.admin')
 @section('content')
     @php
-        $titlePage      = 'Thêm Chuyên mục mới';
-        $submit         = 'admin.categoryBlog.create';
-        $checkImage     = 'required';
+        $titlePage      = 'Thêm Category Blog mới';
+        $submit         = 'admin.categoryBlog.createAndUpdate';
         if(!empty($type)&&$type=='edit'){
-            $titlePage  = 'Chỉnh sửa Chuyên mục';
-            $submit     = 'admin.categoryBlog.update';
-            $checkImage = null;
+            $titlePage  = 'Chỉnh sửa Category BLog';
         }
     @endphp
-
-    <form id="formCategory" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate="" enctype="multipart/form-data">
+    <!-- Start: backgroun để chặn thao tác khi đang dịch content ngầm -->
+    @include('admin.category.lock')
+    <!-- End: backgroun để chặn thao tác khi đang dịch content ngầm -->
+    <form id="formAction" class="needs-validation invalid" action="{{ route($submit) }}" method="POST" novalidate enctype="multipart/form-data">
     @csrf
-        
+    <input type="hidden" id="seo_id" name="seo_id" value="{{ $itemSeo->id ?? 0 }}" />
+    <input type="hidden" id="seo_id_vi" name="seo_id_vi" value="{{ !empty($item->seo->id)&&$type!='copy' ? $item->seo->id : 0 }}" />
+    <input type="hidden" id="category_blog_id" name="category_blog_id" value="{{ !empty($item->id)&&$type!='copy' ? $item->id : 0 }}" />
+    <input type="hidden" id="language" name="language" value="{{ $language ?? 'vi' }}" />
+    <input type="hidden" id="type" name="type" value="{{ $type }}" />
         <div class="pageAdminWithRightSidebar withRightSidebar">
-            <div class="pageAdminWithRightSidebar_header">
-                {{ $titlePage }}
+            <div class="pageAdminWithRightSidebar_header" style="z-index:1000;position:relative;">
+                <div style="width:100%;margin-bottom:10px;">{{ $titlePage }}</div>
+                @include('admin.template.languageBox', [
+                    'item' => $item,
+                    'language' => $language,
+                    'routeName' => 'admin.categoryBlog.view',
+                ])
             </div>
+            
             <!-- Error -->
             @if ($errors->any())
                 <ul class="errorList">
@@ -28,10 +37,10 @@
             @endif
             <!-- MESSAGE -->
             @include('admin.template.messageAction')
-            <!-- END:: Error -->
+            
             <div class="pageAdminWithRightSidebar_main">
+                <!-- START:: Main content -->
                 <div class="pageAdminWithRightSidebar_main_content">
-                    <!-- START:: Main content -->
                     <div class="pageAdminWithRightSidebar_main_content_item">
                         <div class="card">
                             <div class="card-header border-bottom">
@@ -39,7 +48,11 @@
                             </div>
                             <div class="card-body">
 
-                                @include('admin.categoryBlog.formPage')
+                                @include('admin.categoryBlog.formPage', [
+                                    'item'              => !empty($itemSourceToCopy) ? $itemSourceToCopy : $item,
+                                    'itemSeo'           => !empty($itemSeoSourceToCopy) ? $itemSeoSourceToCopy : $itemSeo,
+                                    'flagCopySource'    => !empty($itemSeoSourceToCopy) ? true : false,
+                                ])
 
                             </div>
                         </div>
@@ -51,51 +64,45 @@
                             </div>
                             <div class="card-body">
 
-                                @include('admin.form.formSeo')
+                                @include('admin.form.formSeo', [
+                                    'item'              => !empty($itemSourceToCopy) ? $itemSourceToCopy : $item,
+                                    'itemSeo'           => !empty($itemSeoSourceToCopy) ? $itemSeoSourceToCopy : $itemSeo,
+                                    'flagCopySource'    => !empty($itemSeoSourceToCopy) ? true : false,
+                                    'idSeoSource'       => $itemSeoSourceToCopy->id ?? 0
+                                ])
                                 
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="pageAdminWithRightSidebar_main_content_item width100">
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">
-                                    Nội dung
-                                </h4>
-                            </div>
-                            <div class="card-body">
-                                @include('admin.form.formContent')
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- END:: Main content -->
+                    <!-- nội dung -->
+                    @include('admin.form.formFilterContent')
                 </div>
+                <!-- END:: Main content -->
+
+                <!-- START:: Sidebar content -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
-                    <!-- Button Save -->
-                    <div class="pageAdminWithRightSidebar_main_rightSidebar_item buttonAction">
-                        <a href="{{ route('admin.categoryBlog.list') }}" type="button" class="btn btn-secondary waves-effect waves-float waves-light">Quay lại</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-float waves-light" onClick="javascript:submitForm('formCategory');" style="width:100px;" aria-label="Lưu">Lưu</button>
-                    </div>
-                    <div class="customScrollBar-y" style="height: calc(100% - 90px);">
+                    <!-- action -->
+                    @include('admin.form.buttonAction', [
+                        'routeBack' => 'admin.categoryBlog.list',
+                    ])
+                    <!-- action support -->
+                    <div class="customScrollBar-y">
                         <!-- Form Upload -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formImage')
                         </div>
-                        <!-- Form Slider -->
+                        {{-- <!-- Form Slider -->
                         <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
                             @include('admin.form.formSlider')
-                        </div>
+                        </div> --}}
+                        {{-- <!-- Form Gallery -->
+                        <div class="pageAdminWithRightSidebar_main_rightSidebar_item">
+                            @include('admin.category.formGallery')
+                        </div> --}}
                     </div>
                 </div>
+                <!-- END:: Sidebar content -->
             </div>
         </div>
-
-    </form>
-
-</div>
+    </form>    
 @endsection
-@push('scripts-custom')
-    <script type="text/javascript">
-        
-    </script>
-@endpush

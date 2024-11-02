@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('relation_category_info_category_blog_info', function (Blueprint $table) {
+        Schema::create('relation_category_blog_blog_info', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_info_id');
-            $table->integer('category_blog_info_id');
+            $table->integer('category_blog_id');
+            $table->integer('blog_info_id');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('relation_category_info_category_blog_info');
+        // Schema::dropIfExists('relation_category_blog_blog_info');
     }
 };

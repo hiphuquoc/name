@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\BuildInsertUpdateModel;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use App\Helpers\Upload;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Seo;
@@ -16,10 +14,7 @@ use App\Models\Prompt;
 use App\Models\Category;
 use App\Models\CategoryBlog;
 use App\Models\Tag;
-use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
-use App\Models\FreeWallpaper;
-use App\Models\RelationCategoryInfoCategoryBlogInfo;
 use App\Models\RelationCategoryInfoTagInfo;
 use App\Models\RelationCategoryThumnail;
 use App\Models\RelationSeoCategoryInfo;
@@ -90,9 +85,6 @@ class CategoryController extends Controller {
             $prompts            = Prompt::select('*')
                                     ->whereIn('reference_table', $arrayTypeCategory)
                                     ->get();
-            $parents            = Category::all();
-            /* category blog */
-            $categoryBlogs      = CategoryBlog::all();
             /* trang canonical -> cùng là sản phẩm */
             $idProduct          = $item->id ?? 0;
             $sources            = Category::select('*')
@@ -106,7 +98,16 @@ class CategoryController extends Controller {
             /* type */
             $type               = !empty($itemSeo) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
-            return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'categoryBlogs', 'tags', 'message'));
+            /* trang cha */
+            if($type=='edit'){
+                /* loại trừ chính nó ra */
+                $parents        = Category::select('*')
+                                    ->where('id', '!=', $item->id)
+                                    ->get();
+            }else {
+                $parents        = Category::all();
+            }
+            return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'tags', 'message'));
         } else {
             return redirect()->route('admin.category.list');
         }
@@ -153,18 +154,6 @@ class CategoryController extends Controller {
                         Category::updateItem($idCategory, [
                             'flag_show'     => $flagShow,
                         ]);
-                    }
-                    /* insert relation_category_info_category_blog_id */
-                    RelationCategoryInfoCategoryBlogInfo::select('*')
-                        ->where('category_info_id', $idCategory)
-                        ->delete();
-                    if(!empty($request->get('category_blog_info_id'))){
-                        foreach($request->get('category_blog_info_id') as $idCategoryBlogInfo){
-                            RelationCategoryInfoCategoryBlogInfo::insertItem([
-                                'category_info_id'      => $idCategory,
-                                'category_blog_info_id' => $idCategoryBlogInfo
-                            ]);
-                        }
                     }
                     /* insert relation_category_info_tag_info */
                     RelationCategoryInfoTagInfo::select('*')

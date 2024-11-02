@@ -22,4 +22,10 @@ return [
     'product_info'        => [
         'model_name'    => 'Product',
     ],
+    'category_blog'        => [
+        'model_name'    => 'CategoryBlog',
+    ],
+    'blog_info'        => [
+        'model_name'    => 'Blog',
+    ],
 ];

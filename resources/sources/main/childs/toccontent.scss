@@ -2,7 +2,6 @@
     border-radius: 0.5rem;
     position: relative;
     background: $colorBackgroundLv2;
-    margin-bottom: 1.5rem;
     &_title {
         padding: 0.5rem 1rem;
         font-family: $fontTitle;
@@ -41,10 +40,9 @@
         justify-content: center;
         cursor: pointer;
         top: 0.3rem;
-        [dir="ltr"] & {
-            right: 0;
-        }
-        [dir="rtl"] & {
+        right: 0;
+        &:dir(rtl), [dir="rtl"] & {
+            right: unset;
             left: 0;
         }
         &:before {
@@ -65,20 +63,17 @@
         display: none;
         position: fixed;
         height: 100%;
-        max-width: 330px;
+        max-width: 20rem;
+        min-width: 17rem; /* là chiều ngang của headerSide */
         z-index: 101;
         top: 128px;
-        [dir="ltr"] & {
-            left: 0;
-        }
-        [dir="rtl"] & {
+        box-shadow: 2px -2px 7px $colorBackgroundLv1;
+        left: 0;
+        &:dir(rtl), [dir="rtl"] & {
+            left: unset;
             right: 0;
         }
-        .tocContentMain_title {
-            padding: 0.5rem 0.75rem;
-        }
         .tocContentMain_list {
-            padding: 0 0.75rem;
             display: block !important;
         }
         .tocContentMain_close {
@@ -89,13 +84,20 @@
             }
         }
     }
-    @media(max-width: 1023px){
-        margin-bottom: 1.25rem;
-    }
-    @media(max-width: 767px){
-        margin-bottom: 1rem;
+    @media(max-width: 991px){
+        &_title {
+            padding: 0.5rem 0.75rem;
+        }
         &_list {
             padding: 0.25rem 0.75rem 0.75rem;
+        }
+    }
+    @media(max-width: 767px){
+        &_title {
+            padding: 0.5rem;
+        }
+        &_list {
+            padding: 0.25rem 0.5rem 0.5rem;
         }
     }
 }
@@ -112,10 +114,9 @@
     opacity: 0.8;
     margin-bottom: 0 !important;
     top: 50%;
-    [dir="ltr"] & {
-        left: 0;
-    }
-    [dir="rtl"] & {
+    left: 0;
+    &:dir(rtl), [dir="rtl"] & {
+        left: unset;
         right: 0;
     }
     &:hover {

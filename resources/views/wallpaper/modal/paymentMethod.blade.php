@@ -7,31 +7,15 @@
     <div class="modalBox_box">
         <form id="formModalPaymentMethod" method="get" style="width:100%;">
             <!-- hidden -->
-            @if(empty($language)||$language=='vi')
-                <div class="formModalBox_box_head">Bước 1: Bạn vui lòng nhập email</div>
-            @else 
-                <div class="formModalBox_box_head">Step 1: Please enter your email</div>
-            @endif
+            <div class="formModalBox_box_head">{{ config('language.'.$language.'.data.step_1_buy_now') }}</div>
             <div class="formModalBox_box_body">
-                @if(empty($language)||$language=='vi')
-                    <div style="margin-top:-0.5rem;">Nếu nhập email bạn sẽ được gửi thêm một bản để lưu trữ.</div>
-                @else 
-                    <div style="margin-top:-0.5rem;">If you enter your email, you will be sent a copy for storage.</div>
-                @endif
-                <div class="inputWithLabelInside">
-                    @if(empty($language)||$language=='vi')
-                        <label for="email">Email dùng nhận ảnh</label>
-                    @else 
-                        <label for="email">Email to receive photos</label>
-                    @endif
+                <div style="margin-top:-0.5rem;">{{ config('language.'.$language.'.data.note_fill_email') }}</div>
+                <div class="inputWithLabelInside">  
+                    <label for="email">{{ config('language.'.$language.'.data.email') }}</label>
                     <input type="text" id="email" name="email" onkeyup="validateWhenType(this, 'email')" value="{{ $user->email ?? null }}" />
                 </div>
             </div>
-            @if(empty($language)||$language=='vi')
-                <div class="formModalBox_box_head">Bước 2: Chọn hình thức thanh toán</div>
-            @else 
-                <div class="formModalBox_box_head">Step 2: Choose payment method</div>
-            @endif
+            <div class="formModalBox_box_head">{{ config('language.'.$language.'.data.step_2_buy_now') }}</div>
             <div class="formModalBox_box_body">
                 
                 <div class="paymentMethodBox">

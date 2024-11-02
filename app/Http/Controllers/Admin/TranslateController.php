@@ -19,7 +19,6 @@ use App\Models\CategoryBlog;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Jobs\AutoTranslateAndCreatePage;
-use App\Models\RelationTagInfoCategoryBlogInfo;
 use App\Models\RelationEnCategoryInfoEnCategoryBlogInfo;
 use App\Models\RelationCategoryInfoTagInfo;
 use App\Models\RelationSeoCategoryInfo;

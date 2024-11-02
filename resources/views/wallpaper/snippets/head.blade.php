@@ -33,3 +33,63 @@
 @stack('cssFirstView')
 <!-- Css tải sau -->
 @stack('headCustom')
+@if(env('APP_ENV')=='local')
+    <!-- tải font nếu dev -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Segoe-UI';
+            font-style: normal;
+            font-weight: 500;
+            src: url('/fonts/SegoeUI.ttf');
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Segoe-UI Semi';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('/fonts/SegoeUI-SemiBold.ttf');
+        }
+
+        @font-face {
+            font-family: 'Segoe-UI Bold';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('/fonts/SegoeUI-Bold.ttf');
+        } */
+
+        @font-face {
+            font-family: 'SVN-Gilroy';
+            font-style: normal;
+            font-display: swap;
+            font-weight: 500;
+            src: url('/fonts/svn-gilroy_medium.ttf');
+        }
+
+        @font-face {
+            font-family: 'SVN-Gilroy Med';
+            font-style: normal;
+            font-display: swap;
+            font-weight: 700;
+            src: url('/fonts/svn-gilroy_med.ttf');
+        }
+
+        @font-face {
+            font-family: 'SVN-Gilroy Semi';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('/fonts/svn-gilroy_semibold.ttf');
+        }
+
+        @font-face {
+            font-family: 'SVN-Gilroy Bold';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('/fonts/svn-gilroy_semibold.ttf');
+        }
+    </style>
+@endif

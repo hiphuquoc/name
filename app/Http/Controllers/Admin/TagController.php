@@ -18,7 +18,6 @@ use App\Models\Category;
 use App\Models\CategoryBlog;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GalleryController;
-use App\Models\RelationTagInfoCategoryBlogInfo;
 use App\Models\RelationEnCategoryInfoEnCategoryBlogInfo;
 use App\Models\RelationCategoryInfoTagInfo;
 use App\Models\RelationSeoTagInfo;
@@ -103,8 +102,6 @@ class TagController extends Controller {
                                     ->where('reference_table', $keyTable)
                                     ->get();
             $parents            = Category::all();
-            /* category blog */
-            $categoryBlogs      = CategoryBlog::all();
             /* trang canonical -> cùng là sản phẩm */
             $idProduct          = $item->id ?? 0;
             $sources            = Tag::select('*')
@@ -125,7 +122,7 @@ class TagController extends Controller {
             /* type */
             $type               = !empty($itemSeo) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
-            return view('admin.tag.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'categoryBlogs', 'categories', 'message'));
+            return view('admin.tag.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents','categories', 'message'));
         }else {
             return redirect()->route('admin.tag.list');
         }
@@ -173,18 +170,6 @@ class TagController extends Controller {
                             'flag_show' => $flagShow
                         ]);
                     }
-                    /* insert relation_tag_info_category_blog_id */
-                    RelationTagInfoCategoryBlogInfo::select('*')
-                        ->where('tag_info_id', $idTag)
-                        ->delete();
-                    if(!empty($request->get('category_blog_info_id'))){
-                        foreach($request->get('category_blog_info_id') as $idTagBlogInfo){
-                            RelationTagInfoCategoryBlogInfo::insertItem([
-                                'tag_info_id'      => $idTag,
-                                'category_blog_info_id' => $idTagBlogInfo
-                            ]);
-                        }
-                    }
                     /* insert relation_category_info_tag_info */
                     RelationCategoryInfoTagInfo::select('*')
                         ->where('tag_info_id', $idTag)
@@ -208,7 +193,7 @@ class TagController extends Controller {
                     'tag_info_id'   => $idTag
                 ]);
                 /* insert seo_content */
-                CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
+                if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
                 
                 DB::commit();
                 /* Message */

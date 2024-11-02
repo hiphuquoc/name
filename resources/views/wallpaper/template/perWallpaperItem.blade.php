@@ -15,6 +15,9 @@
                     @endif
 
                 </div>
+                <div class="wallpaperGridBox_item_image_background"></div>
+                <div class="wallpaperGridBox_item_image_backgroundTopMore"></div>
+                <div class="wallpaperGridBox_item_image_backgroundSideMore"></div>
             </a>
         </div>
         <!-- thêm vào giỏ hành nhanh -->

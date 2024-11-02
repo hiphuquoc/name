@@ -2,7 +2,7 @@
 @push('headCustom')
 @section('content')
     <div style="overflow:hidden;">
-        <div class="contentBox">
+        <div class="articleBox">
             <div class="container">
                 <h1>Danh sách tải xuống</h1>
                 <div class="pageCartBox">

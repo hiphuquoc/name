@@ -22,37 +22,53 @@
                                         $query->where('code', 'policy');
                                     })
                                     ->orderBy('seo.ordering', 'DESC')
-                                    ->with('seo')
+                                    ->orderBy('seo.id', 'ASC')
+                                    ->with('seo', 'seos')
                                     ->get();
+    /* chuyên mục blog */
+    $categoriesBlog             = \App\Models\CategoryBlog::getTreeCategory();
+    /* url hiện tại */
+    $urlPath                    = urldecode(request()->path());
 @endphp             
-<div class="logoInMenuMobile show-1023">
+<div class="logoInMenuMobile show-991">
     <a href="/{{ $language }}" class="logoMain" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn"></a>
+</div>
+<!-- icon hiển thị chế độ xem -->
+<div class="layoutHeaderSide_header_menuView" onclick="settingCollapsedMenu();">
+    @php
+        $icon = file_get_contents('storage/images/svg/icon-settingView.svg');
+    @endphp
+    {!! $icon !!}
 </div>
 <div class="headerSide customScrollBar-y">
     <ul>
         <!-- trang chủ -->
-        <li>
-            @php
-                $icon = file_get_contents('storage/images/svg/icon-home-1.svg');
-            @endphp
+        @php
+            $icon           = file_get_contents('storage/images/svg/icon-home-1.svg');
+            $selected       = '';
+            // if($urlPath==$language||$urlPath=='/') $selected = 'selected';
+        @endphp
+        <li class="{{ $selected }}">
             <a href="/{{ $language }}" title="{{ config('language.'.$language.'.data.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
                 {!! $icon !!}
                 <div class="maxLine_1">{{ config('language.'.$language.'.data.home') }}</div>
             </a>
         </li>
         <!-- về chúng tôi -->
-        <li>
-            @php
-                $icon       = file_get_contents('storage/images/svg/icon-about-me-2.svg');
-                $urlAbotUs      = '';
-                $nameAboutUs    = '';
-                foreach($pageAboutUs->seos as $s){
-                    if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
-                        $urlAbotUs      = $s->infoSeo->slug_full;
-                        $nameAboutUs    = $s->infoSeo->title;
-                    }
+        @php
+            $icon       = file_get_contents('storage/images/svg/icon-about-me-2.svg');
+            $urlAbotUs      = '';
+            $nameAboutUs    = '';
+            $selected       = '';
+            foreach($pageAboutUs->seos as $s){
+                if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
+                    $urlAbotUs      = $s->infoSeo->slug_full;
+                    $nameAboutUs    = $s->infoSeo->title;
+                    if($urlAbotUs==$urlPath) $selected = 'selected';
                 }
-            @endphp
+            }
+        @endphp
+        <li class="{{ $selected }}">
             <a href="/{{ $urlAbotUs }}" title="{{ $nameAboutUs }}" aria-label="{{ $nameAboutUs }}">
                 {!! $icon !!}
                 <div class="maxLine_1">{{ $nameAboutUs }}</div>
@@ -60,27 +76,29 @@
         </li>
         <!-- chủ đề -->
         @if(!empty($wallpaperMobile))
-            <li>
-                @php
-                    $titlePhoneWallpaper = config('language.'.$language.'.data.wallpaper_theme.'.env('APP_NAME'));
-                    $url      = '';
-                    foreach($wallpaperMobile->seos as $s){
-                        if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
-                            $url    = $s->infoSeo->slug_full;
-                            break;
-                        }
+            @php
+                $titlePhoneWallpaper = config('language.'.$language.'.data.wallpaper_theme.'.env('APP_NAME'));
+                $url      = '';
+                foreach($wallpaperMobile->seos as $s){
+                    if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
+                        $url    = $s->infoSeo->slug_full;
+                        break;
                     }
-                    $classTmp   = 'close';
-                    $styleTmp   = '';
-                    $iconRight  = '<i class="fa-solid fa-plus"></i>';
-                    $flagOpen   = env('APP_URL').'/'.$url==urldecode(Request::url()) ? true : false;
-                    if($flagOpen==true){
-                        $classTmp   = 'open';
-                        $styleTmp   = 'style="height:auto;opacity:1;"';
-                        $iconRight  = '<i class="fa-solid fa-minus"></i>';
-                    }
-                    $icon = file_get_contents('storage/images/svg/icon-category-2.svg');
-                @endphp
+                }
+                $classTmp       = 'close';
+                $classActive    = '';
+                $iconRight      = '<i class="fa-solid fa-plus"></i>';
+                $selected       = '';
+                $flagOpen       = $url==$urlPath ? true : false;
+                if($flagOpen==true){
+                    $classTmp       = 'open';
+                    $classActive    = 'active';
+                    $iconRight      = '<i class="fa-solid fa-minus"></i>';
+                    $selected       = 'selected';
+                }
+                $icon = file_get_contents('storage/images/svg/icon-category-2.svg');
+            @endphp
+            <li class="{{ $selected }}">
                 <div class="{{ $classTmp }}" onclick="showHideListMenuMobile(this, '{{ $url }}')">
                     {!! $icon !!}
                     @if($flagOpen==true)
@@ -90,7 +108,7 @@
                     @endif
                     {!! $iconRight !!}
                 </div>
-                <ul id="{{ $url }}" class="filterLinkSelected" {!! $styleTmp !!}>
+                <ul id="{{ $url }}" class="filterLinkSelected {{ $classActive }}">
                     @foreach($wallpaperMobile->childs as $event)
                         @if(!empty($event->seo->type)&&$event->seo->type=='category_info')
                             @foreach($event->seos as $seo)
@@ -227,6 +245,63 @@
                 @endforeach
             </ul>
         </li>
+        <!-- chủ đề blog => duyệt để in tất cả cấp 1 -->
+        @foreach($categoriesBlog as $categoryBlogLv1)
+            @php
+                $cateogyrBlogLv1ByLanguage = [];
+                foreach($categoryBlogLv1->seos as $seo){
+                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                        $cateogyrBlogLv1ByLanguage = $seo->infoSeo;
+                        break;
+                    }
+                }
+                $idGroupMenu    = $cateogyrBlogLv1ByLanguage->slug ?? '';
+                $classTmp       = 'close';
+                $classActive    = '';
+                $iconRight      = '<i class="fa-solid fa-plus"></i>';
+                $selected       = '';
+                $flagOpen       = $idGroupMenu==$urlPath ? true : false;
+                if($flagOpen==true){
+                    $classTmp       = 'open';
+                    $classActive    = 'active';
+                    $iconRight      = '<i class="fa-solid fa-minus"></i>';
+                    $selected       = 'selected';
+                }
+            @endphp
+            @if(!empty($cateogyrBlogLv1ByLanguage))
+                <li class="{{ $selected }}">
+                    <div class="{{ $classTmp }}" onclick="showHideListMenuMobile(this, '{{ $idGroupMenu }}')">
+                        @php
+                            $icon = file_get_contents('storage/images/svg/icon-blog-1.svg');
+                        @endphp
+                        {!! $icon !!}
+                        {{-- <div class="maxLine_1">{{ $cateogyrBlogLv1ByLanguage->title }}</div> --}}
+                        <a href="{{ env('APP_URL') }}/{{ $cateogyrBlogLv1ByLanguage->slug_full }}" class="maxLine_1" arira-label="{{ $wallpaperMobile->name }}">{{ $cateogyrBlogLv1ByLanguage->title }}</a>
+                        {!! $iconRight !!}
+                    </div>
+                    <ul id="{{ $idGroupMenu }}" class="filterLinkSelected {{ $classActive }}">
+                        @foreach($categoryBlogLv1->childs as $categoryBlog)
+                            @php
+                                $title      = '';
+                                $slugPage   = '';
+                                foreach($categoryBlog->seos as $seo){
+                                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
+                                        $title      = $seo->infoSeo->title;
+                                        $slugPage   = $seo->infoSeo->slug_full;
+                                        break;
+                                    }
+                                }
+                            @endphp
+                            <li>
+                                <a href="{{ env('APP_URL').'/'.$slugPage }}" title="{{ $title }}" aria-label="{{ $title }}">
+                                    <div class="maxLine_1">{{ $title }}</div>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+            @endif
+        @endforeach
     </ul>
 </div>
 
@@ -248,9 +323,9 @@
             <a href="https://www.tiktok.com/@wallpapers_namecomvn" class="socialBox_social_box_item" aria-label="tiktok">
                 <i class="fa-brands fa-tiktok"></i>
             </a>
-            <a href="https://twitter.com/wallpapers_name" class="socialBox_social_box_item" aria-label="twitter">
+            {{-- <a href="https://twitter.com/wallpapers_name" class="socialBox_social_box_item" aria-label="twitter">
                 <i class="fa-brands fa-twitter"></i>
-            </a>
+            </a> --}}
         </div>
     </div>
     <div class="socialBox_dmca">
@@ -262,7 +337,7 @@
     </div>
 </div>
 
-<div class="closeButtonMobileMenu show-1023" onClick="toggleMenuMobile('js_toggleMenuMobile');">
+<div class="closeButtonMobileMenu show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
     <i class="fa-sharp fa-solid fa-xmark"></i>
 </div>
 <div class="backgroundBlurMobileMenu" onClick="toggleMenuMobile('js_toggleMenuMobile');"></div>
@@ -276,15 +351,9 @@
                 const regex = new RegExp("^" + $(this).attr('href'));
                 if(regex.test(Url)) {
                     /* mở thẻ cha chứa phần tử trang hiện tại */
-                    $(this).closest('ul').css({
-                        height : 'auto',
-                        opacity : 1
-                    });
-                    /* mở luôn thẻ chứa các phần tử con của trang hiện tại */ 
-                    $(this).next('ul').css({
-                        height : 'auto',
-                        opacity : 1
-                    })
+                    $(this).closest('ul').addClass('active');
+                    /* mở luôn thẻ chứa các phần tử con của trang hiện tại */
+                    $(this).next('ul').addClass('active');
                     $(this).closest('ul').children().each(function(){
                         $(this).removeClass('selected');
                     })
@@ -300,15 +369,9 @@
             let elementMenu     = $('#'+idMenu);
             let flag            = elementMenu.height();
             if(flag<=0){
-                elementMenu.css({
-                    height: 'auto',
-                    opacity: '1'
-                });
+                elementMenu.addClass('active');
             }else {
-                elementMenu.css({
-                    height: '0',
-                    opacity: '0'
-                });
+                elementMenu.removeClass('active');
             }
             /* toggle icon */
             const elementIcon = $(element).find('i');
@@ -317,6 +380,41 @@
             } else {
                 $(elementIcon).removeClass('fa-minus').addClass('fa-plus');
             }
+        }
+
+        function settingCollapsedMenu(){
+            const element       = $('#js_settingCollapsedMenu');
+            element.find('.layoutHeaderSide_header').css('width', '4.25rem');
+            /* xác định hành động */
+            var action          = 'on';
+            if(element.hasClass('collapsed'))  action = 'off';
+            /* thiết lập */
+            let dataForm        = {};
+            dataForm.action     = action;            
+            const queryString   = new URLSearchParams(dataForm).toString();
+            fetch('/settingCollapsedMenu?' + queryString, {
+                method  : 'GET',
+                mode    : 'cors',
+            })
+            .then(response => {
+                if (!response.ok){
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(response => {
+                if(action=='on'){
+                    element.addClass('collapsed');
+                }else {
+                    element.removeClass('collapsed');
+                }
+                setTimeout(() => {
+                    element.find('.layoutHeaderSide_header').attr('style', '');
+                }, 200);
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
+            });
         }
 
     </script>

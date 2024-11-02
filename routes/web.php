@@ -13,10 +13,12 @@ use App\Http\Controllers\ConfirmController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController as OrderPublic;
 use App\Http\Controllers\PageController as PagePublic;
+use App\Http\Controllers\CategoryBlogController as CategoryBlogPublic;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SettingController as SettingPublic;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -156,16 +158,15 @@ Route::middleware('auth', 'role:admin')->group(function (){
         /* ===== Category Blog ===== */
         Route::prefix('categoryBlog')->group(function(){
             Route::get('/', [CategoryBlogController::class, 'list'])->name('admin.categoryBlog.list');
-            Route::post('/create', [CategoryBlogController::class, 'create'])->name('admin.categoryBlog.create');
+            Route::post('/createAndUpdate', [CategoryBlogController::class, 'createAndUpdate'])->name('admin.categoryBlog.createAndUpdate');
             Route::get('/view', [CategoryBlogController::class, 'view'])->name('admin.categoryBlog.view');
-            Route::post('/update', [CategoryBlogController::class, 'update'])->name('admin.categoryBlog.update');
+            Route::get('/delete', [CategoryBlogController::class, 'delete'])->name('admin.categoryBlog.delete');
         });
         /* ===== Blog ===== */
         Route::prefix('blog')->group(function(){
             Route::get('/', [BlogController::class, 'list'])->name('admin.blog.list');
-            Route::post('/create', [BlogController::class, 'create'])->name('admin.blog.create');
             Route::get('/view', [BlogController::class, 'view'])->name('admin.blog.view');
-            Route::post('/update', [BlogController::class, 'update'])->name('admin.blog.update');
+            Route::post('/createAndUpdate', [BlogController::class, 'createAndUpdate'])->name('admin.blog.createAndUpdate');
             /* Delete AJAX */
             Route::get('/delete', [BlogController::class, 'delete'])->name('admin.blog.delete');
         });
@@ -295,6 +296,8 @@ Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.chec
 /* order */
 Route::post('/order', [OrderPublic::class, 'create'])->name('main.order');
 Route::get('/viewConfirm', [OrderPublic::class, 'viewConfirm'])->name('main.viewConfirm');
+/* category blog */
+Route::get('/showSortBoxInCategoryTag', [CategoryBlogPublic::class, 'showSortBoxInCategoryTag'])->name('main.showSortBoxInCategoryTag');
 /* sitemap */
 Route::get('sitemap.xml', [SitemapController::class, 'main'])->name('sitemap.main');
 Route::get('sitemap/{type}.xml', [SitemapController::class, 'child'])->name('sitemap.child');
@@ -337,6 +340,8 @@ Route::middleware('auth')->group(function (){
 
     });
 });
+/* setting */
+Route::get('/settingCollapsedMenu', [SettingPublic::class, 'settingCollapsedMenu'])->name('main.settingCollapsedMenu');
 /* ROUTING */
 Route::middleware(['checkRedirect'])->group(function () {
     Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');

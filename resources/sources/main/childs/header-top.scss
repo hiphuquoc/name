@@ -7,21 +7,11 @@
     height: 2.375rem;
     background: url('/storage/images/upload/logo-type-manager-upload.webp?cache=15') no-repeat;
     background-size: cover;
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         flex: 0 0 2.25rem;
         width: 2.25rem;
         height: 2.25rem;
     }
-    // @media(max-width: 1023px){
-    //     flex: 0 0 2rem;
-    //     width: 2rem;
-    //     height: 2rem;
-    // }
-    // @media(max-width: 767px){
-    //     .logoMain {
-    //         height: 35px;
-    //     }
-    // }
 }
 .menuTopBackground {
     position: sticky;
@@ -36,7 +26,7 @@
 .menuTop {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     height: 100%;
     .container {
         display: flex;
@@ -68,9 +58,8 @@
             }
         }
     }
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         justify-content: flex-end;
-        
         .rightBox {
             min-width: unset;
         }
@@ -85,7 +74,7 @@
     a {
         display: flex;
     }
-    @media(max-width: 990px){
+    @media(max-width: 991px){
         display: none;
     }
 }
@@ -143,7 +132,7 @@
             }
         }
     }
-    @media(max-width: 1199px){
+    @media(max-width: 991px){
         display: flex;
         &_item {
             &_text {
@@ -153,7 +142,7 @@
             }
         }
     }
-    @media(max-width: 577px){
+    @media(max-width: 767px){
         &_item {
             &_icon {
                 width: 1.25rem;
@@ -178,11 +167,11 @@
 }
 .closeButtonMobileMenu {
     @include iconCloseSquare;
-    [dir="ltr"] & {
+    &:dir(ltr), [dir="ltr"] & {
         border-top-right-radius: 10px !important;
         border-bottom-left-radius: 10px !important;
     }
-    [dir="rtl"] & {
+    &:dir(rtl), [dir="rtl"] & {
         border-top-left-radius: 10px !important;
         border-bottom-right-radius: 10px !important;
     }
@@ -247,10 +236,9 @@
         width: 660px;
         padding: 0.25rem 0 0.5rem 0;
         top: calc($heightMenu - 0.25rem);
-        [dir="ltr"] & {
-            right: 0;
-        }
-        [dir="rtl"] & {
+        right: 0;
+        &:dir(rtl), [dir="rtl"] & {
+            right: unset;
             left: 0;
         }
         &_close {
@@ -281,7 +269,7 @@
             display: block !important;
         }
     }
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         &_list {
             padding: 0 0 0.25rem 0;
             &_item {
@@ -357,10 +345,9 @@
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         overflow: hidden;
         top: calc($heightMenu - 0.25rem);
-        [dir="ltr"] & {
-            right: 0;
-        }
-        [dir="rtl"] & {
+        right: 0;
+        &:dir(rtl), [dir="rtl"] & {
+            right: unset;
             left: 0;
         }
         &_item {
@@ -526,10 +513,9 @@
                 justify-content: center;
                 align-items: center;
                 top: -0.75rem;
-                [dir="ltr"] & {
-                    right: -0.75rem;
-                }
-                [dir="rtl"] & {
+                right: -0.75rem;
+                &:dir(rtl), [dir="rtl"] & {
+                    right: unset;
                     left: -0.75rem;
                 }
             }
@@ -551,10 +537,9 @@
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         padding: 0;
         top: calc($heightMenu - 0.25rem);
-        [dir="ltr"] & {
-            right: calc(-50% - 100px);
-        }
-        [dir="rtl"] & {
+        right: calc(-50% - 100px);
+        &:dir(rtl), [dir="rtl"] & {
+            right: unset;
             left: calc(-50% - 100px);
         }
         .customScrollBar-y {
@@ -599,12 +584,11 @@
     @media(max-width: 1199px){
         min-width: 106px;
     }
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         min-width: 35px;
-        [dir="ltr"] & {
-            margin-right: 0.5rem;
-        }
-        [dir="rtl"] & {
+        margin-right: 0.5rem;
+        &:dir(rtl), [dir="rtl"] & {
+            margin-right: unset;
             margin-left: 0.5rem;
         }
         &_show {
@@ -664,10 +648,9 @@
             padding: 0.5rem;
             box-shadow: none;
             top: 0.25rem;
-            [dir="ltr"] & {
-                right: 0;
-            }
-            [dir="rtl"] & {
+            right: 0;
+            &:dir(rtl), [dir="rtl"] & {
+                right: unset;
                 left: 0;
             }
             &:focus, &:hover {
@@ -688,10 +671,8 @@
             border-radius: 100px;
             color: $colorText;
             font-size: 0.9rem;
-            [dir="ltr"] & {
-                padding: 0 2.5rem 0 1rem;
-            }
-            [dir="rtl"] & {
+            padding: 0 2.5rem 0 1rem;
+            &:dir(rtl), [dir="rtl"] & {
                 padding: 0 1rem 0 2.5rem;
             }
             &::selection, &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
@@ -717,10 +698,9 @@
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         @include colorOpacity('color', $colorText, 0.8);
         top: calc($heightMenu + 0.625rem);
-        [dir="ltr"] & {
-            left: 0;
-        }
-        [dir="rtl"] & {
+        left: 0;
+        &:dir(rtl), [dir="rtl"] & {
+            left: unset;
             right: 0;
         }
         &_item {
@@ -754,7 +734,7 @@
     &_background {
         @include backgroundModal;
     }
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         width: 0;
         opacity: 0;
         position: fixed;

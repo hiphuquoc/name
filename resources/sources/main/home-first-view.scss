@@ -11,18 +11,17 @@
 @import 'childs/modal.scss';
 
 .categoryGrid {
-    &:not(:first-child){
-        margin-top: 1.5rem;
-    }
+    margin-top: 1.25rem;
     &_title {
-        margin-bottom: 1rem;
+        margin-bottom: 1.25rem;
         h2, h3, a {
             font-size: 1.2rem;
             font-family: $fontTitle;
             margin-bottom: 0 !important;
             color: $colorText;
         }
-        @media(max-width: 990px){
+        @media(max-width: 991px){
+            margin-bottom: 1rem;
             h2, h3 {
                 font-size: 1.15rem;
             }
@@ -31,11 +30,6 @@
             margin-bottom: 0.75rem;
             h2, h3 {
                 font-size: 1.1rem;
-            }
-        }
-        @media(max-width: 577px){
-            h2, h3 {
-                font-size: 1.05rem;
             }
         }
     }
@@ -143,10 +137,9 @@
                             letter-spacing: 4px;
                             width: 35px;
                             text-align: right;
-                            [dir="ltr"] & {
-                                margin-left: 0.5rem;
-                            }
-                            [dir="rtl"] & {
+                            margin-left: 0.5rem;
+                            &:dir(rtl), [dir="rtl"] & {
+                                text-align: left;
                                 margin-left: unset;
                                 margin-right: 0.5rem;
                             }
@@ -178,10 +171,9 @@
                                 @include fontAwesome;
                                 font-size: 0.35rem;
                                 vertical-align: middle;
-                                [dir="ltr"] & {
-                                    margin-right: 0.75rem;
-                                }
-                                [dir="rtl"] & {
+                                margin-right: 0.75rem;
+                                &:dir(rtl), [dir="rtl"] & {
+                                    margin-right: unset;
                                     margin-left: 0.75rem;
                                 }
                             }
@@ -190,14 +182,10 @@
                 }
             }
         }
-        @media(max-width: 1499px){
-            grid-template-columns: auto auto auto;
-        }
         @media(max-width: 1199px){
-            grid-template-columns: auto auto;
-        }
-        @media(max-width: 1023px){
             grid-template-columns: auto auto auto;
+        }
+        @media(max-width: 991px){
             gap: 1rem;
             &_item {
                 &_content {
@@ -230,28 +218,11 @@
                 }
             }
         }
-        @media(max-width: 577px){
-            gap: 0.55rem;
-            &_item {
-                
-                &_content {
-                    &_title {
-                        h2, h3 {
-                            font-size: 0.85rem;
-                        }
-                    }
-                }
-            }
-        }
     }
-    @media(max-width: 1023px){
-        &:first-child , &:not(:first-child){
-            margin-top: 1.25rem;
-        }
+    @media(max-width: 1199px){
+        margin-top: 1rem;
     }
     @media(max-width: 767px){
-        &:first-child, &:not(:first-child){
-            margin-top: 1rem;
-        }
+        margin-top: 0.825rem;
     }
 }

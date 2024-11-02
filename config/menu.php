@@ -61,15 +61,16 @@ return [
             'icon'      => '<i class="fa-solid fa-blog"></i>',
             'child'     => [
                 [
-                    'name'  => '1. Tin tức',
-                    'route' => 'admin.blog.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
                     'name'  => '1. Chuyên mục',
                     'route' => 'admin.categoryBlog.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
-                ]
+                ],
+                [
+                    'name'  => '2. Tin tức',
+                    'route' => 'admin.blog.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                
             ]
         ],
         [

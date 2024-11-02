@@ -7,7 +7,7 @@
             transparent 10px,
             transparent 30px);"' : '';
 @endphp
-<tr id="item_{{ $item->id }}" {!! $flagCopy !!}>
+<tr id="oneItem-{{ $item->id }}" {!! $flagCopy !!}>
     <td class="text-center">{{ $no }}</td>
     <td style="display:flex;flex-direction:column;">
         
@@ -124,7 +124,7 @@
         </div>
     </td>
 </tr>
-<tr>
+<tr id="oneItemSub-{{ $item->id }}">
     <td colspan="4">
         @include('admin.template.languageBox', [
             'item' => $item,

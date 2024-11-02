@@ -86,8 +86,4 @@ class Tag extends Model {
     public function categories(){
         return $this->hasMany(\App\Models\RelationCategoryInfoTagInfo::class, 'tag_info_id', 'id');
     }
-
-    public function blogs(){
-        return $this->hasMany(\App\Models\RelationTagInfoCategoryBlogInfo::class, 'tag_info_id', 'id');
-    }
 }

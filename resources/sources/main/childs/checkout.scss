@@ -97,7 +97,7 @@
             }
         }
     }
-    @media(max-width: 990px){
+    @media(max-width: 991px){
         flex-wrap: wrap;
         &_content {
             width: 100%;
@@ -129,17 +129,6 @@
         }
     }
     @media(max-width: 767px){
-        .column {
-            flex-wrap: wrap;
-            &_item {
-                &:not(:first-child){
-                    margin-left: 0;
-                    margin-top: 1.5rem;
-                }
-            }
-        }
-    }
-    @media(max-width: 577px){
         &_content {
             &_box {
                 padding-left: 1rem;
@@ -187,7 +176,7 @@
     &_body {
 
     }
-    @media(max-width: 990px){
+    @media(max-width: 991px){
         &:not(:first-child){
             margin-top: 0.75rem;
             padding-top: 0.75rem;
@@ -196,7 +185,7 @@
             margin-bottom: 0.75rem;
         }
     }
-    @media(max-width: 577px){
+    @media(max-width: 767px){
         &_title {
             margin-bottom: 0.5rem;
         }
@@ -262,6 +251,9 @@
                 flex: 0 0 80px;
                 font-family: $fontTitle;
                 text-align: right;
+                &:dir(rtl), [dir="rtl"] & {
+                    text-align: left;
+                }
             }
         }
     }
@@ -341,7 +333,7 @@
             }
         }
     }
-    @media(max-width: 990px){
+    @media(max-width: 991px){
         &_item {
             &.buttonBox {
                 border: none;
@@ -353,7 +345,7 @@
             }
         }
     }
-    @media(max-width: 577px){
+    @media(max-width: 767px){
         &_item {
             &.buttonBox {
                 padding: 0.5rem 1rem;

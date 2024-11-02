@@ -3,8 +3,7 @@
     @include colorOpacity('color', $colorText, 0.7);
     font-size: 0.9rem;
     font-weight: normal;
-    // opacity: 0.75;
-    margin-top: 0.75rem;
+    // margin-top: 0.75rem;
     a {
         color: $colorText;
         &:hover {
@@ -19,17 +18,18 @@
             color: $bg-06;
         }
     }
-    @media(max-width: 1023px){
-        margin-top: 0.5rem;
-    }
-    @media(max-width: 767px){
-        font-size: 0.85rem;
-    }
+    // @media(max-width: 991px){
+    //     margin-top: 0.5rem;
+    // }
+    // @media(max-width: 767px){
+    //     font-size: 0.85rem;
+    // }
 }
 
-.breadcrumbMobileBox {
-    display: none;
-    @media(max-width: 1023px){
-        display: flex;
-    }
-}
+// .breadcrumbMobileBox {
+//     display: flex;
+//     // display: none;
+//     // @media(max-width: 991px){
+//     //     display: flex;
+//     // }
+// }

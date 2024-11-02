@@ -94,7 +94,7 @@ class CartController extends Controller{
             /* set session */
             Session::put('cart', json_encode($arrayCart));
             /* trả thông báo */
-            $language       = session()->get('language') ?? 'vi';
+            $language       = $request->get('language') ?? session()->get('language');
             $cartToView     = self::convertInfoCartToView($infoProduct, $infoProductInCart['product_price_id'], $language);
             /* lấy url của trang cart theo ngôn ngữ */
             $urlPageCart = null;

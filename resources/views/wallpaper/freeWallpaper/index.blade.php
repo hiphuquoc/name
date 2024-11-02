@@ -1,12 +1,17 @@
 @extends('layouts.wallpaper')
 @push('cssFirstView')
-    @php
-        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-        $cssFirstView       = $manifest['resources/sources/main/freewallpaper-first-view.scss']['file'];
-    @endphp
-    <style type="text/css">
-        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
-    </style>
+    <!-- trường hợp là local thì dùng vite để chạy npm run dev lúc code -->
+    @if(env('APP_ENV')=='local')
+        @vite('resources/sources/main/freewallpaper-first-view.scss')
+    @else
+        @php
+            $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $cssFirstView       = $manifest['resources/sources/main/freewallpaper-first-view.scss']['file'];
+        @endphp
+        <style type="text/css">
+            {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+        </style>
+    @endif
 @endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
@@ -48,33 +53,33 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="breadcrumbMobileBox">
-        @include('wallpaper.template.breadcrumb')
-    </div>
     <!-- share social -->
     @include('wallpaper.template.shareSocial')
     <!-- content -->
-    <div class="contentBox maxContent-1200">
-        <!-- Gallery và Product detail -->
-        @include('wallpaper.freeWallpaper.body')
+    <div class="articleBox distanceBetweenBox">
 
+        <div class="pagefreeWallpaper distanceBetweenSubbox">
+            <!-- breadcrumb -->
+            @include('wallpaper.template.breadcrumb')
+            <!-- Gallery và Product detail -->
+            @include('wallpaper.freeWallpaper.body')
+        </div>
+        
         <!-- Related -->
         @if($total>0)
-            <div class="contentBox">
-                <div class="relatedProductBox">
-                    <div class="relatedProductBox_title">
-                        <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
-                    </div>
-                    <div class="relatedProductBox_box">
-                        @include('wallpaper.category.box', [
-                            'total'             => $total,
-                            'loaded'            => $loaded,
-                            'arrayIdCategoyr'   => $arrayIdCategory,
-                            'wallpapers'        => $related,
-                            'language'          => $language,
-                            'idNot'             => $idNot
-                        ])
-                    </div>
+            <div class="relatedProductBox">
+                <div class="relatedProductBox_title">
+                    <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
+                </div>
+                <div class="relatedProductBox_box">
+                    @include('wallpaper.category.box', [
+                        'total'             => $total,
+                        'loaded'            => $loaded,
+                        'arrayIdCategoyr'   => $arrayIdCategory,
+                        'wallpapers'        => $related,
+                        'language'          => $language,
+                        'idNot'             => $idNot
+                    ])
                 </div>
             </div>
         @endif

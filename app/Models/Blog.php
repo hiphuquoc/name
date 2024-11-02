@@ -9,11 +9,11 @@ class Blog extends Model {
     use HasFactory;
     protected $table        = 'blog_info';
     protected $fillable     = [
-        'name', 
-        'description',
         'seo_id', 
         'outstanding',
-        'note'
+        'status',
+        'viewed',
+        'shared',
     ];
     public $timestamps      = false;
 
@@ -21,11 +21,14 @@ class Blog extends Model {
         $result     = self::select('*')
                         /* tìm theo tên */
                         ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->where('name', 'like', '%'.$params['search_name'].'%');
+                            $searchName = $params['search_name'];
+                            $query->whereHas('seo', function($subQuery) use($searchName){
+                                $subQuery->where('title', 'like', '%'.$searchName.'%');
+                            });
                         })
-                        /* tìm theo Chuyên mục */
+                        /* tìm theo danh mục */
                         ->when(!empty($params['search_category']), function($query) use($params){
-                            $query->whereHas('categories.infoCategory', function($q) use($params){
+                            $query->whereHas('categories.infoCategory', function($q) use ($params){
                                 $q->where('id', $params['search_category']);
                             });
                         })
@@ -60,8 +63,12 @@ class Blog extends Model {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
 
+    public function seos() {
+        return $this->hasMany(\App\Models\RelationSeoBlogInfo::class, 'blog_info_id', 'id');
+    }
+
     public function categories(){
-        return $this->hasMany(\App\Models\RelationCategoryBlogInfoBlogInfo::class, 'blog_info_id', 'id');
+        return $this->hasMany(\App\Models\RelationCategoryBlogBlogInfo::class, 'blog_info_id', 'id');
     }
 
 }

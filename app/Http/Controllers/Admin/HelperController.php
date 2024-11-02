@@ -13,6 +13,8 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\CategoryBlog;
+use App\Models\Blog;
 use App\Helpers\Upload;
 
 class HelperController extends Controller {
@@ -51,7 +53,7 @@ class HelperController extends Controller {
                     }else {
                         $response = $part.$charactor.$slugParent;
                     }
-                } else if($type=='product_info'||$type=='free_wallpaper_info'){ /* trường hợp là product_info hay free_wallpaper_info */
+                } else if($type=='product_info'||$type=='free_wallpaper_info'||$type=='blog_info'){ /* trường hợp là product_info hay free_wallpaper_info */
                     $response   = Charactor::convertStrToUrl($title).'-'.time();
                 }
             } else { /* trường hợp không có trang cha */
@@ -62,11 +64,11 @@ class HelperController extends Controller {
     }
 
     public static function getFullInfoPageByIdSeo($idSeo){
-        $response           = new \stdClass;
+        $response               = new \stdClass;
         /* kiểm tra xem loại nào */
-        $infoSeo            = Seo::select('*')
-                                ->where('id', $idSeo)
-                                ->first();
+        $infoSeo                = Seo::select('*')
+                                    ->where('id', $idSeo)
+                                    ->first();
         if(!empty($infoSeo)){
             $type               = $infoSeo->type;
             switch ($type) {
@@ -88,6 +90,22 @@ class HelperController extends Controller {
                     break;
                 case 'page_info':
                     $response   = Page::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeo){
+                                        $query->where('id', $idSeo);
+                                    })
+                                    ->with('seo', 'seos')
+                                    ->first();
+                    break;
+                case 'category_blog':
+                    $response   = CategoryBlog::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeo){
+                                        $query->where('id', $idSeo);
+                                    })
+                                    ->with('seo', 'seos')
+                                    ->first();
+                    break;
+                case 'blog_info':
+                    $response   = Blog::select('*')
                                     ->whereHas('seos.infoSeo', function($query) use($idSeo){
                                         $query->where('id', $idSeo);
                                     })

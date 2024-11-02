@@ -1,12 +1,17 @@
 @extends('layouts.wallpaper')
 @push('cssFirstView')
-    @php
-        $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-        $cssFirstView       = $manifest['resources/sources/main/category-money-first-view.scss']['file'];
-    @endphp
-    <style type="text/css">
-        {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
-    </style>
+    <!-- trường hợp là local thì dùng vite để chạy npm run dev lúc code -->
+    @if(env('APP_ENV')=='local')
+        @vite('resources/sources/main/category-money-first-view.scss')
+    @else
+        @php
+            $manifest           = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $cssFirstView       = $manifest['resources/sources/main/category-money-first-view.scss']['file'];
+        @endphp
+        <style type="text/css">
+            {!! file_get_contents(asset('build/' . $cssFirstView)) !!}
+        </style>
+    @endif
 @endpush
 @push('headCustom')
 <!-- ===== START:: SCHEMA ===== -->
@@ -60,19 +65,19 @@
 <!-- ===== END:: SCHEMA ===== -->
 @endpush
 @section('content')
-    <div class="breadcrumbMobileBox">
-        @include('wallpaper.template.breadcrumb')
-    </div>
     <!-- share social -->
     @include('wallpaper.template.shareSocial')
     <!-- content -->
-    <div class="contentBox">
-        <div style="display:flex;">
+    <div class="articleBox distanceBetweenBox">
+        <div class="distanceBetweenSubbox">
+            <!-- breadcrumb -->
+            @include('wallpaper.template.breadcrumb')
+            <!-- tiêu đề -->
             @php
                 $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
                 if($item->seo->level==1) $titlePage = $itemSeo->title;
             @endphp
-            <h1>{{ $titlePage }}</h1>
+            <h1 class="titlePage">{{ $titlePage }}</h1>
             <!-- từ khóa vừa search -->
             @if(!empty(request('search')))
                 <div class="keySearchBadge">
@@ -89,54 +94,42 @@
                     </div>
                 </div>
             @endif
+            <!-- Sort Box -->
+            @include('wallpaper.categoryMoney.sort', [
+                'language'          => $language ?? 'vi',
+                'total'             => $total,
+                'viewBy'            => $viewBy
+            ])
+            <!-- Product Box 
+                vừa vào tải 0 phần tử -> tất cả tải bằng ajax
+            -->
+            @include('wallpaper.template.wallpaperGridWithLoadMore', [
+                'wallpapers'        => $wallpapers,
+                'headingTitle'      => 'h2',
+                'contentEmpty'      => true,
+                'loaded'            => 0,
+                'total'             => $total,
+                'empty'             => !empty($wallpapers)&&$wallpapers->isNotEmpty() ? false : true
+            ])
+            <!-- Loading -->
+            <div class="loadingBox">
+                <span class="loadingIcon"></span>
+            </div>
         </div>
-        <!-- Sort Box -->
-        @php
-            $totalSet   = $wallpapers->count();
-            $totalWallpaper  = 0;
-            foreach($wallpapers as $wallpaper){
-                foreach($wallpaper->prices as $price){
-                    foreach($price->wallpapers as $wallpaper){
-                        ++$totalWallpaper;
-                    }
-                }
-            }
-        @endphp
-        @include('wallpaper.categoryMoney.sort', [
-            'language'          => $language ?? 'vi',
-            'totalSet'          => $totalSet,
-            'totalWallpaper'    => $totalWallpaper,
-            'viewBy'            => $viewBy
-        ])
-
-        <!-- Product Box 
-            vừa vào tải 0 phần tử -> tất cả tải bằng ajax
-        -->
-        @include('wallpaper.template.wallpaperGridWithLoadMore', [
-            'wallpapers'        => $wallpapers,
-            'headingTitle'      => 'h2',
-            'contentEmpty'      => true,
-            'loaded'            => 0,
-            'total'             => $total,
-            'empty'             => !empty($wallpapers)&&$wallpapers->isNotEmpty() ? false : true
-        ])
-        <!-- Loading -->
-        <div class="loadingBox">
-            <span class="loadingIcon"></span>
-        </div>
+        <!-- Nội dung -->
+        @if(!empty($itemSeo->contents))
+            <div id="js_buildTocContentMain_element" class="distanceBetween contentElement maxContent-1200">
+                @php
+                    $xhtmlContent = '';
+                    foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
+                @endphp
+                <div class="contentBox">
+                    <div id="tocContentMain"></div>
+                    {!! $xhtmlContent !!}
+                </div>
+            </div>
+        @endif
     </div>
-
-    <!-- Nội dung -->
-    @if(!empty($itemSeo->contents))
-        <div id="js_buildTocContentMain_element" class="contentElement contentBox maxContent-1200">
-            <div id="tocContentMain"></div>
-            @php
-                $xhtmlContent = '';
-                foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
-            @endphp
-            {!! $xhtmlContent !!}
-        </div>
-    @endif
 @endsection
 @push('modal')
     <!-- Message Add to Cart -->

@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category_blog_info', function (Blueprint $table) {
+        Schema::create('relation_order_info_product_info', function (Blueprint $table) {
             $table->id();
-            $table->integer('seo_id');
-            $table->text('name');
-            $table->text('description')->nullable();
+            $table->integer('order_info_id');
+            $table->integer('product_info_id');
+            $table->text('product_price_id'); /* array ngăn cách bởi dấu - */
+            $table->integer('quantity')->default(1);
+            $table->integer('price');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('category_info');
+        // Schema::dropIfExists('relation_order_info_product_info');
     }
 };

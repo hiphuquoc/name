@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Helpers\Upload;
 use App\Http\Requests\BlogRequest;
+use App\Helpers\Upload;
 use App\Models\CategoryBlog;
 use App\Models\Blog;
 use App\Models\Seo;
-use App\Models\RelationCategoryBlogInfoBlogInfo;
+use App\Models\RelationCategoryBlogBlogInfo;
+use App\Models\RelationSeoBlogInfo;
+use App\Models\Prompt;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -36,25 +38,87 @@ class BlogController extends Controller {
     }
 
     public function view(Request $request){
-        $id             = $request->get('id') ?? 0;
-        $item           = Blog::select('*')
-                            ->where('id', $id)
-                            ->with('seo', 'categories.infoCategory')
-                            ->first();
-        $parents        = CategoryBlog::all();
-        $content        = null;
-        if(!empty($item->seo->slug)){
-            $content    = Storage::get(config('main_'.env('APP_NAME').'.storage.contentBlog').$item->seo->slug.'.blade.php');
+        $message            = $request->get('message') ?? null;
+        $id                 = $request->get('id') ?? 0;
+        $language           = $request->get('language') ?? null;
+        /* kiểm tra xem ngôn ngữ có nằm trong danh sách không */
+        $flagView           = false;
+        foreach(config('language') as $ld){
+            if($ld['key']==$language) {
+                $flagView   = true;
+                break;
+            }
         }
-        /* type */
-        $type           = !empty($item) ? 'edit' : 'create';
-        $type           = $request->get('type') ?? $type;
-        return view('admin.blog.view', compact('parents', 'item', 'type', 'content'));
+        /* tìm theo ngôn ngữ */
+        $item               = Blog::select('*')
+                                ->where('id', $id)
+                                ->with('seo.contents', 'seos.infoSeo.contents', 'seos.infoSeo.jobAutoTranslate')
+                                ->first();
+        if(empty($item)) $flagView = false;
+        if($flagView==true){
+            /* chức năng copy source */
+            $idSeoSourceToCopy  = $request->get('id_seo_source') ?? 0;
+            $itemSourceToCopy   = Blog::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeoSourceToCopy){
+                                        $query->where('id', $idSeoSourceToCopy);
+                                    })
+                                    ->with('seo', 'seos')
+                                    ->first();
+            $itemSeoSourceToCopy    = [];
+            if(!empty($itemSourceToCopy->seos)){
+                foreach($itemSourceToCopy->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeoSourceToCopy = $s->infoSeo;
+                        break;
+                    }
+                }
+            }
+            /* lấy item seo theo ngôn ngữ được chọn */
+            $itemSeo            = [];
+            if(!empty($item->seos)){
+                foreach($item->seos as $s){
+                    if($s->infoSeo->language==$language) {
+                        $itemSeo = $s->infoSeo;
+                        break;
+                    }
+                }
+            }
+            /* prompts */
+            $prompts            = Prompt::select('*')
+                                    ->where('reference_table', 'category_blog')
+                                    ->get();
+            /* trang canonical -> cùng là sản phẩm */
+            $idProduct          = $item->id ?? 0;
+            $sources            = Blog::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($language){
+                                        $query->where('language', $language);
+                                    })
+                                    ->where('id', '!=', $idProduct)
+                                    ->get();
+            /* type */
+            $type               = !empty($itemSeo) ? 'edit' : 'create';
+            $type               = $request->get('type') ?? $type;
+            /* trang cha */
+            $parents            = CategoryBlog::all();
+            /* category cha */
+            return view('admin.blog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'message'));
+        } else {
+            return redirect()->route('admin.blog.list');
+        }
     }
 
-    public function create(BlogRequest $request){
+    public function createAndUpdate(Request $request){
         try {
             DB::beginTransaction();
+            /* ngôn ngữ */
+            $idSeo              = $request->get('seo_id');
+            $idSeoVI            = $request->get('seo_id_vi') ?? 0;
+            $idBlog             = $request->get('blog_info_id');
+            $language           = $request->get('language');
+            $categoryType       = 'blog_info';
+            $type               = $request->get('type');
+            /* check xem là create seo hay update seo */
+            $action             = !empty($idSeo)&&$type=='edit' ? 'edit' : 'create';
             /* upload image */
             $dataPath           = [];
             if($request->hasFile('image')) {
@@ -63,97 +127,83 @@ class BlogController extends Controller {
                 $folderUpload   =  config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers');
                 $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
-            /* insert seo */
-            $insertSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'blog_info', $dataPath);
-            $seoId              = Seo::insertItem($insertSeo);
-            /* insert blog_info */
-            $insertBlog         = $this->BuildInsertUpdateModel->buildArrayTableBlogInfo($request->all(), $seoId);
-            $idBlog             = Blog::insertItem($insertBlog);
-            /* lưu content vào file */
-            $content            = $request->get('content') ?? null;
-            $content            = ImageController::replaceImageInContentWithLoading($content);
-            Storage::put(config('main_'.env('APP_NAME').'.storage.contentBlog').$request->get('slug').'.blade.php', $content);
-            /* relation category_blog_info và blog_info */
-            if(!empty($request->get('category_blog_info_id'))){
-                foreach($request->get('category_blog_info_id') as $idCategoryBlog){
-                    $insertRelationCategoryBlogInfoBlogInfo    = [
-                        'category_blog_info_id' => $idCategoryBlog,
-                        'blog_info_id'          => $idBlog
-                    ];
-                    RelationCategoryBlogInfoBlogInfo::insertItem($insertRelationCategoryBlogInfoBlogInfo);
-                }
-            }
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Dã tạo Bài viết mới'
-            ];
-        } catch (\Exception $exception){
-            DB::rollBack();
-            /* Message */
-            $message        = [
-                'type'      => 'danger',
-                'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
-            ];
-        }
-        /* ===== END:: check_seo_info */
-        $request->session()->put('message', $message);
-        return redirect()->route('admin.blog.view', ['id' => $idBlog]);
-    }
-
-    public function update(BlogRequest $request){
-        try {
-            DB::beginTransaction();
-            $idBlog             = $request->get('blog_info_id');
-            /* upload image */
-            $dataPath           = [];
-            if($request->hasFile('image')) {
-                $name           = !empty($request->get('slug')) ? $request->get('slug') : time();
-                $dataPath       = Upload::uploadThumnail($request->file('image'), $name);
-            }
             /* update page */
-            $updateSeo          = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), 'blog_info', $dataPath);
-            Seo::updateItem($request->get('seo_id'), $updateSeo);
-            /* update blog */
-            $updateBlog         = $this->BuildInsertUpdateModel->buildArrayTableBlogInfo($request->all(), $request->get('seo_id'));
-            Blog::updateItem($idBlog, $updateBlog);
-            /* lưu content vào file */
-            $content            = $request->get('content') ?? null;
-            $content            = ImageController::replaceImageInContentWithLoading($content);
-            Storage::put(config('main_'.env('APP_NAME').'.storage.contentBlog').$request->get('slug').'.blade.php', $content);
-            /* relation category_blog_info và blog_info */
-            RelationCategoryBlogInfoBlogInfo::select('*')
-                ->where('blog_info_id', $idBlog)
-                ->delete();
-            if(!empty($request->get('category_blog_info_id'))){
-                foreach($request->get('category_blog_info_id') as $idCategoryBlog){
-                    $insertRelationCategoryBlogInfoBlogInfo    = [
-                        'category_blog_info_id' => $idCategoryBlog,
-                        'blog_info_id'          => $idBlog
-                    ];
-                    RelationCategoryBlogInfoBlogInfo::insertItem($insertRelationCategoryBlogInfoBlogInfo);
+            $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $categoryType, $dataPath);
+            if($action=='edit'){
+                Seo::updateItem($idSeo, $seo);
+            }else {
+                $idSeo = Seo::insertItem($seo, $idSeoVI);
+            }
+            /* kiểm tra insert thành công không */
+            if(!empty($idSeo)){
+                /* insert seo_content */
+                if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
+                if($language=='vi'){
+                    /* insert hoặc update blog_info */
+                    $status           = !empty($request->get('status'))&&$request->get('status')=='on' ? 1 : 0;
+                    $outstanding      = !empty($request->get('outstanding'))&&$request->get('outstanding')=='on' ? 1 : 0;
+                    if(empty($idBlog)){ /* check xem create category hay update category */
+                        $idBlog          = Blog::insertItem([
+                            'status'        => $status,
+                            'outstanding'   => $outstanding,
+                            'seo_id'        => $idSeo,
+                        ]);
+                    }else {
+                        Blog::updateItem($idBlog, [
+                            'status'        => $status,
+                            'outstanding'   => $outstanding,
+                        ]);
+                    }
+                    /* insert relation_category_blog_blog_info */
+                    RelationCategoryBlogBlogInfo::select('*')
+                        ->where('blog_info_id', $idBlog)
+                        ->delete();
+                    if(!empty($request->get('categories'))){
+                        foreach($request->get('categories') as $idCategoryBlog){
+                            RelationCategoryBlogBlogInfo::insertItem([
+                                'category_blog_id'  => $idCategoryBlog,
+                                'blog_info_id'      => $idBlog
+                            ]);
+                        }
+                    }
+                }
+                /* relation_seo_blog_info */
+                $relationSeoBlogInfo = RelationSeoBlogInfo::select('*')
+                                        ->where('seo_id', $idSeo)
+                                        ->where('blog_info_id', $idBlog)
+                                        ->first();
+                if(empty($relationSeoBlogInfo)) RelationSeoBlogInfo::insertItem([
+                    'seo_id'        => $idSeo,
+                    'blog_info_id'   => $idBlog
+                ]);
+                DB::commit();
+                /* Message */
+                $message        = [
+                    'type'      => 'success',
+                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Bài Viết!'
+                ];
+                /* nếu có tùy chọn index => gửi google index */
+                if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
+                    $flagIndex = IndexController::indexUrl($idSeo);
+                    if($flagIndex==200){
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Bài Viết và Báo Google Index!';
+                    }else {
+                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Bài Viết <span style="color:red;">nhưng báo Google Index lỗi</span>';
+                    }
                 }
             }
-            DB::commit();
-            /* Message */
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Các thay đổi đã được lưu'
-            ];
         } catch (\Exception $exception){
             DB::rollBack();
-            /* Message */
+        }
+        /* có lỗi mặc định Message */
+        if(empty($message)){
             $message        = [
                 'type'      => 'danger',
                 'message'   => '<strong>Thất bại!</strong> Có lỗi xảy ra, vui lòng thử lại'
             ];
         }
-        // /* ===== START:: check_seo_info */
-        // CheckSeo::dispatch($request->get('seo_id'));
-        /* ===== END:: check_seo_info */
         $request->session()->put('message', $message);
-        return redirect()->route('admin.blog.view', ['id' => $idBlog]);
+        return redirect()->route('admin.blog.view', ['id' => $idBlog, 'language' => $language]);
     }
 
     public function delete(Request $request){
@@ -163,16 +213,20 @@ class BlogController extends Controller {
                 $id         = $request->get('id');
                 $info       = Blog::select('*')
                                 ->where('id', $id)
-                                ->with('seo')
+                                ->with('seo', 'seos')
                                 ->first();
-                /* xóa ảnh đại diện trong thư mục */
-                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($info->seo->image_small));
-                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
-                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($info->seo->image));
-                if(file_exists($imagePath)) @unlink($imagePath);
-                /* delete bảng seo */
-                Seo::find($info->seo->id)->delete();
-                /* xóa blog_info */
+                /* xóa ảnh đại diện trên google_clouds */ 
+                Upload::deleteWallpaper($info->seo->image);
+                /* delete relation */
+                $info->categories()->delete();
+                /* delete các trang seos ngôn ngữ */
+                foreach($info->seos as $s){
+                    /* xóa ảnh đại diện trên google_clouds */ 
+                    Upload::deleteWallpaper($s->infoSeo->image);
+                    foreach($s->infoSeo->contents as $c) $c->delete();
+                    $s->infoSeo()->delete();
+                    $s->delete();
+                }
                 $info->delete();
                 DB::commit();
                 return true;

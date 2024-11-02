@@ -10,15 +10,19 @@
     /* lấy ảnh Small */
     $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->file_cloud);
     $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->file_cloud);
-    $imageLarge = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->file_cloud);
+    // $imageLarge = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->file_cloud);
+    // Tính tỷ lệ và số hàng cần chiếm (chỉ tính tương đối để không nhảy hàng - có hàm khác bằng jquery tính và cập nhật lại)
+    $aspectRatio = $wallpaper->height / $wallpaper->width;
+    $imageHeight = $aspectRatio * 280; // Giả sử ảnh hiển thị rộng 280px
+    $rows = ceil($imageHeight / 55); // Tính số hàng cần chiếm 40 của grid-auto-rows và 15 của gap
 @endphp
-<div id="js_calculatorPosition_item_{{ $wallpaper->id }}" class="freeWallpaperBox_item" data-id="{{ $wallpaper->id }}">
+<div id="js_calculatorPosition_item_{{ $wallpaper->id }}" class="freeWallpaperBox_item" data-id="{{ $wallpaper->id }}" data-width="{{ $wallpaper->width }}" data-height="{{ $wallpaper->height }}" style="grid-row-end: span {{ $rows }};">
     <div class="freeWallpaperBox_item_image">
         <picture>
             <source media="(max-width: 767px)" srcset="{{ $imageSmall }}">
             <img class="lazyload" 
                 src="{{ $imageMini }}" 
-                data-src="{{ $imageLarge }}" 
+                data-src="{{ $imageSmall }}" 
                 alt="{{ $altImage }}" 
                 title="{{ $altImage }}" 
                 loading="lazy" 
@@ -30,10 +34,10 @@
         <div class="freeWallpaperBox_item_box_item">
             <div class="author">
                 <div class="author_image">
-                    <img src="https://name.com.vn/storage/images/upload/logo-type-manager-upload.webp" alt="websitekiengiang@gmail.com" title="websitekiengiang@gmail.com" />
+                    <img src="https://name.com.vn/storage/images/upload/logo-type-manager-upload.webp" alt="wallpaperdienthoai@gmail.com" title="wallpaperdienthoai@gmail.com" />
                 </div>
                 <div class="author_name maxLine_1">
-                    Name
+                    Phú Quý
                 </div>
             </div>
         </div>

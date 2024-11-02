@@ -6,49 +6,52 @@
 @import 'childs/breadcrumb.scss';
 /* Home ===== kém quan trọng (nhưng ít nên đưa vào đây luôn) */
 @import 'childs/freewallpaper.scss';
+@import 'childs/relatedBox.scss';
 @import 'childs/footer.scss';
 @import 'childs/right.scss';
 @import 'childs/login.scss';
 @import 'childs/modal.scss';
 
+.pagefreeWallpaper {
+    max-width: 70rem;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
 .freeWallpaperDetailBox {
     display: flex;
     align-items: stretch;
     width: fit-content;
-    margin: 0 auto;
+    width: 100%;
+    gap: 1.5rem;
     &_image {
         position: relative;
+        border-radius: 0.75rem;
         img {
-            height: calc(100vh - 100px);
+            height: calc(100vh - $heightMenu - 3rem);
             width: auto;
             aspect-ratio: auto;
             position: sticky;
-            top: calc(52.5px + 1.5rem);
+            top: calc($heightMenu + 1.25rem);
             display: flex;
-            @media(max-width: 767px){
+            border-radius: inherit;
+            @media(max-width: 577px){
                 width: 100%;
-                max-width: 660px;
                 height: auto;
             }
         }
     }
     &_content {
-        max-width: 500px;
-        margin-left: 1.5rem;
         text-align: justify;
         &_action {
             display: flex;
             align-items: center;
             font-size: 0.85rem;
             font-family: $fontTitle;
-            border: 2px dashed rgba(255,209,0,0.8);
-            padding: 0.75rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
             text-align: left;
-            margin-top: 1rem;
-            &:hover {
-                border: 2px dashed rgba(255,209,0,1);
+            &:dir(rtl), [dir="rtl"] & {
+                text-align: right;
             }
             &_item {
                 padding: 0.5rem;
@@ -57,7 +60,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                border-radius: 0.5rem;
+                border-radius: 0.75rem;
                 box-shadow: 0 0 10px rgba(0,0,0,0.5);
                 cursor: pointer;
                 color: $colorText;
@@ -93,17 +96,25 @@
             }
         }
     }
-    @media(max-width: 1200px){
+    @media(max-width: 1199px){
+        gap: 1.25rem;
+    }
+    @media(max-width: 991px){
+        gap: 1rem;
+    }
+    @media(max-width: 767px){
+        gap: 0.75rem;
+    }
+    @media(max-width: 577px){
         flex-wrap: wrap;
         width: 100%;
+        gap: 0.5rem;
         &_image {
             margin: 0.5rem auto 0 auto;
         }
         &_content {
             width: 100%;
             max-width: 100%;
-            margin-left: 0;
-            margin-top: 0.75rem;
             &_action {
                 position: fixed;
                 left: 0;
@@ -126,7 +137,7 @@
             }
         }
     }
-    @media(max-width: 577px){
+    @media(max-width: 767px){
         &_image {
             margin: 0.25rem auto 0 auto;
         }

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model {
+class Category extends BaseCategory {
     use HasFactory;
     protected $table        = 'category_info';
     protected $fillable     = [
@@ -36,65 +36,6 @@ class Category extends Model {
         return $flag;
     }
 
-    public static function getArrayIdCategoryRelatedByIdCategory($infoCategory, $variable){
-        $idPage             = $infoCategory->seo->id;
-        $arrayChild         = self::select('*')
-                                ->whereHas('seo', function($query) use($idPage){
-                                    $query->where('parent', $idPage);
-                                })
-                                ->with('seo')
-                                ->get();
-        /* kiểm tra đã là category cha chưa => chưa thì lấy id category cha gộp vào mảng */
-        if(!empty($arrayChild)&&$arrayChild->isNotEmpty()){
-            foreach($arrayChild as $child){
-                $variable[]     = $child->id;
-                self::getArrayIdCategoryRelatedByIdCategory($child, $variable);
-            }
-        }
-        return $variable;
-    }
-
-    public static function getTreeCategory($wheres = []){
-        $query  = self::select('category_info.*')
-                    ->whereHas('seo', function ($query) {
-                        $query->where('level', 1);
-                    })
-                    ->with('seo', 'products')
-                    ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                    ->orderBy('seo.ordering', 'DESC');
-        /* thêm query where (nếu có) */
-        foreach ($wheres as $key => $where) $query->where($key, $where);
-        $result = $query->get();
-        for($i=0;$i<$result->count();++$i){
-            $result[$i]->childs  = self::getTreeCategoryByInfoCategory($result[$i], $wheres);
-        }
-        return $result;
-    }
-
-    public static function getTreeCategoryByInfoCategory($infoCategory, $wheres){
-        $result                 = new \Illuminate\Database\Eloquent\Collection;
-        if(!empty($infoCategory)){
-            $idPage             = $infoCategory->seo->id;
-            $query              = self::select('category_info.*')
-                                    ->whereHas('seo', function($query) use($idPage){
-                                        $query->where('parent', $idPage);
-                                    })
-                                    ->with('seo', 'products')
-                                    ->join('seo', 'seo.id', '=', 'category_info.seo_id')
-                                    ->orderBy('seo.ordering', 'DESC');
-            /* thêm query where (nếu có) */
-            foreach ($wheres as $key => $where) $query->where($key, $where);
-            $result = $query->get();  
-            /* ghép phần tử con */        
-            if($result->isNotEmpty()){
-                for($i=0;$i<$result->count();++$i){
-                    $result[$i]->childs = self::getTreeCategoryByInfoCategory($result[$i], $wheres);
-                }
-            }
-        }
-        return $result;
-    }
-
     public function seo() {
         return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
     }
@@ -117,10 +58,6 @@ class Category extends Model {
 
     public function tags(){
         return $this->hasMany(\App\Models\RelationCategoryInfoTagInfo::class, 'category_info_id', 'id');
-    }
-
-    public function blogs(){
-        return $this->hasMany(\App\Models\RelationCategoryInfoCategoryBlogInfo::class, 'category_info_id', 'id');
     }
 
     public function thumnails(){

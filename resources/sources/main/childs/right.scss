@@ -8,10 +8,9 @@
     z-index: 995;
     bottom: 60px;
     gap: 0.25rem;
-    [dir="ltr"] & {
-        right: 0.75rem;
-    }
-    [dir="rtl"] & {
+    right: 0.75rem;
+    &:dir(rtl), [dir="rtl"] & {
+        right: unset;
         left: 0.75rem;
     }
     &:hover {
@@ -75,15 +74,13 @@
             }
         }
     }
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         align-items: flex-start;
         flex-direction: row;
         bottom: calc($heightMenu + 3px);
-        [dir="ltr"] & {
-            left: 10px;
-            right: unset;
-        }
-        [dir="rtl"] & {
+        left: 10px;
+        right: unset;
+        &:dir(rtl), [dir="rtl"] & {
             right: 10px;
             left: unset;
         }

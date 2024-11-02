@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('relation_order_info_wallpaper_info', function (Blueprint $table) {
             $table->id();
             $table->integer('order_info_id');
-            $table->integer('product_info_id');
-            $table->text('product_price_id'); /* text vì để lưu giá trị all (trọn bộ) */
-            $table->integer('quantity');
-            $table->integer('price');
+            $table->integer('wallpaper_info_id');
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('order_product');
+        // Schema::dropIfExists('relation_order_info_wallpaper_info');
     }
 };

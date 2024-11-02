@@ -25,7 +25,7 @@ class CategoryController extends Controller {
         $params             = [];
         if(!empty($request->get('total'))){
             $params['loaded']                   = $request->get('loaded');
-            $params['request_load']             = $request->get('requestLoad');
+            $params['request_load']             = $request->get('request_load');
             $params['array_category_info_id']   = json_decode($request->get('array_category_info_id'));
             $params['sort_by']                  = Cookie::get('sort_by') ?? null;
             $params['filters']                  = $request->get('filters') ?? [];

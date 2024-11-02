@@ -51,7 +51,10 @@
                     dataType    : "html",
                     data        : { id : id }
                 }).done(function(data){
-                    if(data==true) $('#oneItem-'+id).remove();
+                    if(data==true) {
+                        $('#oneItem-'+id).remove();
+                        $('#oneItemSub-'+id).remove();
+                    }
                 });
             }
         }

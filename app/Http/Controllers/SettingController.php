@@ -44,4 +44,14 @@ class SettingController extends Controller {
         return $language;
     }
 
+    public static function settingCollapsedMenu(Request $request){
+        $action = $request->get('action');
+        
+        // Lưu giá trị vào session
+        Session::put('view_menu', $action);
+    
+        // Có thể trả về JSON hoặc true nếu cần cho AJAX response
+        return response()->json(['success' => true]);
+    }
+
 }

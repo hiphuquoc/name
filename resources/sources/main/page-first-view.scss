@@ -11,26 +11,34 @@
 @import 'childs/login.scss';
 @import 'childs/modal.scss';
 
-.pageContentWithSidebar {
+.pagePageBox {
+    max-width: 70rem;
     display: flex;
-    align-items: flex-start;
-    &_content {
-        width: calc(100% - 280px - 2.5rem);
-        ul {
-            margin-left: 1.25rem;
-        }
-    }
-    &_sidebar {
-        flex: 0 0 280px;
-        margin-left: 2.5rem;
-    }
-    @media(max-width: 1199px){
-        flex-wrap: wrap;
-        &_content {
-            width: 100%;
-        }
-        &_sidebar {
-            margin-left: 0;
-        }
-    }
+    flex-direction: column;
+    align-self: center;
 }
+
+// .pageContentWithSidebar {
+//     display: flex;
+//     align-items: flex-start;
+//     justify-content: center;
+//     &_content {
+//         width: calc(100% - 280px - 2.5rem);
+//         ul {
+//             margin-left: 1.25rem;
+//         }
+//     }
+//     &_sidebar {
+//         flex: 0 0 280px;
+//         margin-left: 2.5rem;
+//     }
+//     @media(max-width: 1199px){
+//         flex-wrap: wrap;
+//         &_content {
+//             width: 100%;
+//         }
+//         &_sidebar {
+//             margin-left: 0;
+//         }
+//     }
+// }

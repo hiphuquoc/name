@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Order;
 use App\Jobs\SendEmailOrder;
+use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class ConfirmController extends Controller {
@@ -33,7 +34,7 @@ class ConfirmController extends Controller {
         // $code       = 'FU3J5S0NLRCVAD2';
         $order      = Order::select('*')
                         ->where('code', $code)
-                        ->with('products.infoPrice', 'products.infoProduct')
+                        ->with('wallpapers.infoWallpaper')
                         ->first();
         $language   = session('language') ?? 'vi';
         $breadcrumb = \App\Helpers\Url::buildBreadcrumb($itemSeo->slug_full);
@@ -51,7 +52,7 @@ class ConfirmController extends Controller {
                             ->first();
         $flagPayment    = false;
         /* Trường hợp MOMO: có mã đơn hàng => xử lý tiếp */
-        if(!empty($request->get('orderId'))&&$orderInfo->paymentMethod->code=='momo'){
+        if(!empty($request->get('orderId'))){
             /* cập nhật trans_id (id thanh toán của momo) */
             $transId    = $request->get('transId') ?? '';
             if(!empty($transId)) Order::updateItem($orderInfo->id, ['trans_id' => $transId]);
@@ -82,7 +83,7 @@ class ConfirmController extends Controller {
                                 ->first();
             $flagPayment    = false;
             /* cập nhật trans_id (id thanh toán của zalopay) */
-            if(!empty($request->get('apptransid'))&&!empty($request->get('amount'))){ /* tồn tại transid và đã thanh toán > 0 => xử lý tiếp */
+            if(!empty($request->get('apptransid'))){ /* tồn tại transid và đã thanh toán > 0 => xử lý tiếp */
                 $transId        = $request->get('apptransid');
                 Order::updateItem($orderInfo->id, ['trans_id' => $transId]);
                 /* nếu đã thanh toán thành công */
@@ -138,7 +139,7 @@ class ConfirmController extends Controller {
             /* cập nhật trạng thái thành toán thành công */
             Order::updateItem($orderInfo->id, ['payment_status' => 1]);
             /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
-            if($orderInfo->payment_type=='payment_cart') \App\Http\Controllers\CartController::removeCookie('cart');
+            if($orderInfo->payment_type=='payment_cart') Session::forget('cart');
             /* tạo job gửi email */
             if(!empty($orderInfo->email)) SendEmailOrder::dispatch($orderInfo);
         }

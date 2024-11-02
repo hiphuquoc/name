@@ -161,7 +161,7 @@ class SeoFreeWallpaperController extends Controller {
                     }
                 }
                 /* insert seo_content */
-                CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
+                if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
                 DB::commit();
                 /* Message */
                 $message        = [

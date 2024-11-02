@@ -24,7 +24,7 @@
             <tbody>
                 @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
-                        <tr id="item_{{ $item->id }}">
+                        <tr id="oneItem-{{ $item->id }}">
                             <td class="text-center">{{ ($loop->index + 1) }}</td>
                             <td>{{ $item->type }}</td>
                             <td>{{ $item->reference_table }}</td>
@@ -88,7 +88,7 @@
                     dataType    : "html",
                     data        : { id }
                 }).done(function(data){
-                    if(data==true) $('#item_'+id).remove();
+                    if(data==true) $('#oneItem-'+id).remove();
                 });
             }
         }

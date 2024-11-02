@@ -1,19 +1,20 @@
+$widthNonCollapsed : 4.25rem;
+$widthCollapsed : 17rem;
 .layoutHeaderSide, .layoutHeaderTop {
     display: flex;
-    justify-content: space-between;
+    align-items: stretch;
     width: 100%;
     gap: 1.5rem;
     &_header {
-        flex: 0 0 16rem;
         display: flex;
         align-items: center;
-        gap: 1.5rem;
         margin: 0;
+        overflow: hidden;
         &.container {
-            [dir="ltr"] & {
+            &:dir(ltr), [dir="ltr"] & {
                 padding-right: 0;
             }
-            [dir="rtl"] & {
+            &:dir(rtl), [dir="rtl"] & {
                 padding-left: 0;
             }
         }
@@ -24,49 +25,54 @@
             width: 100%;
         }
         &.container {
-            [dir="ltr"] & {
+            &:dir(ltr), [dir="ltr"] & {
                 padding-left: 0;
             }
-            [dir="rtl"] & {
+            &:dir(rtl), [dir="rtl"] & {
                 padding-right: 0;
             }
         }
     }
     @media(max-width: 1199px){
         gap: 1.25rem;
-        &_header {
-            gap: 1.25rem;
-        }
     }
-    @media(max-width: 1023px){
-        // gap: 1.15rem; /* dung riêng cho khoảng cách của logo và ô search - do ô search bo tròn nên lấy số lẻ */
-        &_header {
-            // gap: 1rem;
-        }
+    @media(max-width: 991px){
         &_content {
             width: 100%;
             min-height: unset;
             display: flex;
             justify-content: flex-end;
             &.container {
-                [dir="ltr"] & {
-                    padding-left: 0.75rem !important; /* lấy theo container */
+                &:dir(ltr), [dir="ltr"] & {
+                    padding-left: 1rem !important; /* lấy theo container */
                 }
-                [dir="rtl"] & {
-                    padding-right: 0.75rem !important; /* lấy theo container */
+                &:dir(rtl), [dir="rtl"] & {
+                    padding-right: 1rem !important; /* lấy theo container */
                 }
             }
         }
 
     }
     @media(max-width: 767px){
-        
         &_content {
             &.container {
-                [dir="ltr"] & {
+                &:dir(ltr), [dir="ltr"] & {
+                    padding-left: 0.75rem !important; /* lấy theo container */
+                }
+                &:dir(rtl), [dir="rtl"] & {
+                    padding-right: 0.75rem !important; /* lấy theo container */
+                }
+            }
+        }
+        
+    }
+    @media(max-width: 566px){
+        &_content {
+            &.container {
+                &:dir(ltr), [dir="ltr"] & {
                     padding-left: 0.5rem !important; /* lấy theo container */
                 }
-                [dir="rtl"] & {
+                &:dir(rtl), [dir="rtl"] & {
                     padding-right: 0.5rem !important; /* lấy theo container */
                 }
             }
@@ -76,7 +82,13 @@
 }
 
 .layoutHeaderTop {
-    @media(max-width: 1023px){
+    &_header {
+        flex: 0 0 $widthNonCollapsed; /* chỉ mang widthCollapsed vì menu chỉ có 1 chế độ thu gọn */
+        width: $widthNonCollapsed;
+        padding-left: 1rem;
+        gap: 1.5rem;
+    }
+    @media(max-width: 991px){
         &_header {
             flex: unset;
             // padding-left: 0.75rem;
@@ -86,45 +98,181 @@
 }
 
 .layoutHeaderSide {
+    
+    &_placeholder {
+        display: flex;
+        flex: 0 0 $widthNonCollapsed;
+        width: $widthNonCollapsed;
+        /* khi sửa 4.25 này thì phải sửa trong js settingCollapsedMenu */
+    }
     &_header {
-        position: sticky;
+        position: fixed;
+        width: $widthNonCollapsed;
+        flex: 0 0 $widthNonCollapsed;
         flex-direction: column;
         align-items: flex-start;
-        top: calc($heightMenu + 1.5rem);
+        top: $heightMenu;
+        height: calc(100vh - $heightMenu);
+        box-shadow: 0px 1px 5px rgba(0,0,0,0.75);
+        transition: all 300ms;
+        background: $colorBackgroundLv2;
+        gap: 0.5rem;
+        z-index: 99;
+        padding: 0.25rem 0rem 1rem 0.75rem; /* left để đè container */
         left: 0;
-        height: calc(100vh - $heightMenu - 1.5rem);
-        padding-bottom: 1rem;
+        &:dir(rtl), [dir="rtl"] & {
+            padding: 0.25rem 0.75rem 1rem 0; /* left để đè container */
+            left: unset;
+            right: 0;
+        }
+        &_menuView {
+            position: absolute;
+            z-index: 2;
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;   
+            top: 0;
+            background: $colorBackgroundLv1;
+            opacity: 0;
+            right: 0;
+            border-top-left-radius: .75rem;
+            border-bottom-left-radius: 0.75rem;
+            &:dir(rtl), [dir="rtl"] & {
+                right: unset;
+                left: 0;
+                border-top-left-radius: unset;
+                border-bottom-left-radius: unset;
+                border-top-right-radius: .75rem;
+                border-bottom-right-radius: 0.75rem;
+            }
+            svg {
+                width: 1.25rem;
+                color: $colorIcon;
+            }
+        }
+        &:hover {
+            flex: 0 0 $widthCollapsed;
+            width: $widthCollapsed;
+            .headerSide {
+                ul {
+                    li {
+                        > a, > div {
+                            i, div, a {
+                                visibility: visible;
+                            }
+                        }
+                        ul {
+                            &.active {
+                                height: auto;
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+            .socialBox {
+                display: flex;
+            }
+            @media not all and (min-width: 990px) and (max-width: 1199px) {
+                .layoutHeaderSide_header_menuView {
+                    opacity: 1;
+                }
+            }
+        }
     }
     &_content {
         min-height: calc(100vh - 45px);
         height: 100%;
     }
-    @media(max-width: 1199px){
-        &_header {
-            height: calc(100vh - 52.5px - 1.25rem);
-            top: calc(52.5px + 1.25rem);
-            padding-bottom: calc($heightMenu + 1rem);
+    @media not all and (min-width: 990px) and (max-width: 1199px) {
+        /* CSS cho kích thước ngoài phạm vi từ 990px đến 1199px */
+        &.collapsed {
+            .layoutHeaderSide_placeholder {
+                display: none;
+                width: 0;
+            }
+            .layoutHeaderSide_header {
+                position: sticky;
+                flex: 0 0 $widthCollapsed;
+                width: $widthCollapsed;
+                .headerSide {
+                    ul {
+                        li {
+                            > a, > div {
+                                i, div, a {
+                                    visibility: visible;
+                                }
+                            }
+                            ul {
+                                &.active {
+                                    height: auto;
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                .layoutHeaderSide_header_menuView {
+                    opacity: 1;
+                }
+                .socialBox {
+                    display: flex;
+                }
+            }
         }
     }
-    @media(max-width: 1023px){
+
+    @media(max-width: 991px){
+        &_placeholder {
+            display: none !important;
+        }
         &_header {
             display: none;
-            position: fixed;
+            position: fixed !important;
             left: unset;
             right: 0;
             top: 0;
             z-index: 99999;
             height: 100vh;
             width: 100%;
-            max-width: 18rem;
             background: $colorBackgroundLv2;
-            padding: 0.75rem !important;
+            padding: 0 !important;
+            width: 18rem;
+            .headerSide {
+                ul {
+                    li {
+                        > a, > div {
+                            border-radius: 0.25rem;
+                            i, div, a {
+                                visibility: visible;
+                            }
+                        }
+                        ul {
+                            &.active {
+                                height: auto;
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+            .socialBox {
+                display: flex;
+                padding: 0 0.75rem 0.75rem 0.75rem !important; /* bắt buôc */
+            }
+            &_menuView {
+                display: none !important;
+            } 
         }
     }
 }
 
 .headerSide {
-    max-height: calc(100vh - $heightMenu - 1.5rem - 4rem);
+    max-height: calc(100vh - $heightMenu);
+    position: relative;
     &.customScrollBar-y {
         &::-webkit-scrollbar {
             width: 0;
@@ -153,28 +301,31 @@
                 color: $colorText !important;
             }
             &.selected {
-                font-family: $fontTitle;
-                color: $colorTextLight;
                 > a, >div {
-                    color: $colorTextLight !important;
-                    font-size: 1rem;
+                    background: $colorBackgroundLv1;
                 }
             }
             > a, > div {
                 color: $colorText !important;
                 display: flex;
                 align-items: center;
-                padding: 0.5rem 0;
                 width: 100%;
-                // flex-wrap: wrap;
                 align-items: flex-start;
                 gap: 0.75rem;
+                letter-spacing: 0.25px;
+                width: calc(100% + 1rem);
+                border-radius: 0.75rem;
+                padding: 0.825rem 1.25rem 0.825rem 2rem;
+                &:dir(rtl), [dir="rtl"] & {
+                    padding: 0.825rem 2rem 0.825rem 1.25rem;
+                }
                 img {
-                    width: 1.5rem;
-                    // opacity: 0.5;
+                    width: 1.45rem;
+                    flex: 0 0 1.45rem;
                 }
                 svg {
                     width: 1.5rem;
+                    flex: 0 0 1.5rem;
                     color: $colorIcon;
                     opacity: 0.75;
                 }
@@ -195,39 +346,33 @@
                 }
             }
             > ul {
-                height: 0;
-                opacity: 0;
-                transition: all 0.2s;
-                [dir="ltr"] & {
-                    padding-left: 20px;
-                }
-                [dir="rtl"] & {
-                    padding-right: 20px;
+                transition: all 0.3s;
+                padding-left: 1rem;
+                &:dir(rtl), [dir="rtl"] & {
+                    padding-left: unset;
+                    padding-right: 1rem;
                 }
             }
             ul {
-                [dir="ltr"] & {
-                    // margin-left: 10px;
-                    border-left: 1px dashed #{$colorIcon}7F;
-                }
-                [dir="rtl"] & {
-                    // margin-right: 10px;
-                    border-right: 1px dashed #{$colorIcon}7F;
-                }
+                height: 0;
+                opacity: 0;
                 > li {
                     position: relative;
                     &:before {
-                        position: absolute;
+                        @include fontAwesome;
                         color: $colorIcon;
-                        content: "--";
-                        font-size: 0.8rem;
-                        opacity: 0.75;
-                        top: 0.6rem;
-                        [dir="ltr"] & {
-                            left: -1.25rem;
-                        }
-                        [dir="rtl"] & {
-                            right: -1.25rem;
+                        content: "\f192";
+                        font-size: 0.45rem;
+                        opacity: .75;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: 0.75rem;
+                    }
+                    &:dir(rtl), [dir="rtl"] & {
+                        &:before {
+                            left: unset;
+                            right: 0.75rem;
                         }
                     }
                 }
@@ -235,20 +380,22 @@
         }
     }
     > ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
         > li {
-            &:not(:first-child){
-                margin-top: 0.15rem;
-            }
-            &:first-child {
-                a {
-                    padding-top: 0;
-                }
-            }
             > a, > div {
                 display: flex;
                 align-items: center;
+                padding-left: 0.75rem;
+                &:dir(rtl), [dir="rtl"] & {
+                    padding-right: 0.75rem;
+                }
+                i, div, a {
+                    visibility: hidden;
+                }
                 i {
-                    width: 30px;
+                    width: 1.75rem;
                     aspect-ratio: 1/1;
                     display: flex;
                     align-items: center;
@@ -257,10 +404,9 @@
                     font-size: 0.9rem;
                     cursor: pointer;
                     @include colorOpacity('color', $colorIcon, 0.75);
-                    [dir="ltr"] & {
-                        margin-left: auto;
-                    }
-                    [dir="rtl"] & {
+                    margin-left: auto;
+                    &:dir(rtl), [dir="rtl"] & {
+                        margin-left: unset;
                         margin-right: auto;
                     }
                 }
@@ -277,27 +423,61 @@
             }
         }
     }
-    @media(max-width: 1023px){
+    @media(max-width: 991px){
         max-height: calc(100vh - $heightMenu - 1.5rem - 4.75rem);
+        ul {
+            li {
+                > a, > div {
+                    width: 100% !important;
+                    padding: 0.75rem 0.75rem 0.75rem 1rem !important;
+                    &:dir(rtl), [dir="rtl"] & {
+                        padding: 0.75rem 1rem 0.75rem 0.75rem !important;
+                    }
+                }
+                ul {
+                    padding-left: 0.25rem;
+                    &:dir(rtl), [dir="rtl"] & {
+                        padding-left: unset;
+                        padding-right: 0.25rem;
+                    }
+                    li {
+                        > a, > div {
+                            padding-left: 2rem !important;
+                            &:dir(rtl), [dir="rtl"] & {
+                                padding-left: unset !important;
+                                padding-right: 2rem !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
 .logoInMenuMobile {
-    padding-bottom: 1rem;
     justify-content: center;
     text-align: center;
     width: 100%;
+    padding: 1.5rem 0 0.5rem 0;
     .logoMain {
+        flex: 0 0 2.75rem;
         width: 2.75rem;
+        height: 2.75rem;
     }
 }
 
 .socialBox {
     margin-top: auto;
     width: 100%;
-    display: flex;
+    display: none;
     align-items: flex-end;
     gap: 0.5rem;
+    padding-right: 1rem;
+    &:dir(rtl), [dir="rtl"] & {
+        padding-right: unset;
+        padding-left: 1rem;
+    }
     &_social {
         // border-top: 1px solid $colorBackgroundLv2;
         &_title {
@@ -307,11 +487,11 @@
         }
         &_box {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.75rem;
             &_item {
                 display: flex;
-                width: 28px;
-                aspect-ratio: 1/1;
+                width: 1.725rem;
+                height: 28px;
                 border-radius: 0.5rem;
                 background: $colorBackgroundLv2;
                 display: flex;
@@ -323,9 +503,9 @@
                     opacity: 1;
                 }
                 i {
-                    font-size: 1.3rem;
+                    font-size: 1.5rem;
                     color: $colorLv1;
-                    text-shadow: 1px 1px 2px $colorLv2;
+                    // text-shadow: 1px 1px 2px $colorLv2;
                 }
             }
         }
@@ -336,92 +516,10 @@
         opacity: 0.75;
         border-radius: 0.5rem;
         overflow: hidden;
-        [dir="ltr"] & {
-            margin-left: auto;
-        }
-        [dir="rtl"] & {
+        margin-left: auto;
+        &:dir(rtl), [dir="rtl"] & {
+            margin-left: unset;
             margin-right: auto;
         }
     }
-    @media(max-width: 767px){
-        padding-top: 0.35rem;
-    }
 }
-
-// .sidebarSectionBox {
-//     &:not(:first-child){
-//         margin-top: 1.5rem;
-//     }
-//     &_title {
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: center;
-//         margin-bottom: 1rem;
-//         h2, h3 {
-//             font-size: 1.15rem;
-//             font-family: $fontTitle;
-//             margin-bottom: 0;
-//             margin-top: 0;
-//             color: $colorText;
-//         }
-//     }
-//     &_box {
-//         // border: 1px solid $bg-04;
-//         border-radius: 0.5rem;
-//         background: $colorBackgroundLv2;
-//         font-weight: normal;
-//         &_item {
-//             display: flex;
-//             padding: 0.75rem 0.5rem;
-//             align-items: center;
-//             &:not(:first-child){
-//                 border-top: 1px solid $colorBackgroundLv1;
-//             }
-//             &:hover {
-//                 background: $colorBackgroundLv3;
-//             }
-//             &.children {
-//                 i {
-//                     margin-left: 0.5rem;
-//                     font-size: 0.4rem;
-//                     color: $bg-07;
-//                 }
-//             }
-//             h2, h3, h4 {
-//                 font-size: 0.95rem;
-//                 font-weight: 500;
-//                 @include colorOpacity('color', $colorText, 0.9);
-//                 margin: 0;
-//             }
-//             i {
-//                 width: 25px;
-//                 margin-right: 0.5rem;
-//                 font-size: 0.8rem;
-//                 @include colorOpacity('color', $colorText, 0.2);
-//                 text-align: center;
-//             }
-//         }
-//     }
-// }
-
-// .sidebarListBox {
-//     &_item {
-//         display: flex;
-//         @include colorOpacity('color', $colorText, 0.8);
-//         &:not(:first-child){
-//             margin-top: 0.5rem;
-//             padding-top: 0.5rem;
-//             border-top: 1px dashed $bg-05;
-//         }
-//         &:before {
-//             content: '\f105';
-//             @include fontAwesome;
-//             font-size: 0.8rem;
-//             color: $bg-06;
-//             margin-right: 0.5rem;
-//         }
-//         &.selected {
-//             color: $colorLv1;
-//         }
-//     }
-// }

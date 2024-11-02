@@ -42,7 +42,7 @@
         //     $(this).css('opacity', 0);
         // });
 
-        // buildTocContentMain('js_contentBox');
+        // buildTocContentMain('js_articleBox');
 
         // $('img').each(function() {
         //     if (!$(this).attr('alt') || !$(this).attr('title')) {
@@ -238,7 +238,7 @@
         const displayE  = element.css('display');
         if(displayE=='none'){
             /* hiển thị */
-            element.css('display', 'block');
+            element.css('display', 'flex');
             $('body').css('overflow', 'hidden');
             $('#js_blurBackground').addClass('blurBackground');
             $('.menuTopBackground').addClass('blurBackground');
@@ -296,23 +296,23 @@
             $('body').css('overflow', 'hidden');
         }
     }
-    /* tăng giảm số lượng input quantity */
-    function plusMinusQuantity(idInput, action){
-        const elementInput  = $('#'+idInput);
-        const valueInput    = elementInput.val();
-        if(action=='minus'){
-            if(valueInput>1) elementInput.val(parseInt(valueInput)-1);
-        }else {
-            elementInput.val(parseInt(valueInput)+1);
-        }
-    }
+    // /* tăng giảm số lượng input quantity */
+    // function plusMinusQuantity(idInput, action){
+    //     const elementInput  = $('#'+idInput);
+    //     const valueInput    = elementInput.val();
+    //     if(action=='minus'){
+    //         if(valueInput>1) elementInput.val(parseInt(valueInput)-1);
+    //     }else {
+    //         elementInput.val(parseInt(valueInput)+1);
+    //     }
+    // }
     /* thêm sản phẩm vào giỏ hàng */
     function addToCart(idProduct, idPrice, type) {
         let dataForm = {};
         dataForm.product_info_id = idProduct;
         dataForm.product_price_id = idPrice;
         dataForm.type = type;
-        
+        dataForm.language = $('#language').val();
         const queryString = new URLSearchParams(dataForm).toString();
 
         fetch("/addToCart?" + queryString, {
@@ -367,35 +367,6 @@
             console.error('There was a problem with your fetch operation:', error);
         });
     }
-    // /* tải lại thành tiền khi thay đổi số lượng */
-    // function updateCart(idRow, idTotal, idCount, idInput, theme = 'cartSort'){
-    //     /* tải loading */ 
-    //     loadLoading(idRow);
-    //     /* lấy dữ liệu */
-    //     const heightElementWrite    = $('#'+idRow).outerHeight();
-    //     const elementInput          = $('#'+idInput);
-    //     const valueInput            = elementInput.val();
-    //     const idProduct             = elementInput.data('product_info_id');
-    //     const idPrice               = elementInput.data('product_price_id');
-    //     $.ajax({
-    //         url         : '{{ route("main.updateCart") }}',
-    //         type        : 'get',
-    //         dataType    : 'json',
-    //         data        : {
-    //             product_info_id     : idProduct,
-    //             product_price_id    : idPrice,
-    //             quantity            : valueInput,
-    //             theme
-    //         },
-    //         success     : function(response){
-    //             setTimeout(function(){
-    //                 $('#'+idRow).html(response.row);
-    //                 $('#'+idTotal).html(response.total);
-    //                 $('#'+idCount).html(response.count);
-    //             }, 1000);
-    //         }
-    //     });
-    // }
     /* xóa sản phẩm khỏi cart */ 
     function removeProductCart(idProduct, idProductPrice, idRow, idTotal, idCount) {
         /* tải loading */ 
@@ -547,7 +518,7 @@
                     // }
                     // $('.tocFixedIcon').css('left', leftE);
                     /* thiết lập vị trí nút nhấn */
-                    const elemtBox = $('.contentElement');
+                    const elemtBox = $('#js_buildTocContentMain_element');
                     const isRTL = $('html').attr('dir') == 'rtl';
                     const positionBox = isRTL 
                         ? $(window).width() - elemtBox.offset().left - elemtBox.outerWidth() 

@@ -67,7 +67,11 @@ class Order extends Model {
     }
 
     public function products() {
-        return $this->hasMany(\App\Models\OrderProduct::class, 'order_info_id', 'id');
+        return $this->hasMany(\App\Models\RelationOrderInfoProductInfo::class, 'product_info_id', 'id');
+    }
+
+    public function wallpapers() {
+        return $this->hasMany(\App\Models\RelationOrderInfoWallpaperInfo::class, 'order_info_id', 'id');
     }
 
     public function paymentMethod() {
