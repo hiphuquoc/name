@@ -103,7 +103,7 @@
                                 @endforeach
                             @endforeach
                         @else 
-                            <div>{{ config('language.vi.data.no_suitable_results_found') }}</div>
+                            <div>{{ config('language.'.$language.'.data.no_suitable_results_found') }}</div>
                         @endif
                     </div>
                     
