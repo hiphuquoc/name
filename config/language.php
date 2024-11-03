@@ -88,7 +88,6 @@ return [
             'step_1_buy_now' => "Step 1: Please enter your email.",
             'note_fill_email' => "* If you enter an email, an additional copy will be sent for storage.",
             'step_2_buy_now' => "Step 2: Choose a payment method.",
-            'copyright' => "Copyright ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Designed and developed by Pham Van Phu. All rights reserved.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Wallpaper Theme",
@@ -152,6 +151,9 @@ return [
                 "topgirl"  => "Search Photos",
                 "topanime"  => "Search Photos",
             ],
+            "copyright" => [
+                "name"  => "Copyright ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Designed and developed by Pham Van Phu. All rights reserved.",
+            ]
         ]
     ],
     "zh" => [
@@ -241,7 +243,6 @@ return [
             'step_1_buy_now' => "步骤1：请您输入邮箱。",
             'note_fill_email' => "* 如果输入邮箱，将会发送一份副本以便存档。",
             'step_2_buy_now' => "步骤2：选择付款方式。",
-            'copyright' => "版权所有 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>。由范文富设计和开发。版权所有。",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "壁纸主题",
@@ -305,6 +306,9 @@ return [
                 "topgirl" => "搜索照片",
                 "topanime" => "搜索照片",
             ],
+            "copyright" => [
+                "name"  => "版权所有 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>。由范文富设计和开发。版权所有。",
+            ]
         ]
     ],
     "es" => [
@@ -394,7 +398,6 @@ return [
             'step_1_buy_now' => "Paso 1: Por favor, ingrese su correo electrónico.",
             'note_fill_email' => "* Si ingresa un correo electrónico, se enviará una copia adicional para su almacenamiento.",
             'step_2_buy_now' => "Paso 2: Elija una forma de pago.",
-            'copyright' => "Derechos de autor ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Diseñado y desarrollado por Pham Van Phu. Todos los derechos reservados.",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "Tema de fondo de pantalla",
@@ -458,6 +461,9 @@ return [
                 "topgirl" => "Buscar fotos",
                 "topanime" => "Buscar fotos",
             ],
+            "copyright" => [
+                "name"  => "Derechos de autor ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Diseñado y desarrollado por Pham Van Phu. Todos los derechos reservados.",
+            ]
         ]
     ],
     "fr" => [
@@ -547,7 +553,6 @@ return [
             'step_1_buy_now' => "Étape 1 : Veuillez entrer votre email.",
             'note_fill_email' => "* Si vous entrez un email, une copie supplémentaire sera envoyée pour archivage.",
             'step_2_buy_now' => "Étape 2 : Choisissez une méthode de paiement.",
-            'copyright' => "Droits d'auteur ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Conçu et développé par Pham Van Phu. Tous droits réservés.",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "Thème du fond d'écran",
@@ -611,6 +616,9 @@ return [
                 "topgirl" => "Rechercher des photos",
                 "topanime" => "Rechercher des photos",
             ],
+            "copyright" => [
+                "name"  => "Droits d'auteur ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Conçu et développé par Pham Van Phu. Tous droits réservés.",
+            ]
         ]
     ],
     "vi" => [
@@ -700,7 +708,6 @@ return [
             'step_1_buy_now' => "Bước 1: Bạn vui lòng nhập email.",
             'note_fill_email' => "* Nếu nhập email bạn sẽ được gửi thêm một bản để lưu trữ.",
             'step_2_buy_now' => "Bước 2: Chọn hình thức thanh toán.",
-            'copyright' => "Bản quyền ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Thiết kế và phát triển bởi Phạm Văn Phú. Mọi quyền được bảo lưu.",
             /* custom */
             "wallpaper_theme"   => [
                 "name"  => "Chủ đề Hình Nền",
@@ -765,6 +772,9 @@ return [
                 "topgirl"  => "Tìm kiếm Ảnh",
                 "topanime"  => "Tìm kiếm Ảnh",
             ],
+            "copyright" => [
+                "name"  => "Bản quyền ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Thiết kế và phát triển bởi Phạm Văn Phú. Mọi quyền được bảo lưu.",
+            ]
         ]
     ],
     "hi" => [
@@ -854,7 +864,6 @@ return [
             'step_1_buy_now' => "चरण 1: कृपया अपना ईमेल दर्ज करें।",
             'note_fill_email' => "* यदि आप ईमेल दर्ज करते हैं, तो भंडारण के लिए एक अतिरिक्त प्रति भेजी जाएगी।",
             'step_2_buy_now' => "चरण 2: भुगतान विधि चुनें।",
-            'copyright' => "कॉपीराइट ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>। डिजाइन और विकास Pham Van Phu द्वारा। सर्वाधिकार सुरक्षित।",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "वॉलपेपर थीम",
@@ -918,6 +927,9 @@ return [
                 "topgirl" => "फोटो खोजें",
                 "topanime" => "फोटो खोजें",
             ],
+            "copyright" => [
+                "name"  => "कॉपीराइट ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>। डिजाइन और विकास Pham Van Phu द्वारा। सर्वाधिकार सुरक्षित।",
+            ]
         ]
     ],
     "bn" => [
@@ -1007,7 +1019,6 @@ return [
             'step_1_buy_now' => "পর্যায় ১: অনুগ্রহ করে আপনার ইমেইল লিখুন।",
             'note_fill_email' => "* ইমেইল দিলে সংরক্ষণের জন্য একটি অতিরিক্ত কপি পাঠানো হবে।",
             'step_2_buy_now' => "পর্যায় ২: অর্থ প্রদানের পদ্ধতি নির্বাচন করুন।",
-            'copyright' => "স্বত্ব ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>। ডিজাইন ও বিকাশ করেছেন ফাম ভ্যান ফু। সর্বস্বত্ব সংরক্ষিত।",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "ওয়ালপেপার থিম",
@@ -1071,6 +1082,9 @@ return [
                 "topgirl" => "ছবি অনুসন্ধান",
                 "topanime" => "ছবি অনুসন্ধান",
             ],
+            "copyright" => [
+                "name" => "স্বত্ব ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>। ডিজাইন ও বিকাশ করেছেন ফাম ভ্যান ফু। সর্বস্বত্ব সংরক্ষিত।",
+            ]
         ]
     ],
     "mr" => [
@@ -1160,7 +1174,6 @@ return [
             'step_1_buy_now' => "पायरी 1: कृपया आपला ईमेल प्रविष्ट करा.",
             'note_fill_email' => "* आपला ईमेल प्रविष्ट केल्यास साठवणीसाठी अतिरिक्त प्रत पाठवली जाईल.",
             'step_2_buy_now' => "पायरी 2: पेमेंट पद्धत निवडा.",
-            'copyright' => "कॉपीराइट ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. फाम वॅन फू यांच्याकडून डिझाइन व विकास. सर्व हक्क राखीव.",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "वॉलपेपर थीम",
@@ -1224,6 +1237,9 @@ return [
                 "topgirl" => "फोटो शोधा",
                 "topanime" => "फोटो शोधा",
             ],
+            "copyright" => [
+                "name"  => "कॉपीराइट ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. फाम वॅन फू यांच्याकडून डिझाइन व विकास. सर्व हक्क राखीव.",
+            ]
         ]
     ],
     "ta" => [
@@ -1313,7 +1329,6 @@ return [
             'step_1_buy_now' => "படி 1: தயவுசெய்து உங்கள் மின்னஞ்சலை உள்ளிடவும்.",
             'note_fill_email' => "* மின்னஞ்சல் உள்ளிடினால், சேமிப்பிற்காக கூடுதல் பிரதியை அனுப்பப்படும்.",
             'step_2_buy_now' => "படி 2: கட்டண முறையை தேர்வு செய்யவும்.",
-            'copyright' => "பதிப்புரிமை ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. வடிவமைப்பு மற்றும் மேம்பாடு Pham Van Phu. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "வால்பேப்பர் தீம்",
@@ -1377,6 +1392,9 @@ return [
                 "topgirl" => "படங்களைத் தேடுங்கள்",
                 "topanime" => "படங்களைத் தேடுங்கள்",
             ],
+            "copyright" => [
+                "name"  => "பதிப்புரிமை ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. வடிவமைப்பு மற்றும் மேம்பாடு Pham Van Phu. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+            ]
         ]
     ],
     "te" => [
@@ -1466,7 +1484,6 @@ return [
             'step_1_buy_now' => "దశ 1: దయచేసి మీ ఇమెయిల్‌ను నమోదు చేయండి.",
             'note_fill_email' => "* మీరు ఇమెయిల్‌ను నమోదు చేస్తే, నిల్వ కోసం అదనపు కాపీ పంపబడుతుంది.",
             'step_2_buy_now' => "దశ 2: చెల్లింపు విధానాన్ని ఎంచుకోండి.",
-            'copyright' => "కాపీహక్కులు ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ఫామ్ వాన్ ఫు రూపొందించారు మరియు అభివృద్ధి చేశారు. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "వాల్‌పేపర్ థీమ్",
@@ -1530,6 +1547,9 @@ return [
                 "topgirl" => "చిత్రాలను అన్వేషించండి",
                 "topanime" => "చిత్రాలను అన్వేషించండి",
             ],
+            "copyright" => [
+                "name"  => "కాపీహక్కులు ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ఫామ్ వాన్ ఫు రూపొందించారు మరియు అభివృద్ధి చేశారు. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
+            ]
         ]
     ],
     "ur" => [
@@ -1619,7 +1639,6 @@ return [
             'step_1_buy_now' => "مرحلہ 1: براہ کرم اپنا ای میل درج کریں۔",
             'note_fill_email' => "* اگر آپ ای میل داخل کرتے ہیں، تو ذخیرہ کرنے کے لیے ایک اضافی کاپی بھیجی جائے گی۔",
             'step_2_buy_now' => "مرحلہ 2: ادائیگی کا طریقہ منتخب کریں۔",
-            'copyright' => "جملہ حقوق محفوظ ہیں ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>۔ ڈیزائن اور ترقی Pham Van Phu نے کی۔",
             /* custom */
             "wallpaper_theme" => [
                 "name" => "وال پیپر تھیم",
@@ -1683,6 +1702,9 @@ return [
                 "topgirl" => "تصاویر تلاش کریں",
                 "topanime" => "تصاویر تلاش کریں",
             ],
+            "copyright" => [
+                "name"  => "جملہ حقوق محفوظ ہیں ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>۔ ڈیزائن اور ترقی Pham Van Phu نے کی۔",
+            ]
         ]
     ],
     "gu" => [
@@ -1772,7 +1794,6 @@ return [
             'step_1_buy_now' => "પગલું 1: કૃપા કરીને તમારું ઇમેઇલ દાખલ કરો.",
             'note_fill_email' => "* જો તમે ઇમેઇલ દાખલ કરો છો, તો સંગ્રહ માટે એક વધારાની નકલ મોકલવામાં આવશે.",
             'step_2_buy_now' => "પગલું 2: ચુકવણીનો વિકલ્પ પસંદ કરો.",
-            'copyright' => "પ્રતિમાન્ય ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a> છે. ફામ વેન ફૂ દ્વારા ડિઝાઇન અને વિકાસ. તમામ હક્કો અધિકારક્ષિત છે.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "વોલપેપર થીમ",
@@ -1836,6 +1857,9 @@ return [
                 "topgirl"  => "ફોટાઓ શોધો",
                 "topanime"  => "ફોટાઓ શોધો",
             ],
+            "copyright" => [
+                "name"  => "પ્રતિમાન્ય ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a> છે. ફામ વેન ફૂ દ્વારા ડિઝાઇન અને વિકાસ. તમામ હક્કો અધિકારક્ષિત છે.",
+            ]
         ]
     ],
     "kn" => [
@@ -1925,7 +1949,6 @@ return [
             'step_1_buy_now' => "ಹಂತ 1: ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ನಮೂದಿಸಿ.",
             'note_fill_email' => "* ನೀವು ಇಮೇಲ್ ನಮೂದಿಸಿದರೆ, ಸಂಗ್ರಹಣೆಗೆ ಇನ್ನೊಂದು ಪ್ರತಿಯನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ.",
             'step_2_buy_now' => "ಹಂತ 2: ಪಾವತಿ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
-            'copyright' => "ಕಾಪಿರೈಟ್ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ಫಾಮ್ ವಾನ್ ಫು ವಿನ್ಯಾಸ ಮತ್ತು ಅಭಿವೃದ್ಧಿ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ವಾಲ್‌ಪೇಪರ್ ಥೀಮ್",
@@ -1989,6 +2012,9 @@ return [
                 "topgirl"  => "ಚಿತ್ರಗಳನ್ನು ಹುಡುಕಿ",
                 "topanime"  => "ಚಿತ್ರಗಳನ್ನು ಹುಡುಕಿ",
             ],
+            "copyright" => [
+                "name"  => "ಕಾಪಿರೈಟ್ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ಫಾಮ್ ವಾನ್ ಫು ವಿನ್ಯಾಸ ಮತ್ತು ಅಭಿವೃದ್ಧಿ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+            ]
         ]
     ],
     "ja" => [
@@ -2078,7 +2104,6 @@ return [
             'step_1_buy_now' => "ステップ1：メールアドレスを入力してください。",
             'note_fill_email' => "* メールアドレスを入力すると、保管用に追加のコピーが送信されます。",
             'step_2_buy_now' => "ステップ2：支払い方法を選択してください。",
-            'copyright' => "著作権 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>。Pham Van Phu によるデザインと開発。全著作権所有。",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "壁紙テーマ",
@@ -2142,6 +2167,9 @@ return [
                 "topgirl"  => "写真を検索",
                 "topanime"  => "写真を検索",
             ],
+            "copyright" => [
+                "name"  => "著作権 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>。Pham Van Phu によるデザインと開発。全著作権所有。",
+            ]
         ]
     ],
     "ko" => [
@@ -2231,7 +2259,6 @@ return [
             'step_1_buy_now' => "단계 1: 이메일을 입력해 주세요.",
             'note_fill_email' => "* 이메일을 입력하면 보관용으로 추가 사본이 전송됩니다.",
             'step_2_buy_now' => "단계 2: 결제 방식을 선택하세요.",
-            'copyright' => "저작권 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Pham Van Phu에 의해 디자인 및 개발되었습니다. 모든 권리 보유.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "배경화면 테마",
@@ -2295,6 +2322,9 @@ return [
                 "topgirl"  => "사진 검색",
                 "topanime"  => "사진 검색",
             ],
+            "copyright" => [
+                "name"  => "저작권 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Pham Van Phu에 의해 디자인 및 개발되었습니다. 모든 권리 보유.",
+            ]
         ]
     ],
     "jv" => [
@@ -2384,7 +2414,6 @@ return [
             'step_1_buy_now' => "Langkah 1: Mangga lebokna email panjenengan.",
             'note_fill_email' => "* Yen lebokna email, salinan tambahan bakal dikirim kanggo panyimpenan.",
             'step_2_buy_now' => "Langkah 2: Pilih cara pambayaran.",
-            'copyright' => "Hak cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Dirancang lan dikembangake dening Pham Van Phu. Kabeh hak dilindhungi.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2448,6 +2477,9 @@ return [
                 "topgirl"  => "Cari Foto",
                 "topanime"  => "Cari Foto",
             ],
+            "copyright" => [
+                "name"  => "Hak cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Dirancang lan dikembangake dening Pham Van Phu. Kabeh hak dilindhungi.",
+            ]
         ]
     ],
     "id" => [
@@ -2537,7 +2569,6 @@ return [
             'step_1_buy_now' => "Langkah 1: Silakan masukkan email Anda.",
             'note_fill_email' => "* Jika Anda memasukkan email, salinan tambahan akan dikirim untuk penyimpanan.",
             'step_2_buy_now' => "Langkah 2: Pilih metode pembayaran.",
-            'copyright' => "Hak Cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Dirancang dan dikembangkan oleh Pham Van Phu. Semua hak dilindungi.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2601,6 +2632,9 @@ return [
                 "topgirl"  => "Cari Foto",
                 "topanime"  => "Cari Foto",
             ],
+            "copyright" => [
+                "name"  => "Hak Cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Dirancang dan dikembangkan oleh Pham Van Phu. Semua hak dilindungi.",
+            ]
         ]
     ],
     "ms" => [
@@ -2690,7 +2724,6 @@ return [
             'step_1_buy_now' => "Langkah 1: Sila masukkan emel anda.",
             'note_fill_email' => "* Jika anda memasukkan emel, salinan tambahan akan dihantar untuk penyimpanan.",
             'step_2_buy_now' => "Langkah 2: Pilih kaedah pembayaran.",
-            'copyright' => "Hak cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Direka dan dibangunkan oleh Pham Van Phu. Hak cipta terpelihara.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2754,6 +2787,9 @@ return [
                 "topgirl"  => "Cari Gambar",
                 "topanime"  => "Cari Gambar",
             ],
+            "copyright" => [
+                "name"  => "Hak cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Direka dan dibangunkan oleh Pham Van Phu. Hak cipta terpelihara.",
+            ]
         ]
     ],
     "th" => [
@@ -2843,7 +2879,6 @@ return [
             'step_1_buy_now' => "ขั้นตอนที่ 1: กรุณาใส่อีเมลของคุณ.",
             'note_fill_email' => "* หากใส่อีเมลจะมีสำเนาเพิ่มเติมส่งไปเพื่อการจัดเก็บ.",
             'step_2_buy_now' => "ขั้นตอนที่ 2: เลือกวิธีการชำระเงิน.",
-            'copyright' => "ลิขสิทธิ์ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ออกแบบและพัฒนาโดย Pham Van Phu. สงวนลิขสิทธิ์ทั้งหมด.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ธีมวอลเปเปอร์",
@@ -2907,6 +2942,9 @@ return [
                 "topgirl"  => "ค้นหาภาพถ่าย",
                 "topanime"  => "ค้นหาภาพถ่าย",
             ],
+            "copyright" => [
+                "name"  => "ลิขสิทธิ์ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ออกแบบและพัฒนาโดย Pham Van Phu. สงวนลิขสิทธิ์ทั้งหมด.",
+            ]
         ]
     ],
     "km" => [
@@ -2996,7 +3034,6 @@ return [
             'step_1_buy_now' => "ជំហានទី 1៖ សូមបញ្ចូលអ៊ីមែលរបស់អ្នក។",
             'note_fill_email' => "* ប្រសិនបើបញ្ចូលអ៊ីមែល នឹងមានច្បាប់ចម្លងបន្ថែមសម្រាប់រក្សាទុក។",
             'step_2_buy_now' => "ជំហានទី 2៖ ជ្រើសរើសវិធីសាស្ត្រទូទាត់។",
-            'copyright' => "រក្សាសិទ្ធិ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>។ រចនា និងអភិវឌ្ឍដោយ Pham Van Phu។ រក្សា​សិទ្ធិ​គ្រប់​យ៉ាង។",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ប្រធានបទផ្ទាំងរូបភាព",
@@ -3060,6 +3097,9 @@ return [
                 "topgirl"  => "ស្វែងរករូបភាព",
                 "topanime"  => "ស្វែងរករូបភាព",
             ],
+            "copyright" => [
+                "name"  => "រក្សាសិទ្ធិ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>។ រចនា និងអភិវឌ្ឍដោយ Pham Van Phu។ រក្សា​សិទ្ធិ​គ្រប់​យ៉ាង។",
+            ]
         ]
     ],
     "lo" => [
@@ -3149,7 +3189,6 @@ return [
             'step_1_buy_now' => "ຂັ້ນຕອນທີ່ 1: ກະລຸນາໃສ່ອີເມລຂອງທ່ານ.",
             'note_fill_email' => "* ຖ້າໃສ່ອີເມລ ຈະຖືກສົ່ງສຳເນົາເພີ່ມເຕີມໄວ້ບັນທຶກ.",
             'step_2_buy_now' => "ຂັ້ນຕອນທີ່ 2: ເລືອກວິທີການຈ່າຍເງິນ.",
-            'copyright' => "ລິຂະສິດ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ອອກແບບ ແລະ ພັດທະນາໂດຍ Pham Van Phu. ສິດທິທັງໝົດຖືກສະໄຫມ.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ຫົວຂໍ້ພາບເວລ",
@@ -3213,6 +3252,9 @@ return [
                 "topgirl"  => "ຄົ້ນຫາຮູບ",
                 "topanime"  => "ຄົ້ນຫາຮູບ",
             ],
+            "copyright" => [
+                "name"  => "ລິຂະສິດ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ອອກແບບ ແລະ ພັດທະນາໂດຍ Pham Van Phu. ສິດທິທັງໝົດຖືກສະໄຫມ.",
+            ]
         ]
     ],
     "ar" => [
@@ -3302,7 +3344,6 @@ return [
             'step_1_buy_now' => "الخطوة 1: يرجى إدخال البريد الإلكتروني الخاص بك.",
             'note_fill_email' => "* إذا أدخلت البريد الإلكتروني، سيتم إرسال نسخة إضافية للتخزين.",
             'step_2_buy_now' => "الخطوة 2: اختر طريقة الدفع.",
-            'copyright' => "حقوق الطبع والنشر ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. تم التصميم والتطوير بواسطة فام فان فو. جميع الحقوق محفوظة.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "موضوع خلفية الشاشة",
@@ -3366,6 +3407,9 @@ return [
                 "topgirl"  => "ابحث عن صور",
                 "topanime"  => "ابحث عن صور",
             ],
+            "copyright" => [
+                "name"  => "حقوق الطبع والنشر ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. تم التصميم والتطوير بواسطة فام فان فو. جميع الحقوق محفوظة.",
+            ]
         ]
     ],
     "fa" => [
@@ -3455,7 +3499,6 @@ return [
             'step_1_buy_now' => "مرحله 1: لطفاً ایمیل خود را وارد کنید.",
             'note_fill_email' => "* اگر ایمیل را وارد کنید، یک نسخه اضافی برای ذخیره ارسال می‌شود.",
             'step_2_buy_now' => "مرحله 2: روش پرداخت را انتخاب کنید.",
-            'copyright' => "کپی رایت ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. طراحی و توسعه توسط فام ون فو. کلیه حقوق محفوظ است.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "موضوع پس‌زمینه",
@@ -3519,6 +3562,9 @@ return [
                 "topgirl"  => "جستجوی عکس‌ها",
                 "topanime"  => "جستجوی عکس‌ها",
             ],
+            "copyright" => [
+                "name"  => "کپی رایت ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. طراحی و توسعه توسط فام ون فو. کلیه حقوق محفوظ است.",
+            ]
         ]
     ],
     "ru" => [
@@ -3608,7 +3654,6 @@ return [
             'step_1_buy_now' => "Шаг 1: Пожалуйста, введите свой адрес электронной почты.",
             'note_fill_email' => "* Если вы введете адрес электронной почты, будет отправлена дополнительная копия для хранения.",
             'step_2_buy_now' => "Шаг 2: Выберите способ оплаты.",
-            'copyright' => "Авторское право ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Дизайн и разработка Pham Van Phu. Все права защищены.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Тема обоев",
@@ -3672,6 +3717,9 @@ return [
                 "topgirl"  => "Поиск фото",
                 "topanime"  => "Поиск фото",
             ],
+            "copyright" => [
+                "name"  => "Авторское право ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Дизайн и разработка Pham Van Phu. Все права защищены.",
+            ]
         ]
     ],
     "de" => [
@@ -3761,7 +3809,6 @@ return [
             'step_1_buy_now' => "Schritt 1: Bitte geben Sie Ihre E-Mail-Adresse ein.",
             'note_fill_email' => "* Wenn Sie eine E-Mail eingeben, wird eine zusätzliche Kopie zur Speicherung gesendet.",
             'step_2_buy_now' => "Schritt 2: Wählen Sie eine Zahlungsmethode.",
-            'copyright' => "Urheberrecht ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Entworfen und entwickelt von Pham Van Phu. Alle Rechte vorbehalten.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tapetenthema",
@@ -3825,6 +3872,9 @@ return [
                 "topgirl"  => "Fotos suchen",
                 "topanime"  => "Fotos suchen",
             ],
+            "copyright" => [
+                "name"  => "Urheberrecht ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Entworfen und entwickelt von Pham Van Phu. Alle Rechte vorbehalten.",
+            ]
         ]
     ],
     "tr" => [
@@ -3914,7 +3964,6 @@ return [
             'step_1_buy_now' => "Adım 1: Lütfen e-postanızı girin.",
             'note_fill_email' => "* Bir e-posta girerseniz, saklama için ek bir kopya gönderilecektir.",
             'step_2_buy_now' => "Adım 2: Bir ödeme yöntemi seçin.",
-            'copyright' => "Telif Hakkı ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Tasarım ve geliştirme Pham Van Phu tarafından. Tüm hakları saklıdır.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Duvar Kağıdı Teması",
@@ -3978,6 +4027,9 @@ return [
                 "topgirl"  => "Fotoğraf Ara",
                 "topanime"  => "Fotoğraf Ara",
             ],
+            "copyright" => [
+                "name"  => "Telif Hakkı ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Tasarım ve geliştirme Pham Van Phu tarafından. Tüm hakları saklıdır.",
+            ]
         ]
     ],
     "it" => [
@@ -4067,7 +4119,6 @@ return [
             'step_1_buy_now' => "Passaggio 1: Si prega di inserire l'email.",
             'note_fill_email' => "* Se inserisci un'email, verrà inviata una copia aggiuntiva per l'archiviazione.",
             'step_2_buy_now' => "Passaggio 2: Scegli un metodo di pagamento.",
-            'copyright' => "Copyright ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Progettato e sviluppato da Pham Van Phu. Tutti i diritti riservati.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema dello sfondo",
@@ -4131,6 +4182,9 @@ return [
                 "topgirl"  => "Cerca Foto",
                 "topanime"  => "Cerca Foto",
             ],
+            "copyright" => [
+                "name"  => "Copyright ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Progettato e sviluppato da Pham Van Phu. Tutti i diritti riservati.",
+            ]
         ]
     ],
     "pl" => [
@@ -4220,7 +4274,6 @@ return [
             'step_1_buy_now' => "Krok 1: Proszę wprowadzić e-mail.",
             'note_fill_email' => "* Jeśli wprowadzisz e-mail, zostanie wysłana dodatkowa kopia do przechowywania.",
             'step_2_buy_now' => "Krok 2: Wybierz metodę płatności.",
-            'copyright' => "Prawa autorskie ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Zaprojektowane i opracowane przez Pham Van Phu. Wszelkie prawa zastrzeżone.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Temat tapety",
@@ -4284,6 +4337,9 @@ return [
                 "topgirl"  => "Szukaj zdjęć",
                 "topanime"  => "Szukaj zdjęć",
             ],
+            "copyright" => [
+                "name"  => "Prawa autorskie ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Zaprojektowane i opracowane przez Pham Van Phu. Wszelkie prawa zastrzeżone.",
+            ]
         ]
     ],
     "uk" => [
@@ -4373,7 +4429,6 @@ return [
             'step_1_buy_now' => "Крок 1: Будь ласка, введіть електронну пошту.",
             'note_fill_email' => "* Якщо ви введете електронну пошту, буде надіслано додаткову копію для зберігання.",
             'step_2_buy_now' => "Крок 2: Виберіть спосіб оплати.",
-            'copyright' => "Авторське право ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Дизайн і розробка Pham Van Phu. Усі права захищено.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Тема шпалер",
@@ -4437,6 +4492,9 @@ return [
                 "topgirl"  => "Шукати фотографії",
                 "topanime"  => "Шукати фотографії",
             ],
+            "copyright" => [
+                "name"  => "Авторське право ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Дизайн і розробка Pham Van Phu. Усі права захищено.",
+            ]
         ]
     ],
     "nl" => [
@@ -4526,7 +4584,6 @@ return [
             'step_1_buy_now' => "Stap 1: Voer uw e-mail in.",
             'note_fill_email' => "* Als u een e-mail invoert, wordt er een extra kopie voor opslag verzonden.",
             'step_2_buy_now' => "Stap 2: Kies een betaalmethode.",
-            'copyright' => "Auteursrecht ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Ontworpen en ontwikkeld door Pham Van Phu. Alle rechten voorbehouden.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Achtergrondthema",
@@ -4590,6 +4647,9 @@ return [
                 "topgirl"  => "Zoek Foto's",
                 "topanime"  => "Zoek Foto's",
             ],
+            "copyright" => [
+                "name"  => "Auteursrecht ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Ontworpen en ontwikkeld door Pham Van Phu. Alle rechten voorbehouden.",
+            ]
         ]
     ],
     "el" => [
@@ -4679,7 +4739,6 @@ return [
             'step_1_buy_now' => "Βήμα 1: Παρακαλώ εισάγετε το email σας.",
             'note_fill_email' => "* Εάν εισάγετε ένα email, θα σταλεί ένα επιπλέον αντίγραφο για αποθήκευση.",
             'step_2_buy_now' => "Βήμα 2: Επιλέξτε μια μέθοδο πληρωμής.",
-            'copyright' => "Πνευματικά δικαιώματα ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Σχεδιασμός και ανάπτυξη από τον Pham Van Phu. Με επιφύλαξη παντός δικαιώματος.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Θέμα Ταπετσαρίας",
@@ -4743,6 +4802,9 @@ return [
                 "topgirl"  => "Αναζήτηση Φωτογραφιών",
                 "topanime"  => "Αναζήτηση Φωτογραφιών",
             ],
+            "copyright" => [
+                "name"  => "Πνευματικά δικαιώματα ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Σχεδιασμός και ανάπτυξη από τον Pham Van Phu. Με επιφύλαξη παντός δικαιώματος.",
+            ]
         ]
     ],
     "hu" => [
@@ -4832,7 +4894,6 @@ return [
             'step_1_buy_now' => "1. lépés: Kérjük, adja meg az e-mail-címét.",
             'note_fill_email' => "* Ha megad egy e-mailt, egy további példány kerül elküldésre tárolás céljából.",
             'step_2_buy_now' => "2. lépés: Válasszon fizetési módot.",
-            'copyright' => "Szerzői jog ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Tervezte és fejlesztette Pham Van Phu. Minden jog fenntartva.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Háttérkép téma",
@@ -4896,6 +4957,9 @@ return [
                 "topgirl"  => "Fotók keresése",
                 "topanime"  => "Fotók keresése",
             ],
+            "copyright" => [
+                "name"  => "Szerzői jog ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Tervezte és fejlesztette Pham Van Phu. Minden jog fenntartva.",
+            ]
         ]
     ],
     "cs" => [
@@ -4985,7 +5049,6 @@ return [
             'step_1_buy_now' => "Krok 1: Zadejte prosím svůj e-mail.",
             'note_fill_email' => "* Pokud zadáte e-mail, bude zaslána další kopie pro uložení.",
             'step_2_buy_now' => "Krok 2: Vyberte způsob platby.",
-            'copyright' => "Autorská práva ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Navrženo a vyvinuto Pham Van Phu. Všechna práva vyhrazena.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Téma tapety",
@@ -5049,6 +5112,9 @@ return [
                 "topgirl"  => "Hledat fotky",
                 "topanime"  => "Hledat fotky",
             ],
+            "copyright" => [
+                "name"  => "Autorská práva ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Navrženo a vyvinuto Pham Van Phu. Všechna práva vyhrazena.",
+            ]
         ]
     ],
     "ro" => [
@@ -5138,7 +5204,6 @@ return [
             'step_1_buy_now' => "Pasul 1: Vă rugăm să introduceți e-mailul.",
             'note_fill_email' => "* Dacă introduceți un e-mail, va fi trimisă o copie suplimentară pentru stocare.",
             'step_2_buy_now' => "Pasul 2: Alegeți o metodă de plată.",
-            'copyright' => "Drepturi de autor ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Proiectat și dezvoltat de Pham Van Phu. Toate drepturile rezervate.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Temă tapet",
@@ -5202,6 +5267,9 @@ return [
                 "topgirl"  => "Caută fotografii",
                 "topanime"  => "Caută fotografii",
             ],
+            "copyright" => [
+                "name"  => "Drepturi de autor ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Proiectat și dezvoltat de Pham Van Phu. Toate drepturile rezervate.",
+            ]
         ]
     ],
     "sk" => [
@@ -5291,7 +5359,6 @@ return [
             'step_1_buy_now' => "Krok 1: Prosím zadajte e-mail.",
             'note_fill_email' => "* Ak zadáte e-mail, bude poslaná ďalšia kópia na uloženie.",
             'step_2_buy_now' => "Krok 2: Vyberte spôsob platby.",
-            'copyright' => "Autorské práva ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Navrhol a vyvinul Pham Van Phu. Všetky práva vyhradené.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Téma tapety",
@@ -5355,6 +5422,9 @@ return [
                 "topgirl"  => "Vyhľadávanie fotografií",
                 "topanime"  => "Vyhľadávanie fotografií",
             ],
+            "copyright" => [
+                "name"  => "Autorské práva ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Navrhol a vyvinul Pham Van Phu. Všetky práva vyhradené.",
+            ]
         ]
     ],
     "ka" => [
@@ -5444,7 +5514,6 @@ return [
             'step_1_buy_now' => "ნაბიჯი 1: გთხოვთ, შეიყვანოთ თქვენი ელ.ფოსტა.",
             'note_fill_email' => "* თუ შეიყვანთ ელ.ფოსტას, დამატებითი ასლი გაიგზავნება შესანახად.",
             'step_2_buy_now' => "ნაბიჯი 2: აირჩიეთ გადახდის მეთოდი.",
-            'copyright' => "საავტორო უფლებები ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. დიზაინი და განვითარება Pham Van Phu. ყველა უფლება დაცულია.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ფონის თემა",
@@ -5508,6 +5577,9 @@ return [
                 "topgirl"  => "ფოტოების ძიება",
                 "topanime"  => "ფოტოების ძიება",
             ],
+            "copyright" => [
+                "name"  => "საავტორო უფლებები ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. დიზაინი და განვითარება Pham Van Phu. ყველა უფლება დაცულია.",
+            ]
         ]
     ],
     "he" => [
@@ -5597,7 +5669,6 @@ return [
             'step_1_buy_now' => "שלב 1: אנא הזן את האימייל שלך.",
             'note_fill_email' => "* אם תזין אימייל, עותק נוסף יישלח לאחסון.",
             'step_2_buy_now' => "שלב 2: בחר שיטת תשלום.",
-            'copyright' => "זכויות יוצרים ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. עיצוב ופיתוח על ידי פאם ואן פהו. כל הזכויות שמורות.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "נושא טפט",
@@ -5661,6 +5732,9 @@ return [
                 "topgirl"  => "חיפוש תמונות",
                 "topanime"  => "חיפוש תמונות",
             ],
+            "copyright" => [
+                "name"  => "זכויות יוצרים ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. עיצוב ופיתוח על ידי פאם ואן פהו. כל הזכויות שמורות.",
+            ]
         ]
     ],
     "uz" => [
@@ -5750,7 +5824,6 @@ return [
             'step_1_buy_now' => "1-qadam: Iltimos, emailingizni kiriting.",
             'note_fill_email' => "* Agar siz elektron pochta manzilini kiritsangiz, saqlash uchun qo'shimcha nusxa yuboriladi.",
             'step_2_buy_now' => "2-qadam: To'lov usulini tanlang.",
-            'copyright' => "Mualliflik huquqi ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Pham Van Phu tomonidan ishlab chiqilgan. Barcha huquqlar himoyalangan.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Fon rasmi mavzusi",
@@ -5814,6 +5887,9 @@ return [
                 "topgirl"  => "Rasmlarni qidirish",
                 "topanime"  => "Rasmlarni qidirish",
             ],
+            "copyright" => [
+                "name"  => "Mualliflik huquqi ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Pham Van Phu tomonidan ishlab chiqilgan. Barcha huquqlar himoyalangan.",
+            ]
         ]
     ],
     "pt" => [
@@ -5903,7 +5979,6 @@ return [
             'step_1_buy_now' => "Passo 1: Por favor, insira o seu e-mail.",
             'note_fill_email' => "* Se você inserir um e-mail, uma cópia adicional será enviada para armazenamento.",
             'step_2_buy_now' => "Passo 2: Escolha um método de pagamento.",
-            'copyright' => "Direitos autorais ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Projetado e desenvolvido por Pham Van Phu. Todos os direitos reservados.",
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema do Papel de Parede",
@@ -5967,6 +6042,9 @@ return [
                 "topgirl"  => "Pesquisar Fotos",
                 "topanime"  => "Pesquisar Fotos",
             ],
+            "copyright" => [
+                "name"  => "Direitos autorais ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Projetado e desenvolvido por Pham Van Phu. Todos os direitos reservados.",
+            ]
         ]
     ],
 ];
