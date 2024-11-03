@@ -14,6 +14,9 @@ use App\Models\RelationSeoCategoryInfo;
 use App\Models\RelationSeoTagInfo;
 use App\Models\RelationSeoProductInfo;
 use App\Models\RelationSeoPageInfo;
+use App\Models\RelationSeoCategoryBlog;
+use App\Models\RelationSeoBlogInfo;
+use App\Models\RelationSeoFreeWallpaperInfo;
 use App\Http\Controllers\Admin\HelperController;
 
 class AutoTranslateAndCreatePage implements ShouldQueue {
@@ -192,11 +195,31 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
                                         'page_info_id'  => $this->infoPage->id,
                                     ]);
                                     break;
-                                default:
+                                case 'category_info':
                                     RelationSeoCategoryInfo::insertItem([
                                         'seo_id'            => $idSeoInsert,
                                         'category_info_id'  => $this->infoPage->id,
                                     ]);
+                                    break;
+                                case 'category_blog':
+                                    RelationSeoCategoryBlog::insertItem([
+                                        'seo_id'            => $idSeoInsert,
+                                        'category_blog_id'  => $this->infoPage->id,
+                                    ]);
+                                    break;
+                                case 'blog_info':
+                                    RelationSeoBlogInfo::insertItem([
+                                        'seo_id'            => $idSeoInsert,
+                                        'blog_info_id'  => $this->infoPage->id,
+                                    ]);
+                                    break;
+                                case 'free_wallpaper_info':
+                                    RelationSeoFreeWallpaperInfo::insertItem([
+                                        'seo_id'            => $idSeoInsert,
+                                        'category_info_id'  => $this->infoPage->id,
+                                    ]);
+                                    break;
+                                default:
                                     break;
                             }
                         }
