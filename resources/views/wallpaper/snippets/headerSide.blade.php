@@ -363,6 +363,8 @@
                     $(this).closest('ul').closest('li').find('.fa-plus').removeClass('fa-plus').addClass('fa-minus');
                 }
             });
+            /* tải status collapsed */
+            getStatusCollapse();
         });
 
         function showHideListMenuMobile(element, idMenu){
@@ -411,6 +413,29 @@
                 setTimeout(() => {
                     element.find('.layoutHeaderSide_header').attr('style', '');
                 }, 200);
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
+            });
+        }
+
+        function getStatusCollapse() {
+            fetch('/getStatusCollapse', {
+                method: 'GET',
+                mode: 'cors',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status == 'on') {
+                    $('#js_settingCollapsedMenu').addClass('collapsed');
+                } else {
+                    $('#js_settingCollapsedMenu').removeClass('collapsed');
+                }
             })
             .catch(error => {
                 console.error("Fetch request failed:", error);

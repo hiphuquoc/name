@@ -24,11 +24,7 @@
             </div>
         </div>
         <!-- === START:: Content === -->
-        @php
-            $menuCollapsed = '';
-            if(!empty(Session::get('view_menu'))&&Session::get('view_menu')=='on') $menuCollapsed = 'collapsed';
-        @endphp
-        <div id="js_settingCollapsedMenu" class="layoutHeaderSide {{ $menuCollapsed }}">
+        <div id="js_settingCollapsedMenu" class="layoutHeaderSide">
             <!-- giữ chỗ thanh bên để chống nhảy trang -->
             <div class="layoutHeaderSide_placeholder"></div>
             <!-- thanh bên -->

@@ -53,5 +53,9 @@ class SettingController extends Controller {
         // Có thể trả về JSON hoặc true nếu cần cho AJAX response
         return response()->json(['success' => true]);
     }
-
+    
+    public static function getStatusCollapse(){
+        $viewMenu = request()->session()->get('view_menu', 'off');
+        return response()->json(['status' => $viewMenu]);
+    }
 }
