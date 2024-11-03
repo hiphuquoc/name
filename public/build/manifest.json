@@ -5,7 +5,7 @@
     "src": "resources/sources/admin/style.scss"
   },
   "resources/sources/main/cart-first-view.scss": {
-    "file": "assets/cart-first-view-ac3364ba.css",
+    "file": "assets/cart-first-view-76b7a298.css",
     "isEntry": true,
     "src": "resources/sources/main/cart-first-view.scss"
   },
@@ -15,7 +15,7 @@
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/category-blog-first-view.scss": {
-    "file": "assets/category-blog-first-view-5941aba0.css",
+    "file": "assets/category-blog-first-view-38eac5cc.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-first-view.scss"
   },
@@ -55,7 +55,7 @@
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/freewallpaper-first-view.scss": {
-    "file": "assets/freewallpaper-first-view-6235dbd0.css",
+    "file": "assets/freewallpaper-first-view-caf6b5d8.css",
     "isEntry": true,
     "src": "resources/sources/main/freewallpaper-first-view.scss"
   },
@@ -75,7 +75,7 @@
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/page-first-view.scss": {
-    "file": "assets/page-first-view-ddda86a3.css",
+    "file": "assets/page-first-view-eb524239.css",
     "isEntry": true,
     "src": "resources/sources/main/page-first-view.scss"
   },
