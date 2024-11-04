@@ -106,3 +106,7 @@
         </div>
     </form>    
 @endsection
+@push('modal')
+    <!-- modal chọn thumnail -->
+    @include('admin.form.formModalChooseLanguageBeforeDeletePage')
+@endpush

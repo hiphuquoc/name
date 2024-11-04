@@ -195,12 +195,6 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
                                         'page_info_id'  => $this->infoPage->id,
                                     ]);
                                     break;
-                                case 'category_info':
-                                    RelationSeoCategoryInfo::insertItem([
-                                        'seo_id'            => $idSeoInsert,
-                                        'category_info_id'  => $this->infoPage->id,
-                                    ]);
-                                    break;
                                 case 'category_blog':
                                     RelationSeoCategoryBlog::insertItem([
                                         'seo_id'            => $idSeoInsert,
@@ -220,6 +214,11 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
                                     ]);
                                     break;
                                 default:
+                                    /* vì có thể là category_info, style_info, event_info */
+                                    RelationSeoCategoryInfo::insertItem([
+                                        'seo_id'            => $idSeoInsert,
+                                        'category_info_id'  => $this->infoPage->id,
+                                    ]);
                                     break;
                             }
                         }

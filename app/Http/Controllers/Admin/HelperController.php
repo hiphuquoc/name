@@ -16,6 +16,7 @@ use App\Models\Product;
 use App\Models\CategoryBlog;
 use App\Models\Blog;
 use App\Helpers\Upload;
+use App\Models\FreeWallpaper;
 
 class HelperController extends Controller {
 
@@ -36,7 +37,7 @@ class HelperController extends Controller {
             /* trường hợp có gửi vào id của trang cha (bảng vi) */
             if(!empty($idPageParentVI)){
                 $infoPageParentVI   = self::getFullInfoPageByIdSeo($idPageParentVI);
-                if($type=='category_info'||$type=='tag_info'||$type=='page_info'){ /* trường hợp là category_info hay tag_info hay page_info */
+                if($type=='category_info'||$type=='tag_info'||$type=='page_info'||'category_blog'){ /* trường hợp là category_info hay tag_info hay page_info */
                     /* lấy slug của parent */
                     $slugParent         = null;
                     foreach($infoPageParentVI->seos as $seo){
@@ -112,7 +113,16 @@ class HelperController extends Controller {
                                     ->with('seo', 'seos')
                                     ->first();
                     break;
+                case 'free_wallpaper_info':
+                    $response   = FreeWallpaper::select('*')
+                                    ->whereHas('seos.infoSeo', function($query) use($idSeo){
+                                        $query->where('id', $idSeo);
+                                    })
+                                    ->with('seo', 'seos')
+                                    ->first();
+                    break;
                 default:
+                    /* vì có thể là category_info, style_info, event_info */
                     $response   = Category::select('*')
                                     ->whereHas('seos.infoSeo', function($query) use($idSeo){
                                         $query->where('id', $idSeo);
