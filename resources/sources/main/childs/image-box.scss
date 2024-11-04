@@ -1,11 +1,18 @@
 /* định dạng ảnh => hiện dùng cho blog */
-.imageBox {
+.imageBox, .imageGroup {
     max-width: 750px;
     font-size: 0.95rem;
     border-radius: 0.75rem;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
+    &_note {
+        padding: 0.5rem 1rem;
+        text-align: center;
+        background: rgba($colorBackgroundLv2, 0.75);
+    }
+}
+.imageBox {
     img {
         width: 100%;    
         object-fit: cover;
@@ -13,41 +20,33 @@
         border-top-right-radius: inherit;
         margin: 0 !important; 
     }
-    &_note {
-        padding: 0.5rem 1rem;
-        text-align: center;
-        background: rgba($colorBackgroundLv2, 0.75);
+}
+.imageGroup {
+    &_box {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        overflow: hidden;
+        &_item {
+            width: 33.3333%;
+            // position: relative;
+            // padding-top: 45.93%; // tương đương với tỷ lệ 1:2.18
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        
+            img {
+                // position: absolute;
+                // top: 0;
+                // left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0.5rem 0.5rem 0 0;
+                margin: 0;
+                scale: 1.1;
+            }
+        }
     }
 }
-// .imageGroup {
-//     font-size: 0.95rem;
-//     border-radius: 0.5rem;
-//     margin: 1rem auto;
-//     max-width: 750px;
-//     &_box {
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: flex-start;
-//         overflow: hidden;
-//         &_item {
-//         width: calc(33.33% - 0.5rem);
-//         aspect-ratio: 1/2.18;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         img {
-//             width: 100%;
-//             object-fit: cover;
-//             border-radius: 0.5rem 0.5rem 0 0;
-//             margin: 0;
-//         }
-//         }
-//     }
-//     &_note {
-//         padding: 0.75rem 1rem 0 1rem;
-//         text-align: center;
-//     }
-//     @media (max-width: 991px){
-//         margin: 0.75rem auto 1rem auto;
-//     }
-// }
