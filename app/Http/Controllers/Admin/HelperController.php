@@ -37,7 +37,7 @@ class HelperController extends Controller {
             /* trường hợp có gửi vào id của trang cha (bảng vi) */
             if(!empty($idPageParentVI)){
                 $infoPageParentVI   = self::getFullInfoPageByIdSeo($idPageParentVI);
-                if($type=='category_info'||$type=='tag_info'||$type=='page_info'||'category_blog'){ /* trường hợp là category_info hay tag_info hay page_info */
+                if($type=='category_info'||$type=='tag_info'||$type=='page_info'){ /* trường hợp là category_info hay tag_info hay page_info */
                     /* lấy slug của parent */
                     $slugParent         = null;
                     foreach($infoPageParentVI->seos as $seo){
@@ -56,6 +56,8 @@ class HelperController extends Controller {
                     }
                 } else if($type=='product_info'||$type=='free_wallpaper_info'||$type=='blog_info'){ /* trường hợp là product_info hay free_wallpaper_info */
                     $response   = Charactor::convertStrToUrl($title).'-'.time();
+                } else if($type=='category_blog'){ /* trường hợp là category_blog */
+                    $response   = Charactor::convertStrToUrl($title);
                 }
             } else { /* trường hợp không có trang cha */
                 $response   = Charactor::convertStrToUrl($title);
