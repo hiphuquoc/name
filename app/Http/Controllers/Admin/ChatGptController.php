@@ -223,14 +223,6 @@ class ChatGptController extends Controller {
             if(strpos($result['error']['message'], 'You exceeded your current quota')!==false){
                 ApiAI::updateItem($infoApiAI->id, ['status' => 0]);
             }
-            // /* nếu lỗi vì bất kì nguyên nhân gì sẽ gọi lại API 1 lần */
-            // if ($retryCount < 1) {
-            //     $retryCount++;
-            //     return self::callApi($promptText, $infoPrompt, $urlImage, $retryCount);
-            // }else {
-            //     $data['content']    = '';
-            //     $data['error']       = $result['error']['message'];
-            // }
         }
         return $data;
     }

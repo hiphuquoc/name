@@ -32,11 +32,17 @@ class Product extends Model {
                                 $q->where('id', $params['search_category']);
                             });
                         })
+                        /* tìm theo danh mục */
+                        ->when(!empty($params['search_tag']), function($query) use($params){
+                            $query->whereHas('tags.infoTag', function($q) use ($params){
+                                $q->where('id', $params['search_tag']);
+                            });
+                        })
                         ->orderBy('created_at', 'DESC')
                         ->with(['files' => function($query){
                             $query->where('relation_table', 'product_info');
                         }])
-                        ->with('seo', 'prices.wallpapers.infoWallpaper', 'categories')
+                        ->with('seo', 'prices.wallpapers.infoWallpaper', 'categories', 'tags')
                         ->paginate($params['paginate']);
         return $result;
     }

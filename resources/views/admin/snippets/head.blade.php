@@ -49,8 +49,8 @@
         src:url("/fonts/svn-gilroy_medium.ttf")
     }
 </style>
-  {{-- @vite(['resources/sources/admin/style.scss']) --}}
-  <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}?version={{ time() }}">
+  @vite('resources/sources/admin/style.scss')
+  {{-- <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}?version={{ time() }}"> --}}
   <!-- END: Custom CSS-->
   <!-- BEGIN: FONT AWESOME -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">

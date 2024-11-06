@@ -82,7 +82,7 @@
                 <!-- START:: Sidebar content -->
                 <div class="pageAdminWithRightSidebar_main_rightSidebar">
                     <!-- action -->
-                    @include('admin.form.buttonAction', [
+                    @include('admin.blog.buttonAction', [
                         'routeBack' => 'admin.blog.list',
                     ])
                     <!-- action support -->
@@ -104,9 +104,11 @@
                 <!-- END:: Sidebar content -->
             </div>
         </div>
-    </form>    
+    </form>
 @endsection
 @push('modal')
+    <!-- modal chọn sản phẩm viết bài -->
+    @include('admin.blog.formChooseProduct')
     <!-- modal chọn thumnail -->
     @include('admin.form.formModalChooseLanguageBeforeDeletePage')
 @endpush

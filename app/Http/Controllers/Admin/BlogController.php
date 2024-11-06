@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Requests\BlogRequest;
+use Illuminate\Http\nequest;
+use App\Http\nequests\BlogRequest;
 use App\Helpers\Upload;
 use App\Models\CategoryBlog;
 use App\Models\Blog;
 use App\Models\Seo;
-use App\Models\RelationCategoryBlogBlogInfo;
-use App\Models\RelationSeoBlogInfo;
+use App\Models\nelationCategoryBlogBlogInfo;
+use App\Models\nelationSeoBlogInfo;
 use App\Models\Prompt;
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Product;
+use App\Helpers\Image;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Request;
 
 class BlogController extends Controller {
 
@@ -95,13 +100,21 @@ class BlogController extends Controller {
                                     })
                                     ->where('id', '!=', $idProduct)
                                     ->get();
+            /* lấy category_info dùng để search sản phẩm */
+            $categories         = Category::select('*')
+                                    ->whereHas('seo', function($query){
+                                        $query->where('level', 2);
+                                    })
+                                    ->get();
+            /* lấy category_info dùng để search sản phẩm */
+            $tags               = Tag::all();
             /* type */
             $type               = !empty($itemSeo) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
             /* trang cha */
             $parents            = CategoryBlog::all();
             /* category cha */
-            return view('admin.blog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'message'));
+            return view('admin.blog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'categories', 'tags', 'language', 'sources', 'parents', 'message'));
         } else {
             return redirect()->route('admin.blog.list');
         }
@@ -235,5 +248,182 @@ class BlogController extends Controller {
                 return false;
             }
         }
+    }
+
+    public function loadProduct(Request $request){
+        $params     = [];
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
+        if(!empty($request->get('search_tag'))) $params['search_tag'] = $request->get('search_tag');
+        $params['paginate'] = PHP_INT_MAX;
+        $products           = Product::getList($params);
+        $response           = '';
+        foreach($products as $product){
+            $response       .= view('admin.blog.itemProduct', compact('product'))->render();
+        }
+        echo $response;
+    }
+
+    public function chooseProduct(Request $request){
+        // Lấy `product_info_id` và `array_wallpaper_info_id` từ request
+        $productInfoId = $request->input('product_info_id');
+        $wallpaperIds = $request->input('array_wallpaper_info_id');
+
+        // Lấy `productChoose` từ session, nếu chưa có thì đặt thành mảng rỗng
+        $productChoose = session()->get('productChoose', []);
+
+        // Lưu dữ liệu mới vào mảng `productChoose` với key là `product_info_id`
+        $productChoose[$productInfoId] = $wallpaperIds;
+
+        // Cập nhật session với mảng `productChoose` đã thay đổi
+        session(['productChoose' => $productChoose]);
+
+        echo 'success';
+    }
+
+    public function loadThemeProductChoosed(){
+        $productChoose  = session()->get('productChoose', []);
+        $productIds     = [];
+        foreach($productChoose as $key => $p) $productIds[] = $key;
+        $products       = Product::select('*')
+                            ->whereIn('id', $productIds)
+                            ->get();
+        $response       = '';
+        if(!empty($products)){
+            foreach($products as $product){
+                $wallpaperIds   = $productChoose[$product->id];
+                $response       .= view('admin.blog.itemProductChoosed', compact('product', 'wallpaperIds'))->render();
+            }
+        }
+        
+        echo $response;
+    }
+
+    public function clearProductChoosed(){
+        session()->forget('productChoose');
+    }
+
+    public function getListProductChoose(){
+        $productChoose      = session()->get('productChoose', []);
+
+        return response()->json($productChoose);
+    }
+
+    public function callAIWritePerProduct(Request $request){
+        $titleInput     = $request->get('title_input');
+        $idProduct      = $request->get('product_info_id');
+        $wallpapers     = $request->get('wallpapers');
+        $maxRetries     = 3; // Số lần thử lại tối đa
+        $retryCount     = 0; // Số lần thử lại hiện tại
+        $isSuccessful   = false; // Biến để kiểm tra thành công
+
+        // Lấy thông tin sản phẩm
+        $infoProduct = Product::select('*')
+            ->where('id', $idProduct)
+            ->with('prices.wallpapers.infoWallpaper')
+            ->first();
+
+        // Tạo prompt
+        $promptText = self::promptWriteSuggest($infoProduct, $titleInput);
+
+        // Lặp lại việc gọi API cho đến khi thành công hoặc đạt đến số lần thử tối đa
+        while (!$isSuccessful && $retryCount < $maxRetries) {
+            try {
+                // Gọi API ChatGPT
+                $infoPrompt = new \stdClass;
+                $infoPrompt->version = config('main_'.env('APP_NAME').'.ai_version')[1];
+                $response = \App\Http\Controllers\Admin\ChatGptController::callApi($promptText, $infoPrompt);
+
+                // Xử lý kết quả từ API nếu thành công
+                $content = str_replace(['```html', '```'], '', $response['content']);
+                $contentImageBox = self::htmlImageGroupBox($infoProduct, $wallpapers);
+                $content = $content . $contentImageBox;
+
+                // Trả kết quả thành công và đánh dấu là hoàn tất
+                echo $content;
+                $isSuccessful = true;
+            } catch (\Exception $e) {
+                // Tăng số lần thử nếu gặp lỗi
+                $retryCount++;
+
+                // Nếu đạt số lần thử tối đa và vẫn thất bại, ghi log lỗi
+                if ($retryCount >= $maxRetries) {
+                    \Log::error("Failed to process product ID {$idProduct} after {$maxRetries} retries.", [
+                        'error' => $e->getMessage(),
+                        'product_id' => $idProduct,
+                    ]);
+                    echo "Error processing product ID {$idProduct}. Please try again later.";
+                } else {
+                    // Log số lần thử lại
+                    \Log::warning("Retrying API call for product ID {$idProduct}. Attempt {$retryCount}.");
+                }
+            }
+        }
+    }
+
+    private static function promptWriteSuggest($infoProduct, $titleInput){
+        /* 
+            Tôi đang viết blog với tiêu đè: $titleInput
+            Bên dưới tôi có thông tin của sản phẩm cần gợi ý và viết vào bài blog này:
+            - tiêu đê sản phẩm: $titleProduct
+            Bạn hãy hoàn thành yêu cầu sau giúp tôi:
+            - viết một đoạn content giới thiệu ngắn khoảng 5-10 dòng để nêu bật được điểm độc đáo, hấp dẫn và đặc biệt của sản phẩm này
+            - cũng nêu lên được tác dụng tích cực đối với tinh thần cho người sử dụng và nó phù hợp với những người nào
+            - có lời kêu gọi để thu hút khách hàng hơn
+            - yêu cầu lời van mượt mà, hay và hấp dẫn. Diễn dạt nhẹ nhàng, lãng mạn, tương tự người viết và là một wow content
+            - tôi dùng cho website nên viết chuẩn SEO, E-E-A-T. 
+            - tôi chỉ cần bạn trả vê kết quả, không cần giải thích luyên thuyên.
+            - ví dụ cho bạn tham khảo trình bày và trả về kết quả "<h2>tiêu đề sản phẩm</h2><p>nội dung</p>"
+        */
+        $result = "Tôi đang viết blog với tiêu đè: ".$titleInput." \n
+            Bên dưới tôi có thông tin của sản phẩm cần gợi ý và viết vào bài blog này: \n
+             - tiêu đê sản phẩm: ".$infoProduct->seo->title." \n
+            Bạn hãy hoàn thành yêu cầu sau giúp tôi:\n
+            - viết một đoạn content giới thiệu ngắn khoảng 5-10 dòng để nêu bật được điểm độc đáo, hấp dẫn và đặc biệt của sản phẩm này \n
+            - cũng nêu lên được tác dụng tích cực đối với tinh thần cho người sử dụng và nó phù hợp với những người nào \n
+            - có lời kêu gọi để thu hút khách hàng hơn \n
+            - yêu cầu lời van mượt mà, hay và hấp dẫn. Diễn dạt nhẹ nhàng, lãng mạn, tương tự người viết và là một wow content \n
+            - tôi dùng cho website nên viết chuẩn SEO, E-E-A-T. \n
+            - tôi chỉ cần bạn trả vê kết quả, không cần giải thích luyên thuyên. \n
+            - trình bày bằng html như sau <h2> (tên sản phẩm), <p> (content)";
+        return $result;
+    }
+
+    private static function htmlImageGroupBox($infoProduct, $wallpapers){
+        /* 
+            <p><a href="#" aria-lable="">Xem đầy đủ và tải bộ hình nền tại đây!</a></p>
+            <div class="imageGroup">
+                <div class="imageGroup_box">
+                <div class="imageGroup_box_item"><img class="lazyload" title="Bộ Hình Nền Điện Thoại Gấu Con Đón Giáng Sinh 4k Tông Màu Xanh Da Trời Tuyệt Đẹp và Ấn Tượng" src="https://namecomvn.storage.googleapis.com/wallpapers/hinh-nen-dien-thoai-giang-sinh-noel-4k-tuyet-dep-v2-1728381709-2-mini.webp" alt="Bộ Hình Nền Điện Thoại Gấu Con Đón Giáng Sinh 4k Tông Màu Xanh Da Trời Tuyệt Đẹp và Ấn Tượng" loading="lazy" data-src="https://namecomvn.storage.googleapis.com/wallpapers/hinh-nen-dien-thoai-giang-sinh-noel-4k-tuyet-dep-v2-1728381709-2-small.webp"></div>
+                <div class="imageGroup_box_item"><img class="lazyload" title="Bộ Hình Nền Điện Thoại Gấu Con Đón Giáng Sinh 4k Tông Màu Xanh Da Trời Tuyệt Đẹp và Ấn Tượng" src="https://namecomvn.storage.googleapis.com/wallpapers/hinh-nen-dien-thoai-giang-sinh-noel-4k-tuyet-dep-v2-1728383321-5-mini.webp" alt="Bộ Hình Nền Điện Thoại Gấu Con Đón Giáng Sinh 4k Tông Màu Xanh Da Trời Tuyệt Đẹp và Ấn Tượng" loading="lazy" data-src="https://namecomvn.storage.googleapis.com/wallpapers/hinh-nen-dien-thoai-giang-sinh-noel-4k-tuyet-dep-v2-1728383321-5-small.webp"></div>
+                <div class="imageGroup_box_item"><img class="lazyload" title="Bộ Hình Nền Điện Thoại Gấu Con Đón Giáng Sinh 4k Tông Màu Xanh Da Trời Tuyệt Đẹp và Ấn Tượng" src="https://namecomvn.storage.googleapis.com/wallpapers/hinh-nen-dien-thoai-giang-sinh-noel-4k-tuyet-dep-v2-1728394958-1-mini.webp" alt="Bộ Hình Nền Điện Thoại Gấu Con Đón Giáng Sinh 4k Tông Màu Xanh Da Trời Tuyệt Đẹp và Ấn Tượng" loading="lazy" data-src="https://namecomvn.storage.googleapis.com/wallpapers/hinh-nen-dien-thoai-giang-sinh-noel-4k-tuyet-dep-v2-1728394958-1-small.webp"></div>
+                </div>
+                <div class="imageGroup_note" style="text-transform: lowercase;">Ảnh trong Bộ Hình Nền Điện Thoại Gấu Con Đón Giáng Sinh 4k Tông Màu Xanh Da Trời Tuyệt Đẹp và Ấn Tượng</div>
+            </div>
+        */
+        $titleProduct = $infoProduct->seo->title;
+        $result = '<p><a href="'.env('APP_URL').'/'.$infoProduct->seo->slug_full.'" aria-lable="'.$titleProduct.'">Xem đầy đủ và tải bộ hình nền tại đây!</a></p>';
+        $result .= '<div class="imageGroup">
+                        <div class="imageGroup_box">';
+        foreach($wallpapers as $idWallpaper){
+            foreach($infoProduct->prices as $price){
+                foreach($price->wallpapers as $w){
+                    if(!empty($w->infoWallpaper->id)&&$w->infoWallpaper->id==$idWallpaper){
+                        $urlImageMini   = Image::getUrlImageSmallByUrlImage($w->infoWallpaper->file_cloud_wallpaper);
+                        $urlImageSmall  = Image::getUrlImageSmallByUrlImage($w->infoWallpaper->file_cloud_wallpaper);
+                        $result         .= '<div class="imageGroup_box_item"><img class="lazyload" 
+                                                src="'.$urlImageMini.'" 
+                                                data-src="'.$urlImageSmall.'" 
+                                                title="'.$titleProduct.'" 
+                                                alt="B'.$titleProduct.'" loading="lazy">
+                                            </div>';
+                    }
+                }
+            }
+        }
+        $result .= '</div>';
+        $result .= '<div class="imageGroup_note" style="text-transform: lowercase;">Ảnh trong '.$titleProduct.'</div>';
+        $result .= '</div>';
+        return $result;
     }
 }
