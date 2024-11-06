@@ -199,4 +199,41 @@ class CategoryMoneyController extends Controller {
 
         return $response;
     }
+
+    public static function buildTocContentMain($content, $language) {
+        // Phân tích HTML của $content để tạo TOC
+        $dom = new \DOMDocument();
+        @$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+    
+        $dataTocContent = [];
+        $indexToc = 0;
+        foreach ($dom->getElementsByTagName('h2') as $i => $heading) {
+            // Tạo id nếu không có
+            $dataId = $heading->getAttribute('id');
+            if (empty($dataId)) {
+                $dataId = 'randomIdTocContent_' . $i;
+                $heading->setAttribute('id', $dataId);
+                $indexToc++;
+            }
+    
+            $dataTocContent[$i] = [
+                'id' => $dataId,
+                'name' => $heading->nodeName,
+                'title' => $heading->textContent
+            ];
+        }
+    
+        // Tạo nội dung TOC với view
+        $xhtml = view('wallpaper.template.tocContentMain', [
+            'data' => $dataTocContent,
+            'language' => $language
+        ])->render();
+    
+        // Trả về cả $xhtml và nội dung đã cập nhật
+        return [
+            'content'           => $dom->saveHTML(),
+            'toc_content'       => $xhtml,
+        ];
+    }
+    
 }

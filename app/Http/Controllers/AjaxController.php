@@ -130,15 +130,6 @@ class AjaxController extends Controller {
         return json_encode($result);
     }
 
-    public function buildTocContentMain(Request $request) {
-        $xhtml = null;
-        if(!empty($request->get('data'))) {
-            $language   = $request->get('language');
-            $xhtml      = view('wallpaper.template.tocContentMain', ['data' => $request->get('data'), 'language' => $language])->render();
-        }
-        return $xhtml;
-    }
-
     public static function setMessageModal(Request $request){
         $response   = view('main.modal.contentMessageModal', [
             'title'     => $request->get('title') ?? null,

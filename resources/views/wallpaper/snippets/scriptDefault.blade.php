@@ -448,118 +448,79 @@
     }
     /* toc content */
     function buildTocContentMain(idElement){
-        var language            = $('#language').val();
-        var dataTocContent      = {};
-        var i                   = 0;
-        var indexToc            = 0;
-        $('#'+idElement).find('h2').each(function(){
-            let dataId        = $(this).attr('id');
-            if(typeof dataId=='undefined'){
-                dataId          = 'randomIdTocContent_'+i;
-                $(this).attr('id', dataId);
-                ++indexToc;
-            }
-            const name          = $(this)[0].localName;
-            const dataTitle     = $(this).html();
-            dataTocContent[i]   = {
-                id      : dataId,
-                name    : name,
-                title   : dataTitle
-            };
-            ++i;
+        fixedTocContentIcon();
+        setHeightTocFixed();
+
+        $(window).resize(function() {
+            fixedTocContentIcon();
+            setHeightTocFixed();
         });
-        $.ajax({
-            url         : '/buildTocContentMain',
-            type        : 'get', 
-            dataType    : 'html',
-            data        : {
-                data    : dataTocContent,
-                language
-            },
-            success     : function(data){
-                $('#tocContentMain').html(data);
-                fixedTocContentIcon();
-                setHeightTocFixed();
 
-                $(window).resize(function() {
-                    fixedTocContentIcon();
-                    setHeightTocFixed();
-                });
+        $('.tocFixedIcon, .tocContentMain.tocFixed .tocContentMain_close').click(function(){
+            let elementMenu = $('.tocContentMain.tocFixed');
+            let displayMenu = elementMenu.css('display');
+            if(displayMenu=='none'){
+                elementMenu.css('display', 'block');
+            }else {
+                elementMenu.css('display', 'none');
+            }
+            // fixedTocContentIcon();
+        });
 
-                $('.tocFixedIcon, .tocContentMain.tocFixed .tocContentMain_close').click(function(){
-                    let elementMenu = $('.tocContentMain.tocFixed');
-                    let displayMenu = elementMenu.css('display');
-                    if(displayMenu=='none'){
-                        elementMenu.css('display', 'block');
-                    }else {
-                        elementMenu.css('display', 'none');
-                    }
-                    // fixedTocContentIcon();
-                });
-
-                $('.tocContentMain_title, .tocContentMain_close').click(function(){
-                    let elemtMenu   = $('.tocContentMain .tocContentMain_list');
-                    let displayMenu = elemtMenu.css('display');
-                    if(displayMenu=='none'){
-                        elemtMenu.css('display', 'block');
-                        $('.tocContentMain_close').removeClass('hidden');
-                    }else {
-                        elemtMenu.css('display', 'none');
-                        $('.tocContentMain_close').addClass('hidden');
-                    }
-                });
-
-                function fixedTocContentIcon(){
-                    // let widthS      = $(window).width();
-                    // let widthC      = $('.container').outerWidth();
-                    // let leftE       = parseInt((widthS - widthC - 70) / 2);
-                    // if($(window).width() < 1200){
-                    //     leftE       = parseInt((widthS - widthC + 20) / 2);
-                    // }
-                    // $('.tocFixedIcon').css('left', leftE);
-                    /* thiết lập vị trí nút nhấn */
-                    const elemtBox = $('#js_buildTocContentMain_element');
-                    const isRTL = $('html').attr('dir') == 'rtl';
-                    const positionBox = isRTL 
-                        ? $(window).width() - elemtBox.offset().left - elemtBox.outerWidth() 
-                        : elemtBox.offset().left;
-
-                    if (isRTL) {
-                        $('.tocFixedIcon').css('right', parseInt(positionBox - 50));
-                    } else {
-                        $('.tocFixedIcon').css('left', parseInt(positionBox - 50));
-                    }
-                }
-
-                function setHeightTocFixed(){
-                    let heightToc   = parseInt($(window).height() - 210);
-                    $('.tocContentMain.tocFixed .tocContentMain_list').css('height', heightToc+'px');
-                }
-
-                let element         = $('#tocContentMain');
-                if(element.length>0){
-                    let boxContent      = $('#'+idElement);
-                    let heightB         = boxContent.outerHeight();
-                    window.addEventListener('scroll', function() {
-                        let positionB       = boxContent.offset().top;
-                        let heightFooter    = $('.copyright').outerHeight();
-                        let positionE   = element.offset().top;
-                        let heightE     = element.outerHeight();
-                        let scrollNow   = $(document).scrollTop();
-                        let minScroll   = parseInt(heightE + positionE);
-                        let maxScroll   = parseInt(heightB + positionB - heightFooter);
-                        if(scrollNow > minScroll && scrollNow < maxScroll){ 
-                            $('.tocFixedIcon').css('display', 'block');
-                            /* thiết lập chiều ngang của box fixed */ 
-                            const width = $('.layoutHeaderSide_header').outerWidth();
-                            $('.tocFixed').css('width', width);
-                        }else {
-                            $('.tocFixedIcon').css('display', 'none');
-                        }
-                    });
-                }
+        $('.tocContentMain_title, .tocContentMain_close').click(function(){
+            let elemtMenu   = $('.tocContentMain .tocContentMain_list');
+            let displayMenu = elemtMenu.css('display');
+            if(displayMenu=='none'){
+                elemtMenu.css('display', 'block');
+                $('.tocContentMain_close').removeClass('hidden');
+            }else {
+                elemtMenu.css('display', 'none');
+                $('.tocContentMain_close').addClass('hidden');
             }
         });
+
+        function fixedTocContentIcon(){
+            /* thiết lập vị trí nút nhấn */
+            const elemtBox = $('#js_buildTocContentMain_element');
+            const isRTL = $('html').attr('dir') == 'rtl';
+            const positionBox = isRTL 
+                ? $(window).width() - elemtBox.offset().left - elemtBox.outerWidth() 
+                : elemtBox.offset().left;
+
+            if (isRTL) {
+                $('.tocFixedIcon').css('right', parseInt(positionBox - 50));
+            } else {
+                $('.tocFixedIcon').css('left', parseInt(positionBox - 50));
+            }
+        }
+
+        function setHeightTocFixed(){
+            let heightToc   = parseInt($(window).height() - 210);
+            $('.tocContentMain.tocFixed .tocContentMain_list').css('height', heightToc+'px');
+        }
+
+        let element         = $('#tocContentMain');
+        if(element.length>0){
+            let boxContent      = $('#'+idElement);
+            let heightB         = boxContent.outerHeight();
+            window.addEventListener('scroll', function() {
+                let positionB       = boxContent.offset().top;
+                let heightFooter    = $('.copyright').outerHeight();
+                let positionE   = element.offset().top;
+                let heightE     = element.outerHeight();
+                let scrollNow   = $(document).scrollTop();
+                let minScroll   = parseInt(heightE + positionE);
+                let maxScroll   = parseInt(heightB + positionB - heightFooter);
+                if(scrollNow > minScroll && scrollNow < maxScroll){ 
+                    $('.tocFixedIcon').css('display', 'block');
+                    /* thiết lập chiều ngang của box fixed */ 
+                    const width = $('.layoutHeaderSide_header').outerWidth();
+                    $('.tocFixed').css('width', width);
+                }else {
+                    $('.tocFixedIcon').css('display', 'none');
+                }
+            });
+        }
     }
     /* validate form khi nhập */
     function validateWhenType(elementInput, type = 'empty'){

@@ -119,13 +119,9 @@
         <!-- Nội dung -->
         @if(!empty($itemSeo->contents))
             <div id="js_buildTocContentMain_element" class="distanceBetween contentElement maxContent-1200">
-                @php
-                    $xhtmlContent = '';
-                    foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
-                @endphp
                 <div class="contentBox">
-                    <div id="tocContentMain"></div>
-                    {!! $xhtmlContent !!}
+                    <div id="tocContentMain">{!! $dataContent['toc_content'] !!}</div>
+                    {!! $dataContent['content'] !!}
                 </div>
             </div>
         @endif

@@ -389,23 +389,21 @@ class BlogController extends Controller {
             Bạn hãy hoàn thành yêu cầu sau giúp tôi:
             - viết một đoạn content giới thiệu ngắn khoảng 5-10 dòng để nêu bật được điểm độc đáo, hấp dẫn và đặc biệt của sản phẩm này
             - cũng nêu lên được tác dụng tích cực đối với tinh thần cho người sử dụng và nó phù hợp với những người nào
-            - có lời kêu gọi để thu hút khách hàng hơn
             - yêu cầu lời van mượt mà, hay và hấp dẫn. Diễn dạt nhẹ nhàng, lãng mạn, tương tự người viết và là một wow content
             - tôi dùng cho website nên viết chuẩn SEO, E-E-A-T. 
             - tôi chỉ cần bạn trả vê kết quả, không cần giải thích luyên thuyên.
-            - ví dụ cho bạn tham khảo trình bày và trả về kết quả "<h2>tiêu đề sản phẩm</h2><p>nội dung</p>"
+            - ví dụ cho bạn tham khảo trình bày và trả về kết quả "<h2>tiêu đề sản phẩm</h2><p>nội dung 1</p><p>nội dung 2</p> (chia nội dung làm 2 phần cho dễ đọc)"
         */
         $result = "Tôi đang viết blog với tiêu đè: ".$titleInput." \n
             Bên dưới tôi có thông tin của sản phẩm cần gợi ý và viết vào bài blog này: \n
              - tiêu đê sản phẩm: ".$infoProduct->seo->title." \n
             Bạn hãy hoàn thành yêu cầu sau giúp tôi:\n
-            - viết một đoạn content giới thiệu ngắn khoảng 5-10 dòng để nêu bật được điểm độc đáo, hấp dẫn và đặc biệt của sản phẩm này \n
-            - cũng nêu lên được tác dụng tích cực đối với tinh thần cho người sử dụng và nó phù hợp với những người nào \n
-            - có lời kêu gọi để thu hút khách hàng hơn \n
-            - yêu cầu lời van mượt mà, hay và hấp dẫn. Diễn dạt nhẹ nhàng, lãng mạn, tương tự người viết và là một wow content \n
-            - tôi dùng cho website nên viết chuẩn SEO, E-E-A-T. \n
-            - tôi chỉ cần bạn trả vê kết quả, không cần giải thích luyên thuyên. \n
-            - trình bày bằng html như sau <h2> (tên sản phẩm), <p> (content)";
+            - viết một đoạn content giới thiệu ngắn khoảng 5-10 dòng để nêu bật được điểm độc đáo, hấp dẫn và đặc biệt của sản phẩm này
+            - cũng nêu lên được tác dụng tích cực đối với tinh thần cho người sử dụng và nó phù hợp với những người nào
+            - yêu cầu lời van mượt mà, hay và hấp dẫn. Diễn dạt nhẹ nhàng, lãng mạn, tương tự người viết và là một wow content
+            - tôi dùng cho website nên viết chuẩn SEO, E-E-A-T. 
+            - tôi chỉ cần bạn trả vê kết quả, không cần giải thích luyên thuyên.
+            - ví dụ cho bạn tham khảo trình bày và trả về kết quả <h2>tiêu đề sản phẩm</h2><p>nội dung 1</p><p>nội dung 2</p> (chia nội dung làm 2 phần cho dễ đọc)";
         return $result;
     }
 

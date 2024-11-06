@@ -180,7 +180,11 @@ class RoutingController extends Controller{
                             $total                              = $tmp['total'];
                             $loaded                             = $tmp['loaded'];
                             $user                               = Auth::user();
-                            $xhtml                              = view('wallpaper.category.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'user', 'searchFeeling'))->render();
+                            /* xây dựng toc_content */
+                            $htmlContent        = '';
+                            foreach($itemSeo->contents as $content) $htmlContent .= $content->content;
+                            $dataContent        = CategoryMoneyController::buildTocContentMain($htmlContent, $language);
+                            $xhtml                              = view('wallpaper.category.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'user', 'searchFeeling', 'dataContent'))->render();
                         }
                         /* ===== trả phí */
                         if($flagFree==false){
@@ -203,7 +207,11 @@ class RoutingController extends Controller{
                             $wallpapers         = $response['wallpapers'];
                             $total              = $response['total'];
                             $loaded             = $response['loaded'];
-                            $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'viewBy', 'search'))->render();
+                            /* xây dựng toc_content */
+                            $htmlContent        = '';
+                            foreach($itemSeo->contents as $content) $htmlContent .= $content->content;
+                            $dataContent        = CategoryMoneyController::buildTocContentMain($htmlContent, $language);
+                            $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'viewBy', 'search', 'dataContent'))->render();
                         }
                     }
                 }
@@ -267,7 +275,12 @@ class RoutingController extends Controller{
                                             ->first();
                     /* blog nổi bật - sidebar */
                     $blogFeatured       = BlogController::getBlogFeatured($language);
-                    $xhtml              = view('wallpaper.blog.index', compact('item', 'itemSeo', 'blogFeatured', 'language', 'breadcrumb'))->render();
+                    /* xây dựng toc_content */
+                    $htmlContent        = '';
+                    foreach($itemSeo->contents as $content) $htmlContent .= $content->content;
+                    $dataContent        = CategoryMoneyController::buildTocContentMain($htmlContent, $language);
+                    $htmlContent        = str_replace('<div id="tocContentMain"></div>', '<div id="tocContentMain">'.$dataContent['toc_content'].'</div>', $dataContent['content']);
+                    $xhtml              = view('wallpaper.blog.index', compact('item', 'itemSeo', 'blogFeatured', 'language', 'breadcrumb', 'htmlContent'))->render();
                 }
 
                 /* Ghi dữ liệu - Xuất kết quả */

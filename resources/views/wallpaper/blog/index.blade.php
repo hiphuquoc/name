@@ -84,15 +84,7 @@
                     </div>
                     <!-- nội dung -->
                     <div id="js_buildTocContentMain_element" class="contentBox">
-                        @foreach($item->seos as $seo)
-                            @if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language)
-                                @if(!empty($seo->infoSeo->contents))
-                                    @foreach($seo->infoSeo->contents as $content)
-                                        {!! $content->content !!}
-                                    @endforeach
-                                @endif
-                            @endif
-                        @endforeach
+                        {!! $htmlContent !!}
                     </div>
                 </div>
                 <!-- sidebar -->
