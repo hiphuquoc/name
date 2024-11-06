@@ -152,7 +152,7 @@ return [
                 "topanime"  => "Search Photos",
             ],
             "copyright" => [
-                "name"  => "Copyright ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Designed and developed by Pham Van Phu. All rights reserved.",
+                "name"  => "Copyright ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Designed and developed by Pham Van Phu. All rights reserved.",
             ]
         ]
     ],
@@ -307,7 +307,7 @@ return [
                 "topanime" => "搜索照片",
             ],
             "copyright" => [
-                "name"  => "版权所有 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>。由范文富设计和开发。版权所有。",
+                "name"  => "版权所有 ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>。由范文富设计和开发。版权所有。",
             ]
         ]
     ],
@@ -462,7 +462,7 @@ return [
                 "topanime" => "Buscar fotos",
             ],
             "copyright" => [
-                "name"  => "Derechos de autor ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Diseñado y desarrollado por Pham Van Phu. Todos los derechos reservados.",
+                "name"  => "Derechos de autor ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Diseñado y desarrollado por Pham Van Phu. Todos los derechos reservados.",
             ]
         ]
     ],
@@ -617,7 +617,7 @@ return [
                 "topanime" => "Rechercher des photos",
             ],
             "copyright" => [
-                "name"  => "Droits d'auteur ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Conçu et développé par Pham Van Phu. Tous droits réservés.",
+                "name"  => "Droits d'auteur ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Conçu et développé par Pham Van Phu. Tous droits réservés.",
             ]
         ]
     ],
@@ -773,7 +773,7 @@ return [
                 "topanime"  => "Tìm kiếm Ảnh",
             ],
             "copyright" => [
-                "name"  => "Bản quyền ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Thiết kế và phát triển bởi Phạm Văn Phú. Mọi quyền được bảo lưu.",
+                "name"  => "Bản quyền ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Thiết kế và phát triển bởi Phạm Văn Phú. Mọi quyền được bảo lưu.",
             ]
         ]
     ],
@@ -928,7 +928,7 @@ return [
                 "topanime" => "फोटो खोजें",
             ],
             "copyright" => [
-                "name"  => "कॉपीराइट ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>। डिजाइन और विकास Pham Van Phu द्वारा। सर्वाधिकार सुरक्षित।",
+                "name"  => "कॉपीराइट ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>। डिजाइन और विकास Pham Van Phu द्वारा। सर्वाधिकार सुरक्षित।",
             ]
         ]
     ],
@@ -1083,7 +1083,7 @@ return [
                 "topanime" => "ছবি অনুসন্ধান",
             ],
             "copyright" => [
-                "name" => "স্বত্ব ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>। ডিজাইন ও বিকাশ করেছেন ফাম ভ্যান ফু। সর্বস্বত্ব সংরক্ষিত।",
+                "name" => "স্বত্ব ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>। ডিজাইন ও বিকাশ করেছেন ফাম ভ্যান ফু। সর্বস্বত্ব সংরক্ষিত।",
             ]
         ]
     ],
@@ -1238,7 +1238,7 @@ return [
                 "topanime" => "फोटो शोधा",
             ],
             "copyright" => [
-                "name"  => "कॉपीराइट ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. फाम वॅन फू यांच्याकडून डिझाइन व विकास. सर्व हक्क राखीव.",
+                "name"  => "कॉपीराइट ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. फाम वॅन फू यांच्याकडून डिझाइन व विकास. सर्व हक्क राखीव.",
             ]
         ]
     ],
@@ -1393,7 +1393,7 @@ return [
                 "topanime" => "படங்களைத் தேடுங்கள்",
             ],
             "copyright" => [
-                "name"  => "பதிப்புரிமை ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. வடிவமைப்பு மற்றும் மேம்பாடு Pham Van Phu. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+                "name"  => "பதிப்புரிமை ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. வடிவமைப்பு மற்றும் மேம்பாடு Pham Van Phu. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
             ]
         ]
     ],
@@ -1548,7 +1548,7 @@ return [
                 "topanime" => "చిత్రాలను అన్వేషించండి",
             ],
             "copyright" => [
-                "name"  => "కాపీహక్కులు ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ఫామ్ వాన్ ఫు రూపొందించారు మరియు అభివృద్ధి చేశారు. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
+                "name"  => "కాపీహక్కులు ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ఫామ్ వాన్ ఫు రూపొందించారు మరియు అభివృద్ధి చేశారు. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
             ]
         ]
     ],
@@ -1703,7 +1703,7 @@ return [
                 "topanime" => "تصاویر تلاش کریں",
             ],
             "copyright" => [
-                "name"  => "جملہ حقوق محفوظ ہیں ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>۔ ڈیزائن اور ترقی Pham Van Phu نے کی۔",
+                "name"  => "جملہ حقوق محفوظ ہیں ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>۔ ڈیزائن اور ترقی Pham Van Phu نے کی۔",
             ]
         ]
     ],
@@ -1858,7 +1858,7 @@ return [
                 "topanime"  => "ફોટાઓ શોધો",
             ],
             "copyright" => [
-                "name"  => "પ્રતિમાન્ય ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a> છે. ફામ વેન ફૂ દ્વારા ડિઝાઇન અને વિકાસ. તમામ હક્કો અધિકારક્ષિત છે.",
+                "name"  => "પ્રતિમાન્ય ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a> છે. ફામ વેન ફૂ દ્વારા ડિઝાઇન અને વિકાસ. તમામ હક્કો અધિકારક્ષિત છે.",
             ]
         ]
     ],
@@ -2013,7 +2013,7 @@ return [
                 "topanime"  => "ಚಿತ್ರಗಳನ್ನು ಹುಡುಕಿ",
             ],
             "copyright" => [
-                "name"  => "ಕಾಪಿರೈಟ್ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ಫಾಮ್ ವಾನ್ ಫು ವಿನ್ಯಾಸ ಮತ್ತು ಅಭಿವೃದ್ಧಿ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+                "name"  => "ಕಾಪಿರೈಟ್ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ಫಾಮ್ ವಾನ್ ಫು ವಿನ್ಯಾಸ ಮತ್ತು ಅಭಿವೃದ್ಧಿ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
             ]
         ]
     ],
@@ -2168,7 +2168,7 @@ return [
                 "topanime"  => "写真を検索",
             ],
             "copyright" => [
-                "name"  => "著作権 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>。Pham Van Phu によるデザインと開発。全著作権所有。",
+                "name"  => "著作権 ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>。Pham Van Phu によるデザインと開発。全著作権所有。",
             ]
         ]
     ],
@@ -2323,7 +2323,7 @@ return [
                 "topanime"  => "사진 검색",
             ],
             "copyright" => [
-                "name"  => "저작권 ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Pham Van Phu에 의해 디자인 및 개발되었습니다. 모든 권리 보유.",
+                "name"  => "저작권 ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Pham Van Phu에 의해 디자인 및 개발되었습니다. 모든 권리 보유.",
             ]
         ]
     ],
@@ -2478,7 +2478,7 @@ return [
                 "topanime"  => "Cari Foto",
             ],
             "copyright" => [
-                "name"  => "Hak cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Dirancang lan dikembangake dening Pham Van Phu. Kabeh hak dilindhungi.",
+                "name"  => "Hak cipta ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Dirancang lan dikembangake dening Pham Van Phu. Kabeh hak dilindhungi.",
             ]
         ]
     ],
@@ -2633,7 +2633,7 @@ return [
                 "topanime"  => "Cari Foto",
             ],
             "copyright" => [
-                "name"  => "Hak Cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Dirancang dan dikembangkan oleh Pham Van Phu. Semua hak dilindungi.",
+                "name"  => "Hak Cipta ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Dirancang dan dikembangkan oleh Pham Van Phu. Semua hak dilindungi.",
             ]
         ]
     ],
@@ -2788,7 +2788,7 @@ return [
                 "topanime"  => "Cari Gambar",
             ],
             "copyright" => [
-                "name"  => "Hak cipta ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Direka dan dibangunkan oleh Pham Van Phu. Hak cipta terpelihara.",
+                "name"  => "Hak cipta ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Direka dan dibangunkan oleh Pham Van Phu. Hak cipta terpelihara.",
             ]
         ]
     ],
@@ -2943,7 +2943,7 @@ return [
                 "topanime"  => "ค้นหาภาพถ่าย",
             ],
             "copyright" => [
-                "name"  => "ลิขสิทธิ์ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ออกแบบและพัฒนาโดย Pham Van Phu. สงวนลิขสิทธิ์ทั้งหมด.",
+                "name"  => "ลิขสิทธิ์ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ออกแบบและพัฒนาโดย Pham Van Phu. สงวนลิขสิทธิ์ทั้งหมด.",
             ]
         ]
     ],
@@ -3098,7 +3098,7 @@ return [
                 "topanime"  => "ស្វែងរករូបភាព",
             ],
             "copyright" => [
-                "name"  => "រក្សាសិទ្ធិ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>។ រចនា និងអភិវឌ្ឍដោយ Pham Van Phu។ រក្សា​សិទ្ធិ​គ្រប់​យ៉ាង។",
+                "name"  => "រក្សាសិទ្ធិ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>។ រចនា និងអភិវឌ្ឍដោយ Pham Van Phu។ រក្សា​សិទ្ធិ​គ្រប់​យ៉ាង។",
             ]
         ]
     ],
@@ -3253,7 +3253,7 @@ return [
                 "topanime"  => "ຄົ້ນຫາຮູບ",
             ],
             "copyright" => [
-                "name"  => "ລິຂະສິດ ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. ອອກແບບ ແລະ ພັດທະນາໂດຍ Pham Van Phu. ສິດທິທັງໝົດຖືກສະໄຫມ.",
+                "name"  => "ລິຂະສິດ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ອອກແບບ ແລະ ພັດທະນາໂດຍ Pham Van Phu. ສິດທິທັງໝົດຖືກສະໄຫມ.",
             ]
         ]
     ],
@@ -3408,7 +3408,7 @@ return [
                 "topanime"  => "ابحث عن صور",
             ],
             "copyright" => [
-                "name"  => "حقوق الطبع والنشر ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. تم التصميم والتطوير بواسطة فام فان فو. جميع الحقوق محفوظة.",
+                "name"  => "حقوق الطبع والنشر ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. تم التصميم والتطوير بواسطة فام فان فو. جميع الحقوق محفوظة.",
             ]
         ]
     ],
@@ -3563,7 +3563,7 @@ return [
                 "topanime"  => "جستجوی عکس‌ها",
             ],
             "copyright" => [
-                "name"  => "کپی رایت ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. طراحی و توسعه توسط فام ون فو. کلیه حقوق محفوظ است.",
+                "name"  => "کپی رایت ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. طراحی و توسعه توسط فام ون فو. کلیه حقوق محفوظ است.",
             ]
         ]
     ],
@@ -3718,7 +3718,7 @@ return [
                 "topanime"  => "Поиск фото",
             ],
             "copyright" => [
-                "name"  => "Авторское право ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Дизайн и разработка Pham Van Phu. Все права защищены.",
+                "name"  => "Авторское право ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Дизайн и разработка Pham Van Phu. Все права защищены.",
             ]
         ]
     ],
@@ -3873,7 +3873,7 @@ return [
                 "topanime"  => "Fotos suchen",
             ],
             "copyright" => [
-                "name"  => "Urheberrecht ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Entworfen und entwickelt von Pham Van Phu. Alle Rechte vorbehalten.",
+                "name"  => "Urheberrecht ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Entworfen und entwickelt von Pham Van Phu. Alle Rechte vorbehalten.",
             ]
         ]
     ],
@@ -4028,7 +4028,7 @@ return [
                 "topanime"  => "Fotoğraf Ara",
             ],
             "copyright" => [
-                "name"  => "Telif Hakkı ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Tasarım ve geliştirme Pham Van Phu tarafından. Tüm hakları saklıdır.",
+                "name"  => "Telif Hakkı ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Tasarım ve geliştirme Pham Van Phu tarafından. Tüm hakları saklıdır.",
             ]
         ]
     ],
@@ -4183,7 +4183,7 @@ return [
                 "topanime"  => "Cerca Foto",
             ],
             "copyright" => [
-                "name"  => "Copyright ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Progettato e sviluppato da Pham Van Phu. Tutti i diritti riservati.",
+                "name"  => "Copyright ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Progettato e sviluppato da Pham Van Phu. Tutti i diritti riservati.",
             ]
         ]
     ],
@@ -4338,7 +4338,7 @@ return [
                 "topanime"  => "Szukaj zdjęć",
             ],
             "copyright" => [
-                "name"  => "Prawa autorskie ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Zaprojektowane i opracowane przez Pham Van Phu. Wszelkie prawa zastrzeżone.",
+                "name"  => "Prawa autorskie ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Zaprojektowane i opracowane przez Pham Van Phu. Wszelkie prawa zastrzeżone.",
             ]
         ]
     ],
@@ -4493,7 +4493,7 @@ return [
                 "topanime"  => "Шукати фотографії",
             ],
             "copyright" => [
-                "name"  => "Авторське право ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Дизайн і розробка Pham Van Phu. Усі права захищено.",
+                "name"  => "Авторське право ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Дизайн і розробка Pham Van Phu. Усі права захищено.",
             ]
         ]
     ],
@@ -4648,7 +4648,7 @@ return [
                 "topanime"  => "Zoek Foto's",
             ],
             "copyright" => [
-                "name"  => "Auteursrecht ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Ontworpen en ontwikkeld door Pham Van Phu. Alle rechten voorbehouden.",
+                "name"  => "Auteursrecht ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Ontworpen en ontwikkeld door Pham Van Phu. Alle rechten voorbehouden.",
             ]
         ]
     ],
@@ -4803,7 +4803,7 @@ return [
                 "topanime"  => "Αναζήτηση Φωτογραφιών",
             ],
             "copyright" => [
-                "name"  => "Πνευματικά δικαιώματα ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Σχεδιασμός και ανάπτυξη από τον Pham Van Phu. Με επιφύλαξη παντός δικαιώματος.",
+                "name"  => "Πνευματικά δικαιώματα ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Σχεδιασμός και ανάπτυξη από τον Pham Van Phu. Με επιφύλαξη παντός δικαιώματος.",
             ]
         ]
     ],
@@ -4958,7 +4958,7 @@ return [
                 "topanime"  => "Fotók keresése",
             ],
             "copyright" => [
-                "name"  => "Szerzői jog ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Tervezte és fejlesztette Pham Van Phu. Minden jog fenntartva.",
+                "name"  => "Szerzői jog ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Tervezte és fejlesztette Pham Van Phu. Minden jog fenntartva.",
             ]
         ]
     ],
@@ -5113,7 +5113,7 @@ return [
                 "topanime"  => "Hledat fotky",
             ],
             "copyright" => [
-                "name"  => "Autorská práva ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Navrženo a vyvinuto Pham Van Phu. Všechna práva vyhrazena.",
+                "name"  => "Autorská práva ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Navrženo a vyvinuto Pham Van Phu. Všechna práva vyhrazena.",
             ]
         ]
     ],
@@ -5268,7 +5268,7 @@ return [
                 "topanime"  => "Caută fotografii",
             ],
             "copyright" => [
-                "name"  => "Drepturi de autor ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Proiectat și dezvoltat de Pham Van Phu. Toate drepturile rezervate.",
+                "name"  => "Drepturi de autor ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Proiectat și dezvoltat de Pham Van Phu. Toate drepturile rezervate.",
             ]
         ]
     ],
@@ -5423,7 +5423,7 @@ return [
                 "topanime"  => "Vyhľadávanie fotografií",
             ],
             "copyright" => [
-                "name"  => "Autorské práva ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Navrhol a vyvinul Pham Van Phu. Všetky práva vyhradené.",
+                "name"  => "Autorské práva ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Navrhol a vyvinul Pham Van Phu. Všetky práva vyhradené.",
             ]
         ]
     ],
@@ -5578,7 +5578,7 @@ return [
                 "topanime"  => "ფოტოების ძიება",
             ],
             "copyright" => [
-                "name"  => "საავტორო უფლებები ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. დიზაინი და განვითარება Pham Van Phu. ყველა უფლება დაცულია.",
+                "name"  => "საავტორო უფლებები ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. დიზაინი და განვითარება Pham Van Phu. ყველა უფლება დაცულია.",
             ]
         ]
     ],
@@ -5733,7 +5733,7 @@ return [
                 "topanime"  => "חיפוש תמונות",
             ],
             "copyright" => [
-                "name"  => "זכויות יוצרים ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. עיצוב ופיתוח על ידי פאם ואן פהו. כל הזכויות שמורות.",
+                "name"  => "זכויות יוצרים ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. עיצוב ופיתוח על ידי פאם ואן פהו. כל הזכויות שמורות.",
             ]
         ]
     ],
@@ -5888,7 +5888,7 @@ return [
                 "topanime"  => "Rasmlarni qidirish",
             ],
             "copyright" => [
-                "name"  => "Mualliflik huquqi ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Pham Van Phu tomonidan ishlab chiqilgan. Barcha huquqlar himoyalangan.",
+                "name"  => "Mualliflik huquqi ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Pham Van Phu tomonidan ishlab chiqilgan. Barcha huquqlar himoyalangan.",
             ]
         ]
     ],
@@ -6043,7 +6043,7 @@ return [
                 "topanime"  => "Pesquisar Fotos",
             ],
             "copyright" => [
-                "name"  => "Direitos autorais ® ".date('Y')." <a href='".env('APP_URL')."/".$language."' aria-label='Name'>Name</a>. Projetado e desenvolvido por Pham Van Phu. Todos os direitos reservados.",
+                "name"  => "Direitos autorais ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Projetado e desenvolvido por Pham Van Phu. Todos os direitos reservados.",
             ]
         ]
     ],
