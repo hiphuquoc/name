@@ -172,6 +172,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::get('/loadProduct', [BlogController::class, 'loadProduct'])->name('admin.blog.loadProduct');
             Route::get('/chooseProduct', [BlogController::class, 'chooseProduct'])->name('admin.blog.chooseProduct');
             Route::get('/loadThemeProductChoosed', [BlogController::class, 'loadThemeProductChoosed'])->name('admin.blog.loadThemeProductChoosed');
+            Route::get('/removeOneProductChoosed', [BlogController::class, 'removeOneProductChoosed'])->name('admin.blog.removeOneProductChoosed');
             Route::get('/clearProductChoosed', [BlogController::class, 'clearProductChoosed'])->name('admin.blog.clearProductChoosed');
             Route::get('/getListProductChoose', [BlogController::class, 'getListProductChoose'])->name('admin.blog.getListProductChoose');
             Route::get('/callAIWritePerProduct', [BlogController::class, 'callAIWritePerProduct'])->name('admin.blog.callAIWritePerProduct');

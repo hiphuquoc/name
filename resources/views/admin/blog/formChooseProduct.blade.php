@@ -151,6 +151,20 @@
             });
         }
 
+        function removeOneProductChoosed(idProduct){
+            $.ajax({
+                url         : '{{ route("admin.blog.removeOneProductChoosed") }}',
+                type        : 'get',
+                dataType    : 'html',
+                data        : {
+                    product_info_id : idProduct,
+                },
+                success     : function(data) {
+                    $('#js_removeOneProductChoosed_'+idProduct).hide();
+                }
+            });
+        }
+
         function clearProductChoosed(){
             $.ajax({
                 url         : '{{ route("admin.blog.clearProductChoosed") }}',

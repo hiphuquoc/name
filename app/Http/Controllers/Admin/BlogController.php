@@ -3,21 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\nequest;
-use App\Http\nequests\BlogRequest;
+// use App\Http\Requests\BlogRequest;
 use App\Helpers\Upload;
 use App\Models\CategoryBlog;
 use App\Models\Blog;
 use App\Models\Seo;
-use App\Models\nelationCategoryBlogBlogInfo;
-use App\Models\nelationSeoBlogInfo;
+use App\Models\RelationCategoryBlogBlogInfo;
+use App\Models\RelationSeoBlogInfo;
 use App\Models\Prompt;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Product;
 use App\Helpers\Image;
 use App\Services\BuildInsertUpdateModel;
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
@@ -299,6 +298,27 @@ class BlogController extends Controller {
         echo $response;
     }
 
+    public function removeOneProductChoosed(Request $request) {
+        $idProduct = $request->get('product_info_id');
+        $productChoose = session()->get('productChoose', []);
+    
+        // Xóa sản phẩm khỏi mảng session nếu tồn tại
+        foreach($productChoose as $key => $value) {
+            if($key == $idProduct) {
+                unset($productChoose[$key]);
+                break;
+            }
+        }
+    
+        // Lưu lại mảng đã cập nhật vào session
+        session()->put('productChoose', $productChoose);
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Sản phẩm đã được xóa khỏi danh sách chọn.',
+        ]);
+    }
+
     public function clearProductChoosed(){
         session()->forget('productChoose');
     }
@@ -408,14 +428,14 @@ class BlogController extends Controller {
         foreach($wallpapers as $idWallpaper){
             foreach($infoProduct->prices as $price){
                 foreach($price->wallpapers as $w){
-                    if(!empty($w->infoWallpaper->id)&&$w->infoWallpaper->id==$idWallpaper){
-                        $urlImageMini   = Image::getUrlImageSmallByUrlImage($w->infoWallpaper->file_cloud_wallpaper);
+                    if($w->id==$idWallpaper){
+                        $urlImageMini   = Image::getUrlImageMiniByUrlImage($w->infoWallpaper->file_cloud_wallpaper);
                         $urlImageSmall  = Image::getUrlImageSmallByUrlImage($w->infoWallpaper->file_cloud_wallpaper);
                         $result         .= '<div class="imageGroup_box_item"><img class="lazyload" 
                                                 src="'.$urlImageMini.'" 
                                                 data-src="'.$urlImageSmall.'" 
                                                 title="'.$titleProduct.'" 
-                                                alt="B'.$titleProduct.'" loading="lazy">
+                                                alt="'.$titleProduct.'" loading="lazy">
                                             </div>';
                     }
                 }

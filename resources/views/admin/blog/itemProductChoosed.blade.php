@@ -2,10 +2,10 @@
     @php
     $title = $product->seo->title ?? '';
     @endphp
-    <div class="productWithWallpapers_item">
+    <div id="js_removeOneProductChoosed_{{ $product->id }}" class="productWithWallpapers_item">
         <div class="productWithWallpapers_item_title">
             <div class="maxLine_1">{{ $title }}</div>
-            <div class="productWithWallpapers_item_title_cancel" onclick="chooseProduct('js_chooseProduct_{{ $product->id }}');">
+            <div class="productWithWallpapers_item_title_cancel" onclick="removeOneProductChoosed({{ $product->id }});">
                 <i class="fa-solid fa-xmark"></i>
             </div>
         </div>
