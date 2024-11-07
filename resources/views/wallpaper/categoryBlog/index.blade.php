@@ -88,7 +88,7 @@
                                                     <h2>{{ $title }}</h2>
                                                 </a>
                                                 <div class="blogListBox_item_content_info">
-                                                    <div class="maxLine_1"><i class="fa-solid fa-user"></i>Phú Quý</div> 
+                                                    <div class="maxLine_1"><i class="fa-solid fa-user"></i>Admin Name</div> 
                                                     <div class="maxLine_1"><i class="fa-regular fa-clock"></i>{{ date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) }}</div>
                                                     <div class="maxLine_1"><i class="fa-solid fa-eye"></i>{{ $blog->viewed }}</div> 
                                                     <div class="maxLine_1"><i class="fa-solid fa-share"></i>{{ $blog->shared }}</div>

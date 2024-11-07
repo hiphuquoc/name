@@ -21,7 +21,7 @@
                                 <h3 class="maxLine_2">{{ $title }}</h3>
                             </a>
                             <div class="blogSiderbarBox_box_item_content_info">
-                                <div>Phú Quý</div> 
+                                <div>Admin Name</div> 
                                 <div>{{ date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) }}</div>
                             </div>
                         </div>
