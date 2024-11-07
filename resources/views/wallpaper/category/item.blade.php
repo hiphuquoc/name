@@ -37,7 +37,7 @@
                     <img src="https://name.com.vn/storage/images/upload/logo-type-manager-upload.webp" alt="wallpaperdienthoai@gmail.com" title="wallpaperdienthoai@gmail.com" />
                 </div>
                 <div class="author_name maxLine_1">
-                    Phú Quý
+                    Admin Name
                 </div>
             </div>
         </div>
