@@ -126,7 +126,7 @@ class CategoryController extends Controller {
 
     public static function loadInfoCategory(Request $request){ /* hàm này dùng load thông tin của category bao gồm các tag con (dùng cho trang chủ) */
         $idCategory     = $request->get('category_info_id') ?? 0;
-        $language       = session()->get('language') ?? $request->get('language') ?? 'vi';
+        $language       = $request->get('language') ?? session()->get('language');
         $infoCategory   = Category::select('*')
                             ->whereHas('seos.infoSeo', function($query) use($language){
                                 $query->where('language', $language);
