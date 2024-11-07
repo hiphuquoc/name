@@ -94,7 +94,7 @@
                                                     <div class="maxLine_1"><i class="fa-solid fa-share"></i>{{ $blog->shared }}</div>
                                                 </div>
                                                 <div class="blogListBox_item_content_desc maxLine_4">
-                                                    {!! strip_tags($seo->infoSeo->contents[0]->content) !!}
+                                                    {!! !empty($seo->infoSeo->contents[0]->content) ? strip_tags($seo->infoSeo->contents[0]->content) : '' !!}
                                                 </div>
                                             </div>
                                         </div>
