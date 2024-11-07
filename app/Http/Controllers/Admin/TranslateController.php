@@ -232,8 +232,8 @@ class TranslateController extends Controller {
                     ++$i;
                 }
             }
-            /* phân chia -> mỗi lần thực hiện 8 ngôn ngữ */
-            $numberPertime          = 8;
+            /* phân chia -> mỗi lần thực hiện 5 ngôn ngữ */
+            $numberPertime          = 5;
             $chunkedArrays          = array_chunk($arrayLanguageNonHas, $numberPertime);
             foreach ($chunkedArrays as $arrayLanguageTranslate) {
                 $flag = AutoTranslateAndCreatePage::dispatch($arrayLanguageHas, $arrayLanguageTranslate, $infoPage);
