@@ -4,7 +4,7 @@
         <span class="tocContentMain_title_icon"></span>
         <span class="tocContentMain_title_text">{{ config('language.'.$language.'.data.table_of_contents') }}</span>
     </div>
-    <div class="tocContentMain_list" style="display: block;">
+    <div class="tocContentMain_list customScrollBar-y" style="display: block;">
         @foreach($data as $item)
             <a href="#{{ $item['id'] ?? null }}" class="tocContentMain_list_item">
                 {!! $item['title'] ?? null !!}

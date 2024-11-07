@@ -496,7 +496,10 @@
 
         function setHeightTocFixed(){
             let heightToc   = parseInt($(window).height() - 210);
-            $('.tocContentMain.tocFixed .tocContentMain_list').css('height', heightToc+'px');
+            $('.tocContentMain.tocFixed .tocContentMain_list').css({
+                'height' : heightToc+'px',
+                'max-height'    : 'unset',
+            });
         }
 
         let element         = $('#tocContentMain');
