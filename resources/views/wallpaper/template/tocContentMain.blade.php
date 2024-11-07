@@ -7,7 +7,7 @@
     <div class="tocContentMain_list customScrollBar-y" style="display: block;">
         @foreach($data as $item)
             <a href="#{{ $item['id'] ?? null }}" class="tocContentMain_list_item">
-                {!! $item['title'] ?? null !!}
+                {{ $loop->index+1 }}. {!! $item['title'] ?? null !!}
             </a>
         @endforeach
     </div>
@@ -24,7 +24,7 @@
     <div class="tocContentMain_list customScrollBar-y">
         @foreach($data as $item)
             <a href="#{{ $item['id'] ?? null }}" class="tocContentMain_list_item">
-                {!! $item['title'] ?? null !!}
+                {{ $loop->index+1 }}. {!! $item['title'] ?? null !!}
             </a>
         @endforeach
     </div>
