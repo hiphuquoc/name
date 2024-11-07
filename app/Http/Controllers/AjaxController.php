@@ -246,6 +246,19 @@ class AjaxController extends Controller {
                                 ->with('seo', 'seos')
                                 ->first();
         }
+        /*
+            nếu là selectbox của category_info thì all phải về trang hinh-nen-dien-thoai (cấp cha của url hiện tại)
+        */
+        $urlReferer = request()->header('Referer');
+        $path = urldecode(parse_url($urlReferer, PHP_URL_PATH));
+        $tmp = explode('/', $path);
+        // Loại bỏ các phần tử rỗng
+        $tmp = array_filter($tmp);
+        if (count($tmp) > 1) {
+            array_pop($tmp); // Nếu là trang category con thì xóa phần tử cuối cùng
+        }
+        $urlAll = implode('/', $tmp);
+        /* lấy giao diện */
         $xhtml              = view('wallpaper.categoryMoney.sortContent', [
             'language'          => $language,
             'total'             => $total,
@@ -253,6 +266,7 @@ class AjaxController extends Controller {
             'categoryChoose'    => $categoryChoose,
             'filters'           => $filters,
             'test'              => true,
+            'urlAll'            => $urlAll,
         ])->render();
         return $xhtml;
     }

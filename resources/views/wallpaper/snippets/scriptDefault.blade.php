@@ -371,8 +371,8 @@
     function removeProductCart(idProduct, idProductPrice, idRow, idTotal, idCount) {
         /* tải loading */ 
         loadLoading(idRow);
-
-        fetch("/removeProductCart?product_info_id=" + idProduct + "&product_price_id=" + idProductPrice, {
+        const language = $('#language').val();
+        fetch("/removeProductCart?product_info_id=" + idProduct + "&product_price_id=" + idProductPrice + "&language=" + language, {
             method: 'GET',
             mode: 'cors'
         })

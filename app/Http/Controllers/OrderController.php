@@ -40,10 +40,11 @@ class OrderController extends Controller{
                 }
             }
             /* tạo order_info */
+            $language       = $params['language_sub'] ?? session()->get('language');
             if($params['payment_type']=='payment_cart'){ /* thanh toán giỏ hàng */
-                $idOrder = $this->createOrderByPaymentCart($idCustomer, $params);
+                $idOrder = $this->createOrderByPaymentCart($idCustomer, $params, $language);
             }else { /* thanh toán ngay (1 sản phẩm) */
-                $idOrder = $this->createOrderByPaymentNow($idCustomer, $params);
+                $idOrder = $this->createOrderByPaymentNow($idCustomer, $params, $language);
             }
             DB::commit();
             return $idOrder;
@@ -52,8 +53,7 @@ class OrderController extends Controller{
         }
     }
 
-    private function createOrderByPaymentCart($idCustomer, $params){
-        $language           = session()->get('language') ?? 'vi';
+    private function createOrderByPaymentCart($idCustomer, $params, $language){
         $productsCarts      = session()->get('cart');
         $productsCarts      = json_decode($productsCarts, true);
         $idPaymentMethod    = $params['payment_method_info_id'];
@@ -65,8 +65,7 @@ class OrderController extends Controller{
         return $idOrder;
     }
 
-    private function createOrderByPaymentNow($idCustomer, $params){
-        $language           = session()->get('language') ?? 'vi';
+    private function createOrderByPaymentNow($idCustomer, $params, $language){
         $arrayPrice         = explode('-', $params['product_price_id']);
         $idProduct          = $params['product_info_id'];
         $idPaymentMethod    = $params['payment_method_info_id'];

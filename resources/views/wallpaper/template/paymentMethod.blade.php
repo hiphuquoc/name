@@ -41,12 +41,14 @@
         }
 
         function loadTotalCart(idMethod){
+            const language = $('#language').val();
             $.ajax({
                 url         : '{{ route("main.loadTotalCart") }}',
                 type        : 'get',
                 dataType    : 'html',
                 data        : {
-                    payment_method_info_id : idMethod
+                    payment_method_info_id : idMethod,
+                    language,
                 },
                 success     : function(response){
                     $('#js_loadTotalCart').html(response);

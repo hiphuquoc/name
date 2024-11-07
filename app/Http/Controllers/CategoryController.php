@@ -24,13 +24,14 @@ class CategoryController extends Controller {
         $content            = '';
         $params             = [];
         if(!empty($request->get('total'))){
+            $language                           = $request->get('language') ?? session()->get('language');
             $params['loaded']                   = $request->get('loaded');
             $params['request_load']             = $request->get('request_load');
             $params['array_category_info_id']   = json_decode($request->get('array_category_info_id'));
             $params['sort_by']                  = Cookie::get('sort_by') ?? null;
             $params['filters']                  = $request->get('filters') ?? [];
             $params['id_not']                   = $request->get('idNot') ?? 0;
-            $tmp                                = self::getFreeWallpapers($params);
+            $tmp                                = self::getFreeWallpapers($params, $language);
             $user           = Auth::user();
             $language       = $request->get('language');
             foreach($tmp['wallpapers'] as $wallpaper){
@@ -43,9 +44,8 @@ class CategoryController extends Controller {
         return json_encode($response);
     }
 
-    public static function getFreeWallpapers($params){
+    public static function getFreeWallpapers($params, $language){
         $idNot          = $params['id_not'] ?? 0;
-        $language       = session()->get('language');
         $keySearch      = $params['search'] ?? null;
         $filters        = $params['filters'] ?? [];
         $sortBy         = $params['sort_by'] ?? null;

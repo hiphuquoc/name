@@ -25,6 +25,9 @@
             <h1 class="titlePage">{{ config('language.'.$language.'.data.product_list') }} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] ?? 0 }}</span>)</h1>
             <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
                 @csrf
+                <!-- tạo language phụ trong form để gửi đi -->
+                <input type="hidden" id="language_sub" name="language_sub" value="{{ $language }}" />
+                <!-- layout -->
                 <div class="layoutPageCart">
                     <div id="js_checkEmptyCart_idWrite" class="layoutPageCart_left distanceBetweenBox">
 

@@ -48,6 +48,7 @@
                 clicked = true;
                 const email = $('#email').val();
                 const idProduct = $('#product_info_id').val();
+                const language_sub = $('#language').val();
                 let idPrice = 0;
                 $(document).find('[data-product_price_id]').each(function() {
                     if ($(this).hasClass('selected')) {
@@ -60,7 +61,8 @@
                         product_info_id: idProduct,
                         product_price_id: idPrice,
                         payment_method_info_id: idMethod,
-                        email: email
+                        email,
+                        language_sub, /* đặt tên để đồng bộ với tính năng paymentCart */
                     }).toString();
 
                     fetch("{{ route('main.paymentNow') }}?" + queryParams, {

@@ -242,7 +242,7 @@ class CartController extends Controller{
         /* set lại cookie */
         Session::put('cart', json_encode($cartNew));
         /* trường hợp remove đến khi cart rỗng */
-        $language               = session()->get('language') ?? 'vi';
+        $language               = $request->get('language') ?? session()->get('language');
         $detailCart             = self::calculatorDetailCart($cartNew, 0, $language);
         $result                 = [];
         $result['count']        = $detailCart['count'];
@@ -308,7 +308,7 @@ class CartController extends Controller{
     public static function loadTotalCart(Request $request){
         $response   = '';
         /* ngôn ngữ */
-        $language   = session()->get('language') ?? 'vi';
+        $language   = $request->get('language') ?? session()->get('language');
         /* tiêu đề "tổng cộng" */
         $titleTotal = $language=='vi' ? 'Tổng cộng' : 'Total';
         /* sản phẩm trong giỏ hàng */

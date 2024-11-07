@@ -48,15 +48,16 @@
 </div>
 <div class="selectCustom_box">
     @php
-        $urlCategoryChoose = '';
+        $urlCategoryChoose              = '';
         if(!empty($categoryChoose->seos)){
             foreach($categoryChoose->seos as $seo){
                 if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
-                    $urlCategoryChoose = $seo->infoSeo->slug_full;
+                    $urlCategoryChoose  = $seo->infoSeo->slug_full;
                     break; 
                 }
             }
         }
+        if(!empty($urlPhoneWallpaper)) $urlCategoryChoose = $urlPhoneWallpaper;
     @endphp
     <a href="/{{ $urlCategoryChoose }}" class="selectCustom_box_item">
         {{ config('language.'.$language.'.data.all') }}

@@ -63,7 +63,12 @@
         <!-- Chủ đề/phong cách/sự kiện -->
         @foreach(config('main_'.env('APP_NAME').'.category_type') as $type)
             <div class="selectCustom hide-1199">
-                @include('wallpaper.categoryMoney.selectCustom')
+                @php
+                    /* phải tách làm 2 biến để không truyền qua các selectbox khác */
+                    $urlPhoneWallpaper = '';
+                    if ($type['key'] == 'category_info'&&!empty($urlAll)) $urlPhoneWallpaper = $urlAll;
+                @endphp
+                @include('wallpaper.categoryMoney.selectCustom', compact('urlPhoneWallpaper'))
             </div>
         @endforeach
         <!-- icon filter nâng cao -->

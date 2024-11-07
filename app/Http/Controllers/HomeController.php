@@ -60,12 +60,6 @@ class HomeController extends Controller {
                     }
                 }
             }
-            /* load một ít category */
-            // $tmp        = [
-            //     'request_load'  => 100,
-            //     'type'          => 'category_info',
-            // ];
-            // $categories = self::getCategories($tmp);
             $categories     = Category::select('*')
                                 ->where('flag_show', 1)
                                 ->get();
@@ -367,54 +361,54 @@ class HomeController extends Controller {
         return $response;
     }
 
-    public static function getCategories($params){
-        $language       = session()->get('language');
-        $sortBy         = $params['sort_by'] ?? null;
-        $loaded         = $params['loaded'] ?? 0;
-        $requestLoad    = $params['request_load'] ?? 10;
-        $type           = $params['type'] ?? 'category_info'; /* category_info, style_info, event_info */
-        $response       = [];
-        $items          = Category::select('*')
-                            ->whereHas('seo', function($query) use($type){
-                                $query->where('level', 2)
-                                    ->where('type', $type);
-                            })
-                            ->whereHas('seos.infoSeo', function($query) use($language){
-                                $query->where('language', $language);
-                            })
-                            ->where('flag_show', 1)
-                            ->when(empty($sortBy), function($query){
-                                $query->orderBy('id', 'ASC');
-                            })
-                            ->when($sortBy=='newest'||$sortBy=='propose', function($query){
-                                $query->orderBy('id', 'DESC');
-                            })
-                            ->when($sortBy=='favourite', function($query){
-                                $query->orderBy('heart', 'DESC')
-                                        ->orderBy('id', 'DESC');
-                            })
-                            ->when($sortBy=='oldest', function($query){
-                                $query->orderBy('id', 'ASC');
-                            })
-                            // ->with(['seo', 'seos.infoSeo' => function($query) use($language) {
-                            //     $query->where('language', $language);
-                            // }])
-                            ->skip($loaded)
-                            ->take($requestLoad)
-                            ->get();
-        $total          = Category::select('*')
-                            ->whereHas('seo', function($query) use($type){
-                                $query->where('level', 2)
-                                    ->where('type', $type);
-                            })
-                            ->whereHas('seos.infoSeo', function($query) use($language){
-                                $query->where('language', $language);
-                            })
-                            ->where('flag_show', 1)
-                            ->count();
-        $response['items']      = $items;
-        $response['total']      = $total;
-        $response['loaded']     = $loaded + $requestLoad;
-        return $response;
-    }
+    // public static function getCategories($params){
+    //     $language       = session()->get('language');
+    //     $sortBy         = $params['sort_by'] ?? null;
+    //     $loaded         = $params['loaded'] ?? 0;
+    //     $requestLoad    = $params['request_load'] ?? 10;
+    //     $type           = $params['type'] ?? 'category_info'; /* category_info, style_info, event_info */
+    //     $response       = [];
+    //     $items          = Category::select('*')
+    //                         ->whereHas('seo', function($query) use($type){
+    //                             $query->where('level', 2)
+    //                                 ->where('type', $type);
+    //                         })
+    //                         ->whereHas('seos.infoSeo', function($query) use($language){
+    //                             $query->where('language', $language);
+    //                         })
+    //                         ->where('flag_show', 1)
+    //                         ->when(empty($sortBy), function($query){
+    //                             $query->orderBy('id', 'ASC');
+    //                         })
+    //                         ->when($sortBy=='newest'||$sortBy=='propose', function($query){
+    //                             $query->orderBy('id', 'DESC');
+    //                         })
+    //                         ->when($sortBy=='favourite', function($query){
+    //                             $query->orderBy('heart', 'DESC')
+    //                                     ->orderBy('id', 'DESC');
+    //                         })
+    //                         ->when($sortBy=='oldest', function($query){
+    //                             $query->orderBy('id', 'ASC');
+    //                         })
+    //                         // ->with(['seo', 'seos.infoSeo' => function($query) use($language) {
+    //                         //     $query->where('language', $language);
+    //                         // }])
+    //                         ->skip($loaded)
+    //                         ->take($requestLoad)
+    //                         ->get();
+    //     $total          = Category::select('*')
+    //                         ->whereHas('seo', function($query) use($type){
+    //                             $query->where('level', 2)
+    //                                 ->where('type', $type);
+    //                         })
+    //                         ->whereHas('seos.infoSeo', function($query) use($language){
+    //                             $query->where('language', $language);
+    //                         })
+    //                         ->where('flag_show', 1)
+    //                         ->count();
+    //     $response['items']      = $items;
+    //     $response['total']      = $total;
+    //     $response['loaded']     = $loaded + $requestLoad;
+    //     return $response;
+    // }
 }

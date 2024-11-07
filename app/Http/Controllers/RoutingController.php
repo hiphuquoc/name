@@ -175,7 +175,7 @@ class RoutingController extends Controller{
                             $params['sort_by']                  = Cookie::get('sort_by') ?? null;
                             $params['filters']                  = $request->get('filters') ?? [];
                             $params['search']                   = $search;
-                            $tmp                                = CategoryController::getFreeWallpapers($params);
+                            $tmp                                = CategoryController::getFreeWallpapers($params, $language);
                             $wallpapers                         = $tmp['wallpapers'];
                             $total                              = $tmp['total'];
                             $loaded                             = $tmp['loaded'];
