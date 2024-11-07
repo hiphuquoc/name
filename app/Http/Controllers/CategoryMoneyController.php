@@ -201,6 +201,13 @@ class CategoryMoneyController extends Controller {
     }
 
     public static function buildTocContentMain($content, $language) {
+        // Kiểm tra nếu $content rỗng hoặc không có thẻ H2
+        if (empty(trim($content))) {
+            return [
+                'content' => '',
+                'toc_content' => ''
+            ];
+        }
         // Phân tích HTML của $content để tạo TOC
         $dom = new \DOMDocument();
         @$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
