@@ -133,7 +133,11 @@ class RoutingController extends Controller{
                     $wallpapers         = $response['wallpapers'];
                     $total              = $response['total'];
                     $loaded             = $response['loaded'];
-                    $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'arrayIdTag', 'total', 'loaded', 'language', 'viewBy'))->render();
+                    /* xây dựng toc_content */
+                    $htmlContent        = '';
+                    foreach($itemSeo->contents as $content) $htmlContent .= $content->content;
+                    $dataContent        = CategoryMoneyController::buildTocContentMain($htmlContent, $language);
+                    $xhtml              = view('wallpaper.categoryMoney.index', compact('item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'arrayIdTag', 'total', 'loaded', 'language', 'viewBy', 'dataContent'))->render();
                 }
                 /* ===== Sản phẩm ==== */
                 if($itemSeo->type=='product_info'){
