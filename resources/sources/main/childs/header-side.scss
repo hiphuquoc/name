@@ -118,10 +118,10 @@ $widthCollapsed : 17rem;
         background: $colorBackgroundLv2;
         gap: 0.5rem;
         z-index: 99;
-        padding: 0.25rem 0rem 1rem 0.75rem; /* left để đè container */
+        padding: 0.5rem 0rem 1rem 0.75rem; /* left để đè container */
         left: 0;
         &:dir(rtl), [dir="rtl"] & {
-            padding: 0.25rem 0.75rem 1rem 0; /* left để đè container */
+            padding: 0.5rem 0.75rem 1rem 0; /* left để đè container */
             left: unset;
             right: 0;
         }
