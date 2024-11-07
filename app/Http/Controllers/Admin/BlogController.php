@@ -89,7 +89,7 @@ class BlogController extends Controller {
             }
             /* prompts */
             $prompts            = Prompt::select('*')
-                                    ->where('reference_table', 'category_blog')
+                                    ->where('reference_table', 'blog_info')
                                     ->get();
             /* trang canonical -> cùng là sản phẩm */
             $idProduct          = $item->id ?? 0;
