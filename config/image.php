@@ -4,6 +4,7 @@ return [
     'default'               => '/storage/images/image-default-660x660.png',
     'folder_upload'         => 'public/images/upload/',
     'extension'             => 'webp',
+    'mine_type'             => 'image/webp', /* extension mặc định dùng webp nên mine_type mặc định là này . */
     'quality'               => '90',
     'resize_large_width'    => 800,
     'resize_small_width'    => 500,

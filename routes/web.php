@@ -215,9 +215,8 @@ Route::middleware('auth', 'role:admin')->group(function (){
         Route::prefix('image')->group(function(){
             Route::get('/', [ImageController::class, 'list'])->name('admin.image.list');
             Route::post('/uploadImages', [ImageController::class, 'uploadImages'])->name('admin.image.uploadImages');
-            Route::post('/loadImage', [ImageController::class, 'loadImage'])->name('admin.image.loadImage');
-            Route::post('/loadModal', [ImageController::class, 'loadModal'])->name('admin.image.loadModal');
-            Route::post('/changeName', [ImageController::class, 'changeName'])->name('admin.image.changeName');
+            Route::get('/loadImage', [ImageController::class, 'loadImage'])->name('admin.image.loadImage');
+            Route::get('/loadModal', [ImageController::class, 'loadModal'])->name('admin.image.loadModal');
             Route::post('/changeImage', [ImageController::class, 'changeImage'])->name('admin.image.changeImage');
             Route::post('/removeImage', [ImageController::class, 'removeImage'])->name('admin.image.removeImage');
 

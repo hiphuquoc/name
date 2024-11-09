@@ -101,6 +101,7 @@ return [
         'wallpapers'        => 'wallpapers/',
         'sources'           => 'sources/',
         'freeWallpapers'    => 'freewallpapers/',
+        'images'            => 'storage/images/',
     ],
     'filter'    => [
         'price' => [

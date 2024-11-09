@@ -35,10 +35,10 @@
         </div>
     </div>
 </form>
-@push('modal')
+@pushonce('modal')
     <!-- full loading -->
     @include('admin.modal.fullLoading')
-@endpush
+@endpushonce
 
 
 @pushonce('scriptCustom')

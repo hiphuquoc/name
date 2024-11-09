@@ -27,21 +27,21 @@
 <!-- ===== END: SEARCH FORM ===== -->
 <div id="js_uploadImage_idWrite" class="imageBox" style="padding-bottom:2rem;">
     @if(!empty($list))
-    @foreach($list as $item)
-        @include('admin.image.oneRow', compact('item'))
-    @endforeach
+        @foreach($list as $infoImageCloud)
+            @include('admin.image.oneRow', compact('infoImageCloud'))
+        @endforeach
     @endif
 </div>
 
 <!-- ===== START: MODAL ===== -->
-<form id="formModal" method="post" enctype="multipart/form-data">
+<form id="formModal" method="post" action="{{ route('admin.image.changeImage') }}" enctype="multipart/form-data">
 @csrf
     <!-- Input Hidden -->
     <div id="modalImage" class="modal fade">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-transparent">
-                    <h4 id="js_loadModal_head">Sửa tên ảnh</h4>
+                    <h4>Thay đổi ảnh</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Đóng">Đóng</button>
-                    <button id="js_loadModal_action" type="button" class="btn btn-primary" tableindex="0" aria-label="Xác nhận">Xác nhận</button>
+                    <button id="js_loadModal_action" type="submit" class="btn btn-primary" tableindex="0" aria-label="Xác nhận">Xác nhận</button>
                 </div>
             </div>
         </div>
@@ -61,68 +61,30 @@
 <!-- ===== END:: MODAL ===== -->
     
 @endsection
+@pushonce('modal')
+    <!-- full loading -->
+    @include('admin.modal.fullLoading')
+@endpushonce
 @push('scriptCustom')
     <script type="text/javascript">
 
-        function loadModal(type, basename){
+        function loadModal(idImageCloud){
             $.ajax({
                 url         : "{{ route('admin.image.loadModal') }}",
-                type        : "post",
-                dataType    : "json",
-                data        : { 
-                    '_token'    : '{{ csrf_token() }}', 
-                    type,
-                    basename 
+                type        : "get",
+                dataType    : "html",
+                data        : {
+                    image_cloud_id : idImageCloud, 
                 }
             }).done(function(data){
-                $('#js_loadModal_head').html(data.head);
-                $('#js_loadModal_body').html(data.body);
-                const buttonAction  = $('#js_loadModal_action');
-                if(type==='changeName'){
-                    buttonAction.attr({
-                        'onClick'   : 'changeName();',
-                        'type'      : 'button'
-                    });
-                }else if(type==='changeImage'){
-                    $('#js_loadModal_action').attr('type', 'submit').removeAttr('onClick');
-                }
-            });
-        }
-
-        function changeName(){
-            const basenameOld   = $('#basename_old').val();
-            const nameNew       = $('#name_new').val();
-            const idImageBox    = basenameOld.slice(0, basenameOld.lastIndexOf('.'));
-            $.ajax({
-                url         : "{{ route('admin.image.changeName') }}",
-                type        : "post",
-                dataType    : "json",
-                data        : { 
-                    '_token'        : '{{ csrf_token() }}', 
-                    basename_old    : basenameOld,
-                    name_new        : nameNew 
-                }
-            }).done(function(data){
-                if(data.flag==true){
-                    /* cập nhật lại id của imageBox */
-                    $('#'+idImageBox).attr('id', nameNew);
-                    /* tải lại imageBox */
-                    loadImageBox(nameNew);
-                    /* tắt modal */
-                    $('#modalImage').modal('hide');
-                }else {
-                    $('#js_loadModal_message').html(data.message).css('display', 'block');
-                    setTimeout(() => {
-                        $('#js_loadModal_message').css('display', 'none');
-                    }, 3000);
-                }
+                $('#js_loadModal_body').html(data);
             });
         }
 
         /* ChangeImage submit files */
         $("#formModal").on('submit', function(e) {
             e.preventDefault();
-            const filenameImage     = $('#filename_image').val();
+            const idImageCloud  = $('#image_cloud_id').val();
             $.ajax({
                 url             : "{{ route('admin.image.changeImage') }}",
                 type            : "POST",
@@ -132,35 +94,29 @@
                 cache           : false,
                 processData     : false,
                 success         : function(data){
-                    setTimeout(() => {
-                        if(data.flag==true){
-                            /* tải lại imageBox */
-                            loadImageBox(filenameImage);
-                            /* tắt modal */
-                            $('#modalImage').modal('hide');
-                            return true;
-                        }else {
-                            $('#js_loadModal_message').html(data.message).css('display', 'block');
-                            setTimeout(() => {
-                                $('#js_loadModal_message').css('display', 'none');
-                            }, 3000);
-                            return false;
-                        }
-                    });
+                    if(data.flag){
+                        /* tải lại imageBox */
+                        loadImageBox(idImageCloud);
+                        /* tắt modal */
+                        $('#modalImage').modal('hide');
+                    }
                 }
             });
         });
 
-        function loadImageBox(idBox){
-            const heightBox = $('#'+idBox).outerHeight();
+        function loadImageBox(idImageCloud){
+            // const heightBox = $('#'+idBox).outerHeight();
+            const idBox         = 'js_removeImage_'+idImageCloud;
+            const elementBox    = $('#'+idBox);
+            const heightBox     = elementBox.outerHeight();
+
             addLoading(idBox, heightBox);
             $.ajax({
                 url         : "{{ route('admin.image.loadImage') }}",
-                type        : "post",
+                type        : "get",
                 dataType    : "html",
                 data        : { 
-                    '_token'        : '{{ csrf_token() }}', 
-                    image_name    : idBox
+                    image_cloud_id  : idImageCloud
                 }
             }).done(function(data){
                 setTimeout(() => {
@@ -172,6 +128,8 @@
         /* Upload and append thêm ảnh */
         $("#formUpload").on('submit', function(e) {
             e.preventDefault();
+            // Mở loading
+            openCloseFullLoading();
             $.ajax({
                 url             : "{{ route('admin.image.uploadImages') }}",
                 type            : "POST",
@@ -185,12 +143,15 @@
                     let contentOld      = elementWrite.html();
                     elementWrite.html(data.content+contentOld);
                     document.getElementById("formUpload").reset();
+                    openCloseFullLoading();
                 }
             });
         });
 
-        function removeImage(idBox, basenameImage){
-            const heightBox = $('#'+idBox).outerHeight();
+        function removeImage(id){
+            const idBox         = 'js_removeImage_'+id;
+            const elementBox    = $('#'+idBox);
+            const heightBox     = elementBox.outerHeight();
             addLoading(idBox, heightBox);
             $.ajax({
                 url         : "{{ route('admin.image.removeImage') }}",
@@ -198,11 +159,11 @@
                 dataType    : "html",
                 data        : { 
                     '_token'        : '{{ csrf_token() }}', 
-                    basename_image  : basenameImage
+                    image_cloud_id  : id
                 }
             }).done(function(data){
                 setTimeout(() => {
-                    if(data==true) $('#'+idBox).hide();
+                    if(data==true) elementBox.hide();
                 }, 500)
             });
         }
