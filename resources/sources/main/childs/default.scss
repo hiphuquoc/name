@@ -529,7 +529,7 @@ $heightMenu : 3.3rem;
     z-index: -2;
     pointer-events: none;
     overflow: hidden;
-    // mix-blend-mode: darken;
+    mix-blend-mode: darken;
     /* Hiệu ứng mờ dần */
     opacity: 0; /* Bắt đầu từ trạng thái ẩn */
     animation: fadeInBackground 0.5s ease-in-out 0.5s forwards; /* Trì hoãn 0.2 giây trước khi bắt đầu */
@@ -545,7 +545,7 @@ $heightMenu : 3.3rem;
     z-index: -1;
     pointer-events: none;
     overflow: hidden;
-    // mix-blend-mode: darken;
+    mix-blend-mode: darken;
     /* Hiệu ứng mờ dần */
     opacity: 0; /* Bắt đầu từ trạng thái ẩn */
     animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
@@ -562,7 +562,7 @@ $heightMenu : 3.3rem;
     z-index: -1;
     pointer-events: none;
     overflow: hidden;
-    // mix-blend-mode: darken;
+    mix-blend-mode: darken;
     /* Hiệu ứng mờ dần */
     opacity: 0; /* Bắt đầu từ trạng thái ẩn */
     animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */

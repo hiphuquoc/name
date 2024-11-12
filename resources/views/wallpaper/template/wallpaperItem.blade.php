@@ -129,9 +129,9 @@
                             <!-- background blur -->
                             <div class="wallpaperGridBox_item_image_backgroundBlur"></div>
                         </div>
-                        <div class="wallpaperGridBox_item_image_background"></div>
+                        {{-- <div class="wallpaperGridBox_item_image_background"></div>
                         <div class="wallpaperGridBox_item_image_backgroundTopMore"></div>
-                        <div class="wallpaperGridBox_item_image_backgroundSideMore"></div>
+                        <div class="wallpaperGridBox_item_image_backgroundSideMore"></div> --}}
                     </a>
                     <!-- thêm vào giỏ hành nhanh -->
                     <div class="wallpaperGridBox_item_action">
