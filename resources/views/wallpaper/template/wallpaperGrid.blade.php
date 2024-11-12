@@ -1,4 +1,4 @@
-<!-- box -->
+{{-- <!-- box -->
 <div class="wallpaperGridBox viewFirstTime">
     @for($i=0;$i<5;++$i)
         <div class="wallpaperGridBox_itemBackground"></div>
@@ -110,4 +110,4 @@
             });     
         }
     </script>
-@endpush
+@endpush --}}

@@ -2,11 +2,13 @@
 <input type="hidden" id="js_loadMoreWallpaper_search" value="{{ $search ?? null }}" />
 <input type="hidden" id="js_loadMoreWallpaper_total" value="{{ $total ?? 0 }}" />
 <input type="hidden" id="js_loadMoreWallpaper_loaded" value="{{ $loaded ?? 0 }}" />
+<!-- bắt buộc phải viết như vậy -->
 @if(!empty($arrayIdCategory))
     <input type="hidden" id="js_loadMoreWallpaper_array_category_info_id" value="{{ json_encode($arrayIdCategory) }}" />
 @else 
     <input type="hidden" id="js_loadMoreWallpaper_array_category_info_id" value="[]" />
 @endif
+<!-- bắt buộc phải viết như vậy -->
 @if(!empty($arrayIdTag))
     <input type="hidden" id="js_loadMoreWallpaper_array_tag_info_id" value="{{ json_encode($arrayIdTag) }}" />
 @else 

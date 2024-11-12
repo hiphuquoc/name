@@ -296,6 +296,7 @@ Route::get('/paymentNow', [CheckoutController::class, 'paymentNow'])->name('main
 Route::post('/paymentCart', [CheckoutController::class, 'paymentCart'])->name('main.paymentCart');
 Route::get('/handlePaymentMomo', [ConfirmController::class, 'handlePaymentMomo'])->name('main.handlePaymentMomo');
 Route::get('/handlePaymentZalopay', [ConfirmController::class, 'handlePaymentZalopay'])->name('main.handlePaymentZalopay');
+Route::get('/handlePaymentVNPay', [ConfirmController::class, 'handlePaymentVNPay'])->name('main.handlePaymentVNPay');
 Route::get('/handlePaymentPaypal', [ConfirmController::class, 'handlePaymentPaypal'])->name('main.handlePaymentPaypal');
 /* check out */
 Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');

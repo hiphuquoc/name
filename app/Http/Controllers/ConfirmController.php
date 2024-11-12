@@ -10,6 +10,9 @@ use App\Jobs\SendEmailOrder;
 use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendProductMail;
+
 class ConfirmController extends Controller {
 
     public static function confirm(Request $request, $slug){
@@ -63,9 +66,9 @@ class ConfirmController extends Controller {
         }
         /* xử lý sau khi đã thanh toán thành công */
         if($flagPayment==true) {
-            self::handleAfterPayment($orderInfo);
-            /* lấy slug theo ngôn ngữ của trang xác nhận */
             $language   = SettingController::getLanguage();
+            self::handleAfterPayment($orderInfo, $language);
+            /* lấy slug theo ngôn ngữ của trang xác nhận */
             $slug       = self::getSlugPageConfirmByLanguage($language);
             /* chuyển hướng sang trang nhận ảnh */
             if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
@@ -90,9 +93,9 @@ class ConfirmController extends Controller {
                 if(!empty($request->get('status'))&&$request->get('status')==1) $flagPayment = true;
                 /* xử lý sau khi đã thanh toán thành công */
                 if($flagPayment==true) {
-                    self::handleAfterPayment($orderInfo);
-                    /* lấy slug theo ngôn ngữ của trang xác nhận */
                     $language   = SettingController::getLanguage();
+                    self::handleAfterPayment($orderInfo, $language);
+                    /* lấy slug theo ngôn ngữ của trang xác nhận */
                     $slug       = self::getSlugPageConfirmByLanguage($language);
                     /* chuyển hướng sang trang nhận ảnh */
                     if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
@@ -101,6 +104,38 @@ class ConfirmController extends Controller {
         }
         /* thanh toán không thành công */
         return redirect()->route('main.home');
+    }
+
+    public static function handlePaymentVNPay(Request $request){
+
+        dd($request->all());
+        // if(!empty($request->get('code'))){
+        //     /* lấy thông tin của Order trong CSDL */
+        //     $code           = $request->get('code');
+        //     $orderInfo      = Order::select('*')
+        //                         ->where('code', $code)
+        //                         ->first();
+        //     $flagPayment    = false;
+        //     /* cập nhật trans_id (id thanh toán của zalopay) */
+        //     if(!empty($request->get('apptransid'))){ /* tồn tại transid và đã thanh toán > 0 => xử lý tiếp */
+        //         $transId        = $request->get('apptransid');
+        //         Order::updateItem($orderInfo->id, ['trans_id' => $transId]);
+        //         /* nếu đã thanh toán thành công */
+        //         if(!empty($request->get('status'))&&$request->get('status')==1) $flagPayment = true;
+        //         /* xử lý sau khi đã thanh toán thành công */
+        //         if($flagPayment==true) {
+            // $language   = SettingController::getLanguage();
+        //             self::handleAfterPayment($orderInfo, $language);
+        //             /* lấy slug theo ngôn ngữ của trang xác nhận */
+        //             
+        //             $slug       = self::getSlugPageConfirmByLanguage($language);
+        //             /* chuyển hướng sang trang nhận ảnh */
+        //             if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
+        //         }
+        //     }
+        // }
+        // /* thanh toán không thành công */
+        // return redirect()->route('main.home');
     }
 
     public static function handlePaymentPaypal(Request $request){
@@ -122,9 +157,9 @@ class ConfirmController extends Controller {
             $flagPayment = true;
             /* xử lý sau khi đã thanh toán thành công */
             if($flagPayment==true) {
-                self::handleAfterPayment($orderInfo);
-                /* lấy slug theo ngôn ngữ của trang xác nhận */
                 $language   = SettingController::getLanguage();
+                self::handleAfterPayment($orderInfo, $language);
+                /* lấy slug theo ngôn ngữ của trang xác nhận */
                 $slug       = self::getSlugPageConfirmByLanguage($language);
                 /* chuyển hướng sang trang nhận ảnh */
                 if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
@@ -134,14 +169,14 @@ class ConfirmController extends Controller {
         return redirect()->route('main.home');
     }
     
-    private static function handleAfterPayment($orderInfo){
+    private static function handleAfterPayment($orderInfo, $language){
         if(!empty($orderInfo)){
             /* cập nhật trạng thái thành toán thành công */
             Order::updateItem($orderInfo->id, ['payment_status' => 1]);
             /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
             if($orderInfo->payment_type=='payment_cart') Session::forget('cart');
             /* tạo job gửi email */
-            if(!empty($orderInfo->email)) SendEmailOrder::dispatch($orderInfo);
+            if(!empty($orderInfo->customer->email)) Mail::to($orderInfo->customer->email)->queue(new SendProductMail($orderInfo, $language));
         }
     }
 

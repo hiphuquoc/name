@@ -36,5 +36,17 @@ return [
         "api"       => [
             "getbanklist"       => "https://gateway.zalopay.vn/api/getlistmerchantbanks"
         ],
+    ],
+    'vnpay'   => [
+        // /* môi trường production */
+        // 'endpoint'  => 'https://openapi.zalopay.vn/v2/create',
+        // 'app_id'    => '2669',
+        // 'app_user'  => 'Wallpaper',
+        // "key_1"     => "51mCWr1bU8sg6IThT31DcQCiyHaNMbgw",
+        // "key_2"     => "ql3W79bv0GThJ4djl8JynroiVkdvbpy6",
+        /* môi trường test */
+        'endpoint'      => 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html',
+        'access_key'    => 'TDNYA8UC',
+        'secret_key'    => 'R8MI4IDJ8OZQ9TQXRSOEZCO6F9BMW3TY',
     ]
 ];

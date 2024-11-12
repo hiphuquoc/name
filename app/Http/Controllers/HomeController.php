@@ -29,6 +29,9 @@ use App\Models\Wallpaper;
 use Google\Client as Google_Client;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendProductMail;
+
 use DOMDocument;
 use PDO;
 use PhpParser\Node\Stmt\Switch_;
@@ -71,149 +74,20 @@ class HomeController extends Controller {
     }
 
     public static function test(Request $request){
-
-
-        phpinfo();
-        // $wallpapers     = Wallpaper::select('*')
-        //                     ->get();
-        // $folderUpload   = config('main_name.google_cloud_storage.wallpapers');
-        // foreach($wallpapers as $wallpaper){
-        //     $filename   = $wallpaper->file_name_wallpaper.'.webp';
-        //     $urlImage   = \App\Helpers\Image::getUrlImageCloud($wallpaper->file_cloud_wallpaper);
-        //     \App\Jobs\reUploadWallpaper::dispatch($urlImage, $filename, $folderUpload);
-        // }
-        // dd(123);
-
-
-
-        /* lấy danh sách category */
-        // $items   = Category::select('*')
-        //             ->whereHas('seo', function($query){
-        //                 $query->where('level', 2);
-        //             })
-        //             ->with('seo', 'seos.infoSeo')
-        //             ->get();
-        // $i      = 1;
-        // foreach($items as $item){
-        //     echo '<div>Hình Nền Điện Thoại '.$item->seo->title.' Miễn Phí</div>';
-        //     if($i%3==0) echo '<div>Tiếp tục giúp tôi với:</div>';
-        //     ++$i;
-        // }
-        // dd(123);
-
-        // /* test */
-        // $arrayNot   = ['vi', 'lo', 'ro'];
-        // $item   = Category::select('*')
-        //             ->where('id', 100)
-        //             ->with('seo', 'seos.infoSeo')
+        
+        // $language       = 'ur';
+        // $order = \App\Models\Order::select('*')
+        //             ->where('code', 'HQC12UNS40AGB6L')
+        //             ->with('customer', 'products', 'wallpapers', 'paymentMethod')
         //             ->first();
-        // foreach($item->seos as $seo){
-        //     $language   = $seo->infoSeo->language;
-        //     // foreach($seo->infoSeo->contents as $c){
-        //     //     /* thay thế content */
-        //     //     $content = AutoTranslateContent::translateSlugBySlugOnData($language, $c->content);
-        //     //     /* update content */
-        //     //     SeoContent::updateItem($c->id, [
-        //     //         'content' => $content
-        //     //     ]);
-        //     // }
-        //     if(!in_array($language, $arrayNot)) TranslateController::createJobTranslateContent($item->seo->id, $language);
+        // $email = $order->customer->email ?? '';
+        // /* tồn tại email và đã thanh toán */
+        // if(!empty($email)&&$order->payment_status==1){
+        //     $flag = Mail::to($email)->send(new SendProductMail($order, $language));
         // }
-        // dd(123);    
 
-        // /* kiểm tra xem tag nào còn thiếu ngôn ngữ nào */
-        // $items = Tag::select('*')
-        //             ->with('seos', 'seo')
-        //             ->get();
-        // $arrayLanguageDefault = [];
-        // foreach(config('language') as $l){
-        //     $arrayLanguageDefault[] = $l['key'];
-        // }
-        // $response       = [];
-        // $count          = 0;
-        // foreach($items as $item){
-        //     $arrayHas   = [];
-        //     foreach($item->seos as $seo){
-        //         if(in_array($seo->infoSeo->language, $arrayLanguageDefault)) {
-        //             $arrayHas[] = $seo->infoSeo->language;
-        //         }
-        //     }
-        //     /* so sánh 2 mảng để lấy ngôn ngữ còn thiếu */
-        //     $missing = array_diff($arrayLanguageDefault, $arrayHas);
-        //     if (!empty($missing)) {
-        //         /* đưa vào mảng in */
-        //         $response[$item->seo->title] = $missing;
-        //         $count                      += count($missing);
-        //     }
-        // }
-        // dd($response);
-        // dd($count);
-
-
-        // /* xóa trang ngôn ngữ */
-        // $arrayNonDelete = [
-        //     'vi', 'en', 'fr', 'es'
-        // ];
-        // $items       = Page::select('*')
-        //                 ->where('id', 1)
-        //                 ->with('seo', 'seos')
-        //                 ->get();
-        // $arrayDelete = [];
-        // foreach($items as $item){
-        //     foreach($item->seos as $seo){
-        //         if(!in_array($seo->infoSeo->language, $arrayNonDelete)){
-        //         // if($seo->infoSeo->language=='kn'){
-        //             Seo::select('*')
-        //                     ->where('id', $seo->infoSeo->id)
-        //                     ->delete();
-        //             RelationSeoPageInfo::select('*')
-        //                 ->where('seo_id', $seo->infoSeo->id)
-        //                 ->delete();
-        //             $arrayDelete[] = $seo->infoSeo->language;
-        //         }
-        //     }
-        // }
-        // dd($arrayDelete);
-
-        // /* tạo trang đa ngôn ngữ hàng loạt */
-        // $items = Tag::select('*')
-        //             ->with('seo', 'seos')
-        //             ->orderBy('id', 'DESC')
-        //             ->get();
-        // $jobs  = [];
-        // foreach($items as $item){
-        //     $flag = TranslateController::createJobTranslateAndCreatePage($item);
-        //     if($flag) {
-        //         $jobs[] = $item->seo->title;
-        //     }
-        // }
-        // dd($jobs);
-
-        // /* xóa hàng loạt 1 vài ngôn ngữ của tag */
-        // $arrayDelete    = ['pl', 'cs', 'mr', 'sk'];
-        // $items  = Tag::select('*')
-        //             ->whereHas('seos.infoSeo', function($query) use($arrayDelete){
-        //                 $query->whereIn('language', $arrayDelete);
-        //             })
-        //             ->with('seo', 'seos')
-        //             ->get();
-        // $response = 0;
-        // foreach($items as $item){
-        //     foreach($item->seos as $seo){
-        //         if(in_array($seo->infoSeo->language, $arrayDelete)){
-        //             /* xóa relation */
-        //             RelationSeoTagInfo::select('*')
-        //                 ->where('seo_id', $seo->infoSeo->id)
-        //                 ->delete();
-        //             /* xóa trang seo */
-        //             $flag = Seo::select('*')
-        //                 ->where('id', $seo->infoSeo->id)
-        //                 ->delete();
-        //             if($flag) $response += 1;
-        //         }
-        //     }
-            
-        // }
+        // dd($flag);
+        
     }
 
     public static function changeSlug(Request $request){

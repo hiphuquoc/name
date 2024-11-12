@@ -88,6 +88,17 @@ return [
             'step_1_buy_now' => "Step 1: Please enter your email.",
             'note_fill_email' => "* If you enter an email, an additional copy will be sent for storage.",
             'step_2_buy_now' => "Step 2: Choose a payment method.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Order Confirmation',
+            'thank_you_message_email' => 'Thank you for completing your order! Your wallpaper is ready to use.',
+            'hello' => 'Hello',
+            'purchase_date' => 'Purchase Date',
+            'download_instructions' => 'You can download the wallpaper collection in the following ways:',
+            'direct_download' => 'Direct download through the links below:',
+            'sincerely' => 'Sincerely!',
+            'login_instruction_message_email' => 'Or log in to <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> with your email and go to the <strong>"My Downloads"</strong> section.',
+            'support_contact_message_email' => 'If you have any questions or need support, please contact us via email at <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'We wish you a great experience with your new wallpaper collection!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Wallpaper Theme",
@@ -243,6 +254,17 @@ return [
             'step_1_buy_now' => "步骤1：请您输入邮箱。",
             'note_fill_email' => "* 如果输入邮箱，将会发送一份副本以便存档。",
             'step_2_buy_now' => "步骤2：选择付款方式。",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => '订单确认',
+            'thank_you_message_email' => '感谢您完成订单！您的壁纸已准备就绪。',
+            'hello' => '你好',
+            'purchase_date' => '购买日期',
+            'download_instructions' => '您可以通过以下方式下载壁纸合集：',
+            'direct_download' => '通过以下链接直接下载：',
+            'sincerely' => '谨上!',
+            'login_instruction_message_email' => '或者使用您的电子邮件登录 <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> 并进入 <strong>"我的下载"</strong> 部分。',
+            'support_contact_message_email' => '如果您有任何问题或需要支持，请通过电子邮件与我们联系：<a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>。',
+            'wish_message_email' => '祝您在使用新壁纸合集时有愉快的体验！',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "壁纸主题",
@@ -398,6 +420,17 @@ return [
             'step_1_buy_now' => "Paso 1: Por favor, ingrese su correo electrónico.",
             'note_fill_email' => "* Si ingresa un correo electrónico, se enviará una copia adicional para su almacenamiento.",
             'step_2_buy_now' => "Paso 2: Elija una forma de pago.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Confirmación de Pedido',
+            'thank_you_message_email' => '¡Gracias por completar tu pedido! Tu fondo de pantalla está listo para usar.',
+            'hello' => 'Hola',
+            'purchase_date' => 'Fecha de compra',
+            'download_instructions' => 'Puede descargar la colección de fondos de las siguientes maneras:',
+            'direct_download' => 'Descarga directa a través de los enlaces a continuación:',
+            'sincerely' => '¡Sinceramente!',
+            'login_instruction_message_email' => 'O inicie sesión en <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> con su correo electrónico y vaya a la sección <strong>"Mis Descargas"</strong>.',
+            'support_contact_message_email' => 'Si tiene alguna pregunta o necesita ayuda, por favor contáctenos por correo electrónico a <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => '¡Le deseamos una excelente experiencia con su nueva colección de fondos de pantalla!',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "Tema de fondo de pantalla",
@@ -553,6 +586,17 @@ return [
             'step_1_buy_now' => "Étape 1 : Veuillez entrer votre email.",
             'note_fill_email' => "* Si vous entrez un email, une copie supplémentaire sera envoyée pour archivage.",
             'step_2_buy_now' => "Étape 2 : Choisissez une méthode de paiement.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Confirmation de Commande',
+            'thank_you_message_email' => 'Merci d\'avoir finalisé votre commande ! Votre fond d\'écran est prêt à être utilisé.',
+            'hello' => 'Bonjour',
+            'purchase_date' => 'Date d\'achat',
+            'download_instructions' => 'Vous pouvez télécharger la collection de fonds d\'écran de la manière suivante :',
+            'direct_download' => 'Téléchargement direct via les liens ci-dessous :',
+            'sincerely' => 'Cordialement !',
+            'login_instruction_message_email' => 'Ou connectez-vous à <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> avec votre e-mail et accédez à la section <strong>"Mes Téléchargements"</strong>.',
+            'support_contact_message_email' => 'Si vous avez des questions ou besoin d\'aide, veuillez nous contacter par e-mail à <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Nous vous souhaitons une excellente expérience avec votre nouvelle collection de fonds d\'écran!',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "Thème du fond d'écran",
@@ -708,6 +752,17 @@ return [
             'step_1_buy_now' => "Bước 1: Bạn vui lòng nhập email.",
             'note_fill_email' => "* Nếu nhập email bạn sẽ được gửi thêm một bản để lưu trữ.",
             'step_2_buy_now' => "Bước 2: Chọn hình thức thanh toán.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Xác nhận đơn hàng',
+            'thank_you_message_email' => 'Cảm ơn bạn đã hoàn tất đơn hàng của mình! Hình nền của bạn đã sẵn sàng để sử dụng.',
+            'hello' => 'Xin chào',
+            'purchase_date' => 'Ngày mua',
+            'download_instructions' => 'Bạn có thể tải bộ hình nền bằng các cách sau:',
+            'direct_download' => 'Tải trực tiếp qua các liên kết bên dưới:',
+            'sincerely' => 'Trân trọng!',
+            'login_instruction_message_email' => 'Hoặc đăng nhập vào <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> bằng email của bạn và vào phần <strong>"Tải xuống của tôi"</strong>',
+            'support_contact_message_email' => 'Nếu có bất kỳ thắc mắc hoặc cần hỗ trợ, vui lòng liên hệ với chúng tôi qua email: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Chúc bạn có những trải nghiệm tuyệt vời cùng bộ sưu tập hình nền mới của mình!',
             /* custom */
             "wallpaper_theme"   => [
                 "name"  => "Chủ đề Hình Nền",
@@ -864,6 +919,17 @@ return [
             'step_1_buy_now' => "चरण 1: कृपया अपना ईमेल दर्ज करें।",
             'note_fill_email' => "* यदि आप ईमेल दर्ज करते हैं, तो भंडारण के लिए एक अतिरिक्त प्रति भेजी जाएगी।",
             'step_2_buy_now' => "चरण 2: भुगतान विधि चुनें।",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'आर्डर की पुष्टि',
+            'thank_you_message_email' => 'आपके ऑर्डर को पूरा करने के लिए धन्यवाद! आपका वॉलपेपर उपयोग के लिए तैयार है।',
+            'hello' => 'नमस्ते',
+            'purchase_date' => 'खरीद की तारीख',
+            'download_instructions' => 'आप निम्नलिखित तरीकों से वॉलपेपर संग्रह डाउनलोड कर सकते हैं:',
+            'direct_download' => 'नीचे दिए गए लिंक के माध्यम से सीधे डाउनलोड करें:',
+            'sincerely' => 'सादर!',
+            'login_instruction_message_email' => 'या अपनी ईमेल के साथ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> में लॉग इन करें और <strong>"मेरे डाउनलोड"</strong> अनुभाग पर जाएं।',
+            'support_contact_message_email' => 'यदि आपके कोई प्रश्न हैं या आपको सहायता की आवश्यकता है, तो कृपया हमें ईमेल के माध्यम से संपर्क करें: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'हम आपको आपकी नई वॉलपेपर संग्रह के साथ शानदार अनुभव की कामना करते हैं!',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "वॉलपेपर थीम",
@@ -1019,6 +1085,17 @@ return [
             'step_1_buy_now' => "পর্যায় ১: অনুগ্রহ করে আপনার ইমেইল লিখুন।",
             'note_fill_email' => "* ইমেইল দিলে সংরক্ষণের জন্য একটি অতিরিক্ত কপি পাঠানো হবে।",
             'step_2_buy_now' => "পর্যায় ২: অর্থ প্রদানের পদ্ধতি নির্বাচন করুন।",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'অর্ডার নিশ্চিতকরণ',
+            'thank_you_message_email' => 'আপনার অর্ডার সম্পন্ন করার জন্য আপনাকে ধন্যবাদ! আপনার ওয়ালপেপার ব্যবহার করার জন্য প্রস্তুত।',
+            'hello' => 'হ্যালো',
+            'purchase_date' => 'ক্রয়ের তারিখ',
+            'download_instructions' => 'আপনি নিম্নলিখিত উপায়ে ওয়ালপেপার সংগ্রহটি ডাউনলোড করতে পারেন:',
+            'direct_download' => 'নীচের লিঙ্কগুলির মাধ্যমে সরাসরি ডাউনলোড করুন:',
+            'sincerely' => 'শুভেচ্ছান্তে!',
+            'login_instruction_message_email' => 'অথবা আপনার ইমেল দিয়ে <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> এ লগ ইন করুন এবং <strong>"আমার ডাউনলোড"</strong> অংশে যান',
+            'support_contact_message_email' => 'যদি কোনো প্রশ্ন থাকে অথবা সহায়তার প্রয়োজন হয়, দয়া করে আমাদের সাথে যোগাযোগ করুন ইমেলের মাধ্যমে: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'আমরা আশা করি আপনি আপনার নতুন ওয়ালপেপার সংগ্রহ নিয়ে চমৎকার অভিজ্ঞতা পাবেন!',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "ওয়ালপেপার থিম",
@@ -1174,6 +1251,17 @@ return [
             'step_1_buy_now' => "पायरी 1: कृपया आपला ईमेल प्रविष्ट करा.",
             'note_fill_email' => "* आपला ईमेल प्रविष्ट केल्यास साठवणीसाठी अतिरिक्त प्रत पाठवली जाईल.",
             'step_2_buy_now' => "पायरी 2: पेमेंट पद्धत निवडा.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'ऑर्डर पुष्टी',
+            'thank_you_message_email' => 'आपला ऑर्डर पूर्ण केल्याबद्दल धन्यवाद! आपले वॉलपेपर वापरण्यास तयार आहे.',
+            'hello' => 'नमस्कार',
+            'purchase_date' => 'खरेदीची तारीख',
+            'download_instructions' => 'तुम्ही खालील मार्गांनी वॉलपेपर संग्रह डाउनलोड करू शकता:',
+            'direct_download' => 'खालील लिंक्सद्वारे थेट डाउनलोड करा:',
+            'sincerely' => 'आदरपूर्वक!',
+            'login_instruction_message_email' => 'किंवा आपली ईमेल वापरून <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> वर लॉगिन करा आणि <strong>"माझे डाउनलोड"</strong> विभागात जा',
+            'support_contact_message_email' => 'जर आपल्याला काही शंका असतील किंवा सहाय्याची आवश्यकता असेल तर कृपया आमच्याशी ईमेलद्वारे संपर्क साधा: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'आशा आहे की तुम्हाला तुमच्या नवीन वॉलपेपर संग्रहासोबत अद्भुत अनुभव येईल!',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "वॉलपेपर थीम",
@@ -1329,6 +1417,17 @@ return [
             'step_1_buy_now' => "படி 1: தயவுசெய்து உங்கள் மின்னஞ்சலை உள்ளிடவும்.",
             'note_fill_email' => "* மின்னஞ்சல் உள்ளிடினால், சேமிப்பிற்காக கூடுதல் பிரதியை அனுப்பப்படும்.",
             'step_2_buy_now' => "படி 2: கட்டண முறையை தேர்வு செய்யவும்.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'ஆர்டர் உறுதிப்படுத்தல்',
+            'thank_you_message_email' => 'உங்கள் ஆர்டரை முடிக்க धन्यवाद! உங்கள் வால்பேப்பர் பயன்படுத்த தயாராக உள்ளது.',
+            'hello' => 'வணக்கம்',
+            'purchase_date' => 'கொள்முதல் தேதி',
+            'download_instructions' => 'நீங்கள் வால்பேப்பர் தொகுப்பை பின்வரும் முறைகளில் பதிவிறக்கலாம்:',
+            'direct_download' => 'கீழே உள்ள இணைப்புகள் வழியாக நேரடியாக பதிவிறக்கவும்:',
+            'sincerely' => 'மிகுந்த மகிழ்ச்சி!',
+            'login_instruction_message_email' => 'அல்லது உங்கள் இமெயிலின் மூலம் <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> இல் உள்நுழையவும் மற்றும் <strong>"எனது பதிவிறக்கங்கள்"</strong> பகுதியில் செல்லவும்',
+            'support_contact_message_email' => 'என்றால் ஏதேனும் கேள்விகள் அல்லது உதவி தேவைப்பட்டால், தயவுசெய்து எங்களை மின்னஞ்சல் மூலம் தொடர்புகொள்ளவும்: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'உங்கள் புதிய வால்பேப்பர் தொகுப்புடன் நீங்கள் அருமையான அனுபவங்களைப் பெறுவீர்கள் என நாங்கள் நம்புகிறோம்!',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "வால்பேப்பர் தீம்",
@@ -1484,6 +1583,17 @@ return [
             'step_1_buy_now' => "దశ 1: దయచేసి మీ ఇమెయిల్‌ను నమోదు చేయండి.",
             'note_fill_email' => "* మీరు ఇమెయిల్‌ను నమోదు చేస్తే, నిల్వ కోసం అదనపు కాపీ పంపబడుతుంది.",
             'step_2_buy_now' => "దశ 2: చెల్లింపు విధానాన్ని ఎంచుకోండి.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'ఆర్డర్ నిర్ధారణ',
+            'thank_you_message_email' => 'మీ ఆర్డర్‌ను పూర్తిచేసినందుకు ధన్యవాదాలు! మీ వాల్‌పేపర్ ఉపయోగించడానికి సిద్ధంగా ఉంది.',
+            'hello' => 'హలో',
+            'purchase_date' => 'కొనుగోలు తేదీ',
+            'download_instructions' => 'మీరు క్రింది విధాలుగా వాల్‌పేపర్ సేకరణను డౌన్‌లోడ్ చేయవచ్చు:',
+            'direct_download' => 'క్రింద పేర్కొన్న లింక్‌ల ద్వారా నేరుగా డౌన్‌లోడ్ చేయండి:',
+            'sincerely' => 'గౌరవంతో!',
+            'login_instruction_message_email' => 'లేదా మీ ఇమెయిల్ ద్వారా <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> లో లాగిన్ అవ్వండి మరియు <strong>"నా డౌన్లోడ్లు"</strong> విభాగంలో వెళ్ళండి',
+            'support_contact_message_email' => 'మీకు ఏవైనా ప్రశ్నలు లేదా సహాయం అవసరం ఉంటే, దయచేసి మా ద్వారా ఇమెయిల్‌లో సంప్రదించండి: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'మీ కొత్త వాల్‌పేపర్ సేకరణతో మీరు అద్భుతమైన అనుభవం పొందుతారని మేము ఆశిస్తున్నాము!',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "వాల్‌పేపర్ థీమ్",
@@ -1639,6 +1749,17 @@ return [
             'step_1_buy_now' => "مرحلہ 1: براہ کرم اپنا ای میل درج کریں۔",
             'note_fill_email' => "* اگر آپ ای میل داخل کرتے ہیں، تو ذخیرہ کرنے کے لیے ایک اضافی کاپی بھیجی جائے گی۔",
             'step_2_buy_now' => "مرحلہ 2: ادائیگی کا طریقہ منتخب کریں۔",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'آرڈر کی تصدیق',
+            'thank_you_message_email' => 'آپ کا آرڈر مکمل کرنے کا شکریہ! آپ کا وال پیپر استعمال کے لیے تیار ہے۔',
+            'hello' => 'سلام',
+            'purchase_date' => 'خریداری کی تاریخ',
+            'download_instructions' => 'آپ درج ذیل طریقوں سے وال پیپر مجموعہ ڈاؤن لوڈ کرسکتے ہیں:',
+            'direct_download' => 'نیچے دیے گئے لنکس کے ذریعے براہ راست ڈاؤن لوڈ کریں:',
+            'sincerely' => 'مخلص!',
+            'login_instruction_message_email' => 'یا آپ اپنے ای میل کے ذریعے <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> پر لاگ ان کریں اور <strong>"میرا ڈاؤن لوڈ"</strong> سیکشن میں جائیں',
+            'support_contact_message_email' => 'اگر آپ کے کوئی سوالات ہوں یا آپ کو مدد کی ضرورت ہو، تو براہ کرم ہمیں ای میل کے ذریعے رابطہ کریں: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'ہمیں امید ہے کہ آپ اپنے نئے وال پیپر مجموعے کے ساتھ شاندار تجربہ حاصل کریں گے!',
             /* custom */
             "wallpaper_theme" => [
                 "name" => "وال پیپر تھیم",
@@ -1794,6 +1915,17 @@ return [
             'step_1_buy_now' => "પગલું 1: કૃપા કરીને તમારું ઇમેઇલ દાખલ કરો.",
             'note_fill_email' => "* જો તમે ઇમેઇલ દાખલ કરો છો, તો સંગ્રહ માટે એક વધારાની નકલ મોકલવામાં આવશે.",
             'step_2_buy_now' => "પગલું 2: ચુકવણીનો વિકલ્પ પસંદ કરો.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'ઓર્ડરની પુષ્ટિ',
+            'thank_you_message_email' => 'તમારા ઓર્ડરને પૂર્ણ કરવા માટે આભાર! તમારું વોલપેપર ઉપયોગ માટે તૈયાર છે.',
+            'hello' => 'હેલો',
+            'purchase_date' => 'ખરીદી તારીખ',
+            'download_instructions' => 'તમે નીચેના માર્ગો દ્વારા વોલપેપર સંગ્રહ ડાઉનલોડ કરી શકો છો:',
+            'direct_download' => 'નીચેના લિન્ક દ્વારા સીધા ડાઉનલોડ કરો:',
+            'sincerely' => 'સામાન્ય!',
+            'login_instruction_message_email' => 'અથવા તમારા ઇમેઇલ દ્વારા <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> પર લોગિન કરો અને <strong>"મારા ડાઉનલોડ"</strong> વિભાગમાં જાઓ',
+            'support_contact_message_email' => 'જો તમારી પાસે કોઇ પ્રશ્નો હોય અથવા મદદની જરૂર હોય, તો કૃપા કરીને અમારો ઇમેઇલ દ્વારા સંપર્ક કરો: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'અમને આશા છે કે તમે તમારા નવા વોલપેપર સંગ્રહ સાથે ઉત્તમ અનુભવ મેળવો છો!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "વોલપેપર થીમ",
@@ -1949,6 +2081,17 @@ return [
             'step_1_buy_now' => "ಹಂತ 1: ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ನಮೂದಿಸಿ.",
             'note_fill_email' => "* ನೀವು ಇಮೇಲ್ ನಮೂದಿಸಿದರೆ, ಸಂಗ್ರಹಣೆಗೆ ಇನ್ನೊಂದು ಪ್ರತಿಯನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ.",
             'step_2_buy_now' => "ಹಂತ 2: ಪಾವತಿ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'ಆರ್ಡರ್ ದೃಢೀಕರಣ',
+            'thank_you_message_email' => 'ನೀವು ನಿಮ್ಮ ಆರ್ಡರ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ವಾಲ್‌ಪೇಪರ್ ಬಳಕೆಗಾಗಿ ತಯಾರಾಗಿದೆ.',
+            'hello' => 'ಹಲೋ',
+            'purchase_date' => 'ಖರೀದಿ ದಿನಾಂಕ',
+            'download_instructions' => 'ನೀವು ವಾಲ್‌ಪೇಪರ್ ಸಂಗ್ರಹವನ್ನು ಕೆಳಗಿನ ರೀತಿಯಲ್ಲಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಬಹುದು:',
+            'direct_download' => 'ಕೆಳಗಿನ ಲಿಂಕ್ಸ್ ಮೂಲಕ ನೇರವಾಗಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ:',
+            'sincerely' => 'ಸಾಧರವಾಗಿ!',
+            'login_instruction_message_email' => 'ಅಥವಾ ನಿಮ್ಮ ಇಮೇಲ್ ಮೂಲಕ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ನಲ್ಲಿ ಲಾಗಿನ್ ಮಾಡಿ ಮತ್ತು <strong>"ನನ್ನ ಡೌನ್‌ಲೋಡ್"</strong> ವಿಭಾಗಕ್ಕೆ ಹೋಗಿ',
+            'support_contact_message_email' => 'ನಿಮ್ಮ ಬಳಿ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳು ಅಥವಾ ಸಹಾಯ ಅವಶ್ಯಕತೆ ಇದ್ದರೆ, ದಯವಿಟ್ಟು ನಮಗೆ ಇಮೇಲ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'ನಾವು ನಂಬಿದ್ದೇವೆ ನೀವು ನಿಮ್ಮ ಹೊಸ ವಾಲ್‌ಪೇಪರ್ ಸಂಗ್ರಹದೊಂದಿಗೆ ಅದ್ಭುತ ಅನುಭವವನ್ನು ಪಡೆಯುತ್ತೀರಿ!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ವಾಲ್‌ಪೇಪರ್ ಥೀಮ್",
@@ -2104,6 +2247,17 @@ return [
             'step_1_buy_now' => "ステップ1：メールアドレスを入力してください。",
             'note_fill_email' => "* メールアドレスを入力すると、保管用に追加のコピーが送信されます。",
             'step_2_buy_now' => "ステップ2：支払い方法を選択してください。",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => '注文確認',
+            'thank_you_message_email' => 'ご注文を完了いただきありがとうございます！壁紙の使用準備が整いました。',
+            'hello' => 'こんにちは',
+            'purchase_date' => '購入日',
+            'download_instructions' => '以下の方法で壁紙コレクションをダウンロードできます：',
+            'direct_download' => '以下のリンクから直接ダウンロードしてください：',
+            'sincerely' => 'よろしくお願いします！',
+            'login_instruction_message_email' => 'または、あなたのメールで <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> にログインして、<strong>"マイダウンロード"</strong> セクションにアクセスしてください',
+            'support_contact_message_email' => 'ご質問がある場合やサポートが必要な場合は、メールでご連絡ください: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>。',
+            'wish_message_email' => '新しい壁紙コレクションで素晴らしい体験をお楽しみいただけることを願っています！',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "壁紙テーマ",
@@ -2259,6 +2413,17 @@ return [
             'step_1_buy_now' => "단계 1: 이메일을 입력해 주세요.",
             'note_fill_email' => "* 이메일을 입력하면 보관용으로 추가 사본이 전송됩니다.",
             'step_2_buy_now' => "단계 2: 결제 방식을 선택하세요.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => '주문 확인',
+            'thank_you_message_email' => '주문을 완료해 주셔서 감사합니다! 벽지가 사용할 준비가 되었습니다.',
+            'hello' => '안녕하세요',
+            'purchase_date' => '구매 날짜',
+            'download_instructions' => '다음 방법으로 배경화면 컬렉션을 다운로드할 수 있습니다:',
+            'direct_download' => '아래 링크를 통해 직접 다운로드하세요:',
+            'sincerely' => '감사합니다!',
+            'login_instruction_message_email' => '또는 이메일을 사용하여 <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a>에 로그인하고 <strong>"내 다운로드"</strong> 섹션으로 이동하세요',
+            'support_contact_message_email' => '질문이 있거나 도움이 필요하시면 이메일로 문의해 주세요: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => '새로운 월페이퍼 컬렉션으로 멋진 경험을 하시길 바랍니다!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "배경화면 테마",
@@ -2414,6 +2579,17 @@ return [
             'step_1_buy_now' => "Langkah 1: Mangga lebokna email panjenengan.",
             'note_fill_email' => "* Yen lebokna email, salinan tambahan bakal dikirim kanggo panyimpenan.",
             'step_2_buy_now' => "Langkah 2: Pilih cara pambayaran.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Konfirmasi Pesanan',
+            'thank_you_message_email' => 'Matur nuwun sampun ngrampungake pesenan! Wallpaper sampeyan wis siap digunakake.',
+            'hello' => 'Halo',
+            'purchase_date' => 'Tanggal tuku',
+            'download_instructions' => 'Sampeyan bisa ngundhuh koleksi wallpaper nganggo cara ing ngisor iki:',
+            'direct_download' => 'Download langsung liwat link ing ngisor iki:',
+            'sincerely' => 'Salam hormat!',
+            'login_instruction_message_email' => 'Utawa mlebu menyang <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> nganggo email sampeyan lan mlebu menyang bagean <strong>"Download aku"</strong>',
+            'support_contact_message_email' => 'Yen sampeyan duwe pitakonan utawa butuh bantuan, hubungi kita liwat email: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Muga-muga sampeyan seneng karo pengalaman anyar karo koleksi wallpaper anyar sampeyan!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2569,6 +2745,17 @@ return [
             'step_1_buy_now' => "Langkah 1: Silakan masukkan email Anda.",
             'note_fill_email' => "* Jika Anda memasukkan email, salinan tambahan akan dikirim untuk penyimpanan.",
             'step_2_buy_now' => "Langkah 2: Pilih metode pembayaran.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Konfirmasi Pesanan',
+            'thank_you_message_email' => 'Terima kasih telah menyelesaikan pesanan Anda! Wallpaper Anda siap digunakan.',
+            'hello' => 'Halo',
+            'purchase_date' => 'Tanggal pembelian',
+            'download_instructions' => 'Anda dapat mengunduh koleksi wallpaper dengan cara berikut:',
+            'direct_download' => 'Unduh langsung melalui tautan di bawah ini:',
+            'sincerely' => 'Salam hormat!',
+            'login_instruction_message_email' => 'Atau login ke <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> menggunakan email Anda dan pergi ke bagian <strong>"Unduhan Saya"</strong>',
+            'support_contact_message_email' => 'Jika ada pertanyaan atau membutuhkan bantuan, silakan hubungi kami melalui email: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Semoga Anda menikmati pengalaman luar biasa dengan koleksi wallpaper baru Anda!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2724,6 +2911,17 @@ return [
             'step_1_buy_now' => "Langkah 1: Sila masukkan emel anda.",
             'note_fill_email' => "* Jika anda memasukkan emel, salinan tambahan akan dihantar untuk penyimpanan.",
             'step_2_buy_now' => "Langkah 2: Pilih kaedah pembayaran.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Pengesahan Pesanan',
+            'thank_you_message_email' => 'Terima kasih kerana menyelesaikan pesanan anda! Kertas dinding anda sedia untuk digunakan.',
+            'hello' => 'Halo',
+            'purchase_date' => 'Tarikh Pembelian',
+            'download_instructions' => 'Anda boleh memuat turun koleksi wallpaper dengan cara berikut:',
+            'direct_download' => 'Muat turun terus melalui pautan di bawah:',
+            'sincerely' => 'Salam sejahtera!',
+            'login_instruction_message_email' => 'Atau log masuk ke <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> menggunakan emel anda dan pergi ke bahagian <strong>"Muat Turun Saya"</strong>',
+            'support_contact_message_email' => 'Jika ada sebarang soalan atau memerlukan sokongan, sila hubungi kami melalui emel: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Semoga anda menikmati pengalaman hebat dengan koleksi wallpaper baru anda!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema Wallpaper",
@@ -2879,6 +3077,17 @@ return [
             'step_1_buy_now' => "ขั้นตอนที่ 1: กรุณาใส่อีเมลของคุณ.",
             'note_fill_email' => "* หากใส่อีเมลจะมีสำเนาเพิ่มเติมส่งไปเพื่อการจัดเก็บ.",
             'step_2_buy_now' => "ขั้นตอนที่ 2: เลือกวิธีการชำระเงิน.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'ยืนยันคำสั่งซื้อ',
+            'thank_you_message_email' => 'ขอบคุณที่ทำการสั่งซื้อเสร็จสมบูรณ์! วอลเปเปอร์ของคุณพร้อมใช้งานแล้ว',
+            'hello' => 'สวัสดี',
+            'purchase_date' => 'วันที่ซื้อ',
+            'download_instructions' => 'คุณสามารถดาวน์โหลดคอลเลคชันวอลเปเปอร์ด้วยวิธีดังต่อไปนี้:',
+            'direct_download' => 'ดาวน์โหลดโดยตรงผ่านลิงก์ด้านล่าง:',
+            'sincerely' => 'ด้วยความเคารพ!',
+            'login_instruction_message_email' => 'หรือเข้าสู่ระบบที่ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ด้วยอีเมลของคุณและไปที่ส่วน <strong>"การดาวน์โหลดของฉัน"</strong>',
+            'support_contact_message_email' => 'หากคุณมีข้อสงสัยหรือต้องการความช่วยเหลือ กรุณาติดต่อเราทางอีเมล: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'ขอให้คุณมีประสบการณ์ที่ยอดเยี่ยมกับคอลเลคชันวอลล์เปเปอร์ใหม่ของคุณ!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ธีมวอลเปเปอร์",
@@ -3034,6 +3243,17 @@ return [
             'step_1_buy_now' => "ជំហានទី 1៖ សូមបញ្ចូលអ៊ីមែលរបស់អ្នក។",
             'note_fill_email' => "* ប្រសិនបើបញ្ចូលអ៊ីមែល នឹងមានច្បាប់ចម្លងបន្ថែមសម្រាប់រក្សាទុក។",
             'step_2_buy_now' => "ជំហានទី 2៖ ជ្រើសរើសវិធីសាស្ត្រទូទាត់។",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'ការបញ្ជាក់ការបញ្ជាទិញ',
+            'thank_you_message_email' => 'សូមអរគុណសម្រាប់ការបំពេញការបញ្ជាទិញរបស់អ្នក! ផ្ទាំងនឹងរបស់អ្នកត្រៀមជាស្រេចដើម្បីប្រើ។',
+            'hello' => 'សួស្តី',
+            'purchase_date' => 'កាលបរិច្ឆេទនៃការទិញ',
+            'download_instructions' => 'អ្នកអាចទាញយកឈុតរូបភាពតាមវិធីខាងក្រោម:',
+            'direct_download' => 'ទាញយកតាមរយៈតំណខាងក្រោម:',
+            'sincerely' => 'ដោយស្មោះពីចិត្ត!',
+            'login_instruction_message_email' => 'ឬចូលទៅកាន់ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ដោយប្រើអ៊ីមែលរបស់អ្នក និងចូលទៅកាន់ផ្នែក <strong>"ការទាញយករបស់ខ្ញុំ"</strong>',
+            'support_contact_message_email' => 'បើមានសំណួរណាមួយ ឬត្រូវការជំនួយ សូមទំនាក់ទំនងមកកាន់យើងតាមអ៊ីមែល: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'សូមជូនពរឱ្យអ្នកមានបទពិសោធន៍អស្ចារ្យជាមួយកូឡេកស៊ីនវ៉ុលពីរប្រកួតថ្មីរបស់អ្នក!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ប្រធានបទផ្ទាំងរូបភាព",
@@ -3189,6 +3409,17 @@ return [
             'step_1_buy_now' => "ຂັ້ນຕອນທີ່ 1: ກະລຸນາໃສ່ອີເມລຂອງທ່ານ.",
             'note_fill_email' => "* ຖ້າໃສ່ອີເມລ ຈະຖືກສົ່ງສຳເນົາເພີ່ມເຕີມໄວ້ບັນທຶກ.",
             'step_2_buy_now' => "ຂັ້ນຕອນທີ່ 2: ເລືອກວິທີການຈ່າຍເງິນ.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'ການຢືນຢັນຄໍາສັ່ງຊື້',
+            'thank_you_message_email' => 'ຂອບໃຈທີ່ທ່ານໄດ້ສໍາເລັດຄໍາສັ່ງຊື້! ພາບເດັດຂອງທ່ານພ້ອມໃຊ້ແລ້ວ.',
+            'hello' => 'ສະບາຍດີ',
+            'purchase_date' => 'ວັນທີຊື້',
+            'download_instructions' => 'ທ່ານສາມາດດາວໂຫຼດຄອລເລັກຊັ່ນວໍເປເປີໄດ້ດັ່ງນີ້:',
+            'direct_download' => 'ດາວໂຫຼດໂດຍກົງຜ່ານລິ້ງຂ້າງລຸ່ມນີ້:',
+            'sincerely' => 'ດ້ວຍຄວາມນັບຖື!',
+            'login_instruction_message_email' => 'ຫຼືເຂົ້າລະບົບທີ່ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ດ້ວຍອີເມວຂອງທ່ານ ແລະໄປຫາສ່ວນ <strong>"ການດາວໂຫລດຂອງຂ້ອຍ"</strong>',
+            'support_contact_message_email' => 'ຖ້າທ່ານມີຄຳຖາມຫຼືຕ້ອງການການສົງເສີດກະທົບກັບພວກເຮົາຜ່ານອີເມວ: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'ຂໍໃຫ້ທ່ານມີປະສົບການທີ່ຍອດຢູ່ກັບຄອລເຫັນພິກີກຫຼືໃຫມມົງມັນ!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ຫົວຂໍ້ພາບເວລ",
@@ -3344,6 +3575,17 @@ return [
             'step_1_buy_now' => "الخطوة 1: يرجى إدخال البريد الإلكتروني الخاص بك.",
             'note_fill_email' => "* إذا أدخلت البريد الإلكتروني، سيتم إرسال نسخة إضافية للتخزين.",
             'step_2_buy_now' => "الخطوة 2: اختر طريقة الدفع.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'تأكيد الطلب',
+            'thank_you_message_email' => 'شكرًا لإكمال طلبك! خلفيتك جاهزة للاستخدام.',
+            'hello' => 'مرحبًا',
+            'purchase_date' => 'تاريخ الشراء',
+            'download_instructions' => 'يمكنك تنزيل مجموعة الخلفيات بالطرق التالية:',
+            'direct_download' => 'التنزيل المباشر من الروابط أدناه:',
+            'sincerely' => 'مع التحية!',
+            'login_instruction_message_email' => 'أو قم بتسجيل الدخول إلى <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> باستخدام بريدك الإلكتروني وانتقل إلى قسم <strong>"تنزيلاتي"</strong>',
+            'support_contact_message_email' => 'إذا كان لديك أي استفسارات أو كنت بحاجة إلى دعم، يرجى الاتصال بنا عبر البريد الإلكتروني: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'نتمنى لك تجربة رائعة مع مجموعة الخلفيات الجديدة الخاصة بك!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "موضوع خلفية الشاشة",
@@ -3499,6 +3741,17 @@ return [
             'step_1_buy_now' => "مرحله 1: لطفاً ایمیل خود را وارد کنید.",
             'note_fill_email' => "* اگر ایمیل را وارد کنید، یک نسخه اضافی برای ذخیره ارسال می‌شود.",
             'step_2_buy_now' => "مرحله 2: روش پرداخت را انتخاب کنید.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'تأیید سفارش',
+            'thank_you_message_email' => 'از تکمیل سفارش خود سپاسگزاریم! تصویر زمینه شما آماده استفاده است.',
+            'hello' => 'سلام',
+            'purchase_date' => 'تاریخ خرید',
+            'download_instructions' => 'می‌توانید مجموعه والپیپرها را به روش‌های زیر دانلود کنید:',
+            'direct_download' => 'دانلود مستقیم از طریق لینک‌های زیر:',
+            'sincerely' => 'با احترام!',
+            'login_instruction_message_email' => 'یا وارد حساب خود در <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> شوید و به بخش <strong>"دانلودهای من"</strong> بروید',
+            'support_contact_message_email' => 'اگر سوالی دارید یا نیاز به پشتیبانی دارید، لطفاً از طریق ایمیل با ما تماس بگیرید: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'امیدواریم که از تجربه شگفت‌انگیز مجموعه تصاویر پس‌زمینه جدیدتان لذت ببرید!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "موضوع پس‌زمینه",
@@ -3654,6 +3907,17 @@ return [
             'step_1_buy_now' => "Шаг 1: Пожалуйста, введите свой адрес электронной почты.",
             'note_fill_email' => "* Если вы введете адрес электронной почты, будет отправлена дополнительная копия для хранения.",
             'step_2_buy_now' => "Шаг 2: Выберите способ оплаты.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Подтверждение заказа',
+            'thank_you_message_email' => 'Спасибо за оформление заказа! Ваш обои готовы к использованию.',
+            'hello' => 'Здравствуйте',
+            'purchase_date' => 'Дата покупки',
+            'download_instructions' => 'Вы можете скачать коллекцию обоев следующим образом:',
+            'direct_download' => 'Скачайте напрямую по ссылке ниже:',
+            'sincerely' => 'С уважением!',
+            'login_instruction_message_email' => 'Или войдите на <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> с помощью вашего электронного адреса и перейдите в раздел <strong>"Мои загрузки"</strong>',
+            'support_contact_message_email' => 'Если у вас есть вопросы или вам нужна помощь, пожалуйста, свяжитесь с нами по электронной почте: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Желаем вам потрясающего опыта с вашей новой коллекцией обоев!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Тема обоев",
@@ -3809,6 +4073,17 @@ return [
             'step_1_buy_now' => "Schritt 1: Bitte geben Sie Ihre E-Mail-Adresse ein.",
             'note_fill_email' => "* Wenn Sie eine E-Mail eingeben, wird eine zusätzliche Kopie zur Speicherung gesendet.",
             'step_2_buy_now' => "Schritt 2: Wählen Sie eine Zahlungsmethode.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Bestellbestätigung',
+            'thank_you_message_email' => 'Vielen Dank, dass Sie Ihre Bestellung abgeschlossen haben! Ihr Hintergrundbild ist einsatzbereit.',
+            'hello' => 'Hallo',
+            'purchase_date' => 'Kaufdatum',
+            'download_instructions' => 'Sie können die Wallpaper-Sammlung wie folgt herunterladen:',
+            'direct_download' => 'Laden Sie direkt über den folgenden Link herunter:',
+            'sincerely' => 'Mit freundlichen Grüßen!',
+            'login_instruction_message_email' => 'Oder melden Sie sich mit Ihrer E-Mail-Adresse bei <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> an und gehen Sie zu "Meine Downloads".',
+            'support_contact_message_email' => 'Wenn Sie Fragen haben oder Unterstützung benötigen, kontaktieren Sie uns bitte per E-Mail: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Wir wünschen Ihnen viel Freude mit Ihrer neuen Wallpaper-Kollektion!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tapetenthema",
@@ -3964,6 +4239,17 @@ return [
             'step_1_buy_now' => "Adım 1: Lütfen e-postanızı girin.",
             'note_fill_email' => "* Bir e-posta girerseniz, saklama için ek bir kopya gönderilecektir.",
             'step_2_buy_now' => "Adım 2: Bir ödeme yöntemi seçin.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Sipariş Onayı',
+            'thank_you_message_email' => 'Siparişinizi tamamladığınız için teşekkürler! Duvar kağıdınız kullanıma hazır.',
+            'hello' => 'Merhaba',
+            'purchase_date' => 'Satın Alma Tarihi',
+            'download_instructions' => 'Duvar kağıdı koleksiyonunu şu şekilde indirebilirsiniz:',
+            'direct_download' => 'Aşağıdaki bağlantıdan doğrudan indirin:',
+            'sincerely' => 'Saygılarımızla!',
+            'login_instruction_message_email' => 'Veya e-posta adresinizle <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a>\'a giriş yapın ve "Benim İndirilenlerim" bölümüne gidin.',
+            'support_contact_message_email' => 'Herhangi bir sorunuz varsa veya desteğe ihtiyacınız varsa, lütfen bizimle şu e-posta adresi üzerinden iletişime geçin: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Yeni duvar kağıdı koleksiyonunuzla harika bir deneyim dileriz!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Duvar Kağıdı Teması",
@@ -4119,6 +4405,17 @@ return [
             'step_1_buy_now' => "Passaggio 1: Si prega di inserire l'email.",
             'note_fill_email' => "* Se inserisci un'email, verrà inviata una copia aggiuntiva per l'archiviazione.",
             'step_2_buy_now' => "Passaggio 2: Scegli un metodo di pagamento.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Conferma dell\'ordine',
+            'thank_you_message_email' => 'Grazie per aver completato il tuo ordine! Il tuo sfondo è pronto per l\'uso.',
+            'hello' => 'Ciao',
+            'purchase_date' => 'Data di acquisto',
+            'download_instructions' => 'Puoi scaricare la collezione di sfondi nel seguente modo:',
+            'direct_download' => 'Scarica direttamente tramite il link sottostante:',
+            'sincerely' => 'Cordiali saluti!',
+            'login_instruction_message_email' => 'Oppure accedi con la tua email su <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> e vai alla sezione <strong>"I miei download"</strong>.',
+            'support_contact_message_email' => 'Se hai domande o hai bisogno di supporto, contattaci via email: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Ti auguriamo una fantastica esperienza con la tua nuova collezione di sfondi!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema dello sfondo",
@@ -4274,6 +4571,17 @@ return [
             'step_1_buy_now' => "Krok 1: Proszę wprowadzić e-mail.",
             'note_fill_email' => "* Jeśli wprowadzisz e-mail, zostanie wysłana dodatkowa kopia do przechowywania.",
             'step_2_buy_now' => "Krok 2: Wybierz metodę płatności.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Potwierdzenie zamówienia',
+            'thank_you_message_email' => 'Dziękujemy za zrealizowanie zamówienia! Twoja tapeta jest gotowa do użycia.',
+            'hello' => 'Cześć',
+            'purchase_date' => 'Data zakupu',
+            'download_instructions' => 'Możesz pobrać kolekcję tapet w następujący sposób:',
+            'direct_download' => 'Pobierz bezpośrednio z poniższego linku:',
+            'sincerely' => 'Z poważaniem!',
+            'login_instruction_message_email' => 'Lub zaloguj się na <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> za pomocą swojego adresu e-mail i przejdź do sekcji <strong>"Moje pobrania"</strong>.',
+            'support_contact_message_email' => 'Jeśli masz jakiekolwiek pytania lub potrzebujesz pomocy, skontaktuj się z nami przez e-mail: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Życzymy wspaniałych doświadczeń z nową kolekcją tapet!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Temat tapety",
@@ -4429,6 +4737,17 @@ return [
             'step_1_buy_now' => "Крок 1: Будь ласка, введіть електронну пошту.",
             'note_fill_email' => "* Якщо ви введете електронну пошту, буде надіслано додаткову копію для зберігання.",
             'step_2_buy_now' => "Крок 2: Виберіть спосіб оплати.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Підтвердження замовлення',
+            'thank_you_message_email' => 'Дякуємо за оформлення замовлення! Ваші шпалери готові до використання.',
+            'hello' => 'Привіт',
+            'purchase_date' => 'Дата покупки',
+            'download_instructions' => 'Ви можете завантажити колекцію шпалер наступним чином:',
+            'direct_download' => 'Завантажте безпосередньо за посиланням нижче:',
+            'sincerely' => 'З повагою!',
+            'login_instruction_message_email' => 'Або увійдіть на <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> за допомогою вашої електронної пошти та перейдіть до розділу <strong>"Мої завантаження"</strong>.',
+            'support_contact_message_email' => 'Якщо у вас є будь-які питання або вам потрібна допомога, будь ласка, зв\'яжіться з нами по електронній пошті: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Бажаємо вам чудових вражень від нової колекції шпалер!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Тема шпалер",
@@ -4584,6 +4903,17 @@ return [
             'step_1_buy_now' => "Stap 1: Voer uw e-mail in.",
             'note_fill_email' => "* Als u een e-mail invoert, wordt er een extra kopie voor opslag verzonden.",
             'step_2_buy_now' => "Stap 2: Kies een betaalmethode.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Bestellingsbevestiging',
+            'thank_you_message_email' => 'Bedankt voor het voltooien van uw bestelling! Uw achtergrond is klaar voor gebruik.',
+            'hello' => 'Hallo',
+            'purchase_date' => 'Aankoopdatum',
+            'download_instructions' => 'U kunt de behangcollectie als volgt downloaden:',
+            'direct_download' => 'Download direct via de onderstaande link:',
+            'sincerely' => 'Met vriendelijke groet!',
+            'login_instruction_message_email' => 'Of log in met je e-mailadres op <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> en ga naar het gedeelte <strong>"Mijn downloads"</strong>.',
+            'support_contact_message_email' => 'Als je vragen hebt of ondersteuning nodig hebt, neem dan contact met ons op via e-mail: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'We wensen je veel plezier met je nieuwe wallpaper collectie!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Achtergrondthema",
@@ -4739,6 +5069,17 @@ return [
             'step_1_buy_now' => "Βήμα 1: Παρακαλώ εισάγετε το email σας.",
             'note_fill_email' => "* Εάν εισάγετε ένα email, θα σταλεί ένα επιπλέον αντίγραφο για αποθήκευση.",
             'step_2_buy_now' => "Βήμα 2: Επιλέξτε μια μέθοδο πληρωμής.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Επιβεβαίωση παραγγελίας',
+            'thank_you_message_email' => 'Σας ευχαριστούμε που ολοκληρώσατε την παραγγελία σας! Η ταπετσαρία σας είναι έτοιμη για χρήση.',
+            'hello' => 'Γειά σας',
+            'purchase_date' => 'Ημερομηνία αγοράς',
+            'download_instructions' => 'Μπορείτε να κατεβάσετε τη συλλογή ταπετσαριών ως εξής:',
+            'direct_download' => 'Κατεβάστε απευθείας από τον παρακάτω σύνδεσμο:',
+            'sincerely' => 'Με εκτίμηση!',
+            'login_instruction_message_email' => 'Ή συνδεθείτε με το email σας στο <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> και μεταβείτε στην ενότητα <strong>"Οι λήψεις μου"</strong>.',
+            'support_contact_message_email' => 'Εάν έχετε οποιεσδήποτε ερωτήσεις ή χρειάζεστε υποστήριξη, επικοινωνήστε μαζί μας μέσω email: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Σας ευχόμαστε υπέροχες εμπειρίες με την νέα συλλογή ταπετσαριών σας!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Θέμα Ταπετσαρίας",
@@ -4894,6 +5235,17 @@ return [
             'step_1_buy_now' => "1. lépés: Kérjük, adja meg az e-mail-címét.",
             'note_fill_email' => "* Ha megad egy e-mailt, egy további példány kerül elküldésre tárolás céljából.",
             'step_2_buy_now' => "2. lépés: Válasszon fizetési módot.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Rendelés visszaigazolása',
+            'thank_you_message_email' => 'Köszönjük, hogy befejezte rendelését! A háttérképe készen áll a használatra.',
+            'hello' => 'Helló',
+            'purchase_date' => 'Vásárlás dátuma',
+            'download_instructions' => 'A háttérképgyűjteményt az alábbi módon töltheti le:',
+            'direct_download' => 'Töltse le közvetlenül az alábbi linken:',
+            'sincerely' => 'Üdvözlettel!',
+            'login_instruction_message_email' => 'Vagy jelentkezzen be e-mail címével a <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> oldalra, és menjen a <strong>"Saját letöltések"</strong> szakaszhoz.',
+            'support_contact_message_email' => 'Ha bármilyen kérdése van, vagy segítségre van szüksége, kérjük, vegye fel velünk a kapcsolatot e-mailben: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Kellemes élményeket kívánunk új háttérkép-gyűjteményével!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Háttérkép téma",
@@ -5049,6 +5401,17 @@ return [
             'step_1_buy_now' => "Krok 1: Zadejte prosím svůj e-mail.",
             'note_fill_email' => "* Pokud zadáte e-mail, bude zaslána další kopie pro uložení.",
             'step_2_buy_now' => "Krok 2: Vyberte způsob platby.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Potvrzení objednávky',
+            'thank_you_message_email' => 'Děkujeme za dokončení objednávky! Vaše tapeta je připravena k použití.',
+            'hello' => 'Ahoj',
+            'purchase_date' => 'Datum nákupu',
+            'download_instructions' => 'Kolekci tapet si můžete stáhnout následujícím způsobem:',
+            'direct_download' => 'Stáhněte si přímo prostřednictvím odkazu níže:',
+            'sincerely' => 'S pozdravem!',
+            'login_instruction_message_email' => 'Nebo se přihlaste pomocí svého e-mailu na <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> a přejděte do sekce <strong>"Mé stahování"</strong>.',
+            'support_contact_message_email' => 'Pokud máte jakékoliv dotazy nebo potřebujete pomoc, kontaktujte nás prosím e-mailem: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Přejeme vám skvělé zážitky s vaší novou sbírkou tapet!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Téma tapety",
@@ -5204,6 +5567,17 @@ return [
             'step_1_buy_now' => "Pasul 1: Vă rugăm să introduceți e-mailul.",
             'note_fill_email' => "* Dacă introduceți un e-mail, va fi trimisă o copie suplimentară pentru stocare.",
             'step_2_buy_now' => "Pasul 2: Alegeți o metodă de plată.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Confirmare comandă',
+            'thank_you_message_email' => 'Vă mulțumim că ați finalizat comanda! Tapetul dumneavoastră este gata de utilizare.',
+            'hello' => 'Salut',
+            'purchase_date' => 'Data achiziției',
+            'download_instructions' => 'Puteți descărca colecția de tapet astfel:',
+            'direct_download' => 'Descărcați direct prin linkul de mai jos:',
+            'sincerely' => 'Cu respect!',
+            'login_instruction_message_email' => 'Sau te autentificați pe <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> folosind adresa dvs. de email și accesați secțiunea <strong>"Descărcările mele"</strong>',
+            'support_contact_message_email' => 'Dacă aveți întrebări sau aveți nevoie de asistență, vă rugăm să ne contactați prin email: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Vă dorim o experiență minunată cu colecția dvs. de fundaluri noi!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Temă tapet",
@@ -5359,6 +5733,17 @@ return [
             'step_1_buy_now' => "Krok 1: Prosím zadajte e-mail.",
             'note_fill_email' => "* Ak zadáte e-mail, bude poslaná ďalšia kópia na uloženie.",
             'step_2_buy_now' => "Krok 2: Vyberte spôsob platby.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Potvrdenie objednávky',
+            'thank_you_message_email' => 'Ďakujeme za dokončenie objednávky! Vaša tapeta je pripravená na použitie.',
+            'hello' => 'Ahoj',
+            'purchase_date' => 'Dátum nákupu',
+            'download_instructions' => 'Kolekciu tapiet si môžete stiahnuť nasledovne:',
+            'direct_download' => 'Stiahnite si priamo cez odkaz nižšie:',
+            'sincerely' => 'S pozdravom!',
+            'login_instruction_message_email' => 'Prihláste sa na <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> pomocou svojho e-mailu a prejdite do sekcie <strong>"Moje stiahnutia"</strong>',
+            'support_contact_message_email' => 'Ak máte akékoľvek otázky alebo potrebujete pomoc, kontaktujte nás prosím e-mailom: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Prajem vám skvelý zážitok s vašou novou zbierkou tapiet!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Téma tapety",
@@ -5514,6 +5899,17 @@ return [
             'step_1_buy_now' => "ნაბიჯი 1: გთხოვთ, შეიყვანოთ თქვენი ელ.ფოსტა.",
             'note_fill_email' => "* თუ შეიყვანთ ელ.ფოსტას, დამატებითი ასლი გაიგზავნება შესანახად.",
             'step_2_buy_now' => "ნაბიჯი 2: აირჩიეთ გადახდის მეთოდი.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'შეკვეთის დადასტურება',
+            'thank_you_message_email' => 'გმადლობთ თქვენი შეკვეთის დასრულებისთვის! თქვენი ფონი მზად არის გამოსაყენებლად.',
+            'hello' => 'გამარჯობა',
+            'purchase_date' => 'შესყიდვის თარიღი',
+            'download_instructions' => 'შეგიძლიათ ჩამოტვირთოთ ფონების კოლექცია შემდეგნაირად:',
+            'direct_download' => 'ჩამოტვირთეთ პირდაპირ ქვემოთ მოცემული ბმულით:',
+            'sincerely' => 'პატივისცემით!',
+            'login_instruction_message_email' => 'შეხედეთ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> თქვენს ელ. ფოსტაზე შესვლა და გადადით განყოფილებაში <strong>"ჩემი გადმოწერები"</strong>',
+            'support_contact_message_email' => 'თუ გაქვთ კითხვები ან გჭირდებათ დახმარება, დაგვიკავშირდით ელექტრონულ ფოსტაზე: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'გისურვებთ სასიამოვნო გამოცდილებას ახალი ფონური სურათების კოლექციით!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "ფონის თემა",
@@ -5669,6 +6065,17 @@ return [
             'step_1_buy_now' => "שלב 1: אנא הזן את האימייל שלך.",
             'note_fill_email' => "* אם תזין אימייל, עותק נוסף יישלח לאחסון.",
             'step_2_buy_now' => "שלב 2: בחר שיטת תשלום.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'אישור הזמנה',
+            'thank_you_message_email' => 'תודה שהשלמת את ההזמנה שלך! הטפט שלך מוכן לשימוש.',
+            'hello' => 'שלום',
+            'purchase_date' => 'תאריך רכישה',
+            'download_instructions' => 'ניתן להוריד את אוסף הרקעים באופן הבא:',
+            'direct_download' => 'הורד ישירות דרך הקישור למטה:',
+            'sincerely' => 'בכבוד רב!',
+            'login_instruction_message_email' => 'היכנסו ל-<a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> באמצעות כתובת הדוא"ל שלכם ועברו לסעיף <strong>"ההורדות שלי"</strong>',
+            'support_contact_message_email' => 'אם יש לכם שאלות או אתם זקוקים לעזרה, אנא פנו אלינו במייל: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'אנו מאחלים לכם חוויה נפלאה עם אוסף רקע המסך החדש שלכם!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "נושא טפט",
@@ -5824,6 +6231,17 @@ return [
             'step_1_buy_now' => "1-qadam: Iltimos, emailingizni kiriting.",
             'note_fill_email' => "* Agar siz elektron pochta manzilini kiritsangiz, saqlash uchun qo'shimcha nusxa yuboriladi.",
             'step_2_buy_now' => "2-qadam: To'lov usulini tanlang.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Buyurtmani tasdiqlash',
+            'thank_you_message_email' => 'Buyurtmangizni bajarganingiz uchun rahmat! Fon rasmi foydalanishga tayyor.',
+            'hello' => 'Salom',
+            'purchase_date' => 'Xarid sanasi',
+            'download_instructions' => 'Fon rasmlari to‘plamini quyidagi tarzda yuklab olishingiz mumkin:',
+            'direct_download' => 'Quyidagi havola orqali to‘g‘ridan-to‘g‘ri yuklab oling:',
+            'sincerely' => 'Hurmat bilan!',
+            'login_instruction_message_email' => 'Elektron pochtangiz orqali <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> saytiga kirib, <strong>"Mening yuklamalarim"</strong> bo\'limiga o\'ting',
+            'support_contact_message_email' => 'Agar savollaringiz bo\'lsa yoki yordam kerak bo\'lsa, iltimos, biz bilan elektron pochta orqali bog\'laning: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Yangi fon rasmlari to\'plamingiz bilan ajoyib tajriba o\'tkazishingizni tilaymiz!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Fon rasmi mavzusi",
@@ -5979,6 +6397,17 @@ return [
             'step_1_buy_now' => "Passo 1: Por favor, insira o seu e-mail.",
             'note_fill_email' => "* Se você inserir um e-mail, uma cópia adicional será enviada para armazenamento.",
             'step_2_buy_now' => "Passo 2: Escolha um método de pagamento.",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Confirmação do pedido',
+            'thank_you_message_email' => 'Obrigado por concluir seu pedido! Seu papel de parede está pronto para uso.',
+            'hello' => 'Olá',
+            'purchase_date' => 'Data de compra',
+            'download_instructions' => 'Você pode baixar a coleção de papéis de parede da seguinte forma:',
+            'direct_download' => 'Baixe diretamente pelo link abaixo:',
+            'sincerely' => 'Atenciosamente!',
+            'login_instruction_message_email' => 'Faça login no <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> com seu e-mail e acesse a seção <strong>"Meus downloads"</strong>',
+            'support_contact_message_email' => 'Se você tiver alguma dúvida ou precisar de assistência, entre em contato conosco por e-mail: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Desejamos a você uma ótima experiência com sua nova coleção de papéis de parede!',
             /* custom */
             "wallpaper_theme"  => [
                 "name"  => "Tema do Papel de Parede",

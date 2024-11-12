@@ -78,11 +78,11 @@ class Order extends Model {
         return $this->hasOne(\App\Models\PaymentMethod::class, 'id', 'payment_method_info_id');
     }
 
-    public function province() {
-        return $this->hasOne(\App\Models\Province::class, 'id', 'province_info_id');
-    }
+    // public function province() {
+    //     return $this->hasOne(\App\Models\Province::class, 'id', 'province_info_id');
+    // }
 
-    public function district() {
-        return $this->hasOne(\App\Models\District::class, 'id', 'district_info_id');
-    }
+    // public function district() {
+    //     return $this->hasOne(\App\Models\District::class, 'id', 'district_info_id');
+    // }
 }
