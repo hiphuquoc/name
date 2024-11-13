@@ -16,6 +16,7 @@ use App\Models\Seo;
 use App\Models\FreeWallpaper;
 use App\Models\RegistryEmail;
 use App\Models\RelationFreeWallpaperUser;
+use App\Models\Page;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Services\BuildInsertUpdateModel;
@@ -145,9 +146,22 @@ class AjaxController extends Controller {
         $user                   = $request->user();
         $language               = $request->get('language');
         if(!empty($user)){
+            /* lấy đường dẫn trang Tải xuống của tôi */
+            $tmp                = Page::select('*')
+                                    ->whereHas('type', function($query){
+                                        $query->where('code', 'my_download');
+                                    })
+                                    ->first();
+            $urlMyDownload      = '';
+            foreach($tmp->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language) {
+                    $urlMyDownload = $seo->infoSeo->slug_full;
+                    break;
+                }
+            }
             /* đã đăng nhập => hiển thị button thông tin tài khoản */
-            $xhtmlButton        = view('wallpaper.template.buttonLogin', ['user' => $user, 'language' => $language])->render();
-            $xhtmlButtonMobile  = view('wallpaper.template.buttonLoginMobile', ['user' => $user, 'language' => $language])->render();
+            $xhtmlButton        = view('wallpaper.template.buttonLogin', ['user' => $user, 'language' => $language, 'urlMyDownload' => $urlMyDownload])->render();
+            $xhtmlButtonMobile  = view('wallpaper.template.buttonLoginMobile', ['user' => $user, 'language' => $language, 'urlMyDownload' => $urlMyDownload])->render();
         }else {
             /* chưa đăng nhập => hiển thị button đăng nhập + modal */
             $xhtmlButton        = view('wallpaper.template.buttonLogin', ['language' => $language])->render();

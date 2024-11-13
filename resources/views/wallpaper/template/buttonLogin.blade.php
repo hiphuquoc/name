@@ -6,13 +6,13 @@
         <div class="loginBox_iconAvatar">
             <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="{{ $accountInformationByLanguage }}" title="{{ $accountInformationByLanguage }}" />
         </div>
-        <div class="maxLine_1">{{ $user->name ?? '' }}</div>
+        <div class="maxLine_1" style="max-width:120px;">{{ $user->email ?? '' }}</div>
         <div class="loginBox_list">
             {{-- <div class="loginBox_list_item">
                 <i class="fa-solid fa-key"></i>
                 <div>Đổi mật khẩu</div>
             </div>  --}}
-            <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
+            <a href="/{{ $urlMyDownload }}" class="loginBox_list_item">
                 <i class="fa-solid fa-download"></i>
                 <div class="maxLine_1">{{ config('language.'.$language.'.data.my_downloads') }}</div>
             </a> 

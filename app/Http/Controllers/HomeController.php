@@ -13,28 +13,28 @@ use App\Models\Tag;
 use App\Models\Seo;
 use App\Models\SeoContent;
 use App\Models\Product;
-use App\Models\Prompt;
-use Intervention\Image\ImageManagerStatic;
-use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Client;
-use AdityaDees\LaravelBard\LaravelBard;
-use App\Http\Controllers\Admin\TranslateController;
-use App\Jobs\AutoTranslateContent;
-use App\Models\FreeWallpaper;
-use App\Models\RelationSeoCategoryInfo;
+// use App\Models\Prompt;
+// use Intervention\Image\ImageManagerStatic;
+// use Illuminate\Support\Facades\Http;
+// use GuzzleHttp\Client;
+// use AdityaDees\LaravelBard\LaravelBard;
+// use App\Http\Controllers\Admin\TranslateController;
+// use App\Jobs\AutoTranslateContent;
+// use App\Models\FreeWallpaper;
+// use App\Models\RelationSeoCategoryInfo;
 use App\Models\RelationSeoProductInfo;
-use App\Models\RelationSeoTagInfo;
-use App\Models\RelationSeoPageInfo;
-use App\Models\Wallpaper;
-use Google\Client as Google_Client;
-use Illuminate\Support\Facades\DB;
+// use App\Models\RelationSeoTagInfo;
+// use App\Models\RelationSeoPageInfo;
+// use App\Models\Wallpaper;
+// use Google\Client as Google_Client;
+// use Illuminate\Support\Facades\DB;
 
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendProductMail;
+// use Illuminate\Support\Facades\Mail;
+// use App\Mail\SendProductMail;
 
-use DOMDocument;
-use PDO;
-use PhpParser\Node\Stmt\Switch_;
+// use DOMDocument;
+// use PDO;
+// use PhpParser\Node\Stmt\Switch_;
 
 class HomeController extends Controller {
     public static function home(Request $request, $language = 'vi'){
@@ -90,150 +90,101 @@ class HomeController extends Controller {
         
     }
 
-    public static function changeSlug(Request $request){
-        $arrayFix = ['es', 'fr', 'zh', 'ru', 'ja', 'ko', 'hi'];
-        $items = Tag::select('*')
-                    ->whereHas('seos.infoSeo', function($query) use($arrayFix){
-                        $query->whereIn('language', $arrayFix)
-                        ->where('level', 2);
-                    })
-                    ->with('seo', 'seos')
-                    ->get();
-        foreach($items as $item){
-            foreach($item->seos as $seo){
-                if(in_array($seo->infoSeo->language, $arrayFix)){
-                    /* xây dựng slug */
-                    $slugNew = HelperController::buildSlugFromTitle($seo->infoSeo->title, $seo->infoSeo->type, $seo->infoSeo->language, $item->seo->parent);
-                    $slugFullNew = Seo::buildFullUrl($slugNew, $seo->infoSeo->parent);
-                    Seo::updateItem($seo->infoSeo->id, [
-                        'slug'  => $slugNew,
-                        'slug_full' => $slugFullNew,
-                    ]);
-                }
-            }
-        }
-        dd('success');
-    }
+    // public static function copyProductBySource($urlSource, $urlSearch){
+    //     $response  = [];
+    //     $productSource  = Product::select('*')
+    //         ->whereHas('seo', function ($query) use($urlSource){
+    //             $query->where('slug', $urlSource);
+    //         })
+    //         ->with('seo', 'seos.infoSeo.contents')
+    //         ->first();
 
-    private static function reorderString($input) {
-        // Các giá trị mặc định
-        $defaults = [
-            'fonds-d-ecran-de-telephone',
-            'fondos-de-pantalla-del-telefono',
-            'wallpaper-ponsel'
-        ];
-        
-        // Kiểm tra từng giá trị mặc định xem có tồn tại trong chuỗi hay không
-        foreach ($defaults as $default) {
-            if (strpos($input, $default) !== false) {
-                // Tách chuỗi thành hai phần
-                $parts = explode($default, $input);
-                // Xóa các ký tự '-' thừa ở đầu và cuối chuỗi
-                $prefix = !empty($parts[0]) ? trim($parts[0], '-') : trim($parts[1], '-');
-                // Nối chuỗi với phần mặc định ở sau
-                return $default . '-' . $prefix;
-            }
-        }
-        
-        // Trường hợp không tìm thấy giá trị mặc định nào trong chuỗi
-        return $input;
-    }
-
-    public static function copyProductBySource($urlSource, $urlSearch){
-        $response  = [];
-        $productSource  = Product::select('*')
-            ->whereHas('seo', function ($query) use($urlSource){
-                $query->where('slug', $urlSource);
-            })
-            ->with('seo', 'seos.infoSeo.contents')
-            ->first();
-
-        $tmp            = Product::select('*')
-            ->whereHas('seo', function ($query) use($urlSearch){
-                $query->where('slug', 'LIKE', $urlSearch.'%');
-            })
-            ->where('id', '!=', $productSource->id)
-            ->with('seo', 'seos.infoSeo.contents')
-            ->get();
-        $k      = 1;
-        foreach ($tmp as $t) {
-            /* xóa relation seos -> infoSeo -> contents (nếu có) */
-            foreach ($t->seos as $seo) {
-                foreach ($seo->infoSeo->contents as $content) {
-                    SeoContent::select('*')
-                        ->where('id', $content->id)
-                        ->delete();
-                }
-                \App\Models\RelationSeoProductInfo::select('*')
-                    ->where('seo_id', $seo->seo_id)
-                    ->delete();
-                Seo::select('*')
-                    ->where('id', $seo->seo_id)
-                    ->delete();
-            }
-            /* tạo dữ liệu mới */
-            $i = 0;
-            foreach ($productSource->seos as $seoS) {
-                /* tạo seo */
-                $tmp2   = $seoS->infoSeo->toArray();
-                $insert = [];
-                foreach ($tmp2 as $key => $value) {
-                    if ($key != 'contents' && $key != 'id') $insert[$key] = $value;
-                }
-                $insert['link_canonical']   = $tmp2['id'];
-                $insert['slug']             = $tmp2['slug'] . '-' . $k;
-                $insert['slug_full']        = $tmp2['slug_full'] . '-' . $k;
-                $idSeo = Seo::insertItem($insert);
-                /* cập nhật lại seo_id của product */
-                if ($insert['language'] == 'vi') {
-                    Product::updateItem($t->id, [
-                        'seo_id' => $idSeo,
-                    ]);
-                }
-                $response[] = $idSeo;
-                /* tạo relation_seo_product_info */
-                RelationSeoProductInfo::insertItem([
-                    'seo_id'    => $idSeo,
-                    'product_info_id' => $t->id,
-                ]);
-                /* tạo content */
-                foreach ($seoS->infoSeo->contents as $content) {
-                    $contentInsert = $content->content;
-                    $contentInsert = str_replace($seoS->infoSeo->slug_full, $insert['slug_full'], $contentInsert);
-                    SeoContent::insertItem([
-                        'seo_id'    => $idSeo,
-                        'content'   => $contentInsert,
-                        'ordering'  => $content->ordering,
-                    ]);
-                }
-                ++$i;
-            }
-            /* copy relation product và category */
-            \App\Models\RelationCategoryProduct::select('*')
-                ->where('product_info_id', $t->id)
-                ->delete();
-            foreach($productSource->categories as $category){
-                \App\Models\RelationCategoryProduct::insertItem([
-                    'category_info_id'       => $category->category_info_id,
-                    'product_info_id'      => $t->id
-                ]);
-            }
-            /* copy relation product và tag */
-            \App\Models\RelationTagInfoOrther::select('*')
-                ->where('reference_type', 'product_info')
-                ->where('reference_id', $t->id)
-                ->delete();
-            foreach($productSource->tags as $tag){
-                \App\Models\RelationTagInfoOrther::insertItem([
-                    'tag_info_id'       => $tag->tag_info_id,
-                    'reference_type'    => 'product_info',
-                    'reference_id'      => $t->id
-                ]);
-            }
-            ++$k;
-        }
-        return $response;
-    }
+    //     $tmp            = Product::select('*')
+    //         ->whereHas('seo', function ($query) use($urlSearch){
+    //             $query->where('slug', 'LIKE', $urlSearch.'%');
+    //         })
+    //         ->where('id', '!=', $productSource->id)
+    //         ->with('seo', 'seos.infoSeo.contents')
+    //         ->get();
+    //     $k      = 1;
+    //     foreach ($tmp as $t) {
+    //         /* xóa relation seos -> infoSeo -> contents (nếu có) */
+    //         foreach ($t->seos as $seo) {
+    //             foreach ($seo->infoSeo->contents as $content) {
+    //                 SeoContent::select('*')
+    //                     ->where('id', $content->id)
+    //                     ->delete();
+    //             }
+    //             \App\Models\RelationSeoProductInfo::select('*')
+    //                 ->where('seo_id', $seo->seo_id)
+    //                 ->delete();
+    //             Seo::select('*')
+    //                 ->where('id', $seo->seo_id)
+    //                 ->delete();
+    //         }
+    //         /* tạo dữ liệu mới */
+    //         $i = 0;
+    //         foreach ($productSource->seos as $seoS) {
+    //             /* tạo seo */
+    //             $tmp2   = $seoS->infoSeo->toArray();
+    //             $insert = [];
+    //             foreach ($tmp2 as $key => $value) {
+    //                 if ($key != 'contents' && $key != 'id') $insert[$key] = $value;
+    //             }
+    //             $insert['link_canonical']   = $tmp2['id'];
+    //             $insert['slug']             = $tmp2['slug'] . '-' . $k;
+    //             $insert['slug_full']        = $tmp2['slug_full'] . '-' . $k;
+    //             $idSeo = Seo::insertItem($insert);
+    //             /* cập nhật lại seo_id của product */
+    //             if ($insert['language'] == 'vi') {
+    //                 Product::updateItem($t->id, [
+    //                     'seo_id' => $idSeo,
+    //                 ]);
+    //             }
+    //             $response[] = $idSeo;
+    //             /* tạo relation_seo_product_info */
+    //             RelationSeoProductInfo::insertItem([
+    //                 'seo_id'    => $idSeo,
+    //                 'product_info_id' => $t->id,
+    //             ]);
+    //             /* tạo content */
+    //             foreach ($seoS->infoSeo->contents as $content) {
+    //                 $contentInsert = $content->content;
+    //                 $contentInsert = str_replace($seoS->infoSeo->slug_full, $insert['slug_full'], $contentInsert);
+    //                 SeoContent::insertItem([
+    //                     'seo_id'    => $idSeo,
+    //                     'content'   => $contentInsert,
+    //                     'ordering'  => $content->ordering,
+    //                 ]);
+    //             }
+    //             ++$i;
+    //         }
+    //         /* copy relation product và category */
+    //         \App\Models\RelationCategoryProduct::select('*')
+    //             ->where('product_info_id', $t->id)
+    //             ->delete();
+    //         foreach($productSource->categories as $category){
+    //             \App\Models\RelationCategoryProduct::insertItem([
+    //                 'category_info_id'       => $category->category_info_id,
+    //                 'product_info_id'      => $t->id
+    //             ]);
+    //         }
+    //         /* copy relation product và tag */
+    //         \App\Models\RelationTagInfoOrther::select('*')
+    //             ->where('reference_type', 'product_info')
+    //             ->where('reference_id', $t->id)
+    //             ->delete();
+    //         foreach($productSource->tags as $tag){
+    //             \App\Models\RelationTagInfoOrther::insertItem([
+    //                 'tag_info_id'       => $tag->tag_info_id,
+    //                 'reference_type'    => 'product_info',
+    //                 'reference_id'      => $t->id
+    //             ]);
+    //         }
+    //         ++$k;
+    //     }
+    //     return $response;
+    // }
 
     // public static function getCategories($params){
     //     $language       = session()->get('language');

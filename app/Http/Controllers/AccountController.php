@@ -18,7 +18,7 @@ class AccountController extends Controller {
         $orders     = Order::select('*')
                         ->where('email', $emailUser)
                         ->where('payment_status', 1)
-                        ->with('products')
+                        ->with('products', 'wallpapers')
                         ->get();
         return view('wallpaper.account.order', compact('item', 'orders', 'language'));
     }

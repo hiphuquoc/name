@@ -7,7 +7,7 @@
             <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="{{ $myDownloadsByLanguage }}" title="$myDownloadsByLanguage" />
         </div>
         <div class="headerBottom_item_text">
-            <div class="maxLine_1">{{ $user->name ?? ''}}</div>
+            <div class="maxLine_1" style="max-width:120px;">{{ $user->email ?? ''}}</div>
             <div class="headerBottom_item_text_modal">
                 <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
                     <i class="fa-solid fa-download"></i>
@@ -30,7 +30,6 @@
                         $('.headerBottom_item_text_background').css('display', 'none');
                     }
                 }
-
             </script>
         </div>
     </div>

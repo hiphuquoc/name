@@ -52,4 +52,8 @@ class Customer extends Model {
     public function address() {
         return $this->hasMany(\App\Models\CustomerAddress::class, 'customer_info_id', 'id');
     }
+
+    public function orders() {
+        return $this->hasMany(\App\Models\Order::class, 'customer_info_id', 'id');
+    }
 }

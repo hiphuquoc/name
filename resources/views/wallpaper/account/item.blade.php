@@ -1,4 +1,4 @@
-<div class="cartSectionBox">
+{{-- <div class="cartSectionBox">
     @if(!empty($orders)&&$orders->isNotEmpty())
     <div class="cartSectionBox_body">
         <div class="cartProductBox_head">
@@ -45,4 +45,4 @@
         </div>
     </div>
     @endif
-</div>
+</div> --}}

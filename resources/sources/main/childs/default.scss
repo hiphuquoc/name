@@ -225,7 +225,7 @@ $heightMenu : 3.3rem;
 @mixin productGrid {
   display: flex;
   &_item {
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     .show {
       width: 100%;
       height: auto;
@@ -438,7 +438,7 @@ $heightMenu : 3.3rem;
   &_image {
       flex: 0 0 70px;
       aspect-ratio: 1/1.05;
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       overflow: hidden;
       display: flex;
       img {

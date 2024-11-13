@@ -6,18 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Blade;
+// use Illuminate\Support\Facades\Blade;
 use App\Helpers\Url;
 use App\Http\Controllers\CategoryMoneyController;
 use App\Models\Blog;
 use App\Models\Category;
-use App\Models\Tag;
-use App\Models\Style;
-use App\Models\Event;
+// use App\Models\Tag;
+// use App\Models\Style;
+use App\Models\Customer;
 use App\Models\Page;
 use App\Models\CategoryBlog;
 use App\Models\FreeWallpaper;
-use App\Models\Seo;
+// use App\Models\Seo;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -222,14 +222,24 @@ class RoutingController extends Controller{
                 /* ===== Trang ==== */
                 if($itemSeo->type=='page_info'){
                     $flagMatch      = true;
-                    /* page related */
                     $item           = Page::select('*')
                                         ->whereHas('seos.infoSeo', function($query) use($idSeo){
                                             $query->where('id', $idSeo);
                                         })
                                         ->with('type')
                                         ->first();
-                    $xhtml  = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
+                    if(!empty($item->type->code)&&$item->type->code=='my_download'&&!empty(Auth::user()->email)){
+                        $emailCustomer  = Auth::user()->email;
+                        $infoCustomer   = Customer::select('*')
+                                            ->where('email', $emailCustomer)
+                                            ->with('orders')
+                                            ->first();
+                        /* trang tài khoản */
+                        $xhtml  = view('wallpaper.account.myDownload', compact('item', 'itemSeo', 'infoCustomer', 'language', 'breadcrumb'))->render();
+                    }else {
+                        /* trang bình thường */
+                        $xhtml  = view('wallpaper.page.index', compact('item', 'itemSeo', 'language', 'breadcrumb'))->render();
+                    }                    
                 }
                 /* ===== Category Blog ==== */
                 if($itemSeo->type=='category_blog'){
