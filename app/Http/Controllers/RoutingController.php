@@ -221,13 +221,13 @@ class RoutingController extends Controller{
                 }
                 /* ===== Trang ==== */
                 if($itemSeo->type=='page_info'){
-                    $flagMatch      = true;
-                    $item           = Page::select('*')
-                                        ->whereHas('seos.infoSeo', function($query) use($idSeo){
-                                            $query->where('id', $idSeo);
-                                        })
-                                        ->with('type')
-                                        ->first();
+                    $flagMatch          = true;
+                    $item               = Page::select('*')
+                                            ->whereHas('seos.infoSeo', function($query) use($idSeo){
+                                                $query->where('id', $idSeo);
+                                            })
+                                            ->with('type')
+                                            ->first();
                     if(!empty($item->type->code)&&$item->type->code=='my_download'&&!empty(Auth::user()->email)){
                         $emailCustomer  = Auth::user()->email;
                         $infoCustomer   = Customer::select('*')
@@ -296,7 +296,6 @@ class RoutingController extends Controller{
                     $htmlContent        = str_replace('<div id="tocContentMain"></div>', '<div id="tocContentMain">'.$dataContent['toc_content'].'</div>', $dataContent['content']);
                     $xhtml              = view('wallpaper.blog.index', compact('item', 'itemSeo', 'blogFeatured', 'language', 'breadcrumb', 'htmlContent'))->render();
                 }
-
                 /* Ghi dữ liệu - Xuất kết quả */
                 if($flagMatch==true){
                     if(env('APP_CACHE_HTML')==true) Storage::put(config('main_'.env('APP_NAME').'.cache.folderSave').$nameCache, $xhtml);
