@@ -9,6 +9,7 @@ use App\Models\Page;
 use App\Models\Category;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\HelperController;
+use App\Models\ISO3166;
 use App\Models\Tag;
 use App\Models\Seo;
 use App\Models\SeoContent;
@@ -25,6 +26,8 @@ use GeoIp2\Database\Reader;
 // use App\Models\FreeWallpaper;
 // use App\Models\RelationSeoCategoryInfo;
 use App\Models\RelationSeoProductInfo;
+use App\Models\Timezone;
+
 // use App\Models\RelationSeoTagInfo;
 // use App\Models\RelationSeoPageInfo;
 // use App\Models\Wallpaper;
@@ -76,8 +79,27 @@ class HomeController extends Controller {
     }
 
     public static function test(Request $request){
+
+        $allTimezone = Timezone::all();
+        foreach($allTimezone as $timezone){
+            $timezoneLow    = strtolower($timezone->timezone);
+            Timezone::updateItem($timezone->id, [
+                'timezone_lower'    => $timezoneLow
+            ]);
+        }
+
+
+        dd(123);
         
+    }
+
+    private static function findUniqueElements($arr1, $arr2) {
+        // Lọc các phần tử có trong arr1 nhưng không có trong arr2 và ngược lại
+        $uniqueInArr1 = array_diff($arr1, $arr2);
+        $uniqueInArr2 = array_diff($arr2, $arr1);
         
+        // Kết hợp các phần tử không trùng
+        return array_merge($uniqueInArr1, $uniqueInArr2);
     }
 
     // public static function copyProductBySource($urlSource, $urlSearch){

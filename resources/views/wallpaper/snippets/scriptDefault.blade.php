@@ -55,7 +55,7 @@
 
         /* thông tin khách hàng */
         settingGPSVisitor();
-        // settingIpVisitor();
+        settingTimezoneVisitor();
 
     });
 
@@ -97,6 +97,33 @@
         } else {
             console.error('Geolocation is not supported by this browser.');
         }
+    }
+
+    function settingTimezoneVisitor(){
+        // Kiểm tra xem đã thiết lập GPS thành công (dựa trên localStorage)
+        if (localStorage.getItem('timezone_set') == 'true') {
+            return; // Nếu đã thiết lập thành công, không làm gì thêm
+        }
+
+        // Lấy múi giờ từ thiết bị người dùng
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const url = new URL('{{ route("main.settingTimezoneVisitor") }}');
+        url.searchParams.append('timezone', timezone);
+        // Gửi múi giờ đến server qua GET request
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}' // CSRF token nếu cần cho GET
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Lưu trạng thái đã thiết lập GPS vào localStorage
+            localStorage.setItem('timezone_set', data.flag);
+        })
+        .catch(error => {
+            console.error('Error setting timezone:', error);
+        });
     }
 
     // function settingIpVisitor() {

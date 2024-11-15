@@ -12,6 +12,7 @@ use App\Models\ISO3166;
 use App\Helpers\GeoIP;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Carbon\CarbonTimeZone;
 
 class SettingController extends Controller {
 
@@ -59,6 +60,32 @@ class SettingController extends Controller {
             session()->save();
             // lưu Cache để dùng ngay
             Cache::put('info_gps', $infoSave, now()->addMinutes(1));
+            return response()->json(['flag' => true]);
+        }
+        return response()->json(['flag' => false]);
+    }
+
+    public static function settingTimezoneVisitor(Request $request){
+        $timezone   = $request->get('timezone');
+
+        $tmp        = ISO3166::select('*')
+                        ->whereHas('timezones', function($query) use($timezone){
+                            $query->where('timezone_lower', strtolower($timezone));
+                        })
+                        ->with('timezones')
+                        ->first();
+        if(!empty($tmp)){
+            $infoSave = [
+                'country_name'      => $tmp['name'],
+                'iso_code'          => $tmp['alpha_2'],
+                'percent_discount'  => $tmp['percent_discount'],
+            ];
+            // Thiết lập session
+            session()->put('info_timezone', $infoSave);
+            // Ghi session ngay lập tức
+            session()->save();
+            // lưu Cache để dùng ngay
+            Cache::put('info_timezone', $infoSave, now()->addMinutes(1));
             return response()->json(['flag' => true]);
         }
         return response()->json(['flag' => false]);
