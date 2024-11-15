@@ -17,11 +17,13 @@
 <!-- ===== START:: SCHEMA ===== -->
     <!-- STRAT:: Product Schema -->
     @php
-        $highPrice          = $item->price_before_promotion;
+        $highPrice          = \App\Helpers\Number::getPriceOriginByCountry($item->price);
         $lowPrice           = $highPrice;
         foreach($item->prices as $price){
-            if($price->price<$lowPrice){
-                $lowPrice   = $price->price;
+            $priceTmp       = \App\Helpers\Number::getPriceOriginByCountry($price->price);
+            if($priceTmp<$lowPrice){
+                $lowPrice   = $priceTmp;
+                break;
             }
         }
     @endphp

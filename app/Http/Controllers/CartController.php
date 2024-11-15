@@ -264,13 +264,13 @@ class CartController extends Controller{
             if(count($infoProduct->cart['product_price_id'])==$infoProduct->prices->count()){
                 /* trường hợp trọn bộ */
                 $tmp        = self::convertInfoCartToView($infoProduct, $infoProduct->cart['product_price_id'], $language);
-                $intoMoney  += $tmp['price'];
+                $intoMoney  += Number::getPriceOriginByCountry($tmp['price']);
                 $count      += 1;
             }else {
                 /* trường hợp từng ảnh */
                 foreach($infoProduct->cart['product_price_id'] as $productPriceId){
                     $tmp        = self::convertInfoCartToView($infoProduct, [$productPriceId], $language);
-                    $intoMoney  += $tmp['price'];
+                    $intoMoney  += Number::getPriceOriginByCountry($tmp['price']);
                     $count      += 1;
                 }
             }

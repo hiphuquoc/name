@@ -52,7 +52,81 @@
 
         /* check login để hiện thị button */
         checkLoginAndSetShow();
+
+        /* thông tin khách hàng */
+        settingGPSVisitor();
+        // settingIpVisitor();
+
     });
+
+    function settingGPSVisitor() {
+        // Kiểm tra xem đã thiết lập GPS thành công (dựa trên localStorage)
+        if (localStorage.getItem('gps_set') == 'true') {
+            return; // Nếu đã thiết lập thành công, không làm gì thêm
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Tạo URL với tham số truy vấn
+                const url = new URL('{{ route("main.settingGPSVisitor") }}');
+                url.searchParams.append('latitude', latitude);
+                url.searchParams.append('longitude', longitude);
+
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Lưu trạng thái đã thiết lập GPS vào localStorage
+                    localStorage.setItem('gps_set', data.flag);
+                    // refresh
+                    if(data.flag) location.reload();
+                })
+                .catch(error => {
+                    console.error('Error fetching GPS data:', error);
+                });
+            }, function(error) {
+                console.error('Error retrieving location:', error);
+            });
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }
+
+    // function settingIpVisitor() {
+    //     // Kiểm tra xem đã thiết lập GPS thành công (dựa trên localStorage)
+    //     if (localStorage.getItem('ip_set') == 'true') {
+    //         return; // Nếu đã thiết lập thành công, không làm gì thêm
+    //     }
+    //     // Tạo URL với tham số truy vấn
+    //     const url = new URL('{{ route("main.settingIpVisitor") }}');
+    //     fetch(url, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         }
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Lưu trạng thái đã thiết lập Ip vào localStorage
+    //         localStorage.setItem('ip_set', data.flag);
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching Ip data:', error);
+    //     });
+    // }
+
+    // function getInfoVisitor(){
+    //     /* time zone */
+    //     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    // }
     
     function lazyload(){
         /* đối với ảnh */

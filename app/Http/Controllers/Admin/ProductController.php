@@ -62,9 +62,11 @@ class ProductController extends Controller {
                 /* insert seo_content */
                 if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
                 /* insert hoặc update product_info */
+                $infoProduct    = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
                 if(empty($idProduct)){ /* check xem create product hay update product */
-                    $infoProduct    = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
                     $idProduct      = Product::insertItem($infoProduct);
+                }else {
+                    Product::updateItem($idProduct, $infoProduct);
                 }
                 /* relation_seo_product_info */
                 $relationSeoCategoryInfo = RelationSeoProductInfo::select('*')

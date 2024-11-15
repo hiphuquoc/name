@@ -350,6 +350,8 @@ Route::middleware('auth')->group(function (){
 /* setting */
 Route::get('/settingCollapsedMenu', [SettingPublic::class, 'settingCollapsedMenu'])->name('main.settingCollapsedMenu');
 Route::get('/getStatusCollapse', [SettingPublic::class, 'getStatusCollapse'])->name('main.getStatusCollapse');
+Route::get('/settingGPSVisitor', [SettingPublic::class, 'settingGPSVisitor'])->name('main.settingGPSVisitor');
+Route::get('/settingIpVisitor', [SettingPublic::class, 'settingIpVisitor'])->name('main.settingIpVisitor');
 /* ROUTING */
 Route::middleware(['checkRedirect'])->group(function () {
     Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');

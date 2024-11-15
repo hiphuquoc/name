@@ -13,8 +13,6 @@ class Product extends Model {
         'code',
         'sold',
         'price',
-        'price_before_promotion',
-        'sale_off'
     ];
     public $timestamps = true;
 

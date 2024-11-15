@@ -91,8 +91,9 @@
             // Sử dụng fetch để thay thế ajax
             fetch(url, {
                 method: 'GET',
+                credentials: 'same-origin',
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
                 }
             })
             .then(response => {

@@ -46,18 +46,18 @@ class CheckoutController extends Controller{
 
     public function paymentNow(Request $request){
         /* tạo đơn hàng */
-        $params             = $request->all();
+        $params                 = $request->all();
         $params['payment_type'] = 'payment_now';
-        $orderController    = App::make(OrderController::class);
-        $idOrder            = $orderController->create($params);
+        $orderController        = App::make(OrderController::class);
+        $idOrder                = $orderController->create($params);
         /* lấy ngược lại thông tin order để xử lý cho chính xác */
-        $orderInfo          = Order::select('*')
-                                ->where('id', $idOrder)
-                                ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
-                                ->first();
-        $urlRedirect        = self::getUrlRedirect($orderInfo);
+        $orderInfo              = Order::select('*')
+                                    ->where('id', $idOrder)
+                                    ->with('products.infoProduct', 'products.infoPrice', 'paymentMethod')
+                                    ->first();
+        $urlRedirect            = self::getUrlRedirect($orderInfo);
         /* trả về đường dẫn để chuyển hướng */
-        $reponse['url'] = $urlRedirect;
+        $reponse['url']         = $urlRedirect;
         return json_encode($reponse);
     }
 

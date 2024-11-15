@@ -11,28 +11,14 @@ class ProductPrice extends Model {
     protected $fillable     = [
         'code_name',
         'product_info_id',
-        'name', 
-        'description',
-        'en_name', 
-        'en_description',
         'price',
-        'price_origin',
-        'price_before_promotion',
-        'sale_off',
         'instock'
     ];
     public $timestamps = false;
     private static $columnFilter = [
         'code_name',
         'product_info_id',
-        'name', 
-        'description',
-        'en_name',
-        'en_description',
         'price',
-        'price_origin',
-        'price_before_promotion',
-        'sale_off',
         'instock'
     ];
 

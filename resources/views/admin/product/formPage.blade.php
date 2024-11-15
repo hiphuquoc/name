@@ -187,19 +187,9 @@
                 </div>
             </div>            
             <!-- One Row -->
-            <div class="flexBox">
-                <div class="flexBox_item">
-                    <div class="formBox_full_item">
-                        <label class="form-label inputRequired" for="price">Giá trọn bộ $</label>
-                        <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="price" name="price" value="{{ old('price') ?? $item->price ?? null }}" required />
-                    </div>
-                </div>
-                <div class="flexBox_item">
-                    <div class="formBox_full_item">
-                        <label class="form-label" for="price_before_promotion">Giá trước KM $</label>
-                        <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="price_before_promotion" name="price_before_promotion" value="{{ old('price_before_promotion') ?? $item->price_before_promotion ?? null }}" />
-                    </div>
-                </div>
+            <div class="formBox_full_item">
+                <label class="form-label inputRequired" for="price">Giá trọn bộ $</label>
+                <input type="text" class="form-control {{ !empty($flagCopySource)&&$flagCopySource==true ? 'inputSuccess' : '' }}" id="price" name="price" value="{{ old('price') ?? $item->price ?? null }}" required />
             </div>
         @endif
     </div>

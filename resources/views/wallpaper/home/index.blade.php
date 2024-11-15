@@ -26,33 +26,13 @@
     <!-- STRAT:: Article Schema -->
     @include('wallpaper.schema.creativeworkseries', compact('item'))
     <!-- END:: Article Schema -->
-
-    {{-- <!-- STRAT:: Product Schema -->
-    @php
-        $highPrice          = 0;
-        if(!empty($products))foreach($products as $product){
-            if($product->price_before_promotion>$highPrice) $highPrice = $product->price_before_promotion;
-        }
-        $lowPrice           = $highPrice;
-        foreach($products as $product){
-            foreach($product->prices as $price){
-                if($price->price<$lowPrice) $lowPrice   = $price->price;
-            }
-        }
-    @endphp
-    @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])
-    <!-- END:: Product Schema -->
-
+    
     <!-- STRAT:: FAQ Schema -->
-    @include('wallpaper.schema.itemlist', ['data' => $products])
+    @include('wallpaper.schema.itemlist', ['data' => $categories])
     <!-- END:: FAQ Schema -->
 
-    <!-- STRAT:: ImageObject Schema -->
-    @include('wallpaper.schema.imageObject', ['data' => $products])
-    <!-- END:: ImageObject Schema --> --}}
-
     <!-- STRAT:: Title - Description - Social -->
-    @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => 0, 'highPrice' => 0])
+    @include('wallpaper.schema.social', ['item' => $item, 'lowPrice' => 1, 'highPrice' => 5])
     <!-- END:: Title - Description - Social -->
 
     <!-- STRAT:: FAQ Schema -->

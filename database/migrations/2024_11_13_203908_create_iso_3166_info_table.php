@@ -11,8 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('iso_3166_info', function (Blueprint $table) {
             $table->id();
             $table->text('name');
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->text('sub_region')->nullable();
             $table->string('region_code', 3)->nullable();
             $table->string('sub_region_code', 3)->nullable();
-            $table->text('price_factor')->default(1);
+            $table->text('percent_discount')->default(1);
         });
     }
 

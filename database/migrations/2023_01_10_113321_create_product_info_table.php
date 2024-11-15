@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('code', 30);
             $table->integer('sold')->default(0);
             $table->text('price');
-            $table->text('price_before_promotion')->nullable();
-            $table->text('sale_off')->nullable();
             $table->timestamps();
         });
     }

@@ -54,10 +54,6 @@ class BuildInsertUpdateModel {
         $result['code']                         = $dataForm['code'];
         if(!empty($seoId)) $result['seo_id']    = $seoId;
         $result['price']                        = $dataForm['price'];
-        $result['price_before_promotion']       = $dataForm['price_before_promotion'] ?? null;
-        if(!empty($dataForm['price_before_promotion'])){
-            $result['sale_off'] = round((($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100);
-        }
         return $result;
     }
 
@@ -67,12 +63,6 @@ class BuildInsertUpdateModel {
             $result['code_name']        = $dataForm['code_name'];
             $result['product_info_id']  = $idProduct;
             $result['price']            = $dataForm['price'];
-            $result['price_origin']     = $dataForm['price_origin'] ?? null;
-            $result['price_before_promotion']   = $dataForm['price_before_promotion'] ?? null;
-            $result['sale_off']         = 0;
-            if(!empty($dataForm['price_before_promotion'])){
-                $result['sale_off'] = round((($dataForm['price_before_promotion'] - $dataForm['price'])/$dataForm['price_before_promotion'])*100);
-            }
             $result['instock']          = $dataForm['instock'] ?? null;
         }
         return $result;

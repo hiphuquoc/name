@@ -355,4 +355,5 @@ return [
     'ai_version'    => [ /* vesion đầu tiên được mặc định dùng ở các trường hợp không quy định */
         'gpt-4o-mini', 'gpt-4o',
     ],
+    'percent_discount_default'  => '0.4', /* hệ số giá mặc định khi không lấy được thông tin GPS và IP của khách hàng */
 ];

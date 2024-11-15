@@ -16,7 +16,7 @@ class ISO3166 extends Model {
         'region',
         'region_code',
         'sub_region_code',
-        'price_factor',
+        'percent_discount',
     ];
     public $timestamps      = false;
 

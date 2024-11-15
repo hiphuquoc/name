@@ -100,20 +100,22 @@
                                 </div>
                                 <div class="wallpaperGridBox_item_image_content_price">
                                     @php
-                                        $p              = $i==0 ? $product->price : $price->price;
-                                        $pOld           = $i==0 ? $product->price_before_promotion : $price->price_before_promotion;
-                                        $xhtmlPrice     = $p.config('language.'.$language.'.currency');
-                                        $xhtmlPrice     = \App\Helpers\Number::getFormatPriceByLanguage($p, $language);
-                                        $xhtmlPriceOld  = null;
-                                        if(!empty($p!=$pOld)){
-                                            $pOld   = \App\Helpers\Number::getFormatPriceByLanguage($pOld, $language, false);
+                                        /* giá gạch bỏ */
+                                        $pMax               = $i==0 ? $product->price : $price->price; 
+                                        /* giá bán thật (có đơn vị tiền tệ) */
+                                        $pOrigin            = \App\Helpers\Number::getPriceOriginByCountry($pMax);
+                                        $xhtmlPriceOrigin   = \App\Helpers\Number::getFormatPriceByLanguage($pOrigin, $language);
+                                        /* giá gạch bỏ (có đơn vị tiền tệ) */
+                                        $xhtmlPriceMax      = null;
+                                        if(!empty($pMax>$pOrigin)) {
+                                            $pMax           = \App\Helpers\Number::getFormatPriceByLanguage($pMax, $language, false);
+                                            $xhtmlPriceMax  = '<span class="maxLine_1">'.$pMax.'</span>';
                                         }
-                                        $xhtmlPriceOld  = '<span class="maxLine_1">'.$pOld.'</span>';
                                     @endphp
                                     <!-- giá -->
-                                    <div>{!! $xhtmlPrice !!}</div>
+                                    <div>{!! $xhtmlPriceOrigin !!}</div>
                                     <!-- giá trước khuyến mãi -->
-                                    {!! $xhtmlPriceOld !!}
+                                    {!! $xhtmlPriceMax !!}
                                     @php
                                         $quantityImage = 0;
                                         foreach($product->prices as $p) if(!empty($p->wallpapers)&&$p->wallpapers->count()) $quantityImage += $p->wallpapers->count();

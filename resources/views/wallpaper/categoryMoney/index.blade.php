@@ -19,13 +19,12 @@
     @php
         $highPrice          = 0;
         foreach($wallpapers as $wallpaper){
-            if($wallpaper->price_before_promotion>$highPrice) $highPrice = $wallpaper->price_before_promotion;
+            if($wallpaper->price>$highPrice) $highPrice = $wallpaper->price;
         }
         $lowPrice           = $highPrice;
         foreach($wallpapers as $wallpaper){
-            foreach($wallpaper->prices as $price){
-                if($price->price<$lowPrice) $lowPrice   = $price->price;
-            }
+            $priceTmp       = \App\Helpers\Number::getPriceOriginByCountry($wallpaper->price);
+            if($priceTmp<$lowPrice) $lowPrice = $priceTmp;
         }
     @endphp
     @include('wallpaper.schema.product', ['item' => $item, 'lowPrice' => $lowPrice, 'highPrice' => $highPrice])

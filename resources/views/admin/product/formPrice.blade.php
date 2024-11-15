@@ -8,21 +8,17 @@
     <div class="card-body">
         <input type="hidden" name="id" value="{{ $price['id'] ?? null }}" />
         <div class="formBox">
-            <div class="formBox_full">
-                <label class="form-label inputRequired" for="code_name">Mã Tên</label>
-                <input class="form-control" name="code_name" type="text" value="{{ $price['code_name'] ?? null }}" required />
-            </div>
             <div class="formBox_full flexBox">
                 <div class="flexBox_item">
                     <div class="formBox_full_item">
-                        <label class="form-label inputRequired" for="price">Giá bán $</label>
-                        <input class="form-control" name="price" type="number" value="{{ $price['price'] ?? null }}" required />
+                        <label class="form-label inputRequired" for="code_name">Mã Tên</label>
+                <input class="form-control" name="code_name" type="text" value="{{ $price['code_name'] ?? null }}" required />
                     </div>
                 </div>
                 <div class="flexBox_item">
                     <div class="formBox_full_item">
-                        <label class="form-label" for="price_before_promotion">Giá trước KM $</label>
-                        <input class="form-control" name="price_before_promotion" type="number" value="{{ $price['price_before_promotion'] ?? null }}" />
+                        <label class="form-label inputRequired" for="price">Giá bán $</label>
+                        <input class="form-control" name="price" type="number" value="{{ $price['price'] ?? null }}" required />
                     </div>
                 </div>
             </div>

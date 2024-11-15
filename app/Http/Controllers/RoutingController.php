@@ -18,6 +18,8 @@ use App\Models\Page;
 use App\Models\CategoryBlog;
 use App\Models\FreeWallpaper;
 // use App\Models\Seo;
+use App\Helpers\GeoIP;
+use App\Models\ISO3166;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -46,8 +48,8 @@ class RoutingController extends Controller{
             /* ngôn ngữ */
             $language               = $itemSeo->language;
             SettingController::settingLanguage($language);
-            /* chế đệ xem */
-            $flagMatch              = false;
+            /* thiết lập theo IP */
+            if(empty(session()->get('info_ip'))) SettingController::settingIpVisitor();
             /* đưa biến search lên để xử lý với cache */
             $search                 = request('search') ?? null;
             /* cache HTML */
@@ -66,18 +68,19 @@ class RoutingController extends Controller{
                 echo $xhtml;
             }else {
                 /* breadcrumb */
-                $breadcrumb     = Url::buildBreadcrumb($itemSeo->slug_full);
+                $breadcrumb         = Url::buildBreadcrumb($itemSeo->slug_full);
                 /* thông tin */
-                $tableName      = $itemSeo->type;
-                $modelName      = config('tablemysql.'.$itemSeo->type.'.model_name');
-                $modelInstance  = resolve("\App\Models\\$modelName");
-                $idSeo          = $itemSeo->id;
-                $item           = $modelInstance::select('*')
-                                    ->whereHas('seos', function($query) use($idSeo){
-                                        $query->where('seo_id', $idSeo);
-                                    })
-                                    ->with('seo', 'seos')
-                                    ->first();
+                $tableName          = $itemSeo->type;
+                $modelName          = config('tablemysql.'.$itemSeo->type.'.model_name');
+                $modelInstance      = resolve("\App\Models\\$modelName");
+                $idSeo              = $itemSeo->id;
+                $item               = $modelInstance::select('*')
+                                        ->whereHas('seos', function($query) use($idSeo){
+                                            $query->where('seo_id', $idSeo);
+                                        })
+                                        ->with('seo', 'seos')
+                                        ->first();
+                $flagMatch          = false;
                 /* ===== từng ảnh ===== */
                 if($itemSeo->type=='free_wallpaper_info'){
                     $flagMatch      = true;
@@ -97,16 +100,16 @@ class RoutingController extends Controller{
                                         ->count();
                     $loaded         = 0;
                     /* sản phẩm liên quan */
-                    $related            = FreeWallpaper::select('*')
-                                            ->where('id', '!=', $item->id)
-                                            ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
-                                                $query->whereIn('id', $arrayIdCategory);
-                                            })
-                                            ->orderBy('id', 'DESC')
-                                            ->skip(0)
-                                            ->take($loaded)
-                                            ->get();
-                    $xhtml              = view('wallpaper.freeWallpaper.index', compact('item', 'itemSeo', 'idNot', 'breadcrumb', 'total', 'loaded', 'related', 'language', 'arrayIdCategory'))->render();
+                    $related        = FreeWallpaper::select('*')
+                                        ->where('id', '!=', $item->id)
+                                        ->whereHas('categories.infoCategory', function($query) use($arrayIdCategory){
+                                            $query->whereIn('id', $arrayIdCategory);
+                                        })
+                                        ->orderBy('id', 'DESC')
+                                        ->skip(0)
+                                        ->take($loaded)
+                                        ->get();
+                    $xhtml          = view('wallpaper.freeWallpaper.index', compact('item', 'itemSeo', 'idNot', 'breadcrumb', 'total', 'loaded', 'related', 'language', 'arrayIdCategory'))->render();
                 }
                 /* ===== Tag ==== */
                 if($itemSeo->type=='tag_info'){

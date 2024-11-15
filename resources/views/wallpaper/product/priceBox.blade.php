@@ -1,41 +1,57 @@
 
 <!-- của trọn bộ -->
 @php
-    $xhtmlPrice         = \App\Helpers\Number::getFormatPriceByLanguage($item->price, $language);
-    $xhtmlPriceOld      = null;
-    if(!empty($item->price_before_promotion)&&$item->price_before_promotion!=$item->price){
-        $priceOld       = \App\Helpers\Number::getFormatPriceByLanguage($item->price_before_promotion, $language, false);
+    /* giá gạch bỏ */
+    $pMax               = $item->price ?? 0; 
+    /* giá bán thật (có đơn vị tiền tệ) */
+    $pOrigin            = \App\Helpers\Number::getPriceOriginByCountry($pMax);
+    $xhtmlPriceOrigin   = \App\Helpers\Number::getFormatPriceByLanguage($pOrigin, $language);
+    /* giá gạch bỏ (có đơn vị tiền tệ) */
+    $xhtmlPriceMax      = null;
+    $xhtmlSaleOff       = null;
+    if(!empty($pMax>$pOrigin)) {
+        /* sale_off => ghi chú: đoạn này phải nằm ở trên trước khi pMax được dùng number_format */
+        $saleOff        = \App\Helpers\Number::calculatorSaleOffByPriceMaxAndPriceOriginByCountry($pMax, $pOrigin);
+        $xhtmlSaleOff   = '<div class="productDetailBox_detail_price_item_saleoff">- '.$saleOff.'%</div>';
+        /* giá gạch bỏ (có đơn vị tiền tệ) */
+        $pMax           = \App\Helpers\Number::getFormatPriceByLanguage($pMax, $language, false);
+        $xhtmlPriceMax  = '<div class="productDetailBox_detail_price_item_old">'.$pMax.'</div>';
     }
-    $xhtmlPriceOld  = '<div class="productDetailBox_detail_price_item_old">'.$priceOld.'</div>';
     /* chuỗi json thay đổi price hiển thị chi chọn option */
     $tmp            = [];
     foreach($item->prices as $price) $tmp[] = $price->id;
     $idKey          = implode('-', $tmp);
 @endphp
 <div id="{{ $idKey }}" class="productDetailBox_detail_price_item selected">
-    <div class="productDetailBox_detail_price_item_real">{!! $xhtmlPrice !!}</div>
-    {!! $xhtmlPriceOld !!}
-    @if(!empty($item->sale_off))
-        <div class="productDetailBox_detail_price_item_saleoff">- {{ $item->sale_off }}%</div>
-    @endif
+    <div class="productDetailBox_detail_price_item_real">{!! $xhtmlPriceOrigin !!}</div>
+    {!! $xhtmlPriceMax !!}
+    {!! $xhtmlSaleOff !!}
 </div>
 
 @foreach($prices as $price)
     @php
-        $xhtmlPrice     = \App\Helpers\Number::getFormatPriceByLanguage($price->price, $language);
-        $xhtmlPriceOld  = null;
-        if(!empty($price->price_before_promotion)&&$price->price_before_promotion!=$price->price){
-            $priceOld   = \App\Helpers\Number::getFormatPriceByLanguage($price->price_before_promotion, $language);
+        /* giá gạch bỏ */
+        $pMax               = $price->price ?? 0; 
+        /* giá bán thật (có đơn vị tiền tệ) */
+        $pOrigin            = \App\Helpers\Number::getPriceOriginByCountry($pMax);
+        $xhtmlPriceOrigin   = \App\Helpers\Number::getFormatPriceByLanguage($pOrigin, $language);
+        /* giá gạch bỏ (có đơn vị tiền tệ) */
+        $xhtmlPriceMax      = null;
+        $xhtmlSaleOff       = null;
+        if(!empty($pMax>$pOrigin)) {
+            /* sale_off => ghi chú: đoạn này phải nằm ở trên trước khi pMax được dùng number_format */
+            $saleOff        = \App\Helpers\Number::calculatorSaleOffByPriceMaxAndPriceOriginByCountry($pMax, $pOrigin);
+            $xhtmlSaleOff   = '<div class="productDetailBox_detail_price_item_saleoff">- '.$saleOff.'%</div>';
+            /* giá gạch bỏ (có đơn vị tiền tệ) */
+            $pMax           = \App\Helpers\Number::getFormatPriceByLanguage($pMax, $language, false);
+            $xhtmlPriceMax  = '<div class="productDetailBox_detail_price_item_old">'.$pMax.'</div>';
         }
-        $xhtmlPriceOld  = '<div class="productDetailBox_detail_price_item_old">'.$priceOld.'</div>';
     @endphp
     <!-- của từng giá -->
     <div id="{{ $price->id }}" class="productDetailBox_detail_price_item">
-        <div class="productDetailBox_detail_price_item_real">{!! $xhtmlPrice !!}</div>
-        {!! $xhtmlPriceOld !!}
-        @if(!empty($price->sale_off))
-            <div class="productDetailBox_detail_price_item_saleoff">- {{ $price->sale_off }}%</div>
-        @endif
+        <div class="productDetailBox_detail_price_item_real">{!! $xhtmlPriceOrigin !!}</div>
+        {!! $xhtmlPriceMax !!}
+        {!! $xhtmlSaleOff !!}
     </div>
 @endforeach
 
