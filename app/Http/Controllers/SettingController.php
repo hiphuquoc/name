@@ -29,16 +29,19 @@ class SettingController extends Controller {
                 'iso_code'          => $infoCountry['iso_code'],
                 'percent_discount'  => $percentDiscount,
             ];
-            // Thiết lập session
-            $flag = session()->put('info_ip', $infoSave);
-            // Ghi session ngay lập tức
-            session()->save();
+            // // Thiết lập session
+            // $flag = session()->put('info_ip', $infoSave);
+            // // Ghi session ngay lập tức
+            // session()->save();
+
             // lưu Cache để dùng ngay
             Cache::put('info_ip', $infoSave, now()->addMinutes(1));
+            // Lưu thông tin vào cookie
+            $cookie = cookie('info_ip', json_encode($infoSave), 3600); // Lưu trong 3600 phút
 
-            return $flag;
+            return response()->json(['flag' => true])->cookie($cookie);
         }
-        return false;
+        return response()->json(['flag' => false]);
     }
 
     public static function settingGPSVisitor(Request $request){
@@ -54,13 +57,17 @@ class SettingController extends Controller {
                 'iso_code'          => $infoCountry['iso_code'],
                 'percent_discount'  => $percentDiscount,
             ];
-            // Thiết lập session
-            session()->put('info_gps', $infoSave);
-            // Ghi session ngay lập tức
-            session()->save();
+            // // Thiết lập session
+            // session()->put('info_gps', $infoSave);
+            // // Ghi session ngay lập tức
+            // session()->save();
+
             // lưu Cache để dùng ngay
             Cache::put('info_gps', $infoSave, now()->addMinutes(1));
-            return response()->json(['flag' => true]);
+            // Lưu thông tin vào cookie
+            $cookie = cookie('info_gps', json_encode($infoSave), 3600); // Lưu trong 3600 phút
+
+            return response()->json(['flag' => true])->cookie($cookie);
         }
         return response()->json(['flag' => false]);
     }
@@ -80,13 +87,16 @@ class SettingController extends Controller {
                 'iso_code'          => $tmp['alpha_2'],
                 'percent_discount'  => $tmp['percent_discount'],
             ];
-            // Thiết lập session
-            session()->put('info_timezone', $infoSave);
-            // Ghi session ngay lập tức
-            session()->save();
+            // // Thiết lập session
+            // session()->put('info_timezone', $infoSave);
+            // // Ghi session ngay lập tức
+            // session()->save();
             // lưu Cache để dùng ngay
             Cache::put('info_timezone', $infoSave, now()->addMinutes(1));
-            return response()->json(['flag' => true]);
+            // Lưu thông tin vào cookie
+            $cookie = cookie('info_timezone', json_encode($infoSave), 3600); // Lưu trong 3600 phút
+
+            return response()->json(['flag' => true])->cookie($cookie);
         }
         return response()->json(['flag' => false]);
     }

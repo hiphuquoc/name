@@ -58,15 +58,27 @@ class Number {
     }
 
     public static function getPriceOriginByCountry($number){
-        /* hệ số giảm giá theo khu vực (nằm trong session) */
-        $percentDiscount            = session()->get('info_gps')['percent_discount']  
-                                        ?? session()->get('info_timezone')['percent_discount']
+        // /* hệ số giảm giá theo khu vực (nằm trong session) */
+        // $percentDiscount            = session()->get('info_gps')['percent_discount']  
+        //                                 ?? session()->get('info_timezone')['percent_discount']
+                                        // ?? Cache::get('info_timezone')['percent_discount'] 
+                                        // ?? Cache::get('info_gps')['percent_discount'] 
+        //                                 /* ip chỉ là phương án cuối cùng */
+        //                                 ?? session()->get('info_ip')['percent_discount']
+        //                                 ?? Cache::get('info_ip')['percent_discount'] 
+        //                                 ?? config('main_'.env('APP_NAME').'.percent_discount_default');
+        // Get cookies from the request
+        $infoGps       = json_decode(request()->cookie('info_gps'), true);
+        $infoTimezone  = json_decode(request()->cookie('info_timezone'), true);
+        $infoIp        = json_decode(request()->cookie('info_ip'), true);
+        // Determine the discount factor from available cookies or fallback
+        $percentDiscount            = $infoGps['percent_discount'] 
+                                        ?? $infoTimezone['percent_discount'] 
                                         ?? Cache::get('info_timezone')['percent_discount'] 
                                         ?? Cache::get('info_gps')['percent_discount'] 
-                                        /* ip chỉ là phương án cuối cùng */
-                                        ?? session()->get('info_ip')['percent_discount']
+                                        ?? $infoIp['percent_discount'] 
                                         ?? Cache::get('info_ip')['percent_discount'] 
-                                        ?? config('main_'.env('APP_NAME').'.percent_discount_default');
+                                        ?? config('main_' . env('APP_NAME') . '.percent_discount_default');
         /* kết quả */
         $number                     = $number * $percentDiscount;
         return $number;
