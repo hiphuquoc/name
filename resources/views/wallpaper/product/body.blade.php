@@ -46,22 +46,26 @@
                         <div id="js_viewMoreContent_content" class="productDetailBox_detail_description">
                             {!! config('language.'.$language.'.data.product_description.'.env('APP_NAME')) !!}
                         </div>
+
                         <!-- option -->
                         <div class="productDetailBox_detail_option hide-991">
                             @include('wallpaper.product.optionBox', compact('item'))
                         </div>
                         <!-- giá -->
-                        <div class="productDetailBox_detail_price hide-991">
-                            @include('wallpaper.product.priceBox', ['prices' => $item->prices])
+                        <div id="js_loadProductPrice" class="productDetailBox_detail_price hide-991">
+                            <!-- load ajax (loadProductPrice) nên truyền collection rỗng -->
+                            @include('wallpaper.product.priceBox', [
+                                'item'      => new \Illuminate\Database\Eloquent\Collection,
+                                'prices'    => new \Illuminate\Database\Eloquent\Collection,
+                            ])
                         </div>
+
                         <!-- button đặt hàng -->
                         <div class="productDetailBox_detail_checkout">
                             <div class="productDetailBox_detail_checkout_button">
                                 <div class="show-991">
-                                    @php
-                                        $priceMobile    = \App\Helpers\Number::getFormatPriceByLanguage($item->price, $language);
-                                    @endphp
-                                    <div class="priceMobile">{!! $priceMobile !!}</div>
+                                    <!-- load ajax (loadProductPrice) -->
+                                    <div id="js_loadProductPrice_priceAllMobile" class="priceMobile">--</div>
                                 </div>
                                 @php
                                     $buttonNameCart     = config('language.'.$language.'.data.add_to_cart');

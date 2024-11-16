@@ -502,4 +502,29 @@ class AjaxController extends Controller {
         }
         echo $linkGuideDownloadByLanguage;
     }
+
+    public function loadProductPrice(Request $request){
+        $idProduct      = $request->get('product_info_id');
+        $language       = $request->get('language') ?? request()->session('lanugage');
+        $infoProduct    = Product::select('*')
+                            ->where('id', $idProduct)
+                            ->with('prices')
+                            ->first();
+        $result         = '';
+        $priceAllMobile = '';
+        if(!empty($infoProduct)){
+            $result         = view('wallpaper.product.priceBox', [
+                'item'      => $infoProduct,
+                'prices'    => $infoProduct->prices,
+                'language'  => $language,
+            ])->render();
+            $priceAllMobile = \App\Helpers\Number::getPriceOriginByCountry($infoProduct->price);
+            $priceAllMobile = \App\Helpers\Number::getFormatPriceByLanguage($priceAllMobile, $language);
+        }
+        
+        return response()->json([
+            'content'           => $result,
+            'price_all_mobile'  => $priceAllMobile,
+        ]);
+    }
 }

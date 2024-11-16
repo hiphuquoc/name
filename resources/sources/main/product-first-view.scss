@@ -176,7 +176,7 @@
             }
         }
         &_price {
-            // margin-top: 1rem;
+            min-height: 40px; /* dùng cho ajax */
             &_item {
                 display: none;
                 align-items: center;

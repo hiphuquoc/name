@@ -109,6 +109,33 @@
 @endpush
 @push('scriptCustom')
     <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductPrice({{ $item->id }});
+        });
+
+        /* thay đổi option sản phẩm */
+        function loadProductPrice(idProduct){
+            // Tạo URL với tham số truy vấn
+            const url = new URL('{{ route("ajax.loadProductPrice") }}');
+            const language = $('#language').val();
+            url.searchParams.append('product_info_id', idProduct);
+            url.searchParams.append('language', language);
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.content!='') $('#js_loadProductPrice').html(data.content);
+                if(data.price_all_mobile!='') $('#js_loadProductPrice_priceAllMobile').html(data.price_all_mobile);
+            })
+            .catch(error => {
+                console.error('Error fetching option product data:', error);
+            });
+        }
+
         /* thay đổi option sản phẩm */
         function setOptionProduct(element, idProduct, type){
             /* xử lý cho việc thay đổi button */

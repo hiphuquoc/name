@@ -1,11 +1,15 @@
 
-<!-- của trọn bộ -->
 @php
     /* giá gạch bỏ */
-    $pMax               = $item->price ?? 0; 
+    $pMax               = !empty($item->price) ? $item->price : 0; 
     /* giá bán thật (có đơn vị tiền tệ) */
     $pOrigin            = \App\Helpers\Number::getPriceOriginByCountry($pMax);
-    $xhtmlPriceOrigin   = \App\Helpers\Number::getFormatPriceByLanguage($pOrigin, $language);
+    if(!empty($pOrigin)){
+        $xhtmlPriceOrigin = \App\Helpers\Number::getFormatPriceByLanguage($pOrigin, $language);
+    }else {
+        /* hiển thị trước khi load ajax */
+        $xhtmlPriceOrigin = '--';
+    }
     /* giá gạch bỏ (có đơn vị tiền tệ) */
     $xhtmlPriceMax      = null;
     $xhtmlSaleOff       = null;
@@ -19,9 +23,10 @@
     }
     /* chuỗi json thay đổi price hiển thị chi chọn option */
     $tmp            = [];
-    foreach($item->prices as $price) $tmp[] = $price->id;
+    if(!empty($item->prices)) foreach($item->prices as $price) $tmp[] = $price->id;
     $idKey          = implode('-', $tmp);
 @endphp
+<!-- của trọn bộ -->
 <div id="{{ $idKey }}" class="productDetailBox_detail_price_item selected">
     <div class="productDetailBox_detail_price_item_real">{!! $xhtmlPriceOrigin !!}</div>
     {!! $xhtmlPriceMax !!}

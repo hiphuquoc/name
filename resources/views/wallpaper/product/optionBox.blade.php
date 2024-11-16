@@ -1,7 +1,7 @@
 {{-- <div class="productDetailBox_detail_option_title">
     Tùy chọn 
 </div> --}}
-<div id="js_addToCart_options" class="productDetailBox_detail_option_box">
+<div class="productDetailBox_detail_option_box">
     <div class="productDetailBox_detail_option_box_item" style="background:none;font-size:0.95rem;padding:0;margin:0 10px 0 0;">
         {{ config('language.'.$language.'.data.options') }}
     </div>

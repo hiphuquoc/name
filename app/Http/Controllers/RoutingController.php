@@ -48,6 +48,8 @@ class RoutingController extends Controller{
             /* ngôn ngữ */
             $language               = $itemSeo->language;
             SettingController::settingLanguage($language);
+
+            // dd(session()->all());
             /* thiết lập theo IP */
             if(empty(session()->get('info_ip'))) SettingController::settingIpVisitor();
             /* đưa biến search lên để xử lý với cache */
