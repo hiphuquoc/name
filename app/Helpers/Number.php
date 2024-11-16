@@ -59,12 +59,12 @@ class Number {
 
     public static function getPriceOriginByCountry($number){
         /* hệ số giảm giá theo khu vực (nằm trong session) */
-        $percentDiscount            = Cache::get('info_gps')['percent_discount'] 
-                                        ?? session()->get('info_gps')['percent_discount'] 
-                                        ?? Cache::get('info_timezone')['percent_discount'] 
+        $percentDiscount            = session()->get('info_gps')['percent_discount']  
+                                        ?? Cache::get('info_gps')['percent_discount'] 
                                         ?? session()->get('info_timezone')['percent_discount'] 
+                                        ?? Cache::get('info_timezone')['percent_discount'] 
+                                        ?? session()->get('info_ip')['percent_discount'] 
                                         ?? Cache::get('info_ip')['percent_discount'] 
-                                        ?? session()->get('info_ip')['percent_discount']
                                         ?? config('main_'.env('APP_NAME').'.percent_discount_default');
         /* kết quả */
         $number                     = $number * $percentDiscount;
