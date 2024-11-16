@@ -129,7 +129,7 @@ class CartController extends Controller{
         if(!empty($priceInCart)&&!empty($infoProduct)){
             if(count($priceInCart)>=$infoProduct->prices->count()){ /* trọn bộ */
                 $result['option_name']  = config('language.'.$language.'.data.full_set');
-                $result['price']        = $infoProduct->price;
+                $result['price']        = Number::getPriceOriginByCountry($infoProduct->price, $language);
                 $result['image']        = $infoProduct->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper;
             }else {
                 /* trường hợp không phải trọn bộ => xử lý chỉ 1 */
@@ -142,7 +142,7 @@ class CartController extends Controller{
                     }
                 }
                 $result['option_name']  = $infoPriceChoose->code_name;
-                $result['price']        = $infoPriceChoose->price;
+                $result['price']        = Number::getPriceOriginByCountry($infoPriceChoose->price);
                 $result['image']        = $infoPriceChoose->wallpapers[0]->infoWallpaper->file_cloud_wallpaper;
             }
             $result['product_name']         = $infoProduct->seo->title;
@@ -160,7 +160,7 @@ class CartController extends Controller{
         $language   = $request->get('language');
         $cart       = session()->get('cart');
         $cart       = json_decode($cart, true);
-        $products = self::getCollectionProducts();
+        $products   = self::getCollectionProducts();
         $detailCart = self::calculatorDetailCart($cart, 0, $language);
         /* lấy url của trang cart theo ngôn ngữ */
         $urlPageCart = null;
@@ -264,13 +264,13 @@ class CartController extends Controller{
             if(count($infoProduct->cart['product_price_id'])==$infoProduct->prices->count()){
                 /* trường hợp trọn bộ */
                 $tmp        = self::convertInfoCartToView($infoProduct, $infoProduct->cart['product_price_id'], $language);
-                $intoMoney  += Number::getPriceOriginByCountry($tmp['price']);
+                $intoMoney  += $tmp['price']; /* ỏ đây dùng price vì price này đã chuyên đổi rồi */
                 $count      += 1;
             }else {
                 /* trường hợp từng ảnh */
                 foreach($infoProduct->cart['product_price_id'] as $productPriceId){
                     $tmp        = self::convertInfoCartToView($infoProduct, [$productPriceId], $language);
-                    $intoMoney  += Number::getPriceOriginByCountry($tmp['price']);
+                    $intoMoney  += $tmp['price']; /* ỏ đây dùng price vì price này đã chuyên đổi rồi */
                     $count      += 1;
                 }
             }

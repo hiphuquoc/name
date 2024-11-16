@@ -92,19 +92,14 @@
                     console.error('Error fetching GPS data:', error);
                 });
             }, function(error) {
-                console.error('Error retrieving location:', error);
+                // console.error('Error retrieving location:', error);
             });
         } else {
-            console.error('Geolocation is not supported by this browser.');
+            // console.error('Geolocation is not supported by this browser.');
         }
     }
 
     function settingTimezoneVisitor(){
-        // Kiểm tra xem đã thiết lập GPS thành công (dựa trên localStorage)
-        if (localStorage.getItem('timezone_set') == 'true') {
-            return; // Nếu đã thiết lập thành công, không làm gì thêm
-        }
-
         // Lấy múi giờ từ thiết bị người dùng
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const url = new URL('{{ route("main.settingTimezoneVisitor") }}');
