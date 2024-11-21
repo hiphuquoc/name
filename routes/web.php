@@ -5,14 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController as CategoryPublic;
 use App\Http\Controllers\CategoryMoneyController as CategoryMoneyPublic;
-use App\Http\Controllers\MomoController;
-use App\Http\Controllers\ZalopayController;
+use App\Http\Controllers\VNPayController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ConfirmController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController as OrderPublic;
-use App\Http\Controllers\PageController as PagePublic;
 use App\Http\Controllers\CategoryBlogController as CategoryBlogPublic;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AjaxController;
@@ -220,8 +218,6 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::get('/loadModal', [ImageController::class, 'loadModal'])->name('admin.image.loadModal');
             Route::post('/changeImage', [ImageController::class, 'changeImage'])->name('admin.image.changeImage');
             Route::post('/removeImage', [ImageController::class, 'removeImage'])->name('admin.image.removeImage');
-
-            // Route::get('/toolRename', [ImageController::class, 'toolRename'])->name('admin.image.toolRename');
         });
         /* ===== CACHE ===== */
         Route::prefix('cache')->group(function(){
@@ -232,8 +228,6 @@ Route::middleware('auth', 'role:admin')->group(function (){
             Route::get('/convertStrToSlug', [HelperController::class, 'convertStrToSlug'])->name('admin.helper.convertStrToSlug');
             Route::post('/deleteLanguage', [HelperController::class, 'deleteLanguage'])->name('admin.helper.deleteLanguage');
         });
-        /* ===== TOOL ===== */
-        
         /* ===== TRANSLATE ===== */
         Route::prefix('translate')->group(function(){
             Route::get('/viewcreateJobTranslateContent', [TranslateController::class, 'viewcreateJobTranslateContent'])->name('admin.translate.viewcreateJobTranslateContent');
@@ -259,30 +253,8 @@ Route::get('/auth/facebook/redirect', [ProviderController::class, 'facebookRedir
 Route::get('/auth/facebook/callback', [ProviderController::class, 'facebookCallback'])->name('main.facebook.callback');
 /* tải hình ảnh khi hoàn tất thanh toán */
 Route::get('/downloadSource', [GoogledriveController::class, 'downloadSource'])->name('main.downloadSource');
-// Route::post('/downloadSourceAll', [ConfirmController::class, 'downloadSourceAll'])->name('main.downloadSourceAll');
-/* thanh toán */
-Route::prefix('payment')->group(function(){
-    Route::get('/momoCreate', [MomoController::class, 'create'])->name('main.momo.create');
-    Route::get('/zaloCreate', [ZalopayController::class, 'create'])->name('main.zalo.create');
-});
-/* trang chủ */
-$validLanguages = ['']; // Ngôn ngữ mặc định
-foreach (config('language') as $key => $value) {
-    $validLanguages[] = $key;
-}
-Route::get('/{language?}', [HomeController::class, 'home'])
-    ->where('language', implode('|', $validLanguages))
-    ->name('main.home');
-/* trang giỏ hàng */
-$validCarts     = config('main_'.env('APP_NAME').'.url_cart_page');
-Route::get('/{slugCart}', [CartController::class, 'index'])
-    ->where('slugCart', implode('|', $validCarts))
-    ->name('main.cart');
-/* trang xác nhận */
-$validSlugs = config('main_'.env('APP_NAME').'.url_confirm_page');
-Route::get('/{slug}', [ConfirmController::class, 'confirm'])
-    ->where('slug', implode('|', $validSlugs))
-    ->name('main.confirm');
+/* Url IPN (bên thứ 3) => để VNPay gọi qua check (1 lần nữa) xem đơn hàng xác nhận chưa => trong trường hợp mạng khách hàng có vấn đề */
+Route::post('/vnpay/url_ipn', [VNPayController::class, 'handleIPN'])->name('main.vnpay.ipn');
 /* nháp */
 Route::get('/test123', [HomeController::class, 'test'])->name('main.test');
 Route::get('/chatgpt', [HomeController::class, 'chatGPT'])->name('main.chatGPT');
@@ -300,8 +272,6 @@ Route::get('/handlePaymentZalopay', [ConfirmController::class, 'handlePaymentZal
 Route::get('/handlePaymentVNPay', [ConfirmController::class, 'handlePaymentVNPay'])->name('main.handlePaymentVNPay');
 Route::get('/handlePaymentPaypal', [ConfirmController::class, 'handlePaymentPaypal'])->name('main.handlePaymentPaypal');
 Route::get('/handlePaymentTwoCheckout', [ConfirmController::class, 'handlePaymentTwoCheckout'])->name('main.handlePaymentTwoCheckout');
-/* check out */
-Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');
 /* order */
 Route::post('/order', [OrderPublic::class, 'create'])->name('main.order');
 Route::get('/viewConfirm', [OrderPublic::class, 'viewConfirm'])->name('main.viewConfirm');
@@ -344,19 +314,36 @@ Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.
 Route::post('/loginCustomer', [LoginController::class, 'loginCustomer'])->name('admin.loginCustomer');
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 Route::get('/createUser', [LoginController::class, 'create'])->name('admin.createUser');
-/* my account */
-Route::middleware('auth')->group(function (){
-    Route::prefix('tai-khoan')->group(function(){
-        Route::get('/tai-xuong-cua-toi', [AccountController::class, 'orders'])->name('main.account.orders');
-
-    });
-});
 /* setting */
 Route::get('/settingCollapsedMenu', [SettingPublic::class, 'settingCollapsedMenu'])->name('main.settingCollapsedMenu');
 Route::get('/getStatusCollapse', [SettingPublic::class, 'getStatusCollapse'])->name('main.getStatusCollapse');
 Route::get('/settingGPSVisitor', [SettingPublic::class, 'settingGPSVisitor'])->name('main.settingGPSVisitor');
 Route::get('/settingIpVisitor', [SettingPublic::class, 'settingIpVisitor'])->name('main.settingIpVisitor');
 Route::get('/settingTimezoneVisitor', [SettingPublic::class, 'settingTimezoneVisitor'])->name('main.settingTimezoneVisitor');
+/* my account */
+Route::middleware('auth')->group(function (){
+    Route::prefix('tai-khoan')->group(function(){
+        Route::get('/tai-xuong-cua-toi', [AccountController::class, 'orders'])->name('main.account.orders');
+    });
+});
+/* trang chủ */
+$validLanguages = ['']; // Ngôn ngữ mặc định
+foreach (config('language') as $key => $value) {
+    $validLanguages[] = $key;
+}
+Route::get('/{language?}', [HomeController::class, 'home'])
+    ->where('language', implode('|', $validLanguages))
+    ->name('main.home');
+/* trang giỏ hàng */
+$validCarts     = config('main_'.env('APP_NAME').'.url_cart_page');
+Route::get('/{slugCart}', [CartController::class, 'index'])
+    ->where('slugCart', implode('|', $validCarts))
+    ->name('main.cart');
+/* trang xác nhận */
+$validSlugs = config('main_'.env('APP_NAME').'.url_confirm_page');
+Route::get('/{slug}', [ConfirmController::class, 'confirm'])
+    ->where('slug', implode('|', $validSlugs))
+    ->name('main.confirm');
 /* ROUTING */
 Route::middleware(['checkRedirect'])->group(function () {
     Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');

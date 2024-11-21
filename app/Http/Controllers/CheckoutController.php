@@ -20,13 +20,13 @@ class CheckoutController extends Controller{
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
     }
 
-    public static function index(Request $request){
-        $payments       = PaymentMethod::all();
-        // $provinces      = Province::all();
-        $products       = \App\Http\Controllers\CartController::getCollectionProducts();
-        $productsCart   = json_decode(Cookie::get('cart'), true);
-        return view('main.checkout.index', compact('payments', 'provinces', 'products', 'productsCart'));
-    }
+    // public static function index(Request $request){
+    //     $payments       = PaymentMethod::all();
+    //     // $provinces      = Province::all();
+    //     $products       = \App\Http\Controllers\CartController::getCollectionProducts();
+    //     $productsCart   = json_decode(Cookie::get('cart'), true);
+    //     return view('main.checkout.index', compact('payments', 'provinces', 'products', 'productsCart'));
+    // }
 
     public function paymentCart(Request $request){
         /* tạo đơn hàng */

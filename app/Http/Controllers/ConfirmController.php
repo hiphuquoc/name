@@ -41,10 +41,10 @@ class ConfirmController extends Controller {
                         ->first();
         $language   = session('language') ?? 'vi';
         $breadcrumb = \App\Helpers\Url::buildBreadcrumb($itemSeo->slug_full);
-        if(!empty($order)&&$order->payment_status==1){
+        // if(!empty($order)&&$order->payment_status==1){
             return view('wallpaper.confirm.index', compact('item', 'itemSeo', 'order', 'breadcrumb', 'language'));
-        }
-        return redirect()->route('main.home');
+        // }
+        // return redirect()->route('main.home');
     }
 
     public static function handlePaymentMomo(Request $request){
@@ -121,14 +121,14 @@ class ConfirmController extends Controller {
                 /* nếu đã thanh toán thành công */
                 $arrayCodeSuccess    = [
                     '00', /* Giao dịch thành công */
-                    '04', /* Giao dịch đảo (Khách hàng đã bị trừ tiền tại Ngân hàng nhưng GD chưa thành công ở VNPAY) */
+                    // '04', /* Giao dịch đảo (Khách hàng đã bị trừ tiền tại Ngân hàng nhưng GD chưa thành công ở VNPAY) */
                 ];
                 $codeStatus     = $request->get('vnp_TransactionStatus') ?? '';
                 if(in_array($codeStatus, $arrayCodeSuccess)) $flagPayment = true;
                 /* xử lý sau khi đã thanh toán thành công */
                 if($flagPayment==true) {
                     $language   = SettingController::getLanguage();
-                    self::handleAfterPayment($orderInfo, $language);
+                    self::handleAfterPayment($orderInfo, $language, false); /* không cập nhật trạng thái thanh toán để test */
                     /* lấy slug theo ngôn ngữ của trang xác nhận */
                     
                     $slug       = self::getSlugPageConfirmByLanguage($language);
@@ -204,10 +204,10 @@ class ConfirmController extends Controller {
         return redirect()->route('main.home');
     }
     
-    private static function handleAfterPayment($orderInfo, $language){
+    private static function handleAfterPayment($orderInfo, $language, $updateStatus = true){
         if(!empty($orderInfo)){
             /* cập nhật trạng thái thành toán thành công */
-            Order::updateItem($orderInfo->id, ['payment_status' => 1]);
+            if($updateStatus == true) Order::updateItem($orderInfo->id, ['payment_status' => 1]);
             /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
             if($orderInfo->payment_type=='payment_cart') Session::forget('cart');
             /* tạo job gửi email */
