@@ -19,6 +19,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SettingController as SettingPublic;
+use App\Http\Controllers\SearchController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -49,7 +50,7 @@ use App\Http\Controllers\CheckOnpageController;
 
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
-use App\Http\Controllers\PaypalController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -298,6 +299,7 @@ Route::get('/handlePaymentMomo', [ConfirmController::class, 'handlePaymentMomo']
 Route::get('/handlePaymentZalopay', [ConfirmController::class, 'handlePaymentZalopay'])->name('main.handlePaymentZalopay');
 Route::get('/handlePaymentVNPay', [ConfirmController::class, 'handlePaymentVNPay'])->name('main.handlePaymentVNPay');
 Route::get('/handlePaymentPaypal', [ConfirmController::class, 'handlePaymentPaypal'])->name('main.handlePaymentPaypal');
+Route::get('/handlePaymentTwoCheckout', [ConfirmController::class, 'handlePaymentTwoCheckout'])->name('main.handlePaymentTwoCheckout');
 /* check out */
 Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('main.checkout');
 /* order */
@@ -313,7 +315,6 @@ Route::get('sitemap/{language}/{type}.xml', [SitemapController::class, 'childFor
 Route::get('/buildTocContentMain', [AjaxController::class, 'buildTocContentMain'])->name('main.buildTocContentMain');
 Route::get('/loadLoading', [AjaxController::class, 'loadLoading'])->name('ajax.loadLoading');
 Route::get('/loadDistrictByIdProvince', [AjaxController::class, 'loadDistrictByIdProvince'])->name('ajax.loadDistrictByIdProvince');
-Route::get('/searchProductAjax', [AjaxController::class, 'searchProductAjax'])->name('ajax.searchProductAjax');
 Route::get('/registryEmail', [AjaxController::class, 'registryEmail'])->name('ajax.registryEmail');
 // Route::get('/registrySeller', [AjaxController::class, 'registrySeller'])->name('ajax.registrySeller');
 Route::get('/setMessageModal', [AjaxController::class, 'setMessageModal'])->name('ajax.setMessageModal');
@@ -335,6 +336,8 @@ Route::get('/loadInfoCategory', [CategoryPublic::class, 'loadInfoCategory'])->na
 Route::get('/toogleHeartFeelingFreeWallpaper', [AjaxController::class, 'toogleHeartFeelingFreeWallpaper'])->name('ajax.toogleHeartFeelingFreeWallpaper');
 Route::get('/loadLinkDownloadGuide', [AjaxController::class, 'loadLinkDownloadGuide'])->name('ajax.loadLinkDownloadGuide');
 Route::get('/loadProductPrice', [AjaxController::class, 'loadProductPrice'])->name('ajax.loadProductPrice');
+/* Search */
+Route::get('/searchAjax', [SearchController::class, 'searchAjax'])->name('search.searchAjax');
 /* login */
 Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');

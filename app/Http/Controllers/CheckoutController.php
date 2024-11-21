@@ -72,6 +72,8 @@ class CheckoutController extends Controller{
             if($orderInfo->paymentMethod->code=='paypal') $urlRedirect = \App\Http\Controllers\PaypalController::create($orderInfo);
             /* tạo yêu cầu thanh toán => nếu paypal */
             if($orderInfo->paymentMethod->code=='vnpay') $urlRedirect = \App\Http\Controllers\VNPayController::create($orderInfo);
+            /* tạo yêu cầu thanh toán => nếu paypal */
+            if($orderInfo->paymentMethod->code=='2checkout') $urlRedirect = \App\Http\Controllers\TwoCheckoutController::create($orderInfo);
         }
         return $urlRedirect;
     }

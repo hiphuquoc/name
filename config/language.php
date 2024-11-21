@@ -15,7 +15,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
             "about_us"      => "About us",
@@ -182,7 +182,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page" => "zh-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "zh-phone-wallpapers",
         "data" => [
             "home" => "首页",
             "about_us" => "关于我们",
@@ -349,7 +349,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "fondos-de-pantalla-del-telefono",
+        "slug_page_premium_wallpaper" => "fondos-de-pantalla-del-telefono",
         "data" => [
             "home" => "Inicio",
             "about_us" => "Sobre nosotros",
@@ -516,7 +516,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "fonds-d-ecran-de-telephone",
+        "slug_page_premium_wallpaper" => "fonds-d-ecran-de-telephone",
         "data" => [
             "home" => "Accueil",
             "about_us" => "À propos de nous",
@@ -683,7 +683,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "hinh-nen-dien-thoai",
+        "slug_page_premium_wallpaper" => "hinh-nen-dien-thoai",
         "data"      => [
             "home"              => "Trang chủ",
             "about_us"          => "Về chúng tôi",
@@ -851,7 +851,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "hi-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "hi-phone-wallpapers",
         "data" => [
             "home" => "होम",
             "about_us" => "हमारे बारे में",
@@ -1018,7 +1018,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data" => [
             "home" => "হোম",
             "about_us" => "আমাদের সম্পর্কে",
@@ -1185,7 +1185,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data" => [
             "home" => "मुखपृष्ठ",
             "about_us" => "आमच्याबद्दल",
@@ -1352,7 +1352,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data" => [
             "home" => "முகப்பு",
             "about_us" => "எங்களைப் பற்றி",
@@ -1519,7 +1519,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data" => [
             "home" => "హోమ్",
             "about_us" => "మా గురించి",
@@ -1686,7 +1686,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "rtl",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data" => [
             "home" => "ہوم",
             "about_us" => "ہمارے بارے میں",
@@ -1853,7 +1853,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "હોમ",
             "about_us"      => "અમારા વિશે",
@@ -2020,7 +2020,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "ಮನೆ",
             "about_us"      => "ನಮ್ಮ ಬಗ್ಗೆ",
@@ -2187,7 +2187,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page" => "ja-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ja-phone-wallpapers",
         "data"      => [
             "home"          => "ホーム",
             "about_us"      => "私たちに関しては",
@@ -2354,7 +2354,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "ko-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ko-phone-wallpapers",
         "data"      => [
             "home"          => "홈",
             "about_us"      => "회사 소개",
@@ -2521,7 +2521,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Beranda",
             "about_us"      => "Tentang Kami",
@@ -2688,7 +2688,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "wallpaper-ponsel",
+        "slug_page_premium_wallpaper" => "wallpaper-ponsel",
         "data"      => [
             "home"          => "Beranda",
             "about_us"      => "Tentang Kami",
@@ -2855,7 +2855,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Rumah",
             "about_us"      => "Tentang Kami",
@@ -3022,7 +3022,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "หน้าหลัก",
             "about_us"      => "เกี่ยวกับเรา",
@@ -3189,7 +3189,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "ទំព័រដើម",
             "about_us"      => "អំពី​ពួក​យើង",
@@ -3356,7 +3356,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "ໜ້າຫຼັກ",
             "about_us"      => "ກ່ຽວກັບເຮົາ",
@@ -3523,7 +3523,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "rtl",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "الرئيسية",
             "about_us"      => "معلومات عنا",
@@ -3690,7 +3690,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "rtl",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "خانه",
             "about_us"      => "درباره ما",
@@ -3857,7 +3857,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "ru-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ru-phone-wallpapers",
         "data"      => [
             "home"          => "Главная",
             "about_us"      => "О нас",
@@ -4024,7 +4024,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Startseite",
             "about_us"      => "Über uns",
@@ -4191,7 +4191,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Ana Sayfa",
             "about_us"      => "Hakkımızda",
@@ -4358,7 +4358,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
             "about_us"      => "Chi siamo",
@@ -4525,7 +4525,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Strona główna",
             "about_us"      => "O nas",
@@ -4692,7 +4692,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Головна",
             "about_us"      => "Про нас",
@@ -4859,7 +4859,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Home",
             "about_us"      => "Over ons",
@@ -5026,7 +5026,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Αρχική",
             "about_us"      => "Σχετικά με εμάς",
@@ -5193,7 +5193,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Kezdőlap",
             "about_us"      => "Rólunk",
@@ -5360,7 +5360,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Domů",
             "about_us"      => "O nás",
@@ -5527,7 +5527,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Acasă",
             "about_us"      => "Despre noi",
@@ -5694,7 +5694,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Domov",
             "about_us"      => "O nás",
@@ -5861,7 +5861,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "მთავარი",
             "about_us"      => "ჩვენს შესახებ",
@@ -6028,7 +6028,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "rtl",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "בית",
             "about_us"      => "אודותינו",
@@ -6195,7 +6195,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Uy",
             "about_us"      => "Biz haqimizda",
@@ -6362,7 +6362,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "phone-wallpapers",
         "data"      => [
             "home"          => "Início",
             "about_us"      => "Sobre nós",

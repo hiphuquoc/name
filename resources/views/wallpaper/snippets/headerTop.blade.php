@@ -1,10 +1,11 @@
 <div class="menuTop">
-
-    {{-- <!-- search box -->
-    @include('wallpaper.template.search') --}}
+    <div class="menuTop_item" style="width: 100%;">
+        <!-- search box -->
+        @include('wallpaper.template.search')
+    </div>
 
     <div class="menuTop_item rightBox">
-
+        
         {{-- <div class="show-991">
             <div class="buttonSearchMobile" onClick="toggleSearchMobile();">
                 <img type="submit" src="{{ Storage::url('images/svg/search.svg') }}" alt="tìm kiếm hình nền điện thoại" title="tìm kiếm hình nền điện thoại" />

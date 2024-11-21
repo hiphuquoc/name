@@ -433,7 +433,8 @@ $heightMenu : 3.3rem;
     color: inherit;
   }
   &:nth-child(2n + 0) {
-    @include colorOpacity('background', $colorBackgroundLv3, 0.5);
+    // @include colorOpacity('background', $colorBackgroundLv3, 0.5);
+    background: rgba($colorBackgroundLv3, 0.5);
   }
   &_image {
       flex: 0 0 70px;
@@ -468,11 +469,14 @@ $heightMenu : 3.3rem;
           color: $colorPrice;
           font-weight: bold;
           letter-spacing: 2px;
-          font-size: 0.9rem;
+          font-size: 0.95rem;
+          display: flex;
+          gap: 0.75rem;
           > span {
               font-weight: normal;
               @include colorOpacity('color', $colorText, 0.6);
               letter-spacing: 0;
+              text-decoration: line-through;
           }
       }
       &_orther {
@@ -588,5 +592,44 @@ $heightMenu : 3.3rem;
       width: 100%;
       z-index: -1;
       border-radius: 0 0 2rem 2rem; /* do hiệu ứng blur nên bo sâu hơn */
+  }
+}
+
+@mixin scrollbarCustom {
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba($colorBackgroundLv1, 0.8);
+    border-radius: 1000px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 0.5rem;
+    background: $colorBackgroundLv3;
+  }
+}
+
+@mixin infoOfBlog {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  > * {
+      background: $colorBackgroundLv3;
+      padding: 0.15rem 1rem;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 7px rgba($colorBackgroundLv1, 0.5);
+      @media(max-width: 767px){
+          padding: 0.15rem 0.75rem;
+          &:last-child {
+              display: none;
+          }
+      }
+      @media(max-width: 767px){
+          padding: 0.15rem 0.5rem;
+      }
+  }
+  i {
+      opacity: 0.75;
   }
 }

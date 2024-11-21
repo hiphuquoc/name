@@ -35,14 +35,7 @@
             // &::-webkit-scrollbar {
             //   background-color: $colorBackgroundLv1;
             // }
-            &::-webkit-scrollbar-thumb {
-              background-color: rgba($colorBackgroundLv1, 0.8);
-              border-radius: 1000px;
-            }
-            &::-webkit-scrollbar-track {
-              border-radius: 0.5rem;
-              background: $colorBackgroundLv3;
-            }
+            @include scrollbarCustom;
         }
     }
     &_close {

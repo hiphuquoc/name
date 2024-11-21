@@ -46,7 +46,7 @@ return [
         // "key_2"     => "ql3W79bv0GThJ4djl8JynroiVkdvbpy6",
         /* môi trường test */
         'endpoint'      => 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html',
-        'access_key'    => 'TDNYA8UC',
-        'secret_key'    => 'R8MI4IDJ8OZQ9TQXRSOEZCO6F9BMW3TY',
+        'access_key'    => 'HITOURW1',
+        'secret_key'    => 'UVI7LAJKBKYZME0LQZIU262XD86WKUCG',
     ]
 ];

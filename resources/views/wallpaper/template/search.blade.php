@@ -1,24 +1,57 @@
 @php
-    $labelName  = config('language.'.$language.'.data.search_wallpapers.'.env('APP_NAME'));
+    // $labelName  = config('language.'.$language.'.data.search_wallpapers.'.env('APP_NAME'));
+    $labelName  = 'nhập tìm kiếm...';
 @endphp
 
-<form action="{{ route('routing', ['slug' => config('language.'.$language.'.slug_page')]).'?search=' }}" method="GET">
-    <div class="searchViewBefore">
-        <div class="searchViewBefore_input">
-            <!-- value = null không lưu giá trị search cũ -->
-            <input id="searchProductAjax_input" type="text" name="search" placeholder="{{ $labelName }}" value="" onkeyup="searchProductAjaxWithDelay(this)" autocomplete="off" />
-            <button type="submit" class="button" aria-label="{{ $labelName }}">
-                <img src="{{ Storage::url('images/svg/search.svg') }}" alt="" title="{{ $labelName }}" />
-            </button>
+<div class="searchViewBefore">
+    <form action="{{ route('routing', ['slug' => config('language.'.$language.'.slug_page_premium_wallpaper')]).'?search=' }}" method="GET">
+        <div class="searchViewBefore_showBox">
+            <div class="searchViewBefore_showBox_typeBox" onclick="openSelected('js_openSelected_typeBoxList', 'searchViewBefore_showBox_typeBox')">
+                <div class="searchViewBefore_showBox_typeBox_text maxLine_1">Hình nền trả phí</div> 
+                <i class="fa-solid fa-angle-down"></i>
+                <div id="js_openSelected_typeBoxList" class="searchViewBefore_showBox_typeBox_list">
+                    <div class="searchViewBefore_showBox_typeBox_list_item" data-input="category_info">Danh mục</div>
+                    <div class="searchViewBefore_showBox_typeBox_list_item selected" data-input="premium_wallpaper">Hình nền trả phí</div>
+                    <div class="searchViewBefore_showBox_typeBox_list_item" data-input="free_wallpaper">Hình nền miễn phí</div>
+                    <div class="searchViewBefore_showBox_typeBox_list_item" data-input="blog_info">Bài Blog</div>
+                </div>
+                <!-- Hidden input to store selected data-input value -->
+                <input type="hidden" id="search_type" name="search_type" value="premium_wallpaper" />
+            </div>
+            
+            <div class="searchViewBefore_showBox_inputBox">
+                <!-- value = null không lưu giá trị search cũ -->
+                <input id="searchAjax_input" class="searchViewBefore_showBox_input" type="text" name="search" placeholder="{{ $labelName }}" value="" onkeyup="searchAjaxWithDelay(this)" autocomplete="off" onclick="openSelectedRight('js_searchAjax_idWrite', 'searchViewBefore_showBox_inputBox')" />
+                <button type="submit" class="searchViewBefore_showBox_inputBox_button" aria-label="{{ $labelName }}">
+                    @php
+                        $icon = file_get_contents('storage/images/svg/search.svg');
+                    @endphp
+                    {!! $icon !!}
+                    <span>Tìm kiếm</span>
+                </button>
+                <div id="js_searchAjax_idWrite" class="searchViewBefore_showBox_inputBox_list">
+                    <!-- load Ajax -->
+                </div>
+                
+            </div>
+            
         </div>
-        <div id="js_searchProductAjax_idWrite" class="searchViewBefore_selectbox">
-            @include('wallpaper.template.emptySearch')
-        </div>
-        <div class="searchViewBefore_background" onClick="closeBoxSearchMobile();"></div>
-    </div>
-</form>
+    </form>
+    
+    <div class="searchViewBefore_background" onClick="closeBoxSearchMobile();"></div>
+</div>
+
 @push('scriptCustom')
     <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Call the function with your selectBox ID and hidden input ID
+            handleSelectItem('js_openSelected_typeBoxList', 'search_type');
+            /* load lần đầu */
+            setTimeout(() => {
+                searchAjax();
+            }, 500);
+        });
+
         function toggleSearchMobile(){
             const elementSearchBox = $('.searchViewBefore');
             elementSearchBox.css({
@@ -28,7 +61,7 @@
             });
             $('.searchViewBefore input').focus();
             /* mở phần hiển thị kết quả search (nếu đang đóng) */
-            $('#js_searchProductAjax_idWrite').css('height', 'auto');
+            $('#js_searchAjax_idWrite').css('height', 'auto');
             $('.searchViewBefore_background').css('display', 'block');
         }
         function closeBoxSearchMobile(){
@@ -38,30 +71,108 @@
         }
         /* mỗi khi người dùng nhập một ký tự mới, hàm searchWallpapersWithDelay sẽ đặt một hẹn giờ (setTimeout) để gọi hàm searchWallpapers sau 0.5 giây. Nếu có thêm ký tự nào được nhập trong khoảng 0.5 giây, hẹn giờ trước đó sẽ bị xóa và hẹn giờ mới sẽ được đặt lại. Điều này giúp tạo ra hiệu ứng chờ giữa các lần nhập. */
         var searchTimer;
-        function searchProductAjaxWithDelay(input) {
+        function searchAjaxWithDelay(input) {
             clearTimeout(searchTimer);
             searchTimer = setTimeout(function () {
-                searchProductAjax(input);
+                searchAjax();
             }, 500);
         }
         /* tìm kiếm sản phẩm ajax */
-        function searchProductAjax(elementButton){
-            const valueElement  = $(elementButton).val();
+        function searchAjax(){
+            /* bật loadding */ 
+            $('#js_searchAjax_idWrite').addClass('loading'); /* hiệu ứng làm mờ box */ 
+            $('#js_searchAjax_iconLoading').addClass('show'); /* icon loadding */
+            /* lấy dữ liệu */
+            const valueElement  = $('#searchAjax_input').val();
+            const searchType    = $('#search_type').val();
             const language      = $('#language').val();
             $.ajax({
-                url         : '{{ route("ajax.searchProductAjax") }}',
+                url         : '{{ route("search.searchAjax") }}',
                 type        : 'get',
                 dataType    : 'html',
                 data        : {
                     search      : valueElement,
+                    search_type : searchType,
                     language,
                 },
                 success     : function(response){
-                    if(response!='') {
-                        $('#js_searchProductAjax_idWrite').html(response);
-                    }
-                    
+                    setTimeout(() => {
+                        if(response!='') $('#js_searchAjax_idWrite').html(response);
+                        /* tắt loadding */ 
+                        $('#js_searchAjax_idWrite').removeClass('loading'); /* hiệu ứng làm mờ box */ 
+                        $('#js_searchAjax_iconLoading').removeClass('show'); /* icon loadding */
+                    }, 500);
                 }
+            });
+        }
+        /* mở selectBox */
+        function openSelected(selectBoxId, parentClass) {
+            const $selectBox = $('#' + selectBoxId);
+
+            // Toggle class 'active' to open/close the select box
+            $selectBox.toggleClass('active');
+
+            if ($selectBox.hasClass('active')) {
+                // Gắn sự kiện click một lần khi SelectBox đang mở
+                $(document).on('click.outsideSelectBox', function(event) {
+                    if (!$(event.target).closest('.' + parentClass).length) {
+                        $selectBox.removeClass('active'); // Close the select box
+                        $(document).off('click.outsideSelectBox'); // Remove this event listener
+                    }
+                });
+            } else {
+                // Khi select box đóng thì cũng bỏ sự kiện click bên ngoài
+                $(document).off('click.outsideSelectBox');
+            }
+        }
+        /* mở selectBox bên phải */
+        function openSelectedRight(selectBoxId, parentClass) {
+            const $selectBox = $('#' + selectBoxId);
+            const $inputParent = $('.' + parentClass);
+
+            // Mở danh sách khi con trỏ chuột nằm trong ô input
+            $selectBox.addClass('active');
+
+            // Gắn sự kiện click bên ngoài để đóng danh sách
+            $(document).on('click.outsideInputBox', function(event) {
+                // Kiểm tra nếu click không thuộc input và không thuộc danh sách
+                if (!$(event.target).closest($inputParent).length && !$(event.target).closest($selectBox).length) {
+                    $selectBox.removeClass('active'); // Đóng danh sách
+                    $(document).off('click.outsideInputBox'); // Loại bỏ sự kiện
+                }
+            });
+
+            // Đảm bảo danh sách đóng khi input bị mất focus
+            $inputParent.find('input').on('blur', function () {
+                setTimeout(() => {
+                    if (!$inputParent.find('input:focus').length) {
+                        $selectBox.removeClass('active');
+                        $(document).off('click.outsideInputBox');
+                    }
+                }, 150); // Delay nhỏ để đảm bảo không xung đột khi click vào danh sách
+            });
+        }
+
+        function handleSelectItem(selectBoxId, hiddenInputId) {
+            $('#' + selectBoxId).on('click', '.searchViewBefore_showBox_typeBox_list_item', function() {
+                // Remove 'selected' class from all items
+                $('#' + selectBoxId + ' .searchViewBefore_showBox_typeBox_list_item').removeClass('selected');
+                
+                // Add 'selected' class to the clicked item
+                $(this).addClass('selected');
+                
+                // Update the text in the select box display (optional)
+                const selectedText = $(this).text().trim();
+                $(this).closest('.searchViewBefore_showBox_typeBox').find('.searchViewBefore_showBox_typeBox_text').text(selectedText);
+                
+                // Get the value from the data-input attribute
+                const selectedValue = $(this).data('input');
+                
+                // Update hidden input value with the selected data-input value
+                $('#' + hiddenInputId).val(selectedValue);
+
+                // tải lại khung search theo tùy chọn mới
+                searchAjax();
             });
         }
     </script>

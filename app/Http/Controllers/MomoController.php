@@ -10,7 +10,7 @@ class MomoController extends Controller{
         $urlRedirect            = null;
         if(!empty($infoOrder)){
             /* ngôn ngữ mặc định của thanh toán Zalo là tiếng việt - đơn vị tiền đồng */
-            $language   = 'vi';
+            $language           = 'vi';
             /* tổng tiền (không có phí thanh toán) */
             $tmp                = \App\Helpers\Number::getPriceByLanguage($infoOrder->total, $language);
             $amount             = $tmp['number'] ?? 0;

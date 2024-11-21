@@ -28,6 +28,7 @@
     align-items: center;
     justify-content: flex-end;
     height: 100%;
+    gap: 1.5rem;
     .container {
         display: flex;
         align-items: center;
@@ -36,14 +37,17 @@
     &_item {
         display: flex;
         gap: 1.5rem;
+        position: relative;
         > * {
             height: 100%;
+            width: fit-content;
+            min-width: fit-content;
         }
     }
     .rightBox {
         height: 100%;
         margin-top: 9px;
-        min-width: 335px;
+        // min-width: 335px;
         justify-content: flex-end;
         display: flex;
         // > * {
@@ -623,113 +627,208 @@
 .searchViewBefore {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    position: relative;
-    height: 70px;
-    margin-top: 2px;
+    justify-content: center;
+    // position: absolute; 
+    // top: 0;
+    // left: 50%;
+    // transform: translateX(-50%);
     z-index: 999;
-    width: inherit;
-    &:hover {
-        .searchViewBefore_selectbox {
-            visibility: visible;
-        }
-        .searchViewBefore_background {
-            display: block;
-        }
-    }
-    &_input {
+    width: calc(100% - 200px);
+    max-width: 660px;
+    // &:hover {
+    //     .searchViewBefore_selectbox {
+    //         visibility: visible;
+    //     }
+    //     .searchViewBefore_background {
+    //         display: block;
+    //     }
+    // }
+    &_showBox {
         display: flex;
-        opacity: 0.8;
+        align-items: center;
         position: relative;
-        width: inherit;
-        button, a {
-            background: none;
-            position: absolute;
-            padding: 0.5rem;
-            box-shadow: none;
-            top: 0.25rem;
-            right: 0;
-            &:dir(rtl), [dir="rtl"] & {
-                right: unset;
+        width: 100%;
+        padding: 0;
+        height: calc($heightMenu - 0.75rem);
+        background: $colorBackgroundLv1;
+        box-shadow: 0 0 5px $colorBackgroundLv1;
+        border-radius: 0.5rem;
+        border: 2px solid transparent;
+        &:hover {
+            border: 2px solid rgba($colorLv2, 0.35);
+            button {
+                background: linear-gradient(45deg, rgba($colorButtonLv1, 0.75), rgba($colorButtonLv2, 0.75)) !important;
+                color: rgba(#fff, 0.7) !important;
+            }
+        }
+        input, &_typeBox, &_inputBox_button {
+            color: rgba($colorText, 0.7);
+            font-size: 0.9rem;
+            font-family: $fontTitle;
+        }
+        &_typeBox {
+            flex: 0 0 180px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            border-right: 1px solid rgba($colorText, 0.25);
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+            &_text {
+                white-space: nowrap;
+            }
+            &_list {
+                position: absolute;
+                overflow: hidden;
+                visibility: hidden;
+                width: 100%;
+                height: auto;
+                padding: 0.45rem 0;
+                background: $colorBackgroundLv2;
+                z-index: 999;
+                border-radius: 0.25rem;
+                flex-direction: column;
+                box-shadow: 1px 1px 10px $colorBackgroundLv1;
+                @include colorOpacity('color', $colorText, 0.8);
+                top: calc($heightMenu - 0.75rem);
                 left: 0;
+                &.active {
+                    visibility: visible;
+                }
+                &:dir(rtl), [dir="rtl"] & {
+                    left: unset;
+                    right: 0;
+                }
+                &_item {
+                    padding: 0.5rem 1rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    cursor: pointer;
+                    &:before {
+                        @include fontAwesome;
+                        content: '\f111';
+                        color: transparent;
+                        border: 1px solid $colorText;
+                        width: 13px;
+                        height: 13px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                    }
+                    &.selected, &:hover {
+                        color: $colorLv2;
+                        &:before {
+                            border: 4px solid $colorLv2;
+                        }
+                    }
+                    
+                }
             }
-            &:focus, &:hover {
-                transform: unset !important;
-                background: none !important;
+        }
+        &_inputBox {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            position: relative;
+            input {
+                background: transparent;
+                border: none;
+                padding: 0.5rem 0;
+                
+                // padding: 0 2.5rem 0 1rem;
+                // &:dir(rtl), [dir="rtl"] & {
+                //     padding: 0 1rem 0 2.5rem;
+                // }
+                // &::selection, &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
+                //     border: none;
+                //     outline: none;
+                //     background: transparent !important;
+                //     -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+                //     -webkit-transition-delay: 9999s;
+                // }
+                &::placeholder {
+                    color: rgba($colorText, 0.7);
+                }
             }
-            img {
-                width: 1.25rem;
-                opacity: 0.7;
+            &_button {
+                background: transparent;
+                height: 100%;
+                border-radius: 0 0.5rem 0.5rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                width: fit-content;
+                border: none;
+                outline: none;
+                gap: 0.75rem;
+                height: calc($heightMenu - 0.75rem - 2px);
+                padding: 0 1rem 0 0.75rem; /* giảm bên trái 0.5 do hiệu ứng ánh sáng của background-radient */
+                color: inherit;
+                cursor: pointer;
+                svg {
+                    width: 1rem;
+                    height: 1rem;
+                    // opacity: 0.7;
+                    color: inherit;
+                }
+                span {
+                    width: fit-content;
+                    white-space: nowrap;
+                }
+            }
+            &_list {
+                position: absolute;
+                overflow: hidden;
+                width: 100%;
+                height: auto;
+                visibility: hidden;
+                background: $colorBackgroundLv2;
+                z-index: 999;
+                border-radius: 0.75rem;
+                box-shadow: 1px 1px 10px $colorBackgroundLv1;
+                @include colorOpacity('color', $colorText, 0.8);
+                top: calc($heightMenu - 0.75rem + 2px);
+                left: 0;
+                padding: 0.25rem 0;
+                &.loading {
+                    &::after {
+                        width: 100%;
+                        height: 100%;
+                        background: rgba($colorBackgroundLv2, 0.5);
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+                }
+                &.active {
+                    visibility: visible;
+                }
+                &:dir(rtl), [dir="rtl"] & {
+                    left: unset;
+                    right: 0;
+                }
+            }
+            .loadingBox {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate3d(-50%, -50%, 10px);
+                z-index: 999;
+                .loadingIcon {
+                    width: 60px;
+                    height: 30px;
+                }
             }
         }
         
-        input {
-            width: 100%;
-            background: $colorBackgroundLv1;
-            height: 2.75rem !important;
-            border: 1px solid $colorBackgroundLv3;
-            border-radius: 100px;
-            color: $colorText;
-            font-size: 0.9rem;
-            padding: 0 2.5rem 0 1rem;
-            &:dir(rtl), [dir="rtl"] & {
-                padding: 0 1rem 0 2.5rem;
-            }
-            &::selection, &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
-                border: none;
-                outline: none;
-                background: transparent !important;
-                -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
-                -webkit-transition-delay: 9999s;
-            }
-        }
-    }
-    &_selectbox {
-        position: absolute;
-        overflow: hidden;
-        width: 100%;
-        height: auto;
-        min-width: 420px;
-        visibility: hidden;
-        background: $colorBackgroundLv2;
-        z-index: 999;
-        border-radius: 0.5rem;
-        flex-direction: column;
-        box-shadow: 1px 1px 10px $colorBackgroundLv1;
-        @include colorOpacity('color', $colorText, 0.8);
-        top: calc($heightMenu + 0.625rem);
-        left: 0;
-        &:dir(rtl), [dir="rtl"] & {
-            left: unset;
-            right: 0;
-        }
-        &_item {
-            @include itemSearchProduct;
-
-            &.viewAll {
-                display: flex;
-                background: none;
-                border-top: 1px solid $colorBackgroundLv1;
-                align-items: center;
-                justify-content: center;
-                padding: 0.55rem 0;
-                color: $colorText;
-                gap: 0.5rem;
-                &:hover {
-                    @include colorOpacity('background', $colorBackgroundLv3, 0.5);
-                }
-                span {
-                    color: $colorTextLight;
-                    font-family: $fontTitle;
-                    font-size: 1rem;
-                }
-                i {
-                    font-size: 0.8rem;
-                    opacity: 0.5;
-                    margin-top: 0.25rem;
-                }
-            }
-        }
+        
+        
     }
     &_background {
         @include backgroundModal;
@@ -782,15 +881,116 @@
 }
 .emptySearchBox {
     width:100%;
-    &_image {
-        margin: 0 auto;
-        background: url('/storage/images/svg/icon-search-100.png') no-repeat;
-        background-size: 100% 100%;
-        width: 120px;
-        aspect-ratio: 1/1;
+    padding: 0.75rem 1rem;
+}
+.searchViewBeforeOfCategory {
+    &_boxItem {
+        display: flex;
+        flex-direction: column;
+        max-height: 565px;
+        &_item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            color: $colorText;
+            &:hover {
+                color: $colorText;
+            }
+            // border-bottom: 1px dashed $colorBackgroundLv1;
+        }
+        &.customScrollBar-y {
+            // &::-webkit-scrollbar {
+            //   background-color: $colorBackgroundLv1;
+            // }
+            @include scrollbarCustom;
+        }
     }
-    &_notice {
-        text-align: center;
-        margin-top: 0.5rem;
+}
+.searchViewBeforeOfPremiumWallpaper {
+    &_boxItem {
+        flex-direction: column;
+        max-height: 565px;
+        &_item {
+            @include itemSearchProduct;
+        }
+        &.customScrollBar-y {
+            // &::-webkit-scrollbar {
+            //   background-color: $colorBackgroundLv1;
+            // }
+            @include scrollbarCustom;
+        }
+    }
+    &_viewAll {
+        display: flex;
+        background: rgba($colorBackgroundLv2, 1);
+        border-top: 1px solid $colorBackgroundLv1;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0;
+        color: $colorText;
+        gap: 0.5rem;
+        &:hover {
+            @include colorOpacity('background', $colorBackgroundLv3, 0.75);
+        }
+        span {
+            color: $colorTextLight;
+            font-family: $fontTitle;
+            font-size: 1rem;
+        }
+        i {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            margin-top: 0.25rem;
+        }
+    }
+}
+.searchViewBeforeOfBlog {
+    &_boxItem {
+        flex-direction: column;
+        max-height: 565px;
+        &_item {
+            @include itemSearchProduct;
+            &_content {
+                &_info {
+                    gap: 1.25rem;
+                    @include infoOfBlog;
+                    > * {
+                        padding: 0;
+                        background: unset;
+                        box-shadow: unset;
+                    }
+                }
+            }
+            
+        }
+        &.customScrollBar-y {
+            // &::-webkit-scrollbar {
+            //   background-color: $colorBackgroundLv1;
+            // }
+            @include scrollbarCustom;
+        }
+    }
+    &_viewAll {
+        display: flex;
+        background: rgba($colorBackgroundLv2, 1);
+        border-top: 1px solid $colorBackgroundLv1;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 0;
+        color: $colorText;
+        gap: 0.5rem;
+        &:hover {
+            @include colorOpacity('background', $colorBackgroundLv3, 0.75);
+        }
+        span {
+            color: $colorTextLight;
+            font-family: $fontTitle;
+            font-size: 1rem;
+        }
+        i {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            margin-top: 0.25rem;
+        }
     }
 }

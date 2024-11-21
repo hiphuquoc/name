@@ -107,6 +107,41 @@ class ConfirmController extends Controller {
     }
 
     public static function handlePaymentVNPay(Request $request){
+        if(!empty($request->get('code'))){
+            /* lấy thông tin của Order trong CSDL */
+            $code           = $request->get('code');
+            $orderInfo      = Order::select('*')
+                                ->where('code', $code)
+                                ->first();
+            $flagPayment    = false;
+            /* cập nhật trans_no */
+            if(!empty($request->get('vnp_TransactionNo'))){ /* tồn tại trans_no và đã thanh toán > 0 => xử lý tiếp */
+                $transId        = $request->get('vnp_TransactionNo');
+                Order::updateItem($orderInfo->id, ['trans_id' => $transId]);
+                /* nếu đã thanh toán thành công */
+                $arrayCodeSuccess    = [
+                    '00', /* Giao dịch thành công */
+                    '04', /* Giao dịch đảo (Khách hàng đã bị trừ tiền tại Ngân hàng nhưng GD chưa thành công ở VNPAY) */
+                ];
+                $codeStatus     = $request->get('vnp_TransactionStatus') ?? '';
+                if(in_array($codeStatus, $arrayCodeSuccess)) $flagPayment = true;
+                /* xử lý sau khi đã thanh toán thành công */
+                if($flagPayment==true) {
+                    $language   = SettingController::getLanguage();
+                    self::handleAfterPayment($orderInfo, $language);
+                    /* lấy slug theo ngôn ngữ của trang xác nhận */
+                    
+                    $slug       = self::getSlugPageConfirmByLanguage($language);
+                    /* chuyển hướng sang trang nhận ảnh */
+                    if(!empty($slug)) return redirect()->route('main.confirm', ['slug' => $slug, 'code' => $code]);
+                }
+            }
+        }
+        /* thanh toán không thành công */
+        return redirect()->route('main.home');
+    }
+
+    public static function handlePaymentTwoCheckout(Request $request){
 
         dd($request->all());
         // if(!empty($request->get('code'))){
