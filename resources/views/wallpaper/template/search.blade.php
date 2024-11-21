@@ -81,7 +81,7 @@
         function searchAjax(){
             /* bật loadding */ 
             $('#js_searchAjax_idWrite').addClass('loading'); /* hiệu ứng làm mờ box */ 
-            $('#js_searchAjax_iconLoading').addClass('show'); /* icon loadding */
+            // $('#js_searchAjax_iconLoading').addClass('show'); /* icon loadding */
             /* lấy dữ liệu */
             const valueElement  = $('#searchAjax_input').val();
             const searchType    = $('#search_type').val();
@@ -100,7 +100,7 @@
                         if(response!='') $('#js_searchAjax_idWrite').html(response);
                         /* tắt loadding */ 
                         $('#js_searchAjax_idWrite').removeClass('loading'); /* hiệu ứng làm mờ box */ 
-                        $('#js_searchAjax_iconLoading').removeClass('show'); /* icon loadding */
+                        // $('#js_searchAjax_iconLoading').removeClass('show'); /* icon loadding */
                     }, 500);
                 }
             });

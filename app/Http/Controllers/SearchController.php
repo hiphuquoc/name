@@ -50,7 +50,7 @@ class SearchController extends Controller {
                 break;
         }
         /* thêm icon loadding => cho lần load tiếp theo */
-        $xhtmlContent         .= '<div id="js_searchAjax_iconLoading" class="loadingBox"><span class="loadingIcon"></span></div>';
+        // $xhtmlContent         .= '<div id="js_searchAjax_iconLoading" class="loadingBox"><span class="loadingIcon"></span></div>';
         echo $xhtmlContent;
     }
 
