@@ -781,12 +781,46 @@
                     white-space: nowrap;
                 }
             }
+            // &_list {
+            //     position: absolute;
+            //     overflow: hidden;
+            //     width: 100%;
+            //     height: auto;
+            //     visibility: hidden;
+            //     background: $colorBackgroundLv2;
+            //     z-index: 999;
+            //     border-radius: 0.75rem;
+            //     box-shadow: 1px 1px 10px $colorBackgroundLv1;
+            //     @include colorOpacity('color', $colorText, 0.8);
+            //     top: calc($heightMenu - 0.75rem + 2px);
+            //     left: 0;
+            //     padding: 0.25rem 0;
+            //     &.loading {
+            //         &::after {
+            //             width: 100%;
+            //             height: 100%;
+            //             background: rgba($colorBackgroundLv2, 0.5);
+            //             content: '';
+            //             position: absolute;
+            //             top: 0;
+            //             left: 0;
+            //         }
+            //     }
+            //     &.active {
+            //         visibility: visible;
+            //     }
+            //     &:dir(rtl), [dir="rtl"] & {
+            //         left: unset;
+            //         right: 0;
+            //     }
+            // }
             &_list {
                 position: absolute;
                 overflow: hidden;
                 width: 100%;
                 height: auto;
-                visibility: hidden;
+                opacity: 0; /* Đặt opacity ban đầu */
+                visibility: hidden; /* Đặt visibility để không thể tương tác */
                 background: $colorBackgroundLv2;
                 z-index: 999;
                 border-radius: 0.75rem;
@@ -795,20 +829,14 @@
                 top: calc($heightMenu - 0.75rem + 2px);
                 left: 0;
                 padding: 0.25rem 0;
-                &.loading {
-                    &::after {
-                        width: 100%;
-                        height: 100%;
-                        background: rgba($colorBackgroundLv2, 0.5);
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                    }
-                }
+                transition: opacity 0.2s ease, visibility 0s linear 0.2s; /* Tắt sau khi opacity hoàn tất */
+            
                 &.active {
-                    visibility: visible;
+                    opacity: 1; /* Hiển thị với hiệu ứng fade */
+                    visibility: visible; /* Bật lại visibility ngay */
+                    transition: opacity 0.2s ease, visibility 0s linear 0s; /* Bật ngay */
                 }
+            
                 &:dir(rtl), [dir="rtl"] & {
                     left: unset;
                     right: 0;
