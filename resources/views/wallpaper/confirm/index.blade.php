@@ -53,11 +53,11 @@
                     </div>
                     <div class="confirmMessageBox_right">
                         <div class="confirmMessageBox_right_item">
-                            {{ config('language.'.$language.'.data.order_id') }} <span class="highLight">{{ $order->code }}</span>
+                            {{ config('language.'.$language.'.data.order_id') }} : <span class="highLight">{{ $order->code }}</span>
                         </div>
                         @if(!empty($order->email))
                             <div class="confirmMessageBox_right_item">
-                                {{ config('language.'.$language.'.data.order_id') }} {{ $order->email }}
+                                {{ config('language.'.$language.'.data.email') }} : {{ $order->email }}
                             </div>
                         @endif
                         <div class="confirmMessageBox_right_item">
@@ -68,7 +68,7 @@
                             @endif
                         </div>
                         <div class="confirmMessageBox_right_item">
-                            {{ config('language.'.$language.'.data.total') }} <span class="price">{!! \App\Helpers\Number::getFormatPriceByLanguage($order->total, $language) !!}</span>
+                            {{ config('language.'.$language.'.data.total') }} : <span class="price">{!! \App\Helpers\Number::getFormatPriceByLanguage($order->total, $language) !!}</span>
                         </div>
                     </div>
                 </div>

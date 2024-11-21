@@ -849,6 +849,7 @@
         transition: all 0.3s;
         align-items: flex-start;
         z-index: -1;
+        display: none !important;
         &_input {
             width: 100%;
             padding: 0 0.75rem;
