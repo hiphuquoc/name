@@ -33,7 +33,7 @@ class SearchController extends Controller {
                 /* tìm kiếm danh mục */
                 $xhtmlContent = self::searchCategoryInfo($keySearch, $language);
                 break;
-            case 'premium_wallpaper':
+            case 'paid_wallpaper':
                 /* tìm kiếm hình nền trả phí */
                 $xhtmlContent = self::searchPremiumWallpaper($keySearch, $language);
                 break;
@@ -41,7 +41,7 @@ class SearchController extends Controller {
                 /* tìm kiếm hình nền miễn phí */
                 $xhtmlContent = self::searchFreeWallpaper($keySearch, $language);
                 break;
-            case 'blog_info':
+            case 'article':
                 /* tìm kiếm bài blog */
                 $xhtmlContent = self::searchBlogInfo($keySearch, $language);
                 break;

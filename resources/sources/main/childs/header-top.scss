@@ -634,7 +634,8 @@
     // transform: translateX(-50%);
     z-index: 999;
     width: calc(100% - 200px);
-    max-width: 660px;
+    max-width: 750px;
+
     // &:hover {
     //     .searchViewBefore_selectbox {
     //         visibility: visible;
@@ -676,6 +677,7 @@
             height: 100%;
             position: relative;
             cursor: pointer;
+            gap: 1rem;
             &_text {
                 white-space: nowrap;
             }

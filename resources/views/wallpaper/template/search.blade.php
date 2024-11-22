@@ -1,22 +1,35 @@
 @php
-    // $labelName  = config('language.'.$language.'.data.search_wallpapers.'.env('APP_NAME'));
-    $labelName  = 'nhập tìm kiếm...';
+    $labelName          = config('language.'.$language.'.data.what_do_you_want_to_find_today');
+    $typeSearch         = config('language.'.$language.'.data.list_type_search.'.env('APP_NAME')) ?? [];
+    $keyActiveFirstTime = 'paid_wallpaper';
+
 @endphp
 
 <div class="searchViewBefore">
     <form action="{{ route('routing', ['slug' => config('language.'.$language.'.slug_page_premium_wallpaper')]).'?search=' }}" method="GET">
         <div class="searchViewBefore_showBox">
             <div class="searchViewBefore_showBox_typeBox" onclick="openSelected('js_openSelected_typeBoxList', 'searchViewBefore_showBox_typeBox')">
-                <div class="searchViewBefore_showBox_typeBox_text maxLine_1">Hình nền trả phí</div> 
+                <div class="searchViewBefore_showBox_typeBox_text maxLine_1">
+                    @foreach($typeSearch as $key => $t)
+                        @if($key==$keyActiveFirstTime)
+                            {{ $t }}
+                            @break;
+                        @endif
+                    @endforeach
+                </div> 
                 <i class="fa-solid fa-angle-down"></i>
-                <div id="js_openSelected_typeBoxList" class="searchViewBefore_showBox_typeBox_list">
-                    <div class="searchViewBefore_showBox_typeBox_list_item" data-input="category_info">Danh mục</div>
-                    <div class="searchViewBefore_showBox_typeBox_list_item selected" data-input="premium_wallpaper">Hình nền trả phí</div>
-                    <div class="searchViewBefore_showBox_typeBox_list_item" data-input="free_wallpaper">Hình nền miễn phí</div>
-                    <div class="searchViewBefore_showBox_typeBox_list_item" data-input="blog_info">Bài Blog</div>
-                </div>
+                @if(!empty($typeSearch))
+                    <div id="js_openSelected_typeBoxList" class="searchViewBefore_showBox_typeBox_list">
+                        @foreach($typeSearch as $key => $t)
+                            @php
+                                $selected = $key==$keyActiveFirstTime ? 'selected' : '';
+                            @endphp
+                            <div class="searchViewBefore_showBox_typeBox_list_item maxLine_1 {{ $selected }}" data-input="{{ $key }}">{{ $t }}</div>
+                        @endforeach
+                    </div>
+                @endif
                 <!-- Hidden input to store selected data-input value -->
-                <input type="hidden" id="search_type" name="search_type" value="premium_wallpaper" />
+                <input type="hidden" id="search_type" name="search_type" value="{{ $keyActiveFirstTime }}" />
             </div>
             
             <div class="searchViewBefore_showBox_inputBox">

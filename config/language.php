@@ -89,6 +89,7 @@ return [
             'step_1_buy_now' => "Step 1: Please enter your email.",
             'note_fill_email' => "* If you enter an email, an additional copy will be sent for storage.",
             'step_2_buy_now' => "Step 2: Choose a payment method.",
+            'what_do_you_want_to_find_today' => "What do you want to find today?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Order Confirmation',
             'thank_you_message_email' => 'Thank you for completing your order! Your wallpaper is ready to use.',
@@ -158,10 +159,25 @@ return [
                 "topgirl"  => "Beautiful Girl Photos by Events",
                 "topanime"  => "Beautiful Girl Photos by Events",
             ],
-            "search_wallpapers" => [
-                "name"  => "Search Wallpapers",
-                "topgirl"  => "Search Photos",
-                "topanime"  => "Search Photos",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Category',
+                    'paid_wallpaper' => 'Paid Wallpapers',
+                    'free_wallpaper' => 'Free Wallpapers',
+                    'article' => 'Article',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Category',
+                    'paid_wallpaper' => 'Paid Wallpapers',
+                    'free_wallpaper' => 'Free Wallpapers',
+                    'article' => 'Article',
+                ],
+                'topanime' => [
+                    'category_info' => 'Category',
+                    'paid_wallpaper' => 'Paid Wallpapers',
+                    'free_wallpaper' => 'Free Wallpapers',
+                    'article' => 'Article',
+                ],
             ],
             "copyright" => [
                 "name"  => "Copyright ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Designed and developed by Pham Van Phu. All rights reserved.",
@@ -256,6 +272,7 @@ return [
             'step_1_buy_now' => "步骤1：请您输入邮箱。",
             'note_fill_email' => "* 如果输入邮箱，将会发送一份副本以便存档。",
             'step_2_buy_now' => "步骤2：选择付款方式。",
+            'what_do_you_want_to_find_today' => "你今天想找什么？",
             /* xác nhận đơn hàng */
             'order_confirmation' => '订单确认',
             'thank_you_message_email' => '感谢您完成订单！您的壁纸已准备就绪。',
@@ -325,10 +342,25 @@ return [
                 "topgirl" => "按活动分类的漂亮女孩照片",
                 "topanime" => "按活动分类的漂亮女孩照片",
             ],
-            "search_wallpapers" => [
-                "name" => "搜索壁纸",
-                "topgirl" => "搜索照片",
-                "topanime" => "搜索照片",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => '类别',
+                    'paid_wallpaper' => '付费壁纸',
+                    'free_wallpaper' => '免费壁纸',
+                    'article' => '文章',
+                ],
+                'topgirl' => [
+                    'category_info' => '类别',
+                    'paid_wallpaper' => '付费壁纸',
+                    'free_wallpaper' => '免费壁纸',
+                    'article' => '文章',
+                ],
+                'topanime' => [
+                    'category_info' => '类别',
+                    'paid_wallpaper' => '付费壁纸',
+                    'free_wallpaper' => '免费壁纸',
+                    'article' => '文章',
+                ],
             ],
             "copyright" => [
                 "name"  => "版权所有 ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>。由范文富设计和开发。版权所有。",
@@ -423,6 +455,7 @@ return [
             'step_1_buy_now' => "Paso 1: Por favor, ingrese su correo electrónico.",
             'note_fill_email' => "* Si ingresa un correo electrónico, se enviará una copia adicional para su almacenamiento.",
             'step_2_buy_now' => "Paso 2: Elija una forma de pago.",
+            'what_do_you_want_to_find_today' => "¿Qué quieres buscar hoy?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Confirmación de Pedido',
             'thank_you_message_email' => '¡Gracias por completar tu pedido! Tu fondo de pantalla está listo para usar.',
@@ -492,10 +525,25 @@ return [
                 "topgirl" => "Fotos de chicas bonitas por eventos",
                 "topanime" => "Fotos de chicas bonitas por eventos",
             ],
-            "search_wallpapers" => [
-                "name" => "Buscar fondos de pantalla",
-                "topgirl" => "Buscar fotos",
-                "topanime" => "Buscar fotos",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Categoría',
+                    'paid_wallpaper' => 'Fondos de pantalla de pago',
+                    'free_wallpaper' => 'Fondos de pantalla gratis',
+                    'article' => 'Artículo',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Categoría',
+                    'paid_wallpaper' => 'Fondos de pantalla de pago',
+                    'free_wallpaper' => 'Fondos de pantalla gratis',
+                    'article' => 'Artículo',
+                ],
+                'topanime' => [
+                    'category_info' => 'Categoría',
+                    'paid_wallpaper' => 'Fondos de pantalla de pago',
+                    'free_wallpaper' => 'Fondos de pantalla gratis',
+                    'article' => 'Artículo',
+                ],
             ],
             "copyright" => [
                 "name"  => "Derechos de autor ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Diseñado y desarrollado por Pham Van Phu. Todos los derechos reservados.",
@@ -590,6 +638,7 @@ return [
             'step_1_buy_now' => "Étape 1 : Veuillez entrer votre email.",
             'note_fill_email' => "* Si vous entrez un email, une copie supplémentaire sera envoyée pour archivage.",
             'step_2_buy_now' => "Étape 2 : Choisissez une méthode de paiement.",
+            'what_do_you_want_to_find_today' => "Que voulez-vous chercher aujourd'hui ?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Confirmation de Commande',
             'thank_you_message_email' => 'Merci d\'avoir finalisé votre commande ! Votre fond d\'écran est prêt à être utilisé.',
@@ -659,10 +708,25 @@ return [
                 "topgirl" => "Photos de belles filles par événements",
                 "topanime" => "Photos de belles filles par événements",
             ],
-            "search_wallpapers" => [
-                "name" => "Rechercher des fonds d'écran",
-                "topgirl" => "Rechercher des photos",
-                "topanime" => "Rechercher des photos",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Catégorie',
+                    'paid_wallpaper' => 'Fonds d\'écran payants',
+                    'free_wallpaper' => 'Fonds d\'écran gratuits',
+                    'article' => 'Article',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Catégorie',
+                    'paid_wallpaper' => 'Fonds d\'écran payants',
+                    'free_wallpaper' => 'Fonds d\'écran gratuits',
+                    'article' => 'Article',
+                ],
+                'topanime' => [
+                    'category_info' => 'Catégorie',
+                    'paid_wallpaper' => 'Fonds d\'écran payants',
+                    'free_wallpaper' => 'Fonds d\'écran gratuits',
+                    'article' => 'Article',
+                ],
             ],
             "copyright" => [
                 "name"  => "Droits d'auteur ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Conçu et développé par Pham Van Phu. Tous droits réservés.",
@@ -757,6 +821,7 @@ return [
             'step_1_buy_now' => "Bước 1: Bạn vui lòng nhập email.",
             'note_fill_email' => "* Nếu nhập email bạn sẽ được gửi thêm một bản để lưu trữ.",
             'step_2_buy_now' => "Bước 2: Chọn hình thức thanh toán.",
+            'what_do_you_want_to_find_today' => "Bạn muốn tìm gì hôm nay?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Xác nhận đơn hàng',
             'thank_you_message_email' => 'Cảm ơn bạn đã hoàn tất đơn hàng của mình! Hình nền của bạn đã sẵn sàng để sử dụng.',
@@ -827,10 +892,25 @@ return [
                 "topgirl"  => "Ảnh Gái Xinh theo Sự Kiện",
                 "topanime"  => "Ảnh Anime theo Sự Kiện",
             ],
-            "search_wallpapers" => [
-                "name"  => "Tìm kiếm Hình Nền",
-                "topgirl"  => "Tìm kiếm Ảnh",
-                "topanime"  => "Tìm kiếm Ảnh",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Danh mục',
+                    'paid_wallpaper' => 'Hình nền trả phí',
+                    'free_wallpaper' => 'Hình nền miễn phí',
+                    'article' => 'Bài viết',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Danh mục',
+                    'paid_wallpaper' => 'Hình nền trả phí',
+                    'free_wallpaper' => 'Hình nền miễn phí',
+                    'article' => 'Bài viết',
+                ],
+                'topanime' => [
+                    'category_info' => 'Danh mục',
+                    'paid_wallpaper' => 'Hình nền trả phí',
+                    'free_wallpaper' => 'Hình nền miễn phí',
+                    'article' => 'Bài viết',
+                ],
             ],
             "copyright" => [
                 "name"  => "Bản quyền ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Thiết kế và phát triển bởi Phạm Văn Phú. Mọi quyền được bảo lưu.",
@@ -925,6 +1005,7 @@ return [
             'step_1_buy_now' => "चरण 1: कृपया अपना ईमेल दर्ज करें।",
             'note_fill_email' => "* यदि आप ईमेल दर्ज करते हैं, तो भंडारण के लिए एक अतिरिक्त प्रति भेजी जाएगी।",
             'step_2_buy_now' => "चरण 2: भुगतान विधि चुनें।",
+            'what_do_you_want_to_find_today' => "आज आप क्या खोजना चाहते हैं?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'आर्डर की पुष्टि',
             'thank_you_message_email' => 'आपके ऑर्डर को पूरा करने के लिए धन्यवाद! आपका वॉलपेपर उपयोग के लिए तैयार है।',
@@ -994,10 +1075,25 @@ return [
                 "topgirl" => "घटनाओं द्वारा सुंदर लड़की की तस्वीरें",
                 "topanime" => "घटनाओं द्वारा सुंदर लड़की की तस्वीरें",
             ],
-            "search_wallpapers" => [
-                "name" => "वॉलपेपर खोजें",
-                "topgirl" => "फोटो खोजें",
-                "topanime" => "फोटो खोजें",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'श्रेणी',
+                    'paid_wallpaper' => 'भुगतान की गई वॉलपेपर',
+                    'free_wallpaper' => 'नि:शुल्क वॉलपेपर',
+                    'article' => 'लेख',
+                ],
+                'topgirl' => [
+                    'category_info' => 'श्रेणी',
+                    'paid_wallpaper' => 'भुगतान की गई वॉलपेपर',
+                    'free_wallpaper' => 'नि:शुल्क वॉलपेपर',
+                    'article' => 'लेख',
+                ],
+                'topanime' => [
+                    'category_info' => 'श्रेणी',
+                    'paid_wallpaper' => 'भुगतान की गई वॉलपेपर',
+                    'free_wallpaper' => 'नि:शुल्क वॉलपेपर',
+                    'article' => 'लेख',
+                ],
             ],
             "copyright" => [
                 "name"  => "कॉपीराइट ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>। डिजाइन और विकास Pham Van Phu द्वारा। सर्वाधिकार सुरक्षित।",
@@ -1092,6 +1188,7 @@ return [
             'step_1_buy_now' => "পর্যায় ১: অনুগ্রহ করে আপনার ইমেইল লিখুন।",
             'note_fill_email' => "* ইমেইল দিলে সংরক্ষণের জন্য একটি অতিরিক্ত কপি পাঠানো হবে।",
             'step_2_buy_now' => "পর্যায় ২: অর্থ প্রদানের পদ্ধতি নির্বাচন করুন।",
+            'what_do_you_want_to_find_today' => "আপনি আজ কী খুঁজতে চান?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'অর্ডার নিশ্চিতকরণ',
             'thank_you_message_email' => 'আপনার অর্ডার সম্পন্ন করার জন্য আপনাকে ধন্যবাদ! আপনার ওয়ালপেপার ব্যবহার করার জন্য প্রস্তুত।',
@@ -1161,10 +1258,25 @@ return [
                 "topgirl" => "ইভেন্ট অনুযায়ী সুন্দর মেয়ের ছবি",
                 "topanime" => "ইভেন্ট অনুযায়ী সুন্দর মেয়ের ছবি",
             ],
-            "search_wallpapers" => [
-                "name" => "ওয়ালপেপার অনুসন্ধান",
-                "topgirl" => "ছবি অনুসন্ধান",
-                "topanime" => "ছবি অনুসন্ধান",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'শ্রেণী',
+                    'paid_wallpaper' => 'পেইড ওয়ালপেপার',
+                    'free_wallpaper' => 'ফ্রি ওয়ালপেপার',
+                    'article' => 'প্রবন্ধ',
+                ],
+                'topgirl' => [
+                    'category_info' => 'শ্রেণী',
+                    'paid_wallpaper' => 'পেইড ওয়ালপেপার',
+                    'free_wallpaper' => 'ফ্রি ওয়ালপেপার',
+                    'article' => 'প্রবন্ধ',
+                ],
+                'topanime' => [
+                    'category_info' => 'শ্রেণী',
+                    'paid_wallpaper' => 'পেইড ওয়ালপেপার',
+                    'free_wallpaper' => 'ফ্রি ওয়ালপেপার',
+                    'article' => 'প্রবন্ধ',
+                ],
             ],
             "copyright" => [
                 "name" => "স্বত্ব ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>। ডিজাইন ও বিকাশ করেছেন ফাম ভ্যান ফু। সর্বস্বত্ব সংরক্ষিত।",
@@ -1259,6 +1371,7 @@ return [
             'step_1_buy_now' => "पायरी 1: कृपया आपला ईमेल प्रविष्ट करा.",
             'note_fill_email' => "* आपला ईमेल प्रविष्ट केल्यास साठवणीसाठी अतिरिक्त प्रत पाठवली जाईल.",
             'step_2_buy_now' => "पायरी 2: पेमेंट पद्धत निवडा.",
+            'what_do_you_want_to_find_today' => "आज तुम्हाला काय शोधायचे आहे?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ऑर्डर पुष्टी',
             'thank_you_message_email' => 'आपला ऑर्डर पूर्ण केल्याबद्दल धन्यवाद! आपले वॉलपेपर वापरण्यास तयार आहे.',
@@ -1328,10 +1441,25 @@ return [
                 "topgirl" => "कार्यक्रमानुसार सुंदर मुलीचे फोटो",
                 "topanime" => "कार्यक्रमानुसार सुंदर मुलीचे फोटो",
             ],
-            "search_wallpapers" => [
-                "name" => "वॉलपेपर शोधा",
-                "topgirl" => "फोटो शोधा",
-                "topanime" => "फोटो शोधा",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'वर्ग',
+                    'paid_wallpaper' => 'सशुल्क वॉलपेपर',
+                    'free_wallpaper' => 'मोफत वॉलपेपर',
+                    'article' => 'लेख',
+                ],
+                'topgirl' => [
+                    'category_info' => 'वर्ग',
+                    'paid_wallpaper' => 'सशुल्क वॉलपेपर',
+                    'free_wallpaper' => 'मोफत वॉलपेपर',
+                    'article' => 'लेख',
+                ],
+                'topanime' => [
+                    'category_info' => 'वर्ग',
+                    'paid_wallpaper' => 'सशुल्क वॉलपेपर',
+                    'free_wallpaper' => 'मोफत वॉलपेपर',
+                    'article' => 'लेख',
+                ],
             ],
             "copyright" => [
                 "name"  => "कॉपीराइट ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. फाम वॅन फू यांच्याकडून डिझाइन व विकास. सर्व हक्क राखीव.",
@@ -1426,6 +1554,7 @@ return [
             'step_1_buy_now' => "படி 1: தயவுசெய்து உங்கள் மின்னஞ்சலை உள்ளிடவும்.",
             'note_fill_email' => "* மின்னஞ்சல் உள்ளிடினால், சேமிப்பிற்காக கூடுதல் பிரதியை அனுப்பப்படும்.",
             'step_2_buy_now' => "படி 2: கட்டண முறையை தேர்வு செய்யவும்.",
+            'what_do_you_want_to_find_today' => "இன்று நீங்கள் என்ன தேட விரும்புகிறீர்கள்?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ஆர்டர் உறுதிப்படுத்தல்',
             'thank_you_message_email' => 'உங்கள் ஆர்டரை முடிக்க धन्यवाद! உங்கள் வால்பேப்பர் பயன்படுத்த தயாராக உள்ளது.',
@@ -1495,10 +1624,25 @@ return [
                 "topgirl" => "நிகழ்வுகளால் அழகான பெண் படங்கள்",
                 "topanime" => "நிகழ்வுகளால் அழகான பெண் படங்கள்",
             ],
-            "search_wallpapers" => [
-                "name" => "வால்பேப்பர்களைத் தேடுங்கள்",
-                "topgirl" => "படங்களைத் தேடுங்கள்",
-                "topanime" => "படங்களைத் தேடுங்கள்",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'வகை',
+                    'paid_wallpaper' => 'செலுத்தப்பட்ட வால்பேப்பர்கள்',
+                    'free_wallpaper' => 'இலவச வால்பேப்பர்கள்',
+                    'article' => 'கட்டுரை',
+                ],
+                'topgirl' => [
+                    'category_info' => 'வகை',
+                    'paid_wallpaper' => 'செலுத்தப்பட்ட வால்பேப்பர்கள்',
+                    'free_wallpaper' => 'இலவச வால்பேப்பர்கள்',
+                    'article' => 'கட்டுரை',
+                ],
+                'topanime' => [
+                    'category_info' => 'வகை',
+                    'paid_wallpaper' => 'செலுத்தப்பட்ட வால்பேப்பர்கள்',
+                    'free_wallpaper' => 'இலவச வால்பேப்பர்கள்',
+                    'article' => 'கட்டுரை',
+                ],
             ],
             "copyright" => [
                 "name"  => "பதிப்புரிமை ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. வடிவமைப்பு மற்றும் மேம்பாடு Pham Van Phu. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
@@ -1593,6 +1737,7 @@ return [
             'step_1_buy_now' => "దశ 1: దయచేసి మీ ఇమెయిల్‌ను నమోదు చేయండి.",
             'note_fill_email' => "* మీరు ఇమెయిల్‌ను నమోదు చేస్తే, నిల్వ కోసం అదనపు కాపీ పంపబడుతుంది.",
             'step_2_buy_now' => "దశ 2: చెల్లింపు విధానాన్ని ఎంచుకోండి.",
+            'what_do_you_want_to_find_today' => "ఈరోజు మీరు ఏమి కనుగొనాలని అనుకుంటున్నారు?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ఆర్డర్ నిర్ధారణ',
             'thank_you_message_email' => 'మీ ఆర్డర్‌ను పూర్తిచేసినందుకు ధన్యవాదాలు! మీ వాల్‌పేపర్ ఉపయోగించడానికి సిద్ధంగా ఉంది.',
@@ -1662,10 +1807,25 @@ return [
                 "topgirl" => "ఈవెంట్స్ ద్వారా అందమైన అమ్మాయిల చిత్రాలు",
                 "topanime" => "ఈవెంట్స్ ద్వారా అందమైన అమ్మాయిల చిత్రాలు",
             ],
-            "search_wallpapers" => [
-                "name" => "వాల్‌పేపర్లు అన్వేషించండి",
-                "topgirl" => "చిత్రాలను అన్వేషించండి",
-                "topanime" => "చిత్రాలను అన్వేషించండి",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'వర్గం',
+                    'paid_wallpaper' => 'చెల్లించిన వాల్‌పేపర్లు',
+                    'free_wallpaper' => 'ఉచిత వాల్‌పేపర్లు',
+                    'article' => 'వ్యాసం',
+                ],
+                'topgirl' => [
+                    'category_info' => 'వర్గం',
+                    'paid_wallpaper' => 'చెల్లించిన వాల్‌పేపర్లు',
+                    'free_wallpaper' => 'ఉచిత వాల్‌పేపర్లు',
+                    'article' => 'వ్యాసం',
+                ],
+                'topanime' => [
+                    'category_info' => 'వర్గం',
+                    'paid_wallpaper' => 'చెల్లించిన వాల్‌పేపర్లు',
+                    'free_wallpaper' => 'ఉచిత వాల్‌పేపర్లు',
+                    'article' => 'వ్యాసం',
+                ],
             ],
             "copyright" => [
                 "name"  => "కాపీహక్కులు ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ఫామ్ వాన్ ఫు రూపొందించారు మరియు అభివృద్ధి చేశారు. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
@@ -1760,6 +1920,7 @@ return [
             'step_1_buy_now' => "مرحلہ 1: براہ کرم اپنا ای میل درج کریں۔",
             'note_fill_email' => "* اگر آپ ای میل داخل کرتے ہیں، تو ذخیرہ کرنے کے لیے ایک اضافی کاپی بھیجی جائے گی۔",
             'step_2_buy_now' => "مرحلہ 2: ادائیگی کا طریقہ منتخب کریں۔",
+            'what_do_you_want_to_find_today' => "آج آپ کیا تلاش کرنا چاہتے ہیں؟",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'آرڈر کی تصدیق',
             'thank_you_message_email' => 'آپ کا آرڈر مکمل کرنے کا شکریہ! آپ کا وال پیپر استعمال کے لیے تیار ہے۔',
@@ -1829,10 +1990,25 @@ return [
                 "topgirl" => "واقعات کے ذریعہ خوبصورت لڑکی کی تصاویر",
                 "topanime" => "واقعات کے ذریعہ خوبصورت لڑکی کی تصاویر",
             ],
-            "search_wallpapers" => [
-                "name" => "وال پیپرز تلاش کریں",
-                "topgirl" => "تصاویر تلاش کریں",
-                "topanime" => "تصاویر تلاش کریں",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'زمرہ',
+                    'paid_wallpaper' => 'ادا شدہ وال پیپرز',
+                    'free_wallpaper' => 'مفت وال پیپرز',
+                    'article' => 'مضمون',
+                ],
+                'topgirl' => [
+                    'category_info' => 'زمرہ',
+                    'paid_wallpaper' => 'ادا شدہ وال پیپرز',
+                    'free_wallpaper' => 'مفت وال پیپرز',
+                    'article' => 'مضمون',
+                ],
+                'topanime' => [
+                    'category_info' => 'زمرہ',
+                    'paid_wallpaper' => 'ادا شدہ وال پیپرز',
+                    'free_wallpaper' => 'مفت وال پیپرز',
+                    'article' => 'مضمون',
+                ],
             ],
             "copyright" => [
                 "name"  => "جملہ حقوق محفوظ ہیں ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>۔ ڈیزائن اور ترقی Pham Van Phu نے کی۔",
@@ -1927,6 +2103,7 @@ return [
             'step_1_buy_now' => "પગલું 1: કૃપા કરીને તમારું ઇમેઇલ દાખલ કરો.",
             'note_fill_email' => "* જો તમે ઇમેઇલ દાખલ કરો છો, તો સંગ્રહ માટે એક વધારાની નકલ મોકલવામાં આવશે.",
             'step_2_buy_now' => "પગલું 2: ચુકવણીનો વિકલ્પ પસંદ કરો.",
+            'what_do_you_want_to_find_today' => "આજે તમે શું શોધવા માંગો છો?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ઓર્ડરની પુષ્ટિ',
             'thank_you_message_email' => 'તમારા ઓર્ડરને પૂર્ણ કરવા માટે આભાર! તમારું વોલપેપર ઉપયોગ માટે તૈયાર છે.',
@@ -1996,10 +2173,25 @@ return [
                 "topgirl"  => "ઘટનાઓ દ્વારા સુંદર છોકરી ફોટાઓ",
                 "topanime"  => "ઘટનાઓ દ્વારા સુંદર છોકરી ફોટાઓ",
             ],
-            "search_wallpapers" => [
-                "name"  => "વોલપેપર્સ શોધો",
-                "topgirl"  => "ફોટાઓ શોધો",
-                "topanime"  => "ફોટાઓ શોધો",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'શ્રેણી',
+                    'paid_wallpaper' => 'ચૂકવેલા વોલપેપર',
+                    'free_wallpaper' => 'મફત વોલપેપર',
+                    'article' => 'લેખ',
+                ],
+                'topgirl' => [
+                    'category_info' => 'શ્રેણી',
+                    'paid_wallpaper' => 'ચૂકવેલા વોલપેપર',
+                    'free_wallpaper' => 'મફત વોલપેપર',
+                    'article' => 'લેખ',
+                ],
+                'topanime' => [
+                    'category_info' => 'શ્રેણી',
+                    'paid_wallpaper' => 'ચૂકવેલા વોલપેપર',
+                    'free_wallpaper' => 'મફત વોલપેપર',
+                    'article' => 'લેખ',
+                ],
             ],
             "copyright" => [
                 "name"  => "પ્રતિમાન્ય ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a> છે. ફામ વેન ફૂ દ્વારા ડિઝાઇન અને વિકાસ. તમામ હક્કો અધિકારક્ષિત છે.",
@@ -2094,6 +2286,7 @@ return [
             'step_1_buy_now' => "ಹಂತ 1: ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ನಮೂದಿಸಿ.",
             'note_fill_email' => "* ನೀವು ಇಮೇಲ್ ನಮೂದಿಸಿದರೆ, ಸಂಗ್ರಹಣೆಗೆ ಇನ್ನೊಂದು ಪ್ರತಿಯನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ.",
             'step_2_buy_now' => "ಹಂತ 2: ಪಾವತಿ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+            'what_do_you_want_to_find_today' => "ನೀವು ಇವತ್ತು ಏನು ಹುಡುಕಲು ಇಚ್ಛಿಸುತ್ತೀರಿ?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ಆರ್ಡರ್ ದೃಢೀಕರಣ',
             'thank_you_message_email' => 'ನೀವು ನಿಮ್ಮ ಆರ್ಡರ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ವಾಲ್‌ಪೇಪರ್ ಬಳಕೆಗಾಗಿ ತಯಾರಾಗಿದೆ.',
@@ -2163,10 +2356,25 @@ return [
                 "topgirl"  => "ಘಟನೆಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
                 "topanime"  => "ಘಟನೆಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
             ],
-            "search_wallpapers" => [
-                "name"  => "ವಾಲ್‌ಪೇಪರ್‌ಗಳನ್ನು ಹುಡುಕಿ",
-                "topgirl"  => "ಚಿತ್ರಗಳನ್ನು ಹುಡುಕಿ",
-                "topanime"  => "ಚಿತ್ರಗಳನ್ನು ಹುಡುಕಿ",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'ವರ್ಗ',
+                    'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+                    'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+                    'article' => 'ಲೇಖ',
+                ],
+                'topgirl' => [
+                    'category_info' => 'ವರ್ಗ',
+                    'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+                    'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+                    'article' => 'ಲೇಖ',
+                ],
+                'topanime' => [
+                    'category_info' => 'ವರ್ಗ',
+                    'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+                    'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+                    'article' => 'ಲೇಖ',
+                ],
             ],
             "copyright" => [
                 "name"  => "ಕಾಪಿರೈಟ್ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ಫಾಮ್ ವಾನ್ ಫು ವಿನ್ಯಾಸ ಮತ್ತು ಅಭಿವೃದ್ಧಿ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
@@ -2261,6 +2469,7 @@ return [
             'step_1_buy_now' => "ステップ1：メールアドレスを入力してください。",
             'note_fill_email' => "* メールアドレスを入力すると、保管用に追加のコピーが送信されます。",
             'step_2_buy_now' => "ステップ2：支払い方法を選択してください。",
+            'what_do_you_want_to_find_today' => "今日は何を探しますか？",
             /* xác nhận đơn hàng */
             'order_confirmation' => '注文確認',
             'thank_you_message_email' => 'ご注文を完了いただきありがとうございます！壁紙の使用準備が整いました。',
@@ -2330,10 +2539,25 @@ return [
                 "topgirl"  => "イベント別美しい女の子の写真",
                 "topanime"  => "イベント別美しい女の子の写真",
             ],
-            "search_wallpapers" => [
-                "name"  => "壁紙を検索",
-                "topgirl"  => "写真を検索",
-                "topanime"  => "写真を検索",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'カテゴリー',
+                    'paid_wallpaper' => '有料壁紙',
+                    'free_wallpaper' => '無料壁紙',
+                    'article' => '記事',
+                ],
+                'topgirl' => [
+                    'category_info' => 'カテゴリー',
+                    'paid_wallpaper' => '有料壁紙',
+                    'free_wallpaper' => '無料壁紙',
+                    'article' => '記事',
+                ],
+                'topanime' => [
+                    'category_info' => 'カテゴリー',
+                    'paid_wallpaper' => '有料壁紙',
+                    'free_wallpaper' => '無料壁紙',
+                    'article' => '記事',
+                ],
             ],
             "copyright" => [
                 "name"  => "著作権 ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>。Pham Van Phu によるデザインと開発。全著作権所有。",
@@ -2428,6 +2652,7 @@ return [
             'step_1_buy_now' => "단계 1: 이메일을 입력해 주세요.",
             'note_fill_email' => "* 이메일을 입력하면 보관용으로 추가 사본이 전송됩니다.",
             'step_2_buy_now' => "단계 2: 결제 방식을 선택하세요.",
+            'what_do_you_want_to_find_today' => "오늘 무엇을 찾고 싶으세요?",
             /* xác nhận đơn hàng */
             'order_confirmation' => '주문 확인',
             'thank_you_message_email' => '주문을 완료해 주셔서 감사합니다! 벽지가 사용할 준비가 되었습니다.',
@@ -2497,10 +2722,25 @@ return [
                 "topgirl"  => "이벤트별 아름다운 소녀 사진",
                 "topanime"  => "이벤트별 아름다운 소녀 사진",
             ],
-            "search_wallpapers" => [
-                "name"  => "배경화면 검색",
-                "topgirl"  => "사진 검색",
-                "topanime"  => "사진 검색",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => '카테고리',
+                    'paid_wallpaper' => '유료 배경화면',
+                    'free_wallpaper' => '무료 배경화면',
+                    'article' => '기사',
+                ],
+                'topgirl' => [
+                    'category_info' => '카테고리',
+                    'paid_wallpaper' => '유료 배경화면',
+                    'free_wallpaper' => '무료 배경화면',
+                    'article' => '기사',
+                ],
+                'topanime' => [
+                    'category_info' => '카테고리',
+                    'paid_wallpaper' => '유료 배경화면',
+                    'free_wallpaper' => '무료 배경화면',
+                    'article' => '기사',
+                ],
             ],
             "copyright" => [
                 "name"  => "저작권 ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Pham Van Phu에 의해 디자인 및 개발되었습니다. 모든 권리 보유.",
@@ -2595,6 +2835,7 @@ return [
             'step_1_buy_now' => "Langkah 1: Mangga lebokna email panjenengan.",
             'note_fill_email' => "* Yen lebokna email, salinan tambahan bakal dikirim kanggo panyimpenan.",
             'step_2_buy_now' => "Langkah 2: Pilih cara pambayaran.",
+            'what_do_you_want_to_find_today' => "Dina iki sampeyan pengin golek apa?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Konfirmasi Pesanan',
             'thank_you_message_email' => 'Matur nuwun sampun ngrampungake pesenan! Wallpaper sampeyan wis siap digunakake.',
@@ -2664,10 +2905,25 @@ return [
                 "topgirl"  => "Foto Gadis Cantik berdasarkan Acara",
                 "topanime"  => "Foto Gadis Cantik berdasarkan Acara",
             ],
-            "search_wallpapers" => [
-                "name"  => "Cari Wallpapers",
-                "topgirl"  => "Cari Foto",
-                "topanime"  => "Cari Foto",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Wallpaper sing mbayar',
+                    'free_wallpaper' => 'Wallpaper gratis',
+                    'article' => 'Artikel',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Wallpaper sing mbayar',
+                    'free_wallpaper' => 'Wallpaper gratis',
+                    'article' => 'Artikel',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Wallpaper sing mbayar',
+                    'free_wallpaper' => 'Wallpaper gratis',
+                    'article' => 'Artikel',
+                ],
             ],
             "copyright" => [
                 "name"  => "Hak cipta ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Dirancang lan dikembangake dening Pham Van Phu. Kabeh hak dilindhungi.",
@@ -2762,6 +3018,7 @@ return [
             'step_1_buy_now' => "Langkah 1: Silakan masukkan email Anda.",
             'note_fill_email' => "* Jika Anda memasukkan email, salinan tambahan akan dikirim untuk penyimpanan.",
             'step_2_buy_now' => "Langkah 2: Pilih metode pembayaran.",
+            'what_do_you_want_to_find_today' => "Apa yang ingin Anda cari hari ini?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Konfirmasi Pesanan',
             'thank_you_message_email' => 'Terima kasih telah menyelesaikan pesanan Anda! Wallpaper Anda siap digunakan.',
@@ -2831,10 +3088,25 @@ return [
                 "topgirl"  => "Foto Gadis Cantik berdasarkan Acara",
                 "topanime"  => "Foto Gadis Cantik berdasarkan Acara",
             ],
-            "search_wallpapers" => [
-                "name"  => "Cari Wallpapers",
-                "topgirl"  => "Cari Foto",
-                "topanime"  => "Cari Foto",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Wallpaper Berbayar',
+                    'free_wallpaper' => 'Wallpaper Gratis',
+                    'article' => 'Artikel',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Wallpaper Berbayar',
+                    'free_wallpaper' => 'Wallpaper Gratis',
+                    'article' => 'Artikel',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Wallpaper Berbayar',
+                    'free_wallpaper' => 'Wallpaper Gratis',
+                    'article' => 'Artikel',
+                ],
             ],
             "copyright" => [
                 "name"  => "Hak Cipta ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Dirancang dan dikembangkan oleh Pham Van Phu. Semua hak dilindungi.",
@@ -2929,6 +3201,7 @@ return [
             'step_1_buy_now' => "Langkah 1: Sila masukkan emel anda.",
             'note_fill_email' => "* Jika anda memasukkan emel, salinan tambahan akan dihantar untuk penyimpanan.",
             'step_2_buy_now' => "Langkah 2: Pilih kaedah pembayaran.",
+            'what_do_you_want_to_find_today' => "Apa yang ingin anda cari hari ini?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Pengesahan Pesanan',
             'thank_you_message_email' => 'Terima kasih kerana menyelesaikan pesanan anda! Kertas dinding anda sedia untuk digunakan.',
@@ -2998,10 +3271,25 @@ return [
                 "topgirl"  => "Gambar Gadis Cantik mengikut Acara",
                 "topanime"  => "Gambar Gadis Cantik mengikut Acara",
             ],
-            "search_wallpapers" => [
-                "name"  => "Cari Wallpapers",
-                "topgirl"  => "Cari Gambar",
-                "topanime"  => "Cari Gambar",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Kertas dinding berbayar',
+                    'free_wallpaper' => 'Kertas dinding percuma',
+                    'article' => 'Artikel',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Kertas dinding berbayar',
+                    'free_wallpaper' => 'Kertas dinding percuma',
+                    'article' => 'Artikel',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Kertas dinding berbayar',
+                    'free_wallpaper' => 'Kertas dinding percuma',
+                    'article' => 'Artikel',
+                ],
             ],
             "copyright" => [
                 "name"  => "Hak cipta ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Direka dan dibangunkan oleh Pham Van Phu. Hak cipta terpelihara.",
@@ -3096,6 +3384,7 @@ return [
             'step_1_buy_now' => "ขั้นตอนที่ 1: กรุณาใส่อีเมลของคุณ.",
             'note_fill_email' => "* หากใส่อีเมลจะมีสำเนาเพิ่มเติมส่งไปเพื่อการจัดเก็บ.",
             'step_2_buy_now' => "ขั้นตอนที่ 2: เลือกวิธีการชำระเงิน.",
+            'what_do_you_want_to_find_today' => "วันนี้คุณต้องการค้นหาอะไร?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ยืนยันคำสั่งซื้อ',
             'thank_you_message_email' => 'ขอบคุณที่ทำการสั่งซื้อเสร็จสมบูรณ์! วอลเปเปอร์ของคุณพร้อมใช้งานแล้ว',
@@ -3165,10 +3454,25 @@ return [
                 "topgirl"  => "ภาพสาวสวยตามเหตุการณ์",
                 "topanime"  => "ภาพสาวสวยตามเหตุการณ์",
             ],
-            "search_wallpapers" => [
-                "name"  => "ค้นหาวอลเปเปอร์",
-                "topgirl"  => "ค้นหาภาพถ่าย",
-                "topanime"  => "ค้นหาภาพถ่าย",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'หมวดหมู่',
+                    'paid_wallpaper' => 'วอลเปเปอร์แบบเสียเงิน',
+                    'free_wallpaper' => 'วอลเปเปอร์ฟรี',
+                    'article' => 'บทความ',
+                ],
+                'topgirl' => [
+                    'category_info' => 'หมวดหมู่',
+                    'paid_wallpaper' => 'วอลเปเปอร์แบบเสียเงิน',
+                    'free_wallpaper' => 'วอลเปเปอร์ฟรี',
+                    'article' => 'บทความ',
+                ],
+                'topanime' => [
+                    'category_info' => 'หมวดหมู่',
+                    'paid_wallpaper' => 'วอลเปเปอร์แบบเสียเงิน',
+                    'free_wallpaper' => 'วอลเปเปอร์ฟรี',
+                    'article' => 'บทความ',
+                ],
             ],
             "copyright" => [
                 "name"  => "ลิขสิทธิ์ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ออกแบบและพัฒนาโดย Pham Van Phu. สงวนลิขสิทธิ์ทั้งหมด.",
@@ -3263,6 +3567,7 @@ return [
             'step_1_buy_now' => "ជំហានទី 1៖ សូមបញ្ចូលអ៊ីមែលរបស់អ្នក។",
             'note_fill_email' => "* ប្រសិនបើបញ្ចូលអ៊ីមែល នឹងមានច្បាប់ចម្លងបន្ថែមសម្រាប់រក្សាទុក។",
             'step_2_buy_now' => "ជំហានទី 2៖ ជ្រើសរើសវិធីសាស្ត្រទូទាត់។",
+            'what_do_you_want_to_find_today' => "តើថ្ងៃនេះអ្នកចង់រកអ្វី?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ការបញ្ជាក់ការបញ្ជាទិញ',
             'thank_you_message_email' => 'សូមអរគុណសម្រាប់ការបំពេញការបញ្ជាទិញរបស់អ្នក! ផ្ទាំងនឹងរបស់អ្នកត្រៀមជាស្រេចដើម្បីប្រើ។',
@@ -3332,10 +3637,25 @@ return [
                 "topgirl"  => "រូបភាពក្មេងស្រីស្រស់ស្អាតតាមព្រឹត្តិការណ៍",
                 "topanime"  => "រូបភាពក្មេងស្រីស្រស់ស្អាតតាមព្រឹត្តិការណ៍",
             ],
-            "search_wallpapers" => [
-                "name"  => "ស្វែងរកផ្ទាំងរូបភាព",
-                "topgirl"  => "ស្វែងរករូបភាព",
-                "topanime"  => "ស្វែងរករូបភាព",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'ប្រភេទ',
+                    'paid_wallpaper' => 'ផ្ទាំងរូបភាពដែលមានតម្លៃ',
+                    'free_wallpaper' => 'ផ្ទាំងរូបភាពឥតគិតថ្លៃ',
+                    'article' => 'អត្ថបទ',
+                ],
+                'topgirl' => [
+                    'category_info' => 'ប្រភេទ',
+                    'paid_wallpaper' => 'ផ្ទាំងរូបភាពដែលមានតម្លៃ',
+                    'free_wallpaper' => 'ផ្ទាំងរូបភាពឥតគិតថ្លៃ',
+                    'article' => 'អត្ថបទ',
+                ],
+                'topanime' => [
+                    'category_info' => 'ប្រភេទ',
+                    'paid_wallpaper' => 'ផ្ទាំងរូបភាពដែលមានតម្លៃ',
+                    'free_wallpaper' => 'ផ្ទាំងរូបភាពឥតគិតថ្លៃ',
+                    'article' => 'អត្ថបទ',
+                ],
             ],
             "copyright" => [
                 "name"  => "រក្សាសិទ្ធិ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>។ រចនា និងអភិវឌ្ឍដោយ Pham Van Phu។ រក្សា​សិទ្ធិ​គ្រប់​យ៉ាង។",
@@ -3430,6 +3750,7 @@ return [
             'step_1_buy_now' => "ຂັ້ນຕອນທີ່ 1: ກະລຸນາໃສ່ອີເມລຂອງທ່ານ.",
             'note_fill_email' => "* ຖ້າໃສ່ອີເມລ ຈະຖືກສົ່ງສຳເນົາເພີ່ມເຕີມໄວ້ບັນທຶກ.",
             'step_2_buy_now' => "ຂັ້ນຕອນທີ່ 2: ເລືອກວິທີການຈ່າຍເງິນ.",
+            'what_do_you_want_to_find_today' => "ມື້ນີ້ທ່ານຕ້ອງການຫາຫຍັງ?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ການຢືນຢັນຄໍາສັ່ງຊື້',
             'thank_you_message_email' => 'ຂອບໃຈທີ່ທ່ານໄດ້ສໍາເລັດຄໍາສັ່ງຊື້! ພາບເດັດຂອງທ່ານພ້ອມໃຊ້ແລ້ວ.',
@@ -3499,10 +3820,25 @@ return [
                 "topgirl"  => "ຮູບພາບສາວງາມໂດຍເຫດການ",
                 "topanime"  => "ຮູບພາບສາວງາມໂດຍເຫດການ",
             ],
-            "search_wallpapers" => [
-                "name"  => "ຄົ້ນຫາພາບເວລ",
-                "topgirl"  => "ຄົ້ນຫາຮູບ",
-                "topanime"  => "ຄົ້ນຫາຮູບ",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'ປະເພດ',
+                    'paid_wallpaper' => 'ຮູບພາບເປີ້ນທີ່ຕ້ອງຈ່າຍເງິນ',
+                    'free_wallpaper' => 'ຮູບພາບເປີ້ນທີ່ບໍ່ເສຍຄ່າ',
+                    'article' => 'ບົດຄວາມ',
+                ],
+                'topgirl' => [
+                    'category_info' => 'ປະເພດ',
+                    'paid_wallpaper' => 'ຮູບພາບເປີ້ນທີ່ຕ້ອງຈ່າຍເງິນ',
+                    'free_wallpaper' => 'ຮູບພາບເປີ້ນທີ່ບໍ່ເສຍຄ່າ',
+                    'article' => 'ບົດຄວາມ',
+                ],
+                'topanime' => [
+                    'category_info' => 'ປະເພດ',
+                    'paid_wallpaper' => 'ຮູບພາບເປີ້ນທີ່ຕ້ອງຈ່າຍເງິນ',
+                    'free_wallpaper' => 'ຮູບພາບເປີ້ນທີ່ບໍ່ເສຍຄ່າ',
+                    'article' => 'ບົດຄວາມ',
+                ],
             ],
             "copyright" => [
                 "name"  => "ລິຂະສິດ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ອອກແບບ ແລະ ພັດທະນາໂດຍ Pham Van Phu. ສິດທິທັງໝົດຖືກສະໄຫມ.",
@@ -3597,6 +3933,7 @@ return [
             'step_1_buy_now' => "الخطوة 1: يرجى إدخال البريد الإلكتروني الخاص بك.",
             'note_fill_email' => "* إذا أدخلت البريد الإلكتروني، سيتم إرسال نسخة إضافية للتخزين.",
             'step_2_buy_now' => "الخطوة 2: اختر طريقة الدفع.",
+            'what_do_you_want_to_find_today' => "ماذا تريد أن تجد اليوم؟",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'تأكيد الطلب',
             'thank_you_message_email' => 'شكرًا لإكمال طلبك! خلفيتك جاهزة للاستخدام.',
@@ -3666,10 +4003,25 @@ return [
                 "topgirl"  => "صور فتاة جميلة حسب الأحداث",
                 "topanime"  => "صور فتاة جميلة حسب الأحداث",
             ],
-            "search_wallpapers" => [
-                "name"  => "ابحث عن خلفيات",
-                "topgirl"  => "ابحث عن صور",
-                "topanime"  => "ابحث عن صور",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'فئة',
+                    'paid_wallpaper' => 'خلفيات مدفوعة',
+                    'free_wallpaper' => 'خلفيات مجانية',
+                    'article' => 'مقال',
+                ],
+                'topgirl' => [
+                    'category_info' => 'فئة',
+                    'paid_wallpaper' => 'خلفيات مدفوعة',
+                    'free_wallpaper' => 'خلفيات مجانية',
+                    'article' => 'مقال',
+                ],
+                'topanime' => [
+                    'category_info' => 'فئة',
+                    'paid_wallpaper' => 'خلفيات مدفوعة',
+                    'free_wallpaper' => 'خلفيات مجانية',
+                    'article' => 'مقال',
+                ],
             ],
             "copyright" => [
                 "name"  => "حقوق الطبع والنشر ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. تم التصميم والتطوير بواسطة فام فان فو. جميع الحقوق محفوظة.",
@@ -3764,6 +4116,7 @@ return [
             'step_1_buy_now' => "مرحله 1: لطفاً ایمیل خود را وارد کنید.",
             'note_fill_email' => "* اگر ایمیل را وارد کنید، یک نسخه اضافی برای ذخیره ارسال می‌شود.",
             'step_2_buy_now' => "مرحله 2: روش پرداخت را انتخاب کنید.",
+            'what_do_you_want_to_find_today' => "امروز چه چیزی می خواهید پیدا کنید؟",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'تأیید سفارش',
             'thank_you_message_email' => 'از تکمیل سفارش خود سپاسگزاریم! تصویر زمینه شما آماده استفاده است.',
@@ -3833,10 +4186,25 @@ return [
                 "topgirl"  => "عکس‌های دختر زیبا بر اساس رویدادها",
                 "topanime"  => "عکس‌های دختر زیبا بر اساس رویدادها",
             ],
-            "search_wallpapers" => [
-                "name"  => "جستجوی پس‌زمینه‌ها",
-                "topgirl"  => "جستجوی عکس‌ها",
-                "topanime"  => "جستجوی عکس‌ها",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'دسته‌بندی',
+                    'paid_wallpaper' => 'تصاویر پس‌زمینه پولی',
+                    'free_wallpaper' => 'تصاویر پس‌زمینه رایگان',
+                    'article' => 'مقاله',
+                ],
+                'topgirl' => [
+                    'category_info' => 'دسته‌بندی',
+                    'paid_wallpaper' => 'تصاویر پس‌زمینه پولی',
+                    'free_wallpaper' => 'تصاویر پس‌زمینه رایگان',
+                    'article' => 'مقاله',
+                ],
+                'topanime' => [
+                    'category_info' => 'دسته‌بندی',
+                    'paid_wallpaper' => 'تصاویر پس‌زمینه پولی',
+                    'free_wallpaper' => 'تصاویر پس‌زمینه رایگان',
+                    'article' => 'مقاله',
+                ],
             ],
             "copyright" => [
                 "name"  => "کپی رایت ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. طراحی و توسعه توسط فام ون فو. کلیه حقوق محفوظ است.",
@@ -3931,6 +4299,7 @@ return [
             'step_1_buy_now' => "Шаг 1: Пожалуйста, введите свой адрес электронной почты.",
             'note_fill_email' => "* Если вы введете адрес электронной почты, будет отправлена дополнительная копия для хранения.",
             'step_2_buy_now' => "Шаг 2: Выберите способ оплаты.",
+            'what_do_you_want_to_find_today' => "Что вы хотите найти сегодня?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Подтверждение заказа',
             'thank_you_message_email' => 'Спасибо за оформление заказа! Ваш обои готовы к использованию.',
@@ -4000,10 +4369,25 @@ return [
                 "topgirl"  => "Фото красивых девушек по событиям",
                 "topanime"  => "Фото красивых девушек по событиям",
             ],
-            "search_wallpapers" => [
-                "name"  => "Поиск обоев",
-                "topgirl"  => "Поиск фото",
-                "topanime"  => "Поиск фото",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Категория',
+                    'paid_wallpaper' => 'Платные обои',
+                    'free_wallpaper' => 'Бесплатные обои',
+                    'article' => 'Статья',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Категория',
+                    'paid_wallpaper' => 'Платные обои',
+                    'free_wallpaper' => 'Бесплатные обои',
+                    'article' => 'Статья',
+                ],
+                'topanime' => [
+                    'category_info' => 'Категория',
+                    'paid_wallpaper' => 'Платные обои',
+                    'free_wallpaper' => 'Бесплатные обои',
+                    'article' => 'Статья',
+                ],
             ],
             "copyright" => [
                 "name"  => "Авторское право ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Дизайн и разработка Pham Van Phu. Все права защищены.",
@@ -4098,6 +4482,7 @@ return [
             'step_1_buy_now' => "Schritt 1: Bitte geben Sie Ihre E-Mail-Adresse ein.",
             'note_fill_email' => "* Wenn Sie eine E-Mail eingeben, wird eine zusätzliche Kopie zur Speicherung gesendet.",
             'step_2_buy_now' => "Schritt 2: Wählen Sie eine Zahlungsmethode.",
+            'what_do_you_want_to_find_today' => "Was möchten Sie heute finden?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Bestellbestätigung',
             'thank_you_message_email' => 'Vielen Dank, dass Sie Ihre Bestellung abgeschlossen haben! Ihr Hintergrundbild ist einsatzbereit.',
@@ -4167,10 +4552,25 @@ return [
                 "topgirl"  => "Schöne Mädchenfotos nach Ereignissen",
                 "topanime"  => "Schöne Mädchenfotos nach Ereignissen",
             ],
-            "search_wallpapers" => [
-                "name"  => "Tapeten suchen",
-                "topgirl"  => "Fotos suchen",
-                "topanime"  => "Fotos suchen",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategorie',
+                    'paid_wallpaper' => 'Bezahlte Hintergründe',
+                    'free_wallpaper' => 'Kostenlose Hintergründe',
+                    'article' => 'Artikel',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategorie',
+                    'paid_wallpaper' => 'Bezahlte Hintergründe',
+                    'free_wallpaper' => 'Kostenlose Hintergründe',
+                    'article' => 'Artikel',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategorie',
+                    'paid_wallpaper' => 'Bezahlte Hintergründe',
+                    'free_wallpaper' => 'Kostenlose Hintergründe',
+                    'article' => 'Artikel',
+                ],
             ],
             "copyright" => [
                 "name"  => "Urheberrecht ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Entworfen und entwickelt von Pham Van Phu. Alle Rechte vorbehalten.",
@@ -4265,6 +4665,7 @@ return [
             'step_1_buy_now' => "Adım 1: Lütfen e-postanızı girin.",
             'note_fill_email' => "* Bir e-posta girerseniz, saklama için ek bir kopya gönderilecektir.",
             'step_2_buy_now' => "Adım 2: Bir ödeme yöntemi seçin.",
+            'what_do_you_want_to_find_today' => "Bugün ne bulmak istiyorsunuz?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Sipariş Onayı',
             'thank_you_message_email' => 'Siparişinizi tamamladığınız için teşekkürler! Duvar kağıdınız kullanıma hazır.',
@@ -4334,10 +4735,25 @@ return [
                 "topgirl"  => "Etkinliklere Göre Güzel Kız Fotoğrafları",
                 "topanime"  => "Etkinliklere Göre Güzel Kız Fotoğrafları",
             ],
-            "search_wallpapers" => [
-                "name"  => "Duvar Kağıdı Ara",
-                "topgirl"  => "Fotoğraf Ara",
-                "topanime"  => "Fotoğraf Ara",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Ücretli Duvar Kağıtları',
+                    'free_wallpaper' => 'Ücretsiz Duvar Kağıtları',
+                    'article' => 'Makale',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Ücretli Duvar Kağıtları',
+                    'free_wallpaper' => 'Ücretsiz Duvar Kağıtları',
+                    'article' => 'Makale',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategori',
+                    'paid_wallpaper' => 'Ücretli Duvar Kağıtları',
+                    'free_wallpaper' => 'Ücretsiz Duvar Kağıtları',
+                    'article' => 'Makale',
+                ],
             ],
             "copyright" => [
                 "name"  => "Telif Hakkı ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Tasarım ve geliştirme Pham Van Phu tarafından. Tüm hakları saklıdır.",
@@ -4432,6 +4848,7 @@ return [
             'step_1_buy_now' => "Passaggio 1: Si prega di inserire l'email.",
             'note_fill_email' => "* Se inserisci un'email, verrà inviata una copia aggiuntiva per l'archiviazione.",
             'step_2_buy_now' => "Passaggio 2: Scegli un metodo di pagamento.",
+            'what_do_you_want_to_find_today' => "Cosa vuoi trovare oggi?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Conferma dell\'ordine',
             'thank_you_message_email' => 'Grazie per aver completato il tuo ordine! Il tuo sfondo è pronto per l\'uso.',
@@ -4501,10 +4918,25 @@ return [
                 "topgirl"  => "Foto di ragazze belle per Eventi",
                 "topanime"  => "Foto di ragazze belle per Eventi",
             ],
-            "search_wallpapers" => [
-                "name"  => "Cerca Sfondi",
-                "topgirl"  => "Cerca Foto",
-                "topanime"  => "Cerca Foto",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Categoria',
+                    'paid_wallpaper' => 'Sfondi a pagamento',
+                    'free_wallpaper' => 'Sfondi gratuiti',
+                    'article' => 'Articolo',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Categoria',
+                    'paid_wallpaper' => 'Sfondi a pagamento',
+                    'free_wallpaper' => 'Sfondi gratuiti',
+                    'article' => 'Articolo',
+                ],
+                'topanime' => [
+                    'category_info' => 'Categoria',
+                    'paid_wallpaper' => 'Sfondi a pagamento',
+                    'free_wallpaper' => 'Sfondi gratuiti',
+                    'article' => 'Articolo',
+                ],
             ],
             "copyright" => [
                 "name"  => "Copyright ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Progettato e sviluppato da Pham Van Phu. Tutti i diritti riservati.",
@@ -4599,6 +5031,7 @@ return [
             'step_1_buy_now' => "Krok 1: Proszę wprowadzić e-mail.",
             'note_fill_email' => "* Jeśli wprowadzisz e-mail, zostanie wysłana dodatkowa kopia do przechowywania.",
             'step_2_buy_now' => "Krok 2: Wybierz metodę płatności.",
+            'what_do_you_want_to_find_today' => "Co chcesz znaleźć dzisiaj?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Potwierdzenie zamówienia',
             'thank_you_message_email' => 'Dziękujemy za zrealizowanie zamówienia! Twoja tapeta jest gotowa do użycia.',
@@ -4668,10 +5101,25 @@ return [
                 "topgirl"  => "Piękne zdjęcia dziewczyn wg Wydarzeń",
                 "topanime"  => "Piękne zdjęcia dziewczyn wg Wydarzeń",
             ],
-            "search_wallpapers" => [
-                "name"  => "Szukaj tapet",
-                "topgirl"  => "Szukaj zdjęć",
-                "topanime"  => "Szukaj zdjęć",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategoria',
+                    'paid_wallpaper' => 'Płatne tapety',
+                    'free_wallpaper' => 'Darmowe tapety',
+                    'article' => 'Artykuł',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategoria',
+                    'paid_wallpaper' => 'Płatne tapety',
+                    'free_wallpaper' => 'Darmowe tapety',
+                    'article' => 'Artykuł',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategoria',
+                    'paid_wallpaper' => 'Płatne tapety',
+                    'free_wallpaper' => 'Darmowe tapety',
+                    'article' => 'Artykuł',
+                ],
             ],
             "copyright" => [
                 "name"  => "Prawa autorskie ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Zaprojektowane i opracowane przez Pham Van Phu. Wszelkie prawa zastrzeżone.",
@@ -4766,6 +5214,7 @@ return [
             'step_1_buy_now' => "Крок 1: Будь ласка, введіть електронну пошту.",
             'note_fill_email' => "* Якщо ви введете електронну пошту, буде надіслано додаткову копію для зберігання.",
             'step_2_buy_now' => "Крок 2: Виберіть спосіб оплати.",
+            'what_do_you_want_to_find_today' => "Що ви хочете знайти сьогодні?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Підтвердження замовлення',
             'thank_you_message_email' => 'Дякуємо за оформлення замовлення! Ваші шпалери готові до використання.',
@@ -4835,10 +5284,25 @@ return [
                 "topgirl"  => "Красива дівоча фотографія за подіями",
                 "topanime"  => "Красива дівоча фотографія за подіями",
             ],
-            "search_wallpapers" => [
-                "name"  => "Шукати шпалери",
-                "topgirl"  => "Шукати фотографії",
-                "topanime"  => "Шукати фотографії",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Категорія',
+                    'paid_wallpaper' => 'Платні шпалери',
+                    'free_wallpaper' => 'Безкоштовні шпалери',
+                    'article' => 'Стаття',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Категорія',
+                    'paid_wallpaper' => 'Платні шпалери',
+                    'free_wallpaper' => 'Безкоштовні шпалери',
+                    'article' => 'Стаття',
+                ],
+                'topanime' => [
+                    'category_info' => 'Категорія',
+                    'paid_wallpaper' => 'Платні шпалери',
+                    'free_wallpaper' => 'Безкоштовні шпалери',
+                    'article' => 'Стаття',
+                ],
             ],
             "copyright" => [
                 "name"  => "Авторське право ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Дизайн і розробка Pham Van Phu. Усі права захищено.",
@@ -4933,6 +5397,7 @@ return [
             'step_1_buy_now' => "Stap 1: Voer uw e-mail in.",
             'note_fill_email' => "* Als u een e-mail invoert, wordt er een extra kopie voor opslag verzonden.",
             'step_2_buy_now' => "Stap 2: Kies een betaalmethode.",
+            'what_do_you_want_to_find_today' => "Wat wil je vandaag vinden?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Bestellingsbevestiging',
             'thank_you_message_email' => 'Bedankt voor het voltooien van uw bestelling! Uw achtergrond is klaar voor gebruik.',
@@ -5002,10 +5467,25 @@ return [
                 "topgirl"  => "Mooie Meisjesfoto's op Evenementen",
                 "topanime"  => "Mooie Meisjesfoto's op Evenementen",
             ],
-            "search_wallpapers" => [
-                "name"  => "Zoek Achtergronden",
-                "topgirl"  => "Zoek Foto's",
-                "topanime"  => "Zoek Foto's",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Categorie',
+                    'paid_wallpaper' => 'Betaalde achtergronden',
+                    'free_wallpaper' => 'Gratis achtergronden',
+                    'article' => 'Artikel',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Categorie',
+                    'paid_wallpaper' => 'Betaalde achtergronden',
+                    'free_wallpaper' => 'Gratis achtergronden',
+                    'article' => 'Artikel',
+                ],
+                'topanime' => [
+                    'category_info' => 'Categorie',
+                    'paid_wallpaper' => 'Betaalde achtergronden',
+                    'free_wallpaper' => 'Gratis achtergronden',
+                    'article' => 'Artikel',
+                ],
             ],
             "copyright" => [
                 "name"  => "Auteursrecht ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Ontworpen en ontwikkeld door Pham Van Phu. Alle rechten voorbehouden.",
@@ -5100,6 +5580,7 @@ return [
             'step_1_buy_now' => "Βήμα 1: Παρακαλώ εισάγετε το email σας.",
             'note_fill_email' => "* Εάν εισάγετε ένα email, θα σταλεί ένα επιπλέον αντίγραφο για αποθήκευση.",
             'step_2_buy_now' => "Βήμα 2: Επιλέξτε μια μέθοδο πληρωμής.",
+            'what_do_you_want_to_find_today' => "Τι θέλετε να βρείτε σήμερα;",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Επιβεβαίωση παραγγελίας',
             'thank_you_message_email' => 'Σας ευχαριστούμε που ολοκληρώσατε την παραγγελία σας! Η ταπετσαρία σας είναι έτοιμη για χρήση.',
@@ -5169,10 +5650,25 @@ return [
                 "topgirl"  => "Όμορφες Φωτογραφίες Κοριτσιών ανά Εκδηλώσεις",
                 "topanime"  => "Όμορφες Φωτογραφίες Κοριτσιών ανά Εκδηλώσεις",
             ],
-            "search_wallpapers" => [
-                "name"  => "Αναζήτηση Ταπετσαριών",
-                "topgirl"  => "Αναζήτηση Φωτογραφιών",
-                "topanime"  => "Αναζήτηση Φωτογραφιών",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Κατηγορία',
+                    'paid_wallpaper' => 'Πληρωμένα ταπετσαρίες',
+                    'free_wallpaper' => 'Δωρεάν ταπετσαρίες',
+                    'article' => 'Άρθρο',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Κατηγορία',
+                    'paid_wallpaper' => 'Πληρωμένα ταπετσαρίες',
+                    'free_wallpaper' => 'Δωρεάν ταπετσαρίες',
+                    'article' => 'Άρθρο',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Κατηγορία',
+                    'paid_wallpaper' => 'Πληρωμένα ταπετσαρίες',
+                    'free_wallpaper' => 'Δωρεάν ταπετσαρίες',
+                    'article' => 'Άρθρο',
+                ],
             ],
             "copyright" => [
                 "name"  => "Πνευματικά δικαιώματα ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Σχεδιασμός και ανάπτυξη από τον Pham Van Phu. Με επιφύλαξη παντός δικαιώματος.",
@@ -5267,6 +5763,7 @@ return [
             'step_1_buy_now' => "1. lépés: Kérjük, adja meg az e-mail-címét.",
             'note_fill_email' => "* Ha megad egy e-mailt, egy további példány kerül elküldésre tárolás céljából.",
             'step_2_buy_now' => "2. lépés: Válasszon fizetési módot.",
+            'what_do_you_want_to_find_today' => "Mit szeretne megtalálni ma?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Rendelés visszaigazolása',
             'thank_you_message_email' => 'Köszönjük, hogy befejezte rendelését! A háttérképe készen áll a használatra.',
@@ -5336,10 +5833,25 @@ return [
                 "topgirl"  => "Gyönyörű lány képek események szerint",
                 "topanime"  => "Gyönyörű lány képek események szerint",
             ],
-            "search_wallpapers" => [
-                "name"  => "Háttérképek keresése",
-                "topgirl"  => "Fotók keresése",
-                "topanime"  => "Fotók keresése",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategória',
+                    'paid_wallpaper' => 'Fizetős háttérképek',
+                    'free_wallpaper' => 'Ingyenes háttérképek',
+                    'article' => 'Cikk',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategória',
+                    'paid_wallpaper' => 'Fizetős háttérképek',
+                    'free_wallpaper' => 'Ingyenes háttérképek',
+                    'article' => 'Cikk',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategória',
+                    'paid_wallpaper' => 'Fizetős háttérképek',
+                    'free_wallpaper' => 'Ingyenes háttérképek',
+                    'article' => 'Cikk',
+                ],
             ],
             "copyright" => [
                 "name"  => "Szerzői jog ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Tervezte és fejlesztette Pham Van Phu. Minden jog fenntartva.",
@@ -5434,6 +5946,7 @@ return [
             'step_1_buy_now' => "Krok 1: Zadejte prosím svůj e-mail.",
             'note_fill_email' => "* Pokud zadáte e-mail, bude zaslána další kopie pro uložení.",
             'step_2_buy_now' => "Krok 2: Vyberte způsob platby.",
+            'what_do_you_want_to_find_today' => "Co chcete dnes najít?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Potvrzení objednávky',
             'thank_you_message_email' => 'Děkujeme za dokončení objednávky! Vaše tapeta je připravena k použití.',
@@ -5503,10 +6016,25 @@ return [
                 "topgirl"  => "Krásné obrázky dívek podle událostí",
                 "topanime"  => "Krásné obrázky dívek podle událostí",
             ],
-            "search_wallpapers" => [
-                "name"  => "Hledat tapety",
-                "topgirl"  => "Hledat fotky",
-                "topanime"  => "Hledat fotky",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategorie',
+                    'paid_wallpaper' => 'Placené tapety',
+                    'free_wallpaper' => 'Zdarma tapety',
+                    'article' => 'Článek',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategorie',
+                    'paid_wallpaper' => 'Placené tapety',
+                    'free_wallpaper' => 'Zdarma tapety',
+                    'article' => 'Článek',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategorie',
+                    'paid_wallpaper' => 'Placené tapety',
+                    'free_wallpaper' => 'Zdarma tapety',
+                    'article' => 'Článek',
+                ],
             ],
             "copyright" => [
                 "name"  => "Autorská práva ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Navrženo a vyvinuto Pham Van Phu. Všechna práva vyhrazena.",
@@ -5601,6 +6129,7 @@ return [
             'step_1_buy_now' => "Pasul 1: Vă rugăm să introduceți e-mailul.",
             'note_fill_email' => "* Dacă introduceți un e-mail, va fi trimisă o copie suplimentară pentru stocare.",
             'step_2_buy_now' => "Pasul 2: Alegeți o metodă de plată.",
+            'what_do_you_want_to_find_today' => "Ce vrei să găsești astăzi?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Confirmare comandă',
             'thank_you_message_email' => 'Vă mulțumim că ați finalizat comanda! Tapetul dumneavoastră este gata de utilizare.',
@@ -5670,10 +6199,25 @@ return [
                 "topgirl"  => "Fotografii cu fete frumoase după evenimente",
                 "topanime"  => "Fotografii cu fete frumoase după evenimente",
             ],
-            "search_wallpapers" => [
-                "name"  => "Caută tapete",
-                "topgirl"  => "Caută fotografii",
-                "topanime"  => "Caută fotografii",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Categorie',
+                    'paid_wallpaper' => 'Fundaluri plătite',
+                    'free_wallpaper' => 'Fundaluri gratuite',
+                    'article' => 'Articol',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Categorie',
+                    'paid_wallpaper' => 'Fundaluri plătite',
+                    'free_wallpaper' => 'Fundaluri gratuite',
+                    'article' => 'Articol',
+                ],
+                'topanime' => [
+                    'category_info' => 'Categorie',
+                    'paid_wallpaper' => 'Fundaluri plătite',
+                    'free_wallpaper' => 'Fundaluri gratuite',
+                    'article' => 'Articol',
+                ],
             ],
             "copyright" => [
                 "name"  => "Drepturi de autor ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Proiectat și dezvoltat de Pham Van Phu. Toate drepturile rezervate.",
@@ -5768,6 +6312,7 @@ return [
             'step_1_buy_now' => "Krok 1: Prosím zadajte e-mail.",
             'note_fill_email' => "* Ak zadáte e-mail, bude poslaná ďalšia kópia na uloženie.",
             'step_2_buy_now' => "Krok 2: Vyberte spôsob platby.",
+            'what_do_you_want_to_find_today' => "Čo chcete dnes nájsť?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Potvrdenie objednávky',
             'thank_you_message_email' => 'Ďakujeme za dokončenie objednávky! Vaša tapeta je pripravená na použitie.',
@@ -5837,10 +6382,25 @@ return [
                 "topgirl"  => "Fotky krásnych dievčat podľa udalostí",
                 "topanime"  => "Fotky krásnych dievčat podľa udalostí",
             ],
-            "search_wallpapers" => [
-                "name"  => "Vyhľadávanie tapiet",
-                "topgirl"  => "Vyhľadávanie fotografií",
-                "topanime"  => "Vyhľadávanie fotografií",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategória',
+                    'paid_wallpaper' => 'Platené tapety',
+                    'free_wallpaper' => 'Bezplatné tapety',
+                    'article' => 'Článok',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategória',
+                    'paid_wallpaper' => 'Platené tapety',
+                    'free_wallpaper' => 'Bezplatné tapety',
+                    'article' => 'Článok',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategória',
+                    'paid_wallpaper' => 'Platené tapety',
+                    'free_wallpaper' => 'Bezplatné tapety',
+                    'article' => 'Článok',
+                ],
             ],
             "copyright" => [
                 "name"  => "Autorské práva ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Navrhol a vyvinul Pham Van Phu. Všetky práva vyhradené.",
@@ -5935,6 +6495,7 @@ return [
             'step_1_buy_now' => "ნაბიჯი 1: გთხოვთ, შეიყვანოთ თქვენი ელ.ფოსტა.",
             'note_fill_email' => "* თუ შეიყვანთ ელ.ფოსტას, დამატებითი ასლი გაიგზავნება შესანახად.",
             'step_2_buy_now' => "ნაბიჯი 2: აირჩიეთ გადახდის მეთოდი.",
+            'what_do_you_want_to_find_today' => "რას ეძებთ დღეს?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'შეკვეთის დადასტურება',
             'thank_you_message_email' => 'გმადლობთ თქვენი შეკვეთის დასრულებისთვის! თქვენი ფონი მზად არის გამოსაყენებლად.',
@@ -6004,10 +6565,25 @@ return [
                 "topgirl"  => "ლამაზი გოგონების სურათები მოვლენების მიხედვით",
                 "topanime"  => "ლამაზი გოგონების სურათები მოვლენების მიხედვით",
             ],
-            "search_wallpapers" => [
-                "name"  => "ფონების ძიება",
-                "topgirl"  => "ფოტოების ძიება",
-                "topanime"  => "ფოტოების ძიება",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'კატეგორია',
+                    'paid_wallpaper' => 'გადახდილი ფონები',
+                    'free_wallpaper' => 'უფასო ფონები',
+                    'article' => 'სტატია',
+                ],
+                'topgirl' => [
+                    'category_info' => 'კატეგორია',
+                    'paid_wallpaper' => 'გადახდილი ფონები',
+                    'free_wallpaper' => 'უფასო ფონები',
+                    'article' => 'სტატია',
+                ],
+                'topanime' => [
+                    'category_info' => 'კატეგორია',
+                    'paid_wallpaper' => 'გადახდილი ფონები',
+                    'free_wallpaper' => 'უფასო ფონები',
+                    'article' => 'სტატია',
+                ],
             ],
             "copyright" => [
                 "name"  => "საავტორო უფლებები ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. დიზაინი და განვითარება Pham Van Phu. ყველა უფლება დაცულია.",
@@ -6102,6 +6678,7 @@ return [
             'step_1_buy_now' => "שלב 1: אנא הזן את האימייל שלך.",
             'note_fill_email' => "* אם תזין אימייל, עותק נוסף יישלח לאחסון.",
             'step_2_buy_now' => "שלב 2: בחר שיטת תשלום.",
+            'what_do_you_want_to_find_today' => "מה אתה רוצה למצוא היום?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'אישור הזמנה',
             'thank_you_message_email' => 'תודה שהשלמת את ההזמנה שלך! הטפט שלך מוכן לשימוש.',
@@ -6171,10 +6748,25 @@ return [
                 "topgirl"  => "תמונות בחורה יפה לפי אירועים",
                 "topanime"  => "תמונות בחורה יפה לפי אירועים",
             ],
-            "search_wallpapers" => [
-                "name"  => "חיפוש טפטים",
-                "topgirl"  => "חיפוש תמונות",
-                "topanime"  => "חיפוש תמונות",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'קטגוריה',
+                    'paid_wallpaper' => 'רקעים בתשלום',
+                    'free_wallpaper' => 'רקעים חינמיים',
+                    'article' => 'מאמר',
+                ],
+                'topgirl' => [
+                    'category_info' => 'קטגוריה',
+                    'paid_wallpaper' => 'רקעים בתשלום',
+                    'free_wallpaper' => 'רקעים חינמיים',
+                    'article' => 'מאמר',
+                ],
+                'topgirl' => [
+                    'category_info' => 'קטגוריה',
+                    'paid_wallpaper' => 'רקעים בתשלום',
+                    'free_wallpaper' => 'רקעים חינמיים',
+                    'article' => 'מאמר',
+                ],
             ],
             "copyright" => [
                 "name"  => "זכויות יוצרים ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. עיצוב ופיתוח על ידי פאם ואן פהו. כל הזכויות שמורות.",
@@ -6269,6 +6861,7 @@ return [
             'step_1_buy_now' => "1-qadam: Iltimos, emailingizni kiriting.",
             'note_fill_email' => "* Agar siz elektron pochta manzilini kiritsangiz, saqlash uchun qo'shimcha nusxa yuboriladi.",
             'step_2_buy_now' => "2-qadam: To'lov usulini tanlang.",
+            'what_do_you_want_to_find_today' => "Bugun nimani topmoqchisiz?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Buyurtmani tasdiqlash',
             'thank_you_message_email' => 'Buyurtmangizni bajarganingiz uchun rahmat! Fon rasmi foydalanishga tayyor.',
@@ -6338,10 +6931,25 @@ return [
                 "topgirl"  => "Voqealar bo'yicha chiroyli qiz rasmlari",
                 "topanime"  => "Voqealar bo'yicha chiroyli qiz rasmlari",
             ],
-            "search_wallpapers" => [
-                "name"  => "Fon rasmlarini qidirish",
-                "topgirl"  => "Rasmlarni qidirish",
-                "topanime"  => "Rasmlarni qidirish",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategoriya',
+                    'paid_wallpaper' => 'Pullik fon rasmi',
+                    'free_wallpaper' => 'Bepul fon rasmi',
+                    'article' => 'Maqola',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategoriya',
+                    'paid_wallpaper' => 'Pullik fon rasmi',
+                    'free_wallpaper' => 'Bepul fon rasmi',
+                    'article' => 'Maqola',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategoriya',
+                    'paid_wallpaper' => 'Pullik fon rasmi',
+                    'free_wallpaper' => 'Bepul fon rasmi',
+                    'article' => 'Maqola',
+                ],
             ],
             "copyright" => [
                 "name"  => "Mualliflik huquqi ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Pham Van Phu tomonidan ishlab chiqilgan. Barcha huquqlar himoyalangan.",
@@ -6436,6 +7044,7 @@ return [
             'step_1_buy_now' => "Passo 1: Por favor, insira o seu e-mail.",
             'note_fill_email' => "* Se você inserir um e-mail, uma cópia adicional será enviada para armazenamento.",
             'step_2_buy_now' => "Passo 2: Escolha um método de pagamento.",
+            'what_do_you_want_to_find_today' => "O que você quer encontrar hoje?",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Confirmação do pedido',
             'thank_you_message_email' => 'Obrigado por concluir seu pedido! Seu papel de parede está pronto para uso.',
@@ -6505,10 +7114,25 @@ return [
                 "topgirl"  => "Fotos de Garotas Bonitas por Eventos",
                 "topanime"  => "Fotos de Garotas Bonitas por Eventos",
             ],
-            "search_wallpapers" => [
-                "name"  => "Pesquisar Papéis de Parede",
-                "topgirl"  => "Pesquisar Fotos",
-                "topanime"  => "Pesquisar Fotos",
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Categoria',
+                    'paid_wallpaper' => 'Papéis de parede pagos',
+                    'free_wallpaper' => 'Papéis de parede gratuitos',
+                    'article' => 'Artigo',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Categoria',
+                    'paid_wallpaper' => 'Papéis de parede pagos',
+                    'free_wallpaper' => 'Papéis de parede gratuitos',
+                    'article' => 'Artigo',
+                ],
+                'topanime' => [
+                    'category_info' => 'Categoria',
+                    'paid_wallpaper' => 'Papéis de parede pagos',
+                    'free_wallpaper' => 'Papéis de parede gratuitos',
+                    'article' => 'Artigo',
+                ],
             ],
             "copyright" => [
                 "name"  => "Direitos autorais ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Projetado e desenvolvido por Pham Van Phu. Todos os direitos reservados.",
