@@ -90,6 +90,7 @@ return [
             'note_fill_email' => "* If you enter an email, an additional copy will be sent for storage.",
             'step_2_buy_now' => "Step 2: Choose a payment method.",
             'what_do_you_want_to_find_today' => "What do you want to find today?",
+            'search' => "Search",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Order Confirmation',
             'thank_you_message_email' => 'Thank you for completing your order! Your wallpaper is ready to use.',
@@ -273,6 +274,7 @@ return [
             'note_fill_email' => "* 如果输入邮箱，将会发送一份副本以便存档。",
             'step_2_buy_now' => "步骤2：选择付款方式。",
             'what_do_you_want_to_find_today' => "你今天想找什么？",
+            'search' => "搜索",
             /* xác nhận đơn hàng */
             'order_confirmation' => '订单确认',
             'thank_you_message_email' => '感谢您完成订单！您的壁纸已准备就绪。',
@@ -456,6 +458,7 @@ return [
             'note_fill_email' => "* Si ingresa un correo electrónico, se enviará una copia adicional para su almacenamiento.",
             'step_2_buy_now' => "Paso 2: Elija una forma de pago.",
             'what_do_you_want_to_find_today' => "¿Qué quieres buscar hoy?",
+            'search' => "Buscar",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Confirmación de Pedido',
             'thank_you_message_email' => '¡Gracias por completar tu pedido! Tu fondo de pantalla está listo para usar.',
@@ -639,6 +642,7 @@ return [
             'note_fill_email' => "* Si vous entrez un email, une copie supplémentaire sera envoyée pour archivage.",
             'step_2_buy_now' => "Étape 2 : Choisissez une méthode de paiement.",
             'what_do_you_want_to_find_today' => "Que voulez-vous chercher aujourd'hui ?",
+            'search' => "Rechercher",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Confirmation de Commande',
             'thank_you_message_email' => 'Merci d\'avoir finalisé votre commande ! Votre fond d\'écran est prêt à être utilisé.',
@@ -822,6 +826,7 @@ return [
             'note_fill_email' => "* Nếu nhập email bạn sẽ được gửi thêm một bản để lưu trữ.",
             'step_2_buy_now' => "Bước 2: Chọn hình thức thanh toán.",
             'what_do_you_want_to_find_today' => "Bạn muốn tìm gì hôm nay?",
+            'search' => "Tìm kiếm",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Xác nhận đơn hàng',
             'thank_you_message_email' => 'Cảm ơn bạn đã hoàn tất đơn hàng của mình! Hình nền của bạn đã sẵn sàng để sử dụng.',
@@ -1006,6 +1011,7 @@ return [
             'note_fill_email' => "* यदि आप ईमेल दर्ज करते हैं, तो भंडारण के लिए एक अतिरिक्त प्रति भेजी जाएगी।",
             'step_2_buy_now' => "चरण 2: भुगतान विधि चुनें।",
             'what_do_you_want_to_find_today' => "आज आप क्या खोजना चाहते हैं?",
+            'search' => "खोज",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'आर्डर की पुष्टि',
             'thank_you_message_email' => 'आपके ऑर्डर को पूरा करने के लिए धन्यवाद! आपका वॉलपेपर उपयोग के लिए तैयार है।',
@@ -1189,6 +1195,7 @@ return [
             'note_fill_email' => "* ইমেইল দিলে সংরক্ষণের জন্য একটি অতিরিক্ত কপি পাঠানো হবে।",
             'step_2_buy_now' => "পর্যায় ২: অর্থ প্রদানের পদ্ধতি নির্বাচন করুন।",
             'what_do_you_want_to_find_today' => "আপনি আজ কী খুঁজতে চান?",
+            'search' => "অনুসন্ধান",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'অর্ডার নিশ্চিতকরণ',
             'thank_you_message_email' => 'আপনার অর্ডার সম্পন্ন করার জন্য আপনাকে ধন্যবাদ! আপনার ওয়ালপেপার ব্যবহার করার জন্য প্রস্তুত।',
@@ -1372,6 +1379,7 @@ return [
             'note_fill_email' => "* आपला ईमेल प्रविष्ट केल्यास साठवणीसाठी अतिरिक्त प्रत पाठवली जाईल.",
             'step_2_buy_now' => "पायरी 2: पेमेंट पद्धत निवडा.",
             'what_do_you_want_to_find_today' => "आज तुम्हाला काय शोधायचे आहे?",
+            'search' => "शोधा",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ऑर्डर पुष्टी',
             'thank_you_message_email' => 'आपला ऑर्डर पूर्ण केल्याबद्दल धन्यवाद! आपले वॉलपेपर वापरण्यास तयार आहे.',
@@ -1555,6 +1563,7 @@ return [
             'note_fill_email' => "* மின்னஞ்சல் உள்ளிடினால், சேமிப்பிற்காக கூடுதல் பிரதியை அனுப்பப்படும்.",
             'step_2_buy_now' => "படி 2: கட்டண முறையை தேர்வு செய்யவும்.",
             'what_do_you_want_to_find_today' => "இன்று நீங்கள் என்ன தேட விரும்புகிறீர்கள்?",
+            'search' => "தேடு",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ஆர்டர் உறுதிப்படுத்தல்',
             'thank_you_message_email' => 'உங்கள் ஆர்டரை முடிக்க धन्यवाद! உங்கள் வால்பேப்பர் பயன்படுத்த தயாராக உள்ளது.',
@@ -1738,6 +1747,7 @@ return [
             'note_fill_email' => "* మీరు ఇమెయిల్‌ను నమోదు చేస్తే, నిల్వ కోసం అదనపు కాపీ పంపబడుతుంది.",
             'step_2_buy_now' => "దశ 2: చెల్లింపు విధానాన్ని ఎంచుకోండి.",
             'what_do_you_want_to_find_today' => "ఈరోజు మీరు ఏమి కనుగొనాలని అనుకుంటున్నారు?",
+            'search' => "శోధించు",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ఆర్డర్ నిర్ధారణ',
             'thank_you_message_email' => 'మీ ఆర్డర్‌ను పూర్తిచేసినందుకు ధన్యవాదాలు! మీ వాల్‌పేపర్ ఉపయోగించడానికి సిద్ధంగా ఉంది.',
@@ -1921,6 +1931,7 @@ return [
             'note_fill_email' => "* اگر آپ ای میل داخل کرتے ہیں، تو ذخیرہ کرنے کے لیے ایک اضافی کاپی بھیجی جائے گی۔",
             'step_2_buy_now' => "مرحلہ 2: ادائیگی کا طریقہ منتخب کریں۔",
             'what_do_you_want_to_find_today' => "آج آپ کیا تلاش کرنا چاہتے ہیں؟",
+            'search' => "تلاش",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'آرڈر کی تصدیق',
             'thank_you_message_email' => 'آپ کا آرڈر مکمل کرنے کا شکریہ! آپ کا وال پیپر استعمال کے لیے تیار ہے۔',
@@ -2104,6 +2115,7 @@ return [
             'note_fill_email' => "* જો તમે ઇમેઇલ દાખલ કરો છો, તો સંગ્રહ માટે એક વધારાની નકલ મોકલવામાં આવશે.",
             'step_2_buy_now' => "પગલું 2: ચુકવણીનો વિકલ્પ પસંદ કરો.",
             'what_do_you_want_to_find_today' => "આજે તમે શું શોધવા માંગો છો?",
+            'search' => "શોધો",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ઓર્ડરની પુષ્ટિ',
             'thank_you_message_email' => 'તમારા ઓર્ડરને પૂર્ણ કરવા માટે આભાર! તમારું વોલપેપર ઉપયોગ માટે તૈયાર છે.',
@@ -2287,6 +2299,7 @@ return [
             'note_fill_email' => "* ನೀವು ಇಮೇಲ್ ನಮೂದಿಸಿದರೆ, ಸಂಗ್ರಹಣೆಗೆ ಇನ್ನೊಂದು ಪ್ರತಿಯನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ.",
             'step_2_buy_now' => "ಹಂತ 2: ಪಾವತಿ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
             'what_do_you_want_to_find_today' => "ನೀವು ಇವತ್ತು ಏನು ಹುಡುಕಲು ಇಚ್ಛಿಸುತ್ತೀರಿ?",
+            'search' => "ಹುಡುಕಿ",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ಆರ್ಡರ್ ದೃಢೀಕರಣ',
             'thank_you_message_email' => 'ನೀವು ನಿಮ್ಮ ಆರ್ಡರ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ವಾಲ್‌ಪೇಪರ್ ಬಳಕೆಗಾಗಿ ತಯಾರಾಗಿದೆ.',
@@ -2470,6 +2483,7 @@ return [
             'note_fill_email' => "* メールアドレスを入力すると、保管用に追加のコピーが送信されます。",
             'step_2_buy_now' => "ステップ2：支払い方法を選択してください。",
             'what_do_you_want_to_find_today' => "今日は何を探しますか？",
+            'search' => "検索",
             /* xác nhận đơn hàng */
             'order_confirmation' => '注文確認',
             'thank_you_message_email' => 'ご注文を完了いただきありがとうございます！壁紙の使用準備が整いました。',
@@ -2653,6 +2667,7 @@ return [
             'note_fill_email' => "* 이메일을 입력하면 보관용으로 추가 사본이 전송됩니다.",
             'step_2_buy_now' => "단계 2: 결제 방식을 선택하세요.",
             'what_do_you_want_to_find_today' => "오늘 무엇을 찾고 싶으세요?",
+            'search' => "검색",
             /* xác nhận đơn hàng */
             'order_confirmation' => '주문 확인',
             'thank_you_message_email' => '주문을 완료해 주셔서 감사합니다! 벽지가 사용할 준비가 되었습니다.',
@@ -2836,6 +2851,7 @@ return [
             'note_fill_email' => "* Yen lebokna email, salinan tambahan bakal dikirim kanggo panyimpenan.",
             'step_2_buy_now' => "Langkah 2: Pilih cara pambayaran.",
             'what_do_you_want_to_find_today' => "Dina iki sampeyan pengin golek apa?",
+            'search' => "Telusuri",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Konfirmasi Pesanan',
             'thank_you_message_email' => 'Matur nuwun sampun ngrampungake pesenan! Wallpaper sampeyan wis siap digunakake.',
@@ -3019,6 +3035,7 @@ return [
             'note_fill_email' => "* Jika Anda memasukkan email, salinan tambahan akan dikirim untuk penyimpanan.",
             'step_2_buy_now' => "Langkah 2: Pilih metode pembayaran.",
             'what_do_you_want_to_find_today' => "Apa yang ingin Anda cari hari ini?",
+            'search' => "Cari",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Konfirmasi Pesanan',
             'thank_you_message_email' => 'Terima kasih telah menyelesaikan pesanan Anda! Wallpaper Anda siap digunakan.',
@@ -3202,6 +3219,7 @@ return [
             'note_fill_email' => "* Jika anda memasukkan emel, salinan tambahan akan dihantar untuk penyimpanan.",
             'step_2_buy_now' => "Langkah 2: Pilih kaedah pembayaran.",
             'what_do_you_want_to_find_today' => "Apa yang ingin anda cari hari ini?",
+            'search' => "Cari",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Pengesahan Pesanan',
             'thank_you_message_email' => 'Terima kasih kerana menyelesaikan pesanan anda! Kertas dinding anda sedia untuk digunakan.',
@@ -3385,6 +3403,7 @@ return [
             'note_fill_email' => "* หากใส่อีเมลจะมีสำเนาเพิ่มเติมส่งไปเพื่อการจัดเก็บ.",
             'step_2_buy_now' => "ขั้นตอนที่ 2: เลือกวิธีการชำระเงิน.",
             'what_do_you_want_to_find_today' => "วันนี้คุณต้องการค้นหาอะไร?",
+            'search' => "ค้นหา",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ยืนยันคำสั่งซื้อ',
             'thank_you_message_email' => 'ขอบคุณที่ทำการสั่งซื้อเสร็จสมบูรณ์! วอลเปเปอร์ของคุณพร้อมใช้งานแล้ว',
@@ -3568,6 +3587,7 @@ return [
             'note_fill_email' => "* ប្រសិនបើបញ្ចូលអ៊ីមែល នឹងមានច្បាប់ចម្លងបន្ថែមសម្រាប់រក្សាទុក។",
             'step_2_buy_now' => "ជំហានទី 2៖ ជ្រើសរើសវិធីសាស្ត្រទូទាត់។",
             'what_do_you_want_to_find_today' => "តើថ្ងៃនេះអ្នកចង់រកអ្វី?",
+            'search' => "ស្វែងរក",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ការបញ្ជាក់ការបញ្ជាទិញ',
             'thank_you_message_email' => 'សូមអរគុណសម្រាប់ការបំពេញការបញ្ជាទិញរបស់អ្នក! ផ្ទាំងនឹងរបស់អ្នកត្រៀមជាស្រេចដើម្បីប្រើ។',
@@ -3751,6 +3771,7 @@ return [
             'note_fill_email' => "* ຖ້າໃສ່ອີເມລ ຈະຖືກສົ່ງສຳເນົາເພີ່ມເຕີມໄວ້ບັນທຶກ.",
             'step_2_buy_now' => "ຂັ້ນຕອນທີ່ 2: ເລືອກວິທີການຈ່າຍເງິນ.",
             'what_do_you_want_to_find_today' => "ມື້ນີ້ທ່ານຕ້ອງການຫາຫຍັງ?",
+            'search' => "ຄົ້ນຫາ",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'ການຢືນຢັນຄໍາສັ່ງຊື້',
             'thank_you_message_email' => 'ຂອບໃຈທີ່ທ່ານໄດ້ສໍາເລັດຄໍາສັ່ງຊື້! ພາບເດັດຂອງທ່ານພ້ອມໃຊ້ແລ້ວ.',
@@ -3934,6 +3955,7 @@ return [
             'note_fill_email' => "* إذا أدخلت البريد الإلكتروني، سيتم إرسال نسخة إضافية للتخزين.",
             'step_2_buy_now' => "الخطوة 2: اختر طريقة الدفع.",
             'what_do_you_want_to_find_today' => "ماذا تريد أن تجد اليوم؟",
+            'search' => "بحث",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'تأكيد الطلب',
             'thank_you_message_email' => 'شكرًا لإكمال طلبك! خلفيتك جاهزة للاستخدام.',
@@ -4117,6 +4139,7 @@ return [
             'note_fill_email' => "* اگر ایمیل را وارد کنید، یک نسخه اضافی برای ذخیره ارسال می‌شود.",
             'step_2_buy_now' => "مرحله 2: روش پرداخت را انتخاب کنید.",
             'what_do_you_want_to_find_today' => "امروز چه چیزی می خواهید پیدا کنید؟",
+            'search' => "جستجو",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'تأیید سفارش',
             'thank_you_message_email' => 'از تکمیل سفارش خود سپاسگزاریم! تصویر زمینه شما آماده استفاده است.',
@@ -4300,6 +4323,7 @@ return [
             'note_fill_email' => "* Если вы введете адрес электронной почты, будет отправлена дополнительная копия для хранения.",
             'step_2_buy_now' => "Шаг 2: Выберите способ оплаты.",
             'what_do_you_want_to_find_today' => "Что вы хотите найти сегодня?",
+            'search' => "Поиск",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Подтверждение заказа',
             'thank_you_message_email' => 'Спасибо за оформление заказа! Ваш обои готовы к использованию.',
@@ -4483,6 +4507,7 @@ return [
             'note_fill_email' => "* Wenn Sie eine E-Mail eingeben, wird eine zusätzliche Kopie zur Speicherung gesendet.",
             'step_2_buy_now' => "Schritt 2: Wählen Sie eine Zahlungsmethode.",
             'what_do_you_want_to_find_today' => "Was möchten Sie heute finden?",
+            'search' => "Suchen",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Bestellbestätigung',
             'thank_you_message_email' => 'Vielen Dank, dass Sie Ihre Bestellung abgeschlossen haben! Ihr Hintergrundbild ist einsatzbereit.',
@@ -4666,6 +4691,7 @@ return [
             'note_fill_email' => "* Bir e-posta girerseniz, saklama için ek bir kopya gönderilecektir.",
             'step_2_buy_now' => "Adım 2: Bir ödeme yöntemi seçin.",
             'what_do_you_want_to_find_today' => "Bugün ne bulmak istiyorsunuz?",
+            'search' => "Ara",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Sipariş Onayı',
             'thank_you_message_email' => 'Siparişinizi tamamladığınız için teşekkürler! Duvar kağıdınız kullanıma hazır.',
@@ -4849,6 +4875,7 @@ return [
             'note_fill_email' => "* Se inserisci un'email, verrà inviata una copia aggiuntiva per l'archiviazione.",
             'step_2_buy_now' => "Passaggio 2: Scegli un metodo di pagamento.",
             'what_do_you_want_to_find_today' => "Cosa vuoi trovare oggi?",
+            'search' => "Cerca",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Conferma dell\'ordine',
             'thank_you_message_email' => 'Grazie per aver completato il tuo ordine! Il tuo sfondo è pronto per l\'uso.',
@@ -5032,6 +5059,7 @@ return [
             'note_fill_email' => "* Jeśli wprowadzisz e-mail, zostanie wysłana dodatkowa kopia do przechowywania.",
             'step_2_buy_now' => "Krok 2: Wybierz metodę płatności.",
             'what_do_you_want_to_find_today' => "Co chcesz znaleźć dzisiaj?",
+            'search' => "Szukaj",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Potwierdzenie zamówienia',
             'thank_you_message_email' => 'Dziękujemy za zrealizowanie zamówienia! Twoja tapeta jest gotowa do użycia.',
@@ -5215,6 +5243,7 @@ return [
             'note_fill_email' => "* Якщо ви введете електронну пошту, буде надіслано додаткову копію для зберігання.",
             'step_2_buy_now' => "Крок 2: Виберіть спосіб оплати.",
             'what_do_you_want_to_find_today' => "Що ви хочете знайти сьогодні?",
+            'search' => "Пошук",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Підтвердження замовлення',
             'thank_you_message_email' => 'Дякуємо за оформлення замовлення! Ваші шпалери готові до використання.',
@@ -5398,6 +5427,7 @@ return [
             'note_fill_email' => "* Als u een e-mail invoert, wordt er een extra kopie voor opslag verzonden.",
             'step_2_buy_now' => "Stap 2: Kies een betaalmethode.",
             'what_do_you_want_to_find_today' => "Wat wil je vandaag vinden?",
+            'search' => "Zoeken",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Bestellingsbevestiging',
             'thank_you_message_email' => 'Bedankt voor het voltooien van uw bestelling! Uw achtergrond is klaar voor gebruik.',
@@ -5581,6 +5611,7 @@ return [
             'note_fill_email' => "* Εάν εισάγετε ένα email, θα σταλεί ένα επιπλέον αντίγραφο για αποθήκευση.",
             'step_2_buy_now' => "Βήμα 2: Επιλέξτε μια μέθοδο πληρωμής.",
             'what_do_you_want_to_find_today' => "Τι θέλετε να βρείτε σήμερα;",
+            'search' => "Αναζήτηση",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Επιβεβαίωση παραγγελίας',
             'thank_you_message_email' => 'Σας ευχαριστούμε που ολοκληρώσατε την παραγγελία σας! Η ταπετσαρία σας είναι έτοιμη για χρήση.',
@@ -5764,6 +5795,7 @@ return [
             'note_fill_email' => "* Ha megad egy e-mailt, egy további példány kerül elküldésre tárolás céljából.",
             'step_2_buy_now' => "2. lépés: Válasszon fizetési módot.",
             'what_do_you_want_to_find_today' => "Mit szeretne megtalálni ma?",
+            'search' => "Keresés",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Rendelés visszaigazolása',
             'thank_you_message_email' => 'Köszönjük, hogy befejezte rendelését! A háttérképe készen áll a használatra.',
@@ -5947,6 +5979,7 @@ return [
             'note_fill_email' => "* Pokud zadáte e-mail, bude zaslána další kopie pro uložení.",
             'step_2_buy_now' => "Krok 2: Vyberte způsob platby.",
             'what_do_you_want_to_find_today' => "Co chcete dnes najít?",
+            'search' => "Hledat",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Potvrzení objednávky',
             'thank_you_message_email' => 'Děkujeme za dokončení objednávky! Vaše tapeta je připravena k použití.',
@@ -6130,6 +6163,7 @@ return [
             'note_fill_email' => "* Dacă introduceți un e-mail, va fi trimisă o copie suplimentară pentru stocare.",
             'step_2_buy_now' => "Pasul 2: Alegeți o metodă de plată.",
             'what_do_you_want_to_find_today' => "Ce vrei să găsești astăzi?",
+            'search' => "Căutare",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Confirmare comandă',
             'thank_you_message_email' => 'Vă mulțumim că ați finalizat comanda! Tapetul dumneavoastră este gata de utilizare.',
@@ -6313,6 +6347,7 @@ return [
             'note_fill_email' => "* Ak zadáte e-mail, bude poslaná ďalšia kópia na uloženie.",
             'step_2_buy_now' => "Krok 2: Vyberte spôsob platby.",
             'what_do_you_want_to_find_today' => "Čo chcete dnes nájsť?",
+            'search' => "Hľadať",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Potvrdenie objednávky',
             'thank_you_message_email' => 'Ďakujeme za dokončenie objednávky! Vaša tapeta je pripravená na použitie.',
@@ -6496,6 +6531,7 @@ return [
             'note_fill_email' => "* თუ შეიყვანთ ელ.ფოსტას, დამატებითი ასლი გაიგზავნება შესანახად.",
             'step_2_buy_now' => "ნაბიჯი 2: აირჩიეთ გადახდის მეთოდი.",
             'what_do_you_want_to_find_today' => "რას ეძებთ დღეს?",
+            'search' => "ძიება",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'შეკვეთის დადასტურება',
             'thank_you_message_email' => 'გმადლობთ თქვენი შეკვეთის დასრულებისთვის! თქვენი ფონი მზად არის გამოსაყენებლად.',
@@ -6679,6 +6715,7 @@ return [
             'note_fill_email' => "* אם תזין אימייל, עותק נוסף יישלח לאחסון.",
             'step_2_buy_now' => "שלב 2: בחר שיטת תשלום.",
             'what_do_you_want_to_find_today' => "מה אתה רוצה למצוא היום?",
+            'search' => "חיפוש",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'אישור הזמנה',
             'thank_you_message_email' => 'תודה שהשלמת את ההזמנה שלך! הטפט שלך מוכן לשימוש.',
@@ -6862,6 +6899,7 @@ return [
             'note_fill_email' => "* Agar siz elektron pochta manzilini kiritsangiz, saqlash uchun qo'shimcha nusxa yuboriladi.",
             'step_2_buy_now' => "2-qadam: To'lov usulini tanlang.",
             'what_do_you_want_to_find_today' => "Bugun nimani topmoqchisiz?",
+            'search' => "Qidirish",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Buyurtmani tasdiqlash',
             'thank_you_message_email' => 'Buyurtmangizni bajarganingiz uchun rahmat! Fon rasmi foydalanishga tayyor.',
@@ -7045,6 +7083,7 @@ return [
             'note_fill_email' => "* Se você inserir um e-mail, uma cópia adicional será enviada para armazenamento.",
             'step_2_buy_now' => "Passo 2: Escolha um método de pagamento.",
             'what_do_you_want_to_find_today' => "O que você quer encontrar hoje?",
+            'search' => "Procurar",
             /* xác nhận đơn hàng */
             'order_confirmation' => 'Confirmação do pedido',
             'thank_you_message_email' => 'Obrigado por concluir seu pedido! Seu papel de parede está pronto para uso.',

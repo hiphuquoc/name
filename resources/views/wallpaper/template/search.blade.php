@@ -5,7 +5,15 @@
 
 @endphp
 
-<div class="searchViewBefore">
+<!-- search mobile -->
+<div class="menuTop_item iconSearchMobile" onclick="toggleSearchMobile();">
+    @php
+        $icon = file_get_contents('storage/images/svg/search.svg');
+    @endphp
+    {!! $icon !!}
+</div>
+<!-- search desktop -->
+<div class="menuTop_item searchViewBefore">
     <form action="{{ route('routing', ['slug' => config('language.'.$language.'.slug_page_premium_wallpaper')]).'?search=' }}" method="GET">
         <div class="searchViewBefore_showBox">
             <div class="searchViewBefore_showBox_typeBox" onclick="openSelected('js_openSelected_typeBoxList', 'searchViewBefore_showBox_typeBox')">
@@ -40,7 +48,7 @@
                         $icon = file_get_contents('storage/images/svg/search.svg');
                     @endphp
                     {!! $icon !!}
-                    <span>Tìm kiếm</span>
+                    <span>{{ config('language.'.$language.'.data.search') }}</span>
                 </button>
                 <div id="js_searchAjax_idWrite" class="searchViewBefore_showBox_inputBox_list">
                     <!-- load Ajax -->
@@ -65,23 +73,35 @@
             }, 500);
         });
 
-        function toggleSearchMobile(){
-            const elementSearchBox = $('.searchViewBefore');
-            elementSearchBox.css({
-                'opacity'   : '1',
-                'width'     : '100%',
-                'z-index'   : '1'
-            });
-            $('.searchViewBefore input').focus();
-            /* mở phần hiển thị kết quả search (nếu đang đóng) */
-            $('#js_searchAjax_idWrite').css('height', 'auto');
-            $('.searchViewBefore_background').css('display', 'block');
+        function toggleSearchMobile() {
+            const searchView = document.querySelector('.searchViewBefore');
+            if (searchView) {
+                searchView.classList.toggle('active');
+            } else {
+                console.error("Phần tử .searchViewBefore không tồn tại.");
+            }
         }
-        function closeBoxSearchMobile(){
-            toggleSearchMobile();
-            $('.searchViewBefore_selectbox').css('height', '0');
-            $('.searchViewBefore_background').css('display', 'none');
-        }
+
+        // function toggleSearchMobile(){
+        //     const elementSearchBox = $('.searchViewBefore');
+        //     elementSearchBox.css({
+        //         'opacity'   : '1',
+        //         'width'     : '100%',
+        //         'z-index'   : '1'
+        //     });
+        //     $('.searchViewBefore input').focus();
+        //     /* mở phần hiển thị kết quả search (nếu đang đóng) */
+        //     $('#js_searchAjax_idWrite').css('height', 'auto');
+        //     $('.searchViewBefore_background').css('display', 'block');
+        // }
+
+        
+
+        // function closeBoxSearchMobile(){
+        //     toggleSearchMobile();
+        //     $('.searchViewBefore_selectbox').css('height', '0');
+        //     $('.searchViewBefore_background').css('display', 'none');
+        // }
         /* mỗi khi người dùng nhập một ký tự mới, hàm searchWallpapersWithDelay sẽ đặt một hẹn giờ (setTimeout) để gọi hàm searchWallpapers sau 0.5 giây. Nếu có thêm ký tự nào được nhập trong khoảng 0.5 giây, hẹn giờ trước đó sẽ bị xóa và hẹn giờ mới sẽ được đặt lại. Điều này giúp tạo ra hiệu ứng chờ giữa các lần nhập. */
         var searchTimer;
         function searchAjaxWithDelay(input) {

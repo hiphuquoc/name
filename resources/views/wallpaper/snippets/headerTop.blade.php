@@ -1,8 +1,6 @@
 <div class="menuTop">
-    <div class="menuTop_item" style="width: 100%;">
-        <!-- search box -->
-        @include('wallpaper.template.search')
-    </div>
+    <!-- search box -->
+    @include('wallpaper.template.search')
 
     <div class="menuTop_item rightBox">
         
