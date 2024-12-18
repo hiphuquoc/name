@@ -66,7 +66,7 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '2. Tin tức',
+                    'name'  => '2. Bài viết',
                     'route' => 'admin.blog.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],

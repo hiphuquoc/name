@@ -329,7 +329,7 @@ class ProductController extends Controller {
                                 ->with('seo', 'seos', 'seo.contents', 'prices.wallpapers')
                                 ->first();
                 /* xóa ảnh đại diện trên google_clouds */ 
-                Upload::deleteWallpaper($info->seo->image);
+                if(!empty($info->seo->image)) Upload::deleteWallpaper($info->seo->image);
                 /* xóa bảng product_price */
                 $info->prices->each(function ($price) {
                     $price->wallpapers()->delete();
@@ -340,8 +340,8 @@ class ProductController extends Controller {
                 /* delete các trang seos ngôn ngữ */
                 foreach($info->seos as $s){
                     /* xóa ảnh đại diện trên google_clouds */ 
-                    Upload::deleteWallpaper($s->infoSeo->image);
-                    foreach($s->infoSeo->contents as $c) $c->delete();
+                    if(!empty($s->infoSeo->image)) Upload::deleteWallpaper($s->infoSeo->image);
+                    if(!empty($s->infoSeo->contents)) foreach($s->infoSeo->contents as $c) $c->delete();
                     $s->infoSeo()->delete();
                     $s->delete();
                 }
