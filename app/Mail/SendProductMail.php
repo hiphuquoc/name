@@ -27,7 +27,7 @@ class SendProductMail extends Mailable {
     }
 
     public function build(){
-        $email = $this->subject('Xác Nhận Đơn Hàng - Name.com.vn')
+        $email = $this->subject('Confirm Order - Name.com.vn')
                     ->view('wallpaper.mail.sendProduct')
                     ->with([
                         'order' => $this->order,

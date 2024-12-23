@@ -10,23 +10,17 @@ use App\Models\Category;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Models\ISO3166;
-use App\Models\Tag;
+use App\Models\Order;
 use App\Models\Seo;
 use App\Models\SeoContent;
 use App\Models\Product;
 use GeoIp2\Database\Reader;
-
-// use App\Models\Prompt;
-// use Intervention\Image\ImageManagerStatic;
-// use Illuminate\Support\Facades\Http;
-// use GuzzleHttp\Client;
-// use AdityaDees\LaravelBard\LaravelBard;
-// use App\Http\Controllers\Admin\TranslateController;
-// use App\Jobs\AutoTranslateContent;
-// use App\Models\FreeWallpaper;
-// use App\Models\RelationSeoCategoryInfo;
+use Illuminate\Support\Facades\Session;
 use App\Models\RelationSeoProductInfo;
 use App\Models\Timezone;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendProductMail;
 
 // use App\Models\RelationSeoTagInfo;
 // use App\Models\RelationSeoPageInfo;
@@ -80,16 +74,30 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        $allTimezone = Timezone::all();
-        foreach($allTimezone as $timezone){
-            $timezoneLow    = strtolower($timezone->timezone);
-            Timezone::updateItem($timezone->id, [
-                'timezone_lower'    => $timezoneLow
-            ]);
+        // $dataLanguage   = config('language');
+        // $i              = 1;
+        // foreach($dataLanguage as $language){
+        //     echo '<div>'.$i.'. '.$language['key'].'</div>';
+        //     ++$i;
+        // }
+
+        // dd($dataLanguage);
+
+
+        // dd(123);
+        $code       = $request->get('code');
+        $orderInfo  = Order::select('*')
+                        ->where('code', $code)
+                        ->first();
+        $language   = 'en';
+        if(!empty($orderInfo)){
+            /* cập nhật trạng thái thành toán thành công */
+            if(!empty($updateStatus) && $updateStatus == true) Order::updateItem($orderInfo->id, ['payment_status' => 1]);
+            /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
+            if($orderInfo->payment_type=='payment_cart') Session::forget('cart');
+            /* tạo job gửi email */
+            if(!empty($orderInfo->customer->email)) Mail::to($orderInfo->customer->email)->queue(new SendProductMail($orderInfo, $language));
         }
-
-
-        dd(123);
         
     }
 
@@ -101,151 +109,4 @@ class HomeController extends Controller {
         // Kết hợp các phần tử không trùng
         return array_merge($uniqueInArr1, $uniqueInArr2);
     }
-
-    // public static function copyProductBySource($urlSource, $urlSearch){
-    //     $response  = [];
-    //     $productSource  = Product::select('*')
-    //         ->whereHas('seo', function ($query) use($urlSource){
-    //             $query->where('slug', $urlSource);
-    //         })
-    //         ->with('seo', 'seos.infoSeo.contents')
-    //         ->first();
-
-    //     $tmp            = Product::select('*')
-    //         ->whereHas('seo', function ($query) use($urlSearch){
-    //             $query->where('slug', 'LIKE', $urlSearch.'%');
-    //         })
-    //         ->where('id', '!=', $productSource->id)
-    //         ->with('seo', 'seos.infoSeo.contents')
-    //         ->get();
-    //     $k      = 1;
-    //     foreach ($tmp as $t) {
-    //         /* xóa relation seos -> infoSeo -> contents (nếu có) */
-    //         foreach ($t->seos as $seo) {
-    //             foreach ($seo->infoSeo->contents as $content) {
-    //                 SeoContent::select('*')
-    //                     ->where('id', $content->id)
-    //                     ->delete();
-    //             }
-    //             \App\Models\RelationSeoProductInfo::select('*')
-    //                 ->where('seo_id', $seo->seo_id)
-    //                 ->delete();
-    //             Seo::select('*')
-    //                 ->where('id', $seo->seo_id)
-    //                 ->delete();
-    //         }
-    //         /* tạo dữ liệu mới */
-    //         $i = 0;
-    //         foreach ($productSource->seos as $seoS) {
-    //             /* tạo seo */
-    //             $tmp2   = $seoS->infoSeo->toArray();
-    //             $insert = [];
-    //             foreach ($tmp2 as $key => $value) {
-    //                 if ($key != 'contents' && $key != 'id') $insert[$key] = $value;
-    //             }
-    //             $insert['link_canonical']   = $tmp2['id'];
-    //             $insert['slug']             = $tmp2['slug'] . '-' . $k;
-    //             $insert['slug_full']        = $tmp2['slug_full'] . '-' . $k;
-    //             $idSeo = Seo::insertItem($insert);
-    //             /* cập nhật lại seo_id của product */
-    //             if ($insert['language'] == 'vi') {
-    //                 Product::updateItem($t->id, [
-    //                     'seo_id' => $idSeo,
-    //                 ]);
-    //             }
-    //             $response[] = $idSeo;
-    //             /* tạo relation_seo_product_info */
-    //             RelationSeoProductInfo::insertItem([
-    //                 'seo_id'    => $idSeo,
-    //                 'product_info_id' => $t->id,
-    //             ]);
-    //             /* tạo content */
-    //             foreach ($seoS->infoSeo->contents as $content) {
-    //                 $contentInsert = $content->content;
-    //                 $contentInsert = str_replace($seoS->infoSeo->slug_full, $insert['slug_full'], $contentInsert);
-    //                 SeoContent::insertItem([
-    //                     'seo_id'    => $idSeo,
-    //                     'content'   => $contentInsert,
-    //                     'ordering'  => $content->ordering,
-    //                 ]);
-    //             }
-    //             ++$i;
-    //         }
-    //         /* copy relation product và category */
-    //         \App\Models\RelationCategoryProduct::select('*')
-    //             ->where('product_info_id', $t->id)
-    //             ->delete();
-    //         foreach($productSource->categories as $category){
-    //             \App\Models\RelationCategoryProduct::insertItem([
-    //                 'category_info_id'       => $category->category_info_id,
-    //                 'product_info_id'      => $t->id
-    //             ]);
-    //         }
-    //         /* copy relation product và tag */
-    //         \App\Models\RelationTagInfoOrther::select('*')
-    //             ->where('reference_type', 'product_info')
-    //             ->where('reference_id', $t->id)
-    //             ->delete();
-    //         foreach($productSource->tags as $tag){
-    //             \App\Models\RelationTagInfoOrther::insertItem([
-    //                 'tag_info_id'       => $tag->tag_info_id,
-    //                 'reference_type'    => 'product_info',
-    //                 'reference_id'      => $t->id
-    //             ]);
-    //         }
-    //         ++$k;
-    //     }
-    //     return $response;
-    // }
-
-    // public static function getCategories($params){
-    //     $language       = session()->get('language');
-    //     $sortBy         = $params['sort_by'] ?? null;
-    //     $loaded         = $params['loaded'] ?? 0;
-    //     $requestLoad    = $params['request_load'] ?? 10;
-    //     $type           = $params['type'] ?? 'category_info'; /* category_info, style_info, event_info */
-    //     $response       = [];
-    //     $items          = Category::select('*')
-    //                         ->whereHas('seo', function($query) use($type){
-    //                             $query->where('level', 2)
-    //                                 ->where('type', $type);
-    //                         })
-    //                         ->whereHas('seos.infoSeo', function($query) use($language){
-    //                             $query->where('language', $language);
-    //                         })
-    //                         ->where('flag_show', 1)
-    //                         ->when(empty($sortBy), function($query){
-    //                             $query->orderBy('id', 'ASC');
-    //                         })
-    //                         ->when($sortBy=='newest'||$sortBy=='propose', function($query){
-    //                             $query->orderBy('id', 'DESC');
-    //                         })
-    //                         ->when($sortBy=='favourite', function($query){
-    //                             $query->orderBy('heart', 'DESC')
-    //                                     ->orderBy('id', 'DESC');
-    //                         })
-    //                         ->when($sortBy=='oldest', function($query){
-    //                             $query->orderBy('id', 'ASC');
-    //                         })
-    //                         // ->with(['seo', 'seos.infoSeo' => function($query) use($language) {
-    //                         //     $query->where('language', $language);
-    //                         // }])
-    //                         ->skip($loaded)
-    //                         ->take($requestLoad)
-    //                         ->get();
-    //     $total          = Category::select('*')
-    //                         ->whereHas('seo', function($query) use($type){
-    //                             $query->where('level', 2)
-    //                                 ->where('type', $type);
-    //                         })
-    //                         ->whereHas('seos.infoSeo', function($query) use($language){
-    //                             $query->where('language', $language);
-    //                         })
-    //                         ->where('flag_show', 1)
-    //                         ->count();
-    //     $response['items']      = $items;
-    //     $response['total']      = $total;
-    //     $response['loaded']     = $loaded + $requestLoad;
-    //     return $response;
-    // }
 }
