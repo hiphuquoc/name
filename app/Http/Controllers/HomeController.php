@@ -96,7 +96,7 @@ class HomeController extends Controller {
             /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
             if($orderInfo->payment_type=='payment_cart') Session::forget('cart');
             /* tạo job gửi email */
-            if(!empty($orderInfo->customer->email)) Mail::to($orderInfo->customer->email)->queue(new SendProductMail($orderInfo, $language));
+            if(!empty($orderInfo->email)) Mail::to($orderInfo->email)->queue(new SendProductMail($orderInfo, $language));
         }
         
     }
