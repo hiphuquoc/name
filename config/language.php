@@ -8291,7 +8291,7 @@ return [
         ],
     ],
 
-    /* gpt 40-mini */
+    /* gpt 4o-mini */
     "tk" => [
         "name" => "Turkmen",
         "name_by_language" => "Türkmençe",
@@ -11427,6 +11427,7 @@ return [
         ],
     ],
 
+    /* chatGPT 4o */
     "sm" => [
         "name" => "Samoan",
         "name_by_language" => "Samoan",
@@ -11443,7 +11444,172 @@ return [
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "",
         "data" => [
-            // Có thể thêm dữ liệu nội bộ nếu cần
+            "home"              => "Itūlā Muamua",
+            "about_us"          => "E uiga i matou",
+            "event"             => "Mea na Tutupu",
+            "support"           => "Lagolago",
+            "connect_with_us"   => "Fesoʻotaʻi ma matou",
+            "table_of_contents" => "Lisi o Mataupu",
+            "photo_set"         => "Seti o Ata",
+            "share"             => "Fetufaai",
+            "no_suitable_results_found" => "Leai ni taunuuga talafeagai na maua",
+            "cart"              => "Taavale Fa'atau",
+            "your_cart_is_empty"    => "O lau Taavale Fa'atau e leai se mea",
+            "continue_shopping" => "Fa'aauau Fa'atau",
+            "full_set"          => "Seti Atoatoa",
+            "image"             => "Ata",
+            "options"           => "Filifiliga",
+            "product_guide_after_payment"   => "<div>A uma le totogi, o le a e mauaina sa'o ma ala i le imeli le ata muamua mo le la'uina.</div>",
+            "suggestions_for_you"   => "Fautuaga mo oe!",
+            "each_image"        => "Tasi Ata",
+            "each_set"          => "Tasi Seti",
+            "propose" => "Fautua",
+            "favourite" => "E fiafia i ai",
+            "newest" => "Fou fou",
+            "oldest" => "Tuai tele",
+            "browse_by" => "Su'esu'e i ",
+            "sort_by" => "Fa'avasega e ",
+            "filter_by" => "Fa'amama e ",
+            "filter_by_themes" => "Fa'amama e Autu",
+            "filter_by_styles" => "Fa'amama e Sitaili",
+            "filter_by_events" => "Fa'amama e Mea na Tutupu",
+            "advanced_filter" => "Fa'amama Fa'apitoa",
+            "all" => "Uma",
+            "added_to_cart" => "Ua Fa'aopoopo i le Taavale Fa'atau!",
+            "view_cart" => "Va'ai i le Taavale Fa'atau",
+            "add_to_cart" => "Fa'aopoopo i le Taavale Fa'atau",
+            "buy_now" => "Fa'atau Nei",
+            "undefined" => "Le fa'amatalaina",
+            "total" => "Aofai",
+            "remove_item_in_cart" => "Aveese Mea i le Taavale Fa'atau",
+            "product_list" => "Lisi o Oloa",
+            "product" => "Oloa",
+            "unit_price" => "Tau i le Iunite",
+            "total_price" => "Tau Aofai",
+            "payment" => "Totogi",
+            "information" => "Fa'amatalaga",
+            "email_prompt" => "Afai e te fa'aaogaina le imeli, o le a tu'uina atu fo'i se kopi mo le teuina.",
+            "email_receive" => "Imeli mo le mauaina o ata",
+            "payment_method" => "Metotia Totogi",
+            "fee" => "Totogifuapauina",
+            "payment_fee" => "Totogifuapauina Totogi",
+            "view_all" => "Va'ai uma",
+            "login_name_com_vn" => "Ulufale i le Name.com.vn",
+            "login_email" => "Imeli mo le ulufale",
+            "password" => "Upu fa'ataga",
+            "remember_me" => "Manatua a'u",
+            "login" => "Ulufale",
+            "or_login_with" => "Po'o ulufale i le",
+            "support" => "Lagolago",
+            "download_guide" => "Tusi Lesona mo le La'uina",
+            "account_information" => "Fa'amatalaga o le Teugatupe",
+            "my_downloads" => "O a'u La'uina",
+            "logout" => "Fa'amavae",
+            "article" => "Tusitusiga",
+            "featured_articles" => "Tusitusiga Fa'apitoa",
+            "news_category" => "Vaega o Tala Fou",
+            "payment_successful" => "Totogi Fa'amanuiaina!",
+            "thank_you_message" => "Fa'afetai mo le lagolagoina o le Name.com.vn. O lau ata o lo'o i lalo po'o le mafai ona e ulufale i lau imeli e la'u ai.",
+            "order_id" => "Numera Poloaiga",
+            "email" => "Imeli",
+            "click_to_download" => "Kiliki e la'uina",
+            "step_1_buy_now" => "Laasaga 1: Fa'amolemole tu'uina atu lau imeli.",
+            "note_fill_email" => "* Afai e tu'uina atu lau imeli, o le a tu'uina atu fo'i se kopi mo le teuina.",
+            "step_2_buy_now" => "Laasaga 2: Filifili le Metotia Totogi.",
+            "what_do_you_want_to_find_today" => "O le a le mea e te fia su'eina i le asō?",
+            "search" => "Su'e",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Faʻamaoniga o le Poloaiga',
+            'thank_you_message_email' => 'Faafetai lava mo le maeʻa ai o lau poloaiga! O lau ata puipui ua sauni e faʻaaoga.',
+            'hello' => 'Talofa',
+            'purchase_date' => 'Aso Faatau',
+            'download_instructions' => 'E mafai ona e sii mai lau ata puipui i auala nei:',
+            'direct_download' => 'Sii mai saʻo e ala i sootaga o lo’o i lalo:',
+            'sincerely' => 'Faamaoni!',
+            'login_instruction_message_email' => 'Poʻo ulufale i totonu o le <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> e faʻaaoga lau imeli ma alu i le vaega <strong>"Laʻu Siisii"</strong>',
+            'support_contact_message_email' => 'Afai e i ai ni au fesili pe manaʻomia se fesoasoani, faamolemole faafesootai matou i le imeli: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Matou te faamoemoe e te fiafia i lau aoina fou o ata puipui!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "Autu o Ata Puipui",
+                "topgirl"  => "Autu o Ata",
+                "topanime"  => "Autu o Ata",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "Sitaili o Ata Puipui",
+                "topgirl"  => "Sitaili o Ata",
+                "topanime"  => "Sitaili o Ata",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "Ata Puipui Saoloto",
+                "topgirl"  => "Ata Saoloto",
+                "topanime"  => "Ata Saoloto",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "Ata Puipui mo Telefoni",
+                "topgirl"  => "Ata o Tamaitai Lalelei",
+                "topanime"  => "Ata Anime",
+            ],
+            "product_description"   => [
+                "name"  => "<p>Fa'alelei lau lau telefoni i se galuega taulima ma lenei aoina matagofie o ata puipui! Aumai se sitaili fou ma fou i lau telefoni.</p>
+                            <ul>
+                                <li>Fuainumera Maualuga: 1440x3360, mautinoa se ata manino i fa'amatalaga uma.</li>
+                                <li>Fa'afetaui lelei ma ituaiga uma o lau telefoni.</li>
+                                <li>Sii mai vave ma faigofie i ni nai laasaga faigofie.</li>
+                                <li>E aofia ai aia tatau fa'aoga, e mafai ona e tufatufaina i au uo.</li>
+                            </ul>
+                            <div>Sii mai nei ma lagona le eseesega i luga o lau telefoni!</div>",
+                "topgirl"  => "<div>Aumai se lanu fou ma sitaili ese i lau telefoni matagofie i lenei aoina matagofie o ata puipui.</div>
+                                <ul>
+                                    <li>Fuainumera: 1440x3360</li>
+                                    <li>Fa'afetaui ma lau telefoni uma.</li>
+                                </ul>
+                                <div>Sii mai ma fa'aoga loa i lau telefoni!</div>",
+                "topanime"  => "<div>Aumai se lanu fou ma sitaili ese i lau telefoni matagofie i lenei aoina matagofie o ata puipui.</div>
+                                <ul>
+                                    <li>Fuainumera: 1440x3360</li>
+                                    <li>Fa'afetaui ma lau telefoni uma.</li>
+                                </ul>
+                                <div>Sii mai ma fa'aoga loa i lau telefoni!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "Ata Puipui mo Telefoni e Fa'atatau i Autu",
+                "topgirl"  => "Ata o Tamaitai Lalelei e Fa'atatau i Autu",
+                "topanime"  => "Ata Anime e Fa'atatau i Autu",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "Ata Puipui mo Telefoni e Fa'atatau i Sitaili",
+                "topgirl"  => "Ata o Tamaitai Lalelei e Fa'atatau i Sitaili",
+                "topanime"  => "Ata Anime e Fa'atatau i Sitaili",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "Ata Puipui mo Telefoni e Fa'atatau i Mea Fa'apitoa",
+                "topgirl"  => "Ata o Tamaitai Lalelei e Fa'atatau i Mea Fa'apitoa",
+                "topanime"  => "Ata Anime e Fa'atatau i Mea Fa'apitoa",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Vaega',
+                    'paid_wallpaper' => 'Ata Puipui Totogi',
+                    'free_wallpaper' => 'Ata Puipui Saoloto',
+                    'article' => 'Mataupu Tusitusia',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Vaega',
+                    'paid_wallpaper' => 'Ata Puipui Totogi',
+                    'free_wallpaper' => 'Ata Puipui Saoloto',
+                    'article' => 'Mataupu Tusitusia',
+                ],
+                'topanime' => [
+                    'category_info' => 'Vaega',
+                    'paid_wallpaper' => 'Ata Puipui Totogi',
+                    'free_wallpaper' => 'Ata Puipui Saoloto',
+                    'article' => 'Mataupu Tusitusia',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "Pule Tau Fatuga ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Fuafuaina ma Atina'e e Phạm Văn Phú. Ua taofia aia tatau uma.",
+            ],
         ],
     ],
 
@@ -11463,7 +11629,172 @@ return [
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "",
         "data" => [
-            // Có thể thêm dữ liệu nội bộ nếu cần
+            "home"              => "‘Api",
+            "about_us"          => "Fekau‘aki mo kimautolu",
+            "event"             => "Me‘a",
+            "support"           => "Tokoni",
+            "connect_with_us"   => "Fetu‘utaki mo kimautolu",
+            "table_of_contents" => "Tepile ʻo e Ngaahi Kaveinga",
+            "photo_set"         => "Fakatātā ‘o e Konga",
+            "share"             => "Vahevahe",
+            "no_suitable_results_found" => "‘Ikai ha ola totonu na‘e ma‘u",
+            "cart"              => "Ngalu",
+            "your_cart_is_empty"    => "Ko ho‘o ngalu ‘oku tā‘e‘ataa",
+            "continue_shopping" => "Fakakoloa pea kei fakatau atu",
+            "full_set"          => "Kongakatoa",
+            "image"             => "Fakatātā",
+            "options"           => "Ngaahi Filifili",
+            "product_guide_after_payment"   => "<div>Hili hono totongi, te ke ma‘u ho‘o fakatātā mo‘oni tōmui pea fakafoki ‘i he ‘imeili ke ke lava ai ‘o tō hifo ‘a e ngaue.</div>",
+            "suggestions_for_you"   => "Ngaahi Fakakaukau kiate koe!",
+            "each_image"        => "Fakatātā taki taha",
+            "each_set"          => "Konga taki taha",
+            "propose" => "Fakahinohino",
+            "favourite" => "Me‘a ‘Ofa",
+            "newest" => "Fou ‘Aupito",
+            "oldest" => "Motu‘a ‘Aupito",
+            "browse_by" => "Liliu ‘i he ",
+            "sort_by" => "Fokotu‘u ‘aki ",
+            "filter_by" => "Sivi ‘aki ",
+            "filter_by_themes" => "Sivi ‘aki ‘a e Ngaahi Kaveinga",
+            "filter_by_styles" => "Sivi ‘aki ‘a e Ngaahi Fa‘unga",
+            "filter_by_events" => "Sivi ‘aki ‘a e Ngaahi Me‘a",
+            "advanced_filter" => "Ngaahi Sivi Fakapoto",
+            "all" => "Kotoa",
+            "added_to_cart" => "Kuo fakahū ki he Ngalu!",
+            "view_cart" => "Vakai ki he Ngalu",
+            "add_to_cart" => "Hū ki he Ngalu",
+            "buy_now" => "Fakatau He taimi ni",
+            "undefined" => "Ta‘e‘ilo",
+            "total" => "Faka‘osi",
+            "remove_item_in_cart" => "To’o ‘a e me‘a ‘i he Ngalu",
+            "product_list" => "Lisi ʻo e Ngaahi Me‘a",
+            "product" => "Ngaahi Me‘a",
+            "unit_price" => "Totongi Taki Taha",
+            "total_price" => "Totongi Fakakatoa",
+            "payment" => "Totongi",
+            "information" => "Fakamatala",
+            "email_prompt" => "Kapau te ke hū mai ha ‘imeili, te ke ma‘u ha kopi ke fakafoki.",
+            "email_receive" => "‘Imeili ki he Fakahinohino",
+            "payment_method" => "Founga Totongi",
+            "fee" => "Totongi Faka‘atā",
+            "payment_fee" => "Totongi ʻo e Founga Totongi",
+            'view_all' => 'Vakai kotoa',
+            'login_name_com_vn' => 'Hū ki he Name.com.vn',
+            'login_email' => '‘Imeili ki hono Hū',
+            'password' => "Paasiweti",
+            'remember_me' => "Manatua au",
+            'login' => "Hū",
+            'or_login_with' => "Pe hū mo e",
+            'support' => "Tokoni",
+            'download_guide' => "Tufaki ʻo e Ngaahi Tu‘utu‘uni",
+            'account_information' => "Fakamatala ʻo e ‘Akauni",
+            'my_downloads' => "‘Oku ma‘u hifo ‘e au",
+            'logout' => "Hū ki tu‘a",
+            'article' => "Kaveinga",
+            'featured_articles' => "Ngaahi Kaveinga Faka‘ilonga",
+            'news_category' => "Ngaahi Kaveinga Tala‘ofa",
+            'payment_successful' => "Na‘e lava lelei hono Totongi!",
+            'thank_you_message' => "Fakamālo atu koe kuo tokoni ki he Name.com.vn. Ko ho‘o ngaahi fakatātā ‘oku tu‘a atu pe ‘oku ha ai ‘i ho‘o ‘imeili.",
+            'order_id' => "‘Ulu‘i Fakataha",
+            'email' => "‘Imeili",
+            'click_to_download' => "Lomi‘i ke tō hifo",
+            'step_1_buy_now' => "Laka 1: Kataki ‘o hū ho‘o ‘imeili.",
+            'note_fill_email' => "* Kapau te ke fakahu ha ‘imeili te ke ma‘u ha kopi ke fakafoki.",
+            'step_2_buy_now' => "Laka 2: Fili ‘a e Founga Totongi.",
+            'what_do_you_want_to_find_today' => "Ko e hā ‘oku ke fie ma‘u ‘i he ‘aho ni?",
+            'search' => "Kumi",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Fakapapauʻing ʻa e tuʻutuʻuni',
+            'thank_you_message_email' => 'Fakamālō atu koeʻuhi ko e fakaʻosi ʻaki hoʻo tuʻutuʻuni! ʻOku ke maʻu ʻa e ngaahi wallpaper kehekehe ke ngaueʻaki.',
+            'hello' => 'Mālō e lelei',
+            'purchase_date' => 'ʻAho ʻo e fakatau',
+            'download_instructions' => 'ʻE lava ke ke download ʻa e ngaahi wallpaper ʻaki e ngaahi founga ʻoku hoko mai: ',
+            'direct_download' => 'Download hangatonu ʻaki e ngaahi liliu ʻoku ʻi lalo:',
+            'sincerely' => 'ʻOfa atu!',
+            'login_instruction_message_email' => 'Pe ko hono login ki <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ʻo ngaueʻaki hoʻo email pea ki he konga <strong>"ʻOku maʻu ʻa e ngaahi download ʻeku naʻe fakatau"</strong>',
+            'support_contact_message_email' => 'Kapau ʻoku ʻi ai ha fehuʻi pe fie maʻu tokoni, kataki ʻo fetuʻutaki mai ʻi he email: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Fakaʻamu ke ke maʻu ha fakaʻamu lelei mo hoʻo ngaahi wallpaper foʻou!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "Kaveinga ʻo e ngaahi Wallpaper",
+                "topgirl"  => "Kaveinga ʻo e ngaahi ʻata",
+                "topanime"  => "Kaveinga ʻo e ngaahi ʻata",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "Sitaili ʻo e ngaahi Wallpaper",
+                "topgirl"  => "Sitaili ʻo e ngaahi ʻata",
+                "topanime"  => "Sitaili ʻo e ngaahi ʻata",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "Ngaahi Wallpaper Taʻe totongi",
+                "topgirl"  => "Ngaahi ʻAta Taʻe totongi",
+                "topanime"  => "Ngaahi ʻAta Taʻe totongi",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "Ngaahi Wallpaper Telefoni",
+                "topgirl"  => "Ngaahi ʻAta ʻo e Ngaahi Taʻahine Manongi",
+                "topanime"  => "Ngaahi ʻAta Anime",
+            ],
+            "product_description"   => [
+                "name"  => "<p>Fakafou ʻa e lauʻulu ʻo hoʻo telefoni ki ha ngaueʻanga ʻo e ngaahi tatau ʻoku māfana mo mālie ʻi he kolisi tatau ʻoku ʻi ai ʻa e ngaahi fakakaukau foʻou!</p>
+                            <ul>
+                                <li>ʻAhoʻo Resolution: 1440x3360, fakapapauʻi ʻa e ʻimisi ʻo maʻa ʻo ha ngāue pe.</li>
+                                <li>Hōʻo Ofi ʻo e ngaahi mata ʻa e ngaahi telefoni ʻoku ke kei lelei ʻi ai.</li>
+                                <li>ʻI ai ʻa e fakafaingofua mo vave ʻo e download mo fakahoko ʻi he ngaahi ngāue siʻi ʻoku fakangofua pe.</li>
+                                <li>ʻI ai ʻa e taukei ʻi he ngaahi tatau, ʻo fakahā mai ha tofiʻa lelei mo tuʻunga lelei ʻi ho ngaahi tokohoa.</li>
+                            </ul>
+                            <div>ʻAfeʻilo atu download mo moʻoni ʻa e ngaahi loto kovi mo mafana ki hoʻo telefoni ʻo fakafekauʻaki e kolisi tatau ki ai!</div>",
+                "topgirl"  => "<div>Tā ʻoku fakaʻatā atu ki hoʻo telefoni ʻo fakaʻofo ke manongi mo fakahoko hono tokolahi ʻo e ngaahi tatau ʻoku ʻi ai ʻa e ngaahi tatau ʻo e ngaahi tatau mālohi.</div>
+                            <ul>
+                                <li>ʻAhoʻo Resolution: 1440x3360</li>
+                                <li>Hōʻo Ofi ʻo e ngaahi telefoni.</li>
+                            </ul>
+                            <div>Tāpuni ʻo e download pea toe maʻu ai ʻa e ngaahi telefoni ʻoku manongi ʻaki ʻa e ngaahi tatau foʻou!</div>",
+                "topanime"  => "<div>Tā ʻoku fakaʻatā atu ki hoʻo telefoni ʻo fakaʻofo ke manongi mo fakahoko hono tokolahi ʻo e ngaahi tatau ʻo e ngaahi tatau mālohi.</div>
+                            <ul>
+                                <li>ʻAhoʻo Resolution: 1440x3360</li>
+                                <li>Hōʻo Ofi ʻo e ngaahi telefoni.</li>
+                            </ul>
+                            <div>Tāpuni ʻo e download pea toe maʻu ai ʻa e ngaahi telefoni ʻoku manongi ʻaki ʻa e ngaahi tatau foʻou!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "Ngaahi Wallpaper Telefoni ʻi he ngaahi Kaveinga",
+                "topgirl"  => "Ngaahi ʻAta ʻo e Ngaahi Taʻahine ʻi he ngaahi Kaveinga",
+                "topanime"  => "Ngaahi ʻAta Anime ʻi he ngaahi Kaveinga",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "Ngaahi Wallpaper Telefoni ʻi he ngaahi Sitaili",
+                "topgirl"  => "Ngaahi ʻAta ʻo e Ngaahi Taʻahine ʻi he ngaahi Sitaili",
+                "topanime"  => "Ngaahi ʻAta Anime ʻi he ngaahi Sitaili",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "Ngaahi Wallpaper Telefoni ʻi he ngaahi Meʻa Fakaʻuhila",
+                "topgirl"  => "Ngaahi ʻAta ʻo e Ngaahi Taʻahine ʻi he ngaahi Meʻa Fakaʻuhila",
+                "topanime"  => "Ngaahi ʻAta Anime ʻi he ngaahi Meʻa Fakaʻuhila",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Vakai ki he Kalasi',
+                    'paid_wallpaper' => 'Ngaahi Wallpaper ʻOku totongi',
+                    'free_wallpaper' => 'Ngaahi Wallpaper Taʻe totongi',
+                    'article' => 'Ngaahi Fakamatala',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Vakai ki he Kalasi',
+                    'paid_wallpaper' => 'Ngaahi Wallpaper ʻOku totongi',
+                    'free_wallpaper' => 'Ngaahi Wallpaper Taʻe totongi',
+                    'article' => 'Ngaahi Fakamatala',
+                ],
+                'topanime' => [
+                    'category_info' => 'Vakai ki he Kalasi',
+                    'paid_wallpaper' => 'Ngaahi Wallpaper ʻOku totongi',
+                    'free_wallpaper' => 'Ngaahi Wallpaper Taʻe totongi',
+                    'article' => 'Ngaahi Fakamatala',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "Ngāue Pālangi Tatau ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Ngaohi mo ngāueʻaki ʻe Phaʻame Vān Phu. Kuo taʻe tonuʻi ʻa e ngaahi tofiʻa kotoa pē.",
+            ],
         ],
     ],
 
@@ -11483,7 +11814,172 @@ return [
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "",
         "data" => [
-            // Có thể thêm dữ liệu nội bộ nếu cần
+            "home" => "Kāinga",
+            "about_us" => "Mō Mātou",
+            "event" => "Takahanga",
+            "support" => "Tautoko",
+            "connect_with_us" => "Honoa ki a Mātou",
+            "table_of_contents" => "Rārangi Take",
+            "photo_set" => "Huinga Whakaahua",
+            "share" => "Toha",
+            "no_suitable_results_found" => "Kāore i kitea he hua e hāngai ana",
+            "cart" => "Kete",
+            "your_cart_is_empty" => "Kei te noho kau tō kete",
+            "continue_shopping" => "Haere tonu ki te hoko",
+            "full_set" => "Huinga Katoa",
+            "image" => "Whakaahua",
+            "options" => "Kōwhiringa",
+            "product_guide_after_payment" => "<div>I muri i te utu, ka whiwhi koe i te whakaahua taketake tika, ā, mā te īmēra hoki hei tango me te whakamahi.</div>",
+            "suggestions_for_you" => "Ngā Tūtohutanga Mōu!",
+            "each_image" => "Ia Whakaahua",
+            "each_set" => "Ia Huinga",
+            "propose" => "Whakahua",
+            "favourite" => "Paingia",
+            "newest" => "Hou",
+            "oldest" => "Tawhito",
+            "browse_by" => "Tirohia Mā",
+            "sort_by" => "Kōmaka Mā",
+            "filter_by" => "Tātari Mā",
+            "filter_by_themes" => "Tātari Mā Ngā Kaupapa",
+            "filter_by_styles" => "Tātari Mā Ngā Kāhua",
+            "filter_by_events" => "Tātari Mā Ngā Takahanga",
+            "advanced_filter" => "Tātari Arā Atu Anō",
+            "all" => "Katoa",
+            "added_to_cart" => "Kua tāpirihia ki te kete!",
+            "view_cart" => "Tiro Kete",
+            "add_to_cart" => "Tāpiri ki te Kete",
+            "buy_now" => "Hoko Inaianei",
+            "undefined" => "Kāore i te tautuhia",
+            "total" => "Tapeke",
+            "remove_item_in_cart" => "Tangohia te tūemi i te Kete",
+            "product_list" => "Rārangi Hua",
+            "product" => "Hua",
+            "unit_price" => "Utu Wae",
+            "total_price" => "Utu Tapeke",
+            "payment" => "Utu",
+            "information" => "Mōhiohio",
+            "email_prompt" => "Mēnā ka whakauru koe i te Īmēra, ka tukuna he kape anō hei pupuri.",
+            "email_receive" => "Īmēra mō te whiwhinga whakaahua",
+            "payment_method" => "Tikanga Utu",
+            "fee" => "Utu",
+            "payment_fee" => "Utu mō te Utu",
+            "view_all" => "Tiro Katoa",
+            "login_name_com_vn" => "Takiuru ki Name.com.vn",
+            "login_email" => "Īmēra Takiuru",
+            "password" => "Kupuhipa",
+            "remember_me" => "Mahara Mai",
+            "login" => "Takiuru",
+            "or_login_with" => "Rānei takiuru mā",
+            "support" => "Tautoko",
+            "download_guide" => "Aratohu Tikiake",
+            "account_information" => "Mōhiohio Kaute",
+            "my_downloads" => "Ngā Tikiake a Au",
+            "logout" => "Takiputa",
+            "article" => "Tuhinga",
+            "featured_articles" => "Ngā Tuhinga Whakamīharo",
+            "news_category" => "Wāhanga Rongo",
+            "payment_successful" => "I Angitū te Utu!",
+            "thank_you_message" => "Ngā mihi mō tō tautoko i Name.com.vn. Kei raro nei ō whakaahua, ā, ka taea hoki e koe te toro atu ki tō īmēra hei tango.",
+            "order_id" => "Tau Whakatau",
+            "email" => "Īmēra",
+            "click_to_download" => "Pāwhiri hei tango",
+            "step_1_buy_now" => "Hipanga 1: Tēnā whakauruhia tō īmēra.",
+            "note_fill_email" => "* Mēnā ka whakauru koe i te īmēra, ka tukuna he kape anō hei pupuri.",
+            "step_2_buy_now" => "Hipanga 2: Tīpakohia te tikanga utu.",
+            "what_do_you_want_to_find_today" => "He aha tō hiahia ki te rapu i tēnei rā?",
+            "search" => "Rapua",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Whakaaetanga ota',
+            'thank_you_message_email' => 'Ngā mihi ki a koe mō te whakaoti i tō ota! Kua rite ō papamuri mō te whakamahi.',
+            'hello' => 'Kia ora',
+            'purchase_date' => 'Rā hoko',
+            'download_instructions' => 'Ka taea e koe te tiki i ngā papamuri mā ngā tikanga e whai ake nei:',
+            'direct_download' => 'Tikiake tika mā ngā hononga i raro nei:',
+            'sincerely' => 'Ngā mihi maioha!',
+            'login_instruction_message_email' => 'Rānei takiuru ki <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> mā tō īmēra ka uru ki te wāhanga <strong>"Tikiake āku"</strong>',
+            'support_contact_message_email' => 'Mēnā he pātai, he āwhina rānei e hiahiatia ana, tēnā whakapā mai ki a mātou mā te īmēra: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Ngā manako pai mō tō wheako pai me tō kohinga papamuri hou!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "Ngā Kaupapa Papamuri",
+                "topgirl"  => "Ngā Kaupapa Āhua",
+                "topanime"  => "Ngā Kaupapa Āhua",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "Ngā Kāhua Papamuri",
+                "topgirl"  => "Ngā Kāhua Āhua",
+                "topanime"  => "Ngā Kāhua Āhua",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "Ngā Papamuri Koreutu",
+                "topgirl"  => "Ngā Āhua Koreutu",
+                "topanime"  => "Ngā Āhua Koreutu",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "Ngā Papamuri Waea",
+                "topgirl"  => "Ngā Āhua Ataahua",
+                "topanime"  => "Ngā Āhua Anime",
+            ],
+            "product_description"   => [
+                "name"  => "<p>Whakawhiti tō mata waea hei mahi toi mā tēnei kohinga whakaahua whakamīharo! Kawea mai te kāhua hou me te āhua mauritau ki tō waea.</p>
+                            <ul>
+                                <li>Te whakataunga teitei: 1440x3360, e kī ana i ngā taipitopito koi katoa.</li>
+                                <li>He pai mō ngā mata waea katoa.</li>
+                                <li>Te tikiake māmā me te tere noa i ngā hikoinga ruarua.</li>
+                                <li>Kua whakaurua te mana whakamahi, ka taea te tiritiri ki ō hoa.</li>
+                            </ul>
+                            <div>Tikina ināianei, ka rongo i te rerekētanga whakamīharo i tō mata waea!</div>",
+                "topgirl"  => "<div>Tāpiri he kara me te kāhua ahurei ki tō waea ātaahua mā tēnei kohinga papamuri waea whakamīharo.</div>
+                            <ul>
+                                <li>Te whakataunga: 1440x3360</li>
+                                <li>He pai mō ngā mata waea katoa.</li>
+                            </ul>
+                            <div>Tikina ināianei, ka whakamahi tonu ki tō mata waea hei rongo i te painga!</div>",
+                "topanime"  => "<div>Tāpiri he kara me te kāhua ahurei ki tō waea ātaahua mā tēnei kohinga papamuri waea whakamīharo.</div>
+                            <ul>
+                                <li>Te whakataunga: 1440x3360</li>
+                                <li>He pai mō ngā mata waea katoa.</li>
+                            </ul>
+                            <div>Tikina ināianei, ka whakamahi tonu ki tō mata waea hei rongo i te painga!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "Ngā Papamuri Waea ā Ngā Kaupapa",
+                "topgirl"  => "Ngā Āhua Ataahua ā Ngā Kaupapa",
+                "topanime"  => "Ngā Āhua Anime ā Ngā Kaupapa",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "Ngā Papamuri Waea ā Ngā Kāhua",
+                "topgirl"  => "Ngā Āhua Ataahua ā Ngā Kāhua",
+                "topanime"  => "Ngā Āhua Anime ā Ngā Kāhua",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "Ngā Papamuri Waea ā Ngā Takahanga",
+                "topgirl"  => "Ngā Āhua Ataahua ā Ngā Takahanga",
+                "topanime"  => "Ngā Āhua Anime ā Ngā Takahanga",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Ngā Kāwai',
+                    'paid_wallpaper' => 'Ngā Papamuri Utu',
+                    'free_wallpaper' => 'Ngā Papamuri Koreutu',
+                    'article' => 'Tuhinga',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Ngā Kāwai',
+                    'paid_wallpaper' => 'Ngā Papamuri Utu',
+                    'free_wallpaper' => 'Ngā Papamuri Koreutu',
+                    'article' => 'Tuhinga',
+                ],
+                'topanime' => [
+                    'category_info' => 'Ngā Kāwai',
+                    'paid_wallpaper' => 'Ngā Papamuri Utu',
+                    'free_wallpaper' => 'Ngā Papamuri Koreutu',
+                    'article' => 'Tuhinga',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "Mana pupuri ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Nā Phạm Văn Phú te hoahoa me te whanaketanga. Katoa ngā motika kua rāhuitia.",
+            ],
         ],
     ],
 
@@ -11502,7 +11998,175 @@ return [
         "flag_has_space_in_content" => false,
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "ဖုန်း-နောက်ခံ-ပုံများ",
-        "data" => []
+        "data" => [
+            "home"              => "ပင်မစာမျက်နှာ",
+            "about_us"          => "ကျွန်ုပ်တို့အကြောင်း",
+            "event"             => "ဖြစ်စဉ်များ",
+            "support"           => "ပံ့ပိုးမှု",
+            "connect_with_us"   => "ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ရန်",
+            "table_of_contents" => "အကြောင်းအရာများ",
+            "photo_set"         => "ဓာတ်ပုံအစုအဖွဲ့",
+            "share"             => "မျှဝေရန်",
+            "no_suitable_results_found" => "သင့်တော်သောရလဒ် မတွေ့ရှိပါ",
+            "cart"              => "ဈေးခြင်း",
+            "your_cart_is_empty"    => "သင့်ဈေးခြင်းတွင် အရာမရှိပါ",
+            "continue_shopping" => "ဆက်လက် ဝယ်ယူရန်",
+            "full_set"          => "အပြည့်အစုံ",
+            "image"             => "ပုံရိပ်",
+            "options"           => "ရွေးချယ်မှုများ",
+            "product_guide_after_payment"   => "<div>ငွေပေးချေပြီးနောက်တွင်, သင်သည် မူရင်းပုံရိပ်ကို တိုက်ရိုက်လည်းကောင်း၊ အီးမေးလ်မှလည်းကောင်း ရယူနိုင်ပါသည်။</div>",
+            "suggestions_for_you"   => "သင့်အတွက် အကြံပြုချက်များ!",
+            "each_image"        => "တစ်ပုံချင်း",
+            "each_set"          => "တစ်စုချင်း",
+            "propose" => "အကြံပြုမှု",
+            "favourite" => "နှစ်သက်မှု",
+            "newest" => "အသစ်ဆုံး",
+            "oldest" => "အဟောင်းဆုံး",
+            "browse_by" => "ဖြင့် ကြည့်ရှုရန် ",
+            "sort_by" => "ဖြင့် စီစဉ်ရန် ",
+            "filter_by" => "ဖြင့် ဖျက်ရန် ",
+            "filter_by_themes" => "အကြောင်းအရာဖြင့် ဖျက်ရန်",
+            "filter_by_styles" => "စတိုင်ဖြင့် ဖျက်ရန်",
+            "filter_by_events" => "ဖြစ်စဉ်ဖြင့် ဖျက်ရန်",
+            "advanced_filter" => "အဆင့်မြင့် စစ်ထုတ်မှု",
+            "all" => "အားလုံး",
+            "added_to_cart" => "ဈေးခြင်းသို့ ထည့်ပြီးပါပြီ!",
+            "view_cart" => "ဈေးခြင်းကို ကြည့်ရန်",
+            "add_to_cart" => "ဈေးခြင်းသို့ ထည့်ရန်",
+            "buy_now" => "ယခုဝယ်မည်",
+            "undefined" => "မသတ်မှတ်ထားပါ",
+            "total" => "စုစုပေါင်း",
+            "remove_item_in_cart" => "ဈေးခြင်းမှ ပစ္စည်းကို ဖယ်ရှားရန်",
+            "product_list" => "ထုတ်ကုန် စာရင်း",
+            "product" => "ထုတ်ကုန်",
+            "unit_price" => "တစ်ခုချင်း စျေးနှုန်း",
+            "total_price" => "စုစုပေါင်း ဈေးနှုန်း",
+            "payment" => "ငွေပေးချေမှု",
+            "information" => "အချက်အလက်",
+            "email_prompt" => "အီးမေးလ်ထည့်ပါက ထပ်မံ အမျိုးတစ်ခု ရယူနိုင်ပါသည်။",
+            "email_receive" => "ဓာတ်ပုံရရှိရန် အီးမေးလ်",
+            "payment_method" => "ငွေပေးချေမှု နည်းလမ်း",
+            "fee" => "ကြေး",
+            "payment_fee" => "ငွေပေးချေမှု ကြေး",
+            "view_all" => "အားလုံးကြည့်ရန်",
+            "login_name_com_vn" => "Name.com.vn မှာ လော့ဂ်အင်လုပ်ရန်",
+            "login_email" => "အီးမေးလ်ဖြင့် လော့ဂ်အင်",
+            "password" => "စကားဝှက်",
+            "remember_me" => "မှတ်မိထားပါ",
+            "login" => "လော့ဂ်အင်",
+            "or_login_with" => "သို့မဟုတ် ဒီဖြင့် လော့ဂ်အင်",
+            "support" => "ပံ့ပိုးမှု",
+            "download_guide" => "ဒေါင်းလုဒ် လမ်းညွှန်",
+            "account_information" => "အကောင့် အချက်အလက်",
+            "my_downloads" => "ကျွန်ုပ်၏ ဒေါင်းလုဒ်များ",
+            "logout" => "ထွက်ရန်",
+            "article" => "ဆောင်းပါး",
+            "featured_articles" => "ထူးချွန်သော ဆောင်းပါးများ",
+            "news_category" => "သတင်းအမျိုးအစား",
+            "payment_successful" => "ငွေပေးချေမှု အောင်မြင်ပါပြီ!",
+            "thank_you_message" => "Name.com.vn အားပံ့ပိုးပေးသည့်အတွက် ကျေးဇူးတင်ပါသည်။ သင့်ဓာတ်ပုံများကို အောက်တွင်ကြည့်ရှုနိုင်ပါသည် သို့မဟုတ် အီးမေးလ်မှ တိုက်ရိုက်ရယူနိုင်ပါသည်။",
+            "order_id" => "အမှာစာ အမှတ်",
+            "email" => "အီးမေးလ်",
+            "click_to_download" => "ဒေါင်းလုဒ်ရန် နှိပ်ပါ",
+            "step_1_buy_now" => "အဆင့် ၁: ကျေးဇူးပြု၍ အီးမေးလ်ထည့်ပါ။",
+            "note_fill_email" => "* အီးမေးလ်ထည့်ပါက ထပ်မံ ဓာတ်ပုံရယူနိုင်ပါသည်။",
+            "step_2_buy_now" => "အဆင့် ၂: ငွေပေးချေမှု နည်းလမ်းကို ရွေးချယ်ပါ။",
+            "what_do_you_want_to_find_today" => "ယနေ့ သင်ဘာရှာဖွေရန်လိုပါသလဲ?",
+            "search" => "ရှာဖွေပါ",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'အော်ဒါအတည်ပြုချက်',
+            'thank_you_message_email' => 'သင့်အော်ဒါကိုပြီးစီးအောင်မြင်စွာပြုလုပ်ပေးသည့်အတွက်ကျေးဇူးတင်ပါသည်! သင့်ဖုန်းနောက်ခံပုံများအသုံးပြုရန်အဆင်သင့်ဖြစ်ပါပြီ။',
+            'hello' => 'မင်္ဂလာပါ',
+            'purchase_date' => 'ဝယ်ယူသည့်ရက်စွဲ',
+            'download_instructions' => 'သင့်ဖုန်းနောက်ခံပုံများကိုအောက်ပါနည်းလမ်းများဖြင့်ဒေါင်းလုဒ်လုပ်နိုင်ပါသည်။',
+            'direct_download' => 'အောက်ပါလင့်များမှတစ်ဆင့်တိုက်ရိုက်ဒေါင်းလုဒ်လုပ်ပါ။',
+            'sincerely' => 'ဂရုတစိုက်',
+            'login_instruction_message_email' => 'သို့မဟုတ် <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ကိုသင့်အီးမေးလ်ဖြင့်လော့ဂ်အင်ဝင်ပြီး <strong>"ကျွန်ုပ်၏ဒေါင်းလုဒ်များ"</strong> နေရာသို့သွားပါ။',
+            'support_contact_message_email' => 'မေးခွန်းများရှိပါက သို့မဟုတ် အကူအညီလိုအပ်ပါက ကျွန်ုပ်တို့ထံ <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a> အီးမေးလ်မှတဆင့်ဆက်သွယ်ပါ။',
+            'wish_message_email' => 'သင့်ဖုန်းနောက်ခံပုံအသစ်များနှင့်အတူအံ့သြဖွယ်အတွေ့အကြုံများရရှိပါစေကောင်းမွန်သောဆုတောင်းများပေးပါသည်!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "ဖုန်းနောက်ခံပုံအကြောင်းအရာ",
+                "topgirl"  => "အကြောင်းအရာပုံ",
+                "topanime"  => "အကြောင်းအရာပုံ",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "ဖုန်းနောက်ခံပုံစတိုင်",
+                "topgirl"  => "ပုံစတိုင်",
+                "topanime"  => "ပုံစတိုင်",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "အခမဲ့နောက်ခံပုံများ",
+                "topgirl"  => "အခမဲ့ပုံများ",
+                "topanime"  => "အခမဲ့ပုံများ",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "ဖုန်းနောက်ခံပုံများ",
+                "topgirl"  => "လှပသောမိန်းကလေးပုံများ",
+                "topanime"  => "Anime ပုံများ",
+            ],
+            "product_description"   => [
+                "name"  => "<p>သင့်ဖုန်းနောက်ခံပုံကိုအနုပညာလက်ရာတစ်ခုအဖြစ်ပြောင်းလဲပေးပါ။ ဒီအစွဲထုတ်မှုကသင့်ဖုန်းကိုအသစ်နဲ့လန်းဆန်းမှုဖြစ်စေပါမယ်။</p>
+                            <ul>
+                                <li>အမြင့်တစ်ကျယ်: 1440x3360၊ အသေးစိတ်အထိကျကျနီနီဖြစ်စေပါမယ်။</li>
+                                <li>ဖုန်းအမျိုးမျိုးနှင့်မှန်ကန်မှုရှိပါသည်။</li>
+                                <li>လွယ်ကူပြီးမြန်ဆန်သောဒေါင်းလုဒ်လုပ်နိုင်ပါသည်။</li>
+                                <li>အသုံးပြုခွင့်ပါဝင်ပြီး၊ မိတ်ဆွေများနှင့်ဝေမျှနိုင်ပါသည်။</li>
+                            </ul>
+                            <div>အမြန်တင်ယူပြီးသင့်ဖုန်းပေါ်တွင်ထူးခြားမှုကိုခံစားလိုက်ပါ။</div>
+                        ",
+                "topgirl"  => "<div>သင့်ဖုန်းကိုစွဲဆောင်မှုရှိသောလှပသောပုံများနဲ့တိုးမြှင့်လိုက်ပါ။</div>
+                                <ul>
+                                    <li>အမြင့်တစ်ကျယ်: 1440x3360</li>
+                                    <li>ဖုန်းအားလုံးနှင့်ချိန်ညှိမှုရှိပါသည်။</li>
+                                </ul>
+                                <div>ဒေါင်းလုဒ်လုပ်ပြီးစမ်းသပ်ပါ။</div>",
+                "topanime"  => "<div>Anime ပုံများနဲ့သင့်ဖုန်းကိုထူးခြားမှုပေးလိုက်ပါ။</div>
+                                <ul>
+                                    <li>အမြင့်တစ်ကျယ်: 1440x3360</li>
+                                    <li>ဖုန်းအားလုံးနှင့်ချိန်ညှိမှုရှိပါသည်။</li>
+                                </ul>
+                                <div>ဒေါင်းလုဒ်လုပ်ပြီးသုံးလိုက်ပါ။</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "နောက်ခံပုံအကြောင်းအရာအလိုက်",
+                "topgirl"  => "မိန်းကလေးပုံများအကြောင်းအရာအလိုက်",
+                "topanime"  => "Anime ပုံများအကြောင်းအရာအလိုက်",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "နောက်ခံပုံစတိုင်အလိုက်",
+                "topgirl"  => "မိန်းကလေးပုံများစတိုင်အလိုက်",
+                "topanime"  => "Anime ပုံများစတိုင်အလိုက်",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "နောက်ခံပုံဖြစ်ရပ်အလိုက်",
+                "topgirl"  => "မိန်းကလေးပုံများဖြစ်ရပ်အလိုက်",
+                "topanime"  => "Anime ပုံများဖြစ်ရပ်အလိုက်",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'အမျိုးအစား',
+                    'paid_wallpaper' => 'ငွေကြေးပေးနောက်ခံပုံ',
+                    'free_wallpaper' => 'အခမဲ့နောက်ခံပုံ',
+                    'article' => 'ဆောင်းပါး',
+                ],
+                'topgirl' => [
+                    'category_info' => 'အမျိုးအစား',
+                    'paid_wallpaper' => 'ငွေကြေးပေးနောက်ခံပုံ',
+                    'free_wallpaper' => 'အခမဲ့နောက်ခံပုံ',
+                    'article' => 'ဆောင်းပါး',
+                ],
+                'topanime' => [
+                    'category_info' => 'အမျိုးအစား',
+                    'paid_wallpaper' => 'ငွေကြေးပေးနောက်ခံပုံ',
+                    'free_wallpaper' => 'အခမဲ့နောက်ခံပုံ',
+                    'article' => 'ဆောင်းပါး',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "မူပိုင်ခွင့် ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ဖန်တီးနှင့်ဖွံ့ဖြိုးမှု: Phạm Văn Phú. မူပိုင်ခွင့်အားလုံးကိုမူတည်ပါသည်။",
+            ],
+        ]
     ],
 
     "lv" => [
@@ -11520,7 +12184,175 @@ return [
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "telefona-fona-attēli",
-        "data" => []
+        "data" => [
+            "home"              => "Sākums",
+            "about_us"          => "Par mums",
+            "event"             => "Pasākumi",
+            "support"           => "Atbalsts",
+            "connect_with_us"   => "Sazinies ar mums",
+            "table_of_contents" => "Satura rādītājs",
+            "photo_set"         => "Foto komplekts",
+            "share"             => "Dalīties",
+            "no_suitable_results_found" => "Nav atrasti atbilstoši rezultāti",
+            "cart"              => "Grozs",
+            "your_cart_is_empty"    => "Jūsu grozs ir tukšs",
+            "continue_shopping" => "Turpināt iepirkties",
+            "full_set"          => "Pilns komplekts",
+            "image"             => "Attēls",
+            "options"           => "Opcijas",
+            "product_guide_after_payment"   => "<div>Pēc apmaksas jūs saņemsiet oriģinālos attēlus tieši un pa e-pastu, lai tos lejupielādētu un izmantotu.</div>",
+            "suggestions_for_you"   => "Ieteikumi jums!",
+            "each_image"        => "Katrs attēls",
+            "each_set"          => "Katrs komplekts",
+            "propose" => "Ieteikt",
+            "favourite" => "Iecienītākie",
+            "newest" => "Jaunākie",
+            "oldest" => "Vecākie",
+            "browse_by" => "Pārlūkot pēc ",
+            "sort_by" => "Kārtot pēc ",
+            "filter_by" => "Filtrēt pēc ",
+            "filter_by_themes" => "Filtrēt pēc tēmām",
+            "filter_by_styles" => "Filtrēt pēc stiliem",
+            "filter_by_events" => "Filtrēt pēc pasākumiem",
+            "advanced_filter" => "Papildu filtrs",
+            "all" => "Visi",
+            "added_to_cart" => "Pievienots grozam!",
+            "view_cart" => "Skatīt grozu",
+            "add_to_cart" => "Pievienot grozam",
+            "buy_now" => "Pirkt tagad",
+            "undefined" => "Nedefinēts",
+            "total" => "Kopā",
+            "remove_item_in_cart" => "Noņemt preci no groza",
+            "product_list" => "Produktu saraksts",
+            "product" => "Produkts",
+            "unit_price" => "Vienības cena",
+            "total_price" => "Kopējā cena",
+            "payment" => "Maksājums",
+            "information" => "Informācija",
+            "email_prompt" => "Ja ievadīsiet e-pastu, jūs saņemsiet papildu kopiju glabāšanai.",
+            "email_receive" => "E-pasts attēlu saņemšanai",
+            "payment_method" => "Apmaksas veids",
+            "fee" => "Maksa",
+            "payment_fee" => "Apmaksas maksa",
+            "view_all" => "Skatīt visu",
+            "login_name_com_vn" => "Pieteikties Name.com.vn",
+            "login_email" => "Pieteikšanās e-pasts",
+            "password" => "Parole",
+            "remember_me" => "Atcerēties mani",
+            "login" => "Pieteikties",
+            "or_login_with" => "Vai pieteikties ar",
+            "support" => "Atbalsts",
+            "download_guide" => "Lejupielādes ceļvedis",
+            "account_information" => "Konta informācija",
+            "my_downloads" => "Manas lejupielādes",
+            "logout" => "Izrakstīties",
+            "article" => "Raksts",
+            "featured_articles" => "Izceltie raksti",
+            "news_category" => "Jaunumu kategorija",
+            "payment_successful" => "Apmaksa veiksmīga!",
+            "thank_you_message" => "Paldies, ka atbalstāt Name.com.vn. Jūsu attēli atrodas zemāk vai arī varat apmeklēt savu e-pastu, lai tos lejupielādētu.",
+            "order_id" => "Pasūtījuma ID",
+            "email" => "E-pasts",
+            "click_to_download" => "Klikšķiniet, lai lejupielādētu",
+            "step_1_buy_now" => "1. solis: Lūdzu, ievadiet savu e-pastu.",
+            "note_fill_email" => "* Ja ievadīsiet e-pastu, jūs saņemsiet papildu kopiju glabāšanai.",
+            "step_2_buy_now" => "2. solis: Izvēlieties apmaksas veidu.",
+            "what_do_you_want_to_find_today" => "Ko vēlaties atrast šodien?",
+            "search" => "Meklēt",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Pasūtījuma apstiprinājums',
+            'thank_you_message_email' => 'Paldies, ka pabeidzāt savu pasūtījumu! Jūsu tapetes ir gatavas lietošanai.',
+            'hello' => 'Sveiki',
+            'purchase_date' => 'Pirkuma datums',
+            'download_instructions' => 'Jūs varat lejupielādēt tapetes, izmantojot šādas metodes:',
+            'direct_download' => 'Lejupielādējiet tieši, izmantojot zemāk esošās saites:',
+            'sincerely' => 'Ar cieņu!',
+            'login_instruction_message_email' => 'Vai arī piesakieties <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ar savu e-pastu un dodieties uz sadaļu <strong>"Manas lejupielādes"</strong>',
+            'support_contact_message_email' => 'Ja jums ir kādi jautājumi vai nepieciešama palīdzība, lūdzu, sazinieties ar mums pa e-pastu: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Mēs novēlam jums lielisku pieredzi ar savu jauno tapešu kolekciju!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "Tapetes Tēma",
+                "topgirl"  => "Attēlu Tēma",
+                "topanime"  => "Attēlu Tēma",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "Tapetes Stils",
+                "topgirl"  => "Attēlu Stils",
+                "topanime"  => "Attēlu Stils",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "Bezmaksas Tapetes",
+                "topgirl"  => "Bezmaksas Attēli",
+                "topanime"  => "Bezmaksas Attēli",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "Tālruņa Tapetes",
+                "topgirl"  => "Skaisto Meiteņu Attēli",
+                "topanime"  => "Anime Attēli",
+            ],
+            "product_description"   => [
+                "name"  => "<p>Pārvērtiet sava tālruņa fona ekrānu par mākslas darbu ar šo skaisto attēlu kolekciju! Ienesiet jaunu stilu un svaigumu savā tālrunī.</p>
+                            <ul>
+                                <li>Augsta izšķirtspēja: 1440x3360, nodrošinot skaidrus attēlus katrā detaļā.</li>
+                                <li>Perfekti saderīgi ar visiem tālruņu ekrāniem.</li>
+                                <li>Vienkārša un ātra lejupielāde tikai ar dažiem soļiem.</li>
+                                <li>Iekļautas lietošanas tiesības, varat brīvi dalīties ar draugiem.</li>
+                            </ul>
+                            <div>Lejupielādējiet tagad un izbaudiet aizraujošo atšķirību savā tālrunī!</div>
+                        ",
+                "topgirl"  => "<div>Pievienojiet nedaudz krāsu un unikālu stilu savam tālrunim ar šo brīnišķīgo tālruņa tapetes kolekciju.</div>
+                            <ul>
+                                <li>Izšķirtspēja: 1440x3360</li>
+                                <li>Saderīgs ar visiem tālruņu ekrāniem.</li>
+                            </ul>
+                            <div>Lejupielādējiet un pielāgojiet savam tālruņa ekrānam tūlīt!</div>",
+                "topanime"  => "<div>Pievienojiet nedaudz krāsu un unikālu stilu savam tālrunim ar šo brīnišķīgo tālruņa tapetes kolekciju.</div>
+                            <ul>
+                                <li>Izšķirtspēja: 1440x3360</li>
+                                <li>Saderīgs ar visiem tālruņu ekrāniem.</li>
+                            </ul>
+                            <div>Lejupielādējiet un pielāgojiet savam tālruņa ekrānam tūlīt!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "Tālruņa Tapetes pēc Tēmām",
+                "topgirl"  => "Skaisto Meiteņu Attēli pēc Tēmām",
+                "topanime"  => "Anime Attēli pēc Tēmām",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "Tālruņa Tapetes pēc Stiliem",
+                "topgirl"  => "Skaisto Meiteņu Attēli pēc Stiliem",
+                "topanime"  => "Anime Attēli pēc Stiliem",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "Tālruņa Tapetes pēc Notikumiem",
+                "topgirl"  => "Skaisto Meiteņu Attēli pēc Notikumiem",
+                "topanime"  => "Anime Attēli pēc Notikumiem",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Maksas Tapetes',
+                    'free_wallpaper' => 'Bezmaksas Tapetes',
+                    'article' => 'Raksts',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Maksas Tapetes',
+                    'free_wallpaper' => 'Bezmaksas Tapetes',
+                    'article' => 'Raksts',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Maksas Tapetes',
+                    'free_wallpaper' => 'Bezmaksas Tapetes',
+                    'article' => 'Raksts',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "Autortiesības ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Dizainu un izstrādi veicis Phạm Văn Phú. Visas tiesības aizsargātas.",
+            ]
+        ]
     ],
 
     "lt" => [
@@ -11538,7 +12370,175 @@ return [
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "telefono-ekrano-fonai",
-        "data" => []
+        "data" => [
+            "home" => "Pradžia",
+            "about_us" => "Apie mus",
+            "event" => "Renginys",
+            "support" => "Pagalba",
+            "connect_with_us" => "Susisiekite su mumis",
+            "table_of_contents" => "Turinys",
+            "photo_set" => "Nuotraukų rinkinys",
+            "share" => "Dalintis",
+            "no_suitable_results_found" => "Nerasta tinkamų rezultatų",
+            "cart" => "Krepšelis",
+            "your_cart_is_empty" => "Jūsų krepšelis tuščias",
+            "continue_shopping" => "Tęsti apsipirkimą",
+            "full_set" => "Pilnas rinkinys",
+            "image" => "Vaizdas",
+            "options" => "Parinktys",
+            "product_guide_after_payment" => "<div>Po apmokėjimo, Jūs tiesiogiai ir el. paštu gausite originalius paveikslėlius, kuriuos galėsite atsisiųsti ir naudoti.</div>",
+            "suggestions_for_you" => "Rekomendacijos jums!",
+            "each_image" => "Kiekvienas vaizdas",
+            "each_set" => "Kiekvienas rinkinys",
+            "propose" => "Pasiūlymas",
+            "favourite" => "Mėgstamiausi",
+            "newest" => "Naujausi",
+            "oldest" => "Seniausi",
+            "browse_by" => "Naršyti pagal",
+            "sort_by" => "Rūšiuoti pagal",
+            "filter_by" => "Filtruoti pagal",
+            "filter_by_themes" => "Filtruoti pagal temas",
+            "filter_by_styles" => "Filtruoti pagal stilių",
+            "filter_by_events" => "Filtruoti pagal renginius",
+            "advanced_filter" => "Išplėstinis filtras",
+            "all" => "Visi",
+            "added_to_cart" => "Įdėta į krepšelį!",
+            "view_cart" => "Peržiūrėti krepšelį",
+            "add_to_cart" => "Įdėti į krepšelį",
+            "buy_now" => "Pirkti dabar",
+            "undefined" => "Neapibrėžta",
+            "total" => "Iš viso",
+            "remove_item_in_cart" => "Pašalinti prekę iš krepšelio",
+            "product_list" => "Produktų sąrašas",
+            "product" => "Produktas",
+            "unit_price" => "Vieneto kaina",
+            "total_price" => "Bendra kaina",
+            "payment" => "Apmokėjimas",
+            "information" => "Informacija",
+            "email_prompt" => "Jei įvesite el. paštą, jums bus išsiųsta papildoma kopija.",
+            "email_receive" => "El. paštas gauti paveikslėlius",
+            "payment_method" => "Mokėjimo būdas",
+            "fee" => "Mokestis",
+            "payment_fee" => "Mokėjimo mokestis",
+            'view_all' => 'Peržiūrėti viską',
+            'login_name_com_vn' => 'Prisijungti Name.com.vn',
+            'login_email' => 'Prisijungimo el. paštas',
+            'password' => 'Slaptažodis',
+            'remember_me' => 'Prisiminti mane',
+            'login' => 'Prisijungti',
+            'or_login_with' => 'Arba prisijunkite naudodami',
+            'support' => 'Pagalba',
+            'download_guide' => 'Atsisiuntimo vadovas',
+            'account_information' => 'Paskyros informacija',
+            'my_downloads' => 'Mano atsisiuntimai',
+            'logout' => 'Atsijungti',
+            'article' => "Straipsnis",
+            'featured_articles' => 'Pagrindiniai straipsniai',
+            'news_category' => 'Naujienų kategorija',
+            'payment_successful' => "Mokėjimas sėkmingas!",
+            'thank_you_message' => "Ačiū, kad palaikote Name.com.vn. Jūsų paveikslėliai yra žemiau arba galite prisijungti prie savo el. pašto ir atsisiųsti juos.",
+            'order_id' => "Užsakymo ID",
+            'email' => "El. paštas",
+            'click_to_download' => "Spauskite norėdami atsisiųsti",
+            'step_1_buy_now' => "1 žingsnis: Prašome įvesti savo el. paštą.",
+            'note_fill_email' => "* Jei įvesite el. paštą, jums bus išsiųsta papildoma kopija.",
+            'step_2_buy_now' => "2 žingsnis: Pasirinkite mokėjimo būdą.",
+            'what_do_you_want_to_find_today' => "Ko ieškote šiandien?",
+            'search' => "Ieškoti",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Užsakymo patvirtinimas',
+            'thank_you_message_email' => 'Dėkojame, kad užbaigėte savo užsakymą! Jūsų fonai yra paruošti naudoti.',
+            'hello' => 'Sveiki',
+            'purchase_date' => 'Pirkimo data',
+            'download_instructions' => 'Fonus galite atsisiųsti šiais būdais:',
+            'direct_download' => 'Atsisiųskite tiesiogiai per šias nuorodas:',
+            'sincerely' => 'Pagarbiai!',
+            'login_instruction_message_email' => 'Arba prisijunkite prie <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> naudodami savo el. paštą ir eikite į <strong>"Mano atsisiuntimai"</strong> skyrių.',
+            'support_contact_message_email' => 'Jei turite klausimų ar reikia pagalbos, susisiekite su mumis el. paštu: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Linkime malonių akimirkų su jūsų naująja fonų kolekcija!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "Fono Temos",
+                "topgirl"  => "Teminė Nuotrauka",
+                "topanime"  => "Teminė Nuotrauka",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "Fono Stiliai",
+                "topgirl"  => "Stiliaus Nuotrauka",
+                "topanime"  => "Stiliaus Nuotrauka",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "Nemokami Fonai",
+                "topgirl"  => "Nemokama Nuotrauka",
+                "topanime"  => "Nemokama Nuotrauka",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "Telefonų Fonai",
+                "topgirl"  => "Merginų Nuotraukos",
+                "topanime"  => "Anime Nuotraukos",
+            ],
+            "product_description"   => [
+                "name"  => "<p>Paverskite savo telefono ekraną tikru meno kūriniu su šia nuostabia nuotraukų kolekcija! Suteikite savo telefonui naują stilių ir gaivumo pojūtį.</p>
+                            <ul>
+                                <li>Aukšta raiška: 1440x3360, užtikrinanti itin ryškius vaizdus.</li>
+                                <li>Puikiai suderinama su visų tipų telefono ekranais.</li>
+                                <li>Lengvas ir greitas atsisiuntimas vos keliais žingsniais.</li>
+                                <li>Įtraukta naudojimo licencija, galite laisvai dalintis su draugais.</li>
+                            </ul>
+                            <div>Atsisiųskite dabar ir pajuskite įdomų skirtumą savo telefono ekrane!</div>
+                            ",
+                "topgirl"  => "<div>Pridėkite šiek tiek spalvų ir unikalumo savo mielam telefonui su šia nuostabia telefonų fonų kolekcija.</div>
+                                <ul>
+                                    <li>Raiška: 1440x3360</li>
+                                    <li>Suderinama su visais telefonų ekranais.</li>
+                                </ul>
+                                <div>Atsisiųskite ir pritaikykite savo telefono ekranui, kad pajustumėte skirtumą!</div>",
+                "topanime"  => "<div>Pridėkite šiek tiek spalvų ir unikalumo savo mielam telefonui su šia nuostabia telefonų fonų kolekcija.</div>
+                                <ul>
+                                    <li>Raiška: 1440x3360</li>
+                                    <li>Suderinama su visais telefonų ekranais.</li>
+                                </ul>
+                                <div>Atsisiųskite ir pritaikykite savo telefono ekranui, kad pajustumėte skirtumą!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "Telefonų Fonai pagal Temas",
+                "topgirl"  => "Merginų Nuotraukos pagal Temas",
+                "topanime"  => "Anime Nuotraukos pagal Temas",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "Telefonų Fonai pagal Stilius",
+                "topgirl"  => "Merginų Nuotraukos pagal Stilius",
+                "topanime"  => "Anime Nuotraukos pagal Stilius",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "Telefonų Fonai pagal Renginius",
+                "topgirl"  => "Merginų Nuotraukos pagal Renginius",
+                "topanime"  => "Anime Nuotraukos pagal Renginius",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Mokami Fonai',
+                    'free_wallpaper' => 'Nemokami Fonai',
+                    'article' => 'Straipsnis',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Mokami Fonai',
+                    'free_wallpaper' => 'Nemokami Fonai',
+                    'article' => 'Straipsnis',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Mokami Fonai',
+                    'free_wallpaper' => 'Nemokami Fonai',
+                    'article' => 'Straipsnis',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "Autorių teisės ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Sukūrė ir išvystė Phạm Văn Phú. Visos teisės saugomos.",
+            ]
+        ]
     ],
 
     "sl" => [
@@ -11556,7 +12556,175 @@ return [
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "ozadja-za-telefon",
-        "data" => []
+        "data" => [
+            "home"              => "Domov",
+            "about_us"          => "O nas",
+            "event"             => "Dogodek",
+            "support"           => "Podpora",
+            "connect_with_us"   => "Povežite se z nami",
+            "table_of_contents" => "Kazalo",
+            "photo_set"         => "Foto set",
+            "share"             => "Delite",
+            "no_suitable_results_found" => "Ni ustreznih rezultatov",
+            "cart"              => "Košarica",
+            "your_cart_is_empty"    => "Vaša košarica je prazna",
+            "continue_shopping" => "Nadaljujte z nakupovanjem",
+            "full_set"          => "Celoten komplet",
+            "image"             => "Slika",
+            "options"           => "Možnosti",
+            "product_guide_after_payment"   => "<div>Po plačilu boste prejeli originalne slike neposredno in preko e-pošte za prenos in uporabo.</div>",
+            "suggestions_for_you"   => "Predlogi za vas!",
+            "each_image"        => "Vsaka slika",
+            "each_set"          => "Vsak komplet",
+            "propose" => "Predlagaj",
+            "favourite" => "Najljubše",
+            "newest" => "Najnovejše",
+            "oldest" => "Najstarejše",
+            "browse_by" => "Brskaj po",
+            "sort_by" => "Razvrsti po",
+            "filter_by" => "Filtriraj po",
+            "filter_by_themes" => "Filtriraj po temah",
+            "filter_by_styles" => "Filtriraj po slogih",
+            "filter_by_events" => "Filtriraj po dogodkih",
+            "advanced_filter" => "Napredni filter",
+            "all" => "Vse",
+            "added_to_cart" => "Dodano v košarico!",
+            "view_cart" => "Ogled košarice",
+            "add_to_cart" => "Dodaj v košarico",
+            "buy_now" => "Kupite zdaj",
+            "undefined" => "Nedoločeno",
+            "total" => "Skupaj",
+            "remove_item_in_cart" => "Odstrani izdelek iz košarice",
+            "product_list" => "Seznam izdelkov",
+            "product" => "Izdelek",
+            "unit_price" => "Cena na enoto",
+            "total_price" => "Skupna cena",
+            "payment" => "Plačilo",
+            "information" => "Informacije",
+            "email_prompt" => "Če vnesete e-pošto, boste prejeli dodatno kopijo za shranjevanje.",
+            "email_receive" => "E-pošta za prejem slik",
+            "payment_method" => "Način plačila",
+            "fee" => "Pristojbina",
+            "payment_fee" => "Plačilna pristojbina",
+            'view_all' => 'Ogled vsega',
+            'login_name_com_vn' => 'Prijava na Name.com.vn',
+            'login_email' => 'Prijavni e-poštni naslov',
+            'password' => 'Geslo',
+            'remember_me' => 'Zapomni si me',
+            'login' => 'Prijava',
+            'or_login_with' => 'Ali prijava z',
+            'support' => 'Podpora',
+            'download_guide' => 'Navodila za prenos',
+            'account_information' => 'Informacije o računu',
+            'my_downloads' => 'Moji prenosi',
+            'logout' => 'Odjava',
+            'article' => "Članek",
+            'featured_articles' => 'Izbrani članki',
+            'news_category' => 'Kategorija novic',
+            'payment_successful' => "Plačilo uspešno!",
+            'thank_you_message' => "Hvala, ker podpirate Name.com.vn. Vaše slike so spodaj ali pa jih lahko prenesete iz svojega e-poštnega naslova.",
+            'order_id' => "Številka naročila",
+            'email' => "E-pošta",
+            'click_to_download' => "Kliknite za prenos",
+            'step_1_buy_now' => "Korak 1: Vnesite svojo e-pošto.",
+            'note_fill_email' => "* Če vnesete e-pošto, boste prejeli dodatno kopijo za shranjevanje.",
+            'step_2_buy_now' => "Korak 2: Izberite način plačila.",
+            'what_do_you_want_to_find_today' => "Kaj želite danes najti?",
+            'search' => "Iskanje",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Potrditev naročila',
+            'thank_you_message_email' => 'Hvala, ker ste zaključili svoje naročilo! Vaša ozadja so pripravljena za uporabo.',
+            'hello' => 'Pozdravljeni',
+            'purchase_date' => 'Datum nakupa',
+            'download_instructions' => 'Ozadja lahko prenesete na naslednje načine:',
+            'direct_download' => 'Neposreden prenos prek spodnjih povezav:',
+            'sincerely' => 'S spoštovanjem!',
+            'login_instruction_message_email' => 'Ali se prijavite na <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> z vašim e-poštnim naslovom in pojdite na razdelek <strong>"Moji prenosi"</strong>',
+            'support_contact_message_email' => 'Če imate kakršna koli vprašanja ali potrebujete pomoč, nas kontaktirajte prek e-pošte: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'Želimo vam veliko užitkov z vašo novo zbirko ozadij!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "Tema ozadij",
+                "topgirl"  => "Tema slik",
+                "topanime"  => "Tema slik",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "Slog ozadij",
+                "topgirl"  => "Slog slik",
+                "topanime"  => "Slog slik",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "Brezplačna ozadja",
+                "topgirl"  => "Brezplačne slike",
+                "topanime"  => "Brezplačne slike",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "Ozadja za telefon",
+                "topgirl"  => "Slike lepih deklet",
+                "topanime"  => "Anime slike",
+            ],
+            "product_description"   => [
+                "name"  => "<p>Spremenite ozadje svojega telefona v umetniško delo s to čudovito zbirko slik! Dodajte svežino in edinstven slog svojemu telefonu.</p>
+                            <ul>
+                                <li>Visoka ločljivost: 1440x3360, zagotavlja ostro in natančno sliko.</li>
+                                <li>Popolna združljivost z vsemi vrstami telefonskih zaslonov.</li>
+                                <li>Preprosto in hitro prenesete v samo nekaj korakih.</li>
+                                <li>Vključene pravice za uporabo, slike lahko delite s prijatelji.</li>
+                            </ul>
+                            <div>Prenesite zdaj in izkusite razliko na svojem telefonskem zaslonu!</div>
+                        ",
+                "topgirl"  => "<div>Dodajte pridih barv in edinstven slog svojemu telefonu s to čudovito zbirko ozadij za telefon.</div>
+                                <ul>
+                                    <li>Ločljivost: 1440x3360</li>
+                                    <li>Združljivo z vsemi telefonskimi zasloni.</li>
+                                </ul>
+                                <div>Prenesite zdaj in uporabite na svojem telefonu!</div>",
+                "topanime"  => "<div>Dodajte pridih barv in edinstven slog svojemu telefonu s to čudovito zbirko ozadij za telefon.</div>
+                                <ul>
+                                    <li>Ločljivost: 1440x3360</li>
+                                    <li>Združljivo z vsemi telefonskimi zasloni.</li>
+                                </ul>
+                                <div>Prenesite zdaj in uporabite na svojem telefonu!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "Ozadja za telefon po temah",
+                "topgirl"  => "Slike lepih deklet po temah",
+                "topanime"  => "Anime slike po temah",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "Ozadja za telefon po slogih",
+                "topgirl"  => "Slike lepih deklet po slogih",
+                "topanime"  => "Anime slike po slogih",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "Ozadja za telefon po dogodkih",
+                "topgirl"  => "Slike lepih deklet po dogodkih",
+                "topanime"  => "Anime slike po dogodkih",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Plačljiva ozadja',
+                    'free_wallpaper' => 'Brezplačna ozadja',
+                    'article' => 'Članek',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Plačljiva ozadja',
+                    'free_wallpaper' => 'Brezplačna ozadja',
+                    'article' => 'Članek',
+                ],
+                'topanime' => [
+                    'category_info' => 'Kategorija',
+                    'paid_wallpaper' => 'Plačljiva ozadja',
+                    'free_wallpaper' => 'Brezplačna ozadja',
+                    'article' => 'Članek',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "Avtorske pravice ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Oblikoval in razvil Phạm Văn Phú. Vse pravice pridržane.",
+            ]
+        ]
     ],
 
     "mn" => [
@@ -11574,7 +12742,175 @@ return [
         "flag_has_space_in_content" => false,
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "гар-утасны-ар-нүүр",
-        "data" => []
+        "data" => [
+            "home"              => "Нүүр хуудас",
+            "about_us"          => "Бидний тухай",
+            "event"             => "Үйл явдал",
+            "support"           => "Дэмжлэг",
+            "connect_with_us"   => "Бидэнтэй холбогдох",
+            "table_of_contents" => "Агуулгын жагсаалт",
+            "photo_set"         => "Зургийн цуглуулга",
+            "share"             => "Хуваалцах",
+            "no_suitable_results_found" => "Тохирох үр дүн олдсонгүй",
+            "cart"              => "Сагс",
+            "your_cart_is_empty"    => "Таны сагс хоосон байна",
+            "continue_shopping" => "Худалдан авалтаа үргэлжлүүлнэ үү",
+            "full_set"          => "Бүрэн цуглуулга",
+            "image"             => "Зураг",
+            "options"           => "Сонголтууд",
+            "product_guide_after_payment"   => "<div>Төлбөр төлсний дараа та эх зургийг шууд болон и-мэйлээр хүлээн авч татаж авах боломжтой.</div>",
+            "suggestions_for_you"   => "Танд санал болгож байна!",
+            "each_image"        => "Тус бүр зураг",
+            "each_set"          => "Тус бүр цуглуулга",
+            "propose" => "Санал болгох",
+            "favourite" => "Дуртай",
+            "newest" => "Хамгийн шинэ",
+            "oldest" => "Хамгийн хуучин",
+            "browse_by" => "Хайх төрөл",
+            "sort_by" => "Эрэмбэлэх",
+            "filter_by" => "Шүүх төрөл",
+            "filter_by_themes" => "Сэдвээр шүүх",
+            "filter_by_styles" => "Загвараар шүүх",
+            "filter_by_events" => "Үйл явдлаар шүүх",
+            "advanced_filter" => "Нарийвчилсан шүүлтүүр",
+            "all" => "Бүгд",
+            "added_to_cart" => "Сагсанд нэмэгдсэн!",
+            "view_cart" => "Сагсаа харах",
+            "add_to_cart" => "Сагсанд нэмэх",
+            "buy_now" => "Одоо худалдаж авах",
+            "undefined" => "Тодорхойгүй",
+            "total" => "Нийт",
+            "remove_item_in_cart" => "Сагснаас хасах",
+            "product_list" => "Бүтээгдэхүүний жагсаалт",
+            "product" => "Бүтээгдэхүүн",
+            "unit_price" => "Нэгж үнэ",
+            "total_price" => "Нийт үнэ",
+            "payment" => "Төлбөр",
+            "information" => "Мэдээлэл",
+            "email_prompt" => "Хэрэв и-мэйлээ оруулбал хадгалах хувилбарыг хүлээн авах боломжтой.",
+            "email_receive" => "Зураг хүлээн авах и-мэйл",
+            "payment_method" => "Төлбөрийн арга",
+            "fee" => "Хураамж",
+            "payment_fee" => "Төлбөрийн хураамж",
+            "view_all" => "Бүгдийг харах",
+            "login_name_com_vn" => "Нэвтрэх Name.com.vn",
+            "login_email" => "И-мэйлээр нэвтрэх",
+            "password" => "Нууц үг",
+            "remember_me" => "Сануулах",
+            "login" => "Нэвтрэх",
+            "or_login_with" => "Эсвэл нэвтрэх",
+            "support" => "Дэмжлэг",
+            "download_guide" => "Татаж авах заавар",
+            "account_information" => "Бүртгэлийн мэдээлэл",
+            "my_downloads" => "Миний татан авалтууд",
+            "logout" => "Гарах",
+            "article" => "Нийтлэл",
+            "featured_articles" => "Онцлох нийтлэлүүд",
+            "news_category" => "Мэдээний ангилал",
+            "payment_successful" => "Төлбөр амжилттай хийгдлээ!",
+            "thank_you_message" => "Name.com.vn-ийг дэмжсэнд баярлалаа. Таны зураг доорх хэсэгт байна эсвэл и-мэйлээр орж татаж болно.",
+            "order_id" => "Захиалгын дугаар",
+            "email" => "И-мэйл",
+            "click_to_download" => "Татаж авахын тулд дарна уу",
+            "step_1_buy_now" => "Алхам 1: И-мэйлээ оруулна уу.",
+            "note_fill_email" => "* И-мэйл оруулбал хадгалах хувилбарыг хүлээн авах боломжтой.",
+            "step_2_buy_now" => "Алхам 2: Төлбөрийн аргыг сонгоно уу.",
+            "what_do_you_want_to_find_today" => "Өнөөдөр та юу хайж байна?",
+            "search" => "Хайх",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Захиалга баталгаажуулалт',
+            'thank_you_message_email' => 'Таны захиалга амжилттай хийгдлээ! Таны ханын цаас одоо ашиглахад бэлэн байна.',
+            'hello' => 'Сайн байна уу',
+            'purchase_date' => 'Худалдан авсан огноо',
+            'download_instructions' => 'Та ханын цаасны багцаа дараах аргаар татаж авч болно:',
+            'direct_download' => 'Доорх холбоосуудаар шууд татаж авах:',
+            'sincerely' => 'Хүндэтгэсэн!',
+            'login_instruction_message_email' => 'Эсвэл өөрийн имэйлээр <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> сайтад нэвтэрч, <strong>"Миний татан авалтууд"</strong> хэсэгт орно уу.',
+            'support_contact_message_email' => 'Асуулт, лавлагаа эсвэл тусламж авахыг хүсвэл бидэнтэй <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a> хаягаар холбогдоно уу.',
+            'wish_message_email' => 'Шинэ ханын цаасны цуглуулгаараа гайхалтай туршлага эдлээрэй!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "Ханын Цаасны Сэдэв",
+                "topgirl"  => "Зурагны Сэдэв",
+                "topanime"  => "Зурагны Сэдэв",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "Ханын Цаасны Загвар",
+                "topgirl"  => "Зурагны Загвар",
+                "topanime"  => "Зурагны Загвар",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "Үнэгүй Ханын Цаас",
+                "topgirl"  => "Үнэгүй Зураг",
+                "topanime"  => "Үнэгүй Зураг",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "Гар Утасны Ханын Цаас",
+                "topgirl"  => "Гоё Охидын Зураг",
+                "topanime"  => "Анимэ Зураг",
+            ],
+            "product_description"   => [
+                "name"  => "<p>Таны гар утасны дэлгэцийг урлагийн бүтээл болгох гайхалтай зурагнуудын цуглуулга! Утсандаа шинэ хэв маяг, шинэлэг байдал авчраарай.</p>
+                            <ul>
+                                <li>Өндөр нягтрал: 1440x3360, бүх нарийн ширийн зүйлийг тод харуулна.</li>
+                                <li>Бүх төрлийн дэлгэцэнд бүрэн нийцнэ.</li>
+                                <li>Амархан, хурдан татах боломжтой.</li>
+                                <li>Хэрэглэх эрхтэй тул найзуудтайгаа хуваалцаарай.</li>
+                            </ul>
+                            <div>Одоо татаж авч, гар утасныхаа дэлгэцэн дээрх өөрчлөлтийг мэдрээрэй!</div>
+                        ",
+                "topgirl"  => "<div>Таны утсыг гоёмсог болгож, өвөрмөц хэв маяг нэмэх гайхалтай ханын цаасны багц.</div>
+                                <ul>
+                                    <li>Нягтрал: 1440x3360</li>
+                                    <li>Бүх төрлийн дэлгэцэнд нийцнэ.</li>
+                                </ul>
+                                <div>Татаж аваад утасныхаа дэлгэцэн дээр хэрэглээд үзээрэй!</div>",
+                "topanime"  => "<div>Таны утсыг гоёмсог болгож, өвөрмөц хэв маяг нэмэх гайхалтай ханын цаасны багц.</div>
+                                <ul>
+                                    <li>Нягтрал: 1440x3360</li>
+                                    <li>Бүх төрлийн дэлгэцэнд нийцнэ.</li>
+                                </ul>
+                                <div>Татаж аваад утасныхаа дэлгэцэн дээр хэрэглээд үзээрэй!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "Сэдэвээр Гар Утасны Ханын Цаас",
+                "topgirl"  => "Сэдэвээр Гоё Охидын Зураг",
+                "topanime"  => "Сэдэвээр Анимэ Зураг",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "Загвараар Гар Утасны Ханын Цаас",
+                "topgirl"  => "Загвараар Гоё Охидын Зураг",
+                "topanime"  => "Загвараар Анимэ Зураг",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "Үйл Явдлаар Гар Утасны Ханын Цаас",
+                "topgirl"  => "Үйл Явдлаар Гоё Охидын Зураг",
+                "topanime"  => "Үйл Явдлаар Анимэ Зураг",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Ангилал',
+                    'paid_wallpaper' => 'Төлбөртэй Ханын Цаас',
+                    'free_wallpaper' => 'Үнэгүй Ханын Цаас',
+                    'article' => 'Нийтлэл',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Ангилал',
+                    'paid_wallpaper' => 'Төлбөртэй Ханын Цаас',
+                    'free_wallpaper' => 'Үнэгүй Ханын Цаас',
+                    'article' => 'Нийтлэл',
+                ],
+                'topanime' => [
+                    'category_info' => 'Ангилал',
+                    'paid_wallpaper' => 'Төлбөртэй Ханын Цаас',
+                    'free_wallpaper' => 'Үнэгүй Ханын Цаас',
+                    'article' => 'Нийтлэл',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "Зохиогчийн эрх ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Фам Ван Фу-гийн зохион бүтээсэн, хөгжүүлсэн. Бүх эрх хуулиар хамгаалагдсан.",
+            ]
+        ]
     ],
 
     "ps" => [
@@ -11592,7 +12928,174 @@ return [
         "flag_has_space_in_content" => false,
         "dir" => "rtl",
         "slug_page_premium_wallpaper" => "د-تلیفون-شالیدونه",
-        "data" => []
+        "data" => [
+            "home"              => "کور",
+            "about_us"          => "زموږ په اړه",
+            "event"             => "پیښه",
+            "support"           => "ملاتړ",
+            "connect_with_us"   => "له موږ سره اړیکه ونیسئ",
+            "table_of_contents" => "فهرست",
+            "photo_set"         => "د عکسونو ټولګه",
+            "share"             => "شریکول",
+            "no_suitable_results_found" => "مناسب پایلې ونه موندل شوې",
+            "cart"              => "ټوکرۍ",
+            "your_cart_is_empty"    => "ستاسو ټوکرۍ تشه ده",
+            "continue_shopping" => "پیرود ته دوام ورکړئ",
+            "full_set"          => "مکمل ټولګه",
+            "image"             => "انځور",
+            "options"           => "غوراوي",
+            "product_guide_after_payment"   => "<div>د پیسو ورکولو وروسته، تاسو به اصل عکس مستقیم ترلاسه کړئ او له بریښنالیک څخه ډاونلوډ لپاره وکاروئ.</div>",
+            "suggestions_for_you"   => "ستاسو لپاره وړاندیزونه!",
+            "each_image"        => "هر انځور",
+            "each_set"          => "هره ټولګه",
+            "propose" => "وړاندیز",
+            "favourite" => "خوښ",
+            "newest" => "نوې",
+            "oldest" => "زوړ",
+            "browse_by" => "وګورئ د",
+            "sort_by" => "ترتیب د",
+            "filter_by" => "فلټر د",
+            "filter_by_themes" => "د موضوعاتو له مخې فلټر کړئ",
+            "filter_by_styles" => "د سټایلونو له مخې فلټر کړئ",
+            "filter_by_events" => "د پیښو له مخې فلټر کړئ",
+            "advanced_filter" => "پرمختللی فلټر",
+            "all" => "ټول",
+            "added_to_cart" => "ټوکرۍ ته اضافه شوه!",
+            "view_cart" => "ټوکرۍ وګورئ",
+            "add_to_cart" => "ټوکرۍ ته اضافه کړئ",
+            "buy_now" => "اوس واخلئ",
+            "undefined" => "نامعلوم",
+            "total" => "ټول",
+            "remove_item_in_cart" => "توکي له ټوکرۍ څخه لرې کړئ",
+            "product_list" => "د محصولاتو لیست",
+            "product" => "محصول",
+            "unit_price" => "واحد بیه",
+            "total_price" => "ټول قیمت",
+            "payment" => "تادیه",
+            "information" => "معلومات",
+            "email_prompt" => "که تاسو ایمیل داخل کړئ، تاسو ته به د خوندي کولو لپاره یو کاپي ولیږل شي.",
+            "email_receive" => "ایمیل د عکس ترلاسه کولو لپاره",
+            "payment_method" => "د تادیې طریقه",
+            "fee" => "فیس",
+            "payment_fee" => "د تادیې فیس",
+            'view_all' => 'ټول وګورئ',
+            'login_name_com_vn' => 'Name.com.vn ته ننه شئ',
+            'login_email' => 'د ننه کیدو ایمیل',
+            'password' => 'پاسورډ',
+            'remember_me' => 'ما په یاد ساته',
+            'login' => 'ننوتل',
+            'or_login_with' => 'یا د دې سره ننوځئ',
+            'support' => 'ملاتړ',
+            'download_guide' => 'د ډاونلوډ لارښود',
+            'account_information' => 'د حساب معلومات',
+            'my_downloads' => 'زما ډاونلوډونه',
+            'logout' => 'وتل',
+            'article' => "مقاله",
+            'featured_articles' => 'ځانګړې مقالې',
+            'news_category' => 'د خبرونو کټګورۍ',
+            'payment_successful' => "تادیه بریالۍ شوه!",
+            'thank_you_message' => "له تاسو څخه مننه چې Name.com.vn ته یې ملاتړ کړی. ستاسو عکسونه لاندې برخه کې دي یا تاسو کولی شئ خپل ایمیل ته ننوځئ ترڅو عکس ډاونلوډ کړئ.",
+            'order_id' => "د امر شمیره",
+            'email' => "ایمیل",
+            'click_to_download' => "د ډاونلوډ لپاره کلیک وکړئ",
+            'step_1_buy_now' => "ګام 1: مهرباني وکړئ خپل ایمیل داخل کړئ.",
+            'note_fill_email' => "* که تاسو ایمیل داخل کړئ، تاسو ته به د خوندي کولو لپاره یو کاپي ولیږل شي.",
+            'step_2_buy_now' => "ګام 2: د تادیې طریقه وټاکئ.",
+            'what_do_you_want_to_find_today' => "تاسو نن څه غواړئ چې ومومئ؟",
+            'search' => "لټون",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'د فرمایش تصدیق',
+            'thank_you_message_email' => 'له تاسو څخه مننه چې خپل فرمایش بشپړ کړ! ستاسو وال پیپرونه د کارولو لپاره چمتو دي.',
+            'hello' => 'سلام',
+            'purchase_date' => 'د اخیستلو نېټه',
+            'download_instructions' => 'تاسو کولی شئ وال پیپرونه په لاندې طریقو سره ډاونلوډ کړئ:',
+            'direct_download' => 'د لاندې لینکونو له لارې مستقیم ډاونلوډ:',
+            'sincerely' => 'په درناوي!',
+            'login_instruction_message_email' => 'یا په خپل ایمیل سره <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ته ننوزئ او د <strong>"زما ډاونلوډونه"</strong> برخې ته لاړ شئ.',
+            'support_contact_message_email' => 'که تاسو کومه پوښتنه یا مرسته ته اړتیا لرئ، نو مهرباني وکړئ موږ سره په ایمیل کې اړیکه ونیسئ: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'هیله ده تاسو د خپل نوي وال پیپرونو ټولګې سره غوره تجربې ولرئ!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "د وال پیپر موضوع",
+                "topgirl"  => "د عکس موضوع",
+                "topanime"  => "د عکس موضوع",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "د وال پیپر سټایل",
+                "topgirl"  => "د عکس سټایل",
+                "topanime"  => "د عکس سټایل",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "وړیا وال پیپر",
+                "topgirl"  => "وړیا عکسونه",
+                "topanime"  => "وړیا عکسونه",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "د موبایل وال پیپر",
+                "topgirl"  => "ښایسته انځورونه",
+                "topanime"  => "انیمي انځورونه",
+            ],
+            "product_description"   => [
+                "name"  => "<p>خپل د موبایل وال پیپر د ښکلي هنر په یوه شاهکار بدل کړئ! خپل موبایل ته نوې سټایل او تازه والی ورکړئ.</p>
+                            <ul>
+                                <li>لوړ ریزولوشن: 1440x3360، د واضح تصویر کیفیت تضمین کوي.</li>
+                                <li>د هر ډول موبایل سکرین سره په بشپړ ډول مطابقت لري.</li>
+                                <li>په څو اسانه ګامونو کې ژر او اسانه ډاونلوډ.</li>
+                                <li>د کارونې حقوق شامل دي، تاسو کولی شئ دا په اسانۍ سره له خپلو ملګرو سره شریک کړئ.</li>
+                            </ul>
+                            <div>همدا اوس ډاونلوډ کړئ او د خپل موبایل سکرین کې د جالب توپیر احساس وکړئ!</div>",
+                "topgirl"  => "<div>خپل موبایل ته یو څه رنګ او ځانګړی سټایل اضافه کړئ د دې ښکلي وال پیپر ټولګې سره.</div>
+                                <ul>
+                                    <li>ریزولوشن: 1440x3360</li>
+                                    <li>د ټولو موبایل سکرینونو سره مطابقت لري.</li>
+                                </ul>
+                                <div>ډاونلوډ کړئ او خپل موبایل سکرین کې یې تطبیق کړئ ترڅو د هغې څخه خوند واخلئ!</div>",
+                "topanime"  => "<div>خپل موبایل ته یو څه رنګ او ځانګړی سټایل اضافه کړئ د دې ښکلي وال پیپر ټولګې سره.</div>
+                                <ul>
+                                    <li>ریزولوشن: 1440x3360</li>
+                                    <li>د ټولو موبایل سکرینونو سره مطابقت لري.</li>
+                                </ul>
+                                <div>ډاونلوډ کړئ او خپل موبایل سکرین کې یې تطبیق کړئ ترڅو د هغې څخه خوند واخلئ!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "د موضوعاتو له مخې د موبایل وال پیپر",
+                "topgirl"  => "د موضوعاتو له مخې ښایسته انځورونه",
+                "topanime"  => "د موضوعاتو له مخې انیمي انځورونه",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "د سټایلونو له مخې د موبایل وال پیپر",
+                "topgirl"  => "د سټایلونو له مخې ښایسته انځورونه",
+                "topanime"  => "د سټایلونو له مخې انیمي انځورونه",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "د پیښو له مخې د موبایل وال پیپر",
+                "topgirl"  => "د پیښو له مخې ښایسته انځورونه",
+                "topanime"  => "د پیښو له مخې انیمي انځورونه",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'کتګورۍ',
+                    'paid_wallpaper' => 'بامعاش وال پیپر',
+                    'free_wallpaper' => 'وړیا وال پیپر',
+                    'article' => 'مقاله',
+                ],
+                'topgirl' => [
+                    'category_info' => 'کتګورۍ',
+                    'paid_wallpaper' => 'بامعاش وال پیپر',
+                    'free_wallpaper' => 'وړیا وال پیپر',
+                    'article' => 'مقاله',
+                ],
+                'topanime' => [
+                    'category_info' => 'کتګورۍ',
+                    'paid_wallpaper' => 'بامعاش وال پیپر',
+                    'free_wallpaper' => 'وړیا وال پیپر',
+                    'article' => 'مقاله',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "د چاپ حق ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ډیزاین او پرمختګ د Phạm Văn Phú لخوا. ټول حقونه خوندي دي.",
+            ]
+        ]
     ],
 
     "yo" => [
@@ -11610,7 +13113,174 @@ return [
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "awọn-aworan-ibùdó-fóònù",
-        "data" => []
+        "data" => [
+            "home"              => "Ojúlé",
+            "about_us"          => "Nípa wa",
+            "event"             => "Ìṣẹ̀lẹ̀",
+            "support"           => "Ìrànlọ́wọ́",
+            "connect_with_us"   => "Ṣe ìṣọ̀kan pẹ̀lú wa",
+            "table_of_contents" => "Atọ́ka",
+            "photo_set"         => "Ẹ̀ka Àwòrán",
+            "share"             => "Pín",
+            "no_suitable_results_found" => "Kò sí ìbámu abajade tó yẹ",
+            "cart"              => "Àpò rira",
+            "your_cart_is_empty"    => "Àpò rira rẹ ṣófo",
+            "continue_shopping" => "Tẹ̀síwájú nínú rira",
+            "full_set"          => "Gbogbo Ẹ̀ka",
+            "image"             => "Àwòrán",
+            "options"           => "Àṣàyàn",
+            "product_guide_after_payment"   => "<div>Lẹ́yìn sísanwó, Ìwọ yóò gba àwòrán ìpilẹ̀ pẹ̀lú ìmèlì láti ṣe igbasilẹ.</div>",
+            "suggestions_for_you"   => "Àbá fún ọ!",
+            "each_image"        => "Kọọ̀kan àwòrán",
+            "each_set"          => "Kọọ̀kan Ẹ̀ka",
+            "propose" => "Ìtìlẹ́yìn",
+            "favourite" => "Ayọ̀ká",
+            "newest" => "Títúnṣẹ̀",
+            "oldest" => "Títójẹ́",
+            "browse_by" => "Ṣàwárí nípasẹ̀",
+            "sort_by" => "Tẹ́lẹ̀ nípasẹ̀",
+            "filter_by" => "Ànfàní nípasẹ̀",
+            "filter_by_themes" => "Ànfàní nípasẹ̀ Àkòrí",
+            "filter_by_styles" => "Ànfàní nípasẹ̀ Àṣà",
+            "filter_by_events" => "Ànfàní nípasẹ̀ Ìṣẹ̀lẹ̀",
+            "advanced_filter" => "Ànfàní to ti ni ilọsiwaju",
+            "all" => "Gbogbo",
+            "added_to_cart" => "Ṣe àfikún sí àpò rira!",
+            "view_cart" => "Wo Àpò Rira",
+            "add_to_cart" => "Ṣe àfikún sí Àpò Rira",
+            "buy_now" => "Ra Ní báyìí",
+            "undefined" => "Aìsí ìtànná",
+            "total" => "Àpapọ̀",
+            "remove_item_in_cart" => "Yọ ohunkóhun kúrò nínú Àpò Rira",
+            "product_list" => "Àkójọ Ọja",
+            "product" => "Ọja",
+            "unit_price" => "Ìye Ọ̀kan",
+            "total_price" => "Ìye Gbogbo",
+            "payment" => "Ìsanwó",
+            "information" => "Àlàyé",
+            "email_prompt" => "Ti o bá tẹ Email, àwọ́n àwòrán yóò tún fi ranṣẹ̀ síbẹ̀ fún ìfipamọ̀.",
+            "email_receive" => "Email láti gba àwòrán",
+            "payment_method" => "Ọ̀nà Ìsanwó",
+            "fee" => "Owó",
+            "payment_fee" => "Owó Ìsanwó",
+            'view_all' => 'Wo Gbogbo',
+            'login_name_com_vn' => 'Wọlé sí Name.com.vn',
+            'login_email' => 'Email fún Wọlé',
+            'password' => 'Ọ̀rọ̀ aṣínà',
+            'remember_me' => 'Rántí mi',
+            'login' => 'Wọlé',
+            'or_login_with' => 'Tabi wọlé pẹ̀lú',
+            'support' => 'Ìrànlọ́wọ́',
+            'download_guide' => 'Ìtọ́sọ́nà igbasilẹ',
+            'account_information' => 'Àlàyé Àkọọlẹ̀',
+            'my_downloads' => 'Àwọn Igbasilẹ mi',
+            'logout' => 'Jádè',
+            'article' => "Àpilẹ̀kọ",
+            'featured_articles' => 'Àpilẹ̀kọ Ifẹ́ṣọ́na',
+            'news_category' => 'Ẹ̀ka Ìròyìn',
+            'payment_successful' => "Ìsanwó yíṣé!",
+            'thank_you_message' => "Ẹ ṣéun fún àtìlẹ́yìn Name.com.vn. Àwọn àwòrán rẹ wa ní isalẹ tàbí o lè wọlé sí ìmèlì rẹ fún igbasilẹ.",
+            'order_id' => "Ìdánimọ̀ Àṣẹ",
+            'email' => "Ìmèlì",
+            'click_to_download' => "Tẹ fún igbasilẹ",
+            'step_1_buy_now' => "Ìgbésẹ̀ 1: Ṣe àyípadà imeeli rẹ.",
+            'note_fill_email' => "* Tẹ imeeli láti gba àfikún ẹ̀dá mìíràn fún ìfipamọ̀.",
+            'step_2_buy_now' => "Ìgbésẹ̀ 2: Yan Ọ̀nà Ìsanwó.",
+            'what_do_you_want_to_find_today' => "Kí ló fẹ́ rí lónìí?",
+            'search' => "Ṣàwárí",
+            /* xác nhận đơn hàng */
+            'order_confirmation' => 'Ìmúdájú ibere',
+            'thank_you_message_email' => 'O ṣeun fun ipari ìbere rẹ! Aworan ilẹ rẹ ti ṣetan lati lo.',
+            'hello' => 'Ẹ n lẹ',
+            'purchase_date' => 'Ọjọ tita',
+            'download_instructions' => 'O le ṣe igbasilẹ akojọpọ awọn aworan ilẹ ni awọn ọna wọnyi:',
+            'direct_download' => 'Ṣe igbasilẹ taara nipasẹ awọn ọna asopọ ni isalẹ:',
+            'sincerely' => 'Ẹ kí!',
+            'login_instruction_message_email' => 'Tabi wọlé si <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> pẹlu imeeli rẹ ki o lọ si apakan <strong>"Awọn igbasilẹ mi"</strong>',
+            'support_contact_message_email' => 'Ti o ba ni ibeere eyikeyi tabi nilo iranlọwọ, jọwọ kan si wa nipasẹ imeeli: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+            'wish_message_email' => 'A fẹ ki o ni iriri ti o yanilenu pẹlu akojọpọ awọn aworan ilẹ tuntun rẹ!',
+            /* custom */
+            "wallpaper_theme"   => [
+                "name"  => "Ẹ̀kà Aworan ilẹ",
+                "topgirl"  => "Ẹ̀kà Aworan",
+                "topanime"  => "Ẹ̀kà Aworan",
+            ],
+            "wallpaper_style"   => [
+                "name"  => "Àṣà Aworan ilẹ",
+                "topgirl"  => "Àṣà Aworan",
+                "topanime"  => "Àṣà Aworan",
+            ],
+            "free_wallpaper"    => [
+                "name"  => "Aworan ilẹ Ọfẹ",
+                "topgirl"  => "Aworan Ọfẹ",
+                "topanime"  => "Aworan Ọfẹ",
+            ],
+            "phone_wallpaper"   => [
+                "name"  => "Aworan ilẹ Foonu",
+                "topgirl"  => "Aworan Ìyàwó Rẹwa",
+                "topanime"  => "Aworan Anime",
+            ],
+            "product_description"   => [
+                "name"  => "<p>Ṣe àyípadà iboju ilẹ foonu rẹ sí iṣẹ́ ọnà pẹ̀lú àkójọpọ̀ aworan aláwòraa yìí! Mu àṣà tuntun àti ayédèrú wá sí foonu rẹ.</p>
+                            <ul>
+                                <li>Ipinnu giga: 1440x3360, jẹ́risi aworan pé ó mọ́ dáadáa.</li>
+                                <li>Ó yẹ fún gbogbo iboju foonu.</li>
+                                <li>Ṣe igbasilẹ rọgbọrùn ún àti kíákíá ní ọ̀pọ̀lọpọ̀ ìgbésẹ̀ àròkọ.</li>
+                                <li>Pẹ̀lú ìyàtọ̀ ojúṣe, o le pin pẹlu àwọn ọ̀rẹ rẹ.</li>
+                            </ul>
+                            <div>Ṣe igbasilẹ lẹsẹkẹsẹ ki o ní ìrírí ìyàtọ̀ lórí iboju ilẹ foonu rẹ!</div>",
+                "topgirl"  => "<div>Fí agbára àti àṣà aláìmọ́ra sí foonu rẹ pẹ̀lú Àkójọpọ̀ Aworan ilẹ alárinrin yìí.</div>
+                            <ul>
+                                <li>Ipinnu: 1440x3360</li>
+                                <li>Ó yẹ fún gbogbo iboju foonu.</li>
+                            </ul>
+                            <div>Ṣe igbasilẹ ki o lo lẹsẹkẹsẹ lórí iboju ilẹ rẹ láti ní ìrírí!</div>",
+                "topanime"  => "<div>Fí agbára àti àṣà aláìmọ́ra sí foonu rẹ pẹ̀lú Àkójọpọ̀ Aworan ilẹ alárinrin yìí.</div>
+                                <ul>
+                                    <li>Ipinnu: 1440x3360</li>
+                                    <li>Ó yẹ fún gbogbo iboju foonu.</li>
+                                </ul>
+                                <div>Ṣe igbasilẹ ki o lo lẹsẹkẹsẹ lórí iboju ilẹ rẹ láti ní ìrírí!</div>",
+            ],
+            "wallpaper_by_themes" => [
+                "name"  => "Aworan ilẹ Foonu gẹ́gẹ́ bí Ẹ̀kà",
+                "topgirl"  => "Aworan Ìyàwó Rẹwa gẹ́gẹ́ bí Ẹ̀kà",
+                "topanime"  => "Aworan Anime gẹ́gẹ́ bí Ẹ̀kà",
+            ],
+            "wallpaper_by_styles" => [
+                "name"  => "Aworan ilẹ Foonu gẹ́gẹ́ bí Àṣà",
+                "topgirl"  => "Aworan Ìyàwó Rẹwa gẹ́gẹ́ bí Àṣà",
+                "topanime"  => "Aworan Anime gẹ́gẹ́ bí Àṣà",
+            ],
+            "wallpaper_by_events" => [
+                "name"  => "Aworan ilẹ Foonu gẹ́gẹ́ bí Ìṣẹ̀lẹ̀",
+                "topgirl"  => "Aworan Ìyàwó Rẹwa gẹ́gẹ́ bí Ìṣẹ̀lẹ̀",
+                "topanime"  => "Aworan Anime gẹ́gẹ́ bí Ìṣẹ̀lẹ̀",
+            ],
+            "list_type_search" => [
+                'name' => [
+                    'category_info' => 'Ẹ̀kà',
+                    'paid_wallpaper' => 'Aworan ilẹ Tí wọ́n san fún',
+                    'free_wallpaper' => 'Aworan ilẹ Ọfẹ',
+                    'article' => 'Àpilẹ̀kọ',
+                ],
+                'topgirl' => [
+                    'category_info' => 'Ẹ̀kà',
+                    'paid_wallpaper' => 'Aworan ilẹ Tí wọ́n san fún',
+                    'free_wallpaper' => 'Aworan ilẹ Ọfẹ',
+                    'article' => 'Àpilẹ̀kọ',
+                ],
+                'topanime' => [
+                    'category_info' => 'Ẹ̀kà',
+                    'paid_wallpaper' => 'Aworan ilẹ Tí wọ́n san fún',
+                    'free_wallpaper' => 'Aworan ilẹ Ọfẹ',
+                    'article' => 'Àpilẹ̀kọ',
+                ],
+            ],
+            "copyright" => [
+                "name"  => "Àṣẹ àbáyọ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Àpẹrẹ àti ìdàgbàsókè nípasẹ̀ Phạm Văn Phú. Gbogbo ẹ̀tọ́ ni a fìpamọ̀.",
+            ],
+        ]
     ]
 
 ];

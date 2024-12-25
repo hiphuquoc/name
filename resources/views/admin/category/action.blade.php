@@ -3,6 +3,14 @@
         <div class="actionBox_item maxLine_1" onClick="callAI('auto_content')">
             <i class="fa-solid fa-robot"></i>Viết toàn trang
         </div>
+        <!-- dịch content (những trang chưa có) -->
+        <div class="actionBox_item maxLine_1" onclick="createJobTranslateAndCreatePageAjax('{{ $item->seo->slug ?? '' }}');">
+            <i class="fa-solid fa-plus"></i>Tạo trang ngôn ngữ còn thiếu (chạy ngầm)
+        </div>
+        <!-- dịch content (những trang chưa có) -->
+        <div class="actionBox_item maxLine_1" onclick="createMultiJobTranslateContent('{{ $item->seo->slug ?? '' }}');">
+            <i class="fa-solid fa-language"></i>Dịch content tất cả ngôn ngữ (chạy ngầm)
+        </div>
     @else   
         <div class="actionBox_item maxLine_1" onClick="callAI('translate_content')">
             <i class="fa-solid fa-language"></i>Dịch toàn trang (trực quan)
@@ -24,6 +32,7 @@
         @endif
         <!-- End:: trường hợp không có bản lưu auto job nào mới hiện ra nút nhấn -->
     @endif
+    <!-- copy trang gốc -->
     @if(!empty($itemSeo->link_canonical))
         <a href="{{ URL::current().'?id='.$item->id.'&language='.$language.'&id_seo_source='.$itemSeo->link_canonical }}" class="actionBox_item maxLine_1">
             <i class="fa-solid fa-file-import"></i>Copy từ trang Gốc
@@ -32,5 +41,43 @@
         <div class="actionBox_item maxLine_1" data-bs-toggle="modal" data-bs-target="#modalViewProductCopied" onclick="searchProductCopied();">
             <i class="fa-solid fa-file-import"></i>Cập nhật trang Copy
         </div>
-    @endif
+    @endif    
 </div>
+@pushonce('scriptCustom')
+    <script type="text/javascript">
+
+        function createMultiJobTranslateContent(slugVi){
+            /* đóng modal + bật loading */
+            openCloseFullLoading();
+            $.ajax({
+                url         : "{{ route('admin.translate.createMultiJobTranslateContent') }}",
+                type        : "post",
+                dataType    : "html",
+                data        : { 
+                    '_token'    : '{{ csrf_token() }}',
+                    slug_vi : slugVi,
+                }
+            }).done(function(response){
+                if(response) location.reload();
+            });
+        }
+
+        function createJobTranslateAndCreatePageAjax(slugVi){
+            /* đóng modal + bật loading */
+            openCloseFullLoading();
+            $.ajax({
+                url         : "{{ route('admin.translate.createJobTranslateAndCreatePageAjax') }}",
+                type        : "post",
+                dataType    : "html",
+                data        : { 
+                    '_token'    : '{{ csrf_token() }}',
+                    slug_vi : slugVi,
+                }
+            }).done(function(response){
+                if(response) location.reload();
+            });
+        }
+
+    </script>
+
+@endpushonce

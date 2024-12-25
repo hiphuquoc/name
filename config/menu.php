@@ -105,16 +105,6 @@ return [
                     'route' => 'admin.redirect.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
-                [
-                    'name'  => '2. Auto tạo trang',
-                    'route' => 'admin.translate.viewCreateJobTranslateAndCreatePage',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '3. Auto dịch',
-                    'route' => 'admin.translate.viewcreateJobTranslateContent',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
             ]
         ],
         [

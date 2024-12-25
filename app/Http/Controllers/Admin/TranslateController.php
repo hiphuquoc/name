@@ -31,14 +31,6 @@ use App\Models\JobAutoTranslate;
 
 class TranslateController extends Controller {
 
-    public function viewcreateJobTranslateContent(Request $request){
-        return view('admin.translate.viewcreateJobTranslateContent');
-    }
-
-    public function viewCreateJobTranslateAndCreatePage(Request $request){
-        return view('admin.translate.viewCreateJobTranslateAndCreatePage');
-    }
-
     public static function list(Request $request){
         $params     = [];
         /* paginate */
@@ -73,20 +65,24 @@ class TranslateController extends Controller {
     }
 
     public static function createMultiJobTranslateContent(Request $request){
-        $urlVi      = $request->get('url_vi');
-        $slug       = self::getSlugByUrl($urlVi);
+        $slugVi      = $request->get('slug_vi');
+        $slug       = self::getSlugByUrl($slugVi);
         /* lấy thông tin trang gốc - vi */
         $tmp        = Seo::select('*')
                         ->where('slug', $slug)
                         ->first();
         $arrayIdSeoRequested = [];
         if(!empty($tmp->id)){
-            /* kiểm tra xem loại nào */
+            /* lấy thông tin trang */
             $infoPage =     HelperController::getFullInfoPageByIdSeo($tmp->id);
             /* duyệt sang mảng để tạo yêu cầu */
             if(!empty($infoPage)){
                 foreach($infoPage->seos as $seo){
-                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language!='vi'){
+                    /* kiểm tra chưa có content mới cho phép chạy */
+                    $countContentVi         = $infoPage->seo->contents->count();
+                    $countContentTranslate  = !empty($seo->infoSeo->contents) ? $seo->infoSeo->contents->count() : 0;
+                    /* tiến hành chạy */
+                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language!='vi'&&$countContentTranslate<$countContentVi){
                         $flag = self::createJobTranslateContent($infoPage->seo->id, $seo->infoSeo->language);
                         if($flag==true) $arrayIdSeoRequested[] = $infoPage->seo->id;
                     }
@@ -96,10 +92,10 @@ class TranslateController extends Controller {
         /* Message */
         $message        = [
             'type'      => 'success',
-            'message'   => 'Đã gửi yêu cầu tạo '.count($arrayIdSeoRequested).' trang ngôn ngữ cho Url: '.$urlVi,
+            'message'   => 'Đã gửi yêu cầu tạo '.count($arrayIdSeoRequested).' trang ngôn ngữ cho Url: '.$slugVi,
         ];
         $request->session()->put('message', $message);
-        return redirect()->route('admin.translate.viewcreateJobTranslateContent');
+        return true;
     }
 
     public static function createJobTranslateContentAjax(Request $request){
@@ -176,25 +172,25 @@ class TranslateController extends Controller {
     }
 
     public static function createJobTranslateAndCreatePageAjax(Request $request) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */
-        $urlVi      = $request->get('url_vi');
-        $slug       = self::getSlugByUrl($urlVi);
+        $slugVi     = $request->get('slug_vi');
+        $slug       = self::getSlugByUrl($slugVi);
         /* lấy thông tin trang gốc - vi */
         $tmp        = Seo::select('*')
             ->where('slug', $slug)
             ->first();
         $arrayLanguageRequested  = [];
         if (!empty($tmp->id)) {
-            /* kiểm tra xem loại nào */
+            /* lấy thông tin trang */
             $infoPage =     HelperController::getFullInfoPageByIdSeo($tmp->id);
             if (!empty($infoPage)) $arrayLanguageRequested = self::createJobTranslateAndCreatePage($infoPage);
         }
         /* Message */
         $message        = [
             'type'      => 'success',
-            'message'   => 'Đã gửi yêu cầu tạo '.count($arrayLanguageRequested).' trang ngôn ngữ cho Url: '.$urlVi,
+            'message'   => 'Đã gửi yêu cầu tạo '.count($arrayLanguageRequested).' trang ngôn ngữ cho Url: '.$slugVi,
         ];
         $request->session()->put('message', $message);
-        return redirect()->route('admin.translate.viewCreateJobTranslateAndCreatePage');
+        return true;
     }
 
     public static function createJobTranslateAndCreatePage($infoPage) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */

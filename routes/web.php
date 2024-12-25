@@ -230,8 +230,6 @@ Route::middleware('auth', 'role:admin')->group(function (){
         });
         /* ===== TRANSLATE ===== */
         Route::prefix('translate')->group(function(){
-            Route::get('/viewcreateJobTranslateContent', [TranslateController::class, 'viewcreateJobTranslateContent'])->name('admin.translate.viewcreateJobTranslateContent');
-            Route::get('/viewCreateJobTranslateAndCreatePage', [TranslateController::class, 'viewCreateJobTranslateAndCreatePage'])->name('admin.translate.viewCreateJobTranslateAndCreatePage');
             Route::get('/list', [TranslateController::class, 'list'])->name('admin.translate.list');
             Route::get('/delete', [TranslateController::class, 'delete'])->name('admin.translate.delete');
             Route::get('/redirectEdit', [TranslateController::class, 'redirectEdit'])->name('admin.translate.redirectEdit');
@@ -257,7 +255,6 @@ Route::get('/downloadSource', [GoogledriveController::class, 'downloadSource'])-
 Route::post('/vnpay/url_ipn', [VNPayController::class, 'handleIPN'])->name('main.vnpay.ipn');
 /* nháp */
 Route::get('/test123', [HomeController::class, 'test'])->name('main.test');
-Route::get('/chatgpt', [HomeController::class, 'chatGPT'])->name('main.chatGPT');
 /* lỗi */
 Route::get('/error', [\App\Http\Controllers\ErrorController::class, 'handle'])->name('error.handle');
 Route::get('/addToCart', [CartController::class, 'addToCart'])->name('main.addToCart');
