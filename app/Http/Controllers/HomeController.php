@@ -74,30 +74,21 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        // $dataLanguage   = config('language');
-        // $i              = 1;
-        // foreach($dataLanguage as $language){
-        //     echo '<div>'.$i.'. '.$language['key'].'</div>';
-        //     ++$i;
-        // }
-
-        // dd($dataLanguage);
-
-
-        // dd(123);
-        $code       = $request->get('code');
-        $orderInfo  = Order::select('*')
-                        ->where('code', $code)
-                        ->first();
-        $language   = 'en';
-        if(!empty($orderInfo)){
-            /* cập nhật trạng thái thành toán thành công */
-            if(!empty($updateStatus) && $updateStatus == true) Order::updateItem($orderInfo->id, ['payment_status' => 1]);
-            /* nếu là thanh toán giỏ hàng => clear giỏ hàng */
-            if($orderInfo->payment_type=='payment_cart') Session::forget('cart');
-            /* tạo job gửi email */
-            if(!empty($orderInfo->email)) Mail::to($orderInfo->email)->queue(new SendProductMail($orderInfo, $language));
+        $infoPage = Category::select('*')
+                    ->whereHas('seo', function($query){
+                        $query->where('slug', 'hinh-nen-dien-thoai');
+                    })
+                    ->with('seo', 'seos')
+                    ->first();
+        // dd($infoPage);
+        foreach($infoPage->seos as $seo){
+            if(!empty($seo->infoSeo->language)){
+                echo '<div>'.$seo->infoSeo->language.'- '.$seo->infoSeo->id.'</div>';
+            }
+            
         }
+
+        dd(123);
         
     }
 

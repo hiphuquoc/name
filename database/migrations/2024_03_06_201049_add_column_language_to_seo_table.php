@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('seo', function (Blueprint $table) {
-            $table->string('language', '2');
+            $table->string('language', '3');
         });
     }
 
