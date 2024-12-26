@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('seo_id');
             $table->integer('ordering');
-            $table->string('language', 2);
+            $table->string('language', 3);
             $table->text('link_source');
             $table->text('link_translate');
         });

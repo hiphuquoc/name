@@ -199,7 +199,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "zh-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "手机壁纸",
         "data" => [
             "home" => "首页",
             "about_us" => "关于我们",
@@ -383,7 +383,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "fondos-de-pantalla-del-telefono",
+        "slug_page_premium_wallpaper" => "fondos-de-pantalla-para-telefonos",
         "data" => [
             "home" => "Inicio",
             "about_us" => "Sobre nosotros",
@@ -567,7 +567,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "fonds-d-ecran-de-telephone",
+        "slug_page_premium_wallpaper" => "fonds-d-ecran-pour-telephones",
         "data" => [
             "home" => "Accueil",
             "about_us" => "À propos de nous",
@@ -936,7 +936,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "hi-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "फोन-वॉलपेपर",
         "data" => [
             "home" => "होम",
             "about_us" => "हमारे बारे में",
@@ -1120,7 +1120,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ফোন-ওয়ালপেপার",
         "data" => [
             "home" => "হোম",
             "about_us" => "আমাদের সম্পর্কে",
@@ -1304,7 +1304,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "फोनसाठी-वॉलपेपर",
         "data" => [
             "home" => "मुखपृष्ठ",
             "about_us" => "आमच्याबद्दल",
@@ -1488,7 +1488,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "தொலைபேசி-வால்பேப்பர்கள்",
         "data" => [
             "home" => "முகப்பு",
             "about_us" => "எங்களைப் பற்றி",
@@ -1672,7 +1672,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ఫోన్-వాల్పేపర్లు",
         "data" => [
             "home" => "హోమ్",
             "about_us" => "మా గురించి",
@@ -1856,7 +1856,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "rtl",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "فون-وال-پیپرز",
         "data" => [
             "home" => "ہوم",
             "about_us" => "ہمارے بارے میں",
@@ -2040,7 +2040,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ફોન-વોલપેપર્સ",
         "data"      => [
             "home"          => "હોમ",
             "about_us"      => "અમારા વિશે",
@@ -2224,7 +2224,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ಫೋನ್-ವಾಲ್ಪೇಪರ್",
         "data"      => [
             "home"          => "ಮನೆ",
             "about_us"      => "ನಮ್ಮ ಬಗ್ಗೆ",
@@ -2408,7 +2408,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "ja-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "携帯電話の壁紙",
         "data"      => [
             "home"          => "ホーム",
             "about_us"      => "私たちに関しては",
@@ -2592,7 +2592,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "ko-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "휴대폰-배경화면",
         "data"      => [
             "home"          => "홈",
             "about_us"      => "회사 소개",
@@ -2776,7 +2776,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "wallpaper-telepon",
         "data"      => [
             "home"          => "Beranda",
             "about_us"      => "Tentang Kami",
@@ -3144,7 +3144,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "kertas-dinding-telefon",
         "data"      => [
             "home"          => "Rumah",
             "about_us"      => "Tentang Kami",
@@ -3328,7 +3328,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "วอลเปเปอร์โทรศัพท์",
         "data"      => [
             "home"          => "หน้าหลัก",
             "about_us"      => "เกี่ยวกับเรา",
@@ -3512,7 +3512,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ផ្ទាំងរូបភាពទូរស័ព្ទ",
         "data"      => [
             "home"          => "ទំព័រដើម",
             "about_us"      => "អំពី​ពួក​យើង",
@@ -3696,7 +3696,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "rtl",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "خلفيات-الهاتف",
         "data"      => [
             "home"          => "الرئيسية",
             "about_us"      => "معلومات عنا",
@@ -3880,7 +3880,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "rtl",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "تصاویر-زمینه-تلفن",
         "data"      => [
             "home"          => "خانه",
             "about_us"      => "درباره ما",
@@ -4064,7 +4064,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "ru-phone-wallpapers",
+        "slug_page_premium_wallpaper" => "обои-для-телефона",
         "data"      => [
             "home"          => "Главная",
             "about_us"      => "О нас",
@@ -4248,7 +4248,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "handy-hintergründe",
         "data"      => [
             "home"          => "Startseite",
             "about_us"      => "Über uns",
@@ -4432,7 +4432,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "telefon-duvar-kağıtları",
         "data"      => [
             "home"          => "Ana Sayfa",
             "about_us"      => "Hakkımızda",
@@ -4616,7 +4616,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "sfondi-per-telefono",
         "data"      => [
             "home"          => "Home",
             "about_us"      => "Chi siamo",
@@ -4800,7 +4800,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "tapety-na-telefon",
         "data"      => [
             "home"          => "Strona główna",
             "about_us"      => "O nas",
@@ -4984,7 +4984,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "шпалери-для-телефону",
         "data"      => [
             "home"          => "Головна",
             "about_us"      => "Про нас",
@@ -5168,7 +5168,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "telefoon-achtergronden",
         "data"      => [
             "home"          => "Home",
             "about_us"      => "Over ons",
@@ -5352,7 +5352,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "ταπετσαρίες-για-τηλέφωνα",
         "data"      => [
             "home"          => "Αρχική",
             "about_us"      => "Σχετικά με εμάς",
@@ -5536,7 +5536,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "telefon-hatterkepek",
         "data"      => [
             "home"          => "Kezdőlap",
             "about_us"      => "Rólunk",
@@ -5720,7 +5720,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "tapety-na-mobilni-telefon",
         "data"      => [
             "home"          => "Domů",
             "about_us"      => "O nás",
@@ -5904,7 +5904,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "tapete-pentru-telefon",
         "data"      => [
             "home"          => "Acasă",
             "about_us"      => "Despre noi",
@@ -6088,7 +6088,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "tapety-pre-mobil",
         "data"      => [
             "home"          => "Domov",
             "about_us"      => "O nás",
@@ -6272,7 +6272,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "მობილური-ტელეფონის-ფონები",
         "data"      => [
             "home"          => "მთავარი",
             "about_us"      => "ჩვენს შესახებ",
@@ -6456,7 +6456,7 @@ return [
         "flag_join_left_to_right" => false,
         "flag_has_space_in_content" => true,
         "dir"       => "rtl",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "טפטים-לטלפונים",
         "data"      => [
             "home"          => "בית",
             "about_us"      => "אודותינו",
@@ -6640,7 +6640,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "telefon-fon-rasmlari",
         "data"      => [
             "home"          => "Uy",
             "about_us"      => "Biz haqimizda",
@@ -6824,7 +6824,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "phone-wallpapers",
+        "slug_page_premium_wallpaper" => "papeis-de-parede-para-telefones",
         "data"      => [
             "home"          => "Início",
             "about_us"      => "Sobre nós",
@@ -7009,7 +7009,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "mga-wallpaper-ng-telepono",
         "data" => [
             "home"              => "Bahay",
             "about_us"          => "Tungkol sa Amin",
@@ -7194,7 +7194,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "telefon-bakgrunder",
         "data" => [
             "home" => "Hem",
             "about_us" => "Om oss",
@@ -7380,7 +7380,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "telefon-bakgrunner",
         "data" => [
             "home"              => "Hjem",
             "about_us"          => "Om oss",
@@ -7566,7 +7566,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "puhelimen-taustakuvat",
         "data" => [
             "home"              => "Etusivu",
             "about_us"          => "Meistä",
@@ -7751,7 +7751,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "telefon-baggrunde",
         "data" => [
             "home"              => "Hjem",
             "about_us"          => "Om os",
@@ -7936,7 +7936,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "picha-za-ukuta-wa-simu",
         "data" => [
             "home"              => "Nyumbani",
             "about_us"          => "Kuhusu Sisi",
@@ -8123,7 +8123,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "ഫോണിന്റെ-വാൾപേപ്പറുകൾ",
         "data" => [
             "home"              => "ഹോം",
             "about_us"          => "ഞങ്ങളെപ്പറ്റി",
@@ -8308,7 +8308,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "телефонни-тапети",
         "data" => [
             "home"              => "Начална страница",
             "about_us"          => "За нас",
@@ -8493,7 +8493,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "телефон-обои",
         "data" => [
             "home"              => "Башкы бет",
             "about_us"          => "Биз жөнүндө",
@@ -8664,192 +8664,6 @@ return [
         ],
     ],
 
-    "sk" => [
-        "name" => "Slovak",
-        "name_by_language" => "Slovenčina",
-        "area" => "Slovensko",
-        "scope" => "Slovenčina je oficiálny jazyk v Slovenskej republike",
-        "currency" => "EUR",
-        "currency_code" => "€",
-        "money_value" => "1",
-        "decimal_places" => 2,
-        "key" => "sk",
-        "latin" => true,
-        "flag_join_left_to_right" => true,
-        "flag_has_space_in_content" => true,
-        "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
-        "data" => [
-            "home"              => "Domov",
-            "about_us"          => "O nás",
-            "event"             => "Udalosti",
-            "support"           => "Podpora",
-            "connect_with_us"   => "Spojte sa s nami",
-            "table_of_contents" => "Obsah",
-            "photo_set"         => "Súbor fotografií",
-            "share"             => "Zdieľať",
-            "no_suitable_results_found" => "Žiadne vhodné výsledky nenájdené",
-            "cart"              => "Košík",
-            "your_cart_is_empty"    => "Váš košík je prázdny",
-            "continue_shopping" => "Pokračovať v nakupovaní",
-            "full_set"          => "Celý set",
-            "image"             => "Obrázok",
-            "options"           => "Možnosti",
-            "product_guide_after_payment"   => "<div>Po zaplatení obdržíte originálny obrázok priamo a cez e-mail, aby ste si ho mohli stiahnuť a použiť.</div>",
-            "suggestions_for_you"   => "Návrhy pre vás!",
-            "each_image"        => "Každý obrázok",
-            "each_set"          => "Každý set",
-            "propose" => "Navrhnúť",
-            "favourite" => "Obľúbené",
-            "newest" => "Najnovšie",
-            "oldest" => "Najstaršie",
-            "browse_by" => "Prehliadať podľa",
-            "sort_by" => "Zoradiť podľa",
-            "filter_by" => "Filtrovať podľa",
-            "filter_by_themes" => "Filtrovať podľa témy",
-            "filter_by_styles" => "Filtrovať podľa štýlu",
-            "filter_by_events" => "Filtrovať podľa udalosti",
-            "advanced_filter" => "Pokročilý filter",
-            "all" => "Všetky",
-            "added_to_cart" => "Pridané do košíka!",
-            "view_cart" => "Zobraziť košík",
-            "add_to_cart" => "Pridať do košíka",
-            "buy_now" => "Kúpiť teraz",
-            "undefined" => "Nezadané",
-            "total" => "Celkom",
-            "remove_item_in_cart" => "Odstrániť položku v košíku",
-            "product_list" => "Zoznam produktov",
-            "product" => "Produkt",
-            "unit_price" => "Cena za jednotku",
-            "total_price" => "Celková cena",
-            "payment" => "Platba",
-            "information" => "Informácie",
-            "email_prompt" => "Ak zadáte e-mail, pošleme vám kópiu na uloženie.",
-            "email_receive" => "E-mail na prijatie obrázkov",
-            "payment_method" => "Spôsob platby",
-            "fee" => "Poplatok",
-            "payment_fee" => "Poplatok za platbu",
-            'view_all' => 'Zobraziť všetky',
-            'login_name_com_vn' => 'Prihlásiť sa na Name.com.vn',
-            'login_email' => 'Prihlasovací e-mail',
-            'password' => 'Heslo',
-            'remember_me' => 'Zapamätať si ma',
-            'login' => 'Prihlásiť sa',
-            'or_login_with' => 'Alebo sa prihláste pomocou',
-            'support' => 'Podpora',
-            'download_guide' => 'Sprievodca sťahovaním',
-            'account_information' => 'Údaje o účte',
-            'my_downloads' => 'Moje sťahovania',
-            'logout' => 'Odhlásiť sa',
-            'article' => "Článok",
-            'featured_articles' => 'Vybrané články',
-            'news_category' => 'Kategória noviniek',
-            'payment_successful' => "Platba bola úspešná!",
-            'thank_you_message' => "Ďakujeme, že podporujete Name.com.vn. Vaše obrázky sú nižšie alebo si ich môžete stiahnuť z e-mailu.",
-            'order_id' => "ID objednávky",
-            'email' => "E-mail",
-            'click_to_download' => "Kliknite na stiahnutie",
-            'step_1_buy_now' => "Krok 1: Zadajte prosím svoj e-mail.",
-            'note_fill_email' => "* Ak zadáte e-mail, pošleme vám kópiu na uloženie.",
-            'step_2_buy_now' => "Krok 2: Vyberte spôsob platby.",
-            'what_do_you_want_to_find_today' => "Čo chcete nájsť dnes?",
-            'search' => "Hľadať",
-            /* xác nhận đơn hàng */
-            'order_confirmation' => 'Potvrdenie objednávky',
-            'thank_you_message_email' => 'Ďakujeme, že ste dokončili svoju objednávku! Vaše tapety sú pripravené na použitie.',
-            'hello' => 'Ahoj',
-            'purchase_date' => 'Dátum nákupu',
-            'download_instructions' => 'Môžete si stiahnuť súbor tapiet nasledujúcimi spôsobmi:',
-            'direct_download' => 'Priame stiahnutie cez nasledujúce odkazy:',
-            'sincerely' => 'S úctou!',
-            'login_instruction_message_email' => 'Alebo sa prihláste na <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> pomocou svojho e-mailu a prejdite na sekciu <strong>"Moje sťahovania"</strong>',
-            'support_contact_message_email' => 'Ak máte akékoľvek otázky alebo potrebujete podporu, kontaktujte nás prosím na e-mailovej adrese: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
-            'wish_message_email' => 'Prajem vám skvelý zážitok s vašou novou kolekciou tapiet!',
-            /* custom */
-            "wallpaper_theme"   => [
-                "name"  => "Téma tapety",
-                "topgirl"  => "Téma obrázkov",
-                "topanime"  => "Téma obrázkov",
-            ],
-            "wallpaper_style"   => [
-                "name"  => "Štýl tapety",
-                "topgirl"  => "Štýl obrázkov",
-                "topanime"  => "Štýl obrázkov",
-            ],
-            "free_wallpaper"    => [
-                "name"  => "Bezplatná tapeta",
-                "topgirl"  => "Bezplatné obrázky",
-                "topanime"  => "Bezplatné obrázky",
-            ],
-            "phone_wallpaper"   => [
-                "name"  => "Tapeta na telefón",
-                "topgirl"  => "Obrázky krásnych dievčat",
-                "topanime"  => "Obrázky anime",
-            ],
-            "product_description"   => [
-                "name"  => "<p>Premeňte svoju obrazovku telefónu na umelecké dielo s touto úžasnou kolekciou tapiet! Prineste nový štýl a sviežosť do svojho telefónu.</p>
-                            <ul>
-                                <li>Vysoké rozlíšenie: 1440x3360, zabezpečujúce ostrý obraz do najmenších detailov.</li>
-                                <li>Perfektne kompatibilné so všetkými typmi obrazoviek telefónov.</li>
-                                <li>Jednoduché a rýchle stiahnutie pomocou niekoľkých krokov.</li>
-                                <li>Obsahuje práva na používanie, môžete ju slobodne zdieľať s priateľmi.</li>
-                            </ul>
-                            <div>Stiahnite si to hneď a zažite zaujímavý rozdiel na obrazovke vášho telefónu!</div>
-                        ",
-                "topgirl"  => "<div>Pridajte trochu farby a unikátneho štýlu do svojho krásneho telefónu s touto úžasnou kolekciou tapiet.</div>
-                                <ul>
-                                    <li>Rozlíšenie: 1440x3360</li>
-                                    <li>Kompatibilné so všetkými obrazovkami telefónov.</li>
-                                </ul>
-                                <div>Stiahnite a aplikujte priamo na obrazovku vášho telefónu a zažite to!</div>",
-                "topanime"  => "<div>Pridajte trochu farby a unikátneho štýlu do svojho krásneho telefónu s touto úžasnou kolekciou tapiet.</div>
-                                <ul>
-                                    <li>Rozlíšenie: 1440x3360</li>
-                                    <li>Kompatibilné so všetkými obrazovkami telefónov.</li>
-                                </ul>
-                                <div>Stiahnite a aplikujte priamo na obrazovku vášho telefónu a zažite to!</div>",
-            ],
-            "wallpaper_by_themes" => [
-                "name"  => "Tapety na telefón podľa témy",
-                "topgirl"  => "Obrázky krásnych dievčat podľa témy",
-                "topanime"  => "Obrázky anime podľa témy",
-            ],
-            "wallpaper_by_styles" => [
-                "name"  => "Tapety na telefón podľa štýlu",
-                "topgirl"  => "Obrázky krásnych dievčat podľa štýlu",
-                "topanime"  => "Obrázky anime podľa štýlu",
-            ],
-            "wallpaper_by_events" => [
-                "name"  => "Tapety na telefón podľa udalosti",
-                "topgirl"  => "Obrázky krásnych dievčat podľa udalosti",
-                "topanime"  => "Obrázky anime podľa udalosti",
-            ],
-            "list_type_search" => [
-                'name' => [
-                    'category_info' => 'Kategória',
-                    'paid_wallpaper' => 'Platené tapety',
-                    'free_wallpaper' => 'Bezplatné tapety',
-                    'article' => 'Článok',
-                ],
-                'topgirl' => [
-                    'category_info' => 'Kategória',
-                    'paid_wallpaper' => 'Platené tapety',
-                    'free_wallpaper' => 'Bezplatné tapety',
-                    'article' => 'Článok',
-                ],
-                'topanime' => [
-                    'category_info' => 'Kategória',
-                    'paid_wallpaper' => 'Platené tapety',
-                    'free_wallpaper' => 'Bezplatné tapety',
-                    'article' => 'Článok',
-                ],
-            ],
-            "copyright" => [
-                "name"  => "Autorské práva ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Dizajn a vývoj: Phạm Văn Phú. Všetky práva vyhradené.",
-            ]
-        ],
-    ],
-
     "is" => [
         "name" => "Icelandic",
         "name_by_language" => "Íslenska",
@@ -8864,7 +8678,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "sima-veggfoður",
         "data" => [
             "home"              => "Heimasíða",
             "about_us"          => "Um okkur",
@@ -9050,7 +8864,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "позадине-за-телефон",
         "data" => [
             "home"              => "Početna",
             "about_us"          => "O nama",
@@ -9235,7 +9049,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "",
+        "slug_page_premium_wallpaper" => "телефонски-позадини",
         "data" => [
             "home" => "Дома",
             "about_us" => "За нас",
@@ -9422,7 +9236,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "ဖုန်း-နောက်ခံ-ပုံများ",
+        "slug_page_premium_wallpaper" => "ဖုန်းနောက်ခံပုံ",
         "data" => [
             "home"              => "ပင်မစာမျက်နှာ",
             "about_us"          => "ကျွန်ုပ်တို့အကြောင်း",
@@ -9608,7 +9422,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "telefona-fona-attēli",
+        "slug_page_premium_wallpaper" => "tālruņu-fona-attēli",
         "data" => [
             "home"              => "Sākums",
             "about_us"          => "Par mums",
@@ -9794,7 +9608,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "telefono-ekrano-fonai",
+        "slug_page_premium_wallpaper" => "telefonų-fono-paveikslėliai",
         "data" => [
             "home" => "Pradžia",
             "about_us" => "Apie mus",
@@ -9980,7 +9794,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "ozadja-za-telefon",
+        "slug_page_premium_wallpaper" => "ozadje-za-telefon",
         "data" => [
             "home"              => "Domov",
             "about_us"          => "O nas",
@@ -10166,7 +9980,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => false,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "гар-утасны-ар-нүүр",
+        "slug_page_premium_wallpaper" => "гар-утасны-ханын-зураг",
         "data" => [
             "home"              => "Нүүр хуудас",
             "about_us"          => "Бидний тухай",
