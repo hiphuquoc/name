@@ -75,58 +75,19 @@ class HomeController extends Controller {
     public static function test(Request $request){
 
         // $infoPage = Category::select('*')
-        //             ->whereHas('seo', function($query){
-        //                 $query->where('slug', 'hinh-nen-dien-thoai');
-        //             })
-        //             ->with('seo', 'seos')
-        //             ->first();
-        // // dd($infoPage);
+        //                 ->whereHas('seo', function($query){
+        //                     $query->where('slug', 'hinh-nen-dien-thoai-mien-phi');
+        //                 })
+        //                 ->with('seo', 'seos')
+        //                 ->first();
+        // $str    = '';
         // foreach($infoPage->seos as $seo){
-        //     if(!empty($seo->infoSeo->language)){
-        //         echo '<div>'.$seo->infoSeo->language.'- '.$seo->infoSeo->id.'</div>';
-        //     }
-            
-        // }
-
-        // dd(123);
-
-        // $main = ["en", "zh", "es", "ja", "de", "fr", "pt", "ko", "it", "ru", 
-        //     "nl", "pl", "tr", "ar", "hi", "id", "vi", "th", "sv", "da", 
-        //     "fi", "no", "he", "cs", "hu", "el", "ro", "uk", "fa", "bn", 
-        //     "fil", "ms", "bg", "hr", "sk", "lt", "lv", "et", "sl", "is", 
-        //     "ml", "ta", "te", "kn", "mr", "gu", "km", "my", "ka", "uz"];
-
-        // $languages = [
-        //     'en', 'zh', 'es', 'fr', 'vi', 'hi', 'bn', 'ta', 'te', 'ur',
-        //     'gu', 'ja', 'ko', 'id', 'ms', 'th', 'ar', 'fa', 'ru', 'de',
-        //     'tr', 'it', 'pl', 'uk', 'nl', 'el', 'hu', 'cs', 'ro', 'sk',
-        //     'ka', 'he', 'uz', 'pt', 'fil', 'sv', 'no', 'fi', 'da', 'sw',
-        //     'ml', 'bg', 'ky', 'is', 'sr', 'mk', 'lv', 'lt', 'sl', 'mn'
-        // ];
-        // $test = array_merge($languages, $main);
-
-        // $result = array_unique($test);
-
-        // $languages = []; // Đổi từ $langauges thành $languages
-        // foreach(config('language') as $key => $language){
-        //     $languages[] = $key; // Chắc chắn rằng $key chứa mã ngôn ngữ
-        // }
-
-        // /* lấy tất cả seo */
-        // $seos = Seo::all();
-        // $countDelete = 0;
-        // foreach($seos as $seo){
-        //     if(!in_array($seo->language, $languages)) {
-        //         $flag = $seo->delete();
-        //         if($flag) ++$countDelete; // Nếu xóa thành công, tăng biến đếm
+        //     if(!empty($seo->infoSeo->slug)){
+        //         $str .= "'".$seo->infoSeo->slug."', ";
         //     }
         // }
 
-        // // Thông báo kết quả xóa
-        // echo "$countDelete SEO records have been deleted.";
-
-
-        // dd(123);
+        // dd($str);
         
     }
 
