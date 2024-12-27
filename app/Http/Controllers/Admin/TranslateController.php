@@ -171,26 +171,41 @@ class TranslateController extends Controller {
         return $flag;
     }
 
-    public static function createJobTranslateAndCreatePageAjax(Request $request) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */
-        $slugVi     = $request->get('slug_vi');
-        $slug       = self::getSlugByUrl($slugVi);
-        /* lấy thông tin trang gốc - vi */
-        $tmp        = Seo::select('*')
-            ->where('slug', $slug)
-            ->first();
-        $arrayLanguageRequested  = [];
-        if (!empty($tmp->id)) {
-            /* lấy thông tin trang */
-            $infoPage =     HelperController::getFullInfoPageByIdSeo($tmp->id);
-            if (!empty($infoPage)) $arrayLanguageRequested = self::createJobTranslateAndCreatePage($infoPage);
-        }
-        /* Message */
-        $message        = [
-            'type'      => 'success',
-            'message'   => 'Đã gửi yêu cầu tạo '.count($arrayLanguageRequested).' trang ngôn ngữ cho Url: '.$slugVi,
+    public static function createJobTranslateAndCreatePageAjax(Request $request) {
+        /* Thông báo mặc định */
+        $response = [
+            'flag' => false,
+            'toast_type' => 'error',
+            'toast_title' => 'Thất bại!',
+            'toast_message' => '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'
         ];
-        $request->session()->put('message', $message);
-        return true;
+    
+        /* Lấy thông tin */
+        $slugVi = $request->get('slug_vi');
+        $slug = self::getSlugByUrl($slugVi);
+    
+        /* Lấy thông tin trang gốc - vi */
+        $seoRecord = Seo::where('slug', $slug)->first();
+    
+        if ($seoRecord) {
+            /* Lấy thông tin đầy đủ của trang */
+            $infoPage = HelperController::getFullInfoPageByIdSeo($seoRecord->id);
+    
+            if ($infoPage) {
+                $arrayLanguageRequested = self::createJobTranslateAndCreatePage($infoPage);
+                $count = count($arrayLanguageRequested) ?? 0;
+    
+                /* Cập nhật thông báo */
+                $response = [
+                    'flag' => true,
+                    'toast_type' => 'success',
+                    'toast_title' => 'Thành công!',
+                    'toast_message' => '👋 Đã gửi yêu cầu tạo <span class="highLight_500">' . $count . '</span> ngôn ngữ cho trang <span class="highLight_500">' . $infoPage->seo->title . '</span>!'
+                ];
+            }
+        }
+    
+        return response()->json($response);
     }
 
     public static function createJobTranslateAndCreatePage($infoPage) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */

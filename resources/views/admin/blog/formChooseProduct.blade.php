@@ -57,10 +57,6 @@
         </div>
     </div>
 </form>
-@pushonce('modal')
-    <!-- full loading -->
-    @include('admin.modal.fullLoading')
-@endpushonce
 
 @pushonce('scriptCustom')
     <script type="text/javascript">

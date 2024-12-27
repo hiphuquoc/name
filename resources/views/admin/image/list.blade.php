@@ -61,10 +61,6 @@
 <!-- ===== END:: MODAL ===== -->
     
 @endsection
-@pushonce('modal')
-    <!-- full loading -->
-    @include('admin.modal.fullLoading')
-@endpushonce
 @push('scriptCustom')
     <script type="text/javascript">
 

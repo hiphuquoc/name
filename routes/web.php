@@ -132,6 +132,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
         /* category */
         Route::prefix('category')->group(function(){
             Route::get('/list', [CategoryController::class, 'list'])->name('admin.category.list');
+            Route::get('/listLanguageNotExists', [CategoryController::class, 'listLanguageNotExists'])->name('admin.category.listLanguageNotExists');
             Route::get('/view', [CategoryController::class, 'view'])->name('admin.category.view');
             Route::post('/createAndUpdate', [CategoryController::class, 'createAndUpdate'])->name('admin.category.createAndUpdate');
             Route::get('/delete', [CategoryController::class, 'delete'])->name('admin.category.delete');
@@ -143,6 +144,7 @@ Route::middleware('auth', 'role:admin')->group(function (){
         /* tag */
         Route::prefix('tag')->group(function(){
             Route::get('/list', [TagController::class, 'list'])->name('admin.tag.list');
+            Route::get('/listLanguageNotExists', [TagController::class, 'listLanguageNotExists'])->name('admin.tag.listLanguageNotExists');
             Route::get('/view', [TagController::class, 'view'])->name('admin.tag.view');
             Route::post('/createAndUpdate', [TagController::class, 'createAndUpdate'])->name('admin.tag.createAndUpdate');
             Route::get('/delete', [TagController::class, 'delete'])->name('admin.tag.delete');

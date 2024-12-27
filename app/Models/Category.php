@@ -15,6 +15,17 @@ class Category extends BaseCategory {
     ];
     public $timestamps = true;
 
+    public static function listLanguageNotExists($params = null){
+        $countLanguage  = count(config('language'));
+        $result         = self::select('*')
+                            ->with('seo', 'seos')
+                            ->withCount('seos') // Đếm số lượng `seos` cho mỗi phần tử
+                            ->orderBy('created_at', 'DESC')
+                            ->having('seos_count', '<', $countLanguage) // Lọc các phần tử có `seos_count` < tổng ngôn ngữ
+                            ->paginate($params['paginate']);
+        return $result;
+    }
+
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){

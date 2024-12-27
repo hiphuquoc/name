@@ -10,7 +10,7 @@ use App\Models\Category;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Models\ISO3166;
-use App\Models\Order;
+use App\Models\Tag;
 use App\Models\Seo;
 use App\Models\SeoContent;
 use App\Models\Product;
@@ -74,21 +74,30 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        // $infoPage = Category::select('*')
-        //                 ->whereHas('seo', function($query){
-        //                     $query->where('slug', 'hinh-nen-dien-thoai-mien-phi');
-        //                 })
-        //                 ->with('seo', 'seos')
-        //                 ->first();
-        // $str    = '';
-        // foreach($infoPage->seos as $seo){
-        //     if(!empty($seo->infoSeo->slug)){
-        //         $str .= "'".$seo->infoSeo->slug."', ";
-        //     }
-        // }
+        $tags       = Tag::select('*')
+                        ->with('seo', 'seos')
+                        ->get();
+        $tagAction  = [];
+        /* data language */
+        $configLanguage  = config('language');
+        $languages  = [];
+        foreach($configLanguage as $key => $c) $languages[] = $key;
+        $i          = 0;
+        foreach($tags as $item){
+            $languageExists = [];
+            foreach($item->seos as $seo){
+                if(!empty($seo->infoSeo->language)) $languageExists[] = $seo->infoSeo->language;
+            }
+            $tmp = array_diff($languages, $languageExists);
+            if(!empty($tmp)) {
+                $tagAction[$i]['id']        = $item->id;
+                $tagAction[$i]['language']  = $tmp;
+                ++$i;
+            }
+        }
 
-        // dd($str);
-        
+
+        dd($tagAction);
     }
 
     private static function findUniqueElements($arr1, $arr2) {

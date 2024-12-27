@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\BuildInsertUpdateModel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 use App\Helpers\Upload;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Seo;
@@ -31,6 +32,19 @@ class CategoryController extends Controller {
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         $list               = Category::getTreeCategory(['seo.language' => 'vi']);
         return view('admin.category.list', compact('list', 'params'));
+    }
+
+    public static function listLanguageNotExists(Request $request){
+        $params             = [];
+        /* Search theo tên */
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        /* Search theo danh mục */
+        if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewCategoryInfoLanguageNotExists') ?? 20;
+        $params['paginate'] = $viewPerPage;
+        $list               = Category::listLanguageNotExists($params);
+        return view('admin.category.listLanguageNotExists', compact('list', 'params', 'viewPerPage'));
     }
 
     public static function view(Request $request){

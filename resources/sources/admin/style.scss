@@ -2051,4 +2051,17 @@ html .content {
     }
 }
 
+/* toast */
+#toast-container {
+    z-index: 1050;
+    padding: 2rem;
+}
+#toast-container>div {
+    padding: 10px 15px 15px 60px !important;
+    width: 350px !important;
+}
+.toast .toast-close-button {
+    top: -10px !important;
+}
+
 @import 'order.scss';

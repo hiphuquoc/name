@@ -2,14 +2,48 @@
 return [
     'left-menu-admin'   => [
         [
-            'name'      => 'Quản lí đơn',
+            'name'      => 'Đơn hàng',
             'route'     => 'admin.order.list',
             'icon'      => '<i class="fa-regular fa-file-lines"></i>'
         ],
         [
-            'name'      => 'Điện thoại',
+            'name'  => 'Chủ đề',
+            'route' => '',
+            'icon'  => '<i class="fa-solid fa-layer-group"></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Danh sách',
+                    'route' => 'admin.category.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '2. Ngôn ngữ',
+                    'route' => 'admin.category.listLanguageNotExists',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+            ]
+        ],
+        [
+            'name'  => 'Tag',
+            'route' => '',
+            'icon'  => '<i class="fa-solid fa-tags"></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Danh sách',
+                    'route' => 'admin.tag.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '2. Ngôn ngữ',
+                    'route' => 'admin.tag.listLanguageNotExists',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+            ]
+        ],
+        [
+            'name'      => 'Nền trả phí',
             'route'     => '',
-            'icon'      => '<i class="fa-solid fa-box-open"></i>',
+            'icon'      => '<i class="fa-solid fa-cloud"></i>',
             'child'     => [
                 [
                     'name'  => '1. Kho trả phí',
@@ -17,34 +51,41 @@ return [
                     'icon'  => '<i data-feather=\'circle\'></i>',
                 ],
                 [
-                    'name'  => '2. Kho miễn phí',
-                    'route' => 'admin.freeWallpaper.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '3. Sản phẩm',
+                    'name'  => '2. Sản phẩm',
                     'route' => 'admin.product.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
                 [
-                    'name'  => '4. Chủ đề',
-                    'route' => 'admin.category.list',
+                    'name'  => '3. Ngôn ngữ',
+                    'route' => '',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
-                [
-                    'name'  => '5. Tag',
-                    'route' => 'admin.tag.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ],
-                [
-                    'name'  => '6. Seo từng ảnh',
-                    'route' => 'admin.seoFreeWallpaper.list',
-                    'icon'  => '<i data-feather=\'circle\'></i>'
-                ]
             ]
         ],
         [
-            'name'      => 'Quản lí trang',
+            'name'      => 'Nền miễn phí',
+            'route'     => '',
+            'icon'      => '<i class="fa-solid fa-cloud-arrow-down"></i>',
+            'child'     => [
+                [
+                    'name'  => '1. Kho miễn phí',
+                    'route' => 'admin.freeWallpaper.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '2. Seo từng ảnh',
+                    'route' => 'admin.seoFreeWallpaper.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+                [
+                    'name'  => '3. Ngôn ngữ',
+                    'route' => '',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
+            ]
+        ],
+        [
+            'name'      => 'Trang',
             'route'     => 'admin.page.list',
             'icon'      => '<i class="fa-regular fa-file-lines"></i>',
             // 'child'     => [
@@ -56,7 +97,7 @@ return [
             // ]
         ],
         [
-            'name'      => 'Quản lí Blog',
+            'name'      => 'Blog',
             'route'     => '',
             'icon'      => '<i class="fa-solid fa-blog"></i>',
             'child'     => [
@@ -74,7 +115,7 @@ return [
             ]
         ],
         [
-            'name'      => 'Quản lí ảnh',
+            'name'      => 'Ảnh',
             'route'     => 'admin.image.list',
             'icon'      => '<i class="fa-regular fa-images"></i>',
         ],

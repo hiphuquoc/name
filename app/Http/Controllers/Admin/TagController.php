@@ -44,6 +44,19 @@ class TagController extends Controller {
         return view('admin.tag.list', compact('list', 'categories', 'params', 'viewPerPage'));
     }
 
+    public static function listLanguageNotExists(Request $request){
+        $params             = [];
+        /* Search theo tên */
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        /* Search theo danh mục */
+        if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewTagInfoLanguageNotExists') ?? 20;
+        $params['paginate'] = $viewPerPage;
+        $list               = Tag::listLanguageNotExists($params);
+        return view('admin.tag.listLanguageNotExists', compact('list', 'params', 'viewPerPage'));
+    }
+
     public static function view(Request $request){
         $keyTable           = 'tag_info';
         $message            = $request->get('message') ?? null;

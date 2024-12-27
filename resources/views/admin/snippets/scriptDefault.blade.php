@@ -33,6 +33,8 @@
 <script src="{{ asset('sources/admin/app-assets/js/core/app-menu.min.js') }}"></script>
 <!-- END: MENU -->
 
+<script src="{{ asset('sources/admin/app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
+
 <!-- END: Page Vendor JS-->
 <script defer>
     $(window).on('load', function () {
@@ -46,6 +48,56 @@
         loadImageFromGoogleCloud();
     })
 
+    function createToast(type, title, message) {
+        const toastContainer = document.getElementById('toast-container') || document.body;
+        
+        // Tạo ID duy nhất cho mỗi Toast
+        const toastId = 'toast-' + Date.now();
+
+        // Tạo cấu trúc HTML của Toast
+        const toastHTML = `
+            <div id="${toastId}" class="toast toast-${type}" aria-live="polite" style="display: block; opacity: 1;">
+                <div class="toast-progress" style="width: 0%;"></div>
+                <button type="button" class="toast-close-button" role="button">×</button>
+                <div class="toast-title">${title}</div>
+                <div class="toast-message">${message}</div>
+            </div>
+        `;
+
+        // Thêm Toast vào container
+        toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+
+        const toastElement = document.getElementById(toastId);
+
+        // Tự động ẩn Toast sau 3 giây và xóa khỏi DOM
+        setTimeout(() => {
+            toastElement.style.opacity = 0;
+            setTimeout(() => toastElement.remove(), 300); // Xóa sau khi hiệu ứng mờ hoàn tất
+        }, 3000);
+
+        // Xử lý sự kiện đóng thủ công
+        const closeButton = toastElement.querySelector('.toast-close-button');
+        if (closeButton) {
+            closeButton.addEventListener('click', () => toastElement.remove());
+        }
+    }
+
+    function openCloseFullLoading(){
+        const htmlLoading = $('#js_fullLoading_bg');
+        if(htmlLoading.is(":visible")){
+            htmlLoading.css('display', 'none');
+            $('#js_fullLoading_blur').css({
+                'filter' : 'unset',
+                'overflow'  : 'unset',
+            });
+        } else {
+            htmlLoading.css('display', 'flex');
+            $('#js_fullLoading_blur').css({
+                'filter'    : 'blur(8px)',
+                'overflow'  : 'hidden',
+            });
+        }
+    }
     $(function () {
         $('[data-toggle="tooltip"]').tooltip({ html : true })
     })
@@ -73,7 +125,6 @@
             }
         });
     }
-
     function submitForm(idForm, addParams = {}){
         const form = $('#' + idForm);
         if(form.valid()){
@@ -89,7 +140,6 @@
             form.submit();
         }
     }
-
     /* copy to clipboard */
     function copyToClipboard(idContent, callbackFunction=null) {
         // Get the text field
@@ -232,20 +282,72 @@
             if(data) location.reload();
         })
     }
-    function openCloseFullLoading(){
-        const htmlLoading = $('#js_fullLoading_bg');
-        if(htmlLoading.is(":visible")){
-            htmlLoading.css('display', 'none');
-            $('#js_fullLoading_blur').css({
-                'filter' : 'unset',
-                'overflow'  : 'unset',
-            });
-        } else {
-            htmlLoading.css('display', 'flex');
-            $('#js_fullLoading_blur').css({
-                'filter'    : 'blur(8px)',
-                'overflow'  : 'hidden',
-            });
-        }
+    function createMultiJobTranslateContent(slugVi, id = 0, reload = true){
+        /* đóng modal + bật loading */
+        openCloseFullLoading();
+        $.ajax({
+            url         : "{{ route('admin.translate.createMultiJobTranslateContent') }}",
+            type        : "post",
+            dataType    : "html",
+            data        : { 
+                '_token'    : '{{ csrf_token() }}',
+                slug_vi : slugVi,
+            }
+        }).done(function(response){
+            // Hiển thị Toast từ response
+            createToast(response.toast_type, response.toast_title, response.toast_message);
+
+            if (response.flag) {
+                // Reload trang hoặc cập nhật DOM
+                if (reload) {
+                    location.reload();
+                } else {
+                    $(`#oneItem-${id}`).remove();
+                    $(`#oneItemSub-${id}`).remove();
+                }
+            }
+        })
+        .fail(function () {
+            // Hiển thị thông báo lỗi mặc định
+            createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
+        })
+        .always(function () {
+            // Tắt trạng thái Loading
+            setTimeout(() => openCloseFullLoading(), 300);
+        });
+    }
+    function createJobTranslateAndCreatePageAjax(slugVi, id = 0) {
+        // Hiển thị trạng thái Loading
+        openCloseFullLoading();
+
+        $.ajax({
+            url: "{{ route('admin.translate.createJobTranslateAndCreatePageAjax') }}",
+            type: "post",
+            dataType: "json",
+            data: {
+                '_token': '{{ csrf_token() }}',
+                slug_vi: slugVi,
+            }
+        })
+        .done(function (response) {
+            // Hiển thị Toast từ response
+            setTimeout(() => createToast(response.toast_type, response.toast_title, response.toast_message), 300);
+
+            if (response.flag) {
+                // cập nhật DOM
+                if (id) {
+                    $(`#oneItem-${id}`).remove();
+                    $(`#oneItemSub-${id}`).remove();
+                }
+            }
+        })
+        .fail(function () {
+            // Hiển thị thông báo lỗi mặc định
+            setTimeout(() => createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'), 300);
+        })
+        .always(function () {
+            // Tắt trạng thái Loading
+            setTimeout(() => openCloseFullLoading(), 300);
+        });
     }
 </script>
