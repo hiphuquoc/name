@@ -177,14 +177,14 @@ class Seo extends Model {
         /* trường hợp insert */
         if($type=='insert'){
             $infoSeo    = self::select('*')
-                            ->where('slug_full', $slugFull)
+                            ->whereRaw('slug_full COLLATE utf8mb4_bin = ?', [$slugFull]) /* chỉ định so sánh dấu */
                             ->first();
             if(empty($infoSeo)) $flag = false;
         }
         /* trường hợp update */
         if($type=='update'&&!empty($idSeo)){
             $infoSeo    = self::select('*')
-                            ->where('slug_full', $slugFull)
+                             ->whereRaw('slug_full COLLATE utf8mb4_bin = ?', [$slugFull])
                             ->where('id', '!=', $idSeo)
                             ->first();
             if(empty($infoSeo)) $flag = false;
