@@ -248,13 +248,12 @@ class TagController extends Controller {
                                 ->with(['files' => function($query){
                                     $query->where('relation_table', 'seo.type');
                                 }])
-                                ->with('seo', 'products', 'blogs', 'freeWallpapers')
+                                ->with('seo', 'products', 'freeWallpapers')
                                 ->first();
                 /* xóa ảnh đại diện trên google_clouds */ 
                 if(!empty($info->seo->image)) Upload::deleteWallpaper($info->seo->image);
                 /* delete relation */
                 $info->products()->delete();
-                $info->blogs()->delete();
                 $info->freeWallpapers()->delete();
                 $info->files()->delete();
                 $info->categories()->delete();
