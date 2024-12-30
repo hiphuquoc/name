@@ -6,14 +6,18 @@ use Closure;
 use Illuminate\Http\Request;
 
 class CheckAdminSubdomain {
-    public function handle(Request $request, Closure $next){
+    public function handle(Request $request, Closure $next) {
         $host       = $request->getHost();
         $domainName = env('DOMAIN_NAME');
-        // Kiểm tra xem subdomain có phải là admin hay không
-        if ($host !== 'admin.'.$domainName) {
-            abort(403, 'Unauthorized access');
+
+        // Kiểm tra nếu không phải subdomain admin và yêu cầu không phải admin, thì chuyển hướng
+        if ($host !== 'admin.' . $domainName && $host !== $domainName) {
+            return redirect()->to('https://' . $domainName . $request->getRequestUri(), 301);
         }
+
         return $next($request);
     }
 }
+
+
 
