@@ -18,6 +18,7 @@ use GeoIp2\Database\Reader;
 use Illuminate\Support\Facades\Session;
 use App\Models\RelationSeoProductInfo;
 use App\Models\Timezone;
+use App\Jobs\Tmp;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendProductMail;
@@ -75,50 +76,7 @@ class HomeController extends Controller {
     public static function test(Request $request){
 
         
-        $configLanguage  = config('language');
-        $languages  = [];
-        foreach($configLanguage as $key => $c) {
-            $languages[] = $key;
-        }
-
-        $pages  = Tag::select('*')
-                    ->get();
-        foreach($pages as $page){
-            foreach($page->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
-                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
-                    $seo->infoSeo()->delete();
-                    $seo->delete();
-                }
-            }
-        }
-
-        $pages  = Page::select('*')
-                    ->get();
-        foreach($pages as $page){
-            foreach($page->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
-                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
-                    $seo->infoSeo()->delete();
-                    $seo->delete();
-                }
-            }
-        }
-
-        $pages  = Category::select('*')
-                    ->get();
-        foreach($pages as $page){
-            foreach($page->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
-                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
-                    $seo->infoSeo()->delete();
-                    $seo->delete();
-                }
-            }
-        }
-
-
-        dd(123);
+        Tmp::dispatch();
         
     }
 
