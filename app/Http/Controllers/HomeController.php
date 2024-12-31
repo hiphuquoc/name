@@ -83,7 +83,30 @@ class HomeController extends Controller {
 
         $pages  = Tag::select('*')
                     ->get();
+        foreach($pages as $page){
+            foreach($page->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
+                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
+                    $seo->infoSeo()->delete();
+                    $seo->delete();
+                }
+            }
+        }
 
+        $pages  = Page::select('*')
+                    ->get();
+        foreach($pages as $page){
+            foreach($page->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
+                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
+                    $seo->infoSeo()->delete();
+                    $seo->delete();
+                }
+            }
+        }
+
+        $pages  = Category::select('*')
+                    ->get();
         foreach($pages as $page){
             foreach($page->seos as $seo){
                 if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
