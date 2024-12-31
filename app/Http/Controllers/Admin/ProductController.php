@@ -271,6 +271,19 @@ class ProductController extends Controller {
         return view('admin.product.list', compact('list', 'categories', 'viewPerPage', 'params'));
     }
 
+    public static function listLanguageNotExists(Request $request){
+        $params             = [];
+        /* Search theo tên */
+        if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
+        /* Search theo danh mục */
+        if(!empty($request->get('search_category'))) $params['search_category'] = $request->get('search_category');
+        /* paginate */
+        $viewPerPage        = Cookie::get('viewProductInfoLanguageNotExists') ?? 20;
+        $params['paginate'] = $viewPerPage;
+        $list               = Product::listLanguageNotExists($params);
+        return view('admin.product.listLanguageNotExists', compact('list', 'params', 'viewPerPage'));
+    }
+
     public static function searchProductCopied(Request $request){
         $xhtml  = '';
         if(!empty($request->get('id_seo'))){

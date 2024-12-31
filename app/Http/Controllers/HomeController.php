@@ -56,8 +56,8 @@ class HomeController extends Controller {
             $itemSeo            = [];
             if (!empty($item->seos)) {
                 foreach ($item->seos as $s) {
-                    if ($s->infoSeo->language == $language) {
-                        $itemSeo = $s->infoSeo;
+                    if ($seo->infoSeo->language == $language) {
+                        $itemSeo = $seo->infoSeo;
                         break;
                     }
                 }
@@ -74,30 +74,29 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        $tags       = Tag::select('*')
-                        ->with('seo', 'seos')
-                        ->get();
-        $tagAction  = [];
-        /* data language */
+        
         $configLanguage  = config('language');
         $languages  = [];
-        foreach($configLanguage as $key => $c) $languages[] = $key;
-        $i          = 0;
-        foreach($tags as $item){
-            $languageExists = [];
-            foreach($item->seos as $seo){
-                if(!empty($seo->infoSeo->language)) $languageExists[] = $seo->infoSeo->language;
-            }
-            $tmp = array_diff($languages, $languageExists);
-            if(!empty($tmp)) {
-                $tagAction[$i]['id']        = $item->id;
-                $tagAction[$i]['language']  = $tmp;
-                ++$i;
+        foreach($configLanguage as $key => $c) {
+            $languages[] = $key;
+        }
+
+        $pages  = Tag::select('*')
+                    ->get();
+
+        foreach($pages as $page){
+            foreach($page->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
+                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
+                    $seo->infoSeo()->delete();
+                    $seo->delete();
+                }
             }
         }
 
 
-        dd($tagAction);
+        dd(123);
+        
     }
 
     private static function findUniqueElements($arr1, $arr2) {

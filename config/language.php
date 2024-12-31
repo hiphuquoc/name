@@ -2210,190 +2210,190 @@ return [
             ]
         ]
     ],
-    "kn" => [
-        "name" => "Tiếng Kannada",
-        "name_by_language" => "ಕನ್ನಡ (Kannada)",
-        "area" => "Ấn Độ",
-        "scope" => "Ngôn ngữ khu vực châu Á",
-        "currency" => "INR",
-        "currency_code" => "₹",
-        "money_value" => "82",
-        "decimal_places" => 0,
-        "key" => "kn",
-        "latin"     => false,
-        "flag_join_left_to_right" => true,
-        "flag_has_space_in_content" => true,
-        "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "ಫೋನ್-ವಾಲ್ಪೇಪರ್",
-        "data"      => [
-            "home"          => "ಮನೆ",
-            "about_us"      => "ನಮ್ಮ ಬಗ್ಗೆ",
-            "event"             => "ಘಟನೆ",
-            "support"           => "ಮદદ",
-            "connect_with_us"   => "ನಮ್ಮೊಂದಿಗೆ ಸಂಪರ್ಕಿಸು",
-            "table_of_contents" => "ವಿಷಯಗಳ ಪಟ್ಟಿ",
-            "photo_set"         => "ಫೋಟೋ ಸೆಟ್",
-            "share"             => "ಹಂಚಿಕೆ",
-            "no_suitable_results_found" => "ಯೋಗ್ಯವಾದ ಫಲಿತಾಂಶಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
-            "cart"              => "ಕಾರ್ಟ್",
-            "your_cart_is_empty"    => "ನಿಮ್ಮ ಕಾರ್ಟ್ ಖಾಲಿಯಾಗಿದೆ",
-            "continue_shopping"     => "ಖರೀದಿಯನ್ನು ಮುಂದುವರಿಸಿ",
-            "full_set"          => "ಪೂರ್ಣ ಸೆಟ್",
-            "image"             => "ಚಿತ್ರ",
-            "options"           => "ಆಯ್ಕೆಗಳು",
-            "product_guide_after_payment"   => "<div>ಪಾವತಿಯ ನಂತರ, ನೀವು ಮೂಲ ಚಿತ್ರವನ್ನು ನೇರವಾಗಿ ಮತ್ತು ಇಮೇಲ್ ಮೂಲಕ ಡೌನ್‌ಲೋಡ್ ಮತ್ತು ಬಳಕೆಗಾಗಿ ಸ್ವೀಕರಿಸುತ್ತೀರಿ.</div>",
-            "suggestions_for_you"   => "ನಿಮಗಾಗಿ ಸಲಹೆಗಳು!",
-            "each_image"        => "ಪ್ರತಿ ಚಿತ್ರ",
-            "each_set"          => "ಪ್ರತಿ ಸೆಟ್",
-            "propose" => "ಪ್ರಸ್ತಾವನೆ",
-            "favourite" => "ಮೆಚ್ಚಿನ",
-            "newest" => "ಇತ್ತೀಚಿನ",
-            "oldest" => "ಹಳೆಯ",
-            "browse_by" => "ಇದರಿಂದ ಬ್ರೌಸ್ ಮಾಡಿ ",
-            "sort_by" => "ಇದರಿಂದ ವಿಂಗಡಿಸಿ ",
-            "filter_by" => "ಇದರಿಂದ ಫಿಲ್ಟರ್ ಮಾಡಿ ",
-            "filter_by_themes" => "ಥೀಮ್ಗಳ ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ",
-            "filter_by_styles" => "ಶೈಲಿಗಳು ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ",
-            "filter_by_events" => "ಘಟನೆಗಳ ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ",
-            "advanced_filter" => "ಸುಧಾರಿತ ಫಿಲ್ಟರ್",
-            "all" => "ಎಲ್ಲ",
-            "added_to_cart" => "ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಲಾಗಿದೆ!",
-            "view_cart" => "ಕಾರ್ಟ್ ವೀಕ್ಷಿಸಿ",
-            "add_to_cart" => "ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ",
-            "buy_now" => "ಈಗ ಖರೀದಿಸಿ",
-            "undefined" => "ಅವ್ಯಾಖ್ಯಾನಿತ",
-            "total" => "ಒಟ್ಟು",
-            "remove_item_in_cart" => "ಕಾರ್ಟ್‌ನಿಂದ ಐಟಂ ತೆಗೆದುಹಾಕಿ",
-            "product_list" => "ಉತ್ಪನ್ನ ಪಟ್ಟಿ",
-            "product" => "ಉತ್ಪನ್ನ",
-            "unit_price" => "ಘಟಕ ಬೆಲೆ",
-            "total_price" => "ಒಟ್ಟು ಬೆಲೆ",
-            "payment" => "ಪಾವತಿ",
-            "information" => "ಮಾಹಿತಿ",
-            "email_prompt" => "ನೀವು ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ನಮೂದಿಸಿದರೆ, ನೀವು ಸಂಗ್ರಹಣೆಗೆ ಹೆಚ್ಚಿನ ಪ್ರತಿ ಸ್ವೀಕರಿಸುತ್ತೀರಿ.",
-            "email_receive" => "ಚಿತ್ರಗಳನ್ನು ಸ್ವೀಕರಿಸಲು ಇಮೇಲ್",
-            "payment_method" => "ಪಾವತಿ ವಿಧಾನ",
-            "fee" => "ಶುಲ್ಕ",
-            "payment_fee" => "ಪಾವತಿ ಶುಲ್ಕ",
-            'view_all' => 'ಎಲ್ಲವನ್ನೂ ನೋಡಿ',
-            'login_name_com_vn' => 'ಲಾಗಿನ್ Name.com.vn',
-            'login_email' => 'ಲಾಗಿನ್ ಇಮೇಲ್',
-            'password' => 'ಪಾಸ್ವರ್ಡ್',
-            'remember_me' => 'ನನ್ನನ್ನು ನೆನಪುಮಾಡಿ',
-            'login' => 'ಲಾಗಿನ್',
-            'or_login_with' => 'ಅಥವಾ ಇತರದಿಂದ ಲಾಗಿನ್ ಮಾಡಿ',
-            'support' => 'ಬೆಂಬಲ',
-            'download_guide' => 'ಡೌನ್ಲೋಡ್ ಮಾರ್ಗದರ್ಶಿ',
-            'account_information' => 'ಖಾತೆ ಮಾಹಿತಿಗಳು',
-            'my_downloads' => 'ನನ್ನ ಡೌನ್ಲೋಡ್‌ಗಳು',
-            'logout' => 'ಲಾಗ್ ಔಟ್',
-            'article' => "ಲೇಖನ",
-            'featured_articles' => 'ವಿಶೇಷ ಲೇಖನಗಳು',
-            'news_category' => 'ಸುದ್ದಿ ವಿಭಾಗ',
-            'payment_successful' => "ಪಾವತಿ ಯಶಸ್ವಿಯಾಯಿತು!",
-            'thank_you_message' => "Name.com.vn ನ ಬೆಂಬಲಕ್ಕೆ ಧನ್ಯವಾದಗಳು. ನಿಮ್ಮ ಚಿತ್ರ ಕೆಳಗಿದೆ ಅಥವಾ ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ನೀವು ನಿಮ್ಮ ಇಮೇಲ್‌ ನೋಡಬಹುದು.",
-            'order_id' => "ಆರ್ಡರ್ ಐಡಿ",
-            'email' => "ಇಮೇಲ್",
-            'click_to_download' => "ಡೌನ್‌ಲೋಡ್‌ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
-            'step_1_buy_now' => "ಹಂತ 1: ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ನಮೂದಿಸಿ.",
-            'note_fill_email' => "* ನೀವು ಇಮೇಲ್ ನಮೂದಿಸಿದರೆ, ಸಂಗ್ರಹಣೆಗೆ ಇನ್ನೊಂದು ಪ್ರತಿಯನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ.",
-            'step_2_buy_now' => "ಹಂತ 2: ಪಾವತಿ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
-            'what_do_you_want_to_find_today' => "ನೀವು ಇವತ್ತು ಏನು ಹುಡುಕಲು ಇಚ್ಛಿಸುತ್ತೀರಿ?",
-            'search' => "ಹುಡುಕಿ",
-            /* xác nhận đơn hàng */
-            'order_confirmation' => 'ಆರ್ಡರ್ ದೃಢೀಕರಣ',
-            'thank_you_message_email' => 'ನೀವು ನಿಮ್ಮ ಆರ್ಡರ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ವಾಲ್‌ಪೇಪರ್ ಬಳಕೆಗಾಗಿ ತಯಾರಾಗಿದೆ.',
-            'hello' => 'ಹಲೋ',
-            'purchase_date' => 'ಖರೀದಿ ದಿನಾಂಕ',
-            'download_instructions' => 'ನೀವು ವಾಲ್‌ಪೇಪರ್ ಸಂಗ್ರಹವನ್ನು ಕೆಳಗಿನ ರೀತಿಯಲ್ಲಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಬಹುದು:',
-            'direct_download' => 'ಕೆಳಗಿನ ಲಿಂಕ್ಸ್ ಮೂಲಕ ನೇರವಾಗಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ:',
-            'sincerely' => 'ಸಾಧರವಾಗಿ!',
-            'login_instruction_message_email' => 'ಅಥವಾ ನಿಮ್ಮ ಇಮೇಲ್ ಮೂಲಕ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ನಲ್ಲಿ ಲಾಗಿನ್ ಮಾಡಿ ಮತ್ತು <strong>"ನನ್ನ ಡೌನ್‌ಲೋಡ್"</strong> ವಿಭಾಗಕ್ಕೆ ಹೋಗಿ',
-            'support_contact_message_email' => 'ನಿಮ್ಮ ಬಳಿ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳು ಅಥವಾ ಸಹಾಯ ಅವಶ್ಯಕತೆ ಇದ್ದರೆ, ದಯವಿಟ್ಟು ನಮಗೆ ಇಮೇಲ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
-            'wish_message_email' => 'ನಾವು ನಂಬಿದ್ದೇವೆ ನೀವು ನಿಮ್ಮ ಹೊಸ ವಾಲ್‌ಪೇಪರ್ ಸಂಗ್ರಹದೊಂದಿಗೆ ಅದ್ಭುತ ಅನುಭವವನ್ನು ಪಡೆಯುತ್ತೀರಿ!',
-            /* custom */
-            "wallpaper_theme"  => [
-                "name"  => "ವಾಲ್‌ಪೇಪರ್ ಥೀಮ್",
-                "topgirl"  => "ಫೋಟೋ ಥೀಮ್",
-                "topanime"  => "ಫೋಟೋ ಥೀಮ್",
-            ],
-            "wallpaper_style"   => [
-                "name"  => "ವಾಲ್‌ಪೇಪರ್ ಶೈಲಿ",
-                "topgirl"  => "ಫೋಟೋ ಶೈಲಿ",
-                "topanime"  => "ಫೋಟೋ ಶೈಲಿ",
-            ],
-            "free_wallpaper"    => [
-                "name"  => "ಉಚಿತ ವಾಲ್‌ಪೇಪರ್",
-                "topgirl"  => "ಉಚಿತ ಫೋಟೋ",
-                "topanime"  => "ಉಚಿತ ಫೋಟೋ",
-            ],
-            "phone_wallpaper"         => [
-                "name"  => "ಫೋನ್ ವಾಲ್‌ಪೇಪರ್ ",
-                "topgirl"  => "ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು ",
-                "topanime"  => "ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು ",
-            ],
-            "product_description"   => [
-                "name"  => "<div>ಈ ಅಚ್ಚರಿಯ ಫೋಟೋ ಸಂಗ್ರಹದೊಂದಿಗೆ ನಿಮ್ಮ ಫೋನ್‌ನ ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ಕಲೆ ಕೃತಿಯಾಗಿಸಿ! ನಿಮ್ಮ ಫೋನ್‌ಗೆ ಹೊಸ ಮತ್ತು ವಿಶಿಷ್ಟ ಶೈಲಿಯನ್ನು ತರುವುದು.</div>
-                                <ul>
-                                    <li>ಹೈ ರೆಸಲ್ಯೂಶನ್: 1440x3360, ಪ್ರತಿಯೊಂದು ವಿವರಗಳೊಂದಿಗೆ ಹಂಚಿನ ಚಿತ್ರಗಳನ್ನು ಖಾತ್ರಿಪಡಿಸುವುದು.</li>
-                                    <li>ಎಲ್ಲಾ ವಿಧದ ಫೋನ್ ಸ್ಕ್ರೀನ್‌ಗಳೊಂದಿಗೆ ಸಂಪೂರ್ಣವಾಗಿ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ.</li>
-                                    <li>ಕೆಲವು ಸರಳ ಹಂತಗಳಲ್ಲಿ ಸುಲಭ ಮತ್ತು ವೇಗದ ಡೌನ್‌ಲೋಡ್.</li>
-                                    <li>ಬಳಕೆ ಹಕ್ಕುಗಳು ಸೇರಿವೆ, ನಿಮ್ಮ ಸ್ನೇಹಿತರೆೊಂದಿಗೆ ಹಂಚಲು ಮುಕ್ತ.</li>
-                                </ul>
-                                <div>ಇದನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಫೋನ್‌ನ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ ಉತ್ಸಾಹಕರವಾದ ವ್ಯತ್ಯಾಸವನ್ನು ಅನುಭವಿಸಿ!</div>",
-                "topgirl"  => "<div>ಈ ಸುಂದರ ಫೋನ್ ವಾಲ್‌ಪೇಪರ್ ಸೆಟ್‌ನೊಂದಿಗೆ ನಿಮ್ಮ ಕುಟೀ ಫೋನ್‌ಗೆ ಕೆಲವು ಬಣ್ಣ ಮತ್ತು ವಿಶಿಷ್ಟ ಶೈಲಿಯನ್ನು ಸೇರಿಸಿ.</div>
-                                            <ul>
-                                                <li>ರೆಸಲ್ಯೂಶನ್: 1440x3360</li>
-                                                <li>ಎಲ್ಲಾ ಫೋನ್ ಸ್ಕ್ರೀನ್‌ಗಳೊಂದಿಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ.</li>
-                                            </ul>
-                                            <div>ಇದನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಫೋನ್‌ನ ಸ್ಕ್ರೀನ್‌ಗೆ ನೇರವಾಗಿ ಅನ್ವಯಿಸಿ ಮತ್ತು ಅದನ್ನು ಅನುಭವಿಸಿ!</div>",
-                "topanime"  => "<div>ಈ ಸುಂದರ ಫೋನ್ ವಾಲ್‌ಪೇಪರ್ ಸೆಟ್‌ನೊಂದಿಗೆ ನಿಮ್ಮ ಕುಟೀ ಫೋನ್‌ಗೆ ಕೆಲವು ಬಣ್ಣ ಮತ್ತು ವಿಶಿಷ್ಟ ಶೈಲಿಯನ್ನು ಸೇರಿಸಿ.</div>
-                                            <ul>
-                                                <li>ರೆಸಲ್ಯೂಶನ್: 1440x3360</li>
-                                                <li>ಎಲ್ಲಾ ಫೋನ್ ಸ್ಕ್ರೀನ್‌ಗಳೊಂದಿಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ.</li>
-                                            </ul>
-                                            <div>ಇದನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಫೋನ್‌ನ ಸ್ಕ್ರೀನ್‌ಗೆ ನೇರವಾಗಿ ಅನ್ವಯಿಸಿ ಮತ್ತು ಅದನ್ನು ಅನುಭವಿಸಿ!</div>",
-            ],
-            "wallpaper_by_themes" => [
-                "name"  => "ಥೀಮ್‌ಗಳ ಮೂಲಕ ವಾಲ್‌ಪೇಪರ್‌ಗಳು",
-                "topgirl"  => "ಥೀಮ್‌ಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
-                "topanime"  => "ಥೀಮ್‌ಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
-            ],
-            "wallpaper_by_styles" => [
-                "name"  => "ಶೈಲಿಗಳ ಮೂಲಕ ವಾಲ್‌ಪೇಪರ್‌ಗಳು",
-                "topgirl"  => "ಶೈಲಿಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
-                "topanime"  => "ಶೈಲಿಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
-            ],
-            "wallpaper_by_events" => [
-                "name"  => "ಘಟನೆಗಳ ಮೂಲಕ ವಾಲ್‌ಪೇಪರ್‌ಗಳು",
-                "topgirl"  => "ಘಟನೆಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
-                "topanime"  => "ಘಟನೆಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
-            ],
-            "list_type_search" => [
-                'name' => [
-                    'category_info' => 'ವರ್ಗ',
-                    'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
-                    'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
-                    'article' => 'ಲೇಖ',
-                ],
-                'topgirl' => [
-                    'category_info' => 'ವರ್ಗ',
-                    'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
-                    'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
-                    'article' => 'ಲೇಖ',
-                ],
-                'topanime' => [
-                    'category_info' => 'ವರ್ಗ',
-                    'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
-                    'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
-                    'article' => 'ಲೇಖ',
-                ],
-            ],
-            "copyright" => [
-                "name"  => "ಕಾಪಿರೈಟ್ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ಫಾಮ್ ವಾನ್ ಫು ವಿನ್ಯಾಸ ಮತ್ತು ಅಭಿವೃದ್ಧಿ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
-            ]
-        ]
-    ],
+    // "kn" => [
+    //     "name" => "Tiếng Kannada",
+    //     "name_by_language" => "ಕನ್ನಡ (Kannada)",
+    //     "area" => "Ấn Độ",
+    //     "scope" => "Ngôn ngữ khu vực châu Á",
+    //     "currency" => "INR",
+    //     "currency_code" => "₹",
+    //     "money_value" => "82",
+    //     "decimal_places" => 0,
+    //     "key" => "kn",
+    //     "latin"     => false,
+    //     "flag_join_left_to_right" => true,
+    //     "flag_has_space_in_content" => true,
+    //     "dir"       => "ltr",
+    //     "slug_page_premium_wallpaper" => "ಫೋನ್-ವಾಲ್ಪೇಪರ್",
+    //     "data"      => [
+    //         "home"          => "ಮನೆ",
+    //         "about_us"      => "ನಮ್ಮ ಬಗ್ಗೆ",
+    //         "event"             => "ಘಟನೆ",
+    //         "support"           => "ಮદદ",
+    //         "connect_with_us"   => "ನಮ್ಮೊಂದಿಗೆ ಸಂಪರ್ಕಿಸು",
+    //         "table_of_contents" => "ವಿಷಯಗಳ ಪಟ್ಟಿ",
+    //         "photo_set"         => "ಫೋಟೋ ಸೆಟ್",
+    //         "share"             => "ಹಂಚಿಕೆ",
+    //         "no_suitable_results_found" => "ಯೋಗ್ಯವಾದ ಫಲಿತಾಂಶಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+    //         "cart"              => "ಕಾರ್ಟ್",
+    //         "your_cart_is_empty"    => "ನಿಮ್ಮ ಕಾರ್ಟ್ ಖಾಲಿಯಾಗಿದೆ",
+    //         "continue_shopping"     => "ಖರೀದಿಯನ್ನು ಮುಂದುವರಿಸಿ",
+    //         "full_set"          => "ಪೂರ್ಣ ಸೆಟ್",
+    //         "image"             => "ಚಿತ್ರ",
+    //         "options"           => "ಆಯ್ಕೆಗಳು",
+    //         "product_guide_after_payment"   => "<div>ಪಾವತಿಯ ನಂತರ, ನೀವು ಮೂಲ ಚಿತ್ರವನ್ನು ನೇರವಾಗಿ ಮತ್ತು ಇಮೇಲ್ ಮೂಲಕ ಡೌನ್‌ಲೋಡ್ ಮತ್ತು ಬಳಕೆಗಾಗಿ ಸ್ವೀಕರಿಸುತ್ತೀರಿ.</div>",
+    //         "suggestions_for_you"   => "ನಿಮಗಾಗಿ ಸಲಹೆಗಳು!",
+    //         "each_image"        => "ಪ್ರತಿ ಚಿತ್ರ",
+    //         "each_set"          => "ಪ್ರತಿ ಸೆಟ್",
+    //         "propose" => "ಪ್ರಸ್ತಾವನೆ",
+    //         "favourite" => "ಮೆಚ್ಚಿನ",
+    //         "newest" => "ಇತ್ತೀಚಿನ",
+    //         "oldest" => "ಹಳೆಯ",
+    //         "browse_by" => "ಇದರಿಂದ ಬ್ರೌಸ್ ಮಾಡಿ ",
+    //         "sort_by" => "ಇದರಿಂದ ವಿಂಗಡಿಸಿ ",
+    //         "filter_by" => "ಇದರಿಂದ ಫಿಲ್ಟರ್ ಮಾಡಿ ",
+    //         "filter_by_themes" => "ಥೀಮ್ಗಳ ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ",
+    //         "filter_by_styles" => "ಶೈಲಿಗಳು ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ",
+    //         "filter_by_events" => "ಘಟನೆಗಳ ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ",
+    //         "advanced_filter" => "ಸುಧಾರಿತ ಫಿಲ್ಟರ್",
+    //         "all" => "ಎಲ್ಲ",
+    //         "added_to_cart" => "ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಲಾಗಿದೆ!",
+    //         "view_cart" => "ಕಾರ್ಟ್ ವೀಕ್ಷಿಸಿ",
+    //         "add_to_cart" => "ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ",
+    //         "buy_now" => "ಈಗ ಖರೀದಿಸಿ",
+    //         "undefined" => "ಅವ್ಯಾಖ್ಯಾನಿತ",
+    //         "total" => "ಒಟ್ಟು",
+    //         "remove_item_in_cart" => "ಕಾರ್ಟ್‌ನಿಂದ ಐಟಂ ತೆಗೆದುಹಾಕಿ",
+    //         "product_list" => "ಉತ್ಪನ್ನ ಪಟ್ಟಿ",
+    //         "product" => "ಉತ್ಪನ್ನ",
+    //         "unit_price" => "ಘಟಕ ಬೆಲೆ",
+    //         "total_price" => "ಒಟ್ಟು ಬೆಲೆ",
+    //         "payment" => "ಪಾವತಿ",
+    //         "information" => "ಮಾಹಿತಿ",
+    //         "email_prompt" => "ನೀವು ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ನಮೂದಿಸಿದರೆ, ನೀವು ಸಂಗ್ರಹಣೆಗೆ ಹೆಚ್ಚಿನ ಪ್ರತಿ ಸ್ವೀಕರಿಸುತ್ತೀರಿ.",
+    //         "email_receive" => "ಚಿತ್ರಗಳನ್ನು ಸ್ವೀಕರಿಸಲು ಇಮೇಲ್",
+    //         "payment_method" => "ಪಾವತಿ ವಿಧಾನ",
+    //         "fee" => "ಶುಲ್ಕ",
+    //         "payment_fee" => "ಪಾವತಿ ಶುಲ್ಕ",
+    //         'view_all' => 'ಎಲ್ಲವನ್ನೂ ನೋಡಿ',
+    //         'login_name_com_vn' => 'ಲಾಗಿನ್ Name.com.vn',
+    //         'login_email' => 'ಲಾಗಿನ್ ಇಮೇಲ್',
+    //         'password' => 'ಪಾಸ್ವರ್ಡ್',
+    //         'remember_me' => 'ನನ್ನನ್ನು ನೆನಪುಮಾಡಿ',
+    //         'login' => 'ಲಾಗಿನ್',
+    //         'or_login_with' => 'ಅಥವಾ ಇತರದಿಂದ ಲಾಗಿನ್ ಮಾಡಿ',
+    //         'support' => 'ಬೆಂಬಲ',
+    //         'download_guide' => 'ಡೌನ್ಲೋಡ್ ಮಾರ್ಗದರ್ಶಿ',
+    //         'account_information' => 'ಖಾತೆ ಮಾಹಿತಿಗಳು',
+    //         'my_downloads' => 'ನನ್ನ ಡೌನ್ಲೋಡ್‌ಗಳು',
+    //         'logout' => 'ಲಾಗ್ ಔಟ್',
+    //         'article' => "ಲೇಖನ",
+    //         'featured_articles' => 'ವಿಶೇಷ ಲೇಖನಗಳು',
+    //         'news_category' => 'ಸುದ್ದಿ ವಿಭಾಗ',
+    //         'payment_successful' => "ಪಾವತಿ ಯಶಸ್ವಿಯಾಯಿತು!",
+    //         'thank_you_message' => "Name.com.vn ನ ಬೆಂಬಲಕ್ಕೆ ಧನ್ಯವಾದಗಳು. ನಿಮ್ಮ ಚಿತ್ರ ಕೆಳಗಿದೆ ಅಥವಾ ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ನೀವು ನಿಮ್ಮ ಇಮೇಲ್‌ ನೋಡಬಹುದು.",
+    //         'order_id' => "ಆರ್ಡರ್ ಐಡಿ",
+    //         'email' => "ಇಮೇಲ್",
+    //         'click_to_download' => "ಡೌನ್‌ಲೋಡ್‌ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+    //         'step_1_buy_now' => "ಹಂತ 1: ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ನಮೂದಿಸಿ.",
+    //         'note_fill_email' => "* ನೀವು ಇಮೇಲ್ ನಮೂದಿಸಿದರೆ, ಸಂಗ್ರಹಣೆಗೆ ಇನ್ನೊಂದು ಪ್ರತಿಯನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ.",
+    //         'step_2_buy_now' => "ಹಂತ 2: ಪಾವತಿ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+    //         'what_do_you_want_to_find_today' => "ನೀವು ಇವತ್ತು ಏನು ಹುಡುಕಲು ಇಚ್ಛಿಸುತ್ತೀರಿ?",
+    //         'search' => "ಹುಡುಕಿ",
+    //         /* xác nhận đơn hàng */
+    //         'order_confirmation' => 'ಆರ್ಡರ್ ದೃಢೀಕರಣ',
+    //         'thank_you_message_email' => 'ನೀವು ನಿಮ್ಮ ಆರ್ಡರ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ವಾಲ್‌ಪೇಪರ್ ಬಳಕೆಗಾಗಿ ತಯಾರಾಗಿದೆ.',
+    //         'hello' => 'ಹಲೋ',
+    //         'purchase_date' => 'ಖರೀದಿ ದಿನಾಂಕ',
+    //         'download_instructions' => 'ನೀವು ವಾಲ್‌ಪೇಪರ್ ಸಂಗ್ರಹವನ್ನು ಕೆಳಗಿನ ರೀತಿಯಲ್ಲಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಬಹುದು:',
+    //         'direct_download' => 'ಕೆಳಗಿನ ಲಿಂಕ್ಸ್ ಮೂಲಕ ನೇರವಾಗಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ:',
+    //         'sincerely' => 'ಸಾಧರವಾಗಿ!',
+    //         'login_instruction_message_email' => 'ಅಥವಾ ನಿಮ್ಮ ಇಮೇಲ್ ಮೂಲಕ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ನಲ್ಲಿ ಲಾಗಿನ್ ಮಾಡಿ ಮತ್ತು <strong>"ನನ್ನ ಡೌನ್‌ಲೋಡ್"</strong> ವಿಭಾಗಕ್ಕೆ ಹೋಗಿ',
+    //         'support_contact_message_email' => 'ನಿಮ್ಮ ಬಳಿ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳು ಅಥವಾ ಸಹಾಯ ಅವಶ್ಯಕತೆ ಇದ್ದರೆ, ದಯವಿಟ್ಟು ನಮಗೆ ಇಮೇಲ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
+    //         'wish_message_email' => 'ನಾವು ನಂಬಿದ್ದೇವೆ ನೀವು ನಿಮ್ಮ ಹೊಸ ವಾಲ್‌ಪೇಪರ್ ಸಂಗ್ರಹದೊಂದಿಗೆ ಅದ್ಭುತ ಅನುಭವವನ್ನು ಪಡೆಯುತ್ತೀರಿ!',
+    //         /* custom */
+    //         "wallpaper_theme"  => [
+    //             "name"  => "ವಾಲ್‌ಪೇಪರ್ ಥೀಮ್",
+    //             "topgirl"  => "ಫೋಟೋ ಥೀಮ್",
+    //             "topanime"  => "ಫೋಟೋ ಥೀಮ್",
+    //         ],
+    //         "wallpaper_style"   => [
+    //             "name"  => "ವಾಲ್‌ಪೇಪರ್ ಶೈಲಿ",
+    //             "topgirl"  => "ಫೋಟೋ ಶೈಲಿ",
+    //             "topanime"  => "ಫೋಟೋ ಶೈಲಿ",
+    //         ],
+    //         "free_wallpaper"    => [
+    //             "name"  => "ಉಚಿತ ವಾಲ್‌ಪೇಪರ್",
+    //             "topgirl"  => "ಉಚಿತ ಫೋಟೋ",
+    //             "topanime"  => "ಉಚಿತ ಫೋಟೋ",
+    //         ],
+    //         "phone_wallpaper"         => [
+    //             "name"  => "ಫೋನ್ ವಾಲ್‌ಪೇಪರ್ ",
+    //             "topgirl"  => "ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು ",
+    //             "topanime"  => "ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು ",
+    //         ],
+    //         "product_description"   => [
+    //             "name"  => "<div>ಈ ಅಚ್ಚರಿಯ ಫೋಟೋ ಸಂಗ್ರಹದೊಂದಿಗೆ ನಿಮ್ಮ ಫೋನ್‌ನ ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ಕಲೆ ಕೃತಿಯಾಗಿಸಿ! ನಿಮ್ಮ ಫೋನ್‌ಗೆ ಹೊಸ ಮತ್ತು ವಿಶಿಷ್ಟ ಶೈಲಿಯನ್ನು ತರುವುದು.</div>
+    //                             <ul>
+    //                                 <li>ಹೈ ರೆಸಲ್ಯೂಶನ್: 1440x3360, ಪ್ರತಿಯೊಂದು ವಿವರಗಳೊಂದಿಗೆ ಹಂಚಿನ ಚಿತ್ರಗಳನ್ನು ಖಾತ್ರಿಪಡಿಸುವುದು.</li>
+    //                                 <li>ಎಲ್ಲಾ ವಿಧದ ಫೋನ್ ಸ್ಕ್ರೀನ್‌ಗಳೊಂದಿಗೆ ಸಂಪೂರ್ಣವಾಗಿ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ.</li>
+    //                                 <li>ಕೆಲವು ಸರಳ ಹಂತಗಳಲ್ಲಿ ಸುಲಭ ಮತ್ತು ವೇಗದ ಡೌನ್‌ಲೋಡ್.</li>
+    //                                 <li>ಬಳಕೆ ಹಕ್ಕುಗಳು ಸೇರಿವೆ, ನಿಮ್ಮ ಸ್ನೇಹಿತರೆೊಂದಿಗೆ ಹಂಚಲು ಮುಕ್ತ.</li>
+    //                             </ul>
+    //                             <div>ಇದನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಫೋನ್‌ನ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ ಉತ್ಸಾಹಕರವಾದ ವ್ಯತ್ಯಾಸವನ್ನು ಅನುಭವಿಸಿ!</div>",
+    //             "topgirl"  => "<div>ಈ ಸುಂದರ ಫೋನ್ ವಾಲ್‌ಪೇಪರ್ ಸೆಟ್‌ನೊಂದಿಗೆ ನಿಮ್ಮ ಕುಟೀ ಫೋನ್‌ಗೆ ಕೆಲವು ಬಣ್ಣ ಮತ್ತು ವಿಶಿಷ್ಟ ಶೈಲಿಯನ್ನು ಸೇರಿಸಿ.</div>
+    //                                         <ul>
+    //                                             <li>ರೆಸಲ್ಯೂಶನ್: 1440x3360</li>
+    //                                             <li>ಎಲ್ಲಾ ಫೋನ್ ಸ್ಕ್ರೀನ್‌ಗಳೊಂದಿಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ.</li>
+    //                                         </ul>
+    //                                         <div>ಇದನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಫೋನ್‌ನ ಸ್ಕ್ರೀನ್‌ಗೆ ನೇರವಾಗಿ ಅನ್ವಯಿಸಿ ಮತ್ತು ಅದನ್ನು ಅನುಭವಿಸಿ!</div>",
+    //             "topanime"  => "<div>ಈ ಸುಂದರ ಫೋನ್ ವಾಲ್‌ಪೇಪರ್ ಸೆಟ್‌ನೊಂದಿಗೆ ನಿಮ್ಮ ಕುಟೀ ಫೋನ್‌ಗೆ ಕೆಲವು ಬಣ್ಣ ಮತ್ತು ವಿಶಿಷ್ಟ ಶೈಲಿಯನ್ನು ಸೇರಿಸಿ.</div>
+    //                                         <ul>
+    //                                             <li>ರೆಸಲ್ಯೂಶನ್: 1440x3360</li>
+    //                                             <li>ಎಲ್ಲಾ ಫೋನ್ ಸ್ಕ್ರೀನ್‌ಗಳೊಂದಿಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ.</li>
+    //                                         </ul>
+    //                                         <div>ಇದನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ನಿಮ್ಮ ಫೋನ್‌ನ ಸ್ಕ್ರೀನ್‌ಗೆ ನೇರವಾಗಿ ಅನ್ವಯಿಸಿ ಮತ್ತು ಅದನ್ನು ಅನುಭವಿಸಿ!</div>",
+    //         ],
+    //         "wallpaper_by_themes" => [
+    //             "name"  => "ಥೀಮ್‌ಗಳ ಮೂಲಕ ವಾಲ್‌ಪೇಪರ್‌ಗಳು",
+    //             "topgirl"  => "ಥೀಮ್‌ಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
+    //             "topanime"  => "ಥೀಮ್‌ಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
+    //         ],
+    //         "wallpaper_by_styles" => [
+    //             "name"  => "ಶೈಲಿಗಳ ಮೂಲಕ ವಾಲ್‌ಪೇಪರ್‌ಗಳು",
+    //             "topgirl"  => "ಶೈಲಿಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
+    //             "topanime"  => "ಶೈಲಿಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
+    //         ],
+    //         "wallpaper_by_events" => [
+    //             "name"  => "ಘಟನೆಗಳ ಮೂಲಕ ವಾಲ್‌ಪೇಪರ್‌ಗಳು",
+    //             "topgirl"  => "ಘಟನೆಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
+    //             "topanime"  => "ಘಟನೆಗಳ ಮೂಲಕ ಸುಂದರ ಹುಡುಗಿಯ ಚಿತ್ರಗಳು",
+    //         ],
+    //         "list_type_search" => [
+    //             'name' => [
+    //                 'category_info' => 'ವರ್ಗ',
+    //                 'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+    //                 'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+    //                 'article' => 'ಲೇಖ',
+    //             ],
+    //             'topgirl' => [
+    //                 'category_info' => 'ವರ್ಗ',
+    //                 'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+    //                 'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+    //                 'article' => 'ಲೇಖ',
+    //             ],
+    //             'topanime' => [
+    //                 'category_info' => 'ವರ್ಗ',
+    //                 'paid_wallpaper' => 'ಪಾವತಿಸಿದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+    //                 'free_wallpaper' => 'ಉಚಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು',
+    //                 'article' => 'ಲೇಖ',
+    //             ],
+    //         ],
+    //         "copyright" => [
+    //             "name"  => "ಕಾಪಿರೈಟ್ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ಫಾಮ್ ವಾನ್ ಫು ವಿನ್ಯಾಸ ಮತ್ತು ಅಭಿವೃದ್ಧಿ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+    //         ]
+    //     ]
+    // ],
     "ja" => [
         "name" => "Tiếng Nhật",
         "name_by_language" => "日本語 (Nihongo)",
@@ -3495,190 +3495,6 @@ return [
             ],
             "copyright" => [
                 "name"  => "ลิขสิทธิ์ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. ออกแบบและพัฒนาโดย Pham Van Phu. สงวนลิขสิทธิ์ทั้งหมด.",
-            ]
-        ]
-    ],
-    "km" => [
-        "name" => "Tiếng Khmer",
-        "name_by_language" => "ខ្មែរ (Khmer)",
-        "area" => "Campuchia",
-        "scope" => "Ngôn ngữ khu vực châu Á",
-        "currency" => "KHR",
-        "currency_code" => "៛",
-        "money_value" => "4100",
-        "decimal_places" => 0,
-        "key" => "km",
-        "latin"     => false,
-        "flag_join_left_to_right" => true,
-        "flag_has_space_in_content" => false,
-        "dir"       => "ltr",
-        "slug_page_premium_wallpaper" => "ផ្ទាំងរូបភាពទូរស័ព្ទ",
-        "data"      => [
-            "home"          => "ទំព័រដើម",
-            "about_us"      => "អំពី​ពួក​យើង",
-            "event"             => "ព្រឹត្តិការណ៍",
-            "support"           => "គាំទ្រ",
-            "connect_with_us"   => "ភ្ជាប់ជាមួយយើង",
-            "table_of_contents" => "តារាងមាតិកា",
-            "photo_set"         => "សំណុំរូបភាព",
-            "share"             => "ចែករំលែក",
-            "no_suitable_results_found" => "រកមិនឃើញលទ្ធផលសមរម្យ",
-            "cart"              => "រទេះ",
-            "your_cart_is_empty"    => "រទេះរបស់អ្នកទទេ",
-            "continue_shopping"     => "បន្តទិញទំនិញ",
-            "full_set"          => "សំណុំពេញ",
-            "image"             => "រូបភាព",
-            "options"           => "ជម្រើស",
-            "product_guide_after_payment"   => "<div>បន្ទាប់ពីបង់ប្រាក់ អ្នកនឹងទទួលបានរូបភាពដើមដោយផ្ទាល់ និងតាមអ៊ីមែលសម្រាប់ទាញយកនិងប្រើប្រាស់។</div>",
-            "suggestions_for_you"   => "សំណើសម្រាប់អ្នក!",
-            "each_image"        => "គ្រប់រូបភាព",
-            "each_set"          => "គ្រប់សំណុំ",
-            "propose" => "ផ្ដល់សំណើ",
-            "favourite" => "ដែលពេញនិយម",
-            "newest" => "ថ្មីបំផុត",
-            "oldest" => "ចាស់បំផុត",
-            "browse_by" => "រុករកតាម ",
-            "sort_by" => "តម្រៀបតាម ",
-            "filter_by" => "ត្រងតាម ",
-            "filter_by_themes" => "ត្រងតាមប្រធានបទ",
-            "filter_by_styles" => "ត្រងតាមរចនាប័ទ្ម",
-            "filter_by_events" => "ត្រងតាមព្រឹត្តិការណ៍",
-            "advanced_filter" => "តម្រងកម្រិតខ្ពស់",
-            "all" => "ទាំងអស់",
-            "added_to_cart" => "បានបន្ថែមទៅរទេះ!",
-            "view_cart" => "មើលរទេះ",
-            "add_to_cart" => "បន្ថែមទៅរទេះ",
-            "buy_now" => "ទិញ​ឥឡូវ​នេះ",
-            "undefined" => "មិនកំណត់",
-            "total" => "សរុប",
-            "remove_item_in_cart" => "យកទំនិញចេញពីរទេះ",
-            "product_list" => "បញ្ជីផលិតផល",
-            "product" => "ផលិតផល",
-            "unit_price" => "តម្លៃ​ឯកតា",
-            "total_price" => "តម្លៃ​សរុប",
-            "payment" => "ការទូទាត់",
-            "information" => "ព័ត៌​មាន",
-            "email_prompt" => "ប្រសិនបើអ្នកបញ្ចូលអ៊ីមែលរបស់អ្នក អ្នកនឹងទទួលបានច្បាប់បន្ថែមសម្រាប់រក្សាទុក។",
-            "email_receive" => "អ៊ីមែលសម្រាប់ទទួលរូបភាព",
-            "payment_method" => "វិធីសាស្ត្រទូទាត់",
-            "fee" => "ថ្លៃសេវា",
-            "payment_fee" => "ថ្លៃសេវាទូទាត់",
-            'view_all' => 'មើលទាំងអស់',
-            'login_name_com_vn' => 'ចូលគណនី Name.com.vn',
-            'login_email' => 'អ៊ីមែលចូលគណនី',
-            'password' => 'ពាក្យសម្ងាត់',
-            'remember_me' => 'ចងចាំខ្ញុំ',
-            'login' => 'ចូលគណនី',
-            'or_login_with' => 'ឬចូលគណនីជាមួយ',
-            'support' => 'ការគាំទ្រ',
-            'download_guide' => 'ឯកសារណែនាំដើម្បីទាញយក',
-            'account_information' => 'ព័ត៌ព័ត៌មានគណនី',
-            'my_downloads' => 'ការទាញយករបស់ខ្ញុំ',
-            'logout' => 'ចាកចេញ',
-            'article' => "អត្ថបទ",
-            'featured_articles' => 'អត្ថបទពិសេស',
-            'news_category' => 'ប្រភេទព័ត៌មាន',
-            'payment_successful' => "ការទូទាត់ជោគជ័យ!",
-            'thank_you_message' => "សូមអរគុណចំពោះការគាំទ្រ Name.com.vn របស់អ្នក។ រូបភាពរបស់អ្នកស្ថិតនៅខាងក្រោម ឬអ្នកអាចពិនិត្យអ៊ីមែលរបស់អ្នកដើម្បីទាញយករូបភាព។",
-            'order_id' => "លេខសម្គាល់បញ្ជា",
-            'email' => "អ៊ីមែល",
-            'click_to_download' => "ចុចដើម្បីទាញយក",
-            'step_1_buy_now' => "ជំហានទី 1៖ សូមបញ្ចូលអ៊ីមែលរបស់អ្នក។",
-            'note_fill_email' => "* ប្រសិនបើបញ្ចូលអ៊ីមែល នឹងមានច្បាប់ចម្លងបន្ថែមសម្រាប់រក្សាទុក។",
-            'step_2_buy_now' => "ជំហានទី 2៖ ជ្រើសរើសវិធីសាស្ត្រទូទាត់។",
-            'what_do_you_want_to_find_today' => "តើថ្ងៃនេះអ្នកចង់រកអ្វី?",
-            'search' => "ស្វែងរក",
-            /* xác nhận đơn hàng */
-            'order_confirmation' => 'ការបញ្ជាក់ការបញ្ជាទិញ',
-            'thank_you_message_email' => 'សូមអរគុណសម្រាប់ការបំពេញការបញ្ជាទិញរបស់អ្នក! ផ្ទាំងនឹងរបស់អ្នកត្រៀមជាស្រេចដើម្បីប្រើ។',
-            'hello' => 'សួស្តី',
-            'purchase_date' => 'កាលបរិច្ឆេទនៃការទិញ',
-            'download_instructions' => 'អ្នកអាចទាញយកឈុតរូបភាពតាមវិធីខាងក្រោម:',
-            'direct_download' => 'ទាញយកតាមរយៈតំណខាងក្រោម:',
-            'sincerely' => 'ដោយស្មោះពីចិត្ត!',
-            'login_instruction_message_email' => 'ឬចូលទៅកាន់ <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> ដោយប្រើអ៊ីមែលរបស់អ្នក និងចូលទៅកាន់ផ្នែក <strong>"ការទាញយករបស់ខ្ញុំ"</strong>',
-            'support_contact_message_email' => 'បើមានសំណួរណាមួយ ឬត្រូវការជំនួយ សូមទំនាក់ទំនងមកកាន់យើងតាមអ៊ីមែល: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
-            'wish_message_email' => 'សូមជូនពរឱ្យអ្នកមានបទពិសោធន៍អស្ចារ្យជាមួយកូឡេកស៊ីនវ៉ុលពីរប្រកួតថ្មីរបស់អ្នក!',
-            /* custom */
-            "wallpaper_theme"  => [
-                "name"  => "ប្រធានបទផ្ទាំងរូបភាព",
-                "topgirl"  => "ប្រធានបទរូបភាព",
-                "topanime"  => "ប្រធានបទរូបភាព",
-            ],
-            "wallpaper_style"   => [
-                "name"  => "រចនាប័ទ្មផ្ទាំងរូបភាព",
-                "topgirl"  => "រចនាប័ទ្មរូបភាព",
-                "topanime"  => "រចនាប័ទ្មរូបភាព",
-            ],
-            "free_wallpaper"    => [
-                "name"  => "ផ្ទាំងរូបភាពឥតគិតថ្លៃ",
-                "topgirl"  => "រូបភាពឥតគិតថ្លៃ",
-                "topanime"  => "រូបភាពឥតគិតថ្លៃ",
-            ],
-            "phone_wallpaper"         => [
-                "name"  => "ផ្ទាំងរូបភាពទូរស័ព្ទ ",
-                "topgirl"  => "រូបភាពក្មេងស្រីស្រស់ស្អាត ",
-                "topanime"  => "រូបភាពក្មេងស្រីស្រស់ស្អាត ",
-            ],
-            "product_description"   => [
-                "name"  => "<div>ប្ដូរផ្ទាំងរូបភាពទូរស័ព្ទរបស់អ្នកទៅជាការងារសិល្បៈជាមួយនឹងកាលស្ទង់រូបភាពដ៏អស្ចារ្យនេះ! នាំមកនូវរចនាប័ទ្មថ្មី និង មិនធម្មតាទៅកាន់ទូរស័ព្ទរបស់អ្នក។</div>
-                                <ul>
-                                    <li>គុណភាពបង្ហាញខ្ពស់៖ 1440x3360 ធានារូបភាពច្បាស់គ្រប់លម្អិត</li>
-                                    <li>ផ្គូផ្គងដោយល្អជាមួយគ្រប់ប្រភេទអេក្រង់ទូរស័ព្ទ</li>
-                                    <li>ទាញយកយ៉ាងងាយ និង លឿនត្រឹមតែជំហានប៉ុន្មាន</li>
-                                    <li>រួមបញ្ចូលសិទ្ធិក្នុងការប្រើប្រាស់ អាចចែករំលែកជាមួយមិត្តភក្តិរបស់អ្នកបានដោយសេរី</li>
-                                </ul>
-                                <div>ទាញយកឥឡូវនេះ និង សាកល្បងភាពខុសគ្នាដ៏រំភើបនៅលើអេក្រង់ទូរស័ព្ទរបស់អ្នក!</div>",
-                "topgirl"  => "<div>បន្ថែមពណ៌ និង រចនាប័ទ្មមិនធម្មតាដល់ទូរស័ព្ទគួរឲ្យស្រលាញ់របស់អ្នកជាមួយនឹងផ្ទាំងរូបភាពទូរស័ព្ទដ៏ស្រស់ស្អាតនេះ។</div>
-                                            <ul>
-                                                <li>គុណភាពបង្ហាញ៖ 1440x3360</li>
-                                                <li>ផ្គូផ្គងដោយល្អជាមួយគ្រប់អេក្រង់ទូរស័ព្ទ</li>
-                                            </ul>
-                                            <div>ទាញយក និង យកវាប្រើដោយផ្ទាល់នៅលើអេក្រង់ទូរស័ព្ទរបស់អ្នកដើម្បីសាកល្បង!</div>",
-                "topanime"  => "<div>បន្ថែមពណ៌ និង រចនាប័ទ្មមិនធម្មតាដល់ទូរស័ព្ទគួរឲ្យស្រលាញ់របស់អ្នកជាមួយនឹងផ្ទាំងរូបភាពទូរស័ព្ទដ៏ស្រស់ស្អាតនេះ។</div>
-                                            <ul>
-                                                <li>គុណភាពបង្ហាញ៖ 1440x3360</li>
-                                                <li>ផ្គូផ្គងដោយល្អជាមួយគ្រប់អេក្រង់ទូរស័ព្ទ</li>
-                                            </ul>
-                                            <div>ទាញយក និង យកវាប្រើដោយផ្ទាល់នៅលើអេក្រង់ទូរស័ព្ទរបស់អ្នកដើម្បីសាកល្បង!</div>",
-            ],
-            "wallpaper_by_themes" => [
-                "name"  => "ផ្ទាំងរូបភាពតាមប្រធានបទ",
-                "topgirl"  => "រូបភាពក្មេងស្រីស្រស់ស្អាតតាមប្រធានបទ",
-                "topanime"  => "រូបភាពក្មេងស្រីស្រស់ស្អាតតាមប្រធានបទ",
-            ],
-            "wallpaper_by_styles" => [
-                "name"  => "ផ្ទាំងរូបភាពតាមរចនាប័ទ្ម",
-                "topgirl"  => "រូបភាពក្មេងស្រីស្រស់ស្អាតតាមរចនាប័ទ្ម",
-                "topanime"  => "រូបភាពក្មេងស្រីស្រស់ស្អាតតាមរចនាប័ទ្ម",
-            ],
-            "wallpaper_by_events" => [
-                "name"  => "ផ្ទាំងរូបភាពតាមព្រឹត្តិការណ៍",
-                "topgirl"  => "រូបភាពក្មេងស្រីស្រស់ស្អាតតាមព្រឹត្តិការណ៍",
-                "topanime"  => "រូបភាពក្មេងស្រីស្រស់ស្អាតតាមព្រឹត្តិការណ៍",
-            ],
-            "list_type_search" => [
-                'name' => [
-                    'category_info' => 'ប្រភេទ',
-                    'paid_wallpaper' => 'ផ្ទាំងរូបភាពដែលមានតម្លៃ',
-                    'free_wallpaper' => 'ផ្ទាំងរូបភាពឥតគិតថ្លៃ',
-                    'article' => 'អត្ថបទ',
-                ],
-                'topgirl' => [
-                    'category_info' => 'ប្រភេទ',
-                    'paid_wallpaper' => 'ផ្ទាំងរូបភាពដែលមានតម្លៃ',
-                    'free_wallpaper' => 'ផ្ទាំងរូបភាពឥតគិតថ្លៃ',
-                    'article' => 'អត្ថបទ',
-                ],
-                'topanime' => [
-                    'category_info' => 'ប្រភេទ',
-                    'paid_wallpaper' => 'ផ្ទាំងរូបភាពដែលមានតម្លៃ',
-                    'free_wallpaper' => 'ផ្ទាំងរូបភាពឥតគិតថ្លៃ',
-                    'article' => 'អត្ថបទ',
-                ],
-            ],
-            "copyright" => [
-                "name"  => "រក្សាសិទ្ធិ ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>។ រចនា និងអភិវឌ្ឍដោយ Pham Van Phu។ រក្សា​សិទ្ធិ​គ្រប់​យ៉ាង។",
             ]
         ]
     ],
@@ -7922,191 +7738,6 @@ return [
         ],
     ],
 
-    "sw" => [
-        "name" => "Swahili",
-        "name_by_language" => "Kiswahili",
-        "area" => "Kenya, Tanzania, Uganda, na maeneo mengine ya Afrika Mashariki",
-        "scope" => "Lugha ya Kiswahili ni moja ya lugha kuu za Afrika Mashariki",
-        "currency" => "KES",
-        "currency_code" => "KSh",
-        "money_value" => "114",
-        "decimal_places" => 2,
-        "key" => "sw",
-        "latin" => true,
-        "flag_join_left_to_right" => true,
-        "flag_has_space_in_content" => true,
-        "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "picha-za-ukuta-wa-simu",
-        "data" => [
-            "home"              => "Nyumbani",
-            "about_us"          => "Kuhusu Sisi",
-            "event"             => "Tukio",
-            "support"           => "Usaidizi",
-            "connect_with_us"   => "Ungana Nasi",
-            "table_of_contents" => "Orodha ya Yaliyomo",
-            "photo_set"         => "Seti ya Picha",
-            "share"             => "Shiriki",
-            "no_suitable_results_found" => "Hakuna matokeo yanayofaa yaliyopatikana",
-            "cart"              => "Kikapu",
-            "your_cart_is_empty"    => "Kikapu chako kimejaa tupu",
-            "continue_shopping" => "Endelea Kununua",
-            "full_set"          => "Seti Kamili",
-            "image"             => "Picha",
-            "options"           => "Chaguo",
-            "product_guide_after_payment"   => "<div>Baada ya malipo, Utapokea picha halisi moja kwa moja na kupitia barua pepe kwa kupakua na kutumia.</div>",
-            "suggestions_for_you"   => "Mapendekezo Kwa Ajili Yako!",
-            "each_image"        => "Kila Picha",
-            "each_set"          => "Kila Seti",
-            "propose"           => "Pendekeza",
-            "favourite"         => "Unayopenda",
-            "newest"            => "Mpya Zaidi",
-            "oldest"            => "Ya Kale Zaidi",
-            "browse_by"         => "Vinavyoangaliwa kwa ",
-            "sort_by"           => "Panga kwa ",
-            "filter_by"         => "Chuja kwa ",
-            "filter_by_themes"  => "Chuja kwa Mandhari",
-            "filter_by_styles"  => "Chuja kwa Mitindo",
-            "filter_by_events"  => "Chuja kwa Matukio",
-            "advanced_filter"   => "Kichujio cha Juu",
-            "all"               => "Yote",
-            "added_to_cart"     => "Imeongezwa kwenye Kikapu!",
-            "view_cart"         => "Tazama Kikapu",
-            "add_to_cart"       => "Ongeza kwenye Kikapu",
-            "buy_now"           => "Nunua Sasa",
-            "undefined"         => "Haijafafanuliwa",
-            "total"             => "Jumla",
-            "remove_item_in_cart" => "Ondoa Kipengee Kwenye Kikapu",
-            "product_list"      => "Orodha ya Bidhaa",
-            "product"           => "Bidhaa",
-            "unit_price"        => "Bei ya Kila Moja",
-            "total_price"       => "Jumla ya Bei",
-            "payment"           => "Malipo",
-            "information"       => "Taarifa",
-            "email_prompt"      => "Ikiwa utaingiza Barua pepe, utapokea nakala zaidi kuhifadhi.",
-            "email_receive"     => "Barua pepe kwa ajili ya kupokea picha",
-            "payment_method"    => "Njia ya Malipo",
-            "fee"               => "Ada",
-            "payment_fee"       => "Ada ya Malipo",
-            "view_all"          => "Tazama Yote",
-            "login_name_com_vn" => "Ingia Name.com.vn",
-            "login_email"       => "Barua pepe ya Kuingia",
-            "password"          => "Nenosiri",
-            "remember_me"       => "Nikumbuke",
-            "login"             => "Ingia",
-            "or_login_with"     => "Au Ingia na",
-            "support"           => "Msaada",
-            "download_guide"    => "Mwongozo wa Kupakua",
-            "account_information" => "Maelezo ya Akaunti",
-            "my_downloads"      => "Vipakuliwa Vyangu",
-            "logout"            => "Ondoka",
-            "article"           => "Makala",
-            "featured_articles" => "Makala Maarufu",
-            "news_category"     => "Jamii ya Habari",
-            "payment_successful"=> "Malipo Yamefanikiwa!",
-            "thank_you_message" => "Asante kwa kuunga mkono Name.com.vn. Picha zako ziko chini au unaweza kufikia barua pepe yako ili kupakua picha.",
-            "order_id"          => "Namba ya Agizo",
-            "email"             => "Barua pepe",
-            "click_to_download" => "Bofya kupakua",
-            "step_1_buy_now"    => "Hatua ya 1: Tafadhali weka barua pepe yako.",
-            "note_fill_email"   => "* Ikiwa utaingiza barua pepe, utapokea nakala zaidi kuhifadhi.",
-            "step_2_buy_now"    => "Hatua ya 2: Chagua njia ya malipo.",
-            "what_do_you_want_to_find_today" => "Unataka kupata nini leo?",
-            "search"            => "Tafuta",
-            /* xác nhận đơn hàng */
-            'order_confirmation' => 'Uthibitisho wa Agizo',
-            'thank_you_message_email' => 'Asante kwa kukamilisha agizo lako! Mandhari yako ya skrini yako tayari kwa matumizi.',
-            'hello' => 'Habari',
-            'purchase_date' => 'Tarehe ya Ununuzi',
-            'download_instructions' => 'Unaweza kupakua seti ya mandhari kwa njia zifuatazo:',
-            'direct_download' => 'Pakua moja kwa moja kupitia viungo vilivyo hapa chini:',
-            'sincerely' => 'Kwa heshima!',
-            'login_instruction_message_email' => 'Au ingia kwenye <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> kwa kutumia barua pepe yako na nenda kwenye sehemu ya <strong>"Vipakuliwa Vyangu"</strong>',
-            'support_contact_message_email' => 'Ikiwa una maswali yoyote au unahitaji msaada, tafadhali wasiliana nasi kupitia barua pepe: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
-            'wish_message_email' => 'Tunakutakia uzoefu mzuri na mkusanyiko wako mpya wa mandhari ya skrini!',
-            /* custom */
-            "wallpaper_theme" => [
-                "name" => "Mandhari ya Mandhari",
-                "topgirl" => "Mandhari ya Picha",
-                "topanime" => "Mandhari ya Picha",
-            ],
-            "wallpaper_style" => [
-                "name" => "Mtindo wa Mandhari",
-                "topgirl" => "Mtindo wa Picha",
-                "topanime" => "Mtindo wa Picha",
-            ],
-            "free_wallpaper" => [
-                "name" => "Mandhari Bila Malipo",
-                "topgirl" => "Picha Bila Malipo",
-                "topanime" => "Picha Bila Malipo",
-            ],
-            "phone_wallpaper" => [
-                "name" => "Mandhari ya Simu",
-                "topgirl" => "Picha za Wasichana Wazuri",
-                "topanime" => "Picha za Anime",
-            ],
-            "product_description" => [
-                "name" => "<p>Geuza skrini ya simu yako kuwa kazi ya sanaa na mkusanyiko huu wa picha za kuvutia! Leta mtindo mpya na uhai kwenye simu yako.</p>
-                            <ul>
-                                <li>Azimio la hali ya juu: 1440x3360, kuhakikisha picha angavu kwa kila undani.</li>
-                                <li>Inafaa kwa kila aina ya skrini za simu.</li>
-                                <li>Pakua kwa urahisi na haraka kwa hatua chache tu.</li>
-                                <li>Imeshajumuishwa haki ya matumizi, unaweza kushiriki kwa urahisi na marafiki.</li>
-                            </ul>
-                            <div>Pakua sasa na uone tofauti ya kusisimua kwenye skrini ya simu yako!</div>",
-                "topgirl" => "<div>Ongeza rangi na mtindo wa kipekee kwenye simu yako nzuri na mkusanyiko huu wa mandhari ya simu.</div>
-                            <ul>
-                                <li>Azimio: 1440x3360</li>
-                                <li>Inafaa kwa kila aina ya skrini za simu.</li>
-                            </ul>
-                            <div>Pakua na tumia mara moja kwenye simu yako ili kuhisi tofauti!</div>",
-                "topanime" => "<div>Ongeza rangi na mtindo wa kipekee kwenye simu yako nzuri na mkusanyiko huu wa mandhari ya simu.</div>
-                            <ul>
-                                <li>Azimio: 1440x3360</li>
-                                <li>Inafaa kwa kila aina ya skrini za simu.</li>
-                            </ul>
-                            <div>Pakua na tumia mara moja kwenye simu yako ili kuhisi tofauti!</div>",
-            ],
-            "wallpaper_by_themes" => [
-                "name" => "Mandhari ya Simu kwa Mandhari",
-                "topgirl" => "Picha za Wasichana Wazuri kwa Mandhari",
-                "topanime" => "Picha za Anime kwa Mandhari",
-            ],
-            "wallpaper_by_styles" => [
-                "name" => "Mandhari ya Simu kwa Mtindo",
-                "topgirl" => "Picha za Wasichana Wazuri kwa Mtindo",
-                "topanime" => "Picha za Anime kwa Mtindo",
-            ],
-            "wallpaper_by_events" => [
-                "name" => "Mandhari ya Simu kwa Matukio",
-                "topgirl" => "Picha za Wasichana Wazuri kwa Matukio",
-                "topanime" => "Picha za Anime kwa Matukio",
-            ],
-            "list_type_search" => [
-                'name' => [
-                    'category_info' => 'Jamii',
-                    'paid_wallpaper' => 'Mandhari ya Kulipia',
-                    'free_wallpaper' => 'Mandhari Bila Malipo',
-                    'article' => 'Makala',
-                ],
-                'topgirl' => [
-                    'category_info' => 'Jamii',
-                    'paid_wallpaper' => 'Mandhari ya Kulipia',
-                    'free_wallpaper' => 'Mandhari Bila Malipo',
-                    'article' => 'Makala',
-                ],
-                'topanime' => [
-                    'category_info' => 'Jamii',
-                    'paid_wallpaper' => 'Mandhari ya Kulipia',
-                    'free_wallpaper' => 'Mandhari Bila Malipo',
-                    'article' => 'Makala',
-                ],
-            ],
-            "copyright" => [
-                "name" => "Haki miliki ® " . date('Y') . " <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Imetengenezwa na kuendelezwa na Phạm Văn Phú. Haki zote zimehifadhiwa.",
-            ],
-        ],
-    ],
-
     /* gpt 4o-mini */
 
     "ml" => [
@@ -8664,192 +8295,6 @@ return [
         ],
     ],
 
-    "is" => [
-        "name" => "Icelandic",
-        "name_by_language" => "Íslenska",
-        "area" => "Ísland",
-        "scope" => "Íslenska er opinbert tungumál á Íslandi",
-        "currency" => "ISK",
-        "currency_code" => "kr",
-        "money_value" => "144",
-        "decimal_places" => 2,
-        "key" => "is",
-        "latin" => true,
-        "flag_join_left_to_right" => true,
-        "flag_has_space_in_content" => true,
-        "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "sima-veggfoður",
-        "data" => [
-            "home"              => "Heimasíða",
-            "about_us"          => "Um okkur",
-            "event"             => "Viðburður",
-            "support"           => "Stuðningur",
-            "connect_with_us"   => "Tengdu við okkur",
-            "table_of_contents" => "Efnisyfirlit",
-            "photo_set"         => "Myndasafn",
-            "share"             => "Deila",
-            "no_suitable_results_found" => "Engar viðeigandi niðurstöður fundust",
-            "cart"              => "Vöruvagn",
-            "your_cart_is_empty"    => "Vöruvagninn þinn er tómur",
-            "continue_shopping" => "Halda áfram að versla",
-            "full_set"          => "Heildarsafn",
-            "image"             => "Mynd",
-            "options"           => "Valkostir",
-            "product_guide_after_payment"   => "<div>Eftir að þú hefur greitt, færðu upprunalegu myndirnar bæði beint og í tölvupósti til að hlaða niður og nota þær.</div>",
-            "suggestions_for_you"   => "Tillögur fyrir þig!",
-            "each_image"        => "Hver mynd",
-            "each_set"          => "Hvert safn",
-            "propose" => "Bjóða",
-            "favourite" => "Uppáhalds",
-            "newest" => "Nýjast",
-            "oldest" => "Elst",
-            "browse_by" => "Vafraðu eftir",
-            "sort_by" => "Raða eftir",
-            "filter_by" => "Sía eftir",
-            "filter_by_themes" => "Sía eftir þemum",
-            "filter_by_styles" => "Sía eftir stílum",
-            "filter_by_events" => "Sía eftir viðburðum",
-            "advanced_filter" => "Valkostur fyrir flokka",
-            "all" => "Allt",
-            "added_to_cart" => "Bætt við í vöruvagn!",
-            "view_cart" => "Skoða vöruvagn",
-            "add_to_cart" => "Bæta við í vöruvagn",
-            "buy_now" => "Kaupa núna",
-            "undefined" => "Óákveðið",
-            "total" => "Heild",
-            "remove_item_in_cart" => "Fjarlægja vöru úr vöruvagni",
-            "product_list" => "Vörulisti",
-            "product" => "Vara",
-            "unit_price" => "Einprice",
-            "total_price" => "Heildarverð",
-            "payment" => "Greiðsla",
-            "information" => "Upplýsingar",
-            "email_prompt" => "Ef þú slærð inn tölvupóst færðu afrit til að geyma.",
-            "email_receive" => "Tölvupóstur til að taka við myndum",
-            "payment_method" => "Greiðslumáti",
-            "fee" => "Gjald",
-            "payment_fee" => "Greiðslugjald",
-            'view_all' => 'Skoða allt',
-            'login_name_com_vn' => 'Innskráning á Name.com.vn',
-            'login_email' => 'Innskráningartölvupóstur',
-            'password' => 'Lykilorð',
-            'remember_me' => 'Muna mig',
-            'login' => 'Innskráning',
-            'or_login_with' => 'Eða skráðu þig inn með',
-            'support' => 'Stuðningur',
-            'download_guide' => 'Leiðbeiningar um niðurhal',
-            'account_information' => 'Upplýsingar um reikning',
-            'my_downloads' => 'Mínar niðurhal',
-            'logout' => 'Útskráning',
-            'article' => "Grein",
-            'featured_articles' => 'Einkennandi greinar',
-            'news_category' => 'Fréttaflokkur',
-            'payment_successful' => "Greiðsla staðfest!",
-            'thank_you_message' => "Takk fyrir að styðja Name.com.vn. Myndir þínar eru hér fyrir neðan eða þú getur farið í tölvupóstinn þinn til að hlaða niður.",
-            'order_id' => "Pöntunarnúmer",
-            'email' => "Tölvupóstur",
-            'click_to_download' => "Smelltu til að hlaða niður",
-            'step_1_buy_now' => "Skref 1: Sláðu inn tölvupóst.",
-            'note_fill_email' => "* Ef þú slærð inn tölvupóst færðu afrit til að geyma.",
-            'step_2_buy_now' => "Skref 2: Veldu greiðslumáta.",
-            'what_do_you_want_to_find_today' => "Hvað viltu finna í dag?",
-            'search' => "Leita",
-            /* xác nhận đơn hàng */
-            'order_confirmation' => 'Staðfesting á pöntun',
-            'thank_you_message_email' => 'Takk fyrir að ljúka pöntuninni þinni! Myndirnar þínar eru tilbúnar til notkunar.',
-            'hello' => 'Halló',
-            'purchase_date' => 'Kaupa dagsetning',
-            'download_instructions' => 'Þú getur halað niður myndasafninu á eftirfarandi vegu:',
-            'direct_download' => 'Hlaða niður beint með neðangreindum tenglum:',
-            'sincerely' => 'Með virðingu!',
-            'login_instruction_message_email' => 'Eða skráðu þig inn á <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> með tölvupósti þínum og fara í <strong>"Mínar niðurhal"</strong>',
-            'support_contact_message_email' => 'Ef þú hefur einhverjar spurningar eða þarft aðstoð, vinsamlegast hafðu samband við okkur í tölvupósti: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
-            'wish_message_email' => 'Við óskum þér góðrar skemmtunar með nýju myndasafni þínu!',
-            /* custom */
-            "wallpaper_theme"   => [
-                "name"  => "Bakgrunnsþema",
-                "topgirl"  => "Myndþema",
-                "topanime"  => "Myndþema",
-            ],
-            "wallpaper_style"   => [
-                "name"  => "Bakgrunnsstíll",
-                "topgirl"  => "Myndstíll",
-                "topanime"  => "Myndstíll",
-            ],
-            "free_wallpaper"    => [
-                "name"  => "Ókeypis Bakgrunnur",
-                "topgirl"  => "Ókeypis Mynd",
-                "topanime"  => "Ókeypis Mynd",
-            ],
-            "phone_wallpaper"   => [
-                "name"  => "Símbakgrunnur",
-                "topgirl"  => "Fallegar stelpur Myndir",
-                "topanime"  => "Anime Myndir",
-            ],
-            "product_description"   => [
-                "name"  => "<p>Gerðu skjáborðið á símanum þínum að listaverki með þessari glæsilegu myndasafn! Fáðu nýtt útlit og ferskleika fyrir síman þinn.</p>
-                            <ul>
-                                <li>Háupplausn: 1440x3360, tryggir skýrleika í öllum smáatriðum.</li>
-                                <li>Fullkomin samhæfing við allar tegundir símtækja.</li>
-                                <li>Auðveld og hröð niðurhal í nokkrum einföldum skrefum.</li>
-                                <li>Inniheldur notkunarréttindi, þú getur deilt með vinum.</li>
-                            </ul>
-                            <div>Hlaðið niður núna og upplifið áhugaverða breytingu á skjánum á símanum ykkar!</div>
-                        ",
-                "topgirl"  => "<div>Bættu smá lit og einstaka stíl við fallega síma þinn með þessari glæsilegu bakgrunnsmyndasafn.</div>
-                                <ul>
-                                    <li>Upplausn: 1440x3360</li>
-                                    <li>Samræmist öllum skjám símtækja.</li>
-                                </ul>
-                                <div>Hlaðið niður og bætið við á síma þinn til að upplifa!</div>",
-                "topanime"  => "<div>Bættu smá lit og einstaka stíl við fallega síma þinn með þessari glæsilegu bakgrunnsmyndasafn.</div>
-                                <ul>
-                                    <li>Upplausn: 1440x3360</li>
-                                    <li>Samræmist öllum skjám símtækja.</li>
-                                </ul>
-                                <div>Hlaðið niður og bætið við á síma þinn til að upplifa!</div>",
-            ],
-            "wallpaper_by_themes" => [
-                "name"  => "Símbakgrunnur eftir Þema",
-                "topgirl"  => "Myndir af fallegum stelpum eftir Þema",
-                "topanime"  => "Anime Myndir eftir Þema",
-            ],
-            "wallpaper_by_styles" => [
-                "name"  => "Símbakgrunnur eftir Stíl",
-                "topgirl"  => "Myndir af fallegum stelpum eftir Stíl",
-                "topanime"  => "Anime Myndir eftir Stíl",
-            ],
-            "wallpaper_by_events" => [
-                "name"  => "Símbakgrunnur eftir Viðburði",
-                "topgirl"  => "Myndir af fallegum stelpum eftir Viðburði",
-                "topanime"  => "Anime Myndir eftir Viðburði",
-            ],
-            "list_type_search" => [
-                'name' => [
-                    'category_info' => 'Flokkur',
-                    'paid_wallpaper' => 'Greiddur Bakgrunnur',
-                    'free_wallpaper' => 'Ókeypis Bakgrunnur',
-                    'article' => 'Grein',
-                ],
-                'topgirl' => [
-                    'category_info' => 'Flokkur',
-                    'paid_wallpaper' => 'Greiddur Bakgrunnur',
-                    'free_wallpaper' => 'Ókeypis Bakgrunnur',
-                    'article' => 'Grein',
-                ],
-                'topanime' => [
-                    'category_info' => 'Flokkur',
-                    'paid_wallpaper' => 'Greiddur Bakgrunnur',
-                    'free_wallpaper' => 'Ókeypis Bakgrunnur',
-                    'article' => 'Grein',
-                ],
-            ],
-            "copyright" => [
-                "name"  => "Höfundarréttur ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Hönnun og þróun af Phạm Văn Phú. Öll réttindi áskilin.",
-            ]
-        ],
-    ],
-
     "sr" => [
         "name" => "Serbian",
         "name_by_language" => "Српски",
@@ -9032,191 +8477,6 @@ return [
             "copyright" => [
                 "name"  => "Copyright ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Dizajn i razvoj od strane Phạm Văn Phú. Sva prava zadržana.",
             ],
-        ],
-    ],
-
-    "mk" => [
-        "name" => "Macedonian",
-        "name_by_language" => "Македонски",
-        "area" => "Северна Македонија",
-        "scope" => "Македонски е официјален јазик во Северна Македонија",
-        "currency" => "MKD",
-        "currency_code" => "ден",
-        "money_value" => "60",
-        "decimal_places" => 2,
-        "key" => "mk",
-        "latin" => false,
-        "flag_join_left_to_right" => true,
-        "flag_has_space_in_content" => true,
-        "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "телефонски-позадини",
-        "data" => [
-            "home" => "Дома",
-            "about_us" => "За нас",
-            "event" => "Настан",
-            "support" => "Поддршка",
-            "connect_with_us" => "Поврзи се со нас",
-            "table_of_contents" => "Содржина",
-            "photo_set" => "Фотографски сет",
-            "share" => "Сподели",
-            "no_suitable_results_found" => "Нема соодветни резултати",
-            "cart" => "Кошничка",
-            "your_cart_is_empty" => "Вашата кошничка е празна",
-            "continue_shopping" => "Продолжете со купување",
-            "full_set" => "Целосен сет",
-            "image" => "Слика",
-            "options" => "Опции",
-            "product_guide_after_payment" => "<div>По плаќањето, ќе добиете оригинални слики директно и преку е-пошта за да ги симнете и користите.</div>",
-            "suggestions_for_you" => "Предлози за вас!",
-            "each_image" => "Секоја слика",
-            "each_set" => "Секој сет",
-            "propose" => "Предложи",
-            "favourite" => "Омилено",
-            "newest" => "Најново",
-            "oldest" => "Најстаро",
-            "browse_by" => "Прелистувај според ",
-            "sort_by" => "Сортирај по ",
-            "filter_by" => "Филтрирај според ",
-            "filter_by_themes" => "Филтрирај според Теми",
-            "filter_by_styles" => "Филтрирај според Стилови",
-            "filter_by_events" => "Филтрирај според Настани",
-            "advanced_filter" => "Напреден филтер",
-            "all" => "Сите",
-            "added_to_cart" => "Додадено во кошничката!",
-            "view_cart" => "Погледни ја кошничката",
-            "add_to_cart" => "Додади во кошничката",
-            "buy_now" => "Купи сега",
-            "undefined" => "Неопределено",
-            "total" => "Вкупно",
-            "remove_item_in_cart" => "Избриши производ од кошничката",
-            "product_list" => "Листа на производи",
-            "product" => "Производ",
-            "unit_price" => "Цена по единица",
-            "total_price" => "Вкупна цена",
-            "payment" => "Плаќање",
-            "information" => "Информации",
-            "email_prompt" => "Ако внесете е-пошта, ќе добиете копија за складирање.",
-            "email_receive" => "Е-пошта за примање на слики",
-            "payment_method" => "Метод на плаќање",
-            "fee" => "Такса",
-            "payment_fee" => "Такса за плаќање",
-            'view_all' => 'Погледни ги сите',
-            'login_name_com_vn' => 'Најави се на Name.com.vn',
-            'login_email' => 'Е-пошта за најава',
-            'password' => 'Лозинка',
-            'remember_me' => 'Запамти ме',
-            'login' => 'Најави се',
-            'or_login_with' => 'Или најави се со',
-            'support' => 'Поддршка',
-            'download_guide' => 'Водич за преземање',
-            'account_information' => 'Информации за сметка',
-            'my_downloads' => 'Мои преземања',
-            'logout' => 'Одјави се',
-            'article' => "Член",
-            'featured_articles' => 'Истакнати членови',
-            'news_category' => 'Категорија на вести',
-            'payment_successful' => "Плаќањето е успешно!",
-            'thank_you_message' => "Ви благодариме што ја поддржавте Name.com.vn. Вашата слика е подолу или можете да ја преземете преку е-пошта.",
-            'order_id' => "Ид на нарачка",
-            'email' => "Е-пошта",
-            'click_to_download' => "Кликнете за да преземете",
-            'step_1_buy_now' => "Чекор 1: Ве молиме внесете е-пошта.",
-            'note_fill_email' => "* Ако внесете е-пошта, ќе добиете копија за складирање.",
-            'step_2_buy_now' => "Чекор 2: Изберете метод на плаќање.",
-            'what_do_you_want_to_find_today' => "Што сакате да најдете денес?",
-            'search' => "Барање",
-            /* xác nhận đơn hàng */
-            'order_confirmation' => 'Потврда за нарачка',
-            'thank_you_message_email' => 'Ви благодариме што ја завршивте вашата нарачка! Вашата слика е подготвена за користење.',
-            'hello' => 'Здраво',
-            'purchase_date' => 'Датум на купување',
-            'download_instructions' => 'Можете да преземете вашите слики на следните начини:',
-            'direct_download' => 'Преземете директно преку следните линкови:',
-            'sincerely' => 'Со почит!',
-            'login_instruction_message_email' => 'Или најавете се на <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> со вашата е-пошта и одете на <strong>"Мои преземања"</strong>',
-            'support_contact_message_email' => 'Ако имате какви било прашања или ви треба поддршка, слободно контактирајте не на е-пошта: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
-            'wish_message_email' => 'Ви посакуваме пријатно искуство со вашата нова колекција на слики!',
-            /* custom */
-            "wallpaper_theme"   => [
-                "name"  => "Тема за позадина",
-                "topgirl"  => "Тема на слика",
-                "topanime"  => "Тема на слика",
-            ],
-            "wallpaper_style"   => [
-                "name"  => "Стил на позадина",
-                "topgirl"  => "Стил на слика",
-                "topanime"  => "Стил на слика",
-            ],
-            "free_wallpaper"    => [
-                "name"  => "Бесплатна позадина",
-                "topgirl"  => "Бесплатна слика",
-                "topanime"  => "Бесплатна слика",
-            ],
-            "phone_wallpaper"   => [
-                "name"  => "Позадина за телефон",
-                "topgirl"  => "Слика на убави девојки",
-                "topanime"  => "Слика на аниме",
-            ],
-            "product_description"   => [
-                "name"  => "<p>Претворете ја позадината на вашиот телефон во уметничко дело со оваа прекрасна колекција на слики! Донесете нов стил и свежина на вашиот телефон.</p>
-                            <ul>
-                                <li>Висока резолуција: 1440x3360, гарантирајќи остри детали.</li>
-                                <li>Совршено компатибилно со сите видови на телефони.</li>
-                                <li>Лесно и брзо преземање со неколку едноставни чекори.</li>
-                                <li>Вклучува права за користење, слободно споделувајте со пријателите.</li>
-                            </ul>
-                            <div>Преземете сега и почувствувајте ја разликата на вашиот телефон!</div>",
-                "topgirl"  => "<div>Додадете малку боја и уникатен стил на вашиот прекрасен телефон со оваа прекрасна колекција на позадини за телефони.</div>
-                                <ul>
-                                    <li>Резолуција: 1440x3360</li>
-                                    <li>Компатибилно со сите телефони.</li>
-                                </ul>
-                                <div>Преземете го веднаш и почувствувајте ја разликата на вашиот телефон!</div>",
-                "topanime"  => "<div>Додадете малку боја и уникатен стил на вашиот прекрасен телефон со оваа прекрасна колекција на позадини за телефони.</div>
-                                <ul>
-                                    <li>Резолуција: 1440x3360</li>
-                                    <li>Компатибилно со сите телефони.</li>
-                                </ul>
-                                <div>Преземете го веднаш и почувствувајте ја разликата на вашиот телефон!</div>",
-            ],
-            "wallpaper_by_themes" => [
-                "name"  => "Позадини за телефон по тема",
-                "topgirl"  => "Слики на убави девојки по тема",
-                "topanime"  => "Слики на аниме по тема",
-            ],
-            "wallpaper_by_styles" => [
-                "name"  => "Позадини за телефон по стил",
-                "topgirl"  => "Слики на убави девојки по стил",
-                "topanime"  => "Слики на аниме по стил",
-            ],
-            "wallpaper_by_events" => [
-                "name"  => "Позадини за телефон по настани",
-                "topgirl"  => "Слики на убави девојки по настани",
-                "topanime"  => "Слики на аниме по настани",
-            ],
-            "list_type_search" => [
-                'name' => [
-                    'category_info' => 'Категорија',
-                    'paid_wallpaper' => 'Платени позадини',
-                    'free_wallpaper' => 'Бесплатни позадини',
-                    'article' => 'Членови',
-                ],
-                'topgirl' => [
-                    'category_info' => 'Категорија',
-                    'paid_wallpaper' => 'Платени позадини',
-                    'free_wallpaper' => 'Бесплатни позадини',
-                    'article' => 'Членови',
-                ],
-                'topanime' => [
-                    'category_info' => 'Категорија',
-                    'paid_wallpaper' => 'Платени позадини',
-                    'free_wallpaper' => 'Бесплатни позадини',
-                    'article' => 'Членови',
-                ],
-            ],
-            "copyright" => [
-                "name"  => "Авторски права ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Дизајн и развој од Phạm Văn Phú. Сите права се задржани.",
-            ]
         ],
     ],
 

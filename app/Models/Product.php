@@ -45,6 +45,24 @@ class Product extends Model {
         return $result;
     }
 
+    public static function listLanguageNotExists($params = null){
+        $countLanguage  = count(config('language'));
+        $result         = self::select('*')
+                            /* chỉ lấy sản phẩm gốc */
+                            ->whereHas('seo', function($query){
+                                $query->whereNull('link_canonical')  // Giá trị NULL
+                                    ->orWhere('link_canonical', '') // Chuỗi rỗng
+                                    ->orWhere('link_canonical', 'IS NOT DEFINED') // Trường hợp không có giá trị, nếu cần
+                                    ->orWhere('link_canonical', '0');
+                            })
+                            ->with('seo', 'seos')
+                            ->withCount('seos') // Đếm số lượng `seos` cho mỗi phần tử
+                            ->orderBy('created_at', 'DESC')
+                            ->having('seos_count', '<', $countLanguage) // Lọc các phần tử có `seos_count` < tổng ngôn ngữ
+                            ->paginate($params['paginate']);
+        return $result;
+    }
+
     public static function insertItem($params){
         $id             = 0;
         if(!empty($params)){

@@ -57,7 +57,7 @@ return [
                 ],
                 [
                     'name'  => '3. Ngôn ngữ',
-                    'route' => '',
+                    'route' => 'admin.product.listLanguageNotExists',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
             ]

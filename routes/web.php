@@ -125,6 +125,7 @@ Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-t
     /* product */
     Route::prefix('product')->group(function(){
         Route::get('/list', [ProductController::class, 'list'])->name('admin.product.list');
+        Route::get('/listLanguageNotExists', [ProductController::class, 'listLanguageNotExists'])->name('admin.product.listLanguageNotExists');
         Route::get('/view', [ProductController::class, 'view'])->name('admin.product.view');
         Route::post('/createAndUpdate', [ProductController::class, 'createAndUpdate'])->name('admin.product.createAndUpdate');
         // Route::post('/create', [ProductController::class, 'create'])->name('admin.product.create');
