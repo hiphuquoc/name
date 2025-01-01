@@ -8853,7 +8853,7 @@ return [
         "key" => "mn",
         "latin" => false,
         "flag_join_left_to_right" => true,
-        "flag_has_space_in_content" => false,
+        "flag_has_space_in_content" => true,
         "dir" => "ltr",
         "slug_page_premium_wallpaper" => "гар-утасны-ханын-зураг",
         "data" => [
