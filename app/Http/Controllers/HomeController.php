@@ -17,6 +17,9 @@ use App\Models\Product;
 use GeoIp2\Database\Reader;
 use Illuminate\Support\Facades\Session;
 use App\Models\RelationSeoProductInfo;
+use App\Models\RelationSeoCategoryInfo;
+use App\Models\RelationSeoTagInfo;
+use App\Models\RelationSeoPageInfo;
 use App\Models\Timezone;
 use App\Jobs\Tmp;
 
@@ -56,8 +59,8 @@ class HomeController extends Controller {
             /* lấy item seo theo ngôn ngữ được chọn */
             $itemSeo            = [];
             if (!empty($item->seos)) {
-                foreach ($item->seos as $s) {
-                    if ($seo->infoSeo->language == $language) {
+                foreach ($item->seos as $seo) {
+                    if (!empty($seo->infoSeo->language) && $seo->infoSeo->language==$language) {
                         $itemSeo = $seo->infoSeo;
                         break;
                     }
@@ -76,6 +79,50 @@ class HomeController extends Controller {
     public static function test(Request $request){
 
         
+        // $configLanguage  = config('language');
+        // $languages  = [];
+        // foreach($configLanguage as $key => $c) {
+        //     $languages[] = $key;
+        // };
+
+        // $seoALl = Seo::all();
+
+        // foreach($seoALl as $seo){
+        //     if(!in_array($seo->language, $languages)){
+        //         switch ($seo->type) {
+        //             case 'product_info':
+        //                 RelationSeoProductInfo::select('*')
+        //                     ->where('seo_id', $seo->id)
+        //                     ->delete();
+        //                 break;
+        //             case 'category_info' || 'style_info' || 'event_info':
+        //                 RelationSeoCategoryInfo::select('*')
+        //                     ->where('seo_id', $seo->id)
+        //                     ->delete();
+        //                 break;
+        //             case 'page_info':
+        //                 RelationSeoPageInfo::select('*')
+        //                     ->where('seo_id', $seo->id)
+        //                     ->delete();
+        //                 break;
+        //             case 'tag_info':
+        //                 RelationSeoTagInfo::select('*')
+        //                     ->where('seo_id', $seo->id)
+        //                     ->delete();
+        //                 break;
+                    
+        //             default:
+        //                 # code...
+        //                 break;
+        //         }
+        //         Seo::select('*')
+        //             ->where('id', $seo->id)
+        //             ->delete();
+        //     }
+        // }
+
+        // dd(123);
+
         Tmp::dispatch();
         
     }

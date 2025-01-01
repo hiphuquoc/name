@@ -34,46 +34,46 @@ class Tmp implements ShouldQueue {
     public function handle(){
         try {
             $configLanguage  = config('language');
-        $languages  = [];
-        foreach($configLanguage as $key => $c) {
-            $languages[] = $key;
-        }
+            $languages  = [];
+            foreach($configLanguage as $key => $c) {
+                $languages[] = $key;
+            };
 
-        $pages  = Tag::select('*')
-                    ->get();
-        foreach($pages as $page){
-            foreach($page->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
-                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
-                    $seo->infoSeo()->delete();
-                    $seo->delete();
+            $seoALl = Seo::all();
+
+            foreach($seoALl as $seo){
+                if(!in_array($seo->language, $languages)){
+                    switch ($seo->type) {
+                        case 'product_info':
+                            RelationSeoProductInfo::select('*')
+                                ->where('seo_id', $seo->id)
+                                ->delete();
+                            break;
+                        case 'category_info' || 'style_info' || 'event_info':
+                            RelationSeoCategoryInfo::select('*')
+                                ->where('seo_id', $seo->id)
+                                ->delete();
+                            break;
+                        case 'page_info':
+                            RelationSeoPageInfo::select('*')
+                                ->where('seo_id', $seo->id)
+                                ->delete();
+                            break;
+                        case 'tag_info':
+                            RelationSeoTagInfo::select('*')
+                                ->where('seo_id', $seo->id)
+                                ->delete();
+                            break;
+                        
+                        default:
+                            # code...
+                            break;
+                    }
+                    Seo::select('*')
+                        ->where('id', $seo->id)
+                        ->delete();
                 }
             }
-        }
-
-        $pages  = Page::select('*')
-                    ->get();
-        foreach($pages as $page){
-            foreach($page->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
-                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
-                    $seo->infoSeo()->delete();
-                    $seo->delete();
-                }
-            }
-        }
-
-        $pages  = Category::select('*')
-                    ->get();
-        foreach($pages as $page){
-            foreach($page->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $languages)){
-                    if(!empty($seo->infoSeo->contents)) foreach($seo->infoSeo->contents as $c) $c->delete();
-                    $seo->infoSeo()->delete();
-                    $seo->delete();
-                }
-            }
-        }
 
         } catch (\Exception $e) {
             throw $e; // Đẩy lại lỗi để Laravel tự động thử lại

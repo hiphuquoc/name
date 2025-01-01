@@ -30,7 +30,7 @@ class CartController extends Controller{
         $itemSeo            = [];
         if(!empty($item->seos)){
             foreach($item->seos as $s){
-                if($s->infoSeo->language==$language) {
+                if(!empty($s->infoSeo->language) && $s->infoSeo->language==$language) {
                     $itemSeo = $s->infoSeo;
                     break;
                 }
