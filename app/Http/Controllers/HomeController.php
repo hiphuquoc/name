@@ -9,6 +9,7 @@ use App\Models\Page;
 use App\Models\Category;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\HelperController;
+use App\Http\Controllers\Admin\TranslateController;
 use App\Models\ISO3166;
 use App\Models\Tag;
 use App\Models\Seo;
@@ -78,16 +79,20 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        $info = Category::select('*')
-                    ->whereHas('seo', function($query){
-                        $query->where('slug', 'hinh-nen-dien-thoai-mien-phi');
-                    })
-                    ->with('seo', 'seos')
-                    ->first();
-        foreach($info->seos as $seo){
-            if(!empty($seo->infoSeo->slug)) echo "'".$seo->infoSeo->slug."', ";
-        }
-        dd(123);
+        $categories = Category::select('*')
+                        ->with('seo', 'seos')
+                        ->get();
+        foreach($categories as $infoC) TranslateController::createJobTranslateAndCreatePage($infoC);
+
+        $tags       = Tag::select('*')
+                        ->with('seo', 'seos')
+                        ->get();
+        foreach($tags as $infoT) TranslateController::createJobTranslateAndCreatePage($infoT);
+
+        $products   = Product::select('*')
+                        ->with('seo', 'seos')
+                        ->get();
+        foreach($products as $infoP) TranslateController::createJobTranslateAndCreatePage($infoP);
         
     }
 
