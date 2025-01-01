@@ -8855,7 +8855,7 @@ return [
         "flag_join_left_to_right" => true,
         "flag_has_space_in_content" => true,
         "dir" => "ltr",
-        "slug_page_premium_wallpaper" => "гар-утасны-ханын-зураг",
+        "slug_page_premium_wallpaper" => "утасны-ханын-зураг",
         "data" => [
             "home"              => "Нүүр хуудас",
             "about_us"          => "Бидний тухай",

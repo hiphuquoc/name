@@ -78,52 +78,16 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        
-        // $configLanguage  = config('language');
-        // $languages  = [];
-        // foreach($configLanguage as $key => $c) {
-        //     $languages[] = $key;
-        // };
-
-        // $seoALl = Seo::all();
-
-        // foreach($seoALl as $seo){
-        //     if(!in_array($seo->language, $languages)){
-        //         switch ($seo->type) {
-        //             case 'product_info':
-        //                 RelationSeoProductInfo::select('*')
-        //                     ->where('seo_id', $seo->id)
-        //                     ->delete();
-        //                 break;
-        //             case 'category_info' || 'style_info' || 'event_info':
-        //                 RelationSeoCategoryInfo::select('*')
-        //                     ->where('seo_id', $seo->id)
-        //                     ->delete();
-        //                 break;
-        //             case 'page_info':
-        //                 RelationSeoPageInfo::select('*')
-        //                     ->where('seo_id', $seo->id)
-        //                     ->delete();
-        //                 break;
-        //             case 'tag_info':
-        //                 RelationSeoTagInfo::select('*')
-        //                     ->where('seo_id', $seo->id)
-        //                     ->delete();
-        //                 break;
-                    
-        //             default:
-        //                 # code...
-        //                 break;
-        //         }
-        //         Seo::select('*')
-        //             ->where('id', $seo->id)
-        //             ->delete();
-        //     }
-        // }
-
-        // dd(123);
-
-        Tmp::dispatch();
+        $info = Category::select('*')
+                    ->whereHas('seo', function($query){
+                        $query->where('slug', 'hinh-nen-dien-thoai-mien-phi');
+                    })
+                    ->with('seo', 'seos')
+                    ->first();
+        foreach($info->seos as $seo){
+            if(!empty($seo->infoSeo->slug)) echo "'".$seo->infoSeo->slug."', ";
+        }
+        dd(123);
         
     }
 
