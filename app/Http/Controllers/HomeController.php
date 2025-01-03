@@ -80,20 +80,20 @@ class HomeController extends Controller {
     public static function test(Request $request){
 
         // tạo ngôn ngữ còn thiếu hàng loạt 
-        // $categories = Category::select('*')
-        //                 ->with('seo', 'seos')
-        //                 ->get();
-        // foreach($categories as $infoC) TranslateController::createJobTranslateAndCreatePage($infoC);
+        $categories = Category::select('*')
+                        ->with('seo', 'seos')
+                        ->get();
+        foreach($categories as $infoC) TranslateController::createJobTranslateAndCreatePage($infoC);
 
-        // $tags       = Tag::select('*')
-        //                 ->with('seo', 'seos')
-        //                 ->get();
-        // foreach($tags as $infoT) TranslateController::createJobTranslateAndCreatePage($infoT);
+        $tags       = Tag::select('*')
+                        ->with('seo', 'seos')
+                        ->get();
+        foreach($tags as $infoT) TranslateController::createJobTranslateAndCreatePage($infoT);
 
-        // $products   = Product::select('*')
-        //                 ->with('seo', 'seos')
-        //                 ->get();
-        // foreach($products as $infoP) TranslateController::createJobTranslateAndCreatePage($infoP);
+        $products   = Product::select('*')
+                        ->with('seo', 'seos')
+                        ->get();
+        foreach($products as $infoP) TranslateController::createJobTranslateAndCreatePage($infoP);
         
     }
 
