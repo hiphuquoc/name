@@ -18,8 +18,8 @@
 <!-- Tối ưu hóa việc tải ảnh từ Google Cloud Storage -->
 <link rel="preconnect" href="https://namecomvn.storage.googleapis.com" crossorigin>
 <link rel="dns-prefetch" href="https://namecomvn.storage.googleapis.com">
-<link rel="preconnect" href="https://images.dmca.com">
-<link rel="dns-prefetch" href="https://images.dmca.com">
+{{-- <link rel="preconnect" href="https://images.dmca.com">
+<link rel="dns-prefetch" href="https://images.dmca.com"> --}}
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <!-- Favicon -->
@@ -36,7 +36,7 @@
 @if(env('APP_ENV')=='local')
     <!-- tải font nếu dev -->
     <style type="text/css">
-        @font-face {
+        /* @font-face {
             font-family: 'Segoe-UI';
             font-style: normal;
             font-weight: 500;

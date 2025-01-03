@@ -328,13 +328,10 @@
             </a> --}}
         </div>
     </div>
-    <div class="socialBox_dmca">
-        <a href="https://www.dmca.com/Protection/Status.aspx?ID={{ env('DMCA_ID') }}" 
-           title="DMCA.com Protection Status" class="dmca-badge"> 
-            <img src="https://images.dmca.com/Badges/dmca-badge-w100-2x1-02.png?ID={{ env('DMCA_ID') }}" alt="DMCA.com Protection Status" loading="lazy" />
-        </a>
-        <script async src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
-    </div>
+    
+    <!-- DMCA -->
+    @include('wallpaper.template.dmca')
+
 </div>
 
 <div class="closeButtonMobileMenu show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
