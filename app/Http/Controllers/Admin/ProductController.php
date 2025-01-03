@@ -61,13 +61,6 @@ class ProductController extends Controller {
             if(!empty($idSeo)){
                 /* insert seo_content */
                 if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
-                /* insert hoặc update product_info */
-                $infoProduct    = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
-                if(empty($idProduct)){ /* check xem create product hay update product */
-                    $idProduct      = Product::insertItem($infoProduct);
-                }else {
-                    Product::updateItem($idProduct, $infoProduct);
-                }
                 /* relation_seo_product_info */
                 $relationSeoCategoryInfo = RelationSeoProductInfo::select('*')
                                         ->where('seo_id', $idSeo)
@@ -79,6 +72,13 @@ class ProductController extends Controller {
                 ]);
                 /* nếu là bảng việt (gốc) mới cập nhật tiếp */
                 if($language=='vi'){
+                    /* insert hoặc update product_info */
+                    $infoProduct    = $this->BuildInsertUpdateModel->buildArrayTableProductInfo($request->all(), $idSeo);
+                    if(empty($idProduct)){ /* check xem create product hay update product */
+                        $idProduct      = Product::insertItem($infoProduct);
+                    }else {
+                        Product::updateItem($idProduct, $infoProduct);
+                    }
                     /* lưu tag name */
                     if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idProduct, 'product_info', $request->get('tag'));
                     /* update product_price 

@@ -36,30 +36,6 @@
 @if(env('APP_ENV')=='local')
     <!-- tải font nếu dev -->
     <style type="text/css">
-        /* @font-face {
-            font-family: 'Segoe-UI';
-            font-style: normal;
-            font-weight: 500;
-            src: url('/fonts/SegoeUI.ttf');
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'Segoe-UI Semi';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: url('/fonts/SegoeUI-SemiBold.ttf');
-        }
-
-        @font-face {
-            font-family: 'Segoe-UI Bold';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: url('/fonts/SegoeUI-Bold.ttf');
-        } */
-
         @font-face {
             font-family: 'SVN-Gilroy';
             font-style: normal;
