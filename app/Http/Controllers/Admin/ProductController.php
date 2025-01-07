@@ -22,9 +22,8 @@ use App\Models\Prompt;
 use App\Models\SeoContent;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\IndexController;
-// use App\Http\Controllers\Admin\GalleryController;
-// use App\Http\Controllers\Admin\SourceController;
 use App\Models\RelationProductPriceWallpaperInfo;
+use App\Jobs\CopyMultiProductJob;
 
 class ProductController extends Controller {
 
@@ -320,10 +319,11 @@ class ProductController extends Controller {
                         })
                         ->with('seo', 'seos')
                         ->get();
-            $response   = self::copyMultiProduct($productSource, $products);
+            // $response   = self::copyMultiProduct($productSource, $products);
+            $response       = CopyMultiProductJob::dispatch($productSource, $products);
             $message        = [
                 'type'      => 'success',
-                'message'   => 'Đã Copy thành công '.count($response).' Url Sản Phẩm (bao gồm đa ngôn ngữ)',
+                'message'   => 'Đã gửi yêu cầu Copy sang trang con thành công! (Job chạy ngầm)',
             ];
             $request->session()->put('message', $message);
         }
