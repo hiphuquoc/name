@@ -23,6 +23,7 @@ use App\Models\RelationSeoTagInfo;
 use App\Models\RelationSeoPageInfo;
 use App\Models\Timezone;
 use App\Jobs\Tmp;
+use GuzzleHttp\Client;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendProductMail;
@@ -79,21 +80,53 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
-        // tạo ngôn ngữ còn thiếu hàng loạt 
-        $categories = Category::select('*')
-                        ->with('seo', 'seos')
-                        ->get();
-        foreach($categories as $infoC) TranslateController::createJobTranslateAndCreatePage($infoC);
+        // Cấu hình Guzzle client
+        $client = new Client();
 
-        $tags       = Tag::select('*')
-                        ->with('seo', 'seos')
-                        ->get();
-        foreach($tags as $infoT) TranslateController::createJobTranslateAndCreatePage($infoT);
+        // Lấy API key từ .env
+        $apiKey = env('CLAUDE_AI_API_KEY');
 
-        $products   = Product::select('*')
-                        ->with('seo', 'seos')
-                        ->get();
-        foreach($products as $infoP) TranslateController::createJobTranslateAndCreatePage($infoP);
+        // Dữ liệu bạn muốn gửi đến Claude AI API
+        $data = [
+            'model' => 'claude-3-5-sonnet-20241022',
+            'max_tokens' => 1024,
+            'messages' => [
+                ['role' => 'user', 'content' => '1 + 1 bằng mấy'], 
+            ],
+        ];
+
+        // Gửi yêu cầu POST đến Claude AI API
+        $response = $client->post('https://api.anthropic.com/v1/messages', [
+            'headers' => [
+                'x-api-key' => $apiKey,
+                'anthropic-version' => '2023-06-01',
+                'content-type' => 'application/json',
+            ],
+            'json' => $data,
+        ]);
+
+        // Trả về kết quả từ API dưới dạng JSON
+        $result = response()->json(json_decode($response->getBody()->getContents(), true));
+
+        dd($result);
+
+        // try {
+        //     // Gửi yêu cầu POST đến Claude AI API
+        //     $response = $client->post('https://api.anthropic.com/v1/messages', [
+        //         'headers' => [
+        //             'x-api-key' => $apiKey,
+        //             'anthropic-version' => '2023-06-01',
+        //             'content-type' => 'application/json',
+        //         ],
+        //         'json' => $data,
+        //     ]);
+
+        //     // Trả về kết quả từ API dưới dạng JSON
+        //     return response()->json(json_decode($response->getBody()->getContents(), true));
+        // } catch (\Exception $e) {
+        //     // Xử lý lỗi nếu có
+        //     return response()->json(['error' => $e->getMessage()]);
+        // }
         
     }
 

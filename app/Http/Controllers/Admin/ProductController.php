@@ -369,7 +369,7 @@ class ProductController extends Controller {
         }
     }
 
-    public static function copyMultiProduct($infoProductSource, $arrayInfoProduct){
+    public static function copyMultiProduct($infoProductSource, $arrayInfoProduct){ /* đã chuyển ra job và đang không dùng */
         $response   = []; /* trả ra array id đã xử lý */
         try {
             DB::beginTransaction();

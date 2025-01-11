@@ -16,7 +16,7 @@ use App\Models\Prompt;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\CategoryBlog;
-use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Jobs\AutoTranslateAndCreatePage;
 use App\Models\RelationEnCategoryInfoEnCategoryBlogInfo;
@@ -156,7 +156,7 @@ class TranslateController extends Controller {
                         'language'  => $language
                     ]);
                     /* lấy prompt đang được áp dụng cho content */
-                    $type       = $infoPage->seo->type;
+                    $type       = HelperController::determinePageType($infoPage->seo->type);
                     $infoPrompt = Prompt::select('*')
                                     ->where('reference_name', 'content')
                                     ->where('type', 'translate_content')
