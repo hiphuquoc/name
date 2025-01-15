@@ -110,72 +110,71 @@ class SeoFreeWallpaperController extends Controller {
             DB::beginTransaction();
             /* ngôn ngữ */
             $keyTable           = 'free_wallpaper_info';
-            $idSeo              = $request->get('seo_id');
+            $idSeo              = $request->get('seo_id') ?? 0;
             $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idFreeWallpaper    = $request->get('free_wallpaper_info_id');
             $language           = $request->get('language');
             $type               = $request->get('type');
             /* check xem là create seo hay update seo */
             $action             = !empty($idSeo)&&$type=='edit' ? 'edit' : 'create';
-            /* update page */
+            /* update page & content */
             $tmp                = FreeWallpaper::find($idFreeWallpaper);
             $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $tmp->file_cloud);
             if($action=='edit'){
+                /* insert seo_content => ghi chú quan trọng: vì trong update Item có tính năng replace url thay đổi trong content, nên bắt buộc phải cập nhật content trước để cố định dữ liệu */
+                if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
+                /* update seo */
                 Seo::updateItem($idSeo, $seo);
             }else {
                 $idSeo = Seo::insertItem($seo, $idSeoVI);
-            }
-            /* kiểm tra insert thành công không */
-            if(!empty($idSeo)){
-                /* xử lý riêng cho bảng việt (gốc) */
-                if($language=='vi'){
-                    /* lưu categories */
-                    FreeWallpaperController::saveCategories($idFreeWallpaper, $request->all());
-                    /* lưu tag name */
-                    if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idFreeWallpaper, 'free_wallpaper_info', $request->get('tag'));
-                    /* chỉ có update free_wallpaper_info => vì trong controller này bên ngoài không có tạo */
-                    FreeWallpaper::updateItem($idFreeWallpaper, [
-                        'seo_id'                    => $idSeo
-                    ]);
-                }
-
-                /* relation_seo_free_wallpaper_info */
-                $relationSeoTagInfo = RelationSeoFreeWallpaperInfo::select('*')
-                                        ->where('seo_id', $idSeo)
-                                        ->where('free_wallpaper_info_id', $idFreeWallpaper)
-                                        ->first();
-                if(empty($relationSeoTagInfo)) RelationSeoFreeWallpaperInfo::insertItem([
-                    'seo_id'        => $idSeo,
-                    'free_wallpaper_info_id'   => $idFreeWallpaper
-                ]);
-                /* relation_category_thumnail (lấy free_wallpaper làm ảnh đại diện category) */
-                RelationCategoryThumnail::select('*')
-                    ->where('free_wallpaper_info_id', $idFreeWallpaper)
-                    ->delete();
-                if(!empty($request->get('thumnails'))){
-                    foreach($request->get('thumnails') as $thumnail){
-                        RelationCategoryThumnail::insertItem([
-                            'free_wallpaper_info_id'    => $idFreeWallpaper,
-                            'category_info_id'          => $thumnail,
-                        ]);
-                    }
-                }
                 /* insert seo_content */
                 if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
-                DB::commit();
-                /* Message */
-                $message        = [
-                    'type'      => 'success',
-                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Hình ảnh!'
-                ];
-                /* nếu có tùy chọn index => gửi google index */
-                if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
-                    $flagIndex = IndexController::indexUrl($idSeo);
-                    if($flagIndex==200){
-                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Hình ảnh và Báo Google Index!';
-                    }else {
-                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Hình ảnh! <span style="color:red;">nhưng báo Google Index lỗi</span>';
-                    }
+            }
+            /* update những phần khác */
+            if($language=='vi'){
+                /* lưu categories */
+                FreeWallpaperController::saveCategories($idFreeWallpaper, $request->all());
+                /* lưu tag name */
+                if(!empty($request->get('tag'))) FreeWallpaperController::createOrGetTagName($idFreeWallpaper, 'free_wallpaper_info', $request->get('tag'));
+                /* chỉ có update free_wallpaper_info => vì trong controller này bên ngoài không có tạo */
+                FreeWallpaper::updateItem($idFreeWallpaper, [
+                    'seo_id'                    => $idSeo
+                ]);
+            }
+            /* relation_seo_free_wallpaper_info */
+            $relationSeoTagInfo = RelationSeoFreeWallpaperInfo::select('*')
+                                    ->where('seo_id', $idSeo)
+                                    ->where('free_wallpaper_info_id', $idFreeWallpaper)
+                                    ->first();
+            if(empty($relationSeoTagInfo)) RelationSeoFreeWallpaperInfo::insertItem([
+                'seo_id'        => $idSeo,
+                'free_wallpaper_info_id'   => $idFreeWallpaper
+            ]);
+            /* relation_category_thumnail (lấy free_wallpaper làm ảnh đại diện category) */
+            RelationCategoryThumnail::select('*')
+                ->where('free_wallpaper_info_id', $idFreeWallpaper)
+                ->delete();
+            if(!empty($request->get('thumnails'))){
+                foreach($request->get('thumnails') as $thumnail){
+                    RelationCategoryThumnail::insertItem([
+                        'free_wallpaper_info_id'    => $idFreeWallpaper,
+                        'category_info_id'          => $thumnail,
+                    ]);
+                }
+            }
+            DB::commit();
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Đã cập nhật Hình ảnh!'
+            ];
+            /* nếu có tùy chọn index => gửi google index */
+            if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
+                $flagIndex = IndexController::indexUrl($idSeo);
+                if($flagIndex==200){
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Hình ảnh và Báo Google Index!';
+                }else {
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Hình ảnh! <span style="color:red;">nhưng báo Google Index lỗi</span>';
                 }
             }
         } catch (\Exception $exception){

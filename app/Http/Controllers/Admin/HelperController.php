@@ -185,4 +185,9 @@ class HelperController extends Controller {
             $request->session()->put('message', $message);
         }
     }
+
+    /* Chuẩn hóa Unicode: Sử dụng Normalizer của PHP (có sẵn trong phần mở rộng intl) để chuẩn hóa chuỗi đầu vào. Điều này đảm bảo các ký tự có dấu được so sánh một cách chính xác. */
+    public static function normalizeUnicode($string) {
+        return \Normalizer::normalize($string, \Normalizer::FORM_C);
+    }
 }

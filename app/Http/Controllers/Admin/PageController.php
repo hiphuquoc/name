@@ -31,7 +31,7 @@ class PageController extends Controller {
             DB::beginTransaction();           
             /* ngôn ngữ */
             $keyTable           = 'page_info';
-            $idSeo              = $request->get('seo_id');
+            $idSeo              = $request->get('seo_id') ?? 0;
             $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idPage             = $request->get('page_info_id');
             $language           = $request->get('language');
@@ -46,58 +46,59 @@ class PageController extends Controller {
                 $folderUpload   =  config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers');
                 $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
-            /* update page */
+            /* update page & content */
             $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $keyTable, $dataPath);
             if($action=='edit'){
+                /* insert seo_content => ghi chú quan trọng: vì trong update Item có tính năng replace url thay đổi trong content, nên bắt buộc phải cập nhật content trước để cố định dữ liệu */
+                if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
+                /* update seo */
                 Seo::updateItem($idSeo, $seo);
             }else {
                 $idSeo = Seo::insertItem($seo, $idSeoVI);
-            }
-            /* kiểm tra insert thành công không */
-            if(!empty($idSeo)){
-                if($language=='vi'){
-                    /* insert hoặc update page_info */
-                    $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
-                    if(empty($idPage)){ /* check xem create page hay update page */
-                        $idPage          = Page::insertItem([
-                            'type_id'       => $request->get('type_id'),
-                            'show_sidebar'  => $showSidebar,
-                            'seo_id'        => $idSeo,
-                        ]);
-                    }else {
-                        Page::updateItem($idPage, [
-                            'type_id'       => $request->get('type_id'),
-                            'show_sidebar'  => $showSidebar
-                        ]);
-                    }
-                }
-
-                /* relation_seo_page_info */
-                $relationSeoTagInfo = RelationSeoPageInfo::select('*')
-                                        ->where('seo_id', $idSeo)
-                                        ->where('page_info_id', $idPage)
-                                        ->first();
-                if(empty($relationSeoTagInfo)) RelationSeoPageInfo::insertItem([
-                    'seo_id'        => $idSeo,
-                    'page_info_id'   => $idPage
-                ]);
                 /* insert seo_content */
                 if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
-                
-                DB::commit();
-                /* Message */
-                $message        = [
-                    'type'      => 'success',
-                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Trang!'
-                ];
-                /* nếu có tùy chọn index => gửi google index */
-                if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
-                    $flagIndex = IndexController::indexUrl($idSeo);
-                    if($flagIndex==200){
-                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang và Báo Google Index!';
-                    }else {
-                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang! <span style="color:red;">nhưng báo Google Index lỗi</span>';
-                    }
+            }
+            /* update những phần khác */
+            if($language=='vi'){
+                /* insert hoặc update page_info */
+                $showSidebar        = !empty($request->get('show_sidebar'))&&$request->get('show_sidebar')=='on' ? 1 : 0;
+                if(empty($idPage)){ /* check xem create page hay update page */
+                    $idPage          = Page::insertItem([
+                        'type_id'       => $request->get('type_id'),
+                        'show_sidebar'  => $showSidebar,
+                        'seo_id'        => $idSeo,
+                    ]);
+                }else {
+                    Page::updateItem($idPage, [
+                        'type_id'       => $request->get('type_id'),
+                        'show_sidebar'  => $showSidebar
+                    ]);
+                }
+            }
+
+            /* relation_seo_page_info */
+            $relationSeoTagInfo = RelationSeoPageInfo::select('*')
+                                    ->where('seo_id', $idSeo)
+                                    ->where('page_info_id', $idPage)
+                                    ->first();
+            if(empty($relationSeoTagInfo)) RelationSeoPageInfo::insertItem([
+                'seo_id'        => $idSeo,
+                'page_info_id'   => $idPage
+            ]);
+            
+            DB::commit();
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Đã cập nhật Trang!'
+            ];
+            /* nếu có tùy chọn index => gửi google index */
+            if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
+                $flagIndex = IndexController::indexUrl($idSeo);
+                if($flagIndex==200){
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang và Báo Google Index!';
+                }else {
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Trang! <span style="color:red;">nhưng báo Google Index lỗi</span>';
                 }
             }
         } catch (\Exception $exception){

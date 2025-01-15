@@ -80,6 +80,29 @@ class HomeController extends Controller {
 
     public static function test(Request $request){
 
+        // $baseUrl        = env('APP_URL');
+        // $slugOld        = 'telefon-hatterkepek/telefon-hatterkepek-pokvirag';
+
+        // $contentsMatch = SeoContent::whereRaw('content REGEXP ?', [
+        //     'href=["\']' . preg_quote($baseUrl . '/' . HelperController::normalizeUnicode($slugOld), '/') . '(\?.*)?["\']'
+        // ])
+        // ->orWhereRaw('content REGEXP ?', [
+        //     'href=["\']\.\./\.\./' . preg_quote(HelperController::normalizeUnicode($slugOld), '/') . '(\?.*)?["\']'
+        // ])
+        // ->get();
+
+
+
+        // dd($contentsMatch);
+        
+    }
+
+    private static function normalizeUnicode($string) {
+        return \Normalizer::normalize($string, \Normalizer::FORM_C);
+    }
+
+    public static function callAPIClaudeAI(Request $request){
+
         // Cấu hình Guzzle client
         $client = new Client();
 
@@ -109,24 +132,6 @@ class HomeController extends Controller {
         $result = response()->json(json_decode($response->getBody()->getContents(), true));
 
         dd($result);
-
-        // try {
-        //     // Gửi yêu cầu POST đến Claude AI API
-        //     $response = $client->post('https://api.anthropic.com/v1/messages', [
-        //         'headers' => [
-        //             'x-api-key' => $apiKey,
-        //             'anthropic-version' => '2023-06-01',
-        //             'content-type' => 'application/json',
-        //         ],
-        //         'json' => $data,
-        //     ]);
-
-        //     // Trả về kết quả từ API dưới dạng JSON
-        //     return response()->json(json_decode($response->getBody()->getContents(), true));
-        // } catch (\Exception $e) {
-        //     // Xử lý lỗi nếu có
-        //     return response()->json(['error' => $e->getMessage()]);
-        // }
         
     }
 

@@ -92,9 +92,15 @@ class Seo extends Model {
 
     public static function replaceInternalLinksInSeoContents($slugOld, $slugNew){
         $baseUrl        = env('APP_URL');
-        $contentsMatch  = SeoContent::whereRaw('content REGEXP ?', ['href=["\']' . preg_quote($baseUrl . '/' . $slugOld, '/') . '(\?.*)?["\']'])
-                            ->orWhereRaw('content REGEXP ?', ['href=["\']\.\./\.\./' . preg_quote($slugOld, '/') . '(\?.*)?["\']'])
-                            ->get();
+
+        $contentsMatch = SeoContent::whereRaw('content REGEXP ?', [
+            'href=["\']' . preg_quote($baseUrl . '/' . HelperController::normalizeUnicode($slugOld), '/') . '(\?.*)?["\']'
+        ])
+        ->orWhereRaw('content REGEXP ?', [
+            'href=["\']\.\./\.\./' . preg_quote(HelperController::normalizeUnicode($slugOld), '/') . '(\?.*)?["\']'
+        ])
+        ->get();
+
         // Xử lý từng bản ghi
         foreach ($contentsMatch as $content) {
             $content->content = self::replaceInternalLinks($slugOld, $slugNew, $content->content);

@@ -123,7 +123,7 @@ class BlogController extends Controller {
         try {
             DB::beginTransaction();
             /* ngôn ngữ */
-            $idSeo              = $request->get('seo_id');
+            $idSeo              = $request->get('seo_id') ?? 0;
             $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idBlog             = $request->get('blog_info_id');
             $language           = $request->get('language');
@@ -139,69 +139,70 @@ class BlogController extends Controller {
                 $folderUpload   =  config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers');
                 $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
-            /* update page */
+           /* update page & content */
             $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $categoryType, $dataPath);
             if($action=='edit'){
+                /* insert seo_content => ghi chú quan trọng: vì trong update Item có tính năng replace url thay đổi trong content, nên bắt buộc phải cập nhật content trước để cố định dữ liệu */
+                if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
+                /* update seo */
                 Seo::updateItem($idSeo, $seo);
             }else {
                 $idSeo = Seo::insertItem($seo, $idSeoVI);
-            }
-            /* kiểm tra insert thành công không */
-            if(!empty($idSeo)){
                 /* insert seo_content */
                 if(!empty($request->get('content'))) CategoryController::insertAndUpdateContents($idSeo, $request->get('content'));
-                if($language=='vi'){
-                    /* insert hoặc update blog_info */
-                    $status           = !empty($request->get('status'))&&$request->get('status')=='on' ? 1 : 0;
-                    $outstanding      = !empty($request->get('outstanding'))&&$request->get('outstanding')=='on' ? 1 : 0;
-                    if(empty($idBlog)){ /* check xem create category hay update category */
-                        $idBlog          = Blog::insertItem([
-                            'status'        => $status,
-                            'outstanding'   => $outstanding,
-                            'seo_id'        => $idSeo,
+            }
+            /* update những phần khác */
+            if($language=='vi'){
+                /* insert hoặc update blog_info */
+                $status           = !empty($request->get('status'))&&$request->get('status')=='on' ? 1 : 0;
+                $outstanding      = !empty($request->get('outstanding'))&&$request->get('outstanding')=='on' ? 1 : 0;
+                if(empty($idBlog)){ /* check xem create category hay update category */
+                    $idBlog          = Blog::insertItem([
+                        'status'        => $status,
+                        'outstanding'   => $outstanding,
+                        'seo_id'        => $idSeo,
+                    ]);
+                }else {
+                    Blog::updateItem($idBlog, [
+                        'status'        => $status,
+                        'outstanding'   => $outstanding,
+                    ]);
+                }
+                /* insert relation_category_blog_blog_info */
+                RelationCategoryBlogBlogInfo::select('*')
+                    ->where('blog_info_id', $idBlog)
+                    ->delete();
+                if(!empty($request->get('categories'))){
+                    foreach($request->get('categories') as $idCategoryBlog){
+                        RelationCategoryBlogBlogInfo::insertItem([
+                            'category_blog_id'  => $idCategoryBlog,
+                            'blog_info_id'      => $idBlog
                         ]);
-                    }else {
-                        Blog::updateItem($idBlog, [
-                            'status'        => $status,
-                            'outstanding'   => $outstanding,
-                        ]);
-                    }
-                    /* insert relation_category_blog_blog_info */
-                    RelationCategoryBlogBlogInfo::select('*')
-                        ->where('blog_info_id', $idBlog)
-                        ->delete();
-                    if(!empty($request->get('categories'))){
-                        foreach($request->get('categories') as $idCategoryBlog){
-                            RelationCategoryBlogBlogInfo::insertItem([
-                                'category_blog_id'  => $idCategoryBlog,
-                                'blog_info_id'      => $idBlog
-                            ]);
-                        }
                     }
                 }
-                /* relation_seo_blog_info */
-                $relationSeoBlogInfo = RelationSeoBlogInfo::select('*')
-                                        ->where('seo_id', $idSeo)
-                                        ->where('blog_info_id', $idBlog)
-                                        ->first();
-                if(empty($relationSeoBlogInfo)) RelationSeoBlogInfo::insertItem([
-                    'seo_id'        => $idSeo,
-                    'blog_info_id'   => $idBlog
-                ]);
-                DB::commit();
-                /* Message */
-                $message        = [
-                    'type'      => 'success',
-                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Bài Viết!'
-                ];
-                /* nếu có tùy chọn index => gửi google index */
-                if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
-                    $flagIndex = IndexController::indexUrl($idSeo);
-                    if($flagIndex==200){
-                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Bài Viết và Báo Google Index!';
-                    }else {
-                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Bài Viết <span style="color:red;">nhưng báo Google Index lỗi</span>';
-                    }
+            }
+            /* relation_seo_blog_info */
+            $relationSeoBlogInfo = RelationSeoBlogInfo::select('*')
+                                    ->where('seo_id', $idSeo)
+                                    ->where('blog_info_id', $idBlog)
+                                    ->first();
+            if(empty($relationSeoBlogInfo)) RelationSeoBlogInfo::insertItem([
+                'seo_id'        => $idSeo,
+                'blog_info_id'   => $idBlog
+            ]);
+            DB::commit();
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Đã cập nhật Bài Viết!'
+            ];
+            /* nếu có tùy chọn index => gửi google index */
+            if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
+                $flagIndex = IndexController::indexUrl($idSeo);
+                if($flagIndex==200){
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Bài Viết và Báo Google Index!';
+                }else {
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Bài Viết <span style="color:red;">nhưng báo Google Index lỗi</span>';
                 }
             }
         } catch (\Exception $exception){

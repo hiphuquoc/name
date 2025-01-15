@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Redirect;
 
 class CheckRedirect {
     public function handle($request, Closure $next) {
-        $path = '/'.$request->path();
+        // Lấy đường dẫn và chuẩn hóa ký tự Unicode
+        $path = '/' . rawurldecode($request->path());
+
         // Tìm đường dẫn cũ trong cơ sở dữ liệu
-        $redirectInfo = RedirectInfo::where('old_url', $path)->first();
+        $redirectInfo = RedirectInfo::select('*')
+                            ->whereRaw('old_url COLLATE utf8mb4_bin = ?', [$path]) /* chỉ định so sánh dấu */
+                            ->first();
 
         if ($redirectInfo) {
             // Nếu tìm thấy, thực hiện redirect 301

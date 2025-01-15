@@ -131,7 +131,7 @@ class CategoryController extends Controller {
         try {
             DB::beginTransaction();
             /* ngôn ngữ */
-            $idSeo              = $request->get('seo_id');
+            $idSeo              = $request->get('seo_id') ?? 0;
             $idSeoVI            = $request->get('seo_id_vi') ?? 0;
             $idCategory         = $request->get('category_info_id');
             $language           = $request->get('language');
@@ -147,77 +147,79 @@ class CategoryController extends Controller {
                 $folderUpload   =  config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers');
                 $dataPath       = Upload::uploadWallpaper($request->file('image'), $fileName, $folderUpload);
             }
-            /* update page */
+            /* update page & content */
             $seo                = $this->BuildInsertUpdateModel->buildArrayTableSeo($request->all(), $categoryType, $dataPath);
             if($action=='edit'){
+                /* insert seo_content => ghi chú quan trọng: vì trong update Item có tính năng replace url thay đổi trong content, nên bắt buộc phải cập nhật content trước để cố định dữ liệu */
+                if(!empty($request->get('content'))) self::insertAndUpdateContents($idSeo, $request->get('content'));
+                /* update seo */
                 Seo::updateItem($idSeo, $seo);
             }else {
                 $idSeo = Seo::insertItem($seo, $idSeoVI);
+                /* insert seo_content */
+                if(!empty($request->get('content'))) self::insertAndUpdateContents($idSeo, $request->get('content'));
             }
-            /* kiểm tra insert thành công không */
-            if(!empty($idSeo)){
-                if($language=='vi'){
-                    /* insert hoặc update category_info */
-                    $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
-                    if(empty($idCategory)){ /* check xem create category hay update category */
-                        $idCategory          = Category::insertItem([
-                            'flag_show'     => $flagShow,
-                            'seo_id'        => $idSeo,
+            /* update những phần khác */
+            if($language=='vi'){
+                /* insert hoặc update category_info */
+                $flagShow           = !empty($request->get('flag_show'))&&$request->get('flag_show')=='on' ? 1 : 0;
+                if(empty($idCategory)){ /* check xem create category hay update category */
+                    $idCategory          = Category::insertItem([
+                        'flag_show'     => $flagShow,
+                        'seo_id'        => $idSeo,
+                    ]);
+                }else {
+                    Category::updateItem($idCategory, [
+                        'flag_show'     => $flagShow,
+                    ]);
+                }
+                /* insert relation_category_info_tag_info */
+                RelationCategoryInfoTagInfo::select('*')
+                    ->where('category_info_id', $idCategory)
+                    ->delete();
+                if(!empty($request->get('tags'))){
+                    foreach($request->get('tags') as $idTagInfo){
+                        RelationCategoryInfoTagInfo::insertItem([
+                            'category_info_id'      => $idCategory,
+                            'tag_info_id' => $idTagInfo
                         ]);
-                    }else {
-                        Category::updateItem($idCategory, [
-                            'flag_show'     => $flagShow,
-                        ]);
-                    }
-                    /* insert relation_category_info_tag_info */
-                    RelationCategoryInfoTagInfo::select('*')
-                        ->where('category_info_id', $idCategory)
-                        ->delete();
-                    if(!empty($request->get('tags'))){
-                        foreach($request->get('tags') as $idTagInfo){
-                            RelationCategoryInfoTagInfo::insertItem([
-                                'category_info_id'      => $idCategory,
-                                'tag_info_id' => $idTagInfo
-                            ]);
-                        }
-                    }
-                    /* insert gallery và lưu CSDL */
-                    if($request->hasFile('galleries')){
-                        $name           = $request->get('slug');
-                        $params         = [
-                            'attachment_id'     => $idCategory,
-                            'relation_table'    => 'category_info',
-                            'name'              => $name,
-                            'file_type'         => 'gallery',
-                        ];
-                        GalleryController::upload($request->file('galleries'), $params);
                     }
                 }
-                /* relation_seo_category_info */
-                $relationSeoCategoryInfo = RelationSeoCategoryInfo::select('*')
-                                        ->where('seo_id', $idSeo)
-                                        ->where('category_info_id', $idCategory)
-                                        ->first();
-                if(empty($relationSeoCategoryInfo)) RelationSeoCategoryInfo::insertItem([
-                    'seo_id'        => $idSeo,
-                    'category_info_id'   => $idCategory
-                ]);
-                /* insert seo_content */
-                self::insertAndUpdateContents($idSeo, $request->get('content'));
-                DB::commit();
-                /* Message */
-                $message        = [
-                    'type'      => 'success',
-                    'message'   => '<strong>Thành công!</strong> Đã cập nhật Category!'
-                ];
-                /* nếu có tùy chọn index => gửi google index */
-                if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
-                    $flagIndex = IndexController::indexUrl($idSeo);
-                    if($flagIndex==200){
-                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category và Báo Google Index!';
-                    }else {
-                        $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category <span style="color:red;">nhưng báo Google Index lỗi</span>';
-                    }
+                /* insert gallery và lưu CSDL */
+                if($request->hasFile('galleries')){
+                    $name           = $request->get('slug');
+                    $params         = [
+                        'attachment_id'     => $idCategory,
+                        'relation_table'    => 'category_info',
+                        'name'              => $name,
+                        'file_type'         => 'gallery',
+                    ];
+                    GalleryController::upload($request->file('galleries'), $params);
+                }
+            }
+            /* relation_seo_category_info */
+            $relationSeoCategoryInfo = RelationSeoCategoryInfo::select('*')
+                                    ->where('seo_id', $idSeo)
+                                    ->where('category_info_id', $idCategory)
+                                    ->first();
+            if(empty($relationSeoCategoryInfo)) RelationSeoCategoryInfo::insertItem([
+                'seo_id'        => $idSeo,
+                'category_info_id'   => $idCategory
+            ]);
+            
+            DB::commit();
+            /* Message */
+            $message        = [
+                'type'      => 'success',
+                'message'   => '<strong>Thành công!</strong> Đã cập nhật Category!'
+            ];
+            /* nếu có tùy chọn index => gửi google index */
+            if(!empty($request->get('index_google'))&&$request->get('index_google')=='on') {
+                $flagIndex = IndexController::indexUrl($idSeo);
+                if($flagIndex==200){
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category và Báo Google Index!';
+                }else {
+                    $message['message'] = '<strong>Thành công!</strong> Đã cập nhật Category <span style="color:red;">nhưng báo Google Index lỗi</span>';
                 }
             }
         } catch (\Exception $exception){
