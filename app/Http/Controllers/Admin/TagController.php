@@ -94,7 +94,7 @@ class TagController extends Controller {
             $itemSeoSourceToCopy    = [];
             if(!empty($itemSourceToCopy->seos)){
                 foreach($itemSourceToCopy->seos as $s){
-                    if($s->infoSeo->language==$language) {
+                    if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language) {
                         $itemSeoSourceToCopy = $s->infoSeo;
                         break;
                     }
