@@ -36,18 +36,43 @@ class AutoTranslateContent implements ShouldQueue {
     public function handle(){
         try {
             $infoPage           = HelperController::getFullInfoPageByIdSeo($this->idSeo);
-            /* lấy content bảng vi - lấy lại để có bản mói nhất */
-            $contentVi          = '';
-            foreach($infoPage->seo->contents as $c){
-                if($c->ordering==$this->ordering) {
-                    $contentVi  = $c->content;
-                    break;
+            /* lấy content source dùng để dịch - lấy lại để có bản mói nhất */
+            $contentSourceLetTranslate          = '';
+            if($this->language=='en'){ /* bản en => lấy bản vi làm nguồn dịch */
+                foreach($infoPage->seo->contents as $c){
+                    if(!empty($c->ordering)&&$c->ordering==$this->ordering) {
+                        $contentSourceLetTranslate  = $c->content;
+                        break;
+                    }
+                }
+            }else { /* khác bản en => lấy bản en làm nguồn dịch */
+                /* kiểm tra trước bản en có tồn tại không đã */
+                foreach($infoPage->seos as $seo){
+                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='en'){
+                        if(!empty($seo->infoSeo->contents)){
+                            foreach($seo->infoSeo->contents as $c){
+                                if(!empty($c->ordering)&&$c->ordering==$this->ordering) {
+                                    $contentSourceLetTranslate  = $c->content;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                /* nếu bản en chưa tồn tại mới quay lại lấy bản vi */
+                if(empty($contentSourceLetTranslate)){
+                    foreach($infoPage->seo->contents as $c){
+                        if(!empty($c->ordering)&&$c->ordering==$this->ordering) {
+                            $contentSourceLetTranslate  = $c->content;
+                            break;
+                        }
+                    }
                 }
             }
             /* convert prompt */
             $promptText         = ChatGptController::convertPrompt($infoPage, $this->infoPrompt, $this->language);
             /* tách content thành những phần nhỏ */
-            $arrayPartContent   = \App\Helpers\Charactor::splitString($contentVi, 4000);
+            $arrayPartContent   = \App\Helpers\Charactor::splitString($contentSourceLetTranslate, 4000);
             $resultContent      = '';
             foreach($arrayPartContent as $contentPart){
                 if(!empty(trim($contentPart))){

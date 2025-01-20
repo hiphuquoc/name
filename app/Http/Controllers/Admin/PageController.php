@@ -191,7 +191,9 @@ class PageController extends Controller {
             $countChild         = Seo::select('*')
                                     ->where('link_canonical', $idSeoVi)
                                     ->count();
-            return view('admin.page.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'message', 'pageTypes', 'countChild'));
+            /* list danh sách trang chưa đủ content (html) */
+            $languageNotEnoughContent = CategoryController::getListPageNotEnoughContent($item);
+            return view('admin.page.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'pageTypes', 'countChild', 'languageNotEnoughContent', 'message'));
         }else {
             return redirect()->route('admin.page.list');
         }

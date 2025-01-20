@@ -126,7 +126,9 @@ class CategoryController extends Controller {
             $countChild         = Seo::select('*')
                                     ->where('link_canonical', $idSeoVi)
                                     ->count();
-            return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'tags', 'countChild', 'message'));
+            /* list danh sách trang chưa đủ content (html) */
+            $languageNotEnoughContent = self::getListPageNotEnoughContent($item);
+            return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'tags', 'countChild', 'languageNotEnoughContent', 'message'));
         } else {
             return redirect()->route('admin.category.list');
         }
@@ -291,6 +293,33 @@ class CategoryController extends Controller {
                 return false;
             }
         }
+    }
+
+    public static function getListPageNotEnoughContent($infoPage){
+        $response = [
+            'html'  => '',
+            'array' => [
+
+            ]
+        ];
+        if(!empty($infoPage)){
+            $tmp                = [];
+            $countContentVi     = $infoPage->seo->contents->count() ?? 0;
+            foreach($infoPage->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language!='vi'){ /* đang so sánh số lượng content bản dịch với bản ngon ngữ khác nên không cần đếm qua vi */
+                    $countTMP   = 0;
+                    foreach($seo->infoSeo->contents as $content){
+                        if(!empty(trim($content->content))) $countTMP += 1;
+                    }
+                    if($countTMP<$countContentVi) $tmp[] = $seo->infoSeo->language;
+                }
+            }
+            if(!empty($tmp)) {
+                $response['html']   = '<span style="color:#00bd7d;">('.count($tmp).' trang)</span> ' . implode(', ', $tmp);
+                $response['array']  = $tmp;
+            }
+        }
+        return $response;
     }
 
     public static function removeThumnailsOfCategory(Request $request){

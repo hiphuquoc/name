@@ -107,7 +107,9 @@ class SeoFreeWallpaperController extends Controller {
         $countChild         = Seo::select('*')
                                 ->where('link_canonical', $idSeoVi)
                                 ->count();
-        return view('admin.seoFreeWallpaper.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'arrayTag', 'categories', 'countChild', 'message'));
+        /* list danh sách trang chưa đủ content (html) */
+        $languageNotEnoughContent = CategoryController::getListPageNotEnoughContent($item);
+        return view('admin.seoFreeWallpaper.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'arrayTag', 'categories', 'countChild', 'languageNotEnoughContent', 'message'));
     }
 
     public function createAndUpdate(SeoFreeWallpaperRequest $request){

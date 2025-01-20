@@ -103,7 +103,9 @@ class CategoryBlogController extends Controller {
             $countChild         = Seo::select('*')
                                     ->where('link_canonical', $idSeoVi)
                                     ->count();
-            return view('admin.categoryBlog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'countChild', 'message'));
+            /* list danh sách trang chưa đủ content (html) */
+            $languageNotEnoughContent = CategoryController::getListPageNotEnoughContent($item);
+            return view('admin.categoryBlog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'countChild', 'languageNotEnoughContent', 'message'));
         } else {
             return redirect()->route('admin.categoryBlog.list');
         }

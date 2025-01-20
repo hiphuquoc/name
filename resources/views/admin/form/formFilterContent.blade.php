@@ -36,10 +36,41 @@
         @if($prompt->type=='translate_content'&&$prompt->reference_name=='content')
             @php
                 $contentsByLanguageUse   = $itemSeoSourceToCopy->contents ?? $itemSeo->contents ?? [];
-                $contentsViUse           = $itemSourceToCopy->seo->contents ?? $item->seo->contents ?? [];
+                /* chọn ngôn ngữ dịch 
+                    => nếu trang en chọn ngôn ngữ vi làm bản dịch
+                    => nếu ngôn ngữ != en chọn ngôn ngữ en làm bản dịch (nếu có)
+                */
+                if($language=='en'){
+                    $contentsSourceUse  = $itemSourceToCopy->seo->contents ?? $item->seo->contents ?? [];
+                }else {
+                    $contentsSourceUse  = [];
+                    /* kiểm tra trang source to copy có bản en không */
+                    if(!empty($itemSourceToCopy->seos)){
+                        foreach($itemSourceToCopy->seos as $seo){
+                            if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='en') {
+                                if(!empty($seo->infoSeo->contents)&&$seo->infoSeo->contents->isNotEmpty()) $contentsSourceUse = $seo->infoSeo->contents;
+                                break;
+                            }
+                        }
+                    }
+                    /* kiểm tra tiếp trang source to copy bản vi */
+                    if(empty($contentsSourceUse)&&!empty($itemSourceToCopy->seo->contents)) $contentsSourceUse = $itemSourceToCopy->seo->contents;
+                    /* kiếm tra tiếp item có bản en không */
+                    if(empty($contentsSourceUse)){
+                        foreach($item->seos as $seo){
+                            if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='en') {
+                                if(!empty($seo->infoSeo->contents)&&$seo->infoSeo->contents->isNotEmpty()) $contentsSourceUse = $seo->infoSeo->contents;
+                                break;
+                            }
+                        }
+                    }
+                    /* kiểm tra tiếp item bản vi */
+                    if(empty($contentsSourceUse)&&!empty($item->seo->contents)) $contentsSourceUse = $item->seo->contents;
+                }
+                
             @endphp
-            @if(!empty($contentsViUse))
-                @foreach($contentsViUse as $content)
+            @if(!empty($contentsSourceUse))
+                @foreach($contentsSourceUse as $content)
                     @php
                         $key                = $content->ordering;
                         /* lấy content theo ordering */
@@ -59,7 +90,7 @@
                                     'content'           => $xhtmlContent, 
                                     'flagCopySource'    => !empty($itemSourceToCopy) ? true : false,
                                     'idBox'             => 'content_'.$key,
-                                    'idContent'         => $content->id ?? 0, /* truyền id của content tiếng viết (để dịch) */
+                                    'idContent'         => $content->id ?? 0, /* truyền id của content dùng làm ngôn ngữ dịch (để dịch) */
                                     'ordering'          => $key,
                                 ]) 
                             </div>

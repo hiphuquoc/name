@@ -253,7 +253,9 @@ class ProductController extends Controller {
             /* type */
             $type               = !empty($itemSeo) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
-            return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'message', 'arrayTag', 'countChild'));
+            /* list danh sách trang chưa đủ content (html) */
+            $languageNotEnoughContent = CategoryController::getListPageNotEnoughContent($item);
+            return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'arrayTag', 'countChild', 'languageNotEnoughContent', 'message'));
         }else {
             return redirect()->route('admin.product.list');
         }

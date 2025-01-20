@@ -117,8 +117,9 @@ class BlogController extends Controller {
                                     ->count();
             /* trang cha */
             $parents            = CategoryBlog::all();
-            /* category cha */
-            return view('admin.blog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'categories', 'tags', 'language', 'sources', 'parents', 'countChild', 'message'));
+            /* list danh sách trang chưa đủ content (html) */
+            $languageNotEnoughContent = CategoryController::getListPageNotEnoughContent($item);
+            return view('admin.blog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'categories', 'tags', 'language', 'sources', 'parents', 'countChild', 'languageNotEnoughContent', 'message'));
         } else {
             return redirect()->route('admin.blog.list');
         }

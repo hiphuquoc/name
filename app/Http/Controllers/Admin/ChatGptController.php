@@ -43,19 +43,23 @@ class ChatGptController extends Controller {
                     /* ===== Dịch content ===== */
                     $idContent  = $request->get('id_content');
                     /* gộp thêm content vào mảng để thay thế */
-                    $contentVi  = '';
+                    $contentSourceLetTranslate  = ''; /* content này có thể là vi hoặc en tùy trường hợp quyết định bằng cách truyền id source làm nguồn dịch trong form->content */
                     if(!empty($idContent)){
-                        foreach($infoPage->seo->contents as $c){
-                            if(!empty($c->id)&&$c->id==$idContent){
-                                $contentVi = $c->content;
-                                break;
+                        foreach($infoPage->seos as $seo){
+                            if(!empty($seo->infoSeo->contents)){
+                                foreach($seo->infoSeo->contents as $c){
+                                    if(!empty($c->id)&&$c->id==$idContent){
+                                        $contentSourceLetTranslate = $c->content;
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
                     /* convert prompt */
                     $promptText         = self::convertPrompt($infoPage, $infoPrompt, $language);
                     /* tách content thành những phần nhỏ */
-                    $arrayPartContent   = \App\Helpers\Charactor::splitString($contentVi, 4000);
+                    $arrayPartContent   = \App\Helpers\Charactor::splitString($contentSourceLetTranslate, 4000);
                     $resultContent      = '';
                     foreach($arrayPartContent as $contentPart){
                         if(!empty(trim($contentPart))){

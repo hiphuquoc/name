@@ -148,7 +148,7 @@ class TranslateController extends Controller {
                 'flag' => true,
                 'toast_type' => 'success',
                 'toast_title' => 'Thành công!',
-                'toast_message' => '👋 Đã gửi yêu cầu dịch nội dung của ngôn ngữ <span class="highLight_500">' . $language . '</span> của trang này!'
+                'toast_message' => '👋 Đã gửi yêu cầu dịch nội dung của ngôn ngữ <span class="highLight_500">' . $language . '</span> cho trang này!'
             ];
         }
         return response()->json($response);
@@ -161,7 +161,7 @@ class TranslateController extends Controller {
         $idSeo                  = 0;
         if (!empty($infoPage->seos)) {
             foreach($infoPage->seos as $seo){
-                if(!empty($seo->infoSeo->language==$language)) {
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language) {
                     $idSeo = $seo->infoSeo->id;
                     break;
                 }

@@ -141,38 +141,11 @@ class TagController extends Controller {
                                     ->where('link_canonical', $idSeoVi)
                                     ->count();
             /* list danh sách trang chưa đủ content (html) */
-            $languageNotEnoughContent = self::getListPageNotEnoughContent($item);
+            $languageNotEnoughContent = CategoryController::getListPageNotEnoughContent($item);
             return view('admin.tag.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents','categories', 'countChild', 'languageNotEnoughContent', 'message'));
         }else {
             return redirect()->route('admin.tag.list');
         }
-    }
-
-    public static function getListPageNotEnoughContent($infoPage){
-        $response = [
-            'html'  => '',
-            'array' => [
-
-            ]
-        ];
-        if(!empty($infoPage)){
-            $tmp                = [];
-            $countContentVi     = $infoPage->seo->contents->count() ?? 0;
-            foreach($infoPage->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language!='vi'){ /* đang so sánh số lượng content bản dịch với bản ngon ngữ khác nên không cần đếm qua vi */
-                    $countTMP   = 0;
-                    foreach($seo->infoSeo->contents as $content){
-                        if(!empty(trim($content->content))) $countTMP += 1;
-                    }
-                    if($countTMP<$countContentVi) $tmp[] = $seo->infoSeo->language;
-                }
-            }
-            if(!empty($tmp)) {
-                $response['html']   = '<span style="color:#00bd7d;">('.count($tmp).' trang)</span> ' . implode(', ', $tmp);
-                $response['array']  = $tmp;
-            }
-        }
-        return $response;
     }
 
     public function createAndUpdate(TagRequest $request){
