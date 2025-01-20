@@ -73,7 +73,7 @@
         setTimeout(() => {
             toastElement.style.opacity = 0;
             setTimeout(() => toastElement.remove(), 300); // Xóa sau khi hiệu ứng mờ hoàn tất
-        }, 3000);
+        }, 10000);
 
         // Xử lý sự kiện đóng thủ công
         const closeButton = toastElement.querySelector('.toast-close-button');
@@ -267,55 +267,127 @@
             confirmButtonText: 'Xác nhận'
         })
     }
-    /* tạo job dịch tự động */
+    /* tạo job dịch tự động từng trang ngôn ngữ riêng biệt */
     function createJobTranslateContent(idSeoVI, language){
+        // Gửi dữ liệu qua AJAX
+        openCloseFullLoading();
         $.ajax({
             url         : '{{ route("admin.translate.createJobTranslateContentAjax") }}',
             type        : 'post',
-            dataType    : 'html',
+            dataType    : 'json',
             data        : {
                 "_token": "{{ csrf_token() }}",
                 id_seo_vi : idSeoVI,
                 language
             }
-        }).done(function(data){
-            if(data) location.reload();
         })
-    }
-    function createMultiJobTranslateContent(slugVi, id = 0, reload = true){
-        /* đóng modal + bật loading */
-        openCloseFullLoading();
-        $.ajax({
-            url         : "{{ route('admin.translate.createMultiJobTranslateContent') }}",
-            type        : "post",
-            dataType    : "html",
-            data        : { 
-                '_token'    : '{{ csrf_token() }}',
-                slug_vi : slugVi,
-            }
-        }).done(function(response){
+        .done(function(response) {
             // Hiển thị Toast từ response
             createToast(response.toast_type, response.toast_title, response.toast_message);
-
-            if (response.flag) {
-                // Reload trang hoặc cập nhật DOM
-                if (reload) {
-                    location.reload();
-                } else {
-                    $(`#oneItem-${id}`).remove();
-                    $(`#oneItemSub-${id}`).remove();
-                }
-            }
+            $('#lock').css('display', 'block');
         })
-        .fail(function () {
+        .fail(function() {
             // Hiển thị thông báo lỗi mặc định
             createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
         })
-        .always(function () {
-            // Tắt trạng thái Loading
+        .always(function() {
             setTimeout(() => openCloseFullLoading(), 300);
         });
     }
+    function createMultiJobTranslateContent(slugVi, id = 0, reload = true) {
+        var htmlBody = `
+            <div style="margin-top: 10px; text-align: left;">
+                <label>
+                    <input type="radio" name="option" value="1" />
+                    1. Dịch nội dung <span style="color:red;">*chỉ trang EN</span> - nội dung có sẵn sẽ bị đè
+                </label>
+            </div>
+            <div style="margin-top: 10px; text-align: left;">
+                <label>
+                    <input type="radio" name="option" value="2" />
+                    2. Dịch nội dung tất cả các ngôn ngữ <span style="color:red;">*ngoại trừ EN</span> - nội dung có sẵn sẽ bị đè
+                </label>
+            </div>`;
+
+        @if (!empty($languageNotEnoughContent['html']))
+            // Chuyển đổi array PHP thành JSON để nhúng vào input
+            var arrayLanguageNotEnoughContent = @json($languageNotEnoughContent['array']);
+            htmlBody += `
+                <div style="margin-top: 10px; text-align: left;">
+                    <label>
+                        <input type="radio" name="option" value="3" checked />
+                        <input type="hidden" name="array_language_not_enough_content" value='${JSON.stringify(arrayLanguageNotEnoughContent)}' />
+                        3. Dịch các ngôn ngữ chưa đủ nội dung {!! $languageNotEnoughContent['html'] !!}
+                    </label>
+                </div>`;
+        @endif
+
+        Swal.fire({
+            title: 'Xác nhận tùy chọn',
+            html: htmlBody,
+            preConfirm: () => {
+                // Tìm giá trị radio được chọn
+                const selectedOption = Swal.getPopup().querySelector('input[name="option"]:checked');
+                const arrayLanguageInput = Swal.getPopup().querySelector('input[name="array_language_not_enough_content"]');
+
+                if (!selectedOption) {
+                    Swal.showValidationMessage('Vui lòng chọn một tùy chọn');
+                    return false;
+                }
+
+                // Parse array từ input nếu tồn tại
+                let arrayLanguageNotEnoughContent = [];
+                if (arrayLanguageInput) {
+                    try {
+                        arrayLanguageNotEnoughContent = JSON.parse(arrayLanguageInput.value);
+                    } catch (e) {
+                        Swal.showValidationMessage('Dữ liệu không hợp lệ trong array_language_not_enough_content');
+                        return false;
+                    }
+                }
+
+                return { 
+                    option: selectedOption.value, 
+                    arrayLanguage: arrayLanguageNotEnoughContent // Trả về array
+                };
+            },
+            showLoaderOnConfirm: true,
+            confirmButtonText: 'Xác nhận'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const optionValue = result.value.option;
+                const arrayLanguage = result.value.arrayLanguage;
+
+                // Gửi dữ liệu qua AJAX
+                openCloseFullLoading();
+                $.ajax({
+                    url: "{{ route('admin.translate.createMultiJobTranslateContent') }}",
+                    type: "post",
+                    dataType: "json",
+                    data: { 
+                        '_token': '{{ csrf_token() }}',
+                        slug_vi: slugVi,
+                        option: optionValue, // Truyền giá trị tùy chọn
+                        array_language: arrayLanguage // Truyền array
+                    }
+                })
+                .done(function(response) {
+                    // Hiển thị Toast từ response
+                    createToast(response.toast_type, response.toast_title, response.toast_message);
+                })
+                .fail(function() {
+                    // Hiển thị thông báo lỗi mặc định
+                    createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
+                })
+                .always(function() {
+                    setTimeout(() => openCloseFullLoading(), 300);
+                });
+            }
+        });
+    }
+
+
+
     function createJobTranslateAndCreatePageAjax(slugVi, id = 0) {
         // Hiển thị trạng thái Loading
         openCloseFullLoading();

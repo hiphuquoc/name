@@ -242,13 +242,18 @@ class ProductController extends Controller {
                                     ->where('id', '!=', $idProduct)
                                     ->get();
             /* tag name */
-            $tags           = Tag::all();
-            $arrayTag       = [];
+            $tags               = Tag::all();
+            $arrayTag           = [];
             foreach($tags as $tag) if(!empty($tag->seo->title)) $arrayTag[] = $tag->seo->title;
+            /* đếm số lượng trang đang chọn trang gốc là trang này => để hiện thị nút "Copy sang trang con" */
+            $idSeoVi            = $item->seo->id ?? 0;
+            $countChild         = Seo::select('*')
+                                    ->where('link_canonical', $idSeoVi)
+                                    ->count();
             /* type */
             $type               = !empty($itemSeo) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
-            return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'message', 'arrayTag'));
+            return view('admin.product.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'language', 'wallpapers', 'type', 'categories', 'sources', 'parents', 'message', 'arrayTag', 'countChild'));
         }else {
             return redirect()->route('admin.product.list');
         }

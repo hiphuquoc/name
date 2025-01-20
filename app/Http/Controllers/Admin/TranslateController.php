@@ -65,59 +65,96 @@ class TranslateController extends Controller {
     }
 
     public static function createMultiJobTranslateContent(Request $request){
-        $slugVi      = $request->get('slug_vi');
+        /* Thông báo mặc định */
+        $response = [
+            'flag' => false,
+            'toast_type' => 'error',
+            'toast_title' => 'Thất bại!',
+            'toast_message' => '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'
+        ];
+        /* lấy dữ liệu từ request */
+        $slugVi     = $request->get('slug_vi');
+        $option     = $request->get('option');
         $slug       = self::getSlugByUrl($slugVi);
         /* lấy thông tin trang gốc - vi */
         $tmp        = Seo::select('*')
                         ->where('slug', $slug)
                         ->first();
         $arrayIdSeoRequested = [];
-        if(!empty($tmp->id)){
+        if(!empty($tmp->id)&&!empty($option)){
             /* lấy thông tin trang */
             $infoPage =     HelperController::getFullInfoPageByIdSeo($tmp->id);
             /* duyệt sang mảng để tạo yêu cầu */
             if(!empty($infoPage)){
-                foreach($infoPage->seos as $seo){
-                    /* kiểm tra chưa có content mới cho phép chạy */
-                    $countContentVi         = $infoPage->seo->contents->count();
-                    $countContentTranslate  = !empty($seo->infoSeo->contents) ? $seo->infoSeo->contents->count() : 0;
-                    /* tiến hành chạy */
-                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language!='vi'&&$countContentTranslate<$countContentVi){
-                        $flag = self::createJobTranslateContent($infoPage->seo->id, $seo->infoSeo->language);
-                        if($flag==true) $arrayIdSeoRequested[] = $infoPage->seo->id;
-                    }
+                /* các option tương ứng giá trị nhận vào từ input trong function createMultiJobTranslateContent
+                    option = 1 => Dịch nội dung *chỉ trang EN - nội dung có sẵn sẽ bị đè
+                    option = 2 => Dịch nội dung tất cả các ngôn ngữ *ngoại trừ EN - nội dung có sẵn sẽ bị đè
+                    option = 3 => Dịch các ngôn ngữ chưa đủ nội dung
+                */
+                switch ($option) {
+                    case '1':
+                        foreach($infoPage->seos as $seo){
+                            if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='en'){
+                                $flag = self::createJobTranslateContent($infoPage->seo->id, $seo->infoSeo->language);
+                                if($flag==true) $arrayIdSeoRequested[] = $infoPage->seo->id;
+                            }
+                        }
+                        break;
+                    case '2':
+                        $arrayPrevent = ['vi', 'en'];
+                        foreach($infoPage->seos as $seo){
+                            if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $arrayPrevent)){
+                                $flag = self::createJobTranslateContent($infoPage->seo->id, $seo->infoSeo->language);
+                                if($flag==true) $arrayIdSeoRequested[] = $infoPage->seo->id;
+                            }
+                        }
+                        break;
+                    default:
+                        $arrayTranslate     = $request->get('array_language');
+                        foreach($infoPage->seos as $seo){
+                            if(in_array($seo->infoSeo->language, $arrayTranslate)) {
+                                $flag = self::createJobTranslateContent($infoPage->seo->id, $seo->infoSeo->language);
+                                if($flag==true) $arrayIdSeoRequested[] = $infoPage->seo->id;
+                            }
+                        }
+                        break;
                 }
+                /* Cập nhật thông báo */
+                $count      = count($arrayIdSeoRequested);
+                $response = [
+                    'flag' => true,
+                    'toast_type' => 'success',
+                    'toast_title' => 'Thành công!',
+                    'toast_message' => '👋 Đã gửi yêu cầu dịch nội dung cho <span class="highLight_500">' . $count . '</span> ngôn ngữ của trang <span class="highLight_500">' . $infoPage->seo->title . '</span>!'
+                ];
             }
         }
-        /* Message */
-        $message        = [
-            'type'      => 'success',
-            'message'   => 'Đã gửi yêu cầu tạo '.count($arrayIdSeoRequested).' trang ngôn ngữ cho Url: '.$slugVi,
-        ];
-        $request->session()->put('message', $message);
-        return true;
+        return response()->json($response);
     }
 
     public static function createJobTranslateContentAjax(Request $request){
+        /* Thông báo mặc định */
+        $response = [
+            'flag' => false,
+            'toast_type' => 'error',
+            'toast_title' => 'Thất bại!',
+            'toast_message' => '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'
+        ];
         $idSeoVI        = $request->get('id_seo_vi');
         $language       = $request->get('language');
         $flag           = self::createJobTranslateContent($idSeoVI, $language);
         if($flag==true){
-            $message        = [
-                'type'      => 'success',
-                'message'   => '<strong>Thành công!</strong> Đã gửi yêu cầu dịch tự động!'
-            ];
-        }else {
-            $message    = [
-                'type'      => 'danger',
-                'message'   => '<strong>Thất bại!</strong> Thao tác đã được thực hiện trước đó, xóa lịch sử trong "Báo cáo" => "Tự động dịch" của trang này và thử lại!'
+            $response = [
+                'flag' => true,
+                'toast_type' => 'success',
+                'toast_title' => 'Thành công!',
+                'toast_message' => '👋 Đã gửi yêu cầu dịch nội dung của ngôn ngữ <span class="highLight_500">' . $language . '</span> của trang này!'
             ];
         }
-        $request->session()->put('message', $message);
-        echo true;
+        return response()->json($response);
     }
 
-    public static function createJobTranslateContent($idSeoVI, $language){
+    private static function createJobTranslateContent($idSeoVI, $language){
         $flag                   = false;
         /* lấy trang theo ngôn ngữ */
         $infoPage               = \App\Http\Controllers\Admin\HelperController::getFullInfoPageByIdSeo($idSeoVI);
@@ -131,9 +168,10 @@ class TranslateController extends Controller {
             }
         }
         if (!empty($idSeo)&&$language!='vi') {
-            /* kiểm tra đã chạy chưa */
+            /* kiểm tra xem có phải đang chạy có bất kì row status = 0 */
             $infoFlag   = JobAutoTranslate::select('*')
                 ->where('seo_id', $idSeo)
+                ->where('status', 0)
                 ->first();
             if (empty($infoFlag)) {
                 /* lấy content bảng tiếng việt */
@@ -163,7 +201,7 @@ class TranslateController extends Controller {
                                     ->where('reference_table', $type)
                                     ->first();
                     /* tạo job */
-                    AutoTranslateContent::dispatch($ordering, $language, $idSeo, $infoPrompt);
+                    AutoTranslateContent::dispatch($ordering, $language, $idSeo, $infoPrompt->id);
                 }
                 $flag = true;
             }
@@ -208,7 +246,7 @@ class TranslateController extends Controller {
         return response()->json($response);
     }
 
-    public static function createJobTranslateAndCreatePage($infoPage) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */
+    private static function createJobTranslateAndCreatePage($infoPage) { /* function tự động tạo ra các trang ngôn ngữ khác gồm title, seo_title, seo_description, slug */
         $arrayLanguageRequested = [];
         if (!empty($infoPage)) {
             /* xây dựng aray của những ngôn ngữ đã có trang */

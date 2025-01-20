@@ -39,11 +39,14 @@
             @endif
             <!-- End:: trường hợp không có bản lưu auto job nào mới hiện ra nút nhấn -->
         @endif
+        <!-- copy sang trang con -->
         @if(!empty($itemSeo->link_canonical))
             <a href="{{ URL::current().'?id='.$item->id.'&language='.$language.'&id_seo_source='.$itemSeo->link_canonical }}" class="actionBox_item maxLine_1">
                 <i class="fa-solid fa-file-import"></i>Copy từ trang Gốc
             </a>
-        @else
+        @endif    
+        <!-- copy từ trang cha (dành cho trang gốc) -->
+        @if($language=='vi'&&$countChild>0)
             <div class="actionBox_item maxLine_1" data-bs-toggle="modal" data-bs-target="#modalViewProductCopied" onclick="searchProductCopied();">
                 <i class="fa-solid fa-file-import"></i>Cập nhật trang Copy
             </div>

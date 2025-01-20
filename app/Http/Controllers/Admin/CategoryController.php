@@ -121,7 +121,12 @@ class CategoryController extends Controller {
             }else {
                 $parents        = Category::all();
             }
-            return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'tags', 'message'));
+            /* đếm số lượng trang đang chọn trang gốc là trang này => để hiện thị nút "Copy sang trang con" */
+            $idSeoVi            = $item->seo->id ?? 0;
+            $countChild         = Seo::select('*')
+                                    ->where('link_canonical', $idSeoVi)
+                                    ->count();
+            return view('admin.category.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'tags', 'countChild', 'message'));
         } else {
             return redirect()->route('admin.category.list');
         }

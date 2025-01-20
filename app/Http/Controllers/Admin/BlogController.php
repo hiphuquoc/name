@@ -110,10 +110,15 @@ class BlogController extends Controller {
             /* type */
             $type               = !empty($itemSeo) ? 'edit' : 'create';
             $type               = $request->get('type') ?? $type;
+            /* đếm số lượng trang đang chọn trang gốc là trang này => để hiện thị nút "Copy sang trang con" */
+            $idSeoVi            = $item->seo->id ?? 0;
+            $countChild         = Seo::select('*')
+                                    ->where('link_canonical', $idSeoVi)
+                                    ->count();
             /* trang cha */
             $parents            = CategoryBlog::all();
             /* category cha */
-            return view('admin.blog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'categories', 'tags', 'language', 'sources', 'parents', 'message'));
+            return view('admin.blog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'categories', 'tags', 'language', 'sources', 'parents', 'countChild', 'message'));
         } else {
             return redirect()->route('admin.blog.list');
         }

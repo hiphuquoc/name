@@ -98,7 +98,12 @@ class CategoryBlogController extends Controller {
             }else {
                 $parents        = CategoryBlog::all();
             }
-            return view('admin.categoryBlog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'message'));
+            /* đếm số lượng trang đang chọn trang gốc là trang này => để hiện thị nút "Copy sang trang con" */
+            $idSeoVi            = $item->seo->id ?? 0;
+            $countChild         = Seo::select('*')
+                                    ->where('link_canonical', $idSeoVi)
+                                    ->count();
+            return view('admin.categoryBlog.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'countChild', 'message'));
         } else {
             return redirect()->route('admin.categoryBlog.list');
         }

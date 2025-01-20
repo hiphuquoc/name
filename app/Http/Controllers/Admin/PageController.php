@@ -186,7 +186,12 @@ class PageController extends Controller {
             $type               = $request->get('type') ?? $type;
             /* type_page */
             $pageTypes          = PageType::all();
-            return view('admin.page.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'message', 'pageTypes'));
+            /* đếm số lượng trang đang chọn trang gốc là trang này => để hiện thị nút "Copy sang trang con" */
+            $idSeoVi            = $item->seo->id ?? 0;
+            $countChild         = Seo::select('*')
+                                    ->where('link_canonical', $idSeoVi)
+                                    ->count();
+            return view('admin.page.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'message', 'pageTypes', 'countChild'));
         }else {
             return redirect()->route('admin.page.list');
         }

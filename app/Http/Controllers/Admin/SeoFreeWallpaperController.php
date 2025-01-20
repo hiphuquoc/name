@@ -102,7 +102,12 @@ class SeoFreeWallpaperController extends Controller {
         /* type */
         $type               = !empty($itemSeo) ? 'edit' : 'create';
         $type               = $request->get('type') ?? $type;
-        return view('admin.seoFreeWallpaper.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'arrayTag', 'categories', 'message'));
+        /* đếm số lượng trang đang chọn trang gốc là trang này => để hiện thị nút "Copy sang trang con" */
+        $idSeoVi            = $item->seo->id ?? 0;
+        $countChild         = Seo::select('*')
+                                ->where('link_canonical', $idSeoVi)
+                                ->count();
+        return view('admin.seoFreeWallpaper.view', compact('item', 'itemSeo', 'itemSourceToCopy', 'itemSeoSourceToCopy', 'prompts', 'type', 'language', 'sources', 'parents', 'arrayTag', 'categories', 'countChild', 'message'));
     }
 
     public function createAndUpdate(SeoFreeWallpaperRequest $request){

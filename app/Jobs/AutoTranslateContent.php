@@ -10,14 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
 use App\Models\Seo;
-use App\Models\Category;
-use App\Models\RelationSeoCategoryInfo;
-use App\Models\Tag;
-use App\Models\RelationSeoTagInfo;
-use App\Models\Product;
-use App\Models\RelationSeoProductInfo;
-use App\Models\Page;
-use App\Models\RelationSeoPageInfo;
+use App\Models\Prompt;
 use App\Models\SeoContent;
 use App\Models\JobAutoTranslate;
 use App\Http\Controllers\Admin\ChatGptController;
@@ -33,11 +26,11 @@ class AutoTranslateContent implements ShouldQueue {
     private $infoPrompt;
     public  $tries = 5; // Số lần thử lại
 
-    public function __construct($ordering, $language, $idSeo, $infoPrompt){
+    public function __construct($ordering, $language, $idSeo, $idPrompt){
         $this->ordering     = $ordering;
         $this->language     = $language;
         $this->idSeo        = $idSeo;
-        $this->infoPrompt   = $infoPrompt;
+        $this->infoPrompt   = Prompt::find($idPrompt);
     }
 
     public function handle(){
