@@ -144,7 +144,7 @@ class AutoTranslateContent implements ShouldQueue {
                 /* ===== tìm trong CSDL dể lấy ra slug_full ngôn ngữ tương ứng */
                 /* lấy tất cả url tiếng việt trên toàn hệ thống */
                 $allSeo = Seo::select('*')
-                            ->where('language', 'vi')
+                            ->whereIn('language', ['vi', 'en'])
                             ->get();
                 $slugTranslate  = '';
                 if(!empty($slugVi)){ /* không phải trang chủ */
