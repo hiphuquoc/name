@@ -129,7 +129,7 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
                     if(!empty($idSeoParentVI)){ /* trường hợp có trang cha */
                         $infoParentForLanguage  = HelperController::getFullInfoPageByIdSeo($idSeoParentVI);
                         foreach($infoParentForLanguage->seos as $s){
-                            if($s->infoSeo->language==$language) {
+                            if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language) {
                                 $idParentForLanguage = $s->infoSeo->id;
                                 break;
                             }
@@ -166,7 +166,7 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
                         if(!empty($idSeoPageSource)){
                             $infoPageSource             = HelperController::getFullInfoPageByIdSeo($idSeoPageSource);
                             foreach($infoPageSource->seos as $seo){
-                                if($seo->infoSeo->language==$language) {
+                                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language) {
                                     $idSeoPageSourceForLanguage = $seo->infoSeo->id;
                                     break;
                                 }
