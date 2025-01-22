@@ -168,12 +168,11 @@ class TranslateController extends Controller {
             }
         }
         if (!empty($idSeo)&&$language!='vi') {
-            // /* kiểm tra xem có phải đang chạy có bất kì row status = 0 */
-            // $infoFlag   = JobAutoTranslate::select('*')
-            //     ->where('seo_id', $idSeo)
-            //     ->where('status', 0)
-            //     ->first();
-                $infoFlag = '';
+            /* kiểm tra xem có phải đang chạy có bất kì row status = 0 */
+            $infoFlag   = JobAutoTranslate::select('*')
+                ->where('seo_id', $idSeo)
+                ->where('status', 0)
+                ->first();
             if (empty($infoFlag)) {
                 /* lấy content bảng tiếng việt */
                 $contents   = SeoContent::select('*')
