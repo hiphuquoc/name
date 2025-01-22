@@ -39,10 +39,14 @@ class AutoTranslateContent implements ShouldQueue {
             /* lấy content source dùng để dịch - lấy lại để có bản mói nhất */
             $contentSourceLetTranslate          = '';
             if($this->language=='en'){ /* bản en => lấy bản vi làm nguồn dịch */
-                foreach($infoPage->seo->contents as $c){
-                    if(!empty($c->ordering)&&$c->ordering==$this->ordering) {
-                        $contentSourceLetTranslate  = $c->content;
-                        break;
+                foreach($infoPage->seos as $seo) {
+                    if (!empty($seo->infoSeo->language) && $seo->infoSeo->language == 'vi') {
+                        foreach ($seo->infoSeo->contents as $c) {
+                            if (isset($c->ordering)&&$c->ordering==$this->ordering) { /* ghi chú quan trong: không kiểm tra empty vì ordering có thể bằng 0 */
+                                $contentSourceLetTranslate = $c->content;
+                                break 2; // Thoát khỏi cả 2 vòng lặp
+                            }
+                        }
                     }
                 }
             }else { /* khác bản en => lấy bản en làm nguồn dịch */
@@ -51,9 +55,9 @@ class AutoTranslateContent implements ShouldQueue {
                     if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='en'){
                         if(!empty($seo->infoSeo->contents)){
                             foreach($seo->infoSeo->contents as $c){
-                                if(!empty($c->ordering)&&$c->ordering==$this->ordering) {
+                                if(isset($c->ordering)&&$c->ordering==$this->ordering) {
                                     $contentSourceLetTranslate  = $c->content;
-                                    break;
+                                    break 2; // Thoát khỏi cả 2 vòng lặp
                                 }
                             }
                         }
