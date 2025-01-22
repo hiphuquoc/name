@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use App\Rules\UniqueSlug;
 
 class BlogRequest extends FormRequest
 {
@@ -33,25 +34,8 @@ class BlogRequest extends FormRequest
             'seo_description'           => 'required',
             'slug'                      => [
                 'required',
-                function($attribute, $value, $fail){
-                    $slug           = !empty(request('slug')) ? request('slug') : null;
-                    if(!empty($slug)){
-                        $flag       = false;
-                        $dataCheck  = DB::table('seo')
-                                        ->join('blog_info', 'blog_info.seo_id', '=', 'seo.id')
-                                        ->select('seo.slug', 'blog_info.id')
-                                        ->where('slug', $slug)
-                                        ->first();
-                        if(!empty($dataCheck)){
-                            if(empty(request('blog_info_id'))){
-                                $flag = true;
-                            }else {
-                                if(request('blog_info_id')!=$dataCheck->id) $flag = true;
-                            }
-                        }
-                        if($flag==true) $fail('Dường dẫn tĩnh đã trùng với một trang khác trên hệ thống!');
-                    }
-                }
+                new UniqueSlug(request()),
+                
             ],
             'rating_aggregate_count'    => 'required',
             'rating_aggregate_star'     => 'required'
