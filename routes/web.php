@@ -114,6 +114,7 @@ Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-t
         Route::get('/view', [PromptController::class, 'view'])->name('admin.prompt.view');
         Route::post('/createAndUpdate', [PromptController::class, 'createAndUpdate'])->name('admin.prompt.createAndUpdate');
         Route::get('/loadColumnTable', [PromptController::class, 'loadColumnTable'])->name('admin.prompt.loadColumnTable');
+        Route::post('/getPromptTextById', [PromptController::class, 'getPromptTextById'])->name('admin.prompt.getPromptTextById');
         Route::get('/delete', [PromptController::class, 'delete'])->name('admin.prompt.delete');
     });
     /* api ai */
@@ -252,7 +253,6 @@ Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-t
         Route::post('/createJobTranslateAndCreatePageAjax', [TranslateController::class, 'createJobTranslateAndCreatePageAjax'])->name('admin.translate.createJobTranslateAndCreatePageAjax');
     });
 });
-
 Route::middleware(['check.domain'])->group(function () {
     /* my account */
     Route::middleware('auth')->group(function (){

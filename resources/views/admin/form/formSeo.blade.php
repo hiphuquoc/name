@@ -28,7 +28,7 @@
                     <i class="explainInput" data-feather='alert-circle'></i>
                     <label class="form-label inputRequired" for="seo_title">Tiêu đề SEO</label>
                     @if(!empty($chatgptDataAndEvent['eventChatgpt']))
-                        <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                        <i class="fa-solid fa-pencil reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                     @endif
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="seo_title">
@@ -65,7 +65,7 @@
                     <i class="explainInput" data-feather='alert-circle'></i>
                     <label class="form-label inputRequired" for="seo_description">Mô tả SEO</label>
                     @if(!empty($chatgptDataAndEvent['eventChatgpt']))
-                        <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                        <i class="fa-solid fa-pencil reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                     @endif
                 </span>
                 <div class="inputWithNumberChacractor_count" data-charactor="seo_description">
@@ -117,7 +117,7 @@
                 <i class="explainInput" data-feather='alert-circle'></i>
                 <label class="form-label inputRequired" for="slug">Đường dẫn tĩnh</label>
                 @if(!empty($chatgptDataAndEvent['eventChatgpt']))
-                    <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                    <i class="fa-solid fa-pencil reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
                 @endif
                 <!-- Hàm này dùng idSeo->parent bảng tiếng việt gửi vào trong để tìm parent những ngôn ngữ khác (vì những trang create chưa có trang) -->
                 <i class="fa-solid fa-arrow-down reloadContentIcon" onclick="convertStrToSlug('slug', $('#title'), '{{ $itemSeo->type ?? $item->seo->type ?? null }}', '{{ $language }}', {{ $item->seo->parent ?? 0 }});"></i>

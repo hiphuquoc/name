@@ -22,7 +22,10 @@
             <div>
                 <label class="form-label inputRequired" for="content">Nội dung</label>
                 @if(!empty($chatgptDataAndEvent['eventChatgpt']))
-                    <i class="fa-solid fa-arrow-rotate-left reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                    <i class="fa-solid fa-pencil reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                @endif
+                @if(!empty($itemSeo->id))
+                    <i class="fa-regular fa-copy reloadContentIcon" onclick="getPromptTextById({{ $itemSeo->id }}, {{ $prompt->id }}, '{{ $language }}')"></i>
                 @endif
             </div>
             <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">

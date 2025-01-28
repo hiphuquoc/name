@@ -422,4 +422,67 @@
             setTimeout(() => openCloseFullLoading(), 300);
         });
     }
+
+    function getPromptTextById(idSeo, idPrompt, language) {
+        // // Hiển thị trạng thái Loading
+        // openCloseFullLoading();
+
+        $.ajax({
+            url: "{{ route('admin.prompt.getPromptTextById') }}",
+            type: "post",
+            dataType: "json",
+            data: {
+                '_token': '{{ csrf_token() }}',
+                seo_id  : idSeo,
+                prompt_info_id : idPrompt,
+                language
+            }
+        })
+        .done(function (response) {
+            // Hiển thị Toast từ response
+            setTimeout(() => createToast(response.toast_type, response.toast_title, response.toast_message), 300);
+
+            if (response.flag) {
+                if (response.content) {
+                    // Sử dụng Clipboard API để copy nội dung
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(response.content)
+                            .then(() => {
+                                // Thông báo thành công đã được xử lý bởi response toast
+                            })
+                            .catch(err => {
+                                console.error('Không thể copy text: ', err);
+                                createToast('error', 'Thất bại', '❌ Không thể copy nội dung vào clipboard');
+                            });
+                    } else {
+                        // Fallback cho trường hợp không hỗ trợ Clipboard API
+                        const textarea = document.createElement('textarea');
+                        textarea.value = response.content;
+                        textarea.style.position = 'fixed';  // Tránh làm ảnh hưởng đến layout
+                        textarea.style.opacity = '0';       // Ẩn element
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        try {
+                            document.execCommand('copy');
+                            // Thông báo thành công đã được xử lý bởi response toast
+                        } catch (err) {
+                            console.error('Không thể copy text: ', err);
+                            createToast('error', 'Thất bại', '❌ Không thể copy nội dung vào clipboard');
+                        }
+                        document.body.removeChild(textarea);
+                    }
+                } else {
+                    createToast('error', 'Thất bại', '❌ Không tìm thấy nội dung để copy');
+                }
+            }
+        })
+        .fail(function () {
+            // Hiển thị thông báo lỗi mặc định
+            setTimeout(() => createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'), 300);
+        })
+        .always(function () {
+            // Tắt trạng thái Loading
+            // setTimeout(() => openCloseFullLoading(), 300);
+        });
+    }
 </script>

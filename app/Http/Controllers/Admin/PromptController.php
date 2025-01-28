@@ -144,4 +144,32 @@ class PromptController extends Controller {
                         
         echo $response;
     }
+
+    public static function getPromptTextById(Request $request){
+        /* Thông báo mặc định */
+        $response = [
+            'flag'      => false,
+            'content' => '',
+            'toast_type' => 'error',
+            'toast_title' => 'Thất bại!',
+            'toast_message' => '❌ Không tìm thấy thông tin prompt.'
+        ];
+        $language   = $request->get('language') ?? 'vi';
+        $idSeo      = $request->get('seo_id') ?? 0;
+        $infoPage   = HelperController::getFullInfoPageByIdSeo($idSeo);
+        $idPrompt   = $request->get('prompt_info_id') ?? 0;
+        $infoPrompt = Prompt::find($idPrompt);
+
+        $promptText = ChatGptController::convertPrompt($infoPage, $infoPrompt, $language);
+        if(!empty($promptText)){
+            $response = [
+                'flag'      => true,
+                'content' => $promptText,
+                'toast_type' => 'success',
+                'toast_title' => 'Thành công!',
+                'toast_message' => 'Đã sao chép 1 prompt vào Clipboard!'
+            ];
+        }
+        return response()->json($response);
+    }
 }
