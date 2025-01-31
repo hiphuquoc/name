@@ -36,31 +36,31 @@ class AutoWriteContent implements ShouldQueue {
             $infoPage   = HelperController::getFullInfoPageByIdSeo($this->idSeo);
             $promptText = ChatGptController::convertPrompt($infoPage, $this->infoPrompt, 'vi');
 
-            if($this->ordering==6||$this->ordering==7){ /* chỉ cần replace */
-                $content    = $promptText;
-            }else {
-                $response   = ChatGptController::callApi($promptText, $this->infoPrompt);
-                // Kiểm tra nếu có lỗi từ API thì đẩy lại Job
-                if (!empty($response['error'])) {
-                    throw new \Exception($response['error']); // Tạo Exception mới
+            if($this->ordering!=5){
+                if($this->ordering==6||$this->ordering==7){ /* chỉ cần replace */
+                    $content    = $promptText;
+                }else {
+                    $response   = ChatGptController::callApi($promptText, $this->infoPrompt);
+                    // Kiểm tra nếu có lỗi từ API thì đẩy lại Job
+                    if (!empty($response['error'])) {
+                        throw new \Exception($response['error']); // Tạo Exception mới
+                    }
+
+                    $content = $response['content'] ?? '';
                 }
 
-                $content = $response['content'] ?? '';
+                // Xóa content cũ
+                SeoContent::where('seo_id', $this->idSeo)
+                    ->where('ordering', $this->ordering)
+                    ->delete();
+
+                // Lưu content mới
+                SeoContent::insertItem([
+                    'seo_id'    => $this->idSeo,
+                    'content'   => $content,
+                    'ordering'  => $this->ordering,
+                ]);
             }
-
-            // Xóa content cũ
-            SeoContent::where('seo_id', $this->idSeo)
-                ->where('ordering', $this->ordering)
-                ->delete();
-
-            // Lưu content mới
-            SeoContent::insertItem([
-                'seo_id'    => $this->idSeo,
-                'content'   => $content,
-                'ordering'  => $this->ordering,
-            ]);
-            
-            
         } catch (\Exception $e) {
             throw $e; // Đẩy lại lỗi để Laravel tự động thử lại
         }
