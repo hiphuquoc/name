@@ -27,6 +27,7 @@ use App\Models\RelationSeoPageInfo;
 use App\Models\RelationSeoProductInfo;
 use App\Models\SeoContent;
 use App\Jobs\AutoTranslateContent;
+use App\Jobs\AutoWriteContent;
 use App\Models\JobAutoTranslate;
 
 class TranslateController extends Controller {
@@ -243,6 +244,45 @@ class TranslateController extends Controller {
             }
         }
     
+        return response()->json($response);
+    }
+
+    public static function createJobWriteContent(Request $request) {
+        /* Thông báo mặc định */
+        $response = [
+            'flag' => false,
+            'toast_type' => 'error',
+            'toast_title' => 'Thất bại!',
+            'toast_message' => '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'
+        ];
+    
+        /* Lấy thông tin */
+        $idSeo      = $request->get('seo_id') ?? 0;
+        /* Lấy thông tin đầy đủ của trang */
+        $infoPage   = HelperController::getFullInfoPageByIdSeo($idSeo);
+        $typePage   = HelperController::determinePageType($infoPage->seo->type);
+        $prompts    = Prompt::select('*')
+                        ->where('reference_table', $typePage)
+                        ->where('type', 'auto_content')
+                        ->where('reference_name', 'content')
+                        ->get();
+        if(!empty($prompts)&&$prompts->isNotEmpty()){
+
+            $count      = 0;
+            foreach($prompts as $prompt){
+                AutoWriteContent::dispatch($prompt->ordering, $idSeo, $prompt->id);
+                ++$count;
+            }
+            
+            /* Cập nhật thông báo */
+            $response = [
+                'flag' => true,
+                'toast_type' => 'success',
+                'toast_title' => 'Thành công!',
+                'toast_message' => '👋 Đã gửi yêu cầu viết nội dung <span class="highLight_500">' . $count . '</span> box cho trang <span class="highLight_500">' . $infoPage->seo->title . '</span>!'
+            ];
+        }
+        
         return response()->json($response);
     }
 

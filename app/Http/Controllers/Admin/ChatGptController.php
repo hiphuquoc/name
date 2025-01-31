@@ -196,56 +196,76 @@ class ChatGptController extends Controller {
         return $response;
     }
 
-    public static function callApi($promptText, $infoPrompt, $urlImage = null, $retryCount = 0){
+    public static function callApi($promptText, $infoPrompt, $urlImage = null){
         $data       = [];
-        $infoApiAI  = ApiAI::select('*')
-                            // ->where('type', $infoPrompt->version)
-                            ->where('status', '1')
-                            ->first();
-        $apiKey     = $infoApiAI->api ?? '';
-        $timeoutSeconds = 0;
-        /* call api */
-        $version    = $infoPrompt->version ?? $infoPrompt['version'];
+        /* xác định mô hình AI sử dụng 
+        
+            dựa trên model - hiện tại:
+            -> nếu 'deepseek-ai/DeepSeek-R1' => deepseek
+            -> còn lại là chatGPT
+        
+        */
+        $model      = $infoPrompt->version ?? $infoPrompt['version'];
+        if($model=='deepseek-ai/DeepSeek-R1'||$model=='deepseek-ai/DeepSeek-V3'){ /* deepseek => gọi thông qua api của deepinfra */
+            $point  = 'https://api.deepinfra.com/v1/openai/chat/completions';
+            $apiKey = env('DEEP_INFRA_API_KEY');
+        }else {
+            $point  = 'https://api.openai.com/v1/chat/completions';
+            $apiKey = env('CHAT_GPT_API_KEY');
+        }
+        /* lấy body */
         if(empty($urlImage)){
-            $body   = self::autoContent($promptText, $version);
+            $body       = self::autoContent($promptText, $model);
         }else {
             $body   = self::autoContentWithImage($promptText, $urlImage);
         }
+        /* thêm options cứng chỗ này => hiện đang là options của deepseek */
+        $options        = [
+            'max_tokens'    => 15000,
+            // 'temperature' => 0.7, // Cân bằng giữa sáng tạo và tập trung (0-1)
+            // 'top_p' => 0.9, // Lấy mẫu từ phần trăm xác suất cao nhất 
+            // 'frequency_penalty' => 0.5, // Giảm lặp từ (0-1)
+            // 'presence_penalty' => 0.3, // Khuyến khích đề cập chủ đề mới (0-1)
+            // 'stop' => ['</html>', '<!--END-->'], // Dừng generate khi gặp các sequence này
+            // 'best_of' => 3, // Sinh 3 response và chọn cái tốt nhất (tăng chi phí)
+            // 'n' => 1, // Số lượng response trả về
+        ];
+        $payload = array_merge($body, $options);
+        /* call api */
+        $timeoutSeconds = 0;
         $response   = Http::withHeaders([
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer ' . $apiKey,
-        ])->timeout($timeoutSeconds)->post('https://api.openai.com/v1/chat/completions', $body);
+        ])->timeout($timeoutSeconds)->post($point, $payload);
         /* trả dữ liệu */
         $result = $response->json();
         if(!empty($result['choices'][0]['message']['content'])) {
-            $data['content']    = $result['choices'][0]['message']['content'];
+            $data['content']    = self::removeThinkTags($result['choices'][0]['message']['content']);
             $data['error']      = '';
         }else {
             $data['content']    = '';
-                $data['error']       = $result['error']['message'];
-            /* kiểm tra nếu hết credit -> đổi trạng thái của API */
-            if(strpos($result['error']['message'], 'You exceeded your current quota')!==false){
-                ApiAI::updateItem($infoApiAI->id, ['status' => 0]);
-            }
+            $data['error']      = $result['error']['message'];
+            // /* kiểm tra nếu hết credit -> đổi trạng thái của API */
+            // if(strpos($result['error']['message'], 'You exceeded your current quota')!==false){
+            //     ApiAI::updateItem($infoApiAI->id, ['status' => 0]);
+            // }
         }
         return $data;
     }
 
-    private static function autoContent($prompt, $model){
+    private static function autoContent($promptText, $model){
 
         return [
             'model'     => $model,
             'messages'  => [
-                [
-                    'role'      => 'user',
-                    'content'   => $prompt
-                ],
+                ['role' => 'system', 'content' => 'You are an expert in phone wallpapers, an art specialist, a psychology expert, a content specialist, and a professional SEO content strategist. Please carefully review each user request. Complete and fulfill it to the best of your ability.'],
+                ['role' => 'user', 'content' => $promptText]
             ],
         ];
         
     }
 
-    private static function autoContentWithImage($prompt, $imageUrl){
+    private static function autoContentWithImage($promptText, $imageUrl){
         // Lấy dữ liệu ảnh từ URL
         $imageData = file_get_contents($imageUrl);
         list($width, $height) = getimagesizefromstring($imageData);
@@ -269,7 +289,7 @@ class ChatGptController extends Controller {
                     'content' => [
                         [
                             'type' => 'text',
-                            'text' => $prompt
+                            'text' => $promptText
                         ],
                         [
                             'type' => 'image_url',
@@ -282,6 +302,11 @@ class ChatGptController extends Controller {
             ],
             'max_tokens' => 4000
         ];
+    }
+
+    private static function removeThinkTags(string $content): string{
+        $content = preg_replace('/<think>.*?<\/think>/s', '', $content);
+        return trim(preg_replace('/\s+/', ' ', $content));
     }
 
 }

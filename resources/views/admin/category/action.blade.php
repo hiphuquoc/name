@@ -7,7 +7,10 @@
         <!-- tạo trang ngôn ngữ --> 
         @include('admin.button.translatePage')
 
-        <!-- dịch content (những trang chưa có) -->
+        <!-- nut viết content (tchạy ngầm) -->
+        @include('admin.button.writeContent')
+
+        <!-- dịch content (theo tùy chọn) -->
         @include('admin.button.translateContentWithOption')
 
     @else   
