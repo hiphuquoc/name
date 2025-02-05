@@ -240,7 +240,7 @@ return [
         'ai', 'google_translate'
     ],
     'ai_version'    => [ /* vesion đầu tiên được mặc định dùng ở các trường hợp không quy định */
-        'gpt-4o', 'gpt-4o-mini', 'deepseek-ai/DeepSeek-R1', 'deepseek-ai/DeepSeek-V3'
+        'gpt-4o', 'gpt-4o-mini', 'o1', 'o1-mini', 'o3-mini', 'deepseek-ai/DeepSeek-R1', 'deepseek-ai/DeepSeek-V3'
     ],
     'percent_discount_default'  => '0.4', /* hệ số giá mặc định khi không lấy được thông tin GPS và IP của khách hàng */
 ];

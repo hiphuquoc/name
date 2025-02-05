@@ -220,16 +220,21 @@ class ChatGptController extends Controller {
             $body   = self::autoContentWithImage($promptText, $urlImage);
         }
         /* thêm options cứng chỗ này => hiện đang là options của deepseek */
-        $options        = [
-            'max_tokens'    => 15000,
-            // 'temperature' => 0.7, // Cân bằng giữa sáng tạo và tập trung (0-1)
-            // 'top_p' => 0.9, // Lấy mẫu từ phần trăm xác suất cao nhất 
-            // 'frequency_penalty' => 0.5, // Giảm lặp từ (0-1)
-            // 'presence_penalty' => 0.3, // Khuyến khích đề cập chủ đề mới (0-1)
-            // 'stop' => ['</html>', '<!--END-->'], // Dừng generate khi gặp các sequence này
-            // 'best_of' => 3, // Sinh 3 response và chọn cái tốt nhất (tăng chi phí)
-            // 'n' => 1, // Số lượng response trả về
+        $arrayNotSupportOptions = [
+            'o1', 'o1-mini', 'o3-mini'
         ];
+        $options        = [];
+        if(!in_array($infoPrompt->version, $arrayNotSupportOptions)) $options['max_tokens'] = 15000;
+        // $options        = [
+        //     'max_tokens'    => 15000,
+        //     'temperature' => 0.7, // Cân bằng giữa sáng tạo và tập trung (0-1)
+        //     'top_p' => 0.9, // Lấy mẫu từ phần trăm xác suất cao nhất 
+        //     'frequency_penalty' => 0.5, // Giảm lặp từ (0-1)
+        //     'presence_penalty' => 0.3, // Khuyến khích đề cập chủ đề mới (0-1)
+        //     'stop' => ['</html>', '<!--END-->'], // Dừng generate khi gặp các sequence này
+        //     'best_of' => 3, // Sinh 3 response và chọn cái tốt nhất (tăng chi phí)
+        //     'n' => 1, // Số lượng response trả về
+        // ];
         $payload = array_merge($body, $options);
         /* call api */
         $timeoutSeconds = 0;
@@ -258,7 +263,7 @@ class ChatGptController extends Controller {
         return [
             'model'     => $model,
             'messages'  => [
-                ['role' => 'system', 'content' => 'You are an expert in phone wallpapers, an art specialist, a psychology expert, a content specialist, and a professional SEO content strategist. Please carefully review each user request. Complete and fulfill it to the best of your ability.'],
+                // ['role' => 'system', 'content' => 'You are an expert in phone wallpapers, an art specialist, a psychology expert, a content specialist, and a professional SEO content strategist. Please carefully review each user request. Complete and fulfill it to the best of your ability.'],
                 ['role' => 'user', 'content' => $promptText]
             ],
         ];

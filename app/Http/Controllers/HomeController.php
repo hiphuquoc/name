@@ -80,75 +80,27 @@ class HomeController extends Controller {
     }
 
     public static function test(Request $request){
-        // Dữ liệu mẫu để kiểm thử hàm
-        $promptText = 'Viết nội dung chuyên sâu cho phần "mở đầu" trong bài viết thuộc danh mục "hình nền điện thoại Siêu Anh Hùng", với các yêu cầu cụ thể sau:
-
-                            Vị trí đặt Nội dung: 
-                            - Nội dung được hiển thị bên dưới danh sách các bộ sưu tập hình nền trả phí. Mỗi bộ sưu tập gồm 6-8 ảnh chất lượng cao.
-
-                            Độ dài: 
-                            - tối thiếu 1800 từ
-
-                            Yêu cầu về trình bày:
-                            - Sử dụng tiếng Việt chuẩn mực, không pha trộn tiếng Anh không cần thiết
-                            - Dùng từ ngữ phổ thông, dễ hiểu với đại đa số người đọc
-                            - Tránh biệt ngữ, tiếng lóng hoặc từ địa phương
-                            - Sử dụng thẻ HTML đúng cách: <h2>, <h3>, <p> để phân cấp nội dung, <strong><a href="../../"></a></strong> cho tên nền tảng name.com.vn, chọn icon phù hợp với nội dung đang viết và thêm vào trước nội dung trong các thẻ <h3> để gây sự chú ý cao
-                            - Viết các đoạn văn gồm 2-3 câu ngắn gọn, dễ đọc. Các câu trong cùng đoạn phải bổ trợ và diễn giải cho nhau.
-                            - Nội dung giữa các đoạn phải liên kết chặt chẽ và không được trùng lặp ý.
-                            - Sử dụng từ ngữ phù hợp với chủ đề và mang tính thực tiễn. Nhấn mạnh vừa phải về số lượng và chất lượng bằng các từ chỉ số nhiều như "những", "các".
-
-                            Yêu cầu về giọng văn:
-                            - Sử dụng giọng văn gần gũi với cách xưng hô "chúng tôi - bạn". Thêm các từ ngữ thân thiện ví dụ như: "nhé!", "ngay nhé!",... một cách hợp lý và cảm xúc.
-                            - Cân bằng giữa ngôn ngữ chuyên môn và dễ hiểu. Tránh sử dụng quá nhiều thuật ngữ kỹ thuật.
-                            - Trình bày nội dung với mở đầu thu hút và kết thúc ấn tượng. Chuyển đoạn mạch lạc và truyền cảm hứng tích cực.
-
-                            Yêu cầu về SEO & trải nghiệm người dùng:
-                            - Tối ưu nội dung: viết như chuyên gia trong lĩnh vực (không như AI viết), thông tin chính xác và cập nhật, phân tích chuyên sâu phù hợp chủ đề, góc nhìn đa dạng thể hiện chiều sâu, nội dung thật hay, cảm xúc và mạch lạc
-                            - Tối ưu từ khóa: tối ưu từ khóa chính "Hình nền điện thoại Viễn Tưởng", từ khóa phụ, từ khóa dài, từ khóa Semantic và từ khóa liên quan nhưng vẫn đảm bảo nội dung tự nhiên, tối ưu cả LSI keywords về chủ đề hình nền một cách tự nhiên, tránh nhồi nhét từ khóa
-                            - Tối ưu chuyển đổi: call-to-action phù hợp chủ đề, đối tượng và gợi ý thực tế về chọn/tải/trải nghiệm hình nền, khuyến khích mua sản phẩm trả phí (cảm xúc, tự nhiên và đặt đúng nơi đúng chỗ - ở cuối của toàn bộ nội dung)
-
-                            Yêu cầu về kết quả:
-                            - Trả về HTML text hoàn chỉnh với thẻ đúng chuẩn
-                            - Chỉ trả kết quả bài viết, không giải thích thêm
-
-                            Lưu ý quan trọng: 
-                            - Sau khi viết xong, trước khi trả kết quả, hãy đứng ở góc nhìn của độc giả (người đang tìm kiếm hình nền điện thoại Viễn Tưởng) để đọc lại nội dung một lần nữa, tự kiểm tra và sửa lỗi dựa trên những yêu cầu đã nêu để có nội dung hay nhất.
-
-                            Gợi ý cấu trúc bài viết: (đây chỉ là gợi ý, bạn phải viết sáng tạo cho phù hợp với chủ đề và unique) - ghi chú: tập trung vào dàn ý này thôi, những phần khác tôi viết riêng
-                            <h2>Hình nền điện thoại Siêu Anh Hùng: Khám phá vẻ đẹp ... và ... của ... Siêu Anh Hùng ngay trên màn hình điện thoại của bạn</h2> - Hoàn thiện tiêu đề bằng cách chọn những điểm đặc sắc nhất của chủ đề Siêu Anh Hùng.
-                            <p>mở đầu</p>
-                            <h3>Định nghĩa về Siêu Anh Hùng?</h3>
-                            <p>Định nghĩa, giải thích rõ ràng về Siêu Anh Hùng</p>
-                            <p>Những đặc trưng nổi bật, vẻ đẹp, ý nghĩa và sự thu hút của chủ đề này trong lĩnh vực nghệ thuật.</p>
-                            -<h3>Cách nghệ sĩ ứng dụng chủ đề Siêu Anh Hùng vào hình nền điện thoại</h3>
-                            <p>Dẫn dắt và nói về cách ứng dụng vẻ đẹp, ý nghĩa và sự đặc sắc của chủ đề Siêu Anh Hùng vào trong hình nền điện thoại</p>
-                            <p>nhấn mạnh đến giá trị mang lại, ý nghĩa, trải nghiệm và tính thẩm mỹ</p>
-                            <p></p>
-                            <h3>Tầm quan trọng của việc trang trí điện thoại bằng hình nền phù hợp</p>
-                            <p>Đưa ra những nghiên cứu (có con số cụ thể) về tác động tinh thần, lợi ích tích cực của việc sử dụng hình nền điện thoại đẹp và phù hợp</p>
-                            <p>đưa ra góc nhìn đa chiều về sự phù hợp của những bộ hình nền điện thoại Siêu Anh Hùng với các đối tượng người dùng cụ thể.</p>
-                            <p>nhấn mạnh hình nền điện thoại trả phí còn có tác dụng hơn thế nữa bởi được chúng tôi nghiên cứu tâm lí học, chăm chút và thiết kế,...</p>
-                            <p>Kết thúc ngắn gọn, tinh tế cho phần dàn ý này (chứ không phải cho toàn bài) - kèm lời kêu gọi tinh tế</p>';
-        $testMessages = [
-            ['role' => 'system', 'content' => 'You are an expert in phone wallpapers, an art specialist, a psychology expert, a content specialist, and a professional SEO content strategist. Please carefully review each user request. Complete and fulfill it to the best of your ability.'],
-            ['role' => 'user', 'content' => $promptText]
-        ];
-        $options        = [
-            'max_tokens'    => 100000,
-            // 'temperature' => 0.7, // Cân bằng giữa sáng tạo và tập trung (0-1)
-            // 'top_p' => 0.9, // Lấy mẫu từ phần trăm xác suất cao nhất 
-            // 'frequency_penalty' => 0.5, // Giảm lặp từ (0-1)
-            // 'presence_penalty' => 0.3, // Khuyến khích đề cập chủ đề mới (0-1)
-            // 'stop' => ['</html>', '<!--END-->'], // Dừng generate khi gặp các sequence này
-            // 'best_of' => 3, // Sinh 3 response và chọn cái tốt nhất (tăng chi phí)
-            // 'n' => 1, // Số lượng response trả về
-        ];
-        $response = self::chatWithDeepInfra($testMessages, 'deepseek-ai/DeepSeek-R1', $options);
-        print_r($response);
+        // // Dữ liệu mẫu để kiểm thử hàm
+        // $promptText = '';
+        // $testMessages = [
+        //     ['role' => 'system', 'content' => 'Bạn là một chuyên gia sáng tạo nội dung với phong cách hấp dẫn và sáng tạo. Hãy giúp tôi viết những nội dung độc đáo và thu hút người đọc, với giọng văn thân thiện, dễ hiểu và sáng tạo. Sử dụng ngôn ngữ tự nhiên và tránh lặp từ.'],
+        //     ['role' => 'user', 'content' => $promptText]
+        // ];
+        // $options        = [
+        //     'max_tokens'    => 100000,
+        //     // 'temperature' => 0.7, // Cân bằng giữa sáng tạo và tập trung (0-1)
+        //     // 'top_p' => 0.9, // Lấy mẫu từ phần trăm xác suất cao nhất 
+        //     // 'frequency_penalty' => 0.5, // Giảm lặp từ (0-1)
+        //     // 'presence_penalty' => 0.3, // Khuyến khích đề cập chủ đề mới (0-1)
+        //     // 'stop' => ['</html>', '<!--END-->'], // Dừng generate khi gặp các sequence này
+        //     // 'best_of' => 3, // Sinh 3 response và chọn cái tốt nhất (tăng chi phí)
+        //     // 'n' => 1, // Số lượng response trả về
+        // ];
+        // $response = self::chatWithDeepInfra($testMessages, 'deepseek-ai/DeepSeek-R1', $options);
+        // print_r($response);
         
         
-        dd($response);
+        // dd($response);
 
 
         
