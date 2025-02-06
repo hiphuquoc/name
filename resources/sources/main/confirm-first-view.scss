@@ -59,7 +59,7 @@
         position: relative;
         transition: all 0.2s;
         background: $colorBackgroundLv2;
-        border-radius: 0.75rem;
+        border-radius: $radiusBoxNormal;
         border: 2px solid $colorBackgroundLv1;
         overflow: hidden;
         &.alreadyDownload {
@@ -97,7 +97,7 @@
             width: fit-content;
             height: fit-content;
             text-align: center;
-            border-radius: 0.75rem;
+            border-radius: $radiusBoxNormal;
             top: 50%;
             left: 50%;
             padding: 0.5rem 1rem;
@@ -142,7 +142,7 @@
 .confirmMessageBox {
     display: flex;
     background: $colorBackgroundLv2;
-    border-radius: 0.5rem;
+    border-radius: $radiusBoxSmall;
     &_left {
         padding: 1rem;
         flex: 0 0 320px;

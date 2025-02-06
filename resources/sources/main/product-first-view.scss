@@ -155,22 +155,28 @@
                 display: flex;
                 align-items: flex-end;
                 flex-wrap: wrap;
-                gap: 0.5rem 0.25rem;
+                gap: 0.75rem 0.5rem;
+                letter-spacing: 0.25px;
                 &_item {
-                    font-size: 0.9rem;
+                    font-size: 0.85rem;
+                    font-family: $fontTitle;
                     display: inline-block;
-                    background: $colorBackgroundLv2;
                     color: $colorText;
-                    padding: 0.15rem 0.75rem;
-                    border-radius: 100px;
+                    padding: 0.15rem 1rem;
+                    border-radius: $radiusBoxSmall;
+                    border: 1px solid $colorBackgroundLv3;
+                    background: rgba($colorBackgroundLv2, 0.15);
                     cursor: pointer;
+                    &:first-child {
+                        border: none;
+                        background: none;
+                    }
                     &:hover {
-                        background: $colorBackgroundLv3;
+                        background: $colorBackgroundLv2;
                     }
                     &.selected {
-                        background: $colorBackgroundLv3;
-                        color: $colorTextLight;
-                        font-family: $fontTitle;
+                        background: $colorBackgroundLv2;
+                        
                     }
                 }
             }
@@ -264,7 +270,7 @@
                 margin: 0;
                 padding: 0;
                 background: $colorBackgroundLv2;
-                border-radius: 0.5rem 0.5rem 0 0;
+                border-radius: $radiusBoxSmall $radiusBoxSmall 0 0;
                 overflow: hidden;
                 box-shadow: 0 -1px 5px $colorBackgroundLv1;
                 &_button {
@@ -447,14 +453,14 @@
     &.mini {
         height: 30px;
         max-width: 110px;
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         .inputQty_button {
             flex: 0 0 30px;
             &.minus {
-                border-radius: 0.5rem 0 0 0.5rem;
+                border-radius: $radiusBoxSmall 0 0 $radiusBoxSmall;
             }
             &.plus {
-                border-radius: 0 0.5rem 0.5rem 0;
+                border-radius: 0 $radiusBoxSmall $radiusBoxSmall 0;
             }
         }
         input {

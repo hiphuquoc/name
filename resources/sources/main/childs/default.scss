@@ -174,7 +174,10 @@ $fontText: "SVN-Gilroy", sans-serif;
   // }
 }
 
-$heightMenu : 3.3rem;
+$heightMenu : 3.6rem;
+$radiusBoxSmall : 0.75rem;
+$radiusBoxNormal : 0.825rem;
+$radiusBoxLarge : 1rem;
 
 @mixin fontAwesome {
   font-family: "Font Awesome 6 Free";
@@ -225,7 +228,7 @@ $heightMenu : 3.3rem;
 @mixin productGrid {
   display: flex;
   &_item {
-    border-radius: 0.75rem;
+    border-radius: $radiusBoxNormal;
     .show {
       width: 100%;
       height: auto;
@@ -439,7 +442,7 @@ $heightMenu : 3.3rem;
   &_image {
       flex: 0 0 70px;
       aspect-ratio: 1/1.05;
-      border-radius: 0.75rem;
+      border-radius: $radiusBoxNormal;
       overflow: hidden;
       display: flex;
       img {
@@ -601,7 +604,7 @@ $heightMenu : 3.3rem;
     border-radius: 1000px;
   }
   &::-webkit-scrollbar-track {
-    border-radius: 0.5rem;
+    border-radius: $radiusBoxSmall;
     background: $colorBackgroundLv3;
   }
 }
@@ -613,7 +616,7 @@ $heightMenu : 3.3rem;
   > * {
       background: $colorBackgroundLv3;
       padding: 0.15rem 1rem;
-      border-radius: 20px;
+      border-radius: $radiusBoxLarge;
       display: flex;
       align-items: center;
       justify-content: center;

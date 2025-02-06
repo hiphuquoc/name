@@ -46,7 +46,7 @@
         font-size: 1.2rem;
         border: none;
         cursor: pointer;
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         @include colorOpacity('color', $colorText, 0.8);
         background: $colorTextLight;
         opacity: 0.6;

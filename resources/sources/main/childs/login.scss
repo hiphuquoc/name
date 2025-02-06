@@ -48,7 +48,7 @@
         width: calc(100% - 2rem);
         margin: 0 auto;
         background: #fff;
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         padding: 1.25rem;
         z-index: 99;
         position: relative;
@@ -252,7 +252,7 @@
     min-height: 40px;
     height: 100%;
     background: #1877f2;
-    border-radius: 5px;
+    border-radius: $radiusBoxSmall;
     display: flex;
     justify-content: center;
     align-items: center;

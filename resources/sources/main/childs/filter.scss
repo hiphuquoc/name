@@ -17,14 +17,14 @@ $heightSelect : 2.25rem;
         left: 0;
         background: $colorBackgroundLv1;
         padding: 0 0.5rem 0 0.25rem;
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         font-size: 0.75rem;
         font-family: $fontTitle;
         @include colorOpacity('color', $colorText, 0.75);
     }
     &_input {
         padding: 0.3rem 0.75rem 0.1rem 0.75rem;
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         border: 1px solid $colorBackgroundLv3;
         font-size: 0.85rem;
         @include colorOpacity('color', $colorText, 0.75);
@@ -58,7 +58,7 @@ $heightSelect : 2.25rem;
         top: $heightSelect;
         background: $colorBackgroundLv2;
         min-width: 200px;
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         box-shadow: 0 0 10px $colorBackgroundLv1;
         z-index: 999;
         max-height: 420px;
@@ -81,7 +81,7 @@ $heightSelect : 2.25rem;
         }
         &::-webkit-scrollbar-track {
             -webkit-box-shadow: inset 0 0 6px $colorBackgroundLv2;
-            border-radius: 0.5rem;
+            border-radius: $radiusBoxSmall;
             background: transparent;
         }
         &_item {
@@ -149,9 +149,9 @@ $heightSelect : 2.25rem;
     .quantity {
         font-size: 0.9rem;
         background: $colorBackgroundLv2;
-        border-radius: 50px;
+        border-radius: $radiusBoxSmall;
         height: calc($heightSelect + 5px);
-        padding: 0 0.75rem;
+        padding: 0 1rem;
         min-width: fit-content;
         display: flex;
         align-items: center;
@@ -181,7 +181,7 @@ $heightSelect : 2.25rem;
         width: calc($heightSelect + 5px);
         aspect-ratio: 1/1;
         @include colorOpacity('background', $colorBackgroundLv2, 0.8);
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         z-index: 1;
         cursor: pointer;
 
@@ -214,7 +214,7 @@ $heightSelect : 2.25rem;
         
         left: 0;
         padding: 0.15rem 0.5rem;
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         line-height: 18px;
         height: 28px;
         
@@ -246,7 +246,7 @@ $heightSelect : 2.25rem;
         z-index: 99;
         @include colorOpacity('background', $colorBackgroundLv1, 1);
         padding: 0.75rem;
-        border-radius: 0.5rem;
+        border-radius: $radiusBoxSmall;
         width: 400px;
         box-shadow: 0 0 12px rgba(0,0,0,0.45);
         &_title {
@@ -265,7 +265,7 @@ $heightSelect : 2.25rem;
                 justify-content: center;
                 align-items: center;
                 @include colorOpacity('background', $colorBackgroundLv2, 0.75);
-                border-radius: 0.5rem;
+                border-radius: $radiusBoxSmall;
                 font-size: 0.85rem;
             }
         }

@@ -1,7 +1,7 @@
 /* định dạng ảnh => hiện dùng cho blog */
 .imageBox, .imageGroup {
     max-width: 750px;
-    border-radius: 0.75rem;
+    border-radius: $radiusBoxNormal;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
@@ -42,7 +42,7 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                border-radius: 0.5rem 0.5rem 0 0;
+                border-radius: $radiusBoxSmall $radiusBoxSmall 0 0;
                 margin: 0;
                 scale: 1.1;
             }

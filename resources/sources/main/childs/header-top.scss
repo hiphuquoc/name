@@ -120,7 +120,7 @@
                 bottom: $heightMenu;
                 right: 0;
                 z-index: 1;
-                border-radius: 0.5rem 0.5rem 0 0;
+                border-radius: $radiusBoxSmall $radiusBoxSmall 0 0;
                 border-top: 2px solid #1a202c;
                 box-shadow: 0px -1px 10px #1a202c;
                 overflow: hidden;
@@ -161,7 +161,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.5rem;
+    border-radius: $radiusBoxSmall; 
     margin-top: 3px;
     padding: 0 !important;
     i {
@@ -172,12 +172,12 @@
 .closeButtonMobileMenu {
     @include iconCloseSquare;
     &:dir(ltr), [dir="ltr"] & {
-        border-top-right-radius: 10px !important;
-        border-bottom-left-radius: 10px !important;
+        border-top-right-radius: $radiusBoxSmall !important;
+        border-bottom-left-radius: $radiusBoxSmall !important;
     }
     &:dir(rtl), [dir="rtl"] & {
-        border-top-left-radius: 10px !important;
-        border-bottom-right-radius: 10px !important;
+        border-top-left-radius: $radiusBoxSmall !important;
+        border-bottom-right-radius: $radiusBoxSmall !important;
     }
 }
 .backgroundBlurMobileMenu {
@@ -243,7 +243,7 @@
         background: $colorBackgroundLv2;
         @include colorOpacity('color', $colorText, 0.8);
         z-index: 1;
-        border-radius: 0 0 0.5rem 0.5rem;
+        border-radius: 0 0 $radiusBoxSmall $radiusBoxSmall;
         border-top: 2px solid $colorBackgroundLv1;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         align-content: flex-start;
@@ -355,7 +355,7 @@
         @include colorOpacity('color', $colorText, 0.8);
         position: absolute;
         z-index: 1;
-        border-radius: 0 0 0.5rem 0.5rem;
+        border-radius: 0 0 $radiusBoxSmall $radiusBoxSmall;
         border-top: 2px solid $colorBackgroundLv1;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         overflow: hidden;
@@ -547,7 +547,7 @@
         @include colorOpacity('color', $colorText, 0.8);
         position: absolute;
         z-index: 1;
-        border-radius: 0 0 0.5rem 0.5rem;
+        border-radius: 0 0 $radiusBoxSmall $radiusBoxSmall;
         border-top: 2px solid $colorBackgroundLv1;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         padding: 0;
@@ -626,7 +626,7 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    border-radius: 0.5rem;
+    border-radius: $radiusBoxSmall;
     img {
         max-width: 120px;
         opacity: 0.8;
@@ -649,8 +649,8 @@
         padding: 0;
         height: calc($heightMenu - 0.75rem);
         background: $colorBackgroundLv1;
-        box-shadow: 0 0 5px $colorBackgroundLv1;
-        border-radius: 0.5rem;
+        box-shadow: 0 0 5px rgba($colorBackgroundLv1, 0.5);
+        border-radius: $radiusBoxSmall;
         border: 2px solid transparent;
         &:hover {
             border: 2px solid rgba($colorLv2, 0.35);
@@ -693,7 +693,7 @@
                 padding: 0.45rem 0;
                 background: $colorBackgroundLv2;
                 z-index: 999;
-                border-radius: 0.25rem;
+                border-radius: $radiusBoxSmall;
                 flex-direction: column;
                 box-shadow: 1px 1px 10px $colorBackgroundLv1;
                 @include colorOpacity('color', $colorText, 0.8);
@@ -784,10 +784,10 @@
                 color: inherit;
                 cursor: pointer;
                 &:dir(ltr), [dir="ltr"] & {
-                    border-radius: 0 0.5rem 0.5rem 0;
+                    border-radius: 0 $radiusBoxSmall $radiusBoxSmall 0;
                 }
                 &:dir(rtl), [dir="rtl"] & {
-                    border-radius: 0.5rem 0 0 0.5rem;
+                    border-radius: $radiusBoxSmall 0 0 $radiusBoxSmall;
                 }
                 svg {
                     width: 1rem;
@@ -809,7 +809,7 @@
                 visibility: hidden; /* Đặt visibility để không thể tương tác */
                 background: $colorBackgroundLv2;
                 z-index: 998;
-                border-radius: 0.75rem;
+                border-radius: $radiusBoxNormal;
                 box-shadow: 1px 1px 10px $colorBackgroundLv1;
                 @include colorOpacity('color', $colorText, 0.8);
                 top: calc($heightMenu - 0.75rem + 2px);
