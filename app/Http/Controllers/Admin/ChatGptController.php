@@ -223,11 +223,11 @@ class ChatGptController extends Controller {
             $body   = self::autoContentWithImage($promptText, $urlImage);
         }
         /* thêm options cứng chỗ này => hiện đang là options của deepseek */
-        $arrayNotSupportOptions = [
-            'o1', 'o1-mini', 'o3-mini'
-        ];
+        // $arrayNotSupportOptions = [
+        //     'o1', 'o1-mini', 'o3-mini'
+        // ];
         $options        = [];
-        if(!in_array($infoPrompt->version, $arrayNotSupportOptions)) $options['max_tokens'] = 15000;
+        // if(!in_array($infoPrompt->version, $arrayNotSupportOptions)) $options['max_tokens'] = 15000;
         // $options        = [
         //     'max_tokens'    => 15000,
         //     'temperature' => 0.7, // Cân bằng giữa sáng tạo và tập trung (0-1)
