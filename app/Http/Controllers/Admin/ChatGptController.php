@@ -209,6 +209,9 @@ class ChatGptController extends Controller {
         if($model=='deepseek-ai/DeepSeek-R1'||$model=='deepseek-ai/DeepSeek-V3'){ /* deepseek => gọi thông qua api của deepinfra */
             $point  = 'https://api.deepinfra.com/v1/openai/chat/completions';
             $apiKey = env('DEEP_INFRA_API_KEY');
+        }else if($model=='qwen-max'||$model=='qwen-plus'||$model=='qwen-turbo'){
+            $point  = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions';
+            $apiKey = env('QWEN_API_KEY');
         }else {
             $point  = 'https://api.openai.com/v1/chat/completions';
             $apiKey = env('CHAT_GPT_API_KEY');
