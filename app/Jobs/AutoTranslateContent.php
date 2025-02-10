@@ -35,89 +35,91 @@ class AutoTranslateContent implements ShouldQueue {
 
     public function handle(){
         try {
-            $infoPage           = HelperController::getFullInfoPageByIdSeo($this->idSeo);
-            /* lấy content source dùng để dịch - lấy lại để có bản mói nhất */
-            $contentSourceLetTranslate          = '';
-            if($this->language=='en'){ /* bản en => lấy bản vi làm nguồn dịch */
-                foreach($infoPage->seos as $seo) {
-                    if (!empty($seo->infoSeo->language) && $seo->infoSeo->language == 'vi') {
-                        foreach ($seo->infoSeo->contents as $c) {
-                            if (isset($c->ordering)&&$c->ordering==$this->ordering) { /* ghi chú quan trong: không kiểm tra empty vì ordering có thể bằng 0 */
-                                $contentSourceLetTranslate = $c->content;
-                                break 2; // Thoát khỏi cả 2 vòng lặp
-                            }
-                        }
-                    }
-                }
-            }else { /* khác bản en => lấy bản en làm nguồn dịch */
-                /* kiểm tra trước bản en có tồn tại không đã */
-                foreach($infoPage->seos as $seo){
-                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='en'){
-                        if(!empty($seo->infoSeo->contents)){
-                            foreach($seo->infoSeo->contents as $c){
-                                if(isset($c->ordering)&&$c->ordering==$this->ordering) {
-                                    $contentSourceLetTranslate  = $c->content;
+            if($this->ordering!=7){
+                $infoPage           = HelperController::getFullInfoPageByIdSeo($this->idSeo);
+                /* lấy content source dùng để dịch - lấy lại để có bản mói nhất */
+                $contentSourceLetTranslate          = '';
+                if($this->language=='en'){ /* bản en => lấy bản vi làm nguồn dịch */
+                    foreach($infoPage->seos as $seo) {
+                        if (!empty($seo->infoSeo->language) && $seo->infoSeo->language == 'vi') {
+                            foreach ($seo->infoSeo->contents as $c) {
+                                if (isset($c->ordering)&&$c->ordering==$this->ordering) { /* ghi chú quan trong: không kiểm tra empty vì ordering có thể bằng 0 */
+                                    $contentSourceLetTranslate = $c->content;
                                     break 2; // Thoát khỏi cả 2 vòng lặp
                                 }
                             }
                         }
                     }
-                }
-                /* nếu bản en chưa tồn tại mới quay lại lấy bản vi */
-                if(empty($contentSourceLetTranslate)){
-                    foreach($infoPage->seo->contents as $c){
-                        if(!empty($c->ordering)&&$c->ordering==$this->ordering) {
-                            $contentSourceLetTranslate  = $c->content;
-                            break;
+                }else { /* khác bản en => lấy bản en làm nguồn dịch */
+                    /* kiểm tra trước bản en có tồn tại không đã */
+                    foreach($infoPage->seos as $seo){
+                        if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='en'){
+                            if(!empty($seo->infoSeo->contents)){
+                                foreach($seo->infoSeo->contents as $c){
+                                    if(isset($c->ordering)&&$c->ordering==$this->ordering) {
+                                        $contentSourceLetTranslate  = $c->content;
+                                        break 2; // Thoát khỏi cả 2 vòng lặp
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    /* nếu bản en chưa tồn tại mới quay lại lấy bản vi */
+                    if(empty($contentSourceLetTranslate)){
+                        foreach($infoPage->seo->contents as $c){
+                            if(!empty($c->ordering)&&$c->ordering==$this->ordering) {
+                                $contentSourceLetTranslate  = $c->content;
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            /* convert prompt */
-            $promptText         = ChatGptController::convertPrompt($infoPage, $this->infoPrompt, $this->language);
-            /* tách content thành những phần nhỏ */
-            $arrayPartContent   = \App\Helpers\Charactor::splitString($contentSourceLetTranslate, 4000);
-            $resultContent      = '';
-            foreach($arrayPartContent as $contentPart){
-                if(!empty(trim($contentPart))){
-                    $promptUse      = str_replace('#content', $contentPart, $promptText);
-                    $response       = ChatGptController::callApi($promptUse, $this->infoPrompt);
-                    $resultContent  .= $response['content'];
+                /* convert prompt */
+                $promptText         = ChatGptController::convertPrompt($infoPage, $this->infoPrompt, $this->language);
+                /* tách content thành những phần nhỏ */
+                $arrayPartContent   = \App\Helpers\Charactor::splitString($contentSourceLetTranslate, 4000);
+                $resultContent      = '';
+                foreach($arrayPartContent as $contentPart){
+                    if(!empty(trim($contentPart))){
+                        $promptUse      = str_replace('#content', $contentPart, $promptText);
+                        $response       = ChatGptController::callApi($promptUse, $this->infoPrompt);
+                        $resultContent  .= $response['content'];
+                    }
                 }
-            }
-            if(!empty($resultContent)){
-                /* thay internal link trong content */
-                $response   = self::translateSlugBySlugOnData($this->language, $resultContent);
-                $resultContent = $response['content'];
-                /* xóa box content cũ và lưu cơ sở dữ liệu */
-                SeoContent::select('*')
-                    ->where('seo_id', $this->idSeo)
-                    ->where('ordering', $this->ordering)
-                    ->delete();
-                SeoContent::insertItem([
-                    'seo_id'    => $this->idSeo,
-                    'content'   => $resultContent,
-                    'ordering'  => $this->ordering
-                ]);
-                /* cập nhật lại trạng thái */
-                JobAutoTranslate::where('seo_id', $this->idSeo)
-                                    ->where('ordering', $this->ordering)
-                                    ->where('language', $this->language)
-                                    ->update(['status' => 1]);
-                /* tạo danh sách links => báo cáo */
-                JobAutoTranslateLinks::where('seo_id', $this->idSeo)
-                                    ->where('ordering', $this->ordering)
-                                    ->where('language', $this->language)
-                                    ->delete();
-                if(!empty($response['array_link'])){
-                    foreach($response['array_link'] as $l){
-                        JobAutoTranslateLinks::insertItem([
-                            'seo_id'            => $this->idSeo,
-                            'ordering'          => $this->ordering,
-                            'language'          => $this->language,
-                            'link_source'       => $l['vi'],
-                            'link_translate'    => $l['translate']
-                        ]);
+                if(!empty($resultContent)){
+                    /* thay internal link trong content */
+                    $response   = self::translateSlugBySlugOnData($this->language, $resultContent);
+                    $resultContent = $response['content'];
+                    /* xóa box content cũ và lưu cơ sở dữ liệu */
+                    SeoContent::select('*')
+                        ->where('seo_id', $this->idSeo)
+                        ->where('ordering', $this->ordering)
+                        ->delete();
+                    SeoContent::insertItem([
+                        'seo_id'    => $this->idSeo,
+                        'content'   => $resultContent,
+                        'ordering'  => $this->ordering
+                    ]);
+                    /* cập nhật lại trạng thái */
+                    JobAutoTranslate::where('seo_id', $this->idSeo)
+                                        ->where('ordering', $this->ordering)
+                                        ->where('language', $this->language)
+                                        ->update(['status' => 1]);
+                    /* tạo danh sách links => báo cáo */
+                    JobAutoTranslateLinks::where('seo_id', $this->idSeo)
+                                        ->where('ordering', $this->ordering)
+                                        ->where('language', $this->language)
+                                        ->delete();
+                    if(!empty($response['array_link'])){
+                        foreach($response['array_link'] as $l){
+                            JobAutoTranslateLinks::insertItem([
+                                'seo_id'            => $this->idSeo,
+                                'ordering'          => $this->ordering,
+                                'language'          => $this->language,
+                                'link_source'       => $l['vi'],
+                                'link_translate'    => $l['translate']
+                            ]);
+                        }
                     }
                 }
             }
