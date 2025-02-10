@@ -10,16 +10,20 @@ $runningJobsCount = DB::table('jobs')
     ->whereNotNull('reserved_at')
     ->count();
 
-// Nếu số job đang chạy ít hơn 5, tìm job chưa được reserve (reserved_at IS NULL) với id cũ nhất
-if ($runningJobsCount < 5) {
-    $job = DB::table('jobs')
+// Nếu số job đang chạy ít hơn 10, ta tính số job cần khởi chạy thêm
+$jobPerTime         = 10;
+if ($runningJobsCount < $jobPerTime) {
+    $jobsToDispatch = $jobPerTime - $runningJobsCount;
+    
+    // Lấy các job chưa được reserve (reserved_at IS NULL) theo số lượng cần thiết
+    $jobs = DB::table('jobs')
         ->whereNull('reserved_at')
         ->orderBy('id', 'asc')
-        ->first();
+        ->limit($jobsToDispatch)
+        ->get();
 
-    if ($job) {
-        // Cập nhật cột reserved_at thành thời gian hiện tại để đánh dấu job này đang được xử lý
-        // Sử dụng helper time() của Laravel để lấy thời gian hiện tại
+    foreach ($jobs as $job) {
+        // Cập nhật cột reserved_at thành thời gian hiện tại (UNIX timestamp)
         DB::table('jobs')
             ->where('id', $job->id)
             ->update(['reserved_at' => time()]);
