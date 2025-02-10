@@ -10,8 +10,8 @@ $runningJobsCount = DB::table('jobs')
     ->whereNotNull('reserved_at')
     ->count();
 
-// Nếu số job đang chạy ít hơn 10, ta tính số job cần khởi chạy thêm
-$jobPerTime         = 10;
+// Nếu số job đang chạy ít hơn 30, ta tính số job cần khởi chạy thêm
+$jobPerTime         = 30;
 if ($runningJobsCount < $jobPerTime) {
     $jobsToDispatch = $jobPerTime - $runningJobsCount;
     
