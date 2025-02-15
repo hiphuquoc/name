@@ -21,7 +21,7 @@ while ($i < 2) { // Chạy tối đa 2 lần
         // Lấy các job chưa được reserve (reserved_at IS NULL) theo số lượng cần thiết
         $jobs = DB::table('jobs')
             ->whereNull('reserved_at')
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
             ->limit($jobsToDispatch)
             ->get();
 
