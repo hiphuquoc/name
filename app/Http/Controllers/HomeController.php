@@ -108,25 +108,20 @@ class HomeController extends Controller {
         // dd(123);
 
 
-        $tags = Tag::select('*')
-                    ->where('id', '>=', 734)
-                    ->orderBy('id', 'DESC')
-                    ->get();
+        // $tags = Tag::select('*')
+        //             ->where('id', '>=', 734)
+        //             ->orderBy('id', 'DESC')
+        //             ->get();
         
-        $arrayNotTranslate = ['vi', 'en'];
+        // $arrayNotTranslate = ['vi', 'en'];
                     
-        foreach($tags as $tag){
-            $idSeo = $tag->seo->id ?? 0;
-            if(!empty($idSeo)){
-                $request = new Request(['seo_id' => $idSeo]);
-                
-                foreach($tag->seos as $seo){
-                    if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->languge, $arrayNotTranslate)){
-                        AutoTranslateContent::dispatch(8, $seo->infoSeo->languge, $idSeo, 3);
-                    }
-                }
-            }
-        }
+        // foreach($tags as $tag){
+        //     foreach($tag->seos as $seo){
+        //         if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->languge, $arrayNotTranslate)){
+        //             AutoTranslateContent::dispatch(8, $seo->infoSeo->languge, $seo->infoSeo->id, 3);
+        //         }
+        //     }
+        // }
 
         // foreach($tags as $tag){
         //     $idSeo = $tag->seo->id ?? 0;
@@ -136,7 +131,7 @@ class HomeController extends Controller {
         //     }
         // }
 
-        dd(123);
+        // dd(123);
         
     }
 
