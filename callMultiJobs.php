@@ -22,7 +22,7 @@ while ($i < 2) { // Chạy tối đa 2 lần
         $ordering = 'asc';
         $jobs = DB::table('jobs')
             ->whereNull('reserved_at')
-            ->where('attempts', '<', 2)
+            ->where('attempts', '<', 1)
             ->orderBy('id', $ordering)
             ->limit($jobsToDispatch)
             ->get();
