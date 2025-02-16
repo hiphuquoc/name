@@ -107,19 +107,19 @@ class HomeController extends Controller {
         // dd(123);
 
 
-        $tags = Tag::select('*')
-                    ->where('id', '<', 734)
-                    ->orderBy('id', 'DESC')
-                    ->get();
-        foreach($tags as $tag){
-            $idSeo = $tag->seo->id ?? 0;
-            if(!empty($idSeo)){
-                $request = new Request(['seo_id' => $idSeo]);
-                TranslateController::createJobWriteContent($request);
-            }
-        }
+        // $tags = Tag::select('*')
+        //             ->where('id', '<', 734)
+        //             ->orderBy('id', 'DESC')
+        //             ->get();
+        // foreach($tags as $tag){
+        //     $idSeo = $tag->seo->id ?? 0;
+        //     if(!empty($idSeo)){
+        //         $request = new Request(['seo_id' => $idSeo]);
+        //         TranslateController::createJobWriteContent($request);
+        //     }
+        // }
 
-        dd(123);
+        // dd(123);
         
     }
 
