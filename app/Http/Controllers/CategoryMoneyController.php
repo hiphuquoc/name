@@ -200,17 +200,35 @@ class CategoryMoneyController extends Controller {
         return $response;
     }
 
-    public static function buildTocContentMain($content, $language) {
-        // Kiểm tra nếu $content rỗng hoặc không có thẻ H2
-        if (empty(trim($content))) {
+    public static function buildTocContentMain($contents, $language) {
+        // Nếu danh sách nội dung rỗng, trả về dữ liệu mặc định
+        if (empty($contents) || count($contents) === 0) {
             return [
                 'content' => '',
                 'toc_content' => ''
             ];
         }
-        // Phân tích HTML của $content để tạo TOC
+    
+        // Sắp xếp theo `ordering`
+        $sortedContents = collect($contents)->sortBy('ordering');
+    
+        // Ghép các nội dung lại sau khi đã sắp xếp
+        $htmlContent = '';
+        foreach ($sortedContents as $content) {
+            $htmlContent .= $content->content;
+        }
+    
+        // Kiểm tra nếu nội dung rỗng
+        if (empty(trim($htmlContent))) {
+            return [
+                'content' => '',
+                'toc_content' => ''
+            ];
+        }
+    
+        // Phân tích HTML của $htmlContent để tạo TOC
         $dom = new \DOMDocument();
-        @$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+        @$dom->loadHTML(mb_convert_encoding($htmlContent, 'HTML-ENTITIES', 'UTF-8'));
     
         $dataTocContent = [];
         $indexToc = 0;
@@ -236,10 +254,10 @@ class CategoryMoneyController extends Controller {
             'language' => $language
         ])->render();
     
-        // Trả về cả $xhtml và nội dung đã cập nhật
+        // Trả về cả nội dung đã cập nhật và TOC
         return [
-            'content'           => $dom->saveHTML(),
-            'toc_content'       => $xhtml,
+            'content' => $dom->saveHTML(),
+            'toc_content' => $xhtml,
         ];
     }
     

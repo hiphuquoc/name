@@ -171,6 +171,7 @@ class PageController extends Controller {
             /* prompts */
             $prompts            = Prompt::select('*')
                     ->where('reference_table', $keyTable)
+                    ->orderBy('ordering', 'ASC')
                     ->get();
             $parents            = Page::all();
             /* trang canonical -> cùng là sản phẩm */

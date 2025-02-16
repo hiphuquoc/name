@@ -98,6 +98,7 @@ class CategoryController extends Controller {
             foreach(config('main_'.env('APP_NAME').'.category_type') as $c) $arrayTypeCategory[] = $c['key'];
             $prompts            = Prompt::select('*')
                                     ->whereIn('reference_table', $arrayTypeCategory)
+                                    ->orderBy('ordering', 'ASC')
                                     ->get();
             /* trang canonical -> cùng là sản phẩm */
             $idProduct          = $item->id ?? 0;

@@ -113,6 +113,7 @@ class TagController extends Controller {
             /* prompts */
             $prompts            = Prompt::select('*')
                                     ->where('reference_table', $keyTable)
+                                    ->orderBy('ordering', 'ASC')
                                     ->get();
             $parents            = Category::all();
             /* trang canonical -> cùng là sản phẩm */

@@ -84,6 +84,7 @@ class SeoFreeWallpaperController extends Controller {
         /* prompts */
         $prompts    = Prompt::select('*')
                 ->where('reference_table', $keyTable)
+                ->orderBy('ordering', 'ASC')
                 ->get();
         $parents    = Category::all();
         $categories = $parents;

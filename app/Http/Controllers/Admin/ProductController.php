@@ -227,6 +227,7 @@ class ProductController extends Controller {
             /* prompts */
             $prompts            = Prompt::select('*')
                                     ->where('reference_table', $keyTable)
+                                    ->orderBy('ordering', 'ASC')
                                     ->get();
             /* gộp lại thành parents và lọc bỏ page hinh-nen-dien-thoai */
             $parents            = Category::all();

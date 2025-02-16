@@ -116,7 +116,7 @@
             </div>
         </div>
         <!-- Nội dung -->
-        @if(!empty($itemSeo->contents))
+        @if(!empty($dataContent['content']))
             <div id="js_buildTocContentMain_element" class="distanceBetween contentElement maxContent-1200">
                 <div class="contentBox">
                     <div id="tocContentMain">{!! $dataContent['toc_content'] !!}</div>
