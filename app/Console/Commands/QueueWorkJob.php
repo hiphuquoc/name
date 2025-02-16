@@ -71,6 +71,11 @@ class QueueWorkJob extends Command
             $this->info("Job {$jobId} đã được xử lý thành công và xóa khỏi bảng.");
         } catch (\Exception $e) {
             $this->error("Xử lý job {$jobId} thất bại: " . $e->getMessage());
+        
+            // Tăng số lần thử lên 1
+            DB::table('jobs')->where('id', $jobId)->increment('attempts');
+        
+            // Phát hành lại job để thử lại sau
             $databaseJob->release($timeout);
         }
 
