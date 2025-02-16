@@ -270,8 +270,10 @@ class TranslateController extends Controller {
 
             $count      = 0;
             foreach($prompts as $prompt){
-                AutoWriteContent::dispatch($prompt->ordering, $idSeo, $prompt->id);
-                ++$count;
+                if($prompt->ordering==1||$prompt->ordering==8){
+                    AutoWriteContent::dispatch($prompt->ordering, $idSeo, $prompt->id);
+                    ++$count;
+                }
             }
             
             /* Cập nhật thông báo */
