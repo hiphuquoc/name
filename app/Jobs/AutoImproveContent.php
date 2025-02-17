@@ -42,7 +42,7 @@ class AutoImproveContent implements ShouldQueue {
             switch ($this->ordering) {
                 case 1:
                     $promptText = 'tôi có đoạn content cần được cải thiện lại cho hay hơn, theo yêu cầu:
-                                    - đoạn mở đầu tách ra 3 câu cho dễ đọc, rõ nghĩa từng câu, lời dẫn thật hay, cuốn hút và hợp lí. quan trọng dẫn dắt liên quan đến vẻ đẹp của chủ đề. rõ nghĩa từng câu bao gồm: 1 câu đặt câu hỏi để dẫn, 1 câu nói nếu khách hàng là người như thế nào, thì vẻ đẹp của hình nền điện thoại này sẽ phù hợp với họ như thế nào, 1 câu mời họ bước vào khám phá chủ đề. mãu gợi ý bên dưới - bạn hãy dựa vào đó mà sáng tạo, sửa lại đoạn mở đầu cho phù hợp với chủ đề và thật cuốn hút, đoạn gợi ý:
+                                    - đoạn mở đầu tách ra 3 câu cho dễ đọc, rõ nghĩa từng câu, lời dẫn thật hay, cuốn hút và hợp lí. quan trọng dẫn dắt liên quan đến vẻ đẹp của chủ đề. rõ nghĩa từng câu bao gồm: 1 câu đặt câu hỏi để dẫn, 1 câu nói nếu khách hàng là người như thế nào, thì vẻ đẹp của hình nền điện thoại này sẽ phù hợp với họ như thế nào, 1 câu mời họ bước vào khám phá chủ đề (thêm "nhé!" cho thân thiện). mãu gợi ý bên dưới - bạn hãy dựa vào đó mà sáng tạo, sửa lại đoạn mở đầu cho phù hợp với chủ đề và thật cuốn hút, đoạn gợi ý:
                                         <gợi ý>
                                             <h2>Hình nền điện thoại '.$title.': Khám phá vẻ đẹp Nghệ Thuật và Phong Cách của văn hóa '.$title.' ngay trên màn hình điện thoại của bạn</h2>
                                             <p>Bạn có biết, mỗi lần mở điện thoại cũng giống như mở ra một cánh cửa nhỏ dẫn đến thế giới riêng của chính mình?</p>
