@@ -55,6 +55,7 @@ class AutoImproveContent implements ShouldQueue {
                                     - đoạn nói về tầm quan trọng của hình việc trang trí bằng hình nền đẹp và phù hợp cải thiện lại theo yêu cầu bên dưới:
                                         + ở đoạn nói về những bộ sưu tập chất lượng của tôi (số nhiều), viết lại để nhấn mạnh và nói nhiều hơn nữa về vẻ đẹp, lợi ích và chất lượng của các bộ hình nền cao cấp và đặt 1 link  <strong><a href="../../hinh-nen-dien-thoai/'.$slug.'">hình nền điện thoại '.$title.'</a></strong>, hoặc đa dạng các biến thể từ khóa dài kết hợp với "chất lượng cao", "cao cấp". lưu ý đa dạng đừng trùng với anchor text phần mở đầu.
                                         + ở đoạn cuối, viết lại cho thật hay và cuốn hút (chỗ vẽ viễn cảnh để khách hàng tưởng tượng), thêm cảm thán phù hợp ở cuối đoạn để cho thân thiện và cảm xúc (nhưng ưu tiên cảm xúc nhẹ nhàng, đừng quá kích thích).
+                                    - icon trước các thẻ h3, tôi cần bạn chọn lại cho thật đẹp, phù hợp với chủ đề và nội dung của thẻ.
                                     - Cuối cùng: trả về toàn bộ nội dung hoàn chỉnh sau khi đã sửa và đừng giải thích gì thêm, để tôi lưu trực tiếp vào cơ sở dữ liệu.
 
                                     đoạn content cần sửa:
