@@ -166,46 +166,46 @@ class HomeController extends Controller {
         //     }
         // }
 
-        // $tags = Tag::select('*')
-        //             ->where('id', '<', 729)
-        //             ->orderBy('id', 'DESC')
-        //             ->get();
-
-        // foreach($tags as $tag){
-        //     $idSeo = $tag->seo->id ?? 0;
-        //     if(!empty($idSeo)){
-        //         $request = new Request(['seo_id' => $idSeo]);
-        //         TranslateController::createJobWriteContent($request);
-        //     }
-        // }
-
-        // dd(123);
-
-
         $tags = Tag::select('*')
-                    ->whereNotIn('id', [737, 744])
+                    ->where('id', '>=', 729)
                     ->orderBy('id', 'DESC')
                     ->get();
-        
-        $arrayOrdering = [1, 2, 3, 4, 5, 8];
-                    
-        foreach($tags as $tag){
 
-            $idSeo = 0;
-            foreach($tag->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
-                    $idSeo = $seo->infoSeo->id;
-                    break;
-                }
-            }
+        foreach($tags as $tag){
+            $idSeo = $tag->seo->id ?? 0;
             if(!empty($idSeo)){
-                foreach($arrayOrdering as $ordering){
-                    AutoImproveContent::dispatch($ordering, $idSeo);
-                }
+                $request = new Request(['seo_id' => $idSeo]);
+                TranslateController::createJobWriteContent($request);
             }
         }
 
         dd(123);
+
+
+        // $tags = Tag::select('*')
+        //             ->whereNotIn('id', [737, 744])
+        //             ->orderBy('id', 'DESC')
+        //             ->get();
+        
+        // $arrayOrdering = [1, 2, 3, 4, 5, 8];
+                    
+        // foreach($tags as $tag){
+
+        //     $idSeo = 0;
+        //     foreach($tag->seos as $seo){
+        //         if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
+        //             $idSeo = $seo->infoSeo->id;
+        //             break;
+        //         }
+        //     }
+        //     if(!empty($idSeo)){
+        //         foreach($arrayOrdering as $ordering){
+        //             AutoImproveContent::dispatch($ordering, $idSeo);
+        //         }
+        //     }
+        // }
+
+        // dd(123);
         
     }
 
