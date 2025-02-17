@@ -182,30 +182,30 @@ class HomeController extends Controller {
         // dd(123);
 
 
-        // $tags = Tag::select('*')
-        //             ->where('id', '<', 729)
-        //             ->orderBy('id', 'DESC')
-        //             ->get();
+        $tags = Tag::select('*')
+                    ->whereNotIn('id', [737, 744])
+                    ->orderBy('id', 'DESC')
+                    ->get();
         
-        // $arrayOrdering = [1, 2, 3, 4, 5];
+        $arrayOrdering = [1, 2, 3, 4, 5, 8];
                     
-        // foreach($tags as $tag){
+        foreach($tags as $tag){
 
-        //     $idSeo = 0;
-        //     foreach($tag->seos as $seo){
-        //         if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
-        //             $idSeo = $seo->infoSeo->id;
-        //             break;
-        //         }
-        //     }
-        //     if(!empty($idSeo)){
-        //         foreach($arrayOrdering as $ordering){
-        //             AutoImproveContent::dispatch($ordering, $idSeo);
-        //         }
-        //     }
-        // }
+            $idSeo = 0;
+            foreach($tag->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
+                    $idSeo = $seo->infoSeo->id;
+                    break;
+                }
+            }
+            if(!empty($idSeo)){
+                foreach($arrayOrdering as $ordering){
+                    AutoImproveContent::dispatch($ordering, $idSeo);
+                }
+            }
+        }
 
-        // dd(123);
+        dd(123);
         
     }
 
