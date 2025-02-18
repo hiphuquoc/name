@@ -19,7 +19,7 @@ while ($i < 2) { // Chạy tối đa 2 lần
         $jobsToDispatch = $jobPerTime - $runningJobsCount;
 
         // Lấy các job chưa được reserve (reserved_at IS NULL) theo số lượng cần thiết
-        $ordering = 'asc';
+        $ordering = 'desc';
         $jobs = DB::table('jobs')
             ->whereNull('reserved_at')
             ->where('attempts', '<', 1)
