@@ -6,33 +6,17 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Container\Container;
 use Illuminate\Queue\Jobs\DatabaseJob;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessTimedOutException;
 
-class QueueWorkJob extends Command
-{
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+class QueueWorkJob extends Command {
     protected $signature = 'queue:work-job {jobId} {--timeout=8000}';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Xử lý một job cụ thể (theo id) từ database queue';
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle() {
         $jobId   = $this->argument('jobId');
         $timeout = (int) $this->option('timeout');
 
-        // Lấy record của job theo id từ bảng jobs
         $jobRecord = DB::table('jobs')->where('id', $jobId)->first();
 
         if (!$jobRecord) {
@@ -40,46 +24,51 @@ class QueueWorkJob extends Command
             return 1;
         }
 
-        // Lấy kết nối queue từ config (giả sử sử dụng database driver)
         $connection = config('queue.default', 'database');
-        // Lấy tên queue từ record, nếu có (mặc định 'default')
-        $queueName = isset($jobRecord->queue) ? $jobRecord->queue : 'default';
+        $queueName  = $jobRecord->queue ?? 'default';
 
-        // Lấy instance của queue connection (DatabaseQueue)
         $databaseQueue = app('queue')->connection($connection);
+        $jobObject    = (object)$jobRecord;
 
-        // Chuyển record job thành object (nếu chưa)
-        $jobObject = is_object($jobRecord) ? $jobRecord : (object)$jobRecord;
-
-        // Tạo instance của DatabaseJob với 5 tham số
         $databaseJob = new DatabaseJob(
             Container::getInstance(),
             $databaseQueue,
             $jobObject,
-            $connection,   // Tham số connection name
+            $connection,
             $queueName
         );
 
         $this->info("Đang xử lý job id: {$jobId}");
 
-        // Tăng số lần thử lên 1
-        DB::table('jobs')->where('id', $jobId)->increment('attempts');
-
         try {
-            // Gọi phương thức xử lý job (lưu ý: tùy phiên bản Laravel, phương thức fire() có thể cần thay đổi)
-            $databaseJob->fire();
+            // Tạo process để chạy job trong một tiến trình riêng với timeout 5 phút
+            $process = new Process(['php', 'artisan', 'internal:job-fire', $jobId]);
+            $process->setTimeout(300); // 300 giây = 5 phút
+            $process->run();
 
-            // Sau khi xử lý thành công, xóa job khỏi bảng
-            $databaseJob->delete();
-            $this->info("Job {$jobId} đã được xử lý thành công và xóa khỏi bảng.");
+            if ($process->isSuccessful()) {
+                // Xóa job sau khi xử lý thành công
+                $databaseJob->delete();
+                $this->info("Job {$jobId} đã được xử lý thành công và xóa khỏi bảng.");
+            } else {
+                // Kiểm tra nếu lỗi do timeout
+                if ($process->getExitCode() === Process::STATUS_TIMED_OUT) {
+                    DB::table('jobs')->where('id', $jobId)->delete();
+                    $this->error("Job {$jobId} đã bị hủy do vượt quá thời gian thực thi 5 phút.");
+                } else {
+                    // Phát hành lại job nếu có lỗi khác
+                    $databaseJob->release($timeout);
+                    $this->error("Xử lý job {$jobId} thất bại: " . $process->getErrorOutput());
+                }
+            }
+        } catch (ProcessTimedOutException $e) {
+            DB::table('jobs')->where('id', $jobId)->delete();
+            $this->error("Job {$jobId} đã bị hủy do vượt quá thời gian thực thi 5 phút.");
         } catch (\Exception $e) {
-            $this->error("Xử lý job {$jobId} thất bại: " . $e->getMessage());
-        
-            // Phát hành lại job để thử lại sau
+            $this->error("Lỗi hệ thống: " . $e->getMessage());
             $databaseJob->release($timeout);
         }
 
         return 0;
     }
-
 }
