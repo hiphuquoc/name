@@ -168,7 +168,7 @@ class HelperController extends Controller {
         $count      = 0;
         if(!empty($infoPage)&&!empty($languages)){
             foreach($infoPage->seos as $s){
-                if(in_array($s->infoSeo->language, $languages)){
+                if(!empty($s->infoSeo->language)&&in_array($s->infoSeo->language, $languages)){
                     /* xóa ảnh đại diện trên google_clouds */ 
                     Upload::deleteWallpaper($s->infoSeo->image);
                     foreach($s->infoSeo->contents as $c) $c->delete();
