@@ -14,7 +14,7 @@ while ($i < 2) { // Chạy tối đa 2 lần
         ->count();
 
     // Nếu số job đang chạy ít hơn 10, ta tính số job cần khởi chạy thêm
-    $jobPerTime = 50;
+    $jobPerTime = 40;
     if ($runningJobsCount < $jobPerTime) {
         $jobsToDispatch = $jobPerTime - $runningJobsCount;
 
