@@ -13,10 +13,14 @@ while ($i < 2) { // Chạy tối đa 2 lần
         ->whereNotNull('reserved_at')
         ->count();
 
-    // Nếu số job đang chạy ít hơn 10, ta tính số job cần khởi chạy thêm
-    $jobPerTime = 30;
+    // Nếu số job đang chạy ít hơn 40, ta tính số job cần khởi chạy thêm
+    $jobPerTime = env('MAX_CONCURRENT_JOBS');
+    $jobPerCall = env('JOBS_BATCH_SIZE');
     if ($runningJobsCount < $jobPerTime) {
         $jobsToDispatch = $jobPerTime - $runningJobsCount;
+
+        // Trường hợp số jobs còn thiếu lớn số job cho phép gọi tối đa mỗi lần thì giới hạn lại
+        if($jobsToDispatch>$jobPerCall) $jobsToDispatch = $jobPerCall;
 
         // Lấy các job chưa được reserve (reserved_at IS NULL) theo số lượng cần thiết
         $ordering = 'desc';
@@ -34,7 +38,8 @@ while ($i < 2) { // Chạy tối đa 2 lần
                 ->update(['reserved_at' => time()]);
 
             // Gọi artisan command tùy chỉnh để xử lý job với id cụ thể
-            $command = 'php ' . __DIR__ . '/artisan queue:work-job ' . $job->id . ' --timeout=8000';
+            $maxTime    = env('JOB_TIMEOUT_SECONDS');
+            $command    = 'php ' . __DIR__ . '/artisan queue:work-job ' . $job->id . ' --timeout=' . $maxTime;
             // Chạy lệnh ở background
             exec($command . ' >> /dev/null 2>&1 &');
         }
