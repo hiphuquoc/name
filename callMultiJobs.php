@@ -11,13 +11,13 @@ $jobPerTime = env('MAX_CONCURRENT_JOBS', 40); // Số job tối đa chạy đồ
 $jobPerCall = env('JOBS_BATCH_SIZE', 10); // Số job tối đa gọi mỗi lần
 $maxTime = env('JOB_TIMEOUT_SECONDS', 300); // Thời gian timeout cho mỗi job (giây)
 
-// Khóa file để tránh việc chạy chồng chéo
-$lockFile = __DIR__ . '/cron.lock';
-if (file_exists($lockFile)) {
-    echo "Script is already running. Exiting...\n";
-    exit;
-}
-file_put_contents($lockFile, getmypid());
+// // Khóa file để tránh việc chạy chồng chéo
+// $lockFile = __DIR__ . '/cron.lock';
+// if (file_exists($lockFile)) {
+//     echo "Script is already running. Exiting...\n";
+//     exit;
+// }
+// file_put_contents($lockFile, getmypid());
 
 try {
     $i = 0; // Biến đếm số lần chạy
@@ -65,8 +65,8 @@ try {
         sleep(30);
     }
 } finally {
-    // Xóa file lock khi kết thúc script
-    if (file_exists($lockFile)) {
-        unlink($lockFile);
-    }
+    // // Xóa file lock khi kết thúc script
+    // if (file_exists($lockFile)) {
+    //     unlink($lockFile);
+    // }
 }
