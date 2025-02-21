@@ -29,6 +29,17 @@ if (!flock($fp, LOCK_EX | LOCK_NB)) {
 try {
     $i = 0; // Biến đếm số lần chạy
     while ($i < 2) { // Chạy tối đa 2 lần
+        // xóa các job đã chạy quá 5 phút (300 giây) trong bảng jobs ở lần chạy thứ 2
+        if ($i == 1) {
+            // Logic xóa các job đã chạy quá 5 phút (300 giây)
+            $currentTime = time(); // Thời gian hiện tại
+            DB::table('jobs')
+                ->whereNotNull('reserved_at') // Chỉ xét các job đang chạy
+                ->whereRaw('(? - reserved_at) > ?', [$currentTime, $maxTime]) // So sánh thời gian
+                ->delete(); // Xóa các job thỏa mãn điều kiện
+            echo "Đã xóa các job chạy quá 5 phút.\n";
+        }
+
         // Đếm số job đang chạy dựa vào cột reserved_at (job đang chạy có reserved_at khác null)
         $runningJobsCount = DB::table('jobs')
             ->whereNotNull('reserved_at')
