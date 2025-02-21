@@ -10,6 +10,7 @@ $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 $jobPerTime = env('MAX_CONCURRENT_JOBS', 40); // Số job tối đa chạy đồng thời
 $jobPerCall = env('JOBS_BATCH_SIZE', 10); // Số job tối đa gọi mỗi lần
 $maxTime = env('JOB_TIMEOUT_SECONDS', 300); // Thời gian timeout cho mỗi job (giây)
+$sleepTime = env('SLEEP_PER_TIME_CALL', 20); // Thời gian nghỉ sau mỗi lần gọi lại
 
 // Khóa file để tránh việc chạy chồng chéo
 $lockFile = __DIR__ . '/cron.lock';
@@ -67,8 +68,8 @@ try {
             break;
         }
 
-        // Chờ 15 giây trước khi chạy lần tiếp theo
-        sleep(15);
+        // Chờ 20 giây trước khi chạy lần tiếp theo
+        sleep($sleepTime);
     }
 } finally {
     // Giải phóng khóa và đóng file
