@@ -13,7 +13,7 @@ class InternalFireJob extends Command {
 
     public function handle() {
         $jobId = $this->argument('jobId');
-        $jobRecord = DB::table('jobs')->where('id', $jobId)->first();
+        $jobRecord = DB::table('jobs')->where('id', $jobId)->whereNull('reserved_at')->first();
 
         if (!$jobRecord) {
             $this->error("Job không tồn tại");
