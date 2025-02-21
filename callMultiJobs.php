@@ -11,13 +11,19 @@ $jobPerTime = env('MAX_CONCURRENT_JOBS', 40); // Số job tối đa chạy đồ
 $jobPerCall = env('JOBS_BATCH_SIZE', 10); // Số job tối đa gọi mỗi lần
 $maxTime = env('JOB_TIMEOUT_SECONDS', 300); // Thời gian timeout cho mỗi job (giây)
 
-// // Khóa file để tránh việc chạy chồng chéo
-// $lockFile = __DIR__ . '/cron.lock';
-// if (file_exists($lockFile)) {
-//     echo "Script is already running. Exiting...\n";
-//     exit;
-// }
-// file_put_contents($lockFile, getmypid());
+// Khóa file để tránh việc chạy chồng chéo
+$lockFile = __DIR__ . '/cron.lock';
+$fp = fopen($lockFile, 'c+');
+
+if (!$fp) {
+    die("Không thể mở lock file.\n");
+}
+
+// Kiểm tra nếu có tiến trình khác đang chạy
+if (!flock($fp, LOCK_EX | LOCK_NB)) {
+    fclose($fp);
+    die("Cron job đang chạy, bỏ qua lần chạy này.\n");
+}
 
 try {
     $i = 0; // Biến đếm số lần chạy
@@ -61,12 +67,11 @@ try {
             break;
         }
 
-        // Chờ 30 giây trước khi chạy lần tiếp theo
-        sleep(30);
+        // Chờ 15 giây trước khi chạy lần tiếp theo
+        sleep(15);
     }
 } finally {
-    // // Xóa file lock khi kết thúc script
-    // if (file_exists($lockFile)) {
-    //     unlink($lockFile);
-    // }
+    // Giải phóng khóa và đóng file
+    flock($fp, LOCK_UN);
+    fclose($fp);
 }
