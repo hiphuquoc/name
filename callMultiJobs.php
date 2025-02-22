@@ -61,7 +61,7 @@ try {
                 // Cập nhật cột reserved_at thành thời gian hiện tại (UNIX timestamp)
                 DB::table('jobs')
                     ->where('id', $job->id)
-                    ->update(['reserved_at' => time()]);
+                    ->update(['reserved_at' => now()->timestamp]);
 
                 // Gọi artisan command tùy chỉnh để xử lý job với id cụ thể
                 $command = sprintf(

@@ -13,43 +13,69 @@ class QueueWorkJob extends Command {
     protected $signature = 'queue:work-job {jobId} {--timeout=300}'; // Mặc định 300s = 5p
     protected $description = 'Xử lý một job cụ thể (theo id) từ database queue';
 
+    // QueueWorkJob.php
     public function handle() {
         $jobId = $this->argument('jobId');
-        $timeoutSeconds = (int) $this->option('timeout');
-
-        // Lấy job và kiểm tra tồn tại
-        $jobRecord = DB::table('jobs')->where('id', $jobId)->first();
-        if (!$jobRecord) {
-            $this->error("Không tìm thấy job với id: {$jobId}");
-            return 1;
-        }else {
-            // Tăng số lần thử lên 1
-            DB::table('jobs')->where('id', $jobId)->increment('attempts');
-        }
-
-        // Khởi tạo process với timeout 5 phút
-        $process = new Process(['php', 'artisan', 'internal:job-fire', $jobId]);
-        $process->setTimeout($timeoutSeconds); // Sử dụng timeout từ option
-
+        
+        // Sử dụng transaction để đảm bảo atomicity
+        DB::beginTransaction();
         try {
-            $this->info("Đang xử lý job id: {$jobId}");
-            $process->run();
+            $jobRecord = DB::table('jobs')
+                ->where('id', $jobId)
+                ->lockForUpdate() // Chặn concurrent access
+                ->first();
 
-            // XÓA JOB TRONG MỌI TRƯỜNG HỢP SAU KHI CHẠY
-            DB::table('jobs')->where('id', $jobId)->delete();
-
-            if ($process->isSuccessful()) {
-                $this->info("Job {$jobId} đã xử lý thành công");
-            } else {
-                $this->error("Job {$jobId} thất bại: " . $process->getErrorOutput());
+            if (!$jobRecord) {
+                $this->error("Job không tồn tại");
+                DB::commit();
+                return 1;
             }
 
-        } catch (ProcessTimedOutException $e) {
-            $this->error("Job {$jobId} bị hủy do timeout 5 phút");
+            DB::table('jobs')
+                ->where('id', $jobId)
+                ->increment('attempts');
+
+            DB::commit();
         } catch (\Exception $e) {
-            $this->error("Lỗi hệ thống: " . $e->getMessage());
+            DB::rollBack();
+            $this->error("Lỗi database: " . $e->getMessage());
+            return 1;
         }
 
+        // Xử lý job trực tiếp không qua process con
+        try {
+            $this->info("Đang xử lý job id: {$jobId}");
+            $this->fireJob($jobId);
+            
+            DB::table('jobs')->where('id', $jobId)->delete();
+            $this->info("Job {$jobId} thành công");
+        } catch (\Exception $e) {
+            $this->error("Lỗi xử lý job: " . $e->getMessage());
+            // Xử lý retry/logic failed job nếu cần
+        }
+
+        // Giải phóng kết nối
+        DB::disconnect();
         return 0;
+    }
+
+    private function fireJob($jobId) {
+        // Sử dụng lại logic từ InternalFireJob
+        $jobRecord = DB::table('jobs')->find($jobId);
+        
+        $connection = config('queue.default');
+        $queueName = $jobRecord->queue ?? 'default';
+        
+        $databaseQueue = app('queue')->connection($connection);
+        
+        $databaseJob = new DatabaseJob(
+            app(),
+            $databaseQueue,
+            (object) $jobRecord,
+            $connection,
+            $queueName
+        );
+        
+        $databaseJob->fire();
     }
 }
