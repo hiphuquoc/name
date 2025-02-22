@@ -33,24 +33,36 @@ use App\Models\JobAutoTranslate;
 class TranslateController extends Controller {
 
     public static function list(Request $request){
-        $params     = [];
+        $params = [];
+        
         /* paginate */
         $viewPerPage        = Cookie::get('viewTranslateReport') ?? 20;
         $params['paginate'] = $viewPerPage;
-        /* Search theo tên */
+    
+        /* Search theo ... */
         $params['search_status'] = $request->get('search_status') ?? 0;
+        if (!empty($request->get('search_language'))) {
+            $params['search_language'] = $request->get('search_language');
+        }
+    
         $list = Seo::select('*')
-            ->whereHas('jobAutoTranslate', function ($query) use($params) {
+            ->whereHas('jobAutoTranslate', function ($query) use ($params) {
                 $query->whereColumn('job_auto_translate.language', 'language')
-                        ->where('status', $params['search_status']);
+                      ->where('status', $params['search_status']);
+    
+                if (!empty($params['search_language'])) {
+                    $query->where('language', $params['search_language']);
+                }
             })
             ->with(['contents', 'jobAutoTranslatelinks'])
             ->with(['jobAutoTranslate' => function ($query) {
                 $query->whereColumn('job_auto_translate.language', 'language');
             }])
             ->paginate($params['paginate']);
+    
         return view('admin.report.listAutoTranslateContent', compact('list', 'params', 'viewPerPage'));
     }
+    
 
     public static function reRequestTranslate(Request $request){
         $idSeoByLanguage        = $request->get('id_seo');
