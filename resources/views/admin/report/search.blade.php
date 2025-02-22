@@ -1,4 +1,4 @@
-<form id="formSearch" method="get" action="{{ route('admin.product.list') }}">
+<form id="formSearch" method="get" action="{{ route('admin.translate.list') }}">
     <div class="searchBox">
         <div class="searchBox_item">
             <div class="input-group">
@@ -6,22 +6,22 @@
                 <button class="btn btn-primary waves-effect" id="button-addon2" type="submit" aria-label="Tìm">Tìm</button>
             </div>
         </div>
-        {{-- @if(!empty($categories))
-            <div class="searchBox_item">
-                <div class="position-relative">
-                    <select class="form-select select2 select2-hidden-accessible" name="search_category" onchange="submitForm('formSearch');" aria-hidden="true">
-                        <option value="0">- Tìm theo Category -</option>
-                        @foreach($categories as $category)
-                            @php
-                                $selected = null;
-                                if(!empty($params['search_category'])&&$params['search_category']==$category->id) $selected = ' selected';
-                            @endphp
-                            <option value="{{ $category->id }}" {{ $selected }}>{{ $category->seo->title }} ({{ $category->products->count() }})</option>
-                        @endforeach
-                    </select>
-                </div>
+        <div class="searchBox_item">
+            <div class="position-relative">
+                @php
+                    $arrayDataSelect = [
+                        0 => 'Chưa hoàn thành',
+                        1 => 'Hoàn thành',
+                    ];
+                    $selectedStatus = request()->get('search_status');
+                @endphp
+                <select class="form-select select2 select2-hidden-accessible" name="search_status" onchange="submitForm('formSearch');" aria-hidden="true">
+                    @foreach($arrayDataSelect as $key => $value)
+                        <option value="{{ $key }}" {{ $selectedStatus == $key ? 'selected' : '' }}>{{ $value }}</option>
+                    @endforeach
+                </select>
             </div>
-        @endif --}}
+        </div>
         <div class="searchBox_item" style="margin-left:auto;text-align:right;">
             @php
                 $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewTranslateReport', config('setting.admin_array_number_view'), $viewPerPage, $list->total());
