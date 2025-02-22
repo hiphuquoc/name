@@ -13,51 +13,54 @@ class QueueWorkJob extends Command {
     protected $signature = 'queue:work-job {jobId} {--timeout=300}'; // Mặc định 300s = 5p
     protected $description = 'Xử lý một job cụ thể (theo id) từ database queue';
 
-    // QueueWorkJob.php
     public function handle() {
         $jobId = $this->argument('jobId');
-        
-        // Sử dụng transaction để đảm bảo atomicity
+    
+        // Sử dụng transaction để tránh tranh chấp
         DB::beginTransaction();
         try {
             $jobRecord = DB::table('jobs')
                 ->where('id', $jobId)
-                ->lockForUpdate() // Chặn concurrent access
+                ->lockForUpdate()
                 ->first();
-
+    
             if (!$jobRecord) {
+                DB::rollBack();
                 $this->error("Job không tồn tại");
-                DB::commit();
                 return 1;
             }
-
+    
             DB::table('jobs')
                 ->where('id', $jobId)
                 ->increment('attempts');
-
+    
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             $this->error("Lỗi database: " . $e->getMessage());
             return 1;
         }
-
-        // Xử lý job trực tiếp không qua process con
+    
+        // Đóng kết nối trước khi chạy job
+        DB::disconnect();
+    
         try {
             $this->info("Đang xử lý job id: {$jobId}");
             $this->fireJob($jobId);
-            
+    
+            // Mở lại kết nối để xóa job
+            DB::reconnect();
             DB::table('jobs')->where('id', $jobId)->delete();
+            DB::disconnect();
+    
             $this->info("Job {$jobId} thành công");
         } catch (\Exception $e) {
             $this->error("Lỗi xử lý job: " . $e->getMessage());
-            // Xử lý retry/logic failed job nếu cần
         }
-
-        // Giải phóng kết nối
-        DB::disconnect();
+    
         return 0;
     }
+    
 
     private function fireJob($jobId) {
         // Sử dụng lại logic từ InternalFireJob
