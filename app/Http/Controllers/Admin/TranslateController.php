@@ -186,11 +186,14 @@ class TranslateController extends Controller {
                 ->where('seo_id', $idSeo)
                 ->where('status', 0)
                 ->first();
-            if (empty($infoFlag)) {
+            if (empty($infoFlag)||!empty($arrayOrdering)) { /* có quy định ordering nào mới được thực hiện thì bỏ qua bước kiểm tra */
                 /* lấy content bảng tiếng việt */
-                $contents   = SeoContent::select('*')
-                    ->where('seo_id', $idSeoVI)
-                    ->get();
+                foreach($infoPage->seos as $seo){
+                    if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
+                        $contents = $seo->infoSeo->contents;
+                        break;
+                    }
+                }
                 /* duyệt qua từng box content để xử lý */
                 foreach ($contents as $content) {
                     /* lấy ordering làm key */
@@ -198,7 +201,9 @@ class TranslateController extends Controller {
                     /* kiểm tra xem ordering này có được thực hiện không */
                     $flagCallJob = false;
                     if(!empty($arrayOrdering)){
-                        if(in_array($ordering, $arrayOrdering)) $flagCallJob = true;
+                        if(in_array($ordering, $arrayOrdering)) {
+                            $flagCallJob = true;
+                        }
                     }else {
                         $flagCallJob = true;
                     }
@@ -375,13 +380,23 @@ class TranslateController extends Controller {
         foreach($list as $item){
             foreach($item->jobAutoTranslate as $job){
                 if($job->status==0){
-                    $arrayOrdering = [ $job->ordering ];
-                    self::createJobTranslateContent($job->seo_id, $job->language, $arrayOrdering);
-                    ++$count;
+                    $idSeo          = $job->seo_id;
+                    $language       = $job->language;
+                    $ordering       = $job->ordering;
+                    $arrayOrdering  = [ $ordering ];
+                    /* xóa trước mới gọi được job */
+                    JobAutoTranslate::select('*')
+                        ->where('seo_id', $idSeo)
+                        ->where('ordering', $ordering)
+                        ->where('language', $language)
+                        ->delete();
+                    /* gọi job */
+                    $flag = self::createJobTranslateContent($idSeo, $language, $arrayOrdering);
+                    if($flag) ++$count;
                 }
             }
         }
-        
+
         /* Cập nhật thông báo */
         $response = [
             'flag' => true,
