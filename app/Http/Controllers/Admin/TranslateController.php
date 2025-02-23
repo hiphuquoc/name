@@ -61,8 +61,7 @@ class TranslateController extends Controller {
             ->paginate($params['paginate']);
     
         return view('admin.report.listAutoTranslateContent', compact('list', 'params', 'viewPerPage'));
-    }
-    
+    } 
 
     public static function reRequestTranslate(Request $request){
         $idSeoByLanguage        = $request->get('id_seo');
@@ -168,7 +167,7 @@ class TranslateController extends Controller {
         return response()->json($response);
     }
 
-    private static function createJobTranslateContent($idSeoVI, $language){
+    private static function createJobTranslateContent($idSeoVI, $language, $arrayOrdering = []){ /* biến arrayOrdering quy định chỉ thực hiện những ordering nhất định - rỗng thì làm tất cả */
         $flag                   = false;
         /* lấy trang theo ngôn ngữ */
         $infoPage               = \App\Http\Controllers\Admin\HelperController::getFullInfoPageByIdSeo($idSeoVI);
@@ -196,26 +195,36 @@ class TranslateController extends Controller {
                 foreach ($contents as $content) {
                     /* lấy ordering làm key */
                     $ordering   = $content->ordering;
-                    /* tạo đánh dấu đang và đã thực hiện tính năng */
-                    JobAutoTranslate::select('*')
-                        ->where('seo_id', $idSeo)
-                        ->where('ordering', $ordering)
-                        ->where('language', $language)
-                        ->delete();
-                    JobAutoTranslate::insertItem([
-                        'seo_id'    => $idSeo,
-                        'ordering'  => $ordering,
-                        'language'  => $language
-                    ]);
-                    /* lấy prompt đang được áp dụng cho content */
-                    $type       = HelperController::determinePageType($infoPage->seo->type);
-                    $infoPrompt = Prompt::select('*')
-                                    ->where('reference_name', 'content')
-                                    ->where('type', 'translate_content')
-                                    ->where('reference_table', $type)
-                                    ->first();
-                    /* tạo job */
-                    AutoTranslateContent::dispatch($ordering, $language, $idSeo, $infoPrompt->id);
+                    /* kiểm tra xem ordering này có được thực hiện không */
+                    $flagCallJob = false;
+                    if(!empty($arrayOrdering)){
+                        if(in_array($ordering, $arrayOrdering)) $flagCallJob = true;
+                    }else {
+                        $flagCallJob = true;
+                    }
+                    /* thực thi */
+                    if($flagCallJob==true){
+                        /* tạo đánh dấu đang và đã thực hiện tính năng */
+                        JobAutoTranslate::select('*')
+                            ->where('seo_id', $idSeo)
+                            ->where('ordering', $ordering)
+                            ->where('language', $language)
+                            ->delete();
+                        JobAutoTranslate::insertItem([
+                            'seo_id'    => $idSeo,
+                            'ordering'  => $ordering,
+                            'language'  => $language
+                        ]);
+                        /* lấy prompt đang được áp dụng cho content */
+                        $type       = HelperController::determinePageType($infoPage->seo->type);
+                        $infoPrompt = Prompt::select('*')
+                                        ->where('reference_name', 'content')
+                                        ->where('type', 'translate_content')
+                                        ->where('reference_table', $type)
+                                        ->first();
+                        /* tạo job */
+                        AutoTranslateContent::dispatch($ordering, $language, $idSeo, $infoPrompt->id);
+                    }
                 }
                 $flag = true;
             }
@@ -343,6 +352,45 @@ class TranslateController extends Controller {
             }
         }
         return $arrayLanguageRequested;
+    }
+
+    public static function autoTranslateMissing(Request $request) {
+        /* Thông báo mặc định */
+        $response = [
+            'flag' => false,
+            'toast_type' => 'error',
+            'toast_title' => 'Thất bại!',
+            'toast_message' => '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'
+        ];
+    
+        /* Lấy thông tin */
+        $list   = Seo::select('*')
+                    ->whereHas('jobAutoTranslate', function ($query) {
+                        $query->where('status', 0);
+                    })
+                    ->with('contents', 'jobAutoTranslatelinks', 'jobAutoTranslate')
+                    ->get();
+        /* gọi job */
+        $count  = 0;
+        foreach($list as $item){
+            foreach($item->jobAutoTranslate as $job){
+                if($job->status==0){
+                    $arrayOrdering = [ $job->ordering ];
+                    self::createJobTranslateContent($job->seo_id, $job->language, $arrayOrdering);
+                    ++$count;
+                }
+            }
+        }
+        
+        /* Cập nhật thông báo */
+        $response = [
+            'flag' => true,
+            'toast_type' => 'success',
+            'toast_title' => 'Thành công!',
+            'toast_message' => '👋 Đã gửi yêu dịch lại nội dung của <span class="highLight_500">' . $count . '</span> box cho các trang còn thiếu!'
+        ];
+        
+        return response()->json($response);
     }
 
     public static function getSlugByUrl($url){

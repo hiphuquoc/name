@@ -41,6 +41,11 @@
                 </select>
             </div>
         </div>
+        <div class="searchBox_item">
+            <div class="position-relative button button-primary" onclick="autoTranslateMissing();">
+                Dịch box còn thiếu
+            </div>
+        </div>
         <div class="searchBox_item" style="margin-left:auto;text-align:right;">
             @php
                 $xhtmlSettingView   = \App\Helpers\Setting::settingView('viewTranslateReport', config('setting.admin_array_number_view'), $viewPerPage, $list->total());
@@ -49,3 +54,37 @@
         </div>
     </div>
 </form>
+
+@push('scriptCustom')
+    <script type="text/javascript">
+        function autoTranslateMissing(){
+            if(confirm('{{ config("admin.alert.confirmRemove") }}')) {
+
+                // Gửi dữ liệu qua AJAX
+                openCloseFullLoading();
+                
+                $.ajax({
+                    url         : '{{ route("admin.translate.autoTranslateMissing") }}',
+                    type        : 'post',
+                    dataType    : 'json',
+                    data        : {
+                        "_token": "{{ csrf_token() }}",
+                    }
+                })
+                .done(function(response) {
+                    // Hiển thị Toast từ response
+                    createToast(response.toast_type, response.toast_title, response.toast_message);
+                    $('#lock').css('display', 'block');
+                })
+                .fail(function() {
+                    // Hiển thị thông báo lỗi mặc định
+                    createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
+                })
+                .always(function() {
+                    setTimeout(() => openCloseFullLoading(), 300);
+                });
+
+            }
+        }
+    </script>
+@endpush

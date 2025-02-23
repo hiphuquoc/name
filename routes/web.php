@@ -251,6 +251,7 @@ Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-t
         Route::post('/createJobTranslateContentAjax', [TranslateController::class, 'createJobTranslateContentAjax'])->name('admin.translate.createJobTranslateContentAjax');
         Route::post('/createMultiJobTranslateContent', [TranslateController::class, 'createMultiJobTranslateContent'])->name('admin.translate.createMultiJobTranslateContent');
         Route::post('/createJobTranslateAndCreatePageAjax', [TranslateController::class, 'createJobTranslateAndCreatePageAjax'])->name('admin.translate.createJobTranslateAndCreatePageAjax');
+        Route::post('/autoTranslateMissing', [TranslateController::class, 'autoTranslateMissing'])->name('admin.translate.autoTranslateMissing');
         /* job auto viết content đặt tạm ở đây */
         Route::post('/createJobWriteContent', [TranslateController::class, 'createJobWriteContent'])->name('admin.translate.createJobWriteContent');
     });
