@@ -42,6 +42,7 @@ use App\Http\Controllers\Admin\RedirectController;
 use App\Http\Controllers\Admin\PromptController;
 use App\Http\Controllers\Admin\ApiAIController;
 use App\Http\Controllers\Admin\ChatGptController;
+use App\Http\Controllers\Admin\ImproveController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\TranslateController;
 use App\Http\Controllers\CheckOnpageController;
@@ -75,6 +76,7 @@ Route::post('/vnpay/url_ipn', [VNPayController::class, 'handleIPN'])->name('main
 Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-thong')->group(function () {
     /* ===== AI ===== */
     Route::get('/chatGpt', [ChatGptController::class, 'chatGpt'])->name('main.chatGpt');
+    Route::get('/improveContent', [ImproveController::class, 'improveContent'])->name('main.improveContent');
     /* ===== REDIRECT ===== */
     Route::prefix('redirect')->group(function(){
         Route::get('/list', [RedirectController::class, 'list'])->name('admin.redirect.list');

@@ -21,11 +21,14 @@
             @endphp
             <div>
                 <label class="form-label inputRequired" for="content">Nội dung</label>
-                @if(!empty($chatgptDataAndEvent['eventChatgpt']))
-                    <i class="fa-solid fa-pencil reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
-                @endif
                 @if(!empty($itemSeo->id))
                     <i class="fa-regular fa-copy reloadContentIcon" onclick="getPromptTextById({{ $itemSeo->id }}, {{ $prompt->id }}, '{{ $language }}')"></i>
+                @endif
+                @if(!empty($chatgptDataAndEvent['eventChatgpt']))
+                    <i class="fa-solid fa-pen-nib reloadContentIcon" onclick="{{ $chatgptDataAndEvent['eventChatgpt'] ?? null }}"></i>
+                @endif
+                @if(!empty($content)&&$language=='vi'&&$type=='edit')
+                    <i class="fa-solid fa-wand-magic-sparkles reloadContentIcon" onclick="improveContent($('#content_{{ $ordering }}'), {{ $ordering }}, {{ $itemSeo->id }});"></i>
                 @endif
             </div>
             <div class="{{ !empty($flagCopySource)&&$flagCopySource==true ? 'boxInputSuccess' : '' }}">

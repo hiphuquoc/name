@@ -385,9 +385,6 @@
             }
         });
     }
-
-
-
     function createJobTranslateAndCreatePageAjax(slugVi, id = 0) {
         // Hiển thị trạng thái Loading
         openCloseFullLoading();
@@ -422,7 +419,6 @@
             setTimeout(() => openCloseFullLoading(), 300);
         });
     }
-
     function getPromptTextById(idSeo, idPrompt, language) {
         // // Hiển thị trạng thái Loading
         // openCloseFullLoading();
@@ -484,5 +480,44 @@
             // Tắt trạng thái Loading
             // setTimeout(() => openCloseFullLoading(), 300);
         });
+    }
+    function improveContent(input, ordering, idSeo){
+        addAndRemoveClass($(input), 'inputLoading', 'inputSuccess inputError');
+        /* vô hiệu hóa box dùng tiny */ 
+        const idBox = $(input).attr('id');
+        var editor = tinymce.get(idBox);
+        if (editor) editor.getBody().setAttribute('contenteditable', false);
+        $.ajax({
+            url         : '{{ route("main.improveContent") }}',
+            type        : 'get',
+            dataType    : 'json',
+            data        : {
+                ordering, 
+                seo_id : idSeo,
+            }
+        }).done(function(data){
+            /* điền dữ liệu vào */
+            if(data.error=='') {
+                addAndRemoveClass($(input), 'inputSuccess', 'inputLoading inputError');
+                $(input).val(data.content);
+            }else {
+                addAndRemoveClass($(input), 'inputError', 'inputLoading inputSuccess');
+            }
+            /* Cập nhật nội dung Tiny */
+            if($(input).is('textarea')){
+                const idBox = $(input).attr('id');
+                if (editor) {
+                    editor.setContent(data.content);
+                    editor.getBody().setAttribute('contenteditable', true);
+                }
+            }
+            /* đếm lại kí tụ nếu có */
+            const idInput           = $(input).attr('id');
+            if(idInput){
+                const lengthInput   = $(input).val().length;
+                const elemtShow     = $(document).find("[data-charactor='" + idInput + "']");
+                elemtShow.html(lengthInput);
+            }
+        })
     }
 </script>
