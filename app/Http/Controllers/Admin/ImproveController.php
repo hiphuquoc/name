@@ -319,7 +319,7 @@ class ImproveController extends Controller {
 
                             - Phần h2 tiếp theo trong nội dung cũ "Món quà..." xòa bỏ vì tôi đã gộp vào phần trên trước đó 
 
-                            - Phần <p>Call action - viết lại theo hướng dẫn: <p class="callActionBox">🎉 <span openCloseModal(\'modalPaymentMethod\')">Tải ngay [tên sản phẩm]</span> để ...! Và cũng đừng quên ghé thăm <strong><a href="../../">Name.com.vn</a></strong> thường xuyên để khám phá và cập nhật thêm nhiều bộ sưu tập hình nền điện độc đáo và ấn tượng khác nhé!</p>';
+                            - Phần <p>Call action - viết lại theo hướng dẫn: <p class="callActionBox">🎉 <span onclick="openCloseModal(\'modalPaymentMethod\')">Tải ngay [tên sản phẩm]</span> để ...! Và cũng đừng quên ghé thăm <strong><a href="../../">Name.com.vn</a></strong> thường xuyên để khám phá và cập nhật thêm nhiều bộ sưu tập hình nền điện độc đáo và ấn tượng khác nhé!</p>';
         }
         return $promptText;
     }
