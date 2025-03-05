@@ -27,8 +27,8 @@
     {{-- @include('snippets.footer') --}}
     <!-- === END:: Footer === -->
 
-     <!-- === START:: Toast Notifications === -->
-     <div id="toast-container" class="toast-container position-fixed top-0 start-0">
+    <!-- === START:: Toast Notifications === -->
+    <div id="toast-container" class="toast-container position-fixed top-0 start-0">
         <!-- Toasts sẽ được thêm động ở đây -->
     </div>
     <!-- === END:: Toast Notifications === -->

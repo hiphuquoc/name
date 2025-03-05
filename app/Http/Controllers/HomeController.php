@@ -84,48 +84,7 @@ class HomeController extends Controller {
     public static function test(Request $request){
 
         // // Dữ liệu mẫu để kiểm thử hàm
-        // $promptText = 'tôi có đoạn content cần được cải thiện lại cho hay hơn, theo yêu cầu:
-        //                 - đoạn thân của nội dung giữ nguyên nội dung, nhưng những icon trước các thẻ h3, tôi cần bạn chọn lại cho thật đẹp, phù hợp với chủ đề và nội dung của thẻ.
-        //                 - đoạn kết viết lại theo mẫu bên dưới:
-        //                     <đoạn mẫu>
-        //                         <p>Với kho hình nền đa dạng, phong phú chủ đề tại <strong><a href="../../">name.com.vn</a></strong>, chúng tôi tin rằng bạn sẽ dễ dàng tìm thấy những thiết kế ưng ý và phù hợp nhất - dù là để thỏa mãn đam mê cái đẹp hay tìm kiếm một món quà ý nghĩa, độc đáo và đầy cảm xúc. Hãy cùng chúng tôi khám phá ngay nhé!</p>
-        //                     </đoạn mẫu>
-        //                 - Cuối cùng: trả về toàn bộ nội dung hoàn chỉnh sau khi đã sửa và đừng giải thích gì thêm, để tôi lưu trực tiếp vào cơ sở dữ liệu.
-
-        //                 đoạn content cần sửa:
-        //                 <h2>Gợi ý cho bạn những chủ đề hình nền Hoa Thủy Tiên độc đáo và ấn tượng nhất 2025</h2>
-        //                 <h3>🌸 Bộ sưu tập "Hoa Thủy Tiên trong ánh bình minh"</h3>
-        //                 <p>Bộ sưu tập này là sự kết hợp hoàn hảo giữa vẻ đẹp tinh khôi của hoa Thủy Tiên và ánh sáng dịu dàng của buổi sớm mai. Những cánh hoa mỏng manh được bao phủ bởi những giọt sương long lanh, tạo nên một bức tranh thiên nhiên đầy sức sống.</p>
-        //                 <p>Với gam màu pastel nhẹ nhàng, bộ hình nền này đặc biệt phù hợp với những người yêu thích sự thanh lịch, tinh tế. Đây cũng là lựa chọn tuyệt vời cho những ai đang tìm kiếm món quà ý nghĩa dành tặng người thân yêu nhé!</p>
-        //                 <h3>🎨 Bộ sưu tập "Nghệ thuật trừu tượng với Hoa Thủy Tiên"</h3>
-        //                 <p>Chúng tôi đã khéo léo kết hợp những đường nét nghệ thuật hiện đại với vẻ đẹp tự nhiên của hoa Thủy Tiên để tạo nên bộ sưu tập độc đáo này. Mỗi bức ảnh là một tác phẩm nghệ thuật riêng biệt, nơi những cánh hoa được tái hiện qua góc nhìn sáng tạo.</p>
-        //                 <p>Những ai đam mê nghệ thuật và muốn thể hiện cá tính riêng chắc chắn sẽ yêu thích bộ hình nền này. Đây cũng là lựa chọn hoàn hảo cho những người làm việc trong lĩnh vực sáng tạo đấy!</p>
-        //                 <h3>✨ Bộ sưu tập "Hoa Thủy Tiên dưới ánh đèn nghệ thuật"</h3>
-        //                 <p>Khi màn đêm buông xuống, những bông hoa Thủy Tiên như được thổi hồn qua ánh đèn nghệ thuật lung linh. Bộ sưu tập này ghi lại những khoảnh khắc kỳ diệu ấy, tạo nên những bức hình nền điện thoại Hoa Thủy Tiên đẳng cấp.</p>
-        //                 <p>Với hiệu ứng ánh sáng độc đáo, bộ hình nền này rất phù hợp với những người yêu thích phong cách hiện đại, sang trọng. Đặc biệt, đây sẽ là món quà tuyệt vời cho những ai đang tìm kiếm điều gì đó thật đặc biệt ngay nhé!</p>
-        //                 <h3>🌿 Bộ sưu tập "Hoa Thủy Tiên trong vườn xuân"</h3>
-        //                 <p>Hình ảnh những bông hoa Thủy Tiên khoe sắc giữa khu vườn mùa xuân tạo nên một không gian tươi mát, trong lành. Bộ sưu tập này mang đến cảm giác thư thái, gần gũi với thiên nhiên cho người sử dụng.</p>
-        //                 <p>Những người yêu thích sự đơn giản nhưng vẫn toát lên vẻ đẹp tinh tế sẽ tìm thấy niềm vui khi sở hữu bộ hình nền này. Đây cũng là lựa chọn lý tưởng cho những ai đang tìm kiếm món quà ý nghĩa dành tặng người thân yêu đấy!</p>
-        //                 <h3>💎 Bộ sưu tập "Hoa Thủy Tiên cao cấp - Đẳng cấp hoàng gia"</h3>
-        //                 <p>Với kỹ thuật chụp chuyên nghiệp và xử lý màu sắc tinh tế, bộ sưu tập này tôn vinh vẻ đẹp quý phái của hoa Thủy Tiên. Mỗi bức ảnh đều được chăm chút tỉ mỉ, tạo nên những tác phẩm hình nền điện thoại Hoa Thủy Tiên chất lượng cao.</p>
-        //                 <p>Đây là lựa chọn hoàn hảo cho những người yêu cái đẹp và mong muốn thể hiện đẳng cấp riêng. Bộ hình nền này cũng rất phù hợp để làm quà tặng cho những dịp đặc biệt, chắc chắn sẽ khiến người nhận cảm thấy hạnh phúc ngay nhé!</p>
-        //                 <h3>🌌 Bộ sưu tập "Hoa Thủy Tiên trong vũ điệu ánh sáng"</h3>
-        //                 <p>Bộ sưu tập này khám phá vẻ đẹp của hoa Thủy Tiên qua những hiệu ứng ánh sáng độc đáo. Những cánh hoa như đang hòa mình vào vũ điệu của ánh sáng, tạo nên những bức hình nền đầy mê hoặc.</p>
-        //                 <p>Với phong cách hiện đại và khác biệt, bộ hình nền này thu hút những người trẻ năng động, sáng tạo. Đây cũng là lựa chọn thú vị cho những ai muốn tạo điểm nhấn riêng cho chiếc điện thoại của mình đấy!</p>
-        //                 <h3>💧 Bộ sưu tập "Hoa Thủy Tiên và giọt sương mai"</h3>
-        //                 <p>Những giọt sương long lanh trên cánh hoa Thủy Tiên được ghi lại một cách tinh tế, tạo nên bộ sưu tập hình nền điện thoại Hoa Thủy Tiên đỉnh cao về mặt thẩm mỹ. Mỗi bức ảnh đều mang đến cảm giác trong lành, tươi mới.</p>
-        //                 <p>Bộ hình nền này đặc biệt phù hợp với những người yêu thích sự tinh khiết, giản dị. Đây cũng là món quà ý nghĩa dành tặng những người thân yêu, giúp họ bắt đầu ngày mới với năng lượng tích cực ngay nhé!</p>
-        //                 <h3>🍂 Bộ sưu tập "Hoa Thủy Tiên mùa thu"</h3>
-        //                 <p>Khi mùa thu đến, những bông hoa Thủy Tiên mang một vẻ đẹp trầm mặc, sâu lắng. Bộ sưu tập này ghi lại những khoảnh khắc đặc biệt ấy, tạo nên những bức hình nền đầy cảm xúc.</p>
-        //                 <p>Những người yêu thích sự lãng mạn, hoài cổ sẽ tìm thấy sự đồng điệu trong bộ hình nền này. Đây cũng là lựa chọn tuyệt vời cho những ai đang tìm kiếm món quà độc đáo dành tặng người thân đấy!</p>
-        //                 <h3>🌟 Bộ sưu tập "Hoa Thủy Tiên dưới ánh sao đêm"</h3>
-        //                 <p>Vẻ đẹp huyền bí của hoa Thủy Tiên được tôn lên dưới bầu trời đầy sao. Bộ sưu tập này mang đến những bức hình nền điện thoại Hoa Thủy Tiên chất lượng cao với không gian lung linh, huyền ảo.</p>
-        //                 <p>Những người yêu thích sự lãng mạn và bí ẩn chắc chắn sẽ bị cuốn hút bởi bộ hình nền này. Đây cũng là món quà ý nghĩa dành tặng những người thân yêu, giúp họ luôn cảm thấy ấm áp ngay nhé!</p>
-        //                 <h3>🌺 Bộ sưu tập "Hoa Thủy Tiên đa sắc màu"</h3>
-        //                 <p>Khám phá vẻ đẹp đa dạng của hoa Thủy Tiên qua bộ sưu tập này. Từ trắng tinh khôi đến hồng pastel, mỗi màu sắc đều được thể hiện một cách trọn vẹn và sống động.</p>
-        //                 <p>Những người yêu thích sự đa dạng và muốn thay đổi thường xuyên sẽ tìm thấy niềm vui khi sở hữu bộ hình nền này. Đây cũng là lựa chọn thú vị cho những ai đang tìm kiếm món quà độc đáo dành tặng người thân đấy!</p>
-        //                 <p>Tại <strong><a href="../../">name.com.vn</a></strong>, chúng tôi tự hào mang đến kho hình nền điện thoại Hoa Thủy Tiên đa dạng và phong phú, đáp ứng mọi nhu cầu của người dùng. Dù bạn là người khó tính đến đâu, chắc chắn cũng sẽ tìm thấy những bộ sưu tập ưng ý trong thế giới hình nền của chúng tôi ngay nhé!</p>
-        //                 ';
+        // $promptText = '';
         // $testMessages = [
         //     ['role' => 'system', 'content' => 'Bạn là một chuyên gia sáng tạo nội dung với phong cách hấp dẫn và sáng tạo. Hãy giúp tôi viết những nội dung độc đáo và thu hút người đọc, với giọng văn thân thiện, dễ hiểu và sáng tạo. Sử dụng ngôn ngữ tự nhiên và tránh lặp từ.'],
         //     ['role' => 'user', 'content' => $promptText]
@@ -148,63 +107,23 @@ class HomeController extends Controller {
         // dd($response);
 
 
-        // $tags = Tag::select('*')
-        //             ->where('id', '>=', 734)
-        //             ->orderBy('id', 'DESC')
-        //             ->get();
+        $tags = Product::select('*')
+                    ->orderBy('id', 'DESC')
+                    ->get();
         
-        // $arrayNotTranslate = ['vi', 'en'];
-                    
-        // foreach($tags as $tag){
-        //     $idSeo = $tag->seo->id ?? 0;
-        //     if(!empty($idSeo)){
-        //         foreach($tag->seos as $seo){
-        //             if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $arrayNotTranslate)){
-        //                 AutoTranslateContent::dispatch(8, $seo->infoSeo->language, $idSeo, 3);
-        //             }
-        //         }
-        //     }
-        // }
+        foreach($tags as $tag){
 
-        // $tags = Tag::select('*')
-        //             ->where('id', '>=', 729)
-        //             ->orderBy('id', 'DESC')
-        //             ->get();
+            $idSeo = 0;
+            foreach($tag->seos as $seo){
+                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
+                    $idSeo = $seo->infoSeo->id;
+                    break;
+                }
+            }
+            AutoImproveContent::dispatch(1, $idSeo);
+        }
 
-        // foreach($tags as $tag){
-        //     $idSeo = $tag->seo->id ?? 0;
-        //     if(!empty($idSeo)){
-        //         $request = new Request(['seo_id' => $idSeo]);
-        //         TranslateController::createJobWriteContent($request);
-        //     }
-        // }
-
-        // dd(123);
-
-
-        // $tags = Tag::select('*')
-        //             ->orderBy('id', 'DESC')
-        //             ->get();
-        
-        // $arrayOrdering = [1, 2, 3, 4, 5, 8]; /*  */
-        
-        // foreach($tags as $tag){
-
-        //     $idSeo = 0;
-        //     foreach($tag->seos as $seo){
-        //         if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
-        //             $idSeo = $seo->infoSeo->id;
-        //             break;
-        //         }
-        //     }
-        //     if(!empty($idSeo)){
-        //         foreach($arrayOrdering as $ordering){
-        //             AutoImproveContent::dispatch($ordering, $idSeo);
-        //         }
-        //     }
-        // }
-
-        // dd(123);
+        dd(123);
         
     }
 

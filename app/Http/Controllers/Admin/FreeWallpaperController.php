@@ -167,12 +167,12 @@ class FreeWallpaperController extends Controller {
     }
 
     public static function createOrGetTagName($idWallpaper, $table, $jsonTagName = null){
-        if(!empty($idWallpaper)&&!empty($jsonTagName)){
+        if(!empty($idWallpaper)){
             RelationTagInfoOrther::select('*')
                 ->where('reference_type', $table)
                 ->where('reference_id', $idWallpaper)
                 ->delete();
-            $tag    = json_decode($jsonTagName, true);
+            $tag    = !empty($jsonTagName) ? json_decode($jsonTagName, true) : [];
             foreach($tag as $t){
                 $nameTag    = strtolower($t['value']);
                 /* kiểm tra xem tag name đã tồn tại chưa */
