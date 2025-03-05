@@ -107,23 +107,23 @@ class HomeController extends Controller {
         // dd($response);
 
 
-        $tags = Product::select('*')
-                    ->orderBy('id', 'DESC')
-                    ->get();
+        // $tags = Product::select('*')
+        //             ->orderBy('id', 'DESC')
+        //             ->get();
         
-        foreach($tags as $tag){
+        // foreach($tags as $tag){
 
-            $idSeo = 0;
-            foreach($tag->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
-                    $idSeo = $seo->infoSeo->id;
-                    break;
-                }
-            }
-            AutoImproveContent::dispatch(1, $idSeo);
-        }
+        //     $idSeo = 0;
+        //     foreach($tag->seos as $seo){
+        //         if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
+        //             $idSeo = $seo->infoSeo->id;
+        //             break;
+        //         }
+        //     }
+        //     AutoImproveContent::dispatch(1, $idSeo);
+        // }
 
-        dd(123);
+        // dd(123);
         
     }
 
