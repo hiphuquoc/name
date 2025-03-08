@@ -128,7 +128,7 @@ class CartController extends Controller{
         $result             = [];
         if(!empty($priceInCart)&&!empty($infoProduct)){
             if(count($priceInCart)>=$infoProduct->prices->count()){ /* trọn bộ */
-                $result['option_name']  = config('language.'.$language.'.data.full_set');
+                $result['option_name']  = config('data_language_1.'.$language.'.full_set');
                 $result['price']        = Number::getPriceOriginByCountry($infoProduct->price, $language);
                 $result['image']        = $infoProduct->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper;
             }else {

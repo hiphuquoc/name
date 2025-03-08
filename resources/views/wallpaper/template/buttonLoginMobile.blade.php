@@ -1,6 +1,6 @@
 @if(!empty($user))
     @php
-        $myDownloadsByLanguage = config('language.'.$language.'.data.my_downloads');
+        $myDownloadsByLanguage = config('data_language_1.'.$language.'.my_downloads');
     @endphp
     <div class="headerBottom_item" onClick="toggleMenuListMobile();">
         <div class="headerBottom_item_icon">
@@ -15,7 +15,7 @@
                 </a> 
                 <a href="{{ route('admin.logout') }}" class="loginBox_list_item">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <div>{{ config('language.'.$language.'.data.logout') }}</div>
+                    <div>{{ config('data_language_1.'.$language.'.logout') }}</div>
                 </a>
             </div>
             <div class="headerBottom_item_text_background"></div>
@@ -35,7 +35,7 @@
     </div>
 @else 
     @php
-        $loginByLanguage = config('language.'.$language.'.data.login');
+        $loginByLanguage = config('data_language_1.'.$language.'.login');
     @endphp
     <div class="headerBottom_item" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
         <div class="headerBottom_item_icon">

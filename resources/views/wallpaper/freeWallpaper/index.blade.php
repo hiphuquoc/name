@@ -69,7 +69,7 @@
         @if($total>0)
             <div class="relatedProductBox">
                 <div class="relatedProductBox_title">
-                    <h2>{!! config('language.'.$language.'.data.suggestions_for_you') !!}</h2>
+                    <h2>{!! config('data_language_1.'.$language.'.suggestions_for_you') !!}</h2>
                 </div>
                 <div class="relatedProductBox_box">
                     @include('wallpaper.category.box', [

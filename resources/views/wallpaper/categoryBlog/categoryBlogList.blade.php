@@ -1,6 +1,6 @@
 <div class="categoryBlogSidebarBox">
     <div class="categoryBlogSidebarBox_head">
-        <h2>{{ config('language.'.$language.'.data.news_category') }}</h2>
+        <h2>{{ config('data_language_1.'.$language.'.news_category') }}</h2>
     </div>
     <div class="categoryBlogSidebarBox_box">
         @foreach($categories as $category)

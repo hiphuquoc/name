@@ -9,10 +9,10 @@
                 break;
             }
         }
-        $nameSupport            = config('language.'.$language.'.data.support');
+        $nameSupport            = config('data_language_1.'.$language.'.support');
         $altSupport             = \App\Helpers\Charactor::concatenateWords([$nameSupport, env('APP_NAME')], $language);
-        $nameGuide              = config('language.'.$language.'.data.download_guide');
-        $altGuide               = \App\Helpers\Charactor::concatenateWords([$nameGuide, config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME'))], $language);
+        $nameGuide              = config('data_language_1.'.$language.'.download_guide');
+        $altGuide               = \App\Helpers\Charactor::concatenateWords([$nameGuide, config('data_language_2.'.$language.'.phone_wallpaper')], $language);
     @endphp
     <a class="headerBottom_item" href="https://zalo.me/{{ $phoneCustomerService }}">
         <div class="headerBottom_item_icon">

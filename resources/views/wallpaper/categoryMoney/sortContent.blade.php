@@ -7,13 +7,13 @@
             $inputViewBy    = null;
             foreach($dataView as $viewItem){
                 if($viewBy==$viewItem['key']) {
-                    $inputViewBy    = $viewItem['icon'].'<div class="maxLine_1">'.config('language.'.$language.'.data.'.$viewItem['key']).'</div>';
+                    $inputViewBy    = $viewItem['icon'].'<div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$viewItem['key']).'</div>';
                 }
             }
         @endphp
         <div class="selectCustom">
             <div class="selectCustom_text maxLine_1">
-                {!! config('language.'.$language.'.data.browse_by') !!}
+                {!! config('data_language_1.'.$language.'.browse_by') !!}
             </div>
             <div class="selectCustom_input">
                 {!! $inputViewBy !!}
@@ -25,7 +25,7 @@
                         if($viewBy==$viewItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setViewBy('{{ $viewItem['key'] }}')">
-                        {!! $viewItem['icon'].config('language.'.$language.'.data.'.$viewItem['key']) !!}
+                        {!! $viewItem['icon'].config('data_language_1.'.$language.'.'.$viewItem['key']) !!}
                     </div>
                 @endforeach
             </div>
@@ -37,13 +37,13 @@
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
                 if($sortBy==$sortItem['key']) {
-                    $inputSortBy    = $sortItem['icon'].'<div class="maxLine_1">'.config('language.'.$language.'.data.'.$sortItem['key']).'</div>';
+                    $inputSortBy    = $sortItem['icon'].'<div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$sortItem['key']).'</div>';
                 }
             }
         @endphp
         <div class="selectCustom">
             <div class="selectCustom_text maxLine_1">
-                {!! config('language.'.$language.'.data.sort_by') !!}
+                {!! config('data_language_1.'.$language.'.sort_by') !!}
             </div>
             <div class="selectCustom_input maxLine_1">
                 {!! $inputSortBy !!}
@@ -55,7 +55,7 @@
                         if($sortBy==$sortItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setSortBy('{{ $sortItem['key'] }}')">
-                        {!! $sortItem['icon'].config('language.'.$language.'.data.'.$sortItem['key']) !!}
+                        {!! $sortItem['icon'].config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
                     </div>
                 @endforeach
             </div>
@@ -73,7 +73,7 @@
         @endforeach
         <!-- icon filter nâng cao -->
         @php
-            $titleAdvancedFilter = config('language.'.$language.'.data.advanced_filter');
+            $titleAdvancedFilter = config('data_language_1.'.$language.'.advanced_filter');
         @endphp
         <div class="filterAdvanced show-1199">
             <div id="js_toggleFilterAdvanced_element" class="filterAdvanced_icon" onclick="toggleFilterAdvanced('js_toggleFilterAdvanced_element');">
@@ -135,7 +135,7 @@
         <div class="sortBox_right_item">
             <!-- số lượng -->
             <span class="quantity maxLine_1">
-                <div class="maxLine_1">{{ config('language.'.$language.'.data.photo_set') }} {{ $total }}</div>
+                <div class="maxLine_1">{{ config('data_language_1.'.$language.'.photo_set') }} {{ $total }}</div>
             </span> 
         </div>
     </div>

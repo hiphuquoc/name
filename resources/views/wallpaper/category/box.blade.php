@@ -12,7 +12,7 @@
             ])
         @endforeach
     @else 
-        <div>{{ config('language.'.$language.'.data.no_suitable_results_found') }}</div>
+        <div>{{ config('data_language_1.'.$language.'.no_suitable_results_found') }}</div>
     @endif
 </div>
 @push('scriptCustom')
@@ -131,7 +131,7 @@
                     updateGridRowSpan();
                 }, 0);
                 /* thêm thông báo nếu empty */
-                if (boxCategory.children().length == 0) boxCategory.html('<div>' + "{{ config('language.' . $language . '.data.no_suitable_results_found') }}" + '</div>');
+                if (boxCategory.children().length == 0) boxCategory.html('<div>' + "{{ config('data_language_1.' . $language . '.no_suitable_results_found') }}" + '</div>');
             })
             .catch(error => {
                 console.error("Fetch request failed:", error);

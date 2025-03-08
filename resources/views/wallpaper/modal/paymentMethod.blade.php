@@ -7,15 +7,15 @@
     <div class="modalBox_box">
         <form id="formModalPaymentMethod" method="get" style="width:100%;">
             <!-- hidden -->
-            <div class="formModalBox_box_head">{{ config('language.'.$language.'.data.step_1_buy_now') }}</div>
+            <div class="formModalBox_box_head">{{ config('data_language_1.'.$language.'.step_1_buy_now') }}</div>
             <div class="formModalBox_box_body">
-                <div style="margin-top:-0.5rem;">{{ config('language.'.$language.'.data.note_fill_email') }}</div>
+                <div style="margin-top:-0.5rem;">{{ config('data_language_1.'.$language.'.note_fill_email') }}</div>
                 <div class="inputWithLabelInside">  
-                    <label for="email">{{ config('language.'.$language.'.data.email') }}</label>
+                    <label for="email">{{ config('data_language_1.'.$language.'.email') }}</label>
                     <input type="text" id="email" name="email" onkeyup="validateWhenType(this, 'email')" value="{{ $user->email ?? null }}" />
                 </div>
             </div>
-            <div class="formModalBox_box_head">{{ config('language.'.$language.'.data.step_2_buy_now') }}</div>
+            <div class="formModalBox_box_head">{{ config('data_language_1.'.$language.'.step_2_buy_now') }}</div>
             <div class="formModalBox_box_body">
                 
                 <div class="paymentMethodBox">

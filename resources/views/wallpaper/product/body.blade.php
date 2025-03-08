@@ -91,7 +91,7 @@
                     <div class="distanceBetweenBox">
                         <!-- mô tả sản phẩm -->
                         <div id="js_viewMoreContent_content" class="productDetailBox_detail_description">
-                            {!! config('language.'.$language.'.data.product_description.'.env('APP_NAME')) !!}
+                            {!! config('data_language_2.'.$language.'.product_description') !!}
                         </div>
 
                         <!-- option -->
@@ -115,9 +115,9 @@
                                     <div id="js_loadProductPrice_priceAllMobile" class="priceMobile">--</div>
                                 </div>
                                 @php
-                                    $buttonNameCart     = config('language.'.$language.'.data.add_to_cart');
+                                    $buttonNameCart     = config('data_language_1.'.$language.'.add_to_cart');
                                     $altCart            = \App\Helpers\Charactor::concatenateWords([$buttonNameCart, $itemSeo->title], $language);
-                                    $buttonNamePayment  = config('language.'.$language.'.data.buy_now');
+                                    $buttonNamePayment  = config('data_language_1.'.$language.'.buy_now');
                                     $altPayment         = \App\Helpers\Charactor::concatenateWords([$buttonNamePayment, $itemSeo->title], $language);
                                     /* chuyển array price sang key all */
                                     $keyPriceAll        = [];
@@ -136,7 +136,7 @@
                         </div>
                         <!-- giải thích thanh toán và nhận ảnh => desktop -->
                         <div class="hide-991">
-                            {!! config('language.'.$language.'.data.product_guide_after_payment') !!}
+                            {!! config('data_language_1.'.$language.'.product_guide_after_payment') !!}
                         </div>
                     </div>
                 </div>

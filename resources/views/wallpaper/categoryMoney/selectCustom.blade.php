@@ -2,7 +2,7 @@
 @php
     /* kiểm tra selected với link truy cập hiện tại */
     $flagSelected   = false;
-    $nameSelect     = config('language.'.$language.'.data.all');
+    $nameSelect     = config('data_language_1.'.$language.'.all');
     if(!empty($categoryChoose->seo)&&$categoryChoose->seo->type==$type['key']){
         if(!empty($categories)&&$categories->isNotEmpty()){
             foreach($categories as $category){
@@ -41,7 +41,7 @@
     }
 @endphp
 <div class="selectCustom_text maxLine_1">
-    {!! config('language.'.$language.'.data.'.$type['key_filter_language']) !!}
+    {!! config('data_language_1.'.$language.'.'.$type['key_filter_language']) !!}
 </div>
 <div class="selectCustom_input maxLine_1">
     {{ $nameSelect }}
@@ -60,7 +60,7 @@
         if(!empty($urlPhoneWallpaper)) $urlCategoryChoose = $urlPhoneWallpaper;
     @endphp
     <a href="/{{ $urlCategoryChoose }}" class="selectCustom_box_item">
-        {{ config('language.'.$language.'.data.all') }}
+        {{ config('data_language_1.'.$language.'.all') }}
     </a>
     @if(!empty($categories)&&$categories->isNotEmpty())
         <!-- ===== Thuật toán của filter box 

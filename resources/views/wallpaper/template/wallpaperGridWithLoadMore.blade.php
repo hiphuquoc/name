@@ -164,7 +164,7 @@
 
             /* thêm thông báo nếu empty */
             if (boxCategory.children().length === 0) {
-                boxCategory.html('<div>' + "{{ config('language.'.$language.'.data.no_suitable_results_found') }}" + '</div>');
+                boxCategory.html('<div>' + "{{ config('data_language_1.'.$language.'.no_suitable_results_found') }}" + '</div>');
             }
 
             /* tắt icon loading */

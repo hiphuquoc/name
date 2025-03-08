@@ -2,7 +2,7 @@
 <div class="tocContentMain">
     <div class="tocContentMain_title">
         <span class="tocContentMain_title_icon"></span>
-        <span class="tocContentMain_title_text">{{ config('language.'.$language.'.data.table_of_contents') }}</span>
+        <span class="tocContentMain_title_text">{{ config('data_language_1.'.$language.'.table_of_contents') }}</span>
     </div>
     <div class="tocContentMain_list customScrollBar-y" style="display: block;">
         @foreach($data as $item)
@@ -19,7 +19,7 @@
 <div class="tocContentMain tocFixed">
     <div class="tocContentMain_title">
         <span class="tocContentMain_title_icon"></span>
-        <span class="tocContentMain_title_text">{{ config('language.'.$language.'.data.table_of_contents') }}</span>
+        <span class="tocContentMain_title_text">{{ config('data_language_1.'.$language.'.table_of_contents') }}</span>
     </div>
     <div class="tocContentMain_list customScrollBar-y">
         @foreach($data as $item)

@@ -66,7 +66,7 @@
             @include('wallpaper.template.breadcrumb')
             <!-- tiêu đề -->
             @php
-                $titlePage = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME')).$itemSeo->title;
+                $titlePage = config('data_language_2.'.$language.'.phone_wallpaper').$itemSeo->title;
                 if($item->seo->level==1) $titlePage = $itemSeo->title;
             @endphp
             <h1 class="titlePage">{{ $titlePage }}</h1>

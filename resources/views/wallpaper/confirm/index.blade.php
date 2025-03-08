@@ -45,19 +45,19 @@
                             <img class="lazyload" src="{{ Storage::url('images/icon-confirm-success.png') }}" loading="lazy" />
                         </div>
                         <div class="confirmMessageBox_left_title">
-                            {{ config('language.'.$language.'.data.payment_successful') }}
+                            {{ config('data_language_1.'.$language.'.payment_successful') }}
                         </div>
                         <div class="confirmMessageBox_left_desc">
-                            {{ config('language.'.$language.'.data.thank_you_message') }}
+                            {{ config('data_language_1.'.$language.'.thank_you_message') }}
                         </div>
                     </div>
                     <div class="confirmMessageBox_right">
                         <div class="confirmMessageBox_right_item">
-                            {{ config('language.'.$language.'.data.order_id') }} : <span class="highLight">{{ $order->code }}</span>
+                            {{ config('data_language_1.'.$language.'.order_id') }} : <span class="highLight">{{ $order->code }}</span>
                         </div>
                         @if(!empty($order->email))
                             <div class="confirmMessageBox_right_item">
-                                {{ config('language.'.$language.'.data.email') }} : {{ $order->email }}
+                                {{ config('data_language_1.'.$language.'.email') }} : {{ $order->email }}
                             </div>
                         @endif
                         <div class="confirmMessageBox_right_item">
@@ -68,7 +68,7 @@
                             @endif
                         </div>
                         <div class="confirmMessageBox_right_item">
-                            {{ config('language.'.$language.'.data.total') }} : <span class="price">{!! \App\Helpers\Number::getFormatPriceByLanguage($order->total, $language) !!}</span>
+                            {{ config('data_language_1.'.$language.'.total') }} : <span class="price">{!! \App\Helpers\Number::getFormatPriceByLanguage($order->total, $language) !!}</span>
                         </div>
                     </div>
                 </div>

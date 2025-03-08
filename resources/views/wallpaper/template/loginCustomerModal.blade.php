@@ -14,7 +14,7 @@
             <div class="modalLoginFormCustomerBox_box_right_close" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"><i class="fa-solid fa-xmark"></i></div>
             <!-- form -->
             @php
-                $loginByLanguage = config('language.'.$language.'.data.login');
+                $loginByLanguage = config('data_language_1.'.$language.'.login');
             @endphp
             <div class="loginFormCustomer">
                 <div class="loginFormCustomer_title">
@@ -26,20 +26,20 @@
                         <div class="formBox">
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
-                                    <label>{{ config('language.'.$language.'.data.login_email') }}</label>
+                                    <label>{{ config('data_language_1.'.$language.'.login_email') }}</label>
                                     <input type="text" name="email" required />
                                 </div>
                             </div>
                             <div class="formBox_item">
                                 <div class="inputWithLabelInside">
-                                    <label>{{ config('language.'.$language.'.data.password') }}</label>
+                                    <label>{{ config('data_language_1.'.$language.'.password') }}</label>
                                     <input type="password" name="password" autocomplete="off" required />
                                 </div>
                             </div>
                             <div class="formBox_item" style="display:flex;justify-content:space-between;align-item:flex-end;">
                                 <label class="checkBox" for="remember" style="font-size:0.85rem;">
                                     <input type="checkbox" id="remember" name="remember" checked />
-                                    <div>{{ config('language.'.$language.'.data.remember_me') }}</div>
+                                    <div>{{ config('data_language_1.'.$language.'.remember_me') }}</div>
                                 </label>
                                 <div id="noticeLogin" class="noticeLogin"> 
                                     <!-- thông báo đăng nhập -->
@@ -54,7 +54,7 @@
                             <!-- login social -->
                             <div class="loginFormSocial">
                                 <div class="loginFormSocial_title">
-                                    {{ config('language.'.$language.'.data.or_login_with') }}
+                                    {{ config('data_language_1.'.$language.'.or_login_with') }}
                                 </div>
                                 <div class="loginFormSocial_body">
                                     <div class="loginFormSocial_body_item">

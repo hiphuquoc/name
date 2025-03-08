@@ -4,9 +4,9 @@
         <input type="hidden" id="loaded" name="loaded" value="{{ $data['items']->count() ?? 0 }}" /> --}}
         @php
             $titleBox = '';
-            if($type=='category_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_themes.'.env('APP_NAME'));
-            if($type=='style_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_styles.'.env('APP_NAME'));
-            if($type=='event_info') $titleBox = config('language.'.$language.'.data.wallpaper_by_events.'.env('APP_NAME'));
+            if($type=='category_info') $titleBox = config('data_language_2.'.$language.'.wallpaper_by_themes');
+            if($type=='style_info') $titleBox = config('data_language_2.'.$language.'.wallpaper_by_styles');
+            if($type=='event_info') $titleBox = config('data_language_2.'.$language.'.wallpaper_by_events');
         @endphp
         <h2>{{ $titleBox }}</h2>
     </div>

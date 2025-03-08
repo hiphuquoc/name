@@ -1,12 +1,12 @@
 <div class="cartBox">
     <a href="{{ $urlPageCart ?? '/' }}" class="cartBox_show">
         <div class="cartBox_show_icon">
-            <img src="{{ Storage::url('images/svg/icon-cart-header.svg') }}" alt="{{ config('language.'.$language.'.data.cart') }}" title="{{ config('language.'.$language.'.data.cart') }}" />
+            <img src="{{ Storage::url('images/svg/icon-cart-header.svg') }}" alt="{{ config('data_language_1.'.$language.'.cart') }}" title="{{ config('data_language_1.'.$language.'.cart') }}" />
             <div id="js_updateCart_count" class="cartBox_show_icon_number">
                 {{ $detailCart['count'] ?? 0 }}
             </div>
         </div>
-        <div class="cartBox_show_text">{{ config('language.'.$language.'.data.cart') }}</div>
+        <div class="cartBox_show_text">{{ config('data_language_1.'.$language.'.cart') }}</div>
     </a>
     <div id="js_checkEmptyCart_idWrite" class="cartBox_list">
         @if(!empty($products)&&$products->isNotEmpty())
@@ -37,8 +37,8 @@
                 @endforeach
             </div>
             <div class="cartBox_list_item buttonBox">
-                <div class="total">{{ config('language.'.$language.'.data.total') }}: <span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($detailCart['total'], $language) !!}</span></div>
-                <a href="{{ $urlPageCart ?? '/' }}" class="button">{{ config('language.'.$language.'.data.view_cart') }}</a>
+                <div class="total">{{ config('data_language_1.'.$language.'.total') }}: <span id="js_updateCart_total">{!! \App\Helpers\Number::getFormatPriceByLanguage($detailCart['total'], $language) !!}</span></div>
+                <a href="{{ $urlPageCart ?? '/' }}" class="button">{{ config('data_language_1.'.$language.'.view_cart') }}</a>
             </div>
         @else
             @include('wallpaper.cart.emptyCart', compact('language'))

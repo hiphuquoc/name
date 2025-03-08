@@ -77,7 +77,7 @@
         <!-- chủ đề -->
         @if(!empty($wallpaperMobile))
             @php
-                $titlePhoneWallpaper = config('language.'.$language.'.data.wallpaper_theme.'.env('APP_NAME'));
+                $titlePhoneWallpaper = config('data_language_2.'.$language.'.wallpaper_theme');
                 $url      = '';
                 foreach($wallpaperMobile->seos as $s){
                     if(!empty($s->infoSeo->language)&&$s->infoSeo->language==$language){
@@ -137,7 +137,7 @@
             @endphp
             <div class="open" onclick="showHideListMenuMobile(this, 'phong-cach')">
                 {!! $icon !!}
-                <div class="maxLine_1" style="margin-left:-3px;">{{ config('language.'.$language.'.data.wallpaper_style.'.env('APP_NAME')) }}</div>
+                <div class="maxLine_1" style="margin-left:-3px;">{{ config('data_language_2.'.$language.'.wallpaper_style') }}</div>
                 <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="phong-cach" class="filterLinkSelected">
@@ -164,7 +164,7 @@
         <!-- sự kiện -->
         <li>
             @php
-                $altPhoneWallpaperEvent = config('language.'.$language.'.data.phone_wallpaper.'.env('APP_NAME'));
+                $altPhoneWallpaperEvent = config('data_language_2.'.$language.'.phone_wallpaper');
             @endphp
             <div class="close" onclick="showHideListMenuMobile(this, 'su-kien')">
                 <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
@@ -196,7 +196,7 @@
         <li>
             @php
                 $icon                   = file_get_contents('storage/images/svg/icon-share-1.svg');
-                $wallpaperFreeText      = config('language.'.$language.'.data.free_wallpaper.'.env('APP_NAME'));
+                $wallpaperFreeText      = config('data_language_2.'.$language.'.free_wallpaper');
                 $slugFullWallpaperFree  = '';
                 foreach($wallpaperMobile->childs as $child){
                     if(in_array($child->seo->slug, config('main_'.env('APP_NAME').'.url_free_wallpaper_category'))){
@@ -221,7 +221,7 @@
                     $icon = file_get_contents('storage/images/svg/icon-support-1.svg');
                 @endphp
                 {!! $icon !!}
-                <div class="maxLine_1">{{ config('language.'.$language.'.data.support') }}</div>
+                <div class="maxLine_1">{{ config('data_language_1.'.$language.'.support') }}</div>
                 <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="ho-tro" class="filterLinkSelected">
@@ -308,7 +308,7 @@
 <div class="socialBox">
     <div class="socialBox_social">
         <div class="socialBox_social_title">
-            {{ config('language.'.$language.'.data.connect_with_us') }}
+            {{ config('data_language_1.'.$language.'.connect_with_us') }}
         </div>
         <div class="socialBox_social_box">
             <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_social_box_item" aria-label="facebook">

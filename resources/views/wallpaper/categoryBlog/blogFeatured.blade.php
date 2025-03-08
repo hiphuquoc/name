@@ -1,6 +1,6 @@
 <div class="blogSiderbarBox">
     <div class="blogSiderbarBox_head">
-        <h2>{{ config('language.'.$language.'.data.featured_articles') }}</h2>
+        <h2>{{ config('data_language_1.'.$language.'.featured_articles') }}</h2>
     </div>
     <div class="blogSiderbarBox_box">
         @foreach($blogFeatured as $blog)

@@ -15,7 +15,7 @@ class CategoryMoneyController extends Controller {
         $language                                   = $request->get('language');
         $viewBy                                     = Cookie::get('view_by') ?? 'each_set';
         $response                                   = [
-            'content'   => '<div>'.config('language.'.$language.'.data.no_suitable_results_found').'</div>',
+            'content'   => '<div>'.config('data_language_1.'.$language.'.no_suitable_results_found').'</div>',
         ];
         if($request->get('loaded')<$request->get('total')){
             $params                                 = [];

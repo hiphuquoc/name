@@ -4,7 +4,7 @@
     // $eventUpdateCart        = "updateCart('js_updateCart_idWrite_$keyId', 'js_updateCart_total', 'js_updateCart_count', 'js_addToCart_quantity_".$keyId."', 'cartMain')";
     $eventRemoveProductCart = "removeProductCart($idProduct, '".json_encode($arrayProductPrice)."', 'js_updateCart_idWrite_".$keyId."', 'js_updateCart_total', 'js_updateCart_count')";
     $url                    = null;
-    $title                  = config('language.'.$language.'.data.undefined');
+    $title                  = config('data_language_1.'.$language.'.undefined');
     foreach($product->seos as $seo){
         if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
             $title      = $seo->infoSeo->title;

@@ -1,3 +1,3 @@
 <div class="copyright">
-    {!! config('language.'.$language.'.data.copyright.'.env('APP_NAME')) !!}
+    {!! config('data_language_2.'.$language.'.copyright') !!}
 </div>

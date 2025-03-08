@@ -1,6 +1,6 @@
 @php
     /* tên được active */
-    $nameSelect         = config('language.'.$language.'.data.all');
+    $nameSelect         = config('data_language_1.'.$language.'.all');
     if(!empty($categoryChoose->seos)){
         foreach($categoryChoose->seos as $seo){
             if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
@@ -20,7 +20,7 @@
     }
 @endphp
 <div class="selectCustom_text maxLine_1">
-    {!! config('language.'.$language.'.data.filter_by_themes') !!}
+    {!! config('data_language_1.'.$language.'.filter_by_themes') !!}
 </div>
 <div class="selectCustom_input maxLine_1">
     {{ $nameSelect }}
@@ -32,7 +32,7 @@
         $selected = !empty($categoryChoose->id) ? '' : 'selected';
     @endphp
     <a href="/{{ $urlCategoryLv1 }}" class="selectCustom_box_item {{ $selected }}">
-        {{ config('language.'.$language.'.data.all') }}
+        {{ config('data_language_1.'.$language.'.all') }}
     </a>
     <!-- option khác -->
     @if(!empty($categories))

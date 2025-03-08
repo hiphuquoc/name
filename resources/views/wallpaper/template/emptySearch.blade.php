@@ -1,3 +1,3 @@
 <div class="emptySearchBox">
-    {{ config('language.'.$language.'.data.no_suitable_results_found') }}...!
+    {{ config('data_language_1.'.$language.'.no_suitable_results_found') }}...!
 </div>

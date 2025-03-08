@@ -44,6 +44,6 @@
     $url    = route('routing', ['slug' => config('language.'.$language.'.slug_page_premium_wallpaper')]).'?search='.$keySearch;
 @endphp
 <a href="{{ $url }}" class="searchViewBeforeOfPremiumWallpaper_viewAll">
-    <div>{{ config('language.'.$language.'.data.view_all') }} (<span>{{ $count }}</span>)</div>
+    <div>{{ config('data_language_1.'.$language.'.view_all') }} (<span>{{ $count }}</span>)</div>
     <i class="fa-solid fa-angles-right"></i>
 </a>

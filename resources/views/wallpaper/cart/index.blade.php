@@ -22,7 +22,7 @@
             <!-- breadcrumb -->
             @include('wallpaper.template.breadcrumb')
             <!-- tiêu đề -->
-            <h1 class="titlePage">{{ config('language.'.$language.'.data.product_list') }} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] ?? 0 }}</span>)</h1>
+            <h1 class="titlePage">{{ config('data_language_1.'.$language.'.product_list') }} (<span id="js_updateCart_count" class="highLight">{{ $detailCart['count'] ?? 0 }}</span>)</h1>
             <form id="formPaymentMethod" action="{{ route('main.paymentCart') }}" method="post" style="width:100%;">
                 @csrf
                 <!-- tạo language phụ trong form để gửi đi -->
@@ -37,8 +37,8 @@
                                 <div class="cartSectionBox">
                                     <div class="cartSectionBox_body">
                                         <div class="cartProductBox_head">
-                                            <div>{{ config('language.'.$language.'.data.product') }}</div>
-                                            <div>{{ config('language.'.$language.'.data.unit_price') }}</div>
+                                            <div>{{ config('data_language_1.'.$language.'.product') }}</div>
+                                            <div>{{ config('data_language_1.'.$language.'.unit_price') }}</div>
                                         </div>
                                         <div class="cartProductBox_body">
                                             @foreach($products as $product)
@@ -92,7 +92,7 @@
                                 Dùng mã giảm giá của {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }} ở bước sau
                             </div> --}}
                             <div class="cartSectionBox_button">
-                                <div class="button" onClick="submitFormPayment('formPaymentMethod');">{{ config('language.'.$language.'.data.payment') }}</div>
+                                <div class="button" onClick="submitFormPayment('formPaymentMethod');">{{ config('data_language_1.'.$language.'.payment') }}</div>
                             </div>
                         </div>
                         @endif

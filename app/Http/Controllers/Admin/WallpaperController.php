@@ -280,7 +280,7 @@ class WallpaperController extends Controller {
                 ])->render();
             }
         }
-        if(empty($response)) $response = '<div class="searchViewBefore_selectbox_item">'.config('language.'.$language.'.data.no_suitable_results_found').'</div>';
+        if(empty($response)) $response = '<div class="searchViewBefore_selectbox_item">'.config('data_language_1.'.$language.'.no_suitable_results_found').'</div>';
         echo $response;
     }
 }

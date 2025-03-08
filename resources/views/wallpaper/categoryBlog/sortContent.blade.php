@@ -7,13 +7,13 @@
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
                 if($sortBy==$sortItem['key']) {
-                    $inputSortBy    = $sortItem['icon'].'<div class="maxLine_1">'.config('language.'.$language.'.data.'.$sortItem['key']).'</div>';
+                    $inputSortBy    = $sortItem['icon'].'<div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$sortItem['key']).'</div>';
                 }
             }
         @endphp
         <div class="selectCustom">
             <div class="selectCustom_text maxLine_1">
-                {!! config('language.'.$language.'.data.sort_by') !!}
+                {!! config('data_language_1.'.$language.'.sort_by') !!}
             </div>
             <div class="selectCustom_input maxLine_1">
                 {!! $inputSortBy !!}
@@ -25,7 +25,7 @@
                         if($sortBy==$sortItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setSortBy('{{ $sortItem['key'] }}')">
-                        {!! $sortItem['icon'].config('language.'.$language.'.data.'.$sortItem['key']) !!}
+                        {!! $sortItem['icon'].config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
                     </div>
                 @endforeach
             </div>
@@ -36,7 +36,7 @@
         </div>
         {{-- <!-- icon filter nâng cao -->
         @php
-            $titleAdvancedFilter = config('language.'.$language.'.data.advanced_filter');
+            $titleAdvancedFilter = config('data_language_1.'.$language.'.advanced_filter');
         @endphp
         <div class="filterAdvanced show-991">
             <div id="js_toggleFilterAdvanced_element" class="filterAdvanced_icon" onclick="toggleFilterAdvanced('js_toggleFilterAdvanced_element');">
@@ -70,7 +70,7 @@
         <div class="sortBox_right_item">
             <!-- số lượng -->
             <span class="quantity maxLine_1">
-                <div class="maxLine_1">{{ config('language.'.$language.'.data.article') }} {{ $total }}</div>
+                <div class="maxLine_1">{{ config('data_language_1.'.$language.'.article') }} {{ $total }}</div>
             </span> 
         </div>
     </div>

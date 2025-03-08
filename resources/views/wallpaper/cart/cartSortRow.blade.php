@@ -3,7 +3,7 @@
         $keyId              = !empty($product->id) ? $product->id.implode('-', $arrayProductPrice) : null;
         // $eventUpdateCart    = "updateCart('js_updateCart_idWrite_".$keyId."', 'js_updateCart_total', 'js_updateCart_count', 'js_addToCart_quantity_".$keyId."')";
         $url                = null;
-        $title              = config('language.'.$language.'.data.undefined');
+        $title              = config('data_language_1.'.$language.'.undefined');
         foreach($product->seos as $seo){
             if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language){
                 $title      = $seo->infoSeo->title;
@@ -43,7 +43,7 @@
             @endif
         </div> --}}
         <div class="cartBox_list_item_content_action" onclick="{{ $eventRemoveProductCart }}">
-            <img src="/storage/images/svg/icon-trash.svg" alt="{{ config('language.'.$language.'.data.remove_item_in_cart') }}" title="{{ config('language.'.$language.'.data.remove_item_in_cart') }}" />
+            <img src="/storage/images/svg/icon-trash.svg" alt="{{ config('data_language_1.'.$language.'.remove_item_in_cart') }}" title="{{ config('data_language_1.'.$language.'.remove_item_in_cart') }}" />
         </div>
     </div>
 @endif

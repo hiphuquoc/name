@@ -1,6 +1,6 @@
 @php
-    $labelName          = config('language.'.$language.'.data.what_do_you_want_to_find_today');
-    $typeSearch         = config('language.'.$language.'.data.list_type_search.'.env('APP_NAME')) ?? [];
+    $labelName          = config('data_language_1.'.$language.'.what_do_you_want_to_find_today');
+    $typeSearch         = config('data_language_2.'.$language.'.list_type_search') ?? [];
     $keyActiveFirstTime = 'paid_wallpaper';
 
 @endphp
@@ -48,7 +48,7 @@
                         $icon = file_get_contents('storage/images/svg/search.svg');
                     @endphp
                     {!! $icon !!}
-                    <span>{{ config('language.'.$language.'.data.search') }}</span>
+                    <span>{{ config('data_language_1.'.$language.'.search') }}</span>
                 </button>
                 <div id="js_searchAjax_idWrite" class="searchViewBefore_showBox_inputBox_list">
                     <!-- load Ajax -->
