@@ -23,7 +23,7 @@ return [
         "free_wallpaper" => "Үнэгүй дэвсгэр зураг",
         "article" => "Нийтлэл",
     ],
-    "copyright" => "Бүх эрх хуулиар хамгаалагдсан ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu-аар зохион бүтээсэн, хөгжүүлсэн.",
+    "copyright" => "Бүх эрх хуулиар хамгаалагдсан ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu-аар зохион бүтээсэн, хөгжүүлсэн.",
 ],
 "sl" => [
     "wallpaper_theme"   => "Tema ozadja",
@@ -47,7 +47,7 @@ return [
         "free_wallpaper" => "Brezplačno ozadje",
         "article" => "Članek",
     ],
-    "copyright" => "Vse pravice pridržane ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Oblikovanje in razvoj: PhamVanPhu.",
+    "copyright" => "Vse pravice pridržane ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Oblikovanje in razvoj: PhamVanPhu.",
 ],
 "lt" => [
     "wallpaper_theme"   => "Fono tema",
@@ -71,7 +71,7 @@ return [
         "free_wallpaper" => "Nemokami fonai",
         "article" => "Straipsnis",
     ],
-    "copyright" => "Visos teisės saugomos ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Sukurta ir plėtojama PhamVanPhu. Visos teisės saugomos.",
+    "copyright" => "Visos teisės saugomos ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Sukurta ir plėtojama PhamVanPhu. Visos teisės saugomos.",
 ],
 "lv" => [
     "wallpaper_theme"   => "Fona tēma",
@@ -95,7 +95,7 @@ return [
         "free_wallpaper" => "Bezmaksas fons",
         "article" => "Raksts",
     ],
-    "copyright" => "Visas tiesības aizsargātas ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Izstrādājis PhamVanPhu. Visas tiesības rezervētas.",
+    "copyright" => "Visas tiesības aizsargātas ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Izstrādājis PhamVanPhu. Visas tiesības rezervētas.",
 ],
 "sr" => [
     "wallpaper_theme"   => "Тема позадина",
@@ -119,7 +119,7 @@ return [
         "free_wallpaper" => "Бесплатне позадине",
         "article" => "Чланак",
     ],
-    "copyright" => "Сва права задржана ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Дизајнирано и развијено од PhamVanPhu.",
+    "copyright" => "Сва права задржана ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Дизајнирано и развијено од PhamVanPhu.",
 ],
 "ky" => [
     "wallpaper_theme"   => "Теманын темасы",
@@ -143,7 +143,7 @@ return [
         "free_wallpaper" => "Бек темалар",
         "article" => "Макала",
     ],
-    "copyright" => "Автордук хоқук ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu тарабынан дизайны жана иштелип чыгарылган. Бардык укуктар корголгон.",
+    "copyright" => "Автордук хоқук ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu тарабынан дизайны жана иштелип чыгарылган. Бардык укуктар корголгон.",
 ],
 "bg" => [
     "wallpaper_theme"   => "Тема на тапетите",
@@ -167,7 +167,7 @@ return [
         "free_wallpaper" => "Безплатни тапети",
         "article" => "Статия",
     ],
-    "copyright" => "Авторско право ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Дизайн и разработка от PhamVanPhu. Всички права запазени.",
+    "copyright" => "Авторско право ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Дизайн и разработка от PhamVanPhu. Всички права запазени.",
 ],
 "ml" => [
     "wallpaper_theme"   => "ബാക്ക്ഗ്രൗണ്ട് ആശയം",
@@ -190,7 +190,7 @@ return [
         "free_wallpaper" => "സൗജന്യ ബാക്ക്ഗ്രൗണ്ടുകൾ",
         "article" => "ലേഖനം",
     ],
-    "copyright" => "കോപ്പിറൈറ്റ് ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu ആണ് രൂപകൽപ്പന ചെയ്തതും വികസിപ്പിച്ചതും. എല്ലാ അവകാശങ്ങളും സംരക്ഷിതം.",
+    "copyright" => "കോപ്പിറൈറ്റ് ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu ആണ് രൂപകൽപ്പന ചെയ്തതും വികസിപ്പിച്ചതും. എല്ലാ അവകാശങ്ങളും സംരക്ഷിതം.",
 ],
 "da" => [
     "wallpaper_theme"   => "Baggrund Tema",
@@ -214,7 +214,7 @@ return [
         "free_wallpaper" => "Gratis baggrundsbillede",
         "article" => "Artikel",
     ],
-    "copyright" => "Ophavsret ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Designet og udviklet af PhamVanPhu. Alle rettigheder forbeholdes.",
+    "copyright" => "Ophavsret ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Designet og udviklet af PhamVanPhu. Alle rettigheder forbeholdes.",
 ],
 "fi" => [
     "wallpaper_theme"   => "Taustakuvien teema",
@@ -238,7 +238,7 @@ return [
         "free_wallpaper" => "Ilmaiset taustakuvat",
         "article" => "Artikkeli",
     ],
-    "copyright" => "Kaikki oikeudet pidätetään ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Suunnittelu ja kehitys PhamVanPhu. ",
+    "copyright" => "Kaikki oikeudet pidätetään ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Suunnittelu ja kehitys PhamVanPhu. ",
 ],
 "no" => [
     "wallpaper_theme"   => "Bakgrunnsbilde Tema",
@@ -262,7 +262,7 @@ return [
         "free_wallpaper" => "Gratis bakgrunnsbilder",
         "article" => "Artikkel",
     ],
-    "copyright" => "Opphavsrett ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Designet og utviklet av PhamVanPhu. Alle rettigheter reservert.",
+    "copyright" => "Opphavsrett ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Designet og utviklet av PhamVanPhu. Alle rettigheter reservert.",
 ],
 "sv" => [
     "wallpaper_theme"   => "Bakgrundsbildstema",
@@ -286,7 +286,7 @@ return [
         "free_wallpaper" => "Gratis bakgrundsbild",
         "article" => "Artikel",
     ],
-    "copyright" => "Upphovsrätt ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Designad och utvecklad av PhamVanPhu. Alla rättigheter förbehållna.",
+    "copyright" => "Upphovsrätt ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Designad och utvecklad av PhamVanPhu. Alla rättigheter förbehållna.",
 ],
 "fil" => [
     "wallpaper_theme"   => "Tema ng Wallpaper",
@@ -310,7 +310,7 @@ return [
         "free_wallpaper" => "Libreng Wallpaper",
         "article" => "Artikulo",
     ],
-    "copyright" => "Lahat ng Karapatan © ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Dinisenyo at binuo ni PhamVanPhu. Lahat ng karapatan ay ipinagbabawal.",
+    "copyright" => "Lahat ng Karapatan © ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Dinisenyo at binuo ni PhamVanPhu. Lahat ng karapatan ay ipinagbabawal.",
 ],
 "pt" => [
     "wallpaper_theme"   => "Tema do Papel de Parede",
@@ -334,7 +334,7 @@ return [
         "free_wallpaper" => "Papéis de parede gratuitos",
         "article" => "Artigo",
     ],
-    "copyright" => "Direitos autorais ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Design e desenvolvimento por PhamVanPhu. Todos os direitos reservados.",
+    "copyright" => "Direitos autorais ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Design e desenvolvimento por PhamVanPhu. Todos os direitos reservados.",
 ],
 "uz" => [
     "wallpaper_theme"   => "Fon Rasmlari Mavzusi",
@@ -358,7 +358,7 @@ return [
         "free_wallpaper" => "Bepul Fon Rasmlari",
         "article" => "Maqola",
     ],
-    "copyright" => "Barcha huquqlar himoyalangan ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu tomonidan dizayn qilingan va ishlab chiqilgan.",
+    "copyright" => "Barcha huquqlar himoyalangan ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu tomonidan dizayn qilingan va ishlab chiqilgan.",
 ],
 "he" => [
     "wallpaper_theme"   => "נושא רקע מסך",
@@ -382,7 +382,7 @@ return [
         "free_wallpaper" => "רקע מסך בחינם",
         "article" => "מאמר",
     ],
-    "copyright" => "זכויות יוצרים ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. תוכנן ופותח על ידי PhamVanPhu. כל הזכויות שמורות.",
+    "copyright" => "זכויות יוצרים ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. תוכנן ופותח על ידי PhamVanPhu. כל הזכויות שמורות.",
 ],
 "ka" => [
     "wallpaper_theme"   => "ფონური სურათის თემა",
@@ -406,7 +406,7 @@ return [
         "free_wallpaper" => "უფასო ფონური სურათები",
         "article" => "სტატია",
     ],
-    "copyright" => "საავტორო უფლებები ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. დიზაინი და განვითარება PhamVanPhu-მა. ყველა უფლება დაცულია.",
+    "copyright" => "საავტორო უფლებები ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. დიზაინი და განვითარება PhamVanPhu-მა. ყველა უფლება დაცულია.",
 ],
 "sk" => [
     "wallpaper_theme"   => "Téma Pozadia",
@@ -430,7 +430,7 @@ return [
         "free_wallpaper" => "Bezplatné pozadia",
         "article" => "Článok",
     ],
-    "copyright" => "Autorské práva ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Navrhol a vyvinul PhamVanPhu. Všetky práva vyhradené.",
+    "copyright" => "Autorské práva ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Navrhol a vyvinul PhamVanPhu. Všetky práva vyhradené.",
 ],
 "ro" => [
     "wallpaper_theme"   => "Teme Fundal",
@@ -454,7 +454,7 @@ return [
         "free_wallpaper" => "Fundaluri Gratuite",
         "article" => "Articol",
     ],
-    "copyright" => "Drepturi de autor ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Proiectat și dezvoltat de PhamVanPhu. Toate drepturile rezervate.",
+    "copyright" => "Drepturi de autor ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Proiectat și dezvoltat de PhamVanPhu. Toate drepturile rezervate.",
 ],
 "cs" => [
     "wallpaper_theme"   => "Téma pozadí",
@@ -478,7 +478,7 @@ return [
         "free_wallpaper" => "Bezplatné pozadí",
         "article" => "Článek",
     ],
-    "copyright" => "Všechna práva vyhrazena ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Navrhl a vyvinul PhamVanPhu.",
+    "copyright" => "Všechna práva vyhrazena ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Navrhl a vyvinul PhamVanPhu.",
 ],
 "hu" => [
     "wallpaper_theme"   => "Háttér téma",
@@ -502,7 +502,7 @@ return [
         "free_wallpaper" => "Ingyenes háttérképek",
         "article" => "Cikk",
     ],
-    "copyright" => "Minden jog fenntartva © ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Tervezte és fejlesztette PhamVanPhu.",
+    "copyright" => "Minden jog fenntartva © ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Tervezte és fejlesztette PhamVanPhu.",
 ],
 "el" => [
     "wallpaper_theme"   => "Θέμα Wallpaper",
@@ -526,7 +526,7 @@ return [
         "free_wallpaper" => "Δωρεάν wallpapers",
         "article" => "Άρθρο",
     ],
-    "copyright" => "Πνευματικά δικαιώματα ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Σχεδιασμός και ανάπτυξη από PhamVanPhu. Με τη διατήρηση όλων των δικαιωμάτων.",
+    "copyright" => "Πνευματικά δικαιώματα ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Σχεδιασμός και ανάπτυξη από PhamVanPhu. Με τη διατήρηση όλων των δικαιωμάτων.",
 ],
 "nl" => [
     "wallpaper_theme"   => "Achtergrond Thema's",
@@ -550,7 +550,7 @@ return [
         "free_wallpaper" => "Gratis achtergronden",
         "article" => "Artikel",
     ],
-    "copyright" => "Auteursrecht ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Ontworpen en ontwikkeld door PhamVanPhu. Alle rechten voorbehouden.",
+    "copyright" => "Auteursrecht ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Ontworpen en ontwikkeld door PhamVanPhu. Alle rechten voorbehouden.",
 ],
 "uk" => [
     "wallpaper_theme"   => "Тема шпалер",
@@ -574,7 +574,7 @@ return [
         "free_wallpaper" => "Безкоштовні шпалери",
         "article" => "Стаття",
     ],
-    "copyright" => "Авторські права ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Дизайн та розробка PhamVanPhu. Всі права захищені.",
+    "copyright" => "Авторські права ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Дизайн та розробка PhamVanPhu. Всі права захищені.",
 ],
 "pl" => [
     "wallpaper_theme"   => "Motyw Tapety",
@@ -598,7 +598,7 @@ return [
         "free_wallpaper" => "Darmowe tapety",
         "article" => "Artykuł",
     ],
-    "copyright" => "Wszelkie prawa zastrzeżone ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Projekt i rozwój PhamVanPhu.",
+    "copyright" => "Wszelkie prawa zastrzeżone ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Projekt i rozwój PhamVanPhu.",
 ],
 "it" => [
     "wallpaper_theme"   => "Tema Sfondi",
@@ -622,7 +622,7 @@ return [
         "free_wallpaper" => "Sfondi gratuiti",
         "article" => "Articolo",
     ],
-    "copyright" => "Diritto d'autore ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Progettato e sviluppato da PhamVanPhu. Tutti i diritti riservati.",
+    "copyright" => "Diritto d'autore ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Progettato e sviluppato da PhamVanPhu. Tutti i diritti riservati.",
 ],
 "tr" => [
     "wallpaper_theme"   => "Duvar Kağıdı Teması",
@@ -646,7 +646,7 @@ return [
         "free_wallpaper" => "Ücretsiz Duvar Kağıdı",
         "article" => "Makale",
     ],
-    "copyright" => "Telif Hakkı ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu tarafından tasarlanmış ve geliştirilmiştir. Tüm hakları saklıdır.",
+    "copyright" => "Telif Hakkı ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu tarafından tasarlanmış ve geliştirilmiştir. Tüm hakları saklıdır.",
 ],
 "de" => [
     "wallpaper_theme"   => "Hintergrundthema",
@@ -670,7 +670,7 @@ return [
         "free_wallpaper" => "Kostenlose Hintergründe",
         "article" => "Artikel",
     ],
-    "copyright" => "Urheberrecht ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Entworfen und entwickelt von PhamVanPhu. Alle Rechte vorbehalten.",
+    "copyright" => "Urheberrecht ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Entworfen und entwickelt von PhamVanPhu. Alle Rechte vorbehalten.",
 ],
 "ru" => [
     "wallpaper_theme"   => "Тематика Обоев",
@@ -694,7 +694,7 @@ return [
         "free_wallpaper" => "Бесплатные обои",
         "article" => "Статья",
     ],
-    "copyright" => "Все права защищены ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Дизайн и разработка PhamVanPhu.",
+    "copyright" => "Все права защищены ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Дизайн и разработка PhamVanPhu.",
 ],
 "fa" => [
     "wallpaper_theme"   => "تم تصویر پس‌زمینه",
@@ -718,7 +718,7 @@ return [
         "free_wallpaper" => "تصاویر پس‌زمینه رایگان",
         "article" => "مقاله",
     ],
-    "copyright" => "حقوق © ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. طراحی و توسعه توسط PhamVanPhu. همه حقوق محفوظ است.",
+    "copyright" => "حقوق © ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. طراحی و توسعه توسط PhamVanPhu. همه حقوق محفوظ است.",
 ],
 "ar" => [
     "wallpaper_theme"   => "موضوع الخلفيات",
@@ -742,7 +742,7 @@ return [
         "free_wallpaper" => "خلفيات مجانية",
         "article" => "مقال",
     ],
-    "copyright" => "جميع الحقوق محفوظة ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. تصميم وتطوير PhamVanPhu.",
+    "copyright" => "جميع الحقوق محفوظة ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. تصميم وتطوير PhamVanPhu.",
 ],
 "th" => [
     "wallpaper_theme"   => "ธีมวอลเปเปอร์",
@@ -766,7 +766,7 @@ return [
         "free_wallpaper" => "วอลเปเปอร์ฟรี",
         "article" => "บทความ",
     ],
-    "copyright" => "สงวนลิขสิทธิ์ ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. ออกแบบและพัฒนาโดย PhamVanPhu. สงวนสิทธิ์ทุกประการ.",
+    "copyright" => "สงวนลิขสิทธิ์ ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. ออกแบบและพัฒนาโดย PhamVanPhu. สงวนสิทธิ์ทุกประการ.",
 ],
 "ms" => [
     "wallpaper_theme"   => "Tema Wallpaper",
@@ -790,7 +790,7 @@ return [
         "free_wallpaper" => "Wallpaper percuma",
         "article" => "Artikel",
     ],
-    "copyright" => "Hak Cipta ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Direka dan dibangunkan oleh PhamVanPhu. Hak cipta terpelihara.",
+    "copyright" => "Hak Cipta ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Direka dan dibangunkan oleh PhamVanPhu. Hak cipta terpelihara.",
 ],
 "id" => [
     "wallpaper_theme"   => "Tema Wallpaper",
@@ -814,7 +814,7 @@ return [
         "free_wallpaper" => "Wallpaper Gratis",
         "article" => "Artikel",
     ],
-    "copyright" => "Hak Cipta ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Dirancang dan dikembangkan oleh PhamVanPhu. Seluruh hak dilindungi.",
+    "copyright" => "Hak Cipta ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Dirancang dan dikembangkan oleh PhamVanPhu. Seluruh hak dilindungi.",
 ],
 "jv" => [
     "wallpaper_theme"   => "Tema Wallpaper",
@@ -838,7 +838,7 @@ return [
         "free_wallpaper" => "Wallpaper gratis",
         "article" => "Artikel",
     ],
-    "copyright" => "Hak Cipta ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Dirancang lan dikembangake dening PhamVanPhu. Kabeh hak dilindhungi.",
+    "copyright" => "Hak Cipta ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Dirancang lan dikembangake dening PhamVanPhu. Kabeh hak dilindhungi.",
 ],
 "ko" => [
     "wallpaper_theme"   => "배경 테마",
@@ -862,7 +862,7 @@ return [
         "free_wallpaper" => "무료 배경 화면",
         "article" => "기사",
     ],
-    "copyright" => "저작권 ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu가 디자인 및 개발했습니다. 모든 권리 보유.",
+    "copyright" => "저작권 ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu가 디자인 및 개발했습니다. 모든 권리 보유.",
 ],
 "ja" => [
     "wallpaper_theme"   => "壁紙テーマ",
@@ -886,7 +886,7 @@ return [
         "free_wallpaper" => "無料壁紙",
         "article" => "記事",
     ],
-    "copyright" => "著作権 ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhuがデザインおよび開発しました。すべての権利を保有します。",
+    "copyright" => "著作権 ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhuがデザインおよび開発しました。すべての権利を保有します。",
 ],
 "gu" => [
     "wallpaper_theme"   => "બગલની છબીઓની થીમ",
@@ -910,7 +910,7 @@ return [
         "free_wallpaper" => "મફત બગલની છબીઓ",
         "article" => "લેખ",
     ],
-    "copyright" => "કૉપીરાઇટ ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu દ્વારા ડિઝાઇન અને વિકસિત. બધા હકો સંરક્ષિત.",
+    "copyright" => "કૉપીરાઇટ ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu દ્વારા ડિઝાઇન અને વિકસિત. બધા હકો સંરક્ષિત.",
 ],
 "ur" => [
     "wallpaper_theme"   => "والپیپر کا موضوع",
@@ -934,7 +934,7 @@ return [
         "free_wallpaper" => "مفت والپیپر",
         "article" => "مقالہ",
     ],
-    "copyright" => "کاپی رائٹ ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu کے ذریعہ ڈیزائن اور ترقی یافتہ۔ تمام حقوق محفوظ ہیں۔",
+    "copyright" => "کاپی رائٹ ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu کے ذریعہ ڈیزائن اور ترقی یافتہ۔ تمام حقوق محفوظ ہیں۔",
 ],
 "te" => [
     "wallpaper_theme"   => "బ్యాక్‌గ్రౌండ్ థీమ్",
@@ -958,7 +958,7 @@ return [
         "free_wallpaper" => "ఉచిత బ్యాక్‌గ్రౌండ్",
         "article" => "వ్యాసం",
     ],
-    "copyright" => "హక్కులు © ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu ద్వారా రూపకల్పన మరియు అభివృద్ధి చేయబడింది. అన్ని హక్కులు కాపాడబడ్డాయి.",
+    "copyright" => "హక్కులు © ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu ద్వారా రూపకల్పన మరియు అభివృద్ధి చేయబడింది. అన్ని హక్కులు కాపాడబడ్డాయి.",
 ],
 "ta" => [
     "wallpaper_theme"   => "பின்புல படத்தின் கருப்பொருள்",
@@ -982,7 +982,7 @@ return [
         "free_wallpaper" => "இலவச பின்புல படங்கள்",
         "article" => "கட்டுரை",
     ],
-    "copyright" => "பதிப்புரிமை ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu ஆல் வடிவமைக்கப்பட்டது. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+    "copyright" => "பதிப்புரிமை ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu ஆல் வடிவமைக்கப்பட்டது. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
 ],
 "mr" => [
     "wallpaper_theme"   => "बॅकग्राउंड थीम",
@@ -1006,7 +1006,7 @@ return [
         "free_wallpaper" => "विनामूल्य बॅकग्राउंड",
         "article" => "लेख",
     ],
-    "copyright" => "सर्व हक्क सुरक्षित ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu द्वारा डिझाइन आणि विकसित. सर्व हक्क सुरक्षित.",
+    "copyright" => "सर्व हक्क सुरक्षित ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu द्वारा डिझाइन आणि विकसित. सर्व हक्क सुरक्षित.",
 ],
 "bn" => [
     "wallpaper_theme"   => "ওয়ালপেপারের থিম",
@@ -1030,7 +1030,7 @@ return [
         "free_wallpaper" => "ফ্রি ওয়ালপেপার",
         "article" => "নিবন্ধ",
     ],
-    "copyright" => "কপিরাইট ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. ডিজাইন এবং ডেভেলপ করেছেন PhamVanPhu. সর্বস্বত্ব সংরক্ষিত.",
+    "copyright" => "কপিরাইট ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. ডিজাইন এবং ডেভেলপ করেছেন PhamVanPhu. সর্বস্বত্ব সংরক্ষিত.",
 ],
 "hi" => [
     "wallpaper_theme"   => "वॉलपेपर थीम",
@@ -1054,7 +1054,7 @@ return [
         "free_wallpaper" => "नि:शुल्क वॉलपेपर",
         "article" => "लेख",
     ],
-    "copyright" => "सर्वाधिकार सुरक्षित ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu द्वारा डिज़ाइन और विकसित। सर्वाधिकार सुरक्षित।",
+    "copyright" => "सर्वाधिकार सुरक्षित ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. PhamVanPhu द्वारा डिज़ाइन और विकसित। सर्वाधिकार सुरक्षित।",
 ],
 "vi" => [
     "wallpaper_theme"   => "Chủ đề Hình Nền",
@@ -1078,7 +1078,7 @@ return [
         "free_wallpaper" => "Hình nền miễn phí",
         "article" => "Bài viết",
     ],
-    "copyright" => "Bản quyền ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Thiết kế và phát triển bởi PhamVanPhu. Mọi quyền được bảo lưu.",
+    "copyright" => "Bản quyền ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Thiết kế và phát triển bởi PhamVanPhu. Mọi quyền được bảo lưu.",
 ],
 "fr" => [
     "wallpaper_theme"   => "Thème du fond d'écran",
@@ -1102,7 +1102,7 @@ return [
         "free_wallpaper" => "Fonds d'écran gratuits",
         "article" => "Article",
     ],
-    "copyright" => "Droits d'auteur ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Conçu et développé par PhamVanPhu. Tous droits réservés.",
+    "copyright" => "Droits d'auteur ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Conçu et développé par PhamVanPhu. Tous droits réservés.",
 ],
 "es" => [
     "wallpaper_theme"   => "Tema del Fondo de Pantalla",
@@ -1126,7 +1126,7 @@ return [
         "free_wallpaper" => "Fondos de pantalla gratis",
         "article" => "Artículo",
     ],
-    "copyright" => "Derechos de autor ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Diseñado y desarrollado por PhamVanPhu. Todos los derechos reservados.",
+    "copyright" => "Derechos de autor ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Diseñado y desarrollado por PhamVanPhu. Todos los derechos reservados.",
 ],
 "zh" => [
     "wallpaper_theme"   => "壁纸主题",
@@ -1150,7 +1150,7 @@ return [
         "free_wallpaper" => "免费壁纸",
         "article" => "文章",
     ],
-    "copyright" => "版权 ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. 由PhamVanPhu设计和开发。保留所有权利。",
+    "copyright" => "版权 ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. 由PhamVanPhu设计和开发。保留所有权利。",
 ],
 "en" => [
     "wallpaper_theme"   => "Wallpaper Themes",
@@ -1174,6 +1174,6 @@ return [
         "free_wallpaper" => "Free Wallpapers",
         "article" => "Article",
     ],
-    "copyright" => "Copyright ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ $language }}\" aria-label=\"Name\">Name</a>. Designed and developed by PhamVanPhu. All rights reserved.",
+    "copyright" => "Copyright ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Designed and developed by PhamVanPhu. All rights reserved.",
 ],
 ];
