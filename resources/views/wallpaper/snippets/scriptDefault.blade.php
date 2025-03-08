@@ -312,20 +312,23 @@
         document.documentElement.scrollTop          = 0;
     }
     /* link to a href #id smooth */
-    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-        a.addEventListener('click', function(event) {
-            event.preventDefault();
-            let id = this.getAttribute('href');
-            let element = document.querySelector(id);
-            if (!element) {
-                console.error(`Element with ID ${id} not found`);
-                return;
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định
+
+            let targetId = this.getAttribute('href').substring(1); // Lấy ID từ href
+            let targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                let headerOffset = 80; // Điều chỉnh khoảng cách mong muốn
+                let elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                let offsetPosition = elementPosition - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth" // Cuộn mượt
+                });
             }
-            let offsetTop = element.offsetTop;
-            window.scrollTo({
-                top: offsetTop + 200,
-                behavior: 'smooth'
-            });
         });
     });
     /* toggle menu mobile */

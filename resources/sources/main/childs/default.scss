@@ -75,29 +75,29 @@ $colorBackgroundLv3: #3a4556;
     font-display: swap;
 } */
 
-@font-face {
-  font-family: 'Segoe-UI';
-  font-style: normal;
-  font-weight: 500;
-  src: url('/fonts/SegoeUI.ttf');
-  font-display: swap;
-}
+// @font-face {
+//   font-family: 'Segoe-UI';
+//   font-style: normal;
+//   font-weight: 500;
+//   src: url('/fonts/SegoeUI.ttf');
+//   font-display: swap;
+// }
 
-@font-face {
-  font-family: 'Segoe-UI Semi';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/SegoeUI-SemiBold.ttf');
-}
+// @font-face {
+//   font-family: 'Segoe-UI Semi';
+//   font-style: normal;
+//   font-weight: 700;
+//   font-display: swap;
+//   src: url('/fonts/SegoeUI-SemiBold.ttf');
+// }
 
-@font-face {
-  font-family: 'Segoe-UI Bold';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/SegoeUI-Bold.ttf');
-}
+// @font-face {
+//   font-family: 'Segoe-UI Bold';
+//   font-style: normal;
+//   font-weight: 700;
+//   font-display: swap;
+//   src: url('/fonts/SegoeUI-Bold.ttf');
+// }
 
 /* @font-face {
   font-family: 'SVN-Gilroy Thin';
@@ -157,16 +157,17 @@ $fontText: "SVN-Gilroy", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: left;
+  margin-bottom: 1rem;
   &:dir(rtl), [dir="rtl"] & {
     text-align: right;
   }
   @media(max-width: 1199px){
     font-size: 1.05rem;
-    // margin-bottom: 0.5rem;
   }
   @media(max-width: 991px){
     font-size: 1rem;
     letter-spacing: 0.25px;
+    margin-bottom: 0.75rem;
   }
   // @media(max-width: 767px){
   //   font-size: 0.95rem;

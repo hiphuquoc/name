@@ -55,7 +55,10 @@
     <!-- END:: Article Schema -->
 
     <!-- STRAT:: FAQ Schema -->
-    @include('wallpaper.schema.faq', ['data' => $item->faqs])
+    @php
+        $dataFaq    = config('data_question_product.'.$language);
+    @endphp
+    @include('wallpaper.schema.faqProduct', ['dataFaq' => $dataFaq])
     <!-- END:: FAQ Schema -->
 <!-- ===== END:: SCHEMA ===== -->
 @endpush

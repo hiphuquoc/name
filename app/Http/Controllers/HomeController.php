@@ -25,6 +25,7 @@ use App\Models\Timezone;
 use App\Jobs\Tmp;
 use App\Jobs\AutoTranslateContent;
 use App\Jobs\AutoImproveContent;
+use App\Jobs\TranslateQuestionProduct;
 use GuzzleHttp\Client;
 
 use Illuminate\Support\Facades\Mail;
@@ -124,7 +125,17 @@ class HomeController extends Controller {
         // }
 
         // dd(123);
-        
+
+        $languageList       = config('language');
+
+        foreach($languageList as $language){
+            
+            
+            TranslateQuestionProduct::dispatch($language);
+            
+        }
+
+        dd('success');
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {

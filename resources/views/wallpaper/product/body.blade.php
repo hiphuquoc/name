@@ -11,15 +11,62 @@
             <div class="show-991">
                 
             </div> --}}
-            <!-- Nội dung -->
+
+            <!-- bảng thông tin Chi tiết từng hình nền -->
+            <div id="detailPerWallpaper" class="infoImageSourceTable">
+                <div class="infoImageSourceTable_title">
+                    <h2>Chi tiết từng hình nền</h2>
+                </div>
+                <div class="infoImageSourceTable_box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Tên</td>
+                                <td>Độ phân giải</td>
+                                <td>Dung lượng</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($item->prices as $price)
+                                @foreach($price->wallpapers as $wallpaper)
+                                    {{-- @php
+                                        dd($wallpaper->infoWallpaper);
+                                    @endphp --}}
+                                    <tr>
+                                        <td>Ảnh {{ $price->code_name ?? '-' }}</td>
+                                        <td>{{ $wallpaper->infoWallpaper->width_source ?? '-' }}x{{ $wallpaper->infoWallpaper->height_source ?? '-' }} px</td>
+                                        <td>{{ !empty($wallpaper->infoWallpaper->file_size_source) ? number_format($wallpaper->infoWallpaper->file_size_source/1024/1024, 1) : '-' }} mb</td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Nội dung - một thẻ div bao bọc để tránh bị display: flex; gap... -->
             @php
                 $xhtmlContent = '';
                 foreach($itemSeo->contents as $content) $xhtmlContent .= $content->content;
             @endphp
-            <!-- một thẻ div bao bọc để tránh bị display: flex; gap... -->
             <div class="contentBox">
                 {!! $xhtmlContent !!}
             </div>
+            <!-- câu hỏi thường gặp -->
+            @if(!empty($dataFaq))
+                <div class="questionAnswerBox">
+                    <div class="questionAnswerBox_title">
+                        <h2>Câu hỏi thường gặp</h2>
+                    </div>
+                    <div  class="questionAnswerBox_box">
+                        @foreach($dataFaq as $faq)
+                            <div class="questionAnswerBox_box_item" onclick="showHideAnswer(this);">
+                                <div class="questionAnswerBox_box_item_question">{!! $faq['question'] !!}</div>
+                                <div class="questionAnswerBox_box_item_answer">{!! $faq['answer'] !!}</div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
         <div class="pageProductDetailBox_right">
             <div class="productDetailBox">
@@ -98,3 +145,14 @@
     </div>
 
 </div>
+
+@push('scriptCustom')
+    <script type="text/javascript">
+        function showHideAnswer(element) {
+            let question    = element.querySelector('.questionAnswerBox_box_item_question');
+            let answer = element.querySelector('.questionAnswerBox_box_item_answer');
+            question.classList.toggle('show');
+            answer.classList.toggle('show');
+        }
+    </script>
+@endpush

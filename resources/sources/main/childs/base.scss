@@ -218,10 +218,23 @@ p, ul, ol, h2, h3, h4, h5, h6 {
   @media(max-width: 991px){
     margin-bottom: 0.5rem;
   }
-  @media(max-width: 767px){
-    margin-bottom: 0.325rem;
-  }
+  // @media(max-width: 767px){
+  //   margin-bottom: 0.325rem;
+  // }
 }
+
+// h2, h3, h4, h5, h6 {
+//   margin-bottom: 1rem;
+//   @media(max-width: 1199px){
+//     margin-bottom: 0.75rem;
+//   }
+//   @media(max-width: 991px){
+//     margin-bottom: 0.625rem;
+//   }
+//   @media(max-width: 767px){
+//     margin-bottom: 0.5rem;
+//   }
+// }
 
 ul, ol {
   margin-right: unset;
