@@ -138,28 +138,28 @@ class HomeController extends Controller {
 
         // dd('success');
 
-        $infoPageParent = Category::select('*')
-                            ->whereHas('seos.infoSeo', function($query){
-                                $query->where('slug', 'hinh-nen-dien-thoai');
-                            })
-                            ->with('seo', 'seos')
-                            ->first();
+        // $infoPageParent = Category::select('*')
+        //                     ->whereHas('seos.infoSeo', function($query){
+        //                         $query->where('slug', 'hinh-nen-dien-thoai');
+        //                     })
+        //                     ->with('seo', 'seos')
+        //                     ->first();
 
-        $orderingCopy   = 7;
-        $contentCopy    = '';
-        foreach($infoPageParent->seos as $seo){
-            if(!empty($seo->infoSeo->language)){
-                $language       = $seo->infoSeo->language;
-                foreach($seo->infoSeo->contents as $content){
-                    if($content->ordering==$orderingCopy){
-                        $contentCopy    = $content->content;
-                        CopyBoxContentToAllTagAndCategory::dispatch($orderingCopy, $language, $contentCopy);
-                        break;
-                    }
-                }
-            }
-        }
-        dd(123);
+        // $orderingCopy   = 7;
+        // $contentCopy    = '';
+        // foreach($infoPageParent->seos as $seo){
+        //     if(!empty($seo->infoSeo->language)){
+        //         $language       = $seo->infoSeo->language;
+        //         foreach($seo->infoSeo->contents as $content){
+        //             if($content->ordering==$orderingCopy){
+        //                 $contentCopy    = $content->content;
+        //                 CopyBoxContentToAllTagAndCategory::dispatch($orderingCopy, $language, $contentCopy);
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
+        // dd(123);
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {
