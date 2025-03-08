@@ -13,9 +13,9 @@
         <!-- header Top -->
         <div class="menuTopBackground layoutHeaderTop">
             <div class="layoutHeaderTop_header container">
-                <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
+                <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn">
                     @if(Route::is('main.home'))
-                        <h1 style="opacity:0;">{{ config('language.'.$language.'.data.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}</h1>
+                        <h1 style="opacity:0;">{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}</h1>
                     @endif
                 </a>
             </div>

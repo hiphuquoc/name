@@ -1,5 +1,5 @@
 @php
-    $nameHome   = config('language.'.$language.'.data.home');
+    $nameHome   = config('data_language_1.'.$language.'.home');
     $xhtml      = '{
                     "@type": "ListItem",
                     "position": 1,

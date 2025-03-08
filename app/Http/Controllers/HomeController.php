@@ -26,6 +26,7 @@ use App\Jobs\Tmp;
 use App\Jobs\AutoTranslateContent;
 use App\Jobs\AutoImproveContent;
 use App\Jobs\TranslateQuestionProduct;
+use App\Jobs\CopyBoxContentToAllTagAndCategory;
 use GuzzleHttp\Client;
 
 use Illuminate\Support\Facades\Mail;
@@ -126,16 +127,39 @@ class HomeController extends Controller {
 
         // dd(123);
 
-        $languageList       = config('language');
+        // $languageList       = config('language');
 
-        foreach($languageList as $language){
+        // foreach($languageList as $language){
             
             
-            TranslateQuestionProduct::dispatch($language);
+        //     TranslateQuestionProduct::dispatch($language);
             
+        // }
+
+        // dd('success');
+
+        $infoPageParent = Category::select('*')
+                            ->whereHas('seos.infoSeo', function($query){
+                                $query->where('slug', 'hinh-nen-dien-thoai');
+                            })
+                            ->with('seo', 'seos')
+                            ->first();
+
+        $orderingCopy   = 7;
+        $contentCopy    = '';
+        foreach($infoPageParent->seos as $seo){
+            if(!empty($seo->infoSeo->language)){
+                $language       = $seo->infoSeo->language;
+                foreach($seo->infoSeo->contents as $content){
+                    if($content->ordering==$orderingCopy){
+                        $contentCopy    = $content->content;
+                        CopyBoxContentToAllTagAndCategory::dispatch($orderingCopy, $language, $contentCopy);
+                        break;
+                    }
+                }
+            }
         }
-
-        dd('success');
+        dd(123);
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {

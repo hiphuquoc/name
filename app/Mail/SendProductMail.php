@@ -27,7 +27,7 @@ class SendProductMail extends Mailable {
     }
 
     public function build(){
-        $email = $this->subject('Confirm Order - Name.com.vn')
+        $email  = $this->subject(config('language.'.$this->language.'.data.order_confirmation').' - Name.com.vn')
                     ->view('wallpaper.mail.sendProduct')
                     ->with([
                         'order' => $this->order,

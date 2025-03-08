@@ -828,98 +828,39 @@ return [
             'what_do_you_want_to_find_today' => "Bạn muốn tìm gì hôm nay?",
             'search' => "Tìm kiếm",
             /* xác nhận đơn hàng */
-            'order_confirmation' => 'Xác nhận đơn hàng',
-            'thank_you_message_email' => 'Cảm ơn bạn đã hoàn tất đơn hàng của mình! Hình nền của bạn đã sẵn sàng để sử dụng.',
-            'hello' => 'Xin chào',
-            'purchase_date' => 'Ngày mua',
-            'download_instructions' => 'Bạn có thể tải bộ hình nền bằng các cách sau:',
-            'direct_download' => 'Tải trực tiếp qua các liên kết bên dưới:',
-            'sincerely' => 'Trân trọng!',
-            'login_instruction_message_email' => 'Hoặc đăng nhập vào <a href="https://name.com.vn" style="color: #006d57; text-decoration: none; font-weight: 700;">Name.com.vn</a> bằng email của bạn và vào phần <strong>"Tải xuống của tôi"</strong>',
-            'support_contact_message_email' => 'Nếu có bất kỳ thắc mắc hoặc cần hỗ trợ, vui lòng liên hệ với chúng tôi qua email: <a href="mailto:wallpaperdienthoai@gmail.com" style="color: #006d57; text-decoration: none; font-weight: 700;">wallpaperdienthoai@gmail.com</a>.',
-            'wish_message_email' => 'Chúc bạn có những trải nghiệm tuyệt vời cùng bộ sưu tập hình nền mới của mình!',
+            "order_confirmation" => "Xác nhận đơn hàng",
+            "thank_you_message_email" => "Cảm ơn bạn đã hoàn tất đơn hàng của mình! Hình nền của bạn đã sẵn sàng để sử dụng.",
+            "hello" => "Xin chào",
+            "purchase_date" => "Ngày mua",
+            "download_instructions" => "Bạn có thể tải bộ hình nền bằng các cách sau:",
+            "direct_download" => "Tải trực tiếp qua các liên kết bên dưới:",
+            "sincerely" => "Trân trọng!",
+            "login_instruction_message_email" => "Hoặc đăng nhập vào <a href=\"https://name.com.vn\" style=\"color: #006d57; text-decoration: none; font-weight: 700;\">Name.com.vn</a> bằng email của bạn và vào phần <strong>\"Tải xuống của tôi\"</strong>",
+            "support_contact_message_email" => "Nếu có bất kỳ thắc mắc hoặc cần hỗ trợ, vui lòng liên hệ với chúng tôi qua email: <a href=\"mailto:wallpaperdienthoai@gmail.com\" style=\"color: #006d57; text-decoration: none; font-weight: 700;\">wallpaperdienthoai@gmail.com</a>.",
+            "wish_message_email" => "Chúc bạn có những trải nghiệm tuyệt vời cùng bộ sưu tập hình nền mới của mình!",
             /* custom */
-            "wallpaper_theme"   => [
-                "name"  => "Chủ đề Hình Nền",
-                "topgirl"  => "Chủ đề Ảnh",
-                "topanime"  => "Chủ đề Ảnh",
-            ],
-            "wallpaper_style"   => [
-                "name"  => "Phong cách Hình Nền",
-                "topgirl"  => "Phong cách Ảnh",
-                "topanime"  => "Phong cách Ảnh",
-            ],
-            "free_wallpaper"    => [
-                "name"  => "Hình nền Miễn Phí",
-                "topgirl"  => "Ảnh Miễn Phí",
-                "topanime"  => "Ảnh Miễn Phí",
-            ],
-            "phone_wallpaper"   => [
-                "name"  => "Hình nền điện thoại ",
-                "topgirl"  => "Ảnh Gái Xinh ",
-                "topanime"  => "Ảnh Anime ",
-            ],
-            "product_description"   => [
-                "name"  => "<p>Biến màn hình nền điện thoại của bạn thành một tác phẩm nghệ thuật với bộ sưu tập ảnh tuyệt đẹp này! Đem lại phong cách mới lạ và sự tươi mới cho chiếc điện thoại của bạn.</p>
-                                <ul>
-                                    <li>Độ phân giải cao: 1440x3360, đảm bảo hình ảnh sắc nét đến từng chi tiết.</li>
-                                    <li>Tương thích hoàn hảo với mọi loại màn hình điện thoại.</li>
-                                    <li>Tải xuống dễ dàng và nhanh chóng chỉ với vài bước đơn giản.</li>
-                                    <li>Đã bao gồm quyền sử dụng, bạn có thể thoải mái chia sẻ với bạn bè.</li>
-                                </ul>
-                                <div>Hãy tải ngay và cảm nhận sự khác biệt đầy thú vị trên màn hình điện thoại của bạn nhé!</div>
-                            ",
-                "topgirl"  => "<div>Thêm một chút màu sắc và phong cách độc đáo vào chiếc điện thoại xinh xắn của bạn với Bộ hình nền điện thoại tuyệt đẹp này.</div>
-                                            <ul>
-                                                <li>Độ phân giải: 1440x3360</li>
-                                                <li>Tương thích tất cả màn hình điện thoại.</li>
-                                            </ul>
-                                            <div>Tải xuống áp dụng ngay trên màn hình điện thoại của bạn để cảm nhận nhé!</div>",
-                "topanime"  => "<div>Thêm một chút màu sắc và phong cách độc đáo vào chiếc điện thoại xinh xắn của bạn với Bộ hình nền điện thoại tuyệt đẹp này.</div>
-                                            <ul>
-                                                <li>Độ phân giải: 1440x3360</li>
-                                                <li>Tương thích tất cả màn hình điện thoại.</li>
-                                            </ul>
-                                            <div>Tải xuống áp dụng ngay trên màn hình điện thoại của bạn để cảm nhận nhé!</div>",
-            ],
-            "wallpaper_by_themes" => [
-                "name"  => "Hình Nền Điện Thoại theo Chủ Đề",
-                "topgirl"  => "Ảnh Gái Xinh theo Chủ Đề",
-                "topanime"  => "Ảnh Anime theo Chủ Đề",
-            ],
-            "wallpaper_by_styles" => [
-                "name"  => "Hình Nền Điện Thoại theo Phong Cách",
-                "topgirl"  => "Ảnh Gái Xinh theo Phong Cách",
-                "topanime"  => "Ảnh Anime theo Phong Cách",
-            ],
-            "wallpaper_by_events" => [
-                "name"  => "Hình Nền Điện Thoại theo Sự Kiện",
-                "topgirl"  => "Ảnh Gái Xinh theo Sự Kiện",
-                "topanime"  => "Ảnh Anime theo Sự Kiện",
-            ],
+            "wallpaper_theme"   => "Chủ đề Hình Nền",
+            "wallpaper_style"   => "Phong cách Hình Nền",
+            "free_wallpaper"    => "Hình nền Miễn Phí",
+            "phone_wallpaper"   => "Hình nền điện thoại ",
+            "product_description"   => "<p>Hô biến màn hình điện thoại của bạn thành một kiệt tác nghệ thuật với bộ sưu tập hình nền cực chất!</p>
+                <ul>
+                    <li>Độ phân giải cao, hình ảnh sắc nét đến từng chi tiết.</li>
+                    <li>Tương thích hoàn hảo với mọi loại màn hình điện thoại.</li>
+                    <li>Tải xuống dễ dàng và nhanh chóng chỉ với vài bước đơn giản.</li>
+                </ul>
+                <div>Hãy tải ngay và cảm nhận sự khác biệt đầy thú vị trên màn hình điện thoại của bạn nhé!</div>
+            ",
+            "wallpaper_by_themes" => "Hình Nền Điện Thoại theo Chủ Đề",
+            "wallpaper_by_styles" => "Hình Nền Điện Thoại theo Phong Cách",
+            "wallpaper_by_events" => "Hình Nền Điện Thoại theo Sự Kiện",
             "list_type_search" => [
-                'name' => [
-                    'category_info' => 'Danh mục',
-                    'paid_wallpaper' => 'Hình nền trả phí',
-                    'free_wallpaper' => 'Hình nền miễn phí',
-                    'article' => 'Bài viết',
-                ],
-                'topgirl' => [
-                    'category_info' => 'Danh mục',
-                    'paid_wallpaper' => 'Hình nền trả phí',
-                    'free_wallpaper' => 'Hình nền miễn phí',
-                    'article' => 'Bài viết',
-                ],
-                'topanime' => [
-                    'category_info' => 'Danh mục',
-                    'paid_wallpaper' => 'Hình nền trả phí',
-                    'free_wallpaper' => 'Hình nền miễn phí',
-                    'article' => 'Bài viết',
-                ],
+                "category_info" => "Danh mục",
+                "paid_wallpaper" => "Hình nền trả phí",
+                "free_wallpaper" => "Hình nền miễn phí",
+                "article" => "Bài viết",
             ],
-            "copyright" => [
-                "name"  => "Bản quyền ® ".date('Y')." <a href='{{ env('APP_URL') }}/{{ \$language }}' aria-label='Name'>Name</a>. Thiết kế và phát triển bởi Phạm Văn Phú. Mọi quyền được bảo lưu.",
-            ]
+            "copyright" => "Bản quyền ® ".date('Y')." <a href=\"{{ env('APP_URL') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Thiết kế và phát triển bởi Phạm Văn Phú. Mọi quyền được bảo lưu.",
         ]
     ],
     "hi" => [

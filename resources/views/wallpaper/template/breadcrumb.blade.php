@@ -1,7 +1,7 @@
 @if(!empty($breadcrumb))
    <!-- === START:: Breadcrumb === -->
    @php
-      $title      = config('language.'.$language.'.data.home');
+      $title      = config('data_language_1.'.$language.'.home');
    @endphp
    <div class="breadcrumbBox">
       <div class="maxLine_1">

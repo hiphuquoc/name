@@ -31,7 +31,7 @@
     $urlPath                    = urldecode(request()->path());
 @endphp             
 <div class="logoInMenuMobile show-991">
-    <a href="/{{ $language }}" class="logoMain" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn"></a>
+    <a href="/{{ $language }}" class="logoMain" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn"></a>
 </div>
 <!-- icon hiển thị chế độ xem -->
 <div class="layoutHeaderSide_header_menuView" onclick="settingCollapsedMenu();">
@@ -49,9 +49,9 @@
             // if($urlPath==$language||$urlPath=='/') $selected = 'selected';
         @endphp
         <li class="{{ $selected }}">
-            <a href="/{{ $language }}" title="{{ config('language.'.$language.'.data.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('language.'.$language.'.data.home') }} Name.com.vn">
+            <a href="/{{ $language }}" title="{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn">
                 {!! $icon !!}
-                <div class="maxLine_1">{{ config('language.'.$language.'.data.home') }}</div>
+                <div class="maxLine_1">{{ config('data_language_1.'.$language.'.home') }}</div>
             </a>
         </li>
         <!-- về chúng tôi -->
@@ -168,7 +168,7 @@
             @endphp
             <div class="close" onclick="showHideListMenuMobile(this, 'su-kien')">
                 <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
-                <div class="maxLine_1">{{ config('language.'.$language.'.data.event') }}</div>
+                <div class="maxLine_1">{{ config('data_language_1.'.$language.'.event') }}</div>
                 <i class="fa-solid fa-plus"></i>
             </div>
             <ul id="su-kien" class="filterLinkSelected">
