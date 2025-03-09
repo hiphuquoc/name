@@ -160,6 +160,28 @@ class HomeController extends Controller {
         //     }
         // }
         // dd(123);
+
+        $array = ["Tê Giác", "Hà Mã", "Lạc Đà", "Cá Nemo", "Sao Biển", "Ngựa", "Cá Ngựa",
+                    "Hồng Hạc", "Vẹt", "Tắc Kè Hoa", "Cá Sấu", "Ếch", "Cá Rồng", "Báo Tuyết", 
+                    "Báo Đen", "Báo Đốm", "Cá Mập", "Cá Heo", "Rùa Biển", "Chim Ưng", "Chim Công", "Đom Đóm", 
+                    "Cá Chép", "Cá Koi", "Cá Thần Tiên", "Cá La Hán", "Cá Bảy Màu", "Cá Betta", "Bươm Bướm",
+                    "Hoa Dâm Bụt", "Hoa Giấy", "Hoa Sứ", "Hoa Lưu Ly", "Hoa Cát Tường", "Hoa Thược Dược", 
+                    "Hoa Mộc Lan", "Hoa Ngọc Lan", "Hoa Sim", "Hoa Súng", "Hoa Lài",
+                    "Trà", "Cà phê", "Trái Bơ", "Trái Thanh Long", "Sữa chua", "Trái xoài", "Trái ổi", "Hải sản",
+                    "Thư viện", "Hồ sen", "Bảo tàng", "Nhà sàn",
+                    "Rạng san hô", "Rừng tre", "Rừng lá phong", "Rừng thông", "Mặt trăng",
+                    "Baby Tree", "Capybara", "Gấu Lobby", "Labubu",
+                    "Back Myth: Wukong", "Genshin Impact", "Call of Duty",
+                    "Tom and Jerry", "Chú Báo Hồng", "Mèo Oggy và những chú gián tinh nghịch", "Dr Stone", 
+                    "Spy x Family", "Solo Leveling", "Bleach", "Fate Series", "Gintama", 
+                    "Tokyo Revengers", "Code Geass", "Black Butler", "Toradora!", "Vua Sư Tử", "Mộ Đom Đóm", "Tây Du Ký", "Câu Bé Bút Chì", "Scooby Doo", "Khuyển dạ xoa", "Vùng đất linh hồn", "Ben 10", "Kẻ trộm mặt trăng", "Natra", "Chu Tước", "Bạch Hổ", "Huyền Vũ", "Thanh Long", "Cóc Ngậm Tiền", "Tỳ Hưu", "Đồng Tiền Cổ", "Cây Tài Lộc", "Tài Lộc", "Thần Tài", "Phúc Lộc Thọ", "Ông Địa", "Bát Quái", "Vòng Tay", "Cây Tùng", "Cây Trúc", "Tứ Quý", "Cầu Nguyện", "Hào Quang"];
+        $count      = 0;
+        foreach($array as $nameTag){
+            $flag   = \App\Http\Controllers\Admin\FreeWallpaperController::createSeoTmp($nameTag);
+            if($flag) $count += $count;
+        }
+
+        dd($count);
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {

@@ -21,9 +21,7 @@ use App\Models\RelationTagInfoOrther;
 use App\Models\RelationFreeWallpaperUser;
 use App\Models\Tag;
 use App\Models\Seo;
-use App\Models\EnSeo;
 use App\Models\RelationCategoryThumnail;
-use App\Models\RelationSeoEnSeo;
 use App\Models\RelationSeoTagInfo;
 
 class FreeWallpaperController extends Controller {
@@ -195,30 +193,47 @@ class FreeWallpaperController extends Controller {
         }
     }
 
-    private static function createSeoTmp($nameTag){
+    public static function createSeoTmp($nameTag){
+        $idTag      = 0;
         /* tạo bảng seo tạm */
         $slug       = config('main_'.env('APP_NAME').'.auto_fill.slug.vi').'-'.Charactor::convertStrToUrl($nameTag);
-        $idSeo      = Seo::insertItem([
-            'title'                     => $nameTag,
-            'seo_title'                 => $nameTag,
-            'level'                     => 1,
-            'type'                      => 'tag_info',
-            'slug'                      => $slug,
-            'slug_full'                 => $slug,
-            'rating_author_name'        => 1,
-            'rating_author_star'        => 5,
-            'rating_aggregate_count'    => rand(100,5000),
-            'rating_aggregate_star'     => '4.'.rand(5, 9),
-            'created_by'                => Auth::user()->id,
-            'language'                  => 'vi'
-        ]);
-        /* tạo bảng tag */
-        $idTag      = Tag::insertItem(['seo_id' => $idSeo]);
-        /* tạo Relation */
-        RelationSeoTagInfo::insertItem([
-            'seo_id'        => $idSeo,
-            'tag_info_id'   => $idTag
-        ]);
+        /* lấy thông tin trang cha */
+        $infoParent = Category::select('*')
+                        ->whereHas('seos.infoSeo', function($query){
+                            $query->where('level', 1);
+                        })
+                        ->first();
+        $level      = $infoParent->seo->level + 1;
+        $parent     = $infoParent->seo->id;
+        $slugFull   = $infoParent->seo->slug_full.'/'.$slug;
+        /* kiểm tra slug trùng */
+        $flag       = Seo::select('*')
+                        ->where('slug_full', $slugFull)
+                        ->first();
+        if(empty($flag)){
+            $idSeo      = Seo::insertItem([
+                'title'                     => $nameTag,
+                'seo_title'                 => $nameTag,
+                'level'                     => $level,
+                'parent'                    => $parent,
+                'type'                      => 'tag_info',
+                'slug'                      => $slug,
+                'slug_full'                 => $slugFull,
+                'rating_author_name'        => 1,
+                'rating_author_star'        => 5,
+                'rating_aggregate_count'    => rand(100,5000),
+                'rating_aggregate_star'     => '4.'.rand(5, 9),
+                'created_by'                => Auth::user()->id ?? 1,
+                'language'                  => 'vi'
+            ]);
+            /* tạo bảng tag */
+            $idTag      = Tag::insertItem(['seo_id' => $idSeo]);
+            /* tạo Relation */
+            RelationSeoTagInfo::insertItem([
+                'seo_id'        => $idSeo,
+                'tag_info_id'   => $idTag
+            ]);
+        }
         return $idTag;
     }
 
