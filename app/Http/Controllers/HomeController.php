@@ -109,27 +109,27 @@ class HomeController extends Controller {
         // dd($response);
 
 
-        $tags = Tag::select('*')
-                    ->where('id', '>', 748)
-                    ->orderBy('id', 'DESC')
-                    ->get();
+        // $tags = Tag::select('*')
+        //             ->where('id', '>', 748)
+        //             ->orderBy('id', 'DESC')
+        //             ->get();
         
-        foreach($tags as $tag){
+        // foreach($tags as $tag){
 
-            $idSeo = 0;
-            foreach($tag->seos as $seo){
-                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
-                    $idSeo = $seo->infoSeo->id;
-                    break;
-                }
-            }
-            foreach($tag->seo->contents as $content){
-                if($content->ordering!=6||$content->ordering!=7) AutoImproveContent::dispatch($content->ordering, $idSeo);
-            }
+        //     $idSeo = 0;
+        //     foreach($tag->seos as $seo){
+        //         if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language=='vi'){
+        //             $idSeo = $seo->infoSeo->id;
+        //             break;
+        //         }
+        //     }
+        //     foreach($tag->seo->contents as $content){
+        //         if($content->ordering!=6||$content->ordering!=7) AutoImproveContent::dispatch($content->ordering, $idSeo);
+        //     }
             
-        }
+        // }
 
-        dd(123);
+        // dd(123);
 
         // $languageList       = config('language');
 
