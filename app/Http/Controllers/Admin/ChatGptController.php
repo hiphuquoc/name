@@ -193,6 +193,9 @@ class ChatGptController extends Controller {
             $prompt             = str_replace($arrayReplace['search'], $arrayReplace['replace'], $prompt);
             $response           = $prompt;
         }
+        /* dù là viết hay dịch -> nếu prompt có truyền vào #wiki thì thay thế vào để AI hiểu rõ hơn vấn đề */
+        $wikiContent    = $infoPage->notes ?? '';
+        $response       = str_replace('#wiki', $wikiContent, $response);
         return $response;
     }
 
@@ -315,6 +318,27 @@ class ChatGptController extends Controller {
     private static function removeThinkTags(string $content): string{
         $content = preg_replace('/<think>.*?<\/think>/s', '', $content);
         return trim(preg_replace('/\s+/', ' ', $content));
+    }
+
+    public static function getArrayInResponse($input){
+        // Loại bỏ các ký tự không mong muốn như dấu backtick và "```php"
+        $cleanedString = trim($input, "'```php ");
+        $cleanedString = trim($cleanedString, "`");
+
+        // Kiểm tra xem chuỗi có đúng cú pháp một mảng PHP không
+        if (!preg_match('/^\[\s*["\']?\w+["\']?\s*=>/', $cleanedString)) {
+            return []; // Nếu không đúng định dạng, trả về []
+        }
+
+        try {
+            // Thực thi mã PHP một cách an toàn
+            $decodedArray = @eval("return " . $cleanedString . ";");
+
+            // Nếu kết quả là mảng hợp lệ, trả về nó, ngược lại trả về []
+            return is_array($decodedArray) ? $decodedArray : [];
+        } catch (\Throwable $e) {
+            return []; // Nếu có lỗi, trả về []
+        }
     }
 
 }

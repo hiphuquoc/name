@@ -605,5 +605,35 @@
         });
     }
 
+    function checkTranslateOfPage(idSeo){
+        Swal.fire({
+            title: 'Xác nhận thao tác',
+            html: '<div>Hành động này sẽ gọi AI để kiểm tra lại tất cả bản dịch title, seo_title và seo_description của trang.</div>',
+            preConfirm: () => {
+                Swal.showLoading();
+                return new Promise((resolve) => {
+                    $.ajax({
+                        url: "{{ route('admin.checkTranslateOfPage.callAI') }}",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            seo_id: idSeo,
+                        }
+                    })
+                    .done(function (response) {
+                        setTimeout(() => createToast(response.toast_type, response.toast_title, response.toast_message), 300);
+                        resolve(true);  // ✅ Giúp đóng modal
+                    })
+                    .fail(function () {
+                        setTimeout(() => createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'), 300);
+                        resolve(false); // ✅ Đóng modal ngay cả khi có lỗi
+                    });
+                });
+            },
+            confirmButtonText: 'Xác nhận'
+        });
+    }
+
 
 </script>

@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="titlePage">Danh Sách Bản Dịch</div>
-@include('admin.report.search', compact('list'))
+<div class="titlePage">Danh Sách Gợi Ý Sửa Lỗi</div>
+@include('admin.report.searchCheckTranslateOfPage', compact('list'))
 <div class="card">
     <!-- ===== Table ===== -->
     <div class="table-responsive">
@@ -10,16 +10,16 @@
             <thead>
                 <tr>
                     <th style="width:60px;"></th>
-                    <th class="text-center">Thông tin</th>
-                    <th class="text-center" style="width:130px;">Trạng thái</th>
-                    <th style="width:800px;">Đường dãn</th>
+                    <th class="text-center" style="width:180px;">Thông tin</th>
+                    <th class="text-center">Bản dịch cũ</th>
+                    <th class="text-center">Gợi ý sửa</th>
                     <th class="text-center" width="200px">-</th>
                 </tr>
             </thead>
             <tbody>
                 @if(!empty($list)&&$list->isNotEmpty())
                     @foreach($list as $item)
-                        @include('admin.report.row', [
+                        @include('admin.report.rowCheckTranslateOfPage', [
                             'item'  => $item,
                             'no'    => $loop->index+1
                         ])

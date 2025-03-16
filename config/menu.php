@@ -175,6 +175,11 @@ return [
                     'route' => 'admin.translate.list',
                     'icon'  => '<i data-feather=\'circle\'></i>'
                 ],
+                [
+                    'name'  => '2. Check translate page',
+                    'route' => 'admin.checkTranslateOfPage.list',
+                    'icon'  => '<i data-feather=\'circle\'></i>'
+                ],
             ]
         ],
     ]

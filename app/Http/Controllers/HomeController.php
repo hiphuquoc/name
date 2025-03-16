@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\TranslateController;
+use App\Http\Controllers\Admin\ChatGptController;
 use App\Models\ISO3166;
 use App\Models\Tag;
 use App\Models\Seo;
@@ -215,7 +216,7 @@ class HomeController extends Controller {
         /* array not check */
         $arrayNotCheck          = ['vi', 'en'];
         foreach($tag->seos as $seo){
-            if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $arrayNotCheck)){
+            if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $arrayNotCheck)&&$seo->infoSeo->language=='th'){
                 $language       = $seo->infoSeo->language;
                 $nameLanguage   = config('language.'.$language.'.name');
                 $promptText     = 'tôi có một danh mục hình nền điện thoại, gồm title, seo_title và seo_description. Thông tin bản gốc tiếng việt và tiếng anh như bên dưới:
@@ -224,50 +225,51 @@ class HomeController extends Controller {
                                     ]
 
                                 bên dưới đây là thông tin mô tả cho bạn hiểu về chủ đề từ wikipedia:
-                                Tru Tiên (giản thể: 诛仙; phồn thể: 誅仙; bính âm: Zhūxiān) là một bộ tiểu thuyết giả tưởng thần tiên kiếm hiệp (còn gọi là tiên hiệp) do Tiêu Đỉnh sáng tác. Tru Tiên được đưa lên mạng vào năm 2003 khi còn chưa hoàn thành, tác phẩm này nhanh chóng thu hút đông đảo sự quan tâm của độc giả và nên gây một làn sóng mới trong văn học Trung Quốc. Đài Loan đã mua bản quyền xuất bản bộ truyện với giá 1 triệu nhân dân tệ.[1] Tại Trung Quốc, trong 3 năm liên tiếp kể từ khi xuất bản, Tru Tiên đã phát hành được gần 2 triệu bản,[2] vượt qua kỷ lục của Harry Potter ở Trung Quốc.[3]
-                                Nhiều công ty game, hãng làm phim - bao gồm nhà chế tác Trương Kỷ Trung, đài truyền hình và xưởng phim hoạt hình Trung Quốc, Hàn Quốc và Đài Loan đã tham gia thương thảo bản quyền với tác giả để chuyển thể tác phẩm này.[1]
+                                '.$tag->notes.'
 
-                                yêu cầu của tôi, hãy dựa vào bản gốc và thông tin từ wikipedia tôi gửi để kiểm tra bản dịch tiếng '.$nameLanguage.' ('.$language.') trong các value tương ứng trong array bên dưới:
+                                yêu cầu của tôi, hãy dựa vào bản tiếng Việt, bản Tiếng Anh và thông tin từ wiki tôi gửi để kiểm tra bản dịch tiếng '.$nameLanguage.' ('.$language.') trong các giá trị bên trong array bên dưới:
                                 [
-                                    "th" => [
+                                    "'.$language.'" => [
                                         "title"             => "'.$seo->infoSeo->title.'",
                                         "seo_title"         => "'.$seo->infoSeo->seo_title.'",
                                         "seo_description"   => "'.$seo->infoSeo->seo_description.'",
                                     ]
                                 ]
                                 
-                                kết quả trả về, nếu trường hợp bản dịch không sai thì trả về array rỗng (không cần giải thích gì thêm), nếu bản dịch sai thì hãy trả về array theo mẫu bên dưới giúp tôi (tôi chỉ cần array kết quả, không cần giải thích gì thêm):
+                                kết quả trả về, nếu trường hợp các bản dịch tiếng '.$nameLanguage.' ('.$language.') không sai thì trả về array rỗng (không cần giải thích gì thêm), nếu một trong các giá trị chưa đúng thì hãy trả về array theo mẫu bên dưới giúp tôi (tôi chỉ cần array kết quả, không cần giải thích gì thêm):
                                 [
-                                    "th" => [
-                                        "title"                 => "'.$seo->infoSeo->title.'",
-                                        "seo_title"             => "'.$seo->infoSeo->seo_title.'",
-                                        "seo_description"       => "'.$seo->infoSeo->seo_description.'",
-                                        "new_title"             => "bản dịch title mới",
-                                        "new_seo_title"         => "bản dịch seo_title mới",
-                                        "new_seo_description"   => "bản dịch seo_description mới",
-                                    ]
+                                    "title"                 => "'.$seo->infoSeo->title.'",
+                                    "seo_title"             => "'.$seo->infoSeo->seo_title.'",
+                                    "seo_description"       => "'.$seo->infoSeo->seo_description.'",
+                                    "new_title"             => "bản dịch title đúng",
+                                    "new_seo_title"         => "bản dịch seo_title đúng",
+                                    "new_seo_description"   => "bản dịch seo_description đúng",
                                 ]
                 ';
-
-            $testMessages = [
-                ['role' => 'system', 'content' => 'Bạn là một chuyên gia sáng tạo nội dung với phong cách hấp dẫn và sáng tạo. Hãy giúp tôi viết những nội dung độc đáo và thu hút người đọc, với giọng văn thân thiện, dễ hiểu và sáng tạo. Sử dụng ngôn ngữ tự nhiên và tránh lặp từ.'],
-                ['role' => 'user', 'content' => $promptText]
-            ];
-            $options        = [
-                // 'max_tokens'    => 100000,
-                // 'stream'        => false,
-                // 'temperature' => 0.7, // Cân bằng giữa sáng tạo và tập trung (0-1)
-                // 'top_p' => 0.9, // Lấy mẫu từ phần trăm xác suất cao nhất 
-                // 'frequency_penalty' => 0.5, // Giảm lặp từ (0-1)
-                // 'presence_penalty' => 0.3, // Khuyến khích đề cập chủ đề mới (0-1)
-                // 'stop' => ['</html>', '<!--END-->'], // Dừng generate khi gặp các sequence này
-                // 'best_of' => 3, // Sinh 3 response và chọn cái tốt nhất (tăng chi phí)
-                // 'n' => 1, // Số lượng response trả về
-            ];
-            $model      = 'qwen-max';
-            $response = self::chatWithAI($testMessages, $model, $options);
-            print_r($response);
-            dd($response);
+                $infoPrompt = [
+                    'version'   => 'qwen-max',
+                ];
+                $response   = ChatGptController::callApi($promptText, $infoPrompt);
+                $arrayData  = ChatGptController::getArrayInResponse($response['content']);
+                if(!empty($arrayData)){
+                    /* thêm các trường dữ liệu thông tin */
+                    $arrayData['seo_id']                = $seo->infoSeo->id;
+                    $arrayData['language']              = $language;
+                    $arrayData['type']                  = $tag->seo->type;
+                    $arrayData['title_vi']              = $tag->seo->title;
+                    $arrayData['seo_title_vi']          = $tag->seo->seo_title;
+                    $arrayData['seo_description_vi']    = $tag->seo->seo_description;
+                    /* tiến hành insert */
+                    \App\Models\CheckTranslate::select('*')
+                        ->where('seo_id', $seo->infoSeo->id)
+                        ->where('language', $language)
+                        ->where('type', $tag->seo->type)
+                        ->delete();
+                    \App\Models\CheckTranslate::insertItem($arrayData);
+                }
+                
+                // $content    = $response['content']; 
+                dd($arrayData);
 
             }
         }

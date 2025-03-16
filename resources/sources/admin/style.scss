@@ -511,6 +511,14 @@ label.error {
     }
 }
 
+.actionCheck {
+    cursor: pointer;
+    color: #fd7e14 !important;
+    &:hover {
+        color: #e67112 !important;
+    }
+}
+
 .pageAdminWithRightSidebar {
     
     &_header {

@@ -1,51 +1,57 @@
 @if(!empty($item))
     <tr id="oneItem-{{ $item->id }}">
         <td>{{ $no }}</td>
-        @php
-            $urlImage = config('image.default');
-            if(!empty($item->image)) $urlImage = \App\Helpers\Image::getUrlImageSmallByUrlImage($item->image);
-        @endphp
-        {{-- <td class="text-center"><img src="{!! $urlImage.'?v='.time() !!}" style="width:100%;aspect-ratio:800/533;object-fit:cover;font-family:'SVN-Gilroy Bold',sans-serif;" /></td> --}}
+
+        <td>
+            <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;">
+                {{ $item->title_vi ?? null }} 
+            </div>
+            <div class="oneLine">
+                <strong>Ngôn ngữ</strong>: {{ $item->language ?? null }}
+            </div>
+            <div class="oneLine">
+                <strong>Loại</strong>: {{ $item->type ?? null }}
+            </div>
+        </td>
         <td>
             @php
-                $countBox = !empty($item->jobAutoTranslate) ? $item->jobAutoTranslate->count() : 0;
-            @endphp
-            <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;">
-                <img src="/storage/images/svg/icon_flag_{{ $item->language }}.png" style="width:35px;margin-right:5px;" /> {{ $item->title ?? null }} <span style="font-weight:normal;font-size:16px;color:#28c76f;">({{ $countBox }} box)</span>
+                $keySearch  = '';
+                $tmp        = explode(' ', $item->title);
+                $keySearch  = implode('+', $tmp);
+            @endphp 
+            <a href="https://www.google.com/search?q={{ $keySearch }}" target="_blank" class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#e67112;">
+                {{ $item->title ?? null }}
+            </a>
+            <div class="oneLine">
+                {{ $item->seo_title ?? null }}
             </div>
             <div class="oneLine">
-                <strong>Tiêu đề SEO</strong>: {{ $item->seo_title ?? null }} (<strong>{{ !empty($item->seo_title) ? mb_strlen($item->seo_title) : 0 }}</strong>)
+                {{ $item->seo_description ?? null }}
             </div>
-            <div class="oneLine">
-                <strong>Mô tả SEO</strong>: {{ $item->seo_description ?? null }} (<strong>{{ !empty($item->seo_description) ? mb_strlen($item->seo_description) : 0 }}</strong>)
-            </div>
-            <div class="oneLine">
-                <strong>Đường dẫn</strong>: {{ $item->slug_full ?? null }}
-            </div>
-        </td>
-        <td class="text-center">
-            @foreach($item->jobAutoTranslate as $l)
-                <div class="oneLine" {{ $loop->index>0 ? 'style="border-top:1px dashed #333;padding-top:5px;"' : '' }}>
-                    {!! $l->status==1 ? '<span style="color:#28c76f;">Thành công</span>' : '<span>Đang chờ...</span>' !!}
-                </div>
-            @endforeach
         </td>
         <td>
-            @foreach($item->jobAutoTranslateLinks as $l)
-                <div class="oneLine" {{ $loop->index>0 ? 'style="border-top:1px dashed #333;padding-top:5px;"' : '' }}>{{ ($loop->index+1) }}. <a target="_blank" href="{{ $l->link_translate }}">{{ $l->link_translate }}</a></div>
-            @endforeach
+            @php
+                $keySearch  = '';
+                $tmp        = explode(' ', $item->new_title);
+                $keySearch  = implode('+', $tmp);
+            @endphp 
+            <a href="https://www.google.com/search?q={{ $keySearch }}" target="_blank" class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#009e69;">
+                {{ $item->new_title ?? null }}
+            </a>
+            <div class="oneLine">
+                {{ $item->new_seo_title ?? null }}
+            </div>
+            <div class="oneLine">
+                {{ $item->new_seo_description ?? null }}
+            </div>
         </td>
         <td>
             <div class="actionBoxOfList">
-                <a href="/{{ $item->slug_full ?? null }}" target="_blank">
-                    <i class="fa-solid fa-eye"></i>
-                    <div>Xem</div>
-                </a>
-                <div onclick="redirectEdit({{ $item->id }}, '{{ $item->language }}');">
+                <div onclick="">
                     <i class="fa-solid fa-pen-to-square"></i>
                     <div>Sửa</div>
                 </div>
-                <div class="actionCheck" onClick="reRequestTranslate({{ $item->id }}, '{{ $item->language }}');">
+                <div class="actionCheck" onClick="">
                     <i class="fa-solid fa-repeat"></i>
                     <div>Lại</div>
                 </div>
@@ -53,7 +59,6 @@
                     <i class="fa-solid fa-trash"></i>
                     <div>Xóa</div>
                 </div>
-                
             </div>
         </td>
     </tr>

@@ -62,6 +62,10 @@
                     <i class="fa-solid fa-book"></i>
                     <div>Wiki</div>
                 </div>
+                <div class="actionCheck" onclick="checkTranslateOfPage({{ $item->seo->id }});">
+                    <i class="fa-solid fa-check"></i>
+                    <div>Check</div>
+                </div>
             </div>
         </td>
     </tr>

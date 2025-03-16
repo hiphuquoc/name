@@ -69,3 +69,4 @@
         }
     </style>
 @endif
+{{-- @include('wallpaper.snippets.fonts') --}}

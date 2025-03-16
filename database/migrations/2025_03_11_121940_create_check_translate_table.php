@@ -18,6 +18,10 @@ return new class extends Migration
             $table->integer('seo_id');
             $table->string('language', 3);
             $table->text('type');
+            /* bản tiếng việt */
+            $table->text('title_vi');
+            $table->text('seo_title_vi');
+            $table->text('seo_description_vi');
             /* bản dịch hiện tại */
             $table->text('title');
             $table->text('seo_title');

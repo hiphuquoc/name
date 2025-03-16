@@ -30,7 +30,6 @@ class AutoImproveContent implements ShouldQueue {
 
     public function handle(){
         try {
-            
             $content        = ImproveController::handleImproveContent($this->ordering, $this->idSeo);
             if(!empty(trim($content))){
                 // Xóa content cũ
