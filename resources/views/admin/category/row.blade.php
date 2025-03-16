@@ -24,11 +24,11 @@
             <div class="oneLine">
                 Đánh giá: <span class="highLight_700">{{ $item->seo->rating_aggregate_star }}</span> sao / <span class="highLight_700">{{ $item->seo->rating_aggregate_count }}</span>
             </div>
-            @if(!empty($item->notes))
-                <div class="oneLine maxLine_7">
+            <div id="js_updateNotes_notes_{{ $item->seo->id }}" class="oneLine maxLine_7">
+                @if(!empty($item->notes))
                     Ghi chú: {{ $item->notes }}
-                </div>
-            @endif
+                @endif
+            </div>
         </td>
         <td>
             <div class="actionBoxOfList">

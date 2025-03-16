@@ -592,6 +592,7 @@
                 })
                 .done(function(response) {
                     createToast(response.toast_type, response.toast_title, response.toast_message);
+                    $('#js_updateNotes_notes_'+idSeo).html('Ghi chú: ' + result.value);
                 })
                 .fail(function() {
                     createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
