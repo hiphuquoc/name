@@ -14,6 +14,7 @@ class Blog extends Model {
         'status',
         'viewed',
         'shared',
+        'notes',
     ];
     public $timestamps      = false;
 

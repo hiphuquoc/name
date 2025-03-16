@@ -23,7 +23,8 @@ class FreeWallpaper extends Model {
         'heart',
         'ha_ha',
         'not_like',
-        'vomit'
+        'vomit',
+        'notes',
     ];
     public $timestamps = true;
 

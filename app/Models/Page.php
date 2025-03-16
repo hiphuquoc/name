@@ -13,7 +13,8 @@ class Page extends Model {
         'type_id',
         'name', 
         'description',
-        'show_sidebar'
+        'show_sidebar',
+        'notes',
     ];
     public $timestamps = false;
 

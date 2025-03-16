@@ -15,7 +15,7 @@
                     <th style="width:150px;">Ảnh</th>
                     <th class="text-center">Thông tin</th>
                     <th class="text-center" style="width:500px;">Chủ đề</th>
-                    <th class="text-center" width="60px">-</th>
+                    <th class="text-center" width="200px">-</th>
                 </tr>
             </thead>
             <tbody>

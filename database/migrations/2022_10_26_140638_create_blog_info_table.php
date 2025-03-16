@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->integer('viewed')->default(0);
             $table->integer('shared')->default(0);
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

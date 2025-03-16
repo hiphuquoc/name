@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('seo_id');
             $table->boolean('flag_show')->default(1);
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

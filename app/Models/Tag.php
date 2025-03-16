@@ -12,6 +12,7 @@ class Tag extends Model {
         'seo_id',
         'icon',
         'flag_show',
+        'notes',
     ];
     public $timestamps = true;
 

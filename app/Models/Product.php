@@ -13,6 +13,7 @@ class Product extends Model {
         'code',
         'sold',
         'price',
+        'notes',
     ];
     public $timestamps = true;
 

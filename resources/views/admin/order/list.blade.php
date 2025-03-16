@@ -15,7 +15,7 @@
                     <th class="text-center" style="width:180px;">Trạng thái</th>
                     <th class="text-center">Khách hàng</th>
                     <th class="text-center" style="width:500px;">Chi tiết</th>
-                    <th class="text-center" width="60px">-</th>
+                    <th class="text-center" width="200px">-</th>
                  </tr>
             </thead>
             <tbody>

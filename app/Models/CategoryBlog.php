@@ -11,6 +11,7 @@ class CategoryBlog extends BaseCategory {
     protected $fillable     = [
         'seo_id', 
         'flag_show',
+        'notes',
     ];
     public $timestamps      = false;
 

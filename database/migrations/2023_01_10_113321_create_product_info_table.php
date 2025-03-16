@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('code', 30);
             $table->integer('sold')->default(0);
             $table->text('price');
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

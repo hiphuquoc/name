@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('not_like')->default(0);
             $table->integer('vomit')->default(0);
             $table->boolean('flag_thumnail_category')->default(0);
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

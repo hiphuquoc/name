@@ -268,30 +268,35 @@
         })
     }
     /* tạo job dịch tự động từng trang ngôn ngữ riêng biệt */
-    function createJobTranslateContent(idSeoVI, language){
-        // Gửi dữ liệu qua AJAX
-        openCloseFullLoading();
-        $.ajax({
-            url         : '{{ route("admin.translate.createJobTranslateContentAjax") }}',
-            type        : 'post',
-            dataType    : 'json',
-            data        : {
-                "_token": "{{ csrf_token() }}",
-                id_seo_vi : idSeoVI,
-                language
-            }
-        })
-        .done(function(response) {
-            // Hiển thị Toast từ response
-            createToast(response.toast_type, response.toast_title, response.toast_message);
-            $('#lock').css('display', 'block');
-        })
-        .fail(function() {
-            // Hiển thị thông báo lỗi mặc định
-            createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
-        })
-        .always(function() {
-            setTimeout(() => openCloseFullLoading(), 300);
+    function createJobTranslateContent(idSeoVI, language) {
+        Swal.fire({
+            title: 'Xác nhận thao tác',
+            html: `<div>Hành động này sẽ tiến hành dịch trang ngôn ngữ <span style="color:red;font-weight:bold;">${language}</span>. Nếu trước đó đã có nội dung thì sẽ bị xóa bỏ tất cả để dịch lại nội dung mới.</div>`,
+            preConfirm: () => {
+                Swal.showLoading();
+                return new Promise((resolve) => {
+                    $.ajax({
+                        url: '{{ route("admin.translate.createJobTranslateContentAjax") }}',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            id_seo_vi: idSeoVI,
+                            language: language  // ✅ Fix lỗi
+                        }
+                    })
+                    .done(function (response) {
+                        createToast(response.toast_type, response.toast_title, response.toast_message);
+                        $('#lock').css('display', 'block');
+                        resolve(true);  // ✅ Giúp đóng modal
+                    })
+                    .fail(function () {
+                        createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
+                        resolve(false); // ✅ Đóng modal ngay cả khi có lỗi
+                    });
+                });
+            },
+            confirmButtonText: 'Xác nhận'
         });
     }
     function createMultiJobTranslateContent(slugVi, id = 0, reload = true) {
@@ -386,37 +391,32 @@
         });
     }
     function createJobTranslateAndCreatePageAjax(slugVi, id = 0) {
-        // Hiển thị trạng thái Loading
-        openCloseFullLoading();
-
-        $.ajax({
-            url: "{{ route('admin.translate.createJobTranslateAndCreatePageAjax') }}",
-            type: "post",
-            dataType: "json",
-            data: {
-                '_token': '{{ csrf_token() }}',
-                slug_vi: slugVi,
-            }
-        })
-        .done(function (response) {
-            // Hiển thị Toast từ response
-            setTimeout(() => createToast(response.toast_type, response.toast_title, response.toast_message), 300);
-
-            if (response.flag) {
-                // cập nhật DOM
-                if (id) {
-                    $(`#oneItem-${id}`).remove();
-                    $(`#oneItemSub-${id}`).remove();
-                }
-            }
-        })
-        .fail(function () {
-            // Hiển thị thông báo lỗi mặc định
-            setTimeout(() => createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'), 300);
-        })
-        .always(function () {
-            // Tắt trạng thái Loading
-            setTimeout(() => openCloseFullLoading(), 300);
+        Swal.fire({
+            title: 'Xác nhận thao tác',
+            html: '<div>Hành động này sẽ tiến hành tạo những trang ngôn ngữ còn thiếu bằng AI.</div>',
+            preConfirm: () => {
+                Swal.showLoading();
+                return new Promise((resolve) => {
+                    $.ajax({
+                        url: "{{ route('admin.translate.createJobTranslateAndCreatePageAjax') }}",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            slug_vi: slugVi,
+                        }
+                    })
+                    .done(function (response) {
+                        setTimeout(() => createToast(response.toast_type, response.toast_title, response.toast_message), 300);
+                        resolve(true);  // ✅ Giúp đóng modal
+                    })
+                    .fail(function () {
+                        setTimeout(() => createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.'), 300);
+                        resolve(false); // ✅ Đóng modal ngay cả khi có lỗi
+                    });
+                });
+            },
+            confirmButtonText: 'Xác nhận'
         });
     }
     function getPromptTextById(idSeo, idPrompt, language) {
@@ -520,4 +520,84 @@
             }
         })
     }
+    function createJobWriteContent(idSeo) {
+        var htmlBody = `
+            <div>Thao tác này sẽ tiến hành <span style="color:red;font-weight:bold">*xóa nội dung bảng VI</span> của trang này và viết lại (chạy ngầm).<br/>Bạn có chắc muốn thực hiện?</div>`;
+
+        Swal.fire({
+            title: 'Xác nhận thao tác',
+            html: htmlBody,
+            preConfirm: () => {
+                
+            },
+            showLoaderOnConfirm: true,
+            confirmButtonText: 'Xác nhận'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ route('admin.translate.createJobWriteContent') }}",
+                    type: "post",
+                    dataType: "json",
+                    data: { 
+                        '_token': '{{ csrf_token() }}',
+                        seo_id : idSeo,
+                    }
+                })
+                .done(function(response) {
+                    // Hiển thị Toast từ response
+                    createToast(response.toast_type, response.toast_title, response.toast_message);
+                })
+                .fail(function() {
+                    // Hiển thị thông báo lỗi mặc định
+                    createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
+                })
+            }
+        });
+    }
+    function updateNotes(idSeo) {
+        var htmlBody = `
+            <div>
+                <textarea id="notesTextarea" rows="10" placeholder="Nhập thông tin cần notes..." 
+                    style="border-radius:12px;outline:none;border:none;background:#EDF2F7;width:100%;padding:1rem;"></textarea>
+            </div>`;
+
+        Swal.fire({
+            title: 'Xác nhận tùy chọn',
+            html: htmlBody,
+            preConfirm: () => {
+                // Lấy giá trị từ textarea
+                const notes = document.getElementById("notesTextarea").value.trim();
+                
+                // Kiểm tra nếu rỗng, yêu cầu nhập lại
+                if (!notes) {
+                    Swal.showValidationMessage("Vui lòng nhập nội dung ghi chú.");
+                    return false;
+                }
+
+                return notes; // ✅ Trả về để sử dụng trong `.then()`
+            },
+            showLoaderOnConfirm: true,
+            confirmButtonText: 'Xác nhận'
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                $.ajax({
+                    url: "{{ route('admin.updateNotes') }}",
+                    type: "post",
+                    dataType: "json",
+                    data: { 
+                        '_token': '{{ csrf_token() }}',
+                        seo_id: idSeo,
+                        notes: result.value  // ✅ Lấy giá trị đã nhập
+                    }
+                })
+                .done(function(response) {
+                    createToast(response.toast_type, response.toast_title, response.toast_message);
+                })
+                .fail(function() {
+                    createToast('error', 'Thất bại', '❌ Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
+                });
+            }
+        });
+    }
+
 </script>

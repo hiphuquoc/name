@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('seo_id');
             $table->longText('content')->nullable();
+            $table->integer('ordering');
         });
     }
 

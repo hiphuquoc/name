@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('seo_id');
             $table->integer('type_id');
             $table->boolean('show_sidebar')->default(0);
+            $table->longText('notes')->nullable();
         });
     }
 

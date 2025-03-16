@@ -43,6 +43,7 @@ use App\Http\Controllers\Admin\PromptController;
 use App\Http\Controllers\Admin\ApiAIController;
 use App\Http\Controllers\Admin\ChatGptController;
 use App\Http\Controllers\Admin\ImproveController;
+use App\Http\Controllers\Admin\ImproveTranslateController;
 use App\Http\Controllers\Admin\HelperController;
 use App\Http\Controllers\Admin\TranslateController;
 use App\Http\Controllers\CheckOnpageController;
@@ -77,6 +78,7 @@ Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-t
     /* ===== AI ===== */
     Route::get('/chatGpt', [ChatGptController::class, 'chatGpt'])->name('main.chatGpt');
     Route::get('/improveContent', [ImproveController::class, 'improveContent'])->name('main.improveContent');
+    Route::post('/updateNotes', [ImproveTranslateController::class, 'updateNotes'])->name('admin.updateNotes');
     /* ===== REDIRECT ===== */
     Route::prefix('redirect')->group(function(){
         Route::get('/list', [RedirectController::class, 'list'])->name('admin.redirect.list');

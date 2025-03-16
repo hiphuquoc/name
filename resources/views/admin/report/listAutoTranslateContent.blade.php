@@ -13,7 +13,7 @@
                     <th class="text-center">Thông tin</th>
                     <th class="text-center" style="width:130px;">Trạng thái</th>
                     <th style="width:800px;">Đường dãn</th>
-                    <th class="text-center" width="60px">-</th>
+                    <th class="text-center" width="200px">-</th>
                 </tr>
             </thead>
             <tbody>

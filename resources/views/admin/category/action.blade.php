@@ -1,8 +1,8 @@
 <div class="actionBox">
     @if($language=='vi')
 
-        <!-- nut viết toàn trang (trực quan) -->
-        @include('admin.button.writeAll')
+        {{-- <!-- nut viết toàn trang (trực quan) -->
+        @include('admin.button.writeAll') --}}
 
         <!-- tạo trang ngôn ngữ --> 
         @include('admin.button.translatePage')
@@ -15,8 +15,8 @@
 
     @else   
 
-        <!-- dịch toàn trang (chạy ngầm) -->
-        @include('admin.button.translateAll')
+        {{-- <!-- dịch toàn trang (trực quan) -->
+        @include('admin.button.translateAll') --}}
 
         <!-- dịch content trang này (chạy ngầm) -->
         @include('admin.button.translateContentThisLanguage')

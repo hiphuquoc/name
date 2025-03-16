@@ -26,7 +26,9 @@ $color-secondary-hover  : rgb(241, 196, 15);
 $colorPrice: rgb(255, 90, 50);
 $colorRed: #E74C3C;
 $colorRed-hover: #D04637;
-$color-green: #00bd7d;
+$colorGreen: #00bd7d;
+$colorGreen-hover: #009e69;
+
 
 $bg-1: 			#212529;
 $bg-09: 		#343a40;
@@ -194,7 +196,7 @@ textarea {
     }
 }
 
-.maxLine_1, .maxLine_2, .maxLine_3, .maxLine_4, .maxLine_5 {
+.maxLine_1, .maxLine_2, .maxLine_3, .maxLine_4, .maxLine_5, .maxLine_6, .maxLine_7, .maxLine_8 {
 	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -214,6 +216,15 @@ textarea {
 }
 .maxLine_5 {
 	-webkit-line-clamp: 5;
+}
+.maxLine_6 {
+	-webkit-line-clamp: 6;
+}
+.maxLine_7 {
+	-webkit-line-clamp: 7;
+}
+.maxLine_8 {
+	-webkit-line-clamp: 8;
 }
 
 .highLight_700 {
@@ -246,16 +257,6 @@ table:not(.sendEmail) {
                     margin-top: 0.3rem;
                 }
             }
-            i {
-                font-size: 1.2rem;
-                color: $bg-06;
-                width: 20px;
-                margin-right: 0.25rem;
-                text-align: center;
-                &.active {
-                    color: $color-primary;
-                }
-            }
         }
     }
     tr {
@@ -272,22 +273,6 @@ table:not(.sendEmail) {
                 background: $bg-02;
             }
         }
-    }
-}
-
-.iconAction {
-    text-align: center;
-    &:not(:first-child){
-        margin-left: 1rem;
-    }
-    a {
-        color: $color-primary;
-        &:hover {
-            color: $color-primary-hover;
-        }
-    }
-    i {
-        font-size: 1.5rem;
     }
 }
 
@@ -506,7 +491,23 @@ label.error {
     cursor: pointer;
     color: $colorRed !important;
     &:hover {
-        color: $colorRed-hover;
+        color: $colorRed-hover !important;
+    }
+}
+
+.actionSearch {
+    cursor: pointer;
+    color: $color-des !important;
+    &:hover {
+        color: $color-text !important;
+    }
+}
+
+.actionWiki {
+    cursor: pointer;
+    color: $colorGreen !important;
+    &:hover {
+        color: $colorGreen-hover !important;
     }
 }
 
@@ -1011,7 +1012,7 @@ html .content {
         position: absolute;
         top: -10px;
         right: 0;
-        background: $color-green;
+        background: $colorGreen;
         width: 25px;
         height: 25px;
         line-height: 25px;
@@ -1040,7 +1041,7 @@ html .content {
     }
     &.success {
         .toastBox_title {
-            color: $color-green;
+            color: $colorGreen;
             &:before {
                 @include fontAwesome;
                 content: '\f00c';
@@ -1795,6 +1796,30 @@ html .content {
     }
 }
 
+.actionBoxOfList {
+    vertical-align: top;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+    font-size: 0.95rem;
+    width: 100%;
+    gap: 0.75rem;
+    > * {
+        width: 100%;
+        font-size: 0.95rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: rgb(105, 103, 240);
+        gap: 0.25rem;
+        i {
+            color: inherit !important;
+            font-size: 1.45rem !important;
+        }
+    }
+}
+
 .reloadContentIcon {
     color: #FF6500;
     margin-left: 0.5rem;
@@ -1831,7 +1856,7 @@ html .content {
             opacity: 0.35;
         }
         &.selected, &:hover {
-            color: $color-green;
+            color: $colorGreen;
         }
     }
 }
@@ -1922,7 +1947,7 @@ html .content {
     &_confirmBox {
         width: calc(100% - 1045px);
         height: calc(100vh - 1.85rem - 300px);
-        background: rgba($color-green, 0.2);
+        background: rgba($colorGreen, 0.2);
         padding: 0.75rem 1rem;
         border-radius: 0.75rem;
         position: relative;
@@ -2007,7 +2032,7 @@ html .content {
                 cursor: pointer;
             }
             &_into {
-                background: rgba($color-green, 0.85);
+                background: rgba($colorGreen, 0.85);
             }
             &_cancel {
                 background: rgba($colorRed, 0.85);
@@ -2039,7 +2064,7 @@ html .content {
                         right: 7px;
                         z-index: 10;
                         font-size: 1.2rem;
-                        color: $color-green;
+                        color: $colorGreen;
                         background: #fff;
                         border-radius: 50%;
                         border: 1px solid $bg-09;
