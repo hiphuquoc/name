@@ -564,6 +564,10 @@
         Swal.fire({
             title: 'Xác nhận tùy chọn',
             html: htmlBody,
+            didOpen: () => {
+                // Đặt focus vào textarea ngay khi modal mở
+                document.getElementById("notesTextarea").focus();
+            },
             preConfirm: () => {
                 // Lấy giá trị từ textarea
                 const notes = document.getElementById("notesTextarea").value.trim();
@@ -600,5 +604,6 @@
             }
         });
     }
+
 
 </script>
