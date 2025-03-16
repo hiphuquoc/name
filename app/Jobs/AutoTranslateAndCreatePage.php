@@ -60,7 +60,10 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
                 }
             }
             $promptText     .= $partPromptOfSource."\n";
-            
+            /* 
+                Bên cạnh đó tôi cũng có thông tin từ wiki để bạn tham khảo và hiểu rõ chủ đề hơn: #wiki
+            */
+            $promptText     .= "Bên cạnh đó tôi cũng có thông tin từ wiki để bạn tham khảo và hiểu rõ chủ đề hơn: ".$this->infoPage->notes."\n";
             /*
                 Tôi cần bạn hoàn thành các bản dịch, và điền vào array sau giúp tôi:
             */
