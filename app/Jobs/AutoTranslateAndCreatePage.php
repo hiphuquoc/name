@@ -98,6 +98,7 @@ class AutoTranslateAndCreatePage implements ShouldQueue {
             */
             $promptText .= "Yêu cầu thêm của tôi:\n";
             $promptText .= "- hãy tham khảo các bản dịch nguồn tôi đưa vào để dịch cho chuẩn, sát nghĩa và hay nhất\n";
+            $promptText .= "- nếu là tên riêng và ngôn ngữ này không có bản dich chính xác, hay không có cách gọi thông dụng của ngôn ngữ địa phương cho title đó thì hãy tham khảo bản dịch tiếng anh và wiki để lấy tên riêng đúng.\n";
             $promptText .= "- hãy kiểm tra kỹ thông tin bạn phản hồi và chỉnh sửa sau đó trả cho tôi kết quả tốt nhất\n";
             $promptText .= "- lưu quan trọng nhất là hãy trả về array dạng json\n";
             $promptText .= "- tôi đang dùng API nên chỉ cần câu trả lời và không cần giải thích thêm gì cả";
