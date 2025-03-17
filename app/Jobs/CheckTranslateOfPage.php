@@ -13,7 +13,7 @@ use App\Models\Seo;
 use App\Models\Prompt;
 use App\Models\SeoContent;
 use App\Http\Controllers\Admin\ChatGptController;
-use App\Http\Controllers\Admin\ImproveController;
+use App\Http\Controllers\Admin\GoogleTranslateController;
 use App\Http\Controllers\Admin\HelperController;
 
 class CheckTranslateOfPage implements ShouldQueue {
@@ -93,6 +93,11 @@ class CheckTranslateOfPage implements ShouldQueue {
                             $arrayData['title_vi']              = $infoPage->seo->title;
                             $arrayData['seo_title_vi']          = $infoPage->seo->seo_title;
                             $arrayData['seo_description_vi']    = $infoPage->seo->seo_description;
+                            /* dịch google translate các cột để dễ so sánh */
+                            $arrayData['title_translate_google_vi']     = GoogleTranslateController::translate($arrayData['title'], 'vi');
+                            $arrayData['title_translate_google_en']     = GoogleTranslateController::translate($arrayData['title'], 'en');
+                            $arrayData['new_title_translate_google_vi'] = GoogleTranslateController::translate($arrayData['new_title'], 'vi');
+                            $arrayData['new_title_translate_google_en'] = GoogleTranslateController::translate($arrayData['new_title'], 'en');
                             /* tiến hành insert */
                             \App\Models\CheckTranslate::select('*')
                                 ->where('seo_id', $seo->infoSeo->id)
@@ -109,5 +114,7 @@ class CheckTranslateOfPage implements ShouldQueue {
             throw $e; // Đẩy lại lỗi để Laravel tự động thử lại
         }
     }
+
+
 
 }

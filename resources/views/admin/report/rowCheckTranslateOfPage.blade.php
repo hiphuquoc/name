@@ -18,9 +18,10 @@
                 $keySearch  = '';
                 $tmp        = explode(' ', $item->title);
                 $keySearch  = implode('+', $tmp);
+                $translate  = '('.$item->title_translate_google_vi.' - '.$item->title_translate_google_en.')';
             @endphp 
             <a href="https://www.google.com/search?q={{ $keySearch }}" target="_blank" class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#e67112;">
-                {{ $item->title ?? null }}
+                {{ $item->title ?? null }} - {{ $translate }}
             </a>
             <div class="oneLine">
                 {{ $item->seo_title ?? null }}
@@ -34,9 +35,10 @@
                 $keySearch  = '';
                 $tmp        = explode(' ', $item->new_title);
                 $keySearch  = implode('+', $tmp);
+                $translate  = '('.$item->new_title_translate_google_vi.' - '.$item->new_title_translate_google_en.')';
             @endphp 
             <a href="https://www.google.com/search?q={{ $keySearch }}" target="_blank" class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#009e69;">
-                {{ $item->new_title ?? null }}
+                {{ $item->new_title ?? null }} - {{ $translate }}
             </a>
             <div class="oneLine">
                 {{ $item->new_seo_title ?? null }}

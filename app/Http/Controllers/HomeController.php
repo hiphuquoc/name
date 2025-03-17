@@ -198,15 +198,29 @@ class HomeController extends Controller {
             ],
         
         */
-        $tags           = Tag::select('*')
-                            ->with('seo', 'seos')
-                            ->orderBy('id', 'DESC')
-                            ->get();
-        foreach($tags as $tag){
-           \App\Jobs\WriteWikiInNotes::dispatch($tag);
-        }
+        
+        // $title = "কালো কচ্ছপ";
+        // $languages = ['vi', 'en']; // Dịch sang tiếng Việt và tiếng Anh
+        // $translations = [];
 
-        dd(123);
+        // foreach ($languages as $language) {
+        //     $response = Http::withHeaders([
+        //         'Referer' => 'https://name.com.vn'
+        //     ])->get('https://translation.googleapis.com/language/translate/v2', [
+        //         'key' => env('GOOGLE_TRANSLATE_API_KEY'),
+        //         'q' => $title,
+        //         'target' => $language,
+        //     ]);
+
+        //     if ($response->successful()) {
+        //         $translatedText = $response->json('data.translations.0.translatedText');
+        //         $translations[$language] = $translatedText;
+        //     } else {
+        //         echo "Lỗi khi gọi API dịch sang $language: " . $response->body() . "\n";
+        //     }
+        // }
+
+        // print_r($translations);
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {
