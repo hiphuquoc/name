@@ -22,16 +22,20 @@ return new class extends Migration
             $table->text('title_vi');
             $table->text('seo_title_vi');
             $table->text('seo_description_vi');
+            /* bản tiếng anh */
+            $table->text('title_en');
+            $table->text('seo_title_en');
+            $table->text('seo_description_en');
             /* bản dịch hiện tại */
             $table->text('title');
-            $table->text('title_translate_google_vi')->nullable();
-            $table->text('title_translate_google_en')->nullable();
+            $table->text('title_google_translate_vi')->nullable();
+            $table->text('title_google_translate_en')->nullable();
             $table->text('seo_title');
             $table->text('seo_description');
             /* bản dịch mới */
             $table->text('new_title');
-            $table->text('new_title_translate_google_vi')->nullable();
-            $table->text('new_title_translate_google_en')->nullable();
+            $table->text('new_title_google_translate_vi')->nullable();
+            $table->text('new_title_google_translate_en')->nullable();
             $table->text('new_seo_title');
             $table->text('new_seo_description');
             $table->boolean('status')->default(0);

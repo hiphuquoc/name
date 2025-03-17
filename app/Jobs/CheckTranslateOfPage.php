@@ -90,14 +90,24 @@ class CheckTranslateOfPage implements ShouldQueue {
                             $arrayData['seo_id']                = $seo->infoSeo->id;
                             $arrayData['language']              = $language;
                             $arrayData['type']                  = $infoPage->seo->type;
+                            /* bản gốc tiếng việt */
                             $arrayData['title_vi']              = $infoPage->seo->title;
                             $arrayData['seo_title_vi']          = $infoPage->seo->seo_title;
                             $arrayData['seo_description_vi']    = $infoPage->seo->seo_description;
+                            /* bản gốc tiếng anh */
+                            foreach($infoPage->seos as $s){
+                                if(!empty($s->infoSeo->language)&&$s->infoSeo->language=='en'){
+                                    $arrayData['title_en']              = $s->infoSeo->title;
+                                    $arrayData['seo_title_en']          = $s->infoSeo->seo_title;
+                                    $arrayData['seo_description_en']    = $s->infoSeo->seo_description;
+                                    break;
+                                }
+                            }
                             /* dịch google translate các cột để dễ so sánh */
-                            $arrayData['title_translate_google_vi']     = GoogleTranslateController::translate($arrayData['title'], 'vi');
-                            $arrayData['title_translate_google_en']     = GoogleTranslateController::translate($arrayData['title'], 'en');
-                            $arrayData['new_title_translate_google_vi'] = GoogleTranslateController::translate($arrayData['new_title'], 'vi');
-                            $arrayData['new_title_translate_google_en'] = GoogleTranslateController::translate($arrayData['new_title'], 'en');
+                            $arrayData['title_google_translate_vi']     = GoogleTranslateController::translate($arrayData['title'], 'vi');
+                            $arrayData['title_google_translate_en']     = GoogleTranslateController::translate($arrayData['title'], 'en');
+                            $arrayData['new_title_google_translate_vi'] = GoogleTranslateController::translate($arrayData['new_title'], 'vi');
+                            $arrayData['new_title_google_translate_en'] = GoogleTranslateController::translate($arrayData['new_title'], 'en');
                             /* tiến hành insert */
                             \App\Models\CheckTranslate::select('*')
                                 ->where('seo_id', $seo->infoSeo->id)
