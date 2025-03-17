@@ -14,7 +14,7 @@
                     <th style="width:60px;"></th>
                     <th style="width:320px;">Ảnh</th>
                     <th class="text-center">Thông tin</th>
-                    <th class="text-center" style="width:225px;">Khác</th>
+                    <th class="text-center" style="width:30%;">Khác</th>
                     <th class="text-center" width="200px">-</th>
                 </tr>
             </thead>

@@ -13,7 +13,7 @@
             <div class="oneLine">
                 <strong>Tiêu đề SEO</strong>: {{ $item->seo->seo_title ?? null }}
             </div>
-            <div class="oneLine">
+            <div class="oneLine maxLine_3">
                 <strong>Mô tả SEO</strong>: {{ $item->seo->seo_description ?? null }}
             </div>
             <div class="oneLine">
