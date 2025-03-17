@@ -58,7 +58,7 @@ class CheckTranslateOfPage implements ShouldQueue {
                                                     '.$sourceText.'
                                                 ]
 
-                                            bên dưới đây là thông tin mô tả cho bạn hiểu về chủ đề từ wikipedia:
+                                            bên dưới đây là định nghĩa từ wiki về chủ đề '.$seo->infoSeo->title.' và hình nền '.$seo->infoSeo->title.' cho bạn hiểu về chủ đề:
                                             '.$infoPage->notes.'
 
                                             yêu cầu của tôi, hãy dựa vào bản tiếng Việt, bản Tiếng Anh và thông tin từ wiki tôi gửi để kiểm tra bản dịch tiếng '.$nameLanguage.' ('.$language.') trong các giá trị bên trong array bên dưới:
