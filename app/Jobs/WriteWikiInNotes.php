@@ -45,7 +45,7 @@ class WriteWikiInNotes implements ShouldQueue {
                                 tôi cần một đoạn mô tả ngắn gọn, rõ ràng và chi tiết khoảng 3-5 dòng định nghĩa về chủ đề '.$this->infoPage->seo->title.' (như wiki giúp người dùng hiểu được bao quát chủ đề) và một đoạn giới thiệu ngắn khoảng 5-10 dòng cho người dùng biết danh mục hình nền '.$this->infoPage->seo->title.' của tôi gồm những hình ảnh gì, vẻ đẹp thu hút, sự hấp dẫn và lợi ích tinh thần của chủ đề hình nền này.
                                 
                                 tôi chỉ cần kết quả, đừng giải thích hay ghi chú gì thêm, trình bày như hướng dẫn bên dưới:
-                                Dịnh nghĩa về #title: [nội dung].
+                                Định nghĩa về #title: [nội dung].
                                 Hiểu về hình nền #title: [nội dung].';
             /* gọi API */
             $infoPrompt = ['version'   => 'qwen-max'];
