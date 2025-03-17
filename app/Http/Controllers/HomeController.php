@@ -199,28 +199,19 @@ class HomeController extends Controller {
         
         */
         
-        // $title = "কালো কচ্ছপ";
-        // $languages = ['vi', 'en']; // Dịch sang tiếng Việt và tiếng Anh
-        // $translations = [];
-
-        // foreach ($languages as $language) {
-        //     $response = Http::withHeaders([
-        //         'Referer' => 'https://name.com.vn'
-        //     ])->get('https://translation.googleapis.com/language/translate/v2', [
-        //         'key' => env('GOOGLE_TRANSLATE_API_KEY'),
-        //         'q' => $title,
-        //         'target' => $language,
-        //     ]);
-
-        //     if ($response->successful()) {
-        //         $translatedText = $response->json('data.translations.0.translatedText');
-        //         $translations[$language] = $translatedText;
-        //     } else {
-        //         echo "Lỗi khi gọi API dịch sang $language: " . $response->body() . "\n";
+        // $tags   = Tag::select('*')
+        //             ->get();
+        // $arrayNotCheck  = ['vi', 'en'];
+        // foreach($tags as $tag){
+        //     foreach($tag->seos as $seo){
+        //         if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $arrayNotCheck)){
+        //             \App\Jobs\CheckTranslateOfPage::dispatch($seo->infoSeo->id, $seo->infoSeo->language);
+        //         }
         //     }
         // }
+        \App\Jobs\Tmp::dispatch();
 
-        // print_r($translations);
+        dd(123);
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {
