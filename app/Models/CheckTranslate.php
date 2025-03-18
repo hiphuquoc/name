@@ -58,8 +58,8 @@ class CheckTranslate extends Model {
         return $flag;
     }
 
-    // public function status() {
-    //     return $this->hasOne(\App\Models\OrderStatus::class, 'id', 'order_status_id');
-    // }
+    public function infoSeo() {
+        return $this->hasOne(\App\Models\Seo::class, 'id', 'seo_id');
+    }
 
 }

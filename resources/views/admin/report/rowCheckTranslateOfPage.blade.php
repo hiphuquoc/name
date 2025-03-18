@@ -1,7 +1,6 @@
 @if(!empty($item))
-    <tr id="oneItem-{{ $item->id }}">
+    <tr id="js_updatePageCheckTranslateOfPage_{{ $item->seo_id }}">
         <td>{{ $no }}</td>
-
         <td>
             <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#009e69;">
                 {{ $item->title_vi ?? null }} 
@@ -17,53 +16,61 @@
             </div>
         </td>
         <td>
-            @php
-                $keySearch  = '';
-                $tmp        = explode(' ', $item->title);
-                $keySearch  = implode('+', $tmp);
-                $translate  = '('.$item->title_google_translate_vi.' - '.$item->title_google_translate_en.')';
-            @endphp 
-            <a href="https://www.google.com/search?q={{ $keySearch }}" target="_blank" class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#e67112;">
-                {{ $item->title ?? null }} - {{ $translate }}
-            </a>
-            <div class="oneLine">
-                {{ $item->seo_title ?? null }}
-            </div>
-            <div class="oneLine">
-                {{ $item->seo_description ?? null }}
-            </div>
+            <label for="title_{{ $item->seo_id }}">
+                @php
+                    $keySearch  = '';
+                    $tmp        = explode(' ', $item->title);
+                    $keySearch  = implode('+', $tmp);
+                    $translate  = '('.$item->title_google_translate_vi.' - '.$item->title_google_translate_en.')';
+                @endphp 
+                <a href="https://www.google.com/search?q={{ $keySearch }}" target="_blank" class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#e67112;">
+                    {{ $item->title ?? null }} - {{ $translate }}
+                </a>
+                <div class="oneLine">
+                    {{ $item->seo_title ?? null }}
+                </div>
+                <div class="oneLine">
+                    {{ $item->seo_description ?? null }}
+                </div>
+                <!-- input -->
+                <input type="radio" id="title_{{ $item->seo_id }}" name="update[{{ $item->seo_id }}]" value="old" />
+            </label>
         </td>
         <td>
-            @php
-                $keySearch  = '';
-                $tmp        = explode(' ', $item->new_title);
-                $keySearch  = implode('+', $tmp);
-                $translate  = '('.$item->new_title_google_translate_vi.' - '.$item->new_title_google_translate_en.')';
-            @endphp 
-            <a href="https://www.google.com/search?q={{ $keySearch }}" target="_blank" class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#009e69;">
-                {{ $item->new_title ?? null }} - {{ $translate }}
-            </a>
-            <div class="oneLine">
-                {{ $item->new_seo_title ?? null }}
-            </div>
-            <div class="oneLine">
-                {{ $item->new_seo_description ?? null }}
-            </div>
+            <label for="new_title_{{ $item->seo_id }}">
+                @php
+                    $keySearch  = '';
+                    $tmp        = explode(' ', $item->new_title);
+                    $keySearch  = implode('+', $tmp);
+                    $translate  = '('.$item->new_title_google_translate_vi.' - '.$item->new_title_google_translate_en.')';
+                @endphp 
+                <a href="https://www.google.com/search?q={{ $keySearch }}" target="_blank" class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#009e69;">
+                    {{ $item->new_title ?? null }} - {{ $translate }}
+                </a>
+                <div class="oneLine">
+                    {{ $item->new_seo_title ?? null }}
+                </div>
+                <div class="oneLine">
+                    {{ $item->new_seo_description ?? null }}
+                </div>
+                <!-- input -->
+                <input type="radio" id="new_title_{{ $item->seo_id }}" name="update[{{ $item->seo_id }}]" value="new" />
+            </label>
         </td>
         <td>
             <div class="actionBoxOfList">
-                <div onclick="">
+                {{-- <div onclick="">
                     <i class="fa-solid fa-pen-to-square"></i>
                     <div>Sửa</div>
-                </div>
-                <div class="actionCheck" onClick="">
+                </div> --}}
+                <div class="actionCheck" onclick="reCheckTranslateOfPage({{ $item->seo_id }}, '{{ $item->language }}');">
                     <i class="fa-solid fa-repeat"></i>
                     <div>Lại</div>
                 </div>
-                <div class="actionDelete" onclick="deleteItem({{ $item->id }});">
+                {{-- <div class="actionDelete" onclick="deleteItem({{ $item->id }});">
                     <i class="fa-solid fa-trash"></i>
                     <div>Xóa</div>
-                </div>
+                </div> --}}
             </div>
         </td>
     </tr>
@@ -77,36 +84,3 @@
         @endforeach
     @endif
 @endif
-
-@pushonce('scriptCustom')
-    <script type="text/javascript">
-        function reRequestTranslate(idSeo, language){
-            $.ajax({
-                url         : "{{ route('admin.translate.reRequestTranslate') }}",
-                type        : "post",
-                dataType    : "html",
-                data        : { 
-                    '_token'        : '{{ csrf_token() }}', 
-                    id_seo : idSeo,
-                    language
-                }
-            }).done(function(data){
-                $('#oneItem-'+idSeo).remove();
-            });
-        }
-        function redirectEdit(idSeoByLanguage, language){
-            $.ajax({
-                url         : "{{ route('admin.translate.redirectEdit') }}",
-                type        : "get",
-                dataType    : "json", // Đảm bảo dataType là json
-                data        : {
-                    id_seo_by_language : idSeoByLanguage,
-                    language,
-                }
-            }).done(function(response){
-                // Mở tab mới với URL trả về từ server
-                window.open(response.url, '_blank');
-            });
-        }
-    </script>
-@endpushonce

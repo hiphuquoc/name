@@ -82,6 +82,8 @@ Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-t
     Route::post('/updateNotes', [ImproveTranslateController::class, 'updateNotes'])->name('admin.updateNotes');
     Route::get('/list', [CheckTranslateOfPageController::class, 'list'])->name('admin.checkTranslateOfPage.list');
     Route::post('/checkTranslateOfPage', [CheckTranslateOfPageController::class, 'checkTranslateOfPage'])->name('admin.checkTranslateOfPage.callAI');
+    Route::post('/updatePageCheckTranslateOfPage', [CheckTranslateOfPageController::class, 'updatePageCheckTranslateOfPage'])->name('admin.checkTranslateOfPage.updatePageCheckTranslateOfPage');
+    Route::post('/reCheckTranslateOfPage', [CheckTranslateOfPageController::class, 'reCheckTranslateOfPage'])->name('admin.checkTranslateOfPage.reCheckTranslateOfPage');
     /* ===== REDIRECT ===== */
     Route::prefix('redirect')->group(function(){
         Route::get('/list', [RedirectController::class, 'list'])->name('admin.redirect.list');
@@ -346,14 +348,19 @@ Route::middleware(['check.domain'])->group(function () {
         ->name('main.home');
     /* trang giỏ hàng */
     $validCarts     = config('main_'.env('APP_NAME').'.url_cart_page');
-    Route::get('/{slugCart}', [CartController::class, 'index'])
-        ->where('slugCart', implode('|', $validCarts))
-        ->name('main.cart');
+    if(!empty($validCarts)){
+        Route::get('/{slugCart}', [CartController::class, 'index'])
+                ->where('slugCart', implode('|', $validCarts))
+                ->name('main.cart');
+    }
+    
     /* trang xác nhận */
     $validSlugs = config('main_'.env('APP_NAME').'.url_confirm_page');
-    Route::get('/{slug}', [ConfirmController::class, 'confirm'])
-        ->where('slug', implode('|', $validSlugs))
-        ->name('main.confirm');
+    if(!empty($validSlugs)){
+        Route::get('/{slug}', [ConfirmController::class, 'confirm'])
+                ->where('slug', implode('|', $validSlugs))
+                ->name('main.confirm');
+    }
     /* ROUTING */
     Route::middleware(['checkRedirect'])->group(function () {
         Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\HelperController;
 use App\Jobs\CheckTranslateOfPage;
 use App\Models\CheckTranslate;
+use App\Models\Seo;
+use App\Helpers\Charactor;
 
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +26,49 @@ class CheckTranslateOfPageController extends Controller {
                                 ->orderBy('id', 'DESC')
                                 ->paginate($params['paginate']);
         return view('admin.report.checkTranslateOfPage', compact('list', 'params', 'viewPerPage'));
+    }
+
+    public static function updatePageCheckTranslateOfPage(Request $request){
+        $arraySucces    = [];
+        $arrayFail      = [];
+        $arrayNotUpdate = [];
+        foreach($request->get('data') as $idSeo => $keyChoose){ /* keyChoose = new | old */
+            $infoCheck  = CheckTranslate::select('*')
+                            ->where('seo_id', $idSeo)
+                            ->with('infoSeo')
+                            ->first();
+            if($keyChoose=='new'){
+                /* update giá trị mới new_title, new_seo_title, new_seo_description và xóa row*/
+                $dataUpdate = [];
+                $dataUpdate['title']            = $infoCheck['new_title'];
+                $dataUpdate['seo_title']        = $infoCheck['new_seo_title'];
+                $dataUpdate['seo_description']  = $infoCheck['new_seo_description'];
+                $dataUpdate['slug']             = Charactor::convertStrToUrl($dataUpdate['title']);
+                $dataUpdate['slug_full']        = Seo::buildFullUrl($dataUpdate['slug'], $infoCheck->infoSeo->parent);
+                /* tiến hành cập nhật */
+                $flag                           = Seo::updateItem($idSeo, $dataUpdate);
+                /* nếu cập nhật thành công -> không bị trùng url thì xóa row check */
+                if($flag==true){
+                    $infoCheck->delete();
+                    $arraySucces[]  = $idSeo;
+                }else {
+                    $arrayFail[]    = $idSeo;
+                }
+            }else if($keyChoose=='old'){
+                /* không làm gì cả và xóa row */
+                $infoCheck->delete();
+                $arrayNotUpdate[] = $idSeo;
+            }
+        }
+        $response = [
+            'flag' => true,
+            'toast_type' => 'success',
+            'toast_title' => 'Thành công!',
+            'toast_message' => '👋 Đã cập nhật thành công <span class="highLight_700">' . count($arraySucces) . '</span> trang ngôn ngữ. Cập nhật không thành công <span class="highLight_700" style="color:#e67112;">' . count($arrayFail) . '</span> trang ngôn ngữ. Giữ nguyên <span class="highLight_700">' . count($arrayNotUpdate) . '</span> trang ngôn ngữ.',
+            'array_success' => $arraySucces,
+            'array_not_update'  => $arrayNotUpdate,
+        ];
+        return response()->json($response);
     }
 
     public static function checkTranslateOfPage(Request $request) {
@@ -44,6 +89,35 @@ class CheckTranslateOfPageController extends Controller {
             'toast_message' => '👋 Đã gửi yêu cầu kiểm tra thành công <span class="highLight_700">' . count($arrayChecked) . '</span> trang ngôn ngữ.'
         ];
         
+        return response()->json($response);
+    }
+
+    public static function reCheckTranslateOfPage(Request $request){
+        $response = [
+            'flag' => false,
+            'toast_type' => 'error',
+            'toast_title' => 'Thất bại!',
+            'toast_message' => '❌ Đã xảy ra lỗi. Vui lòng thử lại.'
+        ];
+        if(!empty($request->get('seo_id'))&&!empty($request->get('language'))){
+            $idSeo = $request->get('seo_id');
+            $language = $request->get('language');
+            $flag   = CheckTranslateOfPage::dispatch($idSeo, $language);
+            if($flag == true){
+                /* xóa record cũ */
+                CheckTranslate::select('*')
+                    ->where('seo_id', $idSeo)
+                    ->where('language', $language)
+                    ->delete();
+                /* thông báo */
+                $response = [
+                    'flag' => true,
+                    'toast_type' => 'success',
+                    'toast_title' => 'Thành công!',
+                    'toast_message' => '👋 Đã gửi yêu cầu kiểm tra lại thành công <span class="highLight_700">1</span> trang ngôn ngữ.'
+                ];
+            }
+        }
         return response()->json($response);
     }
     
