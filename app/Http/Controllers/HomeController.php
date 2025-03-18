@@ -209,9 +209,9 @@ class HomeController extends Controller {
         //         }
         //     }
         // }
-        \App\Jobs\Tmp::dispatch();
+        // \App\Jobs\Tmp::dispatch();
 
-        dd(123);
+        // dd(123);
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {

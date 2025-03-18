@@ -69,7 +69,7 @@ class CheckTranslateOfPage implements ShouldQueue {
                                                     "seo_description"   => "'.$seo->infoSeo->seo_description.'",
                                                 ]
                                             ]
-                                            Ghi chú quan trọng: nếu là tên riêng và ngôn ngữ này không có bản dich chính xác, hay không có cách gọi thông dụng của ngôn ngữ địa phương cho title đó thì hãy tham khảo bản dịch tiếng anh và wiki để lấy tên riêng đúng.
+                                            Ghi chú quan trọng: nếu là tên riêng (ví dụ: tên một bộ phim, tên nhân vật,...) và ngôn ngữ này không có bản dich chính xác, không có cách gọi thông dụng của ngôn ngữ địa phương cho title đó thì hãy tham khảo title tiếng anh và wiki để lấy title cho đúng, ghép vào title vào seo_title, seo_description dịch ra ngôn ngữ này bình thường.
                                             
                                             kết quả trả về, nếu trường hợp các bản dịch tiếng '.$nameLanguage.' ('.$language.') không sai thì trả về array rỗng (không cần giải thích gì thêm), nếu giá trị title chưa đúng cần sửa lại thì hãy trả về array theo mẫu bên dưới giúp tôi (tôi chỉ cần array kết quả, không cần giải thích gì thêm):
                                             [
