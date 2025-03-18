@@ -38,7 +38,7 @@ return new class extends Migration
             $table->text('new_title_google_translate_en')->nullable();
             $table->text('new_seo_title');
             $table->text('new_seo_description');
-            $table->boolean('status')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

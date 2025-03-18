@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\HelperController;
 use App\Jobs\CheckTranslateOfPage;
+use App\Jobs\UpdateSeoAndRemoveCheckTranslate;
 use App\Models\CheckTranslate;
 use App\Models\Seo;
 use App\Helpers\Charactor;
@@ -29,8 +30,7 @@ class CheckTranslateOfPageController extends Controller {
     }
 
     public static function updatePageCheckTranslateOfPage(Request $request){
-        $arraySucces    = [];
-        $arrayFail      = [];
+        $arraySuccess    = [];
         $arrayNotUpdate = [];
         foreach($request->get('data') as $idSeo => $keyChoose){ /* keyChoose = new | old */
             $infoCheck  = CheckTranslate::select('*')
@@ -45,15 +45,12 @@ class CheckTranslateOfPageController extends Controller {
                 $dataUpdate['seo_description']  = $infoCheck['new_seo_description'];
                 $dataUpdate['slug']             = Charactor::convertStrToUrl($dataUpdate['title']);
                 $dataUpdate['slug_full']        = Seo::buildFullUrl($dataUpdate['slug'], $infoCheck->infoSeo->parent);
-                /* tiến hành cập nhật */
-                $flag                           = Seo::updateItem($idSeo, $dataUpdate);
-                /* nếu cập nhật thành công -> không bị trùng url thì xóa row check */
-                if($flag==true){
-                    $infoCheck->delete();
-                    $arraySucces[]  = $idSeo;
-                }else {
-                    $arrayFail[]    = $idSeo;
-                }
+                /* tiến hành cập nhật - ở đây không cập nhật trực tiếp vì tốn nhiều thời gian - gọi cronjob */
+                UpdateSeoAndRemoveCheckTranslate::dispatch($idSeo, $dataUpdate, $infoCheck->id);
+                /* cập nhật lại status */
+                $infoCheck->update(['status' => 1]);
+                /* thêm id vào mảng thông báo */
+                $arraySuccess[]                  = $idSeo;
             }else if($keyChoose=='old'){
                 /* không làm gì cả và xóa row */
                 $infoCheck->delete();
@@ -64,8 +61,8 @@ class CheckTranslateOfPageController extends Controller {
             'flag' => true,
             'toast_type' => 'success',
             'toast_title' => 'Thành công!',
-            'toast_message' => '👋 Đã cập nhật thành công <span class="highLight_700">' . count($arraySucces) . '</span> trang ngôn ngữ. Cập nhật không thành công <span class="highLight_700" style="color:#e67112;">' . count($arrayFail) . '</span> trang ngôn ngữ. Giữ nguyên <span class="highLight_700">' . count($arrayNotUpdate) . '</span> trang ngôn ngữ.',
-            'array_success' => $arraySucces,
+            'toast_message' => '👋 Đã báo cập nhật thành công <span class="highLight_700">' . count($arraySuccess) . '</span> trang ngôn ngữ. Giữ nguyên <span class="highLight_700">' . count($arrayNotUpdate) . '</span> trang ngôn ngữ.',
+            'array_success' => $arraySuccess,
             'array_not_update'  => $arrayNotUpdate,
         ];
         return response()->json($response);

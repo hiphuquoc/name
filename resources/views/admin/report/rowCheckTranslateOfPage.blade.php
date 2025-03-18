@@ -1,5 +1,9 @@
 @if(!empty($item))
-    <tr id="js_updatePageCheckTranslateOfPage_{{ $item->seo_id }}">
+    @php
+        $color = config('main_'.env('APP_NAME').'.status_check_translate_of_page.'.$item->status.'.color');
+        $style = !empty($color) ? 'style="background:'.$color.';"' : ''; 
+    @endphp
+    <tr id="js_updatePageCheckTranslateOfPage_{{ $item->seo_id }}" {!! $style !!}>
         <td>{{ $no }}</td>
         <td>
             <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:#009e69;">

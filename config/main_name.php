@@ -243,4 +243,18 @@ return [
         'qwen-max', 'qwen-plus', 'qwen-turbo', 'gpt-4o', 'gpt-4o-mini', 'o1', 'o1-mini', 'o3-mini', 'deepseek-ai/DeepSeek-R1', 'deepseek-ai/DeepSeek-V3'
     ],
     'percent_discount_default'  => '0.4', /* hệ số giá mặc định khi không lấy được thông tin GPS và IP của khách hàng */
+    'status_check_translate_of_page'    => [
+        0 => [
+            'notes'     => 'Chưa kiểm tra',
+            'color'     => '',
+        ],
+        1 => [
+            'notes'     => 'Đã báo cập nhật',
+            'color'     => '#D9DFC6',
+        ],
+        2 => [
+            'notes'     => 'Cập nhật thất bại',
+            'color'     => '#FFF2C2',
+        ],
+    ],
 ];
