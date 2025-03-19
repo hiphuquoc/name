@@ -24,7 +24,7 @@ class CheckTranslateOfPageController extends Controller {
         /* Search theo tên */
         if(!empty($request->get('search_name'))) $params['search_name'] = $request->get('search_name');
         $list               = CheckTranslate::select('*')
-                                ->orderBy('id', 'DESC')
+                                ->orderBy('title', 'DESC')
                                 ->paginate($params['paginate']);
         return view('admin.report.checkTranslateOfPage', compact('list', 'params', 'viewPerPage'));
     }
