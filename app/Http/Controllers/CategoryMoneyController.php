@@ -189,7 +189,7 @@ class CategoryMoneyController extends Controller {
                                                 ->whereIn('rt.tag_info_id', $arrayIdTag)
                                                 ->where('product_info.id', '!=', $idProduct)
                                                 ->selectRaw('COUNT(rt.tag_info_id) as common_tags_count')
-                                                ->groupBy('product_info.id', 'product_info.seo_id', 'product_info.code', 'product_info.sold', 'product_info.created_at', 'product_info.updated_at', 'product_info.price')
+                                                ->groupBy('product_info.id', 'product_info.seo_id', 'product_info.code', 'product_info.sold', 'product_info.created_at', 'product_info.updated_at', 'product_info.price', 'product_info.notes')
                                                 ->orderByDesc('common_tags_count')
                                                 ->with('tags')
                                                 ->get();
