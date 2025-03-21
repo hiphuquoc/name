@@ -1,13 +1,18 @@
+$heightLogo : calc($heightMenu - 26px);
+$widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
 .logoMain {
     margin: 0 !important;
     display: flex;
-    /* bắt buộc phải dùng cả width và flex */
-    flex: 0 0 2.375rem;
-    width: 2.375rem;
-    height: 2.375rem;
-    background: url('/storage/images/upload/logo-type-manager-upload.webp?cache=15') no-repeat;
-    background-size: cover;
-    @media(max-width: 991px){
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    height: $heightLogo;
+    width: $widthLogo; 
+    background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora.webp') no-repeat;
+    background-size: 100% 100%;
+    
+    @media(max-width: 991px) {
         flex: 0 0 2.25rem;
         width: 2.25rem;
         height: 2.25rem;

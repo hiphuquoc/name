@@ -83,8 +83,8 @@ $widthCollapsed : 17rem;
 
 .layoutHeaderTop {
     &_header {
-        flex: 0 0 $widthNonCollapsed; /* chỉ mang widthCollapsed vì menu chỉ có 1 chế độ thu gọn */
-        width: $widthNonCollapsed;
+        flex: 0 0 $widthLogo; /* chỉ mang widthCollapsed vì menu chỉ có 1 chế độ thu gọn */
+        width: $widthLogo;
         padding-left: 1rem;
         gap: 1.5rem;
     }
