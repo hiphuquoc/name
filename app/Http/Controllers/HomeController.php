@@ -200,18 +200,29 @@ class HomeController extends Controller {
         */
         
         // $tags   = Tag::select('*')
-        //             ->get();
-        // $arrayNotCheck  = ['vi', 'en'];
+        //                 ->where('id', '>=', 10)
+        //                 ->where('id', '<=', 20)
+        //                 ->get();
+        // $arrayNotTranslate = ['vi', 'en'];
+        // $count  = 0;
         // foreach($tags as $tag){
+        //     $type = $tag->seo->type;
+        //     $infoPrompt = \App\Models\Prompt::select('*')
+        //                     ->where('reference_table', $type)
+        //                     ->where('reference_name', 'content')
+        //                     ->where('type', 'translate_content')
+        //                     ->first();
         //     foreach($tag->seos as $seo){
-        //         if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $arrayNotCheck)){
-        //             \App\Jobs\CheckTranslateOfPage::dispatch($seo->infoSeo->id, $seo->infoSeo->language);
+        //         if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $arrayNotTranslate)){
+        //             foreach($tag->seo->contents as $content){
+        //                 \App\Jobs\AutoTranslateContent::dispatch($content->ordering, $seo->infoSeo->language, $seo->infoSeo->id, $infoPrompt->id); 
+        //                 ++$count;           
+        //             }
         //         }
-        //     }
+        //     } 
         // }
-        // \App\Jobs\Tmp::dispatch();
 
-        // dd(123);
+        // dd($count);
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {
