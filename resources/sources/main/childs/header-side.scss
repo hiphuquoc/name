@@ -81,21 +81,20 @@ $widthCollapsed : 17rem;
     }
 }
 
-.layoutHeaderTop {
-    &_header {
-        flex: 0 0 $widthLogo; /* chỉ mang widthCollapsed vì menu chỉ có 1 chế độ thu gọn */
-        width: $widthLogo;
-        padding-left: 1rem;
-        gap: 1.5rem;
-    }
-    @media(max-width: 991px){
-        &_header {
-            flex: unset;
-            // padding-left: 0.75rem;
-        }
+// .layoutHeaderTop {
+//     &_header {
+//         flex: 0 0 $widthLogo; /* chỉ mang widthCollapsed vì menu chỉ có 1 chế độ thu gọn */
+//         width: $widthLogo;
+//         padding-left: 1rem;
+//         gap: 1.5rem;
+//     }
+//     @media(max-width: 991px){
+//         &_header {
+//             flex: unset;
+//         }
         
-    }
-}
+//     }
+// }
 
 .layoutHeaderSide {
     
@@ -106,14 +105,17 @@ $widthCollapsed : 17rem;
         /* khi sửa 4.25 này thì phải sửa trong js settingCollapsedMenu */
     }
     &_header {
-        position: fixed;
+        
         width: $widthNonCollapsed;
         flex: 0 0 $widthNonCollapsed;
+        
         flex-direction: column;
         align-items: flex-start;
-        top: $heightMenu;
+        position: fixed;
+        
         height: calc(100vh - $heightMenu);
         box-shadow: 0px 1px 5px rgba(0,0,0,0.75);
+        top: $heightMenu;
         transition: all 300ms;
         background: $colorBackgroundLv2;
         gap: 0.5rem;
@@ -241,6 +243,10 @@ $widthCollapsed : 17rem;
             background: $colorBackgroundLv2;
             padding: 0 !important;
             width: 18rem;
+            &:hover {
+                width: 18rem !important;
+                flex: 0 0 18rem !important;
+            }
             .headerSide {
                 ul {
                     li {
@@ -459,12 +465,8 @@ $widthCollapsed : 17rem;
     justify-content: center;
     text-align: center;
     width: 100%;
-    padding: 1.5rem 0 0.5rem 0;
-    .logoMain {
-        flex: 0 0 2.75rem;
-        width: 2.75rem;
-        height: 2.75rem;
-    }
+    padding: 1.75rem 0 .5rem 0;
+    margin: 0 auto;
 }
 
 .socialBox {

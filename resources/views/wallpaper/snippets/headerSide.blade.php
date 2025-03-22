@@ -31,7 +31,9 @@
     $urlPath                    = urldecode(request()->path());
 @endphp             
 <div class="logoInMenuMobile show-991">
-    <a href="/{{ $language }}" class="logoMain" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn"></a>
+    <div class="logoMain">
+        <a href="/{{ $language }}" class="logoMain_show" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn"></a>
+    </div>
 </div>
 <!-- icon hiển thị chế độ xem -->
 <div class="layoutHeaderSide_header_menuView" onclick="settingCollapsedMenu();">
@@ -331,13 +333,11 @@
     
     <!-- DMCA -->
     @include('wallpaper.template.dmca')
-
 </div>
 
 <div class="closeButtonMobileMenu show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
     <i class="fa-sharp fa-solid fa-xmark"></i>
 </div>
-<div class="backgroundBlurMobileMenu" onClick="toggleMenuMobile('js_toggleMenuMobile');"></div>
 
 @push('scriptCustom')
     <script type="text/javascript">

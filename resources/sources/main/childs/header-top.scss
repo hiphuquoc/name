@@ -1,23 +1,35 @@
-$heightLogo : calc($heightMenu - 26px);
-$widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
+@mixin set-logo-size($height) {
+    $width: calc($height * (1000 / 149));
+    height: $height !important;
+    width: $width !important;
+}
 .logoMain {
-    margin: 0 !important;
-    display: flex;
-    position: absolute;
-    left: 1.25rem;
-    top: 50%;
-    transform: translateY(-50%);
-    height: $heightLogo;
-    width: $widthLogo; 
-    background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora.webp') no-repeat;
-    background-size: 100% 100%;
-    
-    @media(max-width: 991px) {
-        flex: 0 0 2.25rem;
-        width: 2.25rem;
-        height: 2.25rem;
+    position: relative;
+    @include set-logo-size(1.75rem);
+    &_show {
+        margin: 0 !important;
+        display: flex;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-50%);
+        background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora.webp') no-repeat;
+        background-size: 100% 100%;
+    }
+    @media(max-width: 1499px){
+        @include set-logo-size(1.65rem);
+    }
+    @media(max-width: 991px){
+        @include set-logo-size(1.6rem);
+    }
+    @media(max-width: 767px){
+        margin-top: 5px;
+        @include set-logo-size(1.4rem);
     }
 }
+
 .menuTopBackground {
     position: sticky;
     top: 0;
@@ -28,12 +40,24 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
     box-shadow: 0px 1px 5px #000;
     z-index: 999;
 }
+.menuTopElement {
+    width: 100%;
+    height: $heightMenu;
+}
 .menuTop {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: 100%;
+    position: fixed;
+    width: 100%;
+    height: $heightMenu;
     gap: 1.5rem;
+    top: 0;
+    transition: all 300ms;
+    background: $colorBackgroundLv2;
+    z-index: 99;
+    padding: 0.5rem 1.25rem;
+    left: 0;
     .container {
         display: flex;
         align-items: center;
@@ -43,6 +67,7 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
         display: flex;
         gap: 1.5rem;
         position: relative;
+        width: fit-content;
         > * {
             height: 100%;
             width: fit-content;
@@ -68,14 +93,23 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
         }
     }
     @media(max-width: 991px){
-        justify-content: flex-end;
+        padding: 0.5rem 1rem;
         .rightBox {
             min-width: unset;
         }
     }
     @media(max-width: 767px){
+        padding: 0.5rem 0.75rem;
+        gap: 1.25rem;
         &_item {
             gap: 1.25rem;
+        }
+    }
+    @media(max-width: 577px){
+        gap: 1rem;
+        padding: 0.5rem;
+        &_item {
+            gap: 1rem;
         }
     }
 }
@@ -112,7 +146,7 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
         &_icon {
             width: 1.3rem;
             aspect-ratio: 1/1;
-            opacity: 0.5;
+            opacity: 0.7;
         }
         &_text {
             color: $colorText;
@@ -160,18 +194,17 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
     }
 }
 .iconMenuMobile {
-    background: $colorBackgroundLv3;
+    // background: $colorBackgroundLv3;
     width: 2.25rem;
-    height: 2.25rem !important;
+    // height: 2.25rem !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: $radiusBoxSmall; 
-    margin-top: 3px;
+    border-radius: $radiusBoxSmall;
     padding: 0 !important;
     i {
-        opacity: 0.7;
-        font-size: 1.2rem;
+        // opacity: 0.7;
+        font-size: 1.3rem;
     }
 }
 .closeButtonMobileMenu {
@@ -186,13 +219,15 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
     }
 }
 .backgroundBlurMobileMenu {
-    background: rgba(0,0,0,0.2);
+    background: rgba($colorBackgroundLv1, 0.2);
+    backdrop-filter: blur(8px); /* Làm mờ nền bên dưới */
+    -webkit-backdrop-filter: blur(8px); /* Hỗ trợ Safari */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 999; /* vì đặt ngoài box nên lấy 999 để hiển thị */
     display: none;
 }
 .iconSearchMobile {
@@ -233,9 +268,10 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
+        font-family: $fontTitle;
         i {
             opacity: 0.6;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
         }
         &:hover {
             color: $colorTextLight;
@@ -290,6 +326,9 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
         }
     }
     @media(max-width: 991px){
+        &_show {
+            gap: 0.325rem;
+        }
         &_list {
             padding: 0 0 0.25rem 0;
             &_item {
@@ -339,7 +378,7 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
     > img {
         width: 1.35rem;
         aspect-ratio: 1/1;
-        opacity: 0.5;
+        opacity: 0.7;
     }
     &_iconAvatar {
         flex: 0 0 40px;
@@ -350,7 +389,7 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
         // margin-right: 0.5rem;
         img {
             width: 100%;
-            opacity: 0.5;
+            opacity: 0.7;
         }
     }
     &_list {
@@ -517,7 +556,7 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
             img {
                 width: inherit;
                 height: inherit;
-                opacity: 0.5;
+                opacity: 0.7;
             }
             &_number {
                 background: linear-gradient(45deg, $colorButtonLv1, $colorButtonLv2);
@@ -645,7 +684,8 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
     align-items: center;
     justify-content: center;
     z-index: 999;
-    width: 100%;
+    width: fit-content;
+    margin: 0 auto;
     &_showBox {
         display: flex;
         align-items: center;
@@ -758,18 +798,7 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
                 background: transparent;
                 border: none;
                 padding: 0.5rem 0;
-                min-width: 360px;
-                // padding: 0 2.5rem 0 1rem;
-                // &:dir(rtl), [dir="rtl"] & {
-                //     padding: 0 1rem 0 2.5rem;
-                // }
-                // &::selection, &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
-                //     border: none;
-                //     outline: none;
-                //     background: transparent !important;
-                //     -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
-                //     -webkit-transition-delay: 9999s;
-                // }
+                min-width: 320px;
                 &::placeholder {
                     color: rgba($colorText, 0.7);
                 }
@@ -860,6 +889,24 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
     }
     &_background {
         @include backgroundModal;
+    }
+    @media(max-width: 1499px){
+        &_showBox {
+            &_inputBox {
+                input {
+                    min-width: 200px;
+                }
+            }
+        }
+    }
+    @media(max-width: 1199px){
+        &_showBox {
+            &_inputBox {
+                input {
+                    min-width: 150px;
+                }
+            }
+        }
     }
     @media(max-width: 991px){
         display: none;
@@ -991,7 +1038,7 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
         }
         i {
             font-size: 0.8rem;
-            opacity: 0.5;
+            opacity: 0.7;
             margin-top: 0.25rem;
         }
     }
@@ -1047,7 +1094,7 @@ $widthLogo : calc($heightLogo / (77 / 500)); /* 0.154 = 77/500 */
         }
         i {
             font-size: 0.8rem;
-            opacity: 0.5;
+            opacity: 0.7;
             margin-top: 0.25rem;
         }
     }

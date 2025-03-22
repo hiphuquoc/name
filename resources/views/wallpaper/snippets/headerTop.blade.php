@@ -1,4 +1,15 @@
+<div class="menuTopElement"><!-- giả lập menuTop để set chiều cao --></div> 
 <div class="menuTop">
+
+    <div class="menuTop_item" style="margin-right: auto;"> <!-- style ở đây để giao diện 991 mất box search tự động -->
+        <div class="logoMain">
+            <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain_show" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn">
+                @if(Route::is('main.home'))
+                    <h1 style="opacity:0;">{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}</h1>
+                @endif
+            </a>
+        </div>
+    </div>
     <!-- search box -->
     @include('wallpaper.template.search')
 

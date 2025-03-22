@@ -10,7 +10,7 @@
 <!-- === START:: Body === -->
 <body class="background">
     <div id="js_openCloseModal_blur">
-        <!-- header Top -->
+        {{-- <!-- header Top -->
         <div class="menuTopBackground layoutHeaderTop">
             <div class="layoutHeaderTop_header container">
                 <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn">
@@ -22,7 +22,10 @@
             <div class="layoutHeaderTop_content container">
                 @include('wallpaper.snippets.headerTop')
             </div>
-        </div>
+        </div> --}}
+
+        @include('wallpaper.snippets.headerTop')
+
         <!-- === START:: Content === -->
         <div id="js_settingCollapsedMenu" class="layoutHeaderSide">
             <!-- giữ chỗ thanh bên để chống nhảy trang -->
@@ -31,6 +34,7 @@
             <div id="js_toggleMenuMobile" class="layoutHeaderSide_header container">
                 @include('wallpaper.snippets.headerSide')
             </div>
+            <div class="backgroundBlurMobileMenu" onClick="toggleMenuMobile('js_toggleMenuMobile');"></div>
             <!-- nội dung chính -->
             <div class="layoutHeaderSide_content container">
                 <div id="js_blurBackground">
