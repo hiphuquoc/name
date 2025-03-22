@@ -167,7 +167,7 @@ class TranslateController extends Controller {
         return response()->json($response);
     }
 
-    private static function createJobTranslateContent($idSeoVI, $language, $arrayOrdering = []){ /* biến arrayOrdering quy định chỉ thực hiện những ordering nhất định - rỗng thì làm tất cả */
+    public static function createJobTranslateContent($idSeoVI, $language, $arrayOrdering = []){ /* biến arrayOrdering quy định chỉ thực hiện những ordering nhất định - rỗng thì làm tất cả */
         $flag                   = false;
         /* lấy trang theo ngôn ngữ */
         $infoPage               = \App\Http\Controllers\Admin\HelperController::getFullInfoPageByIdSeo($idSeoVI);

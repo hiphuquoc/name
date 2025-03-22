@@ -26,7 +26,8 @@ class RunTmpJob extends Command {
                         ->where('id', '>=', $num1)
                         ->where('id', '<=', $num2)
                         ->get();
-        $arrayNotTranslate = ['vi', 'en'];
+        $arrayNotTranslate  = ['vi', 'en'];
+        $arrayOrdering      = [1, 2, 3, 4, 5, 6, 8];
         $count  = 0;
         foreach($tags as $tag){
             $type = $tag->seo->type;
@@ -37,10 +38,8 @@ class RunTmpJob extends Command {
                             ->first();
             foreach($tag->seos as $seo){
                 if(!empty($seo->infoSeo->language)&&!in_array($seo->infoSeo->language, $arrayNotTranslate)){
-                    foreach($tag->seo->contents as $content){
-                        \App\Jobs\AutoTranslateContent::dispatch($content->ordering, $seo->infoSeo->language, $seo->infoSeo->id, $infoPrompt->id); 
-                        ++$count;           
-                    }
+                    \App\Http\Controllers\Admin\TranslateController::createJobTranslateContent($tag->seo->id, $seo->infoSeo->language, $arrayOrdering);
+                    ++$count;
                 }
             } 
         }
