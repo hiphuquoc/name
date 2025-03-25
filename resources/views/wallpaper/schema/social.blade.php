@@ -30,7 +30,7 @@
 <meta property="og:image:height" content="533" />
 <meta property="og:image:alt" content="{{ $title }}" />
 <meta property="og:url" content="{{ $urlFull }}" />
-<meta property="og:site_name" content="{{ $title }}" />
+<meta property="og:site_name" content="{{ ucfirst(env('APP_NAME')) }}" />
 <meta property="og:type" content="website" />
 @if(!empty($lowPrice)&&!empty($highPrice))
     @if($lowPrice>=$highPrice)
