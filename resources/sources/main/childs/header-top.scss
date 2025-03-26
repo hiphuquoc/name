@@ -291,7 +291,7 @@
         flex-wrap: wrap;
         width: 660px;
         padding: 0.25rem 0 0.5rem 0;
-        top: calc($heightMenu - 0.25rem);
+        top: calc($heightMenu - 0.75rem);
         right: 0;
         &:dir(rtl), [dir="rtl"] & {
             right: unset;
@@ -403,7 +403,7 @@
         border-top: 2px solid $colorBackgroundLv1;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         overflow: hidden;
-        top: calc($heightMenu - 0.25rem);
+        top: calc($heightMenu - 0.75rem);
         right: 0;
         &:dir(rtl), [dir="rtl"] & {
             right: unset;
@@ -560,9 +560,10 @@
             }
             &_number {
                 background: linear-gradient(45deg, $colorButtonLv1, $colorButtonLv2);
+                text-shadow: 1px 1px 10px rgba($colorBackgroundLv1, 1);
                 position: absolute;
                 border-radius: 50%;
-                font-size: 0.8rem;
+                font-size: 0.9rem;
                 font-family: $fontTitle;
                 width: 1.35rem;
                 height: 1.35rem;
@@ -595,7 +596,7 @@
         border-top: 2px solid $colorBackgroundLv1;
         box-shadow: 1px 1px 10px $colorBackgroundLv1;
         padding: 0;
-        top: calc($heightMenu - 0.25rem);
+        top: calc($heightMenu - 0.75rem);
         right: calc(-50% - 100px);
         &:dir(rtl), [dir="rtl"] & {
             right: unset;

@@ -15,15 +15,15 @@
             <!-- bảng thông tin Chi tiết từng hình nền -->
             <div id="detailPerWallpaper" class="infoImageSourceTable">
                 <div class="infoImageSourceTable_title">
-                    <h2>Chi tiết từng hình nền</h2>
+                    <h2>{{ config('data_language_1.'.$language.'.wallpaper_details') }}</h2>
                 </div>
                 <div class="infoImageSourceTable_box">
                     <table>
                         <thead>
                             <tr>
-                                <td>Tên</td>
-                                <td>Độ phân giải</td>
-                                <td>Dung lượng</td>
+                                <td>{{ config('data_language_1.'.$language.'.table_name') }}</td>
+                                <td>{{ config('data_language_1.'.$language.'.table_resolution') }}</td>
+                                <td>{{ config('data_language_1.'.$language.'.table_file_size') }}</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@
                                         dd($wallpaper->infoWallpaper);
                                     @endphp --}}
                                     <tr>
-                                        <td>Ảnh {{ $price->code_name ?? '-' }}</td>
+                                        <td>{{ config('data_language_1.'.$language.'.image') }} {{ $price->code_name ?? '-' }}</td>
                                         <td>{{ $wallpaper->infoWallpaper->width_source ?? '-' }}x{{ $wallpaper->infoWallpaper->height_source ?? '-' }} px</td>
                                         <td>{{ !empty($wallpaper->infoWallpaper->file_size_source) ? number_format($wallpaper->infoWallpaper->file_size_source/1024/1024, 1) : '-' }} mb</td>
                                     </tr>
@@ -55,7 +55,7 @@
             @if(!empty($dataFaq))
                 <div class="questionAnswerBox">
                     <div class="questionAnswerBox_title">
-                        <h2>Câu hỏi thường gặp</h2>
+                        <h2>{{ config('data_language_1.'.$language.'.question_and_answer') }}</h2>
                     </div>
                     <div  class="questionAnswerBox_box">
                         @foreach($dataFaq as $faq)

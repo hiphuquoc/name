@@ -54,7 +54,7 @@
             <p style="margin: 10px 0; font-size: 15px;">{!! config('data_language_1.'.$language.'.wish_message_email') !!}</p>
         </div>
         <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 10px; font-size: 14px;">
-            <p style="margin: 10px 0; font-size: 14px;">{{ config('data_language_1.'.$language.'.sincerely') }}<br><a href="https://name.com.vn" style="color: #ffffff; text-decoration: none;">Name.com.vn</a></p>
+            <p style="margin: 10px 0; font-size: 14px;">{{ config('data_language_1.'.$language.'.sincerely') }}<br><a href="{{ env('APP_URL') }}" style="color: #ffffff; text-decoration: none;">{{ env('DOMAIN_NAME') }}</a></p>
         </div>
     </div>
 </body>

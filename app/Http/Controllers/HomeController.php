@@ -26,7 +26,7 @@ use App\Models\Timezone;
 use App\Jobs\Tmp;
 use App\Jobs\AutoTranslateContent;
 use App\Jobs\AutoImproveContent;
-use App\Jobs\TranslateQuestionProduct;
+use App\Jobs\TranslateConfigLanguage;
 use App\Jobs\CopyBoxContentToAllTagAndCategory;
 use GuzzleHttp\Client;
 
@@ -132,14 +132,13 @@ class HomeController extends Controller {
 
         // dd(123);
 
-        // $languageList       = config('language');
+        $languageList       = config('language');
 
-        // foreach($languageList as $language){
+        foreach($languageList as $language){
+
+            TranslateConfigLanguage::dispatch($language);
             
-            
-        //     TranslateQuestionProduct::dispatch($language);
-            
-        // }
+        }
 
         // dd('success');
 

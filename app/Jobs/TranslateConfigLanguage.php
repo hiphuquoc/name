@@ -14,7 +14,7 @@ use App\Models\Prompt;
 use App\Models\SeoContent;
 use App\Http\Controllers\HomeController;
 
-class TranslateQuestionProduct implements ShouldQueue {
+class TranslateConfigLanguage implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $infoLanguage;
@@ -36,20 +36,7 @@ class TranslateQuestionProduct implements ShouldQueue {
                                     - chỉ cần trả về array tôi cần, đừng giải thích gì thêm và cũng đừng thêm những ký tự đặc biệt
             
                                 "vi" => [
-                                    "order_confirmation" => "Xác nhận đơn hàng",
-                                    "thank_you_message_email" => "Cảm ơn bạn đã hoàn tất đơn hàng của mình! Hình nền của bạn đã sẵn sàng để sử dụng.",
-                                    "hello" => "Xin chào",
-                                    "purchase_date" => "Ngày mua",
-                                    "download_instructions" => "Bạn có thể tải bộ hình nền bằng các cách sau:",
-                                    "direct_download" => "Tải trực tiếp qua các liên kết bên dưới:",
-                                    "sincerely" => "Trân trọng!",
-                                    "login_instruction_message_email" => "Hoặc đăng nhập vào <a href=\"https://name.com.vn\" style=\"color: #006d57; text-decoration: none; font-weight: 700;\">Name.com.vn</a> bằng email của bạn và vào phần <strong>\"Tải xuống của tôi\"</strong>",
-                                    "support_contact_message_email" => "Nếu có bất kỳ thắc mắc hoặc cần hỗ trợ, vui lòng liên hệ với chúng tôi qua email: <a href=\"mailto:wallpaperdienthoai@gmail.com\" style=\"color: #006d57; text-decoration: none; font-weight: 700;\">wallpaperdienthoai@gmail.com</a>.",
-                                    "wish_message_email" => "Chúc bạn có những trải nghiệm tuyệt vời cùng bộ sưu tập hình nền mới của mình!",
-                                    "wallpaper_details" => "Chi tiết từng hình nền",
-                                    "table_name" => "Tên",
-                                    "table_resolution" => "Độ phân giải",
-                                    "table_file_size" => "Dung lượng",
+                                    "question_and_answer"   => "Câu hỏi thường gặp",
                                     "wallpaper_theme"   => "Chủ đề Hình Nền",
                                     "wallpaper_style"   => "Phong cách Hình Nền",
                                     "free_wallpaper"    => "Hình nền Miễn Phí",
@@ -71,7 +58,7 @@ class TranslateQuestionProduct implements ShouldQueue {
                                         "free_wallpaper" => "Hình nền miễn phí",
                                         "article" => "Bài viết",
                                     ],
-                                    "copyright" => "Bản quyền ® ".date(\'Y\')." <a href=\"{{ env(\'APP_URL\') }}/{{ \$language }}\" aria-label=\"Name\">Name</a>. Thiết kế và phát triển bởi PhamVanPhu. Mọi quyền được bảo lưu.",
+                                    "copyright" => "Bản quyền ® ".date(\'Y\')." <a href=\"{{ env(\'APP_URL\') }}/{{ \$language }}\" aria-label=\"{{ env(\'APP_NAME\') }}\">{{ env(\'APP_NAME\') }}</a>. Thiết kế và phát triển bởi PhamVanPhu. Mọi quyền được bảo lưu.",
                                 ]';
             $testMessages = [
                 ['role' => 'system', 'content' => 'Bạn là một chuyên gia sáng tạo nội dung và dịch thuật với hơn 10 năm kinh nghiệm. Hãy giúp người dùng dịch những nội dung chính xác và phù hợp văn phong, văn hóa địa phương, với giọng văn thân thiện và dễ hiểu.'],

@@ -388,6 +388,7 @@ blockquote{
   letter-spacing: 0.5px;
   // box-shadow: 0 2px 0 $colorBackgroundLv3;
   box-shadow: 0 2px 0 $colorBackgroundLv3;
+  text-shadow: 1px 1px 10px rgba($colorBackgroundLv1, 0.5);
   transition: all 0.2s;
   &:focus, &:hover {
     color: #fff;

@@ -202,12 +202,11 @@
                 }
                 &_saleoff {
                     color: #fff;
-                    @include colorOpacity('background', $colorRed, 0.8);
+                    background: $colorRed;
                     font-size: 1rem;
-                    padding: 0.25rem 0.5rem;
-                    border-radius: 50%;
-                    aspect-ratio: 1.5/1;
-                    text-shadow: 1px 1px 10px $colorBackgroundLv1;
+                    padding: 0.25rem 1rem;
+                    text-shadow: 1px 1px 10px rgba($colorBackgroundLv1, 0.5);
+                    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
                     display: flex;
                     justify-content: center;
                     align-items: center;

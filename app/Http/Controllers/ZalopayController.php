@@ -46,7 +46,7 @@ class ZalopayController extends Controller{
                     "item"          => json_encode($dataItem, JSON_UNESCAPED_UNICODE),
                     "embed_data"    => json_encode($embeddata, JSON_UNESCAPED_UNICODE),
                     "amount"        => $total,
-                    "description"   => "Name.com.vn - Thanh toán Đơn hàng $infoOrder->code",
+                    "description"   => env('APP_NAME')." - Thanh toán Đơn hàng $infoOrder->code",
                     "bank_code"     => array_merge(["zalopayapp"], $bankcode)
                 ];
                 $data           = $order["app_id"] . "|" . $order["app_trans_id"] . "|" . $order["app_user"] . "|" . $order["amount"]

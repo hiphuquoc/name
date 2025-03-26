@@ -21,13 +21,7 @@
             flex-direction: column;
             gap: 0.75rem;
             &:hover {
-                transform: translateY(-3px);
-                // box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-                
-                // &::before {
-                //     opacity: 1;
-                //     transform: scale(1.2);
-                // }
+                background: $colorBackgroundLv2;
             }
             &_question {
                 font-weight: 600;
@@ -65,12 +59,18 @@
 
             &_answer {
                 padding-left: 1.25rem;
-                position: relative;
-                opacity: 0.85;
-                display: none;
+                position: absolute;
+                opacity: 0; 
+                max-height: 0; 
+                overflow: hidden; 
+                transition: all 0.3s; 
+            
                 &.show {
-                    display: block;
+                    position: relative;
+                    opacity: 0.85; 
+                    max-height: unset;
                 }
+            
                 &::before {
                     content: 'A';
                     position: absolute;

@@ -34,7 +34,7 @@
         <div class="freeWallpaperBox_item_box_item">
             <div class="author">
                 <div class="author_image">
-                    <img src="https://name.com.vn/storage/images/upload/logo-type-manager-upload.webp" alt="wallpaperdienthoai@gmail.com" title="wallpaperdienthoai@gmail.com" />
+                    <img src="{{ Storage::url('images/upload/logo-type-manager-upload.webp') }}" alt="wallsora.com@gmail.com" title="wallsora.com@gmail.com" />
                 </div>
                 <div class="author_name maxLine_1">
                     Admin Name

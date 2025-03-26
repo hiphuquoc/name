@@ -3,11 +3,11 @@
 return [
     'info'  => [
         'name'  => [
-            'author_name'           => 'Name.com.vn',
-            'founder_name'          => 'Name.com.vn',
+            'author_name'           => 'wallsora.com',
+            'founder_name'          => 'wallsora.com',
             'founder_address'       => '55 Cô Giang, Rạch Giá',
             'founding'              => '2023-03-30',
-            'company_name'          => 'Name.com.vn',
+            'company_name'          => 'wallsora.com',
             'email'                 => 'anhnendienthoai@gmail.com',
             'company_description'   => 'Giới thiệu dịch vụ',
             'contacts'          =>  [
@@ -72,11 +72,11 @@ return [
                                     ],
         ]
     ],
-    // 'author_name'           => 'Name.com.vn',
-    // 'founder_name'          => 'Name.com.vn',
+    // 'author_name'           => 'wallsora.com',
+    // 'founder_name'          => 'wallsora.com',
     // 'founder_address'       => '55 Cô Giang, Rạch Giá',
     // 'founding'              => '2023-03-30',
-    // 'company_name'          => 'Name.com.vn',
+    // 'company_name'          => 'wallsora.com',
     // 'hotline'               => '0968.6171.68',
     // 'email'                 => 'anhnendienthoai@gmail.com',
     // 'address'               => '55 Cô Giang, Rạch Giá',

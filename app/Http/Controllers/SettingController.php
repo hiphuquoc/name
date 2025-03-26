@@ -105,7 +105,7 @@ class SettingController extends Controller {
         $url = "https://nominatim.openstreetmap.org/reverse";
 
         $response = Http::withHeaders([
-            'User-Agent' => 'Name.com.vn/1.0' // Thêm User-Agent để tránh bị từ chối
+            'User-Agent' => env('DOMAIN_NAME').'/1.0' // Thêm User-Agent để tránh bị từ chối
         ])->get($url, [
             'lat'    => $latitude,
             'lon'    => $longitude,

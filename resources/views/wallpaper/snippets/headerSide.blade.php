@@ -32,7 +32,7 @@
 @endphp             
 <div class="logoInMenuMobile show-991">
     <div class="logoMain">
-        <a href="/{{ $language }}" class="logoMain_show" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn"></a>
+        <a href="/{{ $language }}" class="logoMain_show" aria-label="{{ config('data_language_1.'.$language.'.home') }} {{ env('DOMAIN_NAME') }}"></a>
     </div>
 </div>
 <!-- icon hiển thị chế độ xem -->
@@ -51,7 +51,7 @@
             // if($urlPath==$language||$urlPath=='/') $selected = 'selected';
         @endphp
         <li class="{{ $selected }}">
-            <a href="/{{ $language }}" title="{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('data_language_1.'.$language.'.home') }} Name.com.vn">
+            <a href="/{{ $language }}" title="{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('data_language_1.'.$language.'.home') }} {{ env('DOMAIN_NAME') }}">
                 {!! $icon !!}
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.home') }}</div>
             </a>

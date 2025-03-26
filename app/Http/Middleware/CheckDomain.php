@@ -9,7 +9,7 @@ class CheckDomain {
     public function handle(Request $request, Closure $next) {
         $host       = $request->getHost();
         $domainName = env('DOMAIN_NAME');
-        // Kiểm tra nếu domain không phải 'name.com.vn', chuyển hướng sang đúng domain
+        // Kiểm tra nếu domain không phải 'wallsora.com', chuyển hướng sang đúng domain
         if ($host != $domainName) {
             return redirect()->to('https://' . $domainName . $request->getRequestUri(), 301);
         }
