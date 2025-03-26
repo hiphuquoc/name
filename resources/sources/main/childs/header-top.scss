@@ -17,6 +17,7 @@
         transform: translateY(-50%);
         background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora.webp') no-repeat;
         background-size: 100% 100%;
+        filter: drop-shadow(1px 1px 10px rgba($colorBackgroundLv1, 0.75));
     }
     @media(max-width: 1499px){
         @include set-logo-size(1.65rem);
