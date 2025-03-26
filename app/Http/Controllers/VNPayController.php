@@ -23,7 +23,7 @@ class VNPayController extends Controller{
 
             if(!empty($total)&&$total>0){
                 $vnp_TxnRef     = $infoOrder->code;
-                $vnp_OrderInfo  = env('APP_NAME').' - Thanh toán đơn hàng '.$infoOrder->code;
+                $vnp_OrderInfo  = ucfirst(env('APP_NAME')).' - Thanh toán đơn hàng '.$infoOrder->code;
                 $vnp_OrderType  = 'billpayment';
                 $vnp_Amount     = $total * 100; /* bắt buộc phải * 100 để ra số tiền đúng */
                 $vnp_Locale     = $language;
