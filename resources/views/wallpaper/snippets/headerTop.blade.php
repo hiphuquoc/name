@@ -1,7 +1,7 @@
 <div class="menuTopElement"><!-- giả lập menuTop để set chiều cao --></div> 
 <div class="menuTop">
 
-    <div class="menuTop_item" style="margin-right: auto;"> <!-- style ở đây để giao diện 991 mất box search tự động -->
+    <div class="menuTop_item">
         <div class="logoMain">
             <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain_show" aria-label="{{ config('data_language_1.'.$language.'.home') }} {{ env('DOMAIN_NAME') }}">
                 @if(Route::is('main.home'))
