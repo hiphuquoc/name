@@ -20,8 +20,8 @@ class CreateAdminUserSeeder extends Seeder
     {
         //Admin Seeder
         $user = User::create([
-            'name'      => config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name'), 
-            'email'     => config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.email'),
+            'name'      => config('main_'.env('APP_NAME').'.company_name'), 
+            'email'     => config('main_'.env('APP_NAME').'.email'),
             'password'  => bcrypt('hitourVN@mk123')
         ]);
       

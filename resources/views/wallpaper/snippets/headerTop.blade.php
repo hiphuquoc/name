@@ -5,7 +5,7 @@
         <div class="logoMain">
             <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain_show" aria-label="{{ config('data_language_1.'.$language.'.home') }} {{ env('DOMAIN_NAME') }}">
                 @if(Route::is('main.home'))
-                    <h1 style="opacity:0;">{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}</h1>
+                    <h1 style="opacity:0;">{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.company_name') }}</h1>
                 @endif
             </a>
         </div>

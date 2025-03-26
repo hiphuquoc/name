@@ -132,13 +132,13 @@ class HomeController extends Controller {
 
         // dd(123);
 
-        $languageList       = config('language');
+        // $languageList       = config('language');
 
-        foreach($languageList as $language){
+        // foreach($languageList as $language){
 
-            TranslateConfigLanguage::dispatch($language);
+        //     TranslateConfigLanguage::dispatch($language);
             
-        }
+        // }
 
         // dd('success');
 

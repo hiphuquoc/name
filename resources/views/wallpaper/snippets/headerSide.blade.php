@@ -51,7 +51,7 @@
             // if($urlPath==$language||$urlPath=='/') $selected = 'selected';
         @endphp
         <li class="{{ $selected }}">
-            <a href="/{{ $language }}" title="{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('data_language_1.'.$language.'.home') }} {{ env('DOMAIN_NAME') }}">
+            <a href="/{{ $language }}" title="{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('data_language_1.'.$language.'.home') }} {{ env('DOMAIN_NAME') }}">
                 {!! $icon !!}
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.home') }}</div>
             </a>

@@ -1,7 +1,7 @@
 <div class="headerBottom">
     <!-- hỗ trợ -->
     @php
-        $contacts               = config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.contacts');
+        $contacts               = config('main_'.env('APP_NAME').'.contacts');
         $phoneCustomerService   = null;
         foreach($contacts as $contact){
             if($contact['type']=='customer service') {

@@ -7,7 +7,7 @@
   <meta name="description" content="Trang quản trị nội dung ®Websitekiengiang">
   <meta name="keywords" content="Trang quản trị nội dung ®Websitekiengiang">
   <meta name="author" content="Hitour">
-  <title>Trang quản trị nội dung {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}</title>
+  <title>Trang quản trị nội dung {{ config('main_'.env('APP_NAME').'.company_name') }}</title>
   <!-- Favicon -->
   <link rel="shortcut icon" href="https://namecomvn.storage.googleapis.com/storage/images/favicon-wallsora.webp" type="image/x-icon" />
   <!-- BEGIN: Vendor CSS-->

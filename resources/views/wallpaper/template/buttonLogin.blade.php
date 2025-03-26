@@ -30,7 +30,7 @@
         @php
             $loginByLanguage = config('data_language_1.'.$language.'.login');
         @endphp
-        <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="{{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" title="{{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}" />
+        <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="{{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.company_name') }}" title="{{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.company_name') }}" />
         <div class="maxLine_1">{{ $loginByLanguage }}</div>
     </div>
 @endif

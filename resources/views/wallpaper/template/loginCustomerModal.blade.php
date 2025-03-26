@@ -18,7 +18,7 @@
             @endphp
             <div class="loginFormCustomer">
                 <div class="loginFormCustomer_title">
-                    {{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}
+                    {{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.company_name') }}
                 </div>
                 <div class="loginFormCustomer_body">
                     <div class="loginFormCustomer_body_item">

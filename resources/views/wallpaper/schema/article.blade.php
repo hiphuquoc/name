@@ -3,7 +3,7 @@
     $description        = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
     $url                = env('APP_URL').'/'.$itemSeo->slug_full ?? $item->slug_full;
     /* author */
-    $author             = config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.author_name');
+    $author             = config('main_'.env('APP_NAME').'.author_name');
     /* image */
     $imagePage          = public_path(config('image.default'));
     if(!empty($item->seo->image)) $imagePage = \App\Helpers\Image::getUrlImageCloud($item->seo->image);

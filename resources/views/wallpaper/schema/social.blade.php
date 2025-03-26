@@ -7,7 +7,7 @@
     $imagePage          = public_path(config('image.default'));
     if(!empty($item->seo->image)) $imagePage = \App\Helpers\Image::getUrlImageCloud($item->seo->image);
     /* author */
-    $author             = $itemSeo->rating_author_name ?? $item->seo->rating_author_name ?? config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.author_name');
+    $author             = $itemSeo->rating_author_name ?? $item->seo->rating_author_name ?? config('main_'.env('APP_NAME').'.author_name');
     /* lấy giá theo ngôn ngữ */
     $tmp            = \App\Helpers\Number::getPriceByLanguage($lowPrice, $language);
     $lowPrice       = $tmp['number'];
