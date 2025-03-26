@@ -1,5 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-@if(Route::is('main.confirm'))
+<meta name="robots" content="noindex,nofollow">
+{{-- @if(Route::is('main.confirm'))
     <meta name="robots" content="noindex,nofollow">
 @else
     @if(!empty($index)&&$index=='no')
@@ -7,7 +8,7 @@
     @else 
         <meta name="robots" content="index,follow">
     @endif
-@endif
+@endif --}}
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="fragment" content="!" />
 @if(!empty($language))

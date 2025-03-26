@@ -2,7 +2,7 @@
 deployment:
   tasks:
     # - export DEPLOYPATH=/home/hitourvn/topgirl.com.vn/
-    - export DEPLOYPATH=/home/hitourvn/name.com.vn/
+    - export DEPLOYPATH=/home/hitourvn/wallsora.com/
     - /bin/cp -R * $DEPLOYPATH
     # - rm $DEPLOYPATH/public/build/assets/style-main.css
     

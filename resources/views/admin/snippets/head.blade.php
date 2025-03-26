@@ -8,7 +8,8 @@
   <meta name="keywords" content="Trang quản trị nội dung ®Websitekiengiang">
   <meta name="author" content="Hitour">
   <title>Trang quản trị nội dung {{ config('main_'.env('APP_NAME').'.info.'.env('APP_NAME').'.company_name') }}</title>
-  <link rel="shortcut icon" href="/storage/images/upload/hoaanhtuc-favicon-type-manager-upload.webp" type="image/x-icon">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="https://namecomvn.storage.googleapis.com/storage/images/favicon-wallsora.webp" type="image/x-icon" />
   <!-- BEGIN: Vendor CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/vendors.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('sources/admin/app-assets/vendors/css/pickers/pickadate/pickadate.css') }}">
