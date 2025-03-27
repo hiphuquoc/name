@@ -14,7 +14,7 @@ return [
             <li>Хялбар, хурдан татаж авах боломжтой.</li>
         </ul>
         <div>Одоо татаж аваад утасныхаа дэлгэцэнд үзэсгэлэнтэй өөрчлөлтийг мэдрээрэй!</div>
-    ",
+  ",
     "wallpaper_by_themes" => "Сэдвээр эрэмбэлсэн утасны дэвсгэр зураг",
     "wallpaper_by_styles" => "Загвараар эрэмбэлсэн утасны дэвсгэр зураг",
     "wallpaper_by_events" => "Үйл явдлаар эрэмбэлсэн утасны дэвсгэр зураг",
@@ -39,7 +39,7 @@ return [
                                         <li>Enostavno in hitro prenos z le nekaj koraki.</li>
                                     </ul>
                                     <div>Prenesite jih še danes in zaživite razliko na zaslonu vašega telefona!</div>
-                                ",
+                              ",
     "wallpaper_by_themes"   => "Ozadja za telefone po temah",
     "wallpaper_by_styles"   => "Ozadja za telefone po slogih",
     "wallpaper_by_events"   => "Ozadja za telefone po dogodkih",
@@ -64,7 +64,7 @@ return [
                                         <li>Paprastas ir greitas atsisiuntimas per kelis paprastus žingsnius.</li>
                                     </ul>
                                     <div>Atsisiųskite dabar ir patikrinkite unikalią skirtingą jūsų telefono ekrano versiją!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Telefono fonai pagal temas",
     "wallpaper_by_styles"   => "Telefono fonai pagal stilius",
     "wallpaper_by_events"   => "Telefono fonai pagal renginius",
@@ -89,7 +89,7 @@ return [
             <li>Vienkārša un ātra lejupielāde tikai dažos vienkāršos soļos.</li>
         </ul>
         <div>Lejupielādējiet tūlīt un izjūtiet aizraujošo atšķirību uz sava tālruņa ekrāna!</div>
-    ",
+   ",
     "wallpaper_by_themes"   => "Tālruņa foni pēc tēmām",
     "wallpaper_by_styles"   => "Tālruņa foni pēc stilam",
     "wallpaper_by_events"   => "Tālruņa foni pēc pasākumiem",
@@ -138,7 +138,7 @@ return [
             <li>Жөнөкөй бир нече кадам менен оңой жана тез жүктөп алуу.</li>
         </ul>
         <div>Биздин фон сүрөттөрдү дароо жүктөп алып, телефонунуздун экранындагы кызыктуу айырмачылыкты сезиңиз!</div>
-    ",
+   ",
     "wallpaper_by_themes" => "Темага ылайык телефон фон сүрөттөрү",
     "wallpaper_by_styles" => "Үлгүгө ылайык телефон фон сүрөттөрү",
     "wallpaper_by_events" => "Окуяларга ылайык телефон фон сүрөттөрү",
@@ -163,7 +163,7 @@ return [
                                         <li>Лесно и бързо изтегляне само с няколко прости стъпки.</li>
                                     </ul>
                                     <div>Изтеглете ги още сега и усетете забавната разлика на екрана на телефона си!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Тапети за телефон по теми",
     "wallpaper_by_styles"   => "Тапети за телефон по стилове",
     "wallpaper_by_events"   => "Тапети за телефон по събития",
@@ -212,7 +212,7 @@ return [
                                         <li>Nem og hurtig download på få enkle trin.</li>
                                     </ul>
                                     <div>Hent dem nu og oplev den spændende forskel på din mobilskærm!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Mobiltelefonstapet efter tema",
     "wallpaper_by_styles"   => "Mobiltelefonstapet efter stil",
     "wallpaper_by_events"   => "Mobiltelefonstapet efter begivenhed",
@@ -237,7 +237,7 @@ return [
             <li>Helposti ja nopeasti latautuvat muutamalla yksinkertaisella askeleella.</li>
         </ul>
         <div>Lataa nyt ja koe mielenkiintoinen ero puhelimesi näytöllä!</div>
-    ",
+   ",
     "wallpaper_by_themes"   => "Teemoittain puhelimen taustakuvat",
     "wallpaper_by_styles"   => "Tyylin mukaiset puhelimen taustakuvat",
     "wallpaper_by_events"   => "Tapahtumakohtaiset puhelimen taustakuvat",
@@ -262,7 +262,7 @@ return [
             <li>Enkel og rask nedlasting med bare noen få enkle steg.</li>
         </ul>
         <div>Last ned nå og opplev den spennende forskjellen på mobilskjermen din!</div>
-    ",
+   ",
     "wallpaper_by_themes"   => "Mobilbakgrunner etter tema",
     "wallpaper_by_styles"   => "Mobilbakgrunner etter stil",
     "wallpaper_by_events"   => "Mobilbakgrunner etter hendelse",
@@ -287,7 +287,7 @@ return [
             <li>Enkel och snabb nedladdning på bara några få steg.</li>
         </ul>
         <div>Ladda ner idag och upplev skillnaden som kommer att förnya ditt telefonliv!</div>
-    ",
+   ",
     "wallpaper_by_themes"   => "Telefonbakgrund efter tema",
     "wallpaper_by_styles"   => "Telefonbakgrund efter stil",
     "wallpaper_by_events"   => "Telefonbakgrund efter evenemang",
@@ -312,7 +312,7 @@ return [
             <li>Madaling i-download at mabilis na makukuha sa loob lamang ng ilang simpleng hakbang.</li>
         </ul>
         <div>I-download na ngayon at maranasan ang kakaibang pagbabago sa screen ng iyong telepono!</div>
-    ",
+   ",
     "wallpaper_by_themes" => "Wallpaper para sa Telepono Ayon sa Tema",
     "wallpaper_by_styles" => "Wallpaper para sa Telepono Ayon sa Estilo",
     "wallpaper_by_events" => "Wallpaper para sa Telepono Ayon sa Okasyon",
@@ -361,7 +361,7 @@ return [
                                         <li>Oson va tezkor yuklab olish, oddiy bir necha bosqichda.</li>
                                     </ul>
                                     <div>Hozir yuklab oling va telefon ekraningizdagi qiziqarli farqni his qiling!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Mavzuga ko'ra telefon fon rasmlari",
     "wallpaper_by_styles"   => "Uslubga ko'ra telefon fon rasmlari",
     "wallpaper_by_events"   => "Tadbirlarga ko'ra telefon fon rasmlari",
@@ -434,7 +434,7 @@ return [
                                         <li>Jednoduché a rýchle stiahnutie iba niekoľkými jednoduchými krokmi.</li>
                                     </ul>
                                     <div>Stiahnite si ju hneď teraz a zažite rozdiel na vašej telefónnej obrazovke!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Pozadie pre telefón podľa tém",
     "wallpaper_by_styles"   => "Pozadie pre telefón podľa štýlov",
     "wallpaper_by_events"   => "Pozadie pre telefón podľa udalostí",
@@ -459,7 +459,7 @@ return [
                                         <li>Descărcare ușoară și rapidă în doar câțiva pași simpli.</li>
                                     </ul>
                                     <div>Descarcă acum și simte diferența fascinantă pe ecranul telefonului tău!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Fundaluri pentru Telefon după Temă",
     "wallpaper_by_styles"   => "Fundaluri pentru Telefon după Stil",
     "wallpaper_by_events"   => "Fundaluri pentru Telefon după Evenimente",
@@ -484,7 +484,7 @@ return [
                                         <li>Jednoduché a rychlé stažení pomocí několika jednoduchých kroků.</li>
                                     </ul>
                                     <div>Stáhněte si je ještě dnes a zažijte vzrušující změnu na displeji vašeho telefonu!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Tapety pro mobil podle témat",
     "wallpaper_by_styles"   => "Tapety pro mobil podle stylu",
     "wallpaper_by_events"   => "Tapety pro mobil podle událostí",
@@ -509,7 +509,7 @@ return [
                                         <li>Egyszerű és gyors letöltés, mindössze néhány lépés.</li>
                                     </ul>
                                     <div>Töltsd le még ma, és élvezd az egyedi élményt telefonod kijelzőjén!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Telefon Háttérképek Témák Szerint",
     "wallpaper_by_styles"   => "Telefon Háttérképek Stílusok Szerint",
     "wallpaper_by_events"   => "Telefon Háttérképek Események Szerint",
@@ -558,7 +558,7 @@ return [
                                         <li>Eenvoudig en snel downloaden in slechts enkele stappen.</li>
                                     </ul>
                                     <div>Download nu en ervaar het geweldige verschil op je telefoonscherm!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Telefoonachtergronden op thema",
     "wallpaper_by_styles"   => "Telefoonachtergronden per stijl",
     "wallpaper_by_events"   => "Telefoonachtergronden voor evenementen",
@@ -583,7 +583,7 @@ return [
                                         <li>Просте та швидке завантаження всього за кілька кроків.</li>
                                     </ul>
                                     <div>Завантажуйте зараз і насолоджуйтесь захоплюючими змінами на екрані вашого телефону!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Шпалери для телефону за темами",
     "wallpaper_by_styles"   => "Шпалери для телефону за стилями",
     "wallpaper_by_events"   => "Шпалери для телефону за подіями",
@@ -608,7 +608,7 @@ return [
                                         <li>Łatwe i szybkie pobieranie w zaledwie kilku prostych krokach.</li>
                                     </ul>
                                     <div>Pobierz teraz i poczuj fascynującą różnicę na ekranie swojego telefonu!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Tapety na Telefon według Motywów",
     "wallpaper_by_styles"   => "Tapety na Telefon według Stylów",
     "wallpaper_by_events"   => "Tapety na Telefon według Wydarzeń",
@@ -657,7 +657,7 @@ return [
                                         <li>Kolay ve hızlı indirme, birkaç basit adımla.</li>
                                     </ul>
                                     <div>Hemen indirin ve telefon ekranınızda eğlenceli bir fark yaratın!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Konularına Göre Telefon Duvar Kağıtları",
     "wallpaper_by_styles"   => "Stillerine Göre Telefon Duvar Kağıtları",
     "wallpaper_by_events"   => "Etkinliklere Göre Telefon Duvar Kağıtları",
@@ -682,7 +682,7 @@ return [
                                         <li>Einfacher und schneller Download in nur wenigen Schritten.</li>
                                     </ul>
                                     <div>Laden Sie noch heute herunter und erleben Sie die spannende Veränderung auf Ihrem Handybildschirm!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Handyhintergründe nach Themen",
     "wallpaper_by_styles"   => "Handyhintergründe nach Stilen",
     "wallpaper_by_events"   => "Handyhintergründe nach Anlässen",
@@ -707,7 +707,7 @@ return [
                                         <li>Простая и быстрая загрузка всего за несколько шагов.</li>
                                     </ul>
                                     <div>Скачайте прямо сейчас и почувствуйте удивительную разницу на экране вашего телефона!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "Обои для телефона по темам",
     "wallpaper_by_styles"   => "Обои для телефона по стилям",
     "wallpaper_by_events"   => "Обои для телефона по событиям",
@@ -732,7 +732,7 @@ return [
                                         <li>دانلود آسان و سریع تنها با چند مرحله ساده.</li>
                                     </ul>
                                     <div>همین حالا دانلود کنید و تفاوت جذابی را روی صفحه نمایش گوشی خود تجربه کنید!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "تصاویر زمینه تلفن همراه بر اساس موضوع",
     "wallpaper_by_styles"   => "تصاویر زمینه تلفن همراه بر اساس سبک",
     "wallpaper_by_events"   => "تصاویر زمینه تلفن همراه بر اساس رویداد",
@@ -757,7 +757,7 @@ return [
                                         <li>تنزيل سهل وسريع ببضع خطوات بسيطة فقط.</li>
                                     </ul>
                                     <div>احملها الآن وشعر بالفرق الممتع على شاشة هاتفك!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "خلفيات الهاتف حسب الموضوع",
     "wallpaper_by_styles"   => "خلفيات الهاتف حسب النمط",
     "wallpaper_by_events"   => "خلفيات الهاتف حسب المناسبات",
@@ -782,7 +782,7 @@ return [
                                         <li>ดาวน์โหลดง่ายและรวดเร็วด้วยขั้นตอนง่ายๆ เพียงไม่กี่ขั้นตอน</li>
                                     </ul>
                                     <div>ดาวน์โหลดเลยตอนนี้และสัมผัสความแตกต่างที่น่าสนใจบนหน้าจอโทรศัพท์ของคุณ!</div>
-                                ",
+                               ",
     "wallpaper_by_themes"   => "วอลเปเปอร์โทรศัพท์ตามธีม",
     "wallpaper_by_styles"   => "วอลเปเปอร์โทรศัพท์ตามสไตล์",
     "wallpaper_by_events"   => "วอลเปเปอร์โทรศัพท์ตามงานอีเว้นท์",
@@ -807,7 +807,7 @@ return [
             <li>Muat turun dengan mudah dan cepat hanya dengan beberapa langkah ringkas.</li>
         </ul>
         <div>Muat turun sekarang dan rasakan perbezaan yang menyeronokkan pada paparan telefon anda!</div>
-    ",
+   ",
     "wallpaper_by_themes" => "Kertas Dinding Telefon Mengikut Tema",
     "wallpaper_by_styles" => "Kertas Dinding Telefon Mengikut Gaya",
     "wallpaper_by_events" => "Kertas Dinding Telefon Mengikut Acara",
@@ -832,7 +832,7 @@ return [
             <li>Unduh dengan mudah dan cepat hanya dalam beberapa langkah sederhana.</li>
         </ul>
         <div>Segera unduh dan rasakan perbedaan menarik di layar ponsel Anda!</div>
-    ",
+   ",
     "wallpaper_by_themes"   => "Wallpaper Ponsel Berdasarkan Tema",
     "wallpaper_by_styles"   => "Wallpaper Ponsel Berdasarkan Gaya",
     "wallpaper_by_events"   => "Wallpaper Ponsel Berdasarkan Acara",
@@ -857,7 +857,7 @@ return [
                                         <li>Unduh gampang lan cepet mung nganggo sawetara langkah simpel.</li>
                                     </ul>
                                     <div>Monggo diunduh saiki lan rasakake bedane sing menarik ing layar telponmu!</div>
-                                ",
+                              ",
     "wallpaper_by_themes"   => "Gambar Latar Telpon Miturut Tema",
     "wallpaper_by_styles"   => "Gambar Latar Telpon Miturut Gaya",
     "wallpaper_by_events"   => "Gambar Latar Telpon Miturut Acara",
@@ -882,7 +882,7 @@ return [
                                         <li>몇 가지 간단한 단계로 쉽고 빠르게 다운로드 가능.</li>
                                     </ul>
                                     <div>지금 바로 다운로드하여 스마트폰 화면의 특별한 변화를 경험해보세요!</div>
-                                ",
+                              ",
     "wallpaper_by_themes"   => "테마별 휴대폰 배경화면",
     "wallpaper_by_styles"   => "스타일별 휴대폰 배경화면",
     "wallpaper_by_events"   => "이벤트별 휴대폰 배경화면",
@@ -931,7 +931,7 @@ return [
                                         <li>સરળ અને ઝડપી ડાઉનલોડ માત્ર થોડા પગલાંમાં.</li>
                                     </ul>
                                     <div>હમણાં ડાઉનલોડ કરો અને તમારા મોબાઇલ સ્ક્રીન પર રસપ્રદ ફેરફાર અનુભવો!</div>
-                                ",
+                              ",
     "wallpaper_by_themes"   => "થીમ પ્રમાણે મોબાઇલ વોલપેપર",
     "wallpaper_by_styles"   => "શૈલી પ્રમાણે મોબાઇલ વોલપેપર",
     "wallpaper_by_events"   => "ઇવેન્ટ પ્રમાણે મોબાઇલ વોલપેપર",
@@ -956,7 +956,7 @@ return [
             <li>صرف چند آسان اقدامات میں آسانی سے اور تیزی سے ڈاؤن لوڈ کریں۔</li>
         </ul>
         <div>ابھی ڈاؤن لوڈ کریں اور اپنے فون کی سکرین پر دلکش فرق محسوس کریں!</div>
-    ",
+  ",
     "wallpaper_by_themes" => "فون والپیپر موضوعات کے مطابق",
     "wallpaper_by_styles" => "فون والپیپر انداز کے مطابق",
     "wallpaper_by_events" => "فون والپیپر واقعات کے مطابق",
@@ -981,7 +981,7 @@ return [
                                         <li>కొద్ది స్టెప్లలో సులభంగా మరియు వేగంగా డౌన్‌లోడ్ చేయవచ్చు.</li>
                                     </ul>
                                     <div>ఇప్పుడే డౌన్‌లోడ్ చేసి, మీ ఫోన్ స్క్రీన్‌లో గల ఆస్వాదన తేడాను అనుభవించండి!</div>
-                                ",
+                              ",
     "wallpaper_by_themes"   => "థీముల ద్వారా ఫోన్ వాల్‌పేపర్",
     "wallpaper_by_styles"   => "శైలి ద్వారా ఫోన్ వాల్‌పేపర్",
     "wallpaper_by_events"   => "సంఘటనల ద్వారా ఫోన్ వాల్‌పేపర్",
@@ -1006,7 +1006,7 @@ return [
             <li>சில எளிய படிகளில் எளிதாக பதிவிறக்கம் செய்யலாம்.</li>
         </ul>
         <div>இப்போது பதிவிறக்கம் செய்து உங்கள் மொபைல் திரையில் அதிசயமான மாற்றத்தை உணர்க!</div>
-    ",
+  ",
     "wallpaper_by_themes" => "கருப்பொருள் வாரியான மொபைல் பின்புல அட்டவணைகள்",
     "wallpaper_by_styles" => "பாணி வாரியான மொபைல் பின்புல அட்டவணைகள்",
     "wallpaper_by_events" => "நிகழ்வுகள் வாரியான மொபைல் பின்புல அட்டவணைகள்",
@@ -1031,7 +1031,7 @@ return [
                                         <li>फक्त काही सोप्या पायरींमध्ये सहज आणि वेगवान डाउनलोड.</li>
                                     </ul>
                                     <div>आत्ताच डाउनलोड करा आणि आपल्या मोबाईल स्क्रीनवर रोमांचक फरक अनुभवा!</div>
-                                ",
+                              ",
     "wallpaper_by_themes"   => "विषयानुसार फोन वॉलपेपर",
     "wallpaper_by_styles"   => "शैलीनुसार फोन वॉलपेपर",
     "wallpaper_by_events"   => "घटनांनुसार फोन वॉलपेपर",
@@ -1056,7 +1056,7 @@ return [
             <li>কয়েকটি সহজ ধাপে সহজে এবং দ্রুত ডাউনলোড করুন।</li>
         </ul>
         <div>এখনই ডাউনলোড করুন এবং আপনার মোবাইলের স্ক্রিনে আকর্ষণীয় পরিবর্তন অনুভব করুন!</div>
-    ",
+  ",
     "wallpaper_by_themes" => "থিম অনুযায়ী মোবাইল ওয়ালপেপার",
     "wallpaper_by_styles" => "শৈলী অনুযায়ী মোবাইল ওয়ালপেপার",
     "wallpaper_by_events" => "ইভেন্ট অনুযায়ী মোবাইল ওয়ালপেপার",
@@ -1081,7 +1081,7 @@ return [
                             <li>कुछ ही सरल चरणों में आसानी से और तेज़ी से डाउनलोड करें।</li>
                         </ul>
                         <div>अभी डाउनलोड करें और अपने फ़ोन की स्क्रीन पर रोमांचक अंतर का अनुभव करें!</div>
-                    ",
+                  ",
     "wallpaper_by_themes"   => "विषय के अनुसार फ़ोन वॉलपेपर",
     "wallpaper_by_styles"   => "शैली के अनुसार फ़ोन वॉलपेपर",
     "wallpaper_by_events"   => "आयोजन के अनुसार फ़ोन वॉलपेपर",
@@ -1106,7 +1106,7 @@ return [
             <li>Tải về dễ dàng và nhanh chóng chỉ với vài thao tác đơn giản.</li>
         </ul>
         <div>Tải ngay hôm nay và trải nghiệm sự khác biệt thú vị trên màn hình điện thoại của bạn!</div>
-    ",
+  ",
     "wallpaper_by_themes" => "Hình Nền theo Chủ Đề",
     "wallpaper_by_styles" => "Hình Nền theo Phong Cách",
     "wallpaper_by_events" => "Hình Nền theo Sự Kiện",
@@ -1131,7 +1131,7 @@ return [
                                         <li>Téléchargement facile et rapide en quelques étapes simples.</li>
                                     </ul>
                                     <div>Téléchargez dès maintenant et découvrez une expérience visuelle unique sur votre téléphone !</div>
-                                ",
+                              ",
     "wallpaper_by_themes"   => "Fonds d'écran pour téléphone par thème",
     "wallpaper_by_styles"   => "Fonds d'écran pour téléphone par style",
     "wallpaper_by_events"   => "Fonds d'écran pour téléphone par événement",
@@ -1180,7 +1180,7 @@ return [
             <li>只需简单几步，即可轻松快速下载。</li>
         </ul>
         <div>立即下载，感受手机屏幕上的趣味变化吧！</div>
-    ",
+  ",
     "wallpaper_by_themes"   => "按主题分类的手机壁纸",
     "wallpaper_by_styles"   => "按风格分类的手机壁纸",
     "wallpaper_by_events"   => "按事件分类的手机壁纸",
@@ -1205,7 +1205,7 @@ return [
                                     <li>Easy and fast download in just a few simple steps.</li>
                                 </ul>
                                 <div>Download now and experience the exciting difference on your phone screen!</div>
-                                ",
+                              ",
     "wallpaper_by_themes"   => "Phone Wallpapers by Theme",
     "wallpaper_by_styles"   => "Phone Wallpapers by Style",
     "wallpaper_by_events"   => "Phone Wallpapers by Event",

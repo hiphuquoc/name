@@ -55,7 +55,7 @@
             @if(!empty($dataFaq))
                 <div class="questionAnswerBox">
                     <div class="questionAnswerBox_title">
-                        <h2>{{ config('data_language_1.'.$language.'.question_and_answer') }}</h2>
+                        <h2>{{ config('data_language_2.'.$language.'.question_and_answer') }}</h2>
                     </div>
                     <div  class="questionAnswerBox_box">
                         @foreach($dataFaq as $faq)
