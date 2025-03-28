@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $language ?? 'vi' }}" dir="{{ config('language.'.$language.'.dir') }}">
+<html lang="{{ $language ?? 'vi' }}" dir="{{ config('language.'.$language.'.dir') }}" class="light">
 
 <!-- === START:: Head === -->
 <head>

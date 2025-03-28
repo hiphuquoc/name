@@ -24,15 +24,15 @@
 // );
 
 // Biến cố định cho tất cả giao diện
-$bg-1: rgb(33, 37, 41);
-$bg-09: rgb(52, 58, 64);
-$bg-08: rgb(73, 80, 87);
-$bg-07: rgb(108, 117, 125);
-$bg-06: rgb(173, 181, 189);
-$bg-05: rgb(206, 212, 218);
-$bg-04: rgb(222, 226, 230);
-$bg-03: rgb(233, 236, 239);
-$bg-02: rgb(237, 242, 247);
+$bg-1: #212529;
+$bg-09: #343a40;
+$bg-08: #495057;
+$bg-07: #6c757d;
+$bg-06: #adb5bd;
+$bg-05: #ced4da;
+$bg-04: #dee2e6;
+$bg-03: #e9ecef;
+$bg-02: #edf2f7;
 
 // Dark mode variables
 $dark-colorLv1: #00e88e;
@@ -81,15 +81,19 @@ $light-colorButtonLv1: #00e88e;
 $light-colorButtonLv2: #006d57;
 $light-colorTextLight: #FFD100;
 $light-colorTitle: #1a2b5f;
-$light-colorText: #2d3957;
+$light-colorText: #2e3038;
 $light-colorIcon: #4a6ca8;
 $light-colorPrice: #FFD100;
 $light-colorStar: #FFD100;
 $light-colorSuccess: #00bd7d;
 $light-colorRed: #C62E2E;
-$light-colorBackgroundLv1: #EDF2F7;
-$light-colorBackgroundLv2: #f5f6fa;
-$light-colorBackgroundLv3: #e2e5ed;
+// $light-colorBackgroundLv1: #dee2e6;
+// $light-colorBackgroundLv2: #edf2f7;
+// $light-colorBackgroundLv3: #fcfcfd;
+
+$light-colorBackgroundLv1: #fcfcfd;
+$light-colorBackgroundLv2: #e9ecef;
+$light-colorBackgroundLv3: #ced4da;
 
 :root {
   // Biến cố định (giữ hex vì không cần dùng với rgba())

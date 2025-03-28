@@ -31,7 +31,7 @@ export default defineConfig({
   server: {
     watch: {
       usePolling: true, // Giúp Vite theo dõi thay đổi file
-      interval: 10, // Điều chỉnh thời gian polling
+      interval: 100, // Điều chỉnh thời gian polling
     },
     hmr: {
       overlay: false, // Vô hiệu hóa overlay để tránh lỗi khó chịu
@@ -41,7 +41,6 @@ export default defineConfig({
     devSourcemap: true, // Hỗ trợ sourcemap trong quá trình dev
     preprocessorOptions: {
       scss: {
-        // Tự động import file variables vào tất cả file SCSS
         additionalData: `@import "./resources/sources/main/childs/variables.scss";\n`,
       },
     },
