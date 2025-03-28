@@ -1,0 +1,164 @@
+// /* color mặc định */
+// $opacity-to-hex: (
+//     0       : '00',
+//     0.05    : '0C',
+//     0.1     : '19',
+//     0.15    : '26',
+//     0.2     : '33',
+//     0.25    : '3F',
+//     0.3     : '4C',
+//     0.35    : '59',
+//     0.4     : '66',
+//     0.45    : '72',
+//     0.5     : '7F',
+//     0.55    : '8C',
+//     0.6     : '99',
+//     0.65    : 'A5',
+//     0.7     : 'B2',
+//     0.75    : 'BF',
+//     0.8     : 'CC',
+//     0.85    : 'D8',
+//     0.9     : 'E5',
+//     0.95    : 'F2',
+//     1       : 'FF'
+// );
+
+// Biến cố định cho tất cả giao diện
+$bg-1: rgb(33, 37, 41);
+$bg-09: rgb(52, 58, 64);
+$bg-08: rgb(73, 80, 87);
+$bg-07: rgb(108, 117, 125);
+$bg-06: rgb(173, 181, 189);
+$bg-05: rgb(206, 212, 218);
+$bg-04: rgb(222, 226, 230);
+$bg-03: rgb(233, 236, 239);
+$bg-02: rgb(237, 242, 247);
+
+// Dark mode variables
+$dark-colorLv1: #00e88e;
+$dark-colorLv2: #00E38C;
+$dark-colorSLv1: #FF6500;
+$dark-colorSLv2: #CD5C08;
+$dark-colorButtonLv1: #00e88e;
+$dark-colorButtonLv2: #006d57;
+$dark-colorTextLight: #ffd100;
+$dark-colorTitle: #c6d8fd;
+$dark-colorText: #c0d0f1;
+$dark-colorIcon: #5a7dc2;
+$dark-colorPrice: #ffd100;
+$dark-colorStar: #ffd100;
+$dark-colorSuccess: #00bd7d;
+$dark-colorRed: #C62E2E;
+$dark-colorBackgroundLv1: #1a202c;
+$dark-colorBackgroundLv2: #2d3848;
+$dark-colorBackgroundLv3: #3a4556;
+
+// Gray mode variables
+$gray-colorLv1: #00e88e;
+$gray-colorLv2: #00E38C;
+$gray-colorSLv1: #FF6500;
+$gray-colorSLv2: #CD5C08;
+$gray-colorButtonLv1: #00e88e;
+$gray-colorButtonLv2: #006d57;
+$gray-colorTextLight: #ffd100;
+$gray-colorTitle: #c6d8fd;
+$gray-colorText: #c0d0f1;
+$gray-colorIcon: #5a7dc2;
+$gray-colorPrice: #ffd100;
+$gray-colorStar: #ffd100;
+$gray-colorSuccess: #00bd7d;
+$gray-colorRed: #C62E2E;
+$gray-colorBackgroundLv1: #1a202c;
+$gray-colorBackgroundLv2: #2d3848;
+$gray-colorBackgroundLv3: #3a4556;
+
+// Light mode variables
+$light-colorLv1: #00e88e;
+$light-colorLv2: #00E38C;
+$light-colorSLv1: #FF6500;
+$light-colorSLv2: #CD5C08;
+$light-colorButtonLv1: #00e88e;
+$light-colorButtonLv2: #006d57;
+$light-colorTextLight: #FFD100;
+$light-colorTitle: #1a2b5f;
+$light-colorText: #2d3957;
+$light-colorIcon: #4a6ca8;
+$light-colorPrice: #FFD100;
+$light-colorStar: #FFD100;
+$light-colorSuccess: #00bd7d;
+$light-colorRed: #C62E2E;
+$light-colorBackgroundLv1: #EDF2F7;
+$light-colorBackgroundLv2: #f5f6fa;
+$light-colorBackgroundLv3: #e2e5ed;
+
+:root {
+  // Biến cố định (giữ hex vì không cần dùng với rgba())
+  --bg-1: #{$bg-1};
+  --bg-09: #{$bg-09};
+  --bg-08: #{$bg-08};
+  --bg-07: #{$bg-07};
+  --bg-06: #{$bg-06};
+  --bg-05: #{$bg-05};
+  --bg-04: #{$bg-04};
+  --bg-03: #{$bg-03};
+  --bg-02: #{$bg-02};
+
+  // Biến mặc định (dark mode) - trích xuất RGB
+  --colorLv1: #{red($dark-colorLv1), green($dark-colorLv1), blue($dark-colorLv1)};
+  --colorLv2: #{red($dark-colorLv2), green($dark-colorLv2), blue($dark-colorLv2)};
+  --colorSLv1: #{red($dark-colorSLv1), green($dark-colorSLv1), blue($dark-colorSLv1)};
+  --colorSLv2: #{red($dark-colorSLv2), green($dark-colorSLv2), blue($dark-colorSLv2)};
+  --colorButtonLv1: #{red($dark-colorButtonLv1), green($dark-colorButtonLv1), blue($dark-colorButtonLv1)};
+  --colorButtonLv2: #{red($dark-colorButtonLv2), green($dark-colorButtonLv2), blue($dark-colorButtonLv2)};
+  --colorTextLight: #{red($dark-colorTextLight), green($dark-colorTextLight), blue($dark-colorTextLight)};
+  --colorTitle: #{red($dark-colorTitle), green($dark-colorTitle), blue($dark-colorTitle)};
+  --colorText: #{red($dark-colorText), green($dark-colorText), blue($dark-colorText)};
+  --colorIcon: #{red($dark-colorIcon), green($dark-colorIcon), blue($dark-colorIcon)};
+  --colorPrice: #{red($dark-colorPrice), green($dark-colorPrice), blue($dark-colorPrice)};
+  --colorStar: #{red($dark-colorStar), green($dark-colorStar), blue($dark-colorStar)};
+  --colorSuccess: #{red($dark-colorSuccess), green($dark-colorSuccess), blue($dark-colorSuccess)};
+  --colorRed: #{red($dark-colorRed), green($dark-colorRed), blue($dark-colorRed)};
+  --colorBackgroundLv1: #{red($dark-colorBackgroundLv1), green($dark-colorBackgroundLv1), blue($dark-colorBackgroundLv1)};
+  --colorBackgroundLv2: #{red($dark-colorBackgroundLv2), green($dark-colorBackgroundLv2), blue($dark-colorBackgroundLv2)};
+  --colorBackgroundLv3: #{red($dark-colorBackgroundLv3), green($dark-colorBackgroundLv3), blue($dark-colorBackgroundLv3)};
+}
+
+.light {
+  --colorLv1: #{red($light-colorLv1), green($light-colorLv1), blue($light-colorLv1)};
+  --colorLv2: #{red($light-colorLv2), green($light-colorLv2), blue($light-colorLv2)};
+  --colorSLv1: #{red($light-colorSLv1), green($light-colorSLv1), blue($light-colorSLv1)};
+  --colorSLv2: #{red($light-colorSLv2), green($light-colorSLv2), blue($light-colorSLv2)};
+  --colorButtonLv1: #{red($light-colorButtonLv1), green($light-colorButtonLv1), blue($light-colorButtonLv1)};
+  --colorButtonLv2: #{red($light-colorButtonLv2), green($light-colorButtonLv2), blue($light-colorButtonLv2)};
+  --colorTextLight: #{red($light-colorTextLight), green($light-colorTextLight), blue($light-colorTextLight)};
+  --colorTitle: #{red($light-colorTitle), green($light-colorTitle), blue($light-colorTitle)};
+  --colorText: #{red($light-colorText), green($light-colorText), blue($light-colorText)};
+  --colorIcon: #{red($light-colorIcon), green($light-colorIcon), blue($light-colorIcon)};
+  --colorPrice: #{red($light-colorPrice), green($light-colorPrice), blue($light-colorPrice)};
+  --colorStar: #{red($light-colorStar), green($light-colorStar), blue($light-colorStar)};
+  --colorSuccess: #{red($light-colorSuccess), green($light-colorSuccess), blue($light-colorSuccess)};
+  --colorRed: #{red($light-colorRed), green($light-colorRed), blue($light-colorRed)};
+  --colorBackgroundLv1: #{red($light-colorBackgroundLv1), green($light-colorBackgroundLv1), blue($light-colorBackgroundLv1)};
+  --colorBackgroundLv2: #{red($light-colorBackgroundLv2), green($light-colorBackgroundLv2), blue($light-colorBackgroundLv2)};
+  --colorBackgroundLv3: #{red($light-colorBackgroundLv3), green($light-colorBackgroundLv3), blue($light-colorBackgroundLv3)};
+}
+
+.gray {
+  --colorLv1: #{red($gray-colorLv1), green($gray-colorLv1), blue($gray-colorLv1)};
+  --colorLv2: #{red($gray-colorLv2), green($gray-colorLv2), blue($gray-colorLv2)};
+  --colorSLv1: #{red($gray-colorSLv1), green($gray-colorSLv1), blue($gray-colorSLv1)};
+  --colorSLv2: #{red($gray-colorSLv2), green($gray-colorSLv2), blue($gray-colorSLv2)};
+  --colorButtonLv1: #{red($gray-colorButtonLv1), green($gray-colorButtonLv1), blue($gray-colorButtonLv1)};
+  --colorButtonLv2: #{red($gray-colorButtonLv2), green($gray-colorButtonLv2), blue($gray-colorButtonLv2)};
+  --colorTextLight: #{red($gray-colorTextLight), green($gray-colorTextLight), blue($gray-colorTextLight)};
+  --colorTitle: #{red($gray-colorTitle), green($gray-colorTitle), blue($gray-colorTitle)};
+  --colorText: #{red($gray-colorText), green($gray-colorText), blue($gray-colorText)};
+  --colorIcon: #{red($gray-colorIcon), green($gray-colorIcon), blue($gray-colorIcon)};
+  --colorPrice: #{red($gray-colorPrice), green($gray-colorPrice), blue($gray-colorPrice)};
+  --colorStar: #{red($gray-colorStar), green($gray-colorStar), blue($gray-colorStar)};
+  --colorSuccess: #{red($gray-colorSuccess), green($gray-colorSuccess), blue($gray-colorSuccess)};
+  --colorRed: #{red($gray-colorRed), green($gray-colorRed), blue($gray-colorRed)};
+  --colorBackgroundLv1: #{red($gray-colorBackgroundLv1), green($gray-colorBackgroundLv1), blue($gray-colorBackgroundLv1)};
+  --colorBackgroundLv2: #{red($gray-colorBackgroundLv2), green($gray-colorBackgroundLv2), blue($gray-colorBackgroundLv2)};
+  --colorBackgroundLv3: #{red($gray-colorBackgroundLv3), green($gray-colorBackgroundLv3), blue($gray-colorBackgroundLv3)};
+}

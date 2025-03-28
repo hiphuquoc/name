@@ -21,7 +21,7 @@
     position: absolute;
     content: '';
     top: 6px;
-    background-color: $colorLv1;
+    background-color: rgb(var(--colorLv1));
     opacity: 0.75;
     width: 28px;
     height: 28px;
@@ -30,7 +30,7 @@
   }
   
   .loadingIcon::after {
-    background-color: $colorTextLight;
+    background-color: rgb(var(--colorTextLight));
     animation-delay: 0.5s;
     opacity: 0.55;
   }

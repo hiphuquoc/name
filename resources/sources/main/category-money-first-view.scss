@@ -27,17 +27,17 @@
             display: inline-block;
             border-radius: $radiusBoxSmall;
             padding: 0.1rem 0.5rem;
-            background: $colorBackgroundLv2;
+            background: rgb(var(--colorBackgroundLv2));
             cursor: pointer;
             &_badge {
                 display: flex;
                 &_action {
                     margin-left: 0.5rem;
-                    color: $colorText !important;
+                    color: rgb(var(--colorText)) !important;
                 }
             }
             &:hover {
-                background: $bg-08;
+                background: rgb(var(--bg-08));
             }
         }
     }

@@ -65,7 +65,7 @@
         flex-direction: column;
         border-radius: $radiusBoxNormal;
         gap: 0.75rem;
-        background: rgba($colorBackgroundLv2, 0.5);
+        background: rgba(var(--colorBackgroundLv2), 0.5);
         &_image {
             position: relative;
             width: 100%;
@@ -73,7 +73,7 @@
             border-top-left-radius: inherit;
             border-top-right-radius: inherit;
             overflow: hidden;
-            background: $colorBackgroundLv2;
+            background: rgb(var(--colorBackgroundLv2));
     
             img {
                 position: absolute;
@@ -141,7 +141,7 @@
             flex-direction: column;
             // gap: 0.5rem;
             &:nth-child(2n + 1){
-                background: rgba($colorBackgroundLv2, 0.5);
+                background: rgba(var(--colorBackgroundLv2), 0.5);
             }
             &:not(:nth-child(2n + 1)){
                 .blogSiderbarBox_box_item_content {
@@ -155,7 +155,7 @@
                 }
             }
             // &:not(:first-child){
-            //     border-top: 1px dashed $colorBackgroundLv3;
+            //     border-top: 1px dashed rgb(var(--colorBackgroundLv3));
             //     padding-top: 0.5rem;
             // }
             &_image {
@@ -165,7 +165,7 @@
                 border-top-left-radius: inherit;
                 border-top-right-radius: inherit;
                 overflow: hidden;
-                background: $colorBackgroundLv2;
+                background: rgb(var(--colorBackgroundLv2));
                 // margin-bottom: 0.25rem;
                 img {
                     position: absolute;
@@ -237,7 +237,7 @@
             // flex-direction: column;
             // gap: 0.5rem;
             &:not(:first-child){
-                // border-top: 1px dashed $colorBackgroundLv3;
+                // border-top: 1px dashed rgb(var(--colorBackgroundLv3));
                 padding-top: 0.5rem;
             }
             h2, h3, h4 {

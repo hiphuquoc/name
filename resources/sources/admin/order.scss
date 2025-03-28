@@ -1,6 +1,3 @@
-$colorLv1       : #9e1e1f;
-$colorLabel      : #617A9F;
-
 .pageCheckout {
     display: flex;
     align-items: stretch;
@@ -37,14 +34,14 @@ $colorLabel      : #617A9F;
             }
             &_footer {
                 flex: 1 0 auto;
-                border-top: 1px solid $bg-05;
+                border-top: 1px solid var(--bg-05);
                 padding-top: 1rem;
                 font-size: 1rem;
             }
         }
     }
     &_sidebar {
-        background: $bg-02;
+        background: rgb(var(--bg-02));
         width: 35%;
         height: 100%;
         position: fixed;
@@ -178,7 +175,7 @@ $colorLabel      : #617A9F;
         font-size: 1.2rem;
         font-weight: bold;
         margin-bottom: 0.5rem;
-        color: $colorLv1;
+        color: rgb(var(--colorLv1));
     }
     &_body {
         line-height: 1.8;
@@ -202,7 +199,7 @@ $colorLabel      : #617A9F;
         font-size: 1.2rem;
         font-weight: bold;
         margin-bottom: 1rem;
-        color: $colorLv1;
+        color: rgb(var(--colorLv1));
     }
     &_body {
         display: flex;
@@ -214,7 +211,7 @@ $colorLabel      : #617A9F;
             &:not(:first-child){
                 margin-top: 0.75rem;
                 padding-top: 0.75rem;
-                border-top: 1px dashed $bg-06;
+                border-top: 1px dashed var(--bg-06);
             }
             > * {
                 &:not(:first-child){
@@ -232,7 +229,7 @@ $colorLabel      : #617A9F;
                     position: absolute;
                     top: -5px;
                     right: -5px;
-                    background: $colorLabel;
+                    background: rgb(var(--colorText));
                     border-radius: 50%;
                     color: #fff;
                     font-size: 0.85rem;
@@ -273,7 +270,7 @@ $colorLabel      : #617A9F;
         &:not(:first-child){
             margin-top: 0.5rem;
             padding-top: 0.5rem;
-            border-top: 1px dashed $bg-06;
+            border-top: 1px dashed var(--bg-06);
         }
         > * {
             &:nth-child(2){
@@ -281,7 +278,7 @@ $colorLabel      : #617A9F;
                 letter-spacing: 0.5px;
             }
             &.priceTotal {
-                color: $colorLv1;
+                color: rgb(var(--colorLv1));
                 font-size: 1.2rem;
             }
             &.button {

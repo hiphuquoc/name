@@ -1,96 +1,96 @@
 {
   "resources/sources/admin/style.scss": {
-    "file": "assets/style-79deca9c.css",
+    "file": "assets/style-4604c889.css",
     "isEntry": true,
     "src": "resources/sources/admin/style.scss"
   },
   "resources/sources/main/cart-first-view.scss": {
-    "file": "assets/cart-first-view-4efc83b7.css",
+    "file": "assets/cart-first-view-9a832362.css",
     "isEntry": true,
     "src": "resources/sources/main/cart-first-view.scss"
   },
   "resources/sources/main/cart-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/category-blog-first-view.scss": {
-    "file": "assets/category-blog-first-view-662645d9.css",
+    "file": "assets/category-blog-first-view-bd44bd16.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-first-view.scss"
   },
   "resources/sources/main/category-blog-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/category-free-first-view.scss": {
-    "file": "assets/category-free-first-view-39c3432b.css",
+    "file": "assets/category-free-first-view-9a71f7ca.css",
     "isEntry": true,
     "src": "resources/sources/main/category-free-first-view.scss"
   },
   "resources/sources/main/category-free-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/category-money-first-view.scss": {
-    "file": "assets/category-money-first-view-24976b8a.css",
+    "file": "assets/category-money-first-view-98dd3649.css",
     "isEntry": true,
     "src": "resources/sources/main/category-money-first-view.scss"
   },
   "resources/sources/main/category-money-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/confirm-first-view.scss": {
-    "file": "assets/confirm-first-view-1948c7d5.css",
+    "file": "assets/confirm-first-view-061c058b.css",
     "isEntry": true,
     "src": "resources/sources/main/confirm-first-view.scss"
   },
   "resources/sources/main/confirm-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/freewallpaper-first-view.scss": {
-    "file": "assets/freewallpaper-first-view-ad10b433.css",
+    "file": "assets/freewallpaper-first-view-3910a408.css",
     "isEntry": true,
     "src": "resources/sources/main/freewallpaper-first-view.scss"
   },
   "resources/sources/main/freewallpaper-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/home-first-view.scss": {
-    "file": "assets/home-first-view-fe32c3f3.css",
+    "file": "assets/home-first-view-deb256f0.css",
     "isEntry": true,
     "src": "resources/sources/main/home-first-view.scss"
   },
   "resources/sources/main/home-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/page-first-view.scss": {
-    "file": "assets/page-first-view-91a86597.css",
+    "file": "assets/page-first-view-039c3f6b.css",
     "isEntry": true,
     "src": "resources/sources/main/page-first-view.scss"
   },
   "resources/sources/main/page-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   },
   "resources/sources/main/product-first-view.scss": {
-    "file": "assets/product-first-view-0d123984.css",
+    "file": "assets/product-first-view-4bc2c978.css",
     "isEntry": true,
     "src": "resources/sources/main/product-first-view.scss"
   },
   "resources/sources/main/product-non-first-view.scss": {
-    "file": "assets/home-non-first-view-1a84b608.css",
+    "file": "assets/home-non-first-view-1a4d004f.css",
     "isEntry": true,
     "src": "resources/sources/main/category-blog-non-first-view.scss"
   }

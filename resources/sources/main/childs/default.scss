@@ -1,120 +1,6 @@
-/* color mặc định */
-$opacity-to-hex: (
-    0       : '00',
-    0.05    : '0C',
-    0.1     : '19',
-    0.15    : '26',
-    0.2     : '33',
-    0.25    : '3F',
-    0.3     : '4C',
-    0.35    : '59',
-    0.4     : '66',
-    0.45    : '72',
-    0.5     : '7F',
-    0.55    : '8C',
-    0.6     : '99',
-    0.65    : 'A5',
-    0.7     : 'B2',
-    0.75    : 'BF',
-    0.8     : 'CC',
-    0.85    : 'D8',
-    0.9     : 'E5',
-    0.95    : 'F2',
-    1       : 'FF'
-);
-@mixin colorOpacity($property, $color, $opacity, $important:null) {
-    #{$property}: unquote($color + map-get($opacity-to-hex, $opacity)) $important;
-}
-$bg-1           : #212529;
-$bg-09          : #343a40;
-$bg-08          : #495057;
-$bg-07          : #6c757d;
-$bg-06          : #adb5bd;
-$bg-05          : #ced4da;
-$bg-04          : #dee2e6;
-$bg-03          : #e9ecef;
-$bg-02          : #EDF2F7;
-/* ===== không sửa trực tiếp ở đây do dùng replace */
-$colorLv1       : #00e88e;
-$colorLv2       : #00E38C;
-// $colorLv2       : #00bd7d;
-
-/* ===== */
-$colorSLv1      : #FF6500;
-$colorSLv2      : #CD5C08;
-/* ===== */
-$colorButtonLv1 : #00e88e;
-$colorButtonLv2 : #006d57;
-// $colorButtonLv1 : #00bd7d;
-// $colorButtonLv2 : #006d57;
-/* ===== */
-$colorTextLight : #ffd100;
-// $colorTitle     : #ffffffCC;
-$colorTitle     : #c6d8fd;
-/* ===== */
-$colorText      : #c0d0f1;
-$colorIcon      : #5a7dc2;
-/* ===== */
-$colorLabel     : #ad8e70;
-/* ===== */
-$colorPrice     : #ffd100;
-$colorStar      : #ffd100;
-$colorSuccess   : #00bd7d;
-$colorRed       : #C62E2E;
-
-$colorBackgroundLv1: #1a202c;
-$colorBackgroundLv2: #2d3848;
-$colorBackgroundLv3: #3a4556;
+@import 'variables.scss';
 
 /* font chữ */
-/* @font-face {
-    font-family: 'Segoe-UI Light';
-    font-style: normal;
-    font-weight: 400;
-    src: url('/fonts/SegoeUI-Light.ttf');
-    font-display: swap;
-} */
-
-// @font-face {
-//   font-family: 'Segoe-UI';
-//   font-style: normal;
-//   font-weight: 500;
-//   src: url('/fonts/SegoeUI.ttf');
-//   font-display: swap;
-// }
-
-// @font-face {
-//   font-family: 'Segoe-UI Semi';
-//   font-style: normal;
-//   font-weight: 700;
-//   font-display: swap;
-//   src: url('/fonts/SegoeUI-SemiBold.ttf');
-// }
-
-// @font-face {
-//   font-family: 'Segoe-UI Bold';
-//   font-style: normal;
-//   font-weight: 700;
-//   font-display: swap;
-//   src: url('/fonts/SegoeUI-Bold.ttf');
-// }
-
-/* @font-face {
-  font-family: 'SVN-Gilroy Thin';
-  font-style: normal;
-  font-weight: 400;
-  src: url(//bizweb.dktcdn.net/100/438/408/themes/919724/assets/svn-gilroy_regular.ttf?1698220622470);
-  font-display: 'Swap';
-}
-
-@font-face {
-  font-family: 'SVN-Gilroy Light';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(//bizweb.dktcdn.net/100/438/408/themes/919724/assets/svn-gilroy_regular.ttf?1698220622470);
-} */
-
 @font-face {
   font-family: 'SVN-Gilroy';
   font-style: normal;
@@ -122,7 +8,6 @@ $colorBackgroundLv3: #3a4556;
   font-weight: 500;
   src: url('/fonts/svn-gilroy_medium.ttf');
 }
-
 @font-face {
   font-family: 'SVN-Gilroy Med';
   font-style: normal;
@@ -130,7 +15,6 @@ $colorBackgroundLv3: #3a4556;
   font-weight: 700;
   src: url('/fonts/svn-gilroy_med.ttf');
 }
-
 @font-face {
   font-family: 'SVN-Gilroy Semi';
   font-style: normal;
@@ -138,7 +22,6 @@ $colorBackgroundLv3: #3a4556;
   font-display: swap;
   src: url('/fonts/svn-gilroy_semibold.ttf');
 }
-
 @font-face {
   font-family: 'SVN-Gilroy Bold';
   font-style: normal;
@@ -147,10 +30,10 @@ $colorBackgroundLv3: #3a4556;
   src: url('/fonts/svn-gilroy_semibold.ttf');
 }
 $fontTitle: "SVN-Gilroy Bold", sans-serif;
-$fontText: "SVN-Gilroy", sans-serif;
+$fontText: "SVN-Gilroy Med", sans-serif;
 /* mixin title */
 @mixin titleDefault {
-  color: $colorText;
+  color: rgb(var(--colorText));
   font-family: $fontTitle;
   font-size: 1.1rem;
   margin-bottom: 0;
@@ -198,13 +81,13 @@ $radiusBoxLarge : 1rem;
       height: 35px;
       border: none;
       outline: none;
-      background: $colorBackgroundLv3;
+      background: rgb(var(--colorBackgroundLv3));
       border-radius: 50%;
-      color: $colorText;
+      color: rgb(var(--colorText));
       opacity: 0.5;
       &:hover {
         opacity: 0.75;
-        color: $colorTextLight;
+        color: rgb(var(--colorTextLight));
       }
     }
     .slick-arrow {
@@ -265,7 +148,7 @@ $radiusBoxLarge : 1rem;
         position: absolute;
         top: 0;
         left: 0;
-        @include colorOpacity('background', $colorText, 0.7);
+        background: rgba(var(--colorText), 0.7);
         padding: 0.1rem 0.5rem;
         display: flex;
         color: #fff;
@@ -281,7 +164,7 @@ $radiusBoxLarge : 1rem;
           &:not(:first-child){
             margin-left: 0.25rem;
             padding-left: 0.25rem;
-            border-left: 1px solid $bg-07;
+            border-left: 1px solid var(--bg-07);
           }
         }
       }
@@ -289,7 +172,7 @@ $radiusBoxLarge : 1rem;
         position: absolute;
         top: 0;
         right: 0;
-        @include colorOpacity('background', $colorPrice, 0.8);
+        background: rgba(var(--colorPrice), 0.8);
         padding: 0.1rem 0.5rem;
         display: flex;
         color: #fff;
@@ -320,7 +203,7 @@ $radiusBoxLarge : 1rem;
             object-fit: cover;
           }
           &.selected, &:hover {
-              border: 1px solid $colorLabel;
+            border: 1px solid rgb(var(--colorText));
           }
       }
     }
@@ -331,13 +214,13 @@ $radiusBoxLarge : 1rem;
           font-family: $fontTitle;
           font-size: 1.05rem;
           margin-bottom: 0 !important;
-          @include colorOpacity('color', $colorText, 0.9);
+          color: rgba(var(--colorText), 0.9);
           line-height: 1.5;
         }
       }
       &_price {
         margin-bottom: 0.5rem;
-        color: $colorPrice;
+        color: rgb(var(--colorPrice));
         font-size: 1.2rem;
         font-weight: bold;
         letter-spacing: 1px;
@@ -346,7 +229,7 @@ $radiusBoxLarge : 1rem;
         > span {
             font-size: 1rem;
             font-weight: normal;
-            @include colorOpacity('color', $colorText, 0.6);
+            color: rbga(var(--colorText), 0.6);
             text-decoration: line-through;
             margin-left: 1rem;
         }
@@ -375,7 +258,7 @@ $radiusBoxLarge : 1rem;
 @mixin highLight {
   font-size: 1.1rem;
   font-family: $fontTitle;
-  color: $colorTextLight;
+  color: rgb(var(--colorTextLight));
   margin-right: 0.25rem;
 }
 
@@ -386,7 +269,7 @@ $radiusBoxLarge : 1rem;
   left: 0;
   width: 100%;
   height: 100%;
-  @include colorOpacity('background', $colorBackgroundLv2, 0.8);
+  background: rgba(var(--colorBackgroundLv2), 0.8);
   z-index: -1;
   &:hover {
     display: none !important;
@@ -399,7 +282,7 @@ $radiusBoxLarge : 1rem;
   width: 2.5rem;
   height: 2.5rem;
   font-size: 1rem;
-  background: $colorBackgroundLv2;
+  background: rgb(var(--colorBackgroundLv2));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -418,10 +301,10 @@ $radiusBoxLarge : 1rem;
   }
   i {
     font-size: 1rem;
-    @include colorOpacity('color', $colorText, 0.5);
+    color: rgba(var(--colorText), 0.5);
   }
   &:hover {
-      background: $colorBackgroundLv1;
+      background: rgb(var(--colorBackgroundLv1));
   }
 }
 
@@ -437,8 +320,7 @@ $radiusBoxLarge : 1rem;
     color: inherit;
   }
   &:nth-child(2n + 0) {
-    // @include colorOpacity('background', $colorBackgroundLv3, 0.5);
-    background: rgba($colorBackgroundLv3, 0.5);
+    background: rgba(var(--colorBackgroundLv3), 0.5);
   }
   &_image {
       flex: 0 0 70px;
@@ -470,7 +352,7 @@ $radiusBoxLarge : 1rem;
         font-size: 0.9rem;
       }
       &_price {
-          color: $colorPrice;
+          color: rgb(var(--colorPrice));
           font-weight: bold;
           letter-spacing: 2px;
           font-size: 0.95rem;
@@ -478,7 +360,7 @@ $radiusBoxLarge : 1rem;
           gap: 0.75rem;
           > span {
               font-weight: normal;
-              @include colorOpacity('color', $colorText, 0.6);
+              color: rgba(var(--colorText), 0.6);
               letter-spacing: 0;
               text-decoration: line-through;
           }
@@ -490,7 +372,7 @@ $radiusBoxLarge : 1rem;
           &_total {
               font-weight: normal;
               > span {
-                  color: $colorPrice;
+                  color: rgb(var(--colorPrice));
                   font-weight: bold;
               }
           }
@@ -601,12 +483,12 @@ $radiusBoxLarge : 1rem;
 
 @mixin scrollbarCustom {
   &::-webkit-scrollbar-thumb {
-    background-color: rgba($colorBackgroundLv1, 0.8);
+    background-color: rgba(var(--colorBackgroundLv1), 0.8);
     border-radius: 1000px;
   }
   &::-webkit-scrollbar-track {
     border-radius: $radiusBoxSmall;
-    background: $colorBackgroundLv3;
+    background: rgb(var(--colorBackgroundLv3));
   }
 }
 
@@ -615,14 +497,14 @@ $radiusBoxLarge : 1rem;
   gap: 0.5rem;
   font-size: 0.8rem;
   > * {
-      background: $colorBackgroundLv3;
+      background: rgb(var(--colorBackgroundLv3));
       padding: 0.15rem 1rem;
       border-radius: $radiusBoxLarge;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      box-shadow: 0 2px 7px rgba($colorBackgroundLv1, 0.5);
+      box-shadow: 0 2px 7px rgba(var(--colorBackgroundLv1), 0.5);
       @media(max-width: 767px){
           padding: 0.15rem 0.75rem;
           &:last-child {

@@ -18,7 +18,7 @@
             font-size: 1.2rem;
             font-family: $fontTitle;
             margin-bottom: 0 !important;
-            color: $colorText;
+            color: rgb(var(--colorText));
         }
         @media(max-width: 991px){
             margin-bottom: 1rem;
@@ -43,7 +43,7 @@
             border-radius: $radiusBoxLarge;
             overflow: hidden;
             aspect-ratio: 9/16;
-            background: $colorBackgroundLv2;
+            background: rgb(var(--colorBackgroundLv2));
             &_image {
                 display: flex;
                 flex-direction: row;
@@ -85,7 +85,7 @@
                     bottom: unset;
                     height: 100vh;
                     z-index: 9999;
-                    background: $colorBackgroundLv2;
+                    background: rgb(var(--colorBackgroundLv2));
                     line-height: 2;
                     padding: 0.75rem;
                     transition: all 0.2s;
@@ -115,14 +115,14 @@
                     h2, h3 {
                         font-size: 0.95rem;
                         font-family: $fontTitle;
-                        color: $colorLv1;
+                        color: rgb(var(--colorLv1));
                         margin-bottom: 0;
                         text-transform: none;
                         width: inherit;
                         letter-spacing: 1px;
-                        // text-shadow: 0 0 $colorTextLight;
+                        // text-shadow: 0 0 rgb(var(--colorTextLight));
                         &:hover {
-                            color: $colorLv2;
+                            color: rgb(var(--colorLv2));
                         }
                     }
                     &_action {
@@ -130,7 +130,7 @@
                         &:after {
                             content: '\f192\f192\f192';
                             @include fontAwesome;
-                            @include colorOpacity('color', $colorText, 0.5);
+                            color: rgba(var(--colorText), 0.5);
                             text-shadow: 0 0 rgba(192, 208, 241, 0.5);
                             opacity: 0.75;    
                             font-size: 0.25rem;
@@ -164,7 +164,7 @@
                         transition: max-height 0.25s ease; // Fast transition when hover is removed
                     }
                     > * {
-                        color: $colorText;
+                        color: rgb(var(--colorText));
                         &:not(:first-child){
                             &:before {
                                 content: '\f192';

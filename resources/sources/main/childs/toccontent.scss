@@ -1,13 +1,13 @@
 .tocContentMain {
     border-radius: $radiusBoxSmall;
     position: relative;
-    background: $colorBackgroundLv2;
+    background: rgb(var(--colorBackgroundLv2));
     &_title {
         padding: 0.5rem 1rem;
         font-family: $fontTitle;
         cursor: pointer;
-        border-bottom: 1px solid $colorBackgroundLv1;
-        color: $colorText;
+        border-bottom: 1px solid rgb(var(--colorBackgroundLv1));
+        color: rgb(var(--colorText));
         display: flex;
         gap: 1rem;
         &_icon {
@@ -25,15 +25,15 @@
         &_item {
             display: flex;
             padding-top: 0.25rem;
-            color: $colorText;
+            color: rgb(var(--colorText));
             &:not(:first-child){
                 margin-top: 0.5rem;
-                border-top: 1px dashed $colorBackgroundLv1;
+                border-top: 1px dashed rgb(var(--colorBackgroundLv1));
             }
         }
         &.customScrollBar-y {
             // &::-webkit-scrollbar {
-            //   background-color: $colorBackgroundLv1;
+            //   background-color: rgb(var(--colorBackgroundLv1));
             // }
             @include scrollbarCustom;
         }
@@ -74,7 +74,7 @@
         min-width: 17rem; /* là chiều ngang của headerSide */
         z-index: 101;
         top: 128px;
-        box-shadow: 2px -2px 7px $colorBackgroundLv1;
+        box-shadow: 2px -2px 7px rgb(var(--colorBackgroundLv1));
         left: 0;
         &:dir(rtl), [dir="rtl"] & {
             left: unset;
@@ -113,10 +113,10 @@
     position: fixed;
     width: 32px;
     aspect-ratio: 1/1;
-    background: $colorBackgroundLv2;
+    background: rgb(var(--colorBackgroundLv2));
     border-radius: $radiusBoxSmall;
     cursor: pointer;
-    border: 1px solid $colorBackgroundLv3;
+    border: 1px solid rgb(var(--colorBackgroundLv3));
     z-index: 100;
     opacity: 0.8;
     margin-bottom: 0 !important;

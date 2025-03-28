@@ -19,7 +19,7 @@
         padding-top: 0.75rem;
         &:not(:first-child){
             margin-top: 0.75rem;
-            border-top: 1px solid $colorBackgroundLv1;
+            border-top: 1px solid rgb(var(--colorBackgroundLv1));
         }
         &_order {
             display: flex;
@@ -40,7 +40,7 @@
                     }
                 }
                 &:hover {
-                    color: $colorSuccess;
+                    color: rgb(var(--colorSuccess));
                 }
                 img {
                     width: 20px;
@@ -58,12 +58,12 @@
         width: calc(20% - 0.6rem);
         position: relative;
         transition: all 0.2s;
-        background: $colorBackgroundLv2;
+        background: rgb(var(--colorBackgroundLv2));
         border-radius: $radiusBoxNormal;
-        border: 2px solid $colorBackgroundLv1;
+        border: 2px solid rgb(var(--colorBackgroundLv1));
         overflow: hidden;
         &.alreadyDownload {
-            box-shadow: 10px 10px 30px -25px $colorSuccess;
+            box-shadow: 10px 10px 30px -25px rgb(var(--colorSuccess));
             border: 2px solid #00bd7d99;
         }
         > * {
@@ -104,7 +104,7 @@
             transform: translate3d(-50%, -50%, 0);
             z-index: 1;
             background: rgba(0,0,0,0.8);
-            color: $colorText;
+            color: rgb(var(--colorText));
             img {
                 width: 1.35rem;
             }
@@ -141,7 +141,7 @@
 }
 .confirmMessageBox {
     display: flex;
-    background: $colorBackgroundLv2;
+    background: rgb(var(--colorBackgroundLv2));
     border-radius: $radiusBoxSmall;
     &_left {
         padding: 1rem;
@@ -163,7 +163,7 @@
             font-family: $fontTitle;
         }
         &_desc {
-            @include colorOpacity('color', $colorText, 0.6);
+            color: rgba(var(--colorText), 0.6);
         }
     }
     &_right {
@@ -171,16 +171,16 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        border-left: 1px solid $colorBackgroundLv1;
+        border-left: 1px solid rgb(var(--colorBackgroundLv1));
         &:dir(rtl), [dir="rtl"] & {
             border-left: unset;
-            border-right: 1px solid $colorBackgroundLv1;
+            border-right: 1px solid rgb(var(--colorBackgroundLv1));
         }
         &_item {
             &:not(:first-child){
                 margin-top: 0.5rem;
                 padding-top: 0.25rem;
-                border-top: 1px dashed $colorBackgroundLv1;
+                border-top: 1px dashed rgb(var(--colorBackgroundLv1));
                 
             }
             > * {
@@ -199,7 +199,7 @@
     .highLight {
         margin: 0 0.5rem;
         font-family: $fontTitle;
-        color: $colorLv1;
+        color: rgb(var(--colorLv1));
         font-size: 1.2rem;
         letter-spacing: 0.5px;
     }
@@ -207,7 +207,7 @@
         padding: 0 0.5rem;
         font-size: 1.1rem;
         letter-spacing: 0.5px;
-        color: $colorPrice;
+        color: rgb(var(--colorPrice));
         font-family: $fontTitle;
     }
     @media(max-width: 1199px){
@@ -240,7 +240,7 @@
         }
         &_right {
             width: 100%;
-            border-top: 1px solid $colorBackgroundLv1;
+            border-top: 1px solid rgb(var(--colorBackgroundLv1));
             padding: 0.5rem;
         }
     }

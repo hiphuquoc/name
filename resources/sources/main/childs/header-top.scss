@@ -17,7 +17,7 @@
         transform: translateY(-50%);
         background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora.webp') no-repeat;
         background-size: 100% 100%;
-        filter: drop-shadow(1px 1px 10px rgba($colorBackgroundLv1, 0.75));
+        filter: drop-shadow(1px 1px 10px rgba(var(--colorBackgroundLv1), 0.75));
     }
     @media(max-width: 1499px){
         @include set-logo-size(1.65rem);
@@ -37,7 +37,7 @@
     left: 0;
     height: $heightMenu;
     width: 100%;
-    background: $colorBackgroundLv2;
+    background: rgb(var(--colorBackgroundLv2));
     box-shadow: 0px 1px 5px #000;
     z-index: 999;
 }
@@ -55,7 +55,7 @@
     gap: 1.5rem;
     top: 0;
     transition: all 300ms;
-    background: $colorBackgroundLv2;
+    background: rgb(var(--colorBackgroundLv2));
     z-index: 99;
     padding: 0.5rem 1.25rem;
     left: 0;
@@ -124,8 +124,8 @@
 }
 .headerBottom {
     display: none;
-    background: $colorBackgroundLv2;
-    box-shadow: 0 -0.5px 3px $colorBackgroundLv1;
+    background: rgb(var(--colorBackgroundLv2));
+    box-shadow: 0 -0.5px 3px rgb(var(--colorBackgroundLv1));
     height: calc($heightMenu + 0.25rem);
     width: 100%;
     position: fixed;
@@ -142,15 +142,15 @@
         padding: 0.5rem;
         gap: 0.125rem;
         &:not(:first-child){
-            border-left: 1px solid $colorBackgroundLv3;
+            border-left: 1px solid rgb(var(--colorBackgroundLv3));
         }
         &_icon {
             width: 1.3rem;
             aspect-ratio: 1/1;
-            opacity: 0.7;
+            opacity: 0.75;
         }
         &_text {
-            color: $colorText;
+            color: rgb(var(--colorText));
             &_modal {
                 display: none;
                 width: 180px;
@@ -172,7 +172,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                @include colorOpacity('background', $colorBackgroundLv3, 0.9);
+                background: rgba(var(--colorBackgroundLv3), 0.9);
             }
         }
     }
@@ -195,7 +195,7 @@
     }
 }
 .iconMenuMobile {
-    // background: $colorBackgroundLv3;
+    // background: rgb(var(--colorBackgroundLv3));
     width: 2.25rem;
     // height: 2.25rem !important;
     display: flex;
@@ -204,7 +204,6 @@
     border-radius: $radiusBoxSmall;
     padding: 0 !important;
     i {
-        // opacity: 0.7;
         font-size: 1.3rem;
     }
 }
@@ -220,7 +219,7 @@
     }
 }
 .backgroundBlurMobileMenu {
-    background: rgba($colorBackgroundLv1, 0.2);
+    background: rgba(var(--colorBackgroundLv1), 0.2);
     backdrop-filter: blur(8px); /* Làm mờ nền bên dưới */
     -webkit-backdrop-filter: blur(8px); /* Hỗ trợ Safari */
     position: fixed;
@@ -264,30 +263,30 @@
     justify-content: center;
     &_show {
         cursor: pointer;
-        font-size: 1rem;
+        font-size: 0.925rem;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
         font-family: $fontTitle;
         i {
-            opacity: 0.6;
+            opacity: 0.75;
             font-size: 1.3rem;
         }
         &:hover {
-            color: $colorTextLight;
+            color: rgb(var(--colorTextLight));
         }
     }
     &_list {
         display: none;
         position: absolute;
         height: auto;
-        background: $colorBackgroundLv2;
-        @include colorOpacity('color', $colorText, 0.8);
+        background: rgb(var(--colorBackgroundLv2));
+        color: rgba(var(--colorText), 0.8);
         z-index: 1;
         border-radius: 0 0 $radiusBoxSmall $radiusBoxSmall;
-        border-top: 2px solid $colorBackgroundLv1;
-        box-shadow: 1px 1px 10px $colorBackgroundLv1;
+        border-top: 2px solid rgb(var(--colorBackgroundLv1));
+        box-shadow: 1px 1px 10px rgb(var(--colorBackgroundLv1));
         align-content: flex-start;
         flex-wrap: wrap;
         width: 660px;
@@ -303,11 +302,11 @@
         }
         &_item {
             width: 25%;
-            color: $colorText;
+            color: rgb(var(--colorText));
             padding: 0 1.25rem;
             line-height: 3;
             &.selected, &:not(div):hover {
-                color: $colorTextLight;
+                color: rgb(var(--colorTextLight));
             }
             &:is(div) {
                 opacity: 0.25;
@@ -347,7 +346,7 @@
             position: fixed;
             width: 100%;
             height: calc(100% - $heightMenu);
-            box-shadow: 1px 1px 5px $colorBackgroundLv1;
+            box-shadow: 1px 1px 5px rgb(var(--colorBackgroundLv1));
             overflow: scroll;
             &_item {
                 width: 50%;
@@ -367,7 +366,7 @@
     font-size: 0.925rem;
     gap: 0.5rem;
     &:hover {
-        color: $colorTextLight;
+        color: rgb(var(--colorTextLight));
         .loginBox_list {
             display: flex;
             flex-direction: column;
@@ -379,30 +378,30 @@
     > img {
         width: 1.35rem;
         aspect-ratio: 1/1;
-        opacity: 0.7;
+        opacity: 0.75;
     }
     &_iconAvatar {
         flex: 0 0 40px;
         border-radius: 50%;
         aspect-ratio: 1/1;
-        background: $colorBackgroundLv1;
+        background: rgb(var(--colorBackgroundLv1));
         padding: 0.5rem;
         // margin-right: 0.5rem;
         img {
             width: 100%;
-            opacity: 0.7;
+            opacity: 0.75;
         }
     }
     &_list {
         display: none;
         width: 250px;
-        background: $colorBackgroundLv2;
-        @include colorOpacity('color', $colorText, 0.8);
+        background: rgb(var(--colorBackgroundLv2));
+        color: rgba(var(--colorText), 0.8);
         position: absolute;
         z-index: 1;
         border-radius: 0 0 $radiusBoxSmall $radiusBoxSmall;
-        border-top: 2px solid $colorBackgroundLv1;
-        box-shadow: 1px 1px 10px $colorBackgroundLv1;
+        border-top: 2px solid rgb(var(--colorBackgroundLv1));
+        box-shadow: 1px 1px 10px rgb(var(--colorBackgroundLv1));
         overflow: hidden;
         top: calc($heightMenu - 0.75rem);
         right: 0;
@@ -421,12 +420,12 @@
             gap: 0.75rem;
             &:hover {
                 color: inherit;
-                background: $colorBackgroundLv3;
+                background: rgb(var(--colorBackgroundLv3));
             }
             &:not(:first-child){
                 // margin-top: 0.5rem;
                 // padding-top: 0.5rem;
-                border-top: 1px solid $colorBackgroundLv1;
+                border-top: 1px solid rgb(var(--colorBackgroundLv1));
             }
             &_image {
                 flex: 0 0 60px;
@@ -446,17 +445,17 @@
                     color: inherit;
                     font-family: $fontTitle;
                     &:hover {
-                        color: $colorTitle;
+                        color: rgb(var(--colorTitle));
                     }
                 }
                 &_price {
-                    color: $colorPrice;
+                    color: rgb(var(--colorPrice));
                     font-weight: bold;
                     letter-spacing: 2px;
                     margin-bottom: 0.75rem;
                     > span {
                         font-weight: normal;
-                        @include colorOpacity('color', $colorText, 0.8);
+                        color: rgba(var(--colorText), 0.8);
                         letter-spacing: 0;
                         font-size: 0.95rem;
                     }
@@ -468,7 +467,7 @@
                     &_total {
                         font-weight: normal;
                         > span {
-                            color: $colorPrice;
+                            color: rgb(var(--colorPrice));
                             font-weight: bold;
                         }
                     }
@@ -496,7 +495,7 @@
                         font-size: 1.21rem;
                         font-weight: bold;
                         letter-spacing: 2px;
-                        color: $colorPrice;
+                        color: rgb(var(--colorPrice));
                     }
                 }
                 .button {
@@ -509,13 +508,6 @@
         }
     }
     &_background {
-        // display: none;
-        // position: fixed;
-        // top: 54.5px;
-        // left: 0;
-        // width: 100%;
-        // height: 100%;
-        // @include colorOpacity('background', $colorBackgroundLv3, 0.9);
         @include backgroundModal;
         &:hover {
             display: none !important;
@@ -523,7 +515,7 @@
     }
 }
 .cartBox {
-    @include colorOpacity('color', $colorText, 0.8);
+    color: rgba(var(--colorText), 0.8);
     font-size: 0.925rem;
     height: inherit;
     position: relative;
@@ -550,18 +542,18 @@
             position: relative;
             width: 1.5rem;
             aspect-ratio: 1/1;
-            color: $colorTitle;
+            color: rgb(var(--colorTitle));
             &:hover {
-                color: $colorTitle;
+                color: rgb(var(--colorTitle));
             }
             img {
                 width: inherit;
                 height: inherit;
-                opacity: 0.7;
+                opacity: 0.75;
             }
             &_number {
-                background: linear-gradient(45deg, $colorButtonLv1, $colorButtonLv2);
-                text-shadow: 1px 1px 10px rgba($colorBackgroundLv1, 1);
+                background: linear-gradient(45deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
+                text-shadow: 1px 1px 10px rgba(var(--colorBackgroundLv1), 1);
                 position: absolute;
                 border-radius: 50%;
                 font-size: 0.9rem;
@@ -589,13 +581,13 @@
     &_list {
         display: none;
         width: 420px;
-        background: $colorBackgroundLv2;
-        @include colorOpacity('color', $colorText, 0.8);
+        background: rgb(var(--colorBackgroundLv2));
+        color: rgba(var(--colorText), 0.8);
         position: absolute;
         z-index: 1;
         border-radius: 0 0 $radiusBoxSmall $radiusBoxSmall;
-        border-top: 2px solid $colorBackgroundLv1;
-        box-shadow: 1px 1px 10px $colorBackgroundLv1;
+        border-top: 2px solid rgb(var(--colorBackgroundLv1));
+        box-shadow: 1px 1px 10px rgb(var(--colorBackgroundLv1));
         padding: 0;
         top: calc($heightMenu - 0.75rem);
         right: calc(-50% - 100px);
@@ -612,7 +604,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-end;
-                border-top: 1px solid $colorBackgroundLv1;
+                border-top: 1px solid rgb(var(--colorBackgroundLv1));
                 background: none !important;
                 .total {
                     width: 100%;
@@ -620,7 +612,7 @@
                         font-size: 1.1rem;
                         font-weight: bold;
                         letter-spacing: 2px;
-                        color: $colorPrice;
+                        color: rgb(var(--colorPrice));
                     }
                 }
                 .button {
@@ -666,7 +658,7 @@
     }
 }
 .emptyCartBox {
-    background: $colorBackgroundLv2;
+    background: rgb(var(--colorBackgroundLv2));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -675,7 +667,7 @@
     border-radius: $radiusBoxSmall;
     img {
         max-width: 120px;
-        opacity: 0.8;
+        opacity: 0.75;
     }
     &_button {
         margin-top: 1rem;
@@ -695,19 +687,19 @@
         width: 100%;
         padding: 0;
         height: calc($heightMenu - 0.75rem);
-        background: $colorBackgroundLv1;
-        box-shadow: 0 0 5px rgba($colorBackgroundLv1, 0.5);
+        background: rgb(var(--colorBackgroundLv1));
+        box-shadow: 0 0 5px rgba(var(--colorBackgroundLv1), 0.5);
         border-radius: $radiusBoxSmall;
         border: 2px solid transparent;
         &:hover {
-            border: 2px solid rgba($colorLv2, 0.35);
+            border: 2px solid rgba(var(--colorLv2), 0.35);
             button {
-                background: linear-gradient(45deg, rgba($colorButtonLv1, 0.75), rgba($colorButtonLv2, 0.75)) !important;
+                background: linear-gradient(45deg, rgba(var(--colorButtonLv1), 0.75), rgba(var(--colorButtonLv2), 0.75)) !important;
                 color: rgba(#fff, 0.7) !important;
             }
         }
         input, &_typeBox, &_inputBox_button {
-            color: rgba($colorText, 0.7);
+            color: rgba(var(--colorText), 0.7);
             font-size: 0.9rem;
             font-family: $fontTitle;
         }
@@ -722,10 +714,10 @@
             cursor: pointer;
             gap: 1rem;
             &:dir(ltr), [dir="ltr"] & {
-                border-right: 1px solid rgba($colorText, 0.25);
+                border-right: 1px solid rgba(var(--colorText), 0.25);
             }
             &:dir(rtl), [dir="rtl"] & {
-                border-left: 1px solid rgba($colorText, 0.25);
+                border-left: 1px solid rgba(var(--colorText), 0.25);
             }
             &_text {
                 white-space: nowrap;
@@ -738,12 +730,12 @@
                 width: 100%;
                 height: auto;
                 padding: 0.45rem 0;
-                background: $colorBackgroundLv2;
+                background: rgb(var(--colorBackgroundLv2));
                 z-index: 999;
                 border-radius: $radiusBoxSmall;
                 flex-direction: column;
-                box-shadow: 1px 1px 10px $colorBackgroundLv1;
-                @include colorOpacity('color', $colorText, 0.8);
+                box-shadow: 1px 1px 10px rgb(var(--colorBackgroundLv1));
+                color: rgba(var(--colorText), 0.8);
                 top: calc($heightMenu - 0.75rem);
                 left: 0;
                 &.active {
@@ -764,7 +756,7 @@
                         @include fontAwesome;
                         content: '\f111';
                         color: transparent;
-                        border: 1px solid $colorText;
+                        border: 1px solid rgb(var(--colorText));
                         width: 13px;
                         height: 13px;
                         display: flex;
@@ -773,9 +765,9 @@
                         border-radius: 50%;
                     }
                     &.selected, &:hover {
-                        color: $colorLv2;
+                        color: rgb(var(--colorLv2));
                         &:before {
-                            border: 4px solid $colorLv2;
+                            border: 4px solid rgb(var(--colorLv2));
                         }
                     }
                     
@@ -802,7 +794,7 @@
                 padding: 0.5rem 0;
                 min-width: 320px;
                 &::placeholder {
-                    color: rgba($colorText, 0.7);
+                    color: rgba(var(--colorText), 0.7);
                 }
             }
             &_button {
@@ -828,7 +820,7 @@
                 svg {
                     width: 1rem;
                     height: 1rem;
-                    // opacity: 0.7;
+                    // opacity: 0.75;
                     color: inherit;
                 }
                 span {
@@ -843,11 +835,11 @@
                 height: auto;
                 opacity: 0; /* Đặt opacity ban đầu */
                 visibility: hidden; /* Đặt visibility để không thể tương tác */
-                background: $colorBackgroundLv2;
+                background: rgb(var(--colorBackgroundLv2));
                 z-index: 998;
                 border-radius: $radiusBoxNormal;
-                box-shadow: 1px 1px 10px $colorBackgroundLv1;
-                @include colorOpacity('color', $colorText, 0.8);
+                box-shadow: 1px 1px 10px rgb(var(--colorBackgroundLv1));
+                color: rgba(var(--colorText), 0.8);
                 top: calc($heightMenu - 0.75rem + 2px);
                 left: 0;
                 padding: 0.25rem 0;
@@ -856,7 +848,7 @@
                     &::after {
                         width: 100%;
                         height: 100%;
-                        background: rgba($colorBackgroundLv2, 0.5);
+                        background: rgba(var(--colorBackgroundLv2), 0.5);
                         content: '';
                         position: absolute;
                         top: 0;
@@ -919,7 +911,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            background: $colorBackgroundLv2;
+            background: rgb(var(--colorBackgroundLv2));
             padding: 0.75rem;
             > * {
                 width: 100%;
@@ -958,7 +950,7 @@
                     }
                     &_list {
                         visibility: visible;
-                        opacity: 1;
+                        // opacity: 1;
                         position: fixed;
                         // left: 0.75rem;
                         top: calc($heightMenu + 2px);
@@ -987,15 +979,15 @@
             display: flex;
             justify-content: space-between;
             padding: 0.5rem 1rem;
-            color: $colorText;
+            color: rgb(var(--colorText));
             &:hover {
-                color: $colorText;
+                color: rgb(var(--colorText));
             }
-            // border-bottom: 1px dashed $colorBackgroundLv1;
+            // border-bottom: 1px dashed rgb(var(--colorBackgroundLv1));
         }
         &.customScrollBar-y {
             // &::-webkit-scrollbar {
-            //   background-color: $colorBackgroundLv1;
+            //   background-color: rgb(var(--colorBackgroundLv1));
             // }
             @include scrollbarCustom;
         }
@@ -1016,31 +1008,31 @@
         }
         &.customScrollBar-y {
             // &::-webkit-scrollbar {
-            //   background-color: $colorBackgroundLv1;
+            //   background-color: rgb(var(--colorBackgroundLv1));
             // }
             @include scrollbarCustom;
         }
     }
     &_viewAll {
         display: flex;
-        background: rgba($colorBackgroundLv2, 1);
-        border-top: 1px solid $colorBackgroundLv1;
+        background: rgba(var(--colorBackgroundLv2), 1);
+        border-top: 1px solid rgb(var(--colorBackgroundLv1));
         align-items: center;
         justify-content: center;
         padding: 0.55rem 0;
-        color: $colorText;
+        color: rgb(var(--colorText));
         gap: 0.5rem;
         &:hover {
-            @include colorOpacity('background', $colorBackgroundLv3, 0.75);
+            background: rgba(var(--colorBackgroundLv3), 0.75);
         }
         span {
-            color: $colorTextLight;
+            color: rgb(var(--colorTextLight));
             font-family: $fontTitle;
             font-size: 1rem;
         }
         i {
             font-size: 0.8rem;
-            opacity: 0.7;
+            opacity: 0.75;
             margin-top: 0.25rem;
         }
     }
@@ -1072,31 +1064,31 @@
         }
         &.customScrollBar-y {
             // &::-webkit-scrollbar {
-            //   background-color: $colorBackgroundLv1;
+            //   background-color: rgb(var(--colorBackgroundLv1));
             // }
             @include scrollbarCustom;
         }
     }
     &_viewAll {
         display: flex;
-        background: rgba($colorBackgroundLv2, 1);
-        border-top: 1px solid $colorBackgroundLv1;
+        background: rgba(var(--colorBackgroundLv2), 1);
+        border-top: 1px solid rgb(var(--colorBackgroundLv1));
         align-items: center;
         justify-content: center;
         padding: 0.55rem 0;
-        color: $colorText;
+        color: rgb(var(--colorText));
         gap: 0.5rem;
         &:hover {
-            @include colorOpacity('background', $colorBackgroundLv3, 0.75);
+            background: rgba(var(--colorBackgroundLv3), 0.75);
         }
         span {
-            color: $colorTextLight;
+            color: rgb(var(--colorTextLight));
             font-family: $fontTitle;
             font-size: 1rem;
         }
         i {
             font-size: 0.8rem;
-            opacity: 0.7;
+            opacity: 0.75;
             margin-top: 0.25rem;
         }
     }
@@ -1106,4 +1098,52 @@
             height: calc(100vh - $heightMenu - 0.75rem);
         }
     }
+}
+.themeOption {
+    height: fit-content;
+    &_input {
+        display: flex;  
+        height: 26px;
+        margin-top: 6px;
+        background: rgb(var(--colorBackgroundLv1));
+        border: 1px solid rgba(var(--colorText), 0.25);
+        border-radius: 100px;
+        &_item {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            text-align: center;
+            font-size: 0.35rem;
+            color: rgba(var(--colorText), 0.75);
+            margin-top: -2px;
+            cursor: pointer;
+            &.show {
+                margin-top: 2px;
+                background: rgba(var(--colorText), 0.75);
+                border-radius: 50%;
+                color: transparent;
+            }
+            // &:before {
+            //     content: '|';
+            //     position: absolute;
+            //     left: 0;
+            //     top: -2px;
+            //     width: 20px;
+            //     text-align: center;
+            // }
+        }
+    }
+    &_circle {
+        
+    }
+    // &.light {
+    //     .themeOption_input {
+    //         background: rgb(var(--colorBackgroundLv1));
+    //     }
+    //     .themeOption_circle {
+    //         left: 3px;
+    //         right: unset;
+    //         background: rgba(var(--colorText), 0.75);
+    //     }
+    // }
 }

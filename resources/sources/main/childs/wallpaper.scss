@@ -72,10 +72,10 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                @include colorOpacity('background', $colorBackgroundLv1, 0.8);
+                background: rgba(var(--colorBackgroundLv1), 0.8);
                 padding: 0.1rem 0.5rem;
                 display: flex;
-                color: $colorText;
+                color: rgb(var(--colorText));
                 font-size: 0.8rem;
                 border-top-left-radius: inherit;
                 border-bottom-right-radius: $radiusBoxSmall;
@@ -88,7 +88,7 @@
                     &:not(:first-child){
                         margin-left: 0.25rem;
                         padding-left: 0.25rem;
-                        border-left: 1px solid $bg-07;
+                        border-left: 1px solid var(--bg-07);
                     }
                 }
             }
@@ -96,11 +96,11 @@
                 position: absolute;
                 top: 0;
                 right: 0;
-                @include colorOpacity('background', $colorPrice, 0.8);
+                background: rgba(var(--colorPrice), 0.8);
                 padding: 0.1rem 0.5rem;
                 display: flex;
-                color: $colorTitle;
-                text-shadow: 0 0 5px $colorBackgroundLv1;
+                color: rgb(var(--colorTitle));
+                text-shadow: 0 0 5px rgb(var(--colorBackgroundLv1));
                 font-size: 0.8rem;
                 font-family: $fontTitle;
                 border-top-right-radius: inherit;
@@ -125,7 +125,7 @@
                         font-weight: normal;
                         font-size: 0.9rem;
                         margin-bottom: 0 !important;
-                        color: $colorText;
+                        color: rgb(var(--colorText));
                         line-height: 1.58;
                         letter-spacing: 0.25px;
                         text-transform: unset;
@@ -133,7 +133,7 @@
                     }
                 }
                 &_price {
-                    color: $colorPrice;
+                    color: rgb(var(--colorPrice));
                     font-size: 1rem;
                     font-weight: bold;
                     letter-spacing: 2px;
@@ -145,7 +145,7 @@
                     &_quantity {
                         position: absolute;
                         transform: translateY(-50%);
-                        color: $colorText;
+                        color: rgb(var(--colorText));
                         text-shadow: 0 0 10px #000;
                         font-size: 0.875rem;
                         opacity: 0.65;
@@ -168,7 +168,7 @@
                     > span {
                         font-size: 0.85rem;
                         font-weight: normal;
-                        @include colorOpacity('color', $colorText, 0.6);
+                        color: rgba(var(--colorText), 0.6);
                         text-decoration: line-through;
                         // margin-left: 0.5rem;
                         display: flex;
@@ -181,7 +181,7 @@
         &_action {
             position: absolute;
             font-size: 0.9rem;
-            @include colorOpacity('background', $colorBackgroundLv2, 0.6);
+            background: rgba(var(--colorBackgroundLv2), 0.6);
             padding: 0.5rem 0;
             display: flex;
             gap: 0;
@@ -203,7 +203,7 @@
                 padding-inline-start: 2.25rem;
                 background-size: 100% 100% !important;
                 &:not(:first-child){
-                    border-inline-start: 1px solid rgba($colorText, 0.25);
+                    border-inline-start: 1px solid rgba(var(--colorText), 0.25);
                 }
             }
             .addToCart {
@@ -233,7 +233,7 @@
                 cursor: pointer;
                 overflow: hidden;
                 border: 1px solid transparent;
-                background: $colorBackgroundLv2;
+                background: rgb(var(--colorBackgroundLv2));
                 position: relative;
                 &_backgroundImage {
                     width: 100%;
@@ -249,11 +249,11 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    border: 1px solid $colorBackgroundLv3;
+                    border: 1px solid rgb(var(--colorBackgroundLv3));
                     border-radius: 50%;
                     letter-spacing: 0.5px;
                     font-size: 0.95rem;
-                    color: $colorText;
+                    color: rgb(var(--colorText));
                 }
                 img {
                     width: 100%;
@@ -264,7 +264,7 @@
                     object-fit: cover;
                 }
                 &.selected, &:hover {
-                    border: 1px solid $colorLabel;
+                    border: 1px solid rgb(var(--colorText));
                 }
             }
         }

@@ -27,7 +27,7 @@
         display: flex;
         flex-direction: column;
         &_item {
-            background: $colorBackgroundLv2;
+            background: rgb(var(--colorBackgroundLv2));
             border-radius: $radiusBoxSmall;
             &_head {
                 font-size: 1rem;
@@ -87,7 +87,7 @@
 }
 .cartSectionBox {
     width: 100%;
-    background: $colorBackgroundLv2;
+    background: rgb(var(--colorBackgroundLv2));
     padding: 0.75rem 1rem 1rem;
     border-radius: $radiusBoxSmall;
     position: sticky;
@@ -99,7 +99,7 @@
     }
     &_body {
         width: 100%;
-        @include colorOpacity('background', $colorBackgroundLv2, 0.8);
+        background: rbga(var(--colorBackgroundLv2), 0.8);
         border-radius: $radiusBoxSmall;
         &_item {
             display: flex;
@@ -109,12 +109,12 @@
             &:not(:first-child){
                 margin-top: 0.5rem;
                 padding-top: 0.5rem;
-                border-top: 1px solid $colorBackgroundLv1;
+                border-top: 1px solid rgb(var(--colorBackgroundLv1));
             }
             &.total {
                 font-family: $fontTitle;
                 .total_number {
-                    color: $colorPrice;
+                    color: rgb(var(--colorPrice));
                     font-size: 1.2rem;
                     letter-spacing: 0.5px;
                 }
@@ -123,9 +123,9 @@
         
     }
     &_notice {
-        @include colorOpacity('color', $colorText, 0.8);
+        color: rgba(var(--colorText), 0.8);
         font-size: 1rem;
-        @include colorOpacity('background', $colorBackgroundLv1, 0.5);
+        background: rgba(var(--colorBackgroundLv1), 0.5);
         padding: 0.25rem 0.5rem;
         font-size: 0.95rem;
         margin-top: 0.75rem;
@@ -140,7 +140,7 @@
     .highLight {
         font-size: 1.2rem;
         font-weight: bold;
-        color: $colorText;
+        color: rgb(var(--colorText));
     }
     @media(max-width: 767px){
         padding: 0.75rem;
@@ -189,7 +189,7 @@
     &_head {
         font-size: 0.95rem;
         font-family: $fontTitle;
-        background-color: $colorBackgroundLv2;
+        background-color: rgb(var(--colorBackgroundLv2));
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
         > * {
@@ -201,7 +201,7 @@
         flex-direction: column;
         &_item {
             display: flex;
-            border-top: 1px solid $colorBackgroundLv1;
+            border-top: 1px solid rgb(var(--colorBackgroundLv1));
             margin-top: 0;
             position: relative;
             &:last-child {
@@ -238,7 +238,7 @@
                     }
                     &_option {
                         // font-size: 0.9rem;
-                        @include colorOpacity('color', $colorText, 0.75);
+                        color: rgba(var(--colorText), 0.75);
                     }
                 }
             }
@@ -261,19 +261,19 @@
                     justify-content: flex-end;
                     &_percent {
                         margin-right: 0.5rem;
-                        background: $colorLabel;
+                        background: rgb(var(--colorText));
                         padding: 0 0.25rem;
                         font-size: 0.7rem;
                         border-radius: $radiusBoxSmall;
                         height: 20px;
                         line-height: 20px;
-                        @include colorOpacity('background', $colorPrice, 0.8);
-                        color: $colorTitle;
+                        background: rgba(var(--colorPrice), 0.8);
+                        color: rgb(var(--colorTitle));
                     }
                     &_number {
                         text-decoration: line-through;
                         font-size: 0.9rem;
-                        @include colorOpacity('color', $colorText, 0.6);
+                        color: rgba(var(--colorText), 0.6);
                     }
                 }
                 &_icon {
@@ -293,7 +293,7 @@
             }
             &_money {
                 font-weight: bold;
-                color: $colorPrice;
+                color: rgb(var(--colorPrice));
                 letter-spacing: 0.5px;
                 display: flex;
                 flex-direction: column;
@@ -326,7 +326,7 @@
                         &_title {
                             &:before {
                                 @include fontAwesome;
-                                color: $colorSuccess;
+                                color: rgb(var(--colorSuccess));
                                 margin-right: 0.5rem;
                                 content: "\f00c";
                                 font-size: 0.8rem;

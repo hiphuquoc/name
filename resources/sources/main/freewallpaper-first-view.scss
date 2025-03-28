@@ -57,23 +57,23 @@
             &_item {
                 padding: 0.5rem;
                 width: 100%;
-                @include colorOpacity('background', $colorBackgroundLv2, 0.8);
+                background: rgba(var(--colorBackgroundLv2), 0.8);
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 border-radius: $radiusBoxNormal;
                 box-shadow: 0 0 10px rgba(0,0,0,0.5);
                 cursor: pointer;
-                color: $colorText;
+                color: rgb(var(--colorText));
                 &:hover {
-                    background: $colorBackgroundLv2;
+                    background: rgb(var(--colorBackgroundLv2));
                 }
                 &:not(:first-child){
                     margin-left: 0.75rem;
                 }
                 &.heart {
                     &.selected {
-                        background: $colorBackgroundLv1;
+                        background: rgb(var(--colorBackgroundLv1));
                         > span {
                             &:before {
                                 content: 'Đã ';
@@ -89,7 +89,7 @@
                     color: red;
                 }
                 .fa-download {
-                    color: $colorLv1;
+                    color: rgb(var(--colorLv1));
                 }
                 .fa-share-nodes {
                     color: #007bff;
@@ -122,7 +122,7 @@
                 bottom: 0;
                 width: 100%;
                 margin: 0;
-                background: $colorBackgroundLv2;
+                background: rgb(var(--colorBackgroundLv2));
                 border: none !important;
                 padding: 0;
                 height: 52.5px;
@@ -132,7 +132,7 @@
                     border-radius: 0 !important;
                     margin: 0 !important;
                     &:not(:first-child){
-                        border-left: 1px solid $colorBackgroundLv3;
+                        border-left: 1px solid rgb(var(--colorBackgroundLv3));
                     }
                 }
             }

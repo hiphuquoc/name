@@ -90,7 +90,7 @@
             left: 0;
             width: 100%;
             background: linear-gradient(90deg, transparent, rgb(0,0,0), transparent);
-            color: $colorText;
+            color: rgb(var(--colorText));
             text-shadow: 1px 1px 15px #333;
             font-size: 0.9rem;
             text-align: center;
@@ -109,7 +109,7 @@
     }
     .highLight {
         font-family: $fontTitle;
-        color: $colorTextLight;
+        color: rgb(var(--colorTextLight));
     }
     @media(max-width: 1199px){
         gap: 0.875rem 0.625rem;
@@ -162,21 +162,21 @@
                     font-size: 0.85rem;
                     font-family: $fontTitle;
                     display: inline-block;
-                    color: $colorText;
+                    color: rgb(var(--colorText));
                     padding: 0.15rem 1rem;
                     border-radius: $radiusBoxSmall;
-                    border: 1px solid $colorBackgroundLv3;
-                    background: rgba($colorBackgroundLv2, 0.15);
+                    border: 1px solid rgb(var(--colorBackgroundLv3));
+                    background: rgba(var(--colorBackgroundLv2), 0.15);
                     cursor: pointer;
                     &:first-child {
                         border: none;
                         background: none;
                     }
                     &:hover {
-                        background: $colorBackgroundLv2;
+                        background: rgb(var(--colorBackgroundLv2));
                     }
                     &.selected {
-                        background: $colorBackgroundLv2;
+                        background: rgb(var(--colorBackgroundLv2));
                         
                     }
                 }
@@ -190,22 +190,22 @@
                 gap: 1.5rem;
                 letter-spacing: 1px;
                 &_real {
-                    color: $colorPrice;
+                    color: rgb(var(--colorPrice));
                     letter-spacing: 2.5px;
                     font-size: 1.5rem;
                     font-weight: 700;
                 }
                 &_old {
-                    @include colorOpacity('color', $colorText, 0.6);
+                    color: rgba(var(--colorText), 0.6);
                     font-size: 1rem;
                     text-decoration: line-through;
                 }
                 &_saleoff {
                     color: #fff;
-                    background: $colorRed;
+                    background: rgb(var(--colorRed));
                     font-size: 1rem;
                     padding: 0.25rem 1rem;
-                    text-shadow: 1px 1px 10px rgba($colorBackgroundLv1, 0.5);
+                    text-shadow: 1px 1px 10px rgba(var(--colorBackgroundLv1), 0.5);
                     clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
                     display: flex;
                     justify-content: center;
@@ -230,12 +230,12 @@
                 > * {
                     width: 100%;
                     &:not(:first-child){
-                        border-left: 1px dashed $colorBackgroundLv3;
+                        border-left: 1px dashed rgb(var(--colorBackgroundLv3));
                     }
                     &:dir(rtl), [dir="rtl"] & {
                         &:not(:last-child){
                             border-left: unset;
-                            border-right: 1px dashed $colorBackgroundLv3;
+                            border-right: 1px dashed rgb(var(--colorBackgroundLv3));
                         }
                     }
                 }
@@ -269,10 +269,10 @@
                 width: 100%;
                 margin: 0;
                 padding: 0;
-                background: $colorBackgroundLv2;
+                background: rgb(var(--colorBackgroundLv2));
                 border-radius: $radiusBoxSmall $radiusBoxSmall 0 0;
                 overflow: hidden;
-                box-shadow: 0 -1px 5px $colorBackgroundLv1;
+                box-shadow: 0 -1px 5px rgb(var(--colorBackgroundLv1));
                 &_button {
                     flex-wrap: nowrap;
                     gap: 0;
@@ -289,7 +289,7 @@
                     display: flex !important;
                     align-items: center;
                     height: 100%;
-                    color: $colorTextLight;
+                    color: rgb(var(--colorTextLight));
                     letter-spacing: 2.5px;
                     font-size: 1.2rem;
                     font-family: $fontTitle;
@@ -335,13 +335,13 @@
         &:not(:first-child){
             margin-left: 0.5rem;
             padding-left: 0.5rem;
-            border-left: 1px solid $bg-05;
+            border-left: 1px solid var(--bg-05);
         }
     }
     &_numberSell {
         > span {
             font-family: $fontTitle;
-            color: $colorText;
+            color: rgb(var(--colorText));
             margin: 0 0.25rem;
         }
     }
@@ -360,13 +360,13 @@
                 }
             }
             &_on {
-                color: $colorStar;
+                color: rgb(var(--colorStar));
             }
         }
         &_total {
             > span {
                 font-family: $fontTitle;
-                color: $colorText;
+                color: rgb(var(--colorText));
                 margin: 0 0.25rem;
             }
         }
@@ -376,12 +376,12 @@
     display: flex;
     max-width: 150px;
     font-size: 1rem;
-    border: 1px solid $bg-05;
+    border: 1px solid var(--bg-05);
     border-radius: 30px;
     height: 45px;
     > * {
         &:not(:first-child){
-            border-left: 1px solid $bg-05;
+            border-left: 1px solid var(--bg-05);
         }
     }
     &_button {
@@ -477,7 +477,7 @@
     &:dir(rtl), [dir="rtl"] & {
         text-align: left;
     }
-    color: $colorText;
+    color: rgb(var(--colorText));
     &:after {
         content: '\f107';
         @include fontAwesome;
@@ -517,7 +517,7 @@
         height: 95vh;
         aspect-ratio: 1/2.18;
         width: calc(95vh / 2.18);
-        background: $colorBackgroundLv1;
+        background: rgb(var(--colorBackgroundLv1));
         border-radius: 3vh;
         &_image {
             height: 95vh;
@@ -552,7 +552,7 @@
                 transform: translateY(-50%);
                 z-index: 1;
                 background: none;
-                @include colorOpacity('color', $colorText, 0.8);
+                color: rgba(var(--colorText), 0.8);
                 box-shadow: none;
                 border: none;
                 font-size: 40px;
@@ -589,7 +589,7 @@
                     height: 20px;
                     button {
                         background: none;
-                        color: $colorBackgroundLv1;
+                        color: rgb(var(--colorBackgroundLv1));
                         border-radius: 50%;
                         aspect-ratio: 1/1;
                         width: 25px;
@@ -597,7 +597,7 @@
                         box-shadow: none;
                         &:before {
                             content: "•";
-                            @include colorOpacity('color', $colorText, 0.5);
+                            color: rgba(var(--colorText), 0.5);
                             font-size: 25px;
                         }
                     }
@@ -624,21 +624,6 @@
             }
         }
         &_close {
-            // position: absolute;
-            // top: 5px;
-            // right: 5px;
-            // border-radius: 50%;
-            // @include colorOpacity('background', $colorBackgroundLv3, 0.6);
-            // width: 35px;
-            // aspect-ratio: 1/1;
-            // display: flex;
-            // align-items: center;
-            // justify-content: center;
-            // cursor: pointer;
-            // font-size: 0.7rem;
-            // &:hover {
-            //     @include colorOpacity('background', $colorBackgroundLv3, 0.8);
-            // }
             @include iconCloseSquare;
             border-radius: 50% !important;
         }
@@ -648,7 +633,7 @@
         z-index: -1;
         width: 100%;
         height: 100%;
-        @include colorOpacity('background', $colorBackgroundLv1, 0.8);
+        background: rgba(var(--colorBackgroundLv1), 0.8);
     }
 }
 .infoImageSourceTable {
@@ -656,7 +641,7 @@
         @include titleDefault;
     }
     table {
-        border: 1px solid $colorBackgroundLv3;
+        border: 1px solid rgb(var(--colorBackgroundLv3));
         border-radius: 0.75rem;
         overflow: hidden;
         width: 100%;    
@@ -665,25 +650,25 @@
             td {
                 text-align: center !important;
                 padding: 0.5rem 0.75rem;
-                border-left: 1px solid $colorBackgroundLv2;
-                border-bottom: 1px solid $colorBackgroundLv3;
+                border-left: 1px solid rgb(var(--colorBackgroundLv2));
+                border-bottom: 1px solid rgb(var(--colorBackgroundLv3));
             }
         }
         thead {
             tr {
                 td {
-                    background: $colorBackgroundLv2;
+                    background: rgb(var(--colorBackgroundLv2));
                 }
             }
         }
         tbody {
             tr {
                 td {
-                    background: rgba($colorBackgroundLv2, 0.25);
+                    background: rgba(var(--colorBackgroundLv2), 0.25);
                 }
                 &:nth-child(2n + 2){
                     td {
-                        background: rgba($colorBackgroundLv2, 0.5);
+                        background: rgba(var(--colorBackgroundLv2), 0.5);
                     }
                 }
             }

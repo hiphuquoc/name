@@ -29,11 +29,13 @@
         <div id="js_checkLoginAndSetShow_button" class="hide-991" style="height:100%;display:none !important;">
             <!-- tải ajax checkLoginAndSetShow() -->
         </div>
+
         <!-- language -->
         <div class="languageBox">
             <input type="hidden" id="language" name="language" value="{{ $language ?? '' }}" />
             <div class="languageBox_show" onclick="closeLanguageBoxList('ja_closeLanguageBoxList');">
-                <i class="fa-solid fa-globe"></i>{{ strtoupper($language) }}
+                {{-- <i class="fa-solid fa-globe"></i>{{ strtoupper($language) }} --}}
+                <i class="fa-solid fa-globe"></i>{{ strtoupper(config('language.'.$language.'.key')) }}
             </div>
             @if(!empty($item->seos)&&$item->seos->isNotEmpty())
                 <div id="ja_closeLanguageBoxList" class="languageBox_list">
@@ -65,6 +67,20 @@
             @endif
             <div id="ja_closeLanguageBoxList_background" class="languageBox_background"></div>
         </div>
+
+        <!-- change theme -->
+        <div class="themeOption">
+            <div class="themeOption_input">
+                <div class="themeOption_input_item">|</div>
+                <div class="themeOption_input_item">|</div>
+                <div class="themeOption_input_item show">|</div>
+            </div>
+            <div class="themeOption_circle">
+
+            </div>
+        </div>
+        
+        <!-- icon menu mobile -->
         <div class="iconMenuMobile show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
             <i class="fa-regular fa-bars"></i>
         </div>

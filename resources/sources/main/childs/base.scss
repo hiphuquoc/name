@@ -24,20 +24,22 @@ body {
   font-weight: 500;
   font-family: $fontText;
   box-sizing: border-box;
-  @include colorOpacity('color', $colorText, 0.8);
+  color: rgba(var(--colorText), 0.8);
+
+  // #c0d0f1
   
   &.background {
-    background: $colorBackgroundLv1;
+    background: rgb(var(--colorBackgroundLv1));
   }
   &::-webkit-scrollbar {
     width: 6px; /* Chiều rộng của thanh cuộn */
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba($colorText, 0.5);
+    background: rgba(var(--colorText), 0.5);
     border-radius: 100px; /* Độ cong của "nút" */
   }
   &::-webkit-scrollbar-track {
-    background: rgba($colorBackgroundLv2, 0.75);
+    background: rgba(var(--colorBackgroundLv2), 0.75);
   }
   @media(max-width: 1199px){
     // font-size: 0.9rem;
@@ -69,9 +71,9 @@ body {
 
 a {
   text-decoration: none;
-  color: $colorTextLight;
+  color: rgb(var(--colorTextLight));
   &:hover {
-    color: $colorText;
+    color: rgb(var(--colorText));
   }
 }
 
@@ -85,7 +87,7 @@ h1, h2 {
 
 h2, h3, h4, h5, h6 {
   // margin-bottom: 0.5rem;
-  color: $colorTitle;
+  color: rgb(var(--colorTitle));
   font-style: $fontText;
   letter-spacing: 0.25px;
   font-family: $fontTitle;
@@ -261,20 +263,20 @@ table {
 
 blockquote{
 	display:block;
-    @include colorOpacity('background', $colorBackgroundLv2, 0.75);
-    padding: 0.75rem 0.75rem 0.75rem 2.25rem;
-    margin-bottom: 0.75rem;
-    margin-top: 0.75rem;
-    position: relative;
-    font-size: inherit;
-    text-align: justify;
-    border-left: 4px solid $colorLv2;
-    border-radius: $radiusBoxSmall;
+  background: rgba(var(--colorBackgroundLv2), 0.75);
+  padding: 0.75rem 0.75rem 0.75rem 2.25rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.75rem;
+  position: relative;
+  font-size: inherit;
+  text-align: justify;
+  border-left: 4px solid rgb(var(--colorLv2));
+  border-radius: $radiusBoxSmall;
 	&::before{
 		content: "\201C";
         font-size: 2.5rem;
         font-weight: bold;
-        color: $bg-06;
+        color: rgb(var(--bg-06));
         position: absolute;
         left: 0.5rem;
         top: 1.25rem;
@@ -290,7 +292,7 @@ blockquote{
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
     padding: 0.5rem 0.5rem 0.5rem 1.75rem;
-    border-left: 3px solid $colorLv2;
+    border-left: 3px solid rgb(var(--colorLv2));
     &::before{
       content: "\201C";
           font-size: 2rem;
@@ -310,10 +312,10 @@ blockquote{
     &::-webkit-scrollbar-thumb {
       background-color: transparent;
       border-radius: 1000px;
-      // -webkit-box-shadow: inset 0 0 6px $bg-03;
+      // -webkit-box-shadow: inset 0 0 6px var(--bg-03);
     }
     &::-webkit-scrollbar-track {
-      // -webkit-box-shadow: inset 0 0 6px $bg-03;
+      // -webkit-box-shadow: inset 0 0 6px var(--bg-03);
       border-radius: $radiusBoxNormal;
       background: transparent;
     }
@@ -331,7 +333,7 @@ blockquote{
     height: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $bg-03;
+    background-color: rgb(var(--bg-03));
     border-radius: 1000px;
     -webkit-box-shadow: inset 0 0 6px #fff;
   }
@@ -371,12 +373,12 @@ blockquote{
 }
 
 .background_2 {
-  background: $bg-02;
+  background: rgb(var(--bg-02));
 }
 
 .button {
   padding: 0.5rem 2rem;
-  background: linear-gradient(45deg, $colorButtonLv1, $colorButtonLv2);
+  background: linear-gradient(45deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
   display: inline-block;
   font-family: $fontTitle;
   color: #fff;
@@ -386,14 +388,14 @@ blockquote{
   border: none;
   text-align: center;
   letter-spacing: 0.5px;
-  // box-shadow: 0 2px 0 $colorBackgroundLv3;
-  box-shadow: 0 2px 0 $colorBackgroundLv3;
-  text-shadow: 1px 1px 10px rgba($colorBackgroundLv1, 0.5);
+  // box-shadow: 0 2px 0 rgb(var(--colorBackgroundLv3));
+  box-shadow: 0 2px 0 rgb(var(--colorBackgroundLv3));
+  text-shadow: 1px 1px 10px rgba(var(--colorBackgroundLv1), 0.5);
   transition: all 0.2s;
   &:focus, &:hover {
     color: #fff;
     outline: none;
-    background: linear-gradient(120deg, $colorButtonLv1, $colorButtonLv2);
+    background: linear-gradient(120deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
     transform: translateY(2px);
     box-shadow: none;
   }
@@ -402,21 +404,21 @@ blockquote{
     margin-right: 0.75rem;
   }
   &.cancel {
-    background: $bg-04;
-    @include colorOpacity('color', $colorText, 0.8);
+    background: rgb(var(--bg-04));
+    color: rgba(var(--colorText), 0.8);
     &:hover {
       outline: none;
-      background: $bg-05;
+      background: rgb(var(--bg-05));
     }
   }
   &.secondary {
-    background: $colorBackgroundLv2;
-    color: $colorText;
-    // border: 1px solid $colorBackgroundLv3;
+    background: rgb(var(--colorBackgroundLv2));
+    color: rgb(var(--colorText));
+    // border: 1px solid rgb(var(--colorBackgroundLv3));
     &:hover {
-      background: $colorBackgroundLv2;
+      background: rgb(var(--colorBackgroundLv2));
       box-shadow: none;
-      // color: $colorTextLight;
+      // color: rgb(var(--colorTextLight));
     }
   }
 }
@@ -427,12 +429,12 @@ input, textarea, select {
   font-size: 1rem;
   font-family: $fontText;
   border-radius: $radiusBoxNormal;
-  border: 1px solid $bg-05;
-  background: $colorBackgroundLv1;
-  border: 1px solid $colorBackgroundLv2;
-  color: $colorText;
+  border: 1px solid var(--bg-05);
+  background: rgb(var(--colorBackgroundLv1));
+  border: 1px solid rgb(var(--colorBackgroundLv2));
+  color: rgb(var(--colorText));
   &:focus {
-    border: 1px solid $colorBackgroundLv3;
+    border: 1px solid rgb(var(--colorBackgroundLv3));
     outline: none;
     -webkit-transition-delay: unset !important;
   }
@@ -451,7 +453,7 @@ input, textarea, select {
     top: 50%;
     transform: translateY(-50%);
     right: 0.75rem;
-    color: $bg-05;
+    color: rgb(var(--bg-05));
     margin-left: 0.25rem;
     cursor: pointer;
   }
@@ -467,7 +469,7 @@ label {
   &.required {
     &:after {
       content: '*';
-      color: $colorRed;
+      color: rgb(var(--colorRed));
       font-size: 1.1rem;
       margin-left: 0.25rem;
     }
@@ -475,7 +477,7 @@ label {
   &.error {
     &:after {
       content: 'Vui lòng kiểm tra lại trường này';
-      color: $colorRed;
+      color: rgb(var(--colorRed));
       font-size: 0.9rem;
       font-family: $fontTitle;
       margin-left: 0.25rem;
@@ -498,23 +500,23 @@ label {
   border-radius: $radiusBoxNormal;
   cursor: pointer;
   font-size: 0.9rem;
-  background: $bg-02;
+  background: rgb(var(--bg-02));
   &:not(:last-child){
     margin-right: 0.25rem;
   }
   margin-bottom: 0.6rem;
   &Primary {
     &.selected {
-      background: $colorBackgroundLv2;
-      color: $colorText;
+      background: rgb(var(--colorBackgroundLv2));
+      color: rgb(var(--colorText));
       &:hover {
-          background: $colorBackgroundLv2;
-          color: $colorText;
+          background: rgb(var(--colorBackgroundLv2));
+          color: rgb(var(--colorText));
       }
     }
     &:hover {
-      background: $colorBackgroundLv3;
-      color: $colorText;
+      background: rgb(var(--colorBackgroundLv3));
+      color: rgb(var(--colorText));
     }
   }
 }
@@ -596,21 +598,21 @@ label {
       font-weight: 900;
       @include fontAwesome;
       font-size: 0.55rem;
-      color: $colorRed;
+      color: rgb(var(--colorRed));
       margin-left: 0.3rem;
       opacity: 0.6;
   }
 }
 .inputWithLabelInside, .textareaWithLabelInside {
   height: 58px;
-  border: 1px solid $bg-05;
+  border: 1px solid var(--bg-05);
   width: 100%;
   position: relative;
   padding: 0;
-  background: $colorBackgroundLv3;
+  background: rgb(var(--colorBackgroundLv3));
   border: none;
   cursor: pointer;
-  color: $colorText;
+  color: rgb(var(--colorText));
   border-radius: $radiusBoxNormal;
   label {
       cursor: pointer;
@@ -634,14 +636,14 @@ label {
       height: 100%;
       padding: 33px 0.75rem 13px 0.75rem !important;
       background: transparent !important;
-      color: $colorText;
+      color: rgb(var(--colorText));
       cursor: pointer;
       z-index: 2;
       &:focus, &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:hover, &:-webkit-autofill:active {
-          // border: 1px solid $colorBackgroundLv3;
-          outline: 1px solid $colorBackgroundLv3;
-          -webkit-text-fill-color: $colorText !important;
-          box-shadow: 0 0 0px 1000px $colorBackgroundLv3 inset !important; /* Màu nền mong muốn */
+          // border: 1px solid rgb(var(--colorBackgroundLv3));
+          outline: 1px solid rgb(var(--colorBackgroundLv3));
+          -webkit-text-fill-color: rgb(var(--colorText)) !important;
+          box-shadow: 0 0 0px 1000px rgb(var(--colorBackgroundLv3)) inset !important; /* Màu nền mong muốn */
           // transition: background-color 5000s ease-in-out 0s;
       }
   }
@@ -654,7 +656,7 @@ label {
       right: 10px;
       top: 50%;
       transform: translateY(-50%);
-      color: $bg-06;
+      color: rgb(var(--bg-06));
       font-size: 0.95rem;
       z-index: 1;
   }
@@ -727,7 +729,7 @@ label {
       transform: translateY(-50%);
   }
   .select2-search--dropdown {
-      border-top: 1px solid $bg-05;
+      border-top: 1px solid var(--bg-05);
       input {
       margin: 0 !important;
       }
@@ -756,13 +758,13 @@ label {
   }
 }
 .validateErrorEmpty {
-  border: 1px solid $colorRed;
+  border: 1px solid rgb(var(--colorRed));
   label {
       &:after {
           content: 'Trường này không được bỏ trống';
           font-family: $fontText;
           font-size: inherit;
-          color: $colorRed;
+          color: rgb(var(--colorRed));
           margin-left: 0.3rem;
       }
   }
@@ -776,36 +778,36 @@ label {
   }
 }
 .validateErrorPhone {
-  border: 1px solid $colorRed;
+  border: 1px solid rgb(var(--colorRed));
   label {
   &:after {
       content: 'Số điện thoại không hợp lệ';
       font-family: $fontText;
       font-size: inherit;
-      color: $colorRed;
+      color: rgb(var(--colorRed));
       margin-left: 0.3rem;
   }
   }
 }
 .validateErrorEmail {
-  border: 1px solid $colorRed;
+  border: 1px solid rgb(var(--colorRed));
   label {
       &:after {
       content: 'Email không hợp lệ';
       font-family: $fontText;
       font-size: inherit;
-      color: $colorRed;
+      color: rgb(var(--colorRed));
       margin-left: 0.3rem;
       }
   }
   }
 .validateSuccess {
-  border: 1px solid $colorSuccess;
+  border: 1px solid rgb(var(--colorSuccess));
   label {
   &:after {
       content: '\f00c';
       @include fontAwesome;
-      color: $colorSuccess;
+      color: rgb(var(--colorSuccess));
       font-size: 0.9rem;
       margin-left: 0.3rem;
   }
@@ -818,7 +820,7 @@ label {
 }
 .select2-container--default .select2-selection--single {
   border-radius: $radiusBoxNormal !important;
-  border: 1px solid $bg-05 !important;
+  border: 1px solid var(--bg-05) !important;
 }
 .select2-selection__arrow {
   top: 50% !important;
@@ -826,7 +828,7 @@ label {
 }
 .select2-search--dropdown {
   padding: 1px !important;
-  background: $bg-05;
+  background: rgb(var(--bg-05));
   input {
     // border-radius: 0;
   }

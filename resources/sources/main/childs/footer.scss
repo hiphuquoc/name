@@ -5,10 +5,10 @@
     padding-bottom: 0.75rem;
     a {
         font-family: $fontTitle;
-        color: $colorLv2;
+        color: rgb(var(--colorLv2));
         font-size: 0.9rem;
         &:hover {
-            color: $colorLv1;
+            color: rgb(var(--colorLv1));
         }
     }
     @media(max-width: 991px){

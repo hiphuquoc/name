@@ -21,7 +21,7 @@
                 color: transparent;
                 width: 40px;
                 height: 3px;
-                @include colorOpacity('background', $colorTextLight, 0.5);
+                background: rgba(var(--colorTextLight), 0.5);
                 outline: none;
                 border: none;
                 cursor: pointer;
@@ -32,7 +32,7 @@
             }
             &.slick-active {
                 button {
-                    background: $colorTextLight;
+                    background: rgb(var(--colorTextLight));
                 }
             }
         }
@@ -47,8 +47,8 @@
         border: none;
         cursor: pointer;
         border-radius: $radiusBoxSmall;
-        @include colorOpacity('color', $colorText, 0.8);
-        background: $colorTextLight;
+        color: rgba(var(--colorText), 0.8);
+        background: rgb(var(--colorTextLight));
         opacity: 0.6;
         &:hover {
             opacity: 0.8;

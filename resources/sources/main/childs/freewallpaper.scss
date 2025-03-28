@@ -28,7 +28,7 @@
         }
         &_box {
             display: none;
-            @include colorOpacity('background', $colorBackgroundLv1, 1);
+            background: rgb(var(--colorBackgroundLv1));
             position: absolute;
             bottom: 0.4rem;
             width: calc(100% - 1rem);
@@ -67,7 +67,7 @@
                     right: 0;
                     top: 50%;
                     z-index: 3;
-                    background: $colorBackgroundLv1;
+                    background: rgb(var(--colorBackgroundLv1));
                     transform: translateY(-50%);
                     &_item {
                         aspect-ratio: 1/1;
@@ -78,7 +78,7 @@
                         border-radius: $radiusBoxNormal;
                         cursor: pointer;
                         &:hover {
-                            background: $colorBackgroundLv2;
+                            background: rgb(var(--colorBackgroundLv2));
                         }
                     }
                 }
@@ -94,9 +94,9 @@
                         align-items: center;
                         border-radius: $radiusBoxSmall;
                         cursor: pointer;
-                        color: $colorText;
+                        color: rgb(var(--colorText));
                         &:hover {
-                            background: $colorBackgroundLv2;
+                            background: rgb(var(--colorBackgroundLv2));
                         }
                         i {
                             opacity: 0.5;
@@ -111,7 +111,7 @@
             bottom: -15px;
             right: 0.75rem;
             padding: 0.4rem 0.65rem;
-            background: $colorBackgroundLv1;
+            background: rgb(var(--colorBackgroundLv1));
             display: flex;
             align-items: center;
             justify-content: center;

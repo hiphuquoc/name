@@ -117,7 +117,7 @@ $widthCollapsed : 17rem;
         box-shadow: 0px 1px 5px rgba(0,0,0,0.75);
         top: $heightMenu;
         transition: all 300ms;
-        background: $colorBackgroundLv2;
+        background: rgb(var(--colorBackgroundLv2));
         gap: 0.5rem;
         z-index: 99;
         padding: 0.5rem 0rem 1rem 0.5rem; /* left để đè container */
@@ -137,7 +137,7 @@ $widthCollapsed : 17rem;
             cursor: pointer;
             transition: all 0.3s;   
             top: 0;
-            background: $colorBackgroundLv1;
+            background: rgb(var(--colorBackgroundLv1));
             opacity: 0;
             right: 0;
             border-top-left-radius: $radiusBoxNormal; 
@@ -152,7 +152,7 @@ $widthCollapsed : 17rem;
             }
             svg {
                 width: 1.25rem;
-                color: $colorIcon;
+                color: rgb(var(--colorIcon));
             }
         }
         &:hover {
@@ -240,7 +240,7 @@ $widthCollapsed : 17rem;
             z-index: 99999;
             height: 100vh;
             width: 100%;
-            background: $colorBackgroundLv2;
+            background: rgb(var(--colorBackgroundLv2));
             padding: 0 !important;
             width: 18rem;
             &:hover {
@@ -304,15 +304,15 @@ $widthCollapsed : 17rem;
         li {
             list-style: none;
             a {
-                color: $colorText !important;
+                color: rgb(var(--colorText)) !important;
             }
             &.selected {
                 > a, >div {
-                    background: $colorBackgroundLv1;
+                    background: rgb(var(--colorBackgroundLv1));
                 }
             }
             > a, > div {
-                color: $colorText !important;
+                color: rgb(var(--colorText)) !important;
                 display: flex;
                 align-items: center;
                 width: 100%;
@@ -332,7 +332,7 @@ $widthCollapsed : 17rem;
                 svg {
                     width: 1.5rem;
                     flex: 0 0 1.5rem;
-                    color: $colorIcon;
+                    color: rgb(var(--colorIcon));
                     opacity: 0.75;
                 }
             }
@@ -344,7 +344,7 @@ $widthCollapsed : 17rem;
                 line-height: 40px;
                 border-radius: $radiusBoxNormal;
                 &:hover {
-                    background: $bg-03;
+                    background: rgb(var(--bg-03));
                 }
                 i {
                     margin: 0;
@@ -366,7 +366,7 @@ $widthCollapsed : 17rem;
                     position: relative;
                     &:before {
                         @include fontAwesome;
-                        color: $colorIcon;
+                        color: rgb(var(--colorIcon));
                         content: "\f192";
                         font-size: 0.45rem;
                         opacity: .75;
@@ -409,7 +409,7 @@ $widthCollapsed : 17rem;
                     opacity: 0.8;
                     font-size: 0.9rem;
                     cursor: pointer;
-                    @include colorOpacity('color', $colorIcon, 0.75);
+                    color: rgba(var(--colorIcon), 0.75);
                     margin-left: auto;
                     &:dir(rtl), [dir="rtl"] & {
                         margin-left: unset;
@@ -481,7 +481,7 @@ $widthCollapsed : 17rem;
         padding-left: 1rem;
     }
     &_social {
-        // border-top: 1px solid $colorBackgroundLv2;
+        // border-top: 1px solid rgb(var(--colorBackgroundLv2));
         &_title {
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
@@ -495,7 +495,7 @@ $widthCollapsed : 17rem;
                 width: 1.725rem;
                 height: 28px;
                 border-radius: $radiusBoxSmall;
-                background: $colorBackgroundLv2;
+                background: rgb(var(--colorBackgroundLv2));
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -506,8 +506,8 @@ $widthCollapsed : 17rem;
                 }
                 i {
                     font-size: 1.5rem;
-                    color: $colorLv1;
-                    // text-shadow: 1px 1px 2px $colorLv2;
+                    color: rgb(var(--colorLv1));
+                    // text-shadow: 1px 1px 2px rgb(var(--colorLv2));
                 }
             }
         }

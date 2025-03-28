@@ -14,7 +14,7 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.25rem;
-            color: $colorLv1;
+            color: rgb(var(--colorLv1));
         }
     }
     &_form {
@@ -58,7 +58,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             font-family: $fontTitle;
-            color: $colorText;
+            color: rgb(var(--colorText));
             text-align: center;
         }
         &_body {
@@ -161,7 +161,7 @@
     }
 }
 .noticeLogin {
-    color: $colorRed;
+    color: rgb(var(--colorRed));
     font-size: 0.9rem;
 }
 .loginFormCustomer {

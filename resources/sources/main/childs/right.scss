@@ -62,7 +62,7 @@
             font-size: 0.7rem;
             line-height: 1.2;
             padding: 0.25rem 0.5rem;
-            background: $colorBackgroundLv3;
+            background: rgb(var(--colorBackgroundLv3));
             border-radius: $radiusBoxSmall;
         }
     }
@@ -111,7 +111,7 @@
     align-self: flex-end;
     border: none;
     outline: none;
-    @include colorOpacity('background-color', $colorLv1, 0.4);
+    background: rgba(var(--colorLv1), 0.4);
     color: #fff;
     cursor: pointer;
     border-radius: $radiusBoxSmall;
@@ -125,7 +125,7 @@
       height: 100%;
     }
     &:hover {
-        @include colorOpacity('background-color', $colorLv1, 0.5);
+        background: rgba(var(--colorLv1), 0.5);
     }
     @media(max-width: 1199px){
         margin-bottom: calc(60px + 0.25rem);
