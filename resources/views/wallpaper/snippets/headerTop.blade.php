@@ -68,7 +68,7 @@
             <div id="ja_closeLanguageBoxList_background" class="languageBox_background"></div>
         </div>
 
-        <!-- change theme -->
+        {{-- <!-- change theme -->
         <div class="themeOption">
             <div class="themeOption_input">
                 <div class="themeOption_input_item">|</div>
@@ -78,6 +78,38 @@
             <div class="themeOption_circle">
 
             </div>
+        </div> --}}
+        <div class="viewMode">
+            <div class="viewMode_show">
+                @php
+                    $icon = file_get_contents('storage/images/svg/icon-light-light.svg');
+                @endphp
+                {!! $icon !!}
+            </div>
+            <div class="viewMode_list">
+                <div class="viewMode_list_item selected">
+                    @php
+                        $icon = file_get_contents('storage/images/svg/icon-light-light.svg');
+                    @endphp
+                    {!! $icon !!}
+                    <div>Chế độ sáng</div>
+                </div>
+                <div class="viewMode_list_item">
+                    @php
+                        $icon = file_get_contents('storage/images/svg/icon-light-gray.svg');
+                    @endphp
+                    {!! $icon !!}
+                    <div>Chế độ trung tính</div>
+                </div>
+                <div class="viewMode_list_item">
+                    @php
+                        $icon = file_get_contents('storage/images/svg/icon-light.svg');
+                    @endphp
+                    {!! $icon !!}
+                    <div>Chế độ tối</div>
+                </div>
+            </div>
+            <div class="viewMode_background"></div>
         </div>
         
         <!-- icon menu mobile -->

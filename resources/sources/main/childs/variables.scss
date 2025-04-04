@@ -35,19 +35,21 @@ $bg-03: #e9ecef;
 $bg-02: #edf2f7;
 
 // Dark mode variables
-$dark-colorLv1: #00e88e;
-$dark-colorLv2: #00E38C;
+$dark-colorLv1: #00d483;
+$dark-colorLv2: #00925a;
 $dark-colorSLv1: #FF6500;
 $dark-colorSLv2: #CD5C08;
-$dark-colorButtonLv1: #00e88e;
-$dark-colorButtonLv2: #006d57;
+$dark-colorButtonLv1: #00d483;
+$dark-colorButtonLv2: #00925a;
+
 $dark-colorTextLight: #ffd100;
-$dark-colorTitle: #c6d8fd;
-$dark-colorText: #c0d0f1;
-$dark-colorIcon: #5a7dc2;
+$dark-colorTitle: #c0d0f1;
+$dark-colorText: #b5c4e0;
+// $dark-colorIcon: #7cd8b7;
+// $dark-colorIcon: #5473b3;
+$dark-colorIcon: #7793cc;
 $dark-colorPrice: #ffd100;
-$dark-colorStar: #ffd100;
-$dark-colorSuccess: #00bd7d;
+$dark-colorSuccess: #00d483;
 $dark-colorRed: #C62E2E;
 $dark-colorBackgroundLv1: #1a202c;
 $dark-colorBackgroundLv2: #2d3848;
@@ -65,32 +67,31 @@ $gray-colorTitle: #c6d8fd;
 $gray-colorText: #c0d0f1;
 $gray-colorIcon: #5a7dc2;
 $gray-colorPrice: #ffd100;
-$gray-colorStar: #ffd100;
-$gray-colorSuccess: #00bd7d;
+$gray-colorSuccess: #00d483;
 $gray-colorRed: #C62E2E;
 $gray-colorBackgroundLv1: #1a202c;
 $gray-colorBackgroundLv2: #2d3848;
 $gray-colorBackgroundLv3: #3a4556;
 
 // Light mode variables
-$light-colorLv1: #00e88e;
-$light-colorLv2: #00E38C;
+$light-colorLv1: #2D336B;
+$light-colorLv2: #191e44;
 $light-colorSLv1: #FF6500;
 $light-colorSLv2: #CD5C08;
-$light-colorButtonLv1: #00e88e;
-$light-colorButtonLv2: #006d57;
-$light-colorTextLight: #FFD100;
-$light-colorTitle: #1a2b5f;
-$light-colorText: #2e3038;
-$light-colorIcon: #4a6ca8;
-$light-colorPrice: #FFD100;
-$light-colorStar: #FFD100;
-$light-colorSuccess: #00bd7d;
-$light-colorRed: #C62E2E;
-// $light-colorBackgroundLv1: #dee2e6;
-// $light-colorBackgroundLv2: #edf2f7;
-// $light-colorBackgroundLv3: #fcfcfd;
+$light-colorButtonLv1: #2D336B;
+$light-colorButtonLv2: #191e44;
+$light-colorIcon: #7886C7;
 
+$light-colorTextLight: #313daa;
+$light-colorTitle: #2a2a2e;
+$light-colorText: #2e3038;
+// $light-colorIcon: #5F8B4C;
+// $light-colorIcon: #8aaae5;
+
+
+$light-colorPrice: #ec5f00;
+$light-colorSuccess: #00d483;
+$light-colorRed: #C62E2E;
 $light-colorBackgroundLv1: #fcfcfd;
 $light-colorBackgroundLv2: #e9ecef;
 $light-colorBackgroundLv3: #ced4da;
@@ -119,12 +120,21 @@ $light-colorBackgroundLv3: #ced4da;
   --colorText: #{red($dark-colorText), green($dark-colorText), blue($dark-colorText)};
   --colorIcon: #{red($dark-colorIcon), green($dark-colorIcon), blue($dark-colorIcon)};
   --colorPrice: #{red($dark-colorPrice), green($dark-colorPrice), blue($dark-colorPrice)};
-  --colorStar: #{red($dark-colorStar), green($dark-colorStar), blue($dark-colorStar)};
   --colorSuccess: #{red($dark-colorSuccess), green($dark-colorSuccess), blue($dark-colorSuccess)};
   --colorRed: #{red($dark-colorRed), green($dark-colorRed), blue($dark-colorRed)};
   --colorBackgroundLv1: #{red($dark-colorBackgroundLv1), green($dark-colorBackgroundLv1), blue($dark-colorBackgroundLv1)};
   --colorBackgroundLv2: #{red($dark-colorBackgroundLv2), green($dark-colorBackgroundLv2), blue($dark-colorBackgroundLv2)};
   --colorBackgroundLv3: #{red($dark-colorBackgroundLv3), green($dark-colorBackgroundLv3), blue($dark-colorBackgroundLv3)};
+
+  // font-size mặc định 
+  --fontSizeNormal : 0.925rem;
+  --opacityNormal : 0.85;
+
+  // color shadow
+  --colorShadow : rgba(0, 0, 0, 0.5);
+
+  // line height
+  --lineHeightNormal : 1.88;
 }
 
 .light {
@@ -139,12 +149,21 @@ $light-colorBackgroundLv3: #ced4da;
   --colorText: #{red($light-colorText), green($light-colorText), blue($light-colorText)};
   --colorIcon: #{red($light-colorIcon), green($light-colorIcon), blue($light-colorIcon)};
   --colorPrice: #{red($light-colorPrice), green($light-colorPrice), blue($light-colorPrice)};
-  --colorStar: #{red($light-colorStar), green($light-colorStar), blue($light-colorStar)};
   --colorSuccess: #{red($light-colorSuccess), green($light-colorSuccess), blue($light-colorSuccess)};
   --colorRed: #{red($light-colorRed), green($light-colorRed), blue($light-colorRed)};
   --colorBackgroundLv1: #{red($light-colorBackgroundLv1), green($light-colorBackgroundLv1), blue($light-colorBackgroundLv1)};
   --colorBackgroundLv2: #{red($light-colorBackgroundLv2), green($light-colorBackgroundLv2), blue($light-colorBackgroundLv2)};
   --colorBackgroundLv3: #{red($light-colorBackgroundLv3), green($light-colorBackgroundLv3), blue($light-colorBackgroundLv3)};
+
+  // font-size mặc định 
+  --fontSizeNormal : 0.975rem;
+  --opacityNormal : 1;
+
+  // color shadow
+  --colorShadow : rgba(0, 0, 0, 0.25);
+
+  // line height
+  --lineHeightNormal : 1.7;
 }
 
 .gray {
@@ -159,10 +178,19 @@ $light-colorBackgroundLv3: #ced4da;
   --colorText: #{red($gray-colorText), green($gray-colorText), blue($gray-colorText)};
   --colorIcon: #{red($gray-colorIcon), green($gray-colorIcon), blue($gray-colorIcon)};
   --colorPrice: #{red($gray-colorPrice), green($gray-colorPrice), blue($gray-colorPrice)};
-  --colorStar: #{red($gray-colorStar), green($gray-colorStar), blue($gray-colorStar)};
   --colorSuccess: #{red($gray-colorSuccess), green($gray-colorSuccess), blue($gray-colorSuccess)};
   --colorRed: #{red($gray-colorRed), green($gray-colorRed), blue($gray-colorRed)};
   --colorBackgroundLv1: #{red($gray-colorBackgroundLv1), green($gray-colorBackgroundLv1), blue($gray-colorBackgroundLv1)};
   --colorBackgroundLv2: #{red($gray-colorBackgroundLv2), green($gray-colorBackgroundLv2), blue($gray-colorBackgroundLv2)};
   --colorBackgroundLv3: #{red($gray-colorBackgroundLv3), green($gray-colorBackgroundLv3), blue($gray-colorBackgroundLv3)};
+
+  // font-size mặc định 
+  --fontSizeNormal : 0.975rem;
+  --opacityNormal : 1;
+
+  // color shadow
+  --colorShadow : rgba(0, 0, 0, 0.35);
+
+  // line height
+  --lineHeightNormal : 1.7;
 }

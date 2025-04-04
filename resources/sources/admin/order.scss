@@ -36,7 +36,7 @@
                 flex: 1 0 auto;
                 border-top: 1px solid var(--bg-05);
                 padding-top: 1rem;
-                font-size: 1rem;
+                font-size: calc(var(--fontSizeNormal) + 0.075rem);
             }
         }
     }
@@ -172,13 +172,13 @@
         margin-bottom: 2rem;
     }
     &_title {
-        font-size: 1.2rem;
+        font-size: calc(var(--fontSizeNormal) + 0.275rem);
         font-weight: bold;
         margin-bottom: 0.5rem;
         color: rgb(var(--colorLv1));
     }
     &_body {
-        line-height: 1.8;
+        line-height: var(--lineHeightNormal);
         &_item {
             display: flex;
             > * {
@@ -194,9 +194,9 @@
 }
 
 .checkoutProductBox {
-    font-size: 0.95rem;
+    font-size: calc(var(--fontSizeNormal) + 0.025rem);
     &_title {
-        font-size: 1.2rem;
+        font-size: calc(var(--fontSizeNormal) + 0.275rem);
         font-weight: bold;
         margin-bottom: 1rem;
         color: rgb(var(--colorLv1));
@@ -204,7 +204,7 @@
     &_body {
         display: flex;
         flex-direction: column;
-        line-height: 1.4;
+        line-height: calc(var(--lineHeightNormal) - 0.3);
         &_item {
             display: flex;
             align-items: stretch;
@@ -232,10 +232,10 @@
                     background: rgb(var(--colorText));
                     border-radius: 50%;
                     color: #fff;
-                    font-size: 0.85rem;
+                    font-size: calc(var(--fontSizeNormal) - 0.075rem);
                     font-weight: bold;
-                    aspect-ratio: 1/1;
                     width: 27px;
+                    height: 27px;
                     text-align: center;
                     display: flex;
                     justify-content: center;
@@ -245,13 +245,11 @@
             &_content {
                 width: 100%;
                 &_title {
-                    font-family: $fontTitle;
                     margin-bottom: 0.25rem;
                 }
             }
             &_price {
                 flex: 0 0 80px;
-                font-family: $fontTitle;
                 text-align: right;
             }
         }
@@ -261,7 +259,7 @@
 .detailPayment {
     display: flex;
     flex-direction: column;
-    font-size: 1rem;
+    font-size: calc(var(--fontSizeNormal) + 0.075rem);
     &_item {
         width: 100%;
         display: flex;
@@ -279,7 +277,7 @@
             }
             &.priceTotal {
                 color: rgb(var(--colorLv1));
-                font-size: 1.2rem;
+                font-size: calc(var(--fontSizeNormal) + 0.275rem);
             }
             &.button {
                 border-radius: 7px;

@@ -68,7 +68,7 @@
         cursor: pointer;
         aspect-ratio: 1/2.18;
         overflow: hidden;
-        border-radius: 7%;
+        border-radius: 7% / 20px;
         .zIndexHide {
             position: relative;
             z-index: -1;
@@ -92,7 +92,7 @@
             background: linear-gradient(90deg, transparent, rgb(0,0,0), transparent);
             color: rgb(var(--colorText));
             text-shadow: 1px 1px 15px #333;
-            font-size: 0.9rem;
+            font-size: calc(var(--fontSizeNormal) - 0.025rem);
             text-align: center;
             padding: 0.2rem 0.5rem;
         }
@@ -108,7 +108,7 @@
         }
     }
     .highLight {
-        font-family: $fontTitle;
+        
         color: rgb(var(--colorTextLight));
     }
     @media(max-width: 1199px){
@@ -149,7 +149,7 @@
         &_option {
             &_title {
                 font-weight: bold;
-                font-size: 1rem;
+                font-size: calc(var(--fontSizeNormal) + 0.075rem);
                 display: inline-block;
             }
             &_box {
@@ -159,8 +159,8 @@
                 gap: 0.75rem 0.5rem;
                 letter-spacing: 0.25px;
                 &_item {
-                    font-size: 0.85rem;
-                    font-family: $fontTitle;
+                    font-size: calc(var(--fontSizeNormal) - 0.075rem);
+                    
                     display: inline-block;
                     color: rgb(var(--colorText));
                     padding: 0.15rem 1rem;
@@ -191,19 +191,20 @@
                 letter-spacing: 1px;
                 &_real {
                     color: rgb(var(--colorPrice));
-                    letter-spacing: 2.5px;
-                    font-size: 1.5rem;
+                    letter-spacing: 2px;
+                    font-size: calc(var(--fontSizeNormal) + 0.675rem);
                     font-weight: 700;
+                    font-family: $fontTitle;
                 }
                 &_old {
                     color: rgba(var(--colorText), 0.6);
-                    font-size: 1rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.075rem);
                     text-decoration: line-through;
                 }
                 &_saleoff {
                     color: #fff;
                     background: rgb(var(--colorRed));
-                    font-size: 1rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.075rem);
                     padding: 0.25rem 1rem;
                     text-shadow: 1px 1px 10px rgba(var(--colorBackgroundLv1), 0.5);
                     clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
@@ -241,9 +242,10 @@
                 }
                 button {
                     width: 100%;
-                    height: 45px !important;
+                    // height: 45px !important;
                     display: flex;
-                    padding: 0.375rem 1rem;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
                     font-family: $fontText;
                     align-items: center;
                     justify-content: center;
@@ -252,16 +254,10 @@
                         width: 1.3rem;
                     }
                 }
-                // @media(max-width: 1199px){
-                //     gap: 0.75rem;
-                // }
+                svg {
+                    color: rgba(var(--colorIcon), var(--opacityNormal));
+                }
             }
-            // @media(max-width: 1499px){
-            //     &_button {
-            //         flex-direction: column;
-            //         gap: 1.25rem;
-            //     }
-            // }
             @media(max-width: 991px){
                 position: fixed;
                 bottom: 0;
@@ -272,7 +268,7 @@
                 background: rgb(var(--colorBackgroundLv2));
                 border-radius: $radiusBoxSmall $radiusBoxSmall 0 0;
                 overflow: hidden;
-                box-shadow: 0 -1px 5px rgb(var(--colorBackgroundLv1));
+                box-shadow: 0 -1px 5px var(--colorShadow);
                 &_button {
                     flex-wrap: nowrap;
                     gap: 0;
@@ -291,8 +287,8 @@
                     height: 100%;
                     color: rgb(var(--colorTextLight));
                     letter-spacing: 2.5px;
-                    font-size: 1.2rem;
-                    font-family: $fontTitle;
+                    font-size: calc(var(--fontSizeNormal) + 0.275rem);
+                    
                     margin: 0 auto;
                 }
             }
@@ -307,7 +303,7 @@
                 }
                 .priceMobile {
                     padding-left: 1rem;
-                    font-size: 1.1rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.175rem);
                 }
             }
             @media(max-width: 577px){
@@ -329,8 +325,8 @@
 }
 .ratingBox {
     display: flex;
-    font-size: 0.825rem;
-    opacity: 0.75;
+    font-size: calc(var(--fontSizeNormal) - 0.1rem);
+    opacity: var(--opacityNormal);
     > * {
         &:not(:first-child){
             margin-left: 0.5rem;
@@ -340,7 +336,7 @@
     }
     &_numberSell {
         > span {
-            font-family: $fontTitle;
+            
             color: rgb(var(--colorText));
             margin: 0 0.25rem;
         }
@@ -365,7 +361,7 @@
         }
         &_total {
             > span {
-                font-family: $fontTitle;
+                
                 color: rgb(var(--colorText));
                 margin: 0 0.25rem;
             }
@@ -375,7 +371,7 @@
 .inputQty {
     display: flex;
     max-width: 150px;
-    font-size: 1rem;
+    font-size: calc(var(--fontSizeNormal) + 0.075rem);
     border: 1px solid var(--bg-05);
     border-radius: 30px;
     height: 45px;
@@ -398,7 +394,7 @@
             border-radius: 0 30px 30px 0;
         }
         i {
-            font-size: 0.9rem;
+            font-size: calc(var(--fontSizeNormal) - 0.025rem);
         }
     }
     input {
@@ -482,7 +478,7 @@
         content: '\f107';
         @include fontAwesome;
         margin-left: 0.25rem;
-        font-size: 0.9rem;
+        font-size: calc(var(--fontSizeNormal) - 0.025rem);
     }
     &.open {
         &:after {
@@ -540,7 +536,7 @@
                     height: inherit;
                     .slick-slide {
                         position: relative;
-                        border-radius: 7%;
+                        border-radius: 7% / 20px;
                         overflow: hidden;
                     }
                 }
@@ -552,7 +548,7 @@
                 transform: translateY(-50%);
                 z-index: 1;
                 background: none;
-                color: rgba(var(--colorText), 0.8);
+                color: rgba(var(--colorText), var(--opacityNormal));
                 box-shadow: none;
                 border: none;
                 font-size: 40px;
@@ -591,8 +587,8 @@
                         background: none;
                         color: rgb(var(--colorBackgroundLv1));
                         border-radius: 50%;
-                        aspect-ratio: 1/1;
                         width: 25px;
+                        height: 25px;
                         border: none;
                         box-shadow: none;
                         &:before {
@@ -633,7 +629,7 @@
         z-index: -1;
         width: 100%;
         height: 100%;
-        background: rgba(var(--colorBackgroundLv1), 0.8);
+        background: rgba(var(--colorBackgroundLv1), var(--opacityNormal));
     }
 }
 .infoImageSourceTable {
@@ -649,7 +645,7 @@
         tr {
             td {
                 text-align: center !important;
-                padding: 0.5rem 0.75rem;
+                padding: 0.625rem;
                 border-left: 1px solid rgb(var(--colorBackgroundLv2));
                 border-bottom: 1px solid rgb(var(--colorBackgroundLv3));
             }
@@ -658,17 +654,17 @@
             tr {
                 td {
                     background: rgb(var(--colorBackgroundLv2));
+                    font-family: $fontTitle;
+                    font-weight: 700;
+                    font-size: calc(var(--fontSizeNormal) + 0.075rem)
                 }
             }
         }
         tbody {
             tr {
-                td {
-                    background: rgba(var(--colorBackgroundLv2), 0.25);
-                }
                 &:nth-child(2n + 2){
                     td {
-                        background: rgba(var(--colorBackgroundLv2), 0.5);
+                        background: rgba(var(--colorBackgroundLv2), calc(var(--opacityNormal) - 0.25));
                     }
                 }
             }

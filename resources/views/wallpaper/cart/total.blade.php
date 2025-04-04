@@ -4,12 +4,13 @@
     <div>{!! \App\Helpers\Number::getFormatPriceByLanguage($intoMoney, $language) !!}</div>
 </div>
 <!-- phí thanh toán (nếu có) -->
-<div class="cartSectionBox_body_item" style="padding-top:0;border-top:0;">
-    @if(!empty($taxNumber)&&$taxNumber>0)
+@if(!empty($taxNumber)&&$taxNumber>0)
+    <div class="cartSectionBox_body_item" style="padding-top:0;border-top:0;">
         <div>{{ config('data_language_1.'.$language.'.payment_fee') }}</div> 
         <div>{!! \App\Helpers\Number::getFormatPriceByLanguage($taxNumber, $language) !!}</div>
-    @endif
-</div>
+    </div>
+@endif
+
 <!-- tổng cộng -->
 <div class="cartSectionBox_body_item total">
     {{ config('data_language_1.'.$language.'.total') }}

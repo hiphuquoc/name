@@ -30,16 +30,15 @@
             background: rgb(var(--colorBackgroundLv2));
             border-radius: $radiusBoxSmall;
             &_head {
-                font-size: 1rem;
+                font-size: calc(var(--fontSizeNormal) + 0.075rem);
                 padding: 0.5rem 1rem 1rem;
                 padding-bottom: 0 !important;
-                font-family: $fontTitle;
             }
             &_body {
                 padding: 0.75rem 1rem 1rem;
                 &_note {
-                    font-size: 0.85rem;
-                    line-height: 1.55;
+                    font-size: calc(var(--fontSizeNormal) - 0.075rem);
+                    line-height: var(--lineHeightNormal);
                     margin-top: 0.5rem;
                     display: flex;
                     align-items: stretch;
@@ -95,39 +94,48 @@
     &_title {
         margin-bottom: 1.5rem;
         font-weight: bold;
-        font-size: 1.1rem;
+        font-size: calc(var(--fontSizeNormal) + 0.175rem);
     }
     &_body {
         width: 100%;
-        background: rbga(var(--colorBackgroundLv2), 0.8);
+        background: rbga(var(--colorBackgroundLv2), var(--opacityNormal));
         border-radius: $radiusBoxSmall;
         &_item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 0.75rem;
+            > * {
+                &:not(:first-child){
+                    font-family: $fontTitle;
+                    font-size: calc(var(--fontSizeNormal) + 0.2rem);
+                    font-weight: 600;
+                    letter-spacing: 0.5px;
+                }
+            }
             &:not(:first-child){
                 margin-top: 0.5rem;
                 padding-top: 0.5rem;
-                border-top: 1px solid rgb(var(--colorBackgroundLv1));
+                border-top: 1px solid var(--colorShadow);
             }
             &.total {
-                font-family: $fontTitle;
                 .total_number {
                     color: rgb(var(--colorPrice));
-                    font-size: 1.2rem;
+                    font-family: $fontTitle;
+                    font-size: calc(var(--fontSizeNormal) + 0.4rem);
                     letter-spacing: 0.5px;
+                    font-weight: 700;
                 }
             }
         }
         
     }
     &_notice {
-        color: rgba(var(--colorText), 0.8);
-        font-size: 1rem;
+        color: rgba(var(--colorText), var(--opacityNormal));
+        font-size: calc(var(--fontSizeNormal) + 0.075rem);
         background: rgba(var(--colorBackgroundLv1), 0.5);
         padding: 0.25rem 0.5rem;
-        font-size: 0.95rem;
+        font-size: calc(var(--fontSizeNormal) + 0.025rem);
         margin-top: 0.75rem;
     }
     &_button {
@@ -138,7 +146,7 @@
         }
     }
     .highLight {
-        font-size: 1.2rem;
+        font-size: calc(var(--fontSizeNormal) + 0.275rem);
         font-weight: bold;
         color: rgb(var(--colorText));
     }
@@ -187,8 +195,7 @@
         }
     }
     &_head {
-        font-size: 0.95rem;
-        font-family: $fontTitle;
+        font-size: calc(var(--fontSizeNormal) + 0.025rem);
         background-color: rgb(var(--colorBackgroundLv2));
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
@@ -201,7 +208,7 @@
         flex-direction: column;
         &_item {
             display: flex;
-            border-top: 1px solid rgb(var(--colorBackgroundLv1));
+            border-top: 1px solid var(--colorShadow);
             margin-top: 0;
             position: relative;
             &:last-child {
@@ -215,14 +222,14 @@
                 gap: 0.75rem;
                 &_image {
                     flex: 0 0 65px;
-                    aspect-ratio: 1/1;
+                    height: 65px;
                     border-radius: $radiusBoxSmall;
                     overflow: hidden;
                     display: flex;
                     img {
                         width: 100%;
+                        height: 100%;
                         object-fit: cover;
-                        aspect-ratio: 1/1;
                         scale: 1.1;
                     }
                 }
@@ -231,14 +238,19 @@
                     display: flex;
                     flex-direction: column;
                     &_title {
-                        line-height: 1.58;
                         color: inherit;
                         margin-top: -0.25rem;
                         margin-bottom: 0.25rem;
+                        font-size: calc(var(--fontSizeNormal) - 0.025rem);
+                        line-height: calc(var(--lineHeightNormal) - 0.2);
+                        font-family: $fontText;
+                        font-weight: 600;
                     }
                     &_option {
-                        // font-size: 0.9rem;
-                        color: rgba(var(--colorText), 0.75);
+                        letter-spacing: 0;
+                        font-size: calc(var(--fontSizeNormal) - 0.02rem);
+                        font-weight: normal;
+                        color: rgba(var(--colorText), var(--opacityNormal));
                     }
                 }
             }
@@ -250,10 +262,11 @@
                     text-align: left;
                 }
                 &_now {
-                    font-family: $fontTitle;
-                    font-size: 1rem;
-                    letter-spacing: 1px;
                     margin-top: -0.25rem;
+                    font-family: $fontTitle;
+                    font-size: calc(var(--fontSizeNormal) + 0.2rem);
+                    font-weight: 600;
+                    letter-spacing: 0.5px;
                 }
                 &_old {
                     display: flex;
@@ -267,26 +280,29 @@
                         border-radius: $radiusBoxSmall;
                         height: 20px;
                         line-height: 20px;
-                        background: rgba(var(--colorPrice), 0.8);
+                        background: rgba(var(--colorPrice), var(--opacityNormal));
                         color: rgb(var(--colorTitle));
                     }
                     &_number {
                         text-decoration: line-through;
-                        font-size: 0.9rem;
+                        font-size: calc(var(--fontSizeNormal) - 0.025rem);
                         color: rgba(var(--colorText), 0.6);
                     }
                 }
                 &_icon {
                     margin-top: auto;
-                    img {
+                    svg {
                         width: 22px;
+                        height: 22px;
+                        transition: all 300ms;
                         cursor: pointer;
+                        color: rgba(var(--colorIcon), var(--opacityNormal));
                         float: right;
                         &:dir(rtl), [dir="rtl"] & {
                             float: left;
                         }
                         &:hover {
-                            width: 25px;
+                          scale: 1.1;
                         }
                     }
                 }
@@ -329,7 +345,7 @@
                                 color: rgb(var(--colorSuccess));
                                 margin-right: 0.5rem;
                                 content: "\f00c";
-                                font-size: 0.8rem;
+                                font-size: calc(var(--fontSizeNormal) - 0.125rem);
                             }
                         }
                     }

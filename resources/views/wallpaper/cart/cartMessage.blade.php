@@ -20,7 +20,7 @@
             @endphp
             <div class="cartMessage_box_body_content">
                 <div class="cartMessage_box_body_content_title maxLine_2">{{ $title ?? config('data_language_1.'.$language.'.undefined') }}</div>
-                <div class="cartMessage_box_body_content_price">{!! $xhtmlPrice !!} <span>/{{ $option }}</span></div>
+                <div class="cartMessage_box_body_content_price">{!! $xhtmlPrice !!} <span>- {{ $option }}</span></div>
                 {{-- <div class="cartMessage_box_body_content_type">{{ $option }}</div> --}}
             </div>
         </div>

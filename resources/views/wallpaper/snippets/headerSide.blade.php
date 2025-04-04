@@ -169,7 +169,7 @@
                 $altPhoneWallpaperEvent = config('data_language_2.'.$language.'.phone_wallpaper');
             @endphp
             <div class="close" onclick="showHideListMenuMobile(this, 'su-kien')">
-                <img src="{{ Storage::url('images/svg/icon-event-1.png') }}" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
+                <img src="https://namecomvn.storage.googleapis.com/storage/images/icon-event-1-light.webp" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.event') }}</div>
                 <i class="fa-solid fa-plus"></i>
             </div>

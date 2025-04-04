@@ -24,7 +24,7 @@
             display: flex;
             cursor: pointer;
             width: 2.375rem;
-            aspect-ratio: 1/1;
+            height: 2.375rem;
             &.facebook {
                 background: url('/storage/images/svg/facebook.png') no-repeat;
                 background-size: 100% 100%;
@@ -60,7 +60,6 @@
         }
         &_text {
             font-size: 0.7rem;
-            line-height: 1.2;
             padding: 0.25rem 0.5rem;
             background: rgb(var(--colorBackgroundLv3));
             border-radius: $radiusBoxSmall;
@@ -99,6 +98,7 @@
         &_item {
             &_icon {
                 width: 35px;
+                height: 35px;
             }
         }
         &_text {
@@ -111,12 +111,12 @@
     align-self: flex-end;
     border: none;
     outline: none;
-    background: rgba(var(--colorLv1), 0.4);
+    background: rgba(var(--colorLv1), 0.75);
     color: #fff;
     cursor: pointer;
     border-radius: $radiusBoxSmall;
     width: 37px;
-    aspect-ratio: 1/1;
+    height: 37px;
     margin: 0 0.5rem 0.5rem 0.5rem;
     i {
       display: flex;
@@ -132,6 +132,7 @@
     }
     @media(max-width: 767px){
         width: 35px;
+        height: 35px;
         margin-bottom: calc(52.5px + 0.25rem);
     }
 }

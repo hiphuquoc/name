@@ -22,7 +22,7 @@
         margin-right: 0.5rem;
     }
     &_box {
-        font-size: 0.8rem;
+        font-size: calc(var(--fontSizeNormal) - 0.125rem);
         &_item {
             display: inline-block;
             border-radius: $radiusBoxSmall;

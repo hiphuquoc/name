@@ -18,21 +18,17 @@ $heightSelect : 2.25rem;
         background: rgb(var(--colorBackgroundLv1));
         padding: 0 0.5rem 0 0.25rem;
         border-radius: $radiusBoxSmall;
-        font-size: 0.75rem;
-        font-family: $fontTitle;
-        color: rbga(var(--colorText), 0.75);
+        font-size: calc(var(--fontSizeNormal) - 0.175rem);
+        color: rbga(var(--colorText), var(--opacityNormal));
     }
     &_input {
         padding: 0.3rem 0.75rem 0.1rem 0.75rem;
         border-radius: $radiusBoxSmall;
         border: 1px solid rgb(var(--colorBackgroundLv3));
-        font-size: 0.85rem;
-        color: rgba(var(--colorText), 0.75);
+        font-size: calc(var(--fontSizeNormal) - 0.075rem);
+        color: rgba(var(--colorText), var(--opacityNormal));
         min-width: 140px;
         width: 100%;
-        // display: flex;
-        // align-items: center;
-        // gap: 0.5rem;
         /* ở đây không dùng flex được -> vì không set được maxLine */
         > * {
             display: inline-block;
@@ -46,10 +42,18 @@ $heightSelect : 2.25rem;
             }
         }
         @media(max-width: 991px){
-            min-width: 120px;
+            min-width: 125px;
         }
         @media(max-width: 767px){
-            min-width: 100px;
+            min-width: 110px;
+            padding: 0.3rem 0.5rem 0.1rem 0.5rem;
+            i {
+                margin-right: 0.325rem;
+                &:dir(rtl), [dir="rtl"] & {
+                    margin-right: unset;
+                    margin-left: 0.325rem;
+                }
+            }
         }
     }
     &_box {
@@ -59,11 +63,11 @@ $heightSelect : 2.25rem;
         background: rgb(var(--colorBackgroundLv2));
         min-width: 200px;
         border-radius: $radiusBoxSmall;
-        box-shadow: 0 0 10px rgb(var(--colorBackgroundLv1));
+        box-shadow: 0 0 10px var(--colorShadow);
         z-index: 999;
         max-height: 420px;
         overflow-y: scroll;
-        font-size: 0.8rem;
+        font-size: calc(var(--fontSizeNormal) - 0.125rem);
         padding-bottom: 0.25rem;
         left: 0;
         &:dir(rtl), [dir="rtl"] & {
@@ -95,13 +99,13 @@ $heightSelect : 2.25rem;
                 color: rgb(var(--colorTextLight));
                 background: rgb(var(--colorBackgroundLv3));
             }
-            &:not(:first-child){
-                border-top: 1px dashed rgb(var(--colorBackgroundLv1));
-            }
+            // &:not(:first-child){
+            //     border-top: 1px dashed var(--colorShadow);
+            // }
         }
     }
     i {
-        font-size: 0.8rem;
+        font-size: calc(var(--fontSizeNormal) - 0.125rem);
         opacity: 0.6;
     }
     @media(max-width: 991px){
@@ -114,7 +118,7 @@ $heightSelect : 2.25rem;
     align-items: flex-end;
     color: rgba(var(--colorText), 0.7);
     margin-bottom: 0.325rem; /* thêm này do bên dưới nó là wallpapers (có viền đen) nên bị hiệu ứng hơi gần */
-    font-size: 0.9rem;
+    font-size: calc(var(--fontSizeNormal) - 0.025rem);
     gap: 0.5rem;
     margin-bottom: 0.75rem;
     text-align: left;
@@ -136,10 +140,10 @@ $heightSelect : 2.25rem;
             gap: 0.5rem;
             select {
                 padding: 0;
-                color: rgba(var(--colorText), 0.8);
+                color: rgba(var(--colorText), var(--opacityNormal));
                 border: none;
                 background: transparent;
-                font-size: 0.95rem;
+                font-size: calc(var(--fontSizeNormal) + 0.025rem);
             }
         }
     }
@@ -147,7 +151,7 @@ $heightSelect : 2.25rem;
         display: none;
     }
     .quantity {
-        font-size: 0.9rem;
+        font-size: calc(var(--fontSizeNormal) - 0.025rem);
         background: rgb(var(--colorBackgroundLv2));
         border-radius: $radiusBoxSmall;
         height: calc($heightSelect + 5px);
@@ -165,22 +169,27 @@ $heightSelect : 2.25rem;
     }
     @media(max-width: 767px){
         margin-bottom: 0.5rem;
+        .quantity {
+            padding: 0 0.75rem;
+        }
     }
     @media(max-width: 577px){
-        margin-bottom: 0.325rem;
+        .quantity {
+            padding: 0 0.5rem;
+        }
     }
 }
 .filterAdvanced {
     position: relative;
-    font-size: 0.75rem;
+    font-size: calc(var(--fontSizeNormal) - 0.175rem);
     &_icon {
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         width: calc($heightSelect + 5px);
-        aspect-ratio: 1/1;
-        background: rgba(var(--colorBackgroundLv2), 0.8);
+        height: calc($heightSelect + 5px);
+        background: rgba(var(--colorBackgroundLv2), var(--opacityNormal));
         border-radius: $radiusBoxSmall;
         z-index: 1;
         cursor: pointer;
@@ -202,13 +211,14 @@ $heightSelect : 2.25rem;
         }
         @media(max-width: 991px){
             width: $heightSelect;
+            height: $heightSelect;
         }
     }
 
     &_text {
         display: none;
         width: 110px;
-        background: rbga(var(--colorBackgroundLv2), 0.8);
+        background: rbga(var(--colorBackgroundLv2), var(--opacityNormal));
         position: absolute;
         top: calc(-#{$heightSelect} - 2px);
         
@@ -248,11 +258,11 @@ $heightSelect : 2.25rem;
         padding: 0.75rem;
         border-radius: $radiusBoxSmall;
         width: 400px;
-        box-shadow: 0 0 12px rgba(0,0,0,0.45);
+        box-shadow: 0 0 12px var(--colorShadow);
         &_title {
             position: relative;
             margin-bottom: 0.75rem;
-            font-size: 0.95rem;
+            font-size: calc(var(--fontSizeNormal) + 0.025rem);
             width: 100%;
             &_close {
                 cursor: pointer;
@@ -260,13 +270,13 @@ $heightSelect : 2.25rem;
                 right: 0;
                 top: 0;
                 width: 2rem;
-                aspect-ratio: 1/1;
+                height: 2rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: rbga(var(--colorBackgroundLv2), 0.75);
+                background: rbga(var(--colorBackgroundLv2), var(--opacityNormal));
                 border-radius: $radiusBoxSmall;
-                font-size: 0.85rem;
+                font-size: calc(var(--fontSizeNormal) - 0.075rem);
             }
         }
         &_content {

@@ -159,8 +159,7 @@
             }
         }
         &_title {
-            font-size: 1.2rem;
-            font-family: $fontTitle;
+            font-size: calc(var(--fontSizeNormal) + 0.275rem);
         }
         &_desc {
             color: rgba(var(--colorText), 0.6);
@@ -198,17 +197,15 @@
     }
     .highLight {
         margin: 0 0.5rem;
-        font-family: $fontTitle;
         color: rgb(var(--colorLv1));
-        font-size: 1.2rem;
+        font-size: calc(var(--fontSizeNormal) + 0.275rem);
         letter-spacing: 0.5px;
     }
     .price {
         padding: 0 0.5rem;
-        font-size: 1.1rem;
+        font-size: calc(var(--fontSizeNormal) + 0.175rem);
         letter-spacing: 0.5px;
         color: rgb(var(--colorPrice));
-        font-family: $fontTitle;
     }
     @media(max-width: 1199px){
         &_left {
@@ -222,7 +219,7 @@
     @media(max-width: 767px){
         flex-wrap: wrap;
         .highLight {
-            font-size: 1rem;
+            font-size: calc(var(--fontSizeNormal) + 0.075rem);
         }
         &_left {
             padding: 0.5rem;
@@ -235,7 +232,7 @@
                 }
             }
             &_title {
-                font-size: 1.05rem;
+                font-size: calc(var(--fontSizeNormal) + 0.125rem);
             }
         }
         &_right {

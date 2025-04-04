@@ -29,33 +29,52 @@
   font-display: swap;
   src: url('/fonts/svn-gilroy_semibold.ttf');
 }
-$fontTitle: "SVN-Gilroy Bold", sans-serif;
-$fontText: "SVN-Gilroy Med", sans-serif;
+$fontTitle: "Baloo Chettan 2", sans-serif;
+$fontText: "SVN-Gilroy Bold", sans-serif;
 /* mixin title */
 @mixin titleDefault {
   color: rgb(var(--colorText));
   font-family: $fontTitle;
-  font-size: 1.1rem;
+  line-height: calc(var(--lineHeightNormal) - 0.3);
   margin-bottom: 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
   text-align: left;
   margin-bottom: 1rem;
+  font-size: calc(var(--fontSizeNormal) + 0.45rem);
+  font-weight: 600;
   &:dir(rtl), [dir="rtl"] & {
     text-align: right;
   }
+  .light &, .gray & {
+    font-size: calc(var(--fontSizeNormal) + 0.5rem);
+    font-weight: 700;
+  }
   @media(max-width: 1199px){
-    font-size: 1.05rem;
+    font-size: calc(var(--fontSizeNormal) + 0.4rem);
+    .light &, .gray & {
+      font-size: calc(var(--fontSizeNormal) + 0.45rem);
+    }
   }
   @media(max-width: 991px){
-    font-size: 1rem;
-    letter-spacing: 0.25px;
+    font-size: calc(var(--fontSizeNormal) + 0.35rem);
     margin-bottom: 0.75rem;
+    .light &, .gray & {
+      font-size: calc(var(--fontSizeNormal) + 0.4rem);
+    }
   }
-  // @media(max-width: 767px){
-  //   font-size: 0.95rem;
-  //   letter-spacing: 0.25px;
-  // }
+  @media(max-width: 767px){
+    font-size: calc(var(--fontSizeNormal) + 0.3rem);
+    margin-bottom: 0.75rem;
+    .light &, .gray & {
+      font-size: calc(var(--fontSizeNormal) + 0.35rem);
+    }
+  }
+  @media(max-width: 577px){
+    font-size: calc(var(--fontSizeNormal) + 0.25rem);
+    .light &, .gray & {
+      font-size: calc(var(--fontSizeNormal) + 0.3rem);
+    }
+  }
 }
 
 $heightMenu : 3.6rem;
@@ -86,7 +105,7 @@ $radiusBoxLarge : 1rem;
       color: rgb(var(--colorText));
       opacity: 0.5;
       &:hover {
-        opacity: 0.75;
+        opacity: var(--opacityNormal);
         color: rgb(var(--colorTextLight));
       }
     }
@@ -152,7 +171,7 @@ $radiusBoxLarge : 1rem;
         padding: 0.1rem 0.5rem;
         display: flex;
         color: #fff;
-        font-size: 0.8rem;
+        font-size: calc(var(--fontSizeNormal) - 0.125rem);
         border-top-left-radius: inherit;
         border-bottom-right-radius: inherit;
         img {
@@ -172,12 +191,11 @@ $radiusBoxLarge : 1rem;
         position: absolute;
         top: 0;
         right: 0;
-        background: rgba(var(--colorPrice), 0.8);
+        background: rgba(var(--colorPrice), var(--opacityNormal));
         padding: 0.1rem 0.5rem;
         display: flex;
         color: #fff;
-        font-size: 0.8rem;
-        font-family: $fontTitle;
+        font-size: calc(var(--fontSizeNormal) - 0.125rem);
         border-top-right-radius: inherit;
         border-bottom-left-radius: inherit;
       }
@@ -211,23 +229,21 @@ $radiusBoxLarge : 1rem;
       &_title {
         margin-bottom: 0.25rem;
         h2, h3, h4 {
-          font-family: $fontTitle;
-          font-size: 1.05rem;
+          font-size: calc(var(--fontSizeNormal) + 0.125rem);
           margin-bottom: 0 !important;
           color: rgba(var(--colorText), 0.9);
-          line-height: 1.5;
         }
       }
       &_price {
         margin-bottom: 0.5rem;
         color: rgb(var(--colorPrice));
-        font-size: 1.2rem;
+        font-size: calc(var(--fontSizeNormal) + 0.275rem);
         font-weight: bold;
         letter-spacing: 1px;
         display: flex;
         align-items: flex-end;
         > span {
-            font-size: 1rem;
+            font-size: calc(var(--fontSizeNormal) + 0.075rem);
             font-weight: normal;
             color: rbga(var(--colorText), 0.6);
             text-decoration: line-through;
@@ -243,10 +259,10 @@ $radiusBoxLarge : 1rem;
       }
       &_content {
         &_price {
-          font-size: 1.05rem;
+          font-size: calc(var(--fontSizeNormal) + 0.125rem);
           letter-spacing: 0.5px;
           > span {
-            font-size: 0.95rem;
+            font-size: calc(var(--fontSizeNormal) + 0.025rem);
             margin-left: 0.5rem;
           }
         }
@@ -256,8 +272,7 @@ $radiusBoxLarge : 1rem;
 }
 
 @mixin highLight {
-  font-size: 1.1rem;
-  font-family: $fontTitle;
+  font-size: calc(var(--fontSizeNormal) + 0.175rem);
   color: rgb(var(--colorTextLight));
   margin-right: 0.25rem;
 }
@@ -269,7 +284,8 @@ $radiusBoxLarge : 1rem;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(var(--colorBackgroundLv2), 0.8);
+  background: rgba(var(--colorBackgroundLv2), 0.5);
+  backdrop-filter: blur(8px);
   z-index: -1;
   &:hover {
     display: none !important;
@@ -281,7 +297,7 @@ $radiusBoxLarge : 1rem;
   top: 0;
   width: 2.5rem;
   height: 2.5rem;
-  font-size: 1rem;
+  font-size: calc(var(--fontSizeNormal) + 0.075rem);
   background: rgb(var(--colorBackgroundLv2));
   display: flex;
   justify-content: center;
@@ -300,7 +316,7 @@ $radiusBoxLarge : 1rem;
     border-bottom-right-radius: inherit;
   }
   i {
-    font-size: 1rem;
+    font-size: calc(var(--fontSizeNormal) + 0.075rem);
     color: rgba(var(--colorText), 0.5);
   }
   &:hover {
@@ -324,7 +340,7 @@ $radiusBoxLarge : 1rem;
   }
   &_image {
       flex: 0 0 70px;
-      aspect-ratio: 1/1.05;
+      height: 73.5px;
       border-radius: $radiusBoxNormal;
       overflow: hidden;
       display: flex;
@@ -345,24 +361,31 @@ $radiusBoxLarge : 1rem;
       width: 100%;
       justify-content: space-between;
       &_title {
-        line-height: 1.55;
         color: inherit;
         margin-top: -0.25rem;
         margin-bottom: 0.25rem;
-        font-size: 0.9rem;
+        font-size: calc(var(--fontSizeNormal) - 0.025rem);
+        line-height: calc(var(--lineHeightNormal) - 0.2);
+        font-family: $fontText;
+        font-weight: 600;
       }
       &_price {
-          color: rgb(var(--colorPrice));
-          font-weight: bold;
-          letter-spacing: 2px;
-          font-size: 0.95rem;
           display: flex;
+          align-items: center;
           gap: 0.75rem;
+          color: rgb(var(--colorPrice));
+          font-family: $fontTitle;
+          font-size: calc(var(--fontSizeNormal) + 0.2rem);
+          font-weight: bold;
+          letter-spacing: 0.5px;
           > span {
-              font-weight: normal;
-              color: rgba(var(--colorText), 0.6);
               letter-spacing: 0;
               text-decoration: line-through;
+              font-size: calc(var(--fontSizeNormal) - 0.02rem);
+              font-weight: normal;
+              color: rgba(var(--colorText), var(--opacityNormal));
+              margin-left: 0.25rem;
+              margin-top: 2px;
           }
       }
       &_orther {
@@ -382,7 +405,7 @@ $radiusBoxLarge : 1rem;
           justify-content: flex-end;
           align-items: center;
           width: 30px;
-          aspect-ratio: 1/1;
+          height: 30px;
           position: absolute;
           cursor: pointer;
           bottom: 0;
@@ -391,10 +414,11 @@ $radiusBoxLarge : 1rem;
             right: unset;
             left: 0;
           }
-          img {
+          svg {
               width: 22px;
               height: 22px;
               transition: all 300ms;
+              color: rgba(var(--colorIcon), var(--opacityNormal));
               &:hover {
                 scale: 1.1;
               }
@@ -419,10 +443,9 @@ $radiusBoxLarge : 1rem;
     z-index: -2;
     pointer-events: none;
     overflow: hidden;
-    // mix-blend-mode: darken;
-    /* Hiệu ứng mờ dần */
-    // opacity: 1; /* Bắt đầu từ trạng thái ẩn */
-    // animation: fadeInBackground 0.5s ease-in-out 0.5s forwards; /* Trì hoãn 0.2 giây trước khi bắt đầu */
+    .light &, .gray & {
+      background: rgb(var(--colorBackgroundLv1));
+    }
   }
   &_backgroundTopMore {
     /* làm tối viền phần trên thêm */
@@ -431,72 +454,66 @@ $radiusBoxLarge : 1rem;
     left: 0;
     width: 100%;
     height: 5%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.375) 15%, transparent);
     z-index: -1;
     pointer-events: none;
     overflow: hidden;
-    // mix-blend-mode: darken;
-    /* Hiệu ứng mờ dần */
-    // opacity: 1; /* Bắt đầu từ trạng thái ẩn */
-    // animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
+    background: linear-gradient(180deg, rgba(var(--colorBackgroundLv1), 0.5) 15%, transparent);
+    .light &, .gray & {
+      background: linear-gradient(180deg, rgba(var(--colorBackgroundLv1), 0.25) 15%, transparent);
+    }
   }
-  $colorFill : #000;
   &_backgroundSideMore {
     /* làm tối viền phần trên thêm */
     position: absolute;
     top: 0px;
-    left: 0;
+    left: 0;  
     width: 99%;
     height: 100%;
-    background: linear-gradient(90deg, rgba($colorFill, 0.5) 0%, rgba($colorFill, 0) 4.5%, rgba($colorFill, 0) 95.5%, rgba($colorFill, 0.5) 100%);
     z-index: -1;
     pointer-events: none;
     overflow: hidden;
-    // mix-blend-mode: darken;
-    /* Hiệu ứng mờ dần */
-    // opacity: 1; /* Bắt đầu từ trạng thái ẩn */
-    // animation: fadeInBackground 0.5s ease-in-out 0s forwards; /* Trì hoãn 0 giây trước khi bắt đầu */
+    background: linear-gradient(90deg, rgba(0,0,0, 0.5) 0%, rgba(0,0,0, 0) 4.5%, rgba(0,0,0, 0) 95.5%, rgba(0,0,0, 0.5) 100%);
+    .light &, .gray & {
+      background: linear-gradient(90deg, rgba(var(--colorBackgroundLv1), 0.25) 0%, rgba(var(--colorBackgroundLv1), 0) 4.5%, rgba(var(--colorBackgroundLv1), 0) 95.5%, rgba(var(--colorBackgroundLv1), 0.5) 100%);
+    }
   }
-  // /* Định nghĩa animation */
-  // @keyframes fadeInBackground {
-  //   0% {
-  //     opacity: 0;
-  //   }
-  //   100% {
-  //     opacity: 1;
-  //   }
-  // }
   /* làm mờ nền */
   &_backgroundBlur {
-      filter: blur(5px);
-      -webkit-filter: blur(5px);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      background: rgba(0,0,0,0.6);
-      height: 6rem;
-      width: 100%;
-      z-index: -1;
-      border-radius: 0 0 2rem 2rem; /* do hiệu ứng blur nên bo sâu hơn */
-  }
-}
-
-@mixin scrollbarCustom {
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(var(--colorBackgroundLv1), 0.8);
-    border-radius: 1000px;
-  }
-  &::-webkit-scrollbar-track {
-    border-radius: $radiusBoxSmall;
-    background: rgb(var(--colorBackgroundLv3));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    border-radius: 0 0 2rem 2rem; /* do hiệu ứng blur nên bo sâu hơn */
+    background-image: linear-gradient(360deg, rgba(var(--colorBackgroundLv1), 1) 10%, rgba(var(--colorBackgroundLv1), 0.8) 90%, rgba(var(--colorBackgroundLv1), 0.5) 100%);
+    pointer-events: none;
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    height: 6.75rem;
+    .light &, .gray & {
+      height: 6.5rem;
+    }
+    @media(max-width: 767px){
+      height: 6.625rem;
+      .light &, .gray & {
+        height: 6.325rem;
+      }
+    }
+    @media(max-width: 577px){
+      height: 6.5rem;
+      .light &, .gray & {
+        height: 6.25rem;
+      }
+    }
   }
 }
 
 @mixin infoOfBlog {
   display: flex;
-  gap: 0.5rem;
-  font-size: 0.8rem;
+  gap: 1rem;
+  font-size: calc(var(--fontSizeNormal) - 0.125rem);
   > * {
+      color: rgba(var(--colorText), var(--opacityNormal));
       background: rgb(var(--colorBackgroundLv3));
       padding: 0.15rem 1rem;
       border-radius: $radiusBoxLarge;
@@ -504,7 +521,7 @@ $radiusBoxLarge : 1rem;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      box-shadow: 0 2px 7px rgba(var(--colorBackgroundLv1), 0.5);
+      box-shadow: 0 2px 7px var(--colorShadow);
       @media(max-width: 767px){
           padding: 0.15rem 0.75rem;
           &:last-child {
@@ -516,6 +533,33 @@ $radiusBoxLarge : 1rem;
       }
   }
   i {
-      opacity: 0.75;
+      opacity: var(--opacityNormal);
+  }
+}
+
+@mixin customScrollBar {
+  &::-webkit-scrollbar {
+    width: 6px; /* Chiều rộng của thanh cuộn */
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1000px;
+    background: rgba(var(--colorText), 0.25);  
+    -webkit-box-shadow: inset 0 0 6px rgba(var(--colorText), 0.25);
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(var(--colorBackgroundLv2));
+    border-radius: $radiusBoxNormal;
+    background: rgb(var(--colorBackgroundLv2));
+  }
+  @media(max-width: 1199px){
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+  }
+  @media(max-width: 767px) {
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
   }
 }

@@ -14,7 +14,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(var(--colorBackgroundLv1), 0.8);
+        background: rgba(var(--colorBackgroundLv1), var(--opacityNormal));
     }
     &_box {
         max-width: 600px;
@@ -31,9 +31,9 @@
         }
         &_head {
             margin-bottom: 0.5rem;
-            font-size: 1.4rem;
+            font-size: calc(var(--fontSizeNormal) + 0.475rem);
             font-weight: bold;
-            font-family: $fontTitle;
+            
             color: rgb(var(--colorSuccess));
             text-align: center;
         }
@@ -44,7 +44,7 @@
                 label {
                     flex: 0 0 150px;
                     font-weight: 600;
-                    font-size: 0.95rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.025rem);
                 }
             }
         }
@@ -120,16 +120,15 @@
             &_title {
                 margin-bottom: 0;
                 color: rgb(var(--colorText));
-                font-size: 0.95rem;
-                font-family: $fontTitle;
+                font-size: calc(var(--fontSizeNormal) + 0.025rem);
             }
             &_desc {
-                font-size: 0.9rem;
+                font-size: calc(var(--fontSizeNormal) - 0.025rem);
             }
             &_fee {
                 position: absolute;
                 
-                font-size: 0.8rem;
+                font-size: calc(var(--fontSizeNormal) - 0.125rem);
                 color: rgb(var(--colorTextLight));
                 top: 0;
                 right: 1rem;
@@ -155,7 +154,7 @@
                 content: '\f00c';
                 @include fontAwesome;
                 color: rgb(var(--colorSuccess));
-                font-size: 0.8rem;
+                font-size: calc(var(--fontSizeNormal) - 0.125rem);
             }
         }
         @media(max-width: 767px){
@@ -233,14 +232,14 @@
         min-width: 500px;
         width: 100%;
         background: rgb(var(--colorBackgroundLv2));
-        border-radius: $radiusBoxNormal;
+        border-radius: $radiusBoxLarge;
         padding: 0;
         z-index: 99;
         position: relative;
         display: flex;
         align-items: stretch;
-        border: 1px solid rgb(var(--colorBackgroundLv2));
-        box-shadow: 1px 1px 10px rgb(var(--colorBackgroundLv1));
+        // border: 2px solid rgb(var(--colorBackgroundLv2));
+        box-shadow: 0 0 7px var(--colorShadow);
         &_left {
             flex: 0 0 230px;
             align-self: stretch;
@@ -255,7 +254,7 @@
         &_right {
             width: 100%;
             padding: 0.75rem 1.25rem 0.5rem 1.25rem;
-            border-radius: $radiusBoxNormal;
+            border-radius: $radiusBoxLarge;
             &_close {
                 @include iconCloseSquare;
             }
@@ -267,7 +266,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(var(--colorBackgroundLv1), 0.8);
+        background: rgba(var(--colorBackgroundLv2), 0.5);
     }
     @media(max-width: 991px){
         &_box {
@@ -328,31 +327,32 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(30,41,51,0.45);
+        background: rgba(var(--colorBackgroundLv2), 0.5);
     }
     &_box {
         background: rgb(var(--colorBackgroundLv2));
-        box-shadow: 1px 1px 5px rgb(var(--colorBackgroundLv1));
+        box-shadow: 0 0 7px var(--colorShadow);
         max-width: 520px;
         width: 100%;
-        padding: 0.875rem 1.25rem 1.25rem;
+        padding: 0.875rem 1.25rem 1.5rem 1.25rem;
         position: relative;
         border-radius: $radiusBoxNormal;
         margin: 0 0.5rem;
         &_head {
-            margin-bottom: 1rem;
+            margin-bottom: 0.825rem;
             position: relative;
-            font-size: 1.1rem;
+            font-size: calc(var(--fontSizeNormal) + 0.25rem);
             color: rgb(var(--colorText));
             font-family: $fontTitle;
-            letter-spacing: 1px;
+            letter-spacing: 0.2px;
+            font-weight: 700;
             display: flex;
             gap: 0.5rem;
             &:before {
                 @include fontAwesome;
                 content: '\f00c';
-                font-size: 1.2rem;
-                color: rgb(var(--colorLv2));
+                font-size: calc(var(--fontSizeNormal) + 0.275rem);
+                color: rgb(var(--colorSuccess));
                 text-shadow: 0 0 rgb(var(--colorTextLight));
             }
         }
@@ -365,10 +365,11 @@
             background: rgb(var(--colorBackgroundLv1));
             border-radius: $radiusBoxNormal;
             padding: 1.125rem 1rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+            // box-shadow: 0 0 7px var(--colorShadow);
             &_image {
                 flex: 0 0 90px;
-                aspect-ratio: 1/1;
+                height: 90px;
                 overflow: hidden;
                 display: flex;
                 border-radius: $radiusBoxNormal 0 0 $radiusBoxNormal;
@@ -377,8 +378,8 @@
                 }
                 img {
                     width: 100%;
+                    height: 100%;
                     object-fit: cover;
-                    aspect-ratio: 1/1;
                     scale: 1.1;
                 }
             }
@@ -389,24 +390,30 @@
                 justify-content: space-between;
                 &_title {
                     color: inherit;
-                    // margin-bottom: 0.5rem;
                     margin-top: -0.25rem;
+                    margin-bottom: 0.25rem;
+                    font-size: var(--fontSizeNormal);
+                    line-height: calc(var(--lineHeightNormal) - 0.2);
+                    font-family: $fontText;
+                    font-weight: bold;
                 }
                 &_price {
                     color: rgb(var(--colorPrice));
+                    font-family: $fontTitle;
+                    font-size: calc(var(--fontSizeNormal) + 0.3rem);
                     font-weight: bold;
-                    letter-spacing: 2px;
-                    font-size: 1rem;
+                    letter-spacing: 0.5px;
+
                     > span {
+                        font-size: calc(var(--fontSizeNormal) - 0.025rem);
                         font-weight: normal;
-                        color: rgba(var(--colorText), 0.6);
-                        letter-spacing: 0;
-                        font-size: 0.9rem;
+                        color: rgba(var(--colorText), var(--opacityNormal));
+                        margin-left: 0.25rem;
                     }
                 }
                 &_type {
                     color: rgba(var(--colorText), 0.7);
-                    font-size: 0.95rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.025rem);
                 }
             }
         }
@@ -431,18 +438,13 @@
         &_box {
             padding: 0.875rem 1rem 1.25rem 1rem;
             &_head {
-                font-size: 1.05rem;
+                font-size: calc(var(--fontSizeNormal) + 0.225rem);
                 margin-bottom: 0.75rem;
             }
             &_body {
                 padding: 0.875rem 0.75rem;
-                margin-bottom: 1rem;
+                margin-bottom: 1.325rem;
                 gap: 0.75rem;
-                &_content {
-                    &_price {
-                        font-size: 0.95rem;
-                    }
-                }
             }
         }
     }
@@ -450,17 +452,13 @@
         &_box {
             padding: 0.625rem 0.75rem 1rem 0.75rem;
             &_head {
-                font-size: 1rem;
-                letter-spacing: 0.5px;
+                font-size: calc(var(--fontSizeNormal) + 0.2rem);
+                margin-bottom: 0.5rem;
             }
             &_body {
                 padding: 0.625rem 0.5rem;
+                margin-bottom: 1.25rem;
                 gap: 0.5rem;
-                &_content {
-                    &_price {
-                        font-size: 0.9rem;
-                    }
-                }
             }
         }
     }

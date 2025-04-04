@@ -4,9 +4,8 @@
     background: rgb(var(--colorBackgroundLv2));
     &_title {
         padding: 0.5rem 1rem;
-        font-family: $fontTitle;
         cursor: pointer;
-        border-bottom: 1px solid rgb(var(--colorBackgroundLv1));
+        border-bottom: 1px solid var(--colorShadow);
         color: rgb(var(--colorText));
         display: flex;
         gap: 1rem;
@@ -19,23 +18,22 @@
     }
     &_list {
         padding: 0.25rem 1rem 1rem;
-        font-size: 0.9rem;
-        line-height: 1.68;
+        font-size: calc(var(--fontSizeNormal) - 0.025rem);
         max-height: 500px;
+        &:dir(ltr), [dir="ltr"] & {
+            text-align: left;
+        }
+        &:dir(rtl), [dir="rtl"] & {
+            text-align: right;
+        }
         &_item {
             display: flex;
-            padding-top: 0.25rem;
+            padding-top: 0.325rem;
             color: rgb(var(--colorText));
             &:not(:first-child){
                 margin-top: 0.5rem;
-                border-top: 1px dashed rgb(var(--colorBackgroundLv1));
+                border-top: 1px dashed var(--colorShadow);
             }
-        }
-        &.customScrollBar-y {
-            // &::-webkit-scrollbar {
-            //   background-color: rgb(var(--colorBackgroundLv1));
-            // }
-            @include scrollbarCustom;
         }
     }
     &_close {
@@ -55,7 +53,7 @@
         &:before {
             @include fontAwesome;
             content: '\f077';
-            font-size: 0.8rem;
+            font-size: calc(var(--fontSizeNormal) - 0.125rem);
             opacity: 0.5;
         }
         &.hidden {
@@ -74,7 +72,7 @@
         min-width: 17rem; /* là chiều ngang của headerSide */
         z-index: 101;
         top: 128px;
-        box-shadow: 2px -2px 7px rgb(var(--colorBackgroundLv1));
+        box-shadow: 0 0 7px rgb(var(--colorShadow));
         left: 0;
         &:dir(rtl), [dir="rtl"] & {
             left: unset;
@@ -87,7 +85,7 @@
             &:before {
                 @include fontAwesome;
                 content: '\f057' !important;
-                font-size: 1.3rem;
+                font-size: calc(var(--fontSizeNormal) + 0.375rem);
             }
         }
     }
@@ -112,13 +110,13 @@
     display: none;
     position: fixed;
     width: 32px;
-    aspect-ratio: 1/1;
+    height: 32px;
     background: rgb(var(--colorBackgroundLv2));
     border-radius: $radiusBoxSmall;
     cursor: pointer;
     border: 1px solid rgb(var(--colorBackgroundLv3));
     z-index: 100;
-    opacity: 0.8;
+    opacity: var(--opacityNormal);
     margin-bottom: 0 !important;
     top: 50%;
     left: 0;
@@ -139,7 +137,7 @@
             content: "\f0ca";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
-            font-size: 1.2rem;
+            font-size: calc(var(--fontSizeNormal) + 0.275rem);
         }
     }
     @media(max-width: 767px){

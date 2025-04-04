@@ -3,10 +3,13 @@
         $accountInformationByLanguage = config('data_language_1.'.$language.'.account_information');
     @endphp
     <div class="loginBox" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
-        <div class="loginBox_iconAvatar">
-            <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="{{ $accountInformationByLanguage }}" title="{{ $accountInformationByLanguage }}" />
+        <div class="loginBox_show">
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-user.svg');
+            @endphp
+            {!! $icon !!}
+            <div class="loginBox_show_text maxLine_1">{{ $user->name ?? '' }}</div>
         </div>
-        <div class="maxLine_1" style="max-width:120px;">{{ $user->email ?? '' }}</div>
         <div class="loginBox_list">
             {{-- <div class="loginBox_list_item">
                 <i class="fa-solid fa-key"></i>
@@ -29,8 +32,9 @@
     <div class="loginBox" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
         @php
             $loginByLanguage = config('data_language_1.'.$language.'.login');
+            $icon = file_get_contents('storage/images/svg/sign-in-alt.svg');
         @endphp
-        <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="{{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.company_name') }}" title="{{ $loginByLanguage.' '.config('main_'.env('APP_NAME').'.company_name') }}" />
+        {!! $icon !!}
         <div class="maxLine_1">{{ $loginByLanguage }}</div>
     </div>
 @endif

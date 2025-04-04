@@ -4,25 +4,6 @@
     gap: 1rem 0.75rem;
     flex-wrap: wrap;
     position: relative;
-    &.slickBox {
-        flex-wrap: unset !important;
-        // .wallpaperGridBox_item, .wallpaperGridBox_itemBackground {
-        //     margin-top: 0 !important;
-        //     &:first-child {
-        //         margin-left: 0 !important;
-        //     }
-        //     @media(max-width: 1199px){
-        //         &:nth-child(3n + 1){
-        //             margin-left: 0.75rem;
-        //         }
-        //     }
-        //     @media(max-width: 991px){
-        //         &:nth-child(4n + 1){
-        //             margin-left: 0.75rem;
-        //         }
-        //     }
-        // }
-    }
     &_item, &_itemBackground {
         width: calc(20% - 0.6rem);
     }
@@ -45,9 +26,9 @@
             position: relative;
             border-radius: inherit;
             display: flex;
-            aspect-ratio: 1/2.18;
             overflow: hidden;
-            border-radius: 7%;
+            border-radius: 7% / 20px;
+            aspect-ratio: 1 / 2.18;
             .zIndexHide {
                 position: relative;
                 z-index: -1;
@@ -64,19 +45,21 @@
                 width: 100%;
                 height: 100%;
                 display: flex;
+                top: 0;
+                left: 0;
                 object-fit: contain;
-                position: relative;
+                position: absolute;
                 z-index: -1;
             }
             &_rating {
                 position: absolute;
                 top: 0;
                 left: 0;
-                background: rgba(var(--colorBackgroundLv1), 0.8);
+                background: rgba(var(--colorBackgroundLv1), var(--opacityNormal));
                 padding: 0.1rem 0.5rem;
                 display: flex;
                 color: rgb(var(--colorText));
-                font-size: 0.8rem;
+                font-size: calc(var(--fontSizeNormal) - 0.125rem);
                 border-top-left-radius: inherit;
                 border-bottom-right-radius: $radiusBoxSmall;
                 img {
@@ -96,13 +79,13 @@
                 position: absolute;
                 top: 0;
                 right: 0;
-                background: rgba(var(--colorPrice), 0.8);
+                background: rgba(var(--colorPrice), var(--opacityNormal));
                 padding: 0.1rem 0.5rem;
                 display: flex;
                 color: rgb(var(--colorTitle));
                 text-shadow: 0 0 5px rgb(var(--colorBackgroundLv1));
-                font-size: 0.8rem;
-                font-family: $fontTitle;
+                font-size: calc(var(--fontSizeNormal) - 0.125rem);
+                
                 border-top-right-radius: inherit;
                 border-bottom-left-radius: $radiusBoxSmall;
                 letter-spacing: 2px;
@@ -112,44 +95,41 @@
                 bottom: 0;
                 left: 0;
                 z-index: 2;
-                padding: 0.5rem 1rem;
+                padding: 0.625rem 1rem;
                 width: 100%;
                 display: flex;
                 flex-direction: column;
-                gap: 0.325rem;
+                gap: 0.5rem;
                 &_title {
                     position: relative;
                     height: 2.75rem;
                     h2, h3, h4 {
-                        font-family: $fontText;
-                        font-weight: normal;
-                        font-size: 0.9rem;
+                        font-family: $fontText !important;
+                        font-size: calc(var(--fontSizeNormal) - 0.025rem);
                         margin-bottom: 0 !important;
-                        color: rgb(var(--colorText));
-                        line-height: 1.58;
+                        color: rgb(var(--colorTitle));
                         letter-spacing: 0.25px;
                         text-transform: unset;
-                        font-weight: 500;
+                        font-weight: 600;
                     }
                 }
                 &_price {
                     color: rgb(var(--colorPrice));
-                    font-size: 1rem;
+                    font-family: $fontTitle;
+                    font-size: calc(var(--fontSizeNormal) + 0.2rem);
                     font-weight: bold;
-                    letter-spacing: 2px;
+                    letter-spacing: 0.5px;
                     display: flex;
                     align-items: center;
-                    height: 30px;
                     position: relative;
-                    gap: 0.5rem;
+                    gap: 1rem;
                     &_quantity {
                         position: absolute;
                         transform: translateY(-50%);
-                        color: rgb(var(--colorText));
-                        text-shadow: 0 0 10px #000;
-                        font-size: 0.875rem;
+                        color: rgb(var(--colorText));   
+                        text-shadow: 0 0 10px rgb(var(--colorBackgroundLv1));
+                        font-size: calc(var(--fontSizeNormal) - 0.05rem);
                         opacity: 0.65;
-                        font-family: $fontTitle;
                         font-weight: 500;
                         display: flex;
                         align-items: center;
@@ -162,15 +142,16 @@
                         }
                         i {
                             margin-top: 0;
-                            font-size: 0.825rem;
+                            font-size: calc(var(--fontSizeNormal) - 0.1rem);
+                            opacity: var(--opacityNormal);
+                            color: rgba(var(--colorIcon), var(--opacityNormal));
                         }
                     }
                     > span {
-                        font-size: 0.85rem;
+                        font-size: calc(var(--fontSizeNormal) - 0.05rem);
                         font-weight: normal;
-                        color: rgba(var(--colorText), 0.6);
+                        color: rgba(var(--colorText), var(--opacityNormal));
                         text-decoration: line-through;
-                        // margin-left: 0.5rem;
                         display: flex;
                     }
                 }
@@ -180,44 +161,45 @@
         }
         &_action {
             position: absolute;
-            font-size: 0.9rem;
-            background: rgba(var(--colorBackgroundLv2), 0.6);
-            padding: 0.5rem 0;
+            padding: 0;
             display: flex;
             gap: 0;
+            overflow: hidden;
             border-bottom-left-radius: $radiusBoxSmall;
             border-top-right-radius: $radiusBoxNormal;
-            z-index: -1;
+            z-index: 1;
             top: 0.25rem;
-            right: 0.375rem;
+            right: 0.275rem;
             &:dir(rtl), [dir="rtl"] & {
                 right: unset;
-                left: 0.375rem;
+                left: 0.275rem;
             }
-            .addToCart, .heart {
-                height: 0.9rem;
-                aspect-ratio: 1/1;
-                opacity: 0.75;  
-                transition: all 0.3s;
+            i {
+                font-size: calc(var(--fontSizeNormal) - 0.025rem);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0.5rem 0.625rem;
+                color: rgba(var(--colorIcon), var(--opacityNormal));
+                background: rgba(var(--colorBackgroundLv2), 0.75);
                 cursor: pointer;
-                padding-inline-start: 2.25rem;
-                background-size: 100% 100% !important;
+                &.active {
+                    color: rgb(var(--colorLv1));
+                    &.fa-heart {
+                        color: rgb(var(--colorRed));
+                    }
+                }
                 &:not(:first-child){
-                    border-inline-start: 1px solid rgba(var(--colorText), 0.25);
+                    border-inline-start: 1px solid rgba(var(--colorText), 0.2);
+                }
+                &:hover {
+                    color: rgb(var(--colorLv1));
+                    background: rgba(var(--colorBackgroundLv2), 0.85);
                 }
             }
-            .addToCart {
-                background: url('/storage/images/svg/icon-cart-header.svg') no-repeat center center;
-                &:hover {
-                    background: url('/storage/images/svg/icon-cart-header-success.svg') no-repeat center center !important;
-                    background-size: 100% 100% !important;
-                }
-            }
-            .heart {
-                background: url('/storage/images/svg/icon-heart-1.svg') no-repeat center center;
-                &:hover {
-                    background: url('/storage/images/svg/icon-heart-1-success.svg') no-repeat center center !important;
-                    background-size: 100% 100% !important;
+            @media(max-width: 577px){
+                i {
+                    padding: 0.4rem 0.5rem;
                 }
             }
         }
@@ -245,14 +227,16 @@
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    background: rgba(0,0,0,0.8);
+                    background: rgba(var(--colorBackgroundLv2), 0.75);
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     border: 1px solid rgb(var(--colorBackgroundLv3));
                     border-radius: 50%;
                     letter-spacing: 0.5px;
-                    font-size: 0.95rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.15rem);
+                    font-family: $fontTitle;
+                    font-weight: 600;
                     color: rgb(var(--colorText));
                 }
                 img {
@@ -264,7 +248,7 @@
                     object-fit: cover;
                 }
                 &.selected, &:hover {
-                    border: 1px solid rgb(var(--colorText));
+                    border: 1px solid rgb(var(--colorPrice));
                 }
             }
         }
@@ -297,11 +281,15 @@
             width: calc(50% - 0.1625rem);
             &_image {
                 &_content {
-                    padding: 0.5rem;
-                    gap: 0.125rem;
+                    padding: 0.5rem 0.75rem 0.625rem 0.75rem;
+                    gap: 0.325rem;
                     &_price {
+                        gap: 0.75rem;
+                        > span {
+                            display: none;
+                        }
                         &_quantity {
-                            gap: 0.125rem;
+                            gap: 0.25rem;
                         }
                     }
                 }

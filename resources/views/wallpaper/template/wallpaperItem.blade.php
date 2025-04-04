@@ -137,13 +137,13 @@
                     </a>
                     <!-- thêm vào giỏ hành nhanh -->
                     <div class="wallpaperGridBox_item_action">
-                        <div class="heart"></div>
+                        <i class="fa-regular fa-heart"></i>
                         @php
                             $keyPriceAll = [];
                             foreach($product->prices as $p) $keyPriceAll[] = $p->id;
                             $keyPriceAll = implode('-', $keyPriceAll);
                         @endphp
-                        <div class="addToCart" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}', 'all');"></div>
+                        <i class="fa-solid fa-bag-shopping" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}', 'all');"></i>
                     </div>
                     <!-- danh sách ảnh -->
                     <div class="wallpaperGridBox_item_imageList">

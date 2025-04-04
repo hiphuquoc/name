@@ -1,9 +1,8 @@
 .breadcrumbBox {
     overflow: hidden;
-    color: rgba(var(--colorText), 0.7);
-    font-size: 0.9rem;
+    color: rgba(var(--colorText), var(--opacityNormal));
+    font-size: calc(var(--fontSizeNormal) - 0.025rem);
     font-weight: normal;
-    // margin-top: 0.75rem;
     a {
         color: rgb(var(--colorText));
         &:hover {
@@ -15,21 +14,6 @@
             margin-right: 0.5rem;
             margin-left: 0.75rem;
             font-size: 0.6rem;
-            color: rgb(var(--bg-06));
         }
     }
-    // @media(max-width: 991px){
-    //     margin-top: 0.5rem;
-    // }
-    // @media(max-width: 767px){
-    //     font-size: 0.85rem;
-    // }
 }
-
-// .breadcrumbMobileBox {
-//     display: flex;
-//     // display: none;
-//     // @media(max-width: 991px){
-//     //     display: flex;
-//     // }
-// }

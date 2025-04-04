@@ -4,10 +4,13 @@
     @endphp
     <div class="headerBottom_item" onClick="toggleMenuListMobile();">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/icon-user.svg') }}" alt="{{ $myDownloadsByLanguage }}" title="$myDownloadsByLanguage" />
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-user.svg');
+            @endphp
+            {!! $icon !!}
         </div>
         <div class="headerBottom_item_text">
-            <div class="maxLine_1" style="max-width:120px;">{{ $user->email ?? ''}}</div>
+            <div class="maxLine_1" style="max-width:120px;">{{ $user->name ?? ''}}</div>
             <div class="headerBottom_item_text_modal">
                 <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
                     <i class="fa-solid fa-download"></i>
@@ -39,7 +42,10 @@
     @endphp
     <div class="headerBottom_item" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/sign-in-alt.svg') }}" alt="{{ $loginByLanguage }}" title="{{ $loginByLanguage }}" />
+            @php
+                $icon = file_get_contents('storage/images/svg/sign-in-alt.svg');
+            @endphp
+            {!! $icon !!}
         </div>
         <div class="headerBottom_item_text">
             {{ $loginByLanguage }}

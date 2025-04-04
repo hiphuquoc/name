@@ -27,7 +27,7 @@
         cursor: pointer;
         color: #808080;
         &.selected {
-            color: rgba(var(--colorText), 0.75);
+            color: rgba(var(--colorText), var(--opacityNormal));
         }
         input {
             display: none;
@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     color: rgba(var(--colorTextLight), 1);
-    font-size: 0.9rem;
+    font-size: calc(var(--fontSizeNormal) - 0.025rem);
     svg {
         scale: 0.85;
         margin-right: 0.25rem;

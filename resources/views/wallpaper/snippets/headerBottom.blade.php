@@ -16,7 +16,10 @@
     @endphp
     <a class="headerBottom_item" href="https://zalo.me/{{ $phoneCustomerService }}">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/headphones.svg') }}" alt="{{ $altSupport }}" title="{{ $altSupport }}" loading="lazy" />
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-headphone.svg');
+            @endphp
+            {!! $icon !!}
         </div>
         <div class="headerBottom_item_text maxLine_1">
             {{ $nameSupport }}
@@ -25,7 +28,10 @@
     <!-- hướng dẫn tải -->
     <a id="js_loadLinkDownloadGuide" class="headerBottom_item" href="/">
         <div class="headerBottom_item_icon">
-            <img src="{{ Storage::url('images/svg/book-open-cover.svg') }}" alt="{{ $altGuide }}" title="{{ $altGuide }}" loading="lazy" />
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-book-open.svg');
+            @endphp
+            {!! $icon !!}
         </div>
         <div class="headerBottom_item_text maxLine_1">
             {{ $nameGuide }}

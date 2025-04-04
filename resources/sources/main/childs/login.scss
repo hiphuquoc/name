@@ -11,7 +11,7 @@
     &_text {
         margin-bottom: 1rem;
         &_title {
-            font-size: 1.1rem;
+            font-size: calc(var(--fontSizeNormal) + 0.175rem);
             font-weight: 600;
             margin-bottom: 0.25rem;
             color: rgb(var(--colorLv1));
@@ -55,9 +55,9 @@
         transform-style: preserve-3d;
         &_head {
             margin-bottom: 1.25rem;
-            font-size: 1.2rem;
+            font-size: calc(var(--fontSizeNormal) + 0.275rem);
             font-weight: bold;
-            font-family: $fontTitle;
+            
             color: rgb(var(--colorText));
             text-align: center;
         }
@@ -71,7 +71,7 @@
                 label {
                     flex: 0 0 150px;
                     font-weight: 600;
-                    font-size: 0.95rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.025rem);
                 }
                 &:not(:first-child){
                     margin-top: 1.25rem;
@@ -114,7 +114,7 @@
         &_box {
             &_head {
                 margin-bottom: 1rem;
-                font-size: 1.15rem;
+                font-size: calc(var(--fontSizeNormal) + 0.225rem);
             }
             &_body {
                 &:not(:last-child){
@@ -131,7 +131,7 @@
     @media(max-width: 991px){
         &_box {
             &_head {
-                font-size: 1.1rem;
+                font-size: calc(var(--fontSizeNormal) + 0.175rem);
             }
         }
     }
@@ -139,7 +139,7 @@
         &_box {
             &_head {
                 margin-bottom: 0.75rem;
-                font-size: 1.05rem;
+                font-size: calc(var(--fontSizeNormal) + 0.125rem);
             }
             &_body {
                 &:not(:last-child){
@@ -162,7 +162,7 @@
 }
 .noticeLogin {
     color: rgb(var(--colorRed));
-    font-size: 0.9rem;
+    font-size: calc(var(--fontSizeNormal) - 0.025rem);
 }
 .loginFormCustomer {
     width: 100%;
@@ -172,8 +172,8 @@
         }
     }
     &_title {
-        font-size: 1.1rem;
-        font-family: $fontTitle;
+        font-size: calc(var(--fontSizeNormal) + 0.175rem);
+        
         text-align: center;
         padding: 0;
         letter-spacing: 0.5px;
@@ -210,7 +210,7 @@
     }
 }
 .loginFormSocial {
-    font-size: 0.85rem;
+    font-size: calc(var(--fontSizeNormal) - 0.075rem);
     &_title {
         padding-top: 0.5rem;
         text-align: center;
@@ -257,7 +257,7 @@
     justify-content: center;
     align-items: center;
     color: #fff;
-    font-size: 0.85rem;
+    font-size: calc(var(--fontSizeNormal) - 0.075rem);
     min-width: 220px;
     padding: 0 0.5rem;
     &:hover {

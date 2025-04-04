@@ -26,7 +26,7 @@
             {{ $title }}
         </a>
         <div class="cartBox_list_item_content_price">
-            {!! $xhtmlPrice !!} <span>/{!! $cartToView['option_name'] !!}</span>
+            {!! $xhtmlPrice !!} <span>- {!! $cartToView['option_name'] !!}</span>
         </div>
         {{-- <div class="cartBox_list_item_content_orther">
             <div class="cartBox_list_item_content_orther_quantity">
@@ -43,7 +43,11 @@
             @endif
         </div> --}}
         <div class="cartBox_list_item_content_action" onclick="{{ $eventRemoveProductCart }}">
-            <img src="/storage/images/svg/icon-trash.svg" alt="{{ config('data_language_1.'.$language.'.remove_item_in_cart') }}" title="{{ config('data_language_1.'.$language.'.remove_item_in_cart') }}" />
+            @php
+                $icon = file_get_contents('storage/images/svg/icon-trash.svg');
+            @endphp
+            {!! $icon !!}
+            {{-- <img src="/storage/images/svg/icon-trash.svg" alt="{{ config('data_language_1.'.$language.'.remove_item_in_cart') }}" title="{{ config('data_language_1.'.$language.'.remove_item_in_cart') }}" /> --}}
         </div>
     </div>
 @endif

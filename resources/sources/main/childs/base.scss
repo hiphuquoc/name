@@ -6,62 +6,19 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 0.975rem;
-  line-height: 1.68rem;
-  @media(max-width: 1199px){
-    font-size: 0.95rem;
-  }
-  @media(max-width: 991px){
-    font-size: 0.925rem;
-  }
-  @media(max-width: 767px){
-    font-size: 0.9rem;
-  }
 }
 
 body {
-  font-size: 0.925rem;
+  font-size: var(--fontSizeNormal);
   font-weight: 500;
   font-family: $fontText;
   box-sizing: border-box;
-  color: rgba(var(--colorText), 0.8);
-
-  // #c0d0f1
-  
+  color: rgba(var(--colorText), var(--opacityNormal));
+  line-height: var(--lineHeightNormal);
   &.background {
     background: rgb(var(--colorBackgroundLv1));
   }
-  &::-webkit-scrollbar {
-    width: 6px; /* Chiều rộng của thanh cuộn */
-  }
-  &::-webkit-scrollbar-thumb {
-    background: rgba(var(--colorText), 0.5);
-    border-radius: 100px; /* Độ cong của "nút" */
-  }
-  &::-webkit-scrollbar-track {
-    background: rgba(var(--colorBackgroundLv2), 0.75);
-  }
-  @media(max-width: 1199px){
-    // font-size: 0.9rem;
-    // line-height: 1.66;
-    &::-webkit-scrollbar {
-      width: 5px;
-    }
-  }
-  // @media(max-width: 991px){
-  //   // font-size: 0.875rem;
-  //   // line-height: 1.64;
-  //   &::-webkit-scrollbar {
-  //     width: 5px;
-  //   }
-  // }
-  // @media(max-width: 767px){
-  //   // font-size: 0.85rem;
-  //   // line-height: 1.62;
-  //   &::-webkit-scrollbar {
-  //     width: 3px;
-  //   }
-  // }
+  @include customScrollBar;
 }
 
 .blurBackground {
@@ -71,6 +28,7 @@ body {
 
 a {
   text-decoration: none;
+  font-family: "SVN-Gilroy", sans-serif;
   color: rgb(var(--colorTextLight));
   &:hover {
     color: rgb(var(--colorText));
@@ -79,6 +37,8 @@ a {
 
 strong {
   font-family: $fontTitle;
+  font-size: calc(var(--fontSizeNormal) + 0.05rem);
+  font-weight: 700;
 }
 
 h1, h2 {
@@ -86,42 +46,42 @@ h1, h2 {
 }
 
 h2, h3, h4, h5, h6 {
-  // margin-bottom: 0.5rem;
   color: rgb(var(--colorTitle));
-  font-style: $fontText;
-  letter-spacing: 0.25px;
   font-family: $fontTitle;
-  font-weight: 500;
-  // @media(max-width: 767px){
-  //   margin-bottom: 0.325rem;
-  // }
-}
-
-h3, h4 {
-  font-size: 1.05rem;
-  @media(max-width: 1199px){
-    font-size: 1rem;
-  }
-  @media(max-width: 991px){
-    font-size: 0.95rem;
+  line-height: calc(var(--lineHeightNormal) - 0.2);
+  font-weight: 600;
+  .light &, .gray & {
+    font-weight: 700;
   }
 }
 
-h5, h6 {
-  font-size: 1rem;
+h3 {
+  font-size: calc(var(--fontSizeNormal) + 0.225rem);
   @media(max-width: 1199px){
-    font-size: 0.95rem;
+    font-size: calc(var(--fontSizeNormal) + 0.2rem);
   }
   @media(max-width: 991px){
-    font-size: 0.9rem;
+    font-size: calc(var(--fontSizeNormal) + 0.175rem);
+  }
+}
+
+h4, h5, h6 {
+  font-size: calc(var(--fontSizeNormal) + 0.175rem);
+  @media(max-width: 1199px){
+    font-size: calc(var(--fontSizeNormal) + 0.15rem);
+  }
+  @media(max-width: 991px){
+    font-size: calc(var(--fontSizeNormal) + 0.125rem);
   }
 }
 
 .titlePage {
   margin-bottom: 0.5rem;
-  // @media(max-width: 767px){
-  //   margin-bottom: -0.25rem;
-  // }
+  @media(max-width: 991px){
+    &.customTitlePage {
+      margin-bottom: 0.25rem;
+    }
+  }
 }
 
 form {
@@ -173,17 +133,20 @@ form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  // @media(max-width: 1199px){
-  //   gap: 0.625rem;
-  // }
-  @media(max-width: 991px){
+  .light &, .gray & {
     gap: 0.325rem;
   }
-  // @media(max-width: 767px){
-  //   gap: 0.325rem;
-  // }
+  @media(max-width: 991px){
+    gap: 0.325rem;
+    .light &, .gray & {
+      gap: 0.25rem;
+    }
+  }
   @media(max-width: 577px){
     gap: 0.25rem;
+    .light &, .gray & {
+      gap: 0.125rem;
+    }
   }
 }
 .contentBox {
@@ -263,7 +226,7 @@ table {
 
 blockquote{
 	display:block;
-  background: rgba(var(--colorBackgroundLv2), 0.75);
+  background: rgba(var(--colorBackgroundLv2), var(--opacityNormal));
   padding: 0.75rem 0.75rem 0.75rem 2.25rem;
   margin-bottom: 0.75rem;
   margin-top: 0.75rem;
@@ -280,7 +243,7 @@ blockquote{
         position: absolute;
         left: 0.5rem;
         top: 1.25rem;
-        opacity: 0.75;
+        opacity: var(--opacityNormal);
 	}
 	&::after{
 		content: "";
@@ -302,51 +265,16 @@ blockquote{
 }
 
 .customScrollBar-y {
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll !important;
-    &::-webkit-scrollbar {
-      background-color: transparent;
-      width: 5px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: transparent;
-      border-radius: 1000px;
-      // -webkit-box-shadow: inset 0 0 6px var(--bg-03);
-    }
-    &::-webkit-scrollbar-track {
-      // -webkit-box-shadow: inset 0 0 6px var(--bg-03);
-      border-radius: $radiusBoxNormal;
-      background: transparent;
-    }
-    @media(max-width: 767px){
-      &::-webkit-scrollbar {
-        width: 4px;
-      }
-    }
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll !important;
+  
+  @include customScrollBar;
 }
 .customScrollBar-x {
   width: 100%;
   overflow-x: scroll !important;
-  &::-webkit-scrollbar {
-    background-color: transparent;
-    height: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgb(var(--bg-03));
-    border-radius: 1000px;
-    -webkit-box-shadow: inset 0 0 6px #fff;
-  }
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px #fff;
-    border-radius: $radiusBoxNormal;
-    background: transparent;
-  }
-  @media(max-width: 767px){
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
-  }
+  @include customScrollBar;
 }
 
 .fa-regular, .far {
@@ -377,14 +305,15 @@ blockquote{
 }
 
 .button {
-  padding: 0.5rem 2rem;
+  padding: 0.75rem 2rem;
   background: linear-gradient(45deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
-  display: inline-block;
+  display: flex;
+  align-items: center;
   font-family: $fontTitle;
   color: #fff;
   border-radius: $radiusBoxNormal;
   cursor: pointer;
-  font-size: inherit;
+  font-size: 1rem;
   border: none;
   text-align: center;
   letter-spacing: 0.5px;
@@ -392,6 +321,10 @@ blockquote{
   box-shadow: 0 2px 0 rgb(var(--colorBackgroundLv3));
   text-shadow: 1px 1px 10px rgba(var(--colorBackgroundLv1), 0.5);
   transition: all 0.2s;
+  height: 47.5px;
+  .light &, .gray & {
+    height: 50px;
+  }
   &:focus, &:hover {
     color: #fff;
     outline: none;
@@ -405,7 +338,7 @@ blockquote{
   }
   &.cancel {
     background: rgb(var(--bg-04));
-    color: rgba(var(--colorText), 0.8);
+    color: rgba(var(--colorText), var(--opacityNormal));
     &:hover {
       outline: none;
       background: rgb(var(--bg-05));
@@ -426,7 +359,7 @@ blockquote{
 input, textarea, select {
   padding: 0.75rem 1rem;
   width: 100%;
-  font-size: 1rem;
+  font-size: calc(var(--fontSizeNormal) + 0.075rem);
   font-family: $fontText;
   border-radius: $radiusBoxNormal;
   border: 1px solid var(--bg-05);
@@ -461,7 +394,7 @@ input, textarea, select {
 
 label {
   // font-weight: 600;
-  font-size: 0.925rem;
+  font-size: var(--fontSizeNormal);
   display: flex;
   margin-bottom: 0.2rem;
   display: flex;
@@ -470,7 +403,7 @@ label {
     &:after {
       content: '*';
       color: rgb(var(--colorRed));
-      font-size: 1.1rem;
+      font-size: calc(var(--fontSizeNormal) + 0.175rem);
       margin-left: 0.25rem;
     }
   }
@@ -478,8 +411,7 @@ label {
     &:after {
       content: 'Vui lòng kiểm tra lại trường này';
       color: rgb(var(--colorRed));
-      font-size: 0.9rem;
-      font-family: $fontTitle;
+      font-size: calc(var(--fontSizeNormal) - 0.025rem);
       margin-left: 0.25rem;
     }
   }
@@ -499,7 +431,7 @@ label {
   padding: 0.15rem 0.5rem;
   border-radius: $radiusBoxNormal;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: calc(var(--fontSizeNormal) - 0.025rem);
   background: rgb(var(--bg-02));
   &:not(:last-child){
     margin-right: 0.25rem;
@@ -618,16 +550,16 @@ label {
       cursor: pointer;
       margin-bottom: 0;
       font-weight: normal;
-      font-size: 0.85rem;
+      font-size: calc(var(--fontSizeNormal) - 0.075rem);
       padding: 0 0.75rem;
-      opacity: 0.8;
+      opacity: var(--opacityNormal);
       z-index: 10;
       position: relative;
   }
   > input {
       display: flex;
       margin-top: -2px;
-      font-size: 1rem;
+      font-size: calc(var(--fontSizeNormal) + 0.075rem);
       padding: 0;
       border: none;
       outline: none;
@@ -657,7 +589,7 @@ label {
       top: 50%;
       transform: translateY(-50%);
       color: rgb(var(--bg-06));
-      font-size: 0.95rem;
+      font-size: calc(var(--fontSizeNormal) + 0.025rem);
       z-index: 1;
   }
   &.email {
@@ -683,25 +615,25 @@ label {
   &.adult {
       &:after {
           content: "\f183";
-          font-size: 1.1rem;
+          font-size: calc(var(--fontSizeNormal) + 0.175rem);
       }
   }  
   &.child {
       &:after {
           content: "\f1ae";
-          font-size: 1.1rem;
+          font-size: calc(var(--fontSizeNormal) + 0.175rem);
       }
   } 
   &.old {
       &:after {
           content: "\e53c";
-          font-size: 1.1rem;
+          font-size: calc(var(--fontSizeNormal) + 0.175rem);
       }
   } 
   &.message {
       &:after {
           content: "\f4ad";
-          font-size: 1.1rem;
+          font-size: calc(var(--fontSizeNormal) + 0.175rem);
       }
   }
   select {
@@ -808,7 +740,7 @@ label {
       content: '\f00c';
       @include fontAwesome;
       color: rgb(var(--colorSuccess));
-      font-size: 0.9rem;
+      font-size: calc(var(--fontSizeNormal) - 0.025rem);
       margin-left: 0.3rem;
   }
   }
@@ -838,7 +770,6 @@ label {
 }
 .select2-container .select2-selection--single .select2-selection__rendered {
   padding-left: 0 !important;
-  font-family: $fontTitle;
 }
 .lazyloadWithResize, .lazyload {
   transition: opacity 0.5s ease-in-out;

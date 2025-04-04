@@ -99,7 +99,7 @@
                 }
             }
             &_desc {
-                font-size: 0.9rem;
+                font-size: calc(var(--fontSizeNormal) - 0.025rem);
                 // font-style: italic;
             }
             &_info {
@@ -161,7 +161,7 @@
             &_image {
                 width: 100%;
                 position: relative;
-                padding-top: calc(100% / 1.7777); // Tỷ lệ 16:9 mà không dùng aspect-ratio
+                padding-top: calc(100% / 1.7777);
                 border-top-left-radius: inherit;
                 border-top-right-radius: inherit;
                 overflow: hidden;
@@ -184,21 +184,20 @@
                 padding: 0.75rem 1rem;
                 &_title {
                     h2, h3, h4 {
-                        font-size: 0.9rem;
+                        font-size: calc(var(--fontSizeNormal) - 0.025rem);
                         margin-bottom: 0;
                         letter-spacing: 0.5px;
                         text-align: left;
                         &:dir(rtl), [dir="rtl"] & {
                             text-align: right;
                         }
-                        // line-height: 1.58;
                     }
                 }
                 &_info {
                     display: flex;
                     gap: 0.75rem;
-                    font-size: 0.85rem;
-                    opacity: 0.8;
+                    font-size: calc(var(--fontSizeNormal) - 0.075rem);
+                    opacity: var(--opacityNormal);
                 }
             }
         }
@@ -241,7 +240,7 @@
                 padding-top: 0.5rem;
             }
             h2, h3, h4 {
-                font-size: 0.9rem;
+                font-size: calc(var(--fontSizeNormal) - 0.025rem);
                 margin-bottom: 0;
                 letter-spacing: 0.5px;
                 display: flex;
@@ -251,7 +250,7 @@
                     @include fontAwesome;
                     content: "\f0da";
                     opacity: 0.5;
-                    font-size: 1rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.075rem);
                 }
             }
         }

@@ -1245,7 +1245,7 @@ html .content {
                 background: $bg-07;
                 border-radius: 50%;
                 color: #fff;
-                font-size: 0.85rem;
+                font-size: calc(var(--fontSizeNormal) - 0.075rem);
                 font-weight: bold;
                 aspect-ratio: 1/1;
                 width: 27px;
@@ -1709,7 +1709,7 @@ html .content {
                 background: rgba(0,0,0,0.4);
                 border-radius: 50%;
                 color: #fff;
-                font-size: 0.85rem;
+                font-size: calc(var(--fontSizeNormal) - 0.075rem);
                 &:hover {
                     background: rgba(0,0,0,0.5);
                 }

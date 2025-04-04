@@ -32,7 +32,6 @@
         img {
             height: calc(100vh - $heightMenu - 3rem);
             width: auto;
-            aspect-ratio: auto;
             position: sticky;
             top: calc($heightMenu + 1.25rem);
             display: flex;
@@ -48,8 +47,7 @@
         &_action {
             display: flex;
             align-items: center;
-            font-size: 0.85rem;
-            font-family: $fontTitle;
+            font-size: calc(var(--fontSizeNormal) - 0.075rem);
             text-align: left;
             &:dir(rtl), [dir="rtl"] & {
                 text-align: right;
@@ -57,12 +55,12 @@
             &_item {
                 padding: 0.5rem;
                 width: 100%;
-                background: rgba(var(--colorBackgroundLv2), 0.8);
+                background: rgba(var(--colorBackgroundLv2), var(--opacityNormal));
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 border-radius: $radiusBoxNormal;
-                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+                box-shadow: 0 0 10px var(--colorShadow);
                 cursor: pointer;
                 color: rgb(var(--colorText));
                 &:hover {

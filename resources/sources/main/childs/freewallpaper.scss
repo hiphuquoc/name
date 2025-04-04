@@ -35,7 +35,7 @@
             left: 0.5rem;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: calc(var(--fontSizeNormal) - 0.125rem);
             padding: 0.5rem;
             border-radius: $radiusBoxNormal;
             z-index: 2;
@@ -51,7 +51,7 @@
                     &_image {
                         img {
                             width: 28px;
-                            aspect-ratio: 1/1;
+                            height: 28px;
                             object-fit: cover;
                         }
                     }
@@ -70,7 +70,6 @@
                     background: rgb(var(--colorBackgroundLv1));
                     transform: translateY(-50%);
                     &_item {
-                        aspect-ratio: 1/1;
                         padding: 0.4rem;
                         display: flex;
                         justify-content: center;
@@ -86,7 +85,7 @@
                     display: flex;
                     width: 100%;
                     justify-content: flex-end;
-                    font-size: 0.95rem;
+                    font-size: calc(var(--fontSizeNormal) + 0.025rem);
                     &_item {
                         padding: 0.6rem;
                         display: flex;

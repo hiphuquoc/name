@@ -30,7 +30,7 @@ export default defineConfig({
   ],
   server: {
     watch: {
-      usePolling: true, // Giúp Vite theo dõi thay đổi file
+      usePolling: false, // Giúp Vite theo dõi thay đổi file
       interval: 100, // Điều chỉnh thời gian polling
     },
     hmr: {
@@ -39,10 +39,5 @@ export default defineConfig({
   },
   css: {
     devSourcemap: true, // Hỗ trợ sourcemap trong quá trình dev
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "./resources/sources/main/childs/variables.scss";\n`,
-      },
-    },
   },
 });

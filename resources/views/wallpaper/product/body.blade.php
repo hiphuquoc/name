@@ -74,7 +74,7 @@
                     <!-- id hidden -->
                     <input type="hidden" id="product_info_id" name="product_info_id" value="{{ $item->id ?? null }}" />
                     <!-- tiêu đề -->
-                    <h1 class="titlePage">{{ $itemSeo->title }}</h1>
+                    <h1 class="titlePage customTitlePage">{{ $itemSeo->title }}</h1>
                     <!-- yêu thích -->
                     @php
                         $countHeart = 0;
@@ -123,9 +123,10 @@
                                     $keyPriceAll        = [];
                                     foreach($item->prices as $price) $keyPriceAll[]  = $price->id;
                                     $keyPriceAll        = implode('-', $keyPriceAll);
+                                    $iconCart           = file_get_contents('storage/images/svg/icon-cart-header.svg');
                                 @endphp
                                 <button id="js_addToCart_button" type="button" class="button secondary" onClick="addToCart('{{ $item->id }}', '{{ $keyPriceAll }}', 'all');" aria-label="{{ $altCart }}">
-                                    <img src="{{ Storage::url('images/svg/shopping-cart.png') }}" alt="{{ $altCart }}" title="{{ $altCart }}" />
+                                    {!! $iconCart !!}
                                     <div class="maxLine_1">{{ $buttonNameCart }}</div>
                                 </button>
                                 <button type="button" class="button" onClick="openCloseModal('modalPaymentMethod');" aria-label="{{ $altPayment }}">
