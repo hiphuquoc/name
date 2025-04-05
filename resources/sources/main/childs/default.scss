@@ -77,7 +77,7 @@ $fontText: "SVN-Gilroy Bold", sans-serif;
   }
 }
 
-$heightMenu : 3.6rem;
+$heightMenu : 3.75rem;
 $radiusBoxSmall : 0.75rem;
 $radiusBoxNormal : 0.825rem;
 $radiusBoxLarge : 1rem;
@@ -289,6 +289,9 @@ $radiusBoxLarge : 1rem;
   z-index: -1;
   &:hover {
     display: none !important;
+  }
+  @media(max-width: 991px){
+    top: calc($heightMenu - 0.25rem); /* do từ 991 giao diện heightMenu giảm 0.25rem */
   }
 }
 

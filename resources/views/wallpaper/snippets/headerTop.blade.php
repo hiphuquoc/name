@@ -40,29 +40,36 @@
             @if(!empty($item->seos)&&$item->seos->isNotEmpty())
                 <div id="ja_closeLanguageBoxList" class="languageBox_list">
                     <div class="languageBox_list_close" onclick="closeLanguageBoxList('ja_closeLanguageBoxList');"><i class="fa-sharp fa-solid fa-xmark"></i></div>
-                    @foreach(config('language') as $ld)
-                        @php
-                            $queryString = !empty(request()->getQueryString()) ? '?'.request()->getQueryString() : '';
-                            $flagHas = false;
-                            foreach($item->seos as $seo){
-                                if(!empty($seo->infoSeo)){
-                                    if($seo->infoSeo->language==$ld['key']) {
-                                        $urlOfPageWithLanguage = $seo->infoSeo->slug_full.$queryString;
-                                        $flagHas = true;
-                                        break;
+                    {{-- <div class="languageBox_list_note">
+                        <i class="fa-solid fa-globe"></i>
+                        <span>Hãy chọn ngôn ngữ yêu thích sử dụng của bạn!</span>
+                    </div> --}}
+                    <div class="languageBox_list_content">
+                        @foreach(config('language') as $ld)
+                            @php
+                                $queryString = !empty(request()->getQueryString()) ? '?'.request()->getQueryString() : '';
+                                $flagHas = false;
+                                foreach($item->seos as $seo){
+                                    if(!empty($seo->infoSeo)){
+                                        if($seo->infoSeo->language==$ld['key']) {
+                                            $urlOfPageWithLanguage = $seo->infoSeo->slug_full.$queryString;
+                                            $flagHas = true;
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                            /* selected */
-                            $selected = null;
-                            if($seo->infoSeo->language==$language) $selected = 'selected';
-                        @endphp
-                        @if($flagHas==true)
-                            <a href="{{ $urlOfPageWithLanguage }}" class="languageBox_list_item maxLine_1 {{ $selected }}">{{ $ld['name_by_language'] }}</a>
-                        @else 
-                            <div class="languageBox_list_item maxLine_1">{{ $ld['name_by_language'] }}</div>
-                        @endif
-                    @endforeach
+                                /* selected */
+                                $selected = null;
+                                if($seo->infoSeo->language==$language) $selected = 'selected';
+                            @endphp
+                            @if($flagHas==true)
+                                <a href="{{ $urlOfPageWithLanguage }}" class="languageBox_list_content_item maxLine_1 {{ $selected }}">{{ $ld['name_by_language'] }}</a>
+                            @else 
+                                <div class="languageBox_list_content_item maxLine_1">{{ $ld['name_by_language'] }}</div>
+                            @endif
+                        @endforeach
+                        
+                    </div>
                 </div>
             @endif
             <div id="ja_closeLanguageBoxList_background" class="languageBox_background"></div>
@@ -81,33 +88,25 @@
         </div> --}}
         <div class="viewMode">
             <div class="viewMode_show">
-                @php
-                    $icon = file_get_contents('storage/images/svg/icon-light-light.svg');
-                @endphp
-                {!! $icon !!}
-            </div>
-            <div class="viewMode_list">
-                <div class="viewMode_list_item selected">
+                <div class="viewMode_show_boxHeight">
                     @php
                         $icon = file_get_contents('storage/images/svg/icon-light-light.svg');
                     @endphp
                     {!! $icon !!}
-                    <div>Chế độ sáng</div>
                 </div>
-                <div class="viewMode_list_item">
+            </div>
+            <div class="viewMode_list">
+                @foreach(config('main_'.env('APP_NAME').'.view_mode') as $viewMode)
                     @php
-                        $icon = file_get_contents('storage/images/svg/icon-light-gray.svg');
+                        $icon       = file_get_contents($viewMode['icon']);
+                        $selected   = '';
+                        if($viewMode['key']==request()->cookie('view_mode')) $selected = 'selected';
                     @endphp
-                    {!! $icon !!}
-                    <div>Chế độ trung tính</div>
-                </div>
-                <div class="viewMode_list_item">
-                    @php
-                        $icon = file_get_contents('storage/images/svg/icon-light.svg');
-                    @endphp
-                    {!! $icon !!}
-                    <div>Chế độ tối</div>
-                </div>
+                    <div class="viewMode_list_item {{ $selected }}" onclick="setViewMode('{{ $viewMode['key'] }}');">
+                        {!! $icon !!}
+                        <div>{{ $viewMode['name'] }}</div>
+                    </div>
+                @endforeach
             </div>
             <div class="viewMode_background"></div>
         </div>
@@ -203,5 +202,20 @@
             });
             return error;
         }
+        /* thiết lập chế độ xem */
+        function setViewMode(viewMode){
+            $.ajax({
+                url         : '{{ route("main.setViewMode") }}',
+                type        : 'get',
+                dataType    : 'json',
+                data        : {
+                    view_mode   : viewMode
+                },
+                success     : function(response){
+                    location.reload();
+                }
+            });
+        }
+        
     </script>
 @endpush

@@ -197,4 +197,21 @@ return [
             'color'     => '#FFF2C2',
         ],
     ],
+    'view_mode' => [
+        [
+            'key'  => 'light',
+            'name' => 'Chế độ sáng',
+            'icon'  => 'storage/images/svg/icon-light-light.svg',
+        ],
+        [
+            'key'   => 'gray',
+            'name'  => 'Chế độ trung tính',
+            'icon'  => 'storage/images/svg/icon-light-gray.svg',
+        ],
+        [
+            'key'   => 'dark',
+            'name'  => 'Chế độ tối',
+            'icon'  => 'storage/images/svg/icon-light.svg',
+        ]
+    ],
 ];

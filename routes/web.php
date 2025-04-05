@@ -63,8 +63,10 @@ use App\Http\Controllers\GoogledriveController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
+/* thiết lập giao diện */
+Route::get('/setViewMode', [AjaxController::class, 'setViewMode'])->name('main.setViewMode');
 /* login */
+Route::get('/he-thong', [LoginController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/loginAdmin', [LoginController::class, 'loginAdmin'])->name('admin.loginAdmin');
 Route::post('/loginCustomer', [LoginController::class, 'loginCustomer'])->name('admin.loginCustomer');
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');

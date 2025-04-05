@@ -2,7 +2,7 @@
     @php
         $myDownloadsByLanguage = config('data_language_1.'.$language.'.my_downloads');
     @endphp
-    <div class="headerBottom_item" onClick="toggleMenuListMobile();">
+    <div onClick="toggleMenuListMobile();">
         <div class="headerBottom_item_icon">
             @php
                 $icon = file_get_contents('storage/images/svg/icon-user.svg');
@@ -10,7 +10,7 @@
             {!! $icon !!}
         </div>
         <div class="headerBottom_item_text">
-            <div class="maxLine_1" style="max-width:120px;">{{ $user->name ?? ''}}</div>
+            <div class="maxLine_1">{{ $user->name ?? ''}}</div>
             <div class="headerBottom_item_text_modal">
                 <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
                     <i class="fa-solid fa-download"></i>
@@ -40,7 +40,7 @@
     @php
         $loginByLanguage = config('data_language_1.'.$language.'.login');
     @endphp
-    <div class="headerBottom_item" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
+    <div onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
         <div class="headerBottom_item_icon">
             @php
                 $icon = file_get_contents('storage/images/svg/sign-in-alt.svg');

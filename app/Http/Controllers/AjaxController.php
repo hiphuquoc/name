@@ -28,6 +28,14 @@ class AjaxController extends Controller {
         $this->BuildInsertUpdateModel  = $BuildInsertUpdateModel;
     }
 
+    public static function setViewMode(Request $request){
+        $viewMode          = $request->get('view_mode');
+        if(!empty($viewMode)){
+            Cookie::queue('view_mode', $viewMode, 0);
+        }
+        return true;
+    }
+
     public static function loadLoading(){
         $xhtml      = view('wallpaper.template.loading')->render();
         echo $xhtml;

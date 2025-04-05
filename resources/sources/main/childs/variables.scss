@@ -45,9 +45,8 @@ $dark-colorButtonLv2: #00925a;
 $dark-colorTextLight: #ffd100;
 $dark-colorTitle: #c0d0f1;
 $dark-colorText: #b5c4e0;
-// $dark-colorIcon: #7cd8b7;
-// $dark-colorIcon: #5473b3;
-$dark-colorIcon: #7793cc;
+$dark-colorIcon: #6586c7;
+// $dark-colorIcon: #7793cc;
 $dark-colorPrice: #ffd100;
 $dark-colorSuccess: #00d483;
 $dark-colorRed: #C62E2E;
@@ -55,23 +54,26 @@ $dark-colorBackgroundLv1: #1a202c;
 $dark-colorBackgroundLv2: #2d3848;
 $dark-colorBackgroundLv3: #3a4556;
 
-// Gray mode variables
-$gray-colorLv1: #00e88e;
-$gray-colorLv2: #00E38C;
-$gray-colorSLv1: #FF6500;
+// Gray mode variables (Updated)
+$gray-colorLv1: #2B4A4E; // Tông trung lập, dễ nhận diện trên cả nền sáng và tối  
+$gray-colorLv2: #1F3A3D; // Cân bằng độ sâu so với Dark & Light Mode  
+$gray-colorSLv1: #FF6500; // Giữ nguyên để đồng bộ với brand color  
 $gray-colorSLv2: #CD5C08;
-$gray-colorButtonLv1: #00e88e;
-$gray-colorButtonLv2: #006d57;
-$gray-colorTextLight: #ffd100;
-$gray-colorTitle: #c6d8fd;
-$gray-colorText: #c0d0f1;
-$gray-colorIcon: #5a7dc2;
-$gray-colorPrice: #ffd100;
-$gray-colorSuccess: #00d483;
+$gray-colorButtonLv1: #2B4A4E;
+$gray-colorButtonLv2: #1F3A3D;
+
+$gray-colorTextLight: #DAA520; // Màu chữ nổi bật, tránh quá chói trên nền xám  
+$gray-colorTitle: #C0C7E0; // Điều chỉnh nhẹ để có sự tương phản tốt hơn  
+$gray-colorText: #AEB7C9; // Giảm độ sáng để phù hợp với nền trung lập  
+$gray-colorIcon: #6C819F; // Giữ sắc xanh trung tính, dễ nhìn  
+$gray-colorPrice: #DAA520;
+$gray-colorSuccess: #00B67A; // Điều chỉnh để dễ nhận diện trên nền xám  
 $gray-colorRed: #C62E2E;
-$gray-colorBackgroundLv1: #1a202c;
-$gray-colorBackgroundLv2: #2d3848;
-$gray-colorBackgroundLv3: #3a4556;
+
+$gray-colorBackgroundLv1: #242A32; // Nền chính - trung lập giữa Dark & Light  
+$gray-colorBackgroundLv2: #2F363F; // Nền cấp 2, giữ độ sâu tốt  
+$gray-colorBackgroundLv3: #3C454F; // Nền cấp 3, không quá tối để tránh mất chi tiết  
+
 
 // Light mode variables
 $light-colorLv1: #2D336B;
@@ -80,15 +82,11 @@ $light-colorSLv1: #FF6500;
 $light-colorSLv2: #CD5C08;
 $light-colorButtonLv1: #2D336B;
 $light-colorButtonLv2: #191e44;
-$light-colorIcon: #7886C7;
-
 $light-colorTextLight: #313daa;
 $light-colorTitle: #2a2a2e;
 $light-colorText: #2e3038;
+$light-colorIcon: #7886C7;
 // $light-colorIcon: #5F8B4C;
-// $light-colorIcon: #8aaae5;
-
-
 $light-colorPrice: #ec5f00;
 $light-colorSuccess: #00d483;
 $light-colorRed: #C62E2E;

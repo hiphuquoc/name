@@ -57,6 +57,7 @@ class RoutingController extends Controller{
             /* cache HTML */
             $paramsSlug             = [];
             if(!empty($search)) $paramsSlug['search'] = $search;
+            if(!empty(Cookie::get('view_mode'))&&Cookie::get('view_mode')!='dark') $paramsSlug['viewMode'] = Cookie::get('view_mode');
             $nameCache              = self::buildNameCache($itemSeo['slug_full'], $paramsSlug).'.'.config('main_'.env('APP_NAME').'.cache.extension');
             $pathCache              = Storage::path(config('main_'.env('APP_NAME').'.cache.folderSave')).$nameCache;
             $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;

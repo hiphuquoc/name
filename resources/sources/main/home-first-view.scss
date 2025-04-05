@@ -102,7 +102,6 @@
                         margin-bottom: 0;
                         text-transform: none;
                         width: inherit;
-                        // text-shadow: 0 2px rgb(var(--colorBackgroundLv1));
                         font-weight: 600;
                         font-size: calc(var(--fontSizeNormal) + 0.2rem);
                         .light &, .gray & {
@@ -181,6 +180,9 @@
                     &_title {
                         h2, h3 {
                             font-size: calc(var(--fontSizeNormal) + 0.175rem);
+                            .light &, .gray & {
+                                font-size: calc(var(--fontSizeNormal) + 0.2rem);
+                            }
                         }
                     }
                 }
@@ -199,6 +201,9 @@
                     &_title {
                         h2, h3 {
                             font-size: calc(var(--fontSizeNormal) + 0.15rem);
+                            .light &, .gray & {
+                                font-size: calc(var(--fontSizeNormal) + 0.175rem);
+                            }
                         }
                         &_action {
                             display: flex;
@@ -218,6 +223,7 @@
         }
         &_box {
             gap: 0.75rem;
+            grid-template-columns: auto auto;
             &_item {
                 border-radius: $radiusBoxNormal;
                 &_content {
@@ -225,6 +231,9 @@
                     &_title {
                         h2, h3 {
                             font-size: calc(var(--fontSizeNormal) + 0.125rem);
+                            .light &, .gray & {
+                                font-size: calc(var(--fontSizeNormal) + 0.125rem);
+                            }
                         }
                     }
                     &_list {
@@ -240,12 +249,14 @@
             margin-bottom: 0.5rem;
         }
         &_box {
-            grid-template-columns: auto auto;
             &_item {
                 &_content {
                     &_title {
                         h2, h3 {
                             font-size: calc(var(--fontSizeNormal) + 0.1rem);
+                            .light &, .gray & {
+                                font-size: calc(var(--fontSizeNormal) + 0.1rem);
+                            }
                         }
                     }
                 }

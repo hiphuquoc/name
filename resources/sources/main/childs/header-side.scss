@@ -334,6 +334,18 @@ $widthCollapsed : 17rem;
                     flex: 0 0 1.5rem;
                     color: rgb(var(--colorIcon));
                     opacity: var(--opacityNormal);
+                    @media(max-width: 991px){
+                        width: 1.4rem;
+                        flex: 0 0 1.4rem;
+                    }
+                    @media(max-width: 767px){
+                        width: 1.35rem;
+                        flex: 0 0 1.35rem;
+                    }
+                    // @media(max-width: 577px){
+                    //     width: 1.3rem;
+                    //     flex: 0 0 1.3rem;
+                    // }
                 }
             }
             > span {
@@ -407,7 +419,7 @@ $widthCollapsed : 17rem;
                     align-items: center;
                     justify-content: center;
                     opacity: var(--opacityNormal);
-                    font-size: calc(var(--fontSizeNormal) - 0.025rem);
+                    font-size: calc(var(--fontSizeNormal) - 0.075rem);
                     cursor: pointer;
                     color: rgba(var(--colorIcon), var(--opacityNormal));
                     margin-left: auto;
@@ -465,7 +477,7 @@ $widthCollapsed : 17rem;
     justify-content: center;
     text-align: center;
     width: 100%;
-    padding: 1.75rem 0 .5rem 0;
+    padding: 1.5rem 0 0.25rem 0;
     margin: 0 auto;
 }
 
@@ -483,19 +495,19 @@ $widthCollapsed : 17rem;
     &_social {
         // border-top: 1px solid rgb(var(--colorBackgroundLv2));
         &_title {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             font-size: calc(var(--fontSizeNormal) - 0.025rem);
             
         }
         &_box {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
             &_item {
                 display: flex;
-                width: 1.725rem;
-                height: 28px;
-                border-radius: $radiusBoxSmall;
-                background: rgb(var(--colorBackgroundLv2));
+                width: 32px;
+                height: 32px;
+                border-radius: calc($radiusBoxSmall - 0.025rem);
+                background: rgb(var(--colorBackgroundLv1));
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -505,7 +517,7 @@ $widthCollapsed : 17rem;
                     opacity: 1;
                 }
                 i {
-                    font-size: calc(var(--fontSizeNormal) + 0.575rem);
+                    font-size: calc(var(--fontSizeNormal) + 0.25rem);
                     color: rgb(var(--colorLv1));
                     // text-shadow: 1px 1px 2px rgb(var(--colorLv2));
                 }
