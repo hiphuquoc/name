@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cookie;
 use App\Models\Page;
 use App\Models\Category;
 use App\Http\Controllers\SettingController;
@@ -52,7 +53,9 @@ class HomeController extends Controller {
         /* ngôn ngữ */
         SettingController::settingLanguage($language);
         /* cache HTML */
-        $nameCache              = $language.'home.'.config('main_'.env('APP_NAME').'.cache.extension');
+        $paramsSlug             = [];
+        if(!empty(Cookie::get('view_mode'))&&Cookie::get('view_mode')!='light') $paramsSlug['viewMode'] = Cookie::get('view_mode');
+        $nameCache              = RoutingController::buildNameCache($language.'home', $paramsSlug).'.'.config('main_'.env('APP_NAME').'.cache.extension');
         $pathCache              = Storage::path(config('main_'.env('APP_NAME').'.cache.folderSave')).$nameCache;
         $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
         if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
