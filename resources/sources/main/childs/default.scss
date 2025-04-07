@@ -45,33 +45,33 @@ $fontText: "SVN-Gilroy Bold", sans-serif;
   &:dir(rtl), [dir="rtl"] & {
     text-align: right;
   }
-  .light &, .gray & {
+  .light & {
     font-size: calc(var(--fontSizeNormal) + 0.5rem);
     font-weight: 700;
   }
   @media(max-width: 1199px){
     font-size: calc(var(--fontSizeNormal) + 0.4rem);
-    .light &, .gray & {
+    .light & {
       font-size: calc(var(--fontSizeNormal) + 0.45rem);
     }
   }
   @media(max-width: 991px){
     font-size: calc(var(--fontSizeNormal) + 0.35rem);
     margin-bottom: 0.75rem;
-    .light &, .gray & {
+    .light & {
       font-size: calc(var(--fontSizeNormal) + 0.4rem);
     }
   }
   @media(max-width: 767px){
     font-size: calc(var(--fontSizeNormal) + 0.3rem);
     margin-bottom: 0.75rem;
-    .light &, .gray & {
+    .light & {
       font-size: calc(var(--fontSizeNormal) + 0.35rem);
     }
   }
   @media(max-width: 577px){
     font-size: calc(var(--fontSizeNormal) + 0.25rem);
-    .light &, .gray & {
+    .light & {
       font-size: calc(var(--fontSizeNormal) + 0.3rem);
     }
   }
@@ -446,7 +446,7 @@ $radiusBoxLarge : 1rem;
     z-index: -2;
     pointer-events: none;
     overflow: hidden;
-    .light &, .gray & {
+    .light & {
       background: rgb(var(--colorBackgroundLv1));
     }
   }
@@ -461,7 +461,7 @@ $radiusBoxLarge : 1rem;
     pointer-events: none;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(var(--colorBackgroundLv1), 0.5) 15%, transparent);
-    .light &, .gray & {
+    .light & {
       background: linear-gradient(180deg, rgba(var(--colorBackgroundLv1), 0.25) 15%, transparent);
     }
   }
@@ -476,7 +476,7 @@ $radiusBoxLarge : 1rem;
     pointer-events: none;
     overflow: hidden;
     background: linear-gradient(90deg, rgba(0,0,0, 0.5) 0%, rgba(0,0,0, 0) 4.5%, rgba(0,0,0, 0) 95.5%, rgba(0,0,0, 0.5) 100%);
-    .light &, .gray & {
+    .light & {
       background: linear-gradient(90deg, rgba(var(--colorBackgroundLv1), 0.25) 0%, rgba(var(--colorBackgroundLv1), 0) 4.5%, rgba(var(--colorBackgroundLv1), 0) 95.5%, rgba(var(--colorBackgroundLv1), 0.5) 100%);
     }
   }
@@ -493,18 +493,18 @@ $radiusBoxLarge : 1rem;
     filter: blur(3px);
     -webkit-filter: blur(3px);
     height: 6.75rem;
-    .light &, .gray & {
+    .light & {
       height: 6.5rem;
     }
     @media(max-width: 767px){
       height: 6.625rem;
-      .light &, .gray & {
+      .light & {
         height: 6.325rem;
       }
     }
     @media(max-width: 577px){
       height: 6.5rem;
-      .light &, .gray & {
+      .light & {
         height: 6.25rem;
       }
     }
@@ -516,24 +516,23 @@ $radiusBoxLarge : 1rem;
   gap: 1rem;
   font-size: calc(var(--fontSizeNormal) - 0.125rem);
   > * {
-      color: rgba(var(--colorText), var(--opacityNormal));
-      background: rgb(var(--colorBackgroundLv3));
-      padding: 0.15rem 1rem;
-      border-radius: $radiusBoxLarge;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      box-shadow: 0 2px 7px var(--colorShadow);
-      @media(max-width: 767px){
-          padding: 0.15rem 0.75rem;
-          &:last-child {
-              display: none;
-          }
-      }
-      @media(max-width: 767px){
-          padding: 0.15rem 0.5rem;
-      }
+    color: rgba(var(--colorText), 0.75);
+    background: rgba(var(--colorBackgroundLv3), 0.75);
+    padding: 0.15rem 1rem;
+    border-radius: $radiusBoxLarge;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    @media(max-width: 767px){
+        padding: 0.15rem 0.75rem;
+        &:last-child {
+            display: none;
+        }
+    }
+    @media(max-width: 767px){
+        padding: 0.15rem 0.5rem;
+    }
   }
   i {
       opacity: var(--opacityNormal);

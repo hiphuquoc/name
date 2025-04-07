@@ -35,64 +35,100 @@ $bg-03: #e9ecef;
 $bg-02: #edf2f7;
 
 // Dark mode variables
-$dark-colorLv1: #00d483;
-$dark-colorLv2: #00925a;
+$dark-colorLv1: #a1ca55;
+$dark-colorLv2: #688532;
 $dark-colorSLv1: #FF6500;
 $dark-colorSLv2: #CD5C08;
-$dark-colorButtonLv1: #00d483;
-$dark-colorButtonLv2: #00925a;
-
+$dark-colorButtonLv1: #a1ca55;
+$dark-colorButtonLv2: #688532;
 $dark-colorTextLight: #ffd100;
 $dark-colorTitle: #c0d0f1;
 $dark-colorText: #b5c4e0;
-$dark-colorIcon: #6586c7;
-// $dark-colorIcon: #7793cc;
+$dark-colorIcon: #7793cc;
 $dark-colorPrice: #ffd100;
-$dark-colorSuccess: #00d483;
+$dark-colorSuccess: #a1ca55;
 $dark-colorRed: #C62E2E;
 $dark-colorBackgroundLv1: #1a202c;
 $dark-colorBackgroundLv2: #2d3848;
 $dark-colorBackgroundLv3: #3a4556;
 
 // Gray mode variables (Updated)
-$gray-colorLv1: #2B4A4E; // Tông trung lập, dễ nhận diện trên cả nền sáng và tối  
-$gray-colorLv2: #1F3A3D; // Cân bằng độ sâu so với Dark & Light Mode  
+$gray-colorLv1: #a1ca55; // Tông trung lập, dễ nhận diện trên cả nền sáng và tối  
+$gray-colorLv2: #688532; // Cân bằng độ sâu so với Dark & Light Mode  
 $gray-colorSLv1: #FF6500; // Giữ nguyên để đồng bộ với brand color  
 $gray-colorSLv2: #CD5C08;
-$gray-colorButtonLv1: #2B4A4E;
-$gray-colorButtonLv2: #1F3A3D;
-
+$gray-colorButtonLv1: #a1ca55;
+$gray-colorButtonLv2: #688532;
 $gray-colorTextLight: #DAA520; // Màu chữ nổi bật, tránh quá chói trên nền xám  
 $gray-colorTitle: #C0C7E0; // Điều chỉnh nhẹ để có sự tương phản tốt hơn  
 $gray-colorText: #AEB7C9; // Giảm độ sáng để phù hợp với nền trung lập  
 $gray-colorIcon: #6C819F; // Giữ sắc xanh trung tính, dễ nhìn  
 $gray-colorPrice: #DAA520;
-$gray-colorSuccess: #00B67A; // Điều chỉnh để dễ nhận diện trên nền xám  
+$gray-colorSuccess: #a1ca55; // Điều chỉnh để dễ nhận diện trên nền xám  
 $gray-colorRed: #C62E2E;
-
 $gray-colorBackgroundLv1: #242A32; // Nền chính - trung lập giữa Dark & Light  
 $gray-colorBackgroundLv2: #2F363F; // Nền cấp 2, giữ độ sâu tốt  
 $gray-colorBackgroundLv3: #3C454F; // Nền cấp 3, không quá tối để tránh mất chi tiết  
 
+// // Light mode variables
+// $light-colorLv1: #7c9e42;
+// $light-colorLv2: #5d792e;
+// $light-colorSLv1: #FF6500;
+// $light-colorSLv2: #CD5C08;
+// $light-colorButtonLv1: #7c9e42;
+// $light-colorButtonLv2: #5d792e;
+// $light-colorTextLight: #CD5C08;
+// $light-colorTitle: #2a2a2e;
+// $light-colorText: #2e3038;
+// $light-colorIcon: #808b6c;
+// // $light-colorIcon: #7793cc;
+// // $light-colorIcon: #5F8B4C;
+// $light-colorPrice: #ec5f00;
+// $light-colorSuccess: #7c9e42;
+// $light-colorRed: #C62E2E;
+// $light-colorBackgroundLv1: #fcfcfd;
+// $light-colorBackgroundLv2: #e9ecef;
+// $light-colorBackgroundLv3: #ced4da;
 
 // Light mode variables
-$light-colorLv1: #2D336B;
-$light-colorLv2: #191e44;
+$light-colorLv1: #538300;
+$light-colorLv2: #3f6300;
 $light-colorSLv1: #FF6500;
 $light-colorSLv2: #CD5C08;
-$light-colorButtonLv1: #2D336B;
-$light-colorButtonLv2: #191e44;
-$light-colorTextLight: #313daa;
+$light-colorButtonLv1: #538300;
+$light-colorButtonLv2: #3f6300;
+$light-colorTextLight: #CD5C08;
 $light-colorTitle: #2a2a2e;
 $light-colorText: #2e3038;
-$light-colorIcon: #7886C7;
+$light-colorIcon: #808b6c;
+// $light-colorIcon: #7793cc;
 // $light-colorIcon: #5F8B4C;
 $light-colorPrice: #ec5f00;
-$light-colorSuccess: #00d483;
+$light-colorSuccess: #538300;
 $light-colorRed: #C62E2E;
 $light-colorBackgroundLv1: #fcfcfd;
 $light-colorBackgroundLv2: #e9ecef;
 $light-colorBackgroundLv3: #ced4da;
+
+// // Light mode variables
+// $light-colorLv1: #557c12;
+// $light-colorLv2: #3b5808;
+// $light-colorSLv1: #FF6500;
+// $light-colorSLv2: #CD5C08;
+// $light-colorButtonLv1: #557c12;
+// $light-colorButtonLv2: #3b5808;
+// $light-colorTextLight: #CD5C08;
+// $light-colorTitle: #2a2a2e;
+// $light-colorText: #2e3038;
+// $light-colorIcon: #808b6c;
+// // $light-colorIcon: #7793cc;
+// // $light-colorIcon: #5F8B4C;
+// $light-colorPrice: #ec5f00;
+// $light-colorSuccess: #557c12;
+// $light-colorRed: #C62E2E;
+// $light-colorBackgroundLv1: #fcfcfd;
+// $light-colorBackgroundLv2: #e9ecef;
+// $light-colorBackgroundLv3: #ced4da;
 
 :root {
   // Biến cố định (giữ hex vì không cần dùng với rgba())
@@ -132,7 +168,7 @@ $light-colorBackgroundLv3: #ced4da;
   --colorShadow : rgba(0, 0, 0, 0.5);
 
   // line height
-  --lineHeightNormal : 1.88;
+  --lineHeightNormal : 1.8;
 }
 
 .light {
@@ -183,12 +219,12 @@ $light-colorBackgroundLv3: #ced4da;
   --colorBackgroundLv3: #{red($gray-colorBackgroundLv3), green($gray-colorBackgroundLv3), blue($gray-colorBackgroundLv3)};
 
   // font-size mặc định 
-  --fontSizeNormal : 0.975rem;
-  --opacityNormal : 1;
+  --fontSizeNormal : 0.925rem;
+  --opacityNormal : 0.85;
 
   // color shadow
-  --colorShadow : rgba(0, 0, 0, 0.35);
+  --colorShadow : rgba(0, 0, 0, 0.5);
 
   // line height
-  --lineHeightNormal : 1.7;
+  --lineHeightNormal : 1.8;
 }

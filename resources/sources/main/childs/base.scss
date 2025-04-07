@@ -50,7 +50,7 @@ h2, h3, h4, h5, h6 {
   font-family: $fontTitle;
   line-height: calc(var(--lineHeightNormal) - 0.2);
   font-weight: 600;
-  .light &, .gray & {
+  .light & {
     font-weight: 700;
   }
 }
@@ -77,9 +77,12 @@ h4, h5, h6 {
 
 .titlePage {
   margin-bottom: 0.5rem;
+  &.customTitlePage {
+    margin-bottom: 0.25rem;
+  }
   @media(max-width: 991px){
     &.customTitlePage {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.125rem;
     }
   }
 }
@@ -133,18 +136,18 @@ form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  .light &, .gray & {
+  .light & {
     gap: 0.325rem;
   }
   @media(max-width: 991px){
     gap: 0.325rem;
-    .light &, .gray & {
+    .light & {
       gap: 0.25rem;
     }
   }
   @media(max-width: 577px){
     gap: 0.25rem;
-    .light &, .gray & {
+    .light & {
       gap: 0.125rem;
     }
   }
@@ -322,7 +325,7 @@ blockquote{
   text-shadow: 1px 1px 10px rgba(var(--colorBackgroundLv1), 0.5);
   transition: all 0.2s;
   height: 47.5px;
-  .light &, .gray & {
+  .light & {
     height: 50px;
   }
   &:focus, &:hover {

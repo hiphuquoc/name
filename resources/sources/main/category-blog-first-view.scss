@@ -66,6 +66,7 @@
         border-radius: $radiusBoxNormal;
         gap: 0.75rem;
         background: rgba(var(--colorBackgroundLv2), 0.5);
+        box-shadow: 0 2px 7px var(--colorShadow);
         &_image {
             position: relative;
             width: 100%;
@@ -132,7 +133,7 @@
     &_box {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.75rem;
         &_item {
             width: 100%;
             overflow: hidden;
@@ -180,13 +181,15 @@
             &_content {
                 display: flex;
                 flex-direction: column;
-                gap: 0.25rem;
+                gap: 0.5rem;
                 padding: 0.75rem 1rem;
                 &_title {
                     h2, h3, h4 {
-                        font-size: calc(var(--fontSizeNormal) - 0.025rem);
+                        font-size: calc(var(--fontSizeNormal) + 0.15rem);
+                        line-height: calc(var(--lineHeightNormal) - 0.15);
                         margin-bottom: 0;
-                        letter-spacing: 0.5px;
+                        font-weight: 600;
+                        // letter-spacing: 0.25px;
                         text-align: left;
                         &:dir(rtl), [dir="rtl"] & {
                             text-align: right;
@@ -197,7 +200,7 @@
                     display: flex;
                     gap: 0.75rem;
                     font-size: calc(var(--fontSizeNormal) - 0.075rem);
-                    opacity: var(--opacityNormal);
+                    color: rgba(var(--colorText), 0.75);
                 }
             }
         }

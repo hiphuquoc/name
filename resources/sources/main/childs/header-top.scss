@@ -15,10 +15,19 @@
         width: 100%;
         height: 100%;
         transform: translateY(-50%);
-        // background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora.webp') no-repeat;
-        background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora-light.webp') no-repeat;
+        background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora-dark-small.webp') no-repeat;
         background-size: 100% 100%;
         filter: drop-shadow(1px 1px 10px rgba(var(--colorBackgroundLv1), var(--opacityNormal)));
+        .light & {
+            background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora-light-fix-small.webp') no-repeat;
+            background-size: 100% 100%;
+            filter: drop-shadow(1px 1px 10px rgba(var(--colorBackgroundLv1), var(--opacityNormal)));
+        }
+        .gray & {
+            background: url('https://namecomvn.storage.googleapis.com/storage/images/logo-wallsora-gray-small.webp') no-repeat;
+            background-size: 100% 100%;
+            filter: drop-shadow(1px 1px 10px rgba(var(--colorBackgroundLv1), var(--opacityNormal)));
+        }
     }
     @media(max-width: 1499px){
         @include set-logo-size(1.65rem);
