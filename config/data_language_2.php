@@ -24,7 +24,7 @@ return [
         "free_wallpaper" => "Үнэгүй дэвсгэр зураг",
         "article" => "Нийтлэл",
     ],
-    "copyright" => "Бүх эрх хуулиар хамгаалагдсан ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu-гийн зохион бүтээсэн, хөгжүүлсэн. Бүх эрх хадгалагдана.",
+    "copyright" => "Бүх эрх хуулиар хамгаалагдсан ® ".date('Y')." <a href=\"" . config('app.url') . "/mn\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu-гийн зохион бүтээсэн, хөгжүүлсэн. Бүх эрх хадгалагдана.",
 ],
 "sl" => [
     "question_and_answer"   => "Pogosto zastavljena vprašanja",
@@ -49,7 +49,7 @@ return [
         "free_wallpaper"    => "Brezplačno ozadje",
         "article"           => "Članek",
     ],
-    "copyright"             => "Vse pravice pridržane ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Oblikovanje in razvoj: PhamVanPhu.",
+    "copyright"             => "Vse pravice pridržane ® ".date('Y')." <a href=\"" . config('app.url') . "/sl\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Oblikovanje in razvoj: PhamVanPhu.",
 ],
 "lt" => [
     "question_and_answer"   => "Dažniausiai užduodami klausimai",
@@ -74,7 +74,7 @@ return [
         "free_wallpaper"    => "Nemokamas fonas",
         "article"           => "Straipsnis",
     ],
-    "copyright"             => "Visos teisės saugomos ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Sukurta ir plėtojama PhamVanPhu. Visos teisės saugomos.",
+    "copyright"             => "Visos teisės saugomos ® ".date('Y')." <a href=\"" . config('app.url') . "/lt\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Sukurta ir plėtojama PhamVanPhu. Visos teisės saugomos.",
 ],
 "lv" => [
     "question_and_answer"   => "Bieži uzdotie jautājumi",
@@ -99,7 +99,7 @@ return [
         "free_wallpaper"    => "Bezmaksas fons",
         "article"           => "Raksts",
     ],
-    "copyright"             => "Visas tiesības aizsargātas ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Dizains un izstrāde - PhamVanPhu. Visas tiesības rezervētas.",
+    "copyright"             => "Visas tiesības aizsargātas ® ".date('Y')." <a href=\"" . config('app.url') . "/lv\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Dizains un izstrāde - PhamVanPhu. Visas tiesības rezervētas.",
 ],
 "sr" => [
     "question_and_answer"   => "Често постављана питања",
@@ -123,7 +123,7 @@ return [
         "free_wallpaper"    => "Бесплатне позадине",
         "article"           => "Чланак",
     ],
-    "copyright"             => "Ауторска права ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Дизајнирао и развио PhamVanPhu. Сва права задржана.",
+    "copyright"             => "Ауторска права ® ".date('Y')." <a href=\"" . config('app.url') . "/sr\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Дизајнирао и развио PhamVanPhu. Сва права задржана.",
 ],
 "ky" => [
     "question_and_answer"   => "Көп берилген суроолор",
@@ -148,7 +148,7 @@ return [
         "free_wallpaper" => "Бекер фон сүрөттөр",
         "article" => "Макала",
     ],
-    "copyright" => "Автордук укук ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu тарабынан дизайндалып жана иштелип чыгарылган. Бардык укуктар корголгон.",
+    "copyright" => "Автордук укук ® ".date('Y')." <a href=\"" . config('app.url') . "/ky\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu тарабынан дизайндалып жана иштелип чыгарылган. Бардык укуктар корголгон.",
 ],
 "bg" => [
     "question_and_answer"   => "Често задавани въпроси",
@@ -173,7 +173,7 @@ return [
         "free_wallpaper"    => "Безплатни тапети",
         "article"           => "Статия",
     ],
-    "copyright"             => "Авторско право ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Дизайн и разработка от PhamVanPhu. Всички права запазени.",
+    "copyright"             => "Авторско право ® ".date('Y')." <a href=\"" . config('app.url') . "/bg\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Дизайн и разработка от PhamVanPhu. Всички права запазени.",
 ],
 "ml" => [
     "question_and_answer"   => "പ്രചരിക്കുന്ന ചോദ്യങ്ങൾ",
@@ -197,7 +197,7 @@ return [
         "free_wallpaper"    => "സൗജന്യ ബാക്ക്‌ഗ്രൗണ്ട്",
         "article"           => "ലേഖനം",
     ],
-    "copyright"             => "കോപ്പിറൈറ്റ് ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu ആണ് രൂപകൽപ്പന ചെയ്തതും വികസിപ്പിച്ചതും. എല്ലാ അവകാശങ്ങളും നിലവിലുണ്ട്.",
+    "copyright"             => "കോപ്പിറൈറ്റ് ® ".date('Y')." <a href=\"" . config('app.url') . "/ml\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu ആണ് രൂപകൽപ്പന ചെയ്തതും വികസിപ്പിച്ചതും. എല്ലാ അവകാശങ്ങളും നിലവിലുണ്ട്.",
 ],
 "da" => [
     "question_and_answer"   => "Ofte stillede spørgsmål",
@@ -222,7 +222,7 @@ return [
         "free_wallpaper"    => "Gratis tapet",
         "article"           => "Artikel",
     ],
-    "copyright"             => "Ophavsret ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Designet og udviklet af PhamVanPhu. Alle rettigheder forbeholdes.",
+    "copyright"             => "Ophavsret ® ".date('Y')." <a href=\"" . config('app.url') . "/da\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Designet og udviklet af PhamVanPhu. Alle rettigheder forbeholdes.",
 ],
 "fi" => [
     "question_and_answer"   => "Usein kysytyt kysymykset",
@@ -247,7 +247,7 @@ return [
         "free_wallpaper"    => "Ilmaiset taustakuvat",
         "article"           => "Artikkeli",
     ],
-    "copyright"             => "Kaikki oikeudet pidätetään ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Suunnittelu ja kehitys PhamVanPhu. Kaikki oikeudet pidätetään.",
+    "copyright"             => "Kaikki oikeudet pidätetään ® ".date('Y')." <a href=\"" . config('app.url') . "/fi\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Suunnittelu ja kehitys PhamVanPhu. Kaikki oikeudet pidätetään.",
 ],
 "no" => [
     "question_and_answer"   => "Ofte stilte spørsmål",
@@ -272,7 +272,7 @@ return [
         "free_wallpaper"    => "Gratis bakgrunn",
         "article"           => "Artikkel",
     ],
-    "copyright"             => "Opphavsrett ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Designet og utviklet av PhamVanPhu. Alle rettigheter reservert.",
+    "copyright"             => "Opphavsrett ® ".date('Y')." <a href=\"" . config('app.url') . "/no\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Designet og utviklet av PhamVanPhu. Alle rettigheter reservert.",
 ],
 "sv" => [
     "question_and_answer"   => "Vanliga frågor",
@@ -297,7 +297,7 @@ return [
         "free_wallpaper"    => "Gratis bakgrund",
         "article"           => "Artikel",
     ],
-    "copyright"             => "Upphovsrätt ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Designad och utvecklad av PhamVanPhu. Alla rättigheter förbehållna.",
+    "copyright"             => "Upphovsrätt ® ".date('Y')." <a href=\"" . config('app.url') . "/sv\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Designad och utvecklad av PhamVanPhu. Alla rättigheter förbehållna.",
 ],
 "fil" => [
     "question_and_answer"   => "Mga Madalas Itanong",
@@ -322,7 +322,7 @@ return [
         "free_wallpaper" => "Libreng Wallpaper",
         "article" => "Artikulo",
     ],
-    "copyright" => "Lahat ng Karapatan ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Dinisenyo at binuo ni PhamVanPhu. Lahat ng karapatan ay ipinaglalaban.",
+    "copyright" => "Lahat ng Karapatan ® ".date('Y')." <a href=\"" . config('app.url') . "/fil\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Dinisenyo at binuo ni PhamVanPhu. Lahat ng karapatan ay ipinaglalaban.",
 ],
 "pt" => [
     "question_and_answer"   => "Perguntas Frequentes",
@@ -346,7 +346,7 @@ return [
         "free_wallpaper"    => "Papel de Parede Grátis",
         "article"           => "Artigo",
     ],
-    "copyright"             => "Direitos autorais ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Desenvolvido e projetado por PhamVanPhu. Todos os direitos reservados.",
+    "copyright"             => "Direitos autorais ® ".date('Y')." <a href=\"" . config('app.url') . "/pt\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Desenvolvido e projetado por PhamVanPhu. Todos os direitos reservados.",
 ],
 "uz" => [
     "question_and_answer"   => "Ko'p beriladigan savollar",
@@ -371,7 +371,7 @@ return [
         "free_wallpaper"    => "Bepul fon rasmlari",
         "article"           => "Maqola",
     ],
-    "copyright"             => "Mualliflik huquqi ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu tomonidan dizayn qilingan va ishlab chiqilgan. Barcha huquqlar himoyalangan.",
+    "copyright"             => "Mualliflik huquqi ® ".date('Y')." <a href=\"" . config('app.url') . "/uz\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu tomonidan dizayn qilingan va ishlab chiqilgan. Barcha huquqlar himoyalangan.",
 ],
 "he" => [
     "question_and_answer"   => "שאלות נפוצות",
@@ -395,7 +395,7 @@ return [
         "free_wallpaper"    => "רקעים בחינם",
         "article"           => "מאמר",
     ],
-    "copyright"             => "זכויות יוצרים ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. תוכנן ופותח על ידי PhamVanPhu. כל הזכויות שמורות.",
+    "copyright"             => "זכויות יוצרים ® ".date('Y')." <a href=\"" . config('app.url') . "/he\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. תוכנן ופותח על ידי PhamVanPhu. כל הזכויות שמורות.",
 ],
 "ka" => [
     "question_and_answer"   => "ხშირად დასმული კითხვები",
@@ -419,7 +419,7 @@ return [
         "free_wallpaper"    => "უფასო ფონები",
         "article"           => "სტატია",
     ],
-    "copyright"             => "ყველა უფლება დაცულია ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. შემუშავებულია და შექმნილია PhamVanPhu-ს მიერ.",
+    "copyright"             => "ყველა უფლება დაცულია ® ".date('Y')." <a href=\"" . config('app.url') . "/ka\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. შემუშავებულია და შექმნილია PhamVanPhu-ს მიერ.",
 ],
 "sk" => [
     "question_and_answer"   => "Často kladené otázky",
@@ -444,7 +444,7 @@ return [
         "free_wallpaper"    => "Bezplatné pozadie",
         "article"           => "Článok",
     ],
-    "copyright"             => "Autorské práva ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Navrhol a vyvinul PhamVanPhu. Všetky práva vyhradené.",
+    "copyright"             => "Autorské práva ® ".date('Y')." <a href=\"" . config('app.url') . "/sk\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Navrhol a vyvinul PhamVanPhu. Všetky práva vyhradené.",
 ],
 "ro" => [
     "question_and_answer"   => "Întrebări frecvente",
@@ -469,7 +469,7 @@ return [
         "free_wallpaper"    => "Fundaluri gratuite",
         "article"           => "Articol",
     ],
-    "copyright"             => "Drepturi de autor ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Proiectat și dezvoltat de PhamVanPhu. Toate drepturile rezervate.",
+    "copyright"             => "Drepturi de autor ® ".date('Y')." <a href=\"" . config('app.url') . "/ro\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Proiectat și dezvoltat de PhamVanPhu. Toate drepturile rezervate.",
 ],
 "cs" => [
     "question_and_answer"   => "Často kladené otázky",
@@ -494,7 +494,7 @@ return [
         "free_wallpaper"    => "Zdarma tapety",
         "article"           => "Článek",
     ],
-    "copyright"             => "Autorská práva ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Navrhl a vyvinul PhamVanPhu. Všechna práva vyhrazena.",
+    "copyright"             => "Autorská práva ® ".date('Y')." <a href=\"" . config('app.url') . "/cs\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Navrhl a vyvinul PhamVanPhu. Všechna práva vyhrazena.",
 ],
 "hu" => [
     "question_and_answer"   => "Gyakran Ismételt Kérdések",
@@ -519,7 +519,7 @@ return [
         "free_wallpaper"    => "Ingyenes háttérképek",
         "article"           => "Cikk",
     ],
-    "copyright"             => "Minden jog fenntartva © ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Tervezte és fejlesztette PhamVanPhu.",
+    "copyright"             => "Minden jog fenntartva © ".date('Y')." <a href=\"" . config('app.url') . "/hu\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Tervezte és fejlesztette PhamVanPhu.",
 ],
 "el" => [
     "question_and_answer"   => "Συχνές Ερωτήσεις",
@@ -543,7 +543,7 @@ return [
         "free_wallpaper"    => "Δωρεάν Ταπετσαρία",
         "article"           => "Άρθρο",
     ],
-    "copyright"             => "Πνευματικά Δικαιώματα ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Σχεδιασμός και ανάπτυξη από PhamVanPhu. Με την επιφύλαξη παντός δικαιώματος.",
+    "copyright"             => "Πνευματικά Δικαιώματα ® ".date('Y')." <a href=\"" . config('app.url') . "/el\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Σχεδιασμός και ανάπτυξη από PhamVanPhu. Με την επιφύλαξη παντός δικαιώματος.",
 ],
 "nl" => [
     "question_and_answer"   => "Veelgestelde vragen",
@@ -568,7 +568,7 @@ return [
         "free_wallpaper"    => "Gratis achtergronden",
         "article"           => "Artikelen",
     ],
-    "copyright"             => "Auteursrecht ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Ontworpen en ontwikkeld door PhamVanPhu. Alle rechten voorbehouden.",
+    "copyright"             => "Auteursrecht ® ".date('Y')." <a href=\"" . config('app.url') . "/nl\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Ontworpen en ontwikkeld door PhamVanPhu. Alle rechten voorbehouden.",
 ],
 "uk" => [
     "question_and_answer"   => "Часті питання",
@@ -593,7 +593,7 @@ return [
         "free_wallpaper"    => "Безкоштовні шпалери",
         "article"           => "Стаття",
     ],
-    "copyright"             => "Авторські права ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Розроблено та спроектовано PhamVanPhu. Всі права захищені.",
+    "copyright"             => "Авторські права ® ".date('Y')." <a href=\"" . config('app.url') . "/uk\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Розроблено та спроектовано PhamVanPhu. Всі права захищені.",
 ],
 "pl" => [
     "question_and_answer"   => "Często zadawane pytania",
@@ -618,7 +618,7 @@ return [
         "free_wallpaper"    => "Darmowe Tapety",
         "article"           => "Artykuł",
     ],
-    "copyright"             => "Wszelkie prawa zastrzeżone ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Projekt i rozwój: PhamVanPhu.",
+    "copyright"             => "Wszelkie prawa zastrzeżone ® ".date('Y')." <a href=\"" . config('app.url') . "/pl\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Projekt i rozwój: PhamVanPhu.",
 ],
 "it" => [
     "question_and_answer"   => "Domande frequenti",
@@ -642,7 +642,7 @@ return [
         "free_wallpaper"    => "Sfondi gratuiti",
         "article"           => "Articolo",
     ],
-    "copyright"             => "Diritto d'autore ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Progettato e sviluppato da PhamVanPhu. Tutti i diritti riservati.",
+    "copyright"             => "Diritto d'autore ® ".date('Y')." <a href=\"" . config('app.url') . "/it\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Progettato e sviluppato da PhamVanPhu. Tutti i diritti riservati.",
 ],
 "tr" => [
     "question_and_answer"   => "Sıkça Sorulan Sorular",
@@ -667,7 +667,7 @@ return [
         "free_wallpaper"    => "Ücretsiz duvar kağıdı",
         "article"           => "Makale",
     ],
-    "copyright"             => "Telif Hakkı ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu tarafından tasarlanmış ve geliştirilmiştir. Tüm hakları saklıdır.",
+    "copyright"             => "Telif Hakkı ® ".date('Y')." <a href=\"" . config('app.url') . "/tr\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu tarafından tasarlanmış ve geliştirilmiştir. Tüm hakları saklıdır.",
 ],
 "de" => [
     "question_and_answer"   => "Häufig gestellte Fragen",
@@ -692,7 +692,7 @@ return [
         "free_wallpaper"    => "Kostenlose Hintergründe",
         "article"           => "Artikel",
     ],
-    "copyright"             => "Urheberrecht ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Entworfen und entwickelt von PhamVanPhu. Alle Rechte vorbehalten.",
+    "copyright"             => "Urheberrecht ® ".date('Y')." <a href=\"" . config('app.url') . "/de\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Entworfen und entwickelt von PhamVanPhu. Alle Rechte vorbehalten.",
 ],
 "ru" => [
     "question_and_answer"   => "Часто задаваемые вопросы",
@@ -717,7 +717,7 @@ return [
         "free_wallpaper"    => "Бесплатные обои",
         "article"           => "Статья",
     ],
-    "copyright"             => "Авторское право ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Дизайн и разработка PhamVanPhu. Все права защищены.",
+    "copyright"             => "Авторское право ® ".date('Y')." <a href=\"" . config('app.url') . "/ru\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Дизайн и разработка PhamVanPhu. Все права защищены.",
 ],
 "fa" => [
     "question_and_answer"   => "سوالات متداول",
@@ -742,7 +742,7 @@ return [
         "free_wallpaper"    => "تصاویر زمینه رایگان",
         "article"           => "مقاله",
     ],
-    "copyright"             => "حقوق مادی و معنوی © ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. طراحی و توسعه توسط PhamVanPhu. همه حقوق محفوظ است.",
+    "copyright"             => "حقوق مادی و معنوی © ".date('Y')." <a href=\"" . config('app.url') . "/fa\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. طراحی و توسعه توسط PhamVanPhu. همه حقوق محفوظ است.",
 ],
 "ar" => [
     "question_and_answer"   => "الأسئلة الشائعة",
@@ -767,7 +767,7 @@ return [
         "free_wallpaper"    => "خلفيات مجانية",
         "article"           => "مقال",
     ],
-    "copyright"             => "جميع الحقوق محفوظة ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. تصميم وتطوير PhamVanPhu.",
+    "copyright"             => "جميع الحقوق محفوظة ® ".date('Y')." <a href=\"" . config('app.url') . "/ar\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. تصميم وتطوير PhamVanPhu.",
 ],
 "th" => [
     "question_and_answer"   => "คำถามที่พบบ่อย",
@@ -792,7 +792,7 @@ return [
         "free_wallpaper"    => "วอลเปเปอร์ฟรี",
         "article"           => "บทความ",
     ],
-    "copyright"             => "สงวนลิขสิทธิ์ ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. ออกแบบและพัฒนาโดย PhamVanPhu. สงวนสิทธิ์ทุกประการ.",
+    "copyright"             => "สงวนลิขสิทธิ์ ® ".date('Y')." <a href=\"" . config('app.url') . "/th\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. ออกแบบและพัฒนาโดย PhamVanPhu. สงวนสิทธิ์ทุกประการ.",
 ],
 "ms" => [
     "question_and_answer"   => "Soalan Lazim",
@@ -817,7 +817,7 @@ return [
         "free_wallpaper" => "Kertas Dinding Percuma",
         "article" => "Artikel",
     ],
-    "copyright" => "Hak Cipta ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Direka dan dibangunkan oleh PhamVanPhu. Hak cipta terpelihara.",
+    "copyright" => "Hak Cipta ® ".date('Y')." <a href=\"" . config('app.url') . "/ms\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Direka dan dibangunkan oleh PhamVanPhu. Hak cipta terpelihara.",
 ],
 "id" => [
     "question_and_answer"   => "Pertanyaan yang Sering Diajukan",
@@ -842,7 +842,7 @@ return [
         "free_wallpaper"    => "Wallpaper Gratis",
         "article"           => "Artikel",
     ],
-    "copyright"             => "Hak Cipta ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Dirancang dan dikembangkan oleh PhamVanPhu. Seluruh hak dilindungi.",
+    "copyright"             => "Hak Cipta ® ".date('Y')." <a href=\"" . config('app.url') . "/id\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Dirancang dan dikembangkan oleh PhamVanPhu. Seluruh hak dilindungi.",
 ],
 "jv" => [
     "question_and_answer"   => "Pitakonan kang sering ditanyaken",
@@ -867,7 +867,7 @@ return [
         "free_wallpaper"    => "Gambar latar gratis",
         "article"           => "Artikel",
     ],
-    "copyright"             => "Hak cipta ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Didhesain lan dikembangake dening PhamVanPhu. Kabeh hak dilindhungi.",
+    "copyright"             => "Hak cipta ® ".date('Y')." <a href=\"" . config('app.url') . "/jv\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Didhesain lan dikembangake dening PhamVanPhu. Kabeh hak dilindhungi.",
 ],
 "ko" => [
     "question_and_answer"   => "자주 묻는 질문",
@@ -892,7 +892,7 @@ return [
         "free_wallpaper"    => "무료 배경화면",
         "article"           => "기사",
     ],
-    "copyright"             => "저작권 © ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu가 디자인 및 개발하였습니다. 모든 권리 보유.",
+    "copyright"             => "저작권 © ".date('Y')." <a href=\"" . config('app.url') . "/ko\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu가 디자인 및 개발하였습니다. 모든 권리 보유.",
 ],
 "ja" => [
     "question_and_answer"   => "よくある質問",
@@ -916,7 +916,7 @@ return [
         "free_wallpaper"    => "無料壁紙",
         "article"           => "記事",
     ],
-    "copyright"             => "著作権 © ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhuがデザインおよび開発しました。すべての権利は留保されています。",
+    "copyright"             => "著作権 © ".date('Y')." <a href=\"" . config('app.url') . "/ja\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhuがデザインおよび開発しました。すべての権利は留保されています。",
 ],
 "gu" => [
     "question_and_answer"   => "પ્રશ્ન અને જવાબ",
@@ -941,7 +941,7 @@ return [
         "free_wallpaper"    => "મફત વોલપેપર",
         "article"           => "લેખ",
     ],
-    "copyright"             => "કૉપીરાઇટ ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. ડિઝાઇન અને વિકસિત કરેલ છે PhamVanPhu દ્વારા. બધા હકો સુરક્ષિત.",
+    "copyright"             => "કૉપીરાઇટ ® ".date('Y')." <a href=\"" . config('app.url') . "/gu\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. ડિઝાઇન અને વિકસિત કરેલ છે PhamVanPhu દ્વારા. બધા હકો સુરક્ષિત.",
 ],
 "ur" => [
     "question_and_answer"   => "اکثر پوچھے گئے سوالات",
@@ -966,7 +966,7 @@ return [
         "free_wallpaper" => "مفت والپیپر",
         "article" => "مقالہ",
     ],
-    "copyright" => "کاپی رائٹ ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu کی طرف سے ڈیزائن اور ترقی یافتہ. تمام حقوق محفوظ.",
+    "copyright" => "کاپی رائٹ ® ".date('Y')." <a href=\"" . config('app.url') . "/ur\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu کی طرف سے ڈیزائن اور ترقی یافتہ. تمام حقوق محفوظ.",
 ],
 "te" => [
     "question_and_answer"   => "తరచుగా అడిగే ప్రశ్నలు",
@@ -991,7 +991,7 @@ return [
         "free_wallpaper"    => "ఉచిత వాల్‌పేపర్",
         "article"           => "వ్యాసం",
     ],
-    "copyright"             => "హక్కులు © ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu ద్వారా రూపకల్పన మరియు అభివృద్ధి చేయబడింది. అన్ని హక్కులు కాపాడబడ్డాయి.",
+    "copyright"             => "హక్కులు © ".date('Y')." <a href=\"" . config('app.url') . "/te\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu ద్వారా రూపకల్పన మరియు అభివృద్ధి చేయబడింది. అన్ని హక్కులు కాపాడబడ్డాయి.",
 ],
 "ta" => [
     "question_and_answer"   => "அடிக்கடி கேட்கப்படும் கேள்விகள்",
@@ -1016,7 +1016,7 @@ return [
         "free_wallpaper" => "இலவச பின்புல அட்டவணைகள்",
         "article" => "கட்டுரை",
     ],
-    "copyright" => "பதிப்புரிமை ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu ஆல் வடிவமைக்கப்பட்டது மற்றும் உருவாக்கப்பட்டது. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+    "copyright" => "பதிப்புரிமை ® ".date('Y')." <a href=\"" . config('app.url') . "/ta\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu ஆல் வடிவமைக்கப்பட்டது மற்றும் உருவாக்கப்பட்டது. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
 ],
 "mr" => [
     "question_and_answer"   => "सामान्यपणे विचारले जाणारे प्रश्न",
@@ -1041,7 +1041,7 @@ return [
         "free_wallpaper"    => "मोफत वॉलपेपर",
         "article"           => "लेख",
     ],
-    "copyright"             => "सर्व हक्क सुरक्षित © ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu द्वारे डिझाइन आणि विकसित.",
+    "copyright"             => "सर्व हक्क सुरक्षित © ".date('Y')." <a href=\"" . config('app.url') . "/mr\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu द्वारे डिझाइन आणि विकसित.",
 ],
 "bn" => [
     "question_and_answer"   => "প্রায়শই জিজ্ঞাসিত প্রশ্ন",
@@ -1066,7 +1066,7 @@ return [
         "free_wallpaper" => "ফ্রি ওয়ালপেপার",
         "article" => "নিবন্ধ",
     ],
-    "copyright" => "কপিরাইট ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. ডিজাইন এবং ডেভেলপমেন্ট করেছেন PhamVanPhu. সর্বস্বত্ব সংরক্ষিত.",
+    "copyright" => "কপিরাইট ® ".date('Y')." <a href=\"" . config('app.url') . "/bn\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. ডিজাইন এবং ডেভেলপমেন্ট করেছেন PhamVanPhu. সর্বস্বত্ব সংরক্ষিত.",
 ],
 "hi" => [
     "question_and_answer"   => "अक्सर पूछे जाने वाले प्रश्न",
@@ -1091,7 +1091,7 @@ return [
         "free_wallpaper"    => "नि:शुल्क वॉलपेपर",
         "article"           => "लेख",
     ],
-    "copyright"             => "सर्वाधिकार सुरक्षित ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu द्वारा डिज़ाइन और विकसित. सर्वाधिकार सुरक्षित.",
+    "copyright"             => "सर्वाधिकार सुरक्षित ® ".date('Y')." <a href=\"" . config('app.url') . "/hi\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. PhamVanPhu द्वारा डिज़ाइन और विकसित. सर्वाधिकार सुरक्षित.",
 ],
 "vi" => [
     "question_and_answer"   => "Câu hỏi thường gặp",
@@ -1116,7 +1116,7 @@ return [
         "free_wallpaper" => "Hình nền miễn phí",
         "article" => "Bài viết",
     ],
-    "copyright" => "Bản quyền ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Thiết kế và phát triển bởi PhamVanPhu. Mọi quyền được bảo lưu.",
+    "copyright" => "Bản quyền ® ".date('Y')." <a href=\"" . config('app.url') . "\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Thiết kế và phát triển bởi PhamVanPhu. Mọi quyền được bảo lưu.",
 ],
 "fr" => [
     "question_and_answer"   => "Questions fréquemment posées",
@@ -1141,7 +1141,7 @@ return [
         "free_wallpaper"    => "Fonds d'écran gratuits",
         "article"           => "Article",
     ],
-    "copyright"             => "Droits d'auteur ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Conçu et développé par PhamVanPhu. Tous droits réservés.",
+    "copyright"             => "Droits d'auteur ® ".date('Y')." <a href=\"" . config('app.url') . "/fr\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Conçu et développé par PhamVanPhu. Tous droits réservés.",
 ],
 "es" => [
     "question_and_answer"   => "Preguntas frecuentes",
@@ -1165,7 +1165,7 @@ return [
         "free_wallpaper"    => "Fondos de pantalla gratis",
         "article"           => "Artículo",
     ],
-    "copyright"             => "Derechos de autor ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Diseñado y desarrollado por PhamVanPhu. Todos los derechos reservados.",
+    "copyright"             => "Derechos de autor ® ".date('Y')." <a href=\"" . config('app.url') . "/es\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Diseñado y desarrollado por PhamVanPhu. Todos los derechos reservados.",
 ],
 "zh" => [
     "question_and_answer"   => "常見問題",
@@ -1190,7 +1190,7 @@ return [
         "free_wallpaper"    => "免费壁纸",
         "article"           => "文章",
     ],
-    "copyright"             => "版权 ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. 由PhamVanPhu设计和开发。保留所有权利。",
+    "copyright"             => "版权 ® ".date('Y')." <a href=\"" . config('app.url') . "/zh\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. 由PhamVanPhu设计和开发。保留所有权利。",
 ],
 "en" => [
     "question_and_answer"   => "Frequently Asked Questions",
@@ -1215,6 +1215,6 @@ return [
         "free_wallpaper"    => "Free Wallpapers",
         "article"           => "Article",
     ],
-    "copyright"             => "Copyright ® ".date('Y')." <a href=\"" . config('app.url') . "/{{ $language }}\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Designed and developed by PhamVanPhu. All rights reserved.",
+    "copyright"             => "Copyright ® ".date('Y')." <a href=\"" . config('app.url') . "/en\" aria-label=\"" . config('app.name') . "\"><strong>" . config('app.name') . "</strong></a>. Designed and developed by PhamVanPhu. All rights reserved.",
 ],
 ];

@@ -65,8 +65,8 @@
         flex-direction: column;
         border-radius: $radiusBoxNormal;
         gap: 0.75rem;
-        background: rgba(var(--colorBackgroundLv2), 0.5);
-        box-shadow: 0 2px 7px var(--colorShadow);
+        background: rgb(var(--colorBackgroundLv2));
+        // box-shadow: 0 2px 7px var(--colorShadow);
         &_image {
             position: relative;
             width: 100%;
@@ -140,9 +140,8 @@
             border-radius: $radiusBoxNormal;
             display: flex;
             flex-direction: column;
-            // gap: 0.5rem;
             &:nth-child(2n + 1){
-                background: rgba(var(--colorBackgroundLv2), 0.5);
+                background: rgb(var(--colorBackgroundLv2));
             }
             &:not(:nth-child(2n + 1)){
                 .blogSiderbarBox_box_item_content {

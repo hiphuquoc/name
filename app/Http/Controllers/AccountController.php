@@ -20,7 +20,7 @@ class AccountController extends Controller {
                         ->where('payment_status', 1)
                         ->with('products', 'wallpapers')
                         ->get();
-        return view('wallpaper.account.order', compact('item', 'orders', 'language'));
+        return view('wallpaper.myDownload.order', compact('item', 'orders', 'language'));
     }
 
 }
