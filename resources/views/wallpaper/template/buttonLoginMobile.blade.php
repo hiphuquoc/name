@@ -12,7 +12,7 @@
         <div class="headerBottom_item_text">
             <div class="maxLine_1">{{ $user->name ?? ''}}</div>
             <div class="headerBottom_item_text_modal">
-                <a href="{{ route('main.account.orders') }}" class="loginBox_list_item">
+                <a href="/{{ $urlMyDownload }}" class="loginBox_list_item">
                     <i class="fa-solid fa-download"></i>
                     <div>{{ $myDownloadsByLanguage }}</div>
                 </a> 
