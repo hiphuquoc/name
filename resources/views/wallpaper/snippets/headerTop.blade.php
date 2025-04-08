@@ -74,41 +74,46 @@
             @endif
             <div id="ja_closeLanguageBoxList_background" class="languageBox_background"></div>
         </div>
-
-        {{-- <!-- change theme -->
-        <div class="themeOption">
-            <div class="themeOption_input">
-                <div class="themeOption_input_item">|</div>
-                <div class="themeOption_input_item">|</div>
-                <div class="themeOption_input_item show">|</div>
-            </div>
-            <div class="themeOption_circle">
-
-            </div>
-        </div> --}}
+        <!-- view mode -->
         <div class="viewMode">
-            <div class="viewMode_show">
+            <div class="viewMode_show" onclick="closeLanguageBoxList('ja_closeViewBoxList');">
                 <div class="viewMode_show_boxHeight">
                     @php
-                        $icon = file_get_contents('storage/images/svg/icon-light-light.svg');
+                        /* mặc định lấy icon đầu tiên */
+                        $dataViewMode   = config('main_'.env('APP_NAME').'.view_mode');
+                        $icon           = file_get_contents($dataViewMode[0]['icon']);
+                        foreach($dataViewMode as $viewMode){
+                            if(!empty(request()->cookie('view_mode'))&&request()->cookie('view_mode')==$viewMode['key']){
+                                $icon   = file_get_contents($viewMode['icon']);
+                            }
+                        }
                     @endphp
                     {!! $icon !!}
                 </div>
             </div>
-            <div class="viewMode_list">
-                @foreach(config('main_'.env('APP_NAME').'.view_mode') as $viewMode)
-                    @php
-                        $icon       = file_get_contents($viewMode['icon']);
-                        $selected   = '';
-                        if($viewMode['key']==request()->cookie('view_mode')) $selected = 'selected';
-                    @endphp
-                    <div class="viewMode_list_item {{ $selected }}" onclick="setViewMode('{{ $viewMode['key'] }}');">
-                        {!! $icon !!}
-                        <div>{{ $viewMode['name'] }}</div>
-                    </div>
-                @endforeach
+            <div id="ja_closeViewBoxList" class="viewMode_list">
+                <div class="viewMode_list_title">Chọn chế độ xem bạn thích để có trải nghiệm thoải mái hơn nhé!</div>
+                <div class="viewMode_list_close" onclick="closeLanguageBoxList('ja_closeViewBoxList');"><i class="fa-solid fa-xmark"></i></div>
+                <div class="viewMode_list_box">
+                    @foreach(config('main_'.env('APP_NAME').'.view_mode') as $viewMode)
+                        @php
+                            $icon       = file_get_contents($viewMode['icon']);
+                            $selected   = '';
+                            if(!empty(request()->cookie('view_mode'))){
+                                if(request()->cookie('view_mode')==$viewMode['key']) $selected = 'selected';
+                            }else {
+                                if($loop->index==0) $selected = 'selected';
+                            }
+                            
+                        @endphp
+                        <div class="viewMode_list_box_item {{ $selected }}" onclick="setViewMode('{{ $viewMode['key'] }}');">
+                            {!! $icon !!}
+                            <div>{{ $viewMode['name'] }}</div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-            <div class="viewMode_background"></div>
+            <div id="ja_closeViewBoxList_background" class="viewMode_background"></div>
         </div>
         
         <!-- icon menu mobile -->
@@ -133,6 +138,19 @@
                 $('body').css('overflow', 'unset');
             }
         }
+        // /* đóng mở thiết lập giao diện */
+        // function closeLanguageBoxList(idElemt){
+        //     let displayE    = $('#' + idElemt).css('display');
+        //     if(displayE=='none'){
+        //         $('#' + idElemt).css('display', 'flex');
+        //         $('#' + idElemt + '_background').css('display', 'flex');
+        //         $('body').css('overflow', 'hidden');
+        //     }else {
+        //         $('#' + idElemt).css('display', 'none');
+        //         $('#' + idElemt + '_background').css('display', 'none');
+        //         $('body').css('overflow', 'unset');
+        //     }
+        // }
         /* ===== đăng nhập google */
         function toggleModalCustomerLoginForm(idElement) {
             const element = $('#' + idElement);

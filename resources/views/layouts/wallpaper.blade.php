@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $language ?? 'vi' }}" dir="{{ config('language.'.$language.'.dir') }}" class="{{ request()->cookie('view_mode') ?? 'light' }}">    
+<html lang="{{ $language ?? 'vi' }}" dir="{{ config('language.'.$language.'.dir') }}" class="{{ request()->cookie('view_mode') ?? config('main_'.env('APP_NAME').'.view_mode')[0]['key'] }}">    
 
 <!-- === START:: Head === -->
 <head>

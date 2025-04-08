@@ -192,7 +192,7 @@
         }
     }
     
-    // /* fixed menu khi scroll đối với giao diện nhỏ hơn 990px */
+    // /* fixed menu khi scroll đối với giao diện nhỏ hơn 991px */
     // window.addEventListener('scroll', function() {
     //     // const heightMenu = $('.headerMain').outerHeight();
     //     if($(window).scrollTop()>300){

@@ -178,7 +178,7 @@ $widthCollapsed : 17rem;
             .socialBox {
                 display: flex;
             }
-            @media not all and (min-width: 990px) and (max-width: 1199px) {
+            @media not all and (min-width: 991px) and (max-width: 1199px) {
                 .layoutHeaderSide_header_menuView {
                     opacity: 1;
                 }
@@ -189,8 +189,8 @@ $widthCollapsed : 17rem;
         min-height: calc(100vh - 45px);
         height: 100%;
     }
-    @media not all and (min-width: 990px) and (max-width: 1199px) {
-        /* CSS cho kích thước ngoài phạm vi từ 990px đến 1199px */
+    @media not all and (min-width: 991px) and (max-width: 1199px) {
+        /* CSS cho kích thước ngoài phạm vi từ 991px đến 1199px */
         &.collapsed {
             .layoutHeaderSide_placeholder {
                 display: none;

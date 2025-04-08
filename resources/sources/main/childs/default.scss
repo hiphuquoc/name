@@ -287,6 +287,7 @@ $radiusBoxLarge : 1rem;
   background: rgba(var(--colorBackgroundLv2), 0.5);
   backdrop-filter: blur(8px);
   z-index: -1;
+  pointer-events: auto;
   &:hover {
     display: none !important;
   }

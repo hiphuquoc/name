@@ -198,6 +198,7 @@ return [
         ],
     ],
     'view_mode' => [
+        /* phần tử đầu tiên mặc định */
         [
             'key'  => 'light',
             'name' => 'Chế độ sáng',
@@ -205,7 +206,7 @@ return [
         ],
         [
             'key'   => 'gray',
-            'name'  => 'Chế độ trung tính',
+            'name'  => 'Chế độ xám',
             'icon'  => 'storage/images/svg/icon-light-gray.svg',
         ],
         [

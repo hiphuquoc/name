@@ -54,7 +54,7 @@ class HomeController extends Controller {
         SettingController::settingLanguage($language);
         /* cache HTML */
         $paramsSlug             = [];
-        if(!empty(Cookie::get('view_mode'))&&Cookie::get('view_mode')!='light') $paramsSlug['viewMode'] = Cookie::get('view_mode');
+        if(!empty(Cookie::get('view_mode'))&&Cookie::get('view_mode')!=config('main_'.env('APP_NAME').'.view_mode')[0]['key']) $paramsSlug['viewMode'] = Cookie::get('view_mode');
         $nameCache              = RoutingController::buildNameCache($language.'home', $paramsSlug).'.'.config('main_'.env('APP_NAME').'.cache.extension');
         $pathCache              = Storage::path(config('main_'.env('APP_NAME').'.cache.folderSave')).$nameCache;
         $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;

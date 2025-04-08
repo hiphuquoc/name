@@ -292,7 +292,7 @@
         object-fit: cover;
         color: rgba(var(--colorIcon), var(--opacityNormal));   
     }
-    @media(max-width: 990px){
+    @media(max-width: 991px){
         display: flex;
     }
     @media(max-width: 767px){
@@ -1147,7 +1147,7 @@
             // border-bottom: 1px dashed rgb(var(--colorBackgroundLv1));
         }
     }
-    @media(max-width: 990px){
+    @media(max-width: 991px){
         &_boxItem {
             max-height: unset;
             height: calc(100vh - $heightMenu - 0.75rem);
@@ -1188,7 +1188,7 @@
             margin-top: 0.25rem;
         }
     }
-    @media(max-width: 990px){
+    @media(max-width: 991px){
         &_boxItem {
             max-height: unset;
             height: calc(100vh - $heightMenu - 3.5rem);
@@ -1238,7 +1238,7 @@
             margin-top: 0.25rem;
         }
     }
-    @media(max-width: 990px){
+    @media(max-width: 991px){
         &_boxItem {
             max-height: unset;
             height: calc(100vh - $heightMenu - 0.75rem);
@@ -1288,14 +1288,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    &:hover {
-        .viewMode_list {
-            display: flex;
-        }
-        .viewMode_background {
-            display: block;
-        }
-    }
     &_show {
         display: flex;
         justify-content: center;
@@ -1317,12 +1309,15 @@
                 height: 2.125rem;
                 margin-bottom: 2px;
             }
+            @media(max-width: 991px){
+                width: unset;
+            }
         }
     }
     &_list {
         display: none;
         flex-direction: column;
-        width: 200px;
+        width: 280px;
         min-width: fit-content;
         overflow: hidden;
         background: rgb(var(--colorBackgroundLv2));
@@ -1338,29 +1333,56 @@
         padding: 0;
         font-size: var(--fontSizeNormal);
         font-weight: 500;
-        &_item {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            gap: 0.5rem;
-            white-space: nowrap;
-            padding: 0.5rem 1rem 0.5rem 0.5rem; /* padding ngang chỉ 0.5 (nhỏ hơn những box khác 0.25) vì hiệu ứng tỏa sáng của bóng đèn */
-            &.selected, &:hover {
-                color: rgb(var(--colorTextLight));
-                background: rgb(var(--colorBackgroundLv3));
-            }
-            > * {
+        padding-bottom: 0.125rem;
+        &_title {
+            padding: 0.75rem calc(1rem + 40px) 0 1rem;
+            font-size: calc(var(--fontSizeNormal - 0.025rem));
+            color: rgba(var(--colorText), 0.85);
+        }
+        &_close {
+            @include iconCloseSquare;
+        }
+        &_box {
+            &_item {
                 display: flex;
-            }
-            svg {
-                width: 2rem;
-                height: 2rem;
-                /* liên quan padding (độ cao ô) nên không giảm */
+                align-items: center;
+                cursor: pointer;
+                gap: 0.5rem;
+                white-space: nowrap;
+                padding: 0.5rem 1rem 0.5rem 0.5rem; /* padding ngang chỉ 0.5 (nhỏ hơn những box khác 0.25) vì hiệu ứng tỏa sáng của bóng đèn */
+                &.selected, &:hover {
+                    color: rgb(var(--colorTextLight));
+                }
+                > * {
+                    display: flex;
+                }
+                svg {
+                    width: 2rem;
+                    height: 2rem;
+                    /* liên quan padding (độ cao ô) nên không giảm */
+                }
             }
         }
     }
     &_background {
         @include backgroundModal;
+        &:hover {
+            display: block !important;
+        }
+    }
+    @media(max-width: 991px){
+        &_list {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 10px);   
+            width: calc(100% - 2rem);
+            max-width: 320px;
+            border-radius: $radiusBoxSmall;
+            &_close {
+                display: flex;
+            }
+        }
     }
     @media(max-width: 767px){
         &_show {
@@ -1373,8 +1395,8 @@
         }
         &_list {
             font-size: calc(var(--fontSizeNormal) - 0.025rem);
+            width: calc(100% - 1.5rem);
             &_item {
-                padding: 0.45rem 0.75rem 0.45rem 0.325rem;
                 svg {
                     width: 1.75rem;
                     height: 1.75rem;
