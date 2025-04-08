@@ -45,7 +45,7 @@
                         <span>Hãy chọn ngôn ngữ yêu thích sử dụng của bạn!</span>
                     </div> --}}
                     <div class="languageBox_list_content">
-                        @foreach(config('language') as $ld)
+                        {{-- @foreach(config('language') as $ld)
                             @php
                                 $queryString = !empty(request()->getQueryString()) ? '?'.request()->getQueryString() : '';
                                 $flagHas = false;
@@ -60,11 +60,43 @@
                                 }
                                 /* selected */
                                 $selected = null;
-                                if($seo->infoSeo->language==$language) $selected = 'selected';
+                                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language) {
+                                    $selected = 'selected';
+                                }
                             @endphp
                             @if($flagHas==true)
                                 <a href="{{ $urlOfPageWithLanguage }}" class="languageBox_list_content_item maxLine_1 {{ $selected }}">{{ $ld['name_by_language'] }}</a>
                             @else 
+                                <div class="languageBox_list_content_item maxLine_1">{{ $ld['name_by_language'] }}</div>
+                            @endif
+                        @endforeach --}}
+                        @foreach(config('language') as $ld)
+                            @php
+                                // Lấy query string nếu có
+                                $queryString = request()->getQueryString() ? '?' . request()->getQueryString() : '';
+                                
+                                // Tìm URL theo ngôn ngữ
+                                $urlOfPageWithLanguage = '';
+                                $flagHas = false;
+                                foreach ($item->seos as $seo) {
+                                    if (!empty($seo->infoSeo) && $seo->infoSeo->language === $ld['key']) {
+                                        $urlOfPageWithLanguage = $seo->infoSeo->slug_full . $queryString;
+                                        $flagHas = true;
+                                        break;
+                                    }
+                                }
+
+                                // Kiểm tra selected
+                                $isSelected = !empty($seo->infoSeo->language) && $seo->infoSeo->language == $language;
+                            @endphp
+
+                            @if($flagHas)
+                                @if($isSelected)
+                                    <span class="languageBox_list_content_item maxLine_1 selected">{{ $ld['name_by_language'] }}</span>
+                                @else
+                                    <a href="{{ $urlOfPageWithLanguage }}" class="languageBox_list_content_item maxLine_1">{{ $ld['name_by_language'] }}</a>
+                                @endif
+                            @else
                                 <div class="languageBox_list_content_item maxLine_1">{{ $ld['name_by_language'] }}</div>
                             @endif
                         @endforeach
@@ -99,14 +131,21 @@
                         @php
                             $icon       = file_get_contents($viewMode['icon']);
                             $selected   = '';
+                            $event      = 'onclick=setViewMode(\''.$viewMode['key'].'\')';
                             if(!empty(request()->cookie('view_mode'))){
-                                if(request()->cookie('view_mode')==$viewMode['key']) $selected = 'selected';
+                                if(request()->cookie('view_mode')==$viewMode['key']) {
+                                    $selected   = 'selected';
+                                    $event      = '';
+                                }
                             }else {
-                                if($loop->index==0) $selected = 'selected';
+                                if($loop->index==0) {
+                                    $selected = 'selected';
+                                    $event      = '';
+                                }
                             }
                             
                         @endphp
-                        <div class="viewMode_list_box_item {{ $selected }}" onclick="setViewMode('{{ $viewMode['key'] }}');">
+                        <div class="viewMode_list_box_item {{ $selected }}" {{ $event }}>
                             {!! $icon !!}
                             <div>{{ $viewMode['name'] }}</div>
                         </div>

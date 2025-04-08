@@ -1,7 +1,10 @@
 @php
     $title              = $itemSeo->seo_title ?? $item->seo->seo_title ?? null;
     $description        = $itemSeo->seo_description ?? $item->seo->seo_description ?? null;
-    $url                = !empty($itemSeo->link_canonical) ? $itemSeo->source->slug_full : $itemSeo->slug_full;
+    /* đoạn này xử lý trương hợp lỗi do $itemSeo->source->slug_full rỗng */
+    $url = !empty($itemSeo->link_canonical) 
+    ? ($itemSeo->source ? $itemSeo->source->slug_full : $itemSeo->slug_full) 
+    : $itemSeo->slug_full;
     $urlFull            = !empty($url) ? env('APP_URL').'/'.$url : env('APP_URL');
     /* image */
     $imagePage          = public_path(config('image.default'));
