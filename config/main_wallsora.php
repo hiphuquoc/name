@@ -89,7 +89,7 @@ return [
     ],
     'cache'     => [
         'extension'     => 'html',
-        'folderSave'    => 'public/caches/',
+        'folderSave'    => 'storage/caches/', /* lưu trên google cloud */
     ],
     'main.password_user_default' => 'hitourVN@mk123',
     'category_type' => [

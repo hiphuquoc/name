@@ -52,38 +52,53 @@ class HomeController extends Controller {
     public static function home(Request $request, $language = 'vi'){
         /* ngôn ngữ */
         SettingController::settingLanguage($language);
+        
         /* cache HTML */
-        $paramsSlug             = [];
-        if(!empty(Cookie::get('view_mode'))&&Cookie::get('view_mode')!=config('main_'.env('APP_NAME').'.view_mode')[0]['key']) $paramsSlug['viewMode'] = Cookie::get('view_mode');
-        $nameCache              = RoutingController::buildNameCache($language.'home', $paramsSlug).'.'.config('main_'.env('APP_NAME').'.cache.extension');
-        $pathCache              = Storage::path(config('main_'.env('APP_NAME').'.cache.folderSave')).$nameCache;
-        $cacheTime    	        = env('APP_CACHE_TIME') ?? 1800;
-        if(file_exists($pathCache)&&$cacheTime>(time() - filectime($pathCache))){
-            $xhtml              = file_get_contents($pathCache);
-        }else {
-            $item               = Page::select('*')
+        $paramsSlug = [];
+        if(!empty(Cookie::get('view_mode')) && Cookie::get('view_mode') != config('main_'.env('APP_NAME').'.view_mode')[0]['key']) 
+            $paramsSlug['viewMode'] = Cookie::get('view_mode');
+        
+        $nameCache = RoutingController::buildNameCache($language.'home', $paramsSlug).'.'.config('main_'.env('APP_NAME').'.cache.extension');
+        $cachePath = config('main_'.env('APP_NAME').'.cache.folderSave').$nameCache;
+        $cacheTime = env('APP_CACHE_TIME') ?? 1800;
+        
+        $disk = Storage::disk('gcs');
+        $useCache = env('APP_CACHE_HTML') == true;
+        
+        // Chỉ kiểm tra và sử dụng cache khi APP_CACHE_HTML = true
+        if ($useCache && $disk->exists($cachePath) && $cacheTime > (time() - $disk->lastModified($cachePath))) {
+            $xhtml = $disk->get($cachePath);
+        } else {
+            $item = Page::select('*')
                 ->whereHas('seos.infoSeo', function ($query) use ($language) {
                     $query->where('slug', $language);
                 })
                 ->with('seo', 'seos.infoSeo', 'type')
                 ->first();
+                
             /* lấy item seo theo ngôn ngữ được chọn */
-            $itemSeo            = [];
+            $itemSeo = [];
             if (!empty($item->seos)) {
                 foreach ($item->seos as $seo) {
-                    if (!empty($seo->infoSeo->language) && $seo->infoSeo->language==$language) {
+                    if (!empty($seo->infoSeo->language) && $seo->infoSeo->language == $language) {
                         $itemSeo = $seo->infoSeo;
                         break;
                     }
                 }
             }
-            $categories     = Category::select('*')
-                                ->where('flag_show', 1)
-                                ->get();
-            $xhtml      = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
-            /* Ghi dữ liệu - Xuất kết quả */
-            if(env('APP_CACHE_HTML')==true) Storage::put(config('main_'.env('APP_NAME').'.cache.folderSave').$nameCache, $xhtml);
+            
+            $categories = Category::select('*')
+                ->where('flag_show', 1)
+                ->get();
+                
+            $xhtml = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
+            
+            // Chỉ ghi cache khi APP_CACHE_HTML = true
+            if ($useCache) {
+                $disk->put($cachePath, $xhtml);
+            }
         }
+        
         echo $xhtml;
     }
 
