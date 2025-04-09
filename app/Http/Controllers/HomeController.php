@@ -150,39 +150,16 @@ class HomeController extends Controller {
 
         // dd(123);
 
-        $languageList       = config('language');
+        // $languageList       = config('language');
 
-        foreach($languageList as $language){
+        // foreach($languageList as $language){
 
-            // TranslateConfigLanguage::dispatch($language);
-            echo '<div>'.$language['key'].' - '.$language['name'].'</div>';
+        //     // TranslateConfigLanguage::dispatch($language);
+        //     echo '<div>'.$language['key'].' - '.$language['name'].'</div>';
             
-        }
+        // }
 
         // dd('success');
-
-        // $infoPageParent = Category::select('*')
-        //                     ->whereHas('seos.infoSeo', function($query){
-        //                         $query->where('slug', 'hinh-nen-dien-thoai');
-        //                     })
-        //                     ->with('seo', 'seos')
-        //                     ->first();
-
-        // $orderingCopy   = 7;
-        // $contentCopy    = '';
-        // foreach($infoPageParent->seos as $seo){
-        //     if(!empty($seo->infoSeo->language)){
-        //         $language       = $seo->infoSeo->language;
-        //         foreach($seo->infoSeo->contents as $content){
-        //             if($content->ordering==$orderingCopy){
-        //                 $contentCopy    = $content->content;
-        //                 CopyBoxContentToAllTagAndCategory::dispatch($orderingCopy, $language, $contentCopy);
-        //                 break;
-        //             }
-        //         }
-        //     }
-        // }
-        // dd(123);
 
         // $array = ["Tê Giác", "Hà Mã", "Lạc Đà", "Cá Nemo", "Sao Biển", "Ngựa", "Cá Ngựa",
         //             "Hồng Hạc", "Vẹt", "Tắc Kè Hoa", "Cá Sấu", "Ếch", "Cá Rồng", "Báo Tuyết", 
