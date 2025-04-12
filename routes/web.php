@@ -88,12 +88,21 @@ Route::get('/redis-test', function () {
     }
 });
 Route::get('/redis-keys', function () {
-    $keys = Redis::keys('*');
-    dd($keys);
+    try {
+        $keys = Redis::connection('default')->keys('*');
+        return response()->json($keys);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 });
+
 Route::get('/redis-info', function () {
-    $info = Redis::command('info');
-    dd($info);
+    try {
+        $info = Redis::connection('default')->info();
+        return response()->json($info);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 });
 Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-thong')->group(function () {
     /* ===== AI ===== */
