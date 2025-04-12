@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('link_canonical')->nullable();
             $table->string('type', '50');
             $table->string('rating_author_name', 1)->nullable();
-            $table->string('rating_author_star', 5)->default(5);
+            $table->string('rating_author_star', 5);
             $table->integer('rating_aggregate_count')->nullable();
             $table->string('rating_aggregate_star', 5)->nullable();
             $table->integer('created_by');

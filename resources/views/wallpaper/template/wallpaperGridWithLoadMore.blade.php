@@ -105,7 +105,7 @@
             .then(data => {
                 // Tạo một container ẩn để xử lý nội dung
                 const tempDiv = $('<div></div>').html(data.content);
-
+                
                 // Tìm tất cả hình ảnh trong content
                 const images = tempDiv.find('img');
                 let imagesLoaded = 0;

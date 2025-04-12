@@ -60,7 +60,7 @@ class HomeController extends Controller {
         
         $nameCache = RoutingController::buildNameCache($language.'home', $paramsSlug).'.'.config('main_'.env('APP_NAME').'.cache.extension');
         $cachePath = config('main_'.env('APP_NAME').'.cache.folderSave').$nameCache;
-        $cacheTime = env('APP_CACHE_TIME') ?? 1800;
+        $cacheTime = config('app.cache_html_time', 86400);
         
         $disk = Storage::disk('gcs');
         $useCache = env('APP_CACHE_HTML') == true;

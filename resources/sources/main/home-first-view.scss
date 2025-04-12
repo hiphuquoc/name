@@ -62,7 +62,7 @@
                 z-index: 4;
                 padding: 0.5rem 1rem 0.75rem 1rem;
                 font-size: calc(var(--fontSizeNormal) - 0.075rem);
-                background-image: linear-gradient(360deg, rgba(var(--colorBackgroundLv1), 0.85) 33.33%, rgba(var(--colorBackgroundLv1), 0.9) 66.66%, rgba(var(--colorBackgroundLv1), 0.75) 100%);
+                background: rgba(var(--colorBackgroundLv1), 0.85);
                 transition: all 0.1s;
                 &.zoom {
                     position: fixed;

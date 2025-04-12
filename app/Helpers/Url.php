@@ -11,7 +11,7 @@ class Url {
 
     public static function checkUrlExists($slug){
         $infoPage           = new \Illuminate\Database\Eloquent\Collection;
-        /* check ngôn ngữ Việt */
+        /* check ngôn ngữ */
         $infoPage           = Seo::select('*')
                                 ->where('slug', $slug)
                                 ->first();

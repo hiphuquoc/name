@@ -31,7 +31,7 @@ export default defineConfig({
   server: {
     watch: {
       usePolling: false, // Giúp Vite theo dõi thay đổi file
-      interval: 100, // Điều chỉnh thời gian polling
+      interval: 1000, // Điều chỉnh thời gian polling
     },
     hmr: {
       overlay: false, // Vô hiệu hóa overlay để tránh lỗi khó chịu

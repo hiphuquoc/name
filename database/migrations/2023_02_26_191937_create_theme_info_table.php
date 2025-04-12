@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('theme_info', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->string('type', 50)->default('white');
+            $table->string('type', 50);
             $table->integer('status')->default(0);
             $table->text('note')->nullable();
         });

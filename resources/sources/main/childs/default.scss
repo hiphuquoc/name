@@ -493,20 +493,15 @@ $radiusBoxLarge : 1rem;
     pointer-events: none;
     filter: blur(3px);
     -webkit-filter: blur(3px);
-    height: 6.75rem;
+    height: 6.625rem;
     .light & {
       height: 6.5rem;
     }
     @media(max-width: 767px){
-      height: 6.625rem;
+      /* giảm nhiều hơn do gap cũng giảm */
+      height: 6rem;
       .light & {
-        height: 6.325rem;
-      }
-    }
-    @media(max-width: 577px){
-      height: 6.5rem;
-      .light & {
-        height: 6.25rem;
+        height: 5.825rem;
       }
     }
   }
