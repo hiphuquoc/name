@@ -52,6 +52,7 @@ use App\Http\Controllers\CheckOnpageController;
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
 
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +77,15 @@ Route::get('/setCsrfFirstTime', [CookieController::class, 'setCsrfFirstTime'])->
 Route::post('/auth/google/callback', [ProviderController::class, 'googleCallback'])->name('main.google.callback');
 /* Url IPN (bên thứ 3) => để VNPay gọi qua check (1 lần nữa) xem đơn hàng xác nhận chưa => trong trường hợp mạng khách hàng có vấn đề */
 Route::post('/vnpay/url_ipn', [VNPayController::class, 'handleIPN'])->name('main.vnpay.ipn');
-
+/* redis test */
+Route::get('/redis-test', function () {
+    try {
+        Cache::put('redis_test', 'ok', 10);
+        return Cache::get('redis_test') === 'ok' ? 'Redis hoạt động' : 'Redis không lưu được';
+    } catch (\Exception $e) {
+        return 'Lỗi Redis: ' . $e->getMessage();
+    }
+});
 Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-thong')->group(function () {
     /* ===== AI ===== */
     Route::get('/chatGpt', [ChatGptController::class, 'chatGpt'])->name('main.chatGpt');
@@ -248,7 +257,7 @@ Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-t
     Route::prefix('cache')->group(function(){
         Route::get('/clearCacheHtml', [CacheController::class, 'clear'])->name('admin.cache.clearCache');
     });
-    /* ===== CACHE ===== */
+    /* ===== HELPER ===== */
     Route::prefix('helper')->group(function(){
         Route::get('/convertStrToSlug', [HelperController::class, 'convertStrToSlug'])->name('admin.helper.convertStrToSlug');
         Route::post('/deleteLanguage', [HelperController::class, 'deleteLanguage'])->name('admin.helper.deleteLanguage');
