@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div id="ja_closeViewBoxList" class="viewMode_list">
-                <div class="viewMode_list_title">Chọn chế độ xem bạn thích để có trải nghiệm thoải mái hơn nhé!</div>
+                <div class="viewMode_list_title">{{ config('data_language_3.'.$language.'.view_mode_notes') }}</div>
                 <div class="viewMode_list_close" onclick="closeLanguageBoxList('ja_closeViewBoxList');"><i class="fa-solid fa-xmark"></i></div>
                 <div class="viewMode_list_box">
                     @foreach(config('main_'.env('APP_NAME').'.view_mode') as $viewMode)
@@ -147,7 +147,7 @@
                         @endphp
                         <div class="viewMode_list_box_item {{ $selected }}" {{ $event }}>
                             {!! $icon !!}
-                            <div>{{ $viewMode['name'] }}</div>
+                            <div>{{ config('data_language_3.'.$language.'.'.$viewMode['key'].'_mode') }}</div>
                         </div>
                     @endforeach
                 </div>

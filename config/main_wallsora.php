@@ -201,17 +201,18 @@ return [
         /* phần tử đầu tiên mặc định */
         [
             'key'  => 'light',
-            'name' => 'Chế độ sáng',
             'icon'  => 'storage/images/svg/icon-light-light.svg',
         ],
         [
             'key'   => 'gray',
-            'name'  => 'Chế độ xám',
             'icon'  => 'storage/images/svg/icon-light-gray.svg',
         ],
+        // [
+        //     'key'   => 'sepia',
+        //     'icon'  => 'storage/images/svg/icon-light.svg',
+        // ],
         [
             'key'   => 'dark',
-            'name'  => 'Chế độ tối',
             'icon'  => 'storage/images/svg/icon-light.svg',
         ]
     ],

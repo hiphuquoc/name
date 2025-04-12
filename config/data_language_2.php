@@ -1095,9 +1095,9 @@ return [
 ],
 "vi" => [
     "question_and_answer"   => "Câu hỏi thường gặp",
-    "wallpaper_theme"   => "Chủ đề Hình Nền",
-    "wallpaper_style"   => "Phong cách Hình Nền",
-    "free_wallpaper"    => "Hình nền Miễn Phí",
+    "wallpaper_theme"   => "Chủ đề hình Nền",
+    "wallpaper_style"   => "Phong cách hình Nền",
+    "free_wallpaper"    => "Hình nền miễn Phí",
     "phone_wallpaper"   => "Hình nền điện thoại",
     "product_description"   => "<p>Biến màn hình điện thoại của bạn thành một tác phẩm nghệ thuật với bộ sưu tập hình nền độc đáo này!</p>
         <ul>
@@ -1107,9 +1107,9 @@ return [
         </ul>
         <div>Tải ngay hôm nay và trải nghiệm sự khác biệt thú vị trên màn hình điện thoại của bạn!</div>
   ",
-    "wallpaper_by_themes" => "Hình Nền theo Chủ Đề",
-    "wallpaper_by_styles" => "Hình Nền theo Phong Cách",
-    "wallpaper_by_events" => "Hình Nền theo Sự Kiện",
+    "wallpaper_by_themes" => "Hình nền theo Chủ Đề",
+    "wallpaper_by_styles" => "Hình nền theo Phong Cách",
+    "wallpaper_by_events" => "Hình nền theo Sự Kiện",
     "list_type_search" => [
         "category_info" => "Danh mục",
         "paid_wallpaper" => "Hình nền trả phí",

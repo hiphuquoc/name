@@ -218,6 +218,22 @@ class HomeController extends Controller {
         // }
 
         // dd($count);
+
+
+        // $categories = Category::all();
+
+        // foreach($categories as $category){
+        //     echo ', <span>'.$category->seo->title.'</span>';
+        // }
+
+
+        $languages = config('language');
+        foreach($languages as $language){
+            echo '<div>'.$language['key'].' - '.$language['name_by_language'].'</div>';
+        }
+
+
+        dd(123);
     }
 
     public static function chatWithAI(array $messages, string $model = 'deepseek-reasoner', array $options = []) {

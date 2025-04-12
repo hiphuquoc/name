@@ -18,12 +18,16 @@ html {
 }
 
 body {
-  font-size: var(--fontSizeNormal);
+  // font-size: var(--fontSizeNormal);
   font-weight: 500;
   font-family: $fontText;
   box-sizing: border-box;
   color: rgba(var(--colorText), var(--opacityNormal));
   line-height: var(--lineHeightNormal);
+  font-size: 14.8px;
+  .light & {
+    font-size: 15.6px;
+  }
   &.background {
     background: rgb(var(--colorBackgroundLv1));
   }
