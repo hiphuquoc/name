@@ -53,6 +53,7 @@ use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\GoogledriveController;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,14 @@ Route::get('/redis-test', function () {
     } catch (\Exception $e) {
         return 'Lỗi Redis: ' . $e->getMessage();
     }
+});
+Route::get('/redis-keys', function () {
+    $keys = Redis::keys('*');
+    dd($keys);
+});
+Route::get('/redis-info', function () {
+    $info = Redis::command('info');
+    dd($info);
 });
 Route::middleware(['auth', 'role:admin', 'check.admin.subdomain'])->prefix('he-thong')->group(function () {
     /* ===== AI ===== */
