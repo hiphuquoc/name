@@ -227,7 +227,7 @@ return [
 
 
     /* time cache */
-    'cache_html_time'   => env('APP_CACHE_REDIS_TIME', 2592000), // 1 tháng
+    'cache_html_time'   => env('APP_CACHE_HTML_TIME', 2592000), // 1 tháng
     'cache_redis_time'  => env('APP_CACHE_REDIS_TIME', 86400), // 1 ngày
 
 ];
