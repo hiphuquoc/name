@@ -10,7 +10,7 @@
             {!! $icon !!}
         </div>
         <div class="headerBottom_item_text">
-            <div class="maxLine_1">{{ $user->name ?? ''}}</div>
+            <div class="maxLine_1" style="width:100%;">{{ $user->name ?? ''}}</div>
             <div class="headerBottom_item_text_modal">
                 <a href="/{{ $urlMyDownload }}" class="loginBox_list_item">
                     <i class="fa-solid fa-download"></i>
@@ -47,8 +47,6 @@
             @endphp
             {!! $icon !!}
         </div>
-        <div class="headerBottom_item_text">
-            {{ $loginByLanguage }}
-        </div>
+        <div class="headerBottom_item_text"><div class="maxLine_1" style="width:100%;">{{ $loginByLanguage }}</div></div>
     </div>
 @endif

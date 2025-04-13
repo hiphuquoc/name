@@ -21,9 +21,7 @@
             @endphp
             {!! $icon !!}
         </div>
-        <div class="headerBottom_item_text maxLine_1">
-            {{ $nameSupport }}
-        </div>
+        <div class="headerBottom_item_text maxLine_1"><div class="maxLine_1" style="width:100%;">{{ $nameSupport }}</div></div>
     </a>
     <!-- hướng dẫn tải -->
     <a id="js_loadLinkDownloadGuide" class="headerBottom_item" href="/">
@@ -33,9 +31,7 @@
             @endphp
             {!! $icon !!}
         </div>
-        <div class="headerBottom_item_text maxLine_1">
-            {{ $nameGuide }}
-        </div>
+        <div class="headerBottom_item_text"><div class="maxLine_1" style="width:100%;">{{ $nameGuide }}</div></div>
     </a>
     <!-- đăng nhập => Ajax -->
     <div id="js_checkLoginAndSetShow_buttonMobile" class="headerBottom_item"></div>

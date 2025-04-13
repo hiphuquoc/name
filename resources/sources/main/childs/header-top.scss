@@ -147,11 +147,12 @@
     &_item {
         width: 33.33%;
         height: 100%;
+        padding: 0.5rem;
+        // chỗ này không dùng flex vì để thiết lập maxLine
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0.5rem;
         gap: 0.325rem;
         > * {
             /* mấy thẻ bao bọc dư do ajax */
@@ -161,6 +162,8 @@
             justify-content: center;
             align-items: center;
             gap: 0.325rem;
+            text-align: center;
+            white-space: nowrap;
         }
         &:not(:first-child){
             border-left: 1px solid rgb(var(--colorBackgroundLv3));
@@ -178,6 +181,7 @@
             font-size: calc(var(--fontSizeNormal) - 0.125rem);
             font-family: $fontText;
             font-weight: 600;
+            // margin-top: 0.25rem;
             &_modal {
                 display: none;
                 width: 180px;

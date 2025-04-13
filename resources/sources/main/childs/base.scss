@@ -50,8 +50,11 @@ a {
 
 strong {
   font-family: $fontTitle;
-  font-size: calc(var(--fontSizeNormal) + 0.05rem);
   font-weight: 700;
+  font-size: 15.8px;
+  .light & {
+    font-size: 16.6px;
+  }
 }
 
 h1, h2 {
