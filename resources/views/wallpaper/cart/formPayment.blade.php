@@ -11,7 +11,10 @@
             <input type="text" id="email" name="email" value="{{ $user->email ?? null }}" onkeyup="validateWhenType(this, 'email')">
         </div>
         <div class="layoutPageCart_left_item_body_note">
-            <i class="fa-solid fa-snowflake"></i>{{ config('data_language_1.'.$language.'.email_prompt') }}
+            @php
+                $icon       = file_get_contents('storage/images/svg/icon_snowflake.svg');
+            @endphp
+            {!! $icon .config('data_language_1.'.$language.'.email_prompt') !!}
         </div>
     </div>
     {{-- <div class="layoutPageCart_left_item_footer">

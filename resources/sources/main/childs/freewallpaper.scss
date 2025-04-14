@@ -97,8 +97,10 @@
                         &:hover {
                             background: rgb(var(--colorBackgroundLv2));
                         }
-                        i {
-                            opacity: 0.5;
+                        svg {
+                            color: rgb(var(--colorIcon));
+                            width: 16px;
+                            height: 16px;
                         }
                     }
                 }

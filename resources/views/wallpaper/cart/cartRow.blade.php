@@ -49,18 +49,3 @@
         {{-- <img src="{{ Storage::url('images/svg/icon-trash.svg') }}" alt="xóa sản phẩm khỏi giỏ hàng" title="xóa sản phẩm khỏi giỏ hàng" /> --}}
     </div>
 </div>
-{{-- <div class="cartProductBox_body_item_quantity">
-    <div class="inputQty small">
-        <div class="inputQty_button minus" onClick="plusMinusQuantity('js_addToCart_quantity_{{ $keyId }}', 'minus');{{ $eventUpdateCart }}"><i class="fa-solid fa-minus"></i></div>
-        <input id="js_addToCart_quantity_{{ $keyId }}" type="number" name="quantity" value="{{ $product->cart['quantity'] ?? 0 }}" data-product_info_id="{{ $idProduct }}" data-product_price_id="{{ $idPrice }}" onkeyup="{{ $eventUpdateCart }}" />
-        <div class="inputQty_button plus" onClick="plusMinusQuantity('js_addToCart_quantity_{{ $keyId }}', 'plus');{{ $eventUpdateCart }}"><i class="fa-solid fa-plus"></i></div>       
-    </div>
-</div> --}}
-{{-- @php
-    $money = 0;
-    if(!empty($product->price->price)&&!empty($product->cart['quantity'])) $money = number_format($product->price->price*$product->cart['quantity']);
-@endphp
-<div class="cartProductBox_body_item_money">
-    <div>{!! $money.config('language.'.$language.'.currency') !!}</div>
-    <div class="cartProductBox_body_item_money_icon" onClick="{{ $eventRemoveProductCart }}"><img src="{{ Storage::url('images/svg/icon-trash.svg') }}" alt="xóa sản phẩm khỏi giỏ hàng" title="xóa sản phẩm khỏi giỏ hàng" /></div>
-</div> --}}

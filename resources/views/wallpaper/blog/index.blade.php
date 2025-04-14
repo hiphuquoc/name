@@ -64,19 +64,25 @@
                     <h1 class="titlePage">{{ $itemSeo->title }}</h1>
                     <!-- thông tin bài viết -->
                     <div class="blogInfoHeadBox">
+                        @php
+                            $iconUser   = file_get_contents('storage/images/svg/icon-user.svg');
+                            $iconClock  = file_get_contents('storage/images/svg/icon_clock_bold.svg');
+                            $iconEye    = file_get_contents('storage/images/svg/icon_eye_bold.svg');
+                            $iconShare  = file_get_contents('storage/images/svg/icon_share_bold.svg');
+                        @endphp
                         @foreach($item->seos as $seo)
                             @if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language)
                                 <div class="blogInfoHeadBox_item maxLine_1">
-                                    <i class="fa-solid fa-user"></i>Name Admin
+                                    {!! $iconUser !!}Name Admin
                                 </div>
                                 <div class="blogInfoHeadBox_item maxLine_1">
-                                    <i class="fa-regular fa-clock"></i>{{ date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) }}
+                                    {!! $iconClock.date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) !!}
                                 </div>
                                 <div class="blogInfoHeadBox_item maxLine_1">
-                                    <i class="fa-solid fa-eye"></i>{{ $item->viewed }}
+                                    {!! $iconEye !!}{{ $item->viewed }}
                                 </div> 
                                 <div class="blogInfoHeadBox_item maxLine_1">
-                                    <i class="fa-solid fa-share"></i>{{ $item->shared }}
+                                    {!! $iconShare !!}{{ $item->shared }}
                                 </div>
                                 @break
                             @endif

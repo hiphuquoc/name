@@ -5,7 +5,12 @@
         <div class="cartMessage_box_head">
             {{ config('data_language_1.'.$language.'.added_to_cart') }}
         </div>
-        <div class="cartMessage_box_close" onClick="openCloseModal('cartMessage');"><i class="fa-solid fa-xmark"></i></div>
+        <div class="cartMessage_box_close" onClick="openCloseModal('cartMessage');">
+            @php
+                $icon       = file_get_contents('storage/images/svg/icon_close.svg');
+            @endphp
+            {!! $icon !!}
+        </div>
         <div class="cartMessage_box_body">
             @if(!empty($image))
                 <div class="cartMessage_box_body_image">

@@ -12,7 +12,6 @@
             background: rgba(var(--colorBackgroundLv2), var(--opacityNormal));
             border: 1px solid rgba(0,0,0,0.08);
             border-radius: 0.75rem;
-            padding: 0.75rem 1rem 1rem 1.75rem;
             transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
             position: relative;
             overflow: hidden;
@@ -20,6 +19,10 @@
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
+            padding: 0.75rem 1rem 1rem 1.75rem;
+            &:dir(rtl), [dir="rtl"] & {
+                padding: 0.75rem 1.75rem 1rem 1rem;
+            }
             &:hover {
                 background: rgb(var(--colorBackgroundLv2));
             }
@@ -30,21 +33,39 @@
                 padding-left: 1.25rem;
                 padding-right: 1.75rem; /* chừa chỗ cho icon show - hide */
                 position: relative;
+                &:dir(rtl), [dir="rtl"] & {
+                    padding-right: 1.25rem;
+                    padding-left: 1.75rem; /* chừa chỗ cho icon show - hide */
+                    &:before {
+                        left: unset;
+                        right: -12px;
+                    }
+                    &:after {
+                        right: unset;
+                        left: 0;
+                    }
+                }
                 &::before {
                     content: 'Q';
                     position: absolute;
                     left: -12px;
-                    top: 0;
+                    top: -3.5px;
                     font-weight: bold;
                     color: rgba(var(--colorIcon), var(--opacityNormal));
                     font-size: calc(var(--fontSizeNormal) + 0.375rem);
                 }
                 &::after {
-                    content: '\2b';
-                    @include fontAwesome;
+                    content: '';
                     position: absolute;
+                    top: 7px;
+                    background-color: rgba(var(--colorText), 0.5);
+                    mask: url('/storage/images/svg/icon_plus.svg') no-repeat center;
+                    mask-size: contain;
+                    -webkit-mask: url('/storage/images/svg/icon_plus.svg') no-repeat center;
+                    -webkit-mask-size: contain;
+                    width: 1rem;
+                    height: 1rem;
                     right: 0;
-                    top: 0;
                 }
                 &.show {
                     &::after {
@@ -54,13 +75,20 @@
             }
 
             &_answer {
-                padding-left: 1.25rem;
                 position: absolute;
                 opacity: 0; 
                 max-height: 0;
                 transition: all 0.3s; 
                 bottom: 0;
-            
+                padding-left: 1.25rem;
+                &:dir(rtl), [dir="rtl"] & {
+                    padding-right: 1.25rem;
+                    padding-left: unset;
+                    &:before {
+                        left: unset;
+                        right: -12px;
+                    }
+                }
                 &.show {
                     position: relative;
                     opacity: var(--opacityNormal); 

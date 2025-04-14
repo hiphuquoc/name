@@ -70,6 +70,12 @@
                     <!-- bài viết con -->
                     <div class="blogListBox">
                         @if(!empty($blogs)&&$blogs->count()>0)
+                            @php
+                                $iconUser   = file_get_contents('storage/images/svg/icon-user.svg');
+                                $iconClock  = file_get_contents('storage/images/svg/icon_clock_bold.svg');
+                                $iconEye    = file_get_contents('storage/images/svg/icon_eye_bold.svg');
+                                $iconShare  = file_get_contents('storage/images/svg/icon_share_bold.svg');
+                            @endphp
                             @foreach($blogs as $blog)
                                 @foreach($blog->seos as $seo)
                                     @if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language)
@@ -88,10 +94,10 @@
                                                     <h2>{{ $title }}</h2>
                                                 </a>
                                                 <div class="blogListBox_item_content_info">
-                                                    <div class="maxLine_1"><i class="fa-solid fa-user"></i>Admin Name</div> 
-                                                    <div class="maxLine_1"><i class="fa-regular fa-clock"></i>{{ date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) }}</div>
-                                                    <div class="maxLine_1"><i class="fa-solid fa-eye"></i>{{ $blog->viewed }}</div> 
-                                                    <div class="maxLine_1"><i class="fa-solid fa-share"></i>{{ $blog->shared }}</div>
+                                                    <div class="maxLine_1">{!! $iconUser !!}Name Admin</div> 
+                                                    <div class="maxLine_1">{!! $iconClock.date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) !!}</div>
+                                                    <div class="maxLine_1">{!! $iconEye !!}{{ $item->viewed }}</div> 
+                                                    <div class="maxLine_1">{!! $iconShare !!}{{ $item->shared }}</div>
                                                 </div>
                                                 <div class="blogListBox_item_content_desc maxLine_4">
                                                     {!! !empty($seo->infoSeo->contents[0]->content) ? strip_tags($seo->infoSeo->contents[0]->content) : '' !!}

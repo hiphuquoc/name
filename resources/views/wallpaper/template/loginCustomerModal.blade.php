@@ -11,7 +11,12 @@
         </div>
         <div class="modalLoginFormCustomerBox_box_right">
             <!-- close -->
-            <div class="modalLoginFormCustomerBox_box_right_close" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');"><i class="fa-solid fa-xmark"></i></div>
+            <div class="modalLoginFormCustomerBox_box_right_close" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
+                @php
+                    $icon       = file_get_contents('storage/images/svg/icon_close.svg');
+                @endphp
+                {!! $icon !!}
+            </div>
             <!-- form -->
             @php
                 $loginByLanguage = config('data_language_1.'.$language.'.login');

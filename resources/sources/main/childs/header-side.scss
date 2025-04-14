@@ -377,19 +377,25 @@ $widthCollapsed : 17rem;
                 > li {
                     position: relative;
                     &:before {
-                        @include fontAwesome;
-                        color: rgb(var(--colorIcon));
-                        content: "\f192";
-                        font-size: 0.45rem;
-                        opacity: .75;
+                        content: "";
                         position: absolute;
                         top: 50%;
                         transform: translateY(-50%);
-                        left: 0.75rem;
+                        background-color: rgb(var(--colorIcon));
+                        mask: url('/storage/images/svg/icon_circle_with_line.svg') no-repeat center;
+                        mask-size: contain;
+                        -webkit-mask: url('/storage/images/svg/icon_circle_with_line.svg') no-repeat center;
+                        -webkit-mask-size: contain;
+                        width: 7px;
+                        height: 7px;
+                    }
+                    &:dir(ltr), [dir="ltr"] & {
+                        &::before {
+                            left: 0.75rem;
+                        }
                     }
                     &:dir(rtl), [dir="rtl"] & {
-                        &:before {
-                            left: unset;
+                        &::before {
                             right: 0.75rem;
                         }
                     }
@@ -412,20 +418,33 @@ $widthCollapsed : 17rem;
                 i, div, a {
                     visibility: hidden;
                 }
-                i {
+                .actionMenu {
                     width: 1.75rem;
                     height: 1.75rem;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    opacity: var(--opacityNormal);
-                    font-size: calc(var(--fontSizeNormal) - 0.075rem);
                     cursor: pointer;
-                    color: rgba(var(--colorIcon), var(--opacityNormal));
                     margin-left: auto;
                     &:dir(rtl), [dir="rtl"] & {
                         margin-left: unset;
                         margin-right: auto;
+                    }
+                    &::after {
+                        content: '';
+                        display: block;
+                        width: 1rem;
+                        height: 1rem;
+                        background-color: rgb(var(--colorIcon));
+                        mask: url('/storage/images/svg/icon_plus.svg') no-repeat center;
+                        mask-size: contain;
+                        -webkit-mask: url('/storage/images/svg/icon_plus.svg') no-repeat center;
+                        -webkit-mask-size: contain;
+                    }
+
+                    &.isOpen::after {
+                        mask-image: url('/storage/images/svg/icon_close.svg');
+                        -webkit-mask-image: url('/storage/images/svg/icon_close.svg');
                     }
                 }
             }
@@ -497,7 +516,6 @@ $widthCollapsed : 17rem;
         &_title {
             margin-bottom: 0.25rem;
             font-size: calc(var(--fontSizeNormal) - 0.025rem);
-            
         }
         &_box {
             display: flex;
@@ -512,14 +530,57 @@ $widthCollapsed : 17rem;
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
-                opacity: var(--opacityNormal);
+                opacity: 0.85;
                 &:hover {
                     opacity: 1;
                 }
-                i {
-                    font-size: calc(var(--fontSizeNormal) + 0.25rem);
-                    color: rgb(var(--colorLv1));
-                    // text-shadow: 1px 1px 2px rgb(var(--colorLv2));
+                &.facebook {
+                    &::after {
+                        content: '';
+                        background-color: rgb(var(--colorIcon));
+                        mask: url('/storage/images/svg/icon_facebook_f.svg') no-repeat center;
+                        mask-size: contain;
+                        -webkit-mask: url('/storage/images/svg/icon_facebook_f.svg') no-repeat center;
+                        -webkit-mask-size: contain;
+                        width: 1.35rem;
+                        height: 1.35rem;
+                    }
+                }
+                &.instagram {
+                    &::after {
+                        content: '';
+                        background-color: rgb(var(--colorIcon));
+                        mask: url('/storage/images/svg/icon_instagram.svg') no-repeat center;
+                        mask-size: contain;
+                        -webkit-mask: url('/storage/images/svg/icon_instagram.svg') no-repeat center;
+                        -webkit-mask-size: contain;
+                        width: 1.35rem;
+                        height: 1.35rem;
+                    }
+                }
+                &.youtube {
+                    &::after {
+                        content: '';
+                        background-color: rgb(var(--colorIcon));
+                        mask: url('/storage/images/svg/icon_youtube.svg') no-repeat center;
+                        mask-size: contain;
+                        -webkit-mask: url('/storage/images/svg/icon_youtube.svg') no-repeat center;
+                        -webkit-mask-size: contain;
+                        width: 1.35rem;
+                        height: 1.35rem;
+                    }
+                }
+                &.tiktok {
+                    &::after {
+                        content: '';
+                        background-color: rgb(var(--colorIcon));
+                        mask: url('/storage/images/svg/icon_tiktok.svg') no-repeat center;
+                        mask-size: contain;
+                        -webkit-mask: url('/storage/images/svg/icon_tiktok.svg') no-repeat center;
+                        -webkit-mask-size: contain;
+                        width: 1.35rem;
+                        height: 1.35rem;
+                    }
                 }
             }
         }

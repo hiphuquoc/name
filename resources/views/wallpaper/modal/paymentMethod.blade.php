@@ -33,7 +33,10 @@
             </div> --}}
         </form>
         <div class="modalBox_box_close" onClick="openCloseModal('modalPaymentMethod');">
-            <i class="fa-sharp fa-solid fa-xmark"></i>
+            @php
+                $icon       = file_get_contents('storage/images/svg/icon_close.svg');
+            @endphp
+            {!! $icon !!}
         </div>
     </div>
 </div>

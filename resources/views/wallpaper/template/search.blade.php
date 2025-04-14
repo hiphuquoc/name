@@ -25,7 +25,10 @@
                         @endif
                     @endforeach
                 </div> 
-                <i class="fa-solid fa-angle-down"></i>
+                @php
+                    $icon = file_get_contents('storage/images/svg/icon_arrow_down.svg');
+                @endphp
+                {!! $icon !!}
                 @if(!empty($typeSearch))
                     <div id="js_openSelected_typeBoxList" class="searchViewBefore_showBox_typeBox_list">
                         @foreach($typeSearch as $key => $t)

@@ -13,11 +13,17 @@
             <div class="maxLine_1" style="width:100%;">{{ $user->name ?? ''}}</div>
             <div class="headerBottom_item_text_modal">
                 <a href="/{{ $urlMyDownload }}" class="loginBox_list_item">
-                    <i class="fa-solid fa-download"></i>
+                    @php
+                        $icon   = file_get_contents('storage/images/svg/icon_download.svg');
+                    @endphp
+                    {!! $icon !!}
                     <div>{{ $myDownloadsByLanguage }}</div>
                 </a> 
                 <a href="{{ route('admin.logout') }}" class="loginBox_list_item">
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    @php
+                        $icon   = file_get_contents('storage/images/svg/icon_right_from_bracket.svg');
+                    @endphp
+                    {!! $icon !!}
                     <div>{{ config('data_language_1.'.$language.'.logout') }}</div>
                 </a>
             </div>

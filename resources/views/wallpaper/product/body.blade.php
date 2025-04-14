@@ -29,9 +29,6 @@
                         <tbody>
                             @foreach($item->prices as $price)
                                 @foreach($price->wallpapers as $wallpaper)
-                                    {{-- @php
-                                        dd($wallpaper->infoWallpaper);
-                                    @endphp --}}
                                     <tr>
                                         <td>{{ config('data_language_1.'.$language.'.image') }} {{ $price->code_name ?? '-' }}</td>
                                         <td>{{ $wallpaper->infoWallpaper->width_source ?? '-' }}x{{ $wallpaper->infoWallpaper->height_source ?? '-' }} px</td>
@@ -75,19 +72,21 @@
                     <input type="hidden" id="product_info_id" name="product_info_id" value="{{ $item->id ?? null }}" />
                     <!-- tiêu đề -->
                     <h1 class="titlePage customTitlePage">{{ $itemSeo->title }}</h1>
-                    <!-- yêu thích -->
+                    {{-- <!-- yêu thích -->
                     @php
                         $countHeart = 0;
                         foreach($item->prices as $price){
-                            foreach($price->wallpapers as $wallpaper) $countHeart += $wallpaper->heart;
+                            foreach($price->wallpapers as $wallpaper) {
+                                $countHeart += $wallpaper->infoWallpaper->heart;
+                            }
                         }
                     @endphp
                     @if($countHeart>0)
                         <div class="showFeelingBox">
                             {!! file_get_contents(public_path('storage/images/svg/icon-heart-2.svg')) !!}
-                            <div>{{ 200 }} yêu thích</div>
+                            <div>{{ $countHeart }} yêu thích</div>
                         </div>
-                    @endif
+                    @endif --}}
                     <div class="distanceBetweenBox">
                         <!-- mô tả sản phẩm -->
                         <div id="js_viewMoreContent_content" class="productDetailBox_detail_description">

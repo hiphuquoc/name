@@ -122,7 +122,11 @@
                                     @endphp
                                     @if(!empty($quantityImage))
                                         <div class="wallpaperGridBox_item_image_content_price_quantity">
-                                            <i class="fa-regular fa-image"></i><div>{{ $quantityImage }}</div>
+                                            @php
+                                                $icon       = file_get_contents('storage/images/svg/icon_image.svg');
+                                            @endphp
+                                            {!! $icon !!}
+                                            <div>{{ $quantityImage }}</div>
                                         </div>
                                     @endif
                                 </div>
@@ -137,13 +141,21 @@
                     </a>
                     <!-- thêm vào giỏ hành nhanh -->
                     <div class="wallpaperGridBox_item_action">
-                        <i class="fa-regular fa-heart"></i>
+                        @php
+                            $icon       = file_get_contents('storage/images/svg/icon_heart.svg');
+                        @endphp
+                        <div class="wallpaperGridBox_item_action_item">
+                            {!! $icon !!}
+                        </div>
                         @php
                             $keyPriceAll = [];
                             foreach($product->prices as $p) $keyPriceAll[] = $p->id;
                             $keyPriceAll = implode('-', $keyPriceAll);
+                            $icon       = file_get_contents('storage/images/svg/icon_bag_shopping.svg');
                         @endphp
-                        <i class="fa-solid fa-bag-shopping" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}', 'all');"></i>
+                        <div class="wallpaperGridBox_item_action_item" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}', 'all');">
+                            {!! $icon !!}
+                        </div>
                     </div>
                     <!-- danh sách ảnh -->
                     <div class="wallpaperGridBox_item_imageList">

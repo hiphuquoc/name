@@ -24,7 +24,10 @@
             @endforeach
        </div>
        <div class="viewImageFullBox_box_close" onClick="toogleModalViewImageFull(0, 'close');">
-            <i class="fa-sharp fa-solid fa-xmark"></i>
+            @php
+                $icon       = file_get_contents('storage/images/svg/icon_close.svg');
+            @endphp
+            {!! $icon !!}
         </div>
     </div>
     <div class="viewImageFullBox_background" onClick="toogleModalViewImageFull(0, 'close');"></div>

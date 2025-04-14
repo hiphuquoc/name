@@ -319,8 +319,9 @@ $radiusBoxLarge : 1rem;
     border-top-left-radius: inherit;
     border-bottom-right-radius: inherit;
   }
-  i {
-    font-size: calc(var(--fontSizeNormal) + 0.075rem);
+  svg {
+    width: 18px;
+    height: 18px;
     color: rgba(var(--colorText), 0.5);
   }
   &:hover {
@@ -493,15 +494,15 @@ $radiusBoxLarge : 1rem;
     pointer-events: none;
     filter: blur(3px);
     -webkit-filter: blur(3px);
-    height: 6.625rem;
+    height: 6.375rem;
     .light & {
-      height: 6.5rem;
+      height: 6.25rem;
     }
     @media(max-width: 767px){
       /* giảm nhiều hơn do gap cũng giảm */
       height: 6rem;
       .light & {
-        height: 5.825rem;
+        height: 5.75rem;
       }
     }
   }
@@ -530,8 +531,10 @@ $radiusBoxLarge : 1rem;
         padding: 0.15rem 0.5rem;
     }
   }
-  i {
-      opacity: var(--opacityNormal);
+  svg {
+    color: rgba(var(--colorIcon), var(--opacityNormal));
+    width: 1rem;
+    height: 1rem;
   }
 }
 

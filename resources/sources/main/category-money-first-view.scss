@@ -16,13 +16,13 @@
 
 .keySearchBadge {
     margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
     display: flex;
-    // align-items: flex-end;
     &_label {
         margin-right: 0.5rem;
     }
     &_box {
-        font-size: calc(var(--fontSizeNormal) - 0.125rem);
+        font-size: var(--fontSizeNormal);
         &_item {
             display: inline-block;
             border-radius: $radiusBoxSmall;
@@ -31,13 +31,22 @@
             cursor: pointer;
             &_badge {
                 display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.25rem;
                 &_action {
-                    margin-left: 0.5rem;
                     color: rgb(var(--colorText)) !important;
+                    display: flex;
+                    align-items: center;
+                    svg {
+                        width: 14px;
+                        height: 14px;
+                        color: rgba(var(--colorIcon), var(--opacityNormal));
+                    }
                 }
             }
             &:hover {
-                background: rgb(var(--bg-08));
+                background: rgb(var(--colorBackgroundLv3));
             }
         }
     }

@@ -60,7 +60,7 @@
                 height: fit-content;
                 transform: translateZ(1px);
                 z-index: 4;
-                padding: 0.5rem 1rem 0.75rem 1rem;
+                padding: 0.75rem 1rem;
                 font-size: calc(var(--fontSizeNormal) - 0.075rem);
                 background: rgba(var(--colorBackgroundLv1), 0.85);
                 transition: all 0.1s;
@@ -76,8 +76,19 @@
                     transition: all 0.2s;
                     .categoryGrid_box_item_content_title_action {
                         &::after {
-                            content: '\f00d';
-                            @include iconCloseSquare;
+                            content: '';
+                            background: rgb(var(--colorText), 0.75);
+                            mask: url('/storage/images/svg/icon_close.svg') no-repeat center;
+                            mask-size: contain;
+                            -webkit-mask: url('/storage/images/svg/icon_close.svg') no-repeat center;
+                            -webkit-mask-size: contain;
+                            width: 18px;
+                            height: 18px;
+                            margin: 0;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate3d(-50%, -50%, 0);
                         }
                     }
                     .categoryGrid_box_item_content_list {
@@ -109,22 +120,27 @@
                           font-size: calc(var(--fontSizeNormal) + 0.25rem);
                         }
                         &:hover {
-                            color: rgb(var(--colorLv2));
+                            color: rgb(var(--colorText));
                         }
                     }
                     &_action {
                         display: none;
+                        width: 32px;
+                        height: auto;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
                         &:after {
-                            content: '\f111\f111\f111';
-                            @include fontAwesome;
-                            color: rgb(var(--colorIcon));  
-                            font-size: 0.275rem;
-                            letter-spacing: 4px;
-                            width: 35px;
-                            text-align: right;
+                            content: '';
                             margin-left: 0.5rem;
+                            background-color: rgb(var(--colorIcon));
+                            mask: url('/storage/images/svg/icon_three_dots.svg') no-repeat center;
+                            mask-size: contain;
+                            -webkit-mask: url('/storage/images/svg/icon_three_dots.svg') no-repeat center;
+                            -webkit-mask-size: contain;
+                            width: 20px;
+                            height: 20px;
                             &:dir(rtl), [dir="rtl"] & {
-                                text-align: left;
                                 margin-left: unset;
                                 margin-right: 0.5rem;
                             }
@@ -134,9 +150,7 @@
                 &_list {
                     display: flex;
                     flex-wrap: wrap;
-                    font-size: calc(var(--fontSizeNormal) - 0.075rem);
                     margin-top: 0.35rem;
-                    letter-spacing: 0.75px;
                     max-height: 150px;
                     overflow: hidden;
                     gap: 0.15rem 0.75rem;
@@ -151,12 +165,22 @@
                     }
                     > * {
                         color: rgb(var(--colorTitle));
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: calc(var(--fontSizeNormal) - 0.075rem);
+                        letter-spacing: 0.75px;
+                        font-weight: 600;
                         &:not(:first-child){
                             &:before {
-                                content: '\f192';
-                                @include fontAwesome;
-                                font-size: 0.35rem;
-                                vertical-align: middle;
+                                content: '';
+                                background-color: rgba(var(--colorText), 0.5);
+                                mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+                                mask-size: contain;
+                                -webkit-mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+                                -webkit-mask-size: contain;
+                                width: 8px;
+                                height: 8px;
                                 margin-right: 0.75rem;
                                 &:dir(rtl), [dir="rtl"] & {
                                     margin-right: unset;

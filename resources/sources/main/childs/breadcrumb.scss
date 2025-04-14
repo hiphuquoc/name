@@ -8,12 +8,26 @@
         &:hover {
             color: rgb(var(--colorTextLight));
         }
-        &:after {
-            @include fontAwesome;
-            content: '\f101';
-            margin-right: 0.5rem;
-            margin-left: 0.75rem;
-            font-size: 0.6rem;
+    }
+    svg {
+        margin: 0 0.5rem;
+        width: 10px;
+        height: 10px;
+        color: rgba(var(--colorIcon), var(--opacityNormal));
+    }
+    @media(max-width: 991px){
+        svg {
+            margin: 0 0.325rem;
         }
     }
+    @media(max-width: 577px){
+        svg {
+            margin: 0 0.25rem;
+        }
+    }
+}
+
+// ✅ Xoay icon nếu giao diện RTL
+[dir="rtl"] .breadcrumbBox svg {
+    transform: rotate(180deg);
 }

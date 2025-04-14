@@ -1,4 +1,4 @@
-<div class="productDetailBox_detail_rating">
+{{-- <div class="productDetailBox_detail_rating">
     <div class="ratingBox">
         @if(!empty($item->sold))
             <div class="ratingBox_numberSell">
@@ -24,4 +24,4 @@
             </div>
         @endif
     </div>
-</div>
+</div> --}}

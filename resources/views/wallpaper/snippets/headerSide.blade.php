@@ -89,13 +89,13 @@
                 }
                 $classTmp       = 'close';
                 $classActive    = '';
-                $iconRight      = '<i class="fa-solid fa-plus"></i>';
+                $classStatusMenu = '';
                 $selected       = '';
                 $flagOpen       = $url==$urlPath ? true : false;
                 if($flagOpen==true){
                     $classTmp       = 'open';
                     $classActive    = 'active';
-                    $iconRight      = '<i class="fa-solid fa-minus"></i>';
+                    $classStatusMenu = 'isOpen';
                     $selected       = 'selected';
                 }
                 $icon = file_get_contents('storage/images/svg/icon-category-2.svg');
@@ -108,7 +108,7 @@
                     @else 
                         <a href="{{ env('APP_URL') }}/{{ $url }}" class="maxLine_1" arira-label="{{ $wallpaperMobile->name }}">{{ $titlePhoneWallpaper }}</a>
                     @endif
-                    {!! $iconRight !!}
+                    <div class="actionMenu {{ $classStatusMenu }}"></div>
                 </div>
                 <ul id="{{ $url }}" class="filterLinkSelected {{ $classActive }}">
                     @foreach($wallpaperMobile->childs as $event)
@@ -137,10 +137,10 @@
             @php
                 $icon = file_get_contents('storage/images/svg/icon-brush-1.svg');
             @endphp
-            <div class="open" onclick="showHideListMenuMobile(this, 'phong-cach')">
+            <div class="close" onclick="showHideListMenuMobile(this, 'phong-cach')">
                 {!! $icon !!}
                 <div class="maxLine_1" style="margin-left:-3px;">{{ config('data_language_2.'.$language.'.wallpaper_style') }}</div>
-                <i class="fa-solid fa-plus"></i>
+                <div class="actionMenu"></div>
             </div>
             <ul id="phong-cach" class="filterLinkSelected">
                 @foreach($wallpaperMobile->childs as $event)
@@ -171,7 +171,7 @@
             <div class="close" onclick="showHideListMenuMobile(this, 'su-kien')">
                 <img src="https://namecomvn.storage.googleapis.com/storage/images/icon-event-{{ request()->cookie('view_mode') ?? config('main_'.env('APP_NAME').'.view_mode')[0]['key'] }}.webp" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.event') }}</div>
-                <i class="fa-solid fa-plus"></i>
+                <div class="actionMenu"></div>
             </div>
             <ul id="su-kien" class="filterLinkSelected">
                 @foreach($wallpaperMobile->childs as $event)
@@ -224,7 +224,7 @@
                 @endphp
                 {!! $icon !!}
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.support') }}</div>
-                <i class="fa-solid fa-plus"></i>
+                <div class="actionMenu"></div>
             </div>
             <ul id="ho-tro" class="filterLinkSelected">
                 @foreach($policies as $policy)
@@ -260,13 +260,13 @@
                 $idGroupMenu    = $cateogyrBlogLv1ByLanguage->slug ?? '';
                 $classTmp       = 'close';
                 $classActive    = '';
-                $iconRight      = '<i class="fa-solid fa-plus"></i>';
+                $classStatusMenu      = '';
                 $selected       = '';
                 $flagOpen       = $idGroupMenu==$urlPath ? true : false;
                 if($flagOpen==true){
                     $classTmp       = 'open';
                     $classActive    = 'active';
-                    $iconRight      = '<i class="fa-solid fa-minus"></i>';
+                    $classStatusMenu      = 'isOpen';
                     $selected       = 'selected';
                 }
             @endphp
@@ -279,7 +279,7 @@
                         {!! $icon !!}
                         {{-- <div class="maxLine_1">{{ $cateogyrBlogLv1ByLanguage->title }}</div> --}}
                         <a href="{{ env('APP_URL') }}/{{ $cateogyrBlogLv1ByLanguage->slug_full }}" class="maxLine_1" arira-label="{{ $wallpaperMobile->name }}">{{ $cateogyrBlogLv1ByLanguage->title }}</a>
-                        {!! $iconRight !!}
+                        <div class="actionMenu {{ $classStatusMenu }}"></div>
                     </div>
                     <ul id="{{ $idGroupMenu }}" class="filterLinkSelected {{ $classActive }}">
                         @foreach($categoryBlogLv1->childs as $categoryBlog)
@@ -313,21 +313,11 @@
             {{ config('data_language_1.'.$language.'.connect_with_us') }}
         </div>
         <div class="socialBox_social_box">
-            <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_social_box_item" aria-label="facebook">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/wallpapers_namecomvn" class="socialBox_social_box_item" aria-label="instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.youtube.com/@wallpapers_namecomvn" class="socialBox_social_box_item" aria-label="youtube">
-                <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://www.tiktok.com/@wallpapers_namecomvn" class="socialBox_social_box_item" aria-label="tiktok">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-            {{-- <a href="https://twitter.com/wallpapers_name" class="socialBox_social_box_item" aria-label="twitter">
-                <i class="fa-brands fa-twitter"></i>
-            </a> --}}
+            <a href="https://www.facebook.com/wallpapers.name.com.vn" class="socialBox_social_box_item facebook" aria-label="facebook"></a>
+            <a href="https://www.instagram.com/wallpapers_namecomvn" class="socialBox_social_box_item instagram" aria-label="instagram"></a>
+            <a href="https://www.youtube.com/@wallpapers_namecomvn" class="socialBox_social_box_item youtube" aria-label="youtube"></a>
+            <a href="https://www.tiktok.com/@wallpapers_namecomvn" class="socialBox_social_box_item tiktok" aria-label="tiktok"></a>
+            {{-- <a href="https://twitter.com/wallpapers_name" class="socialBox_social_box_item twitter" aria-label="twitter"></a> --}}
         </div>
     </div>
     
@@ -336,7 +326,10 @@
 </div>
 
 <div class="closeButtonMobileMenu show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
-    <i class="fa-sharp fa-solid fa-xmark"></i>
+    @php
+        $icon       = file_get_contents('storage/images/svg/icon_close.svg');
+    @endphp
+    {!! $icon !!}
 </div>
 
 @push('scriptCustom')
@@ -357,7 +350,7 @@
                     
                     $(this).closest('li').addClass('selected');
                     /* thay icon */
-                    $(this).closest('ul').closest('li').find('.fa-plus').removeClass('fa-plus').addClass('fa-minus');
+                    $(this).closest('ul').closest('li').find('.actionMenu').addClass('isOpen');
                 }
             });
             /* tải status collapsed */
@@ -373,11 +366,11 @@
                 elementMenu.removeClass('active');
             }
             /* toggle icon */
-            const elementIcon = $(element).find('i');
-            if ($(elementIcon).hasClass('fa-plus')) {
-                $(elementIcon).removeClass('fa-plus').addClass('fa-minus');
+            const elementIcon = $(element).find('.actionMenu');
+            if ($(elementIcon).hasClass('isOpen')) {
+                $(elementIcon).removeClass('isOpen');
             } else {
-                $(elementIcon).removeClass('fa-minus').addClass('fa-plus');
+                $(elementIcon).addClass('isOpen');
             }
         }
 

@@ -45,5 +45,8 @@
 @endphp
 <a href="{{ $url }}" class="searchViewBeforeOfPremiumWallpaper_viewAll">
     <div>{{ config('data_language_1.'.$language.'.view_all') }} (<span>{{ $count }}</span>)</div>
-    <i class="fa-solid fa-angles-right"></i>
+    @php
+        $icon       = file_get_contents('storage/images/svg/icon_double_arrow_right.svg');
+    @endphp
+    {!! $icon !!}
 </a>

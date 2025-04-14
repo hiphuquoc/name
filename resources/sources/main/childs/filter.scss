@@ -265,18 +265,9 @@ $heightSelect : 2.25rem;
             font-size: calc(var(--fontSizeNormal) + 0.025rem);
             width: 100%;
             &_close {
-                cursor: pointer;
-                position: absolute; 
-                right: 0;
-                top: 0;
-                width: 2rem;
-                height: 2rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background: rbga(var(--colorBackgroundLv2), var(--opacityNormal));
-                border-radius: $radiusBoxSmall;
-                font-size: calc(var(--fontSizeNormal) - 0.075rem);
+                @include iconCloseSquare;
+                background: none;
+                position: fixed;
             }
         }
         &_content {

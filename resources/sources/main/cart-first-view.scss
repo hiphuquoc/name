@@ -43,9 +43,11 @@
                     display: flex;
                     align-items: stretch;
                     gap: 0.375rem;
-                    i {
-                        font-size: 0.5rem;
+                    svg {
                         margin-top: 0.5rem;
+                        width: 10px;
+                        height: 10px;
+                        color: rgb(var(--colorIcon));
                     }
                 }
             }
@@ -341,11 +343,15 @@
                     &_content {
                         &_title {
                             &:before {
-                                @include fontAwesome;
-                                color: rgb(var(--colorSuccess));
+                                content: '';
                                 margin-right: 0.5rem;
-                                content: "\f00c";
-                                font-size: calc(var(--fontSizeNormal) - 0.125rem);
+                                background-color: rgb(var(--colorIcon));
+                                mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+                                mask-size: contain;
+                                -webkit-mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+                                -webkit-mask-size: contain;
+                                width: 1.25rem;
+                                height: 1.25rem;
                             }
                         }
                     }

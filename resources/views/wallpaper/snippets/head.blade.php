@@ -24,11 +24,7 @@
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <!-- Favicon -->
 <link rel="shortcut icon" href="https://namecomvn.storage.googleapis.com/storage/images/favicon-wallsora.webp" type="image/x-icon" />
-<!-- Font Awesome -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" />
-<noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-</noscript>
+
 <!-- CSS Khung nhìn đầu tiên - Inline Css -->
 @stack('cssFirstView')
 <!-- Css tải sau -->

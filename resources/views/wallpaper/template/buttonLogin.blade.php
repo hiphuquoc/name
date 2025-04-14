@@ -11,16 +11,18 @@
             <div class="loginBox_show_text maxLine_1">{{ $user->name ?? '' }}</div>
         </div>
         <div class="loginBox_list">
-            {{-- <div class="loginBox_list_item">
-                <i class="fa-solid fa-key"></i>
-                <div>Đổi mật khẩu</div>
-            </div>  --}}
             <a href="/{{ $urlMyDownload }}" class="loginBox_list_item">
-                <i class="fa-solid fa-download"></i>
+                @php
+                    $icon   = file_get_contents('storage/images/svg/icon_download.svg');
+                @endphp
+                {!! $icon !!}
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.my_downloads') }}</div>
             </a> 
             <a href="{{ route('admin.logout') }}" class="loginBox_list_item">
-                <i class="fa-solid fa-right-from-bracket"></i>
+                @php
+                    $icon   = file_get_contents('storage/images/svg/icon_right_from_bracket.svg');
+                @endphp
+                {!! $icon !!}
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.logout') }}</div>
             </a>
         </div>

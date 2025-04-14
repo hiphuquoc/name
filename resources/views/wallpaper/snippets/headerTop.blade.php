@@ -34,42 +34,20 @@
         <div class="languageBox">
             <input type="hidden" id="language" name="language" value="{{ $language ?? '' }}" />
             <div class="languageBox_show" onclick="closeLanguageBoxList('ja_closeLanguageBoxList');">
-                {{-- <i class="fa-solid fa-globe"></i>{{ strtoupper($language) }} --}}
-                <i class="fa-solid fa-globe"></i>{{ strtoupper(config('language.'.$language.'.key')) }}
+                @php
+                    $icon   = file_get_contents('storage/images/svg/icon_global.svg');
+                @endphp
+                {!! $icon.strtoupper(config('language.'.$language.'.key')) !!}
             </div>
             @if(!empty($item->seos)&&$item->seos->isNotEmpty())
                 <div id="ja_closeLanguageBoxList" class="languageBox_list">
-                    <div class="languageBox_list_close" onclick="closeLanguageBoxList('ja_closeLanguageBoxList');"><i class="fa-sharp fa-solid fa-xmark"></i></div>
-                    {{-- <div class="languageBox_list_note">
-                        <i class="fa-solid fa-globe"></i>
-                        <span>Hãy chọn ngôn ngữ yêu thích sử dụng của bạn!</span>
-                    </div> --}}
+                    <div class="languageBox_list_close" onclick="closeLanguageBoxList('ja_closeLanguageBoxList');">
+                        @php
+                            $icon       = file_get_contents('storage/images/svg/icon_close.svg');
+                        @endphp
+                        {!! $icon !!}
+                    </div>
                     <div class="languageBox_list_content">
-                        {{-- @foreach(config('language') as $ld)
-                            @php
-                                $queryString = !empty(request()->getQueryString()) ? '?'.request()->getQueryString() : '';
-                                $flagHas = false;
-                                foreach($item->seos as $seo){
-                                    if(!empty($seo->infoSeo)){
-                                        if($seo->infoSeo->language==$ld['key']) {
-                                            $urlOfPageWithLanguage = $seo->infoSeo->slug_full.$queryString;
-                                            $flagHas = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                /* selected */
-                                $selected = null;
-                                if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language) {
-                                    $selected = 'selected';
-                                }
-                            @endphp
-                            @if($flagHas==true)
-                                <a href="{{ $urlOfPageWithLanguage }}" class="languageBox_list_content_item maxLine_1 {{ $selected }}">{{ $ld['name_by_language'] }}</a>
-                            @else 
-                                <div class="languageBox_list_content_item maxLine_1">{{ $ld['name_by_language'] }}</div>
-                            @endif
-                        @endforeach --}}
                         @foreach(config('language') as $ld)
                             @php
                                 // Lấy query string nếu có
@@ -125,7 +103,12 @@
             </div>
             <div id="ja_closeViewBoxList" class="viewMode_list">
                 <div class="viewMode_list_title">{{ config('data_language_3.'.$language.'.view_mode_notes') }}</div>
-                <div class="viewMode_list_close" onclick="closeLanguageBoxList('ja_closeViewBoxList');"><i class="fa-solid fa-xmark"></i></div>
+                <div class="viewMode_list_close" onclick="closeLanguageBoxList('ja_closeViewBoxList');">
+                    @php
+                        $icon       = file_get_contents('storage/images/svg/icon_close.svg');
+                    @endphp
+                    {!! $icon !!}
+                </div>
                 <div class="viewMode_list_box">
                     @foreach(config('main_'.env('APP_NAME').'.view_mode') as $viewMode)
                         @php
@@ -157,7 +140,10 @@
         
         <!-- icon menu mobile -->
         <div class="iconMenuMobile show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
-            <i class="fa-regular fa-bars"></i>
+            @php
+                $icon   = file_get_contents('storage/images/svg/icon_bars.svg');
+            @endphp
+            {!! $icon !!}
         </div>
     </div>
 </div>
