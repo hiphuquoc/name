@@ -399,8 +399,7 @@ input, textarea, select {
 .inputWithIcon {
   position: relative;
   &:after {
-    @include fontAwesome;
-    content: "\f06e";
+    /* đã xóa bỏ iconAwesome, khi nào dùng code lại */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -545,13 +544,21 @@ label {
 /* form */
 .inputRequired {
   &:after {
-      content: '\f621';
-      font-weight: 900;
-      @include fontAwesome;
-      font-size: 0.55rem;
-      color: rgb(var(--colorRed));
-      margin-left: 0.3rem;
-      opacity: 0.6;
+    content: '';
+    background-color: rgb(var(--colorIcon));
+    mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+    mask-size: contain;
+    -webkit-mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+    -webkit-mask-size: contain;
+    width: 8px;
+    height: 8px;
+    margin-left: 0.3rem;
+  }
+  &:dir(rtl), [dir="rtl"] & {
+    &:after {
+      margin-left: unset;
+      margin-right: 0.3rem;
+    }
   }
 }
 .inputWithLabelInside, .textareaWithLabelInside {
@@ -566,14 +573,16 @@ label {
   color: rgb(var(--colorText));
   border-radius: $radiusBoxNormal;
   label {
-      cursor: pointer;
-      margin-bottom: 0;
-      font-weight: normal;
-      font-size: calc(var(--fontSizeNormal) - 0.075rem);
-      padding: 0 0.75rem;
-      opacity: var(--opacityNormal);
-      z-index: 10;
-      position: relative;
+    cursor: pointer;
+    margin-bottom: 0;
+    font-weight: normal;
+    font-size: calc(var(--fontSizeNormal) - 0.075rem);
+    padding: 0 0.75rem;
+    opacity: var(--opacityNormal);
+    z-index: 10;
+    position: relative;
+    display: flex;
+    align-items: center;
   }
   > input {
       display: flex;
@@ -602,14 +611,24 @@ label {
       margin-top: 1rem;
   }
   &:after {
-      @include fontAwesome;
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgb(var(--bg-06));
-      font-size: calc(var(--fontSizeNormal) + 0.025rem);
-      z-index: 1;
+    content: '';
+    background-color: rgba(var(--colorText), 0.5);
+    mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+    mask-size: contain;
+    -webkit-mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+    -webkit-mask-size: contain;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    right: 10px;
+  }
+  &:dir(rtl), [dir="rtl"] & {
+    &:after {
+      right: unset;
+      left: 10px;
+    }
   }
   &.email {
       &:after {
@@ -709,7 +728,6 @@ label {
   }
 }
 .validateErrorEmpty {
-  border: 1px solid rgb(var(--colorRed));
   label {
       &:after {
           content: 'Trường này không được bỏ trống';
@@ -718,6 +736,9 @@ label {
           color: rgb(var(--colorRed));
           margin-left: 0.3rem;
       }
+  }
+  input {
+    border: 1px solid rgb(var(--colorRed)) !important;
   }
   &.errorCustomLocation {
       border: none !important;
@@ -729,39 +750,55 @@ label {
   }
 }
 .validateErrorPhone {
-  border: 1px solid rgb(var(--colorRed));
   label {
-  &:after {
-      content: 'Số điện thoại không hợp lệ';
-      font-family: $fontText;
-      font-size: inherit;
-      color: rgb(var(--colorRed));
-      margin-left: 0.3rem;
+    &:after {
+        content: 'Số điện thoại không hợp lệ';
+        font-family: $fontText;
+        font-size: inherit;
+        color: rgb(var(--colorRed));
+        margin-left: 0.3rem;
+    }
   }
+  input {
+    border: 1px solid rgb(var(--colorRed)) !important;
   }
 }
 .validateErrorEmail {
-  border: 1px solid rgb(var(--colorRed));
-  label {
+    label {
       &:after {
-      content: 'Email không hợp lệ';
-      font-family: $fontText;
-      font-size: inherit;
-      color: rgb(var(--colorRed));
-      margin-left: 0.3rem;
+        content: 'Email không hợp lệ';
+        font-family: $fontText;
+        font-size: inherit;
+        color: rgb(var(--colorRed));
+        margin-left: 0.3rem;
       }
-  }
+    }
+    input {
+      border: 1px solid rgb(var(--colorRed)) !important;
+    }
   }
 .validateSuccess {
-  border: 1px solid rgb(var(--colorSuccess));
   label {
-  &:after {
-      content: '\f00c';
-      @include fontAwesome;
-      color: rgb(var(--colorSuccess));
-      font-size: calc(var(--fontSizeNormal) - 0.025rem);
+    &:after {
+      content: '';
+      background-color: rgb(var(--colorSuccess));
+      mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+      mask-size: contain;
+      -webkit-mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+      -webkit-mask-size: contain;
+      width: 16px;
+      height: 16px;
       margin-left: 0.3rem;
+    }
+    &:dir(rtl), [dir="rtl"] & {
+      &:after {
+        margin-left: unset;
+        margin-right: 0.3rem;
+      }
+    }
   }
+  input {
+    border: 1px solid rgb(var(--colorSuccess)) !important;
   }
 }
 .select2-container .select2-selection--single {

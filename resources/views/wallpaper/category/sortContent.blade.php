@@ -9,7 +9,7 @@
             foreach($dataView as $viewItem){
                 if($viewBy==$viewItem['key']) {
                     $tmp            = empty($language)||$language=='vi' ? $viewItem['name'] : $viewItem['en_name'];
-                    $inputViewBy    = $viewItem['icon'].$tmp;
+                    $inputViewBy    = file_get_contents($viewItem['icon']).$tmp;
                 }
             }
         @endphp
@@ -27,7 +27,7 @@
                         if($viewBy==$viewItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setViewBy('{{ $viewItem['key'] }}')">
-                        {!! $viewItem['icon'] !!}{{ empty($language)||$language=='vi' ? $viewItem['name'] : $viewItem['en_name'] }}
+                        {!! file_get_contents($viewItem['icon']) !!}{{ empty($language)||$language=='vi' ? $viewItem['name'] : $viewItem['en_name'] }}
                     </div>
                 @endforeach
             </div>
@@ -39,7 +39,7 @@
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
                 if($sortBy==$sortItem['key']) {
-                    $inputSortBy    = $sortItem['icon'].config('data_language_1.'.$language.'.'.$sortItem['key']);
+                    $inputSortBy    = file_get_contents($sortItem['icon']).config('data_language_1.'.$language.'.'.$sortItem['key']);
                 }
             }
         @endphp
@@ -57,7 +57,7 @@
                         if($sortBy==$sortItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setSortBy('{{ $sortItem['key'] }}')">
-                        {!! $sortItem['icon'].config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
+                        {!! file_get_contents($sortItem['icon']).config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
                     </div>
                 @endforeach
             </div>

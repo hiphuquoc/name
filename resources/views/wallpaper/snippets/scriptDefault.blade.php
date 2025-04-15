@@ -298,7 +298,7 @@
     window.onscroll                 = function() {scrollFunction()};
     function scrollFunction() {
         if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-            mybutton.style.display 	= "block";
+            mybutton.style.display 	= "flex";
         } else {
             mybutton.style.display 	= "none";
         }
@@ -673,10 +673,16 @@
                 }
             }else {
                 /* check email hợp lệ */
-                if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valueElement)){
-                    parent.removeClass('validateErrorEmail');
-                    parent.removeClass('validateErrorEmpty');
-                    parent.addClass('validateSuccess');
+                if(valueElement!=''){ /* khi nào người dùng nhập -> có giá trị mới tiến hành validate */
+                    if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valueElement)){
+                        parent.removeClass('validateErrorEmail');
+                        parent.removeClass('validateErrorEmpty');
+                        parent.addClass('validateSuccess');
+                    }else {
+                        parent.removeClass('validateSuccess');
+                        parent.removeClass('validateErrorEmpty');
+                        parent.addClass('validateErrorEmail');
+                    }
                 }
             }
         }

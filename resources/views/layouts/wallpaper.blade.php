@@ -53,8 +53,11 @@
         <!-- === END:: Footer === -->
 
         <div class="bottom">
-            <div id="smoothScrollToTop" class="gotoTop" onclick="javascript:smoothScrollToTop();" style="display: block;">
-                <i class="fas fa-chevron-up"></i>
+            <div id="smoothScrollToTop" class="gotoTop" onclick="javascript:smoothScrollToTop();">
+                @php
+                    $icon = file_get_contents('storage/images/svg/icon_arrow_up.svg');
+                @endphp
+                {!! $icon !!}
             </div>
             @stack('bottom')
         </div>

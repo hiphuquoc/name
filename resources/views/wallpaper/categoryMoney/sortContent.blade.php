@@ -7,7 +7,7 @@
             $inputViewBy    = null;
             foreach($dataView as $viewItem){
                 if($viewBy==$viewItem['key']) {
-                    $inputViewBy    = $viewItem['icon'].'<div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$viewItem['key']).'</div>';
+                    $inputViewBy    = file_get_contents($viewItem['icon']).'<div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$viewItem['key']).'</div>';
                 }
             }
         @endphp
@@ -25,7 +25,7 @@
                         if($viewBy==$viewItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setViewBy('{{ $viewItem['key'] }}')">
-                        {!! $viewItem['icon'].config('data_language_1.'.$language.'.'.$viewItem['key']) !!}
+                        {!! file_get_contents($viewItem['icon']).config('data_language_1.'.$language.'.'.$viewItem['key']) !!}
                     </div>
                 @endforeach
             </div>
@@ -37,7 +37,7 @@
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
                 if($sortBy==$sortItem['key']) {
-                    $inputSortBy    = $sortItem['icon'].'<div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$sortItem['key']).'</div>';
+                    $inputSortBy    = file_get_contents($sortItem['icon']).'<div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$sortItem['key']).'</div>';
                 }
             }
         @endphp
@@ -55,7 +55,7 @@
                         if($sortBy==$sortItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setSortBy('{{ $sortItem['key'] }}')">
-                        {!! $sortItem['icon'].config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
+                        {!! file_get_contents($sortItem['icon']).config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
                     </div>
                 @endforeach
             </div>

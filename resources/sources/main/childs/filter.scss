@@ -34,7 +34,10 @@ $heightSelect : 2.25rem;
             display: inline-block;
             vertical-align: middle;
         }
-        i {
+        svg {
+            color: rgba(var(--colorText), 0.4);
+            width: 1rem;
+            height: 1rem;
             margin-right: 0.5rem;
             &:dir(rtl), [dir="rtl"] & {
                 margin-right: unset;
@@ -47,7 +50,7 @@ $heightSelect : 2.25rem;
         @media(max-width: 767px){
             min-width: 110px;
             padding: 0.3rem 0.5rem 0.1rem 0.5rem;
-            i {
+            svg {
                 margin-right: 0.325rem;
                 &:dir(rtl), [dir="rtl"] & {
                     margin-right: unset;
@@ -96,7 +99,7 @@ $heightSelect : 2.25rem;
             color: rgb(var(--colorText));
             gap: 0.5rem;
             &.selected, &:hover {
-                color: rgb(var(--colorTextLight));
+                // color: rgb(var(--colorTextLight));
                 background: rgb(var(--colorBackgroundLv3));
             }
             // &:not(:first-child){
@@ -104,9 +107,10 @@ $heightSelect : 2.25rem;
             // }
         }
     }
-    i {
-        font-size: calc(var(--fontSizeNormal) - 0.125rem);
-        opacity: 0.6;
+    svg {
+        color: rgba(var(--colorText), 0.4);
+        width: 1rem;
+        height: 1rem;
     }
     @media(max-width: 991px){
         margin-top: 7.5px;

@@ -51,7 +51,7 @@
                     left: -12px;
                     top: -3.5px;
                     font-weight: bold;
-                    color: rgba(var(--colorIcon), var(--opacityNormal));
+                    color: rgb(var(--colorIcon));
                     font-size: calc(var(--fontSizeNormal) + 0.375rem);
                 }
                 &::after {
@@ -101,7 +101,7 @@
                     left: -12px;
                     top: 0;
                     font-weight: bold;
-                    color: rgba(var(--colorIcon), var(--opacityNormal));
+                    color: rgb(var(--colorIcon));
                     font-size: calc(var(--fontSizeNormal) + 0.375rem);
                 }
             }

@@ -255,7 +255,7 @@
                     }
                 }
                 svg {
-                    color: rgba(var(--colorIcon), var(--opacityNormal));
+                    color: rgb(var(--colorIcon));
                 }
             }
             @media(max-width: 991px){

@@ -1,7 +1,11 @@
+@php
+    $icon = file_get_contents('storage/images/svg/icon_list_menu.svg');
+@endphp
+
 <!-- TOC CONTENT -->
 <div class="tocContentMain">
     <div class="tocContentMain_title">
-        <span class="tocContentMain_title_icon"></span>
+        {!! $icon !!}
         <span class="tocContentMain_title_text">{{ config('data_language_1.'.$language.'.table_of_contents') }}</span>
     </div>
     <div class="tocContentMain_list customScrollBar-y" style="display: block;">
@@ -14,11 +18,11 @@
     <div class="tocContentMain_close"></div>
     </div>
 <!-- TOC CONTENT FIXED ICON -->
-<div class="tocFixedIcon"><div></div></div>
+<div class="tocFixedIcon"><div>{!! $icon !!}</div></div>
 <!-- TOC CONTENT FIXED -->
 <div class="tocContentMain tocFixed">
     <div class="tocContentMain_title">
-        <span class="tocContentMain_title_icon"></span>
+        {!! $icon !!}
         <span class="tocContentMain_title_text">{{ config('data_language_1.'.$language.'.table_of_contents') }}</span>
     </div>
     <div class="tocContentMain_list customScrollBar-y">

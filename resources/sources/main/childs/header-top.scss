@@ -117,7 +117,7 @@
         margin-top: 10px;
         justify-content: flex-end;
         display: flex;
-        color: rgba(var(--colorIcon), var(--opacityNormal));
+        color: rgb(var(--colorIcon));
     }
     @media(max-width: 1199px){
         &_item {
@@ -485,7 +485,7 @@
             font-family: $fontTitle;
             font-weight: 500;
             letter-spacing: 0.25px;
-            color: rgba(var(--colorIcon), var(--opacityNormal));
+            color: rgb(var(--colorIcon));
             svg {
                 display: none;
             }

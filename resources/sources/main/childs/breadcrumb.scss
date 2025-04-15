@@ -13,7 +13,7 @@
         margin: 0 0.5rem;
         width: 10px;
         height: 10px;
-        color: rgba(var(--colorIcon), var(--opacityNormal));
+        color: rgb(var(--colorIcon));
     }
     @media(max-width: 991px){
         svg {
