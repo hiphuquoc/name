@@ -79,11 +79,11 @@ return [
     ],
     'view_by' => [
         [
-            'icon'      => '<i class="fa-solid fa-gift"></i>',
+            'icon'      => 'storage/images/svg/icon_gift.svg',
             'key'       => 'each_set'
         ],
         [
-            'icon'      => '<i class="fa-regular fa-image"></i>',
+            'icon'      => 'storage/images/svg/icon_star.svg',
             'key'       => 'each_image'
         ]
     ],
@@ -111,19 +111,19 @@ return [
     ],
     'sort_type' => [
         [
-            'icon'      => '<i class="fa-solid fa-star"></i>',
+            'icon'      => 'storage/images/svg/icon_star.svg',
             'key'       => 'propose',
         ],
         [
-            'icon'      => '<i class="fa-solid fa-heart"></i>',
+            'icon'      => 'storage/images/svg/icon_heart.svg',
             'key'       => 'favourite',
         ],
         [
-            'icon'      => '<i class="fa-solid fa-arrow-down"></i>',
+            'icon'      => 'storage/images/svg/icon_arrow_down.svg',
             'key'       => 'newest',
         ],
         [
-            'icon'      => '<i class="fa-solid fa-arrow-up"></i>',
+            'icon'      => 'storage/images/svg/icon_arrow_up.svg',
             'key'       => 'oldest',
         ]
     ],
