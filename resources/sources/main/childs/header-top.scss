@@ -166,10 +166,6 @@
     bottom: 0;
     left: 0;
     font-size: var(--fontSizeNormal);
-    // font-size: 14.8px;
-    // .light & {
-    //     font-size: 15.6px;
-    // }
     &_item {
         width: 33.33%;
         height: 100%;
@@ -180,6 +176,7 @@
         align-items: center;
         justify-content: flex-start;
         gap: 0;
+        overflow: hidden;
         > * {
             /* mấy thẻ bao bọc dư do ajax */
             width: 100%;

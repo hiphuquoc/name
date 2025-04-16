@@ -62,7 +62,6 @@ class ProviderController extends Controller {
     }
 
     public static function facebookCallback(){
-        dd(123);
         $user = Socialite::driver('facebook')->user();
          
         $finduser = User::where('facebook_id', $user->id)->first();

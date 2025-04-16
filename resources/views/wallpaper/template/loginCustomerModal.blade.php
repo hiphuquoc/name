@@ -54,7 +54,7 @@
                         </div>
                         <div class="loginFormCustomer_body_item">
                             <!-- button -->
-                            <button type="button" class="button" onClick="submitFormLogin('formLogin');">{{ $loginByLanguage }}</div>
+                            <button type="button" class="button" onClick="submitFormLogin('formLogin');" disabled>{{ $loginByLanguage }}</div>
                             <!-- đăng nhập google -->
                             <!-- login social -->
                             <div class="loginFormSocial">
@@ -83,19 +83,15 @@
                                             data-logo_alignment="left">
                                         </div>
                                     </div>
-                                    <div class="loginFormSocial_body_item">
+                                    {{-- <div class="loginFormSocial_body_item">
                                         @php
-                                            if(!empty($language)&&$language=='en'){
-                                                $buttonTitleLoginWithFB = 'Login with Facebook';
-                                            }else {
-                                                $buttonTitleLoginWithFB = 'Đăng nhập với Facebook';
-                                            }
+                                            $buttonTitleLoginWithFB = 'Login with Facebook';
                                         @endphp
                                         <a class="facebookButtonLogin" href="{{ route('main.facebook.redirect') }}">
                                             <img src="{{ Storage::url('images/svg/logo-facebook-fff.png') }}" alt="{{ $buttonTitleLoginWithFB }}" title="{{ $buttonTitleLoginWithFB }}" />
-                                            <div>{{ $buttonTitleLoginWithFB }}</div>
+                                            <div class="maxLine_1">{{ $buttonTitleLoginWithFB }}</div>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
