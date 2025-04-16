@@ -201,11 +201,11 @@ return [
         /* phần tử đầu tiên mặc định */
         [
             'key'  => 'light',
-            'icon'  => 'storage/images/svg/icon-light-light.svg',
+            'icon'  => 'storage/images/svg/icon_view_mode_light.svg',
         ],
         [
             'key'   => 'gray',
-            'icon'  => 'storage/images/svg/icon-light-gray.svg',
+            'icon'  => 'storage/images/svg/icon_view_mode_gray.svg',
         ],
         // [
         //     'key'   => 'sepia',
@@ -213,7 +213,7 @@ return [
         // ],
         [
             'key'   => 'dark',
-            'icon'  => 'storage/images/svg/icon-light.svg',
+            'icon'  => 'storage/images/svg/icon_view_mode_dark.svg',
         ]
     ],
 ];
