@@ -275,7 +275,7 @@
                     button {
                         border-radius: 0;
                         height: $heightMenu !important;   
-                        font-size: 0.9rem !important;
+                        font-size: var(--fontSizeNormal);
                         display: flex;
                         padding: 0.5rem;
                     }
@@ -297,7 +297,7 @@
             @media(max-width: 767px){
                 &_button {
                     button {
-                        font-size: 0.875rem !important;
+                        // font-size: 0.875rem !important;
                         img {
                             width: 1.15rem;
                         }
@@ -310,10 +310,10 @@
             @media(max-width: 577px){
                 &_button {
                     button {
-                        font-size: 0.85rem !important;
+                        // font-size: 0.85rem !important;
                         flex-direction: column;
                         flex-wrap: nowrap;
-                        gap: 0.325rem;
+                        gap: 0.25rem;
                         padding: 0.25rem 0.5rem;
                     }
                 }

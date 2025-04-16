@@ -128,7 +128,7 @@
                             }
                             
                         @endphp
-                        <div class="viewMode_list_box_item {{ $selected }}" {{ $event }}>
+                        <div class="viewMode_list_box_item {{ $viewMode['key'] }}Mode {{ $selected }}" {{ $event }}>
                             {!! $icon !!}
                             <div>{{ config('data_language_3.'.$language.'.'.$viewMode['key'].'_mode') }}</div>
                         </div>

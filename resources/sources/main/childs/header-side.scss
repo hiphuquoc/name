@@ -304,6 +304,8 @@ $widthCollapsed : 17rem;
         li {
             list-style: none;
             a {
+                font-family: $fontText;
+                font-weight: 500 !important;
                 color: rgb(var(--colorText)) !important;
             }
             &.selected {
@@ -312,6 +314,8 @@ $widthCollapsed : 17rem;
                 }
             }
             > a, > div {
+                font-family: $fontText;
+                font-weight: 500 !important;
                 color: rgb(var(--colorText)) !important;
                 display: flex;
                 align-items: center;
