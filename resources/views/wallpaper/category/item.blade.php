@@ -34,10 +34,10 @@
         <div class="freeWallpaperBox_item_box_item">
             <div class="author">
                 <div class="author_image">
-                    <img src="{{ Storage::url('images/upload/logo-type-manager-upload.webp') }}" alt="wallsora.com@gmail.com" title="wallsora.com@gmail.com" />
+                    <img src="{{ \App\Helpers\Image::getBase64Image('https://namecomvn.storage.googleapis.com/storage/images/favicon-wallsora.webp') }}" alt="wallsora.com" title="wallsora.com" />
                 </div>
                 <div class="author_name maxLine_1">
-                    Admin Name
+                    Wallsora
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
             </div>
             <!-- action -->
             @php
-                $iconImage      = file_get_contents('storage/images/svg/icon_image.svg');
+                $iconView      = file_get_contents('storage/images/svg/icon_expand.svg');
                 $iconLike       = file_get_contents('storage/images/svg/icon_like.svg');
                 $iconDownload   = file_get_contents('storage/images/svg/icon_download.svg');
             @endphp
@@ -67,7 +67,7 @@
                 {{-- <a href="{{ route('search.searchByImage', ['free_wallpaper_info_id' => $wallpaper->id]) }}" class="action_item"> --}}
                 @if(!empty($wallpaper->seo))
                     <a href="/{{ $itemSeoWallpaper->slug_full ?? $wallpaper->seo->slug_full }}" class="action_item" aria-label="viewmore">
-                        {!! $iconImage !!}
+                        {!! $iconView !!}
                     </a>
                 @endif
                 <div class="action_item" onclick="showBoxFeeling(this);">

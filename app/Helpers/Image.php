@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Seo;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as I;
 use GuzzleHttp\Client;
 
@@ -124,5 +127,52 @@ class Image {
         }
     
         return false;
+    }
+
+    public static function getBase64Image($path) {
+        // Tạo key cache duy nhất dựa trên đường dẫn hoặc URL
+        $cacheKey = 'base64_image_' . md5($path);
+        $cacheTime = config('app.cache_html_time', 86400);
+
+        // Lấy từ cache hoặc tạo mới
+        return Cache::remember($cacheKey, $cacheTime, function () use ($path) {
+            // Kiểm tra xem path là URL hay đường dẫn cục bộ
+            if (Str::startsWith($path, ['http://', 'https://'])) {
+                // Là URL, dùng HTTP client để tải ảnh
+                $response = Http::get($path);
+                
+                if ($response->successful()) {
+                    $imageContent = $response->body();
+                    // Lấy MIME type từ header hoặc đoán từ phần mở rộng
+                    $mimeType = $response->header('Content-Type') ?: self::guessMimeType($path);
+                    return 'data:' . $mimeType . ';base64,' . base64_encode($imageContent);
+                }
+            } else {
+                // Là đường dẫn cục bộ, dùng Storage
+                if (Storage::exists($path)) {
+                    $imageContent = Storage::get($path);
+                    $mimeType = Storage::mimeType($path);
+                    return 'data:' . $mimeType . ';base64,' . base64_encode($imageContent);
+                }
+            }
+
+            return null;
+        });
+    }
+
+    /**
+     * Đoán MIME type dựa trên phần mở rộng của file
+     */
+    private static function guessMimeType($path) {
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+        $mimeTypes = [
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'webp' => 'image/webp',
+            'gif' => 'image/gif',
+        ];
+
+        return $mimeTypes[strtolower($extension)] ?? 'application/octet-stream';
     }
 }

@@ -30,8 +30,9 @@
             display: none;
             background: rgb(var(--colorBackgroundLv1));
             position: absolute;
-            bottom: 0.4rem;
+            bottom: 0.325rem;
             width: calc(100% - 1rem);
+            height: 45px;
             left: 0.5rem;
             justify-content: space-between;
             align-items: center;
@@ -47,10 +48,11 @@
                 width: 50%;
                 .author {
                     display: flex;
+                    align-items: center;
                     width: 100%;
                     &_image {
                         img {
-                            width: 28px;
+                            width: auto;
                             height: 28px;
                             object-fit: cover;
                         }
@@ -131,8 +133,28 @@
             left: 0;
         }
     }
+    @media(max-width: 991px){
+        &_item {
+            &_box {
+                display: flex;
+            }
+        }
+    }
     @media (max-width: 768px) {
         grid-template-columns: repeat(2, 1fr); /* Luôn giữ ít nhất 2 cột */
         gap: 12px 8px;
+    }
+    @media (max-width: 577px) {
+        &_item {
+            &_box {
+                &_item {
+                    .author {
+                        &_name {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
