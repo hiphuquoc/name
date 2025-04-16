@@ -197,7 +197,7 @@
                     font-family: $fontTitle;
                 }
                 &_old {
-                    color: rgba(var(--colorText), 0.6);
+                    color: rgba(var(--colorText), 0.75);
                     font-size: calc(var(--fontSizeNormal) + 0.075rem);
                     text-decoration: line-through;
                 }
