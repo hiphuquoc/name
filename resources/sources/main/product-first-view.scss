@@ -251,8 +251,14 @@
                     align-items: center;
                     justify-content: center;
                     gap: 0.75rem;
-                    img, svg {
+                    svg {
                         width: 1.3rem;
+                    }
+                    &.buyNow {
+                        svg {
+                            color: #fff;
+                            margin-top: 2px; /* do hiệu ứng sóng của icon*/
+                        }
                     }
                 }
                 svg {
