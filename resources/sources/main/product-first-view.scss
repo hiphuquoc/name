@@ -18,6 +18,7 @@
     align-items: stretch;
     gap: 1.5rem; /* gap lấy theo .distanceBetweenBox */
     z-index: 2; /* để nằm trên headerBottom */
+    margin-top: 0.125rem;
     &_left {
         flex: 0 0 47%;
         display: flex;
