@@ -17,8 +17,9 @@
         background: rgba(var(--colorBackgroundLv3), var(--opacityNormal));
     }
     span {
-        color: rgb(var(--colorTextLight));
+        color: rgb(var(--colorLv1));
         font-size: calc(var(--fontSizeNormal) + 0.075rem);
+        font-weight: 700;
     }
     svg {
         color: rgba(var(--colorText), var(--opacityNormal));
@@ -305,49 +306,89 @@
     display: none;
 }
 .iconSearchMobile {
-    width: fit-content;
+    
     align-items: center;
     justify-content: flex-end;
     cursor: pointer;
-    margin-top: 10px; /* bằng với margin-top của rightBox để đẩy xuống tạo hiệu ứng */
+    margin-top: 10px;
     padding: 0.75rem;
     display: none;
+    transition: all 0.3s;
+    
+    &_icon {
+        position: relative;
+        width: 1.35rem;
+        height: 1.35rem;
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(var(--colorIcon));
+            transition: opacity 0.3s ease;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+        }
+    
+        &:before {
+            mask-image: url('/storage/images/svg/search.svg');
+            -webkit-mask-image: url('/storage/images/svg/search.svg');
+            opacity: 1;
+        }
+    
+        &:after {
+            mask-image: url('/storage/images/svg/icon_close.svg');
+            -webkit-mask-image: url('/storage/images/svg/icon_close.svg');
+            opacity: 0;
+        }
+
+        &.active {
+            &:before {
+                opacity: 0;
+            }
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+
     &:dir(ltr), [dir="ltr"] & {
         margin-right: -0.75rem;
         margin-left: auto;
     }
+
     &:dir(rtl), [dir="rtl"] & {
         margin-right: auto;
         margin-left: -0.75rem;
     }
-    svg {
-        width: 1.35rem;
-        height: 1.35rem;
-        object-fit: cover;
-        color: rgb(var(--colorIcon));   
-    }
+
     @media(max-width: 991px){
         display: flex;
     }
-    @media(max-width: 767px){
-        &:dir(ltr), [dir="ltr"] & {
-            margin-right: -0.625rem;
-        }
-        &:dir(rtl), [dir="rtl"] & {
-            margin-left: -0.625rem;
-        }
-        svg {
-            width: 1.3rem;
-            height: 1.3rem;
-        }
-    }
-    // @media(max-width: 577px){
-    //     svg {
-    //         width: 1.25rem;
-    //         height: 1.25rem;
+
+    // @media(max-width: 767px){
+    //     &:dir(ltr), [dir="ltr"] & {
+    //         margin-right: -0.625rem;
+    //     }
+    //     &:dir(rtl), [dir="rtl"] & {
+    //         margin-left: -0.625rem;
+    //     }
+
+    //     &:before,
+    //     &:after {
+    //         width: 1.3rem;
+    //         height: 1.3rem;
     //     }
     // }
 }
+
 .languageBox {
     display: flex;
     position: relative;
@@ -871,6 +912,7 @@
         margin-top: 1.25rem;
     }
 }
+$distanceWrapSearchBoxMobile : 3.5rem;
 .searchViewBefore {
     display: flex;
     align-items: center;
@@ -1115,10 +1157,10 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            top: 0;
+            top: $distanceWrapSearchBoxMobile;
             left: 0;
             background: rgb(var(--colorBackgroundLv2));
-            padding: 0.75rem;
+            padding: 0 0.75rem 0.75rem 0.75rem;
             > * {
                 width: 100%;
             }
@@ -1159,7 +1201,7 @@
                         // opacity: 1;
                         position: fixed;
                         // left: 0.75rem;
-                        top: calc($heightMenu + 2px);
+                        top: calc($heightMenu + 2px + ($distanceWrapSearchBoxMobile - 1rem));
                         height: 100%;
                         max-height: unset;
                         box-shadow: none;
@@ -1213,7 +1255,7 @@
     @media(max-width: 991px){
         &_boxItem {
             max-height: unset;
-            height: calc(100vh - $heightMenu - 3.5rem);
+            height: calc(100vh - $heightMenu - 3.5rem - ($distanceWrapSearchBoxMobile - 1rem));
         }
     }
 }
@@ -1353,13 +1395,14 @@
             @include iconCloseSquare;
         }
         &_box {
+            margin: 0.25rem 0;
             &_item {
                 display: flex;
                 align-items: center;
                 cursor: pointer;
                 gap: 0.5rem;
                 white-space: nowrap;
-                padding: 0.5rem 1rem 0.5rem 0.5rem; /* padding ngang chỉ 0.5 (nhỏ hơn những box khác 0.25) vì hiệu ứng tỏa sáng của bóng đèn */
+                padding: 0.5rem 1rem;
                 &.selected, &:hover {
                     color: rgb(var(--colorTextLight));
                 }

@@ -7,10 +7,7 @@
 
 <!-- search mobile -->
 <div class="menuTop_item iconSearchMobile" onclick="toggleSearchMobile();">
-    @php
-        $icon = file_get_contents('storage/images/svg/search.svg');
-    @endphp
-    {!! $icon !!}
+    <div class="iconSearchMobile_icon"></div>
 </div>
 <!-- search desktop -->
 <div class="menuTop_item searchViewBefore">
@@ -77,9 +74,13 @@
         });
 
         function toggleSearchMobile() {
+            const iconSearch    = document.querySelector('.iconSearchMobile_icon');
             const searchView = document.querySelector('.searchViewBefore');
+            const searchList = document.querySelector('.searchViewBefore_showBox_inputBox_list');
             if (searchView) {
                 searchView.classList.toggle('active');
+                searchList.classList.toggle('active');
+                iconSearch.classList.toggle('active');
             } else {
                 console.error("Phần tử .searchViewBefore không tồn tại.");
             }
