@@ -1,37 +1,5 @@
 <div class="sortBox">
     <div class="sortBox_left">
-        {{-- <!-- chế độ xem -->
-        @php
-            $titleViewBy    = empty($language)||$language=='vi' ? 'Duyệt theo' : 'Browse by';
-            $dataView       = config('main_'.env('APP_NAME').'.view_by');
-            $viewBy         = Cookie::get('view_by') ?? $dataView[0]['key'];
-            $inputViewBy    = null;
-            foreach($dataView as $viewItem){
-                if($viewBy==$viewItem['key']) {
-                    $tmp            = empty($language)||$language=='vi' ? $viewItem['name'] : $viewItem['en_name'];
-                    $inputViewBy    = file_get_contents($viewItem['icon']).$tmp;
-                }
-            }
-        @endphp
-        <div class="selectCustom">
-            <div class="selectCustom_text maxLine_1">
-                {!! $titleViewBy !!}
-            </div>
-            <div class="selectCustom_input maxLine_1">
-                {!! $inputViewBy !!}
-            </div>
-            <div class="selectCustom_box">
-                @foreach($dataView as $viewItem)
-                    @php
-                        $selected = null;
-                        if($viewBy==$viewItem['key']) $selected = 'selected';
-                    @endphp
-                    <div class="selectCustom_box_item {{ $selected }}" onClick="setViewBy('{{ $viewItem['key'] }}')">
-                        {!! file_get_contents($viewItem['icon']) !!}{{ empty($language)||$language=='vi' ? $viewItem['name'] : $viewItem['en_name'] }}
-                    </div>
-                @endforeach
-            </div>
-        </div> --}}
         <!-- sort by -->
         @php
             $dataSort       = config('main_'.env('APP_NAME').'.sort_type');
@@ -39,7 +7,7 @@
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
                 if($sortBy==$sortItem['key']) {
-                    $inputSortBy    = file_get_contents($sortItem['icon']).config('data_language_1.'.$language.'.'.$sortItem['key']);
+                    $inputSortBy    = '<svg><use xlink:href="#'.$sortItem['icon'].'"></use></svg>'.config('data_language_1.'.$language.'.'.$sortItem['key']);
                 }
             }
         @endphp
@@ -57,7 +25,8 @@
                         if($sortBy==$sortItem['key']) $selected = 'selected';
                     @endphp
                     <div class="selectCustom_box_item {{ $selected }}" onClick="setSortBy('{{ $sortItem['key'] }}')">
-                        {!! file_get_contents($sortItem['icon']).config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
+                        <svg><use xlink:href="#{{ $sortItem['icon'] }}"></use></svg>
+                        {!! config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
                     </div>
                 @endforeach
             </div>
@@ -101,34 +70,6 @@
     </div>
 
     <div class="sortBox_right">
-        {{-- <div class="sortBox_right_item">
-            <!-- feeling -->
-            <div class="feelingBox">
-                <div class="feelingBox_item selected" onclick="setFeelingAndSubmit(this);">
-                    Tất cả
-                    <input type="checkbox" name="search_feeling[]" value="all" /> 
-                </div>
-                @foreach(config('main_'.env('APP_NAME').'.feeling_type') as $feeling)
-                    @php
-                        $icon       = $feeling['icon_unactive'];
-                        $checked    = null;
-                        if(!empty($searchFeeling)){
-                            foreach($searchFeeling as $f){
-                                if($f==$feeling['key']) {
-                                    $icon = $feeling['icon'];
-                                    $checked = 'checked';
-                                    break;
-                                }
-                            }
-                        }
-                    @endphp
-                    <div class="feelingBox_item" onclick="setFeelingAndSubmit(this);">
-                        {!! file_get_contents(public_path($icon)) !!}
-                        <input type="checkbox" name="search_feeling[]" value="{{ $feeling['key'] }}" {{ $checked }} /> 
-                    </div>
-                @endforeach
-            </div>
-        </div> --}}
         <div class="sortBox_right_item">
             <!-- số lượng -->
             <span class="quantity">

@@ -79,11 +79,11 @@ return [
     ],
     'view_by' => [
         [
-            'icon'      => 'storage/images/svg/icon_gift.svg',
+            'icon'      => 'icon_gift',
             'key'       => 'each_set'
         ],
         [
-            'icon'      => 'storage/images/svg/icon_star.svg',
+            'icon'      => 'icon_star',
             'key'       => 'each_image'
         ]
     ],
@@ -111,47 +111,47 @@ return [
     ],
     'sort_type' => [
         [
-            'icon'      => 'storage/images/svg/icon_star.svg',
+            'icon'      => 'icon_star',
             'key'       => 'propose',
         ],
         [
-            'icon'      => 'storage/images/svg/icon_heart.svg',
+            'icon'      => 'icon_heart',
             'key'       => 'favourite',
         ],
         [
-            'icon'      => 'storage/images/svg/icon_arrow_down.svg',
+            'icon'      => 'icon_arrow_down',
             'key'       => 'newest',
         ],
         [
-            'icon'      => 'storage/images/svg/icon_arrow_up.svg',
+            'icon'      => 'icon_arrow_up',
             'key'       => 'oldest',
         ]
     ],
     'feeling_type'  => [
         [
-            'icon'          => 'storage/images/svg/icon-vomit-2.svg',
-            'icon_unactive' => 'storage/images/svg/icon-vomit-2-unactive.svg',
+            'icon'          => 'icon_vomit_2',
+            'icon_unactive' => 'icon_vomit_2_unactive',
             'key'           => 'vomit',
             'name'          => 'Ói',
             'en_name'       => 'Vomit'
         ],
         [
-            'icon'      => 'storage/images/svg/icon-notLike-2.svg',
-            'icon_unactive' => 'storage/images/svg/icon-notLike-2-unactive.svg',
+            'icon'      => 'icon_not_like_2',
+            'icon_unactive' => 'icon_not_like_2_unactive',
             'key'       => 'notlike',
             'name'      => 'Không thích',
             'en_name'   => 'Not like'
         ],
         [
-            'icon'      => 'storage/images/svg/icon-haha-2.svg',
-            'icon_unactive' => 'storage/images/svg/icon-haha-2-unactive.svg',
+            'icon'      => 'icon_haha_2',
+            'icon_unactive' => 'icon_haha_2_unactive',
             'key'       => 'haha',
             'name'      => 'Haha',
             'en_name'   => 'Haha'
         ],
         [
-            'icon'      => 'storage/images/svg/icon-heart-2.svg',
-            'icon_unactive' => 'storage/images/svg/icon-heart-2-unactive.svg',
+            'icon'      => 'icon_heart_2',
+            'icon_unactive' => 'icon_heart_2_unactive',
             'key'       => 'heart',
             'name'      => 'Thả tim',
             'en_name'   => 'Heart'
@@ -201,19 +201,19 @@ return [
         /* phần tử đầu tiên mặc định */
         [
             'key'  => 'light',
-            'icon'  => 'storage/images/svg/icon_view_mode_light.svg',
+            'icon'  => 'icon_view_mode_light',
         ],
         [
             'key'   => 'gray',
-            'icon'  => 'storage/images/svg/icon_view_mode_gray.svg',
+            'icon'  => 'icon_view_mode_gray',
         ],
         // [
         //     'key'   => 'sepia',
-        //     'icon'  => 'storage/images/svg/icon-light.svg',
+        //     'icon'  => 'icon-light',
         // ],
         [
             'key'   => 'dark',
-            'icon'  => 'storage/images/svg/icon_view_mode_dark.svg',
+            'icon'  => 'icon_view_mode_dark',
         ]
     ],
 ];

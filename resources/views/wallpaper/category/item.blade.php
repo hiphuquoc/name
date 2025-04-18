@@ -48,11 +48,11 @@
                 @foreach(config('main_'.env('APP_NAME').'.feeling_type') as $feeling)
                     @if(!empty($user->id))
                         <div class="feeling_item" onclick="setFeelingFreeWallpaper(this, {{ $wallpaper->id }}, '{{ $feeling['key'] }}');">
-                            {!! file_get_contents(public_path($feeling['icon'])) !!}
+                            <svg><use xlink:href="#{{ $feeling['icon'] }}"></use></svg>
                         </div>
                     @else 
                         <div class="feeling_item" onclick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
-                            {!! file_get_contents(public_path($feeling['icon'])) !!}
+                            <svg><use xlink:href="#{{ $feeling['icon'] }}"></use></svg>
                         </div>
                     @endif
                 @endforeach
@@ -82,7 +82,7 @@
             }
         @endphp
         <div class="freeWallpaperBox_item_icon">
-            {!! file_get_contents(public_path($icon)) !!}
+            <svg><use xlink:href="#{{ $icon }}"></use></svg>
         </div>
     @endif
     @if(!empty($wallpaper->seo))

@@ -86,11 +86,15 @@
                     @php
                         /* mặc định lấy icon đầu tiên */
                         $dataViewMode   = config('main_'.env('APP_NAME').'.view_mode');
-                        $icon           = file_get_contents($dataViewMode[0]['icon']);
-                        foreach($dataViewMode as $viewMode){
-                            if(!empty(request()->cookie('view_mode'))&&request()->cookie('view_mode')==$viewMode['key']){
-                                $icon   = file_get_contents($viewMode['icon']);
+                        if(!empty(request()->cookie('view_mode'))){
+                            foreach($dataViewMode as $viewMode){
+                                if(request()->cookie('view_mode')==$viewMode['key']){
+                                    $icon   = '<svg><use xlink:href="#'.$viewMode['icon'].'"></use></svg>';
+                                    break;
+                                }
                             }
+                        }else {
+                            $icon           = '<svg><use xlink:href="#'.$dataViewMode[0]['icon'].'"></use></svg>';
                         }
                     @endphp
                     {!! $icon !!}
@@ -104,7 +108,6 @@
                 <div class="viewMode_list_box">
                     @foreach(config('main_'.env('APP_NAME').'.view_mode') as $viewMode)
                         @php
-                            $icon       = file_get_contents($viewMode['icon']);
                             $selected   = '';
                             $event      = 'onclick=setViewMode(\''.$viewMode['key'].'\')';
                             if(!empty(request()->cookie('view_mode'))){
@@ -121,7 +124,7 @@
                             
                         @endphp
                         <div class="viewMode_list_box_item {{ $viewMode['key'] }}Mode {{ $selected }}" {{ $event }}>
-                            {!! $icon !!}
+                            <svg><use xlink:href="#{{ $viewMode['icon'] }}"></use></svg>
                             <div>{{ config('data_language_3.'.$language.'.'.$viewMode['key'].'_mode') }}</div>
                         </div>
                     @endforeach
