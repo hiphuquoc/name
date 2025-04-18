@@ -15,24 +15,15 @@
                 if(!empty($item->feeling)&&$item->feeling->type=='heart') $flagHeart = true;
             @endphp
             <div class="freeWallpaperDetailBox_content_action_item heart {{ $flagHeart==true ? 'selected' : '' }}" onclick="toogleHeartFeelingFreeWallpaper({{ $item->id }});">
-                @php
-                    $icon = file_get_contents('storage/images/svg/icon-heart-2.svg');
-                @endphp
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_heart_2"></use></svg>
                 <span class="maxLine_1">Yêu thích</span>
             </div>
             <div class="freeWallpaperDetailBox_content_action_item">
-                @php
-                    $icon = file_get_contents('storage/images/svg/icon-share-1.svg');
-                @endphp
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_share"></use></svg>
                 <span class="maxLine_1">Chia sẻ</span>
             </div>
             <a href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $item->file_cloud]) }}" class="freeWallpaperDetailBox_content_action_item" download>
-                @php
-                    $icon = file_get_contents('storage/images/svg/icon_download.svg');
-                @endphp
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_download"></use></svg>
                 <span class="maxLine_1">Tải miễn phí</span>
             </a>
         </div>

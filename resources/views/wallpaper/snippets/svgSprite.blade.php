@@ -1,0 +1,1 @@
+{!! file_get_contents(public_path('svg/sprite.svg')) !!}

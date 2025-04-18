@@ -42,10 +42,6 @@
         </div>
     </div> --}}
     <div class="cartProductBox_body_item_price_icon" onClick="{{ $eventRemoveProductCart }}">
-        @php
-            $icon = file_get_contents('storage/images/svg/icon-trash.svg');
-        @endphp
-        {!! $icon !!}
-        {{-- <img src="{{ Storage::url('images/svg/icon-trash.svg') }}" alt="xóa sản phẩm khỏi giỏ hàng" title="xóa sản phẩm khỏi giỏ hàng" /> --}}
+        <svg><use xlink:href="#icon_trash"></use></svg>
     </div>
 </div>

@@ -12,10 +12,7 @@
         <div class="modalLoginFormCustomerBox_box_right">
             <!-- close -->
             <div class="modalLoginFormCustomerBox_box_right_close" onClick="toggleModalCustomerLoginForm('modalLoginFormCustomerBox');">
-                @php
-                    $icon       = file_get_contents('storage/images/svg/icon_close.svg');
-                @endphp
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_close"></use></svg>
             </div>
             <!-- form -->
             @php

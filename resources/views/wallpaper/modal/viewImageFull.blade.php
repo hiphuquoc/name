@@ -24,10 +24,7 @@
             @endforeach
        </div>
        <div class="viewImageFullBox_box_close" onClick="toogleModalViewImageFull(0, 'close');">
-            @php
-                $icon       = file_get_contents('storage/images/svg/icon_close.svg');
-            @endphp
-            {!! $icon !!}
+        <svg><use xlink:href="#icon_close"></use></svg>
         </div>
     </div>
     <div class="viewImageFullBox_background" onClick="toogleModalViewImageFull(0, 'close');"></div>

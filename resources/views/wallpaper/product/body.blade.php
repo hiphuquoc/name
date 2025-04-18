@@ -122,16 +122,13 @@
                                     $keyPriceAll        = [];
                                     foreach($item->prices as $price) $keyPriceAll[]  = $price->id;
                                     $keyPriceAll        = implode('-', $keyPriceAll);
-                                    $iconCart           = file_get_contents('storage/images/svg/icon-cart-header.svg');
-                                    $iconMoney          = file_get_contents('storage/images/svg/icon_money_bill_wave.svg');
                                 @endphp
                                 <button id="js_addToCart_button" type="button" class="button secondary" onClick="addToCart('{{ $item->id }}', '{{ $keyPriceAll }}', 'all');" aria-label="{{ $altCart }}">
-                                    {!! $iconCart !!}
+                                    <svg><use xlink:href="#icon_cart"></use></svg>
                                     <div class="maxLine_1">{{ $buttonNameCart }}</div>
                                 </button>
                                 <button type="button" class="button buyNow" onClick="openCloseModal('modalPaymentMethod');" aria-label="{{ $altPayment }}">
-                                    {{-- <img src="{{ Storage::url('images/svg/money-bill-wave.png') }}" alt="{{ $altPayment }}" title="{{ $altPayment }}" /> --}}
-                                    {!! $iconMoney !!}
+                                    <svg><use xlink:href="#icon_money_bill_wave"></use></svg>
                                     <div class="maxLine_1">{{ $buttonNamePayment }}</div>
                                 </button>
                             </div>

@@ -93,10 +93,7 @@
                             <div class="keySearchBadge_box_item_badge">
                                 <div>{{ request('search') }}</div>
                                 <a href="{{ URL::current() }}" class="keySearchBadge_box_item_badge_action">
-                                    @php
-                                        $icon       = file_get_contents('storage/images/svg/icon_close.svg');
-                                    @endphp
-                                    {!! $icon !!}
+                                    <svg><use xlink:href="#icon_close"></use></svg>
                                 </a>
                             </div>
                         </div>

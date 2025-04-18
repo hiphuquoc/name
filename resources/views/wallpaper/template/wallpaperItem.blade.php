@@ -122,10 +122,7 @@
                                     @endphp
                                     @if(!empty($quantityImage))
                                         <div class="wallpaperGridBox_item_image_content_price_quantity">
-                                            @php
-                                                $icon       = file_get_contents('storage/images/svg/icon_image.svg');
-                                            @endphp
-                                            {!! $icon !!}
+                                            <svg><use xlink:href="#icon_image"></use></svg>
                                             <div>{{ $quantityImage }}</div>
                                         </div>
                                     @endif
@@ -141,20 +138,16 @@
                     </a>
                     <!-- thêm vào giỏ hành nhanh -->
                     <div class="wallpaperGridBox_item_action">
-                        @php
-                            $icon       = file_get_contents('storage/images/svg/icon_heart.svg');
-                        @endphp
                         <div class="wallpaperGridBox_item_action_item">
-                            {!! $icon !!}
+                            <svg><use xlink:href="#icon_heart"></use></svg>
                         </div>
                         @php
                             $keyPriceAll = [];
                             foreach($product->prices as $p) $keyPriceAll[] = $p->id;
                             $keyPriceAll = implode('-', $keyPriceAll);
-                            $icon       = file_get_contents('storage/images/svg/icon_bag_shopping.svg');
                         @endphp
                         <div class="wallpaperGridBox_item_action_item" onClick="addToCart('{{ $product->id }}', '{{ $keyPriceAll }}', 'all');">
-                            {!! $icon !!}
+                            <svg><use xlink:href="#icon_bag_shopping"></use></svg>
                         </div>
                     </div>
                     <!-- danh sách ảnh -->

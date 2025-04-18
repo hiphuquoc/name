@@ -34,18 +34,13 @@
         <div class="languageBox">
             <input type="hidden" id="language" name="language" value="{{ $language ?? '' }}" />
             <div class="languageBox_show" onclick="closeLanguageBoxList('ja_closeLanguageBoxList');">
-                @php
-                    $icon   = file_get_contents('storage/images/svg/icon_global.svg');
-                @endphp
-                {!! $icon.strtoupper(config('language.'.$language.'.key')) !!}
+                <svg><use xlink:href="#icon_global"></use></svg>
+                {!! strtoupper(config('language.'.$language.'.key')) !!}
             </div>
             @if(!empty($item->seos)&&$item->seos->isNotEmpty())
                 <div id="ja_closeLanguageBoxList" class="languageBox_list">
                     <div class="languageBox_list_close" onclick="closeLanguageBoxList('ja_closeLanguageBoxList');">
-                        @php
-                            $icon       = file_get_contents('storage/images/svg/icon_close.svg');
-                        @endphp
-                        {!! $icon !!}
+                        <svg><use xlink:href="#icon_close"></use></svg>
                     </div>
                     <div class="languageBox_list_content">
                         @foreach(config('language') as $ld)
@@ -104,10 +99,7 @@
             <div id="ja_closeViewBoxList" class="viewMode_list">
                 <div class="viewMode_list_title">{{ config('data_language_3.'.$language.'.view_mode_notes') }}</div>
                 <div class="viewMode_list_close" onclick="closeLanguageBoxList('ja_closeViewBoxList');">
-                    @php
-                        $icon       = file_get_contents('storage/images/svg/icon_close.svg');
-                    @endphp
-                    {!! $icon !!}
+                    <svg><use xlink:href="#icon_close"></use></svg>
                 </div>
                 <div class="viewMode_list_box">
                     @foreach(config('main_'.env('APP_NAME').'.view_mode') as $viewMode)
@@ -140,10 +132,7 @@
         
         <!-- icon menu mobile -->
         <div class="iconMenuMobile show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
-            @php
-                $icon   = file_get_contents('storage/images/svg/icon_bars.svg');
-            @endphp
-            {!! $icon !!}
+            <svg><use xlink:href="#icon_bars"></use></svg>
         </div>
     </div>
 </div>

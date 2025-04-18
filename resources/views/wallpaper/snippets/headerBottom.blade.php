@@ -16,20 +16,14 @@
     @endphp
     <a class="headerBottom_item" href="https://zalo.me/{{ $phoneCustomerService }}">
         <div class="headerBottom_item_icon">
-            @php
-                $icon = file_get_contents('storage/images/svg/icon-headphone.svg');
-            @endphp
-            {!! $icon !!}
+            <svg><use xlink:href="#icon_headphone"></use></svg>
         </div>
         <div class="headerBottom_item_text maxLine_1"><div class="maxLine_1" style="width:100%;">{{ $nameSupport }}</div></div>
     </a>
     <!-- hướng dẫn tải -->
     <a id="js_loadLinkDownloadGuide" class="headerBottom_item" href="/">
         <div class="headerBottom_item_icon">
-            @php
-                $icon = file_get_contents('storage/images/svg/icon-book-open.svg');
-            @endphp
-            {!! $icon !!}
+            <svg><use xlink:href="#icon_book_open"></use></svg>
         </div>
         <div class="headerBottom_item_text"><div class="maxLine_1" style="width:100%;">{{ $nameGuide }}</div></div>
     </a>

@@ -1,10 +1,6 @@
 
 
 <div class="searchViewBeforeOfBlog_boxItem customScrollBar-y">
-    @php
-        $iconUser   = file_get_contents('storage/images/svg/icon-user.svg');
-        $iconClock  = file_get_contents('storage/images/svg/icon_clock_bold.svg');
-    @endphp
     @foreach($blogs as $blog)
         @foreach($blog->seos as $seo)
             @if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language)
@@ -25,10 +21,12 @@
                         </div>
                         <div class="searchViewBeforeOfBlog_boxItem_item_content_info">
                             <div class="searchViewBeforeOfBlog_boxItem_item_content_info_item maxLine_1">
-                               {!! $iconUser !!}Name Admin
+                                <svg><use xlink:href="#icon_user"></use></svg>
+                                Name Admin
                             </div>
                             <div class="searchViewBeforeOfBlog_boxItem_item_content_info_item maxLine_1">
-                                {!! $iconClock.date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) !!}
+                                <svg><use xlink:href="#icon_clock_bold"></use></svg>
+                                {!! date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) !!}
                             </div>
                         </div>
                     </div>
@@ -44,8 +42,5 @@
 @endphp
 <a href="{{ $url }}" class="searchViewBeforeOfBlog_viewAll">
     <div>{{ config('data_language_1.'.$language.'.view_all') }} (<span>{{ $count }}</span>)</div>
-    @php
-        $icon       = file_get_contents('storage/images/svg/icon_double_arrow_right.svg');
-    @endphp
-    {!! $icon !!}
+    <svg><use xlink:href="#icon_double_arrow_right"></use></svg>
 </a>

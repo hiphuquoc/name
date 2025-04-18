@@ -58,23 +58,18 @@
                 @endforeach
             </div>
             <!-- action -->
-            @php
-                $iconView      = file_get_contents('storage/images/svg/icon_expand.svg');
-                $iconLike       = file_get_contents('storage/images/svg/icon_like.svg');
-                $iconDownload   = file_get_contents('storage/images/svg/icon_download.svg');
-            @endphp
             <div class="action">
                 {{-- <a href="{{ route('search.searchByImage', ['free_wallpaper_info_id' => $wallpaper->id]) }}" class="action_item"> --}}
                 @if(!empty($wallpaper->seo))
                     <a href="/{{ $itemSeoWallpaper->slug_full ?? $wallpaper->seo->slug_full }}" class="action_item" aria-label="viewmore">
-                        {!! $iconView !!}
+                        <svg><use xlink:href="#icon_expand"></use></svg>
                     </a>
                 @endif
                 <div class="action_item" onclick="showBoxFeeling(this);">
-                    {!! $iconLike !!}
+                    <svg><use xlink:href="#icon_like"></use></svg>
                 </div>
                 <a class="action_item download" href="{{ route('ajax.downloadImgFreeWallpaper', ['file_cloud' => $wallpaper->file_cloud]) }}" download aria-label="download">
-                    {!! $iconDownload !!}
+                    <svg><use xlink:href="#icon_download"></use></svg>
                 </a>
             </div>
         </div>

@@ -22,10 +22,7 @@
                         @endif
                     @endforeach
                 </div> 
-                @php
-                    $icon = file_get_contents('storage/images/svg/icon_arrow_down.svg');
-                @endphp
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_arrow_down"></use></svg>
                 @if(!empty($typeSearch))
                     <div id="js_openSelected_typeBoxList" class="searchViewBefore_showBox_typeBox_list">
                         @foreach($typeSearch as $key => $t)
@@ -44,10 +41,7 @@
                 <!-- value = null không lưu giá trị search cũ -->
                 <input id="searchAjax_input" class="searchViewBefore_showBox_input" type="text" name="search" placeholder="{{ $labelName }}" value="" onkeyup="searchAjaxWithDelay(this)" autocomplete="off" onclick="openSelectedRight('js_searchAjax_idWrite', 'searchViewBefore_showBox_inputBox')" />
                 <button type="submit" class="searchViewBefore_showBox_inputBox_button" aria-label="{{ $labelName }}">
-                    @php
-                        $icon = file_get_contents('storage/images/svg/search.svg');
-                    @endphp
-                    {!! $icon !!}
+                    <svg><use xlink:href="#icon_search"></use></svg>
                     <span>{{ config('data_language_1.'.$language.'.search') }}</span>
                 </button>
                 <div id="js_searchAjax_idWrite" class="searchViewBefore_showBox_inputBox_list">

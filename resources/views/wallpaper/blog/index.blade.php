@@ -64,25 +64,23 @@
                     <h1 class="titlePage">{{ $itemSeo->title }}</h1>
                     <!-- thông tin bài viết -->
                     <div class="blogInfoHeadBox">
-                        @php
-                            $iconUser   = file_get_contents('storage/images/svg/icon-user.svg');
-                            $iconClock  = file_get_contents('storage/images/svg/icon_clock_bold.svg');
-                            $iconEye    = file_get_contents('storage/images/svg/icon_eye_bold.svg');
-                            $iconShare  = file_get_contents('storage/images/svg/icon_share_bold.svg');
-                        @endphp
                         @foreach($item->seos as $seo)
                             @if(!empty($seo->infoSeo->language)&&$seo->infoSeo->language==$language)
                                 <div class="blogInfoHeadBox_item maxLine_1">
-                                    {!! $iconUser !!}Name Admin
+                                    <svg><use xlink:href="#icon_user"></use></svg>
+                                    Name Admin
                                 </div>
                                 <div class="blogInfoHeadBox_item maxLine_1">
-                                    {!! $iconClock.date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) !!}
+                                    <svg><use xlink:href="#icon_clock_bold"></use></svg>
+                                    {!! date('d \t\h\á\n\g m, Y', strtotime($seo->infoSeo->created_at)) !!}
                                 </div>
                                 <div class="blogInfoHeadBox_item maxLine_1">
-                                    {!! $iconEye !!}{{ $item->viewed }}
+                                    <svg style="transform: scale(1.15)"><use xlink:href="#icon_eye_bold"></use></svg>
+                                    {{ $item->viewed }}
                                 </div> 
                                 <div class="blogInfoHeadBox_item maxLine_1">
-                                    {!! $iconShare !!}{{ $item->shared }}
+                                    <svg style="transform: scale(1.1)"><use xlink:href="#icon_share"></use></svg>
+                                    {{ $item->shared }}
                                 </div>
                                 @break
                             @endif

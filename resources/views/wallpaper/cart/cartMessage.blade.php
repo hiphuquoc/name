@@ -6,10 +6,7 @@
             {{ config('data_language_1.'.$language.'.added_to_cart') }}
         </div>
         <div class="cartMessage_box_close" onClick="openCloseModal('cartMessage');">
-            @php
-                $icon       = file_get_contents('storage/images/svg/icon_close.svg');
-            @endphp
-            {!! $icon !!}
+            <svg><use xlink:href="#icon_close"></use></svg>
         </div>
         <div class="cartMessage_box_body">
             @if(!empty($image))

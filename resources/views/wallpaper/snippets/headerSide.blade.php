@@ -37,28 +37,22 @@
 </div>
 <!-- icon hiển thị chế độ xem -->
 <div class="layoutHeaderSide_header_menuView" onclick="settingCollapsedMenu();">
-    @php
-        $icon = file_get_contents('storage/images/svg/icon-settingView.svg');
-    @endphp
-    {!! $icon !!}
+    <svg><use xlink:href="#icon_setting_view"></use></svg>
 </div>
 <div class="headerSide customScrollBar-y">
     <ul>
         <!-- trang chủ -->
         @php
-            $icon           = file_get_contents('storage/images/svg/icon-home-1.svg');
             $selected       = '';
-            // if($urlPath==$language||$urlPath=='/') $selected = 'selected';
         @endphp
         <li class="{{ $selected }}">
             <a href="/{{ $language }}" title="{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.company_name') }}" aria-label="{{ config('data_language_1.'.$language.'.home') }} {{ env('DOMAIN_NAME') }}">
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_home"></use></svg>
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.home') }}</div>
             </a>
         </li>
         <!-- về chúng tôi -->
         @php
-            $icon       = file_get_contents('storage/images/svg/icon-about-me-2.svg');
             $urlAbotUs      = '';
             $nameAboutUs    = '';
             $selected       = '';
@@ -72,7 +66,7 @@
         @endphp
         <li class="{{ $selected }}">
             <a href="/{{ $urlAbotUs }}" title="{{ $nameAboutUs }}" aria-label="{{ $nameAboutUs }}">
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_about_me"></use></svg>
                 <div class="maxLine_1">{{ $nameAboutUs }}</div>
             </a>
         </li>
@@ -98,11 +92,10 @@
                     $classStatusMenu = 'isOpen';
                     $selected       = 'selected';
                 }
-                $icon = file_get_contents('storage/images/svg/icon-category-2.svg');
             @endphp
             <li class="{{ $selected }}">
                 <div class="{{ $classTmp }}" onclick="showHideListMenuMobile(this, '{{ $url }}')">
-                    {!! $icon !!}
+                    <svg><use xlink:href="#icon_category"></use></svg>
                     @if($flagOpen==true)
                         <div class="maxLine_1">{{ $titlePhoneWallpaper }}</div>
                     @else 
@@ -134,11 +127,8 @@
         @endif
         <!-- phong cách -->
         <li>
-            @php
-                $icon = file_get_contents('storage/images/svg/icon-brush-1.svg');
-            @endphp
             <div class="close" onclick="showHideListMenuMobile(this, 'phong-cach')">
-                {!! $icon !!}
+                <svg style="transform: scale(1.325);"><use xlink:href="#icon_brush"></use></svg>
                 <div class="maxLine_1" style="margin-left:-3px;">{{ config('data_language_2.'.$language.'.wallpaper_style') }}</div>
                 <div class="actionMenu"></div>
             </div>
@@ -197,7 +187,6 @@
         <!-- miễn phí -->
         <li>
             @php
-                $icon                   = file_get_contents('storage/images/svg/icon-share-1.svg');
                 $wallpaperFreeText      = config('data_language_2.'.$language.'.free_wallpaper');
                 $slugFullWallpaperFree  = '';
                 foreach($wallpaperMobile->childs as $child){
@@ -212,17 +201,14 @@
                 }
             @endphp
             <a href="{{ env('APP_URL') }}/{{ $slugFullWallpaperFree }}" title="{{ $wallpaperFreeText }}" aria-label="{{ $wallpaperFreeText }}">
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_share"></use></svg>
                 <div class="maxLine_1">{{ $wallpaperFreeText }}</div>
             </a>
         </li>
         <!-- hỗ trợ -->
         <li>
             <div class="close" onclick="showHideListMenuMobile(this, 'ho-tro')">
-                @php
-                    $icon = file_get_contents('storage/images/svg/icon-support-1.svg');
-                @endphp
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_support"></use></svg>
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.support') }}</div>
                 <div class="actionMenu"></div>
             </div>
@@ -273,10 +259,7 @@
             @if(!empty($cateogyrBlogLv1ByLanguage))
                 <li class="{{ $selected }}">
                     <div class="{{ $classTmp }}" onclick="showHideListMenuMobile(this, '{{ $idGroupMenu }}')">
-                        @php
-                            $icon = file_get_contents('storage/images/svg/icon-blog-1.svg');
-                        @endphp
-                        {!! $icon !!}
+                        <svg style="transform: scale(0.9);"><use xlink:href="#icon_blog"></use></svg>
                         {{-- <div class="maxLine_1">{{ $cateogyrBlogLv1ByLanguage->title }}</div> --}}
                         <a href="{{ env('APP_URL') }}/{{ $cateogyrBlogLv1ByLanguage->slug_full }}" class="maxLine_1" arira-label="{{ $wallpaperMobile->name }}">{{ $cateogyrBlogLv1ByLanguage->title }}</a>
                         <div class="actionMenu {{ $classStatusMenu }}"></div>
@@ -326,10 +309,7 @@
 </div>
 
 <div class="closeButtonMobileMenu show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
-    @php
-        $icon       = file_get_contents('storage/images/svg/icon_close.svg');
-    @endphp
-    {!! $icon !!}
+    <svg><use xlink:href="#icon_close"></use></svg>
 </div>
 
 @push('scriptCustom')

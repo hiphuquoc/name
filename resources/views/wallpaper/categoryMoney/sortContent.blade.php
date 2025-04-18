@@ -86,10 +86,7 @@
                 <div class="filterAdvanced_box_title">
                     <span>{{ $titleAdvancedFilter }}</span>
                     <div class="filterAdvanced_box_title_close" onclick="toggleFilterAdvanced('js_toggleFilterAdvanced_element');">
-                        @php
-                            $icon       = file_get_contents('storage/images/svg/icon_close.svg');
-                        @endphp
-                        {!! $icon !!}
+                        <svg><use xlink:href="#icon_close"></use></svg>
                     </div>
                 </div>
                 

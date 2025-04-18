@@ -1,10 +1,7 @@
 <div class="cartBox">
     <a href="{{ $urlPageCart ?? '/' }}" class="cartBox_show">
         <div class="cartBox_show_icon">
-            @php
-                $icon = file_get_contents('storage/images/svg/icon-cart-header.svg');
-            @endphp
-            {!! $icon !!}
+            <svg><use xlink:href="#icon_cart"></use></svg>
             <div id="js_updateCart_count" class="cartBox_show_icon_number">
                 {{ $detailCart['count'] ?? 0 }}
             </div>

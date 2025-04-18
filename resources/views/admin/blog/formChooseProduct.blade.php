@@ -5,19 +5,6 @@
         <div class="modal-dialog modal-lg" style="margin:0 auto;width:1500px;max-width:unset;height:100vh;">
             <div class="modal-content">
                 <div class="modal-body">
-                    
-                    {{-- <div class="searchViewBefore">
-                        <div class="searchViewBefore_input">
-                            <!-- value = null không lưu giá trị search cũ -->
-                            <input type="text" placeholder="Tìm thumnail..." value="" data-product-price-id="{{ 0 }}" onkeyup="searchWallpapersWithDelay(this)" autocomplete="off" disabled />
-                            <div>
-                                <img src="/storage/images/svg/search.svg" alt="Tìm kiếm thumnall" title="Tìm kiếm thumnall" />
-                            </div>
-                        </div>
-                        <div id="js_seachFreeWallpaperOfCategory_idWrite" class="searchViewBefore_selectbox">
-                            <!-- load ajax -->
-                        </div>
-                    </div> --}}
                     <div class="formChooseProduct">
                         <div class="formChooseProduct_chooseBox customScrollBar-y">
                             <!-- khung search -->

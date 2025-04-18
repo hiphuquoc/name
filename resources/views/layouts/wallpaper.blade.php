@@ -9,6 +9,10 @@
 
 <!-- === START:: Body === -->
 <body class="background">
+
+    <!-- SVG icon inline -->
+    @include('wallpaper.snippets.svgSprite')
+    
     <div id="js_openCloseModal_blur">
         {{-- <!-- header Top -->
         <div class="menuTopBackground layoutHeaderTop">
@@ -54,10 +58,7 @@
 
         <div class="bottom">
             <div id="smoothScrollToTop" class="gotoTop" onclick="javascript:smoothScrollToTop();">
-                @php
-                    $icon = file_get_contents('storage/images/svg/icon_arrow_up.svg');
-                @endphp
-                {!! $icon !!}
+                <svg><use xlink:href="#icon_arrow_up"></use></svg>
             </div>
             @stack('bottom')
         </div>

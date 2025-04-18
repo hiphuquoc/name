@@ -50,7 +50,7 @@
                     <span>{{ $titleAdvancedFilter }}</span>
                     <div class="filterAdvanced_box_title_close" onclick="toggleFilterAdvanced('js_toggleFilterAdvanced_element');">
                         @php
-                            $icon       = file_get_contents('storage/images/svg/icon_close.svg');
+                            $icon       = '';
                         @endphp
                         {!! $icon !!}
                     </div>
