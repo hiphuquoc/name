@@ -1348,11 +1348,15 @@ $distanceWrapSearchBoxMobile : 3.5rem;
         &_boxHeight {
             height: $heightMenu;
             width: 3rem;
-            top: 0;
-            right: 0;
             position: absolute;
             display: flex;
             justify-content: flex-end;
+            top: 0;
+            right: 0;
+            &:dir(rtl), [dir="rtl"] & {
+                right: unset;
+                left: 0;
+            }
             svg {
                 width: 1.6rem;
                 height: 1.6rem;

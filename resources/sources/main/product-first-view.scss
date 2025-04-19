@@ -570,19 +570,22 @@
                 transform: translateX(-50%);
                 width: 100%;
                 padding: 0;
-                margin: 0 0 1.5rem 0;
+                margin: 0 0 1rem 0;
                 flex-wrap: wrap;
                 justify-content: center;
                 cursor: pointer;
-                gap: 0.75rem;
+                gap: 1rem 0.75rem;
                 li {
                     list-style: none;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
                     button {
                         background: rgb(var(--colorIcon));
-                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
+                        // box-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
                         border-radius: 20px;
                         width: 30px;
-                        height: 4px;
+                        height: 5px;
                         border: none;
                     }
                     &.slick-active {
