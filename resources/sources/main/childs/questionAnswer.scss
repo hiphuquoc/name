@@ -59,9 +59,9 @@
                     position: absolute;
                     top: 7px;
                     background-color: rgba(var(--colorText), 0.5);
-                    mask: url('/storage/images/svg/icon_plus.svg') no-repeat center;
+                    mask: var(--icon_plus) no-repeat center;
                     mask-size: contain;
-                    -webkit-mask: url('/storage/images/svg/icon_plus.svg') no-repeat center;
+                    -webkit-mask: var(--icon_plus) no-repeat center;
                     -webkit-mask-size: contain;
                     width: 1rem;
                     height: 1rem;
@@ -69,7 +69,8 @@
                 }
                 &.show {
                     &::after {
-                        content: '\f068' !important;
+                        mask: var(--icon_close) no-repeat center;
+                        -webkit-mask: var(--icon_close) no-repeat center;
                     }
                 }
             }

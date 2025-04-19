@@ -338,14 +338,14 @@
         }
     
         &:before {
-            mask-image: url('/storage/images/svg/search.svg');
-            -webkit-mask-image: url('/storage/images/svg/search.svg');
+            mask-image: var(--icon_search);
+            -webkit-mask-image: var(--icon_search);
             opacity: 1;
         }
     
         &:after {
-            mask-image: url('/storage/images/svg/icon_close.svg');
-            -webkit-mask-image: url('/storage/images/svg/icon_close.svg');
+            mask-image: var(--icon_close);
+            -webkit-mask-image: var(--icon_close);
             opacity: 0;
         }
 

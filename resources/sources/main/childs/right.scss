@@ -26,34 +26,18 @@
             width: 2.375rem;
             height: 2.375rem;
             &.facebook {
-                background: url('/storage/images/svg/facebook.png') no-repeat;
+                background: url('') no-repeat;
                 background-size: 100% 100%;
                 &:hover {
-                    background: url('/storage/images/svg/facebook-color.png') no-repeat;
+                    background: url('') no-repeat;
                     background-size: 100% 100% !important;
                 }
             }
             &.instagram {
-                background: url('/storage/images/svg/instagram.png') no-repeat;
+                background: url('') no-repeat;
                 background-size: 100% 100%;
                 &:hover {
-                    background: url('/storage/images/svg/instagram-color.png') no-repeat;
-                    background-size: 100% 100% !important;
-                }
-            }
-            &.twitter {
-                background: url('/storage/images/svg/twitter.png') no-repeat;
-                background-size: 100% 100%;
-                &:hover {
-                    background: url('/storage/images/svg/twitter-color.png') no-repeat;
-                    background-size: 100% 100% !important;
-                }
-            }
-            &.email {
-                background: url('/storage/images/svg/email.png') no-repeat;
-                background-size: 100% 100%;
-                &:hover {
-                    background: url('/storage/images/svg/email-color.png') no-repeat;
+                    background: url('') no-repeat;
                     background-size: 100% 100% !important;
                 }
             }

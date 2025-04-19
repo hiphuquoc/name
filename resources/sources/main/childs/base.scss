@@ -546,9 +546,9 @@ label {
   &:after {
     content: '';
     background-color: rgb(var(--colorIcon));
-    mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+    mask: var(--icon_circle_dot) no-repeat center;
     mask-size: contain;
-    -webkit-mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+    -webkit-mask: var(--icon_circle_dot) no-repeat center;
     -webkit-mask-size: contain;
     width: 8px;
     height: 8px;
@@ -613,9 +613,9 @@ label {
   &:after {
     content: '';
     background-color: rgba(var(--colorText), 0.5);
-    mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+    mask: var(--icon_circle_dot) no-repeat center;
     mask-size: contain;
-    -webkit-mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+    -webkit-mask: var(--icon_circle_dot) no-repeat center;
     -webkit-mask-size: contain;
     width: 16px;
     height: 16px;
@@ -782,9 +782,9 @@ label {
     &:after {
       content: '';
       background-color: rgb(var(--colorSuccess));
-      mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+      mask: var(--icon_check) no-repeat center;
       mask-size: contain;
-      -webkit-mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+      -webkit-mask: var(--icon_check) no-repeat center;
       -webkit-mask-size: contain;
       width: 16px;
       height: 16px;

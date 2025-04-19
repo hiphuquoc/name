@@ -154,9 +154,9 @@
                 bottom: 5px;
                 right: 5px;
                 background-color: rgb(var(--colorIcon));
-                mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+                mask: var(--icon_check) no-repeat center;
                 mask-size: contain;
-                -webkit-mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+                -webkit-mask: var(--icon_check) no-repeat center;
                 -webkit-mask-size: contain;
                 width: 16px;
                 height: 16px;
@@ -360,9 +360,9 @@
             &:before {
                 content: '';
                 background-color: rgb(var(--colorIcon));
-                mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+                mask: var(--icon_check) no-repeat center;
                 mask-size: contain;
-                -webkit-mask: url('/storage/images/svg/icon_check.svg') no-repeat center;
+                -webkit-mask: var(--icon_check) no-repeat center;
                 -webkit-mask-size: contain;
                 width: 1.5rem;
                 height: 1.5rem;

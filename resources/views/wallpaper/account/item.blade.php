@@ -22,7 +22,7 @@
                                     $zipPath = $product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug.'/'.$product->infoPrice->folder_drive.'-'.$product->infoProduct->seo->slug.'.zip';
                                 @endphp
                                 <a class="downloadBox_item_download_item" href="{{ Storage::disk('google')->url($zipPath) }}" target="_blank">
-                                    <img src="/storage/images/svg/download-success.svg">
+                                    <img src="">
                                     <div>{{ $product->infoProduct->name }} (link google drive .ZIP)</div>
                                 </a>
                             @endforeach
@@ -39,7 +39,7 @@
     @else
     <div class="cartSectionBox_body">
         <div class="emptyCartBox">
-            <img src="/storage/images/svg/icon-blank-cart.svg" alt="danh sách sản phẩm trong giỏ hàng" title="danh sách sản phẩm trong giỏ hàng">
+            <img src="" alt="danh sách sản phẩm trong giỏ hàng" title="danh sách sản phẩm trong giỏ hàng">
             <div class="emptyCart_text">Tải xuống của bạn trống!</div> 
             <a href="/hinh-nen-dien-thoai" class="emptyCartBox_button button" aria-label="Bắt đầu mua sắm">Bắt đầu mua hàng</a>
         </div>

@@ -79,7 +79,7 @@
                             <!-- rating và số lượng đã bán -->
                             {{-- <div class="wallpaperGridBox_item_image_rating">
                                 @if(!empty($product->seo->rating_aggregate_star))
-                                    <div><img src="{{ Storage::url('images/svg/icon_star.svg') }}" alt="đánh giá sản phẩm {{ $productName }}" title="đánh giá sản phẩm {{ $productName }}" />{{ $product->seo->rating_aggregate_star }}</div>
+                                    <div><img src="{{ Storage::url('') }}" alt="đánh giá sản phẩm {{ $productName }}" title="đánh giá sản phẩm {{ $productName }}" />{{ $product->seo->rating_aggregate_star }}</div>
                                 @endif
                                 @if(!empty($product->sold))
                                     <div>Đã bán {{ $product->sold }}</div>

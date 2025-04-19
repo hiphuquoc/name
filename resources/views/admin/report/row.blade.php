@@ -10,9 +10,9 @@
             @php
                 $countBox = !empty($item->jobAutoTranslate) ? $item->jobAutoTranslate->count() : 0;
             @endphp
-            <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;">
-                <img src="/storage/images/svg/icon_flag_{{ $item->language }}.png" style="width:35px;margin-right:5px;" /> {{ $item->title ?? null }} <span style="font-weight:normal;font-size:16px;color:#28c76f;">({{ $countBox }} box)</span>
-            </div>
+            {{-- <div class="oneLine" style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;">
+                <img src="" style="width:35px;margin-right:5px;" /> {{ $item->title ?? null }} <span style="font-weight:normal;font-size:16px;color:#28c76f;">({{ $countBox }} box)</span>
+            </div> --}}
             <div class="oneLine">
                 <strong>Tiêu đề SEO</strong>: {{ $item->seo_title ?? null }} (<strong>{{ !empty($item->seo_title) ? mb_strlen($item->seo_title) : 0 }}</strong>)
             </div>

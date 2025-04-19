@@ -85,7 +85,7 @@
                                             $buttonTitleLoginWithFB = 'Login with Facebook';
                                         @endphp
                                         <a class="facebookButtonLogin" href="{{ route('main.facebook.redirect') }}">
-                                            <img src="{{ Storage::url('images/svg/logo-facebook-fff.png') }}" alt="{{ $buttonTitleLoginWithFB }}" title="{{ $buttonTitleLoginWithFB }}" />
+                                            <img src="{{ Storage::url('') }}" alt="{{ $buttonTitleLoginWithFB }}" title="{{ $buttonTitleLoginWithFB }}" />
                                             <div class="maxLine_1">{{ $buttonTitleLoginWithFB }}</div>
                                         </a>
                                     </div> --}}

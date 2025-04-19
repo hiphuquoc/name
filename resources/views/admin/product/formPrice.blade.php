@@ -47,7 +47,7 @@
                             <!-- value = null không lưu giá trị search cũ -->
                             <input type="text" placeholder="Tìm wallpaper..." value="" data-product-price-id="{{ $price->id }}" onkeyup="searchWallpapersWithDelay(this)" autocomplete="off" />
                             <div>
-                                <img src="/storage/images/svg/search.svg" alt="" title="Tìm kiếm hình nền điện thoại">
+                                <svg><use xlink:href="#icon_search"></use></svg>
                             </div>
                         </div>
                         <div class="searchViewBefore_selectbox">

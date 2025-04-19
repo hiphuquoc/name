@@ -78,9 +78,9 @@
                         &::after {
                             content: '';
                             background: rgb(var(--colorText), 0.75);
-                            mask: url('/storage/images/svg/icon_close.svg') no-repeat center;
+                            mask: var(--icon_close) no-repeat center;
                             mask-size: contain;
-                            -webkit-mask: url('/storage/images/svg/icon_close.svg') no-repeat center;
+                            -webkit-mask: var(--icon_close) no-repeat center;
                             -webkit-mask-size: contain;
                             width: 18px;
                             height: 18px;
@@ -134,9 +134,9 @@
                             content: '';
                             margin-left: 0.5rem;
                             background-color: rgb(var(--colorIcon));
-                            mask: url('/storage/images/svg/icon_three_dots.svg') no-repeat center;
+                            mask: var(--icon_three_dots) no-repeat center;
                             mask-size: contain;
-                            -webkit-mask: url('/storage/images/svg/icon_three_dots.svg') no-repeat center;
+                            -webkit-mask: var(--icon_three_dots) no-repeat center;
                             -webkit-mask-size: contain;
                             width: 20px;
                             height: 20px;
@@ -175,9 +175,9 @@
                             &:before {
                                 content: '';
                                 background-color: rgba(var(--colorText), 0.5);
-                                mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+                                mask: var(--icon_circle_dot) no-repeat center;
                                 mask-size: contain;
-                                -webkit-mask: url('/storage/images/svg/icon_circle_dot.svg') no-repeat center;
+                                -webkit-mask: var(--icon_circle_dot) no-repeat center;
                                 -webkit-mask-size: contain;
                                 width: 8px;
                                 height: 8px;

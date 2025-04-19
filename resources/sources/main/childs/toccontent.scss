@@ -55,9 +55,9 @@
             width: 16px;
             height: 16px;
             background-color: rgb(var(--colorIcon));
-            mask: url('/storage/images/svg/icon_close.svg') no-repeat center;
+            mask: var(--icon_close) no-repeat center;
             mask-size: contain;
-            -webkit-mask: url('/storage/images/svg/icon_close.svg') no-repeat center;
+            -webkit-mask: var(--icon_close) no-repeat center;
             -webkit-mask-size: contain;
         }
         &.hidden {
@@ -67,9 +67,9 @@
                 width: 16px;
                 height: 16px;
                 background-color: rgb(var(--colorIcon));
-                mask: url('/storage/images/svg/icon_arrow_down.svg') no-repeat center;
+                mask: var(--icon_plus) no-repeat center;
                 mask-size: contain;
-                -webkit-mask: url('/storage/images/svg/icon_arrow_down.svg') no-repeat center;
+                -webkit-mask: var(--icon_plus) no-repeat center;
                 -webkit-mask-size: contain;
             }
         }

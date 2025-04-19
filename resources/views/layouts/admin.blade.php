@@ -11,6 +11,9 @@
 <!-- === START:: Body === -->
 <body class="pace-done vertical-layout vertical-menu-modern navbar-floating footer-static menu-expanded" data-open="click" data-menu="vertical-menu-modern" data-col>
 
+    <!-- SVG icon inline -->
+    @include('wallpaper.snippets.svgSprite')
+    
     <div id="js_fullLoading_blur">
         <!-- === START:: Header === -->
         @include('admin.snippets.menu')
@@ -22,10 +25,6 @@
             @yield('content')
         </div>
     </div>
-
-    <!-- === START:: Footer === -->
-    {{-- @include('snippets.footer') --}}
-    <!-- === END:: Footer === -->
 
     <!-- === START:: Toast Notifications === -->
     <div id="toast-container" class="toast-container position-fixed top-0 start-0">

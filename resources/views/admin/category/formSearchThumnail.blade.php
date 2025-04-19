@@ -11,7 +11,7 @@
                             <!-- value = null không lưu giá trị search cũ -->
                             <input type="text" placeholder="Tìm thumnail..." value="" data-product-price-id="{{ 0 }}" onkeyup="searchWallpapersWithDelay(this)" autocomplete="off" disabled />
                             <div>
-                                <img src="/storage/images/svg/search.svg" alt="Tìm kiếm thumnall" title="Tìm kiếm thumnall" />
+                                <svg><use xlink:href="#icon_search"></use></svg>
                             </div>
                         </div>
                         <div id="js_seachFreeWallpaperOfCategory_idWrite" class="searchViewBefore_selectbox">

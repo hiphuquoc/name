@@ -83,7 +83,7 @@
                     @endphp
                     @if($countHeart>0)
                         <div class="showFeelingBox">
-                            {!! file_get_contents(public_path('storage/images/svg/icon-heart-2.svg')) !!}
+                            <svg><use xlink:href="#icon_heart"></use></svg>
                             <div>{{ $countHeart }} yêu thích</div>
                         </div>
                     @endif --}}

@@ -391,9 +391,9 @@ $widthCollapsed : 17rem;
                         top: 50%;
                         transform: translateY(-50%);
                         background-color: rgb(var(--colorIcon));
-                        mask: url('/storage/images/svg/search.svg') no-repeat center;
+                        mask: url('#icon_search') no-repeat center;
                         mask-size: contain;
-                        -webkit-mask: url('/storage/images/svg/search.svg') no-repeat center;
+                        -webkit-mask: url('#icon_search') no-repeat center;
                         -webkit-mask-size: contain;
                         width: 7px;
                         height: 7px;
@@ -445,15 +445,15 @@ $widthCollapsed : 17rem;
                         width: 1rem;
                         height: 1rem;
                         background-color: rgb(var(--colorIcon));
-                        mask: url('/storage/images/svg/icon_plus.svg') no-repeat center;
+                        mask: var(--icon_plus) no-repeat center;
                         mask-size: contain;
-                        -webkit-mask: url('/storage/images/svg/icon_plus.svg') no-repeat center;
+                        -webkit-mask: var(--icon_plus) no-repeat center;
                         -webkit-mask-size: contain;
                     }
 
                     &.isOpen::after {
-                        mask-image: url('/storage/images/svg/icon_close.svg');
-                        -webkit-mask-image: url('/storage/images/svg/icon_close.svg');
+                        mask-image: var(--icon_close);
+                        -webkit-mask-image: var(--icon_close);
                     }
                 }
             }
@@ -547,9 +547,9 @@ $widthCollapsed : 17rem;
                     &::after {
                         content: '';
                         background-color: rgb(var(--colorIcon));
-                        mask: url('/storage/images/svg/icon_facebook_f.svg') no-repeat center;
+                        mask: var(--icon_facebook_f) no-repeat center;
                         mask-size: contain;
-                        -webkit-mask: url('/storage/images/svg/icon_facebook_f.svg') no-repeat center;
+                        -webkit-mask: var(--icon_facebook_f) no-repeat center;
                         -webkit-mask-size: contain;
                         width: 1.35rem;
                         height: 1.35rem;
@@ -559,9 +559,9 @@ $widthCollapsed : 17rem;
                     &::after {
                         content: '';
                         background-color: rgb(var(--colorIcon));
-                        mask: url('/storage/images/svg/icon_instagram.svg') no-repeat center;
+                        mask: var(--icon_instagram) no-repeat center;
                         mask-size: contain;
-                        -webkit-mask: url('/storage/images/svg/icon_instagram.svg') no-repeat center;
+                        -webkit-mask: var(--icon_instagram) no-repeat center;
                         -webkit-mask-size: contain;
                         width: 1.35rem;
                         height: 1.35rem;
@@ -571,9 +571,9 @@ $widthCollapsed : 17rem;
                     &::after {
                         content: '';
                         background-color: rgb(var(--colorIcon));
-                        mask: url('/storage/images/svg/icon_youtube.svg') no-repeat center;
+                        mask: var(--icon_youtube) no-repeat center;
                         mask-size: contain;
-                        -webkit-mask: url('/storage/images/svg/icon_youtube.svg') no-repeat center;
+                        -webkit-mask: var(--icon_youtube) no-repeat center;
                         -webkit-mask-size: contain;
                         width: 1.35rem;
                         height: 1.35rem;
@@ -583,9 +583,9 @@ $widthCollapsed : 17rem;
                     &::after {
                         content: '';
                         background-color: rgb(var(--colorIcon));
-                        mask: url('/storage/images/svg/icon_tiktok.svg') no-repeat center;
+                        mask: var(--icon_tiktok) no-repeat center;
                         mask-size: contain;
-                        -webkit-mask: url('/storage/images/svg/icon_tiktok.svg') no-repeat center;
+                        -webkit-mask: var(--icon_tiktok) no-repeat center;
                         -webkit-mask-size: contain;
                         width: 1.35rem;
                         height: 1.35rem;
