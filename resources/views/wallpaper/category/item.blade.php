@@ -34,7 +34,7 @@
         <div class="freeWallpaperBox_item_box_item">
             <div class="author">
                 <div class="author_image">
-                    <img src="{{ \App\Helpers\Image::getBase64Image('https://namecomvn.storage.googleapis.com/storage/images/favicon-wallsora.webp') }}" alt="wallsora.com" title="wallsora.com" />
+                    <img src="{{ \App\Helpers\Image::getBase64Image('https://cdn.wallsora.com/storage/images/favicon-wallsora.webp') }}" alt="wallsora.com" title="wallsora.com" />
                 </div>
                 <div class="author_name maxLine_1">
                     Wallsora

@@ -34,6 +34,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendProductMail;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 // use App\Models\RelationSeoTagInfo;
 // use App\Models\RelationSeoPageInfo;
@@ -49,58 +50,80 @@ use Illuminate\Support\Facades\Http;
 // use PhpParser\Node\Stmt\Switch_;
 
 class HomeController extends Controller {
-    public static function home(Request $request, $language = 'vi'){
-        /* ngôn ngữ */
+    public static function home(Request $request, $language = 'vi') {
+        // 1. Cài đặt cơ bản
         SettingController::settingLanguage($language);
-        
-        /* cache HTML */
         $paramsSlug = [];
-        if(!empty(Cookie::get('view_mode')) && Cookie::get('view_mode') != config('main_'.env('APP_NAME').'.view_mode')[0]['key']) 
+    
+        if (!empty(Cookie::get('view_mode')) && Cookie::get('view_mode') != config('main_'.env('APP_NAME').'.view_mode')[0]['key']) {
             $paramsSlug['viewMode'] = Cookie::get('view_mode');
-        
-        $nameCache = RoutingController::buildNameCache($language.'home', $paramsSlug).'.'.config('main_'.env('APP_NAME').'.cache.extension');
-        $cachePath = config('main_'.env('APP_NAME').'.cache.folderSave').$nameCache;
-        $cacheTime = config('app.cache_html_time', 86400);
-        
+        }
+    
+        $nameCache = RoutingController::buildNameCache($language.'home', $paramsSlug);
+        $fileName = $nameCache . '.' . config('main_'.env('APP_NAME').'.cache.extension');
+        $cachePath = config('main_'.env('APP_NAME').'.cache.folderSave') . $fileName;
+    
+        $cacheKey = 'html_page_' . $nameCache;
+        $cacheTime = config('app.cache_html_time', 86400); // 1 ngày
+    
         $disk = Storage::disk('gcs');
         $useCache = env('APP_CACHE_HTML') == true;
-        
-        // Chỉ kiểm tra và sử dụng cache khi APP_CACHE_HTML = true
-        if ($useCache && $disk->exists($cachePath) && $cacheTime > (time() - $disk->lastModified($cachePath))) {
-            $xhtml = $disk->get($cachePath);
-        } else {
-            $item = Page::select('*')
-                ->whereHas('seos.infoSeo', function ($query) use ($language) {
-                    $query->where('slug', $language);
-                })
-                ->with('seo', 'seos.infoSeo', 'type')
-                ->first();
-                
-            /* lấy item seo theo ngôn ngữ được chọn */
-            $itemSeo = [];
-            if (!empty($item->seos)) {
-                foreach ($item->seos as $seo) {
-                    if (!empty($seo->infoSeo->language) && $seo->infoSeo->language == $language) {
-                        $itemSeo = $seo->infoSeo;
-                        break;
-                    }
-                }
-            }
-            
-            $categories = Category::select('*')
-                ->where('flag_show', 1)
-                ->get();
-                
-            $xhtml = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
-            
-            // Chỉ ghi cache khi APP_CACHE_HTML = true
-            if ($useCache) {
-                $disk->put($cachePath, $xhtml);
+    
+        // 2. Kiểm tra Redis cache trước
+        if ($useCache && Cache::has($cacheKey)) {
+            echo Cache::get($cacheKey);
+            return;
+        }
+    
+        // 3. Nếu không có Redis, thử lấy từ GCS
+        if ($useCache && $disk->exists($cachePath)) {
+            $lastModified = $disk->lastModified($cachePath);
+    
+            if ((time() - $lastModified) < $cacheTime) {
+                $html = $disk->get($cachePath);
+    
+                // Lưu lại Redis để lần sau nhanh hơn
+                Cache::put($cacheKey, $html, $cacheTime);
+    
+                echo $html;
+                return;
             }
         }
-        
+    
+        // 4. Nếu không có cache → render
+        $item = Page::select('*')
+            ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                $query->where('slug', $language);
+            })
+            ->with('seo', 'seos.infoSeo', 'type')
+            ->first();
+    
+        $itemSeo = [];
+        if (!empty($item->seos)) {
+            foreach ($item->seos as $seo) {
+                if (!empty($seo->infoSeo->language) && $seo->infoSeo->language == $language) {
+                    $itemSeo = $seo->infoSeo;
+                    break;
+                }
+            }
+        }
+    
+        $categories = Category::select('*')
+            ->where('flag_show', 1)
+            ->get();
+    
+        $xhtml = view('wallpaper.home.index', compact('item', 'itemSeo', 'language', 'categories'))->render();
+    
+        // 5. echo ra giao diện
         echo $xhtml;
+
+        // 6. Lưu cache nếu cho phép
+        if ($useCache) {
+            $disk->put($cachePath, $xhtml);
+            Cache::put($cacheKey, $xhtml, $cacheTime);
+        }
     }
+    
 
     public static function test(Request $request){
 

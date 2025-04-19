@@ -159,7 +159,7 @@
                 $altPhoneWallpaperEvent = config('data_language_2.'.$language.'.phone_wallpaper');
             @endphp
             <div class="close" onclick="showHideListMenuMobile(this, 'su-kien')">
-                <img src="https://namecomvn.storage.googleapis.com/storage/images/icon-event-{{ request()->cookie('view_mode') ?? config('main_'.env('APP_NAME').'.view_mode')[0]['key'] }}.webp" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
+                <img src="https://cdn.wallsora.com/storage/images/icon-event-{{ request()->cookie('view_mode') ?? config('main_'.env('APP_NAME').'.view_mode')[0]['key'] }}.webp" alt="{!! $altPhoneWallpaperEvent !!}" title="{!! $altPhoneWallpaperEvent !!}" />
                 <div class="maxLine_1">{{ config('data_language_1.'.$language.'.event') }}</div>
                 <div class="actionMenu"></div>
             </div>

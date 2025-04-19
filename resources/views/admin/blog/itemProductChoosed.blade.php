@@ -27,18 +27,3 @@
         </div>
     </div>
 @endif
-{{-- <div class="productWithWallpapers_item">
-    <div class="productWithWallpapers_item_title">
-        <div class="maxLine_1">Bộ Hình Nền Điện Thoại Người Tuyết Đón Giáng Sinh 4k Tuyệt Đẹp và Độc Đáo</div>
-        <div class="productWithWallpapers_item_title_cancel">
-            <i class="fa-solid fa-xmark"></i>
-        </div>
-    </div>
-    <div class="productWithWallpapers_item_image">
-        @for($i=0;$i<3;++$i)
-            <div class="selected">
-                <img title="Bộ Hình Nền Điện Thoại Người Tuyết Đón Giáng Sinh 4k Tuyệt Đẹp và Độc Đáo" src="https://namecomvn.storage.googleapis.com/wallpapers/hinh-nen-dien-thoai-nguoi-tuyet-giang-sinh-phong-cach-hoat-hinh-toi-gian-v2-1727758181-2-small.webp" />
-            </div>
-        @endfor
-    </div>
-</div> --}}

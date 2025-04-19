@@ -16,14 +16,14 @@
 <!-- Dmca -->
 <meta name='dmca-site-verification' content='{{ env('DMCA_VALIDATE') }}' />
 <!-- Tối ưu hóa việc tải ảnh từ Google Cloud Storage -->
-<link rel="preconnect" href="https://namecomvn.storage.googleapis.com" crossorigin>
-<link rel="dns-prefetch" href="https://namecomvn.storage.googleapis.com">
+<link rel="preconnect" href="https://cdn.wallsora.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.wallsora.com">
 {{-- <link rel="preconnect" href="https://images.dmca.com">
 <link rel="dns-prefetch" href="https://images.dmca.com"> --}}
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+{{-- <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"> --}}
 <!-- Favicon -->
-<link rel="shortcut icon" href="https://namecomvn.storage.googleapis.com/storage/images/favicon-wallsora.webp" type="image/x-icon" />
+<link rel="shortcut icon" href="https://cdn.wallsora.com/storage/images/favicon-wallsora.webp" type="image/x-icon" />
 
 <!-- CSS Khung nhìn đầu tiên - Inline Css -->
 @stack('cssFirstView')
