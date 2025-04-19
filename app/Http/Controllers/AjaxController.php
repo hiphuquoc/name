@@ -272,7 +272,7 @@ class AjaxController extends Controller {
             $flag = self::checkShowSource($fileName, $codeOrder);
 
             if ($flag == true) {
-                $urlImage       = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').config('main_'.env('APP_NAME').'.google_cloud_storage.sources').$fileName;
+                $urlImage       = config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain').config('main_'.env('APP_NAME').'.google_cloud_storage.sources').$fileName;
                 return response()->json([
                     'file_name' => pathinfo($urlImage)['filename'],
                     'url'       => $urlImage
@@ -325,7 +325,7 @@ class AjaxController extends Controller {
     public function downloadImgFreeWallpaper(Request $request){
         $fileName = $request->get('file_cloud');
         // Lấy đường dẫn đến ảnh trong Google Cloud Storage
-        $imagePath = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain') . $fileName;
+        $imagePath = config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain') . $fileName;
 
         // Đọc nội dung của ảnh
         $imageContents = file_get_contents($imagePath);

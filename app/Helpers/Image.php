@@ -67,7 +67,7 @@ class Image {
         $result     = null;
         if(!empty($urlImage)){
             /* sử dụng ảnh trong google_cloud_storage */
-            $result = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$urlImage;
+            $result = config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain').$urlImage;
         }
         return $result;
     }
@@ -76,7 +76,7 @@ class Image {
         $result     = null;
         if(!empty($urlImage)){
             /* sử dụng ảnh trong google_cloud_storage */
-            $url    = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$urlImage;
+            $url    = config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain').$urlImage;
             $tmp    = pathinfo($url);
             $result = $tmp['dirname'].'/'.$tmp['filename'].'-mini.'.$tmp['extension'];
         }
@@ -87,7 +87,7 @@ class Image {
         $result     = null;
         if(!empty($urlImage)){
             /* sử dụng ảnh trong google_cloud_storage */
-            $url    = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$urlImage;
+            $url    = config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain').$urlImage;
             $tmp    = pathinfo($url);
             $result = $tmp['dirname'].'/'.$tmp['filename'].'-small.'.$tmp['extension'];
         }
@@ -98,7 +98,7 @@ class Image {
         $result     = null;
         if(!empty($urlImage)){
             /* sử dụng ảnh trong google_cloud_storage */
-            $url    = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$urlImage;
+            $url    = config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain').$urlImage;
             $tmp    = pathinfo($url);
             $result = $tmp['dirname'].'/'.$tmp['filename'].'-large.'.$tmp['extension'];
         }

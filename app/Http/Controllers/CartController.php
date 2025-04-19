@@ -116,7 +116,7 @@ class CartController extends Controller{
                 'title'     => $cartToView['product_name'],
                 'option'    => $cartToView['option_name'],
                 'price'     => $cartToView['price'],
-                'image'     => config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$cartToView['image'],
+                'image'     => config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain').$cartToView['image'],
                 'urlPageCart'   => $urlPageCart,
                 'language'  => $language
             ])->render();

@@ -83,10 +83,10 @@ class CategoryBlogController extends Controller {
                                 ->when($sortBy == 'new' || $sortBy == 'propose', function($query) {
                                     $query->orderBy('id', 'DESC');
                                 })
-                                ->when($sortBy == 'favourite', function($query) {
-                                    $query->orderBy('heart', 'DESC')
-                                        ->orderBy('id', 'DESC');
-                                })
+                                // ->when($sortBy == 'favourite', function($query) {
+                                //     $query->orderBy('heart', 'DESC')
+                                //         ->orderBy('id', 'DESC');
+                                // })
                                 ->when($sortBy == 'old', function($query) {
                                     $query->orderBy('id', 'ASC');
                                 })

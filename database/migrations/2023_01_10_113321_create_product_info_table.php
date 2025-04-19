@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('seo_id');
             $table->string('code', 30);
             $table->integer('sold')->default(0);
+            $table->integer('heart')->default(0);
             $table->text('price');
             $table->longText('notes')->nullable();
             $table->timestamps();

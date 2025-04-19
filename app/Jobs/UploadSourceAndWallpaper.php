@@ -28,7 +28,7 @@ class UploadSourceAndWallpaper implements ShouldQueue
 
     public function handle(){
         // $urlS                           = config('main_'.env('APP_NAME').'.google_cloud_storage.sources').$this->infoWallpaper->file_name;
-        // $fullUrlS                       = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$urlS;
+        // $fullUrlS                       = config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain').$urlS;
 
         // /* Lấy thông tin ảnh wallpaper */
         // $widthW                         = 800;
@@ -72,7 +72,7 @@ class UploadSourceAndWallpaper implements ShouldQueue
         // Wallpaper::updateItem($this->infoWallpaper->id, $infoUpdate);
 
         // $urlW                   = config('main_'.env('APP_NAME').'.google_cloud_storage.wallpapers').$this->infoWallpaper->file_name;
-        // $fullUrlW               = config('main_'.env('APP_NAME').'.google_cloud_storage.default_domain').$urlW;
+        // $fullUrlW               = config('main_'.env('APP_NAME').'.google_cloud_storage.cdn_domain').$urlW;
         
         // $folderTmp              = 'testwallpapers/';
         // $imageTmp               = ImageManagerStatic::make($fullUrlW);

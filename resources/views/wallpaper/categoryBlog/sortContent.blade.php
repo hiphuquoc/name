@@ -7,7 +7,8 @@
             $inputSortBy    = null;
             foreach($dataSort as $sortItem){
                 if($sortBy==$sortItem['key']) {
-                    $inputSortBy    = $sortItem['icon'].'<div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$sortItem['key']).'</div>';
+                    $inputSortBy    = '<svg><use xlink:href="#'.$sortItem['icon'].'"></use></svg>
+                                            <div class="maxLine_1">'.config('data_language_1.'.$language.'.'.$sortItem['key']).'</div>';
                 }
             }
         @endphp
@@ -20,13 +21,16 @@
             </div>
             <div class="selectCustom_box">
                 @foreach($dataSort as $sortItem)
-                    @php
-                        $selected = null;
-                        if($sortBy==$sortItem['key']) $selected = 'selected';
-                    @endphp
-                    <div class="selectCustom_box_item {{ $selected }}" onClick="setSortBy('{{ $sortItem['key'] }}')">
-                        {!! $sortItem['icon'].config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
-                    </div>
+                    @if($sortItem['key']!='favourite') <!-- blog không có tính năng yêu thích -->
+                        @php
+                            $selected = null;
+                            if($sortBy==$sortItem['key']) $selected = 'selected';
+                        @endphp
+                        <div class="selectCustom_box_item {{ $selected }}" onClick="setSortBy('{{ $sortItem['key'] }}')">
+                            <svg><use xlink:href="#{{ $sortItem['icon'] }}"></use></svg>
+                            {!! config('data_language_1.'.$language.'.'.$sortItem['key']) !!}
+                        </div>
+                    @endif
                 @endforeach
             </div>
         </div>

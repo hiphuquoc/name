@@ -37,6 +37,7 @@ return [
     ],
     'google_cloud_storage' => [
         'default_domain'    => 'https://'.env('GOOGLE_CLOUD_STORAGE_BUCKET').'.storage.googleapis.com/',
+        'cdn_domain'        => 'https://cdn.wallsora.com/', /* đường dẫn CDN thiết lập trên google cloud CDN */
         // 'wallpapers'        => 'test/',
         'wallpapers'        => 'wallpapers/',
         'sources'           => 'sources/',
@@ -89,8 +90,8 @@ return [
     ],
     'cache'     => [
         'extension'     => 'html',
-        'folderSave'    => 'storage/caches/', /* lưu trên google cloud */
-        // 'folderSave'    => 'storage/test_caches/', /* lưu trên google cloud */
+        // 'folderSave'    => 'storage/caches/', /* lưu trên google cloud */
+        'folderSave'    => 'storage/test_caches/', /* lưu trên google cloud */
     ],
     'main.password_user_default' => 'hitourVN@mk123',
     'category_type' => [
