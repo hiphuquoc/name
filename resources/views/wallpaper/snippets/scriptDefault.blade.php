@@ -157,7 +157,7 @@
                 var distance = $(window).scrollTop() - $(this).offset().top + 900;
                 if (distance > 0) {
                     $(this).attr('src', $(this).attr('data-src'));
-                    $(this).addClass('loaded').removeClass('loading_1').css('opacity', 1);
+                    $(this).addClass('loaded').removeClass('loading_1');
                 }
             }
         });
@@ -167,8 +167,7 @@
                 var distance = $(window).scrollTop() - $(this).offset().top + 900;
                 if (distance > 0) {
                     $(this).css({
-                        background  : 'url("'+$(this).attr('data-src')+'") no-repeat center center / cover',
-                        filter      : 'unset'
+                        background  : 'url("'+$(this).attr('data-src')+'") no-repeat center center / cover'
                     });
                     $(this).addClass('loaded');
                 }

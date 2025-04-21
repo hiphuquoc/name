@@ -178,7 +178,7 @@ class AjaxController extends Controller {
         $xhtml              = '';
         $id                 = $request->get('id');
         $total              = $request->get('total');
-        $type               = $request->get('type');
+        $type               = $request->get('type'); /* category_info, event_info, style_info */
         $language           = $request->get('language');
         /* select của filter */
         $categories         = Category::select('*')
@@ -192,16 +192,9 @@ class AjaxController extends Controller {
                                 ->get();
         /* filter (nếu có) */
         $filters            = $request->get('filters') ?? [];
-        /* giá trị selectBox */
-        $categoryChoose     = new \Illuminate\Database\Eloquent\Collection;
-        if($type=='category_info'){
-            $categoryChoose = Category::select('*')
-                                ->where('id', $id)
-                                ->with('seo', 'seos')
-                                ->first();
-        }
         /*
-            nếu là selectbox của category_info thì all phải về trang hinh-nen-dien-thoai (cấp cha của url hiện tại)
+            nếu là selectbox của danh mục (!= tag_info) thì all phải về trang hinh-nen-dien-thoai (cấp cha của url hiện tại)
+            tag_info không hiển thị selectbox chủ đề nên chưa cần xử lý
         */
         $urlReferer = request()->header('Referer');
         $path = urldecode(parse_url($urlReferer, PHP_URL_PATH));
@@ -212,16 +205,36 @@ class AjaxController extends Controller {
             array_pop($tmp); // Nếu là trang category con thì xóa phần tử cuối cùng
         }
         $urlAll = implode('/', $tmp);
-        /* lấy giao diện */
-        $xhtml              = view('wallpaper.categoryMoney.sortContent', [
-            'language'          => $language,
-            'total'             => $total,
-            'categories'        => $categories,
-            'categoryChoose'    => $categoryChoose,
-            'filters'           => $filters,
-            'test'              => true,
-            'urlAll'            => $urlAll,
-        ])->render();
+        /* giá trị selectBox */
+        $categoryChoose         = new \Illuminate\Database\Eloquent\Collection;
+        if($type!='tag_info'){
+            $categoryChoose     = Category::select('*')
+                                    ->where('id', $id)
+                                    ->with('seo', 'seos')
+                                    ->first();
+            /* lấy giao diện category_info */
+            $xhtml              = view('wallpaper.categoryMoney.sortContent', [
+                'language'          => $language,
+                'total'             => $total,
+                'categories'        => $categories,
+                'categoryChoose'    => $categoryChoose,
+                'filters'           => $filters,
+                'test'              => true,
+                'urlAll'            => $urlAll,
+            ])->render();
+        }else {
+            /* lấy giao diện tag_info */
+            $xhtml              = view('wallpaper.tag.sortContent', [
+                'language'          => $language,
+                'total'             => $total,
+                'categories'        => $categories,
+                'categoryChoose'    => $categoryChoose,
+                'filters'           => $filters,
+                'test'              => true,
+                'urlAll'            => $urlAll,
+            ])->render();
+        }
+        
         return $xhtml;
     }
 

@@ -37,8 +37,7 @@
                                         alt="{{ $itemSeo->title }}" 
                                         title="{{ $itemSeo->title }}" 
                                         data-option="js_addToCart_option_{{ $price->id }}" 
-                                        loading="lazy" 
-                                        style="filter:blur(8px);" 
+                                        loading="lazy"
                                     />
                                 </picture>
                             </div>

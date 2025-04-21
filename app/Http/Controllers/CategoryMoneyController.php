@@ -28,6 +28,8 @@ class CategoryMoneyController extends Controller {
                 $params['loaded']                   = $request->get('loaded') ?? 0;
                 $params['request_load']             = $request->get('request_load');
                 $tmp                                = self::getWallpapersByProductRelated($idProduct, $arrayIdTag, $language, $params);
+                /* đổ theme lấy html - phần này bên ngoài view nằm phía dưới -> không ảnh hưởng khung nhìn đầu tiên nên không cần dùng firstLoad */
+                $content                            = self::getXhtmlWallpapers($tmp['wallpapers'], $language, $viewBy, false);
             }else {
                 /* trường hợp tải từ category & tag */
                 $params['filters']                  = $request->get('filters') ?? [];
@@ -38,9 +40,12 @@ class CategoryMoneyController extends Controller {
                 $params['array_tag_info_id']        = json_decode($request->get('array_tag_info_id'));
                 $params['sort_by']                  = Cookie::get('sort_by') ?? config('main_'.env('APP_NAME').'.sort_type')[0]['key'];
                 $tmp                                = self::getWallpapers($params, $language);
+                /* đổ theme lấy html */
+                // $firstLoad                          = $params['loaded']==0 ? true : false;
+                $firstLoad                          = false;
+                $content                            = self::getXhtmlWallpapers($tmp['wallpapers'], $language, $viewBy, $firstLoad);
             }
-            /* đổ theme lấy html */
-            $content                                = self::getXhtmlWallpapers($tmp['wallpapers'], $language, $viewBy);
+            
             /* trả kết quả */
             $response['content']                    = $content;
             $response['loaded']                     = $tmp['loaded'];
@@ -49,17 +54,23 @@ class CategoryMoneyController extends Controller {
         return json_encode($response);
     }
 
-    public static function getXhtmlWallpapers($wallpapers, $language, $viewBy = 'each_set'){
+    /*
+        $firstLoad để kiểm tra xem có phải lần đầu tải ajax /trang không -> dể thay đổi cách hiển thị, cải hiện khung nhìn đầu tiên
+    */
+    public static function getXhtmlWallpapers($wallpapers, $language, $viewBy = 'each_set', $firstLoad = false){
         $response   = '';
         if(!empty($wallpapers)){
+            $i      = 0;
             foreach($wallpapers as $wallpaper){
                 if($viewBy=='each_set'){
+                    $lazyload   = $firstLoad==true&&$i<4 ? false : true;
                     $response    .= view('wallpaper.template.wallpaperItem', [
                         'product'   => $wallpaper,
                         'language'  => $language,
-                        'lazyload'  => true,
+                        'lazyload'  => $lazyload,
                         'headingTitle'  => 'h2',
                     ])->render();
+                    ++$i;
                 }else {
                     $wallpaperName      = null;
                     $link               = env('APP_URL').'/'.$wallpaper->seo->slug_full;
@@ -72,6 +83,7 @@ class CategoryMoneyController extends Controller {
                     }
                     foreach($wallpaper->prices as $price){
                         foreach($price->wallpapers as $w){
+                            $lazyload   = $firstLoad==true&&$i<4 ? false : true;
                             $response .= view('wallpaper.template.perWallpaperItem', [
                                 'idProduct'     => $w->id,
                                 'idPrice'       => $price->id,
@@ -79,10 +91,12 @@ class CategoryMoneyController extends Controller {
                                 'productName'   => $wallpaperName,
                                 'link'          => $link,
                                 'language'      => $language,
-                                'lazyload'      => true
+                                'lazyload'      => $lazyload
                             ]);
+                            ++$i;
                         }
                     }
+                    
                 }
             }
         }

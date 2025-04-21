@@ -1,6 +1,6 @@
 <!-- filter box -->
 <form id="formViewBy" action="{{ url()->current().'?'.http_build_query(request()->query()) }}" method="GET">
-    @include('wallpaper.category.sortContent', [
+    @include('wallpaper.tag.sortContent', [
         'language'          => $language ?? 'vi',
         'total'             => $total,
         'categories'        => $categories ?? null,
@@ -12,7 +12,7 @@
 @pushonce('scriptCustom')
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
-            showSortBoxFreeWallpaper();
+            showSortBoxWallpaper();
         });
     </script>
 @endpushonce

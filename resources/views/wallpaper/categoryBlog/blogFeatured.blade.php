@@ -12,8 +12,19 @@
                     @endphp
                     <div class="blogSiderbarBox_box_item">
                         <a href="{{ $urlArticle }}" class="blogSiderbarBox_box_item_image">
+                            @php
+                                $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($blog->seo->image);
+                                $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($blog->seo->image);
+                            @endphp
                             @if(!empty($blog->seo->image))
-                                <img src="{{ \App\Helpers\Image::getUrlImageSmallByUrlImage($blog->seo->image) }}" alt="{{ $title }}" title="{{ $title }}" />
+                                <img 
+                                    class="lazyload" 
+                                    src="{{ $imageMini }}" 
+                                    data-src="{{ $imageSmall }}" 
+                                    alt="{{ $title }}" 
+                                    title="{{ $title }}" 
+                                    loading="lazy"
+                                />
                             @endif
                         </a>
                         <div class="blogSiderbarBox_box_item_content">

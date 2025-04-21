@@ -100,12 +100,20 @@
                     </div>
                 </div>
             @endif
-            <!-- Sort Box -->
-            @include('wallpaper.categoryMoney.sort', [
-                'language'          => $language ?? 'vi',
-                'total'             => $total,
-                'viewBy'            => $viewBy
-            ])
+            <!-- Sort Box ==== view này đang dùng cho cho category (trả phí) và tag (trả phí) nhưng khác nhau phần sort -->
+            @if(!empty($item->seo->type)&&$item->seo->type=='tag_info')
+                @include('wallpaper.tag.sort', [
+                    'language'          => $language ?? 'vi',
+                    'total'             => $total,
+                    'viewBy'            => $viewBy
+                ])
+            @else 
+                @include('wallpaper.categoryMoney.sort', [
+                    'language'          => $language ?? 'vi',
+                    'total'             => $total,
+                    'viewBy'            => $viewBy
+                ])
+            @endif
             <!-- Product Box 
                 vừa vào tải 0 phần tử -> tất cả tải bằng ajax
             -->

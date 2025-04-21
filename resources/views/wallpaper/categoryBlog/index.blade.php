@@ -80,7 +80,22 @@
                                         <div class="blogListBox_item">
                                             <a href="{{ $urlArticle }}" class="blogListBox_item_image">
                                                 @if(!empty($blog->seo->image))
-                                                    <img src="{{ \App\Helpers\Image::getUrlImageLargeByUrlImage($blog->seo->image) }}" alt="{{ $title }}" title="{{ $title }}" />
+                                                    @php
+                                                        $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($blog->seo->image);
+                                                        $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($blog->seo->image);
+                                                        $imageLarge = \App\Helpers\Image::getUrlImageLargeByUrlImage($blog->seo->image);
+                                                    @endphp
+                                                    <picture>
+                                                        <source media="(max-width: 577px)" srcset="{{ $imageSmall }}">
+                                                        <img 
+                                                            class="lazyload" 
+                                                            src="{{ $imageMini }}" 
+                                                            data-src="{{ $imageLarge }}" 
+                                                            alt="{{ $title }}" 
+                                                            title="{{ $title }}" 
+                                                            loading="lazy" 
+                                                        />
+                                                    </picture>
                                                 @endif
                                             </a>
                                             <div class="blogListBox_item_content">

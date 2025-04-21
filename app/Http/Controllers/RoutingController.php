@@ -222,7 +222,6 @@ class RoutingController extends Controller{
             'sort_by' => Cookie::get('sort_by') ?? null,
             'view_by'   => $viewBy,
         ];
-    
         $response       = CategoryMoneyController::getWallpapers($params, $language);
         $wallpapers     = $response['wallpapers'];
         $total          = $response['total'];

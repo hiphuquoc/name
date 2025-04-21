@@ -35,7 +35,7 @@
                     /* lấy ảnh Small */
                     $imageMini  = \App\Helpers\Image::getUrlImageMiniByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
-                    $imageLarge = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
+                    // $imageLarge = \App\Helpers\Image::getUrlImageLargeByUrlImage($wallpaper->infoWallpaper->file_cloud_wallpaper);
                     /* đường dẫn */
                     $url        = $productSeo->slug_full ?? null;
                 @endphp
@@ -51,11 +51,10 @@
                                     <source media="(max-width: 767px)" srcset="{{ $imageSmall }}">
                                     <img class="{{ $classMethodLoad }}" 
                                         src="{{ $imageMini }}" 
-                                        data-src="{{ $imageLarge }}" 
+                                        data-src="{{ $imageSmall }}" 
                                         alt="{{ $productName }}" 
                                         title="{{ $productName }}" 
-                                        loading="lazy" 
-                                        style="filter:blur(8px);" 
+                                        loading="lazy"
                                     />
                                 </picture>
                             @else 
@@ -67,11 +66,10 @@
                                         <source media="(max-width: 767px)" srcset="{{ $imageSmall }}">
                                         <img class="lazyloadAfter" 
                                             src="{{ $imageMini }}" 
-                                            data-src="{{ $imageLarge }}" 
+                                            data-src="{{ $imageSmall }}" 
                                             alt="{{ $productName }}" 
                                             title="{{ $productName }}" 
-                                            loading="lazy" 
-                                            style="filter:blur(8px);" 
+                                            loading="lazy"
                                         />
                                     </picture>
                                 @endif
