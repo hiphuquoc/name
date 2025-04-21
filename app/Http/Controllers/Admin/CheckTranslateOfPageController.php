@@ -37,7 +37,7 @@ class CheckTranslateOfPageController extends Controller {
                             ->where('seo_id', $idSeo)
                             ->with('infoSeo')
                             ->first();
-            if($keyChoose=='new'){
+            if($keyChoose=='newest'){
                 /* update giá trị mới new_title, new_seo_title, new_seo_description và xóa row*/
                 $dataUpdate = [];
                 $dataUpdate['title']            = $infoCheck['new_title'];
@@ -51,7 +51,7 @@ class CheckTranslateOfPageController extends Controller {
                 $infoCheck->update(['status' => 1]);
                 /* thêm id vào mảng thông báo */
                 $arraySuccess[]                  = $idSeo;
-            }else if($keyChoose=='old'){
+            }else if($keyChoose=='oldest'){
                 /* không làm gì cả và xóa row */
                 $infoCheck->delete();
                 $arrayNotUpdate[] = $idSeo;

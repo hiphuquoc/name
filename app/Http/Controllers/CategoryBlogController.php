@@ -80,14 +80,14 @@ class CategoryBlogController extends Controller {
                                 ->when(empty($sortBy), function($query) {
                                     $query->orderBy('id', 'DESC');
                                 })
-                                ->when($sortBy == 'new' || $sortBy == 'propose', function($query) {
+                                ->when($sortBy == 'newest' || $sortBy == 'propose', function($query) {
                                     $query->orderBy('id', 'DESC');
                                 })
                                 // ->when($sortBy == 'favourite', function($query) {
                                 //     $query->orderBy('heart', 'DESC')
                                 //         ->orderBy('id', 'DESC');
                                 // })
-                                ->when($sortBy == 'old', function($query) {
+                                ->when($sortBy == 'oldest', function($query) {
                                     $query->orderBy('id', 'ASC');
                                 })
                                 ->with(['seos.infoSeo' => function($query) use ($language) {
