@@ -365,7 +365,7 @@ class RoutingController extends Controller{
     
         // Render view
         return view('wallpaper.categoryMoney.index', compact(
-            'item', 'itemSeo', 'breadcrumb', 'wallpapers', 'total', 'loaded', 'language', 'viewBy', 'search', 'dataContent'
+            'item', 'itemSeo', 'breadcrumb', 'wallpapers', 'arrayIdCategory', 'total', 'loaded', 'language', 'viewBy', 'search', 'dataContent'
         ))->render();
     }
     

@@ -133,46 +133,70 @@ class Image {
         // Tạo key cache duy nhất dựa trên đường dẫn hoặc URL
         $cacheKey = 'base64_image_' . md5($path);
         $cacheTime = config('app.cache_html_time', 86400);
-
-        // Lấy từ cache hoặc tạo mới
-        return Cache::remember($cacheKey, $cacheTime, function () use ($path) {
-            // Kiểm tra xem path là URL hay đường dẫn cục bộ
-            if (Str::startsWith($path, ['http://', 'https://'])) {
-                // Là URL, dùng HTTP client để tải ảnh
-                $response = Http::get($path);
-                
-                if ($response->successful()) {
-                    $imageContent = $response->body();
-                    // Lấy MIME type từ header hoặc đoán từ phần mở rộng
-                    $mimeType = $response->header('Content-Type') ?: self::guessMimeType($path);
-                    return 'data:' . $mimeType . ';base64,' . base64_encode($imageContent);
-                }
-            } else {
-                // Là đường dẫn cục bộ, dùng Storage
-                if (Storage::exists($path)) {
-                    $imageContent = Storage::get($path);
-                    $mimeType = Storage::mimeType($path);
-                    return 'data:' . $mimeType . ';base64,' . base64_encode($imageContent);
-                }
-            }
-
-            return null;
-        });
+        $useCache = env('APP_CACHE_HTML', true); // Kiểm tra xem có sử dụng cache hay không
+    
+        // Nếu sử dụng cache
+        if ($useCache) {
+            return Cache::remember($cacheKey, $cacheTime, function () use ($path) {
+                return self::processBase64Image($path);
+            });
+        }
+    
+        // Nếu không sử dụng cache, truy vấn trực tiếp
+        return self::processBase64Image($path);
     }
-
+    
     /**
-     * Đoán MIME type dựa trên phần mở rộng của file
+     * Hàm xử lý chuyển đổi ảnh thành chuỗi base64.
+     *
+     * @param string $path Đường dẫn hoặc URL của ảnh
+     * @return string|null Chuỗi base64 của ảnh hoặc null nếu không thành công
      */
-    private static function guessMimeType($path) {
-        $extension = pathinfo($path, PATHINFO_EXTENSION);
-        $mimeTypes = [
-            'jpg' => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'png' => 'image/png',
-            'webp' => 'image/webp',
-            'gif' => 'image/gif',
-        ];
-
-        return $mimeTypes[strtolower($extension)] ?? 'application/octet-stream';
+    protected static function processBase64Image($path) {
+        // Kiểm tra xem path là URL hay đường dẫn cục bộ
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            // Là URL, dùng HTTP client để tải ảnh
+            $response = Http::get($path);
+    
+            if ($response->successful()) {
+                $imageContent = $response->body();
+                // Lấy MIME type từ header hoặc đoán từ phần mở rộng
+                $mimeType = $response->header('Content-Type') ?: self::guessMimeType($path);
+                return 'data:' . $mimeType . ';base64,' . base64_encode($imageContent);
+            }
+        } else {
+            // Là đường dẫn cục bộ, dùng Storage
+            if (Storage::exists($path)) {
+                $imageContent = Storage::get($path);
+                $mimeType = Storage::mimeType($path);
+                return 'data:' . $mimeType . ';base64,' . base64_encode($imageContent);
+            }
+        }
+    
+        return null;
     }
+    
+    /**
+     * Hàm đoán MIME type từ phần mở rộng của file.
+     *
+     * @param string $path Đường dẫn hoặc URL của ảnh
+     * @return string MIME type mặc định nếu không thể đoán
+     */
+    protected static function guessMimeType($path) {
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+        switch (strtolower($extension)) {
+            case 'jpg':
+            case 'jpeg':
+                return 'image/jpeg';
+            case 'png':
+                return 'image/png';
+            case 'gif':
+                return 'image/gif';
+            case 'webp':
+                return 'image/webp';
+            default:
+                return 'application/octet-stream'; // Mặc định nếu không xác định được
+        }
+    }
+    
 }

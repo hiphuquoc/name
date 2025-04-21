@@ -53,6 +53,7 @@ class CategoryController extends Controller {
         $arrayIdCategory = $params['array_category_info_id'] ?? [];
         $requestLoad     = $params['request_load'] ?? 10;
     
+        // Tạo khóa cache dựa trên các tham số đầu vào
         $cacheKey = 'free_wallpapers_' . md5(json_encode([
             'id_not'              => $idNot,
             'filters'             => $filters,
@@ -64,55 +65,84 @@ class CategoryController extends Controller {
         ]));
     
         $cacheSeconds = config('app.cache_redis_time', 3600);
+        $useCache = env('APP_CACHE_HTML', true); // Kiểm tra xem có sử dụng cache hay không
     
-        return Cache::remember($cacheKey, now()->addSeconds($cacheSeconds), function () use (
+        // Nếu sử dụng cache
+        if ($useCache) {
+            return Cache::remember($cacheKey, now()->addSeconds($cacheSeconds), function () use (
+                $idNot, $filters, $sortBy, $loaded, $arrayIdCategory, $requestLoad, $language
+            ) {
+                return self::queryFreeWallpapers(
+                    $idNot, $filters, $sortBy, $loaded, $arrayIdCategory, $requestLoad, $language
+                );
+            });
+        }
+    
+        // Nếu không sử dụng cache, truy vấn trực tiếp
+        return self::queryFreeWallpapers(
             $idNot, $filters, $sortBy, $loaded, $arrayIdCategory, $requestLoad, $language
-        ) {
-            $query = FreeWallpaper::select('*')
-                ->whereHas('seos.infoSeo', function ($query) use ($language) {
-                    $query->where('language', $language);
-                })
-                ->when(!empty($idNot), function ($query) use ($idNot) {
-                    $query->where('id', '!=', $idNot);
-                })
-                ->when(!empty($arrayIdCategory), function ($query) use ($arrayIdCategory) {
-                    $query->whereHas('categories', function ($query) use ($arrayIdCategory) {
-                        $query->whereIn('category_info_id', $arrayIdCategory);
-                    });
-                })
-                ->when(!empty($filters), function ($query) use ($filters) {
-                    foreach ($filters as $filter) {
-                        $query->whereHas('categories.infoCategory', function ($query) use ($filter) {
-                            $query->where('id', $filter);
-                        });
-                    }
+        );
+    }
+    
+    /**
+     * Hàm thực hiện truy vấn wallpapers miễn phí.
+     *
+     * @param int $idNot
+     * @param array $filters
+     * @param string|null $sortBy
+     * @param int $loaded
+     * @param array $arrayIdCategory
+     * @param int $requestLoad
+     * @param string $language
+     * @return array
+     */
+    private static function queryFreeWallpapers($idNot, $filters, $sortBy, $loaded, $arrayIdCategory, $requestLoad, $language) {
+        $query = FreeWallpaper::select('*')
+            ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                $query->where('language', $language);
+            })
+            ->when(!empty($idNot), function ($query) use ($idNot) {
+                $query->where('id', '!=', $idNot);
+            })
+            ->when(!empty($arrayIdCategory), function ($query) use ($arrayIdCategory) {
+                $query->whereHas('categories', function ($query) use ($arrayIdCategory) {
+                    $query->whereIn('category_info_id', $arrayIdCategory);
                 });
+            })
+            ->when(!empty($filters), function ($query) use ($filters) {
+                foreach ($filters as $filter) {
+                    $query->whereHas('categories.infoCategory', function ($query) use ($filter) {
+                        $query->where('id', $filter);
+                    });
+                }
+            });
     
-            $total = (clone $query)->count();
+        // Đếm tổng số wallpapers
+        $total = (clone $query)->count();
     
-            $wallpapers = $query
-                ->when(empty($sortBy), function ($query) {
-                    $query->orderBy('id', 'DESC');
-                })
-                ->when($sortBy == 'newest' || $sortBy == 'propose', function ($query) {
-                    $query->orderBy('id', 'DESC');
-                })
-                ->when($sortBy == 'favourite', function ($query) {
-                    $query->orderBy('heart', 'DESC')->orderBy('id', 'DESC');
-                })
-                ->when($sortBy == 'oldest', function ($query) {
-                    $query->orderBy('id', 'ASC');
-                })
-                ->skip($loaded)
-                ->take($requestLoad)
-                ->get();
+        // Lấy danh sách wallpapers với sắp xếp và phân trang
+        $wallpapers = $query
+            ->when(empty($sortBy), function ($query) {
+                $query->orderBy('id', 'DESC');
+            })
+            ->when($sortBy == 'newest' || $sortBy == 'propose', function ($query) {
+                $query->orderBy('id', 'DESC');
+            })
+            ->when($sortBy == 'favourite', function ($query) {
+                $query->orderBy('heart', 'DESC')->orderBy('id', 'DESC');
+            })
+            ->when($sortBy == 'oldest', function ($query) {
+                $query->orderBy('id', 'ASC');
+            })
+            ->skip($loaded)
+            ->take($requestLoad)
+            ->get();
     
-            return [
-                'wallpapers' => $wallpapers,
-                'total'      => $total,
-                'loaded'     => $loaded + $requestLoad
-            ];
-        });
+        return [
+            'wallpapers' => $wallpapers,
+            'total'      => $total,
+            'loaded'     => $loaded + $requestLoad
+        ];
     }
 
     public static function loadInfoCategory(Request $request){ /* hàm này dùng load thông tin của category bao gồm các tag con (dùng cho trang chủ) */

@@ -89,77 +89,6 @@ class CategoryMoneyController extends Controller {
         return $response;
     }
 
-    // public static function getWallpapers($params, $language) {
-    //     $cacheKey           = 'wallpapers:' . md5(json_encode($params) . $language);
-    //     $cacheTime          = config('app.cache_redis_time', 86400);
-    //     $useCache           = env('APP_CACHE_HTML', true);
-
-    //     return Cache::remember($cacheKey, now()->addSeconds($cacheTime), function () use ($params, $language) {
-    //         $keySearch      = $params['search'] ?? null;
-    //         $filters        = $params['filters'] ?? [];
-    //         $sortBy         = $params['sort_by'] ?? null;
-    //         $loaded         = $params['loaded'] ?? 0;
-    //         $arrayIdCategory = $params['array_category_info_id'] ?? [];
-    //         $arrayIdTag     = $params['array_tag_info_id'] ?? [];
-    //         $requestLoad    = $params['request_load'] ?? 10;
-            
-    //         $query          = Product::select('product_info.*')
-    //             ->join('seo', 'seo.id', '=', 'product_info.seo_id')
-    //             ->whereHas('prices.wallpapers', function() {})
-    //             ->whereHas('seos.infoSeo', function ($query) use ($language, $keySearch) {
-    //                 $query->where('language', $language)
-    //                     ->where('title', 'like', '%' . $keySearch . '%');
-    //             })
-    //             ->when(!empty($filters), function($query) use ($filters) {
-    //                 foreach ($filters as $filter) {
-    //                     $query->whereHas('categories.infoCategory', function($query) use ($filter) {
-    //                         $query->where('id', $filter);
-    //                     });
-    //                 }
-    //             })
-    //             ->when(!empty($arrayIdCategory), function($query) use ($arrayIdCategory) {
-    //                 $query->whereHas('categories', function($query) use ($arrayIdCategory) {
-    //                     $query->whereIn('category_info_id', $arrayIdCategory);
-    //                 });
-    //             })
-    //             ->when(!empty($arrayIdTag), function($query) use ($arrayIdTag) {
-    //                 $query->whereHas('tags', function($query) use ($arrayIdTag) {
-    //                     $query->where('reference_type', 'product_info')
-    //                         ->whereIn('tag_info_id', $arrayIdTag);
-    //                 });
-    //             });
-    //         /* sử dụng clone để query không bị ảnh hưởng cho truy vấn tiếp theo */
-    //         $total          = (clone $query)->count();
-    //         $wallpapers     = $query->when(empty($sortBy), function($query) {
-    //                                 $query->orderBy('id', 'DESC');
-    //                             })
-    //                             ->when($sortBy == 'newest' || $sortBy == 'propose', function($query) {
-    //                                 $query->orderBy('id', 'DESC');
-    //                             })
-    //                             ->when($sortBy == 'favourite', function($query) {
-    //                                 $query->orderBy('heart', 'DESC')
-    //                                     ->orderBy('id', 'DESC');
-    //                             })
-    //                             ->when($sortBy == 'oldest', function($query) {
-    //                                 $query->orderBy('id', 'ASC');
-    //                             })
-    //                             ->with(['seos.infoSeo' => function($query) use ($language) {
-    //                                 $query->where('language', $language);
-    //                             }, 'seo', 'prices'])
-    //                             ->orderBy('seo.ordering', 'DESC')
-    //                             ->orderBy('id', 'DESC')
-    //                             ->skip($loaded)
-    //                             ->take($requestLoad)
-    //                             ->get();
-
-    //         return [
-    //             'wallpapers' => $wallpapers,
-    //             'total'      => $total,
-    //             'loaded'     => $loaded + $requestLoad
-    //         ];
-    //     });
-    // }
-
     public static function getWallpapers($params, $language) {
         $cacheKey = 'wallpapers:' . md5(json_encode($params) . $language);
         $cacheTime = config('app.cache_redis_time', 86400);
@@ -182,7 +111,7 @@ class CategoryMoneyController extends Controller {
      * @param string $language
      * @return array
      */
-    protected static function queryWallpapers($params, $language) {
+    private static function queryWallpapers($params, $language) {
         $keySearch = $params['search'] ?? null;
         $filters = $params['filters'] ?? [];
         $sortBy = $params['sort_by'] ?? null;
@@ -251,36 +180,68 @@ class CategoryMoneyController extends Controller {
         ];
     }
 
-    public static function getWallpapersByProductRelated($idProduct, $arrayIdTag, $language, $params){
+    public static function getWallpapersByProductRelated($idProduct, $arrayIdTag, $language, $params) {
+        // Tạo khóa cache dựa trên các tham số đầu vào
         $cacheKey = 'wallpapers_related:' . $idProduct
                     . ':' . $language
                     . ':' . md5(json_encode($arrayIdTag))
                     . ':' . $params['loaded']
                     . ':' . $params['request_load'];
         $cacheTime = config('app.cache_redis_time', 86400);
-
-        return Cache::remember($cacheKey, now()->addSeconds($cacheTime), function () use ($idProduct, $arrayIdTag, $language, $params) {
-            $response = [];
-            $tmp = Product::select('product_info.*')
-                ->whereHas('seos.infoSeo', function ($query) use ($language) {
-                    $query->where('language', $language);
-                })
-                ->join('relation_tag_info_orther as rt', 'product_info.id', '=', 'rt.reference_id')
-                ->where('rt.reference_type', 'product_info')
-                ->whereIn('rt.tag_info_id', $arrayIdTag)
-                ->where('product_info.id', '!=', $idProduct)
-                ->selectRaw('COUNT(rt.tag_info_id) as common_tags_count')
-                ->groupBy('product_info.id', 'product_info.seo_id', 'product_info.code', 'product_info.sold', 'product_info.heart', 'product_info.created_at', 'product_info.updated_at', 'product_info.price', 'product_info.notes')
-                ->orderByDesc('common_tags_count')
-                ->with('tags')
-                ->get();
-
-            $response['wallpapers'] = $tmp->slice($params['loaded'], $params['request_load'])->values();
-            $response['loaded']     = $params['loaded'] + $response['wallpapers']->count();
-            $response['total']      = $tmp->count();
-
-            return $response;
-        });
+        $useCache = env('APP_CACHE_HTML', true); // Kiểm tra xem có sử dụng cache hay không
+    
+        // Nếu sử dụng cache
+        if ($useCache) {
+            return Cache::remember($cacheKey, now()->addSeconds($cacheTime), function () use ($idProduct, $arrayIdTag, $language, $params) {
+                return self::queryWallpapersByProductRelated($idProduct, $arrayIdTag, $language, $params);
+            });
+        }
+    
+        // Nếu không sử dụng cache, truy vấn trực tiếp
+        return self::queryWallpapersByProductRelated($idProduct, $arrayIdTag, $language, $params);
+    }
+    
+    /**
+     * Hàm thực hiện truy vấn wallpapers liên quan.
+     *
+     * @param int $idProduct
+     * @param array $arrayIdTag
+     * @param string $language
+     * @param array $params
+     * @return array
+     */
+    private static function queryWallpapersByProductRelated($idProduct, $arrayIdTag, $language, $params) {
+        $response = [];
+        $tmp = Product::select('product_info.*')
+            ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                $query->where('language', $language);
+            })
+            ->join('relation_tag_info_orther as rt', 'product_info.id', '=', 'rt.reference_id')
+            ->where('rt.reference_type', 'product_info')
+            ->whereIn('rt.tag_info_id', $arrayIdTag)
+            ->where('product_info.id', '!=', $idProduct)
+            ->selectRaw('COUNT(rt.tag_info_id) as common_tags_count')
+            ->groupBy(
+                'product_info.id',
+                'product_info.seo_id',
+                'product_info.code',
+                'product_info.sold',
+                'product_info.heart',
+                'product_info.created_at',
+                'product_info.updated_at',
+                'product_info.price',
+                'product_info.notes'
+            )
+            ->orderByDesc('common_tags_count')
+            ->with('tags')
+            ->get();
+    
+        // Phân trang thủ công
+        $response['wallpapers'] = $tmp->slice($params['loaded'], $params['request_load'])->values();
+        $response['loaded']     = $params['loaded'] + $response['wallpapers']->count();
+        $response['total']      = $tmp->count();
+    
+        return $response;
     }
 
     public static function buildTocContentMain($contents, $language) {
