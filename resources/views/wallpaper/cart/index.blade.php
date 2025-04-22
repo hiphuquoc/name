@@ -144,6 +144,7 @@
 
                 setTimeout(() => {
                     clicked = false;
+                    toggleFullLoading();
                 }, 1500);
             }
         }

@@ -140,10 +140,10 @@
                         return response.json();
                     })
                     .then(data => {
+                        window.location.href = data.url;
                         setTimeout(() => {
-                            /* Redirect to the payment page */
-                            window.location.href = data.url;
-                        }, 500);
+                            toggleFullLoading();
+                        }, 1500);
                     })
                     .catch(error => {
                         console.error("Fetch request failed:", error);
