@@ -1,49 +1,110 @@
-@php
-    $user               = Auth::user();
-@endphp
-
 <div id="modalPaymentMethod" class="modalBox">
-    <div class="modalBox_bg" onClick="openCloseModal('modalPaymentMethod');"></div>
+    <!-- nền modal -->
+    <div class="modalBox_bg"></div>
+    <!-- body modal -->
     <div class="modalBox_box">
-        <form id="formModalPaymentMethod" method="get" style="width:100%;">
-            <!-- hidden -->
-            <div class="formModalBox_box_head">{{ config('data_language_1.'.$language.'.step_1_buy_now') }}</div>
-            <div class="formModalBox_box_body">
-                <div style="margin-top:-0.5rem;">{{ config('data_language_1.'.$language.'.note_fill_email') }}</div>
-                <div class="inputWithLabelInside">  
-                    <label for="email">{{ config('data_language_1.'.$language.'.email') }}</label>
-                    <input type="text" id="email" name="email" onkeyup="validateWhenType(this, 'email')" value="{{ $user->email ?? null }}" />
-                </div>
-            </div>
-            <div class="formModalBox_box_head">{{ config('data_language_1.'.$language.'.step_2_buy_now') }}</div>
-            <div class="formModalBox_box_body">
-                
-                <div class="paymentMethodBox">
-                    @include('wallpaper.template.paymentMethod', [
-                        'language'  => $language,
-                        'action'    => 'paymentNow'
-                    ])
-                </div>
-
-            </div>
-            {{-- <div class="formModalBox_box_footer">
-                <div class="formModalBox_box_footer_item button" tabindex="6" onclick="submitForm('formModalSubmit')">
-                    Gửi yêu cầu
-                </div>
-            </div> --}}
-        </form>
+        <!-- nút thoát -->
         <div class="modalBox_box_close" onClick="openCloseModal('modalPaymentMethod');">
             <svg><use xlink:href="#icon_close"></use></svg>
         </div>
+
+        <div class="modalBox_box_title">{{ config('data_language_3.'.$language.'.you_are_paying_for_the_product') }}</div>
+
+        <form id="formModalPaymentMethod" method="get">
+            <div class="modalBox_box_body">
+
+                <!-- item ===== thông tin sản phẩm -->
+                <div class="modalBox_box_body_item">
+                    <div class="cartMessage_box_body" style="margin-bottom:0 !important;">
+                        @php
+                            $titleProduct   = $itemSeo->title ?? '-';
+                            $option         = config('data_language_1.'.$language.'.full_set');
+                            $imageSmall     = config('image.default');
+                            if(!empty($item->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper)){
+                                $imageSmall = \App\Helpers\Image::getUrlImageSmallByUrlImage($item->prices[0]->wallpapers[0]->infoWallpaper->file_cloud_wallpaper);
+                            }
+                        @endphp
+                        <div class="cartMessage_box_body_image">
+                            <img class="lazyload" loading="lazy" src="{{ $imageSmall }}" alt="{{ $titleProduct }}" title="{{ $titleProduct }}">
+                        </div>
+                        <div class="cartMessage_box_body_content">
+                            <div class="cartMessage_box_body_content_title maxLine_2">{{ $titleProduct }}</div>
+                            <div class="cartMessage_box_body_content_price">
+                                <div id="js_calculaterRightPrice">{{ config('data_language_3.'.$language.'.loading') }}</div>
+                                <span> - {{ $option }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- item ===== email -->
+                <div class="modalBox_box_body_item">
+                    <div class="modalBox_box_body_item_subtitle">{{ config('data_language_1.'.$language.'.step_1_buy_now') }}</div>
+                    <div class="modalBox_box_body_item_input">
+                        <div class="inputWithLabelInside">  
+                            <label for="email">{{ config('data_language_1.'.$language.'.email') }}</label>
+                            <input type="text" id="email" name="email" onkeyup="validateWhenType(this, 'email')" value="{{ Auth::user()->email ?? null }}" />
+                        </div>
+                        <div class="modalBox_box_body_item_input_note">
+                            <svg><use xlink:href="#icon_snowflake"></use></svg>
+                            {!! config('data_language_1.'.$language.'.email_prompt') !!}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- item ===== phương thức thanh toán -->
+                <div class="modalBox_box_body_item">
+                    <div class="modalBox_box_body_item_subtitle">{{ config('data_language_1.'.$language.'.step_2_buy_now') }}</div>
+                    <div class="modalBox_box_body_item_input">
+                        <div class="paymentMethodBox">
+                            @include('wallpaper.template.paymentMethod', [
+                                'language'  => $language,
+                                'action'    => 'paymentNow',
+                            ])
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </form>
+        
     </div>
 </div>
 @push('scriptCustom')
     {{-- <script src="{{ asset('sources/admin/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
     <script src="{{ asset('sources/admin/app-assets/js/scripts/forms/form-select2.min.js') }}"></script> --}}
     <script type="text/javascript">
+        function calculaterRightPrice(idWrite, idProduct){ /* do cache html nên truyền product_info_id */
+            const language  = $('#language').val();
+            const queryParams = new URLSearchParams({
+                product_info_id : idProduct,
+                language,
+            }).toString();
 
+            fetch("{{ route('ajax.calculaterRightPrice') }}?" + queryParams, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                $('#'+idWrite).html(data.content);
+            })
+            .catch(error => {
+                console.error("Fetch request failed:", error);
+            });
+        }
+        /* hàm này phải để ngoài vì trùng cart -> index const clicked */
         let clicked = false;
         function paymentNow(element, idMethod) {
+            const toggleText = @json(config('data_language_3.'.$language.'.the_system_is_redirecting_you_to_the_checkout_page'));
+            toggleFullLoading(toggleText);
             if (!clicked) {
                 clicked = true;
                 const email = $('#email').val();
@@ -79,8 +140,10 @@
                         return response.json();
                     })
                     .then(data => {
-                        /* redirect qua trang thanh toán */
-                        window.location.href = data.url;
+                        setTimeout(() => {
+                            /* Redirect to the payment page */
+                            window.location.href = data.url;
+                        }, 500);
                     })
                     .catch(error => {
                         console.error("Fetch request failed:", error);

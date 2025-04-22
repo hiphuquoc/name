@@ -115,6 +115,8 @@
         let clicked = false;
         function submitFormPayment(idForm){
             event.preventDefault();
+            const toggleText = @json(config('data_language_3.'.$language.'.the_system_is_redirecting_you_to_the_checkout_page'));
+            toggleFullLoading(toggleText);
             if (!clicked) {
                 clicked = true;
                 

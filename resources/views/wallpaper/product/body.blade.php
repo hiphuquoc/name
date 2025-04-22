@@ -127,7 +127,7 @@
                                     <svg><use xlink:href="#icon_cart"></use></svg>
                                     <div class="maxLine_1">{{ $buttonNameCart }}</div>
                                 </button>
-                                <button type="button" class="button buyNow" onClick="openCloseModal('modalPaymentMethod');" aria-label="{{ $altPayment }}">
+                                <button type="button" class="button buyNow" onClick="openCloseModal('modalPaymentMethod'); calculaterRightPrice('js_calculaterRightPrice', {{ $item->id ?? 0 }});" aria-label="{{ $altPayment }}">
                                     <svg><use xlink:href="#icon_money_bill_wave"></use></svg>
                                     <div class="maxLine_1">{{ $buttonNamePayment }}</div>
                                 </button>

@@ -24,6 +24,8 @@
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"> --}}
 <!-- Favicon -->
 <link rel="shortcut icon" href="https://cdn.wallsora.com/storage/images/favicon-wallsora.webp" type="image/x-icon" />
+<!-- view mode -->
+<script src="{{ asset('js/viewMode.js') }}" async></script>
 
 <!-- CSS Khung nhìn đầu tiên - Inline Css -->
 @stack('cssFirstView')

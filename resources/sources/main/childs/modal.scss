@@ -27,25 +27,37 @@
         z-index: 99;
         position: relative;
         transform-style: preserve-3d;
+        max-height: calc(100vh - 2rem);
         &_close {
             @include iconCloseSquare;
         }
-        &_head {
+        &_title {
             margin-bottom: 0.5rem;
             font-size: calc(var(--fontSizeNormal) + 0.475rem);
-            font-weight: bold;
+            font-family: $fontTitle;
+            font-weight: 700;
             
-            color: rgb(var(--colorSuccess));
+            color: rgb(var(--colorTitle));
             text-align: center;
         }
         &_body {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             &_item {
                 display: flex;
-                align-items: center;
-                label {
-                    flex: 0 0 150px;
+                flex-direction: column;
+                gap: 0.5rem;
+                &_subtitle {
+                    font-family: $fontTitle;
                     font-weight: 600;
-                    font-size: calc(var(--fontSizeNormal) + 0.025rem);
+                    font-size: calc(var(--fontSizeNormal) + 0.35rem);
+                    color: rgb(var(--colorTitle));
+                }
+                &_input {
+                    &_note {
+                        @include noteInput;
+                    }
                 }
             }
         }
@@ -77,9 +89,9 @@
             background-size: 100% 100%;
             transform: translateZ(-1px);
         }
-        .inputWithLabelInside {
-            margin-top: 0.75rem !important;
-        }
+        // .inputWithLabelInside {
+        //     margin-top: 0.75rem !important;
+        // }
     }
     @media(max-width: 767px){
         &_box {
@@ -130,7 +142,7 @@
                 position: absolute;
                 
                 font-size: calc(var(--fontSizeNormal) - 0.125rem);
-                color: rgb(var(--colorTextLight));
+                color: rgb(var(--colorPrice));
                 top: 0;
                 right: 1rem;
                 &:dir(rtl), [dir="rtl"] & {
@@ -319,6 +331,139 @@
         }
     }
 }
+@mixin bodyCartMessage {
+    background: rgb(var(--colorBackgroundLv2));
+    box-shadow: 0 0 7px var(--colorShadow);
+    max-width: 520px;
+    width: 100%;
+    padding: 0.875rem 1.25rem 1.5rem 1.25rem;
+    position: relative;
+    border-radius: $radiusBoxNormal;
+    margin: 0 0.75rem;
+    &_head {
+        margin-bottom: 0.825rem;
+        position: relative;
+        font-size: calc(var(--fontSizeNormal) + 0.25rem);
+        color: rgb(var(--colorText));
+        font-family: $fontTitle;
+        letter-spacing: 0.2px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        &:before {
+            content: '';
+            background-color: rgb(var(--colorIcon));
+            mask: var(--icon_check) no-repeat center;
+            mask-size: contain;
+            -webkit-mask: var(--icon_check) no-repeat center;
+            -webkit-mask-size: contain;
+            width: 1.5rem;
+            height: 1.5rem;
+            text-shadow: 0 0 rgb(var(--colorTextLight));
+        }
+    }
+    &_close {
+        @include iconCloseSquare;
+    }
+    &_body {
+        display: flex;
+        gap: 1rem;
+        background: rgb(var(--colorBackgroundLv1));
+        border-radius: $radiusBoxNormal;
+        padding: 1.125rem 1rem;
+        margin-bottom: 1.5rem;
+        // box-shadow: 0 0 7px var(--colorShadow);
+        &_image {
+            flex: 0 0 90px;
+            height: 90px;
+            overflow: hidden;
+            display: flex;
+            border-radius: $radiusBoxNormal 0 0 $radiusBoxNormal;
+            &:dir(rtl), [dir="rtl"] & {
+                border-radius: 0 $radiusBoxNormal $radiusBoxNormal 0;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                scale: 1.1;
+            }
+        }
+        &_content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            &_title {
+                color: inherit;
+                margin-top: -0.25rem;
+                margin-bottom: 0.25rem;
+                font-size: var(--fontSizeNormal);
+                line-height: calc(var(--lineHeightNormal) - 0.2);
+                font-family: $fontText;
+                font-weight: bold;
+            }
+            &_price {
+                color: rgb(var(--colorPrice));
+                font-family: $fontTitle;
+                font-size: calc(var(--fontSizeNormal) + 0.3rem);
+                font-weight: bold;
+                letter-spacing: 0.5px;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                > span {
+                    font-size: calc(var(--fontSizeNormal) - 0.025rem);
+                    font-weight: normal;
+                    color: rgba(var(--colorText), var(--opacityNormal));
+                    margin-left: 0.25rem;
+                }
+            }
+            &_type {
+                color: rgba(var(--colorText), 0.7);
+                font-size: calc(var(--fontSizeNormal) + 0.025rem);
+            }
+        }
+    }
+    &_footer {
+        > * {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(45deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
+            &:focus {
+                background: linear-gradient(120deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
+            }
+            &:hover {
+                background: linear-gradient(120deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
+            }
+        }
+    }
+    @media(max-width: 991px){
+        padding: 0.875rem 1rem 1.25rem 1rem;
+        &_head {
+            font-size: calc(var(--fontSizeNormal) + 0.225rem);
+            margin-bottom: 0.75rem;
+        }
+        &_body {
+            padding: 0.875rem 0.75rem;
+            margin-bottom: 1.325rem;
+            gap: 0.75rem;
+        }
+    }
+    @media(max-width: 767px){
+        padding: 0.625rem 0.75rem 1rem 0.75rem;
+        &_head {
+            font-size: calc(var(--fontSizeNormal) + 0.2rem);
+            margin-bottom: 0.5rem;
+        }
+        &_body {
+            // padding: 0.625rem 0.5rem;
+            // gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+    }
+}
 .cartMessage {
     display: none;
     position: fixed;
@@ -338,141 +483,9 @@
         background: rgba(var(--colorBackgroundLv2), 0.5);
     }
     &_box {
-        background: rgb(var(--colorBackgroundLv2));
-        box-shadow: 0 0 7px var(--colorShadow);
-        max-width: 520px;
-        width: 100%;
-        padding: 0.875rem 1.25rem 1.5rem 1.25rem;
-        position: relative;
-        border-radius: $radiusBoxNormal;
-        margin: 0 0.75rem;
-        &_head {
-            margin-bottom: 0.825rem;
-            position: relative;
-            font-size: calc(var(--fontSizeNormal) + 0.25rem);
-            color: rgb(var(--colorText));
-            font-family: $fontTitle;
-            letter-spacing: 0.2px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            &:before {
-                content: '';
-                background-color: rgb(var(--colorIcon));
-                mask: var(--icon_check) no-repeat center;
-                mask-size: contain;
-                -webkit-mask: var(--icon_check) no-repeat center;
-                -webkit-mask-size: contain;
-                width: 1.5rem;
-                height: 1.5rem;
-                text-shadow: 0 0 rgb(var(--colorTextLight));
-            }
-        }
-        &_close {
-            @include iconCloseSquare;
-        }
-        &_body {
-            display: flex;
-            gap: 1rem;
-            background: rgb(var(--colorBackgroundLv1));
-            border-radius: $radiusBoxNormal;
-            padding: 1.125rem 1rem;
-            margin-bottom: 1.5rem;
-            // box-shadow: 0 0 7px var(--colorShadow);
-            &_image {
-                flex: 0 0 90px;
-                height: 90px;
-                overflow: hidden;
-                display: flex;
-                border-radius: $radiusBoxNormal 0 0 $radiusBoxNormal;
-                &:dir(rtl), [dir="rtl"] & {
-                    border-radius: 0 $radiusBoxNormal $radiusBoxNormal 0;
-                }
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    scale: 1.1;
-                }
-            }
-            &_content {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                &_title {
-                    color: inherit;
-                    margin-top: -0.25rem;
-                    margin-bottom: 0.25rem;
-                    font-size: var(--fontSizeNormal);
-                    line-height: calc(var(--lineHeightNormal) - 0.2);
-                    font-family: $fontText;
-                    font-weight: bold;
-                }
-                &_price {
-                    color: rgb(var(--colorPrice));
-                    font-family: $fontTitle;
-                    font-size: calc(var(--fontSizeNormal) + 0.3rem);
-                    font-weight: bold;
-                    letter-spacing: 0.5px;
-
-                    > span {
-                        font-size: calc(var(--fontSizeNormal) - 0.025rem);
-                        font-weight: normal;
-                        color: rgba(var(--colorText), var(--opacityNormal));
-                        margin-left: 0.25rem;
-                    }
-                }
-                &_type {
-                    color: rgba(var(--colorText), 0.7);
-                    font-size: calc(var(--fontSizeNormal) + 0.025rem);
-                }
-            }
-        }
-        &_footer {
-            > * {
-                display: flex;
-                justify-content: center;
-                background: linear-gradient(45deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
-                &:focus {
-                    background: linear-gradient(120deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
-                }
-                &:hover {
-                    background: linear-gradient(120deg, rgb(var(--colorButtonLv1)), rgb(var(--colorButtonLv2)));
-                }
-            }
-        }
+        @include bodyCartMessage;
     }
     .highLight {
         @include highLight;
-    }
-    @media(max-width: 991px){
-        &_box {
-            padding: 0.875rem 1rem 1.25rem 1rem;
-            &_head {
-                font-size: calc(var(--fontSizeNormal) + 0.225rem);
-                margin-bottom: 0.75rem;
-            }
-            &_body {
-                padding: 0.875rem 0.75rem;
-                margin-bottom: 1.325rem;
-                gap: 0.75rem;
-            }
-        }
-    }
-    @media(max-width: 767px){
-        &_box {
-            padding: 0.625rem 0.75rem 1rem 0.75rem;
-            &_head {
-                font-size: calc(var(--fontSizeNormal) + 0.2rem);
-                margin-bottom: 0.5rem;
-            }
-            &_body {
-                // padding: 0.625rem 0.5rem;
-                // gap: 0.5rem;
-                margin-bottom: 1.25rem;
-            }
-        }
     }
 }

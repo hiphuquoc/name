@@ -359,6 +359,7 @@ Route::middleware(['check.domain'])->group(function () {
     Route::get('/toogleHeartFeelingFreeWallpaper', [AjaxController::class, 'toogleHeartFeelingFreeWallpaper'])->name('ajax.toogleHeartFeelingFreeWallpaper');
     Route::get('/loadLinkDownloadGuide', [AjaxController::class, 'loadLinkDownloadGuide'])->name('ajax.loadLinkDownloadGuide');
     Route::get('/loadProductPrice', [AjaxController::class, 'loadProductPrice'])->name('ajax.loadProductPrice');
+    Route::get('/calculaterRightPrice', [AjaxController::class, 'calculaterRightPrice'])->name('ajax.calculaterRightPrice');
     /* Search */
     Route::get('/searchAjax', [SearchController::class, 'searchAjax'])->name('search.searchAjax');
     /* setting */

@@ -74,58 +74,7 @@
             <div id="ja_closeLanguageBoxList_background" class="languageBox_background"></div>
         </div>
         <!-- view mode -->
-        <div class="viewMode">
-            <div class="viewMode_show" onclick="closeLanguageBoxList('ja_closeViewBoxList');">
-                <div class="viewMode_show_boxHeight">
-                    @php
-                        /* mặc định lấy icon đầu tiên */
-                        $dataViewMode   = config('main_'.env('APP_NAME').'.view_mode');
-                        if(!empty(request()->cookie('view_mode'))){
-                            foreach($dataViewMode as $viewMode){
-                                if(request()->cookie('view_mode')==$viewMode['key']){
-                                    $icon   = '<svg><use xlink:href="#'.$viewMode['icon'].'"></use></svg>';
-                                    break;
-                                }
-                            }
-                        }else {
-                            $icon           = '<svg><use xlink:href="#'.$dataViewMode[0]['icon'].'"></use></svg>';
-                        }
-                    @endphp
-                    {!! $icon !!}
-                </div>
-            </div>
-            <div id="ja_closeViewBoxList" class="viewMode_list">
-                <div class="viewMode_list_title">{{ config('data_language_3.'.$language.'.view_mode_notes') }}</div>
-                <div class="viewMode_list_close" onclick="closeLanguageBoxList('ja_closeViewBoxList');">
-                    <svg><use xlink:href="#icon_close"></use></svg>
-                </div>
-                <div class="viewMode_list_box">
-                    @foreach(config('main_'.env('APP_NAME').'.view_mode') as $viewMode)
-                        @php
-                            $selected   = '';
-                            $event      = 'onclick=setViewMode(\''.$viewMode['key'].'\')';
-                            if(!empty(request()->cookie('view_mode'))){
-                                if(request()->cookie('view_mode')==$viewMode['key']) {
-                                    $selected   = 'selected';
-                                    $event      = '';
-                                }
-                            }else {
-                                if($loop->index==0) {
-                                    $selected = 'selected';
-                                    $event      = '';
-                                }
-                            }
-                            
-                        @endphp
-                        <div class="viewMode_list_box_item {{ $viewMode['key'] }}Mode {{ $selected }}" {{ $event }}>
-                            <svg><use xlink:href="#{{ $viewMode['icon'] }}"></use></svg>
-                            <div>{{ config('data_language_3.'.$language.'.'.$viewMode['key'].'_mode') }}</div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <div id="ja_closeViewBoxList_background" class="viewMode_background"></div>
-        </div>
+        @include('wallpaper.template.viewMode')
         
         <!-- icon menu mobile -->
         <div class="iconMenuMobile show-991" onClick="toggleMenuMobile('js_toggleMenuMobile');">
@@ -231,20 +180,5 @@
             });
             return error;
         }
-        /* thiết lập chế độ xem */
-        function setViewMode(viewMode){
-            $.ajax({
-                url         : '{{ route("main.setViewMode") }}',
-                type        : 'get',
-                dataType    : 'json',
-                data        : {
-                    view_mode   : viewMode
-                },
-                success     : function(response){
-                    location.reload();
-                }
-            });
-        }
-        
     </script>
 @endpush

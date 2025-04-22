@@ -11,7 +11,7 @@
         <div class="cartMessage_box_body">
             @if(!empty($image))
                 <div class="cartMessage_box_body_image">
-                    <img src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
+                    <img loading="lazy" src="{{ $image }}" alt="{{ $title ?? null }}" title="{{ $title ?? null }}" />
                 </div>
             @endif
             @php

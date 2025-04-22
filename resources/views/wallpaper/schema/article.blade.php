@@ -5,7 +5,7 @@
     /* author */
     $author             = config('main_'.env('APP_NAME').'.author_name');
     /* image */
-    $imagePage          = public_path(config('image.default'));
+    $imagePage          = config('image.default');
     if(!empty($item->seo->image)) $imagePage = \App\Helpers\Image::getUrlImageCloud($item->seo->image);
     $imageAuthor        = env('APP_URL').Storage::url(config('main_'.env('APP_NAME').'.logo_main'));
     $widthImageAuthor   = 500;

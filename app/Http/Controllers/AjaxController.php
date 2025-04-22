@@ -20,7 +20,7 @@ use App\Models\Page;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Services\BuildInsertUpdateModel;
-// use SebastianBergmann\Type\FalseType;
+use App\Services\CacheService;
 
 class AjaxController extends Controller {
 
@@ -456,28 +456,68 @@ class AjaxController extends Controller {
         echo $linkGuideDownloadByLanguage;
     }
 
-    public function loadProductPrice(Request $request){
-        $idProduct      = $request->get('product_info_id');
-        $language       = $request->get('language') ?? request()->session('lanugage');
-        $infoProduct    = Product::select('*')
-                            ->where('id', $idProduct)
-                            ->with('prices')
-                            ->first();
-        $result         = '';
+    public function loadProductPrice(Request $request) {
+        $idProduct = $request->get('product_info_id');
+        $language = $request->get('language') ?? request()->session('language');
+
+        // Tạo key duy nhất cho sản phẩm theo ID và ngôn ngữ
+        $cacheKey = "product_info:{$idProduct}";
+
+        // Định nghĩa query callback để truy vấn từ database
+        $queryCallback = function () use ($idProduct) {
+            return Product::select('*')
+                ->where('id', $idProduct)
+                ->with('prices')
+                ->first();
+        };
+
+        // Lấy dữ liệu từ cache hoặc truy vấn từ database
+        $infoProduct = CacheService::getOrSetCache($cacheKey, $queryCallback);
+
+        $result = '';
         $priceAllMobile = '';
-        if(!empty($infoProduct)){
-            $result         = view('wallpaper.product.priceBox', [
-                'item'      => $infoProduct,
-                'prices'    => $infoProduct->prices,
-                'language'  => $language,
+
+        if (!empty($infoProduct)) {
+            $result = view('wallpaper.product.priceBox', [
+                'item' => $infoProduct,
+                'prices' => $infoProduct->prices,
+                'language' => $language,
             ])->render();
+
             $priceAllMobile = \App\Helpers\Number::getPriceOriginByCountry($infoProduct->price);
             $priceAllMobile = \App\Helpers\Number::getFormatPriceByLanguage($priceAllMobile, $language);
         }
-        
+
         return response()->json([
-            'content'           => $result,
-            'price_all_mobile'  => $priceAllMobile,
+            'content' => $result,
+            'price_all_mobile' => $priceAllMobile,
+        ]);
+    }
+
+    public function calculaterRightPrice(Request $request){
+        $idProduct = $request->get('product_info_id');
+        $language = $request->get('language') ?? request()->session('language');
+
+        // Tạo key duy nhất cho sản phẩm theo ID và ngôn ngữ
+        $cacheKey = "product_info:{$idProduct}";
+
+        // Định nghĩa query callback để truy vấn từ database
+        $queryCallback = function () use ($idProduct) {
+            return Product::select('*')
+                ->where('id', $idProduct)
+                ->with('prices')
+                ->first();
+        };
+
+        // Lấy dữ liệu từ cache hoặc truy vấn từ database
+        $infoProduct = CacheService::getOrSetCache($cacheKey, $queryCallback);
+
+        // tính giá
+        $priceAllMobile = \App\Helpers\Number::getPriceOriginByCountry($infoProduct->price);
+        $priceAllMobile = \App\Helpers\Number::getFormatPriceByLanguage($priceAllMobile, $language);
+
+        return response()->json([
+            'content' => $priceAllMobile,
         ]);
     }
 }

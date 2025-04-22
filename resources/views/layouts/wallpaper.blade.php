@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ $language ?? 'vi' }}" dir="{{ config('language.'.$language.'.dir') }}" class="{{ request()->cookie('view_mode') ?? config('main_'.env('APP_NAME').'.view_mode')[0]['key'] }}">    
+<html lang="{{ $language ?? 'vi' }}" dir="{{ config('language.'.$language.'.dir') }}">   
+    
+{{-- class="{{ request()->cookie('view_mode') ?? config('main_'.env('APP_NAME').'.view_mode')[0]['key'] }}" --}}
 
 <!-- === START:: Head === -->
 <head>
@@ -63,6 +65,14 @@
             @stack('bottom')
         </div>
 
+    </div>
+
+    <!-- Full loading -->
+    <div id="js_toggleFullLoading" class="fullLoading">
+        <div class="fullLoading_box">
+            <div class="loadingIcon"></div>
+            <div id="js_toggleFullLoading_text" class="fullLoading_box_text">{{ config('data_language_3.'.$language.'.the_system_is_processing_your_request') }}</div>
+        </div>
     </div>
     
     <!-- Modal -->

@@ -92,7 +92,7 @@
     <!-- Message Add to Cart -->
     <div id="js_addToCart_idWrite">
         @include('wallpaper.cart.cartMessage', [
-            'title'     => $item->name,
+            'title'     => '',
             'option'    => null,
             'quantity'  => 0,
             'price'     => 0,

@@ -7,7 +7,7 @@
     : $itemSeo->slug_full;
     $urlFull            = !empty($url) ? env('APP_URL').'/'.$url : env('APP_URL');
     /* image */
-    $imagePage          = public_path(config('image.default'));
+    $imagePage          = config('image.default');
     if(!empty($item->seo->image)) $imagePage = \App\Helpers\Image::getUrlImageCloud($item->seo->image);
     /* author */
     $author             = $itemSeo->rating_author_name ?? $item->seo->rating_author_name ?? config('main_'.env('APP_NAME').'.author_name');

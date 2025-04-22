@@ -55,20 +55,13 @@ class HomeController extends Controller {
         SettingController::settingLanguage($language);
 
         $appName        = env('APP_NAME');
-        $viewModeCookie = Cookie::get('view_mode');
-        $defaultViewKey = config("main_{$appName}.view_mode")[0]['key'];
 
         $useCache       = env('APP_CACHE_HTML', true);
         $redisTtl       = config('app.cache_redis_time', 86400);     // Redis: 1 ngày
         $fileTtl        = config('app.cache_html_time', 2592000);    // GCS: 30 ngày
 
-        $paramsSlug = [];
-        if (!empty($viewModeCookie) && $viewModeCookie !== $defaultViewKey) {
-            $paramsSlug['viewMode'] = $viewModeCookie;
-        }
-
         // 2. Tạo key và đường dẫn cache
-        $cacheKey     = RoutingController::buildNameCache("{$language}home", $paramsSlug);
+        $cacheKey     = RoutingController::buildNameCache("{$language}home");
         $cacheName    = $cacheKey . '.' . config("main_{$appName}.cache.extension");
         $cacheFolder  = config("main_{$appName}.cache.folderSave");
         $cachePath    = $cacheFolder . $cacheName;

@@ -907,4 +907,28 @@
             console.error("Fetch request failed:", error);
         });
     }
+    /* full loading */
+    function toggleFullLoading(textContent = '') {
+        const elemt         = $('#js_toggleFullLoading');
+        const elemtTextBox  = $('#js_toggleFullLoading_text');
+        const body          = $('body');
+
+        // Toggle the 'show' class and determine the new state
+        elemt.toggleClass('show');
+        
+        // Check if the element has the 'show' class after toggling
+        const isVisible = elemt.hasClass('show');
+
+        // Update text content if provided
+        if (textContent) {
+            elemtTextBox.text(textContent);
+        }
+
+        // Update body overflow based on visibility state
+        if (isVisible) {
+            body.css('overflow', 'hidden'); // Add overflow: hidden when element is visible
+        } else {
+            body.css('overflow', 'unset'); // Remove overflow style when element is hidden
+        }
+    }
 </script>

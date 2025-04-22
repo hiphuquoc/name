@@ -1,14 +1,10 @@
-@php
-    $user               = Auth::user();
-@endphp
-
 <!-- form email -->
 <div class="layoutPageCart_left_item">
     <div class="layoutPageCart_left_item_head">{{ config('data_language_1.'.$language.'.information') }}</div>
     <div class="layoutPageCart_left_item_body">
         <div class="inputWithLabelInside">
             <label for="email">{{ config('data_language_1.'.$language.'.email_receive') }}</label>
-            <input type="text" id="email" name="email" value="{{ $user->email ?? null }}" onkeyup="validateWhenType(this, 'email')">
+            <input type="text" id="email" name="email" value="{{ Auth::user()->email ?? null }}" onkeyup="validateWhenType(this, 'email')">
         </div>
         <div class="layoutPageCart_left_item_body_note">
             <svg><use xlink:href="#icon_snowflake"></use></svg>
