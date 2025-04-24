@@ -75,7 +75,7 @@ class SearchController extends Controller {
         }
 
         return view('wallpaper.template.emptySearch', compact('language'))->render();
-   }
+    }
 
     private static function searchCategoryInfo($keySearch, $language) {
         // Xử lý trường hợp keySearch rỗng

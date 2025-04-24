@@ -27,9 +27,9 @@ class Product extends Model {
             'code'              => $this->code,
             'seo_title'         => $this->seo->title ?? '',
             'seo_description'   => $this->seo->description ?? '',
-            'seos'              => $this->seos->pluck('infoSeo.title')->filter()->toArray(),
-            'tags'              => $this->tags->pluck('infoTag.seos.infoSeo.title')->filter()->toArray(),
-            'categories'        => $this->categories->pluck('infoCategory.seos.infoSeo.title')->filter()->toArray(),
+            'seos'              => $this->seos->pluck('infoSeo.title')->filter()->values()->toArray(),
+            'tags'              => $this->tags->pluck('infoTag.seos.infoSeo.title')->filter()->values()->toArray(),
+            'categories'        => $this->categories->pluck('infoCategory.seos.infoSeo.title')->filter()->values()->toArray(),
         ];
     }
 

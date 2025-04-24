@@ -26,10 +26,10 @@ class Category extends BaseCategory {
             'code'              => $this->code,
             'seo_title'         => $this->seo->title ?? '',
             'seo_description'   => $this->seo->description ?? '',
-            'seos'              => $this->seos->pluck('infoSeo.title')->filter()->toArray(),
-            'tags'              => $this->tags->pluck('infoTag.seos.infoSeo.title')->filter()->toArray(),
-            'products'          => $this->products->pluck('infoProduct.seos.infoSeo.title')->filter()->toArray(),
-            'freeWallpapers'    => $this->products->pluck('infoFreeWallpaper.seos.infoSeo.title')->filter()->toArray(),
+            'seos'              => $this->seos->pluck('infoSeo.title')->filter()->values()->toArray(),
+            'tags'              => $this->tags->pluck('infoTag.seos.infoSeo.title')->filter()->values()->toArray(),
+            'products'          => $this->products->pluck('infoProduct.seos.infoSeo.title')->filter()->values()->toArray(),
+            'freeWallpapers'    => $this->products->pluck('infoFreeWallpaper.seos.infoSeo.title')->filter()->values()->toArray(),
         ];
     }
 
