@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 require __DIR__ . '/vendor/autoload.php';
 $app = require_once __DIR__ . '/bootstrap/app.php';
@@ -65,12 +66,14 @@ try {
 
                 // Gọi artisan command tùy chỉnh để xử lý job với id cụ thể
                 $command = sprintf(
-                    'php %s/artisan queue:work-job %d --timeout=%d >> /dev/null 2>&1 &',
+                    '/usr/bin/php %s/artisan queue:work-job %d --timeout=%d >> %s/storage/logs/queue.log 2>&1',
                     __DIR__,
                     $job->id,
-                    $maxTime
+                    $maxTime,
+                    __DIR__
                 );
-                exec($command);
+                exec($command, $output, $returnVar);
+                Log::info("Command: $command, Return code: $returnVar, Output: " . implode("\n", $output));
             }
         }
 
