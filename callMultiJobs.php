@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-require __DIR__ . '/vendor/autoload.php';
-$app = require_once __DIR__ . '/bootstrap/app.php';
-$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+if (php_sapi_name() === 'cli') {
+    require __DIR__ . '/vendor/autoload.php';
+    $app = require_once __DIR__ . '/bootstrap/app.php';
+    $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+}
 
 // Định nghĩa các hằng số từ file .env
 $jobPerTime = env('MAX_CONCURRENT_JOBS', 40); // Số job tối đa chạy đồng thời
@@ -65,9 +67,8 @@ try {
                     ->update(['reserved_at' => now()->timestamp]);
 
                 // Gọi artisan command tùy chỉnh để xử lý job với id cụ thể
-                // >> %s/storage/logs/queue.log 2>&1
                 $command = sprintf(
-                    '/usr/bin/php %s/artisan queue:work-job %d --timeout=%d',
+                    '/usr/local/bin/php %s/artisan queue:work-job %d --timeout=%d',
                     __DIR__,
                     $job->id,
                     $maxTime,
