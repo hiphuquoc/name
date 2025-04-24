@@ -11,8 +11,9 @@ class CacheController extends Controller {
     public static function clear(){
 
         try {
-            // Kết nối với Google Cloud Storage
-            $disk = Storage::disk('gcs');
+            // Kết nối với nơi lưu trữ cache
+            $appName        = env('APP_NAME');
+            $disk = Storage::disk(config("main_{$appName}.cache.disk"));
             $folderSave = config('main_' . env('APP_NAME') . '.cache.folderSave');
     
             // Lấy danh sách tất cả file trong thư mục cache
