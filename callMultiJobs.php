@@ -65,8 +65,9 @@ try {
                     ->update(['reserved_at' => now()->timestamp]);
 
                 // Gọi artisan command tùy chỉnh để xử lý job với id cụ thể
+                // >> %s/storage/logs/queue.log 2>&1
                 $command = sprintf(
-                    '/usr/bin/php %s/artisan queue:work-job %d --timeout=%d >> %s/storage/logs/queue.log 2>&1',
+                    '/usr/bin/php %s/artisan queue:work-job %d --timeout=%d',
                     __DIR__,
                     $job->id,
                     $maxTime,

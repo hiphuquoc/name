@@ -395,4 +395,7 @@ Route::middleware(['check.domain'])->group(function () {
     Route::middleware(['checkRedirect'])->group(function () {
         Route::get("/{slug}/{slug2?}/{slug3?}/{slug4?}/{slug5?}/{slug6?}/{slug7?}/{slug8?}/{slug9?}/{slug10?}", [RoutingController::class, 'routing'])->name('routing');
     });
+    Route::get('/call-jobs', function () {
+        include base_path('callMultiJobs.php');
+    });
 });
