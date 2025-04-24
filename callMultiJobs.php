@@ -68,7 +68,7 @@ try {
 
                 // Gọi artisan command tùy chỉnh để xử lý job với id cụ thể
                 $command = sprintf(
-                    '/usr/local/bin/php %s/artisan queue:work-job %d --timeout=%d',
+                    '/usr/local/bin/php %s/artisan queue:work-job %d --timeout=%d', // chạy lệnh which php trên terminal để xác nhận /usr/local/bin/php
                     __DIR__,
                     $job->id,
                     $maxTime,

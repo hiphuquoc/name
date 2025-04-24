@@ -8,12 +8,13 @@ use Illuminate\Console\Command;
 
 class CopyBoxContent extends Command {
 
-    protected $signature = 'run:copyBoxContent {ordering : The ordering value to process}';
+    // protected $signature = 'run:copyBoxContent {ordering : The ordering value to process}';
+    protected $signature = 'run:copyBoxContent';
     protected $description = 'Copy box content based on ordering to all tags and categories';
 
     public function handle() {
         // Lấy giá trị ordering từ tham số
-        $orderingCopy = $this->argument('ordering');
+        $orderingCopy = 7;
 
         // Truy vấn dữ liệu
         $infoPageParent = Category::select('*')
