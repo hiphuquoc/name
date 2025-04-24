@@ -23,7 +23,7 @@ class Category extends BaseCategory {
 
         return [
             'id'                => $this->id,
-            'seo_title'         => $this->seo->title ?? '',
+            'title'         => $this->seo->title ?? '',
             'seos'              => $this->seos->pluck('infoSeo.title')->filter()->values()->toArray(),
             'tags'              => $this->tags->pluck('infoTag.seos.infoSeo.title')->filter()->values()->toArray(),
             'products'          => $this->products->pluck('infoProduct.seos.infoSeo.title')->filter()->values()->toArray(),
