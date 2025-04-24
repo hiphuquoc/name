@@ -67,7 +67,7 @@ class HomeController extends Controller {
         $cachePath    = $cacheFolder . $cacheName;
         $cdnDomain    = config("main_{$appName}.google_cloud_storage.cdn_domain");
 
-        $disk         = Storage::disk('gcs');
+        $disk         = Storage::disk(config("main_{$appName}.cache.disk"));
         $htmlContent  = null;
 
         // 3. Thử lấy từ Redis

@@ -90,8 +90,9 @@ return [
     ],
     'cache'     => [
         'extension'     => 'html',
-        'folderSave'    => 'storage/caches/', /* lưu trên google cloud */
-        // 'folderSave'    => 'storage/test_caches/', /* lưu trên google cloud */
+        'folderSave'    => 'public/caches/',
+        // 'folderSave'    => 'storage/caches/', /* lưu trên google cloud */
+        'disk'          => 'local',
     ],
     'main.password_user_default' => 'hitourVN@mk123',
     'category_type' => [

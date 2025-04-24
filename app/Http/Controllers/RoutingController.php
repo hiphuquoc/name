@@ -64,16 +64,18 @@ class RoutingController extends Controller{
             if (!empty($search)) $paramsSlug['search'] = $search;
             
             // Tạo key và đường dẫn cache
-            $cacheKey = self::buildNameCache($itemSeo->slug_full, $paramsSlug);
-            $cacheName = $cacheKey . '.' . config("main_" . env('APP_NAME') . ".cache.extension");
-            $cacheFolder = config("main_" . env('APP_NAME') . ".cache.folderSave");
+            $appName        = env('APP_NAME');
+            $cacheKey   = self::buildNameCache($itemSeo->slug_full, $paramsSlug);
+            $cacheName = $cacheKey . '.' . config("main_" . $appName . ".cache.extension");
+            $cacheFolder = config("main_" . $appName . ".cache.folderSave");
             $cachePath = $cacheFolder . $cacheName;
-            $cdnDomain = config("main_" . env('APP_NAME') . ".google_cloud_storage.cdn_domain");
+            $cdnDomain = config("main_" . $appName . ".google_cloud_storage.cdn_domain");
     
-            $disk = Storage::disk('gcs');
-            $useCache = env('APP_CACHE_HTML', true);
-            $redisTtl = config('app.cache_redis_time', 86400);     // Redis: 1 ngày
-            $fileTtl = config('app.cache_html_time', 2592000);     // GCS: 30 ngày
+
+            $disk       = Storage::disk(config("main_{$appName}.cache.disk"));
+            $useCache   = env('APP_CACHE_HTML', true);
+            $redisTtl   = config('app.cache_redis_time', 86400);     // Redis: 1 ngày
+            $fileTtl    = config('app.cache_html_time', 2592000);     // GCS: 30 ngày
     
             $htmlContent = null;
     
