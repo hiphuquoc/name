@@ -4,18 +4,15 @@
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-                @foreach($dataFaq as $faq)
-                    @if($loop->index!=0) 
-                        ,
-                    @endif
+                @foreach($dataFaq as $index => $faq)
                     {
                         "@type": "Question",
-                        "name": "{!! $faq['question'] !!}",
+                        "name": "{{ addslashes($faq['question']) }}",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "{!! $faq['answer'] !!}"
+                            "text": "{{ addslashes($faq['answer']) }}"
                         }
-                    }
+                    }@if(!$loop->last),@endif
                 @endforeach
             ]
         }
