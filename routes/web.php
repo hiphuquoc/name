@@ -65,9 +65,9 @@ use Illuminate\Support\Facades\Redis;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/call-jobs', function () {
-    include base_path('callMultiJobs.php');
-});
+// Route::get('/call-jobs', function () {
+//     include base_path('callMultiJobs.php');
+// });
 /* thiết lập giao diện */
 Route::get('/setViewMode', [AjaxController::class, 'setViewMode'])->name('main.setViewMode');
 /* login */

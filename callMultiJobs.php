@@ -1,13 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
-if (php_sapi_name() === 'cli') {
-    require __DIR__ . '/vendor/autoload.php';
-    $app = require_once __DIR__ . '/bootstrap/app.php';
-    $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-}
+// if (php_sapi_name() === 'cli') {
+//     require __DIR__ . '/vendor/autoload.php';
+//     $app = require_once __DIR__ . '/bootstrap/app.php';
+//     $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+// }
+
+require __DIR__ . '/vendor/autoload.php';
+$app = require_once __DIR__ . '/bootstrap/app.php';
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
 // Định nghĩa các hằng số từ file .env
 $jobPerTime = env('MAX_CONCURRENT_JOBS', 40); // Số job tối đa chạy đồng thời
@@ -76,7 +79,9 @@ try {
                     $maxTime,
                     __DIR__
                 );
-                exec($command);
+                echo $command;
+                // exec($command);
+                pclose(popen($command, "r"));
             }
         }
 
