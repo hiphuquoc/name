@@ -68,14 +68,15 @@ try {
 
                 // Gọi artisan command tùy chỉnh để xử lý job với id cụ thể
                 $command = sprintf(
-                    '/usr/local/bin/php %s/artisan queue:work-job %d --timeout=%d', // chạy lệnh which php trên terminal để xác nhận /usr/local/bin/php
+                    // '/usr/local/bin/php %s/artisan queue:work-job %d --timeout=%d', // chạy lệnh which php trên terminal để xác nhận /usr/local/bin/php
+                    // __DIR__,
+                    '/usr/local/bin/php %s/artisan queue:work-job %d --timeout=%d >> /dev/null 2>&1 &', // chạy lệnh which php trên terminal để xác nhận /usr/local/bin/php
                     __DIR__,
                     $job->id,
                     $maxTime,
                     __DIR__
                 );
-                exec($command, $output, $returnVar);
-                Log::info("Command: $command, Return code: $returnVar, Output: " . implode("\n", $output));
+                exec($command);
             }
         }
 
