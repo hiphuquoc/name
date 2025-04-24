@@ -39,13 +39,23 @@
             
             <div class="searchViewBefore_showBox_inputBox">
                 <!-- value = null không lưu giá trị search cũ -->
-                <input id="searchAjax_input" class="searchViewBefore_showBox_input" type="text" name="search" placeholder="{{ $labelName }}" value="" onkeyup="searchAjaxWithDelay(this)" autocomplete="off" onclick="openSelectedRight('js_searchAjax_idWrite', 'searchViewBefore_showBox_inputBox')" />
+                <input id="searchAjax_input" class="searchViewBefore_showBox_input" type="text" name="search" placeholder="{{ $labelName }}" value="" onkeyup="searchAjaxWithDelay(this)" autocomplete="off" onclick="openSelectedRight('js_openSelectedRight_elemt', 'searchViewBefore_showBox_inputBox')" />
                 <button type="submit" class="searchViewBefore_showBox_inputBox_button" aria-label="{{ $labelName }}">
                     <svg><use xlink:href="#icon_search"></use></svg>
                     <span>{{ config('data_language_1.'.$language.'.search') }}</span>
                 </button>
-                <div id="js_searchAjax_idWrite" class="searchViewBefore_showBox_inputBox_list">
-                    <!-- load Ajax -->
+                <div id="js_openSelectedRight_elemt" class="searchViewBefore_showBox_inputBox_list">
+                    <div id="js_searchAjax">
+                        <!-- load Ajax -->
+                        <div id="js_searchAjax_idWrite" class="searchViewBeforeOfPremiumWallpaper">
+                            
+                        </div>
+                        <!-- loading -->
+                        <div class="loadingBox">
+                            <div class="loadingIcon"></div>
+                            <div class="loadingBox_backgroundBlur"></div>
+                        </div>
+                    </div>
                 </div>
                 
             </div>
@@ -61,10 +71,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Call the function with your selectBox ID and hidden input ID
             handleSelectItem('js_openSelected_typeBoxList', 'search_type');
-            /* load lần đầu */
-            setTimeout(() => {
-                searchAjax();
-            }, 500);
         });
 
         function toggleSearchMobile() {
@@ -103,6 +109,9 @@
         /* mỗi khi người dùng nhập một ký tự mới, hàm searchWallpapersWithDelay sẽ đặt một hẹn giờ (setTimeout) để gọi hàm searchWallpapers sau 0.5 giây. Nếu có thêm ký tự nào được nhập trong khoảng 0.5 giây, hẹn giờ trước đó sẽ bị xóa và hẹn giờ mới sẽ được đặt lại. Điều này giúp tạo ra hiệu ứng chờ giữa các lần nhập. */
         var searchTimer;
         function searchAjaxWithDelay(input) {
+            /* khi gõ làm mờ box kết quả (bật loading) */
+            $('#js_searchAjax .loadingBox').addClass('show'); /* hiệu ứng làm mờ box */
+            /* tính toán thời gian và gọi hàm search */
             clearTimeout(searchTimer);
             searchTimer = setTimeout(function () {
                 searchAjax();
@@ -110,9 +119,6 @@
         }
         /* tìm kiếm sản phẩm ajax */
         function searchAjax(){
-            /* bật loadding */ 
-            $('#js_searchAjax_idWrite').addClass('loading'); /* hiệu ứng làm mờ box */ 
-            // $('#js_searchAjax_iconLoading').addClass('show'); /* icon loadding */
             /* lấy dữ liệu */
             const valueElement  = $('#searchAjax_input').val();
             const searchType    = $('#search_type').val();
@@ -130,24 +136,23 @@
                     setTimeout(() => {
                         if(response!='') $('#js_searchAjax_idWrite').html(response);
                         /* tắt loadding */ 
-                        $('#js_searchAjax_idWrite').removeClass('loading'); /* hiệu ứng làm mờ box */ 
-                        // $('#js_searchAjax_iconLoading').removeClass('show'); /* icon loadding */
+                        $('#js_searchAjax .loadingBox').removeClass('show'); /* hiệu ứng làm mờ box */
                     }, 500);
                 }
             });
         }
         /* mở selectBox */
         function openSelected(selectBoxId, parentClass) {
-            const $selectBox = $('#' + selectBoxId);
+            const selectBox = $('#' + selectBoxId);
 
             // Toggle class 'active' to open/close the select box
-            $selectBox.toggleClass('active');
+            selectBox.toggleClass('active');
 
-            if ($selectBox.hasClass('active')) {
+            if (selectBox.hasClass('active')) {
                 // Gắn sự kiện click một lần khi SelectBox đang mở
                 $(document).on('click.outsideSelectBox', function(event) {
                     if (!$(event.target).closest('.' + parentClass).length) {
-                        $selectBox.removeClass('active'); // Close the select box
+                        selectBox.removeClass('active'); // Close the select box
                         $(document).off('click.outsideSelectBox'); // Remove this event listener
                     }
                 });
@@ -158,26 +163,26 @@
         }
         /* mở selectBox bên phải */
         function openSelectedRight(selectBoxId, parentClass) {
-            const $selectBox = $('#' + selectBoxId);
-            const $inputParent = $('.' + parentClass);
+            const selectBox = $('#' + selectBoxId);
+            const inputParent = $('.' + parentClass);
 
             // Mở danh sách khi con trỏ chuột nằm trong ô input
-            $selectBox.addClass('active');
+            selectBox.addClass('active');
 
             // Gắn sự kiện click bên ngoài để đóng danh sách
             $(document).on('click.outsideInputBox', function(event) {
                 // Kiểm tra nếu click không thuộc input và không thuộc danh sách
-                if (!$(event.target).closest($inputParent).length && !$(event.target).closest($selectBox).length) {
-                    $selectBox.removeClass('active'); // Đóng danh sách
+                if (!$(event.target).closest(inputParent).length && !$(event.target).closest(selectBox).length) {
+                    selectBox.removeClass('active'); // Đóng danh sách
                     $(document).off('click.outsideInputBox'); // Loại bỏ sự kiện
                 }
             });
 
             // Đảm bảo danh sách đóng khi input bị mất focus
-            $inputParent.find('input').on('blur', function () {
+            inputParent.find('input').on('blur', function () {
                 setTimeout(() => {
-                    if (!$inputParent.find('input:focus').length) {
-                        $selectBox.removeClass('active');
+                    if (!inputParent.find('input:focus').length) {
+                        selectBox.removeClass('active');
                         $(document).off('click.outsideInputBox');
                     }
                 }, 150); // Delay nhỏ để đảm bảo không xung đột khi click vào danh sách
@@ -203,6 +208,7 @@
                 $('#' + hiddenInputId).val(selectedValue);
 
                 // tải lại khung search theo tùy chọn mới
+                $('#js_searchAjax .loadingBox').addClass('show'); /* hiệu ứng làm mờ box */
                 searchAjax();
             });
         }

@@ -5,8 +5,14 @@
 @endphp
 @foreach($paymentMethods as $method)
     @php
-        $nameMethodPayment          = empty($language)||$language=='vi' ? $method->name : $method->en_name;
-        $descriptionMethodPayment   = empty($language)||$language=='vi' ? $method->description : $method->en_description;
+        // Kiểm tra điều kiện lọc: nếu ngôn ngữ không phải 'vi', chỉ hiển thị phương thức có code là 'paypal'
+        if ($language != 'vi' && $method->code != 'paypal') {
+            continue; // Bỏ qua các phương thức không thỏa mãn điều kiện
+        }
+
+        // Xác định tên và mô tả dựa trên ngôn ngữ
+        $nameMethodPayment          = empty($language) || $language == 'vi' ? $method->name : $method->en_name;
+        $descriptionMethodPayment   = empty($language) || $language == 'vi' ? $method->description : $method->en_description;
     @endphp
     <div class="paymentMethodBox_item" onclick="{{ $action }}(this, {{ $method->id }});">
         <div class="paymentMethodBox_item_logo">

@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Product extends Model {
-    use HasFactory;
+    use HasFactory, Searchable;
     protected $table        = 'product_info';
     protected $fillable     = [
         'seo_id',
@@ -17,32 +18,59 @@ class Product extends Model {
     ];
     public $timestamps = true;
 
+    /* index dữ liệu SearchData */
+    public function toSearchableArray() {
+        $this->loadMissing(['seo', 'seos.infoSeo', 'tags.infoTag', 'categories.infoCategory']);
+
+        return [
+            'id'                => $this->id,
+            'code'              => $this->code,
+            'seo_title'         => $this->seo->title ?? '',
+            'seo_description'   => $this->seo->description ?? '',
+            'seos'              => $this->seos->pluck('infoSeo.title')->filter()->toArray(),
+            'tags'              => $this->tags->pluck('infoTag.seos.infoSeo.title')->filter()->toArray(),
+            'categories'        => $this->categories->pluck('infoCategory.seos.infoSeo.title')->filter()->toArray(),
+        ];
+    }
+
     public static function getList($params = null){
-        $result     = self::select('*')
-                        /* tìm theo tên */
-                        ->when(!empty($params['search_name']), function($query) use($params){
-                            $query->whereHas('seo', function($subQuery) use($params){
-                                $subQuery->where('title', 'like', '%'.$params['search_name'].'%');
-                            })->orWhere('code', 'like', '%'.$params['search_name'].'%');
-                        })
-                        /* tìm theo danh mục */
+        if (!empty($params['search_name'])) {
+            $searchName = $params['search_name'];
+    
+            // Lấy danh sách ID từ Meilisearch (tìm trong seo.title)
+            $ids = self::search($searchName)->get()->pluck('id')->toArray();
+    
+            // Truy vấn tiếp tục trong database với điều kiện khác
+            $result = self::whereIn('id', $ids)
                         ->when(!empty($params['search_category']), function($query) use($params){
                             $query->whereHas('categories.infoCategory', function($q) use ($params){
                                 $q->where('id', $params['search_category']);
                             });
                         })
-                        /* tìm theo danh mục */
-                        ->when(!empty($params['search_tag']), function($query) use($params){
-                            $query->whereHas('tags.infoTag', function($q) use ($params){
-                                $q->where('id', $params['search_tag']);
-                            });
-                        })
                         ->orderBy('created_at', 'DESC')
                         ->with(['files' => function($query){
-                            $query->where('relation_table', 'product_info');
+                            $query->where('relation_table', 'tag_info');
                         }])
-                        ->with('seo', 'prices.wallpapers.infoWallpaper', 'categories', 'tags')
+                        ->with('seo', 'seos', 'categories')
                         ->paginate($params['paginate']);
+    
+            return $result;
+        }
+    
+        // Truy vấn mặc định khi không tìm kiếm
+        $result = self::select('*')
+                    ->when(!empty($params['search_category']), function($query) use($params){
+                        $query->whereHas('categories.infoCategory', function($q) use ($params){
+                            $q->where('id', $params['search_category']);
+                        });
+                    })
+                    ->orderBy('created_at', 'DESC')
+                    ->with(['files' => function($query){
+                        $query->where('relation_table', 'tag_info');
+                    }])
+                    ->with('seo', 'seos', 'categories')
+                    ->paginate($params['paginate']);
+    
         return $result;
     }
 

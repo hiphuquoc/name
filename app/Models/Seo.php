@@ -212,18 +212,6 @@ class Seo extends Model {
         return $flag;
     }
 
-    // public function keywords() {
-    //     return $this->hasMany(\App\Models\Keyword::class, 'seo_id', 'id');
-    // }
-
-    // public function contentspin() {
-    //     return $this->hasOne(\App\Models\Contentspin::class, 'seo_id', 'id');
-    // }
-
-    // public function checkSeos() {
-    //     return $this->hasMany(\App\Models\CheckSeo::class, 'seo_id', 'id');
-    // }
-
     public function user(){
         return $this->hasOne(\App\Models\User::class, 'id', 'rating_author_name');
     }

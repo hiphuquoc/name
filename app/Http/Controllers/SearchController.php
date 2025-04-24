@@ -49,64 +49,66 @@ class SearchController extends Controller {
                 $xhtmlContent = null;
                 break;
         }
-        /* thêm icon loadding => cho lần load tiếp theo */
-        // $xhtmlContent         .= '<div id="js_searchAjax_iconLoading" class="loadingBox"><span class="loadingIcon"></span></div>';
         echo $xhtmlContent;
     }
 
     private static function searchPremiumWallpaper($keySearch, $language){
-        $products           = Product::select('product_info.*')
-            ->whereHas('prices.wallpapers', function(){
-
-            })
-            ->whereHas('seos.infoSeo', function($query) use($keySearch, $language){
-                $query->where('title', 'like', '%'.$keySearch.'%');
-            })
-            ->orWhere('code', 'like', '%'.$keySearch.'%')
-            ->get();
-        $count              = $products->count();
-        // $count              = Product::select('product_info.*')
-        //     ->whereHas('prices.wallpapers', function(){
-                    
-        //     })
-        //     ->whereHas('seos.infoSeo', function($query) use($keySearch, $language){
-        //         $query->where('title', 'like', '%'.$keySearch.'%');
-        //     })
-        //     ->orWhere('code', 'like', '%'.$keySearch.'%')
-        //     ->count();
-        $response           = '';
-        if(!empty($products)&&$products->isNotEmpty()){
-            $response       = view('wallpaper.search.premiumWallpaper', compact('products', 'language', 'keySearch', 'count'));
-        }else {
-            $response       = view('wallpaper.template.emptySearch', compact('language'))->render();
+        // trường họp keySearch rỗng
+        if(empty($keySearch)) {
+            return view('wallpaper.template.emptySearch', compact('language'))->render();
         }
-        return $response;
+        // Lấy danh sách ID từ Meilisearch (tìm trong seo.title)
+        $ids        = Product::search($keySearch)->get()->pluck('id')->toArray();
+        $products   = Product::whereIn('id', $ids)
+                        ->whereHas('seos.infoSeo', function($query) use($language){
+                            $query->where('language', $language);
+                        })
+                        ->whereHas('prices.wallpapers', function(){
+
+                        })
+                        ->get();
+        $count      = $products->count();
+
+        // lấy giao diện
+        if($products->isNotEmpty()) {
+            return view('wallpaper.search.premiumWallpaper', compact('products', 'language', 'keySearch', 'count'));
+        }
+
+        return view('wallpaper.template.emptySearch', compact('language'))->render();
    }
 
-    private static function searchCategoryInfo($keySearch, $language){
-        $categories         = Category::select('*')
-            ->whereHas('seos.infoSeo', function($query) use($keySearch, $language){
-                $query->where('title', 'like', '%'.$keySearch.'%')
-                    ->where('language', $language);
-            })
-            ->get();
-        $tags               = Tag::select('*')
-            ->whereHas('seos.infoSeo', function ($query) use ($keySearch, $language) {
-                $query->where('title', 'like', '%' . $keySearch . '%')
-                    ->where('language', $language);
-            })
-            ->get();
-        /* Gộp kết quả từ Category và Tag thành một collection */
-        $categories         = $categories->concat($tags);
-        $count              = $categories->count();
-        /* lấy giao diện */
-        $response           = '';
-        if(!empty($categories)&&$categories->isNotEmpty()){
-            $response       = view('wallpaper.search.categoryInfo', compact('categories', 'language', 'keySearch', 'count'));
-        }else {
-            $response       = view('wallpaper.template.emptySearch', compact('language'))->render();
+    private static function searchCategoryInfo($keySearch, $language) {
+        // Xử lý trường hợp keySearch rỗng
+        if (empty($keySearch)) {
+            return view('wallpaper.template.emptySearch', compact('language'))->render();
         }
-        return $response;
+
+        // Tìm kiếm ID của Category và Tag bằng Meilisearch
+        $categoryIds = Category::search($keySearch)->get()->pluck('id')->toArray();
+        $tagIds = Tag::search($keySearch)->get()->pluck('id')->toArray();
+
+        // Lấy danh sách categories và tags theo ngôn ngữ
+        $categories = Category::whereIn('id', $categoryIds)
+            ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                $query->where('language', $language);
+            })
+            ->get();
+        $tags = Tag::whereIn('id', $tagIds)
+            ->whereHas('seos.infoSeo', function ($query) use ($language) {
+                $query->where('language', $language);
+            })
+            ->get();
+
+        // Gộp kết quả thành một collection
+        $categories = $categories->concat($tags);
+        $count      = $categories->count();
+
+        // Trả về giao diện phù hợp
+        if ($categories->isNotEmpty()) {
+            return view('wallpaper.search.categoryInfo', compact('categories', 'language', 'keySearch', 'count'));
+        }
+
+        return view('wallpaper.template.emptySearch', compact('language'))->render();
     }
 
     private static function searchFreeWallpaper($keySearch, $language){
@@ -115,19 +117,25 @@ class SearchController extends Controller {
     }
 
     private static function searchBlogInfo($keySearch, $language){
-        $blogs              = Blog::select('*')
-            ->whereHas('seos.infoSeo', function($query) use($keySearch, $language){
-                $query->where('title', 'like', '%'.$keySearch.'%')
-                    ->where('language', $language);
-            })
-            ->get();
-        $count              = $blogs->count();
-        $response           = '';
-        if(!empty($blogs)&&$blogs->isNotEmpty()){
-            $response       = view('wallpaper.search.blogInfo', compact('blogs', 'language', 'keySearch', 'count'));
-        }else {
-            $response       = view('wallpaper.template.emptySearch', compact('language'))->render();
+        // Xử lý trường hợp keySearch rỗng
+        if (empty($keySearch)) {
+            return view('wallpaper.template.emptySearch', compact('language'))->render();
         }
-        return $response;
+
+        // Tìm kiếm ID của Blog bằng Meilisearch
+        $blogIds    = Blog::search($keySearch)->get()->pluck('id')->toArray();
+        $blogs      = Blog::whereIn('id', $blogIds)
+                        ->whereHas('seos.infoSeo', function($query) use($language){
+                            $query->where('language', $language);
+                        })
+                        ->get();
+        $count      = $blogs->count();
+        
+        // Trả về giao diện phù hợp
+        if($blogs->isNotEmpty()){
+            return view('wallpaper.search.blogInfo', compact('blogs', 'language', 'keySearch', 'count'));
+        }
+        
+        return view('wallpaper.template.emptySearch', compact('language'))->render();
     }
 }

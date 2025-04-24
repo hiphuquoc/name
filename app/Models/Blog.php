@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Blog extends Model {
-    use HasFactory;
+    use HasFactory, Searchable;
     protected $table        = 'blog_info';
     protected $fillable     = [
         'seo_id', 
@@ -18,16 +19,43 @@ class Blog extends Model {
     ];
     public $timestamps      = false;
 
+    /* index dữ liệu SearchData */
+    public function toSearchableArray() {
+        $this->loadMissing(['seo', 'seos.infoSeo', 'categories.infoCategory']);
+
+        return [
+            'id'                => $this->id,
+            'code'              => $this->code,
+            'seo_title'         => $this->seo->title ?? '',
+            'seo_description'   => $this->seo->description ?? '',
+            'seos'              => $this->seos->pluck('infoSeo.title')->filter()->toArray(),
+            'categories'        => $this->categories->pluck('infoCategory.seos.infoSeo.title')->filter()->toArray(),
+        ];
+    }
+
     public static function getList($params = null){
-        $result     = self::select('*')
-                        /* tìm theo tên */
-                        ->when(!empty($params['search_name']), function($query) use($params){
-                            $searchName = $params['search_name'];
-                            $query->whereHas('seo', function($subQuery) use($searchName){
-                                $subQuery->where('title', 'like', '%'.$searchName.'%');
+        if (!empty($params['search_name'])) {
+            $searchName = $params['search_name'];
+    
+            // Lấy danh sách ID từ Meilisearch (tìm trong seo.title)
+            $ids = self::search($searchName)->get()->pluck('id')->toArray();
+    
+            // Truy vấn tiếp tục trong database với điều kiện khác
+            $result = self::whereIn('id', $ids)
+                        ->when(!empty($params['search_category']), function($query) use($params){
+                            $query->whereHas('categories.infoCategory', function($q) use ($params){
+                                $q->where('id', $params['search_category']);
                             });
                         })
-                        /* tìm theo danh mục */
+                        ->with('seo')
+                        ->orderBy('id', 'DESC')
+                        ->paginate($params['paginate']);
+    
+            return $result;
+        }
+
+        // Truy vấn mặc định khi không tìm kiếm
+        $result     = self::select('*')
                         ->when(!empty($params['search_category']), function($query) use($params){
                             $query->whereHas('categories.infoCategory', function($q) use ($params){
                                 $q->where('id', $params['search_category']);
@@ -71,5 +99,4 @@ class Blog extends Model {
     public function categories(){
         return $this->hasMany(\App\Models\RelationCategoryBlogBlogInfo::class, 'blog_info_id', 'id');
     }
-
 }

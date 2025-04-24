@@ -1082,8 +1082,12 @@ $distanceWrapSearchBoxMobile : 3.5rem;
                 overflow: hidden;
                 width: 100%;
                 height: auto;
-                opacity: 0; /* Đặt opacity ban đầu */
-                visibility: hidden; /* Đặt visibility để không thể tương tác */
+                // opacity: 0; /* Đặt opacity ban đầu */
+                // visibility: hidden; /* Đặt visibility để không thể tương tác */
+                opacity: 1; /* Hiển thị với hiệu ứng fade */
+                visibility: visible; /* Bật lại visibility ngay */
+
+                transition: opacity 0.2s ease, visibility 0s linear 0.2s; /* Tắt sau khi opacity hoàn tất */
                 background: rgb(var(--colorBackgroundLv2));
                 z-index: 998;
                 border-radius: 0 0 $radiusBoxNormal $radiusBoxNormal;
@@ -1091,22 +1095,44 @@ $distanceWrapSearchBoxMobile : 3.5rem;
                 top: calc($heightMenu - 0.625rem - 3px);
                 left: 0;
                 padding: 0;
-                transition: opacity 0.2s ease, visibility 0s linear 0.2s; /* Tắt sau khi opacity hoàn tất */
-                &.loading {
-                    &::after {
-                        width: 100%;
-                        height: 100%;
-                        background: rgba(var(--colorBackgroundLv2), 0.5);
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                    }
-                }
+
                 &.active {
                     opacity: 1; /* Hiển thị với hiệu ứng fade */
                     visibility: visible; /* Bật lại visibility ngay */
                     transition: opacity 0.2s ease, visibility 0s linear 0s; /* Bật ngay */
+                }
+
+                .loadingBox {
+                    display: none;
+                    width: 0;
+                    height: 0;
+                    z-index: 2;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    scale: 1;
+                    .loadingIcon {
+                        z-index: 2;
+                        scale: 0.6;
+                        top: 40%;
+                        left: 50%;
+                        transform: translate3d(-50%, -50%, 0);
+                    }
+                    &_backgroundBlur {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        z-index: 1;
+                        background: rgba(var(--colorBackgroundLv2), 0.5);
+                        top: 0;
+                        left: 0;
+                        backdrop-filter: blur(5px);
+                    }
+                    &.show {
+                        display: flex;
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
             
                 &:dir(rtl), [dir="rtl"] & {
@@ -1114,19 +1140,6 @@ $distanceWrapSearchBoxMobile : 3.5rem;
                     right: 0;
                 }
             }
-            // .loadingBox {
-            //     position: absolute;
-            //     width: 100%;
-            //     height: 100%;
-            //     top: 50%;
-            //     left: 50%;
-            //     transform: translate3d(-50%, -50%, 10px);
-            //     z-index: 999;
-            //     .loadingIcon {
-            //         width: 60px;
-            //         height: 30px;
-            //     }
-            // }
         }
     }
     &_background {
@@ -1242,6 +1255,7 @@ $distanceWrapSearchBoxMobile : 3.5rem;
     }
 }
 .searchViewBeforeOfPremiumWallpaper {
+    position: relative;
     &_boxItem {
         flex-direction: column;
         max-height: 500px;

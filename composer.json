@@ -11,13 +11,16 @@
         "geoip2/geoip2": "^3.0",
         "google/apiclient": "^2.13",
         "guzzlehttp/guzzle": "^7.8",
+        "http-interop/http-factory-guzzle": "^1.2",
         "intervention/image": "^2.5",
         "joggapp/laravel-google-translate": "^9.0",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/scout": "^10.14",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
         "league/flysystem-aws-s3-v3": "^3.13",
+        "meilisearch/meilisearch-php": "^1.14",
         "predis/predis": "^2.3",
         "psr/log": "^3.0",
         "spatie/laravel-google-cloud-storage": "^2.2",
@@ -70,7 +73,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "dev",

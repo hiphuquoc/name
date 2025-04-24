@@ -29,5 +29,13 @@ class RelationTagInfoOrther extends Model {
     public function infoTag() {
         return $this->hasOne(\App\Models\Tag::class, 'id', 'tag_info_id');
     }
+
+    public function infoProduct() {
+        return $this->hasOne(\App\Models\Product::class, 'id', 'reference_id');
+    }
+
+    public function infoFreeWallpaper() {
+        return $this->hasOne(\App\Models\FreeWallpaper::class, 'id', 'reference_id');
+    }
     
 }

@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Category extends BaseCategory {
-    use HasFactory;
+    use HasFactory, Searchable;
     protected $table        = 'category_info';
     protected $fillable     = [
         'seo_id',
@@ -15,6 +16,22 @@ class Category extends BaseCategory {
         'notes',
     ];
     public $timestamps = true;
+
+    /* index dữ liệu SearchData */
+    public function toSearchableArray() {
+        $this->loadMissing(['seo', 'seos.infoSeo', 'tags.infoTag', 'products.infoProduct', 'freeWallpapers.infoFreeWallpaper']);
+
+        return [
+            'id'                => $this->id,
+            'code'              => $this->code,
+            'seo_title'         => $this->seo->title ?? '',
+            'seo_description'   => $this->seo->description ?? '',
+            'seos'              => $this->seos->pluck('infoSeo.title')->filter()->toArray(),
+            'tags'              => $this->tags->pluck('infoTag.seos.infoSeo.title')->filter()->toArray(),
+            'products'          => $this->products->pluck('infoProduct.seos.infoSeo.title')->filter()->toArray(),
+            'freeWallpapers'    => $this->products->pluck('infoFreeWallpaper.seos.infoSeo.title')->filter()->toArray(),
+        ];
+    }
 
     public static function listLanguageNotExists($params = null){
         $countLanguage  = count(config('language'));
