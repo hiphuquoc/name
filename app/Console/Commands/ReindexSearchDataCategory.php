@@ -19,7 +19,7 @@ class ReindexSearchDataCategory extends Command {
         $index = $client->index('category_info'); // <- phải khớp với tên ở Meilisearch Cloud
 
         $index->updateSearchableAttributes([
-            'seo_title',
+            'title',
             'seos',        // cho phép search trong seos.infoSeo.title
             'tags',
             'products',
