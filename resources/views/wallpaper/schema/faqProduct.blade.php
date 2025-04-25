@@ -10,7 +10,7 @@
             "name": "{{ addslashes($faq['question']) }}",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "{!! addslashes($faq['answer']) !!}"
+                "text": "{{ addslashes($faq['answer']) }}"
             }
         }@if(!$loop->last),@endif
         @endforeach

@@ -423,32 +423,32 @@ return [
 ],
 "uz" => [
     [
-        "question" => "Fon rasmlari qanday o\'lchamda va hajmda?",
-        "answer" => "To\'plamdagi har bir fon rasm yuqori o\'lchamli, ekranning barcha telefonlarida aniq, jonli va tafsilotli tasvirlarga ega bo\'lishi uchun mo\'ljallangan. Har bir rasmning aniq o\'lchamlarini ko\'rish uchun <strong><a href=\"#detailPerWallpaper\">har bir fon rasmi haqida batafsil ma\'lumot</a></strong> jadvaliga qarang."
+        "question" => "Fon rasmlari qanday o'lchamda va hajmda?",
+        "answer" => "To'plamdagi har bir fon rasm yuqori o'lchamli, ekranning barcha telefonlarida aniq, jonli va tafsilotli tasvirlarga ega bo'lishi uchun mo'ljallangan. Har bir rasmning aniq o'lchamlarini ko'rish uchun <strong><a href=\"#detailPerWallpaper\">har bir fon rasmi haqida batafsil ma'lumot</a></strong> jadvaliga qarang."
     ],
     [
-        "question" => "Ushbu fon rasmlari barcha turdagi telefonlar bilan mos keladimi va eng so\'nggi modellar uchun optimallashtirilganmi?",
-        "answer" => "Albatta! Ushbu fon rasmlari to\'plami hozirgi kunda mavjud bo\'lgan barcha zamonaviy smartfonlar, shu jumladan iPhone, Samsung, Xiaomi, Oppo, Vivo, Realme, Huawei va boshqa barcha Android qurilmalar uchun mukammal mos kelishini ta\'minlaydi. Biz har bir tasvirni barcha ekran o\'lchamlarida silliq va aniq ko\'rsatilishi uchun optimallashtirdik, hatto eng so\'nggi displey texnologiyasiga ega yangi telefonlar bilan ham. Siz qaysi qurilmani ishlatishingizdan qat\'i nazar, fon rasmi avtomatik ravishda sozlanadi va ajoyib tasvir taassurotini taqdim etadi."
+        "question" => "Ushbu fon rasmlari barcha turdagi telefonlar bilan mos keladimi va eng so'nggi modellar uchun optimallashtirilganmi?",
+        "answer" => "Albatta! Ushbu fon rasmlari to'plami hozirgi kunda mavjud bo'lgan barcha zamonaviy smartfonlar, shu jumladan iPhone, Samsung, Xiaomi, Oppo, Vivo, Realme, Huawei va boshqa barcha Android qurilmalar uchun mukammal mos kelishini ta'minlaydi. Biz har bir tasvirni barcha ekran o'lchamlarida silliq va aniq ko'rsatilishi uchun optimallashtirdik, hatto eng so'nggi displey texnologiyasiga ega yangi telefonlar bilan ham. Siz qaysi qurilmani ishlatishingizdan qat'i nazar, fon rasmi avtomatik ravishda sozlanadi va ajoyib tasvir taassurotini taqdim etadi."
     ],
     [
         "question" => "Fon rasmlari qanday fayl formatida taqdim etiladi?",
-        "answer" => "To\'plamdagi barcha fon rasmlari yuqori sifatli PNG formatida taqdim etiladi. Bu ranglarning haqiqiy ko\'rinishini saqlash, chetki chiziqlardan yoki tafsilot yo\'qolishidan himoya qilish va har qanday ekranda asl ko\'rinishini saqlash uchun ideal formatdir. PNG formati sizning qurilmangizdan qat\'i nazar, har bir fon rasmini doimiy ravishda chiroyli va aniq saqlab turadi."
+        "answer" => "To'plamdagi barcha fon rasmlari yuqori sifatli PNG formatida taqdim etiladi. Bu ranglarning haqiqiy ko'rinishini saqlash, chetki chiziqlardan yoki tafsilot yo'qolishidan himoya qilish va har qanday ekranda asl ko'rinishini saqlash uchun ideal formatdir. PNG formati sizning qurilmangizdan qat'i nazar, har bir fon rasmini doimiy ravishda chiroyli va aniq saqlab turadi."
     ],
     [
         "question" => "Fon rasmini sotib olganimdan keyin qanday qilib yuklab olishim mumkin?",
-        "answer" => "To\'lovni yakunlaganingizdan so\'ng, sizga original fon rasmlarni eng yuqori sifatida yuklab olish uchun to\'g\'ridan-to\'g\'ri havola beriladi. Shuningdek, saqlash va foydalanish uchun qulaylik yaratish maqsadida biz fon rasmlari to\'plamining nusxasini elektron pochta orqali ham yuboramiz. Ushbu sodda jarayon sizga hech qanday muammo olmadan tezda fon rasmini egallash va o\'rnatish imkonini beradi."
+        "answer" => "To'lovni yakunlaganingizdan so'ng, sizga original fon rasmlarni eng yuqori sifatida yuklab olish uchun to'g'ridan-to'g'ri havola beriladi. Shuningdek, saqlash va foydalanish uchun qulaylik yaratish maqsadida biz fon rasmlari to'plamining nusxasini elektron pochta orqali ham yuboramiz. Ushbu sodda jarayon sizga hech qanday muammo olmadan tezda fon rasmini egallash va o'rnatish imkonini beradi."
     ],
     [
         "question" => "Sotib olishimdan keyin men fon rasmini qancha vaqt ichida olaman?",
-        "answer" => "To\'lovni yakunlaganingizdan so\'ng siz darhol fon rasmini olasiz. Yuklab olish havolasi buyurtma tasdiqlash sahifasida paydo bo\'ladi va fon rasmlari nusxasi elektron pochtangizga bir necha daqiqada yetkazib beriladi. Bu tezlik bilan siz kutishga hojat qilmagan holda sevimli fon rasmingizni ishlatishni boshlashingiz mumkin."
+        "answer" => "To'lovni yakunlaganingizdan so'ng siz darhol fon rasmini olasiz. Yuklab olish havolasi buyurtma tasdiqlash sahifasida paydo bo'ladi va fon rasmlari nusxasi elektron pochtangizga bir necha daqiqada yetkazib beriladi. Bu tezlik bilan siz kutishga hojat qilmagan holda sevimli fon rasmingizni ishlatishni boshlashingiz mumkin."
     ],
     [
-        "question" => "Agar fon rasmini yuklash yoki ishlatishda muammo bo\'lsa, texnik yordam bormi?",
-        "answer" => "Ha! Biz sizga eng yaxshi tajriba o\'tkazish uchun 24/7 faol texnik yordam xizmatini taqdim etamiz. Bizning mutaxassislar jamoamiz sizni onlayn chat yoki aqlli AI chatbot orqali har qanday savolingizga javob berish va fon rasmini yuklash yoki ishlatish jarayonida yuzaga kelgan har qanday muammo bilan tezda ishlashga tayyor."
+        "question" => "Agar fon rasmini yuklash yoki ishlatishda muammo bo'lsa, texnik yordam bormi?",
+        "answer" => "Ha! Biz sizga eng yaxshi tajriba o'tkazish uchun 24/7 faol texnik yordam xizmatini taqdim etamiz. Bizning mutaxassislar jamoamiz sizni onlayn chat yoki aqlli AI chatbot orqali har qanday savolingizga javob berish va fon rasmini yuklash yoki ishlatish jarayonida yuzaga kelgan har qanday muammo bilan tezda ishlashga tayyor."
     ],
     [
         "question" => "Fon rasmini sotib olganimdan keyin uni yangilanishlarini yoki yangi versiyalarini olamanmi?",
-        "answer" => "Albatta! Ushbu fon rasmlari to\'plamini egallaganingizda, siz umr bo\'yi bepul yangilanishlardan foydalana olasiz. Yangi rasm versiyalari chiqqanda yoki kelajakdagi telefonlar uchun moslashtirish optimallashtirilganda, biz sizga elektron pochta orqali bildirish va to\'liq bepul yangilanishlarni taqdim etamiz. Bu sizning har doim eng chiroyli va zamonaviy fon rasmlariga ega bo\'lishingizni ta\'minlaydi, qo\'shimcha xarajatlarsiz."
+        "answer" => "Albatta! Ushbu fon rasmlari to'plamini egallaganingizda, siz umr bo'yi bepul yangilanishlardan foydalana olasiz. Yangi rasm versiyalari chiqqanda yoki kelajakdagi telefonlar uchun moslashtirish optimallashtirilganda, biz sizga elektron pochta orqali bildirish va to'liq bepul yangilanishlarni taqdim etamiz. Bu sizning har doim eng chiroyli va zamonaviy fon rasmlariga ega bo'lishingizni ta'minlaydi, qo'shimcha xarajatlarsiz."
     ]
 ],
 "he" => [
@@ -474,7 +474,7 @@ return [
     ],
     [
         "question" => "האם יש תמיכה טכנית אם אתקל בבעיות במהלך ההורדה או השימוש ברקע המסך?",
-        "answer" => "כן! אנו מספקים תמיכה טכנית ייעודית 24/7 כדי להבטיח חוויה מעולה. צוות המומחים שלנו זמין תמיד לעזור לך באמצעות צ\'אט מקוון או צ\'אט בוט AI מתקדם, לענות על כל השאלות ולטפל במהירות בכל בעיה שתיתקל בה בעת הורדת או שימוש ברקע המסך."
+        "answer" => "כן! אנו מספקים תמיכה טכנית ייעודית 24/7 כדי להבטיח חוויה מעולה. צוות המומחים שלנו זמין תמיד לעזור לך באמצעות צ'אט מקוון או צ'אט בוט AI מתקדם, לענות על כל השאלות ולטפל במהירות בכל בעיה שתיתקל בה בעת הורדת או שימוש ברקע המסך."
     ],
     [
         "question" => "האם אקבל עדכונים או גרסאות חדשות של רקע המסך לאחר הרכישה?",
@@ -710,7 +710,7 @@ return [
     ],
     [
         "question" => "Через який час я отримаю шпалери після покупки?",
-        "answer" => "Ви отримаєте шпалери відразу після завершення оплати. Посилання для завантаження з\'явиться на сторінці підтвердження замовлення, а електронний лист із копією шпалер буде надісланий вам протягом декількох хвилин. З такою швидкістю ви зможете почати користуватися улюбленими шпалерами без очікування."
+        "answer" => "Ви отримаєте шпалери відразу після завершення оплати. Посилання для завантаження з'явиться на сторінці підтвердження замовлення, а електронний лист із копією шпалер буде надісланий вам протягом декількох хвилин. З такою швидкістю ви зможете почати користуватися улюбленими шпалерами без очікування."
     ],
     [
         "question" => "Чи є технічна підтримка, якщо у мене виникнуть проблеми з завантаженням або використанням шпалер?",
@@ -718,7 +718,7 @@ return [
     ],
     [
         "question" => "Чи отримаю я оновлення або нові версії шпалер після покупки?",
-        "answer" => "Звичайно! Купуючи цей набір шпалер, ви отримуєте право на безкоштовні оновлення на все життя. Кожного разу, коли з\'являться нові версії зображень або оптимізації для сумісності з майбутніми моделями телефонів, ми повідомимо вас електронною поштою і надамо повністю безкоштовне оновлення. Це гарантує, що ви завжди матимете найкрасивіші та найсучасніші шпалери без додаткових витрат."
+        "answer" => "Звичайно! Купуючи цей набір шпалер, ви отримуєте право на безкоштовні оновлення на все життя. Кожного разу, коли з'являться нові версії зображень або оптимізації для сумісності з майбутніми моделями телефонів, ми повідомимо вас електронною поштою і надамо повністю безкоштовне оновлення. Це гарантує, що ви завжди матимете найкрасивіші та найсучасніші шпалери без додаткових витрат."
     ]
 ],
 "pl" => [
@@ -754,31 +754,31 @@ return [
 "it" => [
     [
         "question" => "Qual è la risoluzione e la dimensione delle immagini di sfondo?",
-        "answer" => "Ogni immagine di sfondo nella collezione è progettata con un\'alta risoluzione, garantendo immagini nitide, vivide e dettagliate su ogni schermo del telefono. Per informazioni specifiche sulla risoluzione di ciascuna immagine, puoi consultare la tabella <strong><a href=\"#detailPerWallpaper\">dettagli per ogni sfondo</a></strong>."
+        "answer" => "Ogni immagine di sfondo nella collezione è progettata con un'alta risoluzione, garantendo immagini nitide, vivide e dettagliate su ogni schermo del telefono. Per informazioni specifiche sulla risoluzione di ciascuna immagine, puoi consultare la tabella <strong><a href=\"#detailPerWallpaper\">dettagli per ogni sfondo</a></strong>."
     ],
     [
         "question" => "Questi sfondi sono compatibili con tutti i tipi di telefoni e sono stati ottimizzati per i modelli più recenti?",
-        "answer" => "Assolutamente sì! Questa collezione di sfondi è stata progettata per essere perfettamente compatibile con tutti gli smartphone attuali, inclusi iPhone, Samsung, Xiaomi, Oppo, Vivo, Realme, Huawei e tutti gli altri dispositivi Android. Abbiamo ottimizzato ogni immagine per garantire una visualizzazione fluida e nitida su ogni dimensione di schermo, compresi i modelli più recenti con tecnologie di visualizzazione avanzate. Indipendentemente dal dispositivo che utilizzi, lo sfondo si adatterà automaticamente per offrire un\'esperienza visiva impressionante."
+        "answer" => "Assolutamente sì! Questa collezione di sfondi è stata progettata per essere perfettamente compatibile con tutti gli smartphone attuali, inclusi iPhone, Samsung, Xiaomi, Oppo, Vivo, Realme, Huawei e tutti gli altri dispositivi Android. Abbiamo ottimizzato ogni immagine per garantire una visualizzazione fluida e nitida su ogni dimensione di schermo, compresi i modelli più recenti con tecnologie di visualizzazione avanzate. Indipendentemente dal dispositivo che utilizzi, lo sfondo si adatterà automaticamente per offrire un'esperienza visiva impressionante."
     ],
     [
         "question" => "In quale formato file sono forniti gli sfondi?",
-        "answer" => "Tutti gli sfondi della collezione sono forniti in formato PNG di alta qualità. Questo formato è ideale per mantenere colori autentici, senza bordi o perdita di dettagli, preservando la bellezza originale dell\'immagine su qualsiasi tipo di schermo. Con il formato PNG, puoi essere sicuro che ogni sfondo sarà sempre vibrante e nitido, indipendentemente dal dispositivo che utilizzi."
+        "answer" => "Tutti gli sfondi della collezione sono forniti in formato PNG di alta qualità. Questo formato è ideale per mantenere colori autentici, senza bordi o perdita di dettagli, preservando la bellezza originale dell'immagine su qualsiasi tipo di schermo. Con il formato PNG, puoi essere sicuro che ogni sfondo sarà sempre vibrante e nitido, indipendentemente dal dispositivo che utilizzi."
     ],
     [
-        "question" => "Come posso scaricare gli sfondi dopo l\'acquisto?",
+        "question" => "Come posso scaricare gli sfondi dopo l'acquisto?",
         "answer" => "Subito dopo aver completato il pagamento, riceverai un link diretto per accedere e scaricare gli sfondi originali nella migliore qualità possibile. Inoltre, per maggiore comodità di archiviazione e utilizzo, ti invieremo anche una copia della collezione di sfondi via email. Questo processo semplice ti assicura di poter ottenere e impostare rapidamente gli sfondi senza alcuna difficoltà."
     ],
     [
-        "question" => "Entro quanto tempo riceverò gli sfondi dopo l\'acquisto?",
-        "answer" => "Riceverai gli sfondi immediatamente dopo aver completato il pagamento. Il link per il download apparirà sulla pagina di conferma dell\'ordine e una email contenente una copia degli sfondi ti verrà inviata entro pochi minuti. Con questa velocità, puoi iniziare a utilizzare i tuoi sfondi preferiti senza dover aspettare."
+        "question" => "Entro quanto tempo riceverò gli sfondi dopo l'acquisto?",
+        "answer" => "Riceverai gli sfondi immediatamente dopo aver completato il pagamento. Il link per il download apparirà sulla pagina di conferma dell'ordine e una email contenente una copia degli sfondi ti verrà inviata entro pochi minuti. Con questa velocità, puoi iniziare a utilizzare i tuoi sfondi preferiti senza dover aspettare."
     ],
     [
-        "question" => "C\'è supporto tecnico se incontro problemi durante il download o l\'utilizzo degli sfondi?",
-        "answer" => "Sì! Offriamo un servizio di supporto tecnico dedicato 24/7 per garantire la migliore esperienza possibile. Il nostro team di esperti è sempre pronto ad assisterti tramite chat online o chatbot AI intelligente, rispondendo a tutte le tue domande e risolvendo rapidamente qualsiasi problema tu possa incontrare durante il download o l\'utilizzo degli sfondi."
+        "question" => "C'è supporto tecnico se incontro problemi durante il download o l'utilizzo degli sfondi?",
+        "answer" => "Sì! Offriamo un servizio di supporto tecnico dedicato 24/7 per garantire la migliore esperienza possibile. Il nostro team di esperti è sempre pronto ad assisterti tramite chat online o chatbot AI intelligente, rispondendo a tutte le tue domande e risolvendo rapidamente qualsiasi problema tu possa incontrare durante il download o l'utilizzo degli sfondi."
     ],
     [
-        "question" => "Riceverò aggiornamenti o nuove versioni degli sfondi dopo l\'acquisto?",
-        "answer" => "Certamente sì! Acquistando questa collezione di sfondi, avrai diritto agli aggiornamenti gratuiti a vita. Ogni volta che ci saranno nuove versioni delle immagini o ottimizzazioni per garantire la compatibilità con i futuri modelli di telefono, ti informeremo via email e forniremo l\'aggiornamento completamente gratuito. Questo ti assicura di avere sempre gli sfondi più belli e moderni senza dover pagare costi aggiuntivi."
+        "question" => "Riceverò aggiornamenti o nuove versioni degli sfondi dopo l'acquisto?",
+        "answer" => "Certamente sì! Acquistando questa collezione di sfondi, avrai diritto agli aggiornamenti gratuiti a vita. Ogni volta che ci saranno nuove versioni delle immagini o ottimizzazioni per garantire la compatibilità con i futuri modelli di telefono, ti informeremo via email e forniremo l'aggiornamento completamente gratuito. Questo ti assicura di avere sempre gli sfondi più belli e moderni senza dover pagare costi aggiuntivi."
     ]
 ],
 "tr" => [
@@ -1353,32 +1353,32 @@ return [
 ],
 "fr" => [
     [
-        "question" => "Quelle est la résolution et la taille des fonds d\'écran ?",
-        "answer" => "Chaque fond d\'écran de cette collection est conçu avec une haute résolution, garantissant des images nettes, vivantes et détaillées sur tous les écrans de téléphone. Pour des informations spécifiques sur la résolution de chaque image, vous pouvez consulter le tableau <strong><a href=\"#detailPerWallpaper\">détails par fond d\'écran</a></strong>."
+        "question" => "Quelle est la résolution et la taille des fonds d'écran ?",
+        "answer" => "Chaque fond d'écran de cette collection est conçu avec une haute résolution, garantissant des images nettes, vivantes et détaillées sur tous les écrans de téléphone. Pour des informations spécifiques sur la résolution de chaque image, vous pouvez consulter le tableau <strong><a href=\"#detailPerWallpaper\">détails par fond d'écran</a></strong>."
     ],
     [
-        "question" => "Est-ce que ces fonds d\'écran sont compatibles avec tous les types de téléphones et optimisés pour les derniers modèles ?",
-        "answer" => "Absolument ! Cette collection de fonds d\'écran est conçue pour être parfaitement compatible avec tous les smartphones actuels, y compris iPhone, Samsung, Xiaomi, Oppo, Vivo, Realme, Huawei et tous les autres appareils Android. Nous avons optimisé chaque image pour assurer un affichage fluide et net sur toutes les tailles d\'écran, y compris les derniers modèles dotés de technologies d\'affichage avancées. Peu importe l\'appareil que vous utilisez, le fond d\'écran s\'ajustera automatiquement pour offrir une expérience visuelle impressionnante."
+        "question" => "Est-ce que ces fonds d'écran sont compatibles avec tous les types de téléphones et optimisés pour les derniers modèles ?",
+        "answer" => "Absolument ! Cette collection de fonds d'écran est conçue pour être parfaitement compatible avec tous les smartphones actuels, y compris iPhone, Samsung, Xiaomi, Oppo, Vivo, Realme, Huawei et tous les autres appareils Android. Nous avons optimisé chaque image pour assurer un affichage fluide et net sur toutes les tailles d'écran, y compris les derniers modèles dotés de technologies d'affichage avancées. Peu importe l'appareil que vous utilisez, le fond d'écran s'ajustera automatiquement pour offrir une expérience visuelle impressionnante."
     ],
     [
-        "question" => "Dans quel format de fichier sont fournis les fonds d\'écran ?",
-        "answer" => "Tous les fonds d\'écran de cette collection sont disponibles au format PNG haute qualité. C\'est un format idéal pour préserver des couleurs fidèles, sans bordures ni perte de détails, tout en maintenant la beauté originale de l\'image sur tous les types d\'écrans. Avec le format PNG, vous pouvez être sûr que chaque fond d\'écran restera vibrant et net, quel que soit votre appareil."
+        "question" => "Dans quel format de fichier sont fournis les fonds d'écran ?",
+        "answer" => "Tous les fonds d'écran de cette collection sont disponibles au format PNG haute qualité. C'est un format idéal pour préserver des couleurs fidèles, sans bordures ni perte de détails, tout en maintenant la beauté originale de l'image sur tous les types d'écrans. Avec le format PNG, vous pouvez être sûr que chaque fond d'écran restera vibrant et net, quel que soit votre appareil."
     ],
     [
-        "question" => "Comment puis-je télécharger les fonds d\'écran après l\'achat ?",
-        "answer" => "Immédiatement après avoir finalisé votre paiement, vous recevrez un lien direct pour accéder et télécharger les fonds d\'écran originaux en haute qualité. De plus, pour plus de commodité dans le stockage et l\'utilisation, nous vous enverrons également une copie complète des fonds d\'écran par email. Ce processus simple garantit que vous pouvez obtenir et installer vos fonds d\'écran rapidement et sans difficulté."
+        "question" => "Comment puis-je télécharger les fonds d'écran après l'achat ?",
+        "answer" => "Immédiatement après avoir finalisé votre paiement, vous recevrez un lien direct pour accéder et télécharger les fonds d'écran originaux en haute qualité. De plus, pour plus de commodité dans le stockage et l'utilisation, nous vous enverrons également une copie complète des fonds d'écran par email. Ce processus simple garantit que vous pouvez obtenir et installer vos fonds d'écran rapidement et sans difficulté."
     ],
     [
-        "question" => "Combien de temps vais-je recevoir les fonds d\'écran après l\'achat ?",
-        "answer" => "Vous recevrez les fonds d\'écran immédiatement après avoir finalisé votre paiement. Le lien de téléchargement apparaîtra sur la page de confirmation de commande, et l\'email contenant une copie des fonds d\'écran vous sera envoyé en quelques minutes seulement. Avec cette rapidité, vous pourrez commencer à utiliser vos fonds d\'écran préférés sans attendre."
+        "question" => "Combien de temps vais-je recevoir les fonds d'écran après l'achat ?",
+        "answer" => "Vous recevrez les fonds d'écran immédiatement après avoir finalisé votre paiement. Le lien de téléchargement apparaîtra sur la page de confirmation de commande, et l'email contenant une copie des fonds d'écran vous sera envoyé en quelques minutes seulement. Avec cette rapidité, vous pourrez commencer à utiliser vos fonds d'écran préférés sans attendre."
     ],
     [
-        "question" => "Y a-t-il un support technique si je rencontre des problèmes lors du téléchargement ou de l\'utilisation des fonds d\'écran ?",
-        "answer" => "Oui ! Nous proposons un service de support technique 24h/24 et 7j/7 dédié pour vous assurer une expérience exceptionnelle. Notre équipe d\'experts est toujours prête à vous aider via notre système de chat en ligne ou notre chatbot IA intelligent, répondant à toutes vos questions et résolvant rapidement tout problème rencontré pendant le téléchargement ou l\'utilisation des fonds d\'écran."
+        "question" => "Y a-t-il un support technique si je rencontre des problèmes lors du téléchargement ou de l'utilisation des fonds d'écran ?",
+        "answer" => "Oui ! Nous proposons un service de support technique 24h/24 et 7j/7 dédié pour vous assurer une expérience exceptionnelle. Notre équipe d'experts est toujours prête à vous aider via notre système de chat en ligne ou notre chatbot IA intelligent, répondant à toutes vos questions et résolvant rapidement tout problème rencontré pendant le téléchargement ou l'utilisation des fonds d'écran."
     ],
     [
-        "question" => "Vais-je recevoir des mises à jour ou de nouvelles versions des fonds d\'écran après l\'achat ?",
-        "answer" => "Absolument ! En achetant cette collection de fonds d\'écran, vous bénéficierez de mises à jour gratuites à vie. Chaque fois qu\'une nouvelle version d\'image ou des optimisations pour les futurs modèles de téléphones seront disponibles, nous vous en informerons par email et vous fournirons la mise à jour gratuitement. Cela garantit que vous posséderez toujours les plus beaux et les plus modernes fonds d\'écran sans frais supplémentaires."
+        "question" => "Vais-je recevoir des mises à jour ou de nouvelles versions des fonds d'écran après l'achat ?",
+        "answer" => "Absolument ! En achetant cette collection de fonds d'écran, vous bénéficierez de mises à jour gratuites à vie. Chaque fois qu'une nouvelle version d'image ou des optimisations pour les futurs modèles de téléphones seront disponibles, nous vous en informerons par email et vous fournirons la mise à jour gratuitement. Cela garantit que vous posséderez toujours les plus beaux et les plus modernes fonds d'écran sans frais supplémentaires."
     ]
 ],
 "es" => [
