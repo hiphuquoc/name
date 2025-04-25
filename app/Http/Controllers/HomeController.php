@@ -260,6 +260,13 @@ class HomeController extends Controller {
             echo '<div>'.$language['key'].' - '.$language['name_by_language'].'</div>';
         }
 
+        $categories = Category::all();
+        $i  = 1;
+        foreach($categories as $category){
+            echo '<div>' . $i . '. ' . $category->seo->title . ' 4K</div>';
+            ++$i;
+        }
+
 
         dd(123);
     }
