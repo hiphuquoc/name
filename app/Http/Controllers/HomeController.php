@@ -263,7 +263,7 @@ class HomeController extends Controller {
         $categories = Category::all();
         $i  = 1;
         foreach($categories as $category){
-            echo '<div>' . $i . '. ' . $category->seo->title . ' 4K</div>';
+            echo $category->seo->title . ', ';
             ++$i;
         }
 

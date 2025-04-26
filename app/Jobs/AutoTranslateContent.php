@@ -122,6 +122,12 @@ class AutoTranslateContent implements ShouldQueue {
                         }
                     }
                 }
+            }else {
+                /* cập nhật lại trạng thái */
+                JobAutoTranslate::where('seo_id', $this->idSeo)
+                    ->where('ordering', $this->ordering)
+                    ->where('language', $this->language)
+                    ->update(['status' => 1]);
             }
         } catch (\Exception $e) {
             throw $e; // Đẩy lại lỗi để Laravel tự động thử lại
