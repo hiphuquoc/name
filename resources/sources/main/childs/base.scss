@@ -208,6 +208,14 @@ p, ul, ol, h2, h3, h4, h5, h6 {
   // }
 }
 
+ul, ol {
+  li {
+    &:not(:first-child){
+      margin-top: 0.25rem;
+    }
+  }
+}
+
 // h2, h3, h4, h5, h6 {
 //   margin-bottom: 1rem;
 //   @media(max-width: 1199px){

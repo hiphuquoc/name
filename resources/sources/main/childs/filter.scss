@@ -6,6 +6,7 @@ $heightSelect : 2.25rem;
     align-items: flex-end;
     margin-top: 10px;
     width: 100%;
+    cursor: pointer;
     &:hover {
         .selectCustom_box {
             visibility: visible !important;
@@ -29,11 +30,13 @@ $heightSelect : 2.25rem;
         color: rgba(var(--colorText), var(--opacityNormal));
         min-width: 140px;
         width: 100%;
-        /* ở đây không dùng flex được -> vì không set được maxLine */
-        > * {
-            display: inline-block;
-            vertical-align: middle;
-        }
+        height: 100%;
+        display: flex;
+        align-items: center;
+        // > * {
+        //     display: inline-block;
+        //     vertical-align: middle;
+        // }
         svg {
             color: rgba(var(--colorText), 0.4);
             width: 1rem;

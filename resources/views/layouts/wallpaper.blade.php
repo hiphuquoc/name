@@ -15,65 +15,44 @@
     <!-- SVG icon inline -->
     @include('wallpaper.snippets.svgSprite')
     
-    <div id="js_openCloseModal_blur">
-        {{-- <!-- header Top -->
-        <div class="menuTopBackground layoutHeaderTop">
-            <div class="layoutHeaderTop_header container">
-                <a href="/{{ config('language.'.$language.'.key') }}" class="logoMain" aria-label="{{ config('data_language_1.'.$language.'.home') }} wallsora.com">
-                    @if(Route::is('main.home'))
-                        <h1 style="opacity:0;">{{ config('data_language_1.'.$language.'.home').' '.config('main_'.env('APP_NAME').'.company_name') }}</h1>
-                    @endif
-                </a>
-            </div>
-            <div class="layoutHeaderTop_content container">
-                @include('wallpaper.snippets.headerTop')
-            </div>
-        </div> --}}
+    @include('wallpaper.snippets.headerTop')
 
-        @include('wallpaper.snippets.headerTop')
-
-        <!-- === START:: Content === -->
-        <div id="js_settingCollapsedMenu" class="layoutHeaderSide">
-            <!-- giữ chỗ thanh bên để chống nhảy trang -->
-            <div class="layoutHeaderSide_placeholder"></div>
-            <!-- thanh bên -->
-            <div id="js_toggleMenuMobile" class="layoutHeaderSide_header container">
-                @include('wallpaper.snippets.headerSide')
-            </div>
-            <div class="backgroundBlurMobileMenu" onClick="toggleMenuMobile('js_toggleMenuMobile');"></div>
-            <!-- nội dung chính -->
-            <div class="layoutHeaderSide_content container">
-                <div id="js_blurBackground">
-                    @yield('content')
-                    @include('wallpaper.snippets.footer')
-                </div>
-            </div>
-            {{-- <div class="backgroundBlurMobileMenu"></div> --}}
+    <!-- === START:: Content === -->
+    <div id="js_settingCollapsedMenu" class="layoutHeaderSide">
+        <!-- giữ chỗ thanh bên để chống nhảy trang -->
+        <div class="layoutHeaderSide_placeholder"></div>
+        <!-- thanh bên -->
+        <div id="js_toggleMenuMobile" class="layoutHeaderSide_header container">
+            @include('wallpaper.snippets.headerSide')
         </div>
-
-        <!-- === START:: Footer === -->
-        {{-- @if(!Route::is('main.cart')&&!Route::is('main.confirm'))
-            @include('wallpaper.snippets.footer')
-        @endif --}}
-        {{-- @include('wallpaper.snippets.footer') --}}
-        <!-- === END:: Footer === -->
-
-        <div class="bottom">
-            <div id="smoothScrollToTop" class="gotoTop" onclick="javascript:smoothScrollToTop();">
-                <svg><use xlink:href="#icon_arrow_up"></use></svg>
+        <div class="backgroundBlurMobileMenu" onClick="toggleMenuMobile('js_toggleMenuMobile');"></div>
+        <!-- nội dung chính -->
+        <div class="layoutHeaderSide_content container">
+            <div id="js_blurBackground">
+                @yield('content')
+                @include('wallpaper.snippets.footer')
             </div>
-            @stack('bottom')
         </div>
-
     </div>
+    <!-- === END:: Content === -->
 
-    <!-- Full loading -->
+    <!-- === START:: BOTTOM === -->
+    <div class="bottom">
+        <div id="smoothScrollToTop" class="gotoTop" onclick="javascript:smoothScrollToTop();">
+            <svg><use xlink:href="#icon_arrow_up"></use></svg>
+        </div>
+        @stack('bottom')
+    </div>
+    <!-- === END:: BOTTOM === -->
+
+    <!-- === START:: LOADING === -->
     <div id="js_toggleFullLoading" class="fullLoading">
         <div class="fullLoading_box">
             <div class="loadingIcon"></div>
             <div id="js_toggleFullLoading_text" class="fullLoading_box_text">{{ config('data_language_3.'.$language.'.the_system_is_processing_your_request') }}</div>
         </div>
     </div>
+    <!-- === END:: LOADING === -->
     
     <!-- Modal -->
     @stack('modal')

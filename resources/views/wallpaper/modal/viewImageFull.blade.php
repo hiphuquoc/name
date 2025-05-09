@@ -92,24 +92,20 @@
             if(action==null){
                 if(flag=='none'){
                     elementModal.css('display', 'flex');
-                    $('#js_openCloseModal_blur').addClass('blurBackground');
                     $('body').css('overflow', 'hidden');
                 }else {
                     elementModal.css('display', 'none');
-                    $('#js_openCloseModal_blur').removeClass('blurBackground');
                     $('body').css('overflow', 'unset');
                 }
             }
             /* đóng */
             if(action=='close'){
                 elementModal.css('display', 'none');
-                $('#js_openCloseModal_blur').removeClass('blurBackground');
                 $('body').css('overflow', 'unset');
             }
             /* mở */
             if(action=='open'){
                 elementModal.css('display', 'flex');
-                $('#js_openCloseModal_blur').addClass('blurBackground');
                 $('body').css('overflow', 'hidden');
             }
         }

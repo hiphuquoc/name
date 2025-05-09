@@ -318,6 +318,7 @@ $widthCollapsed : 17rem;
             > a, > div {
                 font-family: $fontText;
                 font-weight: 500 !important;
+                font-size: var(--fontSizeNormal);
                 color: rgb(var(--colorText)) !important;
                 display: flex;
                 align-items: center;

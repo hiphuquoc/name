@@ -176,7 +176,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        gap: 0;
+        gap: 0.15rem;
         overflow: hidden;
         > * {
             /* mấy thẻ bao bọc dư do ajax */
@@ -185,7 +185,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 0;
+            gap: 0.15rem;
             text-align: center;
             white-space: nowrap;
         }
@@ -246,6 +246,16 @@
                 height: 1.25rem;
                 svg {
                     width: 1.25rem;
+                }
+            }
+        }
+    }
+    @media(max-width: 577px){
+        &_item {
+            &_icon {
+                height: 1.2rem;
+                svg {
+                    width: 1.2rem;
                 }
             }
         }
@@ -317,8 +327,8 @@
     
     &_icon {
         position: relative;
-        width: 1.35rem;
-        height: 1.35rem;
+        width: 1.3rem;
+        height: 1.3rem;
         &:before,
         &:after {
             content: '';
@@ -397,6 +407,7 @@
     justify-content: center;
     color: rgba(var(--colorText), var(--opacityNormal));
     font-size: var(--fontSizeNormal);
+    font-weight: 500;
     &:hover {
         color: rgb(var(--colorText));
     }
@@ -518,7 +529,7 @@
     }
     @media(max-width: 577px){
         &_show {
-            font-size: 1.45rem;  
+            font-size: 1.4rem;  
             font-family: $fontTitle;
             font-weight: 500;
             letter-spacing: 0.25px;
@@ -538,6 +549,7 @@
     font-size: var(--fontSizeNormal);
     color: rgba(var(--colorText), var(--opacityNormal));
     font-family: $fontText;
+    font-weight: 500;
     gap: 0.5rem;
     &:hover {
         color: rgb(var(--colorText));
@@ -553,7 +565,7 @@
         width: 1.45rem; /* to hơn icon khác 0.1rem vì icon user ốm */
         height: 1.45rem;
         opacity: var(--opacityNormal);
-        color: rgb(var(--colorIcon));
+        color: rgba(var(--colorIcon), var(--opacityNormal));
     }
     &_show {
         display: flex;
@@ -719,9 +731,10 @@
     }
 }
 .cartBox {
-    color: rgba(var(--colorText), var(--opacityNormal));
+    color: rgb(var(--colorText));
     font-size: var(--fontSizeNormal);
     font-family: $fontText;
+    font-weight: 500;
     height: inherit;
     position: relative;
     display: flex;
@@ -784,22 +797,10 @@
                     height: 100%;
                 }
             }
-            // @media(max-width: 767px){
-            //     width: 1.35rem;
-            //     height: 1.35rem;
-            //     svg {
-            //         width: 100%;
-            //         height: 100%;
-            //     }
-            // }
-            // @media(max-width: 577px){
-            //     width: 1.3rem;
-            //     height: 1.3rem;
-            //     svg {
-            //         width: 100%;
-            //         height: 100%;
-            //     }
-            // }
+            @media(max-width: 577px){
+                width: 1.35rem;
+                height: 1.35rem;
+            }
         }
         &_text {
             color: inherit;
@@ -876,10 +877,6 @@
     @media(max-width: 991px){
         min-width: 32.5px;
         margin-right: 0.25rem;
-        // &:dir(rtl), [dir="rtl"] & {
-        //     margin-right: unset;
-        //     margin-left: 0.5rem;
-        // }
         &_show {
             &_text {
                 display: none !important;
@@ -1413,7 +1410,7 @@ $distanceWrapSearchBoxMobile : 3.5rem;
             @include iconCloseSquare;
         }
         &_box {
-            margin: 0.25rem 0;
+            margin: 0.25rem 0;  
             &_item {
                 display: flex;
                 align-items: center;
@@ -1448,12 +1445,12 @@ $distanceWrapSearchBoxMobile : 3.5rem;
     }
     @media(max-width: 991px){
         &_show {
-            width: 1.55rem;
-            height: 1.55rem;
+            width: 1.5rem;
+            height: 1.5rem;
             &_boxHeight {
                 svg {
-                    width: 1.55rem;
-                    height: 1.55rem;
+                    width: 1.5rem;
+                    height: 1.5rem;
                 }
             }
         }
@@ -1472,28 +1469,28 @@ $distanceWrapSearchBoxMobile : 3.5rem;
     }
     @media(max-width: 767px){
         &_show {
-            width: 1.5rem;
-            height: 1.5rem;
-            &_boxHeight {
-                svg {
-                    width: 1.5rem;
-                    height: 1.5rem;
-                }
-            }
-        }
-        &_list {
-            font-size: calc(var(--fontSizeNormal) - 0.025rem);
-            width: calc(100% - 1.5rem);
-        }
-    }
-    @media(max-width: 577px){
-        &_show {
             width: 1.45rem;
             height: 1.45rem;
             &_boxHeight {
                 svg {
                     width: 1.45rem;
                     height: 1.45rem;
+                }
+            }
+        }
+        &_list {
+            font-size: calc(var(--fontSizeNormal) - 0.025rem);
+            width: calc(100% - 1.45rem);
+        }
+    }
+    @media(max-width: 577px){
+        &_show {
+            width: 1.4rem;
+            height: 1.4rem;
+            &_boxHeight {
+                svg {
+                    width: 1.4rem;
+                    height: 1.4rem;
                 }
             }
         }

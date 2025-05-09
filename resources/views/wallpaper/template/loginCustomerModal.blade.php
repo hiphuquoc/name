@@ -104,19 +104,6 @@
 </form>
 {{-- @push('scriptCustom')
     <script type="text/javascript">
-        function toggleModalCustomerLoginForm(idElement){
-            const element   = $('#'+idElement);
-            const displayE  = element.css('display');
-            if(displayE=='none'){
-                /* hiển thị */
-                element.css('display', 'flex');
-                $('body').css('overflow', 'hidden');
-                $('#js_openCloseModal_blur').addClass('blurBackground');
-            }else {
-                element.css('display', 'none');
-                $('body').css('overflow', 'unset');
-                $('#js_openCloseModal_blur').removeClass('blurBackground');
-            }
-        }
+       
     </script>
 @endpush --}}

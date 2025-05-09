@@ -120,7 +120,6 @@
                 /* hiển thị modal */
                 element.css('display', 'flex');
                 $('body').css('overflow', 'hidden');
-                $('#js_openCloseModal_blur').addClass('blurBackground');
                 // Kiểm tra xem script Google Sign-In đã được tải chưa
                 if (!document.getElementById('google-signin-script')) {
                     var script = document.createElement('script');
@@ -132,7 +131,6 @@
                 /* ẩn modal */
                 element.css('display', 'none');
                 $('body').css('overflow', 'unset');
-                $('#js_openCloseModal_blur').removeClass('blurBackground');
             }
         }
         function submitFormLogin(idForm){
