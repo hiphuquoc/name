@@ -127,7 +127,7 @@ $heightSelect : 2.25rem;
     margin-bottom: 0.325rem; /* thêm này do bên dưới nó là wallpapers (có viền đen) nên bị hiệu ứng hơi gần */
     font-size: calc(var(--fontSizeNormal) - 0.025rem);
     gap: 0.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     text-align: left;
     &:dir(rtl), [dir="rtl"] & {
         text-align: right;
@@ -171,9 +171,9 @@ $heightSelect : 2.25rem;
             height: $heightSelect;
         }
     }
-    @media(max-width: 1199px){
-        margin-bottom: 0.625rem;
-    }
+    // @media(max-width: 1199px){
+    //     margin-bottom: 0.625rem;
+    // }
     @media(max-width: 767px){
         margin-bottom: 0.5rem;
         .quantity {
@@ -182,7 +182,7 @@ $heightSelect : 2.25rem;
     }
     @media(max-width: 577px){
         .quantity {
-            padding: 0 0.5rem;
+            padding: 0 0.325rem;
         }
     }
 }

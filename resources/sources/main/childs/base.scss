@@ -64,7 +64,6 @@ h1, h2 {
 h2, h3, h4, h5, h6 {
   color: rgb(var(--colorTitle));
   font-family: $fontTitle;
-  line-height: calc(var(--lineHeightNormal) - 0.2);
   font-weight: 600;
   .light & {
     font-weight: 700;
@@ -92,14 +91,9 @@ h4, h5, h6 {
 }
 
 .titlePage {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.325rem;
   &.customTitlePage {
     margin-bottom: 0.25rem;
-  }
-  @media(max-width: 991px){
-    &.customTitlePage {
-      margin-bottom: 0.125rem;
-    }
   }
 }
 
@@ -148,23 +142,43 @@ form {
     gap: 0.5rem;
   }
 }
+// .distanceBetweenSubbox {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0.5rem;
+//   .light & {
+//     gap: 0.325rem;
+//   }
+//   @media(max-width: 991px){
+//     gap: 0.325rem;
+//     .light & {
+//       gap: 0.25rem;
+//     }
+//   }
+//   @media(max-width: 577px){
+//     gap: 0.25rem;
+//     .light & {
+//       gap: 0.125rem;
+//     }
+//   }
+// }
 .distanceBetweenSubbox {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.625rem;
   .light & {
-    gap: 0.325rem;
+    gap: 0.5rem;
   }
   @media(max-width: 991px){
-    gap: 0.325rem;
+    gap: 0.5rem;
     .light & {
-      gap: 0.25rem;
+      gap: 0.325rem;
     }
   }
   @media(max-width: 577px){
-    gap: 0.25rem;
+    gap: 0.325rem;
     .light & {
-      gap: 0.125rem;
+      gap: 0.25rem;
     }
   }
 }

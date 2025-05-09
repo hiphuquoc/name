@@ -51,6 +51,16 @@
 
 @push('scriptCustom')
     <script type="text/javascript">
+        /* Chạy khi trang tải xong */
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lấy chế độ xem từ localStorage (nếu có)
+            const savedViewMode = localStorage.getItem('viewMode');
+
+            // Nếu có chế độ xem đã lưu, áp dụng nó
+            if (savedViewMode) {
+                setViewMode(savedViewMode);
+            }
+        });
         /* Thiết lập chế độ xem */
         function setViewMode(viewMode) {
             // Lưu chế độ xem vào localStorage
@@ -81,7 +91,7 @@
                     updateViewModeIcon(viewMode);
 
                     // đóng modal 
-                    closeLanguageBoxList('ja_closeViewBoxList');
+                    closeLanguageBoxList('ja_closeViewBoxList', 'close');
                 }
             });
         }

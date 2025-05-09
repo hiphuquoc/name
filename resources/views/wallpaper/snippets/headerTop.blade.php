@@ -86,7 +86,8 @@
 @push('scriptCustom')
     <script type="text/javascript">
         /* đóng mở trang ngôn ngữ */
-        function closeLanguageBoxList(idElemt){
+        function closeLanguageBoxList(idElemt, action = 'toggle'){
+            /* trường hợp toogle */ 
             let displayE    = $('#' + idElemt).css('display');
             if(displayE=='none'){
                 $('#' + idElemt).css('display', 'flex');
@@ -96,6 +97,18 @@
                 $('#' + idElemt).css('display', 'none');
                 $('#' + idElemt + '_background').css('display', 'none');
                 $('body').css('overflow', 'unset');
+            }
+            /* trường hợp close */ 
+            if(action=='close'){
+                $('#' + idElemt).css('display', 'none');
+                $('#' + idElemt + '_background').css('display', 'none');
+                $('body').css('overflow', 'unset');
+            }
+            /* trường hợp open */ 
+            if(action=='open'){
+                $('#' + idElemt).css('display', 'flex');
+                $('#' + idElemt + '_background').css('display', 'flex');
+                $('body').css('overflow', 'hidden');
             }
         }
         // /* đóng mở thiết lập giao diện */

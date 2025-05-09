@@ -277,6 +277,4 @@
     <symbol id="icon_view_mode_light" viewBox="0 0 50 50" fill="currentColor">
         <path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal" d="M 17.984375 5.9863281 A 1.0001 1.0001 0 0 0 17.839844 6 L 4 6 A 1.0001 1.0001 0 0 0 3 7 L 3 43 A 1.0001 1.0001 0 0 0 4 44 L 17.832031 44 A 1.0001 1.0001 0 0 0 18.158203 44 L 31.832031 44 A 1.0001 1.0001 0 0 0 32.158203 44 L 46 44 A 1.0001 1.0001 0 0 0 47 43 L 47 25.167969 A 1.0001 1.0001 0 0 0 47 24.841797 L 47 7 A 1.0001 1.0001 0 0 0 46 6 L 18.154297 6 A 1.0001 1.0001 0 0 0 17.984375 5.9863281 z M 5 8 L 17 8 L 17 24.832031 A 1.0001 1.0001 0 0 0 17 25.158203 L 17 42 L 5 42 L 5 8 z M 19 8 L 45 8 L 45 24 L 32.154297 24 A 1.0001 1.0001 0 0 0 31.984375 23.986328 A 1.0001 1.0001 0 0 0 31.839844 24 L 19 24 L 19 8 z M 19 26 L 31 26 L 31 42 L 19 42 L 19 26 z M 33 26 L 45 26 L 45 42 L 33 42 L 33 26 z" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible" stroke="currentColor" stroke-width="1.5px" />
     </symbol>
-
-
 </svg>

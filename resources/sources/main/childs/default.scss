@@ -35,7 +35,6 @@ $fontText: "SVN-Gilroy Bold", sans-serif;
 @mixin titleDefault {
   color: rgb(var(--colorText));
   font-family: $fontTitle;
-  line-height: calc(var(--lineHeightNormal) - 0.3);
   margin-bottom: 0;
   text-transform: uppercase;
   text-align: left;
@@ -370,7 +369,6 @@ $radiusBoxLarge : 1rem;
         margin-top: -0.25rem;
         margin-bottom: 0.25rem;
         font-size: calc(var(--fontSizeNormal) - 0.025rem);
-        line-height: calc(var(--lineHeightNormal) - 0.2);
         font-family: $fontText;
         font-weight: 600;
       }

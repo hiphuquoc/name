@@ -7,10 +7,6 @@
         <div class="pageProductDetailBox_left distanceBetweenBox">
             <!-- Gallery Desktop -->
             @include('wallpaper.product.gallery', ['prices' => $item->prices])
-            {{-- <!-- giải thích thanh toán và nhận ảnh => desktop -->
-            <div class="show-991">
-                
-            </div> --}}
 
             <!-- bảng thông tin Chi tiết từng hình nền -->
             <div id="detailPerWallpaper" class="infoImageSourceTable">
@@ -72,21 +68,29 @@
                     <input type="hidden" id="product_info_id" name="product_info_id" value="{{ $item->id ?? null }}" />
                     <!-- tiêu đề -->
                     <h1 class="titlePage customTitlePage">{{ $itemSeo->title }}</h1>
-                    {{-- <!-- yêu thích -->
-                    @php
-                        $countHeart = 0;
-                        foreach($item->prices as $price){
-                            foreach($price->wallpapers as $wallpaper) {
-                                $countHeart += $wallpaper->infoWallpaper->heart;
+                    <!-- yêu thích -->
+                    <div class="soldedBox">
+                        @php
+                            $countHeart = 0;
+                            foreach($item->prices as $price){
+                                foreach($price->wallpapers as $wallpaper) {
+                                    $countHeart += $wallpaper->infoWallpaper->heart;
+                                }
                             }
-                        }
-                    @endphp
-                    @if($countHeart>0)
-                        <div class="showFeelingBox">
-                            <svg><use xlink:href="#icon_heart"></use></svg>
-                            <div>{{ $countHeart }} yêu thích</div>
-                        </div>
-                    @endif --}}
+                        @endphp
+                        @if($countHeart>0)
+                            <div class="soldedBox_item heart">
+                                <svg><use xlink:href="#icon_heart"></use></svg>
+                                <div>{{ number_format($countHeart) }}</div>
+                            </div>
+                        @endif
+                        @if($item->sold>0)
+                            <div class="soldedBox_item download">
+                                <svg><use xlink:href="#icon_download"></use></svg>
+                                <div>{{ $item->sold }}</div>
+                            </div>
+                        @endif
+                    </div>
                     <div class="distanceBetweenBox">
                         <!-- mô tả sản phẩm -->
                         <div id="js_viewMoreContent_content" class="productDetailBox_detail_description">
