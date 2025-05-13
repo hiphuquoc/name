@@ -23,7 +23,7 @@
     {!! config('data_language_1.'.$language.'.filter_by_themes') !!}
 </div>
 <div class="selectCustom_input maxLine_1">
-    {{ $nameSelect }}
+    <div class="maxLine_1">{{ $nameSelect }}</div>
 </div>
 <div class="selectCustom_box">
     <!-- tất cả -->

@@ -45,7 +45,7 @@
     {!! config('data_language_1.'.$language.'.'.$type['key_filter_language']) !!}
 </div>
 <div class="selectCustom_input maxLine_1">
-    {{ $nameSelect }}
+    <div class="maxLine_1">{{ $nameSelect }}</div>
 </div>
 <div class="selectCustom_box">
     @php

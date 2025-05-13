@@ -238,61 +238,62 @@ class FreeWallpaperController extends Controller {
     }
 
     public function deleteWallpaper(Request $request){
-        $flag                       = false;
-        if(!empty($request->get('id'))){
-            $idWallpaper            = $request->get('id');
-            $infoWallpaper          = FreeWallpaper::select('*')
-                                        ->where('id', $idWallpaper)
-                                        ->with('seo')
-                                        ->first();
-            $flag                   = self::delete($infoWallpaper);
-        }
-        return $flag;
+        $id = $request->get('id');
+        if (!$id) return false;
+
+        $infoWallpaper = FreeWallpaper::with(['seo', 'seos.infoSeo.contents'])->find($id);
+        if (!$infoWallpaper) return false;
+
+        return $this->deleteFreeWallpaper($infoWallpaper);
     }
 
     private static function delete($infoWallpaper){
-        $flag   = false;
-        if(!empty($infoWallpaper)){
-            /* xóa wallpaper trong google_cloud_storage */
-            Storage::disk('gcs')->delete($infoWallpaper->file_cloud);
-            /* xóa wallpaper large trong google_cloud_storage */
-            Storage::disk('gcs')->delete(config('main_'.env('APP_NAME').'.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-large.'.$infoWallpaper->extension);
-            /* xóa wallpaper Small trong google_cloud_storage */
-            Storage::disk('gcs')->delete(config('main_'.env('APP_NAME').'.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-small.'.$infoWallpaper->extension);
-            /* xóa wallpaper Mini trong google_cloud_storage */
-            Storage::disk('gcs')->delete(config('main_'.env('APP_NAME').'.google_cloud_storage.freeWallpapers').$infoWallpaper->file_name.'-mini.'.$infoWallpaper->extension);
-            /* xóa relation */
-            /* categories */
-            RelationFreeWallpaperUser::select('*')
-                ->where('free_wallpaper_info_id', $infoWallpaper->id)
-                ->delete();
-            /* categories */
-            RelationFreewallpaperCategory::select('*')
-                ->where('free_wallpaper_info_id', $infoWallpaper->id)
-                ->delete();
-            /* thumnails của category */
-            RelationCategoryThumnail::select('*')
-                ->where('free_wallpaper_info_id', $infoWallpaper->id)
-                ->delete();
-            /* tags */
-            RelationTagInfoOrther::select('*')
-                ->where('reference_id', $infoWallpaper->id)
-                ->where('reference_type', 'free_wallpaper_info')
-                ->delete();
-            /* delete các trang seos ngôn ngữ */
-            foreach($infoWallpaper->seos as $s){
-                $imageSmallPath     = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image_small));
-                if(file_exists($imageSmallPath)) @unlink($imageSmallPath);
-                $imagePath          = Storage::path(config('admin.images.folderUpload').basename($s->infoSeo->image));
-                if(file_exists($imagePath)) @unlink($imagePath);
-                foreach($s->infoSeo->contents as $c) $c->delete();
-                $s->infoSeo()->delete();
-                $s->delete();
-            }
-            $infoWallpaper->delete();
-            $flag = true;
+        $cloudPath = config('main_'.env('APP_NAME').'.google_cloud_storage.freeWallpapers');
+        $fileBase  = $info->file_name . '.' . $info->extension;
+
+        // Xoá file gốc và các kích thước phụ
+        $fileVariants = [
+            $info->file_cloud,
+            $cloudPath . $info->file_name . '-large.' . $info->extension,
+            $cloudPath . $info->file_name . '-small.' . $info->extension,
+            $cloudPath . $info->file_name . '-mini.' . $info->extension,
+        ];
+
+        foreach ($fileVariants as $file) {
+            Storage::disk('gcs')->delete($file);
         }
-        return $flag;
+
+        // Xoá quan hệ
+        RelationFreeWallpaperUser::where('free_wallpaper_info_id', $info->id)->delete();
+        RelationFreewallpaperCategory::where('free_wallpaper_info_id', $info->id)->delete();
+        RelationCategoryThumnail::where('free_wallpaper_info_id', $info->id)->delete();
+        RelationTagInfoOrther::where([
+            ['reference_id', '=', $info->id],
+            ['reference_type', '=', 'free_wallpaper_info'],
+        ])->delete();
+
+        // Xoá các bản ghi SEO ngôn ngữ
+        foreach ($info->seos as $s) {
+            $seo = $s->infoSeo;
+
+            // Xoá ảnh thumbnail trong thư mục local
+            foreach (['image', 'image_small'] as $imgKey) {
+                if (!empty($seo->$imgKey)) {
+                    $imagePath = Storage::path(config('admin.images.folderUpload') . basename($seo->$imgKey));
+                    if (file_exists($imagePath)) @unlink($imagePath);
+                }
+            }
+
+            // Xoá content và liên kết
+            $seo->contents->each->delete();
+            $seo->delete();
+            $s->delete();
+        }
+
+        // Cuối cùng xoá chính bản ghi wallpaper
+        $info->delete();
+
+        return true;
     }
 
     public function loadModalUploadAndEdit(Request $request){

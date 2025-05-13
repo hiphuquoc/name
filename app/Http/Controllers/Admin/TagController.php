@@ -247,40 +247,74 @@ class TagController extends Controller {
         return redirect()->route('admin.tag.view', ['id' => $idTag, 'language' => $language]);
     }
 
-    public function delete(Request $request){
-        if(!empty($request->get('id'))){
-            try {
-                DB::beginTransaction();
-                $id         = $request->get('id');
-                $info       = Tag::select('*')
-                                ->where('id', $id)
-                                ->with(['files' => function($query){
-                                    $query->where('relation_table', 'seo.type');
-                                }])
-                                ->with('seo', 'products', 'freeWallpapers')
-                                ->first();
-                /* xóa ảnh đại diện trên google_clouds */ 
-                if(!empty($info->seo->image)) Upload::deleteWallpaper($info->seo->image);
-                /* delete relation */
-                $info->products()->delete();
-                $info->freeWallpapers()->delete();
-                $info->files()->delete();
-                $info->categories()->delete();
-                /* delete các trang seos ngôn ngữ */
-                foreach($info->seos as $s){
-                    /* xóa ảnh đại diện trên google_clouds */ 
-                    if(!empty($s->infoSeo->image)) Upload::deleteWallpaper($s->infoSeo->image);
-                    if(!empty($s->infoSeo->contents)) foreach($s->infoSeo->contents as $c) $c->delete();
-                    $s->infoSeo()->delete();
-                    $s->delete();
-                }
-                $info->delete();
-                DB::commit();
-                return true;
-            } catch (\Exception $exception){
-                DB::rollBack();
-                return false;
+    public function delete(Request $request) {
+        try {
+            DB::beginTransaction();
+            
+            $id = $request->get('id');
+
+            if (!$id) return false;
+
+            $info = Tag::where('id', $id)
+                        ->with([
+                            'files' => function ($query) {
+                                $query->where('relation_table', 'seo.type');
+                            },
+                            'seo', 'products', 'freeWallpapers', 'seos.infoSeo.contents'
+                        ])
+                        ->first();
+
+            if (!$info) return false;
+
+            // Xoá ảnh đại diện chính
+            if (!empty($info->seo->image)) {
+                Upload::deleteWallpaper($info->seo->image);
             }
+
+            // Xoá các quan hệ
+            $info->products()->delete();
+            $info->freeWallpapers()->delete();
+            $info->files()->delete();
+            $info->categories()->delete();
+
+            // Xoá các bản ghi liên quan trong seos
+            foreach ($info->seos as $s) {
+                if (!empty($s->infoSeo->image)) {
+                    Upload::deleteWallpaper($s->infoSeo->image);
+                }
+
+                if (!empty($s->infoSeo->contents)) {
+                    foreach ($s->infoSeo->contents as $c) {
+                        $c->delete();
+                    }
+                }
+
+                $s->infoSeo()->delete();
+                $s->delete();
+            }
+
+            // Liên quan tới dữ liệu đã index trên Melisearch
+            $engineManager = app(EngineManager::class);
+            $engineManager->forgetEngines();
+            // Tiếp tục với phần xóa dữ liệu
+            \App\Models\Tag::withoutSyncingToSearch(function () use ($info) {
+                $info->delete();
+            });
+
+            // Xoá khỏi Meilisearch (nếu index tồn tại)
+            try {
+                $meili = new MeilisearchClient(env('MEILISEARCH_HOST'), env('MEILISEARCH_KEY'));
+                $meili->index('tag_info')->deleteDocument($id);
+            } catch (\Exception $e) {
+                // Bạn có thể log lỗi hoặc bỏ qua nếu không cần xử lý tiếp
+                Log::warning("Meilisearch delete failed for tag ID $id: ".$e->getMessage());
+            }
+
+            DB::commit();
+            return true;
+        } catch (\Exception $exception){
+            DB::rollBack();
+            return false;
         }
     }
 }

@@ -196,37 +196,53 @@ class CategoryBlogController extends Controller {
     }
 
     public function delete(Request $request){
-        if(!empty($request->get('id'))){
-            try {
-                DB::beginTransaction();
-                $id         = $request->get('id');
-                $info       = CategoryBlog::select('*')
-                                ->where('id', $id)
-                                ->with(['files' => function($query){
-                                    $query->where('relation_table', 'seo.type');
-                                }])
-                                ->with('seo', 'seos')
-                                ->first();
-                /* xóa ảnh đại diện trên google_clouds */ 
-                if(!empty($info->seo->image)) Upload::deleteWallpaper($info->seo->image);
-                /* delete relation */
-                $info->blogs()->delete();
-                $info->files()->delete();
-                /* delete các trang seos ngôn ngữ */
-                foreach($info->seos as $s){
-                    /* xóa ảnh đại diện trên google_clouds */ 
-                    if(!empty($s->infoSeo->image)) Upload::deleteWallpaper($s->infoSeo->image);
-                    if(!empty($s->infoSeo->contents)) foreach($s->infoSeo->contents as $c) $c->delete();
-                    $s->infoSeo()->delete();
-                    $s->delete();
-                }
-                $info->delete();
-                DB::commit();
-                return true;
-            } catch (\Exception $exception){
-                DB::rollBack();
-                return false;
+        try {
+            DB::beginTransaction();
+            
+            $id = $request->get('id');
+
+            if (!$id) return false;
+
+            $info       = CategoryBlog::select('*')
+                            ->where('id', $id)
+                            ->with(['files' => function($query){
+                                $query->where('relation_table', 'seo.type');
+                            }])
+                            ->with('seo', 'seos')
+                            ->first();
+
+            // Xoá ảnh đại diện chính
+            if (!empty($info->seo->image)) {
+                Upload::deleteWallpaper($info->seo->image);
             }
+
+            // Xoá các quan hệ
+            $info->blogs()->delete();
+            $info->files()->delete();
+
+             // Xoá các bản ghi liên quan trong seos
+            foreach ($info->seos as $s) {
+                if (!empty($s->infoSeo->image)) {
+                    Upload::deleteWallpaper($s->infoSeo->image);
+                }
+
+                if (!empty($s->infoSeo->contents)) {
+                    foreach ($s->infoSeo->contents as $c) {
+                        $c->delete();
+                    }
+                }
+
+                $s->infoSeo()->delete();
+                $s->delete();
+            }
+            
+            $info->delete();
+            
+            DB::commit();
+            return true;
+        } catch (\Exception $exception){
+            DB::rollBack();
+            return false;
         }
     }
 }
