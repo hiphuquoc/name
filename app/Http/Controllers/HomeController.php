@@ -70,10 +70,10 @@ class HomeController extends Controller {
         $disk         = Storage::disk(config("main_{$appName}.cache.disk"));
         $htmlContent  = null;
 
-        // 3. Thử lấy từ Redis
-        if ($useCache && Cache::has($cacheKey)) {
-            $htmlContent = Cache::get($cacheKey);
-        }
+        // // 3. Thử lấy từ Redis
+        // if ($useCache && Cache::has($cacheKey)) {
+        //     $htmlContent = Cache::get($cacheKey);
+        // }
 
         // 4. Nếu không có Redis → thử từ GCS (qua CDN)
         if ($useCache && !$htmlContent && $disk->exists($cachePath)) {
@@ -105,7 +105,7 @@ class HomeController extends Controller {
 
             // Lưu cache lại nếu bật
             if ($useCache) {
-                Cache::put($cacheKey, $htmlContent, $redisTtl);
+                // Cache::put($cacheKey, $htmlContent, $redisTtl);
                 $disk->put($cachePath, $htmlContent);
             }
         }

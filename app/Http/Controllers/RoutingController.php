@@ -79,10 +79,10 @@ class RoutingController extends Controller{
     
             $htmlContent = null;
     
-            // 4. Thử lấy từ Redis
-            if ($useCache && Cache::has($cacheKey)) {
-                $htmlContent = Cache::get($cacheKey);
-            }
+            // // 4. Thử lấy từ Redis
+            // if ($useCache && Cache::has($cacheKey)) {
+            //     $htmlContent = Cache::get($cacheKey);
+            // }
     
             // 5. Nếu không có Redis → thử từ GCS (qua CDN)
             if ($useCache && !$htmlContent && $disk->exists($cachePath)) {
@@ -106,7 +106,7 @@ class RoutingController extends Controller{
     
                 // Lưu cache lại nếu bật
                 if ($useCache) {
-                    Cache::put($cacheKey, $htmlContent, $redisTtl);
+                    // Cache::put($cacheKey, $htmlContent, $redisTtl);
                     $disk->put($cachePath, $htmlContent);
                 }
             }
